@@ -1,0 +1,19 @@
+--- 
+title: "Seguros Generales"
+author: ""
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+documentclass: book
+# bibliography: [book.bib, packages.bib]
+# biblio-style: apalike
+link-citations: yes
+# github-repo: rstudio/bookdown-demo
+description: ""
+output: 
+  bookdown::gitbook:
+    css: style.css
+    includes:
+      in_header: mathjax_includes.html
+    config:
+      split_by: rmd
+---

@@ -1,0 +1,321 @@
+# Consideraciones preliminares
+
+## Consideraciones de probabilidades
+### Probabilidad discreta
+Una variable aleatoria $K: \Omega \longrightarrow D$ que parte del espacio muestral $\Omega$ y toma 
+valores en un conjunto discreto $D = \left\{k_i \in \mathbb{R} | i \in \mathbb{N} \right\}$, sigue 
+una probabilidad discreta dada por las probabilidades $p_i \in [0,1]$ , $i \in \mathbb{N}$, si
+\begin{equation}
+P\left( K = k_i \right) = p_i,\qquad \forall i \in \mathbb{N}
+\end{equation}
+Además se cumple la **condición de normalización** que es muy importante.
+\begin{equation}
+\sum\limits_{i = 0}^{\infty} p_i = 1
+\end{equation}
+las probabilidades *¡Nunca son negativas!* y *!Suman siempre 1!*.
+
+También se puede tener el caso particular donde los valores que puede tomar la variable aleatoria 
+$K$ son discretos y también finitos, es decir el conjunto $D = \{k_0,\ldots,k_n\}$ es finito, en 
+tal caso el número de probabilidades $\{p_1,\ldots,p_n\}$ también es finito.
+
+### Esperanza matemática
+Considerando una variable aleatoria discreta $K$, así como la hemos definido, su **esperanza 
+matemática** está dada por:
+\begin{equation}
+\mathbb{E}[ K ] 
+= \sum\limits_{i=0}^{\infty} k_i P\left( K = k_i \right)
+= \sum\limits_{i=0}^{\infty} k_i p_i
+\end{equation}
+
+Así mismo su **varianza** es la dada por:
+\begin{equation}
+\mathbb{V}[ K ] 
+= \mathbb{E}\left[ \left( K - \mathbb{E}[ K ] \right)^2 \right]
+= \sum\limits_{i=0}^{\infty} \left( k_i  - \mathbb{E}[ K ] \right)^2 p_i
+= \mathbb{E}\left[ K^2 \right] - \mathbb{E}\left[ K \right]^2
+\end{equation}
+
+## Consideraciones demográficas
+En el transcurso de este curso, siempre utilizaremos el tiempo $t$ como una variable discreta, 
+salvo se especifique lo contrario, los mismo haremos para la variable $x$ que representa la edad.
+
+El **número de individuos de la población** será representaremos por una función dependiente del 
+tiempo, usualmente notado por $t$ y la edad, usualmente nota por $x$, es decir, 
+$l: \mathbb{R} \times \mathbb{R} \longrightarrow \mathbb{R}_+$ así, $l(t,x)$ es el número de 
+individuos en la población en el tiempo $t$ que tiene edad $x$.
+
+La función anterior puede ser agregada de diferentes formas. La forma usual de agregación se da 
+para obtener la población total en un tiempo dado, esta es la siguiente función que solo 
+depende del tiempo $t$:
+\begin{equation}
+l( t ) = \sum\limits_{x=0}^{\omega} l( t, x )
+\end{equation}
+donde $\omega$ es la edad máxima considerada.
+
+La **probabilidad de supervivencia dinámica**, es la probabilidad que un individuo con edad $x$ en 
+el tiempo $s$ sobreviva hasta el tiempo $t \geq s$ y está dada por:
+\begin{equation}
+p( s, t, x ) = \frac{l(t,x+t-s)}{l(s,x)}
+\end{equation}
+cuando $s = 0$, se puede simplificar la notación, utilizando $p( t, x ) = p( 0, t, x )$
+
+Así mismo la población puede ser dividida en diferentes grupos, en particular nos interesamos a
+dividir la población entre:
+
+1. **activos** personas que tienen edad y capacidad para mantener una actividad económica
+y se encuentran trabajando, $l^a: \mathbb{R} \times \mathbb{R} \longrightarrow \mathbb{R}_+$
+
+2. **retirados** son personas que han cesado pero que alguna vez en el pasado mantuvieron una 
+actividad económica, usualmente tienen edades superiores a la que presentas los activos o cesantes,
+ $l^r: \mathbb{R} \times \mathbb{R} \longrightarrow \mathbb{R}_+$,
+ 
+3. **cesantes** personas que están en edad y capacidad para mantener una actividad económica pero que 
+no se encuentran trabajando y no están retirados, 
+$l^c: \mathbb{R} \times \mathbb{R} \longrightarrow \mathbb{R}_+$
+
+4. **jubilados** son personas retiradas que perciben una renta **pensión** como consecuencia de su 
+actividad económica en el pasado, $l^j: \mathbb{R} \times \mathbb{R} \longrightarrow \mathbb{R}_+$
+
+4. **retirados sin jubilación** son personas retiradas que no perciben una renta como consecuencia 
+de su actividad económica en el pasado, $l^s: \mathbb{R} \times \mathbb{R} \longrightarrow \mathbb{R}_+$
+
+5. **dependientes** personas que no tienen edad o capacidad para mantener una actividad económica
+y que no están retirados, $l^d: \mathbb{R} \times \mathbb{R} \longrightarrow \mathbb{R}_+$.
+
+Se mantienen las siguientes relaciones para todo tiempo $t$ y edad $x$. La población total es suma
+de todas las clases anteriores entre activos, cesantes, retirados y dependientes.
+\begin{equation}
+l( t, x ) = l^a( t, x ) + l^c( t, x ) + l^r( t, x ) + l^d( t, x )
+\end{equation}
+
+La clase de los retirados está compuesta por los jubilados y los retirados sin jubilación.
+\begin{equation}
+l( t, x ) = l^a( t, x ) + l^c( t, x ) + l^j( t, x ) + l^s( t, x ) + l^d( t, x )
+\end{equation}
+
+Ya en la práctica para los intereses de los planes de previsión social es importante delimitar 
+la población objetivo, población total y sus respectivos activos, jubilados y dependientes.
+
+La **masa salarial** es la que resulta de sumar todos los salarios de la población activa. Así,
+para cada individuo activo $k$, con edad $x$ consideramos su salario $S_k( t )$ en el tiempo $t$,
+esto nos da la **masa salarial por grupo de edad**.
+\begin{equation}
+S( t, x ) = \sum\limits_{k=1}^{l^a(t,x)} S_k( t )
+\end{equation}
+Y la **masa salarial** en el tiempo $t$ resulta de sumar para todas las edades
+\begin{equation}
+S( t ) = \sum\limits_{x=0}^{\omega} S( t, x ) 
+= \sum\limits_{x=0}^{\omega} \sum\limits_{k=1}^{l^a(t,x)} S_k( t )
+\end{equation}
+
+El **salario promedio** en un tiempo dado $t$ y para la edad $x$, está dado por:
+\begin{equation}
+\overline{S}( t, x ) 
+= \frac{S(t,x)}{l^a(t,x)} 
+= \frac{1}{l^a(t,x)} \sum\limits_{k=1}^{l^a(t,x)} S_k( t )
+\end{equation}
+
+Si el salario promedio es estimado adecuadamente, se puede trabajar con este valor en vez de 
+los salarios individuales, ya que para la masa salarial:
+\begin{equation}
+S( t, x ) 
+= \sum\limits_{k=1}^{l^a(t,x)} S_k( t ) 
+= \overline{S}( t, x ) l^a( t, x )
+\end{equation}
+
+También se puede hablar de un salario promedio independiente de la edad $x$
+\begin{equation}
+\overline{S}(t) = \frac{S(t)}{l^a(t)}
+= \frac{1}{l^a(t)} \sum\limits_{x=0}^{\omega} S( t, x )
+= \frac{1}{l^a(t)} \sum\limits_{x=0}^{\omega} \sum\limits_{k=1}^{l^a(t,x)} S_k( t )
+\end{equation}
+con $l^a(t) = \sum\limits_{x=0}^{\omega} l^a( t, x )$.
+
+Esta idea puede ser extendida a otros flujos financieros que dependen del número de personas 
+en un determinado grupo demográfico. Es así que se puede hablar de **pensiones promedio**
+$\overline{P}(t)$ en el tiempo $t$, o **pensiones promedio** $\overline{P}(t,x)$ en el tiempo $t$ 
+para las personas con edad $x$.
+
+### Coeficiente de retirados
+\begin{equation}
+CR( t ) = \frac{l^r( t )}{l^a( t )}
+\end{equation}
+
+### Coeficiente de jubilación
+\begin{equation}
+CJ( t ) = \frac{l^j( t )}{l^a( t )}
+\end{equation}
+
+### Coeficiente de dependientes
+\begin{equation}
+CD( t ) = \frac{l^r( t ) + l^c( t ) + l^d( t )}{l^a( t )}
+\end{equation}
+
+### Coeficiente de dependientes reducido
+\begin{equation}
+CDR( t ) = \frac{l^j( t ) + l^d( t )}{l^a( t )}
+\end{equation}
+
+### Tasa de desempleo
+\begin{equation}
+TD( t ) = \frac{l^c( t )}{l^a( t ) + l^c( t )}
+\end{equation}
+
+### Tasa de remplazo
+\begin{equation}
+TR( t ) = \frac{\overline{P}( t )}{\overline{S}(t)}
+\end{equation}
+
+## Consideraciones financieras
+Antes de desarrollar el contenido propio del curso, debemos tener en cuenta algunas consideraciones
+financieras como las siguientes:
+
+### Función de actualización o descuento
+La **función de actualización** de flujos $v: \mathbb{R} \times \mathbb{R} \longrightarrow [0,1]$, al
+evaluar en $s, t \in \mathbb{R}, s\leq t, v(s,t)$, diremos que actualizamos los flujos que se 
+producen en el tiempo $t$, valorados desde el tiempo $s$. Además la función de actualización tiene
+las siguientes propiedades:
+  
+1. Si $s = t, v(s,t) = 1$,
+  
+2. Si $s \leq t, v(s,t) \leq 1$,
+  
+3. Si $r \leq s \leq t, v( r, s ) v( s, t ) = v( r, t )$.
+
+El caso más particular y sencillo se presenta cuando la función de actualización es generada
+por una tasa constante $i \in [0,1]$, es decir, $v(s,t) = ( 1 + i )^{t-s}$.
+
+La **función de capitalización**, es la función $u: \mathbb{R} \times \mathbb{R} \longrightarrow [0,1]$,
+tal que $u( s, t ) v( s, t ) = 1$.
+
+### Flujos financieros
+Un flujo financiero discreto $c$ es una serie de valores reales $c(t_1), c(t_2), \cdots, c(t_n)$ 
+que se producen en un número discreto de tiempos $t_0 < t_1 < \cdots < t_n$. 
+
+El **valor presente** de estos flujos, en un tiempo $t \leq t_0$, se lo puede calcular utilizando 
+precisamente la función de actualización $v$
+\begin{equation}
+VP_t( c ) = \sum\limits_{k = 1}^n v( t, t_k )  c( t_k )
+\end{equation}
+cuando $t=0$, se suele solo expresar $VP( c ) = VP_0( c )$.
+
+### Flujos financieros probables
+Un flujo financiero discreto $c$ es una serie de valores reales $c(t_1), c(t_2), \cdots, c(t_n)$ 
+que se producen en un número discreto de tiempos $t_0 < t_1 < \cdots < t_n$. 
+
+El **valor actuarial presente** de estos flujos, en un tiempo $t \leq t_0$, se lo puede calcular 
+utilizando precisamente la función de actualización $v$
+\begin{equation}
+VAP_t( c ) = \mathbb{E}\left[ \sum\limits_{k = 1}^n v( t, t_k )  c( t_k ) \right]
+= \sum\limits_{k = 1}^n v( t, t_k ) \mathbb{E}\left[ c( t_k ) \right]
+\end{equation}
+cuando $t=0$, se suele solo expresar $VAP( c ) = VAP_0( c )$.
+
+Si cada $c(t_k)$ es una variable aleatoria discreta
+\begin{equation}
+VAP_t( c ) = \sum\limits_{k = 1}^n v( t, t_k ) \mathbb{E}\left[ c( t_k ) \right]
+= \sum\limits_{k = 1}^n \sum\limits_{i=1}^{\infty} v( t, t_k ) c_i( t_k ) p_i( t_k )
+\end{equation}
+
+### Equilibrio financiero
+Se dice que un flujo financiero $c(t_1), c(t_2), \cdots, c(t_n)$ como el anterior, está en 
+**equilibrio financiero** si:
+\begin{equation}
+VP_0( c ) = \sum\limits_{k=0}^{n} v( 0, t_k ) c( t_k ) =  0
+\end{equation}
+
+El equilibrio financiero se mantiene en el tiempo, basta observar que para cualquier instante 
+$t \geq 0$
+\begin{eqnarray*}
+0 & = & u( 0, t ) VP_0( c ) \\
+& = & u( 0, t ) \sum\limits_{k=0}^{n} v( 0, t_k ) c( t_k ) \\
+& = & \sum\limits_{t_k \leq t} u( 0, t ) v( 0, t_k ) c( t_k ) 
++ \sum\limits_{t_k > t} u( 0, t ) v( 0, t_k ) c( t_k ) \\
+& = & \sum\limits_{t_k \leq t} u( 0, t_k ) u( t_k, t ) v( 0, t_k ) c( t_k ) 
++ \sum\limits_{t_k > t} u( 0, t ) v( 0, t ) v( t, t_k ) c( t_k ) \\
+& = & \sum\limits_{t_k \leq t} u( t_k, t ) c( t_k ) 
++ \sum\limits_{t_k > t} v( t, t_k ) c( t_k ) \\
+\end{eqnarray*}
+
+Esto implica que el valor actualizado a cualquier instante $t$ de un flujo financiero $c$ que 
+está en equilibrio en un inicio, se mantiene también en equilibrio; siempre y cuando se preserve
+los flujos y tasas de actualización. A pesar de ser un resultado evidente, en la izquierda tenemos 
+los  flujos capitalizados hasta el tiempo $t$ y en la derecha tenemos los flujos actualizados al 
+tiempo $t$. La expresión de la izquierda se conoce como la parte **retrospectiva** y la expresión de 
+la derecha como la parte **prospectiva**.
+
+En condiciones de equilibrio financiero la parte retrospectiva se igual con menos la parte 
+prospectiva.
+\begin{equation}
+\sum\limits_{t_k \leq t} u( t_k, t ) c( t_k ) = 
+-\sum\limits_{t_k > t} v( t, t_k ) c( t_k )
+\end{equation}
+algunas veces se considera la parte prospectiva con el signo menos.
+
+## Consideraciones de programación en R
+En el transcurso del presente curso utilizaremos algunos paquetes de R, acá la lista de carga de los
+mismos
+```{r l2c1, include = FALSE}
+options( width = 120 )
+
+knitr::opts_chunk$set(size = 'footnotesize', dpi = 100, warning = FALSE, echo = TRUE, class.source = "numberLines lineAnchors")
+def.chunk.hook  <- knitr::knit_hooks$get("chunk")
+knitr::knit_hooks$set(chunk = function(x, options) {
+  x <- def.chunk.hook(x, options)
+  ifelse( options$size != "normalsize", paste0("\n \\", options$size,"\n\n", x, "\n\n \\normalsize"), x)
+})
+
+local({
+  hook_output <- knitr::knit_hooks$get('output')
+  knitr::knit_hooks$set(output = function(x, options) {
+    if (!is.null(options$max.height)) options$attr.output <- c(
+      options$attr.output,
+      sprintf('style="max-height: %s;"', options$max.height)
+    )
+    hook_output(x, options)
+  })
+})
+```
+
+```{r l2c2, warning = FALSE}
+library( data.table )
+library( ggplot2 )
+library( googledrive )
+library( kableExtra )
+library( knitr )
+library( latex2exp )
+library( lubridate )
+library( openxlsx )
+library( readxl )
+library( rmarkdown )
+library( shiny )
+library( wesanderson )
+
+options( scipen = 9999 )
+options( stringsAsFactors = FALSE )
+```
+
+Para definir una variable utilizamos el operador de asignación `<-`, también se puede utilizar `=`.
+
+Un vector se define con la función de concatenación `c`
+```{r l2c3}
+x <- c( 1, 2, 3 )
+print( x )
+```
+
+Un función se define con la sentencia `function`
+```{r l2c4}
+f <- function( t ) {
+  return( t^2 )
+}
+```
+
+Si buscamos aplicar una función sobre un vector, podemos utilizar `sapply`
+```{r l2c5}
+y <- sapply( x, FUN = f )
+print( y )
+```
+
+Para muchas tareas que están relacionadas con el manejo de datos, podemos utilizar las 
+funcionalidades del paquete de R, `data.table`. Para trabajar con fechas recomendamos utilizar
+el paquete `lubridate`.
