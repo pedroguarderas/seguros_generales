@@ -1,3 +1,6 @@
+thm:tlc
+thm:bein
+exm:exo
 introducción
 consideraciones-preliminares
 consideraciones-de-probabilidades
@@ -16,6 +19,16 @@ flujos-financieros
 flujos-financieros-probables
 equilibrio-financiero
 consideraciones-de-programación-en-r
-previsión-social-historia-y-teoría
-mortalidad
-financiamiento-de-planes-de-previsión-social
+modelos-de-pérdida-agregada
+mutualización-del-riesgo
+modelo-individual
+modelo-colectivo
+deducibles
+primas
+prima-pura-de-riesgo
+prima-de-riesgo-con-recargo-sobre-la-esperanza
+prima-de-riesgo-con-recargo-sobre-la-varianza
+prima-de-riesgo-con-recargo-sobre-la-desviación
+prima-de-riesgo-con-principio-exponential-para-t-0
+prima-de-percentiles-para-un-valor-de-confianza-varepsilon-in-01
+medidas-de-riesgo

@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Capítulo 4 Mortalidad | Seguros Generales</title>
-  <meta name="description" content="Capítulo 4 Mortalidad | Seguros Generales" />
+  <title>Capítulo 3 Modelo de riesgo | Seguros Generales</title>
+  <meta name="description" content="Capítulo 3 Modelo de riesgo | Seguros Generales" />
   <meta name="generator" content="bookdown 0.42 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Capítulo 4 Mortalidad | Seguros Generales" />
+  <meta property="og:title" content="Capítulo 3 Modelo de riesgo | Seguros Generales" />
   <meta property="og:type" content="book" />
   
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Capítulo 4 Mortalidad | Seguros Generales" />
+  <meta name="twitter:title" content="Capítulo 3 Modelo de riesgo | Seguros Generales" />
   
   
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="modelos-de-pérdida-agregada.html"/>
-<link rel="next" href="financiamiento-de-planes-de-previsión-social.html"/>
+<link rel="prev" href="consideraciones-preliminares.html"/>
+<link rel="next" href="mortalidad.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -166,11 +166,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="2.4" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#consideraciones-de-programación-en-r"><i class="fa fa-check"></i><b>2.4</b> Consideraciones de programación en R</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html"><i class="fa fa-check"></i><b>3</b> Modelos de pérdida agregada</a>
-<ul>
-<li class="chapter" data-level="3.1" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html#modelo-individual"><i class="fa fa-check"></i><b>3.1</b> Modelo individual</a></li>
-<li class="chapter" data-level="3.2" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html#modelo-colectivo"><i class="fa fa-check"></i><b>3.2</b> Modelo colectivo</a></li>
-</ul></li>
+<li class="chapter" data-level="3" data-path="modelo-de-riesgo.html"><a href="modelo-de-riesgo.html"><i class="fa fa-check"></i><b>3</b> Modelo de riesgo</a></li>
 <li class="chapter" data-level="4" data-path="mortalidad.html"><a href="mortalidad.html"><i class="fa fa-check"></i><b>4</b> Mortalidad</a></li>
 <li class="chapter" data-level="5" data-path="financiamiento-de-planes-de-previsión-social.html"><a href="financiamiento-de-planes-de-previsión-social.html"><i class="fa fa-check"></i><b>5</b> Financiamiento de planes de previsión social</a></li>
 </ul>
@@ -190,8 +186,44 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="mortalidad" class="section level1 hasAnchor" number="4">
-<h1><span class="header-section-number">Capítulo 4</span> Mortalidad<a href="mortalidad.html#mortalidad" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="modelo-de-riesgo" class="section level1 hasAnchor" number="3">
+<h1><span class="header-section-number">Capítulo 3</span> Modelo de riesgo<a href="modelo-de-riesgo.html#modelo-de-riesgo" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>En el modelo de riesgos individuales consideramos que el número de siniestros que se producirán es
+conocido, por ejemplo puede ser a lo sumo el tamaño de la población asegurada, en tal caso la
+variable aleatoria <span class="math inline">\(N\)</span> pasa a ser una constante, que representaremos por <span class="math inline">\(n\)</span>. De esta forma, la
+severidad total puede ser facilmente representada por:
+<span class="math display">\[\begin{equation}
+  S = \sum\limits_{i=1}^n X_i
+\end{equation}\]</span></p>
+<p>La hipótesis más usual que sostiene a este modelo es la indenpendencia entre cada uno de los
+reclamos <span class="math inline">\(X_i\)</span> y <span class="math inline">\(X_j\)</span> son independientes para cualquier <span class="math inline">\(1 \leq i \neq j \leq n\)</span>.</p>
+<p>El valor esperado de la severidad total <span class="math inline">\(S\)</span> es: <span class="math display">\[\begin{eqnarray*}
+  \mathbb{E}[S]
+  &amp; = &amp; \mathbb{E}\left[ \sum\limits_{i=1}^n X_i \right] \\
+  &amp; = &amp; \sum\limits_{i=1}^n  \mathbb{E}\left[ X_i \right] \\
+  &amp; = &amp; n \mathbb{E}\left[X\right]
+\end{eqnarray*}\]</span></p>
+<p>En este caso particular el número <span class="math inline">\(n\)</span> de posibles siniestros es conocido y fijo, <span class="math inline">\(n\)</span> no es una
+variables aleatoria. Además entre las hipótesis usuales, está en considerar que los reclamos
+son variables aleatorias identicamente distribuidas e independientes, de ello <span class="math inline">\(S\)</span> es la suma de
+estas variables. Por lo expuesto en el capítulo <span class="math inline">\(\ref{chp_prob}\)</span> si <span class="math inline">\(S \rightsquigarrow g\)</span>, sabemos
+que <span class="math inline">\(g\)</span> puede ser determinada por la comvolución de la ley de <span class="math inline">\(X\)</span>.
+<span class="math display">\[\begin{equation}
+g = f_1 * \cdots * f_n = f^{*n}
+\end{equation}\]</span></p>
+<p>Esta última relación da paso a un método de estimación de la distribución de <span class="math inline">\(S\)</span>, mediante el uso
+de la transformada de Fourier <span class="math inline">\(\mathcal{F}\)</span>, al aplicarla en <span class="math inline">\(g\)</span> ya que
+<span class="math display">\[\begin{equation}
+g = \mathcal{F}^{-1} \left( \mathcal{F}( g ) \right)
+= \mathcal{F}^{-1} \left( \mathcal{F}( f^{*n} ) \right)
+= \mathcal{F}^{-1} \left( \mathcal{F}( f )^n \right)
+\end{equation}\]</span></p>
+<p>## Modelo de riesgo colectivo
+The collective risk model consider the number <span class="math inline">\(N\)</span> of claims arising from policies at a given period
+and the amount of each claim represented by <span class="math inline">\(X_i\)</span> for <span class="math inline">\(i\)</span>-th claim. Then the consider the aggregate claims generated by the portfolio in the period under study.
+<span class="math display">\[\begin{equation}
+S = \sum\limits_{i=1}^N X_i
+\end{equation}\]</span></p>
 
 </div>
             </section>
@@ -199,8 +231,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="modelos-de-pérdida-agregada.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="financiamiento-de-planes-de-previsión-social.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="consideraciones-preliminares.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="mortalidad.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
