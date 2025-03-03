@@ -1,2 +1,33 @@
-# Financiamiento de planes de previsión social
+# Primas
+
+## Prima pura de riesgo
+\begin{equation}
+  P = \mathbb{E}[S]
+\end{equation}
+
+## Prima de riesgo con recargo sobre la esperanza
+\begin{equation}
+  P = (1 + \rho) \mathbb{E}[S]
+\end{equation}
+
+## Prima de riesgo con recargo sobre la varianza
+\begin{equation}
+  P = \mathbb{E}[S] + \rho \mathbb{V}[S]
+\end{equation}
+
+## Prima de riesgo con recargo sobre la desviación
+\begin{equation}
+  P = \mathbb{E}[S] + \rho \sqrt{\mathbb{V}[S]}
+\end{equation} 
+
+## Prima de riesgo con principio exponential para $t > 0$
+\begin{equation}
+  P = \frac{1}{2} \mathbb{E}\left[e^{tS}\right]
+  = \frac{1}{2} M_N\big( \ln M_X( t ) \big)
+\end{equation}
+
+## Prima de percentiles para un valor de confianza $\varepsilon \in (0,1)$
+\begin{equation}
+  P = F_S^{-1}( 1 - \varepsilon )
+\end{equation}
 

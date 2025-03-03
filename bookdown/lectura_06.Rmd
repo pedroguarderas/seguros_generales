@@ -1,0 +1,27 @@
+# Medidas de riesgo
+
+Se tiene algunas propiedades deseables para una medida de riesgo, $\zeta: \mathbb{R} 
+\longrightarrow \mathbb{R}$
+1. **Homogenidad**
+\begin{equation}
+\zeta( a X ) = a \zeta( X )
+\end{equation}
+2. **Invarianza ante las traslaciones**
+\begin{equation}
+\zeta( \alpha X + a ) = \zeta( \alpha X ) + a
+\end{equation}
+3. **Monotonicidad**
+\begin{equation}
+\zeta( X + a ) = \zeta( X ) + a
+\end{equation}
+4. **Sub-aditividad**
+\begin{equation}
+\zeta( X_1 + X_2 ) \leq \zeta( X_1 ) + \zeta( X_2 )
+\end{equation}
+
+Si en caso la medida de riesgo satisface las cuatro propiedades anteriores se dice que es un 
+medida de riesgo coherente.
+
+
+
+
