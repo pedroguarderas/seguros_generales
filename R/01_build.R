@@ -23,7 +23,8 @@ options( stringsAsFactors = FALSE )
 wd <- paste0( getwd(), '/' )
 
 # Creando directorios ------------------------------------------------------------------------------
-dirs <- c( 'Data', 'RData', 'results', 'LaTeX' )
+dirs <- c( 'Data', 'RData', 'LaTeX' )
+dirs <- c( 'Data', 'RData', 'LaTeX' )
 for ( dr in dirs ) {
   if ( !dir.exists( dr ) ) {
     dir.create( dr )
