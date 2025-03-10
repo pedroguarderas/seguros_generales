@@ -1,7 +1,7 @@
 # Consideraciones preliminares
-
+  
 ## Consideraciones de probabilidades
-### Probabilidad discreta
+### Variable aleatoria discreta
 Una variable aleatoria $K: \Omega \longrightarrow D$ que parte del espacio muestral $\Omega$ y toma 
 valores en un conjunto discreto $D = \left\{k_i \in \mathbb{R} | i \in \mathbb{N} \right\}$, sigue 
 una probabilidad discreta dada por las probabilidades $p_i \in [0,1]$ , $i \in \mathbb{N}$, si
@@ -13,6 +13,14 @@ Además se cumple la **condición de normalización** que es muy importante.
 \sum\limits_{i = 0}^{\infty} p_i = 1
 \end{equation}
 las probabilidades *¡Nunca son negativas!* y *!Suman siempre 1!*.
+
+### Variable aleatoria a valores reales (continua)
+Una variable aleatoria $X: \Omega \longrightarrow D$ que parte del espacio muestral $\Omega$ y toma 
+valores en el conjunto de los números reales  $\mathbb{R}$, decimos que sigue la ley 
+$f : \mathbb{R} \longrightarroa \mathbb{R}$, si para cualquier evento $A \subset \Omega$
+\begin{equation}
+\p
+\end{equation}
 
 También se puede tener el caso particular donde los valores que puede tomar la variable aleatoria 
 $K$ son discretos y también finitos, es decir el conjunto $D = \{k_0,\ldots,k_n\}$ es finito, en 
@@ -35,6 +43,7 @@ Así mismo su **varianza** es la dada por:
 = \mathbb{E}\left[ K^2 \right] - \mathbb{E}\left[ K \right]^2
 \end{equation}
 
+<!------------------------------------------------------------------------------------------------->
 ## Consideraciones demográficas
 En el transcurso de este curso, siempre utilizaremos el tiempo $t$ como una variable discreta, 
 salvo se especifique lo contrario, los mismo haremos para la variable $x$ que representa la edad.

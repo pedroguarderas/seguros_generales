@@ -33,7 +33,7 @@ for ( dr in dirs ) {
 rm( dr, dirs )
 
 # Descarga datos e información ---------------------------------------------------------------------
-# Descarga inforamción si en caso está presente en la fuente de origen en Google Drive
+# Descarga información si en caso está presente en la fuente de origen en Google Drive
 # fl <- 'RData/IESS_life_tables_2020.RData'
 # if ( !file.exists( fl ) ) {
 #   

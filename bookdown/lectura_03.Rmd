@@ -207,3 +207,21 @@ points( 1:n, Bn, type = 'l', lty = 1, col = 'red' )
 
 
 
+```{r l3c7}
+l <- 3
+n <- 300
+dt <- rexp( n = n, rate = 1 / l )
+t <- c( 0, cumsum( dt ) )
+dN <- sapply( dt, FUN = function( w ) rpois( 1, lambda = l * w ) )
+N <- c( 0, cumsum( dN ) )
+sh <- 3
+rt <- 2
+X <- lapply( dN, FUN = function( n ) rgamma( n, shape = sh, rate = rt ) )
+dS <- sapply( X, FUN = function( x ) sum( x ) )
+S <- c( 0, cumsum( dS ) )
+plot( t, N, type = 's' )
+plot( t, S, type = 's' )
+```
+
+
+

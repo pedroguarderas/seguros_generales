@@ -1,5 +1,9 @@
 # Primas
 
+\begin{equation}
+P = \frac{S}{n}
+\end{equation}
+
 ## Prima pura de riesgo
 \begin{equation}
   P = \mathbb{E}[S]
@@ -31,3 +35,7 @@
   P = F_S^{-1}( 1 - \varepsilon )
 \end{equation}
 
+
+```{r l5c1}
+
+```
