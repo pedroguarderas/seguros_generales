@@ -4,7 +4,8 @@ exm:exo
 introducción
 consideraciones-preliminares
 consideraciones-de-probabilidades
-probabilidad-discreta
+variable-aleatoria-discreta
+variable-aleatoria-a-valores-reales-continua
 esperanza-matemática
 consideraciones-demográficas
 coeficiente-de-retirados
@@ -25,10 +26,11 @@ modelo-individual
 modelo-colectivo
 deducibles
 primas
-prima-pura-de-riesgo
+prima-neta-o-prima-pura-de-riesgo
 prima-de-riesgo-con-recargo-sobre-la-esperanza
 prima-de-riesgo-con-recargo-sobre-la-varianza
 prima-de-riesgo-con-recargo-sobre-la-desviación
 prima-de-riesgo-con-principio-exponential-para-t-0
-prima-de-percentiles-para-un-valor-de-confianza-varepsilon-in-01
+prima-de-percentiles-para-un-valor-de-confianza-alpha-in-01-o-var_alpha
+esscher
 medidas-de-riesgo

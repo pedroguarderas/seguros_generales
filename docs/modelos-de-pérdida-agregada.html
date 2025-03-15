@@ -23,7 +23,7 @@
 <meta name="author" content="" />
 
 
-<meta name="date" content="2025-02-28" />
+<meta name="date" content="2025-03-15" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -145,8 +145,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="2.1" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#consideraciones-de-probabilidades"><i class="fa fa-check"></i><b>2.1</b> Consideraciones de probabilidades</a>
 <ul>
-<li class="chapter" data-level="2.1.1" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#probabilidad-discreta"><i class="fa fa-check"></i><b>2.1.1</b> Probabilidad discreta</a></li>
-<li class="chapter" data-level="2.1.2" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#esperanza-matemática"><i class="fa fa-check"></i><b>2.1.2</b> Esperanza matemática</a></li>
+<li class="chapter" data-level="2.1.1" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#variable-aleatoria-discreta"><i class="fa fa-check"></i><b>2.1.1</b> Variable aleatoria discreta</a></li>
+<li class="chapter" data-level="2.1.2" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#variable-aleatoria-a-valores-reales-continua"><i class="fa fa-check"></i><b>2.1.2</b> Variable aleatoria a valores reales (continua)</a></li>
+<li class="chapter" data-level="2.1.3" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#esperanza-matemática"><i class="fa fa-check"></i><b>2.1.3</b> Esperanza matemática</a></li>
 </ul></li>
 <li class="chapter" data-level="2.2" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#consideraciones-demográficas"><i class="fa fa-check"></i><b>2.2</b> Consideraciones demográficas</a>
 <ul>
@@ -175,12 +176,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4" data-path="deducibles.html"><a href="deducibles.html"><i class="fa fa-check"></i><b>4</b> Deducibles</a></li>
 <li class="chapter" data-level="5" data-path="primas.html"><a href="primas.html"><i class="fa fa-check"></i><b>5</b> Primas</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="primas.html"><a href="primas.html#prima-pura-de-riesgo"><i class="fa fa-check"></i><b>5.1</b> Prima pura de riesgo</a></li>
+<li class="chapter" data-level="5.1" data-path="primas.html"><a href="primas.html#prima-neta-o-prima-pura-de-riesgo"><i class="fa fa-check"></i><b>5.1</b> Prima neta, o prima pura de riesgo</a></li>
 <li class="chapter" data-level="5.2" data-path="primas.html"><a href="primas.html#prima-de-riesgo-con-recargo-sobre-la-esperanza"><i class="fa fa-check"></i><b>5.2</b> Prima de riesgo con recargo sobre la esperanza</a></li>
 <li class="chapter" data-level="5.3" data-path="primas.html"><a href="primas.html#prima-de-riesgo-con-recargo-sobre-la-varianza"><i class="fa fa-check"></i><b>5.3</b> Prima de riesgo con recargo sobre la varianza</a></li>
 <li class="chapter" data-level="5.4" data-path="primas.html"><a href="primas.html#prima-de-riesgo-con-recargo-sobre-la-desviación"><i class="fa fa-check"></i><b>5.4</b> Prima de riesgo con recargo sobre la desviación</a></li>
 <li class="chapter" data-level="5.5" data-path="primas.html"><a href="primas.html#prima-de-riesgo-con-principio-exponential-para-t-0"><i class="fa fa-check"></i><b>5.5</b> Prima de riesgo con principio exponential para <span class="math inline">\(t &gt; 0\)</span></a></li>
-<li class="chapter" data-level="5.6" data-path="primas.html"><a href="primas.html#prima-de-percentiles-para-un-valor-de-confianza-varepsilon-in-01"><i class="fa fa-check"></i><b>5.6</b> Prima de percentiles para un valor de confianza <span class="math inline">\(\varepsilon \in (0,1)\)</span></a></li>
+<li class="chapter" data-level="5.6" data-path="primas.html"><a href="primas.html#prima-de-percentiles-para-un-valor-de-confianza-alpha-in-01-o-var_alpha"><i class="fa fa-check"></i><b>5.6</b> Prima de percentiles para un valor de confianza <span class="math inline">\(\alpha \in (0,1)\)</span> o <span class="math inline">\(VaR_\alpha\)</span></a></li>
+<li class="chapter" data-level="5.7" data-path="primas.html"><a href="primas.html#esscher"><i class="fa fa-check"></i><b>5.7</b> Esscher</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="medidas-de-riesgo.html"><a href="medidas-de-riesgo.html"><i class="fa fa-check"></i><b>6</b> Medidas de riesgo</a></li>
 </ul>
@@ -202,6 +204,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="modelos-de-pérdida-agregada" class="section level1 hasAnchor" number="3">
 <h1><span class="header-section-number">Capítulo 3</span> Modelos de pérdida agregada<a href="modelos-de-pérdida-agregada.html#modelos-de-pérdida-agregada" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p><span class="math inline">\(R\)</span> Ganancia
+<span class="math inline">\(P\)</span> Ingreso por primas
+<span class="math inline">\(I\)</span> Ingreso por inversiones
+<span class="math inline">\(S\)</span> Pago de siniestros
+<span class="math inline">\(G\)</span> Gastos de subscripción
+<span class="math display">\[\begin{equation}
+R = P + I - S - G
+\end{equation}\]</span></p>
 <div id="mutualización-del-riesgo" class="section level2 hasAnchor" number="3.1">
 <h2><span class="header-section-number">3.1</span> Mutualización del riesgo<a href="modelos-de-pérdida-agregada.html#mutualización-del-riesgo" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>La idea de mantener un seguro está basada en la mutualización de los riesgos. La mutualización
@@ -393,6 +403,23 @@ agregada <span class="math inline">\(S_n\)</span> y mostraresmo s</p>
 <p><img src="seguros_generales_files/figure-html/l3c6-1.png" width="700" /></p>
 <p></p>
 </div>
+<p></p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb13-1"><a href="modelos-de-pérdida-agregada.html#cb13-1"></a>l <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb13-2"><a href="modelos-de-pérdida-agregada.html#cb13-2"></a>n <span class="ot">&lt;-</span> <span class="dv">300</span></span>
+<span id="cb13-3"><a href="modelos-de-pérdida-agregada.html#cb13-3"></a>dt <span class="ot">&lt;-</span> <span class="fu">rexp</span>( <span class="at">n =</span> n, <span class="at">rate =</span> <span class="dv">1</span> <span class="sc">/</span> l )</span>
+<span id="cb13-4"><a href="modelos-de-pérdida-agregada.html#cb13-4"></a>t <span class="ot">&lt;-</span> <span class="fu">c</span>( <span class="dv">0</span>, <span class="fu">cumsum</span>( dt ) )</span>
+<span id="cb13-5"><a href="modelos-de-pérdida-agregada.html#cb13-5"></a>dN <span class="ot">&lt;-</span> <span class="fu">sapply</span>( dt, <span class="at">FUN =</span> <span class="cf">function</span>( w ) <span class="fu">rpois</span>( <span class="dv">1</span>, <span class="at">lambda =</span> l <span class="sc">*</span> w ) )</span>
+<span id="cb13-6"><a href="modelos-de-pérdida-agregada.html#cb13-6"></a>N <span class="ot">&lt;-</span> <span class="fu">c</span>( <span class="dv">0</span>, <span class="fu">cumsum</span>( dN ) )</span>
+<span id="cb13-7"><a href="modelos-de-pérdida-agregada.html#cb13-7"></a>sh <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb13-8"><a href="modelos-de-pérdida-agregada.html#cb13-8"></a>rt <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb13-9"><a href="modelos-de-pérdida-agregada.html#cb13-9"></a>X <span class="ot">&lt;-</span> <span class="fu">lapply</span>( dN, <span class="at">FUN =</span> <span class="cf">function</span>( n ) <span class="fu">rgamma</span>( n, <span class="at">shape =</span> sh, <span class="at">rate =</span> rt ) )</span>
+<span id="cb13-10"><a href="modelos-de-pérdida-agregada.html#cb13-10"></a>dS <span class="ot">&lt;-</span> <span class="fu">sapply</span>( X, <span class="at">FUN =</span> <span class="cf">function</span>( x ) <span class="fu">sum</span>( x ) )</span>
+<span id="cb13-11"><a href="modelos-de-pérdida-agregada.html#cb13-11"></a>S <span class="ot">&lt;-</span> <span class="fu">c</span>( <span class="dv">0</span>, <span class="fu">cumsum</span>( dS ) )</span>
+<span id="cb13-12"><a href="modelos-de-pérdida-agregada.html#cb13-12"></a><span class="fu">plot</span>( t, N, <span class="at">type =</span> <span class="st">&#39;s&#39;</span> )</span></code></pre></div>
+<p><img src="seguros_generales_files/figure-html/l3c7-1.png" width="700" /></p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb14-1"><a href="modelos-de-pérdida-agregada.html#cb14-1"></a><span class="fu">plot</span>( t, S, <span class="at">type =</span> <span class="st">&#39;s&#39;</span> )</span></code></pre></div>
+<p><img src="seguros_generales_files/figure-html/l3c7-2.png" width="700" /></p>
+<p></p>
 
 </div>
 </div>

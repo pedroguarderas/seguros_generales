@@ -23,7 +23,7 @@
 <meta name="author" content="" />
 
 
-<meta name="date" content="2025-02-28" />
+<meta name="date" content="2025-03-15" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -145,8 +145,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="2.1" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#consideraciones-de-probabilidades"><i class="fa fa-check"></i><b>2.1</b> Consideraciones de probabilidades</a>
 <ul>
-<li class="chapter" data-level="2.1.1" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#probabilidad-discreta"><i class="fa fa-check"></i><b>2.1.1</b> Probabilidad discreta</a></li>
-<li class="chapter" data-level="2.1.2" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#esperanza-matemática"><i class="fa fa-check"></i><b>2.1.2</b> Esperanza matemática</a></li>
+<li class="chapter" data-level="2.1.1" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#variable-aleatoria-discreta"><i class="fa fa-check"></i><b>2.1.1</b> Variable aleatoria discreta</a></li>
+<li class="chapter" data-level="2.1.2" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#variable-aleatoria-a-valores-reales-continua"><i class="fa fa-check"></i><b>2.1.2</b> Variable aleatoria a valores reales (continua)</a></li>
+<li class="chapter" data-level="2.1.3" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#esperanza-matemática"><i class="fa fa-check"></i><b>2.1.3</b> Esperanza matemática</a></li>
 </ul></li>
 <li class="chapter" data-level="2.2" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#consideraciones-demográficas"><i class="fa fa-check"></i><b>2.2</b> Consideraciones demográficas</a>
 <ul>
@@ -175,12 +176,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4" data-path="deducibles.html"><a href="deducibles.html"><i class="fa fa-check"></i><b>4</b> Deducibles</a></li>
 <li class="chapter" data-level="5" data-path="primas.html"><a href="primas.html"><i class="fa fa-check"></i><b>5</b> Primas</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="primas.html"><a href="primas.html#prima-pura-de-riesgo"><i class="fa fa-check"></i><b>5.1</b> Prima pura de riesgo</a></li>
+<li class="chapter" data-level="5.1" data-path="primas.html"><a href="primas.html#prima-neta-o-prima-pura-de-riesgo"><i class="fa fa-check"></i><b>5.1</b> Prima neta, o prima pura de riesgo</a></li>
 <li class="chapter" data-level="5.2" data-path="primas.html"><a href="primas.html#prima-de-riesgo-con-recargo-sobre-la-esperanza"><i class="fa fa-check"></i><b>5.2</b> Prima de riesgo con recargo sobre la esperanza</a></li>
 <li class="chapter" data-level="5.3" data-path="primas.html"><a href="primas.html#prima-de-riesgo-con-recargo-sobre-la-varianza"><i class="fa fa-check"></i><b>5.3</b> Prima de riesgo con recargo sobre la varianza</a></li>
 <li class="chapter" data-level="5.4" data-path="primas.html"><a href="primas.html#prima-de-riesgo-con-recargo-sobre-la-desviación"><i class="fa fa-check"></i><b>5.4</b> Prima de riesgo con recargo sobre la desviación</a></li>
 <li class="chapter" data-level="5.5" data-path="primas.html"><a href="primas.html#prima-de-riesgo-con-principio-exponential-para-t-0"><i class="fa fa-check"></i><b>5.5</b> Prima de riesgo con principio exponential para <span class="math inline">\(t &gt; 0\)</span></a></li>
-<li class="chapter" data-level="5.6" data-path="primas.html"><a href="primas.html#prima-de-percentiles-para-un-valor-de-confianza-varepsilon-in-01"><i class="fa fa-check"></i><b>5.6</b> Prima de percentiles para un valor de confianza <span class="math inline">\(\varepsilon \in (0,1)\)</span></a></li>
+<li class="chapter" data-level="5.6" data-path="primas.html"><a href="primas.html#prima-de-percentiles-para-un-valor-de-confianza-alpha-in-01-o-var_alpha"><i class="fa fa-check"></i><b>5.6</b> Prima de percentiles para un valor de confianza <span class="math inline">\(\alpha \in (0,1)\)</span> o <span class="math inline">\(VaR_\alpha\)</span></a></li>
+<li class="chapter" data-level="5.7" data-path="primas.html"><a href="primas.html#esscher"><i class="fa fa-check"></i><b>5.7</b> Esscher</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="medidas-de-riesgo.html"><a href="medidas-de-riesgo.html"><i class="fa fa-check"></i><b>6</b> Medidas de riesgo</a></li>
 </ul>
@@ -204,8 +206,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1><span class="header-section-number">Capítulo 2</span> Consideraciones preliminares<a href="consideraciones-preliminares.html#consideraciones-preliminares" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <div id="consideraciones-de-probabilidades" class="section level2 hasAnchor" number="2.1">
 <h2><span class="header-section-number">2.1</span> Consideraciones de probabilidades<a href="consideraciones-preliminares.html#consideraciones-de-probabilidades" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="probabilidad-discreta" class="section level3 hasAnchor" number="2.1.1">
-<h3><span class="header-section-number">2.1.1</span> Probabilidad discreta<a href="consideraciones-preliminares.html#probabilidad-discreta" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="variable-aleatoria-discreta" class="section level3 hasAnchor" number="2.1.1">
+<h3><span class="header-section-number">2.1.1</span> Variable aleatoria discreta<a href="consideraciones-preliminares.html#variable-aleatoria-discreta" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Una variable aleatoria <span class="math inline">\(K: \Omega \longrightarrow D\)</span> que parte del espacio muestral <span class="math inline">\(\Omega\)</span> y toma
 valores en un conjunto discreto <span class="math inline">\(D = \left\{k_i \in \mathbb{R} | i \in \mathbb{N} \right\}\)</span>, sigue
 una probabilidad discreta dada por las probabilidades <span class="math inline">\(p_i \in [0,1]\)</span> , <span class="math inline">\(i \in \mathbb{N}\)</span>, si
@@ -217,12 +219,21 @@ Además se cumple la <strong>condición de normalización</strong> que es muy im
 \sum\limits_{i = 0}^{\infty} p_i = 1
 \end{equation}\]</span>
 las probabilidades <em>¡Nunca son negativas!</em> y <em>!Suman siempre 1!</em>.</p>
+</div>
+<div id="variable-aleatoria-a-valores-reales-continua" class="section level3 hasAnchor" number="2.1.2">
+<h3><span class="header-section-number">2.1.2</span> Variable aleatoria a valores reales (continua)<a href="consideraciones-preliminares.html#variable-aleatoria-a-valores-reales-continua" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Una variable aleatoria <span class="math inline">\(X: \Omega \longrightarrow D\)</span> que parte del espacio muestral <span class="math inline">\(\Omega\)</span> y toma
+valores en el conjunto de los números reales <span class="math inline">\(\mathbb{R}\)</span>, decimos que sigue la ley
+<span class="math inline">\(f : \mathbb{R} \longrightarroa \mathbb{R}\)</span>, si para cualquier evento <span class="math inline">\(A \subset \Omega\)</span>
+<span class="math display">\[\begin{equation}
+\p
+\end{equation}\]</span></p>
 <p>También se puede tener el caso particular donde los valores que puede tomar la variable aleatoria
 <span class="math inline">\(K\)</span> son discretos y también finitos, es decir el conjunto <span class="math inline">\(D = \{k_0,\ldots,k_n\}\)</span> es finito, en
 tal caso el número de probabilidades <span class="math inline">\(\{p_1,\ldots,p_n\}\)</span> también es finito.</p>
 </div>
-<div id="esperanza-matemática" class="section level3 hasAnchor" number="2.1.2">
-<h3><span class="header-section-number">2.1.2</span> Esperanza matemática<a href="consideraciones-preliminares.html#esperanza-matemática" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="esperanza-matemática" class="section level3 hasAnchor" number="2.1.3">
+<h3><span class="header-section-number">2.1.3</span> Esperanza matemática<a href="consideraciones-preliminares.html#esperanza-matemática" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Considerando una variable aleatoria discreta <span class="math inline">\(K\)</span>, así como la hemos definido, su <strong>esperanza
 matemática</strong> está dada por:
 <span class="math display">\[\begin{equation}

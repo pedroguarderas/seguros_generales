@@ -23,7 +23,7 @@
 <meta name="author" content="" />
 
 
-<meta name="date" content="2025-02-28" />
+<meta name="date" content="2025-03-15" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -145,8 +145,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="2.1" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#consideraciones-de-probabilidades"><i class="fa fa-check"></i><b>2.1</b> Consideraciones de probabilidades</a>
 <ul>
-<li class="chapter" data-level="2.1.1" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#probabilidad-discreta"><i class="fa fa-check"></i><b>2.1.1</b> Probabilidad discreta</a></li>
-<li class="chapter" data-level="2.1.2" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#esperanza-matemática"><i class="fa fa-check"></i><b>2.1.2</b> Esperanza matemática</a></li>
+<li class="chapter" data-level="2.1.1" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#variable-aleatoria-discreta"><i class="fa fa-check"></i><b>2.1.1</b> Variable aleatoria discreta</a></li>
+<li class="chapter" data-level="2.1.2" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#variable-aleatoria-a-valores-reales-continua"><i class="fa fa-check"></i><b>2.1.2</b> Variable aleatoria a valores reales (continua)</a></li>
+<li class="chapter" data-level="2.1.3" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#esperanza-matemática"><i class="fa fa-check"></i><b>2.1.3</b> Esperanza matemática</a></li>
 </ul></li>
 <li class="chapter" data-level="2.2" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#consideraciones-demográficas"><i class="fa fa-check"></i><b>2.2</b> Consideraciones demográficas</a>
 <ul>
@@ -175,12 +176,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4" data-path="deducibles.html"><a href="deducibles.html"><i class="fa fa-check"></i><b>4</b> Deducibles</a></li>
 <li class="chapter" data-level="5" data-path="primas.html"><a href="primas.html"><i class="fa fa-check"></i><b>5</b> Primas</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="primas.html"><a href="primas.html#prima-pura-de-riesgo"><i class="fa fa-check"></i><b>5.1</b> Prima pura de riesgo</a></li>
+<li class="chapter" data-level="5.1" data-path="primas.html"><a href="primas.html#prima-neta-o-prima-pura-de-riesgo"><i class="fa fa-check"></i><b>5.1</b> Prima neta, o prima pura de riesgo</a></li>
 <li class="chapter" data-level="5.2" data-path="primas.html"><a href="primas.html#prima-de-riesgo-con-recargo-sobre-la-esperanza"><i class="fa fa-check"></i><b>5.2</b> Prima de riesgo con recargo sobre la esperanza</a></li>
 <li class="chapter" data-level="5.3" data-path="primas.html"><a href="primas.html#prima-de-riesgo-con-recargo-sobre-la-varianza"><i class="fa fa-check"></i><b>5.3</b> Prima de riesgo con recargo sobre la varianza</a></li>
 <li class="chapter" data-level="5.4" data-path="primas.html"><a href="primas.html#prima-de-riesgo-con-recargo-sobre-la-desviación"><i class="fa fa-check"></i><b>5.4</b> Prima de riesgo con recargo sobre la desviación</a></li>
 <li class="chapter" data-level="5.5" data-path="primas.html"><a href="primas.html#prima-de-riesgo-con-principio-exponential-para-t-0"><i class="fa fa-check"></i><b>5.5</b> Prima de riesgo con principio exponential para <span class="math inline">\(t &gt; 0\)</span></a></li>
-<li class="chapter" data-level="5.6" data-path="primas.html"><a href="primas.html#prima-de-percentiles-para-un-valor-de-confianza-varepsilon-in-01"><i class="fa fa-check"></i><b>5.6</b> Prima de percentiles para un valor de confianza <span class="math inline">\(\varepsilon \in (0,1)\)</span></a></li>
+<li class="chapter" data-level="5.6" data-path="primas.html"><a href="primas.html#prima-de-percentiles-para-un-valor-de-confianza-alpha-in-01-o-var_alpha"><i class="fa fa-check"></i><b>5.6</b> Prima de percentiles para un valor de confianza <span class="math inline">\(\alpha \in (0,1)\)</span> o <span class="math inline">\(VaR_\alpha\)</span></a></li>
+<li class="chapter" data-level="5.7" data-path="primas.html"><a href="primas.html#esscher"><i class="fa fa-check"></i><b>5.7</b> Esscher</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="medidas-de-riesgo.html"><a href="medidas-de-riesgo.html"><i class="fa fa-check"></i><b>6</b> Medidas de riesgo</a></li>
 </ul>
@@ -203,25 +205,56 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="medidas-de-riesgo" class="section level1 hasAnchor" number="6">
 <h1><span class="header-section-number">Capítulo 6</span> Medidas de riesgo<a href="medidas-de-riesgo.html#medidas-de-riesgo" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>Se tiene algunas propiedades deseables para una medida de riesgo, <span class="math inline">\(\zeta: \mathbb{R}
-\longrightarrow \mathbb{R}\)</span>
-1. <strong>Homogenidad</strong>
+\longrightarrow \mathbb{R}\)</span>.</p>
+<ol style="list-style-type: decimal">
+<li><strong>Homogenidad</strong>
 <span class="math display">\[\begin{equation}
 \zeta( a X ) = a \zeta( X )
-\end{equation}\]</span>
-2. <strong>Invarianza ante las traslaciones</strong>
+\end{equation}\]</span></li>
+<li><strong>Invarianza ante las traslaciones</strong>
 <span class="math display">\[\begin{equation}
 \zeta( \alpha X + a ) = \zeta( \alpha X ) + a
-\end{equation}\]</span>
-3. <strong>Monotonicidad</strong>
+\end{equation}\]</span></li>
+<li><strong>Monotonicidad</strong>
 <span class="math display">\[\begin{equation}
 \zeta( X + a ) = \zeta( X ) + a
-\end{equation}\]</span>
-4. <strong>Sub-aditividad</strong>
+\end{equation}\]</span></li>
+<li><strong>Sub-aditividad</strong>
 <span class="math display">\[\begin{equation}
 \zeta( X_1 + X_2 ) \leq \zeta( X_1 ) + \zeta( X_2 )
-\end{equation}\]</span></p>
+\end{equation}\]</span></li>
+</ol>
 <p>Si en caso la medida de riesgo satisface las cuatro propiedades anteriores se dice que es un
-medida de riesgo coherente.</p>
+<strong>medida de riesgo coherente</strong>.</p>
+<p><span class="math display">\[\begin{equation}
+VaR_{\alpha}( X ) = F_X^{-1}( \alpha )
+\end{equation}\]</span></p>
+<p><span class="math display">\[\begin{equation}
+TVaR_{\alpha}( X ) = \frac{1}{1-\alpha} \int\limits_{\alpha}^1 VaR_u( X )\ du
+\end{equation}\]</span></p>
+<p></p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb24-1"><a href="medidas-de-riesgo.html#cb24-1"></a>u <span class="ot">&lt;-</span> <span class="dv">4</span></span>
+<span id="cb24-2"><a href="medidas-de-riesgo.html#cb24-2"></a>s <span class="ot">&lt;-</span> <span class="fl">0.5</span></span>
+<span id="cb24-3"><a href="medidas-de-riesgo.html#cb24-3"></a>n <span class="ot">&lt;-</span> <span class="fl">1e4</span></span>
+<span id="cb24-4"><a href="medidas-de-riesgo.html#cb24-4"></a>X <span class="ot">&lt;-</span> <span class="fu">rlnorm</span>( n, <span class="at">meanlog =</span> u, <span class="at">sdlog =</span> s )</span>
+<span id="cb24-5"><a href="medidas-de-riesgo.html#cb24-5"></a>k <span class="ot">&lt;-</span> <span class="fu">seq</span>( <span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.2</span> ) </span>
+<span id="cb24-6"><a href="medidas-de-riesgo.html#cb24-6"></a>VaRX <span class="ot">&lt;-</span> <span class="fu">quantile</span>( X, <span class="at">probs =</span> k, <span class="at">names =</span> <span class="cn">FALSE</span> )</span>
+<span id="cb24-7"><a href="medidas-de-riesgo.html#cb24-7"></a>TVaRX <span class="ot">&lt;-</span> <span class="fu">sapply</span>( </span>
+<span id="cb24-8"><a href="medidas-de-riesgo.html#cb24-8"></a>  <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>( VaRX ), </span>
+<span id="cb24-9"><a href="medidas-de-riesgo.html#cb24-9"></a>  <span class="at">FUN =</span> <span class="cf">function</span>( i ) <span class="fu">ifelse</span>( k[ i ] <span class="sc">&lt;</span> <span class="dv">1</span>, ( <span class="dv">1</span> <span class="sc">/</span> ( <span class="dv">1</span> <span class="sc">-</span> k[ i ] ) ) <span class="sc">*</span> <span class="fu">mean</span>( X <span class="sc">*</span> ( X <span class="sc">&gt;</span> VaRX[ i ] ) ), <span class="fu">max</span>( X ) ) )</span>
+<span id="cb24-10"><a href="medidas-de-riesgo.html#cb24-10"></a></span>
+<span id="cb24-11"><a href="medidas-de-riesgo.html#cb24-11"></a><span class="fu">hist</span>( X, <span class="at">breaks =</span> <span class="dv">100</span>, <span class="at">xlim =</span> <span class="fu">c</span>( <span class="dv">0</span>, <span class="fl">1.1</span> <span class="sc">*</span> <span class="fu">max</span>( X ) ) )</span>
+<span id="cb24-12"><a href="medidas-de-riesgo.html#cb24-12"></a><span class="fu">abline</span>( <span class="at">v =</span> VaRX, <span class="at">col =</span> <span class="st">&#39;red&#39;</span> )</span></code></pre></div>
+<p><img src="seguros_generales_files/figure-html/l6c1-1.png" width="700" /></p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb25-1"><a href="medidas-de-riesgo.html#cb25-1"></a><span class="fu">hist</span>( X, <span class="at">breaks =</span> <span class="dv">100</span>, <span class="at">xlim =</span> <span class="fu">c</span>( <span class="dv">0</span>, <span class="fl">1.1</span> <span class="sc">*</span> <span class="fu">max</span>( X ) ) )</span>
+<span id="cb25-2"><a href="medidas-de-riesgo.html#cb25-2"></a><span class="fu">abline</span>( <span class="at">v =</span> TVaRX, <span class="at">col =</span> <span class="st">&#39;blue&#39;</span> )</span></code></pre></div>
+<p><img src="seguros_generales_files/figure-html/l6c1-2.png" width="700" /></p>
+<p></p>
+<p></p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb26-1"><a href="medidas-de-riesgo.html#cb26-1"></a><span class="fu">plot</span>( k, VaRX, <span class="at">ylim =</span> <span class="fu">c</span>( <span class="dv">0</span>, <span class="fl">1e3</span> ) )</span>
+<span id="cb26-2"><a href="medidas-de-riesgo.html#cb26-2"></a><span class="fu">points</span>( k, TVaRX, <span class="at">col =</span> <span class="st">&#39;red&#39;</span> )</span></code></pre></div>
+<p><img src="seguros_generales_files/figure-html/l6c2-1.png" width="700" /></p>
+<p></p>
 
 </div>
             </section>

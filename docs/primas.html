@@ -23,7 +23,7 @@
 <meta name="author" content="" />
 
 
-<meta name="date" content="2025-02-28" />
+<meta name="date" content="2025-03-15" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -145,8 +145,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="2.1" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#consideraciones-de-probabilidades"><i class="fa fa-check"></i><b>2.1</b> Consideraciones de probabilidades</a>
 <ul>
-<li class="chapter" data-level="2.1.1" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#probabilidad-discreta"><i class="fa fa-check"></i><b>2.1.1</b> Probabilidad discreta</a></li>
-<li class="chapter" data-level="2.1.2" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#esperanza-matemática"><i class="fa fa-check"></i><b>2.1.2</b> Esperanza matemática</a></li>
+<li class="chapter" data-level="2.1.1" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#variable-aleatoria-discreta"><i class="fa fa-check"></i><b>2.1.1</b> Variable aleatoria discreta</a></li>
+<li class="chapter" data-level="2.1.2" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#variable-aleatoria-a-valores-reales-continua"><i class="fa fa-check"></i><b>2.1.2</b> Variable aleatoria a valores reales (continua)</a></li>
+<li class="chapter" data-level="2.1.3" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#esperanza-matemática"><i class="fa fa-check"></i><b>2.1.3</b> Esperanza matemática</a></li>
 </ul></li>
 <li class="chapter" data-level="2.2" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#consideraciones-demográficas"><i class="fa fa-check"></i><b>2.2</b> Consideraciones demográficas</a>
 <ul>
@@ -175,12 +176,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4" data-path="deducibles.html"><a href="deducibles.html"><i class="fa fa-check"></i><b>4</b> Deducibles</a></li>
 <li class="chapter" data-level="5" data-path="primas.html"><a href="primas.html"><i class="fa fa-check"></i><b>5</b> Primas</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="primas.html"><a href="primas.html#prima-pura-de-riesgo"><i class="fa fa-check"></i><b>5.1</b> Prima pura de riesgo</a></li>
+<li class="chapter" data-level="5.1" data-path="primas.html"><a href="primas.html#prima-neta-o-prima-pura-de-riesgo"><i class="fa fa-check"></i><b>5.1</b> Prima neta, o prima pura de riesgo</a></li>
 <li class="chapter" data-level="5.2" data-path="primas.html"><a href="primas.html#prima-de-riesgo-con-recargo-sobre-la-esperanza"><i class="fa fa-check"></i><b>5.2</b> Prima de riesgo con recargo sobre la esperanza</a></li>
 <li class="chapter" data-level="5.3" data-path="primas.html"><a href="primas.html#prima-de-riesgo-con-recargo-sobre-la-varianza"><i class="fa fa-check"></i><b>5.3</b> Prima de riesgo con recargo sobre la varianza</a></li>
 <li class="chapter" data-level="5.4" data-path="primas.html"><a href="primas.html#prima-de-riesgo-con-recargo-sobre-la-desviación"><i class="fa fa-check"></i><b>5.4</b> Prima de riesgo con recargo sobre la desviación</a></li>
 <li class="chapter" data-level="5.5" data-path="primas.html"><a href="primas.html#prima-de-riesgo-con-principio-exponential-para-t-0"><i class="fa fa-check"></i><b>5.5</b> Prima de riesgo con principio exponential para <span class="math inline">\(t &gt; 0\)</span></a></li>
-<li class="chapter" data-level="5.6" data-path="primas.html"><a href="primas.html#prima-de-percentiles-para-un-valor-de-confianza-varepsilon-in-01"><i class="fa fa-check"></i><b>5.6</b> Prima de percentiles para un valor de confianza <span class="math inline">\(\varepsilon \in (0,1)\)</span></a></li>
+<li class="chapter" data-level="5.6" data-path="primas.html"><a href="primas.html#prima-de-percentiles-para-un-valor-de-confianza-alpha-in-01-o-var_alpha"><i class="fa fa-check"></i><b>5.6</b> Prima de percentiles para un valor de confianza <span class="math inline">\(\alpha \in (0,1)\)</span> o <span class="math inline">\(VaR_\alpha\)</span></a></li>
+<li class="chapter" data-level="5.7" data-path="primas.html"><a href="primas.html#esscher"><i class="fa fa-check"></i><b>5.7</b> Esscher</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="medidas-de-riesgo.html"><a href="medidas-de-riesgo.html"><i class="fa fa-check"></i><b>6</b> Medidas de riesgo</a></li>
 </ul>
@@ -202,8 +204,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="primas" class="section level1 hasAnchor" number="5">
 <h1><span class="header-section-number">Capítulo 5</span> Primas<a href="primas.html#primas" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div id="prima-pura-de-riesgo" class="section level2 hasAnchor" number="5.1">
-<h2><span class="header-section-number">5.1</span> Prima pura de riesgo<a href="primas.html#prima-pura-de-riesgo" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>La prima es la cantidad de dinero que un individuo o entidad pagan por una póliza de seguro, la cual
+está diseñada para cubrir ciertos riesgos personales o comerciales.</p>
+<p><span class="math display">\[\begin{equation}
+P = \frac{S}{n}
+\end{equation}\]</span></p>
+<div id="prima-neta-o-prima-pura-de-riesgo" class="section level2 hasAnchor" number="5.1">
+<h2><span class="header-section-number">5.1</span> Prima neta, o prima pura de riesgo<a href="primas.html#prima-neta-o-prima-pura-de-riesgo" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><span class="math display">\[\begin{equation}
   P = \mathbb{E}[S]
 \end{equation}\]</span></p>
@@ -233,11 +240,364 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   = \frac{1}{2} M_N\big( \ln M_X( t ) \big)
 \end{equation}\]</span></p>
 </div>
-<div id="prima-de-percentiles-para-un-valor-de-confianza-varepsilon-in-01" class="section level2 hasAnchor" number="5.6">
-<h2><span class="header-section-number">5.6</span> Prima de percentiles para un valor de confianza <span class="math inline">\(\varepsilon \in (0,1)\)</span><a href="primas.html#prima-de-percentiles-para-un-valor-de-confianza-varepsilon-in-01" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="prima-de-percentiles-para-un-valor-de-confianza-alpha-in-01-o-var_alpha" class="section level2 hasAnchor" number="5.6">
+<h2><span class="header-section-number">5.6</span> Prima de percentiles para un valor de confianza <span class="math inline">\(\alpha \in (0,1)\)</span> o <span class="math inline">\(VaR_\alpha\)</span><a href="primas.html#prima-de-percentiles-para-un-valor-de-confianza-alpha-in-01-o-var_alpha" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><span class="math display">\[\begin{equation}
-  P = F_S^{-1}( 1 - \varepsilon )
+  P = VaR_\alpha)( S ) =  F_S^{-1}( \alpha )
 \end{equation}\]</span></p>
+</div>
+<div id="esscher" class="section level2 hasAnchor" number="5.7">
+<h2><span class="header-section-number">5.7</span> Esscher<a href="primas.html#esscher" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><span class="math inline">\(X_i \rightsquigarrow Gamma( \alpha_i, \theta )\)</span>, para <span class="math inline">\(i \in \{1,\ldots,n\}\)</span>,
+<span class="math inline">\(S \rightsquigarrow Gamma\left( \sum\limits_{i=1}^n \alpha_i \right)\)</span></p>
+<p></p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb15-1"><a href="primas.html#cb15-1"></a>n <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
+<span id="cb15-2"><a href="primas.html#cb15-2"></a>a <span class="ot">&lt;-</span> <span class="fu">runif</span>( n, <span class="dv">5</span>, <span class="dv">10</span> )</span>
+<span id="cb15-3"><a href="primas.html#cb15-3"></a>A <span class="ot">&lt;-</span> <span class="fu">sum</span>( a )</span>
+<span id="cb15-4"><a href="primas.html#cb15-4"></a>theta <span class="ot">&lt;-</span> <span class="dv">4</span></span>
+<span id="cb15-5"><a href="primas.html#cb15-5"></a>EX <span class="ot">&lt;-</span> a <span class="sc">*</span> theta</span>
+<span id="cb15-6"><a href="primas.html#cb15-6"></a>VX <span class="ot">&lt;-</span> a <span class="sc">*</span> theta<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb15-7"><a href="primas.html#cb15-7"></a>ES <span class="ot">&lt;-</span> <span class="fu">sum</span>( EX )</span>
+<span id="cb15-8"><a href="primas.html#cb15-8"></a>VS <span class="ot">&lt;-</span> <span class="fu">sum</span>( VX )</span>
+<span id="cb15-9"><a href="primas.html#cb15-9"></a>SDS <span class="ot">&lt;-</span> <span class="fu">sqrt</span>( VS )</span>
+<span id="cb15-10"><a href="primas.html#cb15-10"></a></span>
+<span id="cb15-11"><a href="primas.html#cb15-11"></a>alpha <span class="ot">&lt;-</span> <span class="fl">0.95</span></span>
+<span id="cb15-12"><a href="primas.html#cb15-12"></a>P <span class="ot">&lt;-</span> ES</span>
+<span id="cb15-13"><a href="primas.html#cb15-13"></a>P_avg <span class="ot">&lt;-</span> ( <span class="dv">1</span> <span class="sc">+</span> alpha ) <span class="sc">*</span> ES</span>
+<span id="cb15-14"><a href="primas.html#cb15-14"></a>P_var <span class="ot">&lt;-</span> ES <span class="sc">+</span> alpha <span class="sc">*</span> VS</span>
+<span id="cb15-15"><a href="primas.html#cb15-15"></a>P_sde <span class="ot">&lt;-</span> ES <span class="sc">+</span> alpha <span class="sc">*</span> SDS</span>
+<span id="cb15-16"><a href="primas.html#cb15-16"></a>P_VaR <span class="ot">&lt;-</span> <span class="fu">qgamma</span>( alpha, <span class="at">shape =</span> A, <span class="at">scale =</span> theta )</span>
+<span id="cb15-17"><a href="primas.html#cb15-17"></a></span>
+<span id="cb15-18"><a href="primas.html#cb15-18"></a><span class="co"># curve( dgamma, shape = A, scale = theta )</span></span></code></pre></div>
+<p></p>
+<p></p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb16-1"><a href="primas.html#cb16-1"></a>alph <span class="ot">&lt;-</span> <span class="fl">0.01</span></span>
+<span id="cb16-2"><a href="primas.html#cb16-2"></a>e <span class="ot">&lt;-</span> <span class="fu">unlist</span>( <span class="fu">lapply</span>( <span class="fu">seq</span>( <span class="dv">1</span>, <span class="dv">6</span>, <span class="dv">1</span> ), <span class="at">FUN =</span> <span class="cf">function</span>( n ) <span class="fu">seq</span>( <span class="dv">9</span>, <span class="dv">1</span>, <span class="sc">-</span><span class="fl">0.2</span> ) <span class="sc">*</span> <span class="dv">10</span><span class="sc">^</span>{<span class="sc">-</span>n} ) )</span>
+<span id="cb16-3"><a href="primas.html#cb16-3"></a>n <span class="ot">&lt;-</span> <span class="fu">log</span>( <span class="dv">2</span> <span class="sc">/</span> alph ) <span class="sc">/</span> e<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb16-4"><a href="primas.html#cb16-4"></a><span class="fu">plot</span>( e, n, <span class="at">type =</span> <span class="st">&#39;l&#39;</span>, <span class="at">xlim =</span> <span class="fu">c</span>( <span class="dv">0</span>, <span class="fl">0.00001</span> ) )</span></code></pre></div>
+<p><img src="seguros_generales_files/figure-html/l5c2-1.png" width="700" /></p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb17-1"><a href="primas.html#cb17-1"></a>dt <span class="ot">&lt;-</span> <span class="fu">data.table</span>( e, n )</span>
+<span id="cb17-2"><a href="primas.html#cb17-2"></a><span class="fu">cat</span>( <span class="fu">paste</span>( <span class="fu">paste0</span>( <span class="fu">formatC</span>( e, <span class="at">digits =</span> <span class="dv">10</span>, <span class="at">format =</span> <span class="st">&#39;f&#39;</span> ), <span class="st">&#39;, &#39;</span>, <span class="fu">formatC</span>( n, <span class="at">digits =</span> <span class="dv">30</span>, <span class="at">format =</span> <span class="st">&#39;f&#39;</span> ) ), <span class="at">collapse =</span> <span class="st">&#39;</span><span class="sc">\n</span><span class="st">&#39;</span> ) )</span></code></pre></div>
+<pre><code>## 0.9000000000, 6.541132551293871166819826612482
+## 0.8800000000, 6.841835442339920803078712197021
+## 0.8600000000, 7.163760636219627997434145072475
+## 0.8400000000, 7.508953183883270376952623337274
+## 0.8200000000, 7.879710539185063922218432708178
+## 0.8000000000, 8.278620885231305237539345398545
+## 0.7800000000, 8.708608426278823699817621672992
+## 0.7600000000, 9.172987130450200865539045480546
+## 0.7400000000, 9.675524774558134311064350185916
+## 0.7200000000, 10.220519611396673198555618000682
+## 0.7000000000, 10.812892584791908845431862573605
+## 0.6800000000, 11.458298803088311501596763264388
+## 0.6600000000, 12.163263008604305426274549972732
+## 0.6400000000, 12.935345133173910880941548384726
+## 0.6200000000, 13.783343825567211382576715550385
+## 0.6000000000, 14.717548240411208126943165552802
+## 0.5800000000, 15.750051624696897789590366301127
+## 0.5600000000, 16.895144663737365675615365034901
+## 0.5400000000, 18.169812642482977338431737734936
+## 0.5200000000, 19.594368959127358209570957114920
+## 0.5000000000, 21.193269466192145245031497324817
+## 0.4800000000, 22.996169125642520469909868552350
+## 0.4600000000, 25.039307025274279538962218794040
+## 0.4400000000, 27.367341769359697423169563990086
+## 0.4200000000, 30.035812735533095718665208551101
+## 0.4000000000, 33.114483540925220950157381594181
+## 0.3800000000, 36.691948521800803462156181922182
+## 0.3600000000, 40.882078445586699899649829603732
+## 0.3400000000, 45.833195212353260217241768259555
+## 0.3200000000, 51.741380532695686156330339144915
+## 0.3000000000, 58.870192961644832507772662211210
+## 0.2800000000, 67.580578654949462702461460139602
+## 0.2600000000, 78.377475836509432838283828459680
+## 0.2400000000, 91.984676502570096090494189411402
+## 0.2200000000, 109.469367077438818114387686364353
+## 0.2000000000, 132.457934163700883800629526376724
+## 0.1800000000, 163.528313782346799598599318414927
+## 0.1600000000, 206.965522130782744625321356579661
+## 0.1400000000, 270.322314619797907653264701366425
+## 0.1200000000, 367.938706010280668579071061685681
+## 0.1000000000, 529.831736654803535202518105506897
+## 0.0900000000, 654.113255129387198394397273659706
+## 0.0880000000, 684.183544233992165572999510914087
+## 0.0860000000, 716.376063621962885008542798459530
+## 0.0840000000, 750.895318388327041247976012527943
+## 0.0820000000, 787.971053918506527224963065236807
+## 0.0800000000, 827.862088523130637440772261470556
+## 0.0780000000, 870.860842627882334454625379294157
+## 0.0760000000, 917.298713045020122081041336059570
+## 0.0740000000, 967.552477455813459528144448995590
+## 0.0720000000, 1022.051961139667241695860866457224
+## 0.0700000000, 1081.289258479190948492032475769520
+## 0.0680000000, 1145.829880308831207003095187246799
+## 0.0660000000, 1216.326300860430592365446500480175
+## 0.0640000000, 1293.534513317391656528343446552753
+## 0.0620000000, 1378.334382556721493529039435088634
+## 0.0600000000, 1471.754824041121310074231587350368
+## 0.0580000000, 1575.005162469690048965276218950748
+## 0.0560000000, 1689.514466373736468085553497076035
+## 0.0540000000, 1816.981264248297293306677602231503
+## 0.0520000000, 1959.436895912736190439318306744099
+## 0.0500000000, 2119.326946619214140810072422027588
+## 0.0480000000, 2299.616912564251833828166127204895
+## 0.0460000000, 2503.930702527427456516306847333908
+## 0.0440000000, 2736.734176935969571786699816584587
+## 0.0420000000, 3003.581273553309074486605823040009
+## 0.0400000000, 3311.448354092522549763089045882225
+## 0.0380000000, 3669.194852180080488324165344238281
+## 0.0360000000, 4088.207844558670331025496125221252
+## 0.0340000000, 4583.319521235326647001784294843674
+## 0.0320000000, 5174.138053269569354597479104995728
+## 0.0300000000, 5887.019296164485240296926349401474
+## 0.0280000000, 6758.057865494945872342213988304138
+## 0.0260000000, 7837.747583650944761757273226976395
+## 0.0240000000, 9198.467650257012792280875146389008
+## 0.0220000000, 10946.936707743885563104413449764252
+## 0.0200000000, 13245.793416370090199052356183528900
+## 0.0180000000, 16352.831378234681324101984500885010
+## 0.0160000000, 20696.552213078277418389916419982910
+## 0.0140000000, 27032.231461979798041284084320068359
+## 0.0120000000, 36793.870601028072996996343135833740
+## 0.0100000000, 52983.173665480360796209424734115601
+## 0.0090000000, 65411.325512938703468535095453262329
+## 0.0088000000, 68418.354423399228835478425025939941
+## 0.0086000000, 71637.606362196267582476139068603516
+## 0.0084000000, 75089.531838832699577324092388153076
+## 0.0082000000, 78797.105391850651358254253864288330
+## 0.0080000000, 82786.208852313066017813980579376221
+## 0.0078000000, 87086.084262788252090103924274444580
+## 0.0076000000, 91729.871304502012208104133605957031
+## 0.0074000000, 96755.247745581378694623708724975586
+## 0.0072000000, 102205.196113966725533828139305114746
+## 0.0070000000, 108128.925847919090301729738712310791
+## 0.0068000000, 114582.988030883148894645273685455322
+## 0.0066000000, 121632.630086043078335933387279510498
+## 0.0064000000, 129353.451331739168381318449974060059
+## 0.0062000000, 137833.438255672139348462224006652832
+## 0.0060000000, 147175.482404112117365002632141113281
+## 0.0058000000, 157500.516246968996711075305938720703
+## 0.0056000000, 168951.446637373621342703700065612793
+## 0.0054000000, 181698.126424829766619950532913208008
+## 0.0052000000, 195943.689591273549012839794158935547
+## 0.0050000000, 211932.694661921443184837698936462402
+## 0.0048000000, 229961.691256425227038562297821044922
+## 0.0046000000, 250393.070252742734737694263458251953
+## 0.0044000000, 273673.417693596973549574613571166992
+## 0.0042000000, 300358.127355330914724618196487426758
+## 0.0040000000, 331144.835409252264071255922317504883
+## 0.0038000000, 366919.485218008048832416534423828125
+## 0.0036000000, 408820.784455867018550634384155273438
+## 0.0034000000, 458331.952123532711993902921676635742
+## 0.0032000000, 517413.805326956906355917453765869141
+## 0.0030000000, 588701.929616448469460010528564453125
+## 0.0028000000, 675805.786549494485370814800262451172
+## 0.0026000000, 783774.758365094196051359176635742188
+## 0.0024000000, 919846.765025701257400214672088623047
+## 0.0022000000, 1094693.670774388359859585762023925781
+## 0.0020000000, 1324579.341637009056285023689270019531
+## 0.0018000000, 1635283.137823468074202537536621093750
+## 0.0016000000, 2069655.221307827625423669815063476562
+## 0.0014000000, 2703223.146197979804128408432006835938
+## 0.0012000000, 3679387.060102807357907295227050781250
+## 0.0010000000, 5298317.366548036225140094757080078125
+## 0.0009000000, 6541132.551293870434165000915527343750
+## 0.0008800000, 6841835.442339920438826084136962890625
+## 0.0008600000, 7163760.636219627223908901214599609375
+## 0.0008400000, 7508953.183883270248770713806152343750
+## 0.0008200000, 7879710.539185062982141971588134765625
+## 0.0008000000, 8278620.885231306776404380798339843750
+## 0.0007800000, 8708608.426278823986649513244628906250
+## 0.0007600000, 9172987.130450200289487838745117187500
+## 0.0007400000, 9675524.774558134377002716064453125000
+## 0.0007200000, 10220519.611396674066781997680664062500
+## 0.0007000000, 10812892.584791911765933036804199218750
+## 0.0006800000, 11458298.803088312968611717224121093750
+## 0.0006600000, 12163263.008604306727647781372070312500
+## 0.0006400000, 12935345.133173914626240730285644531250
+## 0.0006200000, 13783343.825567213818430900573730468750
+## 0.0006000000, 14717548.240411210805177688598632812500
+## 0.0005800000, 15750051.624696897342801094055175781250
+## 0.0005600000, 16895144.663737364113330841064453125000
+## 0.0005400000, 18169812.642482969909906387329101562500
+## 0.0005200000, 19594368.959127359092235565185546875000
+## 0.0005000000, 21193269.466192144900560379028320312500
+## 0.0004800000, 22996169.125642519444227218627929687500
+## 0.0004600000, 25039307.025274276733398437500000000000
+## 0.0004400000, 27367341.769359696656465530395507812500
+## 0.0004200000, 30035812.735533092170953750610351562500
+## 0.0004000000, 33114483.540925227105617523193359375000
+## 0.0003800000, 36691948.521800801157951354980468750000
+## 0.0003600000, 40882078.445586711168289184570312500000
+## 0.0003400000, 45833195.212353266775608062744140625000
+## 0.0003200000, 51741380.532695688307285308837890625000
+## 0.0003000000, 58870192.961644843220710754394531250000
+## 0.0002800000, 67580578.654949456453323364257812500000
+## 0.0002600000, 78377475.836509436368942260742187500000
+## 0.0002400000, 91984676.502570107579231262207031250000
+## 0.0002200000, 109469367.077438831329345703125000000000
+## 0.0002000000, 132457934.163700908422470092773437500000
+## 0.0001800000, 163528313.782346844673156738281250000000
+## 0.0001600000, 206965522.130782753229141235351562500000
+## 0.0001400000, 270322314.619797885417938232421875000000
+## 0.0001200000, 367938706.010280668735504150390625000000
+## 0.0001000000, 529831736.654803633689880371093750000000
+## 0.0000900000, 654113255.129387140274047851562500000000
+## 0.0000880000, 684183544.233992218971252441406250000000
+## 0.0000860000, 716376063.621962666511535644531250000000
+## 0.0000840000, 750895318.388327002525329589843750000000
+## 0.0000820000, 787971053.918506264686584472656250000000
+## 0.0000800000, 827862088.523130536079406738281250000000
+## 0.0000780000, 870860842.627882361412048339843750000000
+## 0.0000760000, 917298713.045019984245300292968750000000
+## 0.0000740000, 967552477.455813527107238769531250000000
+## 0.0000720000, 1022051961.139667391777038574218750000000
+## 0.0000700000, 1081289258.479190826416015625000000000000
+## 0.0000680000, 1145829880.308831453323364257812500000000
+## 0.0000660000, 1216326300.860430717468261718750000000000
+## 0.0000640000, 1293534513.317391157150268554687500000000
+## 0.0000620000, 1378334382.556720972061157226562500000000
+## 0.0000600000, 1471754824.041120767593383789062500000000
+## 0.0000580000, 1575005162.469689846038818359375000000000
+## 0.0000560000, 1689514466.373736143112182617187500000000
+## 0.0000540000, 1816981264.248297452926635742187500000000
+## 0.0000520000, 1959436895.912735462188720703125000000000
+## 0.0000500000, 2119326946.619214534759521484375000000000
+## 0.0000480000, 2299616912.564251422882080078125000000000
+## 0.0000460000, 2503930702.527427196502685546875000000000
+## 0.0000440000, 2736734176.935969352722167968750000000000
+## 0.0000420000, 3003581273.553308963775634765625000000000
+## 0.0000400000, 3311448354.092522144317626953125000000000
+## 0.0000380000, 3669194852.180079936981201171875000000000
+## 0.0000360000, 4088207844.558669567108154296875000000000
+## 0.0000340000, 4583319521.235325813293457031250000000000
+## 0.0000320000, 5174138053.269566535949707031250000000000
+## 0.0000300000, 5887019296.164483070373535156250000000000
+## 0.0000280000, 6758057865.494944572448730468750000000000
+## 0.0000260000, 7837747583.650941848754882812500000000000
+## 0.0000240000, 9198467650.257009506225585937500000000000
+## 0.0000220000, 10946936707.743881225585937500000000000000
+## 0.0000200000, 13245793416.370088577270507812500000000000
+## 0.0000180000, 16352831378.234678268432617187500000000000
+## 0.0000160000, 20696552213.078266143798828125000000000000
+## 0.0000140000, 27032231461.979793548583984375000000000000
+## 0.0000120000, 36793870601.028068542480468750000000000000
+## 0.0000100000, 52983173665.480354309082031250000000000000
+## 0.0000090000, 65411325512.938713073730468750000000000000
+## 0.0000088000, 68418354423.399223327636718750000000000000
+## 0.0000086000, 71637606362.196289062500000000000000000000
+## 0.0000084000, 75089531838.832733154296875000000000000000
+## 0.0000082000, 78797105391.850631713867187500000000000000
+## 0.0000080000, 82786208852.313064575195312500000000000000
+## 0.0000078000, 87086084262.788238525390625000000000000000
+## 0.0000076000, 91729871304.502029418945312500000000000000
+## 0.0000074000, 96755247745.581359863281250000000000000000
+## 0.0000072000, 102205196113.966766357421875000000000000000
+## 0.0000070000, 108128925847.919113159179687500000000000000
+## 0.0000068000, 114582988030.883163452148437500000000000000
+## 0.0000066000, 121632630086.043090820312500000000000000000
+## 0.0000064000, 129353451331.739181518554687500000000000000
+## 0.0000062000, 137833438255.672180175781250000000000000000
+## 0.0000060000, 147175482404.112091064453125000000000000000
+## 0.0000058000, 157500516246.968994140625000000000000000000
+## 0.0000056000, 168951446637.373626708984375000000000000000
+## 0.0000054000, 181698126424.829772949218750000000000000000
+## 0.0000052000, 195943689591.273559570312500000000000000000
+## 0.0000050000, 211932694661.921508789062500000000000000000
+## 0.0000048000, 229961691256.425201416015625000000000000000
+## 0.0000046000, 250393070252.742828369140625000000000000000
+## 0.0000044000, 273673417693.596984863281250000000000000000
+## 0.0000042000, 300358127355.330993652343750000000000000000
+## 0.0000040000, 331144835409.252258300781250000000000000000
+## 0.0000038000, 366919485218.008117675781250000000000000000
+## 0.0000036000, 408820784455.867126464843750000000000000000
+## 0.0000034000, 458331952123.532714843750000000000000000000
+## 0.0000032000, 517413805326.956970214843750000000000000000
+## 0.0000030000, 588701929616.448364257812500000000000000000
+## 0.0000028000, 675805786549.494506835937500000000000000000
+## 0.0000026000, 783774758365.094238281250000000000000000000
+## 0.0000024000, 919846765025.701171875000000000000000000000
+## 0.0000022000, 1094693670774.388305664062500000000000000000
+## 0.0000020000, 1324579341637.009033203125000000000000000000
+## 0.0000018000, 1635283137823.468505859375000000000000000000
+## 0.0000016000, 2069655221307.827880859375000000000000000000
+## 0.0000014000, 2703223146197.980468750000000000000000000000
+## 0.0000012000, 3679387060102.807128906250000000000000000000
+## 0.0000010000, 5298317366548.036132812500000000000000000000</code></pre>
+<div class="sourceCode" id="cb19"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb19-1"><a href="primas.html#cb19-1"></a>d <span class="ot">&lt;-</span> n <span class="sc">*</span> <span class="dv">8</span> <span class="sc">/</span> <span class="dv">1024</span><span class="sc">^</span><span class="dv">2</span></span></code></pre></div>
+<p></p>
+<p></p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb20-1"><a href="primas.html#cb20-1"></a>n <span class="ot">&lt;-</span> <span class="fl">1e3</span></span>
+<span id="cb20-2"><a href="primas.html#cb20-2"></a>S <span class="ot">&lt;-</span> <span class="fu">rgamma</span>( n, <span class="at">shape =</span> A, <span class="at">scale =</span> theta )</span>
+<span id="cb20-3"><a href="primas.html#cb20-3"></a>smin <span class="ot">&lt;-</span> <span class="fu">qgamma</span>( <span class="fl">0.001</span>, <span class="at">shape =</span> A, <span class="at">scale =</span> theta )</span>
+<span id="cb20-4"><a href="primas.html#cb20-4"></a>smax <span class="ot">&lt;-</span> <span class="fu">qgamma</span>( <span class="fl">0.999</span>, <span class="at">shape =</span> A, <span class="at">scale =</span> theta )</span>
+<span id="cb20-5"><a href="primas.html#cb20-5"></a>s <span class="ot">&lt;-</span> <span class="fu">seq</span>( smin, smax, <span class="at">length.out =</span> <span class="dv">1000</span> )</span>
+<span id="cb20-6"><a href="primas.html#cb20-6"></a>Fns <span class="ot">&lt;-</span> <span class="fu">ecdf</span>( S )( s )</span>
+<span id="cb20-7"><a href="primas.html#cb20-7"></a>Fs <span class="ot">&lt;-</span> <span class="fu">pgamma</span>( s, <span class="at">shape =</span> A, <span class="at">scale =</span> theta )</span>
+<span id="cb20-8"><a href="primas.html#cb20-8"></a></span>
+<span id="cb20-9"><a href="primas.html#cb20-9"></a>alph <span class="ot">&lt;-</span> <span class="fl">0.02</span></span>
+<span id="cb20-10"><a href="primas.html#cb20-10"></a>er <span class="ot">&lt;-</span> <span class="fu">sqrt</span>( <span class="fu">log</span>( <span class="dv">2</span> <span class="sc">/</span> alph ) <span class="sc">/</span> ( <span class="dv">2</span> <span class="sc">*</span> n ) )</span>
+<span id="cb20-11"><a href="primas.html#cb20-11"></a><span class="fu">abs</span>( Fs <span class="sc">-</span> Fns ) <span class="sc">&gt;</span> er </span></code></pre></div>
+<pre><code>##    [1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+##   [20] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+##   [39] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+##   [58] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+##   [77] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+##   [96] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+##  [115] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+##  [134] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+##  [153] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+##  [172] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+##  [191] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+##  [210] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+##  [229] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+##  [248] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+##  [267] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+##  [286] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+##  [305] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+##  [324] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+##  [343] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+##  [362] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+##  [381] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+##  [400] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+##  [419] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+##  [438] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+##  [457] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+##  [476] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+##  [495] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+##  [514] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+##  [533] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+##  [552] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+##  [571] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+##  [590] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+##  [609] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+##  [628] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+##  [647] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+##  [666] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+##  [685] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+##  [704] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+##  [723] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+##  [742] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+##  [761] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+##  [780] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+##  [799] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+##  [818] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+##  [837] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+##  [856] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+##  [875] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+##  [894] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+##  [913] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+##  [932] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+##  [951] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+##  [970] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+##  [989] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE</code></pre>
+<div class="sourceCode" id="cb22"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb22-1"><a href="primas.html#cb22-1"></a><span class="fu">plot</span>( s, Fs, <span class="at">type =</span> <span class="st">&#39;l&#39;</span>, <span class="at">ylim =</span> <span class="fu">c</span>( <span class="sc">-</span>er, <span class="dv">1</span> <span class="sc">+</span> er ) )</span>
+<span id="cb22-2"><a href="primas.html#cb22-2"></a><span class="fu">points</span>( s, Fns <span class="sc">-</span> er, <span class="at">col =</span> <span class="st">&#39;red&#39;</span>, <span class="at">type =</span> <span class="st">&#39;l&#39;</span> )</span>
+<span id="cb22-3"><a href="primas.html#cb22-3"></a><span class="fu">points</span>( s, Fns <span class="sc">+</span> er, <span class="at">col =</span> <span class="st">&#39;red&#39;</span>, <span class="at">type =</span> <span class="st">&#39;l&#39;</span> )</span></code></pre></div>
+<p><img src="seguros_generales_files/figure-html/l5c3-1.png" width="700" /></p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb23-1"><a href="primas.html#cb23-1"></a><span class="fu">hist</span>( <span class="fu">pgamma</span>( S, <span class="at">shape =</span> A, <span class="at">scale =</span> theta ), <span class="at">breaks =</span> <span class="dv">5</span> )</span></code></pre></div>
+<p><img src="seguros_generales_files/figure-html/l5c3-2.png" width="700" /></p>
+<p></p>
 
 </div>
 </div>
