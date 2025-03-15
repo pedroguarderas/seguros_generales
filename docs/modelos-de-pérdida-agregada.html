@@ -148,16 +148,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.1.1" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#variable-aleatoria-discreta"><i class="fa fa-check"></i><b>2.1.1</b> Variable aleatoria discreta</a></li>
 <li class="chapter" data-level="2.1.2" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#variable-aleatoria-a-valores-reales-continua"><i class="fa fa-check"></i><b>2.1.2</b> Variable aleatoria a valores reales (continua)</a></li>
 <li class="chapter" data-level="2.1.3" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#esperanza-matemática"><i class="fa fa-check"></i><b>2.1.3</b> Esperanza matemática</a></li>
+<li class="chapter" data-level="2.1.4" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#función-de-distribución-acumulada"><i class="fa fa-check"></i><b>2.1.4</b> Función de distribución acumulada</a></li>
+<li class="chapter" data-level="2.1.5" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#función-de-densidad-de-probabilidad"><i class="fa fa-check"></i><b>2.1.5</b> Función de densidad de probabilidad</a></li>
 </ul></li>
-<li class="chapter" data-level="2.2" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#consideraciones-demográficas"><i class="fa fa-check"></i><b>2.2</b> Consideraciones demográficas</a>
-<ul>
-<li class="chapter" data-level="2.2.1" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#coeficiente-de-retirados"><i class="fa fa-check"></i><b>2.2.1</b> Coeficiente de retirados</a></li>
-<li class="chapter" data-level="2.2.2" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#coeficiente-de-jubilación"><i class="fa fa-check"></i><b>2.2.2</b> Coeficiente de jubilación</a></li>
-<li class="chapter" data-level="2.2.3" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#coeficiente-de-dependientes"><i class="fa fa-check"></i><b>2.2.3</b> Coeficiente de dependientes</a></li>
-<li class="chapter" data-level="2.2.4" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#coeficiente-de-dependientes-reducido"><i class="fa fa-check"></i><b>2.2.4</b> Coeficiente de dependientes reducido</a></li>
-<li class="chapter" data-level="2.2.5" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#tasa-de-desempleo"><i class="fa fa-check"></i><b>2.2.5</b> Tasa de desempleo</a></li>
-<li class="chapter" data-level="2.2.6" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#tasa-de-remplazo"><i class="fa fa-check"></i><b>2.2.6</b> Tasa de remplazo</a></li>
-</ul></li>
+<li class="chapter" data-level="2.2" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#consideraciones-estadísticas"><i class="fa fa-check"></i><b>2.2</b> Consideraciones estadísticas</a></li>
 <li class="chapter" data-level="2.3" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#consideraciones-financieras"><i class="fa fa-check"></i><b>2.3</b> Consideraciones financieras</a>
 <ul>
 <li class="chapter" data-level="2.3.1" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#función-de-actualización-o-descuento"><i class="fa fa-check"></i><b>2.3.1</b> Función de actualización o descuento</a></li>
@@ -338,44 +332,9 @@ and the amount of each claim represented by <span class="math inline">\(X_i\)</s
 <p><span class="math display">\[\begin{equation}
 \mathbb{E}[ S ] = \int_{\mathbb{R}_+} f_S( x )\ dx \approx \frac{1}{m} \sum\limits_{i=1}^m S_i
 \end{equation}\]</span></p>
-<div class="theorem">
-<p><span id="thm:tlc" class="theorem"><strong>Theorem 3.1  (Teorema del límite central) </strong></span>Consideramos las variables aleatorias <span class="math inline">\(X_1,\ldots,X_n\)</span>, independientes e idénticamente distribuidas
-(i.i.d) con media común finita <span class="math inline">\(\mathbb{E}[X_i] = \mu &lt; +\infty\)</span> y varianza común finita
-<span class="math inline">\(\mathbb{V}[ X_i ] = \sigma^2 &lt; +\infty\)</span>, para todo <span class="math inline">\(i \in \{1, \ldots, n \}\)</span>. Si consideramos la
-variable aleatoria de la suma total <span class="math inline">\(S_n = \sum\limits_{i=1}^n X_i\)</span>, entonces
-<span class="math display">\[\begin{equation}
-\frac{S_n - \mathbb{E}[S_n]}{\mathbb{V}[ S_n ]} \overset{d}{\longrightarrow} Z
-\end{equation}\]</span>
-cuando <span class="math inline">\(n \rightarrow +\infty\)</span>, donde <span class="math inline">\(Z \rightsquigarrow N( 0, 1 )\)</span>.</p>
-<p>Más aún
-<span class="math display">\[\begin{equation}
-\underset{n \rightarrow +\infty}{\lim} \mathbf{P}\left( \frac{S_n - \mathbb{E}[S_n]}{\mathbb{V}[ S_n ]} \leq z \right)
-= \Phi( z )
-\end{equation}\]</span></p>
-</div>
-<p>El teorema del límite central en su forma usual no proporciona una tasa de convergencia es decir,
-la variable aleatoria <span class="math inline">\(\frac{S_n - \mathbb{E}[S_n]}{\mathbb{V}[ S_n ]}\)</span> tiende a tener un
-comportamiento de una variable aleatoria normal estándar conforme aumenta <span class="math inline">\(n\)</span>, pero no estamos
-seguros que tamaño debe tomar <span class="math inline">\(n\)</span> para que esto se cumpla con una alta certeza. Para ello adicional
-al <a href="modelos-de-pérdida-agregada.html#thm:tlc">3.1</a> se debe considerar otros resultados asociados a desigualdades de concentración.</p>
-<div class="theorem">
-<p><span id="thm:bein" class="theorem"><strong>Theorem 3.2  (Desigualdad de Berry-Esséen) </strong></span>Sean <span class="math inline">\(X_1, \ldots X_n\)</span> variables aleatoria i.i.d, con media y varianza finitas, i.e
-<span class="math inline">\(\mathbb{E}[X] &lt; +\infty\)</span> y <span class="math inline">\(\mathbb{V}[X] &lt; +\infty\)</span> y además con tercer momento absoluto finito
-<span class="math inline">\(\mathbb{E}\left[\left|X - \mathbb{E}[X]\right|^3\right] &lt; +\infty\)</span>. Entonces, la distribución
-acumulada <span class="math inline">\(F_n\)</span> de la variable aleatoria
-<span class="math display">\[\begin{equation}
-U_n = \frac{S_n - \mathbb{E}[ S_n ]}{\mathbb{V}[ S_n ]}
-\end{equation}\]</span>
-con <span class="math inline">\(S_n = \sum\limits_{i=1}^n X_i\)</span>. Satisface la siguiente desigualdad respecto de la distribución
-acumulada de la ley normal <span class="math inline">\(\Phi\)</span>.
-<span class="math display">\[\begin{equation}
-\underset{u}{\sup}\left| F_n( u ) - \Phi( u ) \right| \leq \frac{A}{\sqrt{n}}
-\frac{\mathbb{E}\left[\left|X - \mathbb{E}[X]\right|^3\right]}{\sqrt{\mathbb{V}[X]}^3}
-\end{equation}\]</span></p>
-</div>
 <div class="example">
 <p><span id="exm:exo" class="example"><strong>Example 3.1  </strong></span>En este caso en particular estudiaremos la velocidad de convergencia del método resultante del
-teorema del límite central <a href="modelos-de-pérdida-agregada.html#thm:tlc">3.1</a>. Generaremos una simulación aleatoria de la suma
+teorema del límite central <a href="consideraciones-preliminares.html#thm:tlc">2.1</a>. Generaremos una simulación aleatoria de la suma
 agregada <span class="math inline">\(S_n\)</span> y mostraresmo s</p>
 <p></p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb12-1"><a href="modelos-de-pérdida-agregada.html#cb12-1"></a>m <span class="ot">&lt;-</span> <span class="dv">500</span></span>
@@ -394,7 +353,7 @@ agregada <span class="math inline">\(S_n\)</span> y mostraresmo s</p>
 <span id="cb12-14"><a href="modelos-de-pérdida-agregada.html#cb12-14"></a>D <span class="ot">&lt;-</span> <span class="fu">sapply</span>( FSn, <span class="at">FUN =</span> <span class="cf">function</span>( Fn ) <span class="fu">max</span>( <span class="fu">abs</span>( Fn <span class="sc">-</span> <span class="fu">pnorm</span>( z ) ) ) )</span>
 <span id="cb12-15"><a href="modelos-de-pérdida-agregada.html#cb12-15"></a></span>
 <span id="cb12-16"><a href="modelos-de-pérdida-agregada.html#cb12-16"></a>C <span class="ot">&lt;-</span> <span class="fl">0.015</span></span>
-<span id="cb12-17"><a href="modelos-de-pérdida-agregada.html#cb12-17"></a>C <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">/</span> <span class="fu">sqrt</span>( <span class="dv">2</span> <span class="sc">*</span> pi )</span>
+<span id="cb12-17"><a href="modelos-de-pérdida-agregada.html#cb12-17"></a><span class="co"># C &lt;- 1 / sqrt( 2 * pi )</span></span>
 <span id="cb12-18"><a href="modelos-de-pérdida-agregada.html#cb12-18"></a>rho <span class="ot">&lt;-</span> <span class="fu">exp</span>( <span class="dv">3</span> <span class="sc">*</span> u <span class="sc">+</span> <span class="dv">3</span><span class="sc">^</span><span class="dv">2</span> <span class="sc">*</span> s<span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> <span class="dv">2</span> )</span>
 <span id="cb12-19"><a href="modelos-de-pérdida-agregada.html#cb12-19"></a>Bn <span class="ot">&lt;-</span> C <span class="sc">*</span> rho <span class="sc">/</span> ( SDX<span class="sc">^</span><span class="dv">3</span> <span class="sc">*</span> <span class="fu">sqrt</span>( <span class="dv">1</span><span class="sc">:</span>n ) )</span>
 <span id="cb12-20"><a href="modelos-de-pérdida-agregada.html#cb12-20"></a></span>

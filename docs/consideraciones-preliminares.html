@@ -148,16 +148,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.1.1" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#variable-aleatoria-discreta"><i class="fa fa-check"></i><b>2.1.1</b> Variable aleatoria discreta</a></li>
 <li class="chapter" data-level="2.1.2" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#variable-aleatoria-a-valores-reales-continua"><i class="fa fa-check"></i><b>2.1.2</b> Variable aleatoria a valores reales (continua)</a></li>
 <li class="chapter" data-level="2.1.3" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#esperanza-matemática"><i class="fa fa-check"></i><b>2.1.3</b> Esperanza matemática</a></li>
+<li class="chapter" data-level="2.1.4" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#función-de-distribución-acumulada"><i class="fa fa-check"></i><b>2.1.4</b> Función de distribución acumulada</a></li>
+<li class="chapter" data-level="2.1.5" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#función-de-densidad-de-probabilidad"><i class="fa fa-check"></i><b>2.1.5</b> Función de densidad de probabilidad</a></li>
 </ul></li>
-<li class="chapter" data-level="2.2" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#consideraciones-demográficas"><i class="fa fa-check"></i><b>2.2</b> Consideraciones demográficas</a>
-<ul>
-<li class="chapter" data-level="2.2.1" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#coeficiente-de-retirados"><i class="fa fa-check"></i><b>2.2.1</b> Coeficiente de retirados</a></li>
-<li class="chapter" data-level="2.2.2" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#coeficiente-de-jubilación"><i class="fa fa-check"></i><b>2.2.2</b> Coeficiente de jubilación</a></li>
-<li class="chapter" data-level="2.2.3" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#coeficiente-de-dependientes"><i class="fa fa-check"></i><b>2.2.3</b> Coeficiente de dependientes</a></li>
-<li class="chapter" data-level="2.2.4" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#coeficiente-de-dependientes-reducido"><i class="fa fa-check"></i><b>2.2.4</b> Coeficiente de dependientes reducido</a></li>
-<li class="chapter" data-level="2.2.5" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#tasa-de-desempleo"><i class="fa fa-check"></i><b>2.2.5</b> Tasa de desempleo</a></li>
-<li class="chapter" data-level="2.2.6" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#tasa-de-remplazo"><i class="fa fa-check"></i><b>2.2.6</b> Tasa de remplazo</a></li>
-</ul></li>
+<li class="chapter" data-level="2.2" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#consideraciones-estadísticas"><i class="fa fa-check"></i><b>2.2</b> Consideraciones estadísticas</a></li>
 <li class="chapter" data-level="2.3" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#consideraciones-financieras"><i class="fa fa-check"></i><b>2.3</b> Consideraciones financieras</a>
 <ul>
 <li class="chapter" data-level="2.3.1" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#función-de-actualización-o-descuento"><i class="fa fa-check"></i><b>2.3.1</b> Función de actualización o descuento</a></li>
@@ -204,8 +198,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="consideraciones-preliminares" class="section level1 hasAnchor" number="2">
 <h1><span class="header-section-number">Capítulo 2</span> Consideraciones preliminares<a href="consideraciones-preliminares.html#consideraciones-preliminares" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<!------------------------------------------------------------------------------------------------->
 <div id="consideraciones-de-probabilidades" class="section level2 hasAnchor" number="2.1">
 <h2><span class="header-section-number">2.1</span> Consideraciones de probabilidades<a href="consideraciones-preliminares.html#consideraciones-de-probabilidades" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<!------------------------------------------------------------------------------------------------->
 <div id="variable-aleatoria-discreta" class="section level3 hasAnchor" number="2.1.1">
 <h3><span class="header-section-number">2.1.1</span> Variable aleatoria discreta<a href="consideraciones-preliminares.html#variable-aleatoria-discreta" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Una variable aleatoria <span class="math inline">\(K: \Omega \longrightarrow D\)</span> que parte del espacio muestral <span class="math inline">\(\Omega\)</span> y toma
@@ -219,18 +215,17 @@ Además se cumple la <strong>condición de normalización</strong> que es muy im
 \sum\limits_{i = 0}^{\infty} p_i = 1
 \end{equation}\]</span>
 las probabilidades <em>¡Nunca son negativas!</em> y <em>!Suman siempre 1!</em>.</p>
+<!------------------------------------------------------------------------------------------------->
 </div>
 <div id="variable-aleatoria-a-valores-reales-continua" class="section level3 hasAnchor" number="2.1.2">
 <h3><span class="header-section-number">2.1.2</span> Variable aleatoria a valores reales (continua)<a href="consideraciones-preliminares.html#variable-aleatoria-a-valores-reales-continua" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Una variable aleatoria <span class="math inline">\(X: \Omega \longrightarrow D\)</span> que parte del espacio muestral <span class="math inline">\(\Omega\)</span> y toma
 valores en el conjunto de los números reales <span class="math inline">\(\mathbb{R}\)</span>, decimos que sigue la ley
-<span class="math inline">\(f : \mathbb{R} \longrightarroa \mathbb{R}\)</span>, si para cualquier evento <span class="math inline">\(A \subset \Omega\)</span>
-<span class="math display">\[\begin{equation}
-\p
-\end{equation}\]</span></p>
+<span class="math inline">\(f : \mathbb{R} \longrightarrow \mathbb{R}\)</span>, si para cualquier evento <span class="math inline">\(A \subset \Omega\)</span></p>
 <p>También se puede tener el caso particular donde los valores que puede tomar la variable aleatoria
 <span class="math inline">\(K\)</span> son discretos y también finitos, es decir el conjunto <span class="math inline">\(D = \{k_0,\ldots,k_n\}\)</span> es finito, en
 tal caso el número de probabilidades <span class="math inline">\(\{p_1,\ldots,p_n\}\)</span> también es finito.</p>
+<!------------------------------------------------------------------------------------------------->
 </div>
 <div id="esperanza-matemática" class="section level3 hasAnchor" number="2.1.3">
 <h3><span class="header-section-number">2.1.3</span> Esperanza matemática<a href="consideraciones-preliminares.html#esperanza-matemática" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -250,133 +245,83 @@ matemática</strong> está dada por:
 \end{equation}\]</span></p>
 <!------------------------------------------------------------------------------------------------->
 </div>
-</div>
-<div id="consideraciones-demográficas" class="section level2 hasAnchor" number="2.2">
-<h2><span class="header-section-number">2.2</span> Consideraciones demográficas<a href="consideraciones-preliminares.html#consideraciones-demográficas" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>En el transcurso de este curso, siempre utilizaremos el tiempo <span class="math inline">\(t\)</span> como una variable discreta,
-salvo se especifique lo contrario, los mismo haremos para la variable <span class="math inline">\(x\)</span> que representa la edad.</p>
-<p>El <strong>número de individuos de la población</strong> será representaremos por una función dependiente del
-tiempo, usualmente notado por <span class="math inline">\(t\)</span> y la edad, usualmente nota por <span class="math inline">\(x\)</span>, es decir,
-<span class="math inline">\(l: \mathbb{R} \times \mathbb{R} \longrightarrow \mathbb{R}_+\)</span> así, <span class="math inline">\(l(t,x)\)</span> es el número de
-individuos en la población en el tiempo <span class="math inline">\(t\)</span> que tiene edad <span class="math inline">\(x\)</span>.</p>
-<p>La función anterior puede ser agregada de diferentes formas. La forma usual de agregación se da
-para obtener la población total en un tiempo dado, esta es la siguiente función que solo
-depende del tiempo <span class="math inline">\(t\)</span>:
+<div id="función-de-distribución-acumulada" class="section level3 hasAnchor" number="2.1.4">
+<h3><span class="header-section-number">2.1.4</span> Función de distribución acumulada<a href="consideraciones-preliminares.html#función-de-distribución-acumulada" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Consideramos una variable aleatoria a valores reales <span class="math inline">\(X\)</span>, la <strong>función de distribución acumulada</strong>
+<span class="math inline">\(F\)</span> asociada a la variable aleatoria <span class="math inline">\(X\)</span>, está dada por la siguiente relación:
 <span class="math display">\[\begin{equation}
-l( t ) = \sum\limits_{x=0}^{\omega} l( t, x )
+F( x ) = P( X \leq x )
+\end{equation}\]</span></p>
+<!------------------------------------------------------------------------------------------------->
+</div>
+<div id="función-de-densidad-de-probabilidad" class="section level3 hasAnchor" number="2.1.5">
+<h3><span class="header-section-number">2.1.5</span> Función de densidad de probabilidad<a href="consideraciones-preliminares.html#función-de-densidad-de-probabilidad" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><span class="math display">\[\begin{equation}
+P( a \leq X \leq b ) = F( b ) - F( a ) = \int\limits_a^b f( x )\ dx
+\end{equation}\]</span></p>
+<p><span class="math display">\[\begin{equation}
+F( x ) = \int\limits_{-\infty}^x f( x )\ dx
+\end{equation}\]</span></p>
+<!------------------------------------------------------------------------------------------------->
+</div>
+</div>
+<div id="consideraciones-estadísticas" class="section level2 hasAnchor" number="2.2">
+<h2><span class="header-section-number">2.2</span> Consideraciones estadísticas<a href="consideraciones-preliminares.html#consideraciones-estadísticas" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="theorem">
+<p><span id="thm:tlc" class="theorem"><strong>Theorem 2.1  (Teorema del límite central) </strong></span>Consideramos las variables aleatorias <span class="math inline">\(X_1,\ldots,X_n\)</span>, independientes e idénticamente distribuidas
+(i.i.d) con media común finita <span class="math inline">\(\mathbb{E}[X_i] = \mu &lt; +\infty\)</span> y varianza común finita
+<span class="math inline">\(\mathbb{V}[ X_i ] = \sigma^2 &lt; +\infty\)</span>, para todo <span class="math inline">\(i \in \{1, \ldots, n \}\)</span>. Si consideramos la
+variable aleatoria de la suma total <span class="math inline">\(S_n = \sum\limits_{i=1}^n X_i\)</span>, entonces
+<span class="math display">\[\begin{equation}
+\frac{S_n - \mathbb{E}[S_n]}{\mathbb{V}[ S_n ]} \overset{d}{\longrightarrow} Z
 \end{equation}\]</span>
-donde <span class="math inline">\(\omega\)</span> es la edad máxima considerada.</p>
-<p>La <strong>probabilidad de supervivencia dinámica</strong>, es la probabilidad que un individuo con edad <span class="math inline">\(x\)</span> en
-el tiempo <span class="math inline">\(s\)</span> sobreviva hasta el tiempo <span class="math inline">\(t \geq s\)</span> y está dada por:
+cuando <span class="math inline">\(n \rightarrow +\infty\)</span>, donde <span class="math inline">\(Z \rightsquigarrow N( 0, 1 )\)</span>.</p>
+<p>Más aún
 <span class="math display">\[\begin{equation}
-p( s, t, x ) = \frac{l(t,x+t-s)}{l(s,x)}
+\underset{n \rightarrow +\infty}{\lim} \mathbf{P}\left( \frac{S_n - \mathbb{E}[S_n]}{\mathbb{V}[ S_n ]} \leq z \right)
+= \Phi( z )
+\end{equation}\]</span></p>
+</div>
+<p>El teorema del límite central en su forma usual no proporciona una tasa de convergencia es decir,
+la variable aleatoria <span class="math inline">\(\frac{S_n - \mathbb{E}[S_n]}{\mathbb{V}[ S_n ]}\)</span> tiende a tener un
+comportamiento de una variable aleatoria normal estándar conforme aumenta <span class="math inline">\(n\)</span>, pero no estamos
+seguros que tamaño debe tomar <span class="math inline">\(n\)</span> para que esto se cumpla con una alta certeza. Para ello adicional
+al <a href="consideraciones-preliminares.html#thm:tlc">2.1</a> se debe considerar otros resultados asociados a desigualdades de concentración.</p>
+<div class="theorem">
+<p><span id="thm:bein" class="theorem"><strong>Theorem 2.2  (Desigualdad de Berry-Esséen) </strong></span>Sean <span class="math inline">\(X_1, \ldots X_n\)</span> variables aleatoria i.i.d, con media y varianza finitas, i.e
+<span class="math inline">\(\mathbb{E}[X] &lt; +\infty\)</span> y <span class="math inline">\(\mathbb{V}[X] &lt; +\infty\)</span> y además con tercer momento absoluto finito
+<span class="math inline">\(\mathbb{E}\left[\left|X - \mathbb{E}[X]\right|^3\right] &lt; +\infty\)</span>. Entonces, la distribución
+acumulada <span class="math inline">\(F_n\)</span> de la variable aleatoria
+<span class="math display">\[\begin{equation}
+U_n = \frac{S_n - \mathbb{E}[ S_n ]}{\mathbb{V}[ S_n ]}
 \end{equation}\]</span>
-cuando <span class="math inline">\(s = 0\)</span>, se puede simplificar la notación, utilizando <span class="math inline">\(p( t, x ) = p( 0, t, x )\)</span></p>
-<p>Así mismo la población puede ser dividida en diferentes grupos, en particular nos interesamos a
-dividir la población entre:</p>
-<ol style="list-style-type: decimal">
-<li><p><strong>activos</strong> personas que tienen edad y capacidad para mantener una actividad económica
-y se encuentran trabajando, <span class="math inline">\(l^a: \mathbb{R} \times \mathbb{R} \longrightarrow \mathbb{R}_+\)</span></p></li>
-<li><p><strong>retirados</strong> son personas que han cesado pero que alguna vez en el pasado mantuvieron una
-actividad económica, usualmente tienen edades superiores a la que presentas los activos o cesantes,
-<span class="math inline">\(l^r: \mathbb{R} \times \mathbb{R} \longrightarrow \mathbb{R}_+\)</span>,</p></li>
-<li><p><strong>cesantes</strong> personas que están en edad y capacidad para mantener una actividad económica pero que
-no se encuentran trabajando y no están retirados,
-<span class="math inline">\(l^c: \mathbb{R} \times \mathbb{R} \longrightarrow \mathbb{R}_+\)</span></p></li>
-<li><p><strong>jubilados</strong> son personas retiradas que perciben una renta <strong>pensión</strong> como consecuencia de su
-actividad económica en el pasado, <span class="math inline">\(l^j: \mathbb{R} \times \mathbb{R} \longrightarrow \mathbb{R}_+\)</span></p></li>
-<li><p><strong>retirados sin jubilación</strong> son personas retiradas que no perciben una renta como consecuencia
-de su actividad económica en el pasado, <span class="math inline">\(l^s: \mathbb{R} \times \mathbb{R} \longrightarrow \mathbb{R}_+\)</span></p></li>
-<li><p><strong>dependientes</strong> personas que no tienen edad o capacidad para mantener una actividad económica
-y que no están retirados, <span class="math inline">\(l^d: \mathbb{R} \times \mathbb{R} \longrightarrow \mathbb{R}_+\)</span>.</p></li>
-</ol>
-<p>Se mantienen las siguientes relaciones para todo tiempo <span class="math inline">\(t\)</span> y edad <span class="math inline">\(x\)</span>. La población total es suma
-de todas las clases anteriores entre activos, cesantes, retirados y dependientes.
+con <span class="math inline">\(S_n = \sum\limits_{i=1}^n X_i\)</span>. Satisface la siguiente desigualdad respecto de la distribución
+acumulada de la ley normal <span class="math inline">\(\Phi\)</span>.
 <span class="math display">\[\begin{equation}
-l( t, x ) = l^a( t, x ) + l^c( t, x ) + l^r( t, x ) + l^d( t, x )
+\underset{u}{\sup}\left| F_n( u ) - \Phi( u ) \right| \leq \frac{A}{\sqrt{n}}
+\frac{\mathbb{E}\left[\left|X - \mathbb{E}[X]\right|^3\right]}{\sqrt{\mathbb{V}[X]}^3}
 \end{equation}\]</span></p>
-<p>La clase de los retirados está compuesta por los jubilados y los retirados sin jubilación.
+</div>
+<div class="theorem">
+<p><span id="thm:tlc" class="theorem"><strong>Theorem 2.1  (Desigualdad Dvoretzky–Kiefer–Wolfowitz) </strong></span>Dada una serie de variables aleatorias a valores reales <span class="math inline">\(X_1, \ldots, X_n\)</span>, independientes
+entre si e idénticamente distribuidas (i.i.d), con distribución acumulada <span class="math inline">\(F\)</span>, tenemos la siguiente
+desigualdad asociada a la distribución acumulada empírica
 <span class="math display">\[\begin{equation}
-l( t, x ) = l^a( t, x ) + l^c( t, x ) + l^j( t, x ) + l^s( t, x ) + l^d( t, x )
-\end{equation}\]</span></p>
-<p>Ya en la práctica para los intereses de los planes de previsión social es importante delimitar
-la población objetivo, población total y sus respectivos activos, jubilados y dependientes.</p>
-<p>La <strong>masa salarial</strong> es la que resulta de sumar todos los salarios de la población activa. Así,
-para cada individuo activo <span class="math inline">\(k\)</span>, con edad <span class="math inline">\(x\)</span> consideramos su salario <span class="math inline">\(S_k( t )\)</span> en el tiempo <span class="math inline">\(t\)</span>,
-esto nos da la <strong>masa salarial por grupo de edad</strong>.
-<span class="math display">\[\begin{equation}
-S( t, x ) = \sum\limits_{k=1}^{l^a(t,x)} S_k( t )
+F_n( x ) = \frac{1}{n}\sum\limits_{i=1}^n \mathbf{1}_{(-\infty,x]}( X_i )
 \end{equation}\]</span>
-Y la <strong>masa salarial</strong> en el tiempo <span class="math inline">\(t\)</span> resulta de sumar para todas las edades
+y su aproximación a <span class="math inline">\(F\)</span>.
 <span class="math display">\[\begin{equation}
-S( t ) = \sum\limits_{x=0}^{\omega} S( t, x )
-= \sum\limits_{x=0}^{\omega} \sum\limits_{k=1}^{l^a(t,x)} S_k( t )
-\end{equation}\]</span></p>
-<p>El <strong>salario promedio</strong> en un tiempo dado <span class="math inline">\(t\)</span> y para la edad <span class="math inline">\(x\)</span>, está dado por:
-<span class="math display">\[\begin{equation}
-\overline{S}( t, x )
-= \frac{S(t,x)}{l^a(t,x)}
-= \frac{1}{l^a(t,x)} \sum\limits_{k=1}^{l^a(t,x)} S_k( t )
-\end{equation}\]</span></p>
-<p>Si el salario promedio es estimado adecuadamente, se puede trabajar con este valor en vez de
-los salarios individuales, ya que para la masa salarial:
-<span class="math display">\[\begin{equation}
-S( t, x )
-= \sum\limits_{k=1}^{l^a(t,x)} S_k( t )
-= \overline{S}( t, x ) l^a( t, x )
-\end{equation}\]</span></p>
-<p>También se puede hablar de un salario promedio independiente de la edad <span class="math inline">\(x\)</span>
-<span class="math display">\[\begin{equation}
-\overline{S}(t) = \frac{S(t)}{l^a(t)}
-= \frac{1}{l^a(t)} \sum\limits_{x=0}^{\omega} S( t, x )
-= \frac{1}{l^a(t)} \sum\limits_{x=0}^{\omega} \sum\limits_{k=1}^{l^a(t,x)} S_k( t )
-\end{equation}\]</span>
-con <span class="math inline">\(l^a(t) = \sum\limits_{x=0}^{\omega} l^a( t, x )\)</span>.</p>
-<p>Esta idea puede ser extendida a otros flujos financieros que dependen del número de personas
-en un determinado grupo demográfico. Es así que se puede hablar de <strong>pensiones promedio</strong>
-<span class="math inline">\(\overline{P}(t)\)</span> en el tiempo <span class="math inline">\(t\)</span>, o <strong>pensiones promedio</strong> <span class="math inline">\(\overline{P}(t,x)\)</span> en el tiempo <span class="math inline">\(t\)</span>
-para las personas con edad <span class="math inline">\(x\)</span>.</p>
-<div id="coeficiente-de-retirados" class="section level3 hasAnchor" number="2.2.1">
-<h3><span class="header-section-number">2.2.1</span> Coeficiente de retirados<a href="consideraciones-preliminares.html#coeficiente-de-retirados" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p><span class="math display">\[\begin{equation}
-CR( t ) = \frac{l^r( t )}{l^a( t )}
+P\left( \underset{x \in \mathbb{R}}{\sup} \left| F_n( x ) - F( x ) \right| &gt; \varepsilon \right)
+\leq 2 e^{-2n \varepsilon^2 }\qquad \forall \varepsilon &gt; 0
 \end{equation}\]</span></p>
 </div>
-<div id="coeficiente-de-jubilación" class="section level3 hasAnchor" number="2.2.2">
-<h3><span class="header-section-number">2.2.2</span> Coeficiente de jubilación<a href="consideraciones-preliminares.html#coeficiente-de-jubilación" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p><span class="math display">\[\begin{equation}
-CJ( t ) = \frac{l^j( t )}{l^a( t )}
-\end{equation}\]</span></p>
-</div>
-<div id="coeficiente-de-dependientes" class="section level3 hasAnchor" number="2.2.3">
-<h3><span class="header-section-number">2.2.3</span> Coeficiente de dependientes<a href="consideraciones-preliminares.html#coeficiente-de-dependientes" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p><span class="math display">\[\begin{equation}
-CD( t ) = \frac{l^r( t ) + l^c( t ) + l^d( t )}{l^a( t )}
-\end{equation}\]</span></p>
-</div>
-<div id="coeficiente-de-dependientes-reducido" class="section level3 hasAnchor" number="2.2.4">
-<h3><span class="header-section-number">2.2.4</span> Coeficiente de dependientes reducido<a href="consideraciones-preliminares.html#coeficiente-de-dependientes-reducido" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p><span class="math display">\[\begin{equation}
-CDR( t ) = \frac{l^j( t ) + l^d( t )}{l^a( t )}
-\end{equation}\]</span></p>
-</div>
-<div id="tasa-de-desempleo" class="section level3 hasAnchor" number="2.2.5">
-<h3><span class="header-section-number">2.2.5</span> Tasa de desempleo<a href="consideraciones-preliminares.html#tasa-de-desempleo" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p><span class="math display">\[\begin{equation}
-TD( t ) = \frac{l^c( t )}{l^a( t ) + l^c( t )}
-\end{equation}\]</span></p>
-</div>
-<div id="tasa-de-remplazo" class="section level3 hasAnchor" number="2.2.6">
-<h3><span class="header-section-number">2.2.6</span> Tasa de remplazo<a href="consideraciones-preliminares.html#tasa-de-remplazo" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p><span class="math display">\[\begin{equation}
-TR( t ) = \frac{\overline{P}( t )}{\overline{S}(t)}
-\end{equation}\]</span></p>
-</div>
+<!------------------------------------------------------------------------------------------------->
 </div>
 <div id="consideraciones-financieras" class="section level2 hasAnchor" number="2.3">
 <h2><span class="header-section-number">2.3</span> Consideraciones financieras<a href="consideraciones-preliminares.html#consideraciones-financieras" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Antes de desarrollar el contenido propio del curso, debemos tener en cuenta algunas consideraciones
 financieras como las siguientes:</p>
+<!------------------------------------------------------------------------------------------------->
 <div id="función-de-actualización-o-descuento" class="section level3 hasAnchor" number="2.3.1">
 <h3><span class="header-section-number">2.3.1</span> Función de actualización o descuento<a href="consideraciones-preliminares.html#función-de-actualización-o-descuento" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>La <strong>función de actualización</strong> de flujos <span class="math inline">\(v: \mathbb{R} \times \mathbb{R} \longrightarrow [0,1]\)</span>, al
@@ -392,6 +337,7 @@ las siguientes propiedades:</p>
 por una tasa constante <span class="math inline">\(i \in [0,1]\)</span>, es decir, <span class="math inline">\(v(s,t) = ( 1 + i )^{t-s}\)</span>.</p>
 <p>La <strong>función de capitalización</strong>, es la función <span class="math inline">\(u: \mathbb{R} \times \mathbb{R} \longrightarrow [0,1]\)</span>,
 tal que <span class="math inline">\(u( s, t ) v( s, t ) = 1\)</span>.</p>
+<!------------------------------------------------------------------------------------------------->
 </div>
 <div id="flujos-financieros" class="section level3 hasAnchor" number="2.3.2">
 <h3><span class="header-section-number">2.3.2</span> Flujos financieros<a href="consideraciones-preliminares.html#flujos-financieros" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -403,6 +349,7 @@ precisamente la función de actualización <span class="math inline">\(v\)</span
 VP_t( c ) = \sum\limits_{k = 1}^n v( t, t_k )  c( t_k )
 \end{equation}\]</span>
 cuando <span class="math inline">\(t=0\)</span>, se suele solo expresar <span class="math inline">\(VP( c ) = VP_0( c )\)</span>.</p>
+<!------------------------------------------------------------------------------------------------->
 </div>
 <div id="flujos-financieros-probables" class="section level3 hasAnchor" number="2.3.3">
 <h3><span class="header-section-number">2.3.3</span> Flujos financieros probables<a href="consideraciones-preliminares.html#flujos-financieros-probables" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -420,6 +367,7 @@ cuando <span class="math inline">\(t=0\)</span>, se suele solo expresar <span cl
 VAP_t( c ) = \sum\limits_{k = 1}^n v( t, t_k ) \mathbb{E}\left[ c( t_k ) \right]
 = \sum\limits_{k = 1}^n \sum\limits_{i=1}^{\infty} v( t, t_k ) c_i( t_k ) p_i( t_k )
 \end{equation}\]</span></p>
+<!------------------------------------------------------------------------------------------------->
 </div>
 <div id="equilibrio-financiero" class="section level3 hasAnchor" number="2.3.4">
 <h3><span class="header-section-number">2.3.4</span> Equilibrio financiero<a href="consideraciones-preliminares.html#equilibrio-financiero" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -453,6 +401,7 @@ prospectiva.
 -\sum\limits_{t_k &gt; t} v( t, t_k ) c( t_k )
 \end{equation}\]</span>
 algunas veces se considera la parte prospectiva con el signo menos.</p>
+<!------------------------------------------------------------------------------------------------->
 </div>
 </div>
 <div id="consideraciones-de-programación-en-r" class="section level2 hasAnchor" number="2.4">

@@ -7,13 +7,9 @@ consideraciones-de-probabilidades
 variable-aleatoria-discreta
 variable-aleatoria-a-valores-reales-continua
 esperanza-matemática
-consideraciones-demográficas
-coeficiente-de-retirados
-coeficiente-de-jubilación
-coeficiente-de-dependientes
-coeficiente-de-dependientes-reducido
-tasa-de-desempleo
-tasa-de-remplazo
+función-de-distribución-acumulada
+función-de-densidad-de-probabilidad
+consideraciones-estadísticas
 consideraciones-financieras
 función-de-actualización-o-descuento
 flujos-financieros

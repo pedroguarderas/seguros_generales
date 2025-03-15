@@ -1,6 +1,10 @@
+<!------------------------------------------------------------------------------------------------->
 # Consideraciones preliminares
   
+<!------------------------------------------------------------------------------------------------->
 ## Consideraciones de probabilidades
+
+<!------------------------------------------------------------------------------------------------->
 ### Variable aleatoria discreta
 Una variable aleatoria $K: \Omega \longrightarrow D$ que parte del espacio muestral $\Omega$ y toma 
 valores en un conjunto discreto $D = \left\{k_i \in \mathbb{R} | i \in \mathbb{N} \right\}$, sigue 
@@ -14,18 +18,17 @@ Además se cumple la **condición de normalización** que es muy importante.
 \end{equation}
 las probabilidades *¡Nunca son negativas!* y *!Suman siempre 1!*.
 
+<!------------------------------------------------------------------------------------------------->
 ### Variable aleatoria a valores reales (continua)
 Una variable aleatoria $X: \Omega \longrightarrow D$ que parte del espacio muestral $\Omega$ y toma 
 valores en el conjunto de los números reales  $\mathbb{R}$, decimos que sigue la ley 
-$f : \mathbb{R} \longrightarroa \mathbb{R}$, si para cualquier evento $A \subset \Omega$
-\begin{equation}
-\p
-\end{equation}
+$f : \mathbb{R} \longrightarrow \mathbb{R}$, si para cualquier evento $A \subset \Omega$
 
 También se puede tener el caso particular donde los valores que puede tomar la variable aleatoria 
 $K$ son discretos y también finitos, es decir el conjunto $D = \{k_0,\ldots,k_n\}$ es finito, en 
 tal caso el número de probabilidades $\{p_1,\ldots,p_n\}$ también es finito.
 
+<!------------------------------------------------------------------------------------------------->
 ### Esperanza matemática
 Considerando una variable aleatoria discreta $K$, así como la hemos definido, su **esperanza 
 matemática** está dada por:
@@ -44,141 +47,85 @@ Así mismo su **varianza** es la dada por:
 \end{equation}
 
 <!------------------------------------------------------------------------------------------------->
-## Consideraciones demográficas
-En el transcurso de este curso, siempre utilizaremos el tiempo $t$ como una variable discreta, 
-salvo se especifique lo contrario, los mismo haremos para la variable $x$ que representa la edad.
-
-El **número de individuos de la población** será representaremos por una función dependiente del 
-tiempo, usualmente notado por $t$ y la edad, usualmente nota por $x$, es decir, 
-$l: \mathbb{R} \times \mathbb{R} \longrightarrow \mathbb{R}_+$ así, $l(t,x)$ es el número de 
-individuos en la población en el tiempo $t$ que tiene edad $x$.
-
-La función anterior puede ser agregada de diferentes formas. La forma usual de agregación se da 
-para obtener la población total en un tiempo dado, esta es la siguiente función que solo 
-depende del tiempo $t$:
+### Función de distribución acumulada
+Consideramos una variable aleatoria a valores reales $X$, la **función de distribución acumulada**
+$F$ asociada a la variable aleatoria $X$, está dada por la siguiente relación:
 \begin{equation}
-l( t ) = \sum\limits_{x=0}^{\omega} l( t, x )
-\end{equation}
-donde $\omega$ es la edad máxima considerada.
-
-La **probabilidad de supervivencia dinámica**, es la probabilidad que un individuo con edad $x$ en 
-el tiempo $s$ sobreviva hasta el tiempo $t \geq s$ y está dada por:
-\begin{equation}
-p( s, t, x ) = \frac{l(t,x+t-s)}{l(s,x)}
-\end{equation}
-cuando $s = 0$, se puede simplificar la notación, utilizando $p( t, x ) = p( 0, t, x )$
-
-Así mismo la población puede ser dividida en diferentes grupos, en particular nos interesamos a
-dividir la población entre:
-
-1. **activos** personas que tienen edad y capacidad para mantener una actividad económica
-y se encuentran trabajando, $l^a: \mathbb{R} \times \mathbb{R} \longrightarrow \mathbb{R}_+$
-
-2. **retirados** son personas que han cesado pero que alguna vez en el pasado mantuvieron una 
-actividad económica, usualmente tienen edades superiores a la que presentas los activos o cesantes,
- $l^r: \mathbb{R} \times \mathbb{R} \longrightarrow \mathbb{R}_+$,
- 
-3. **cesantes** personas que están en edad y capacidad para mantener una actividad económica pero que 
-no se encuentran trabajando y no están retirados, 
-$l^c: \mathbb{R} \times \mathbb{R} \longrightarrow \mathbb{R}_+$
-
-4. **jubilados** son personas retiradas que perciben una renta **pensión** como consecuencia de su 
-actividad económica en el pasado, $l^j: \mathbb{R} \times \mathbb{R} \longrightarrow \mathbb{R}_+$
-
-4. **retirados sin jubilación** son personas retiradas que no perciben una renta como consecuencia 
-de su actividad económica en el pasado, $l^s: \mathbb{R} \times \mathbb{R} \longrightarrow \mathbb{R}_+$
-
-5. **dependientes** personas que no tienen edad o capacidad para mantener una actividad económica
-y que no están retirados, $l^d: \mathbb{R} \times \mathbb{R} \longrightarrow \mathbb{R}_+$.
-
-Se mantienen las siguientes relaciones para todo tiempo $t$ y edad $x$. La población total es suma
-de todas las clases anteriores entre activos, cesantes, retirados y dependientes.
-\begin{equation}
-l( t, x ) = l^a( t, x ) + l^c( t, x ) + l^r( t, x ) + l^d( t, x )
+F( x ) = P( X \leq x )
 \end{equation}
 
-La clase de los retirados está compuesta por los jubilados y los retirados sin jubilación.
+<!------------------------------------------------------------------------------------------------->
+### Función de densidad de probabilidad
 \begin{equation}
-l( t, x ) = l^a( t, x ) + l^c( t, x ) + l^j( t, x ) + l^s( t, x ) + l^d( t, x )
+P( a \leq X \leq b ) = F( b ) - F( a ) = \int\limits_a^b f( x )\ dx
 \end{equation}
 
-Ya en la práctica para los intereses de los planes de previsión social es importante delimitar 
-la población objetivo, población total y sus respectivos activos, jubilados y dependientes.
-
-La **masa salarial** es la que resulta de sumar todos los salarios de la población activa. Así,
-para cada individuo activo $k$, con edad $x$ consideramos su salario $S_k( t )$ en el tiempo $t$,
-esto nos da la **masa salarial por grupo de edad**.
 \begin{equation}
-S( t, x ) = \sum\limits_{k=1}^{l^a(t,x)} S_k( t )
-\end{equation}
-Y la **masa salarial** en el tiempo $t$ resulta de sumar para todas las edades
-\begin{equation}
-S( t ) = \sum\limits_{x=0}^{\omega} S( t, x ) 
-= \sum\limits_{x=0}^{\omega} \sum\limits_{k=1}^{l^a(t,x)} S_k( t )
+F( x ) = \int\limits_{-\infty}^x f( x )\ dx
 \end{equation}
 
-El **salario promedio** en un tiempo dado $t$ y para la edad $x$, está dado por:
+<!------------------------------------------------------------------------------------------------->
+## Consideraciones estadísticas
+
+::: {.theorem #tlc name="Teorema del límite central"}
+Consideramos las variables aleatorias $X_1,\ldots,X_n$, independientes e idénticamente distribuidas 
+(i.i.d) con media común finita $\mathbb{E}[X_i] = \mu < +\infty$ y varianza común finita
+$\mathbb{V}[ X_i ] = \sigma^2 < +\infty$, para todo $i \in \{1, \ldots, n \}$. Si consideramos la
+variable aleatoria de la suma total $S_n = \sum\limits_{i=1}^n X_i$, entonces
 \begin{equation}
-\overline{S}( t, x ) 
-= \frac{S(t,x)}{l^a(t,x)} 
-= \frac{1}{l^a(t,x)} \sum\limits_{k=1}^{l^a(t,x)} S_k( t )
+\frac{S_n - \mathbb{E}[S_n]}{\mathbb{V}[ S_n ]} \overset{d}{\longrightarrow} Z
 \end{equation}
+cuando $n \rightarrow +\infty$, donde $Z \rightsquigarrow N( 0, 1 )$. 
 
-Si el salario promedio es estimado adecuadamente, se puede trabajar con este valor en vez de 
-los salarios individuales, ya que para la masa salarial:
+Más aún
 \begin{equation}
-S( t, x ) 
-= \sum\limits_{k=1}^{l^a(t,x)} S_k( t ) 
-= \overline{S}( t, x ) l^a( t, x )
+\underset{n \rightarrow +\infty}{\lim} \mathbf{P}\left( \frac{S_n - \mathbb{E}[S_n]}{\mathbb{V}[ S_n ]} \leq z \right)
+= \Phi( z )
 \end{equation}
+:::
 
-También se puede hablar de un salario promedio independiente de la edad $x$
+El teorema del límite central en su forma usual no proporciona una tasa de convergencia es decir,
+la variable aleatoria $\frac{S_n - \mathbb{E}[S_n]}{\mathbb{V}[ S_n ]}$ tiende a tener un 
+comportamiento de una variable aleatoria normal estándar conforme aumenta $n$, pero no estamos 
+seguros que tamaño debe tomar $n$ para que esto se cumpla con una alta certeza. Para ello adicional
+al \@ref(thm:tlc) se debe considerar otros resultados asociados a desigualdades de concentración.
+
+::: {.theorem #bein  name="Desigualdad de Berry-Esséen"}
+Sean $X_1, \ldots X_n$ variables aleatoria i.i.d, con media y varianza finitas, i.e 
+$\mathbb{E}[X] < +\infty$ y $\mathbb{V}[X] < +\infty$ y además con tercer momento absoluto finito
+$\mathbb{E}\left[\left|X - \mathbb{E}[X]\right|^3\right] < +\infty$. Entonces, la distribución 
+acumulada $F_n$ de la variable aleatoria
 \begin{equation}
-\overline{S}(t) = \frac{S(t)}{l^a(t)}
-= \frac{1}{l^a(t)} \sum\limits_{x=0}^{\omega} S( t, x )
-= \frac{1}{l^a(t)} \sum\limits_{x=0}^{\omega} \sum\limits_{k=1}^{l^a(t,x)} S_k( t )
+U_n = \frac{S_n - \mathbb{E}[ S_n ]}{\mathbb{V}[ S_n ]}
 \end{equation}
-con $l^a(t) = \sum\limits_{x=0}^{\omega} l^a( t, x )$.
-
-Esta idea puede ser extendida a otros flujos financieros que dependen del número de personas 
-en un determinado grupo demográfico. Es así que se puede hablar de **pensiones promedio**
-$\overline{P}(t)$ en el tiempo $t$, o **pensiones promedio** $\overline{P}(t,x)$ en el tiempo $t$ 
-para las personas con edad $x$.
-
-### Coeficiente de retirados
+con $S_n = \sum\limits_{i=1}^n X_i$. Satisface la siguiente desigualdad respecto de la distribución 
+acumulada de la ley normal $\Phi$.
 \begin{equation}
-CR( t ) = \frac{l^r( t )}{l^a( t )}
+\underset{u}{\sup}\left| F_n( u ) - \Phi( u ) \right| \leq \frac{A}{\sqrt{n}} 
+\frac{\mathbb{E}\left[\left|X - \mathbb{E}[X]\right|^3\right]}{\sqrt{\mathbb{V}[X]}^3}
 \end{equation}
+:::
 
-### Coeficiente de jubilación
+::: {.theorem #tlc name="Desigualdad Dvoretzky–Kiefer–Wolfowitz"}
+Dada una serie de variables aleatorias a valores reales $X_1, \ldots, X_n$, independientes
+entre si e idénticamente distribuidas (i.i.d), con distribución acumulada $F$, tenemos la siguiente
+desigualdad asociada a la distribución acumulada empírica 
 \begin{equation}
-CJ( t ) = \frac{l^j( t )}{l^a( t )}
+F_n( x ) = \frac{1}{n}\sum\limits_{i=1}^n \mathbf{1}_{(-\infty,x]}( X_i )
 \end{equation}
-
-### Coeficiente de dependientes
+y su aproximación a $F$.
 \begin{equation}
-CD( t ) = \frac{l^r( t ) + l^c( t ) + l^d( t )}{l^a( t )}
+P\left( \underset{x \in \mathbb{R}}{\sup} \left| F_n( x ) - F( x ) \right| > \varepsilon \right) 
+\leq 2 e^{-2n \varepsilon^2 }\qquad \forall \varepsilon > 0
 \end{equation}
+:::
 
-### Coeficiente de dependientes reducido
-\begin{equation}
-CDR( t ) = \frac{l^j( t ) + l^d( t )}{l^a( t )}
-\end{equation}
-
-### Tasa de desempleo
-\begin{equation}
-TD( t ) = \frac{l^c( t )}{l^a( t ) + l^c( t )}
-\end{equation}
-
-### Tasa de remplazo
-\begin{equation}
-TR( t ) = \frac{\overline{P}( t )}{\overline{S}(t)}
-\end{equation}
-
+<!------------------------------------------------------------------------------------------------->
 ## Consideraciones financieras
 Antes de desarrollar el contenido propio del curso, debemos tener en cuenta algunas consideraciones
 financieras como las siguientes:
 
+<!------------------------------------------------------------------------------------------------->
 ### Función de actualización o descuento
 La **función de actualización** de flujos $v: \mathbb{R} \times \mathbb{R} \longrightarrow [0,1]$, al
 evaluar en $s, t \in \mathbb{R}, s\leq t, v(s,t)$, diremos que actualizamos los flujos que se 
@@ -197,6 +144,7 @@ por una tasa constante $i \in [0,1]$, es decir, $v(s,t) = ( 1 + i )^{t-s}$.
 La **función de capitalización**, es la función $u: \mathbb{R} \times \mathbb{R} \longrightarrow [0,1]$,
 tal que $u( s, t ) v( s, t ) = 1$.
 
+<!------------------------------------------------------------------------------------------------->
 ### Flujos financieros
 Un flujo financiero discreto $c$ es una serie de valores reales $c(t_1), c(t_2), \cdots, c(t_n)$ 
 que se producen en un número discreto de tiempos $t_0 < t_1 < \cdots < t_n$. 
@@ -208,6 +156,7 @@ VP_t( c ) = \sum\limits_{k = 1}^n v( t, t_k )  c( t_k )
 \end{equation}
 cuando $t=0$, se suele solo expresar $VP( c ) = VP_0( c )$.
 
+<!------------------------------------------------------------------------------------------------->
 ### Flujos financieros probables
 Un flujo financiero discreto $c$ es una serie de valores reales $c(t_1), c(t_2), \cdots, c(t_n)$ 
 que se producen en un número discreto de tiempos $t_0 < t_1 < \cdots < t_n$. 
@@ -226,6 +175,7 @@ VAP_t( c ) = \sum\limits_{k = 1}^n v( t, t_k ) \mathbb{E}\left[ c( t_k ) \right]
 = \sum\limits_{k = 1}^n \sum\limits_{i=1}^{\infty} v( t, t_k ) c_i( t_k ) p_i( t_k )
 \end{equation}
 
+<!------------------------------------------------------------------------------------------------->
 ### Equilibrio financiero
 Se dice que un flujo financiero $c(t_1), c(t_2), \cdots, c(t_n)$ como el anterior, está en 
 **equilibrio financiero** si:
@@ -261,6 +211,7 @@ prospectiva.
 \end{equation}
 algunas veces se considera la parte prospectiva con el signo menos.
 
+<!------------------------------------------------------------------------------------------------->
 ## Consideraciones de programación en R
 En el transcurso del presente curso utilizaremos algunos paquetes de R, acá la lista de carga de los
 mismos
