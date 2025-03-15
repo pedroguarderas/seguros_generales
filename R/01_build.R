@@ -15,6 +15,7 @@ suppressPackageStartupMessages( library( rmarkdown ) )
 suppressPackageStartupMessages( library( shiny ) )
 suppressPackageStartupMessages( library( showtext ) )
 suppressPackageStartupMessages( library( sysfonts ) )
+suppressPackageStartupMessages( library( actuar ) )
 
 options( scipen = 999 )
 options( stringsAsFactors = FALSE )
