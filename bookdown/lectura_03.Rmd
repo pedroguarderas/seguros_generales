@@ -1,6 +1,15 @@
 <!------------------------------------------------------------------------------------------------->
 # Modelos de pérdida agregada
 
+$R$ Ganancia
+$P$ Ingreso por primas
+$I$ Ingreso por inversiones
+$S$ Pago de siniestros
+$G$ Gastos de subscripción
+\begin{equation}
+R = P + I - S - G
+\end{equation}
+
 ## Mutualización del riesgo
 La idea de mantener un seguro está basada en la mutualización de los riesgos. La mutualización 
 como tal nace del mismo mecanismo bajo el cual funciona un seguro, cada asegurado transfiera 
