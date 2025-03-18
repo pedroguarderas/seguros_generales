@@ -15,6 +15,7 @@ suppressPackageStartupMessages( library( rmarkdown ) )
 suppressPackageStartupMessages( library( shiny ) )
 suppressPackageStartupMessages( library( showtext ) )
 suppressPackageStartupMessages( library( sysfonts ) )
+suppressPackageStartupMessages( library( actuar ) )
 
 options( scipen = 999 )
 options( stringsAsFactors = FALSE )
@@ -33,7 +34,7 @@ for ( dr in dirs ) {
 rm( dr, dirs )
 
 # Descarga datos e información ---------------------------------------------------------------------
-# Descarga inforamción si en caso está presente en la fuente de origen en Google Drive
+# Descarga información si en caso está presente en la fuente de origen en Google Drive
 # fl <- 'RData/IESS_life_tables_2020.RData'
 # if ( !file.exists( fl ) ) {
 #   

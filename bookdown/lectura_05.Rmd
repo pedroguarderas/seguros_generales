@@ -1,6 +1,13 @@
 # Primas
 
-## Prima pura de riesgo
+La prima es la cantidad de dinero que un individuo o entidad pagan por una póliza de seguro, la cual
+está diseñada para cubrir ciertos riesgos personales o comerciales.
+
+\begin{equation}
+P = \frac{S}{n}
+\end{equation}
+
+## Prima neta, o prima pura de riesgo
 \begin{equation}
   P = \mathbb{E}[S]
 \end{equation}
@@ -26,8 +33,62 @@
   = \frac{1}{2} M_N\big( \ln M_X( t ) \big)
 \end{equation}
 
-## Prima de percentiles para un valor de confianza $\varepsilon \in (0,1)$
+## Prima de percentiles para un valor de confianza $\alpha \in (0,1)$ o $VaR_\alpha$
 \begin{equation}
-  P = F_S^{-1}( 1 - \varepsilon )
+  P = VaR_\alpha)( S ) =  F_S^{-1}( \alpha )
 \end{equation}
 
+## Esscher
+$X_i \rightsquigarrow Gamma( \alpha_i, \theta )$, para $i \in \{1,\ldots,n\}$, 
+$S \rightsquigarrow Gamma\left( \sum\limits_{i=1}^n \alpha_i \right)$
+```{r l5c1}
+n <- 1000
+a <- runif( n, 5, 10 )
+A <- sum( a )
+theta <- 4
+EX <- a * theta
+VX <- a * theta^2
+ES <- sum( EX )
+VS <- sum( VX )
+SDS <- sqrt( VS )
+
+alpha <- 0.95
+P <- ES
+P_avg <- ( 1 + alpha ) * ES
+P_var <- ES + alpha * VS
+P_sde <- ES + alpha * SDS
+P_VaR <- qgamma( alpha, shape = A, scale = theta )
+
+# curve( dgamma, shape = A, scale = theta )
+```
+
+```{r l5c2}
+alph <- 0.01
+e <- unlist( lapply( seq( 1, 6, 1 ), FUN = function( n ) seq( 9, 1, -0.2 ) * 10^{-n} ) )
+n <- log( 2 / alph ) / e^2
+plot( e, n, type = 'l', xlim = c( 0, 0.00001 ) )
+dt <- data.table( e, n )
+cat( paste( paste0( formatC( e, digits = 10, format = 'f' ), ', ', formatC( n, digits = 30, format = 'f' ) ), collapse = '\n' ) )
+
+d <- n * 8 / 1024^2
+```
+
+```{r l5c3}
+n <- 1e3
+S <- rgamma( n, shape = A, scale = theta )
+smin <- qgamma( 0.001, shape = A, scale = theta )
+smax <- qgamma( 0.999, shape = A, scale = theta )
+s <- seq( smin, smax, length.out = 1000 )
+Fns <- ecdf( S )( s )
+Fs <- pgamma( s, shape = A, scale = theta )
+
+alph <- 0.02
+er <- sqrt( log( 2 / alph ) / ( 2 * n ) )
+abs( Fs - Fns ) > er 
+
+plot( s, Fs, type = 'l', ylim = c( -er, 1 + er ) )
+points( s, Fns - er, col = 'red', type = 'l' )
+points( s, Fns + er, col = 'red', type = 'l' )
+
+hist( pgamma( S, shape = A, scale = theta ), breaks = 5 )
+```

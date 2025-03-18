@@ -17,3 +17,36 @@ the policyholder to pay it himself;
 
 4. Reducción de la prima - premium reduction can be an important aspect for the policyholders, 
 they may prefer to take a higher deductible to get a lower premium.
+
+
+```{r l4c1, include = FALSE}
+n <- 1e3
+l <- 3
+dat <- data.table( id = 1:n, k = rpois( n, lambda = l )  )
+# dat <- data.table( id = 1:n, k = rbinom( n, 10, 0.3 )  )
+# dat <- data.table( id = 1:n, k = rnbinom ( n, 10, 0.3 )  )
+
+datf <- dat[ , list( fk = .N ), by = k ]
+setorder( datf, k )
+datf[ , fks := shift( fk, n = 1 ) ]
+datf[ , gk := k * fk / fks ]
+datf <- datf[ !is.na( gk ) ]
+plot( datf$k, datf$gk )
+```
+
+```{r l4c2, include = FALSE}
+dflm <- lm( formula = gk ~ k, data = datf, method = 'qr' )
+a <- coef( dflm )[ 2 ]
+b <- coef( dflm )[ 1 ]
+p0 <- exp( -b )
+k <- seq( 1, 100, 1 )
+p <- p0 * cumprod( c( 1, a + b / k ) )
+sum( p )
+k <- seq( 0, 100, 1 )
+sum( dpois( k, lambda = l ) )
+EN <- sum( k * p )
+
+plot( k, p, ylim = c( 0, 0.3 ) )
+points( k, dpois( k, lambda = b ), col = 'red' )
+
+```

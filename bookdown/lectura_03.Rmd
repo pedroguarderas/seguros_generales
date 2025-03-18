@@ -1,6 +1,15 @@
 <!------------------------------------------------------------------------------------------------->
 # Modelos de pérdida agregada
 
+$R$ Ganancia
+$P$ Ingreso por primas
+$I$ Ingreso por inversiones
+$S$ Pago de siniestros
+$G$ Gastos de subscripción
+\begin{equation}
+R = P + I - S - G
+\end{equation}
+
 ## Mutualización del riesgo
 La idea de mantener un seguro está basada en la mutualización de los riesgos. La mutualización 
 como tal nace del mismo mecanismo bajo el cual funciona un seguro, cada asegurado transfiera 
@@ -136,45 +145,6 @@ abline( v = ES, col = 'red' )
 \end{equation}
 
 
-::: {.theorem #tlc name="Teorema del límite central"}
-Consideramos las variables aleatorias $X_1,\ldots,X_n$, independientes e idénticamente distribuidas 
-(i.i.d) con media común finita $\mathbb{E}[X_i] = \mu < +\infty$ y varianza común finita
-$\mathbb{V}[ X_i ] = \sigma^2 < +\infty$, para todo $i \in \{1, \ldots, n \}$. Si consideramos la
-variable aleatoria de la suma total $S_n = \sum\limits_{i=1}^n X_i$, entonces
-\begin{equation}
-\frac{S_n - \mathbb{E}[S_n]}{\mathbb{V}[ S_n ]} \overset{d}{\longrightarrow} Z
-\end{equation}
-cuando $n \rightarrow +\infty$, donde $Z \rightsquigarrow N( 0, 1 )$. 
-
-Más aún
-\begin{equation}
-\underset{n \rightarrow +\infty}{\lim} \mathbf{P}\left( \frac{S_n - \mathbb{E}[S_n]}{\mathbb{V}[ S_n ]} \leq z \right)
-= \Phi( z )
-\end{equation}
-:::
-
-El teorema del límite central en su forma usual no proporciona una tasa de convergencia es decir,
-la variable aleatoria $\frac{S_n - \mathbb{E}[S_n]}{\mathbb{V}[ S_n ]}$ tiende a tener un 
-comportamiento de una variable aleatoria normal estándar conforme aumenta $n$, pero no estamos 
-seguros que tamaño debe tomar $n$ para que esto se cumpla con una alta certeza. Para ello adicional
-al \@ref(thm:tlc) se debe considerar otros resultados asociados a desigualdades de concentración.
-
-::: {.theorem #bein  name="Desigualdad de Berry-Esséen"}
-Sean $X_1, \ldots X_n$ variables aleatoria i.i.d, con media y varianza finitas, i.e 
-$\mathbb{E}[X] < +\infty$ y $\mathbb{V}[X] < +\infty$ y además con tercer momento absoluto finito
-$\mathbb{E}\left[\left|X - \mathbb{E}[X]\right|^3\right] < +\infty$. Entonces, la distribución 
-acumulada $F_n$ de la variable aleatoria
-\begin{equation}
-U_n = \frac{S_n - \mathbb{E}[ S_n ]}{\mathbb{V}[ S_n ]}
-\end{equation}
-con $S_n = \sum\limits_{i=1}^n X_i$. Satisface la siguiente desigualdad respecto de la distribución 
-acumulada de la ley normal $\Phi$.
-\begin{equation}
-\underset{u}{\sup}\left| F_n( u ) - \Phi( u ) \right| \leq \frac{A}{\sqrt{n}} 
-\frac{\mathbb{E}\left[\left|X - \mathbb{E}[X]\right|^3\right]}{\sqrt{\mathbb{V}[X]}^3}
-\end{equation}
-:::
-
 ::: {.example #exo}
 En este caso en particular estudiaremos la velocidad de convergencia del método resultante del 
 teorema del límite central \@ref(thm:tlc). Generaremos una simulación aleatoria de la suma
@@ -196,7 +166,7 @@ FSn <- lapply( 1:n, FUN = function( i ) ecdf( sapply( 1:m, FUN = function( j ) N
 D <- sapply( FSn, FUN = function( Fn ) max( abs( Fn - pnorm( z ) ) ) )
 
 C <- 0.015
-C <- 1 / sqrt( 2 * pi )
+# C <- 1 / sqrt( 2 * pi )
 rho <- exp( 3 * u + 3^2 * s^2 / 2 )
 Bn <- C * rho / ( SDX^3 * sqrt( 1:n ) )
 
@@ -204,6 +174,24 @@ plot( 1:n, D, pch = 16, cex = 0.5, type = 'l', lwd = 2, lty = 1, ylim = c( 0, 0.
 points( 1:n, Bn, type = 'l', lty = 1, col = 'red' )
 ```
 :::
+
+
+
+```{r l3c7}
+l <- 3
+n <- 300
+dt <- rexp( n = n, rate = 1 / l )
+t <- c( 0, cumsum( dt ) )
+dN <- sapply( dt, FUN = function( w ) rpois( 1, lambda = l * w ) )
+N <- c( 0, cumsum( dN ) )
+sh <- 3
+rt <- 2
+X <- lapply( dN, FUN = function( n ) rgamma( n, shape = sh, rate = rt ) )
+dS <- sapply( X, FUN = function( x ) sum( x ) )
+S <- c( 0, cumsum( dS ) )
+plot( t, N, type = 's' )
+plot( t, S, type = 's' )
+```
 
 
 
