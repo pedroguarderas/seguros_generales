@@ -23,7 +23,7 @@
 <meta name="author" content="" />
 
 
-<meta name="date" content="2025-03-15" />
+<meta name="date" content="2025-03-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -175,8 +175,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.3" data-path="primas.html"><a href="primas.html#prima-de-riesgo-con-recargo-sobre-la-varianza"><i class="fa fa-check"></i><b>5.3</b> Prima de riesgo con recargo sobre la varianza</a></li>
 <li class="chapter" data-level="5.4" data-path="primas.html"><a href="primas.html#prima-de-riesgo-con-recargo-sobre-la-desviación"><i class="fa fa-check"></i><b>5.4</b> Prima de riesgo con recargo sobre la desviación</a></li>
 <li class="chapter" data-level="5.5" data-path="primas.html"><a href="primas.html#prima-de-riesgo-con-principio-exponential-para-t-0"><i class="fa fa-check"></i><b>5.5</b> Prima de riesgo con principio exponential para <span class="math inline">\(t &gt; 0\)</span></a></li>
-<li class="chapter" data-level="5.6" data-path="primas.html"><a href="primas.html#prima-de-percentiles-para-un-valor-de-confianza-alpha-in-01-o-var_alpha"><i class="fa fa-check"></i><b>5.6</b> Prima de percentiles para un valor de confianza <span class="math inline">\(\alpha \in (0,1)\)</span> o <span class="math inline">\(VaR_\alpha\)</span></a></li>
-<li class="chapter" data-level="5.7" data-path="primas.html"><a href="primas.html#esscher"><i class="fa fa-check"></i><b>5.7</b> Esscher</a></li>
+<li class="chapter" data-level="5.6" data-path="primas.html"><a href="primas.html#prima-de-percentiles-para-un-valor-de-confianza-alpha-in-01-o-prima-de-valor-en-riesgo"><i class="fa fa-check"></i><b>5.6</b> Prima de percentiles para un valor de confianza <span class="math inline">\(\alpha \in [0,1]\)</span> o prima de valor en riesgo</a></li>
+<li class="chapter" data-level="5.7" data-path="primas.html"><a href="primas.html#prima-de-valor-en-riesgo-en-la-cola-tail-value-at-risk-tvar_alpha.-es-el-promedio-uniforme"><i class="fa fa-check"></i><b>5.7</b> Prima de valor en riesgo en la cola (Tail Value at Risk) <span class="math inline">\(TVaR_\alpha\)</span>. Es el promedio uniforme</a></li>
+<li class="chapter" data-level="5.8" data-path="primas.html"><a href="primas.html#esscher"><i class="fa fa-check"></i><b>5.8</b> Esscher</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="medidas-de-riesgo.html"><a href="medidas-de-riesgo.html"><i class="fa fa-check"></i><b>6</b> Medidas de riesgo</a></li>
 </ul>
@@ -234,44 +235,59 @@ P = \frac{S}{n}
   = \frac{1}{2} M_N\big( \ln M_X( t ) \big)
 \end{equation}\]</span></p>
 </div>
-<div id="prima-de-percentiles-para-un-valor-de-confianza-alpha-in-01-o-var_alpha" class="section level2 hasAnchor" number="5.6">
-<h2><span class="header-section-number">5.6</span> Prima de percentiles para un valor de confianza <span class="math inline">\(\alpha \in (0,1)\)</span> o <span class="math inline">\(VaR_\alpha\)</span><a href="primas.html#prima-de-percentiles-para-un-valor-de-confianza-alpha-in-01-o-var_alpha" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p><span class="math display">\[\begin{equation}
+<div id="prima-de-percentiles-para-un-valor-de-confianza-alpha-in-01-o-prima-de-valor-en-riesgo" class="section level2 hasAnchor" number="5.6">
+<h2><span class="header-section-number">5.6</span> Prima de percentiles para un valor de confianza <span class="math inline">\(\alpha \in [0,1]\)</span> o prima de valor en riesgo<a href="primas.html#prima-de-percentiles-para-un-valor-de-confianza-alpha-in-01-o-prima-de-valor-en-riesgo" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><span class="math inline">\(VaR_\alpha\)</span>
+<span class="math display">\[\begin{equation}
   P = VaR_\alpha)( S ) =  F_S^{-1}( \alpha )
 \end{equation}\]</span></p>
 </div>
-<div id="esscher" class="section level2 hasAnchor" number="5.7">
-<h2><span class="header-section-number">5.7</span> Esscher<a href="primas.html#esscher" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="prima-de-valor-en-riesgo-en-la-cola-tail-value-at-risk-tvar_alpha.-es-el-promedio-uniforme" class="section level2 hasAnchor" number="5.7">
+<h2><span class="header-section-number">5.7</span> Prima de valor en riesgo en la cola (Tail Value at Risk) <span class="math inline">\(TVaR_\alpha\)</span>. Es el promedio uniforme<a href="primas.html#prima-de-valor-en-riesgo-en-la-cola-tail-value-at-risk-tvar_alpha.-es-el-promedio-uniforme" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>de todos los valores en riesgo <span class="math inline">\(VaR_u\)</span>, con <span class="math inline">\(u \geq \alpha\)</span>.
+<span class="math display">\[\begin{equation}
+P = TVaR_\alpha( S ) = \frac{1}{1-\alpha} \int\limits_{\alpha}^1 VaR_u( S )\ du
+\end{equation}\]</span></p>
+</div>
+<div id="esscher" class="section level2 hasAnchor" number="5.8">
+<h2><span class="header-section-number">5.8</span> Esscher<a href="primas.html#esscher" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><span class="math inline">\(X_i \rightsquigarrow Gamma( \alpha_i, \theta )\)</span>, para <span class="math inline">\(i \in \{1,\ldots,n\}\)</span>,
 <span class="math inline">\(S \rightsquigarrow Gamma\left( \sum\limits_{i=1}^n \alpha_i \right)\)</span></p>
 <p></p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb15-1"><a href="primas.html#cb15-1"></a>n <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
-<span id="cb15-2"><a href="primas.html#cb15-2"></a>a <span class="ot">&lt;-</span> <span class="fu">runif</span>( n, <span class="dv">5</span>, <span class="dv">10</span> )</span>
-<span id="cb15-3"><a href="primas.html#cb15-3"></a>A <span class="ot">&lt;-</span> <span class="fu">sum</span>( a )</span>
-<span id="cb15-4"><a href="primas.html#cb15-4"></a>theta <span class="ot">&lt;-</span> <span class="dv">4</span></span>
-<span id="cb15-5"><a href="primas.html#cb15-5"></a>EX <span class="ot">&lt;-</span> a <span class="sc">*</span> theta</span>
-<span id="cb15-6"><a href="primas.html#cb15-6"></a>VX <span class="ot">&lt;-</span> a <span class="sc">*</span> theta<span class="sc">^</span><span class="dv">2</span></span>
-<span id="cb15-7"><a href="primas.html#cb15-7"></a>ES <span class="ot">&lt;-</span> <span class="fu">sum</span>( EX )</span>
-<span id="cb15-8"><a href="primas.html#cb15-8"></a>VS <span class="ot">&lt;-</span> <span class="fu">sum</span>( VX )</span>
-<span id="cb15-9"><a href="primas.html#cb15-9"></a>SDS <span class="ot">&lt;-</span> <span class="fu">sqrt</span>( VS )</span>
-<span id="cb15-10"><a href="primas.html#cb15-10"></a></span>
-<span id="cb15-11"><a href="primas.html#cb15-11"></a>alpha <span class="ot">&lt;-</span> <span class="fl">0.95</span></span>
-<span id="cb15-12"><a href="primas.html#cb15-12"></a>P <span class="ot">&lt;-</span> ES</span>
-<span id="cb15-13"><a href="primas.html#cb15-13"></a>P_avg <span class="ot">&lt;-</span> ( <span class="dv">1</span> <span class="sc">+</span> alpha ) <span class="sc">*</span> ES</span>
-<span id="cb15-14"><a href="primas.html#cb15-14"></a>P_var <span class="ot">&lt;-</span> ES <span class="sc">+</span> alpha <span class="sc">*</span> VS</span>
-<span id="cb15-15"><a href="primas.html#cb15-15"></a>P_sde <span class="ot">&lt;-</span> ES <span class="sc">+</span> alpha <span class="sc">*</span> SDS</span>
-<span id="cb15-16"><a href="primas.html#cb15-16"></a>P_VaR <span class="ot">&lt;-</span> <span class="fu">qgamma</span>( alpha, <span class="at">shape =</span> A, <span class="at">scale =</span> theta )</span>
-<span id="cb15-17"><a href="primas.html#cb15-17"></a></span>
-<span id="cb15-18"><a href="primas.html#cb15-18"></a><span class="co"># curve( dgamma, shape = A, scale = theta )</span></span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb17-1"><a href="primas.html#cb17-1"></a>n <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
+<span id="cb17-2"><a href="primas.html#cb17-2"></a>a <span class="ot">&lt;-</span> <span class="fu">runif</span>( n, <span class="dv">5</span>, <span class="dv">10</span> )</span>
+<span id="cb17-3"><a href="primas.html#cb17-3"></a>A <span class="ot">&lt;-</span> <span class="fu">sum</span>( a )</span>
+<span id="cb17-4"><a href="primas.html#cb17-4"></a>theta <span class="ot">&lt;-</span> <span class="dv">4</span></span>
+<span id="cb17-5"><a href="primas.html#cb17-5"></a>EX <span class="ot">&lt;-</span> a <span class="sc">*</span> theta</span>
+<span id="cb17-6"><a href="primas.html#cb17-6"></a>VX <span class="ot">&lt;-</span> a <span class="sc">*</span> theta<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb17-7"><a href="primas.html#cb17-7"></a>ES <span class="ot">&lt;-</span> <span class="fu">sum</span>( EX )</span>
+<span id="cb17-8"><a href="primas.html#cb17-8"></a>VS <span class="ot">&lt;-</span> <span class="fu">sum</span>( VX )</span>
+<span id="cb17-9"><a href="primas.html#cb17-9"></a>SDS <span class="ot">&lt;-</span> <span class="fu">sqrt</span>( VS )</span>
+<span id="cb17-10"><a href="primas.html#cb17-10"></a></span>
+<span id="cb17-11"><a href="primas.html#cb17-11"></a>alpha <span class="ot">&lt;-</span> <span class="fl">0.95</span></span>
+<span id="cb17-12"><a href="primas.html#cb17-12"></a>P <span class="ot">&lt;-</span> ES</span>
+<span id="cb17-13"><a href="primas.html#cb17-13"></a>P_avg <span class="ot">&lt;-</span> ( <span class="dv">1</span> <span class="sc">+</span> alpha ) <span class="sc">*</span> ES</span>
+<span id="cb17-14"><a href="primas.html#cb17-14"></a>P_var <span class="ot">&lt;-</span> ES <span class="sc">+</span> alpha <span class="sc">*</span> VS</span>
+<span id="cb17-15"><a href="primas.html#cb17-15"></a>P_sde <span class="ot">&lt;-</span> ES <span class="sc">+</span> alpha <span class="sc">*</span> SDS</span>
+<span id="cb17-16"><a href="primas.html#cb17-16"></a></span>
+<span id="cb17-17"><a href="primas.html#cb17-17"></a>m <span class="ot">&lt;-</span> <span class="fl">1e6</span></span>
+<span id="cb17-18"><a href="primas.html#cb17-18"></a>P_VaR <span class="ot">&lt;-</span> <span class="fu">qgamma</span>( alpha, <span class="at">shape =</span> A, <span class="at">scale =</span> theta )</span>
+<span id="cb17-19"><a href="primas.html#cb17-19"></a>P_VaR <span class="ot">&lt;-</span> <span class="fu">quantile</span>( <span class="fu">rgamma</span>( m, <span class="at">shape =</span> A, <span class="at">scale =</span> theta ), <span class="at">probs =</span> alpha )</span>
+<span id="cb17-20"><a href="primas.html#cb17-20"></a></span>
+<span id="cb17-21"><a href="primas.html#cb17-21"></a>m <span class="ot">&lt;-</span> <span class="fl">1e6</span></span>
+<span id="cb17-22"><a href="primas.html#cb17-22"></a>P_TVaR <span class="ot">&lt;-</span> ( <span class="dv">1</span> <span class="sc">/</span> ( <span class="dv">1</span> <span class="sc">-</span> alpha ) ) <span class="sc">*</span> ( A <span class="sc">*</span> theta ) <span class="sc">*</span> ( <span class="dv">1</span> <span class="sc">-</span> <span class="fu">pgamma</span>( <span class="fu">qgamma</span>( alpha, <span class="at">shape =</span> A, <span class="at">scale =</span> theta ), <span class="at">shape =</span> A <span class="sc">+</span> <span class="dv">1</span>, <span class="at">scale =</span> theta ) )</span>
+<span id="cb17-23"><a href="primas.html#cb17-23"></a>P_TVaR <span class="ot">&lt;-</span> ( <span class="dv">1</span> <span class="sc">/</span> ( <span class="dv">1</span> <span class="sc">-</span> alpha ) ) <span class="sc">*</span> <span class="fu">integrate</span>( <span class="at">f =</span> <span class="cf">function</span>( u ) <span class="fu">qgamma</span>( u, <span class="at">shape =</span> A, <span class="at">scale =</span> theta ), alpha, <span class="dv">1</span> )<span class="sc">$</span>value</span>
+<span id="cb17-24"><a href="primas.html#cb17-24"></a>P_TVaR <span class="ot">&lt;-</span> <span class="fu">mean</span>( <span class="fu">sapply</span>( <span class="fu">runif</span>( m, alpha, <span class="dv">1</span> ), <span class="at">FUN =</span> <span class="cf">function</span>( k ) <span class="fu">qgamma</span>( k, <span class="at">shape =</span> A, <span class="at">scale =</span> theta ) ) )</span>
+<span id="cb17-25"><a href="primas.html#cb17-25"></a><span class="co"># curve( dgamma, shape = A, scale = theta )</span></span></code></pre></div>
 <p></p>
 <p></p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb16-1"><a href="primas.html#cb16-1"></a>alph <span class="ot">&lt;-</span> <span class="fl">0.01</span></span>
-<span id="cb16-2"><a href="primas.html#cb16-2"></a>e <span class="ot">&lt;-</span> <span class="fu">unlist</span>( <span class="fu">lapply</span>( <span class="fu">seq</span>( <span class="dv">1</span>, <span class="dv">6</span>, <span class="dv">1</span> ), <span class="at">FUN =</span> <span class="cf">function</span>( n ) <span class="fu">seq</span>( <span class="dv">9</span>, <span class="dv">1</span>, <span class="sc">-</span><span class="fl">0.2</span> ) <span class="sc">*</span> <span class="dv">10</span><span class="sc">^</span>{<span class="sc">-</span>n} ) )</span>
-<span id="cb16-3"><a href="primas.html#cb16-3"></a>n <span class="ot">&lt;-</span> <span class="fu">log</span>( <span class="dv">2</span> <span class="sc">/</span> alph ) <span class="sc">/</span> e<span class="sc">^</span><span class="dv">2</span></span>
-<span id="cb16-4"><a href="primas.html#cb16-4"></a><span class="fu">plot</span>( e, n, <span class="at">type =</span> <span class="st">&#39;l&#39;</span>, <span class="at">xlim =</span> <span class="fu">c</span>( <span class="dv">0</span>, <span class="fl">0.00001</span> ) )</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb18-1"><a href="primas.html#cb18-1"></a>alph <span class="ot">&lt;-</span> <span class="fl">0.01</span></span>
+<span id="cb18-2"><a href="primas.html#cb18-2"></a>e <span class="ot">&lt;-</span> <span class="fu">unlist</span>( <span class="fu">lapply</span>( <span class="fu">seq</span>( <span class="dv">1</span>, <span class="dv">6</span>, <span class="dv">1</span> ), <span class="at">FUN =</span> <span class="cf">function</span>( n ) <span class="fu">seq</span>( <span class="dv">9</span>, <span class="dv">1</span>, <span class="sc">-</span><span class="fl">0.2</span> ) <span class="sc">*</span> <span class="dv">10</span><span class="sc">^</span>{<span class="sc">-</span>n} ) )</span>
+<span id="cb18-3"><a href="primas.html#cb18-3"></a>n <span class="ot">&lt;-</span> <span class="fu">log</span>( <span class="dv">2</span> <span class="sc">/</span> alph ) <span class="sc">/</span> e<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb18-4"><a href="primas.html#cb18-4"></a><span class="fu">plot</span>( e, n, <span class="at">type =</span> <span class="st">&#39;l&#39;</span>, <span class="at">xlim =</span> <span class="fu">c</span>( <span class="dv">0</span>, <span class="fl">0.00001</span> ) )</span></code></pre></div>
 <p><img src="seguros_generales_files/figure-html/l5c2-1.png" width="700" /></p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb17-1"><a href="primas.html#cb17-1"></a>dt <span class="ot">&lt;-</span> <span class="fu">data.table</span>( e, n )</span>
-<span id="cb17-2"><a href="primas.html#cb17-2"></a><span class="fu">cat</span>( <span class="fu">paste</span>( <span class="fu">paste0</span>( <span class="fu">formatC</span>( e, <span class="at">digits =</span> <span class="dv">10</span>, <span class="at">format =</span> <span class="st">&#39;f&#39;</span> ), <span class="st">&#39;, &#39;</span>, <span class="fu">formatC</span>( n, <span class="at">digits =</span> <span class="dv">30</span>, <span class="at">format =</span> <span class="st">&#39;f&#39;</span> ) ), <span class="at">collapse =</span> <span class="st">&#39;</span><span class="sc">\n</span><span class="st">&#39;</span> ) )</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb19-1"><a href="primas.html#cb19-1"></a>dt <span class="ot">&lt;-</span> <span class="fu">data.table</span>( e, n )</span>
+<span id="cb19-2"><a href="primas.html#cb19-2"></a><span class="fu">cat</span>( <span class="fu">paste</span>( <span class="fu">paste0</span>( <span class="fu">formatC</span>( e, <span class="at">digits =</span> <span class="dv">10</span>, <span class="at">format =</span> <span class="st">&#39;f&#39;</span> ), <span class="st">&#39;, &#39;</span>, <span class="fu">formatC</span>( n, <span class="at">digits =</span> <span class="dv">30</span>, <span class="at">format =</span> <span class="st">&#39;f&#39;</span> ) ), <span class="at">collapse =</span> <span class="st">&#39;</span><span class="sc">\n</span><span class="st">&#39;</span> ) )</span></code></pre></div>
 <pre><code>## 0.9000000000, 6.541132551293871166819826612482
 ## 0.8800000000, 6.841835442339920803078712197021
 ## 0.8600000000, 7.163760636219627997434145072475
@@ -518,20 +534,20 @@ P = \frac{S}{n}
 ## 0.0000014000, 2703223146197.980468750000000000000000000000
 ## 0.0000012000, 3679387060102.807128906250000000000000000000
 ## 0.0000010000, 5298317366548.036132812500000000000000000000</code></pre>
-<div class="sourceCode" id="cb19"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb19-1"><a href="primas.html#cb19-1"></a>d <span class="ot">&lt;-</span> n <span class="sc">*</span> <span class="dv">8</span> <span class="sc">/</span> <span class="dv">1024</span><span class="sc">^</span><span class="dv">2</span></span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb21-1"><a href="primas.html#cb21-1"></a>d <span class="ot">&lt;-</span> n <span class="sc">*</span> <span class="dv">8</span> <span class="sc">/</span> <span class="dv">1024</span><span class="sc">^</span><span class="dv">2</span></span></code></pre></div>
 <p></p>
 <p></p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb20-1"><a href="primas.html#cb20-1"></a>n <span class="ot">&lt;-</span> <span class="fl">1e3</span></span>
-<span id="cb20-2"><a href="primas.html#cb20-2"></a>S <span class="ot">&lt;-</span> <span class="fu">rgamma</span>( n, <span class="at">shape =</span> A, <span class="at">scale =</span> theta )</span>
-<span id="cb20-3"><a href="primas.html#cb20-3"></a>smin <span class="ot">&lt;-</span> <span class="fu">qgamma</span>( <span class="fl">0.001</span>, <span class="at">shape =</span> A, <span class="at">scale =</span> theta )</span>
-<span id="cb20-4"><a href="primas.html#cb20-4"></a>smax <span class="ot">&lt;-</span> <span class="fu">qgamma</span>( <span class="fl">0.999</span>, <span class="at">shape =</span> A, <span class="at">scale =</span> theta )</span>
-<span id="cb20-5"><a href="primas.html#cb20-5"></a>s <span class="ot">&lt;-</span> <span class="fu">seq</span>( smin, smax, <span class="at">length.out =</span> <span class="dv">1000</span> )</span>
-<span id="cb20-6"><a href="primas.html#cb20-6"></a>Fns <span class="ot">&lt;-</span> <span class="fu">ecdf</span>( S )( s )</span>
-<span id="cb20-7"><a href="primas.html#cb20-7"></a>Fs <span class="ot">&lt;-</span> <span class="fu">pgamma</span>( s, <span class="at">shape =</span> A, <span class="at">scale =</span> theta )</span>
-<span id="cb20-8"><a href="primas.html#cb20-8"></a></span>
-<span id="cb20-9"><a href="primas.html#cb20-9"></a>alph <span class="ot">&lt;-</span> <span class="fl">0.02</span></span>
-<span id="cb20-10"><a href="primas.html#cb20-10"></a>er <span class="ot">&lt;-</span> <span class="fu">sqrt</span>( <span class="fu">log</span>( <span class="dv">2</span> <span class="sc">/</span> alph ) <span class="sc">/</span> ( <span class="dv">2</span> <span class="sc">*</span> n ) )</span>
-<span id="cb20-11"><a href="primas.html#cb20-11"></a><span class="fu">abs</span>( Fs <span class="sc">-</span> Fns ) <span class="sc">&gt;</span> er </span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb22-1"><a href="primas.html#cb22-1"></a>n <span class="ot">&lt;-</span> <span class="fl">1e3</span></span>
+<span id="cb22-2"><a href="primas.html#cb22-2"></a>S <span class="ot">&lt;-</span> <span class="fu">rgamma</span>( n, <span class="at">shape =</span> A, <span class="at">scale =</span> theta )</span>
+<span id="cb22-3"><a href="primas.html#cb22-3"></a>smin <span class="ot">&lt;-</span> <span class="fu">qgamma</span>( <span class="fl">0.001</span>, <span class="at">shape =</span> A, <span class="at">scale =</span> theta )</span>
+<span id="cb22-4"><a href="primas.html#cb22-4"></a>smax <span class="ot">&lt;-</span> <span class="fu">qgamma</span>( <span class="fl">0.999</span>, <span class="at">shape =</span> A, <span class="at">scale =</span> theta )</span>
+<span id="cb22-5"><a href="primas.html#cb22-5"></a>s <span class="ot">&lt;-</span> <span class="fu">seq</span>( smin, smax, <span class="at">length.out =</span> <span class="dv">1000</span> )</span>
+<span id="cb22-6"><a href="primas.html#cb22-6"></a>Fns <span class="ot">&lt;-</span> <span class="fu">ecdf</span>( S )( s )</span>
+<span id="cb22-7"><a href="primas.html#cb22-7"></a>Fs <span class="ot">&lt;-</span> <span class="fu">pgamma</span>( s, <span class="at">shape =</span> A, <span class="at">scale =</span> theta )</span>
+<span id="cb22-8"><a href="primas.html#cb22-8"></a></span>
+<span id="cb22-9"><a href="primas.html#cb22-9"></a>alph <span class="ot">&lt;-</span> <span class="fl">0.02</span></span>
+<span id="cb22-10"><a href="primas.html#cb22-10"></a>er <span class="ot">&lt;-</span> <span class="fu">sqrt</span>( <span class="fu">log</span>( <span class="dv">2</span> <span class="sc">/</span> alph ) <span class="sc">/</span> ( <span class="dv">2</span> <span class="sc">*</span> n ) )</span>
+<span id="cb22-11"><a href="primas.html#cb22-11"></a><span class="fu">abs</span>( Fs <span class="sc">-</span> Fns ) <span class="sc">&gt;</span> er </span></code></pre></div>
 <pre><code>##    [1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
 ##   [20] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
 ##   [39] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
@@ -585,11 +601,11 @@ P = \frac{S}{n}
 ##  [951] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
 ##  [970] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
 ##  [989] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE</code></pre>
-<div class="sourceCode" id="cb22"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb22-1"><a href="primas.html#cb22-1"></a><span class="fu">plot</span>( s, Fs, <span class="at">type =</span> <span class="st">&#39;l&#39;</span>, <span class="at">ylim =</span> <span class="fu">c</span>( <span class="sc">-</span>er, <span class="dv">1</span> <span class="sc">+</span> er ) )</span>
-<span id="cb22-2"><a href="primas.html#cb22-2"></a><span class="fu">points</span>( s, Fns <span class="sc">-</span> er, <span class="at">col =</span> <span class="st">&#39;red&#39;</span>, <span class="at">type =</span> <span class="st">&#39;l&#39;</span> )</span>
-<span id="cb22-3"><a href="primas.html#cb22-3"></a><span class="fu">points</span>( s, Fns <span class="sc">+</span> er, <span class="at">col =</span> <span class="st">&#39;red&#39;</span>, <span class="at">type =</span> <span class="st">&#39;l&#39;</span> )</span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb24-1"><a href="primas.html#cb24-1"></a><span class="fu">plot</span>( s, Fs, <span class="at">type =</span> <span class="st">&#39;l&#39;</span>, <span class="at">ylim =</span> <span class="fu">c</span>( <span class="sc">-</span>er, <span class="dv">1</span> <span class="sc">+</span> er ) )</span>
+<span id="cb24-2"><a href="primas.html#cb24-2"></a><span class="fu">points</span>( s, Fns <span class="sc">-</span> er, <span class="at">col =</span> <span class="st">&#39;red&#39;</span>, <span class="at">type =</span> <span class="st">&#39;l&#39;</span> )</span>
+<span id="cb24-3"><a href="primas.html#cb24-3"></a><span class="fu">points</span>( s, Fns <span class="sc">+</span> er, <span class="at">col =</span> <span class="st">&#39;red&#39;</span>, <span class="at">type =</span> <span class="st">&#39;l&#39;</span> )</span></code></pre></div>
 <p><img src="seguros_generales_files/figure-html/l5c3-1.png" width="700" /></p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb23-1"><a href="primas.html#cb23-1"></a><span class="fu">hist</span>( <span class="fu">pgamma</span>( S, <span class="at">shape =</span> A, <span class="at">scale =</span> theta ), <span class="at">breaks =</span> <span class="dv">5</span> )</span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb25-1"><a href="primas.html#cb25-1"></a><span class="fu">hist</span>( <span class="fu">pgamma</span>( S, <span class="at">shape =</span> A, <span class="at">scale =</span> theta ), <span class="at">breaks =</span> <span class="dv">5</span> )</span></code></pre></div>
 <p><img src="seguros_generales_files/figure-html/l5c3-2.png" width="700" /></p>
 <p></p>
 

@@ -27,6 +27,7 @@ prima-de-riesgo-con-recargo-sobre-la-esperanza
 prima-de-riesgo-con-recargo-sobre-la-varianza
 prima-de-riesgo-con-recargo-sobre-la-desviación
 prima-de-riesgo-con-principio-exponential-para-t-0
-prima-de-percentiles-para-un-valor-de-confianza-alpha-in-01-o-var_alpha
+prima-de-percentiles-para-un-valor-de-confianza-alpha-in-01-o-prima-de-valor-en-riesgo
+prima-de-valor-en-riesgo-en-la-cola-tail-value-at-risk-tvar_alpha.-es-el-promedio-uniforme
 esscher
 medidas-de-riesgo
