@@ -79,7 +79,8 @@ cuando $n \rightarrow +\infty$, donde $Z \rightsquigarrow N( 0, 1 )$.
 
 Más aún
 \begin{equation}
-\underset{n \rightarrow +\infty}{\lim} \mathbf{P}\left( \frac{S_n - \mathbb{E}[S_n]}{\mathbb{V}[ S_n ]} \leq z \right)
+\underset{n \rightarrow +\infty}{\lim} \mathbf{P}\left( \frac{S_n 
+- \mathbb{E}[S_n]}{\mathbb{V}[ S_n ]} \leq z \right)
 = \Phi( z )
 \end{equation}
 :::
@@ -238,6 +239,7 @@ local({
 ```
 
 ```{r l2c2, warning = FALSE}
+library( actuar )
 library( data.table )
 library( ggplot2 )
 library( googledrive )
@@ -274,6 +276,11 @@ Si buscamos aplicar una función sobre un vector, podemos utilizar `sapply`
 ```{r l2c5}
 y <- sapply( x, FUN = f )
 print( y )
+```
+
+```{r l2c6}
+z <- lapply( x, FUN = f )
+print( z )
 ```
 
 Para muchas tareas que están relacionadas con el manejo de datos, podemos utilizar las 

@@ -33,12 +33,21 @@ P = \frac{S}{n}
   = \frac{1}{2} M_N\big( \ln M_X( t ) \big)
 \end{equation}
 
-## Prima de percentiles para un valor de confianza $\alpha \in (0,1)$ o $VaR_\alpha$
+## Prima de percentiles para un valor de confianza $\alpha \in [0,1]$ o prima de valor en riesgo 
+$VaR_\alpha$
 \begin{equation}
-  P = VaR_\alpha)( S ) =  F_S^{-1}( \alpha )
+  P = VaR_\alpha( S ) =  F_S^{-1}( \alpha )
+\end{equation}
+
+## Prima de valor en riesgo en la cola (Tail Value at Risk) $TVaR_\alpha$. Es el promedio uniforme
+de todos los valores en riesgo $VaR_u$, con $u \geq \alpha$.
+\begin{equation}
+P = TVaR_\alpha( S ) = \frac{1}{1-\alpha} \int\limits_{\alpha}^1 VaR_u( S )\ du
 \end{equation}
 
 ## Esscher
+
+
 $X_i \rightsquigarrow Gamma( \alpha_i, \theta )$, para $i \in \{1,\ldots,n\}$, 
 $S \rightsquigarrow Gamma\left( \sum\limits_{i=1}^n \alpha_i \right)$
 ```{r l5c1}
@@ -52,14 +61,31 @@ ES <- sum( EX )
 VS <- sum( VX )
 SDS <- sqrt( VS )
 
+m <- 1e6
+S <- rgamma( m, shape = A, scale = theta )
+
 alpha <- 0.95
 P <- ES
-P_avg <- ( 1 + alpha ) * ES
-P_var <- ES + alpha * VS
-P_sde <- ES + alpha * SDS
-P_VaR <- qgamma( alpha, shape = A, scale = theta )
+P <- mean( S )
 
-# curve( dgamma, shape = A, scale = theta )
+P_avg <- ( 1 + alpha ) * ES
+P_avg <- ( 1 + alpha ) * mean( S )
+
+P_var <- ES + alpha * VS
+P_var <- mean( S ) + alpha * var( S )
+
+P_sde <- ES + alpha * SDS
+P_sde <- mean( S ) + alpha * sd( S )
+
+VaRS <- qgamma( alpha, shape = A, scale = theta )
+P_VaR <- VaRS
+P_VaR <- quantile( S, probs = alpha )
+
+P_TVaR <- ( 1 / ( 1 - alpha ) ) * ( A * theta ) * ( 1 - pgamma( VaRS, shape = A + 1, scale = theta ) )
+P_TVaR <- ( 1 / ( 1 - alpha ) ) * integrate( f = function( u ) qgamma( u, shape = A, scale = theta ), alpha, 1 )$value
+P_TVaR <- mean( sapply( runif( m, alpha, 1 ), FUN = function( k ) qgamma( k, shape = A, scale = theta ) ) )
+I <- as.numeric( S > VaRS )
+P_TVaR <- mean( S * I ) / mean( I )
 ```
 
 ```{r l5c2}
