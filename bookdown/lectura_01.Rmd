@@ -1,1 +1,50 @@
 # Introducción
+
+
+## Materia {-}
+
+**Matemática Actuarial de los Seguros Generales**
+
+## Resultados de aprendisaje  {-}
+
+- Contrastar los criterios de valoración actuarial en los seguros generales, así como elaborar y aplicar
+las bases técnicas.
+
+- Aprender a obtener la distribución y momentos correspondientes de la siniestralidad total pagada
+por el asegurador y por el reasegurador en presencia de franquicias y reaseguro.
+
+- Identificar las modificaciones que pueden sufrir los contratos de seguros generales y valorar las
+consecuencias técnicas de dichas modificaciones.
+
+- Calcular la función de distribución del coste total de una cartera de pólizas.
+
+## Contenidos propuestos {-}
+
+1. Distribuciones compuestas
+
+2. Series de tiempo
+
+3. El Proceso de Riesgo: Distribución clase (a,b) y algoritmo de Panjer, Distribución de siniestralidad 
+agregada
+
+4. Modelos Lineales Generalizados (GLMs): para datos binarios y recuentos
+
+5. Proceso de Tarificación
+
+6. Tarificación a priori: cálculo de la prima pura
+
+7. Tarificación a posteriori: sistemas Bonus-Malus
+
+8. Teoría de la Ruina
+
+## Bibliografía {-}
+
+1. Loss Models, Klugman S., Panjer H., Wilmot G., Society of Actuaries, Wiley, 2012
+
+3. Modélisation et évaluation quantitative des risques en actuariat, Etienne Marceau, Springer, 2013
+
+2. GIL FANA: Elementos de Matemáticas para las Ciencias del Seguro. Fundación Mapfre Estudios. 1991
+
+4. *actuar*: An R Package for Actuarial Science, Christophe Dutang C, and Vincent Goulet V., Pigeon M.
+
+
