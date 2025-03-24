@@ -1,1 +1,3 @@
-# Dat
+# Modelos lineales generalizados (GLM)
+
+Muchas de las veces

@@ -1,4 +1,6 @@
-# Primas
+# Tarificación
+
+## Prima
 
 La prima es la cantidad de dinero que un individuo o entidad pagan por una póliza de seguro, la cual
 está diseñada para cubrir ciertos riesgos personales o comerciales.
@@ -47,7 +49,6 @@ P = TVaR_\alpha( S ) = \frac{1}{1-\alpha} \int\limits_{\alpha}^1 VaR_u( S )\ du
 
 ## Esscher
 
-
 $X_i \rightsquigarrow Gamma( \alpha_i, \theta )$, para $i \in \{1,\ldots,n\}$, 
 $S \rightsquigarrow Gamma\left( \sum\limits_{i=1}^n \alpha_i \right)$
 ```{r l5c1}
@@ -61,7 +62,7 @@ ES <- sum( EX )
 VS <- sum( VX )
 SDS <- sqrt( VS )
 
-m <- 1e6
+m <- 1e5
 S <- rgamma( m, shape = A, scale = theta )
 
 alpha <- 0.95
@@ -117,4 +118,58 @@ points( s, Fns - er, col = 'red', type = 'l' )
 points( s, Fns + er, col = 'red', type = 'l' )
 
 hist( pgamma( S, shape = A, scale = theta ), breaks = 5 )
+```
+
+<!------------------------------------------------------------------------------------------------->
+## Deducibles
+
+El principal objetivo de los deducibles, es el reducir los costos de atención de los reclamos 
+usualmente mediante la exclusión de siniestros usualmente numerosos debidos a reclamos pequeños.
+En otras ocasiones, los deducibles están diseñados para incentivar al asegurado para evitar 
+y prevenir siniestros por cierto monto límite.
+
+1. Prevención de la pérdida - as the compensation is reduced by a deductible the retention of the 
+insured is positive; This makes out a good case for avoiding the loss; 
+
+2. Reducción de la pérdida - the fact a deductible puts the policyholder at risk of obtaining 
+only partial compensation provides an economic incentive to reduce the extend of the damage; 
+
+3. Evitar pequeñas pérdidas - where administration costs are dominant for small losses, the 
+administration costs will often exceed the loss itself, and hence the insurance company would want 
+the policyholder to pay it himself; 
+
+4. Reducción de la prima - premium reduction can be an important aspect for the policyholders, 
+they may prefer to take a higher deductible to get a lower premium.
+
+
+```{r l4c1, include = FALSE}
+n <- 1e3
+l <- 3
+dat <- data.table( id = 1:n, k = rpois( n, lambda = l )  )
+# dat <- data.table( id = 1:n, k = rbinom( n, 10, 0.3 )  )
+# dat <- data.table( id = 1:n, k = rnbinom ( n, 10, 0.3 )  )
+
+datf <- dat[ , list( fk = .N ), by = k ]
+setorder( datf, k )
+datf[ , fks := shift( fk, n = 1 ) ]
+datf[ , gk := k * fk / fks ]
+datf <- datf[ !is.na( gk ) ]
+plot( datf$k, datf$gk )
+```
+
+```{r l4c2, include = FALSE}
+dflm <- lm( formula = gk ~ k, data = datf, method = 'qr' )
+a <- coef( dflm )[ 2 ]
+b <- coef( dflm )[ 1 ]
+p0 <- exp( -b )
+k <- seq( 1, 100, 1 )
+p <- p0 * cumprod( c( 1, a + b / k ) )
+sum( p )
+k <- seq( 0, 100, 1 )
+sum( dpois( k, lambda = l ) )
+EN <- sum( k * p )
+
+plot( k, p, ylim = c( 0, 0.3 ) )
+points( k, dpois( k, lambda = b ), col = 'red' )
+
 ```

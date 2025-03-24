@@ -37,14 +37,10 @@ agregada
 
 8. Teoría de la Ruina
 
-## Bibliografía {-}
+En cuanto a las referencias utilizaremos los siguientes libros guía, @PanjerLoss2012, 
+@LossModFur, @modevquant. También haremos uso del paquete para R, @actuar.
 
-1. Loss Models, Klugman S., Panjer H., Wilmot G., Society of Actuaries, Wiley, 2012
+GIL FANA: Elementos de Matemáticas para las Ciencias del Seguro. Fundación Mapfre Estudios. 1991
 
-3. Modélisation et évaluation quantitative des risques en actuariat, Etienne Marceau, Springer, 2013
-
-2. GIL FANA: Elementos de Matemáticas para las Ciencias del Seguro. Fundación Mapfre Estudios. 1991
-
-4. *actuar*: An R Package for Actuarial Science, Christophe Dutang C, and Vincent Goulet V., Pigeon M.
 
 

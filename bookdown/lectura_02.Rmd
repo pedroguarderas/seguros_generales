@@ -170,6 +170,7 @@ al \@ref(thm:tlc) se debe considerar otros resultados asociados a desigualdades 
 
 El siguiente teorema es de gran ayuda para estimar la tasa de convergencia del resultado anterior
 \@ref(thm:tlc).
+
 ::: {.theorem #bein  name="Desigualdad de Berry-Esséen"}
 Sean $X_1, \ldots X_n$ variables aleatoria i.i.d, con media y varianza finitas, i.e 
 $\mathbb{E}[X] < +\infty$ y $\mathbb{V}[X] < +\infty$ y además con tercer momento absoluto finito
