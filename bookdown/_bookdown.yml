@@ -1,5 +1,5 @@
 book_filename: seguros_generales
-rmd_file: [ index.Rmd, lectura_01.Rmd, lectura_02.Rmd, lectura_03.Rmd, lectura_04.Rmd, lectura_05.Rmd, lectura_06.Rmd ]
+rmd_file: [ index.Rmd, lectura_01.Rmd, lectura_02.Rmd, lectura_03.Rmd, lectura_04.Rmd, lectura_05.Rmd, lectura_06.Rmd, lectura_07.Rmd, lectura_08.Rmd, lectura_09.Rmd ]
 delete_merged_file: true
 new_session: no
 output_dir: "docs"

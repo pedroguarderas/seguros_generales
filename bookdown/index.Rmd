@@ -16,4 +16,6 @@ output:
       in_header: mathjax_includes.html
     config:
       split_by: rmd
+bibliography: [bibliografia_libros.bib, bibliografia_paquetes.bib]
+csl: electronic-journal-of-statistics.csl
 ---
