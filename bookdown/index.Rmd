@@ -1,5 +1,5 @@
 ---
-title: "Seguros Generales"
+title: "Matemática Actuarial de los Seguros Generales"
 author: ""
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
