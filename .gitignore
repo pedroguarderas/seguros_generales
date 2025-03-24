@@ -2,4 +2,5 @@
 .Rhistory
 .RData
 .Ruserdata
-bookdown/seguros_generales/*
+bookdown/seguros_generales_files/*
+bookdown/_bookdown_files/*
