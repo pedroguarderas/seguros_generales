@@ -33,6 +33,10 @@ for ( dr in dirs ) {
 }
 rm( dr, dirs )
 
+# Copiando bibliografía ----------------------------------------------------------------------------
+file.copy( '~/Development/bibliography/Bibtex/bibliografia_libros.bib', 'bookdown/bibliografia_libros.bib', overwrite = TRUE )
+file.copy( '~/Development/bibliography/Bibtex/bibliografia_paquetes.bib', 'bookdown/bibliografia_paquetes.bib', overwrite = TRUE )
+
 # Descarga datos e información ---------------------------------------------------------------------
 # Descarga información si en caso está presente en la fuente de origen en Google Drive
 # fl <- 'RData/IESS_life_tables_2020.RData'
