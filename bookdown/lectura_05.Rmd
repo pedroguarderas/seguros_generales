@@ -9,45 +9,44 @@ está diseñada para cubrir ciertos riesgos personales o comerciales.
 P = \frac{S}{n}
 \end{equation}
 
-## Prima neta, o prima pura de riesgo
+1. Prima neta, o prima pura de riesgo
 \begin{equation}
   P = \mathbb{E}[S]
 \end{equation}
 
-## Prima de riesgo con recargo sobre la esperanza
+2. Prima de riesgo con recargo sobre la esperanza
 \begin{equation}
   P = (1 + \rho) \mathbb{E}[S]
 \end{equation}
 
-## Prima de riesgo con recargo sobre la varianza
+3. Prima de riesgo con recargo sobre la varianza
 \begin{equation}
   P = \mathbb{E}[S] + \rho \mathbb{V}[S]
 \end{equation}
 
-## Prima de riesgo con recargo sobre la desviación
+4. Prima de riesgo con recargo sobre la desviación
 \begin{equation}
   P = \mathbb{E}[S] + \rho \sqrt{\mathbb{V}[S]}
 \end{equation} 
 
-## Prima de riesgo con principio exponential para $t > 0$
+5. Prima de riesgo con principio exponencial para $t > 0$
 \begin{equation}
   P = \frac{1}{2} \mathbb{E}\left[e^{tS}\right]
   = \frac{1}{2} M_N\big( \ln M_X( t ) \big)
 \end{equation}
 
-## Prima de percentiles para un valor de confianza $\alpha \in [0,1]$ o prima de valor en riesgo 
+6. Prima de percentiles para un valor de confianza $\alpha \in [0,1]$ o prima de valor en riesgo 
 $VaR_\alpha$
 \begin{equation}
   P = VaR_\alpha( S ) =  F_S^{-1}( \alpha )
 \end{equation}
 
-## Prima de valor en riesgo en la cola (Tail Value at Risk) $TVaR_\alpha$. Es el promedio uniforme
+7. Prima de valor en riesgo en la cola (Tail Value at Risk) $TVaR_\alpha$. Es el promedio uniforme
 de todos los valores en riesgo $VaR_u$, con $u \geq \alpha$.
 \begin{equation}
 P = TVaR_\alpha( S ) = \frac{1}{1-\alpha} \int\limits_{\alpha}^1 VaR_u( S )\ du
 \end{equation}
 
-## Esscher
 
 $X_i \rightsquigarrow Gamma( \alpha_i, \theta )$, para $i \in \{1,\ldots,n\}$, 
 $S \rightsquigarrow Gamma\left( \sum\limits_{i=1}^n \alpha_i \right)$
