@@ -192,15 +192,7 @@ div.csl-indent {
 <li class="chapter" data-level="5" data-path="tarificación.html"><a href="tarificación.html"><i class="fa fa-check"></i><b>5</b> Tarificación</a>
 <ul>
 <li class="chapter" data-level="5.1" data-path="tarificación.html"><a href="tarificación.html#prima"><i class="fa fa-check"></i><b>5.1</b> Prima</a></li>
-<li class="chapter" data-level="5.2" data-path="tarificación.html"><a href="tarificación.html#prima-neta-o-prima-pura-de-riesgo"><i class="fa fa-check"></i><b>5.2</b> Prima neta, o prima pura de riesgo</a></li>
-<li class="chapter" data-level="5.3" data-path="tarificación.html"><a href="tarificación.html#prima-de-riesgo-con-recargo-sobre-la-esperanza"><i class="fa fa-check"></i><b>5.3</b> Prima de riesgo con recargo sobre la esperanza</a></li>
-<li class="chapter" data-level="5.4" data-path="tarificación.html"><a href="tarificación.html#prima-de-riesgo-con-recargo-sobre-la-varianza"><i class="fa fa-check"></i><b>5.4</b> Prima de riesgo con recargo sobre la varianza</a></li>
-<li class="chapter" data-level="5.5" data-path="tarificación.html"><a href="tarificación.html#prima-de-riesgo-con-recargo-sobre-la-desviación"><i class="fa fa-check"></i><b>5.5</b> Prima de riesgo con recargo sobre la desviación</a></li>
-<li class="chapter" data-level="5.6" data-path="tarificación.html"><a href="tarificación.html#prima-de-riesgo-con-principio-exponential-para-t-0"><i class="fa fa-check"></i><b>5.6</b> Prima de riesgo con principio exponential para <span class="math inline">\(t &gt; 0\)</span></a></li>
-<li class="chapter" data-level="5.7" data-path="tarificación.html"><a href="tarificación.html#prima-de-percentiles-para-un-valor-de-confianza-alpha-in-01-o-prima-de-valor-en-riesgo"><i class="fa fa-check"></i><b>5.7</b> Prima de percentiles para un valor de confianza <span class="math inline">\(\alpha \in [0,1]\)</span> o prima de valor en riesgo</a></li>
-<li class="chapter" data-level="5.8" data-path="tarificación.html"><a href="tarificación.html#prima-de-valor-en-riesgo-en-la-cola-tail-value-at-risk-tvar_alpha.-es-el-promedio-uniforme"><i class="fa fa-check"></i><b>5.8</b> Prima de valor en riesgo en la cola (Tail Value at Risk) <span class="math inline">\(TVaR_\alpha\)</span>. Es el promedio uniforme</a></li>
-<li class="chapter" data-level="5.9" data-path="tarificación.html"><a href="tarificación.html#esscher"><i class="fa fa-check"></i><b>5.9</b> Esscher</a></li>
-<li class="chapter" data-level="5.10" data-path="tarificación.html"><a href="tarificación.html#deducibles"><i class="fa fa-check"></i><b>5.10</b> Deducibles</a></li>
+<li class="chapter" data-level="5.2" data-path="tarificación.html"><a href="tarificación.html#deducibles"><i class="fa fa-check"></i><b>5.2</b> Deducibles</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="modelos-lineales-generalizados-glm.html"><a href="modelos-lineales-generalizados-glm.html"><i class="fa fa-check"></i><b>6</b> Modelos lineales generalizados (GLM)</a></li>
 <li class="chapter" data-level="7" data-path="estimación-de-valores-extremos.html"><a href="estimación-de-valores-extremos.html"><i class="fa fa-check"></i><b>7</b> Estimación de valores extremos</a></li>
@@ -232,54 +224,39 @@ está diseñada para cubrir ciertos riesgos personales o comerciales.</p>
 <p><span class="math display">\[\begin{equation}
 P = \frac{S}{n}
 \end{equation}\]</span></p>
-</div>
-<div id="prima-neta-o-prima-pura-de-riesgo" class="section level2 hasAnchor" number="5.2">
-<h2><span class="header-section-number">5.2</span> Prima neta, o prima pura de riesgo<a href="tarificación.html#prima-neta-o-prima-pura-de-riesgo" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p><span class="math display">\[\begin{equation}
+<ol style="list-style-type: decimal">
+<li><p>Prima neta, o prima pura de riesgo
+<span class="math display">\[\begin{equation}
   P = \mathbb{E}[S]
-\end{equation}\]</span></p>
-</div>
-<div id="prima-de-riesgo-con-recargo-sobre-la-esperanza" class="section level2 hasAnchor" number="5.3">
-<h2><span class="header-section-number">5.3</span> Prima de riesgo con recargo sobre la esperanza<a href="tarificación.html#prima-de-riesgo-con-recargo-sobre-la-esperanza" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p><span class="math display">\[\begin{equation}
+\end{equation}\]</span></p></li>
+<li><p>Prima de riesgo con recargo sobre la esperanza
+<span class="math display">\[\begin{equation}
   P = (1 + \rho) \mathbb{E}[S]
-\end{equation}\]</span></p>
-</div>
-<div id="prima-de-riesgo-con-recargo-sobre-la-varianza" class="section level2 hasAnchor" number="5.4">
-<h2><span class="header-section-number">5.4</span> Prima de riesgo con recargo sobre la varianza<a href="tarificación.html#prima-de-riesgo-con-recargo-sobre-la-varianza" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p><span class="math display">\[\begin{equation}
+\end{equation}\]</span></p></li>
+<li><p>Prima de riesgo con recargo sobre la varianza
+<span class="math display">\[\begin{equation}
   P = \mathbb{E}[S] + \rho \mathbb{V}[S]
-\end{equation}\]</span></p>
-</div>
-<div id="prima-de-riesgo-con-recargo-sobre-la-desviación" class="section level2 hasAnchor" number="5.5">
-<h2><span class="header-section-number">5.5</span> Prima de riesgo con recargo sobre la desviación<a href="tarificación.html#prima-de-riesgo-con-recargo-sobre-la-desviación" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p><span class="math display">\[\begin{equation}
+\end{equation}\]</span></p></li>
+<li><p>Prima de riesgo con recargo sobre la desviación
+<span class="math display">\[\begin{equation}
   P = \mathbb{E}[S] + \rho \sqrt{\mathbb{V}[S]}
-\end{equation}\]</span></p>
-</div>
-<div id="prima-de-riesgo-con-principio-exponential-para-t-0" class="section level2 hasAnchor" number="5.6">
-<h2><span class="header-section-number">5.6</span> Prima de riesgo con principio exponential para <span class="math inline">\(t &gt; 0\)</span><a href="tarificación.html#prima-de-riesgo-con-principio-exponential-para-t-0" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p><span class="math display">\[\begin{equation}
+\end{equation}\]</span></p></li>
+<li><p>Prima de riesgo con principio exponencial para <span class="math inline">\(t &gt; 0\)</span>
+<span class="math display">\[\begin{equation}
   P = \frac{1}{2} \mathbb{E}\left[e^{tS}\right]
   = \frac{1}{2} M_N\big( \ln M_X( t ) \big)
-\end{equation}\]</span></p>
-</div>
-<div id="prima-de-percentiles-para-un-valor-de-confianza-alpha-in-01-o-prima-de-valor-en-riesgo" class="section level2 hasAnchor" number="5.7">
-<h2><span class="header-section-number">5.7</span> Prima de percentiles para un valor de confianza <span class="math inline">\(\alpha \in [0,1]\)</span> o prima de valor en riesgo<a href="tarificación.html#prima-de-percentiles-para-un-valor-de-confianza-alpha-in-01-o-prima-de-valor-en-riesgo" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p><span class="math inline">\(VaR_\alpha\)</span>
+\end{equation}\]</span></p></li>
+<li><p>Prima de percentiles para un valor de confianza <span class="math inline">\(\alpha \in [0,1]\)</span> o prima de valor en riesgo
+<span class="math inline">\(VaR_\alpha\)</span>
 <span class="math display">\[\begin{equation}
   P = VaR_\alpha( S ) =  F_S^{-1}( \alpha )
-\end{equation}\]</span></p>
-</div>
-<div id="prima-de-valor-en-riesgo-en-la-cola-tail-value-at-risk-tvar_alpha.-es-el-promedio-uniforme" class="section level2 hasAnchor" number="5.8">
-<h2><span class="header-section-number">5.8</span> Prima de valor en riesgo en la cola (Tail Value at Risk) <span class="math inline">\(TVaR_\alpha\)</span>. Es el promedio uniforme<a href="tarificación.html#prima-de-valor-en-riesgo-en-la-cola-tail-value-at-risk-tvar_alpha.-es-el-promedio-uniforme" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>de todos los valores en riesgo <span class="math inline">\(VaR_u\)</span>, con <span class="math inline">\(u \geq \alpha\)</span>.
+\end{equation}\]</span></p></li>
+<li><p>Prima de valor en riesgo en la cola (Tail Value at Risk) <span class="math inline">\(TVaR_\alpha\)</span>. Es el promedio uniforme
+de todos los valores en riesgo <span class="math inline">\(VaR_u\)</span>, con <span class="math inline">\(u \geq \alpha\)</span>.
 <span class="math display">\[\begin{equation}
 P = TVaR_\alpha( S ) = \frac{1}{1-\alpha} \int\limits_{\alpha}^1 VaR_u( S )\ du
-\end{equation}\]</span></p>
-</div>
-<div id="esscher" class="section level2 hasAnchor" number="5.9">
-<h2><span class="header-section-number">5.9</span> Esscher<a href="tarificación.html#esscher" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+\end{equation}\]</span></p></li>
+</ol>
 <p><span class="math inline">\(X_i \rightsquigarrow Gamma( \alpha_i, \theta )\)</span>, para <span class="math inline">\(i \in \{1,\ldots,n\}\)</span>,
 <span class="math inline">\(S \rightsquigarrow Gamma\left( \sum\limits_{i=1}^n \alpha_i \right)\)</span></p>
 <p></p>
@@ -649,8 +626,8 @@ P = TVaR_\alpha( S ) = \frac{1}{1-\alpha} \int\limits_{\alpha}^1 VaR_u( S )\ du
 <p></p>
 <!------------------------------------------------------------------------------------------------->
 </div>
-<div id="deducibles" class="section level2 hasAnchor" number="5.10">
-<h2><span class="header-section-number">5.10</span> Deducibles<a href="tarificación.html#deducibles" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="deducibles" class="section level2 hasAnchor" number="5.2">
+<h2><span class="header-section-number">5.2</span> Deducibles<a href="tarificación.html#deducibles" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>El principal objetivo de los deducibles, es el reducir los costos de atención de los reclamos
 usualmente mediante la exclusión de siniestros usualmente numerosos debidos a reclamos pequeños.
 En otras ocasiones, los deducibles están diseñados para incentivar al asegurado para evitar
