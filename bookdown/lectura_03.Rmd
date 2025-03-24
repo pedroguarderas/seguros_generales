@@ -176,7 +176,6 @@ points( 1:n, Bn, type = 'l', lty = 1, col = 'red' )
 :::
 
 
-
 ```{r l3c7}
 l <- 3
 n <- 300
@@ -192,6 +191,67 @@ S <- c( 0, cumsum( dS ) )
 plot( t, N, type = 's' )
 plot( t, S, type = 's' )
 ```
+
+
+## Medidas de riesgo
+
+<!------------------------------------------------------------------------------------------------->
+::: {.definition #spv name="Medida de riesgo coherente"}
+Una **medida de riesgo coeherente** es una función $\zeta: \mathbb{R} \longrightarrow \mathbb{R}$, 
+que satisface la siguientes propiedades:
+
+1. **Homogenidad positiva**, para cualquier $a > 0$
+\begin{equation}
+\zeta( a X ) = a \zeta( X )
+\end{equation}
+
+2. **Invarianza ante las traslaciones**, para cualquier $a > 0$
+\begin{equation}
+\zeta( \alpha X + a ) = \zeta( \alpha X ) + a
+\end{equation}
+
+3. **Monotonicidad**, Si $X \leq Y$
+\begin{equation}
+\zeta( X ) \leq \zeta( Y )
+\end{equation}
+
+4. **Sub-aditividad**
+\begin{equation}
+\zeta( X + Y ) \leq \zeta( X ) + \zeta( Y )
+\end{equation}
+:::
+
+\begin{equation}
+VaR_{\alpha}( X ) = F_X^{-1}( \alpha )
+\end{equation}
+
+\begin{equation}
+TVaR_{\alpha}( X ) = \frac{1}{1-\alpha} \int\limits_{\alpha}^1 VaR_u( X )\ du
+\end{equation}
+
+```{r l6c1}
+u <- 4
+s <- 0.5
+n <- 1e4
+X <- rlnorm( n, meanlog = u, sdlog = s )
+k <- seq( 0, 1, 0.2 ) 
+VaRX <- quantile( X, probs = k, names = FALSE )
+TVaRX <- sapply( 
+  1:length( VaRX ), 
+  FUN = function( i ) ifelse( k[ i ] < 1, ( 1 / ( 1 - k[ i ] ) ) * mean( X * ( X > VaRX[ i ] ) ), max( X ) ) )
+
+hist( X, breaks = 100, xlim = c( 0, 1.1 * max( X ) ) )
+abline( v = VaRX, col = 'red' )
+
+hist( X, breaks = 100, xlim = c( 0, 1.1 * max( X ) ) )
+abline( v = TVaRX, col = 'blue' )
+```
+
+```{r l6c2}
+plot( k, VaRX, ylim = c( 0, 1e3 ) )
+points( k, TVaRX, col = 'red' )
+```
+
 
 
 

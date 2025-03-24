@@ -5,7 +5,20 @@
 ## Consideraciones de probabilidades
 
 <!------------------------------------------------------------------------------------------------->
-### Variable aleatoria discreta
+::: {.definition #va name="Variable aleatoria"}
+Una variable aleatoria $X: \Omega \longrightarrow D$ que parte del espacio muestral $\Omega$ y toma 
+valores en el conjunto de los números reales  $\mathbb{R}$, decimos que sigue la ley 
+$f : \mathbb{R} \longrightarrow \mathbb{R}$, si para cualquier evento $A \subset \Omega$
+\begin{equation}
+P( X \in A )
+= \int\limits_{A} dP_X( x )
+= \int\limits_{A} d(P \circ X^{-1})( x )
+= \int\limits_{X^{-1}( A )} dP( \omega )
+\end{equation}
+:::
+
+<!------------------------------------------------------------------------------------------------->
+::: {.definition #vad name="Variable aleatoria discreta"}
 Una variable aleatoria $K: \Omega \longrightarrow D$ que parte del espacio muestral $\Omega$ y toma 
 valores en un conjunto discreto $D = \left\{k_i \in \mathbb{R} | i \in \mathbb{N} \right\}$, sigue 
 una probabilidad discreta dada por las probabilidades $p_i \in [0,1]$ , $i \in \mathbb{N}$, si
@@ -17,52 +30,116 @@ Además se cumple la **condición de normalización** que es muy importante.
 \sum\limits_{i = 0}^{\infty} p_i = 1
 \end{equation}
 las probabilidades *¡Nunca son negativas!* y *!Suman siempre 1!*.
+:::
 
 <!------------------------------------------------------------------------------------------------->
-### Variable aleatoria a valores reales (continua)
-Una variable aleatoria $X: \Omega \longrightarrow D$ que parte del espacio muestral $\Omega$ y toma 
-valores en el conjunto de los números reales  $\mathbb{R}$, decimos que sigue la ley 
-$f : \mathbb{R} \longrightarrow \mathbb{R}$, si para cualquier evento $A \subset \Omega$
-
-También se puede tener el caso particular donde los valores que puede tomar la variable aleatoria 
-$K$ son discretos y también finitos, es decir el conjunto $D = \{k_0,\ldots,k_n\}$ es finito, en 
-tal caso el número de probabilidades $\{p_1,\ldots,p_n\}$ también es finito.
-
-<!------------------------------------------------------------------------------------------------->
-### Esperanza matemática
-Considerando una variable aleatoria discreta $K$, así como la hemos definido, su **esperanza 
-matemática** está dada por:
-\begin{equation}
-\mathbb{E}[ K ] 
-= \sum\limits_{i=0}^{\infty} k_i P\left( K = k_i \right)
-= \sum\limits_{i=0}^{\infty} k_i p_i
-\end{equation}
-
-Así mismo su **varianza** es la dada por:
-\begin{equation}
-\mathbb{V}[ K ] 
-= \mathbb{E}\left[ \left( K - \mathbb{E}[ K ] \right)^2 \right]
-= \sum\limits_{i=0}^{\infty} \left( k_i  - \mathbb{E}[ K ] \right)^2 p_i
-= \mathbb{E}\left[ K^2 \right] - \mathbb{E}\left[ K \right]^2
-\end{equation}
-
-<!------------------------------------------------------------------------------------------------->
-### Función de distribución acumulada
+::: {.definition #cd name="Función de distribución acumulada"}
 Consideramos una variable aleatoria a valores reales $X$, la **función de distribución acumulada**
 $F$ asociada a la variable aleatoria $X$, está dada por la siguiente relación:
 \begin{equation}
 F( x ) = P( X \leq x )
 \end{equation}
 
+La función de distribución acumulada, tiene las siguientes propiedades:
+
+  1. Para cualquier $x \in \mathbb{R}$, $0 \leq F( x ) \leq 1$,
+  
+  2. La función $F$ es no decreciente,
+  
+  3. La función $F$ es continua por derecha,
+  
+  4. Se satisfacen los siguientes límites:
+  
+\begin{equation}
+\underset{x \rightarrow -\infty}{\lim} F( x ) = 0\qquad
+\underset{x \rightarrow +\infty}{\lim} F( x ) = 1
+\end{equation}
+:::
+
 <!------------------------------------------------------------------------------------------------->
-### Función de densidad de probabilidad
+::: {.definition #spv name="Función supervivencia"}
+La función de **supervivencia** $S : \mathbb{R} \longrightarrow \mathbb{R}$ está asociada a una 
+variable aleatoria $X$, está dada por la siguiente:
+\begin{equation}
+S( x ) = 1 - F( x ) = 1 - P( X \leq x ) = P( X > x )
+\end{equation}
+:::
+
+<!------------------------------------------------------------------------------------------------->
+::: {.definition #lp name="Función de densidad de probabilidad"}
+
+La **densidad de probabilidad** o también la **ley de probabilidad** de una variable aleatoria 
+a valores reales $X$, es una función $f: \mathbb{R} \longrightarrow \mathbb{R}$, tal que
 \begin{equation}
 P( a \leq X \leq b ) = F( b ) - F( a ) = \int\limits_a^b f( x )\ dx
 \end{equation}
 
+Así se satisface la siguiente igualdad
 \begin{equation}
 F( x ) = \int\limits_{-\infty}^x f( x )\ dx
 \end{equation}
+:::
+
+<!------------------------------------------------------------------------------------------------->
+::: {.definition #em name="Esperanza matemática"}
+Considerando una variable aleatoria discreta $K : \Omega \longrightarrow D = \{k_1, \ldots, k_n\} \subset \mathbb{R}$, la **esperanza matemática** está dada por:
+\begin{equation}
+\mathbb{E}[ K ] 
+= \sum\limits_{i=0}^{\infty} k_i P\left( K = k_i \right)
+= \sum\limits_{i=0}^{\infty} k_i p_i
+\end{equation}
+
+Para el caso de una variable aleatoria continua $X : \Omega \longrightarrow \mathbb{R}$ a valores 
+reales, la esperanza matemática está dada por
+\begin{equation}
+\mathbb{E}[ X ]
+= \int\limits_{\mathbb{\Omega}} X( \omega )\ dP( \omega )
+= \int\limits_{\mathbb{R}} x f( x )\ dx
+\end{equation}
+Cuando la función de densidad de probabilidad está bien definida es posible expresar y calcular 
+la esperanza matemática como la siguiente expresión:
+\begin{equation}
+\mathbb{E}[ X ]
+= \int\limits_{\mathbb{R}} x f( x )\ dx
+\end{equation}
+
+La esperanza matemática goza de las siguientes propiedades:
+
+1. Linealidad, $a \in \mathbb{R}$
+\begin{equation}
+\mathbb{E}[ aX + Y ] = a \mathbb{E}[ X ] + \mathbb{E}[ Y ]
+\end{equation}
+
+2. Monotonía, si $X \leq Y$, entonces
+\begin{equation}
+\mathbb{E}[X] \leq \mathbb{E}[Y]
+\end{equation}
+:::
+
+<!------------------------------------------------------------------------------------------------->
+::: {.definition #em name="Varianza"}
+Así mismo su **varianza** es la dada por:
+\begin{equation}
+\mathbb{V}[ X ] 
+= \mathbb{E}\left[ \left( X - \mathbb{E}[ X ] \right)^2 \right]
+= \mathbb{E}\left[ X^2 \right] - \mathbb{E}\left[ X \right]^2
+\end{equation}
+:::
+
+<!------------------------------------------------------------------------------------------------->
+La siguiente definición de distribución de exceso condicionada es útil para el estudio de los 
+valores extremos que se pueden presentar en el estudio de los valores de siniestros que se presentan
+en un seguro.
+
+::: {.definition #dec name="Distribución de exceso condicionada"}
+La **distribución de exceso condicionada** asociada a una variable aleatoria $X$ con distribución 
+de probabilidad acumulada $F$ y a un umbral de condicionamiento $u > 0$, está dada por:
+\begin{equation}
+F_u( y ) = P\left( X - u \leq y \mid X > u \right) 
+= \frac{P\left( u < X \leq y + u\right)}{P(X > u)}
+= \frac{F( u + y ) - F( u )}{ 1 - F( u )}
+\end{equation}
+:::
 
 <!------------------------------------------------------------------------------------------------->
 ## Consideraciones estadísticas
@@ -91,6 +168,8 @@ comportamiento de una variable aleatoria normal estándar conforme aumenta $n$, 
 seguros que tamaño debe tomar $n$ para que esto se cumpla con una alta certeza. Para ello adicional
 al \@ref(thm:tlc) se debe considerar otros resultados asociados a desigualdades de concentración.
 
+El siguiente teorema es de gran ayuda para estimar la tasa de convergencia del resultado anterior
+\@ref(thm:tlc).
 ::: {.theorem #bein  name="Desigualdad de Berry-Esséen"}
 Sean $X_1, \ldots X_n$ variables aleatoria i.i.d, con media y varianza finitas, i.e 
 $\mathbb{E}[X] < +\infty$ y $\mathbb{V}[X] < +\infty$ y además con tercer momento absoluto finito
@@ -120,6 +199,31 @@ P\left( \underset{x \in \mathbb{R}}{\sup} \left| F_n( x ) - F( x ) \right| > \va
 \leq 2 e^{-2n \varepsilon^2 }\qquad \forall \varepsilon > 0
 \end{equation}
 :::
+
+Como podemos notar el orden de convergencia del teorema es $\sqrt{n}$ en el tamaño de observaciones,
+esto quiere decir que la convergencia es menos que el orden lineal.
+
+<!------------------------------------------------------------------------------------------------->
+::: {.definition #gdp name="Distribución de Pareto generalizada"}
+\begin{equation}
+G_{\varepsilon,\beta}( x ) = 
+\left \{
+\begin{array}{ll}
+1 - \left( 1 + \varepsilon \frac{x}{\beta} \right)^{-\frac{1}{\varepsilon}}, \text{si}\ \varepsilon \neq 0 \\
+1 - e^{-\frac{x}{\beta}}, \text{si}\ \varepsilon = 0
+\end{array}
+\right.
+\end{equation}
+:::
+
+::: {.theorem #pbh name="Pickands-Balkema-De Haan"}
+Sea $F_u$ la distribución de exceso asociada a la variable aleatoria $X$ y con umbral de 
+condicionamiento $u > 0$. Entonces, para cualquier $\varepsilon \in \mathbb{R}$.
+\begin{equation}
+\underset{u \longrightarrow x}{\lim} \underset{x > 0}{\sup} 
+\left| F_u( x ) - G_{\varepsilon,\beta(u)( x )} \right| = 0
+\end{equation}
+::: 
 
 <!------------------------------------------------------------------------------------------------->
 ## Consideraciones financieras
