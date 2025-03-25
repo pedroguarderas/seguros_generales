@@ -1,11 +1,11 @@
 # Introducción
 
 
-## Materia {-}
+## Materia
 
 **Matemática Actuarial de los Seguros Generales**
 
-## Resultados de aprendisaje  {-}
+## Resultados de aprendizaje
 
 - Contrastar los criterios de valoración actuarial en los seguros generales, así como elaborar y aplicar
 las bases técnicas.
@@ -18,7 +18,7 @@ consecuencias técnicas de dichas modificaciones.
 
 - Calcular la función de distribución del coste total de una cartera de pólizas.
 
-## Contenidos propuestos {-}
+## Contenidos propuestos
 
 1. Distribuciones compuestas
 
