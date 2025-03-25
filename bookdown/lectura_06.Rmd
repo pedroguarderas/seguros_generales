@@ -1,3 +1,139 @@
+<!------------------------------------------------------------------------------------------------->
 # Modelos lineales generalizados (GLM)
 
-Muchas de las veces
+<!------------------------------------------------------------------------------------------------->
+## Familia exponencial
+
+De forma amplia, un modelo lineal generalizado aprovecha algunas propiedades de la distribución de 
+probabilidad $f_X$ de la variable (vector) aleatoria $X : \Omega \longrightarrow \mathbb{R}^n$ en 
+estudio. Se parte de asumir que $X$ tiene una distribución dentro de la **familia exponencial**, es 
+decir, existen:
+
+1. Un conjunto admisible de parámetros $\Theta \subset \mathbb{R}^m$, así cada parámetro 
+$\theta = ( \theta_1, \ldots, \theta_m )^T \in \Theta$,
+
+2. Una función $T: \mathbb{R}^n \longrightarrow \mathbb{R}^p$
+
+3. Una función $A: \mathbb{R}^m \longrightarrow \mathbb{R}$
+
+4. Una función $\eta: \mathbb{R}^m \longrightarrow \mathbb{R}^p$
+
+de tal forma que:
+\begin{equation}
+f_X( x \mid \theta ) = h( x ) \exp\left( \eta( \theta ) \cdot T( x ) - A( \theta ) \right)
+\end{equation}
+
+Al tener varias observaciones independientes de la misma variable aleatoria $x_1, \ldots, x_N$,
+su distribución conjunta se puede expresar como:
+\begin{equation}
+f_{X_1,\ldots,X_N}( x_1, \ldots, x_N \mid \theta )
+= \prod\limits_{i=1}^N f_{X_i}( x_i \mid \theta )
+\end{equation}
+
+La función de verosimilitud logarítmica, "log-likelihood", toma una forma específica, la cual puede
+ser trabajada con comodidad para la maximización de verosimilitud.
+
+\begin{eqnarray*}
+\ell( \theta )
+& = & \log f_{X_1,\ldots,X_N}( x_1, \ldots, x_N \mid \theta ) \\
+& = & \sum\limits_{i=1}^N \log f_{X_i}( x_i \mid \theta ) \\
+& = & \sum\limits_{i=1}^N \left( \log h( x_i ) + \eta( \theta ) \cdot T( x_i ) - A( \theta )  \right)
+\end{eqnarray*}
+
+lo que podemos observar es que existe una casi linealidad respecto de la variable $\theta$. Esta 
+propiedad permite obtener un problema de maximización de verosimilitud que puede ser atacado con 
+varios paquetes de optimización numérica de una forma eficiente.
+
+\begin{equation}
+\underset{\theta \in \Theta}{\sup} \ell( \theta )
+= \underset{\theta \in \Theta}{\sup}  
+\sum\limits_{i=1}^N \left( \eta( \theta ) \cdot T( x_i ) - A( \theta )  \right)
+\end{equation}
+
+Usualmente, este problema se suele atacar mediante la anulación del gradiente de la función 
+objetivo, esto lo realiza la mayor parte de paquetes de software. El sistema a resolver es el 
+siguiente sistema, usualmente no lineal, de dimensión $m$:
+
+\begin{equation}
+\frac{\partial \ell}{\partial \theta_i}( \theta ) 
+= \sum\limits_{i=1}^N \left( \frac{\partial \eta}{\partial \theta_i}( \theta ) \cdot T( x_i ) - 
+\frac{\partial A}{\partial \theta_i}( \theta ) \right) 
+= 0,\qquad \forall i \in \{1,\ldots, m\}
+\end{equation}
+
+En la familia exponential tenemos las siguientes distribuciones: normal, exponencial, log-normal,
+gamma, chi-cuadrado, beta, Dirichlet, Bernoulli, Poisson, binomial, geométrica, binomial negativa,
+von Mises-Fisher, Pareto con valor mínimo conocido, Gaussiana inversa, gamma inversa, multinomial
+con número $n$ conocido, Wishart, categórica.
+
+Por la condición de normalización de la densidad de probabilidad $f_X$, se satisface la igualdad:
+\begin{eqnarray*}
+1 & = & \int\limits f_X( x \mid \theta )\ dx \\
+1 & = & \int\limits h( x ) \exp\left( \eta( \theta ) \cdot T( x ) - A( \theta ) \right)\ dx \\
+1 & = & \int\limits h( x ) \exp\left( \eta( \theta ) \cdot T( x ) \right) \exp\left( - A( \theta ) \right)\ dx \\
+1 & = &  \exp\left( - A( \theta ) \right) \int\limits h( x ) \exp\left( \eta( \theta ) \cdot T( x ) \right)\ dx \\
+\exp\left( A( \theta ) \right) & = & \int\limits h( x ) \exp\left( \eta( \theta ) \cdot T( x ) \right)\ dx \\
+A( \theta ) & = & \log\left( \int\limits h( x ) \exp\left( \eta( \theta ) \cdot T( x ) \right)\ dx \right)
+\end{eqnarray*}
+
+de donde se determina precisamente la forma que tiene la función $A$ y su el papel como factor 
+de normalización para la distribución de la variable aleatoria $X$.
+
+Así mismo, podemos establecer una cierta relación para la espera de los valores observados 
+de $T(X)$ en función de $A$
+\begin{eqnarray*}
+0 & = & \frac{\partial}{\partial \theta_i} 1 \\
+0 & = & \frac{\partial}{\partial \theta_i} \int\limits f_X( x \mid \theta )\ dx \\
+0 & = & \int\limits h( x ) \frac{\partial}{\partial \theta_i} \exp\left( \eta( \theta ) \cdot T( x ) - A( \theta ) \right)\ dx \\
+0 & = & \int\limits h( x ) \exp\left( \eta( \theta ) \cdot T( x ) - A( \theta ) \right) 
+\left( \frac{\partial \eta}{\partial \theta_i}( \theta )  \cdot T( x ) -  \frac{\partial A}{\partial \theta_i}( \theta ) \right)\ dx \\ 
+0 & = & \int\limits h( x ) \exp\left( \eta( \theta ) \cdot T( x ) - A( \theta ) \right) 
+\frac{\partial \eta}{\partial \theta_i}( \theta )  \cdot T( x )\ dx \\
+& & - \frac{\partial A}{\partial \theta_i} ( \theta )
+\int\limits h( x ) \exp\left( \eta( \theta ) \cdot T( x ) - A( \theta ) \right)\ dx \\
+0 & = & \int \limits \frac{\partial \eta}{\partial \theta_i}( \theta )  \cdot T( x ) f_X( x \mid \theta )\ dx
+- \frac{\partial A}{\partial \theta_i}( \theta ) \int \limits f_X( x \mid \theta )\ dx
+\end{eqnarray*}
+
+estamos en la capacidad de concluir que:
+\begin{equation}
+\mathbb{E}\left[ \frac{\partial \eta}{\partial \theta_i}( \theta )  \cdot T( X ) \right]
+ = \frac{\partial A}{\partial \theta_i}( \theta )
+\end{equation}
+
+<!------------------------------------------------------------------------------------------------->
+## Modelo lineal generalizado (GLM)
+Precisamente, un **modelo lineal generalizado** (**GLM** por sus siglas en inglés) busca explotar 
+las propiedades de las variables aleatorias que poseen una densidad de probabilidad dada por alguna 
+de la funciones de la familia exponencial.
+
+La idea general es poder describir el comportamiento de una variable aleatoria $Y$ que se presume
+puede ser descrita por alguna función de la familia exponencial, a partir de otras variables 
+aleatorias $X : \Omega \longrightarrow \mathbb{R}^n$ mediante una **función de vínculo** 
+$g: \mathbb{R}^q \longrightarrow \mathbb{R}^m$ entre $\theta$ y $X$, a través del paso por una 
+composición con una función lineal $\beta : \mathbb{R}^n \longrightarrow \mathbb{R}^q$, de tal 
+forma que:
+\begin{equation}
+\theta = g( \beta( X ) ) = g( \beta X )
+\end{equation}
+
+Así, un GLM prescribe una distribución de probabilidad para $Y$ que tendrá la siguiente forma y 
+será dependiente de los parámetros $\beta$ y las variables explicativas $X$
+\begin{equation}
+f_Y( y \mid \theta ) 
+= f_Y( y \mid g( \beta x ) )
+= h( x ) \exp\left( \eta( g( \beta x ) ) \cdot T( x ) - A( g( \beta x ) ) \right)
+\end{equation}
+
+En la aplicación, el ajuste de un modelo GLM a $N \in \mathbb{N}$ observaciones $y_1, \ldots, y_N$
+de la variable aleatoria $Y$ y sus respectivas variables explicativas $x_1, \ldots, x_N$. Se asume
+independencias entre las observaciones y se busca maximizar la verosimilitud de los valores 
+observados, pero en función del nuevo parámetro $\beta$, de ahí la parte lineal del modelo.
+\begin{equation}
+\ell( \beta )
+= \sum\limits_{i=1}^N \left( \log h( x_i ) +
+\eta( g( \beta x_i ) ) \cdot T( x_i ) - A( g( \beta x_i ) \right)
+\end{equation} 
+
+
+
