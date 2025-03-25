@@ -155,16 +155,16 @@ También, es bastante útil para realizar de forma más clara y rápida algunos 
 ::: {.definition #indicatriz name="Función indicatriz"}
 La **función indicatriz** de un conjunto $A \subset \Omega$, es la función 
 $\mathbf{1}_A : \Omega \longrightarrow \{0,1\}$, que toma los valores 
-$\mathbb{1}_A( \omega ) = 0$, si $\omega \notin A$ y $\mathbb{1}_A( \omega ) = 1$, si 
+$\mathbf{1}_A( \omega ) = 0$, si $\omega \notin A$ y $\mathbf{1}_A( \omega ) = 1$, si 
 $\omega \in A$.
 :::
 
-La función indicatriz $1_A$ sobre un evento $A$ del espacio muestral $\Omega$, también se puede
+La función indicatriz $\mathbf{1}_A$ sobre un evento $A$ del espacio muestral $\Omega$, también se puede
 interpretar como una variable aleatoria, que tan solo tomo los valores $0$ o $1$. Es más, su 
 esperanza es precisamente la probabilidad del evento $A$.
 \begin{equation}
-\mathbb{E}\left[ \mathbb{1}_A \right] 
-= \int\limits_\Omega \mathbb{1}_A( \omega )\ dP( \omega )
+\mathbb{E}\left[ \mathbf{1}_A \right] 
+= \int\limits_\Omega \mathbf{1}_A( \omega )\ dP( \omega )
 = \int\limits_A dP( \omega )
 = P( A )
 \end{equation}
@@ -273,7 +273,7 @@ cuando $n \rightarrow +\infty$, donde $Z \rightsquigarrow N( 0, 1 )$.
 
 Más aún
 \begin{equation}
-\underset{n \rightarrow +\infty}{\lim} \mathbf{P}\left( \frac{S_n 
+\underset{n \rightarrow +\infty}{\lim} P\left( \frac{S_n 
 - \mathbb{E}[S_n]}{\mathbb{V}[ S_n ]} \leq z \right)
 = \Phi( z )
 \end{equation}
