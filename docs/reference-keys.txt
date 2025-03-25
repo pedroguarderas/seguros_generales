@@ -14,6 +14,8 @@ thm:ddkw
 def:gdp
 thm:pbh
 exm:exo
+def:fampanjer
+prp:chfampanjer
 introducción
 materia
 resultados-de-aprendizaje
@@ -34,6 +36,7 @@ modelo-individual
 modelo-colectivo
 medidas-de-riesgo
 series-de-tiempo
+familia-de-panjer
 tarificación
 prima
 deducibles

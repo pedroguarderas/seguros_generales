@@ -1,1 +1,28 @@
 # Series de tiempo
+
+## Familia de Panjer
+
+::: {.definition #fampanjer name="Familia de Panjer"}
+Una variable aleatoria discreta $N$, que toma valores enteros positivos $N \in \mathbb{N}$, se dice
+que pertenece a la **familia de Panjer**, si sus probabilidades $p_k = P( N = k )$ para cada 
+$k \in \mathbb{N}$, satisfacen la siguiente relación de recurrencia.
+\begin{equation}
+p_k = \left( a + \frac{b}{k} \right)p_{k-1},\qquad \forall k \in \mathbb{N} \setminus \{0\} 
+\end{equation}
+:::
+
+Además tenemos la siguiente proposición que caracteriza a la distribución de las variables 
+aleatorias en la familia de Panjer.
+
+::: {.proposition #chfampanjer name="Caracterización familia de Panjer"}
+Las únicas leyes de probabilidad que satisfacen la relación de recurrencia anterior son:
+
+1. La ley de Poisson, la cual se obtiene para $a = 0$ y $b > 0$
+
+2. La ley binomial negativa, la cual se obtiene para $0 < a < 1$ y $a + b > 0$
+
+3. La ley binomial, la cual se obtenida para $a < 0$ y $b = -a(m + 1)$, para cierto $m$ entero y 
+positivo.
+:::
+
+Para una demostración detallada de la proposición anterior se puede consultar @MathAssuNV1.

@@ -189,7 +189,10 @@ div.csl-indent {
 <li class="chapter" data-level="3.3" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html#modelo-colectivo"><i class="fa fa-check"></i><b>3.3</b> Modelo colectivo</a></li>
 <li class="chapter" data-level="3.4" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html#medidas-de-riesgo"><i class="fa fa-check"></i><b>3.4</b> Medidas de riesgo</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="series-de-tiempo.html"><a href="series-de-tiempo.html"><i class="fa fa-check"></i><b>4</b> Series de tiempo</a></li>
+<li class="chapter" data-level="4" data-path="series-de-tiempo.html"><a href="series-de-tiempo.html"><i class="fa fa-check"></i><b>4</b> Series de tiempo</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="series-de-tiempo.html"><a href="series-de-tiempo.html#familia-de-panjer"><i class="fa fa-check"></i><b>4.1</b> Familia de Panjer</a></li>
+</ul></li>
 <li class="chapter" data-level="5" data-path="tarificación.html"><a href="tarificación.html"><i class="fa fa-check"></i><b>5</b> Tarificación</a>
 <ul>
 <li class="chapter" data-level="5.1" data-path="tarificación.html"><a href="tarificación.html#prima"><i class="fa fa-check"></i><b>5.1</b> Prima</a></li>
@@ -222,7 +225,36 @@ div.csl-indent {
             <section class="normal" id="section-">
 <div id="series-de-tiempo" class="section level1 hasAnchor" number="4">
 <h1><span class="header-section-number">Capítulo 4</span> Series de tiempo<a href="series-de-tiempo.html#series-de-tiempo" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="familia-de-panjer" class="section level2 hasAnchor" number="4.1">
+<h2><span class="header-section-number">4.1</span> Familia de Panjer<a href="series-de-tiempo.html#familia-de-panjer" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="definition">
+<p><span id="def:fampanjer" class="definition"><strong>Definition 4.1  (Familia de Panjer) </strong></span>Una variable aleatoria discreta <span class="math inline">\(N\)</span>, que toma valores enteros positivos <span class="math inline">\(N \in \mathbb{N}\)</span>, se dice
+que pertenece a la <strong>familia de Panjer</strong>, si sus probabilidades <span class="math inline">\(p_k = P( N = k )\)</span> para cada
+<span class="math inline">\(k \in \mathbb{N}\)</span>, satisfacen la siguiente relación de recurrencia.
+<span class="math display">\[\begin{equation}
+p_k = \left( a + \frac{b}{k} \right)p_{k-1},\qquad \forall k \in \mathbb{N} \setminus \{0\}
+\end{equation}\]</span></p>
+</div>
+<p>Además tenemos la siguiente proposición que caracteriza a la distribución de las variables
+aleatorias en la familia de Panjer.</p>
+<div class="proposition">
+<p><span id="prp:chfampanjer" class="proposition"><strong>Proposition 4.1  (Caracterización familia de Panjer) </strong></span>Las únicas leyes de probabilidad que satisfacen la relación de recurrencia anterior son:</p>
+<ol style="list-style-type: decimal">
+<li><p>La ley de Poisson, la cual se obtiene para <span class="math inline">\(a = 0\)</span> y <span class="math inline">\(b &gt; 0\)</span></p></li>
+<li><p>La ley binomial negativa, la cual se obtiene para <span class="math inline">\(0 &lt; a &lt; 1\)</span> y <span class="math inline">\(a + b &gt; 0\)</span></p></li>
+<li><p>La ley binomial, la cual se obtenida para <span class="math inline">\(a &lt; 0\)</span> y <span class="math inline">\(b = -a(m + 1)\)</span>, para cierto <span class="math inline">\(m\)</span> entero y
+positivo.</p></li>
+</ol>
+</div>
+<p>Para una demostración detallada de la proposición anterior se puede consultar <span class="citation">[<a href="#ref-MathAssuNV1">4</a>]</span>.</p>
 
+</div>
+</div>
+<h3> Bibliografía<a href="bibliografía.html#bibliografía" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="refs" class="references csl-bib-body">
+<div id="ref-MathAssuNV1" class="csl-entry">
+<div class="csl-left-margin">[4] </div><div class="csl-right-inline"><span class="smallcaps">Denuit</span>, M. and <span class="smallcaps">Charpentier</span>, A. (2005). <em>Mathématiques de l’assurance non-vie</em>. vol I Economica, Paris.</div>
+</div>
 </div>
             </section>
 
