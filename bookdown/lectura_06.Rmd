@@ -122,7 +122,7 @@ será dependiente de los parámetros $\beta$ y las variables explicativas $X$
 \begin{equation}
 f_Y( y \mid \theta ) 
 = f_Y( y \mid g( \beta x ) )
-= h( x ) \exp\left( \eta( g( \beta x ) ) \cdot T( x ) - A( g( \beta x ) ) \right)
+= h( y ) \exp\left( \eta( g( \beta x ) ) \cdot T( y ) - A( g( \beta x ) ) \right)
 \end{equation}
 
 En la aplicación, el ajuste de un modelo GLM a $N \in \mathbb{N}$ observaciones $y_1, \ldots, y_N$
@@ -131,20 +131,20 @@ independencias entre las observaciones y se busca maximizar la verosimilitud de 
 observados, pero en función del nuevo parámetro $\beta$, de ahí la parte lineal del modelo.
 \begin{equation}
 \ell( \beta )
-= \sum\limits_{i=1}^N \left( \log h( x_i ) +
-\eta( g( \beta x_i ) ) \cdot T( x_i ) - A( g( \beta x_i ) \right)
+= \sum\limits_{i=1}^N \left( \log h( y_i ) +
+\eta( g( \beta x_i ) ) \cdot T( y_i ) - A( g( \beta x_i ) \right)
 \end{equation} 
 
 En varias ocasiones no todos los parámetros $\theta$ de la densidad de probabilidad son 
 considerados, sino tan solo una parte de los mismos, los otros parámetros se consideran como un
 valor constante ya dado o también como un parámetro a determinar. Así, se divide 
 $\theta = ( \theta_1, \theta_2 ), \theta_1 \in \mathbb{R}^{m_1}, \theta_2 \in \mathbb{R}^{m_2}, m = m_1 + m_2$, 
-donde solo se establece una función de vínculo para la la primera parte $\theta_1 = g( \beta X )$. 
+donde solo se establece una función de vínculo para la primera parte $\theta_1 = g( \beta X )$. 
 Esta consideración en muchos casos ayuda a simplificar la formulación del modelo y el costo 
-computacional de estimación.
-
-o
-
-
-
+computacional de estimación. En este contexto la función de verosimilitud tomaría la forma:
+\begin{equation}
+\ell( \beta, \theta_2 )
+= \sum\limits_{i=1}^N \left( \log h( y_i ) +
+\eta( g( \beta x_i ), \theta_2 ) \cdot T( y_i ) - A( g( \beta x_i ), \theta_2 ) \right)
+\end{equation} 
 
