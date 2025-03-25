@@ -97,6 +97,31 @@ abline( v = EeS, col = 'red' )
 abline( v = ES, col = 'orange' )
 ```
 
+::: {.example #l3ex1}
+Podemos considerar el caso sencillo donde el valor posible de severidad es determinista, es decir
+para cada póliza $i\in \{1,\ldots,n\}$, el valor de severidad probable es único $M > 0$ si en caso 
+se da un evento $A_i$, esto lo podemos expresar como $X_i = M \mathbf{1}_{A_i}$ es constante. Así, pérdida
+total está dada por:
+\begin{equation} 
+S = \sum\limits_{i=1}^n X_i = \sum\limits_{i=1}^n M \mathbf{1}_{A_i} 
+\end{equation}
+
+El valor total esperado de reclamos está dado por:
+\begin{equation}
+\mathbf{E}[ S ] 
+= \sum\limits_{i=1}^n \mathbf{E}\left[ M \mathbf{1}_{A_i} \right]
+= M \sum\limits_{i=1}^n P( A_i )
+\end{equation}
+la última igualdad resulta de las propiedades de la función indicatriz \@ref(def:indicatriz).
+
+Si en caso todos los $P(A_i) = p$ tienen la misma probabilidad, el valor total esperado de reclamos
+toma la siguiente forma:
+\begin{equation}
+\mathbb{E}[S] = n M p
+\end{equation}
+:::
+
+
 <!------------------------------------------------------------------------------------------------->
 ## Modelo colectivo
 
@@ -149,7 +174,7 @@ mediante la siguiente suma $S_i = \sum\limits_{j=1}^{N_i} X_{i,j}$.
 En el lenguaje de programación R, este método de simulación puede ser fácilmente implementado 
 utilizando las funciones de aplicación vectorial `sapply` y `lapply`. 
 
-::: {.example #exsim1}
+::: {.example #l3ex2}
 Para este ejemplo práctico en particular consideramos $N \rightsquigarrow Pois( \lambda )$ y 
 $X \rightsquigarrow LN( \mu, \sigma )$.
 ```{r l3c3}
@@ -194,7 +219,7 @@ abline( v = ES, col = 'red' )
 \end{equation}
 
 
-::: {.example #exo}
+::: {.example #l3ex3}
 En este caso en particular estudiaremos la velocidad de convergencia del método resultante del 
 teorema del límite central \@ref(thm:tlc). Generaremos una simulación aleatoria de la suma
 agregada $S_n$ y mostraresmo s

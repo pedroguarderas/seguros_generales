@@ -313,6 +313,27 @@ reclamos <span class="math inline">\(X_i\)</span> y <span class="math inline">\(
 <span id="cb10-7"><a href="modelos-de-pérdida-agregada.html#cb10-7"></a><span class="fu">abline</span>( <span class="at">v =</span> ES, <span class="at">col =</span> <span class="st">&#39;orange&#39;</span> )</span></code></pre></div>
 <p><img src="seguros_generales_files/figure-html/l3c2-1.png" width="700" /></p>
 <p></p>
+<div class="example">
+<p><span id="exm:l3ex1" class="example"><strong>Example 3.1  </strong></span>Podemos considerar el caso sencillo donde el valor posible de severidad es determinista, es decir
+para cada póliza <span class="math inline">\(i\in \{1,\ldots,n\}\)</span>, el valor de severidad probable es único <span class="math inline">\(M &gt; 0\)</span> si en caso
+se da un evento <span class="math inline">\(A_i\)</span>, esto lo podemos expresar como <span class="math inline">\(X_i = M \mathbf{1}_{A_i}\)</span> es constante. Así, pérdida
+total está dada por:
+<span class="math display">\[\begin{equation}
+S = \sum\limits_{i=1}^n X_i = \sum\limits_{i=1}^n M \mathbf{1}_{A_i}
+\end{equation}\]</span></p>
+<p>El valor total esperado de reclamos está dado por:
+<span class="math display">\[\begin{equation}
+\mathbf{E}[ S ]
+= \sum\limits_{i=1}^n \mathbf{E}\left[ M \mathbf{1}_{A_i} \right]
+= M \sum\limits_{i=1}^n P( A_i )
+\end{equation}\]</span>
+la última igualdad resulta de las propiedades de la función indicatriz <a href="consideraciones-preliminares.html#def:indicatriz">2.8</a>.</p>
+<p>Si en caso todos los <span class="math inline">\(P(A_i) = p\)</span> tienen la misma probabilidad, el valor total esperado de reclamos
+toma la siguiente forma:
+<span class="math display">\[\begin{equation}
+\mathbb{E}[S] = n M p
+\end{equation}\]</span></p>
+</div>
 <!------------------------------------------------------------------------------------------------->
 </div>
 <div id="modelo-colectivo" class="section level2 hasAnchor" number="3.3">
@@ -361,7 +382,7 @@ mediante la siguiente suma <span class="math inline">\(S_i = \sum\limits_{j=1}^{
 <p>En el lenguaje de programación R, este método de simulación puede ser fácilmente implementado
 utilizando las funciones de aplicación vectorial <code>sapply</code> y <code>lapply</code>.</p>
 <div class="example">
-<p><span id="exm:exsim1" class="example"><strong>Example 3.1  </strong></span>Para este ejemplo práctico en particular consideramos <span class="math inline">\(N \rightsquigarrow Pois( \lambda )\)</span> y
+<p><span id="exm:l3ex2" class="example"><strong>Example 3.2  </strong></span>Para este ejemplo práctico en particular consideramos <span class="math inline">\(N \rightsquigarrow Pois( \lambda )\)</span> y
 <span class="math inline">\(X \rightsquigarrow LN( \mu, \sigma )\)</span>.</p>
 <p></p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb11-1"><a href="modelos-de-pérdida-agregada.html#cb11-1"></a>m <span class="ot">&lt;-</span> <span class="fl">1e4</span></span>
@@ -404,7 +425,7 @@ utilizando las funciones de aplicación vectorial <code>sapply</code> y <code>la
 \mathbb{E}[ S ] = \int_{\mathbb{R}_+} f_S( x )\ dx \approx \frac{1}{m} \sum\limits_{i=1}^m S_i
 \end{equation}\]</span></p>
 <div class="example">
-<p><span id="exm:exo" class="example"><strong>Example 3.2  </strong></span>En este caso en particular estudiaremos la velocidad de convergencia del método resultante del
+<p><span id="exm:l3ex3" class="example"><strong>Example 3.3  </strong></span>En este caso en particular estudiaremos la velocidad de convergencia del método resultante del
 teorema del límite central <a href="consideraciones-preliminares.html#thm:tlc">2.2</a>. Generaremos una simulación aleatoria de la suma
 agregada <span class="math inline">\(S_n\)</span> y mostraresmo s</p>
 <p></p>
