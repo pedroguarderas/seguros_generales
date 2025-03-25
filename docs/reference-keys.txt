@@ -12,7 +12,7 @@ thm:pbh
 exm:exo
 introducción
 materia
-resultados-de-aprendisaje
+resultados-de-aprendizaje
 contenidos-propuestos
 consideraciones-preliminares
 consideraciones-de-probabilidades

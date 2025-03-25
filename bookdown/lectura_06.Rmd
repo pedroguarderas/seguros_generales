@@ -135,5 +135,16 @@ observados, pero en función del nuevo parámetro $\beta$, de ahí la parte line
 \eta( g( \beta x_i ) ) \cdot T( x_i ) - A( g( \beta x_i ) \right)
 \end{equation} 
 
+En varias ocasiones no todos los parámetros $\theta$ de la densidad de probabilidad son 
+considerados, sino tan solo una parte de los mismos, los otros parámetros se consideran como un
+valor constante ya dado o también como un parámetro a determinar. Así, se divide 
+$\theta = ( \theta_1, \theta_2 ), \theta_1 \in \mathbb{R}^{m_1}, \theta_2 \in \mathbb{R}^{m_2}, m = m_1 + m_2$, 
+donde solo se establece una función de vínculo para la la primera parte $\theta_1 = g( \beta X )$. 
+Esta consideración en muchos casos ayuda a simplificar la formulación del modelo y el costo 
+computacional de estimación.
+
+o
+
+
 
 

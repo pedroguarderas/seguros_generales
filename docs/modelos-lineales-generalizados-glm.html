@@ -23,7 +23,7 @@
 <meta name="author" content="" />
 
 
-<meta name="date" content="2025-03-24" />
+<meta name="date" content="2025-03-25" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -165,7 +165,7 @@ div.csl-indent {
 <li class="chapter" data-level="1" data-path="introducción.html"><a href="introducción.html"><i class="fa fa-check"></i><b>1</b> Introducción</a>
 <ul>
 <li class="chapter" data-level="1.1" data-path="introducción.html"><a href="introducción.html#materia"><i class="fa fa-check"></i><b>1.1</b> Materia</a></li>
-<li class="chapter" data-level="1.2" data-path="introducción.html"><a href="introducción.html#resultados-de-aprendisaje"><i class="fa fa-check"></i><b>1.2</b> Resultados de aprendisaje</a></li>
+<li class="chapter" data-level="1.2" data-path="introducción.html"><a href="introducción.html#resultados-de-aprendizaje"><i class="fa fa-check"></i><b>1.2</b> Resultados de aprendizaje</a></li>
 <li class="chapter" data-level="1.3" data-path="introducción.html"><a href="introducción.html#contenidos-propuestos"><i class="fa fa-check"></i><b>1.3</b> Contenidos propuestos</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html"><i class="fa fa-check"></i><b>2</b> Consideraciones preliminares</a>
@@ -337,6 +337,14 @@ observados, pero en función del nuevo parámetro <span class="math inline">\(\b
 = \sum\limits_{i=1}^N \left( \log h( x_i ) +
 \eta( g( \beta x_i ) ) \cdot T( x_i ) - A( g( \beta x_i ) \right)
 \end{equation}\]</span></p>
+<p>En varias ocasiones no todos los parámetros <span class="math inline">\(\theta\)</span> de la densidad de probabilidad son
+considerados, sino tan solo una parte de los mismos, los otros parámetros se consideran como un
+valor constante ya dado o también como un parámetro a determinar. Así, se divide
+<span class="math inline">\(\theta = ( \theta_1, \theta_2 ), \theta_1 \in \mathbb{R}^{m_1}, \theta_2 \in \mathbb{R}^{m_2}, m = m_1 + m_2\)</span>,
+donde solo se establece una función de vínculo para la la primera parte <span class="math inline">\(\theta_1 = g( \beta X )\)</span>.
+Esta consideración en muchos casos ayuda a simplificar la formulación del modelo y el costo
+computacional de estimación.</p>
+<p>o</p>
 
 </div>
 </div>
