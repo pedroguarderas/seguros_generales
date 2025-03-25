@@ -355,8 +355,26 @@ f_{X,Y}( x, y ) = f_X( x ) f_Y( y )
 \end{equation}\]</span></p>
 </div>
 <!------------------------------------------------------------------------------------------------->
+<p>La siguiente función es utilidad para comprender algunos resultados en teoría de probabilidades.
+También, es bastante útil para realizar de forma más clara y rápida algunos cálculos.</p>
 <div class="definition">
-<p><span id="def:dsum" class="definition"><strong>Definition 2.8  (Distribución de la suma de variables aleatorias) </strong></span>Dadas dos variables aleatorias a valores reales <span class="math inline">\(X\)</span> y <span class="math inline">\(Y\)</span>, con funciones de distribución acumulada
+<p><span id="def:indicatriz" class="definition"><strong>Definition 2.8  (Función indicatriz) </strong></span>La <strong>función indicatriz</strong> de un conjunto <span class="math inline">\(A \subset \Omega\)</span>, es la función
+<span class="math inline">\(\mathbf{1}_A : \Omega \longrightarrow \{0,1\}\)</span>, que toma los valores
+<span class="math inline">\(\mathbb{1}_A( \omega ) = 0\)</span>, si <span class="math inline">\(\omega \notin A\)</span> y <span class="math inline">\(\mathbb{1}_A( \omega ) = 1\)</span>, si
+<span class="math inline">\(\omega \in A\)</span>.</p>
+</div>
+<p>La función indicatriz <span class="math inline">\(1_A\)</span> sobre un evento <span class="math inline">\(A\)</span> del espacio muestral <span class="math inline">\(\Omega\)</span>, también se puede
+interpretar como una variable aleatoria, que tan solo tomo los valores <span class="math inline">\(0\)</span> o <span class="math inline">\(1\)</span>. Es más, su
+esperanza es precisamente la probabilidad del evento <span class="math inline">\(A\)</span>.
+<span class="math display">\[\begin{equation}
+\mathbb{E}\left[ \mathbb{1}_A \right]
+= \int\limits_\Omega \mathbb{1}_A( \omega )\ dP( \omega )
+= \int\limits_A dP( \omega )
+= P( A )
+\end{equation}\]</span></p>
+<!------------------------------------------------------------------------------------------------->
+<div class="definition">
+<p><span id="def:dsum" class="definition"><strong>Definition 2.9  (Distribución de la suma de variables aleatorias) </strong></span>Dadas dos variables aleatorias a valores reales <span class="math inline">\(X\)</span> y <span class="math inline">\(Y\)</span>, con funciones de distribución acumulada
 <span class="math inline">\(F_X\)</span> y <span class="math inline">\(F_Y\)</span> respectivamente, la distribución acumulada <span class="math inline">\(F_Z\)</span> de la variable aleatoria <span class="math inline">\(Z = X + Y\)</span>
 está dada por la siguiente expresión:
 <span class="math display">\[\begin{equation}
@@ -371,13 +389,17 @@ aleatorias <span class="math inline">\(X\)</span> y <span class="math inline">\(
 f_Z( z ) = f_X \star f_Y ( z )
 = \int\limits_{\mathbb{R}} f_X( x - y ) f_Y( y )\ dy
 \end{equation}\]</span></p>
+<p>El producto <span class="math inline">\(\star\)</span> se conoce como convolución de funciones, el mismo es simétrico.</p>
 </div>
+<p>Para cuando se realiza la convolución de varias veces la misma función, se opta por una notación
+más compacta <span class="math inline">\(f^{\star k}\)</span>, para el producto de convolución <span class="math inline">\(k\)</span>-veces la misma función
+<span class="math inline">\(f \star f \star \cdots \star f\)</span>.</p>
 <!------------------------------------------------------------------------------------------------->
 <p>La siguiente definición de distribución de exceso condicionada es útil para el estudio de los
 valores extremos que se pueden presentar en el estudio de los valores de siniestros que se presentan
 en un seguro.</p>
 <div class="definition">
-<p><span id="def:dec" class="definition"><strong>Definition 2.9  (Distribución de exceso condicionada) </strong></span>La <strong>distribución de exceso condicionada</strong> asociada a una variable aleatoria <span class="math inline">\(X\)</span> con distribución
+<p><span id="def:dec" class="definition"><strong>Definition 2.10  (Distribución de exceso condicionada) </strong></span>La <strong>distribución de exceso condicionada</strong> asociada a una variable aleatoria <span class="math inline">\(X\)</span> con distribución
 de probabilidad acumulada <span class="math inline">\(F\)</span> y a un umbral de condicionamiento <span class="math inline">\(u &gt; 0\)</span>, está dada por:
 <span class="math display">\[\begin{equation}
 F_u( y ) = P\left( X - u \leq y \mid X &gt; u \right)
@@ -472,7 +494,7 @@ P\left( \underset{x \in \mathbb{R}}{\sup} \left| F_n( x ) - F( x ) \right| &gt; 
 esto quiere decir que la convergencia es menos que el orden lineal.</p>
 <!------------------------------------------------------------------------------------------------->
 <div class="definition">
-<p><span id="def:gdp" class="definition"><strong>Definition 2.10  (Distribución de Pareto generalizada) </strong></span><span class="math display">\[\begin{equation}
+<p><span id="def:gdp" class="definition"><strong>Definition 2.11  (Distribución de Pareto generalizada) </strong></span><span class="math display">\[\begin{equation}
 G_{\varepsilon,\beta}( x ) =
 \left \{
 \begin{array}{ll}

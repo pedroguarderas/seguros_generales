@@ -149,6 +149,27 @@ f_{X,Y}( x, y ) = f_X( x ) f_Y( y )
 :::
 
 <!------------------------------------------------------------------------------------------------->
+La siguiente función es utilidad para comprender algunos resultados en teoría de probabilidades. 
+También, es bastante útil para realizar de forma más clara y rápida algunos cálculos.
+
+::: {.definition #indicatriz name="Función indicatriz"}
+La **función indicatriz** de un conjunto $A \subset \Omega$, es la función 
+$\mathbf{1}_A : \Omega \longrightarrow \{0,1\}$, que toma los valores 
+$\mathbb{1}_A( \omega ) = 0$, si $\omega \notin A$ y $\mathbb{1}_A( \omega ) = 1$, si 
+$\omega \in A$.
+:::
+
+La función indicatriz $1_A$ sobre un evento $A$ del espacio muestral $\Omega$, también se puede
+interpretar como una variable aleatoria, que tan solo tomo los valores $0$ o $1$. Es más, su 
+esperanza es precisamente la probabilidad del evento $A$.
+\begin{equation}
+\mathbb{E}\left[ \mathbb{1}_A \right] 
+= \int\limits_\Omega \mathbb{1}_A( \omega )\ dP( \omega )
+= \int\limits_A dP( \omega )
+= P( A )
+\end{equation}
+
+<!------------------------------------------------------------------------------------------------->
 ::: {.definition #dsum name="Distribución de la suma de variables aleatorias"}
 Dadas dos variables aleatorias a valores reales $X$ y $Y$, con funciones de distribución acumulada
 $F_X$ y $F_Y$ respectivamente, la distribución acumulada $F_Z$ de la variable aleatoria $Z = X + Y$ 
@@ -166,7 +187,13 @@ aleatorias $X$ y $Y$, entonces:
 f_Z( z ) = f_X \star f_Y ( z )
 = \int\limits_{\mathbb{R}} f_X( x - y ) f_Y( y )\ dy
 \end{equation}
+
+El producto $\star$ se conoce como convolución de funciones, el mismo es simétrico.
 :::
+
+Para cuando se realiza la convolución de varias veces la misma función, se opta por una notación 
+más compacta $f^{\star k}$, para el producto de convolución $k$-veces la misma función 
+$f \star f \star \cdots \star f$.
 
 <!------------------------------------------------------------------------------------------------->
 La siguiente definición de distribución de exceso condicionada es útil para el estudio de los 

@@ -122,7 +122,7 @@ El valor esperado del total de reclamos $S$, está dado por:
 & = & \sum\limits_{n=0}^{+\infty} \mathbb{E}\left[ \mathbf{1}_{\mathbb{N}^*}( N ) 
 \sum\limits_{i=1}^n X_i\ \middle|\ N = n \right]P( N = n )\quad
 \text{utilizando la esperanza condicional} \\
-& = & 0 + \sum\limits_{n=1}^{+\infty} \mathbb{E}\left[ \sum\limits_{i=1}^n X_i\ \middle|\ N = n \right]P( N = n ) \\
+& = & 0 P( N = 0 ) + \sum\limits_{n=1}^{+\infty} \mathbb{E}\left[ \sum\limits_{i=1}^n X_i\ \middle|\ N = n \right]P( N = n ) \\
 & = & \sum\limits_{n=1}^{+\infty} \sum\limits_{i=1}^n \mathbb{E}\left[ X_i \mid N = n \right]P( N = n )\quad
 \text{linealidad de la esperanza} \\
 & = & \sum\limits_{n=0}^{+\infty} n \mathbb{E}\left[ X \mid N = n \right]P( N = n )\quad

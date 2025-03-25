@@ -5,6 +5,7 @@ def:spv
 def:lp
 def:em
 def:ind
+def:indicatriz
 def:dsum
 def:dec
 prp:chebdes
