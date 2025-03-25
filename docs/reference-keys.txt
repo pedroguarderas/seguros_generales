@@ -4,9 +4,13 @@ def:cd
 def:spv
 def:lp
 def:em
+def:ind
+def:dsum
 def:dec
-thm:tlc
+prp:chebdes
 thm:bein
+thm:tlc
+thm:ddkw
 def:gdp
 thm:pbh
 exm:exo
@@ -16,6 +20,7 @@ resultados-de-aprendizaje
 contenidos-propuestos
 consideraciones-preliminares
 consideraciones-de-probabilidades
+desigualdades-de-concentración
 consideraciones-estadísticas
 consideraciones-financieras
 función-de-actualización-o-descuento

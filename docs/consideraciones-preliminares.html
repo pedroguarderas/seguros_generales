@@ -171,15 +171,16 @@ div.csl-indent {
 <li class="chapter" data-level="2" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html"><i class="fa fa-check"></i><b>2</b> Consideraciones preliminares</a>
 <ul>
 <li class="chapter" data-level="2.1" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#consideraciones-de-probabilidades"><i class="fa fa-check"></i><b>2.1</b> Consideraciones de probabilidades</a></li>
-<li class="chapter" data-level="2.2" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#consideraciones-estadísticas"><i class="fa fa-check"></i><b>2.2</b> Consideraciones estadísticas</a></li>
-<li class="chapter" data-level="2.3" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#consideraciones-financieras"><i class="fa fa-check"></i><b>2.3</b> Consideraciones financieras</a>
+<li class="chapter" data-level="2.2" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#desigualdades-de-concentración"><i class="fa fa-check"></i><b>2.2</b> Desigualdades de concentración</a></li>
+<li class="chapter" data-level="2.3" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#consideraciones-estadísticas"><i class="fa fa-check"></i><b>2.3</b> Consideraciones estadísticas</a></li>
+<li class="chapter" data-level="2.4" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#consideraciones-financieras"><i class="fa fa-check"></i><b>2.4</b> Consideraciones financieras</a>
 <ul>
-<li class="chapter" data-level="2.3.1" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#función-de-actualización-o-descuento"><i class="fa fa-check"></i><b>2.3.1</b> Función de actualización o descuento</a></li>
-<li class="chapter" data-level="2.3.2" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#flujos-financieros"><i class="fa fa-check"></i><b>2.3.2</b> Flujos financieros</a></li>
-<li class="chapter" data-level="2.3.3" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#flujos-financieros-probables"><i class="fa fa-check"></i><b>2.3.3</b> Flujos financieros probables</a></li>
-<li class="chapter" data-level="2.3.4" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#equilibrio-financiero"><i class="fa fa-check"></i><b>2.3.4</b> Equilibrio financiero</a></li>
+<li class="chapter" data-level="2.4.1" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#función-de-actualización-o-descuento"><i class="fa fa-check"></i><b>2.4.1</b> Función de actualización o descuento</a></li>
+<li class="chapter" data-level="2.4.2" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#flujos-financieros"><i class="fa fa-check"></i><b>2.4.2</b> Flujos financieros</a></li>
+<li class="chapter" data-level="2.4.3" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#flujos-financieros-probables"><i class="fa fa-check"></i><b>2.4.3</b> Flujos financieros probables</a></li>
+<li class="chapter" data-level="2.4.4" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#equilibrio-financiero"><i class="fa fa-check"></i><b>2.4.4</b> Equilibrio financiero</a></li>
 </ul></li>
-<li class="chapter" data-level="2.4" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#consideraciones-de-programación-en-r"><i class="fa fa-check"></i><b>2.4</b> Consideraciones de programación en R</a></li>
+<li class="chapter" data-level="2.5" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#consideraciones-de-programación-en-r"><i class="fa fa-check"></i><b>2.5</b> Consideraciones de programación en R</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html"><i class="fa fa-check"></i><b>3</b> Modelos de pérdida agregada</a>
 <ul>
@@ -302,7 +303,7 @@ reales, la esperanza matemática está dada por
 <span class="math display">\[\begin{equation}
 \mathbb{E}[ X ]
 = \int\limits_{\mathbb{\Omega}} X( \omega )\ dP( \omega )
-= \int\limits_{\mathbb{R}} x f( x )\ dx
+= \int\limits_{\mathbb{R}} x\ dF( x )
 \end{equation}\]</span>
 Cuando la función de densidad de probabilidad está bien definida es posible expresar y calcular
 la esperanza matemática como la siguiente expresión:
@@ -332,11 +333,48 @@ la esperanza matemática como la siguiente expresión:
 \end{equation}\]</span></p>
 </div>
 <!------------------------------------------------------------------------------------------------->
+<div class="definition">
+<p><span id="def:ind" class="definition"><strong>Definition 2.7  (Independencia de variables aleatorias) </strong></span>Dos variables aleatorias a valores reales <span class="math inline">\(X\)</span> y <span class="math inline">\(Y\)</span>, se dicen independientes si para cualquier par
+de eventos <span class="math inline">\(A\)</span> y <span class="math inline">\(B\)</span>, sucede la siguiente factorización de probabilidades
+<span class="math display">\[\begin{equation}
+P( X \in A \wedge Y \in B ) = P( X \in A ) P( Y \in B)
+\end{equation}\]</span></p>
+<p>La propiedad anterior, en particular para la función de distribución conjunta, toma la siguiente
+forma:
+<span class="math display">\[\begin{equation}
+F_{X,Y}( x, y ) = P( X \leq x \wedge Y \leq y )
+= P( X \leq x ) P( Y \leq y )
+= F_{X}( x ) F_{Y}( y )
+\end{equation}\]</span></p>
+<p>Así mismo, para la densidad de probabilidad conjunto, sucede la siguiente factorización
+<span class="math display">\[\begin{equation}
+f_{X,Y}( x, y ) = f_X( x ) f_Y( y )
+\end{equation}\]</span></p>
+</div>
+<!------------------------------------------------------------------------------------------------->
+<div class="definition">
+<p><span id="def:dsum" class="definition"><strong>Definition 2.8  (Distribución de la suma de variables aleatorias) </strong></span>Dadas dos variables aleatorias a valores reales <span class="math inline">\(X\)</span> y <span class="math inline">\(Y\)</span>, con funciones de distribución acumulada
+<span class="math inline">\(F_X\)</span> y <span class="math inline">\(F_Y\)</span> respectivamente, la distribución acumulada <span class="math inline">\(F_Z\)</span> de la variable aleatoria <span class="math inline">\(Z = X + Y\)</span>
+está dada por la siguiente expresión:
+<span class="math display">\[\begin{equation}
+F_Z( z )
+= P( Z \leq z )
+= F_X \star F_Y ( z )
+= \int\limits_{\mathbb{R}} F_X( x - y )dF_Y( y )
+\end{equation}\]</span></p>
+<p>si en caso se puede definir las densidades de probabilidad <span class="math inline">\(f_X\)</span> y <span class="math inline">\(f_Y\)</span> para las variables
+aleatorias <span class="math inline">\(X\)</span> y <span class="math inline">\(Y\)</span>, entonces:
+<span class="math display">\[\begin{equation}
+f_Z( z ) = f_X \star f_Y ( z )
+= \int\limits_{\mathbb{R}} f_X( x - y ) f_Y( y )\ dy
+\end{equation}\]</span></p>
+</div>
+<!------------------------------------------------------------------------------------------------->
 <p>La siguiente definición de distribución de exceso condicionada es útil para el estudio de los
 valores extremos que se pueden presentar en el estudio de los valores de siniestros que se presentan
 en un seguro.</p>
 <div class="definition">
-<p><span id="def:dec" class="definition"><strong>Definition 2.7  (Distribución de exceso condicionada) </strong></span>La <strong>distribución de exceso condicionada</strong> asociada a una variable aleatoria <span class="math inline">\(X\)</span> con distribución
+<p><span id="def:dec" class="definition"><strong>Definition 2.9  (Distribución de exceso condicionada) </strong></span>La <strong>distribución de exceso condicionada</strong> asociada a una variable aleatoria <span class="math inline">\(X\)</span> con distribución
 de probabilidad acumulada <span class="math inline">\(F\)</span> y a un umbral de condicionamiento <span class="math inline">\(u &gt; 0\)</span>, está dada por:
 <span class="math display">\[\begin{equation}
 F_u( y ) = P\left( X - u \leq y \mid X &gt; u \right)
@@ -346,8 +384,39 @@ F_u( y ) = P\left( X - u \leq y \mid X &gt; u \right)
 </div>
 <!------------------------------------------------------------------------------------------------->
 </div>
-<div id="consideraciones-estadísticas" class="section level2 hasAnchor" number="2.2">
-<h2><span class="header-section-number">2.2</span> Consideraciones estadísticas<a href="consideraciones-preliminares.html#consideraciones-estadísticas" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="desigualdades-de-concentración" class="section level2 hasAnchor" number="2.2">
+<h2><span class="header-section-number">2.2</span> Desigualdades de concentración<a href="consideraciones-preliminares.html#desigualdades-de-concentración" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Para muchos fines prácticos es importante encontrar una buena estimación de donde se encuentran
+concentrados los valores de una distribución de probabilidad, para ello existen varios resultados
+que caracterizan precisamente ello, estos se conocen como desigualdades de concentración.</p>
+<div class="proposition">
+<p><span id="prp:chebdes" class="proposition"><strong>Proposition 2.1  (Desigualdad de Chebyshev (Чебышёв)) </strong></span>Dada una variable aleatoria <span class="math inline">\(X\)</span> con esperanza y varianza finitas <span class="math inline">\(\mathbb{E}[X] &lt;+ \infty\)</span> y
+<span class="math inline">\(\mathbb{V}[X] &lt; +\infty\)</span>, tenemos que se satisface la siguiente desigualdad para cualquier
+<span class="math inline">\(varepsilon &gt; 0\)</span>
+<span class="math display">\[\begin{equation}
+P\left( \left| X - \mathbb{E}[X] \right| &gt; \varepsilon \right) &lt; \frac{1}{\varepsilon^2}
+\mathbb{V}[ X ]
+\end{equation}\]</span></p>
+</div>
+<div class="theorem">
+<p><span id="thm:bein" class="theorem"><strong>Theorem 2.1  (Desigualdad de Berry-Esséen) </strong></span>Sean <span class="math inline">\(X_1, \ldots X_n\)</span> variables aleatoria i.i.d, con media y varianza finitas, i.e
+<span class="math inline">\(\mathbb{E}[X] &lt; +\infty\)</span> y <span class="math inline">\(\mathbb{V}[X] &lt; +\infty\)</span> y además con tercer momento absoluto finito
+<span class="math inline">\(\mathbb{E}\left[\left|X - \mathbb{E}[X]\right|^3\right] &lt; +\infty\)</span>. Entonces, la distribución
+acumulada <span class="math inline">\(F_n\)</span> de la variable aleatoria
+<span class="math display">\[\begin{equation}
+U_n = \frac{S_n - \mathbb{E}[ S_n ]}{\mathbb{V}[ S_n ]}
+\end{equation}\]</span>
+con <span class="math inline">\(S_n = \sum\limits_{i=1}^n X_i\)</span>. Satisface la siguiente desigualdad respecto de la distribución
+acumulada de la ley normal <span class="math inline">\(\Phi\)</span>.
+<span class="math display">\[\begin{equation}
+\underset{u}{\sup}\left| F_n( u ) - \Phi( u ) \right| \leq \frac{A}{\sqrt{n}}
+\frac{\mathbb{E}\left[\left|X - \mathbb{E}[X]\right|^3\right]}{\sqrt{\mathbb{V}[X]}^3}
+\end{equation}\]</span></p>
+</div>
+<!------------------------------------------------------------------------------------------------->
+</div>
+<div id="consideraciones-estadísticas" class="section level2 hasAnchor" number="2.3">
+<h2><span class="header-section-number">2.3</span> Consideraciones estadísticas<a href="consideraciones-preliminares.html#consideraciones-estadísticas" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>De las ramas de las Matemáticas la Estadística ciertamente es la más subestimada, en muchos casos
 menospreciada. Sin embargo, no sin mucha pretención, sino más bien honestidad, se puede decir
 que la Estadística es una de las ramas más complicadas de las Ciencias en general, ya que busca
@@ -361,7 +430,7 @@ hay algo más complejo y duro que la realidad misma.</p>
 software, sin embargo, no se debe olvidar que en muchos casos estas herramientas hacen uso de
 muchos métodos bastante avanzados y complejos en lo que respecta al conocimiento Matemático.</p>
 <div class="theorem">
-<p><span id="thm:tlc" class="theorem"><strong>Theorem 2.1  (Teorema del límite central) </strong></span>Consideramos las variables aleatorias <span class="math inline">\(X_1,\ldots,X_n\)</span>, independientes e idénticamente distribuidas
+<p><span id="thm:tlc" class="theorem"><strong>Theorem 2.2  (Teorema del límite central) </strong></span>Consideramos las variables aleatorias <span class="math inline">\(X_1,\ldots,X_n\)</span>, independientes e idénticamente distribuidas
 (i.i.d) con media común finita <span class="math inline">\(\mathbb{E}[X_i] = \mu &lt; +\infty\)</span> y varianza común finita
 <span class="math inline">\(\mathbb{V}[ X_i ] = \sigma^2 &lt; +\infty\)</span>, para todo <span class="math inline">\(i \in \{1, \ldots, n \}\)</span>. Si consideramos la
 variable aleatoria de la suma total <span class="math inline">\(S_n = \sum\limits_{i=1}^n X_i\)</span>, entonces
@@ -380,26 +449,11 @@ cuando <span class="math inline">\(n \rightarrow +\infty\)</span>, donde <span c
 la variable aleatoria <span class="math inline">\(\frac{S_n - \mathbb{E}[S_n]}{\mathbb{V}[ S_n ]}\)</span> tiende a tener un
 comportamiento de una variable aleatoria normal estándar conforme aumenta <span class="math inline">\(n\)</span>, pero no estamos
 seguros que tamaño debe tomar <span class="math inline">\(n\)</span> para que esto se cumpla con una alta certeza. Para ello adicional
-al <a href="consideraciones-preliminares.html#thm:tlc">2.1</a> se debe considerar otros resultados asociados a desigualdades de concentración.</p>
+al <a href="consideraciones-preliminares.html#thm:tlc">2.2</a> se debe considerar otros resultados asociados a desigualdades de concentración.</p>
 <p>El siguiente teorema es de gran ayuda para estimar la tasa de convergencia del resultado anterior
-<a href="consideraciones-preliminares.html#thm:tlc">2.1</a>.</p>
+<a href="consideraciones-preliminares.html#thm:tlc">2.2</a>.</p>
 <div class="theorem">
-<p><span id="thm:bein" class="theorem"><strong>Theorem 2.2  (Desigualdad de Berry-Esséen) </strong></span>Sean <span class="math inline">\(X_1, \ldots X_n\)</span> variables aleatoria i.i.d, con media y varianza finitas, i.e
-<span class="math inline">\(\mathbb{E}[X] &lt; +\infty\)</span> y <span class="math inline">\(\mathbb{V}[X] &lt; +\infty\)</span> y además con tercer momento absoluto finito
-<span class="math inline">\(\mathbb{E}\left[\left|X - \mathbb{E}[X]\right|^3\right] &lt; +\infty\)</span>. Entonces, la distribución
-acumulada <span class="math inline">\(F_n\)</span> de la variable aleatoria
-<span class="math display">\[\begin{equation}
-U_n = \frac{S_n - \mathbb{E}[ S_n ]}{\mathbb{V}[ S_n ]}
-\end{equation}\]</span>
-con <span class="math inline">\(S_n = \sum\limits_{i=1}^n X_i\)</span>. Satisface la siguiente desigualdad respecto de la distribución
-acumulada de la ley normal <span class="math inline">\(\Phi\)</span>.
-<span class="math display">\[\begin{equation}
-\underset{u}{\sup}\left| F_n( u ) - \Phi( u ) \right| \leq \frac{A}{\sqrt{n}}
-\frac{\mathbb{E}\left[\left|X - \mathbb{E}[X]\right|^3\right]}{\sqrt{\mathbb{V}[X]}^3}
-\end{equation}\]</span></p>
-</div>
-<div class="theorem">
-<p><span id="thm:tlc" class="theorem"><strong>Theorem 2.1  (Desigualdad Dvoretzky–Kiefer–Wolfowitz) </strong></span>Dada una serie de variables aleatorias a valores reales <span class="math inline">\(X_1, \ldots, X_n\)</span>, independientes
+<p><span id="thm:ddkw" class="theorem"><strong>Theorem 2.3  (Desigualdad Dvoretzky–Kiefer–Wolfowitz) </strong></span>Dada una serie de variables aleatorias a valores reales <span class="math inline">\(X_1, \ldots, X_n\)</span>, independientes
 entre si e idénticamente distribuidas (i.i.d), con distribución acumulada <span class="math inline">\(F\)</span>, tenemos la siguiente
 desigualdad asociada a la distribución acumulada empírica
 <span class="math display">\[\begin{equation}
@@ -415,7 +469,7 @@ P\left( \underset{x \in \mathbb{R}}{\sup} \left| F_n( x ) - F( x ) \right| &gt; 
 esto quiere decir que la convergencia es menos que el orden lineal.</p>
 <!------------------------------------------------------------------------------------------------->
 <div class="definition">
-<p><span id="def:gdp" class="definition"><strong>Definition 2.8  (Distribución de Pareto generalizada) </strong></span><span class="math display">\[\begin{equation}
+<p><span id="def:gdp" class="definition"><strong>Definition 2.10  (Distribución de Pareto generalizada) </strong></span><span class="math display">\[\begin{equation}
 G_{\varepsilon,\beta}( x ) =
 \left \{
 \begin{array}{ll}
@@ -426,7 +480,7 @@ G_{\varepsilon,\beta}( x ) =
 \end{equation}\]</span></p>
 </div>
 <div class="theorem">
-<p><span id="thm:pbh" class="theorem"><strong>Theorem 2.3  (Pickands-Balkema-De Haan) </strong></span>Sea <span class="math inline">\(F_u\)</span> la distribución de exceso asociada a la variable aleatoria <span class="math inline">\(X\)</span> y con umbral de
+<p><span id="thm:pbh" class="theorem"><strong>Theorem 2.4  (Pickands-Balkema-De Haan) </strong></span>Sea <span class="math inline">\(F_u\)</span> la distribución de exceso asociada a la variable aleatoria <span class="math inline">\(X\)</span> y con umbral de
 condicionamiento <span class="math inline">\(u &gt; 0\)</span>. Entonces, para cualquier <span class="math inline">\(\varepsilon \in \mathbb{R}\)</span>.
 <span class="math display">\[\begin{equation}
 \underset{u \longrightarrow x}{\lim} \underset{x &gt; 0}{\sup}
@@ -435,13 +489,13 @@ condicionamiento <span class="math inline">\(u &gt; 0\)</span>. Entonces, para c
 </div>
 <!------------------------------------------------------------------------------------------------->
 </div>
-<div id="consideraciones-financieras" class="section level2 hasAnchor" number="2.3">
-<h2><span class="header-section-number">2.3</span> Consideraciones financieras<a href="consideraciones-preliminares.html#consideraciones-financieras" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="consideraciones-financieras" class="section level2 hasAnchor" number="2.4">
+<h2><span class="header-section-number">2.4</span> Consideraciones financieras<a href="consideraciones-preliminares.html#consideraciones-financieras" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Antes de desarrollar el contenido propio del curso, debemos tener en cuenta algunas consideraciones
 financieras como las siguientes:</p>
 <!------------------------------------------------------------------------------------------------->
-<div id="función-de-actualización-o-descuento" class="section level3 hasAnchor" number="2.3.1">
-<h3><span class="header-section-number">2.3.1</span> Función de actualización o descuento<a href="consideraciones-preliminares.html#función-de-actualización-o-descuento" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="función-de-actualización-o-descuento" class="section level3 hasAnchor" number="2.4.1">
+<h3><span class="header-section-number">2.4.1</span> Función de actualización o descuento<a href="consideraciones-preliminares.html#función-de-actualización-o-descuento" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>La <strong>función de actualización</strong> de flujos <span class="math inline">\(v: \mathbb{R} \times \mathbb{R} \longrightarrow [0,1]\)</span>, al
 evaluar en <span class="math inline">\(s, t \in \mathbb{R}, s\leq t, v(s,t)\)</span>, diremos que actualizamos los flujos que se
 producen en el tiempo <span class="math inline">\(t\)</span>, valorados desde el tiempo <span class="math inline">\(s\)</span>. Además la función de actualización tiene
@@ -457,8 +511,8 @@ por una tasa constante <span class="math inline">\(i \in [0,1]\)</span>, es deci
 tal que <span class="math inline">\(u( s, t ) v( s, t ) = 1\)</span>.</p>
 <!------------------------------------------------------------------------------------------------->
 </div>
-<div id="flujos-financieros" class="section level3 hasAnchor" number="2.3.2">
-<h3><span class="header-section-number">2.3.2</span> Flujos financieros<a href="consideraciones-preliminares.html#flujos-financieros" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="flujos-financieros" class="section level3 hasAnchor" number="2.4.2">
+<h3><span class="header-section-number">2.4.2</span> Flujos financieros<a href="consideraciones-preliminares.html#flujos-financieros" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Un flujo financiero discreto <span class="math inline">\(c\)</span> es una serie de valores reales <span class="math inline">\(c(t_1), c(t_2), \cdots, c(t_n)\)</span>
 que se producen en un número discreto de tiempos <span class="math inline">\(t_0 &lt; t_1 &lt; \cdots &lt; t_n\)</span>.</p>
 <p>El <strong>valor presente</strong> de estos flujos, en un tiempo <span class="math inline">\(t \leq t_0\)</span>, se lo puede calcular utilizando
@@ -469,8 +523,8 @@ VP_t( c ) = \sum\limits_{k = 1}^n v( t, t_k )  c( t_k )
 cuando <span class="math inline">\(t=0\)</span>, se suele solo expresar <span class="math inline">\(VP( c ) = VP_0( c )\)</span>.</p>
 <!------------------------------------------------------------------------------------------------->
 </div>
-<div id="flujos-financieros-probables" class="section level3 hasAnchor" number="2.3.3">
-<h3><span class="header-section-number">2.3.3</span> Flujos financieros probables<a href="consideraciones-preliminares.html#flujos-financieros-probables" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="flujos-financieros-probables" class="section level3 hasAnchor" number="2.4.3">
+<h3><span class="header-section-number">2.4.3</span> Flujos financieros probables<a href="consideraciones-preliminares.html#flujos-financieros-probables" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Un flujo financiero discreto <span class="math inline">\(c\)</span> es una serie de valores reales <span class="math inline">\(c(t_1), c(t_2), \cdots, c(t_n)\)</span>
 que se producen en un número discreto de tiempos <span class="math inline">\(t_0 &lt; t_1 &lt; \cdots &lt; t_n\)</span>.</p>
 <p>El <strong>valor actuarial presente</strong> de estos flujos, en un tiempo <span class="math inline">\(t \leq t_0\)</span>, se lo puede calcular
@@ -487,8 +541,8 @@ VAP_t( c ) = \sum\limits_{k = 1}^n v( t, t_k ) \mathbb{E}\left[ c( t_k ) \right]
 \end{equation}\]</span></p>
 <!------------------------------------------------------------------------------------------------->
 </div>
-<div id="equilibrio-financiero" class="section level3 hasAnchor" number="2.3.4">
-<h3><span class="header-section-number">2.3.4</span> Equilibrio financiero<a href="consideraciones-preliminares.html#equilibrio-financiero" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="equilibrio-financiero" class="section level3 hasAnchor" number="2.4.4">
+<h3><span class="header-section-number">2.4.4</span> Equilibrio financiero<a href="consideraciones-preliminares.html#equilibrio-financiero" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Se dice que un flujo financiero <span class="math inline">\(c(t_1), c(t_2), \cdots, c(t_n)\)</span> como el anterior, está en
 <strong>equilibrio financiero</strong> si:
 <span class="math display">\[\begin{equation}
@@ -522,8 +576,8 @@ algunas veces se considera la parte prospectiva con el signo menos.</p>
 <!------------------------------------------------------------------------------------------------->
 </div>
 </div>
-<div id="consideraciones-de-programación-en-r" class="section level2 hasAnchor" number="2.4">
-<h2><span class="header-section-number">2.4</span> Consideraciones de programación en R<a href="consideraciones-preliminares.html#consideraciones-de-programación-en-r" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="consideraciones-de-programación-en-r" class="section level2 hasAnchor" number="2.5">
+<h2><span class="header-section-number">2.5</span> Consideraciones de programación en R<a href="consideraciones-preliminares.html#consideraciones-de-programación-en-r" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>En el transcurso del presente curso utilizaremos algunos paquetes de R, acá la lista de carga de los
 mismos</p>
 <p></p>

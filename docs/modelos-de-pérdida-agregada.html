@@ -171,15 +171,16 @@ div.csl-indent {
 <li class="chapter" data-level="2" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html"><i class="fa fa-check"></i><b>2</b> Consideraciones preliminares</a>
 <ul>
 <li class="chapter" data-level="2.1" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#consideraciones-de-probabilidades"><i class="fa fa-check"></i><b>2.1</b> Consideraciones de probabilidades</a></li>
-<li class="chapter" data-level="2.2" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#consideraciones-estadísticas"><i class="fa fa-check"></i><b>2.2</b> Consideraciones estadísticas</a></li>
-<li class="chapter" data-level="2.3" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#consideraciones-financieras"><i class="fa fa-check"></i><b>2.3</b> Consideraciones financieras</a>
+<li class="chapter" data-level="2.2" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#desigualdades-de-concentración"><i class="fa fa-check"></i><b>2.2</b> Desigualdades de concentración</a></li>
+<li class="chapter" data-level="2.3" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#consideraciones-estadísticas"><i class="fa fa-check"></i><b>2.3</b> Consideraciones estadísticas</a></li>
+<li class="chapter" data-level="2.4" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#consideraciones-financieras"><i class="fa fa-check"></i><b>2.4</b> Consideraciones financieras</a>
 <ul>
-<li class="chapter" data-level="2.3.1" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#función-de-actualización-o-descuento"><i class="fa fa-check"></i><b>2.3.1</b> Función de actualización o descuento</a></li>
-<li class="chapter" data-level="2.3.2" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#flujos-financieros"><i class="fa fa-check"></i><b>2.3.2</b> Flujos financieros</a></li>
-<li class="chapter" data-level="2.3.3" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#flujos-financieros-probables"><i class="fa fa-check"></i><b>2.3.3</b> Flujos financieros probables</a></li>
-<li class="chapter" data-level="2.3.4" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#equilibrio-financiero"><i class="fa fa-check"></i><b>2.3.4</b> Equilibrio financiero</a></li>
+<li class="chapter" data-level="2.4.1" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#función-de-actualización-o-descuento"><i class="fa fa-check"></i><b>2.4.1</b> Función de actualización o descuento</a></li>
+<li class="chapter" data-level="2.4.2" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#flujos-financieros"><i class="fa fa-check"></i><b>2.4.2</b> Flujos financieros</a></li>
+<li class="chapter" data-level="2.4.3" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#flujos-financieros-probables"><i class="fa fa-check"></i><b>2.4.3</b> Flujos financieros probables</a></li>
+<li class="chapter" data-level="2.4.4" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#equilibrio-financiero"><i class="fa fa-check"></i><b>2.4.4</b> Equilibrio financiero</a></li>
 </ul></li>
-<li class="chapter" data-level="2.4" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#consideraciones-de-programación-en-r"><i class="fa fa-check"></i><b>2.4</b> Consideraciones de programación en R</a></li>
+<li class="chapter" data-level="2.5" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#consideraciones-de-programación-en-r"><i class="fa fa-check"></i><b>2.5</b> Consideraciones de programación en R</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html"><i class="fa fa-check"></i><b>3</b> Modelos de pérdida agregada</a>
 <ul>
@@ -357,7 +358,7 @@ and the amount of each claim represented by <span class="math inline">\(X_i\)</s
 \end{equation}\]</span></p>
 <div class="example">
 <p><span id="exm:exo" class="example"><strong>Example 3.1  </strong></span>En este caso en particular estudiaremos la velocidad de convergencia del método resultante del
-teorema del límite central <a href="consideraciones-preliminares.html#thm:tlc">2.1</a>. Generaremos una simulación aleatoria de la suma
+teorema del límite central <a href="consideraciones-preliminares.html#thm:tlc">2.2</a>. Generaremos una simulación aleatoria de la suma
 agregada <span class="math inline">\(S_n\)</span> y mostraresmo s</p>
 <p></p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb14-1"><a href="modelos-de-pérdida-agregada.html#cb14-1"></a>m <span class="ot">&lt;-</span> <span class="dv">500</span></span>
@@ -447,15 +448,15 @@ TVaR_{\alpha}( X ) = \frac{1}{1-\alpha} \int\limits_{\alpha}^1 VaR_u( X )\ du
 <span id="cb17-10"><a href="modelos-de-pérdida-agregada.html#cb17-10"></a></span>
 <span id="cb17-11"><a href="modelos-de-pérdida-agregada.html#cb17-11"></a><span class="fu">hist</span>( X, <span class="at">breaks =</span> <span class="dv">100</span>, <span class="at">xlim =</span> <span class="fu">c</span>( <span class="dv">0</span>, <span class="fl">1.1</span> <span class="sc">*</span> <span class="fu">max</span>( X ) ) )</span>
 <span id="cb17-12"><a href="modelos-de-pérdida-agregada.html#cb17-12"></a><span class="fu">abline</span>( <span class="at">v =</span> VaRX, <span class="at">col =</span> <span class="st">&#39;red&#39;</span> )</span></code></pre></div>
-<p><img src="seguros_generales_files/figure-html/l6c1-1.png" width="700" /></p>
+<p><img src="seguros_generales_files/figure-html/l3c8-1.png" width="700" /></p>
 <div class="sourceCode" id="cb18"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb18-1"><a href="modelos-de-pérdida-agregada.html#cb18-1"></a><span class="fu">hist</span>( X, <span class="at">breaks =</span> <span class="dv">100</span>, <span class="at">xlim =</span> <span class="fu">c</span>( <span class="dv">0</span>, <span class="fl">1.1</span> <span class="sc">*</span> <span class="fu">max</span>( X ) ) )</span>
 <span id="cb18-2"><a href="modelos-de-pérdida-agregada.html#cb18-2"></a><span class="fu">abline</span>( <span class="at">v =</span> TVaRX, <span class="at">col =</span> <span class="st">&#39;blue&#39;</span> )</span></code></pre></div>
-<p><img src="seguros_generales_files/figure-html/l6c1-2.png" width="700" /></p>
+<p><img src="seguros_generales_files/figure-html/l3c8-2.png" width="700" /></p>
 <p></p>
 <p></p>
 <div class="sourceCode" id="cb19"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb19-1"><a href="modelos-de-pérdida-agregada.html#cb19-1"></a><span class="fu">plot</span>( k, VaRX, <span class="at">ylim =</span> <span class="fu">c</span>( <span class="dv">0</span>, <span class="fl">1e3</span> ) )</span>
 <span id="cb19-2"><a href="modelos-de-pérdida-agregada.html#cb19-2"></a><span class="fu">points</span>( k, TVaRX, <span class="at">col =</span> <span class="st">&#39;red&#39;</span> )</span></code></pre></div>
-<p><img src="seguros_generales_files/figure-html/l6c2-1.png" width="700" /></p>
+<p><img src="seguros_generales_files/figure-html/l3c9-1.png" width="700" /></p>
 <p></p>
 
 </div>

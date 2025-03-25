@@ -171,15 +171,16 @@ div.csl-indent {
 <li class="chapter" data-level="2" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html"><i class="fa fa-check"></i><b>2</b> Consideraciones preliminares</a>
 <ul>
 <li class="chapter" data-level="2.1" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#consideraciones-de-probabilidades"><i class="fa fa-check"></i><b>2.1</b> Consideraciones de probabilidades</a></li>
-<li class="chapter" data-level="2.2" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#consideraciones-estadísticas"><i class="fa fa-check"></i><b>2.2</b> Consideraciones estadísticas</a></li>
-<li class="chapter" data-level="2.3" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#consideraciones-financieras"><i class="fa fa-check"></i><b>2.3</b> Consideraciones financieras</a>
+<li class="chapter" data-level="2.2" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#desigualdades-de-concentración"><i class="fa fa-check"></i><b>2.2</b> Desigualdades de concentración</a></li>
+<li class="chapter" data-level="2.3" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#consideraciones-estadísticas"><i class="fa fa-check"></i><b>2.3</b> Consideraciones estadísticas</a></li>
+<li class="chapter" data-level="2.4" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#consideraciones-financieras"><i class="fa fa-check"></i><b>2.4</b> Consideraciones financieras</a>
 <ul>
-<li class="chapter" data-level="2.3.1" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#función-de-actualización-o-descuento"><i class="fa fa-check"></i><b>2.3.1</b> Función de actualización o descuento</a></li>
-<li class="chapter" data-level="2.3.2" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#flujos-financieros"><i class="fa fa-check"></i><b>2.3.2</b> Flujos financieros</a></li>
-<li class="chapter" data-level="2.3.3" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#flujos-financieros-probables"><i class="fa fa-check"></i><b>2.3.3</b> Flujos financieros probables</a></li>
-<li class="chapter" data-level="2.3.4" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#equilibrio-financiero"><i class="fa fa-check"></i><b>2.3.4</b> Equilibrio financiero</a></li>
+<li class="chapter" data-level="2.4.1" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#función-de-actualización-o-descuento"><i class="fa fa-check"></i><b>2.4.1</b> Función de actualización o descuento</a></li>
+<li class="chapter" data-level="2.4.2" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#flujos-financieros"><i class="fa fa-check"></i><b>2.4.2</b> Flujos financieros</a></li>
+<li class="chapter" data-level="2.4.3" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#flujos-financieros-probables"><i class="fa fa-check"></i><b>2.4.3</b> Flujos financieros probables</a></li>
+<li class="chapter" data-level="2.4.4" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#equilibrio-financiero"><i class="fa fa-check"></i><b>2.4.4</b> Equilibrio financiero</a></li>
 </ul></li>
-<li class="chapter" data-level="2.4" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#consideraciones-de-programación-en-r"><i class="fa fa-check"></i><b>2.4</b> Consideraciones de programación en R</a></li>
+<li class="chapter" data-level="2.5" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#consideraciones-de-programación-en-r"><i class="fa fa-check"></i><b>2.5</b> Consideraciones de programación en R</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html"><i class="fa fa-check"></i><b>3</b> Modelos de pérdida agregada</a>
 <ul>
@@ -647,6 +648,66 @@ the policyholder to pay it himself;</p></li>
 <li><p>Reducción de la prima - premium reduction can be an important aspect for the policyholders,
 they may prefer to take a higher deductible to get a lower premium.</p></li>
 </ol>
+<p></p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb29-1"><a href="tarificación.html#cb29-1"></a>n <span class="ot">&lt;-</span> <span class="fl">1e5</span></span>
+<span id="cb29-2"><a href="tarificación.html#cb29-2"></a>l <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb29-3"><a href="tarificación.html#cb29-3"></a>dat <span class="ot">&lt;-</span> <span class="fu">data.table</span>( <span class="at">id =</span> <span class="dv">1</span><span class="sc">:</span>n, <span class="at">k =</span> <span class="fu">rpois</span>( n, <span class="at">lambda =</span> l )  )</span>
+<span id="cb29-4"><a href="tarificación.html#cb29-4"></a>datf <span class="ot">&lt;-</span> dat[ , <span class="fu">list</span>( <span class="at">fk =</span> .N ), by <span class="ot">=</span> k ]</span>
+<span id="cb29-5"><a href="tarificación.html#cb29-5"></a><span class="fu">setorder</span>( datf, k )</span>
+<span id="cb29-6"><a href="tarificación.html#cb29-6"></a>datf[ , fks <span class="sc">:=</span> <span class="fu">shift</span>( fk, <span class="at">n =</span> <span class="dv">1</span> ) ]</span>
+<span id="cb29-7"><a href="tarificación.html#cb29-7"></a>datf[ , gk <span class="sc">:=</span> k <span class="sc">*</span> fk <span class="sc">/</span> fks ]</span>
+<span id="cb29-8"><a href="tarificación.html#cb29-8"></a>datf <span class="ot">&lt;-</span> datf[ <span class="sc">!</span><span class="fu">is.na</span>( gk ) ]</span>
+<span id="cb29-9"><a href="tarificación.html#cb29-9"></a><span class="fu">plot</span>( datf<span class="sc">$</span>k, datf<span class="sc">$</span>gk )</span></code></pre></div>
+<p><img src="seguros_generales_files/figure-html/l5c4-1.png" width="700" /></p>
+<p></p>
+<p></p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb30-1"><a href="tarificación.html#cb30-1"></a>dflm <span class="ot">&lt;-</span> <span class="fu">lm</span>( <span class="at">formula =</span> gk <span class="sc">~</span> k, <span class="at">data =</span> datf, <span class="at">method =</span> <span class="st">&#39;qr&#39;</span> )</span>
+<span id="cb30-2"><a href="tarificación.html#cb30-2"></a>a <span class="ot">&lt;-</span> <span class="fu">coef</span>( dflm )[ <span class="dv">2</span> ]</span>
+<span id="cb30-3"><a href="tarificación.html#cb30-3"></a>b <span class="ot">&lt;-</span> <span class="fu">coef</span>( dflm )[ <span class="dv">1</span> ]</span>
+<span id="cb30-4"><a href="tarificación.html#cb30-4"></a>p0 <span class="ot">&lt;-</span> <span class="fu">exp</span>( <span class="sc">-</span>b )</span>
+<span id="cb30-5"><a href="tarificación.html#cb30-5"></a>k <span class="ot">&lt;-</span> <span class="fu">seq</span>( <span class="dv">1</span>, <span class="dv">100</span>, <span class="dv">1</span> )</span>
+<span id="cb30-6"><a href="tarificación.html#cb30-6"></a>p <span class="ot">&lt;-</span> p0 <span class="sc">*</span> <span class="fu">cumprod</span>( <span class="fu">c</span>( <span class="dv">1</span>, a <span class="sc">+</span> b <span class="sc">/</span> k ) )</span>
+<span id="cb30-7"><a href="tarificación.html#cb30-7"></a><span class="fu">sum</span>( p )</span></code></pre></div>
+<pre><code>## [1] 0.9411634</code></pre>
+<div class="sourceCode" id="cb32"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb32-1"><a href="tarificación.html#cb32-1"></a>k <span class="ot">&lt;-</span> <span class="fu">seq</span>( <span class="dv">0</span>, <span class="dv">100</span>, <span class="dv">1</span> )</span>
+<span id="cb32-2"><a href="tarificación.html#cb32-2"></a><span class="fu">sum</span>( <span class="fu">dpois</span>( k, <span class="at">lambda =</span> l ) )</span></code></pre></div>
+<pre><code>## [1] 1</code></pre>
+<div class="sourceCode" id="cb34"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb34-1"><a href="tarificación.html#cb34-1"></a>EN <span class="ot">&lt;-</span> <span class="fu">sum</span>( k <span class="sc">*</span> p )</span></code></pre></div>
+<p></p>
+<p></p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb35-1"><a href="tarificación.html#cb35-1"></a>D <span class="ot">&lt;-</span> <span class="cf">function</span>( x, d ) <span class="fu">return</span>( <span class="fu">max</span>( x <span class="sc">-</span> d, <span class="dv">0</span> ) )</span>
+<span id="cb35-2"><a href="tarificación.html#cb35-2"></a>d <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb35-3"><a href="tarificación.html#cb35-3"></a>u <span class="ot">&lt;-</span> <span class="dv">6</span></span>
+<span id="cb35-4"><a href="tarificación.html#cb35-4"></a>s <span class="ot">&lt;-</span> <span class="fl">0.3</span></span>
+<span id="cb35-5"><a href="tarificación.html#cb35-5"></a>n <span class="ot">&lt;-</span> <span class="fl">1e3</span></span>
+<span id="cb35-6"><a href="tarificación.html#cb35-6"></a>X <span class="ot">&lt;-</span> <span class="fu">rlnorm</span>( n, <span class="at">meanlog =</span> u, <span class="at">sdlog =</span> s )</span>
+<span id="cb35-7"><a href="tarificación.html#cb35-7"></a>DX <span class="ot">&lt;-</span> <span class="fu">sapply</span>( X, <span class="at">FUN =</span> D, d )</span>
+<span id="cb35-8"><a href="tarificación.html#cb35-8"></a>x <span class="ot">&lt;-</span> <span class="fu">seq</span>( <span class="dv">0</span>, <span class="fl">1e3</span>, <span class="at">length.out =</span> <span class="dv">500</span> )</span>
+<span id="cb35-9"><a href="tarificación.html#cb35-9"></a>FXe <span class="ot">&lt;-</span> <span class="fu">ecdf</span>( X )</span>
+<span id="cb35-10"><a href="tarificación.html#cb35-10"></a>FDXe <span class="ot">&lt;-</span> <span class="fu">ecdf</span>( DX )</span>
+<span id="cb35-11"><a href="tarificación.html#cb35-11"></a>Fx <span class="ot">&lt;-</span> <span class="fu">sapply</span>( x, <span class="at">FUN =</span> <span class="cf">function</span>( x ) <span class="fu">FXe</span>( x ) )</span>
+<span id="cb35-12"><a href="tarificación.html#cb35-12"></a>FDx <span class="ot">&lt;-</span> <span class="fu">sapply</span>( x, <span class="at">FUN =</span> <span class="cf">function</span>( x ) <span class="fu">FDXe</span>( x ) )</span>
+<span id="cb35-13"><a href="tarificación.html#cb35-13"></a><span class="fu">plot</span>( x, Fx, <span class="at">type =</span> <span class="st">&#39;s&#39;</span> )</span>
+<span id="cb35-14"><a href="tarificación.html#cb35-14"></a><span class="fu">points</span>( x, FDx, <span class="at">type =</span> <span class="st">&#39;s&#39;</span>, <span class="at">col =</span> <span class="st">&#39;blue&#39;</span> )</span></code></pre></div>
+<p><img src="seguros_generales_files/figure-html/l5c6-1.png" width="700" /></p>
+<p></p>
+<p></p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb36-1"><a href="tarificación.html#cb36-1"></a>D <span class="ot">&lt;-</span> <span class="cf">function</span>( x, M ) <span class="fu">return</span>( <span class="fu">min</span>( x, M ) )</span>
+<span id="cb36-2"><a href="tarificación.html#cb36-2"></a>M <span class="ot">&lt;-</span> <span class="dv">600</span></span>
+<span id="cb36-3"><a href="tarificación.html#cb36-3"></a>u <span class="ot">&lt;-</span> <span class="dv">6</span></span>
+<span id="cb36-4"><a href="tarificación.html#cb36-4"></a>s <span class="ot">&lt;-</span> <span class="fl">0.3</span></span>
+<span id="cb36-5"><a href="tarificación.html#cb36-5"></a>n <span class="ot">&lt;-</span> <span class="fl">1e4</span></span>
+<span id="cb36-6"><a href="tarificación.html#cb36-6"></a>X <span class="ot">&lt;-</span> <span class="fu">rlnorm</span>( n, <span class="at">meanlog =</span> u, <span class="at">sdlog =</span> s )</span>
+<span id="cb36-7"><a href="tarificación.html#cb36-7"></a>DX <span class="ot">&lt;-</span> <span class="fu">sapply</span>( X, <span class="at">FUN =</span> D, M )</span>
+<span id="cb36-8"><a href="tarificación.html#cb36-8"></a>x <span class="ot">&lt;-</span> <span class="fu">seq</span>( <span class="dv">0</span>, <span class="fl">1e3</span>, <span class="at">length.out =</span> <span class="dv">500</span> )</span>
+<span id="cb36-9"><a href="tarificación.html#cb36-9"></a>FXe <span class="ot">&lt;-</span> <span class="fu">ecdf</span>( X )</span>
+<span id="cb36-10"><a href="tarificación.html#cb36-10"></a>FDXe <span class="ot">&lt;-</span> <span class="fu">ecdf</span>( DX )</span>
+<span id="cb36-11"><a href="tarificación.html#cb36-11"></a>Fx <span class="ot">&lt;-</span> <span class="fu">sapply</span>( x, <span class="at">FUN =</span> <span class="cf">function</span>( x ) <span class="fu">FXe</span>( x ) )</span>
+<span id="cb36-12"><a href="tarificación.html#cb36-12"></a>FDx <span class="ot">&lt;-</span> <span class="fu">sapply</span>( x, <span class="at">FUN =</span> <span class="cf">function</span>( x ) <span class="fu">FDXe</span>( x ) )</span>
+<span id="cb36-13"><a href="tarificación.html#cb36-13"></a><span class="fu">plot</span>( x, Fx, <span class="at">type =</span> <span class="st">&#39;s&#39;</span> )</span>
+<span id="cb36-14"><a href="tarificación.html#cb36-14"></a><span class="fu">points</span>( x, FDx, <span class="at">type =</span> <span class="st">&#39;s&#39;</span>, <span class="at">col =</span> <span class="st">&#39;blue&#39;</span> )</span></code></pre></div>
+<p><img src="seguros_generales_files/figure-html/l5c7-1.png" width="700" /></p>
+<p></p>
 
 <!------------------------------------------------------------------------------------------------->
 </div>
