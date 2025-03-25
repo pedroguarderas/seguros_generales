@@ -141,13 +141,10 @@ the policyholder to pay it himself;
 they may prefer to take a higher deductible to get a lower premium.
 
 
-```{r l4c1, include = FALSE}
-n <- 1e3
+```{r l5c4}
+n <- 1e5
 l <- 3
 dat <- data.table( id = 1:n, k = rpois( n, lambda = l )  )
-# dat <- data.table( id = 1:n, k = rbinom( n, 10, 0.3 )  )
-# dat <- data.table( id = 1:n, k = rnbinom ( n, 10, 0.3 )  )
-
 datf <- dat[ , list( fk = .N ), by = k ]
 setorder( datf, k )
 datf[ , fks := shift( fk, n = 1 ) ]
@@ -156,7 +153,7 @@ datf <- datf[ !is.na( gk ) ]
 plot( datf$k, datf$gk )
 ```
 
-```{r l4c2, include = FALSE}
+```{r l5c5}
 dflm <- lm( formula = gk ~ k, data = datf, method = 'qr' )
 a <- coef( dflm )[ 2 ]
 b <- coef( dflm )[ 1 ]
@@ -167,8 +164,39 @@ sum( p )
 k <- seq( 0, 100, 1 )
 sum( dpois( k, lambda = l ) )
 EN <- sum( k * p )
+```
 
-plot( k, p, ylim = c( 0, 0.3 ) )
-points( k, dpois( k, lambda = b ), col = 'red' )
+```{r l5c6}
+D <- function( x, d ) return( max( x - d, 0 ) )
+d <- 100
+u <- 6
+s <- 0.3
+n <- 1e3
+X <- rlnorm( n, meanlog = u, sdlog = s )
+DX <- sapply( X, FUN = D, d )
+x <- seq( 0, 1e3, length.out = 500 )
+FXe <- ecdf( X )
+FDXe <- ecdf( DX )
+Fx <- sapply( x, FUN = function( x ) FXe( x ) )
+FDx <- sapply( x, FUN = function( x ) FDXe( x ) )
+plot( x, Fx, type = 's' )
+points( x, FDx, type = 's', col = 'blue' )
+```
 
+
+```{r l5c7}
+D <- function( x, M ) return( min( x, M ) )
+M <- 600
+u <- 6
+s <- 0.3
+n <- 1e4
+X <- rlnorm( n, meanlog = u, sdlog = s )
+DX <- sapply( X, FUN = D, M )
+x <- seq( 0, 1e3, length.out = 500 )
+FXe <- ecdf( X )
+FDXe <- ecdf( DX )
+Fx <- sapply( x, FUN = function( x ) FXe( x ) )
+FDx <- sapply( x, FUN = function( x ) FDXe( x ) )
+plot( x, Fx, type = 's' )
+points( x, FDx, type = 's', col = 'blue' )
 ```

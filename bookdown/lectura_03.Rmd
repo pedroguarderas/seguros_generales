@@ -229,7 +229,7 @@ VaR_{\alpha}( X ) = F_X^{-1}( \alpha )
 TVaR_{\alpha}( X ) = \frac{1}{1-\alpha} \int\limits_{\alpha}^1 VaR_u( X )\ du
 \end{equation}
 
-```{r l6c1}
+```{r l3c8}
 u <- 4
 s <- 0.5
 n <- 1e4
@@ -247,7 +247,7 @@ hist( X, breaks = 100, xlim = c( 0, 1.1 * max( X ) ) )
 abline( v = TVaRX, col = 'blue' )
 ```
 
-```{r l6c2}
+```{r l3c9}
 plot( k, VaRX, ylim = c( 0, 1e3 ) )
 points( k, TVaRX, col = 'red' )
 ```

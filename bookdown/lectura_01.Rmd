@@ -38,7 +38,8 @@ agregada
 8. Teoría de la Ruina
 
 En cuanto a las referencias utilizaremos los siguientes libros guía, @PanjerLoss2012, 
-@LossModFur, @modevquant. También haremos uso del paquete para R, @actuar.
+@LossModFur, @modevquant, @MathAssuNV1, @MathAssuNV2. También haremos uso del paquete para R, 
+@actuar.
 
 GIL FANA: Elementos de Matemáticas para las Ciencias del Seguro. Fundación Mapfre Estudios. 1991
 

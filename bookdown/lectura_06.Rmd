@@ -61,10 +61,10 @@ siguiente sistema, usualmente no lineal, de dimensión $m$:
 = 0,\qquad \forall i \in \{1,\ldots, m\}
 \end{equation}
 
-En la familia exponential tenemos las siguientes distribuciones: normal, exponencial, log-normal,
+En la familia exponential tenemos las siguientes distribuciones: *normal, exponencial, log-normal,
 gamma, chi-cuadrado, beta, Dirichlet, Bernoulli, Poisson, binomial, geométrica, binomial negativa,
 von Mises-Fisher, Pareto con valor mínimo conocido, Gaussiana inversa, gamma inversa, multinomial
-con número $n$ conocido, Wishart, categórica.
+con número $n$ conocido, Wishart, categórica*.
 
 Por la condición de normalización de la densidad de probabilidad $f_X$, se satisface la igualdad:
 \begin{eqnarray*}
@@ -98,6 +98,13 @@ de $T(X)$ en función de $A$
 estamos en la capacidad de concluir que:
 \begin{equation}
 \mathbb{E}\left[ \frac{\partial \eta}{\partial \theta_i}( \theta )  \cdot T( X ) \right]
+ = \frac{\partial A}{\partial \theta_i}( \theta )
+\end{equation}
+
+Cuando se da el caso que $\eta$ y $T$ son las funciones identidad, la relación anterior se reduce 
+a la siguiente igualdad:
+\begin{equation}
+\mathbb{E}\left[ X_i \right]
  = \frac{\partial A}{\partial \theta_i}( \theta )
 \end{equation}
 
