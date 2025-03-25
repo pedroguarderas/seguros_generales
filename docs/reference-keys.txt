@@ -13,6 +13,7 @@ thm:tlc
 thm:ddkw
 def:gdp
 thm:pbh
+exm:exsim1
 exm:exo
 def:fampanjer
 prp:chfampanjer
