@@ -1,6 +1,5 @@
 # Introducción
 
-
 ## Materia
 
 **Matemática Actuarial de los Seguros Generales**
@@ -38,10 +37,10 @@ agregada
 8. Teoría de la Ruina
 
 En cuanto a las referencias utilizaremos los siguientes libros guía, @PanjerLoss2012, 
-@LossModFur, @modevquant, @MathAssuNV1, @MathAssuNV2. Utilizaremos algunos otras referencias de 
-soporte, que serán de utilidad para quien desee profundizar con más detalle en algunos conceptos 
-@funmathstat, @prinsrisk, @QRisk:2015, @KNight, @mathstat1, @mathstat2. En cuanto a la parte
-computacional, haremos uso del paquete para R, @actuar.
+@LossModFur, @modevquant, @MathAssuNV1, @MathAssuNV2, https://nonlifemaths.github.io/. 
+Utilizaremos algunos otras referencias de soporte, que serán de utilidad para quien desee profundizar 
+con más detalle en algunos conceptos @funmathstat, @prinsrisk, @QRisk:2015, @KNight, @mathstat1, @mathstat2. 
+En cuanto a la parte computacional, haremos uso del paquete para R, @actuar.
 
 GIL FANA: Elementos de Matemáticas para las Ciencias del Seguro. Fundación Mapfre Estudios. 1991
 
