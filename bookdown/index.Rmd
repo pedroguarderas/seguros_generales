@@ -16,6 +16,15 @@ output:
       in_header: mathjax_includes.html
     config:
       split_by: rmd
+      toc:
+        collapse: section
+      download: ["pdf", "epub"]
+  bookdown::pdf_book:
+#    includes:
+#      in_header: preamble.tex
+    latex_engine: xelatex
+    citation_package: natbib
+    keep_tex: yes
 bibliography: [bibliografia_libros.bib, bibliografia_paquetes.bib]
 csl: electronic-journal-of-statistics.csl
 ---
