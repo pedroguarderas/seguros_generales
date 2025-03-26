@@ -614,20 +614,21 @@ mismos</p>
 <p></p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb1-1"><a href="consideraciones-preliminares.html#cb1-1"></a><span class="fu">library</span>( actuar )</span>
 <span id="cb1-2"><a href="consideraciones-preliminares.html#cb1-2"></a><span class="fu">library</span>( data.table )</span>
-<span id="cb1-3"><a href="consideraciones-preliminares.html#cb1-3"></a><span class="fu">library</span>( ggplot2 )</span>
-<span id="cb1-4"><a href="consideraciones-preliminares.html#cb1-4"></a><span class="fu">library</span>( googledrive )</span>
-<span id="cb1-5"><a href="consideraciones-preliminares.html#cb1-5"></a><span class="fu">library</span>( kableExtra )</span>
-<span id="cb1-6"><a href="consideraciones-preliminares.html#cb1-6"></a><span class="fu">library</span>( knitr )</span>
-<span id="cb1-7"><a href="consideraciones-preliminares.html#cb1-7"></a><span class="fu">library</span>( latex2exp )</span>
-<span id="cb1-8"><a href="consideraciones-preliminares.html#cb1-8"></a><span class="fu">library</span>( lubridate )</span>
-<span id="cb1-9"><a href="consideraciones-preliminares.html#cb1-9"></a><span class="fu">library</span>( openxlsx )</span>
-<span id="cb1-10"><a href="consideraciones-preliminares.html#cb1-10"></a><span class="fu">library</span>( readxl )</span>
-<span id="cb1-11"><a href="consideraciones-preliminares.html#cb1-11"></a><span class="fu">library</span>( rmarkdown )</span>
-<span id="cb1-12"><a href="consideraciones-preliminares.html#cb1-12"></a><span class="fu">library</span>( shiny )</span>
-<span id="cb1-13"><a href="consideraciones-preliminares.html#cb1-13"></a><span class="fu">library</span>( wesanderson )</span>
-<span id="cb1-14"><a href="consideraciones-preliminares.html#cb1-14"></a></span>
-<span id="cb1-15"><a href="consideraciones-preliminares.html#cb1-15"></a><span class="fu">options</span>( <span class="at">scipen =</span> <span class="dv">9999</span> )</span>
-<span id="cb1-16"><a href="consideraciones-preliminares.html#cb1-16"></a><span class="fu">options</span>( <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span> )</span></code></pre></div>
+<span id="cb1-3"><a href="consideraciones-preliminares.html#cb1-3"></a><span class="fu">library</span>( fitdistrplus )</span>
+<span id="cb1-4"><a href="consideraciones-preliminares.html#cb1-4"></a><span class="fu">library</span>( ggplot2 )</span>
+<span id="cb1-5"><a href="consideraciones-preliminares.html#cb1-5"></a><span class="fu">library</span>( googledrive )</span>
+<span id="cb1-6"><a href="consideraciones-preliminares.html#cb1-6"></a><span class="fu">library</span>( kableExtra )</span>
+<span id="cb1-7"><a href="consideraciones-preliminares.html#cb1-7"></a><span class="fu">library</span>( knitr )</span>
+<span id="cb1-8"><a href="consideraciones-preliminares.html#cb1-8"></a><span class="fu">library</span>( latex2exp )</span>
+<span id="cb1-9"><a href="consideraciones-preliminares.html#cb1-9"></a><span class="fu">library</span>( lubridate )</span>
+<span id="cb1-10"><a href="consideraciones-preliminares.html#cb1-10"></a><span class="fu">library</span>( openxlsx )</span>
+<span id="cb1-11"><a href="consideraciones-preliminares.html#cb1-11"></a><span class="fu">library</span>( readxl )</span>
+<span id="cb1-12"><a href="consideraciones-preliminares.html#cb1-12"></a><span class="fu">library</span>( rmarkdown )</span>
+<span id="cb1-13"><a href="consideraciones-preliminares.html#cb1-13"></a><span class="fu">library</span>( shiny )</span>
+<span id="cb1-14"><a href="consideraciones-preliminares.html#cb1-14"></a><span class="fu">library</span>( wesanderson )</span>
+<span id="cb1-15"><a href="consideraciones-preliminares.html#cb1-15"></a></span>
+<span id="cb1-16"><a href="consideraciones-preliminares.html#cb1-16"></a><span class="fu">options</span>( <span class="at">scipen =</span> <span class="dv">9999</span> )</span>
+<span id="cb1-17"><a href="consideraciones-preliminares.html#cb1-17"></a><span class="fu">options</span>( <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span> )</span></code></pre></div>
 <p></p>
 <p>Para definir una variable utilizamos el operador de asignación <code>&lt;-</code>, también se puede utilizar <code>=</code>.</p>
 <p>Un vector se define con la función de concatenación <code>c</code></p>
@@ -715,13 +716,13 @@ gitbook.start({
     "link": null,
     "text": null
   },
-  "download": null,
+  "download": ["seguros_generales.pdf", "seguros_generales.epub"],
   "search": {
     "engine": "fuse",
     "options": null
   },
   "toc": {
-    "collapse": "subsection"
+    "collapse": "section"
   },
   "split_by": "rmd"
 });
