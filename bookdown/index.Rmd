@@ -23,7 +23,7 @@ output:
 #    includes:
 #      in_header: preamble.tex
     latex_engine: xelatex
-    citation_package: natbib
+    citation_package: biblatex
     keep_tex: yes
 bibliography: [bibliografia_libros.bib, bibliografia_paquetes.bib]
 csl: electronic-journal-of-statistics.csl
