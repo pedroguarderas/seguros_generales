@@ -34,6 +34,10 @@ flujos-financieros-probables
 equilibrio-financiero
 consideraciones-de-programación-en-r
 modelos-de-pérdida-agregada
+pasivos-y-activos-de-una-aseguradora
+pasivos
+activos
+reservas-técnicas
 mutualización-del-riesgo
 modelo-individual
 modelo-colectivo
