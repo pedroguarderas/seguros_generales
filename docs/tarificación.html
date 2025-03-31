@@ -193,9 +193,12 @@ div.csl-indent {
 <li class="chapter" data-level="3.3" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html#mutualización-del-riesgo"><i class="fa fa-check"></i><b>3.3</b> Mutualización del riesgo</a></li>
 <li class="chapter" data-level="3.4" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html#modelo-individual"><i class="fa fa-check"></i><b>3.4</b> Modelo individual</a>
 <ul>
-<li class="chapter" data-level="3.4.1" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html#algorimo-de-simulación"><i class="fa fa-check"></i><b>3.4.1</b> Algorimo de simulación</a></li>
+<li class="chapter" data-level="3.4.1" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html#algoritmo-de-simulación"><i class="fa fa-check"></i><b>3.4.1</b> Algoritmo de simulación</a></li>
 </ul></li>
-<li class="chapter" data-level="3.5" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html#modelo-colectivo"><i class="fa fa-check"></i><b>3.5</b> Modelo colectivo</a></li>
+<li class="chapter" data-level="3.5" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html#modelo-colectivo"><i class="fa fa-check"></i><b>3.5</b> Modelo colectivo</a>
+<ul>
+<li class="chapter" data-level="3.5.1" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html#algoritmo-de-simulación-1"><i class="fa fa-check"></i><b>3.5.1</b> Algoritmo de simulación</a></li>
+</ul></li>
 <li class="chapter" data-level="3.6" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html#medidas-de-riesgo"><i class="fa fa-check"></i><b>3.6</b> Medidas de riesgo</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="series-de-tiempo.html"><a href="series-de-tiempo.html"><i class="fa fa-check"></i><b>4</b> Series de tiempo</a>
@@ -207,7 +210,8 @@ div.csl-indent {
 <li class="chapter" data-level="5" data-path="tarificación.html"><a href="tarificación.html"><i class="fa fa-check"></i><b>5</b> Tarificación</a>
 <ul>
 <li class="chapter" data-level="5.1" data-path="tarificación.html"><a href="tarificación.html#prima"><i class="fa fa-check"></i><b>5.1</b> Prima</a></li>
-<li class="chapter" data-level="5.2" data-path="tarificación.html"><a href="tarificación.html#deducibles"><i class="fa fa-check"></i><b>5.2</b> Deducibles</a></li>
+<li class="chapter" data-level="5.2" data-path="tarificación.html"><a href="tarificación.html#segmentación"><i class="fa fa-check"></i><b>5.2</b> Segmentación</a></li>
+<li class="chapter" data-level="5.3" data-path="tarificación.html"><a href="tarificación.html#deducibles"><i class="fa fa-check"></i><b>5.3</b> Deducibles</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="modelos-lineales-generalizados-glm.html"><a href="modelos-lineales-generalizados-glm.html"><i class="fa fa-check"></i><b>6</b> Modelos lineales generalizados (GLM)</a>
 <ul>
@@ -240,40 +244,67 @@ div.csl-indent {
 <h2><span class="header-section-number">5.1</span> Prima<a href="tarificación.html#prima" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>La prima es la cantidad de dinero que un individuo o entidad pagan por una póliza de seguro, la cual
 está diseñada para cubrir ciertos riesgos personales o comerciales.</p>
-<p><span class="math display">\[\begin{equation}
-P = \frac{S}{n}
-\end{equation}\]</span></p>
+<p>La determinación de las primas por parte del asegurador hace uso de la mutualización del riesgo y
+diversificación, para así poder asumir la transferencia del riesgo por parte de sus asegurados. Así
+por tanto, es deseable que cualquier método que se utilice para la estimación de primas, se
+satisfaga, algunas propiedades importantes.</p>
+<p>Sin consideramos dos riesgos a cubrir <span class="math inline">\(S_1\)</span> y <span class="math inline">\(S_2\)</span>, entonces la función que estima <span class="math inline">\(\rho\)</span> las primas
+sería aconsejable satisfaga las siguientes propiedades.</p>
+<ol style="list-style-type: decimal">
+<li><p>Si se decide cobrir por compleo dos riesgos <span class="math inline">\(S_1\)</span> y <span class="math inline">\(S_2\)</span> en un mismo producto, el valor de la
+prima deberá ser menor o igual al valor que se resultaría de cubrir cada uno de los riesgos con
+productos separados.
+<span class="math display">\[\begin{equation}
+\rho( S_1 + S_2 ) \leq \rho( S_1 ) + \rho( S_2 )
+\end{equation}\]</span></p></li>
+<li><p>El asumir mayor riesgo debe tener como consecuencia el aumento de la prima
+\begin{equation}
+( S_1 ) ( S_1 + S_2 )
+\end{equaiton}
+Esta propiedad implica que al configurar un producto de seguro con mejor cobertura, se espera
+una prima de mayor costo.</p></li>
+<li><p>Si el riesgo a cubrir está limitado, es decir <span class="math inline">\(P( S \leq M ) = 1\)</span>, para un valor <span class="math inline">\(M &gt; 0\)</span>,
+entonces jamás la prima será superior a <span class="math inline">\(M\)</span>
+<span class="math display">\[\begin{equation}
+\rho( S ) \leq M
+\end{equation}\]</span>
+Esto se traduce a que ningún asegurado estará interesado en adquirir una póliza para cubrir un
+riesgo por encima del valor total asegurado.</p></li>
+</ol>
+<p>Es así que hay algunos principios para la estimación de primas, aquí citamos algunos de los más
+conocidos:</p>
 <ol style="list-style-type: decimal">
 <li><p>Prima neta, o prima pura de riesgo
 <span class="math display">\[\begin{equation}
-  P = \mathbb{E}[S]
+  \rho( S ) = \mathbb{E}[S]
 \end{equation}\]</span></p></li>
-<li><p>Prima de riesgo con recargo sobre la esperanza
+<li><p>Prima de riesgo con recargo sobre la esperanza matemática
 <span class="math display">\[\begin{equation}
-  P = (1 + \rho) \mathbb{E}[S]
+  P = \rho( S ) = (1 + \rho) \mathbb{E}[S]
 \end{equation}\]</span></p></li>
 <li><p>Prima de riesgo con recargo sobre la varianza
 <span class="math display">\[\begin{equation}
-  P = \mathbb{E}[S] + \rho \mathbb{V}[S]
+  P = \rho( S ) = \mathbb{E}[S] + \rho \mathbb{V}[S]
 \end{equation}\]</span></p></li>
 <li><p>Prima de riesgo con recargo sobre la desviación
 <span class="math display">\[\begin{equation}
-  P = \mathbb{E}[S] + \rho \sqrt{\mathbb{V}[S]}
+  P = \rho( S ) = \mathbb{E}[S] + \rho \sqrt{\mathbb{V}[S]}
 \end{equation}\]</span></p></li>
 <li><p>Prima de riesgo con principio exponencial para <span class="math inline">\(t &gt; 0\)</span>
 <span class="math display">\[\begin{equation}
-  P = \frac{1}{2} \mathbb{E}\left[e^{tS}\right]
+  P = \rho( S )
+  = \frac{1}{2} \mathbb{E}\left[e^{tS}\right]
   = \frac{1}{2} M_N\big( \ln M_X( t ) \big)
 \end{equation}\]</span></p></li>
 <li><p>Prima de percentiles para un valor de confianza <span class="math inline">\(\alpha \in [0,1]\)</span> o prima de valor en riesgo
 <span class="math inline">\(VaR_\alpha\)</span>
 <span class="math display">\[\begin{equation}
-  P = VaR_\alpha( S ) =  F_S^{-1}( \alpha )
+  P = \rho( S ) = VaR_\alpha( S ) =  F_S^{-1}( \alpha )
 \end{equation}\]</span></p></li>
 <li><p>Prima de valor en riesgo en la cola (Tail Value at Risk) <span class="math inline">\(TVaR_\alpha\)</span>. Es el promedio uniforme
 de todos los valores en riesgo <span class="math inline">\(VaR_u\)</span>, con <span class="math inline">\(u \geq \alpha\)</span>.
 <span class="math display">\[\begin{equation}
-P = TVaR_\alpha( S ) = \frac{1}{1-\alpha} \int\limits_{\alpha}^1 VaR_u( S )\ du
+P = \rho( S ) = TVaR_\alpha( S ) = \frac{1}{1-\alpha} \int\limits_{\alpha}^1 VaR_u( S )\ du
 \end{equation}\]</span></p></li>
 </ol>
 <p><span class="math inline">\(X_i \rightsquigarrow Gamma( \alpha_i, \theta )\)</span>, para <span class="math inline">\(i \in \{1,\ldots,n\}\)</span>,
@@ -645,8 +676,16 @@ P = TVaR_\alpha( S ) = \frac{1}{1-\alpha} \int\limits_{\alpha}^1 VaR_u( S )\ du
 <p></p>
 <!------------------------------------------------------------------------------------------------->
 </div>
-<div id="deducibles" class="section level2 hasAnchor" number="5.2">
-<h2><span class="header-section-number">5.2</span> Deducibles<a href="tarificación.html#deducibles" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="segmentación" class="section level2 hasAnchor" number="5.2">
+<h2><span class="header-section-number">5.2</span> Segmentación<a href="tarificación.html#segmentación" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>En muchas ocasiones es necesario tener en cuenta algunas características asociadas al riesgo
+de asegurado, de tal forma que la prima sea lo más eficiente y adecuado según el riesgo cubierto y
+las características del mismo. La idea de segmentar la población es obtener grupos homogéneos
+con riesgos similares.</p>
+<!------------------------------------------------------------------------------------------------->
+</div>
+<div id="deducibles" class="section level2 hasAnchor" number="5.3">
+<h2><span class="header-section-number">5.3</span> Deducibles<a href="tarificación.html#deducibles" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>El principal objetivo de los deducibles, es el reducir los costos de atención de los reclamos
 usualmente mediante la exclusión de siniestros usualmente numerosos debidos a reclamos pequeños.
 En otras ocasiones, los deducibles están diseñados para incentivar al asegurado para evitar
@@ -682,7 +721,7 @@ they may prefer to take a higher deductible to get a lower premium.</p></li>
 <span id="cb32-5"><a href="tarificación.html#cb32-5"></a>k <span class="ot">&lt;-</span> <span class="fu">seq</span>( <span class="dv">1</span>, <span class="dv">100</span>, <span class="dv">1</span> )</span>
 <span id="cb32-6"><a href="tarificación.html#cb32-6"></a>p <span class="ot">&lt;-</span> p0 <span class="sc">*</span> <span class="fu">cumprod</span>( <span class="fu">c</span>( <span class="dv">1</span>, a <span class="sc">+</span> b <span class="sc">/</span> k ) )</span>
 <span id="cb32-7"><a href="tarificación.html#cb32-7"></a><span class="fu">sum</span>( p )</span></code></pre></div>
-<pre><code>## [1] 1.139952</code></pre>
+<pre><code>## [1] 0.9641431</code></pre>
 <div class="sourceCode" id="cb34"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb34-1"><a href="tarificación.html#cb34-1"></a>k <span class="ot">&lt;-</span> <span class="fu">seq</span>( <span class="dv">0</span>, <span class="dv">100</span>, <span class="dv">1</span> )</span>
 <span id="cb34-2"><a href="tarificación.html#cb34-2"></a><span class="fu">sum</span>( <span class="fu">dpois</span>( k, <span class="at">lambda =</span> l ) )</span></code></pre></div>
 <pre><code>## [1] 1</code></pre>

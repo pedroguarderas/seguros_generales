@@ -47,8 +47,9 @@ activos
 reservas-técnicas
 mutualización-del-riesgo
 modelo-individual
-algorimo-de-simulación
+algoritmo-de-simulación
 modelo-colectivo
+algoritmo-de-simulación-1
 medidas-de-riesgo
 series-de-tiempo
 distribuciones-de-conteo-discretas
@@ -56,6 +57,7 @@ distribuciones-continuas
 familia-de-panjer
 tarificación
 prima
+segmentación
 deducibles
 modelos-lineales-generalizados-glm
 familia-exponencial

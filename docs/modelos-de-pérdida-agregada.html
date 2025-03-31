@@ -193,9 +193,12 @@ div.csl-indent {
 <li class="chapter" data-level="3.3" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html#mutualización-del-riesgo"><i class="fa fa-check"></i><b>3.3</b> Mutualización del riesgo</a></li>
 <li class="chapter" data-level="3.4" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html#modelo-individual"><i class="fa fa-check"></i><b>3.4</b> Modelo individual</a>
 <ul>
-<li class="chapter" data-level="3.4.1" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html#algorimo-de-simulación"><i class="fa fa-check"></i><b>3.4.1</b> Algorimo de simulación</a></li>
+<li class="chapter" data-level="3.4.1" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html#algoritmo-de-simulación"><i class="fa fa-check"></i><b>3.4.1</b> Algoritmo de simulación</a></li>
 </ul></li>
-<li class="chapter" data-level="3.5" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html#modelo-colectivo"><i class="fa fa-check"></i><b>3.5</b> Modelo colectivo</a></li>
+<li class="chapter" data-level="3.5" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html#modelo-colectivo"><i class="fa fa-check"></i><b>3.5</b> Modelo colectivo</a>
+<ul>
+<li class="chapter" data-level="3.5.1" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html#algoritmo-de-simulación-1"><i class="fa fa-check"></i><b>3.5.1</b> Algoritmo de simulación</a></li>
+</ul></li>
 <li class="chapter" data-level="3.6" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html#medidas-de-riesgo"><i class="fa fa-check"></i><b>3.6</b> Medidas de riesgo</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="series-de-tiempo.html"><a href="series-de-tiempo.html"><i class="fa fa-check"></i><b>4</b> Series de tiempo</a>
@@ -207,7 +210,8 @@ div.csl-indent {
 <li class="chapter" data-level="5" data-path="tarificación.html"><a href="tarificación.html"><i class="fa fa-check"></i><b>5</b> Tarificación</a>
 <ul>
 <li class="chapter" data-level="5.1" data-path="tarificación.html"><a href="tarificación.html#prima"><i class="fa fa-check"></i><b>5.1</b> Prima</a></li>
-<li class="chapter" data-level="5.2" data-path="tarificación.html"><a href="tarificación.html#deducibles"><i class="fa fa-check"></i><b>5.2</b> Deducibles</a></li>
+<li class="chapter" data-level="5.2" data-path="tarificación.html"><a href="tarificación.html#segmentación"><i class="fa fa-check"></i><b>5.2</b> Segmentación</a></li>
+<li class="chapter" data-level="5.3" data-path="tarificación.html"><a href="tarificación.html#deducibles"><i class="fa fa-check"></i><b>5.3</b> Deducibles</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="modelos-lineales-generalizados-glm.html"><a href="modelos-lineales-generalizados-glm.html"><i class="fa fa-check"></i><b>6</b> Modelos lineales generalizados (GLM)</a>
 <ul>
@@ -353,8 +357,9 @@ reclamos <span class="math inline">\(X_i\)</span> y <span class="math inline">\(
 + \sum\limits_{i=1}^n \sum\limits_{j=1,j\neq i}^n \mathbb{C}\left[ X_i, X_j \right] \\
 &amp; = &amp; \sum\limits_{i=1}^n \mathbb{V}\left[ X_i \right]\quad \text{por independencia entre $X_i$ y $X_j$}
 \end{eqnarray*}\]</span></p>
-<div id="algorimo-de-simulación" class="section level3 hasAnchor" number="3.4.1">
-<h3><span class="header-section-number">3.4.1</span> Algorimo de simulación<a href="modelos-de-pérdida-agregada.html#algorimo-de-simulación" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<!------------------------------------------------------------------------------------------------->
+<div id="algoritmo-de-simulación" class="section level3 hasAnchor" number="3.4.1">
+<h3><span class="header-section-number">3.4.1</span> Algoritmo de simulación<a href="modelos-de-pérdida-agregada.html#algoritmo-de-simulación" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Se puede simular la severidad total <span class="math inline">\(S\)</span> para el caso donde se asume independencia entre cada una
 de las severidades <span class="math inline">\(X_1, \ldots, X_n\)</span> y se conoce cada una de sus densidades de probabilidad
 <span class="math inline">\(f_{X_1}, \ldots, f_{X_n}\)</span> o distribuciones de probabilidad <span class="math inline">\(F_{X_1}, \ldots, F_{X_n}\)</span>.</p>
@@ -432,8 +437,22 @@ a la integral de Riemann-Stieltjes.
 <p>De ello tenemos los siguientes resultados de cálculo para el valor esperado de la severidad total
 <span class="math display">\[\begin{eqnarray*}
 \mathbb{E}[S] = \sum\limits_{i=1}^n e^{ \mu_i + \frac{1}{2} \sigma_i^2 } &amp; = &amp; 34562.7208, \\
-\overline{S} = \frac{1}{m} \sum\limits_{i=1}^m S_i &amp; = &amp; 34766.309, \\
-\sum\limits_{i=1}^N s_{i} \left( F_m( s_{i+1} ) - F_m( s_{i} ) \right) &amp; = &amp; 34751.3999
+\overline{S} = \frac{1}{m} \sum\limits_{i=1}^m S_i &amp; = &amp; 34774.8249, \\
+\sum\limits_{i=1}^N s_{i} \left( F_m( s_{i+1} ) - F_m( s_{i} ) \right) &amp; = &amp; 34759.859
+\end{eqnarray*}\]</span></p>
+<p>La distribución acumulada de la variable aleatoria correspondiente al reclamo total <span class="math inline">\(S\)</span>, para el
+caso del modelo individual toma la forma:
+<span class="math display">\[\begin{eqnarray*}
+F_S( s )
+&amp; = &amp; P( S \leq s ) \\
+&amp; = &amp; P\left( \sum\limits_{i=1}^n X_i \leq s \right) \\
+&amp; = &amp; F_{X_1} \star \cdots \star F_{X_n}( s )\quad \text{distribución de la suma de variables aleatorias} \\
+&amp; = &amp; F^{\star n}_{X}( s ) \quad \text{si $\{X_i\}$ son idénticamente distribuidas}
+\end{eqnarray*}\]</span></p>
+<p>Es sencillo determinar que la densidad de probabilidad de <span class="math inline">\(S\)</span>, está dado por el producto de convolución
+<span class="math display">\[\begin{eqnarray*}
+f_S( s ) &amp; = &amp; f_{X_1} \star \cdots \star f_{X_n}( s )\quad \text{densidad de la suma de variables aleatorias} \\
+&amp; = &amp; f^{\star n}_{X}( s ) \quad \text{si $\{X_i\}$ son idénticamente distribuidas}
 \end{eqnarray*}\]</span></p>
 <div class="example">
 <p><span id="exm:l3ex2" class="example"><strong>Ejemplo 3.2  </strong></span>Podemos considerar el caso sencillo donde el valor posible de severidad es determinista, es decir
@@ -486,11 +505,25 @@ o de forma más compacta y equivalente <span class="math inline">\(S = \mathbf{1
 &amp; = &amp; \sum\limits_{n=1}^{+\infty} \sum\limits_{i=1}^n \mathbb{E}\left[ X_i \mid N = n \right]P( N = n )\quad
 \text{linealidad de la esperanza} \\
 &amp; = &amp; \sum\limits_{n=0}^{+\infty} n \mathbb{E}\left[ X \mid N = n \right]P( N = n )\quad
-\text{si $\{X_i\}$ son identicamente distribuidas} \\
+\text{si $\{X_i\}$ son idénticamente distribuidas} \\
 &amp; = &amp; \mathbb{E}\left[ X \right] \sum\limits_{n=0}^{+\infty} n P( N = n )\quad
 \text{si $X$ y $N$ son independientes} \\
 &amp; = &amp; \mathbb{E}[ X ] \mathbb{E}[ N ]
 \end{eqnarray*}\]</span></p>
+<p>La distribución acumulada del reclamo total <span class="math inline">\(S\)</span> tiene la forma:
+<span class="math display">\[\begin{eqnarray*}
+F_S( s )
+&amp; = &amp; P( S \leq s ) \\
+&amp; = &amp; P\left( \sum\limits_{i=1}^N X_i \leq s \right) \\
+&amp; = &amp; \sum\limits_{n=0}^{+\infty} P\left( \sum\limits_{i=1}^n X_i \leq s \middle| N = n \right) P( N = n )\quad \text{utilizando la probabilidad condicional} \\
+&amp; = &amp; \sum\limits_{n=0}^{+\infty} P\left( \sum\limits_{i=1}^n X_i \leq s \right) p_n\quad \text{si $X_i$ y $N$ son independientes} \\
+&amp; = &amp; \sum\limits_{n=0}^{+\infty} F_{X_1} \star \cdots \star F_{X_n}( s ) p_n\quad \text{distribución de la suma de variables aleatorias} \\
+&amp; = &amp; \sum\limits_{n=0}^{+\infty} F^{\star n}_{X}( s ) p_n\quad \text{si $\{X_i\}$ son idénticamente distribuidas} \\
+\end{eqnarray*}\]</span>
+tomando <span class="math inline">\(F^{\star 0}_{X}( s ) = 1\)</span></p>
+<!------------------------------------------------------------------------------------------------->
+<div id="algoritmo-de-simulación-1" class="section level3 hasAnchor" number="3.5.1">
+<h3><span class="header-section-number">3.5.1</span> Algoritmo de simulación<a href="modelos-de-pérdida-agregada.html#algoritmo-de-simulación-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>La variable del reclamo total <span class="math inline">\(S\)</span> puede ser simulada mediante el siguiente método montecarlo.
 Si <span class="math inline">\(N\)</span> sigue una ley discreta <span class="math inline">\(f_N\)</span> y cada valor severidad <span class="math inline">\(X\)</span> son idénticamente distribuidos
 con ley <span class="math inline">\(f_X\)</span>.</p>
@@ -519,6 +552,9 @@ utilizando las funciones de aplicación vectorial <code>sapply</code> y <code>la
 <p><img src="seguros_generales_files/figure-html/l3c4-1.png" width="700" /></p>
 <p></p>
 </div>
+<p>Es de notar que una algoritmo como el descrito tienen una falencia cuando la frecuencia de siniestros
+es poco observada, esto sucede cuando <span class="math inline">\(P( N = 0 )\)</span> es alta y por tal razón para tener cálculos con
+una buena aproximación mediante el uso de simulaciones se necesitará un gran número de las mismas.</p>
 <p></p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb13-1"><a href="modelos-de-pérdida-agregada.html#cb13-1"></a>D <span class="ot">&lt;-</span> <span class="cf">function</span>( x, m, M ) {</span>
 <span id="cb13-2"><a href="modelos-de-pérdida-agregada.html#cb13-2"></a>  <span class="fu">return</span>( <span class="fu">min</span>( <span class="fu">max</span>( x <span class="sc">-</span> m, <span class="dv">0</span> ), M ) )</span>
@@ -594,6 +630,7 @@ agregada <span class="math inline">\(S_n\)</span> y mostraresmo s</p>
 <div class="sourceCode" id="cb17"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb17-1"><a href="modelos-de-pérdida-agregada.html#cb17-1"></a><span class="fu">plot</span>( t, S, <span class="at">type =</span> <span class="st">&#39;s&#39;</span> )</span></code></pre></div>
 <p><img src="seguros_generales_files/figure-html/l3c8-2.png" width="700" /></p>
 <p></p>
+</div>
 </div>
 <div id="medidas-de-riesgo" class="section level2 hasAnchor" number="3.6">
 <h2><span class="header-section-number">3.6</span> Medidas de riesgo<a href="modelos-de-pérdida-agregada.html#medidas-de-riesgo" class="anchor-section" aria-label="Anchor link to header"></a></h2>
