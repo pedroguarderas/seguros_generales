@@ -126,26 +126,107 @@ El valor esperado de la severidad total $S$ es:
 & = & \sum\limits_{i=1}^n \mathbb{E}\left[ X_i \right]
 \end{eqnarray*}
 
-```{r l3c1}
-m <- 100
-n <- 200
-u <- sample( c( 1, 2, 3, 4 ), size = n, replace = TRUE )
-s <- sample( c( 1, 2, 3, 4 ), size = n, replace = TRUE )
-X <- sapply( 1:n, FUN = function( i ) rlnorm( m, meanlog = u[ i ], sdlog = s[ i ] ) )
-S <- sapply( 1:m, FUN = function( i ) sum( X[i,] ) )
-```
+Así mismo con la varianza de $S$.
+\begin{eqnarray*}
+\mathbb{V}\left[ S \right]
+& = & \mathbb{V}\left[ \sum\limits_{i=1}^n X_i \right] \\
+& = & \sum\limits_{i=1}^n \mathbb{V}\left[ X_i \right] 
++ \sum\limits_{i=1}^n \sum\limits_{j=1,j\neq i}^n \mathbb{C}\left[ X_i, X_j \right] \\
+& = & \sum\limits_{i=1}^n \mathbb{V}\left[ X_i \right]\quad \text{por independencia entre $X_i$ y $X_j$}
+\end{eqnarray*}
 
+
+### Algorimo de simulación
+Se puede simular la severidad total $S$ para el caso donde se asume independencia entre cada una 
+de las severidades $X_1, \ldots, X_n$ y se conoce cada una de sus densidades de probabilidad
+$f_{X_1}, \ldots, f_{X_n}$ o distribuciones de probabilidad $F_{X_1}, \ldots, F_{X_n}$.
+
+1. Se tiene fijo $n \in \mathbb{N}$,
+
+2. Se fija el número de simulaciones $m \in \mathbb{N}$
+
+3. Para cada $i \in \{1, \ldots, m\}$ se extrae una muestra $X_{i,1} \rightsquigarrow f_{X_1},\ldots,X_{i,n} \rightsquigarrow f_{X_n}$,
+
+4. Para cada $i \in \{1, \ldots, m\}$ se calcula la severidad total para la muestra $i$, 
+$S_i = \sum\limits_{j=1}^n X_{i,j}$
+
+::: {.example #l3ex1}
+El siguiente código ejemplifica el algoritmo anterior, donde se asume que cada variable aleatoria de 
+severidad $X_i$ sigue una ley log-normal $LN( \mu_i, \sigma_i )$, de parámetros $\mu_i, \sigma_i$, 
+para $i \in \{1,\ldots, n\}$.
+```{r l3c1}
+# 1. número de distribuciones
+n <- 200
+# parámetros para las n distribuciones
+mu <- seq( 1, 2, length.out = n )
+sigma <- seq( 2, 3, length.out = n )
+
+# 2. número de simulaciones
+m <- 1e4 
+
+# 3. simulación de severidades
+X <- lapply( 1:m, FUN = function( i ) sapply( 1:n, FUN = function( j ) rlnorm( 1, meanlog = mu[ j ], sdlog = sigma[ j ] ) ) )
+
+# 4. simulación de severidad total
+S <- sapply( X, FUN = function( x ) sum( x ) )
+```
+:::
+
+En el ejemplo anterior es de notar que la densidad de probabilidad de la severidad $S$ resulta de la
+convolución de las $n$ densidades individuales $f_S = f_{X_1} \star \cdots \star f_{X_n}$, la cual
+no presenta una forma analítica conocida. 
+
+De la imposibilidad anterior se se puede ver la utilidad de trabajar con la simulación aleatoria de 
+la variable $S$. Se puede estimar la distribución acumulada de probabilidad $F_S$ a partir 
+de la distribución empírica $F_m$ de la muestra, con:
+\begin{equation}
+F_S( s ) \approx F_m( s ) = \frac{1}{m} \sum\limits_{i=1}^m \mathbf {1}_{(-\infty,s]}( S_i )
+\end{equation}
+el resultado de acotación de \@ref(thm:ddkw) nos da un criterio de convergencia de $F_m$ a $F_S$
+
+Para construir $F_m$ en R, se puede utilizar la función ya empaquetada `ecdf` (empirical cumulative
+distribution function).
 ```{r l3c2}
-FS <- seq( 0, 1, 0.01 )
-Sq <- quantile( S, probs = FS )
+# estimación distribución acumulada empírica de S
+Fm <- ecdf( S )
+
+# esperanza empírica
 EeS <- mean( S )
-ES <- sum( sapply( 1:n, FUN = function( i ) exp( u[i] + 0.5 * s[i]^2 ) ) )
-plot( Sq, FS, type = 's', col = 'dodgerblue4' )
+
+# esperanza teórica
+ES <- sum( sapply( 1:n, FUN = function( i ) exp( mu[i] + 0.5 * sigma[i]^2 ) ) )
+
+s <- seq( quantile( S, probs = 0.01 ), quantile( S, probs = 0.99 ), length.out = 1e3 )
+Fms <- sapply( s, FUN = Fm )
+
+plot( s, Fms, type = 's' )
 abline( v = EeS, col = 'red' )
 abline( v = ES, col = 'orange' )
 ```
 
-::: {.example #l3ex1}
+Para calcular la esperanza de la severidad total $S$, también se puede utilizar una aproximación 
+a la integral de Riemann-Stieltjes.
+\begin{equation}
+\mathbb{E}[ S ] = \int\limits_{\mathbb{R}} s dF_S( s )
+\approx \int\limits_{\mathbb{R}} s dF_m( s )
+\approx \sum\limits_{i=1}^N s_{i} \left( F_m( s_{i+1} ) - F_m( s_{i} ) \right)
+\end{equation}
+
+Esta aproximación en R puede ser implementada de la siguiente forma:
+```{r l3c3}
+N <- 1e5
+s <- seq( min( S ), max( S ), length.out = N )
+EmS <- sum( s[-N] * diff( sapply( s, FUN = Fm ) ) )
+```
+
+De ello tenemos los siguientes resultados de cálculo para el valor esperado de la severidad total
+\begin{eqnarray*}
+\mathbb{E}[S] = \sum\limits_{i=1}^n e^{ \mu_i + \frac{1}{2} \sigma_i^2 } & = & `r round( ES, 4 )`, \\
+\overline{S} = \frac{1}{m} \sum\limits_{i=1}^m S_i & = & `r round( EeS, 4 )`, \\
+\sum\limits_{i=1}^N s_{i} \left( F_m( s_{i+1} ) - F_m( s_{i} ) \right) & = & `r round( EmS, 4 )`
+\end{eqnarray*}
+
+::: {.example #l3ex2}
 Podemos considerar el caso sencillo donde el valor posible de severidad es determinista, es decir
 para cada póliza $i\in \{1,\ldots,n\}$, el valor de severidad probable es único $M > 0$ si en caso 
 se da un evento $A_i$, esto lo podemos expresar como $X_i = M \mathbf{1}_{A_i}$ es constante. Así, pérdida
@@ -221,10 +302,10 @@ mediante la siguiente suma $S_i = \sum\limits_{j=1}^{N_i} X_{i,j}$.
 En el lenguaje de programación R, este método de simulación puede ser fácilmente implementado 
 utilizando las funciones de aplicación vectorial `sapply` y `lapply`. 
 
-::: {.example #l3ex2}
+::: {.example #l3ex3}
 Para este ejemplo práctico en particular consideramos $N \rightsquigarrow Pois( \lambda )$ y 
 $X \rightsquigarrow LN( \mu, \sigma )$.
-```{r l3c3}
+```{r l3c4}
 m <- 1e4
 u <- 5
 s <- 2
@@ -236,7 +317,7 @@ plot( sort( S ) )
 ```
 :::
 
-```{r l3c4}
+```{r l3c5}
 D <- function( x, m, M ) {
   return( min( max( x - m, 0 ), M ) )
 }
@@ -253,7 +334,7 @@ plot( sort( S ) )
 ```
 
 $S_1, \ldots, S_m \rightsquigarrow F_S$
-```{r l3c5}
+```{r l3c6}
 FS <- seq( 0, 1, 0.01 )
 Sq <- quantile( S, probs = FS )
 ES <- mean( S )
@@ -270,7 +351,7 @@ abline( v = ES, col = 'red' )
 En este caso en particular estudiaremos la velocidad de convergencia del método resultante del 
 teorema del límite central \@ref(thm:tlc). Generaremos una simulación aleatoria de la suma
 agregada $S_n$ y mostraresmo s
-```{r l3c6}
+```{r l3c7}
 m <- 500
 n <- 5000
 u <- 4
@@ -297,7 +378,7 @@ points( 1:n, Bn, type = 'l', lty = 1, col = 'red' )
 :::
 
 
-```{r l3c7}
+```{r l3c8}
 l <- 3
 n <- 300
 dt <- rexp( n = n, rate = 1 / l )
@@ -350,7 +431,7 @@ VaR_{\alpha}( X ) = F_X^{-1}( \alpha )
 TVaR_{\alpha}( X ) = \frac{1}{1-\alpha} \int\limits_{\alpha}^1 VaR_u( X )\ du
 \end{equation}
 
-```{r l3c8}
+```{r l3c9}
 u <- 4
 s <- 0.5
 n <- 1e4
@@ -368,7 +449,7 @@ hist( X, breaks = 100, xlim = c( 0, 1.1 * max( X ) ) )
 abline( v = TVaRX, col = 'blue' )
 ```
 
-```{r l3c9}
+```{r l3c10}
 plot( k, VaRX, ylim = c( 0, 1e3 ) )
 points( k, TVaRX, col = 'red' )
 ```
