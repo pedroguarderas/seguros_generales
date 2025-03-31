@@ -260,9 +260,9 @@ productos separados.
 \rho( S_1 + S_2 ) \leq \rho( S_1 ) + \rho( S_2 )
 \end{equation}\]</span></p></li>
 <li><p>El asumir mayor riesgo debe tener como consecuencia el aumento de la prima
-\begin{equation}
-( S_1 ) ( S_1 + S_2 )
-\end{equaiton}
+<span class="math display">\[\begin{equation}
+\rho( S_1 ) \leq \rho( S_1 + S_2 )
+\end{equation}\]</span>
 Esta propiedad implica que al configurar un producto de seguro con mejor cobertura, se espera
 una prima de mayor costo.</p></li>
 <li><p>Si el riesgo a cubrir está limitado, es decir <span class="math inline">\(P( S \leq M ) = 1\)</span>, para un valor <span class="math inline">\(M &gt; 0\)</span>,
@@ -723,7 +723,7 @@ they may prefer to take a higher deductible to get a lower premium.</p></li>
 <span id="cb33-5"><a href="tarificación.html#cb33-5"></a>k <span class="ot">&lt;-</span> <span class="fu">seq</span>( <span class="dv">1</span>, <span class="dv">100</span>, <span class="dv">1</span> )</span>
 <span id="cb33-6"><a href="tarificación.html#cb33-6"></a>p <span class="ot">&lt;-</span> p0 <span class="sc">*</span> <span class="fu">cumprod</span>( <span class="fu">c</span>( <span class="dv">1</span>, a <span class="sc">+</span> b <span class="sc">/</span> k ) )</span>
 <span id="cb33-7"><a href="tarificación.html#cb33-7"></a><span class="fu">sum</span>( p )</span></code></pre></div>
-<pre><code>## [1] 1.062604</code></pre>
+<pre><code>## [1] 1.060669</code></pre>
 <div class="sourceCode" id="cb35"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb35-1"><a href="tarificación.html#cb35-1"></a>k <span class="ot">&lt;-</span> <span class="fu">seq</span>( <span class="dv">0</span>, <span class="dv">100</span>, <span class="dv">1</span> )</span>
 <span id="cb35-2"><a href="tarificación.html#cb35-2"></a><span class="fu">sum</span>( <span class="fu">dpois</span>( k, <span class="at">lambda =</span> l ) )</span></code></pre></div>
 <pre><code>## [1] 1</code></pre>
