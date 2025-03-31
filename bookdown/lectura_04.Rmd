@@ -1,5 +1,113 @@
+<!------------------------------------------------------------------------------------------------->
 # Series de tiempo
 
+<!------------------------------------------------------------------------------------------------->
+## Distribuciones de conteo, discretas
+
+::: {.definition #dbinom name="Distribución binomial"}
+Una variable aleatoria $N$ que toma valores en $\mathbb{N}$ se dice que sigue una distribución 
+o ley de binomial $N \rightsquigarrow Bin( n, p )$, con parámetros $n \in \mathbb{N}$ y 
+$p \in [0, 1]$, si:
+\begin{equation}
+P( N = k ) = \binom{n}{k} p^k ( 1 - p )^{n-k}, \qquad
+\forall k \in \{0,\ldots, n\}
+\end{equation}
+:::
+En R se puede para trabajar con variables aleatorias de binomiales se puede utilizar las siguientes
+funciones
+
+::: {.definition #dpois name="Distribución de Poisson"}
+Una variable aleatoria $N$ que toma valores en $\mathbb{N}$ se dice que sigue una distribución 
+o ley de Poisson $N \rightsquigarrow Pois( n, p )$, con parámetro $\lambda \in \mathbb{R}$, si:
+\begin{equation}
+P( N = k ) = e^{-\lambda} \frac{\lambda^k}{k!}, \qquad
+\forall k \in \mathbb{N}
+\end{equation}
+:::
+```{r l4c2}
+lambda <- 2
+n <- 10
+k <- 2
+N <- rpois( n = n, lambda = lambda ) # simular una muestra de tamaño n, N sigue Pois( lambda )
+pk <- dpois( k, lambda = lambda ) # cálculo de probabilidad P( N = k )
+Pk <- ppois( k, lambda = lambda ) # cálculo de probabilidad P( N <= k )
+```
+
+::: {.definition #dnbinom name="Distribución binomial negativa"}
+Una variable aleatoria $N$ que toma valores en $\mathbb{N}$ se dice que sigue una distribución 
+o ley de  binomial negativa $N \rightsquigarrow NBin( \alpha, p )$, con parámetro $\alpha > 0$ y 
+$p \in (0,1)$, si:
+\begin{equation}
+P( N = k ) = \binom{\alpha + k - 1}{k} p^\alpha ( 1 - p )^k
+= \frac{\Gamma( \alpha + k )}{\Gamma(k+1) \Gamma(\alpha)}p^\alpha ( 1 - p )^k, \qquad
+\forall k \in \mathbb{N}
+\end{equation}
+donde $\Gamma( \alpha ) = \int\limits_0^{+\infty} x^{\alpha - 1} e^{-x}\ dx$, $\forall \alpha \geq 0$
+:::
+
+Asociado a estas distribuciones discretas existe un resultado de caracterización, el cual permite
+seleccionar la distribución de conteo.
+
+<!------------------------------------------------------------------------------------------------->
+## Distribuciones continuas
+
+::: {.definition #dunif name="Distribución uniforme"}
+Una variable aleatoria $X$ a valores reales, sigue una distribución uniforme 
+$X \rightsquigarrow Unif( a, b )$ de parámetros $a, b \in \mathbb{R}$, si su función de distribución
+acumulada es de la siguiente forma:
+\begin{equation}
+F_X( x ) = \frac{x-a}{b-a} \mathbf{1}_{[a,b)}( x ) + \mathbf{1}_{[b,+\infty)}( x )
+\end{equation}
+sin mucho esfuerzo se puede verificar que su densidad de probabilidad está dada por la función
+\begin{equation}
+f_X( x ) = \frac{1}{b-a}\mathbf{1}_{[a,b]}( x )
+\end{equation}
+:::
+
+::: {.definition #dexp name="Distribución exponencial"}
+Una variable aleatoria $X$ a valores reales, sigue una distribución exponencial 
+$X \rightsquigarrow Exp( \lambda )$ de parámetros $\lambda > 0$, si su función de distribución
+acumulada es de la siguiente forma:
+\begin{equation}
+F_X( x ) = \mathbf{1}_{(0,+\infty)}( x ) \left( 1 - e^{-\lambda x} \right)
+\end{equation}
+sin mucho esfuerzo se puede verificar que su densidad de probabilidad está dada por la función
+\begin{equation}
+f_X( x ) = \mathbf{1}_{(0,+\infty)}( x ) \lambda e^{-\lambda x}
+\end{equation}
+:::
+
+::: {.definition #dnorm name="Distribución normal"}
+Una variable aleatoria $X$ a valores reales, sigue una distribución normal 
+$X \rightsquigarrow N( \mu, \sigma )$ de parámetros $\mu \in \mathbb{R}$, $\sigma > 0$, si su 
+función de distribución acumulada es de la siguiente forma:
+\begin{equation}
+F_X( x ) = \frac{1}{\sqrt{2\pi} \sigma} \int\limits_{-\infty}^x e^{-\frac{(y - \mu)^2}{\sigma^2}}\ dy
+\end{equation}
+la densidad de probabilidad automáticamente está dada por la función:
+\begin{equation}
+f_X( x ) = \frac{1}{\sqrt{2\pi}} e^{-\frac{(x - \mu)^2}{\sigma^2}}
+\end{equation}
+:::
+
+::: {.definition #dlnorm name="Distribución log-normal"}
+Una variable aleatoria $X$ a valores reales, sigue una distribución log-normal 
+$X \rightsquigarrow LN( \mu, \sigma )$ de parámetros $\mu > 0$, $\sigma > 0$, si su 
+función de distribución acumulada es de la siguiente forma:
+\begin{equation}
+F_X( x ) = \frac{1}{\sqrt{2\pi} \sigma} \int\limits_{0}^{\ln(x)} e^{-\frac{(y - \mu)^2}{\sigma^2}}\ dy
+\end{equation}
+la densidad de probabilidad automáticamente está dada por la función:
+\begin{equation}
+f_X( x ) = \frac{1}{\sqrt{2\pi}} e^{-\frac{(\ln(x) - \mu)^2}{\sigma^2}}
+\end{equation}
+:::
+En pocas, una variable aleatoria $X \rightsquigarrow LN( \mu, \sigma )$ sigue una distribución 
+log-normal si y solamente si la variable aleatoria dada por su logaritmo $\ln( X ) \rightsquigarrow N( \mu, \sigma )$ 
+sigue una distribución normal.
+
+
+<!------------------------------------------------------------------------------------------------->
 ## Familia de Panjer
 
 ::: {.definition #fampanjer name="Familia de Panjer"}
