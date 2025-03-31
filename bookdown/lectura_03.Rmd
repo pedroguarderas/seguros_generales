@@ -132,8 +132,10 @@ Así mismo con la varianza de $S$.
 & = & \mathbb{V}\left[ \sum\limits_{i=1}^n X_i \right] \\
 & = & \sum\limits_{i=1}^n \mathbb{V}\left[ X_i \right] 
 + \sum\limits_{i=1}^n \sum\limits_{j=1,j\neq i}^n \mathbb{C}\left[ X_i, X_j \right] \\
-& = & \sum\limits_{i=1}^n \mathbb{V}\left[ X_i \right]\quad \text{por independencia entre $X_i$ y $X_j$}
+& = & \sum\limits_{i=1}^n \mathbb{V}\left[ X_i \right]\quad \text{si $\{X_i\}$ sin son independientes entre si} \\
+& = & n \mathbb{V}\left[ X \right]\quad \text{si $\{X_i\}$ sin son idénticamente distribuidas }
 \end{eqnarray*}
+
 
 <!------------------------------------------------------------------------------------------------->
 ### Algoritmo de simulación
@@ -205,7 +207,7 @@ abline( v = ES, col = 'orange' )
 ```
 
 Para calcular la esperanza de la severidad total $S$, también se puede utilizar una aproximación 
-a la integral de Riemann-Stieltjes.
+a la integral de Riemann-Stieltjes utilizando la distribución acumulada empírica $F_m$.
 \begin{equation}
 \mathbb{E}[ S ] = \int\limits_{\mathbb{R}} s dF_S( s )
 \approx \int\limits_{\mathbb{R}} s dF_m( s )
@@ -221,26 +223,36 @@ EmS <- sum( s[-N] * diff( sapply( s, FUN = Fm ) ) )
 
 De ello tenemos los siguientes resultados de cálculo para el valor esperado de la severidad total
 \begin{eqnarray*}
-\mathbb{E}[S] = \sum\limits_{i=1}^n e^{ \mu_i + \frac{1}{2} \sigma_i^2 } & = & `r round( ES, 4 )`, \\
-\overline{S} = \frac{1}{m} \sum\limits_{i=1}^m S_i & = & `r round( EeS, 4 )`, \\
-\sum\limits_{i=1}^N s_{i} \left( F_m( s_{i+1} ) - F_m( s_{i} ) \right) & = & `r round( EmS, 4 )`
+\mathbb{E}[S] = \sum\limits_{i=1}^n e^{ \mu_i + \frac{1}{2} \sigma_i^2 } & = & `r formatC( ES, digits = 4, format = 'f' )`, \\
+\overline{S} = \frac{1}{m} \sum\limits_{i=1}^m S_i & = & `r formatC( EeS, digits = 4, format = 'f' )`, \\
+\sum\limits_{i=1}^N s_{i} \left( F_m( s_{i+1} ) - F_m( s_{i} ) \right) & = & `r formatC( EmS, digits = 4, format = 'f' )`
 \end{eqnarray*}
 
-La distribución acumulada de la variable aleatoria correspondiente al reclamo total $S$, para el
-caso del modelo individual toma la forma:
+Lo bueno de poseer una buena aproximación a la distribución acumulada de una variable aleatoria, es 
+que podemos calcular algunos otros valores de importancia relacionados a la variable aleatoria y
+no tan solo utilizar medidas de tendencia central. Sin embargo, para que esta aproximación sea 
+útil se requiere reducir el error de probabilidad. Acorde a la desigualdad \@ref(thm:ddkw), para 
+tener un probabilidad baja de aproximación $\delta > 0$ en un error de discrepancia $\varepsilon >0$,
+necesitamos satisfacer la desigualdad.
 \begin{eqnarray*}
-F_S( s ) 
-& = & P( S \leq s ) \\
-& = & P\left( \sum\limits_{i=1}^n X_i \leq s \right) \\
-& = & F_{X_1} \star \cdots \star F_{X_n}( s )\quad \text{distribución de la suma de variables aleatorias} \\
-& = & F^{\star n}_{X}( s ) \quad \text{si $\{X_i\}$ son idénticamente distribuidas}
+2 e^{-2n \varepsilon^2 } & \leq & \delta \\
+2n \varepsilon^2 & \geq & -\ln\left( \frac{\delta}{2} \right) \\
+n & \geq & -\frac{1}{2\varepsilon^2} \ln\left( \frac{\delta}{2} \right)
 \end{eqnarray*}
+así se observa que para tener una aproximación de orden $\delta$ y con un error de discrepancia
+$\varepsilon$, se requiere como mínimo realizar un número de simulaciones $n$ de orden 
+logarítmico en $\delta$ y cuadrático en $\varepsilon$.
 
-Es sencillo determinar que la densidad de probabilidad de $S$, está dado por el producto de convolución
-\begin{eqnarray*}
-f_S( s ) & = & f_{X_1} \star \cdots \star f_{X_n}( s )\quad \text{densidad de la suma de variables aleatorias} \\
-& = & f^{\star n}_{X}( s ) \quad \text{si $\{X_i\}$ son idénticamente distribuidas} 
-\end{eqnarray*}
+
+<!-- La imagen a continuación muestra el tamaño de la simulación $n$ en función de los parámetros -->
+<!-- $\delta$ y $\varepsilon$. Como se puede observar para tener un error de discrepancia útil, el -->
+<!-- número de simulaciones crece rápidamente -->
+<!-- ```{r l3c4} -->
+<!-- e <- seq( 1e-6, 1e-3, length.out = 25 ) -->
+<!-- d <- seq( 1e-6, 1e-3, length.out = length( e ) ) -->
+<!-- n <- outer( e, d, FUN = function( e, d ) return( log( -log( d / 2 ) / ( 2 * e^2 ) ) ) ) -->
+<!-- persp( e, d, n, col = 'darkgreen', theta = 140, phi = 20 ) -->
+<!-- ``` -->
 
 ::: {.example #l3ex2}
 Podemos considerar el caso sencillo donde el valor posible de severidad es determinista, es decir
@@ -298,7 +310,7 @@ El valor esperado del total de reclamos $S$, está dado por:
 \text{si $\{X_i\}$ son idénticamente distribuidas} \\
 & = & \mathbb{E}\left[ X \right] \sum\limits_{n=0}^{+\infty} n P( N = n )\quad
 \text{si $X$ y $N$ son independientes} \\
-& = & \mathbb{E}[ X ] \mathbb{E}[ N ]
+& = & \mathbb{E}[ N ] \mathbb{E}[ X ] 
 \end{eqnarray*}
 
 La distribución acumulada del reclamo total $S$ tiene la forma:
@@ -329,46 +341,144 @@ $X_{i,1}, \ldots X_{i,N_i}$ con ley $f_X$,
 4. Se calcula los reclamos totales $S_1, \ldots, S_m$ para cada simulación $i = \{1, \ldots, m\}$, 
 mediante la siguiente suma $S_i = \sum\limits_{j=1}^{N_i} X_{i,j}$.
 
-En el lenguaje de programación R, este método de simulación puede ser fácilmente implementado 
-utilizando las funciones de aplicación vectorial `sapply` y `lapply`. 
+En el lenguaje de programación R, este método de simulación puede ser fácilmente implementado, 
+como ya lo hemos realizado, utilizando las funciones de aplicación vectorial `sapply` y `lapply`. 
 
 ::: {.example #l3ex3}
-Para este ejemplo práctico en particular consideramos $N \rightsquigarrow Pois( \lambda )$ y 
-$X \rightsquigarrow LN( \mu, \sigma )$.
-```{r l3c4}
+Consideramos el caso de un modelo colectivo para el cuál el conteo de siniestros 
+$N \rightsquigarrow Pois( \lambda )$ y la distribución de cada uno de los reclamos 
+$\{X_i\}_{i\in \N}$, está dada por la misma distribución de probabilidad 
+$X \rightsquigarrow LN( \mu, \sigma )$, siendo además cada uno de los reclamos indepencientes entre
+si.
+```{r l3c5}
+# 1. selección de simulaciones
 m <- 1e4
+
+# 2. especificación de los parámetros para las distribuciones
 u <- 5
 s <- 2
 l <- 3
+
+# 3. simulación del conteo de siniestros
 N <- rpois( n = m, lambda = l )
+
+# 4. simulación de la severidad de los reclamos
 X <- lapply( N, FUN = function( n ) rlnorm( n, meanlog = u, sdlog = s ) )
+
+# 5. reclamo total, agregación por cada simulación
 S <- sapply( X, FUN = function( x ) sum( x, na.rm = TRUE ) )
-plot( sort( S ) )
 ```
 :::
 
-Es de notar que una algoritmo como el descrito tienen una falencia cuando la frecuencia de siniestros
-es poco observada, esto sucede cuando $P( N = 0 )$ es alta y por tal razón para tener cálculos con 
-una buena aproximación mediante el uso de simulaciones se necesitará un gran número de las mismas.
+Es de notar que una algoritmo como el descrito tiene una falencia cuando la frecuencia de siniestros
+es poco observada, esto sucede cuando la probabilidad $P( N = 0 )$ es alta y por tal razón para 
+generar suficientes reclamos y así poder tener cálculos con una buena aproximación numérica, 
+con el uso de simulaciones se necesitará muchas simulaciones.
 
-```{r l3c5}
-D <- function( x, m, M ) {
-  return( min( max( x - m, 0 ), M ) )
-}
-m <- 1000
-n <- 100
+Es interesante observar que el modelo colectivo puede ser muchas veces calculado de forma similar
+a un modelo individual, para ciertos casos particulares. Por ejemplo, si consideramos el caso 
+cuando la variable aleatoria del conteo de siniestros $N \rightsquigarrow Bin( n, p )$ sigue una 
+distribución binomial con parámetros $n$ y $p$ y los reclamos individuales $\{ X_i \}$ son i.i.d.
+A partir de esto, el reclamo total $S$ puede ser expresado de dos formas
+\begin{equation}
+S = \sum\limits_{k=0}^{N} X_k
+= \sum\limits_{k=0}^n B_k X_k
+\end{equation}
+donde $B_k \rightsquigarrow Ber( p )$ y es independientes de $X_k$. Así el modelo colectivo se 
+transforma en un modelo individual con $n$ constante y valores de reclamos individuales dados por 
+la variable aleatoria $Y_k = B_k X_k$.
+
+Para este caso en particular
+\begin{eqnarray*}
+\mathbb{E}[ S ] 
+& = & \mathbb{E}\left[ \sum\limits_{k=0}^{n} B_k X_k \right] \\
+& = & \sum\limits_{k=0}^{n} \mathbb{E}\left[ B_k X_k \right] \\
+& = & n \mathbb{E}[ B X ] \\
+& = & n \mathbb{E}[ B ] \mathbb{E}[ X ] \\
+& = & n p \mathbb{E}[ X ]
+\end{eqnarray*}
+
+así mismo,
+\begin{eqnarray*}
+\mathbb{V}[ S ]
+& = & n \mathbb{V}[ B X ] \\
+& = & n \left( \mathbb{E}[ B^2 X^2 ] - \mathbb{E}[ B X ]^2 \right) \\
+& = & n \left( \mathbb{E}[ B^2 ] \mathbb{E}[ X^2 ] - \mathbb{E}[ B ]^2 \mathbb{E}[ X ]^2 \right) \\
+& = & n \left( p \mathbb{E}[ X^2 ] - p^2 \mathbb{E}[ X ]^2 \right) \\
+& = & n \left( p \mathbb{E}[ X^2 ] - p \mathbb{E}[ X ]^2 + p \mathbb{E}[ X ]^2  - p^2 \mathbb{E}[ X ]^2 \right) \\
+& = & n \left( p \mathbb{V}[ X ] + p ( 1 - p ) \mathbb{E}[ X ]^2 \right) \\
+& = & n \left( \mathbb{E}[B] \mathbb{V}[ X ] + \mathbb{V}[B] \mathbb{E}[ X ]^2 \right)
+\end{eqnarray*}
+
+::: {.example #l3ex3}
+Hacemos uso del algoritmo de simulación, pero bajo la consideración anterior donde el conteo 
+de siniestros $N \rightsquigarrow Bin( n, p )$, en algunos casos se puede considerar $n$ como el 
+número de pólizas vendidas, esto supone que solo se presenta un reclamo por póliza. Por su parte los
+reclamos consideraremos  $X_i \rightsquigarrow LN( \mu, \sigma )$, para todo $i \in \{1,\ldots,n\}$. 
+Si consideramos generar la simulación como un modelo individual, generamos variables aleatorias
+$B_i \rightsquigarrow Ber(p)$, para todo $i \in \{1,\ldots,n\}$.
+```{r l3c6}
+m <- 1e4
+n <- 1000
+p <- 0.2
+mu <- 5
+sigma <- 2
+B <- lapply( 1:m, FUN = function( i ) rbinom( n, size = 1, prob = p ) )
+X <- lapply( 1:m, FUN = function( i ) rlnorm( n, meanlog = mu, sdlog = sigma ) )
+S <- sapply( 1:m, FUN = function( i ) sum( B[[ i ]] * X[[ i ]], na.rm = TRUE ) )
+
+EeS <- mean( S )
+ES <- n * p * exp( mu + 0.5 * sigma^2 )
+```
+
+\begin{eqnarray*}
+\mathbb{E}[S] = n p e^{ \mu + \frac{1}{2} \sigma^2 } & = & `r formatC( ES, digits = 4, format = 'f' )`, \\
+\overline{S} = \frac{1}{m} \sum\limits_{i=1}^m S_i & = & `r formatC( EeS, digits = 4, format = 'f' )`, 
+\end{eqnarray*}
+:::
+
+Es importante observar que si la frecuencia de reclamos es superior a $1$, sea este por póliza, 
+individuo o en general por unidad asegurada, la aproximación anterior no es la correcta si no 
+se realiza un ajuste al valor $n$ que es el número máximo de siniestros. Además, hay un gasto 
+innecesario de valores simulados de reclamos $X_i$ ya que algunos se multiplicaran por $B_i$, la 
+cual solo toma valores $\{0,1\}$.
+
+
+<!------------------------------------------------------------------------------------------------->
+## Aplicación del deducible
+
+En muchas ocasiones según las condiciones de los contratos de seguro y el apetito de riesgo del 
+asegurador, se configura funciones deducibles sobre los reclamos.
+
+```{r l3c7}
+# 1. selección de simulaciones
+m <- 1e4
+
+# 2. especificación de los parámetros para las distribuciones
 u <- 5
 s <- 2
-l <- 5
+l <- 3
+
+# 3. se especifica la función deducible
+D <- function( x, d, M ) {
+  return( min( max( x - d, 0 ), M ) )
+}
+
+# 4. simulación del conteo de siniestros
 N <- rpois( n = m, lambda = l )
-X <- lapply( 1:m, FUN = function( i ) rlnorm( N[i], meanlog = u, sdlog = s ) )
+
+# 5. simulación de la severidad de los reclamos
+X <- lapply( N, FUN = function( n ) rlnorm( n, meanlog = u, sdlog = s ) )
+
+# 6. se aplica el deducible a los reclamos
 DX <- lapply( X, FUN = function( x ) sapply( x, FUN = function( y ) D( y, 10, 1000 ) ) )
-S <- sapply( X, FUN = function( x ) sum( x ) )
-plot( sort( S ) )
+
+# 7. reclamo total, agregación por cada simulación
+S <- sapply( DX, FUN = function( x ) ifelse( length( x ) == 0, 0, sum( x, na.rm = TRUE ) ) )
 ```
 
 $S_1, \ldots, S_m \rightsquigarrow F_S$
-```{r l3c6}
+```{r l3c8}
 FS <- seq( 0, 1, 0.01 )
 Sq <- quantile( S, probs = FS )
 ES <- mean( S )
@@ -376,16 +486,11 @@ plot( Sq, FS, type = 's', col = 'darkgreen' )
 abline( v = ES, col = 'red' )
 ```
 
-\begin{equation}
-\mathbb{E}[ S ] = \int_{\mathbb{R}_+} f_S( x )\ dx \approx \frac{1}{m} \sum\limits_{i=1}^m S_i
-\end{equation}
-
-
-::: {.example #l3ex3}
+::: {.example #l3ex4}
 En este caso en particular estudiaremos la velocidad de convergencia del método resultante del 
 teorema del límite central \@ref(thm:tlc). Generaremos una simulación aleatoria de la suma
 agregada $S_n$ y mostraresmo s
-```{r l3c7}
+```{r l3c9}
 m <- 500
 n <- 5000
 u <- 4
@@ -412,7 +517,7 @@ points( 1:n, Bn, type = 'l', lty = 1, col = 'red' )
 :::
 
 
-```{r l3c8}
+```{r l3c10}
 l <- 3
 n <- 300
 dt <- rexp( n = n, rate = 1 / l )
@@ -429,9 +534,9 @@ plot( t, S, type = 's' )
 ```
 
 
+<!------------------------------------------------------------------------------------------------->
 ## Medidas de riesgo
 
-<!------------------------------------------------------------------------------------------------->
 ::: {.definition #spv name="Medida de riesgo coherente"}
 Una **medida de riesgo coeherente** es una función $\zeta: \mathbb{R} \longrightarrow \mathbb{R}$, 
 que satisface la siguientes propiedades:
@@ -465,7 +570,7 @@ VaR_{\alpha}( X ) = F_X^{-1}( \alpha )
 TVaR_{\alpha}( X ) = \frac{1}{1-\alpha} \int\limits_{\alpha}^1 VaR_u( X )\ du
 \end{equation}
 
-```{r l3c9}
+```{r l3c11}
 u <- 4
 s <- 0.5
 n <- 1e4
@@ -483,7 +588,7 @@ hist( X, breaks = 100, xlim = c( 0, 1.1 * max( X ) ) )
 abline( v = TVaRX, col = 'blue' )
 ```
 
-```{r l3c10}
+```{r l3c12}
 plot( k, VaRX, ylim = c( 0, 1e3 ) )
 points( k, TVaRX, col = 'red' )
 ```
