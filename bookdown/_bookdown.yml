@@ -6,4 +6,20 @@ output_dir: "docs"
 language:
   ui:
     chapter_name: "Capítulo "
+  label:
+    fig: 'Figura '
+    tab: 'Tabla '
+    eq: 'Ecuación '
+    thm: 'Teorema '
+    lem: 'Lema '
+    cor: 'Corolario '
+    prp: 'Proposición '
+    cnj: 'Conjetura '
+    def: 'Definición '
+    exm: 'Ejemplo '
+    exr: 'Ejercicio '
+    hyp: 'Hipótesis '
+    proof: 'Demostración. '
+    remark: 'Observación. '
+    solution: 'Solución. '
 
