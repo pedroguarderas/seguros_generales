@@ -53,7 +53,8 @@ algoritmo-de-simulación
 modelo-colectivo
 algoritmo-de-simulación-1
 aplicación-del-deducible
-medidas-de-riesgo
+algoritmo-de-panjer
+estimación-usando-la-transformada-de-fourier
 series-de-tiempo
 distribuciones-de-conteo-discretas
 distribuciones-continuas
@@ -61,6 +62,7 @@ familia-de-panjer
 tarificación
 prima
 segmentación
+medidas-de-riesgo
 deducibles
 modelos-lineales-generalizados-glm
 familia-exponencial

@@ -201,7 +201,8 @@ div.csl-indent {
 <li class="chapter" data-level="3.5.1" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html#algoritmo-de-simulación-1"><i class="fa fa-check"></i><b>3.5.1</b> Algoritmo de simulación</a></li>
 </ul></li>
 <li class="chapter" data-level="3.6" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html#aplicación-del-deducible"><i class="fa fa-check"></i><b>3.6</b> Aplicación del deducible</a></li>
-<li class="chapter" data-level="3.7" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html#medidas-de-riesgo"><i class="fa fa-check"></i><b>3.7</b> Medidas de riesgo</a></li>
+<li class="chapter" data-level="3.7" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html#algoritmo-de-panjer"><i class="fa fa-check"></i><b>3.7</b> Algoritmo de Panjer</a></li>
+<li class="chapter" data-level="3.8" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html#estimación-usando-la-transformada-de-fourier"><i class="fa fa-check"></i><b>3.8</b> Estimación usando la transformada de Fourier</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="series-de-tiempo.html"><a href="series-de-tiempo.html"><i class="fa fa-check"></i><b>4</b> Series de tiempo</a>
 <ul>
@@ -213,7 +214,8 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="5.1" data-path="tarificación.html"><a href="tarificación.html#prima"><i class="fa fa-check"></i><b>5.1</b> Prima</a></li>
 <li class="chapter" data-level="5.2" data-path="tarificación.html"><a href="tarificación.html#segmentación"><i class="fa fa-check"></i><b>5.2</b> Segmentación</a></li>
-<li class="chapter" data-level="5.3" data-path="tarificación.html"><a href="tarificación.html#deducibles"><i class="fa fa-check"></i><b>5.3</b> Deducibles</a></li>
+<li class="chapter" data-level="5.3" data-path="tarificación.html"><a href="tarificación.html#medidas-de-riesgo"><i class="fa fa-check"></i><b>5.3</b> Medidas de riesgo</a></li>
+<li class="chapter" data-level="5.4" data-path="tarificación.html"><a href="tarificación.html#deducibles"><i class="fa fa-check"></i><b>5.4</b> Deducibles</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="modelos-lineales-generalizados-glm.html"><a href="modelos-lineales-generalizados-glm.html"><i class="fa fa-check"></i><b>6</b> Modelos lineales generalizados (GLM)</a>
 <ul>
@@ -265,12 +267,12 @@ P( N = k ) = e^{-\lambda} \frac{\lambda^k}{k!}, \qquad
 \end{equation}\]</span></p>
 </div>
 <p></p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb22-1"><a href="series-de-tiempo.html#cb22-1"></a>lambda <span class="ot">&lt;-</span> <span class="dv">2</span></span>
-<span id="cb22-2"><a href="series-de-tiempo.html#cb22-2"></a>n <span class="ot">&lt;-</span> <span class="dv">10</span></span>
-<span id="cb22-3"><a href="series-de-tiempo.html#cb22-3"></a>k <span class="ot">&lt;-</span> <span class="dv">2</span></span>
-<span id="cb22-4"><a href="series-de-tiempo.html#cb22-4"></a>N <span class="ot">&lt;-</span> <span class="fu">rpois</span>( <span class="at">n =</span> n, <span class="at">lambda =</span> lambda ) <span class="co"># simular una muestra de tamaño n, N sigue Pois( lambda )</span></span>
-<span id="cb22-5"><a href="series-de-tiempo.html#cb22-5"></a>pk <span class="ot">&lt;-</span> <span class="fu">dpois</span>( k, <span class="at">lambda =</span> lambda ) <span class="co"># cálculo de probabilidad P( N = k )</span></span>
-<span id="cb22-6"><a href="series-de-tiempo.html#cb22-6"></a>Pk <span class="ot">&lt;-</span> <span class="fu">ppois</span>( k, <span class="at">lambda =</span> lambda ) <span class="co"># cálculo de probabilidad P( N &lt;= k )</span></span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb19-1"><a href="series-de-tiempo.html#cb19-1"></a>lambda <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb19-2"><a href="series-de-tiempo.html#cb19-2"></a>n <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb19-3"><a href="series-de-tiempo.html#cb19-3"></a>k <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb19-4"><a href="series-de-tiempo.html#cb19-4"></a>N <span class="ot">&lt;-</span> <span class="fu">rpois</span>( <span class="at">n =</span> n, <span class="at">lambda =</span> lambda ) <span class="co"># simular una muestra de tamaño n, N sigue Pois( lambda )</span></span>
+<span id="cb19-5"><a href="series-de-tiempo.html#cb19-5"></a>pk <span class="ot">&lt;-</span> <span class="fu">dpois</span>( k, <span class="at">lambda =</span> lambda ) <span class="co"># cálculo de probabilidad P( N = k )</span></span>
+<span id="cb19-6"><a href="series-de-tiempo.html#cb19-6"></a>Pk <span class="ot">&lt;-</span> <span class="fu">ppois</span>( k, <span class="at">lambda =</span> lambda ) <span class="co"># cálculo de probabilidad P( N &lt;= k )</span></span></code></pre></div>
 <p></p>
 <div class="definition">
 <p><span id="def:dnbinom" class="definition"><strong>Definición 4.3  (Distribución binomial negativa) </strong></span>Una variable aleatoria <span class="math inline">\(N\)</span> que toma valores en <span class="math inline">\(\mathbb{N}\)</span> se dice que sigue una distribución
