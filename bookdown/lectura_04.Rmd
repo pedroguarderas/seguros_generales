@@ -25,4 +25,5 @@ Las únicas leyes de probabilidad que satisfacen la relación de recurrencia ant
 positivo.
 :::
 
-Para una demostración detallada de la proposición anterior se puede consultar @MathAssuNV1.
+Para una demostración detallada de la proposición anterior se puede consultar @MathAssuNV1 o 
+en https://nonlifemaths.github.io/.
