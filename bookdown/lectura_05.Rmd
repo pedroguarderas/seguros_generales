@@ -1,50 +1,80 @@
 # Tarificación
 
 ## Prima
-
 La prima es la cantidad de dinero que un individuo o entidad pagan por una póliza de seguro, la cual
 está diseñada para cubrir ciertos riesgos personales o comerciales.
 
+La determinación de las primas por parte del asegurador hace uso de la mutualización del riesgo y
+diversificación, para así poder asumir la transferencia del riesgo por parte de sus asegurados. Así
+por tanto, es deseable que cualquier método que se utilice para la estimación de primas, se 
+satisfaga, algunas propiedades importantes.
+
+Sin consideramos dos riesgos a cubrir $S_1$ y $S_2$, entonces la función que estima $\rho$ las primas 
+sería aconsejable satisfaga las siguientes propiedades.
+
+1. Si se decide cobrir por compleo dos riesgos $S_1$ y $S_2$ en un mismo producto, el valor de la 
+prima deberá ser menor o igual al valor que se resultaría de cubrir cada uno de los riesgos con 
+productos separados.
 \begin{equation}
-P = \frac{S}{n}
+\rho( S_1 + S_2 ) \leq \rho( S_1 ) + \rho( S_2 )
 \end{equation}
+
+2. El asumir mayor riesgo debe tener como consecuencia el aumento de la prima
+\begin{equation}
+\rho( S_1 ) \leq \rho( S_1 + S_2 )
+\end{equaiton}
+Esta propiedad implica que al configurar un producto de seguro con mejor cobertura, se espera 
+una prima de mayor costo.
+
+3. Si el riesgo a cubrir está limitado, es decir $P( S \leq M ) = 1$, para un valor $M > 0$, 
+entonces jamás la prima será superior a $M$
+\begin{equation}
+\rho( S ) \leq M
+\end{equation}
+Esto se traduce a que ningún asegurado estará interesado en adquirir una póliza para cubrir un 
+riesgo por encima del valor total asegurado.
+
+
+Es así que hay algunos principios para la estimación de primas, aquí citamos algunos de los más 
+conocidos:
 
 1. Prima neta, o prima pura de riesgo
 \begin{equation}
-  P = \mathbb{E}[S]
+  \rho( S ) = \mathbb{E}[S]
 \end{equation}
 
-2. Prima de riesgo con recargo sobre la esperanza
+2. Prima de riesgo con recargo sobre la esperanza matemática
 \begin{equation}
-  P = (1 + \rho) \mathbb{E}[S]
+  P = \rho( S ) = (1 + \rho) \mathbb{E}[S]
 \end{equation}
 
 3. Prima de riesgo con recargo sobre la varianza
 \begin{equation}
-  P = \mathbb{E}[S] + \rho \mathbb{V}[S]
+  P = \rho( S ) = \mathbb{E}[S] + \rho \mathbb{V}[S]
 \end{equation}
 
 4. Prima de riesgo con recargo sobre la desviación
 \begin{equation}
-  P = \mathbb{E}[S] + \rho \sqrt{\mathbb{V}[S]}
+  P = \rho( S ) = \mathbb{E}[S] + \rho \sqrt{\mathbb{V}[S]}
 \end{equation} 
 
 5. Prima de riesgo con principio exponencial para $t > 0$
 \begin{equation}
-  P = \frac{1}{2} \mathbb{E}\left[e^{tS}\right]
+  P = \rho( S )
+  = \frac{1}{2} \mathbb{E}\left[e^{tS}\right]
   = \frac{1}{2} M_N\big( \ln M_X( t ) \big)
 \end{equation}
 
 6. Prima de percentiles para un valor de confianza $\alpha \in [0,1]$ o prima de valor en riesgo 
 $VaR_\alpha$
 \begin{equation}
-  P = VaR_\alpha( S ) =  F_S^{-1}( \alpha )
+  P = \rho( S ) = VaR_\alpha( S ) =  F_S^{-1}( \alpha )
 \end{equation}
 
 7. Prima de valor en riesgo en la cola (Tail Value at Risk) $TVaR_\alpha$. Es el promedio uniforme
 de todos los valores en riesgo $VaR_u$, con $u \geq \alpha$.
 \begin{equation}
-P = TVaR_\alpha( S ) = \frac{1}{1-\alpha} \int\limits_{\alpha}^1 VaR_u( S )\ du
+P = \rho( S ) = TVaR_\alpha( S ) = \frac{1}{1-\alpha} \int\limits_{\alpha}^1 VaR_u( S )\ du
 \end{equation}
 
 
@@ -118,6 +148,15 @@ points( s, Fns + er, col = 'red', type = 'l' )
 
 hist( pgamma( S, shape = A, scale = theta ), breaks = 5 )
 ```
+
+<!------------------------------------------------------------------------------------------------->
+## Segmentación
+
+En muchas ocasiones es necesario tener en cuenta algunas características asociadas al riesgo 
+de asegurado, de tal forma que la prima sea lo más eficiente y adecuado según el riesgo cubierto y
+las características del mismo. La idea de segmentar la población es obtener grupos homogéneos 
+con riesgos similares.
+
 
 <!------------------------------------------------------------------------------------------------->
 ## Deducibles
