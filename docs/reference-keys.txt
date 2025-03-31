@@ -17,6 +17,7 @@ thm:pbh
 exm:l3ex1
 exm:l3ex2
 exm:l3ex3
+exm:l3ex4
 def:dbinom
 def:dpois
 def:dnbinom
@@ -31,6 +32,7 @@ materia
 resultados-de-aprendizaje
 contenidos-propuestos
 consideraciones-preliminares
+consideraciones-de-matemáticas
 consideraciones-de-probabilidades
 desigualdades-de-concentración
 consideraciones-estadísticas
@@ -50,6 +52,7 @@ modelo-individual
 algoritmo-de-simulación
 modelo-colectivo
 algoritmo-de-simulación-1
+aplicación-del-deducible
 medidas-de-riesgo
 series-de-tiempo
 distribuciones-de-conteo-discretas
