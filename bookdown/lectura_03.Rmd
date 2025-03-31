@@ -135,8 +135,8 @@ Así mismo con la varianza de $S$.
 & = & \sum\limits_{i=1}^n \mathbb{V}\left[ X_i \right]\quad \text{por independencia entre $X_i$ y $X_j$}
 \end{eqnarray*}
 
-
-### Algorimo de simulación
+<!------------------------------------------------------------------------------------------------->
+### Algoritmo de simulación
 Se puede simular la severidad total $S$ para el caso donde se asume independencia entre cada una 
 de las severidades $X_1, \ldots, X_n$ y se conoce cada una de sus densidades de probabilidad
 $f_{X_1}, \ldots, f_{X_n}$ o distribuciones de probabilidad $F_{X_1}, \ldots, F_{X_n}$.
@@ -226,6 +226,22 @@ De ello tenemos los siguientes resultados de cálculo para el valor esperado de 
 \sum\limits_{i=1}^N s_{i} \left( F_m( s_{i+1} ) - F_m( s_{i} ) \right) & = & `r round( EmS, 4 )`
 \end{eqnarray*}
 
+La distribución acumulada de la variable aleatoria correspondiente al reclamo total $S$, para el
+caso del modelo individual toma la forma:
+\begin{eqnarray*}
+F_S( s ) 
+& = & P( S \leq s ) \\
+& = & P\left( \sum\limits_{i=1}^n X_i \leq s \right) \\
+& = & F_{X_1} \star \cdots \star F_{X_n}( s )\quad \text{distribución de la suma de variables aleatorias} \\
+& = & F^{\star n}_{X}( s ) \quad \text{si $\{X_i\}$ son idénticamente distribuidas}
+\end{eqnarray*}
+
+Es sencillo determinar que la densidad de probabilidad de $S$, está dado por el producto de convolución
+\begin{eqnarray*}
+f_S( s ) & = & f_{X_1} \star \cdots \star f_{X_n}( s )\quad \text{densidad de la suma de variables aleatorias} \\
+& = & f^{\star n}_{X}( s ) \quad \text{si $\{X_i\}$ son idénticamente distribuidas} 
+\end{eqnarray*}
+
 ::: {.example #l3ex2}
 Podemos considerar el caso sencillo donde el valor posible de severidad es determinista, es decir
 para cada póliza $i\in \{1,\ldots,n\}$, el valor de severidad probable es único $M > 0$ si en caso 
@@ -279,12 +295,26 @@ El valor esperado del total de reclamos $S$, está dado por:
 & = & \sum\limits_{n=1}^{+\infty} \sum\limits_{i=1}^n \mathbb{E}\left[ X_i \mid N = n \right]P( N = n )\quad
 \text{linealidad de la esperanza} \\
 & = & \sum\limits_{n=0}^{+\infty} n \mathbb{E}\left[ X \mid N = n \right]P( N = n )\quad
-\text{si $\{X_i\}$ son identicamente distribuidas} \\
+\text{si $\{X_i\}$ son idénticamente distribuidas} \\
 & = & \mathbb{E}\left[ X \right] \sum\limits_{n=0}^{+\infty} n P( N = n )\quad
 \text{si $X$ y $N$ son independientes} \\
 & = & \mathbb{E}[ X ] \mathbb{E}[ N ]
 \end{eqnarray*}
 
+La distribución acumulada del reclamo total $S$ tiene la forma:
+\begin{eqnarray*}
+F_S( s ) 
+& = & P( S \leq s ) \\
+& = & P\left( \sum\limits_{i=1}^N X_i \leq s \right) \\
+& = & \sum\limits_{n=0}^{+\infty} P\left( \sum\limits_{i=1}^n X_i \leq s \middle| N = n \right) P( N = n )\quad \text{utilizando la probabilidad condicional} \\
+& = & \sum\limits_{n=0}^{+\infty} P\left( \sum\limits_{i=1}^n X_i \leq s \right) p_n\quad \text{si $X_i$ y $N$ son independientes} \\
+& = & \sum\limits_{n=0}^{+\infty} F_{X_1} \star \cdots \star F_{X_n}( s ) p_n\quad \text{distribución de la suma de variables aleatorias} \\
+& = & \sum\limits_{n=0}^{+\infty} F^{\star n}_{X}( s ) p_n\quad \text{si $\{X_i\}$ son idénticamente distribuidas} \\
+\end{eqnarray*}
+tomando $F^{\star 0}_{X}( s ) = 1$
+
+<!------------------------------------------------------------------------------------------------->
+### Algoritmo de simulación
 La variable del reclamo total $S$ puede ser simulada mediante el siguiente método montecarlo.
 Si $N$ sigue una ley discreta $f_N$ y cada valor severidad $X$ son idénticamente distribuidos 
 con ley $f_X$.
@@ -316,6 +346,10 @@ S <- sapply( X, FUN = function( x ) sum( x, na.rm = TRUE ) )
 plot( sort( S ) )
 ```
 :::
+
+Es de notar que una algoritmo como el descrito tienen una falencia cuando la frecuencia de siniestros
+es poco observada, esto sucede cuando $P( N = 0 )$ es alta y por tal razón para tener cálculos con 
+una buena aproximación mediante el uso de simulaciones se necesitará un gran número de las mismas.
 
 ```{r l3c5}
 D <- function( x, m, M ) {
