@@ -157,6 +157,65 @@ de asegurado, de tal forma que la prima sea lo más eficiente y adecuado según 
 las características del mismo. La idea de segmentar la población es obtener grupos homogéneos 
 con riesgos similares.
 
+<!------------------------------------------------------------------------------------------------->
+## Medidas de riesgo
+
+::: {.definition #spv name="Medida de riesgo coherente"}
+Una **medida de riesgo coeherente** es una función $\zeta: \mathbb{R} \longrightarrow \mathbb{R}$, 
+que satisface la siguientes propiedades:
+
+1. **Homogenidad positiva**, para cualquier $a > 0$
+\begin{equation}
+\zeta( a X ) = a \zeta( X )
+\end{equation}
+
+2. **Invarianza ante las traslaciones**, para cualquier $a > 0$
+\begin{equation}
+\zeta( \alpha X + a ) = \zeta( \alpha X ) + a
+\end{equation}
+
+3. **Monotonicidad**, Si $X \leq Y$
+\begin{equation}
+\zeta( X ) \leq \zeta( Y )
+\end{equation}
+
+4. **Sub-aditividad**
+\begin{equation}
+\zeta( X + Y ) \leq \zeta( X ) + \zeta( Y )
+\end{equation}
+:::
+
+\begin{equation}
+VaR_{\alpha}( X ) = F_X^{-1}( \alpha )
+\end{equation}
+
+\begin{equation}
+TVaR_{\alpha}( X ) = \frac{1}{1-\alpha} \int\limits_{\alpha}^1 VaR_u( X )\ du
+\end{equation}
+
+```{r l5c4}
+u <- 4
+s <- 0.5
+n <- 1e4
+X <- rlnorm( n, meanlog = u, sdlog = s )
+k <- seq( 0, 1, 0.2 ) 
+VaRX <- quantile( X, probs = k, names = FALSE )
+TVaRX <- sapply( 
+  1:length( VaRX ), 
+  FUN = function( i ) ifelse( k[ i ] < 1, ( 1 / ( 1 - k[ i ] ) ) * mean( X * ( X > VaRX[ i ] ) ), max( X ) ) )
+
+hist( X, breaks = 100, xlim = c( 0, 1.1 * max( X ) ) )
+abline( v = VaRX, col = 'red' )
+
+hist( X, breaks = 100, xlim = c( 0, 1.1 * max( X ) ) )
+abline( v = TVaRX, col = 'blue' )
+```
+
+```{r l5c5}
+plot( k, VaRX, ylim = c( 0, 1e3 ) )
+points( k, TVaRX, col = 'red' )
+```
+
 
 <!------------------------------------------------------------------------------------------------->
 ## Deducibles
@@ -180,7 +239,7 @@ the policyholder to pay it himself;
 they may prefer to take a higher deductible to get a lower premium.
 
 
-```{r l5c4}
+```{r l5c6}
 n <- 1e5
 l <- 3
 dat <- data.table( id = 1:n, k = rpois( n, lambda = l )  )
@@ -192,7 +251,7 @@ datf <- datf[ !is.na( gk ) ]
 plot( datf$k, datf$gk )
 ```
 
-```{r l5c5}
+```{r l5c7}
 dflm <- lm( formula = gk ~ k, data = datf, method = 'qr' )
 a <- coef( dflm )[ 2 ]
 b <- coef( dflm )[ 1 ]
@@ -205,7 +264,7 @@ sum( dpois( k, lambda = l ) )
 EN <- sum( k * p )
 ```
 
-```{r l5c6}
+```{r l5c8}
 D <- function( x, d ) return( max( x - d, 0 ) )
 d <- 100
 u <- 6
@@ -223,7 +282,7 @@ points( x, FDx, type = 's', col = 'blue' )
 ```
 
 
-```{r l5c7}
+```{r l5c9}
 D <- function( x, M ) return( min( x, M ) )
 M <- 600
 u <- 6
