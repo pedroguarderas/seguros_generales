@@ -23,7 +23,7 @@
 <meta name="author" content="" />
 
 
-<meta name="date" content="2025-03-26" />
+<meta name="date" content="2025-03-31" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -191,13 +191,18 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="3.2" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html#reservas-técnicas"><i class="fa fa-check"></i><b>3.2</b> Reservas técnicas</a></li>
 <li class="chapter" data-level="3.3" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html#mutualización-del-riesgo"><i class="fa fa-check"></i><b>3.3</b> Mutualización del riesgo</a></li>
-<li class="chapter" data-level="3.4" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html#modelo-individual"><i class="fa fa-check"></i><b>3.4</b> Modelo individual</a></li>
+<li class="chapter" data-level="3.4" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html#modelo-individual"><i class="fa fa-check"></i><b>3.4</b> Modelo individual</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html#algorimo-de-simulación"><i class="fa fa-check"></i><b>3.4.1</b> Algorimo de simulación</a></li>
+</ul></li>
 <li class="chapter" data-level="3.5" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html#modelo-colectivo"><i class="fa fa-check"></i><b>3.5</b> Modelo colectivo</a></li>
 <li class="chapter" data-level="3.6" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html#medidas-de-riesgo"><i class="fa fa-check"></i><b>3.6</b> Medidas de riesgo</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="series-de-tiempo.html"><a href="series-de-tiempo.html"><i class="fa fa-check"></i><b>4</b> Series de tiempo</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="series-de-tiempo.html"><a href="series-de-tiempo.html#familia-de-panjer"><i class="fa fa-check"></i><b>4.1</b> Familia de Panjer</a></li>
+<li class="chapter" data-level="4.1" data-path="series-de-tiempo.html"><a href="series-de-tiempo.html#distribuciones-de-conteo-discretas"><i class="fa fa-check"></i><b>4.1</b> Distribuciones de conteo, discretas</a></li>
+<li class="chapter" data-level="4.2" data-path="series-de-tiempo.html"><a href="series-de-tiempo.html#distribuciones-continuas"><i class="fa fa-check"></i><b>4.2</b> Distribuciones continuas</a></li>
+<li class="chapter" data-level="4.3" data-path="series-de-tiempo.html"><a href="series-de-tiempo.html#familia-de-panjer"><i class="fa fa-check"></i><b>4.3</b> Familia de Panjer</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="tarificación.html"><a href="tarificación.html"><i class="fa fa-check"></i><b>5</b> Tarificación</a>
 <ul>
@@ -231,10 +236,110 @@ div.csl-indent {
             <section class="normal" id="section-">
 <div id="series-de-tiempo" class="section level1 hasAnchor" number="4">
 <h1><span class="header-section-number">Capítulo 4</span> Series de tiempo<a href="series-de-tiempo.html#series-de-tiempo" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div id="familia-de-panjer" class="section level2 hasAnchor" number="4.1">
-<h2><span class="header-section-number">4.1</span> Familia de Panjer<a href="series-de-tiempo.html#familia-de-panjer" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<!------------------------------------------------------------------------------------------------->
+<div id="distribuciones-de-conteo-discretas" class="section level2 hasAnchor" number="4.1">
+<h2><span class="header-section-number">4.1</span> Distribuciones de conteo, discretas<a href="series-de-tiempo.html#distribuciones-de-conteo-discretas" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div class="definition">
-<p><span id="def:fampanjer" class="definition"><strong>Definition 4.1  (Familia de Panjer) </strong></span>Una variable aleatoria discreta <span class="math inline">\(N\)</span>, que toma valores enteros positivos <span class="math inline">\(N \in \mathbb{N}\)</span>, se dice
+<p><span id="def:dbinom" class="definition"><strong>Definition 4.1  (Distribución binomial) </strong></span>Una variable aleatoria <span class="math inline">\(N\)</span> que toma valores en <span class="math inline">\(\mathbb{N}\)</span> se dice que sigue una distribución
+o ley de binomial <span class="math inline">\(N \rightsquigarrow Bin( n, p )\)</span>, con parámetros <span class="math inline">\(n \in \mathbb{N}\)</span> y
+<span class="math inline">\(p \in [0, 1]\)</span>, si:
+<span class="math display">\[\begin{equation}
+P( N = k ) = \binom{n}{k} p^k ( 1 - p )^{n-k}, \qquad
+\forall k \in \{0,\ldots, n\}
+\end{equation}\]</span></p>
+</div>
+<p>En R se puede para trabajar con variables aleatorias de binomiales se puede utilizar las siguientes
+funciones</p>
+<div class="definition">
+<p><span id="def:dpois" class="definition"><strong>Definition 4.2  (Distribución de Poisson) </strong></span>Una variable aleatoria <span class="math inline">\(N\)</span> que toma valores en <span class="math inline">\(\mathbb{N}\)</span> se dice que sigue una distribución
+o ley de Poisson <span class="math inline">\(N \rightsquigarrow Pois( n, p )\)</span>, con parámetro <span class="math inline">\(\lambda \in \mathbb{R}\)</span>, si:
+<span class="math display">\[\begin{equation}
+P( N = k ) = e^{-\lambda} \frac{\lambda^k}{k!}, \qquad
+\forall k \in \mathbb{N}
+\end{equation}\]</span></p>
+</div>
+<p></p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb21-1"><a href="series-de-tiempo.html#cb21-1"></a>lambda <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb21-2"><a href="series-de-tiempo.html#cb21-2"></a>n <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb21-3"><a href="series-de-tiempo.html#cb21-3"></a>k <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb21-4"><a href="series-de-tiempo.html#cb21-4"></a>N <span class="ot">&lt;-</span> <span class="fu">rpois</span>( <span class="at">n =</span> n, <span class="at">lambda =</span> lambda ) <span class="co"># simular una muestra de tamaño n, N sigue Pois( lambda )</span></span>
+<span id="cb21-5"><a href="series-de-tiempo.html#cb21-5"></a>pk <span class="ot">&lt;-</span> <span class="fu">dpois</span>( k, <span class="at">lambda =</span> lambda ) <span class="co"># cálculo de probabilidad P( N = k )</span></span>
+<span id="cb21-6"><a href="series-de-tiempo.html#cb21-6"></a>Pk <span class="ot">&lt;-</span> <span class="fu">ppois</span>( k, <span class="at">lambda =</span> lambda ) <span class="co"># cálculo de probabilidad P( N &lt;= k )</span></span></code></pre></div>
+<p></p>
+<div class="definition">
+<p><span id="def:dnbinom" class="definition"><strong>Definition 4.3  (Distribución binomial negativa) </strong></span>Una variable aleatoria <span class="math inline">\(N\)</span> que toma valores en <span class="math inline">\(\mathbb{N}\)</span> se dice que sigue una distribución
+o ley de binomial negativa <span class="math inline">\(N \rightsquigarrow NBin( \alpha, p )\)</span>, con parámetro <span class="math inline">\(\alpha &gt; 0\)</span> y
+<span class="math inline">\(p \in (0,1)\)</span>, si:
+<span class="math display">\[\begin{equation}
+P( N = k ) = \binom{\alpha + k - 1}{k} p^\alpha ( 1 - p )^k
+= \frac{\Gamma( \alpha + k )}{\Gamma(k+1) \Gamma(\alpha)}p^\alpha ( 1 - p )^k, \qquad
+\forall k \in \mathbb{N}
+\end{equation}\]</span>
+donde <span class="math inline">\(\Gamma( \alpha ) = \int\limits_0^{+\infty} x^{\alpha - 1} e^{-x}\ dx\)</span>, <span class="math inline">\(\forall \alpha \geq 0\)</span></p>
+</div>
+<p>Asociado a estas distribuciones discretas existe un resultado de caracterización, el cual permite
+seleccionar la distribución de conteo.</p>
+<!------------------------------------------------------------------------------------------------->
+</div>
+<div id="distribuciones-continuas" class="section level2 hasAnchor" number="4.2">
+<h2><span class="header-section-number">4.2</span> Distribuciones continuas<a href="series-de-tiempo.html#distribuciones-continuas" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="definition">
+<p><span id="def:dunif" class="definition"><strong>Definition 4.4  (Distribución uniforme) </strong></span>Una variable aleatoria <span class="math inline">\(X\)</span> a valores reales, sigue una distribución uniforme
+<span class="math inline">\(X \rightsquigarrow Unif( a, b )\)</span> de parámetros <span class="math inline">\(a, b \in \mathbb{R}\)</span>, si su función de distribución
+acumulada es de la siguiente forma:
+<span class="math display">\[\begin{equation}
+F_X( x ) = \frac{x-a}{b-a} \mathbf{1}_{[a,b)}( x ) + \mathbf{1}_{[b,+\infty)}( x )
+\end{equation}\]</span>
+sin mucho esfuerzo se puede verificar que su densidad de probabilidad está dada por la función
+<span class="math display">\[\begin{equation}
+f_X( x ) = \frac{1}{b-a}\mathbf{1}_{[a,b]}( x )
+\end{equation}\]</span></p>
+</div>
+<div class="definition">
+<p><span id="def:dexp" class="definition"><strong>Definition 4.5  (Distribución exponencial) </strong></span>Una variable aleatoria <span class="math inline">\(X\)</span> a valores reales, sigue una distribución exponencial
+<span class="math inline">\(X \rightsquigarrow Exp( \lambda )\)</span> de parámetros <span class="math inline">\(\lambda &gt; 0\)</span>, si su función de distribución
+acumulada es de la siguiente forma:
+<span class="math display">\[\begin{equation}
+F_X( x ) = \mathbf{1}_{(0,+\infty)}( x ) \left( 1 - e^{-\lambda x} \right)
+\end{equation}\]</span>
+sin mucho esfuerzo se puede verificar que su densidad de probabilidad está dada por la función
+<span class="math display">\[\begin{equation}
+f_X( x ) = \mathbf{1}_{(0,+\infty)}( x ) \lambda e^{-\lambda x}
+\end{equation}\]</span></p>
+</div>
+<div class="definition">
+<p><span id="def:dnorm" class="definition"><strong>Definition 4.6  (Distribución normal) </strong></span>Una variable aleatoria <span class="math inline">\(X\)</span> a valores reales, sigue una distribución normal
+<span class="math inline">\(X \rightsquigarrow N( \mu, \sigma )\)</span> de parámetros <span class="math inline">\(\mu \in \mathbb{R}\)</span>, <span class="math inline">\(\sigma &gt; 0\)</span>, si su
+función de distribución acumulada es de la siguiente forma:
+<span class="math display">\[\begin{equation}
+F_X( x ) = \frac{1}{\sqrt{2\pi} \sigma} \int\limits_{-\infty}^x e^{-\frac{(y - \mu)^2}{\sigma^2}}\ dy
+\end{equation}\]</span>
+la densidad de probabilidad automáticamente está dada por la función:
+<span class="math display">\[\begin{equation}
+f_X( x ) = \frac{1}{\sqrt{2\pi}} e^{-\frac{(x - \mu)^2}{\sigma^2}}
+\end{equation}\]</span></p>
+</div>
+<div class="definition">
+<p><span id="def:dlnorm" class="definition"><strong>Definition 4.7  (Distribución log-normal) </strong></span>Una variable aleatoria <span class="math inline">\(X\)</span> a valores reales, sigue una distribución log-normal
+<span class="math inline">\(X \rightsquigarrow LN( \mu, \sigma )\)</span> de parámetros <span class="math inline">\(\mu &gt; 0\)</span>, <span class="math inline">\(\sigma &gt; 0\)</span>, si su
+función de distribución acumulada es de la siguiente forma:
+<span class="math display">\[\begin{equation}
+F_X( x ) = \frac{1}{\sqrt{2\pi} \sigma} \int\limits_{0}^{\ln(x)} e^{-\frac{(y - \mu)^2}{\sigma^2}}\ dy
+\end{equation}\]</span>
+la densidad de probabilidad automáticamente está dada por la función:
+<span class="math display">\[\begin{equation}
+f_X( x ) = \frac{1}{\sqrt{2\pi}} e^{-\frac{(\ln(x) - \mu)^2}{\sigma^2}}
+\end{equation}\]</span></p>
+</div>
+<p>En pocas, una variable aleatoria <span class="math inline">\(X \rightsquigarrow LN( \mu, \sigma )\)</span> sigue una distribución
+log-normal si y solamente si la variable aleatoria dada por su logaritmo <span class="math inline">\(\ln( X ) \rightsquigarrow N( \mu, \sigma )\)</span>
+sigue una distribución normal.</p>
+<!------------------------------------------------------------------------------------------------->
+</div>
+<div id="familia-de-panjer" class="section level2 hasAnchor" number="4.3">
+<h2><span class="header-section-number">4.3</span> Familia de Panjer<a href="series-de-tiempo.html#familia-de-panjer" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="definition">
+<p><span id="def:fampanjer" class="definition"><strong>Definition 4.8  (Familia de Panjer) </strong></span>Una variable aleatoria discreta <span class="math inline">\(N\)</span>, que toma valores enteros positivos <span class="math inline">\(N \in \mathbb{N}\)</span>, se dice
 que pertenece a la <strong>familia de Panjer</strong>, si sus probabilidades <span class="math inline">\(p_k = P( N = k )\)</span> para cada
 <span class="math inline">\(k \in \mathbb{N}\)</span>, satisfacen la siguiente relación de recurrencia.
 <span class="math display">\[\begin{equation}

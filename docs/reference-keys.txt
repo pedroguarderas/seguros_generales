@@ -17,6 +17,13 @@ thm:pbh
 exm:l3ex1
 exm:l3ex2
 exm:l3ex3
+def:dbinom
+def:dpois
+def:dnbinom
+def:dunif
+def:dexp
+def:dnorm
+def:dlnorm
 def:fampanjer
 prp:chfampanjer
 introducción
@@ -40,9 +47,12 @@ activos
 reservas-técnicas
 mutualización-del-riesgo
 modelo-individual
+algorimo-de-simulación
 modelo-colectivo
 medidas-de-riesgo
 series-de-tiempo
+distribuciones-de-conteo-discretas
+distribuciones-continuas
 familia-de-panjer
 tarificación
 prima
