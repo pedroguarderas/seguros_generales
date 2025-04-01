@@ -206,7 +206,7 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="4" data-path="series-de-tiempo.html"><a href="series-de-tiempo.html"><i class="fa fa-check"></i><b>4</b> Series de tiempo</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="series-de-tiempo.html"><a href="series-de-tiempo.html#distribuciones-de-conteo-discretas"><i class="fa fa-check"></i><b>4.1</b> Distribuciones de conteo, discretas</a></li>
+<li class="chapter" data-level="4.1" data-path="series-de-tiempo.html"><a href="series-de-tiempo.html#distribuciones-discretas"><i class="fa fa-check"></i><b>4.1</b> Distribuciones discretas</a></li>
 <li class="chapter" data-level="4.2" data-path="series-de-tiempo.html"><a href="series-de-tiempo.html#distribuciones-continuas"><i class="fa fa-check"></i><b>4.2</b> Distribuciones continuas</a></li>
 <li class="chapter" data-level="4.3" data-path="series-de-tiempo.html"><a href="series-de-tiempo.html#familia-de-panjer"><i class="fa fa-check"></i><b>4.3</b> Familia de Panjer</a></li>
 </ul></li>
@@ -533,26 +533,6 @@ P\left( \underset{x \in \mathbb{R}}{\sup} \left| F_n( x ) - F( x ) \right| &gt; 
 </div>
 <p>Como podemos notar el orden de convergencia del teorema es <span class="math inline">\(\sqrt{n}\)</span> en el tamaño de observaciones,
 esto quiere decir que la convergencia es menos que el orden lineal.</p>
-<!------------------------------------------------------------------------------------------------->
-<div class="definition">
-<p><span id="def:gdp" class="definition"><strong>Definición 2.11  (Distribución de Pareto generalizada) </strong></span><span class="math display">\[\begin{equation}
-G_{\varepsilon,\beta}( x ) =
-\left \{
-\begin{array}{ll}
-1 - \left( 1 + \varepsilon \frac{x}{\beta} \right)^{-\frac{1}{\varepsilon}}, \text{si}\ \varepsilon \neq 0 \\
-1 - e^{-\frac{x}{\beta}}, \text{si}\ \varepsilon = 0
-\end{array}
-\right.
-\end{equation}\]</span></p>
-</div>
-<div class="theorem">
-<p><span id="thm:pbh" class="theorem"><strong>Teorema 2.4  (Pickands-Balkema-De Haan) </strong></span>Sea <span class="math inline">\(F_u\)</span> la distribución de exceso asociada a la variable aleatoria <span class="math inline">\(X\)</span> y con umbral de
-condicionamiento <span class="math inline">\(u &gt; 0\)</span>. Entonces, para cualquier <span class="math inline">\(\varepsilon \in \mathbb{R}\)</span>.
-<span class="math display">\[\begin{equation}
-\underset{u \longrightarrow x}{\lim} \underset{x &gt; 0}{\sup}
-\left| F_u( x ) - G_{\varepsilon,\beta(u)( x )} \right| = 0
-\end{equation}\]</span></p>
-</div>
 <!------------------------------------------------------------------------------------------------->
 </div>
 <div id="consideraciones-financieras" class="section level2 hasAnchor" number="2.5">

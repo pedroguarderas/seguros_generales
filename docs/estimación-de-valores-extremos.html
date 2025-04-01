@@ -206,7 +206,7 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="4" data-path="series-de-tiempo.html"><a href="series-de-tiempo.html"><i class="fa fa-check"></i><b>4</b> Series de tiempo</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="series-de-tiempo.html"><a href="series-de-tiempo.html#distribuciones-de-conteo-discretas"><i class="fa fa-check"></i><b>4.1</b> Distribuciones de conteo, discretas</a></li>
+<li class="chapter" data-level="4.1" data-path="series-de-tiempo.html"><a href="series-de-tiempo.html#distribuciones-discretas"><i class="fa fa-check"></i><b>4.1</b> Distribuciones discretas</a></li>
 <li class="chapter" data-level="4.2" data-path="series-de-tiempo.html"><a href="series-de-tiempo.html#distribuciones-continuas"><i class="fa fa-check"></i><b>4.2</b> Distribuciones continuas</a></li>
 <li class="chapter" data-level="4.3" data-path="series-de-tiempo.html"><a href="series-de-tiempo.html#familia-de-panjer"><i class="fa fa-check"></i><b>4.3</b> Familia de Panjer</a></li>
 </ul></li>
@@ -244,6 +244,9 @@ div.csl-indent {
             <section class="normal" id="section-">
 <div id="estimación-de-valores-extremos" class="section level1 hasAnchor" number="7">
 <h1><span class="header-section-number">Capítulo 7</span> Estimación de valores extremos<a href="estimación-de-valores-extremos.html#estimación-de-valores-extremos" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div class="definition">
+<p><span id="def:dmaxstab" class="definition"><strong>Definición 7.1  (Familia max-estable) </strong></span>dd</p>
+</div>
 <div class="theorem">
 <p><span id="thm:tftg" class="theorem"><strong>Teorema 7.1  (Fisher-Tippett-Gnedenko) </strong></span>Si consideramos una secuencia de variables aleatorias <span class="math inline">\(\{X_i\}_{i\in \mathbb{N}}\)</span> las mismas
 son i.i.d, con distribución acumulada <span class="math inline">\(F\)</span>. Entonces, si existen dos sucesiones de valores reales
@@ -257,11 +260,19 @@ que:
 tenemos que <span class="math inline">\(G\)</span> es una de las siguientes distribuciones acumuladas:</p>
 <ol style="list-style-type: decimal">
 <li><p><strong>Tipo I</strong>, una distribución de Gumbel <span class="math inline">\(G(x) = \exp( -\exp( -x ) ), x \in \mathbb{R}\)</span></p></li>
-<li><p><strong>Tipo II</strong>, una distribución de Frechet <span class="math inline">\(G( x ) = \exp( -x^{-\alpha} )\)</span>, para <span class="math inline">\(x \geq 0\)</span> y
+<li><p><strong>Tipo II</strong>, una distribución de Frechet <span class="math inline">\(G( x ) = \mathbf{1}_{(0,+\infty)}( x ) \exp( -x^{-\alpha} )\)</span>, para <span class="math inline">\(x \geq 0\)</span> y
 <span class="math inline">\(\alpha &gt; 0\)</span>,</p></li>
-<li><p><strong>Tipo III</strong>, una distribución de Weibull inversa <span class="math inline">\(G(x) = \exp( -( -x )^{\alpha} )\)</span>, para
+<li><p><strong>Tipo III</strong>, una distribución de Weibull inversa <span class="math inline">\(G(x) = \mathbf{1}_{(-\infty,0)}( x ) \exp( -( -x )^{\alpha} )\)</span>, para
 <span class="math inline">\(x \leq 0, \alpha &gt; 0\)</span></p></li>
 </ol>
+</div>
+<div class="theorem">
+<p><span id="thm:pbh" class="theorem"><strong>Teorema 7.2  (Pickands-Balkema-De Haan) </strong></span>Sea <span class="math inline">\(F_u\)</span> la distribución de exceso asociada a la variable aleatoria <span class="math inline">\(X\)</span> y con umbral de
+condicionamiento <span class="math inline">\(u &gt; 0\)</span>. Entonces, para cualquier <span class="math inline">\(\varepsilon \in \mathbb{R}\)</span>.
+<span class="math display">\[\begin{equation}
+\underset{u \longrightarrow x}{\lim} \underset{x &gt; 0}{\sup}
+\left| F_u( x ) - G_{\varepsilon,\beta(u)( x )} \right| = 0
+\end{equation}\]</span></p>
 </div>
 
 </div>
