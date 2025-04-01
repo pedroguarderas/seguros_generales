@@ -336,28 +336,6 @@ Como podemos notar el orden de convergencia del teorema es $\sqrt{n}$ en el tama
 esto quiere decir que la convergencia es menos que el orden lineal.
 
 <!------------------------------------------------------------------------------------------------->
-::: {.definition #gdp name="Distribución de Pareto generalizada"}
-\begin{equation}
-G_{\varepsilon,\beta}( x ) = 
-\left \{
-\begin{array}{ll}
-1 - \left( 1 + \varepsilon \frac{x}{\beta} \right)^{-\frac{1}{\varepsilon}}, \text{si}\ \varepsilon \neq 0 \\
-1 - e^{-\frac{x}{\beta}}, \text{si}\ \varepsilon = 0
-\end{array}
-\right.
-\end{equation}
-:::
-
-::: {.theorem #pbh name="Pickands-Balkema-De Haan"}
-Sea $F_u$ la distribución de exceso asociada a la variable aleatoria $X$ y con umbral de 
-condicionamiento $u > 0$. Entonces, para cualquier $\varepsilon \in \mathbb{R}$.
-\begin{equation}
-\underset{u \longrightarrow x}{\lim} \underset{x > 0}{\sup} 
-\left| F_u( x ) - G_{\varepsilon,\beta(u)( x )} \right| = 0
-\end{equation}
-::: 
-
-<!------------------------------------------------------------------------------------------------->
 ## Consideraciones financieras
 Antes de desarrollar el contenido propio del curso, debemos tener en cuenta algunas consideraciones
 financieras como las siguientes:
