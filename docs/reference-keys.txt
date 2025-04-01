@@ -12,10 +12,6 @@ prp:chebdes
 thm:bein
 thm:tlc
 thm:ddkw
-exm:l3ex1
-exm:l3ex2
-exm:l3ex3
-exm:l3ex4
 def:dbinom
 def:dpois
 def:dnbinom
@@ -27,6 +23,10 @@ def:dgpd
 def:dgev
 def:fampanjer
 prp:chfampanjer
+exm:l3ex1
+exm:l3ex2
+exm:l3ex3
+exm:l3ex4
 def:dmaxstab
 thm:tftg
 thm:pbh
@@ -45,6 +45,10 @@ flujos-financieros
 flujos-financieros-probables
 equilibrio-financiero
 consideraciones-de-programación-en-r
+distribuciones
+distribuciones-discretas
+distribuciones-continuas
+familia-de-panjer
 modelos-de-pérdida-agregada
 pasivos-y-activos-de-una-aseguradora
 pasivos
@@ -58,10 +62,6 @@ algoritmo-de-simulación-1
 aplicación-del-deducible
 algoritmo-de-panjer
 estimación-usando-la-transformada-de-fourier
-series-de-tiempo
-distribuciones-discretas
-distribuciones-continuas
-familia-de-panjer
 tarificación
 prima
 segmentación
@@ -70,6 +70,6 @@ deducibles
 modelos-lineales-generalizados-glm
 familia-exponencial
 modelo-lineal-generalizado-glm
+series-de-tiempo
 estimación-de-valores-extremos
-teoría-de-la-ruina
 bibliografía
