@@ -23,7 +23,7 @@
 <meta name="author" content="" />
 
 
-<meta name="date" content="2025-03-31" />
+<meta name="date" content="2025-04-01" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -342,6 +342,24 @@ f_X( x ) = \frac{1}{\sqrt{2\pi}} e^{-\frac{(\ln(x) - \mu)^2}{\sigma^2}}
 <p>En pocas, una variable aleatoria <span class="math inline">\(X \rightsquigarrow LN( \mu, \sigma )\)</span> sigue una distribución
 log-normal si y solamente si la variable aleatoria dada por su logaritmo <span class="math inline">\(\ln( X ) \rightsquigarrow N( \mu, \sigma )\)</span>
 sigue una distribución normal.</p>
+<div class="definition">
+<p><span id="def:dlnorm" class="definition"><strong>Definición 4.7  (Distribución de Pareto generalizada) </strong></span>Una variable aleatoria <span class="math inline">\(X\)</span> a valores reales, sigue una distribución de Pareto generalizada
+<span class="math inline">\(X \rightsquigarrow GPD( \mu, \sigma, \xi )\)</span> de parámetros <span class="math inline">\(\mu \in \mathbb{R}\)</span>, <span class="math inline">\(\sigma &gt; 0\)</span>,
+<span class="math inline">\(\xi \in \mathbb{R}\)</span>, si su función de distribución acumulada es de la siguiente forma:
+<span class="math display">\[\begin{equation}
+F_X( x ) =
+\left\{
+\begin{array}{ll}
+1 - \left( 1 + \xi \frac{x - \mu}{\sigma} \right)^{-\frac{1}{\xi}} &amp; \text{si}\ \xi \neq 0 \\
+1 - e^{-\frac{x-\mu}{\sigma}} &amp; \text{si}\ \xi = 0 \\
+\end{array}
+\right.
+\end{equation}\]</span>
+la densidad de probabilidad está dada por la función:
+<span class="math display">\[\begin{equation}
+f_X( x ) = \frac{1}{\sigma} \left( 1 + \xi \frac{x - \mu}{\sigma} \right)^{-1-\frac{1}{\xi}}
+\end{equation}\]</span></p>
+</div>
 <!------------------------------------------------------------------------------------------------->
 </div>
 <div id="familia-de-panjer" class="section level2 hasAnchor" number="4.3">

@@ -23,7 +23,7 @@
 <meta name="author" content="" />
 
 
-<meta name="date" content="2025-03-31" />
+<meta name="date" content="2025-04-01" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -244,6 +244,25 @@ div.csl-indent {
             <section class="normal" id="section-">
 <div id="estimación-de-valores-extremos" class="section level1 hasAnchor" number="7">
 <h1><span class="header-section-number">Capítulo 7</span> Estimación de valores extremos<a href="estimación-de-valores-extremos.html#estimación-de-valores-extremos" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div class="theorem">
+<p><span id="thm:tftg" class="theorem"><strong>Teorema 7.1  (Fisher-Tippett-Gnedenko) </strong></span>Si consideramos una secuencia de variables aleatorias <span class="math inline">\(\{X_i\}_{i\in \mathbb{N}}\)</span> las mismas
+son i.i.d, con distribución acumulada <span class="math inline">\(F\)</span>. Entonces, si existen dos sucesiones de valores reales
+<span class="math inline">\(\{a_n\}_{n \in \mathbb{N}}\)</span> y <span class="math inline">\(\{b_n\}_{n \in \mathbb{N}}\)</span>, tales que
+<span class="math inline">\(a_n &gt; 0, \forall n \in \mathbb{N}\)</span> y una distribución acumulada no degenerada <span class="math inline">\(G\)</span>, de tal forma
+que:
+<span class="math display">\[\begin{equation}
+\underset{n \rightarrow +\infty}{\lim} ( F\left( a_n x + b_n \right) )^n = G( x ),
+\forall x \in \mathbb{R}
+\end{equation}\]</span>
+tenemos que <span class="math inline">\(G\)</span> es una de las siguientes distribuciones acumuladas:</p>
+<ol style="list-style-type: decimal">
+<li><p><strong>Tipo I</strong>, una distribución de Gumbel <span class="math inline">\(G(x) = \exp( -\exp( -x ) ), x \in \mathbb{R}\)</span></p></li>
+<li><p><strong>Tipo II</strong>, una distribución de Frechet <span class="math inline">\(G( x ) = \exp( -x^{-\alpha} )\)</span>, para <span class="math inline">\(x \geq 0\)</span> y
+<span class="math inline">\(\alpha &gt; 0\)</span>,</p></li>
+<li><p><strong>Tipo III</strong>, una distribución de Weibull inversa <span class="math inline">\(G(x) = \exp( -( -x )^{\alpha} )\)</span>, para
+<span class="math inline">\(x \leq 0, \alpha &gt; 0\)</span></p></li>
+</ol>
+</div>
 
 </div>
             </section>
