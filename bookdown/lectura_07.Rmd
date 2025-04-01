@@ -1,3 +1,26 @@
 # Estimación de valores extremos
+
+::: {.definition #dmaxstab  name="Max-stable family"}
+
+:::
  
- 
+::: {.theorem #tftg  name="Fisher-Tippett-Gnedenko"}
+Si consideramos una secuencia de variables aleatorias $\{X_i\}_{i\in \mathbb{N}}$ las mismas
+son i.i.d, con distribución acumulada $F$. Entonces, si existen dos sucesiones de valores reales 
+$\{a_n\}_{n \in \mathbb{N}}$ y $\{b_n\}_{n \in \mathbb{N}}$, tales que 
+$a_n > 0, \forall n \in \mathbb{N}$ y una distribución acumulada no degenerada $G$, de tal forma 
+que:
+\begin{equation}
+\underset{n \rightarrow +\infty}{\lim} ( F\left( a_n x + b_n \right) )^n = G( x ),
+\forall x \in \mathbb{R}
+\end{equation}
+tenemos que $G$ es una de las siguientes distribuciones acumuladas:
+
+1. **Tipo I**, una distribución de Gumbel $G(x) = \exp( -\exp( -x ) ), x \in \mathbb{R}$
+
+2. **Tipo II**, una distribución de Frechet $G( x ) = \exp( -x^{-\alpha} )$, para $x \geq 0$ y 
+$\alpha > 0$,
+
+3. **Tipo III**, una distribución de Weibull inversa $G(x) = \exp( -( -x )^{\alpha} )$, para
+$x \leq 0, \alpha > 0$
+:::

@@ -106,6 +106,25 @@ En pocas, una variable aleatoria $X \rightsquigarrow LN( \mu, \sigma )$ sigue un
 log-normal si y solamente si la variable aleatoria dada por su logaritmo $\ln( X ) \rightsquigarrow N( \mu, \sigma )$ 
 sigue una distribución normal.
 
+::: {.definition #dlnorm name="Distribución de Pareto generalizada"}
+Una variable aleatoria $X$ a valores reales, sigue una distribución de Pareto generalizada
+$X \rightsquigarrow GPD( \mu, \sigma, \xi )$ de parámetros $\mu \in \mathbb{R}$, $\sigma > 0$, 
+$\xi \in \mathbb{R}$, si su función de distribución acumulada es de la siguiente forma:
+\begin{equation}
+F_X( x ) = 
+\left\{
+\begin{array}{ll}
+1 - \left( 1 + \xi \frac{x - \mu}{\sigma} \right)^{-\frac{1}{\xi}} & \text{si}\ \xi \neq 0 \\
+1 - e^{-\frac{x-\mu}{\sigma}} & \text{si}\ \xi = 0 \\
+\end{array}
+\right.
+\end{equation}
+la densidad de probabilidad está dada por la función:
+\begin{equation}
+f_X( x ) = \frac{1}{\sigma} \left( 1 + \xi \frac{x - \mu}{\sigma} \right)^{-1-\frac{1}{\xi}}
+\end{equation}
+:::
+
 
 <!------------------------------------------------------------------------------------------------->
 ## Familia de Panjer
