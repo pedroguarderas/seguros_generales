@@ -1,1 +1,36 @@
-# Teoría de la Ruina
+# Estimación de valores extremos
+
+::: {.definition #dmaxstab  name="Familia max-estable"}
+dd
+:::
+ 
+::: {.theorem #tftg  name="Fisher-Tippett-Gnedenko"}
+Si consideramos una secuencia de variables aleatorias $\{X_i\}_{i\in \mathbb{N}}$ las mismas
+son i.i.d, con distribución acumulada $F$. Entonces, si existen dos sucesiones de valores reales 
+$\{a_n\}_{n \in \mathbb{N}}$ y $\{b_n\}_{n \in \mathbb{N}}$, tales que 
+$a_n > 0, \forall n \in \mathbb{N}$ y una distribución acumulada no degenerada $G$, de tal forma 
+que:
+\begin{equation}
+\underset{n \rightarrow +\infty}{\lim} ( F\left( a_n x + b_n \right) )^n = G( x ),
+\forall x \in \mathbb{R}
+\end{equation}
+tenemos que $G$ es una de las siguientes distribuciones acumuladas:
+
+1. **Tipo I**, una distribución de Gumbel $G(x) = \exp( -\exp( -x ) ), x \in \mathbb{R}$
+
+2. **Tipo II**, una distribución de Frechet $G( x ) = \mathbf{1}_{(0,+\infty)}( x ) \exp( -x^{-\alpha} )$, para $x \geq 0$ y 
+$\alpha > 0$,
+
+3. **Tipo III**, una distribución de Weibull inversa $G(x) = \mathbf{1}_{(-\infty,0)}( x ) \exp( -( -x )^{\alpha} )$, para
+$x \leq 0, \alpha > 0$
+:::
+
+
+::: {.theorem #pbh name="Pickands-Balkema-De Haan"}
+Sea $F_u$ la distribución de exceso asociada a la variable aleatoria $X$ y con umbral de 
+condicionamiento $u > 0$. Entonces, para cualquier $\varepsilon \in \mathbb{R}$.
+\begin{equation}
+\underset{u \longrightarrow x}{\lim} \underset{x > 0}{\sup} 
+\left| F_u( x ) - G_{\varepsilon,\beta(u)( x )} \right| = 0
+\end{equation}
+::: 
