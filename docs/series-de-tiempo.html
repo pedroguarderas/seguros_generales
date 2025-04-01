@@ -256,8 +256,15 @@ P( N = k ) = \binom{n}{k} p^k ( 1 - p )^{n-k}, \qquad
 \forall k \in \{0,\ldots, n\}
 \end{equation}\]</span></p>
 </div>
-<p>En R se puede para trabajar con variables aleatorias de binomiales se puede utilizar las siguientes
-funciones</p>
+<p></p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb19-1"><a href="series-de-tiempo.html#cb19-1"></a>n <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb19-2"><a href="series-de-tiempo.html#cb19-2"></a>p <span class="ot">&lt;-</span> <span class="fl">0.3</span></span>
+<span id="cb19-3"><a href="series-de-tiempo.html#cb19-3"></a>k <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb19-4"><a href="series-de-tiempo.html#cb19-4"></a>m <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb19-5"><a href="series-de-tiempo.html#cb19-5"></a>N <span class="ot">&lt;-</span> <span class="fu">rbinom</span>( <span class="at">n =</span> m, <span class="at">size =</span> n, <span class="at">prob =</span> p ) <span class="co"># simular una muestra de tamaño m</span></span>
+<span id="cb19-6"><a href="series-de-tiempo.html#cb19-6"></a>pk <span class="ot">&lt;-</span> <span class="fu">dbinom</span>( <span class="at">x =</span> k, <span class="at">size =</span> n, <span class="at">prob =</span> p ) <span class="co"># cálculo de probabilidad P( N = k )</span></span>
+<span id="cb19-7"><a href="series-de-tiempo.html#cb19-7"></a>Pk <span class="ot">&lt;-</span> <span class="fu">pbinom</span>( <span class="at">q =</span> k, <span class="at">size =</span> n, <span class="at">prob =</span> p ) <span class="co"># cálculo de probabilidad P( N &lt;= k )</span></span></code></pre></div>
+<p></p>
 <div class="definition">
 <p><span id="def:dpois" class="definition"><strong>Definición 4.2  (Distribución de Poisson) </strong></span>Una variable aleatoria <span class="math inline">\(N\)</span> que toma valores en <span class="math inline">\(\mathbb{N}\)</span> se dice que sigue una distribución
 o ley de Poisson <span class="math inline">\(N \rightsquigarrow Pois( n, p )\)</span>, con parámetro <span class="math inline">\(\lambda \in \mathbb{R}\)</span>, si:
@@ -267,12 +274,12 @@ P( N = k ) = \exp\left( -\lambda \right) \frac{\lambda^k}{k!}, \qquad
 \end{equation}\]</span></p>
 </div>
 <p></p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb19-1"><a href="series-de-tiempo.html#cb19-1"></a>lambda <span class="ot">&lt;-</span> <span class="dv">2</span></span>
-<span id="cb19-2"><a href="series-de-tiempo.html#cb19-2"></a>n <span class="ot">&lt;-</span> <span class="dv">10</span></span>
-<span id="cb19-3"><a href="series-de-tiempo.html#cb19-3"></a>k <span class="ot">&lt;-</span> <span class="dv">2</span></span>
-<span id="cb19-4"><a href="series-de-tiempo.html#cb19-4"></a>N <span class="ot">&lt;-</span> <span class="fu">rpois</span>( <span class="at">n =</span> n, <span class="at">lambda =</span> lambda ) <span class="co"># simular una muestra de tamaño n, N sigue Pois( lambda )</span></span>
-<span id="cb19-5"><a href="series-de-tiempo.html#cb19-5"></a>pk <span class="ot">&lt;-</span> <span class="fu">dpois</span>( k, <span class="at">lambda =</span> lambda ) <span class="co"># cálculo de probabilidad P( N = k )</span></span>
-<span id="cb19-6"><a href="series-de-tiempo.html#cb19-6"></a>Pk <span class="ot">&lt;-</span> <span class="fu">ppois</span>( k, <span class="at">lambda =</span> lambda ) <span class="co"># cálculo de probabilidad P( N &lt;= k )</span></span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb20-1"><a href="series-de-tiempo.html#cb20-1"></a>lambda <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb20-2"><a href="series-de-tiempo.html#cb20-2"></a>k <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb20-3"><a href="series-de-tiempo.html#cb20-3"></a>m <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb20-4"><a href="series-de-tiempo.html#cb20-4"></a>N <span class="ot">&lt;-</span> <span class="fu">rpois</span>( <span class="at">n =</span> m, <span class="at">lambda =</span> lambda ) <span class="co"># simular una muestra de tamaño m</span></span>
+<span id="cb20-5"><a href="series-de-tiempo.html#cb20-5"></a>pk <span class="ot">&lt;-</span> <span class="fu">dpois</span>( k, <span class="at">lambda =</span> lambda ) <span class="co"># cálculo de probabilidad P( N = k )</span></span>
+<span id="cb20-6"><a href="series-de-tiempo.html#cb20-6"></a>Pk <span class="ot">&lt;-</span> <span class="fu">ppois</span>( k, <span class="at">lambda =</span> lambda ) <span class="co"># cálculo de probabilidad P( N &lt;= k )</span></span></code></pre></div>
 <p></p>
 <div class="definition">
 <p><span id="def:dnbinom" class="definition"><strong>Definición 4.3  (Distribución binomial negativa) </strong></span>Una variable aleatoria <span class="math inline">\(N\)</span> que toma valores en <span class="math inline">\(\mathbb{N}\)</span> se dice que sigue una distribución
@@ -285,6 +292,15 @@ P( N = k ) = \binom{\alpha + k - 1}{k} p^\alpha ( 1 - p )^k
 \end{equation}\]</span>
 donde <span class="math inline">\(\Gamma( \alpha ) = \int\limits_0^{+\infty} x^{\alpha - 1} \exp(-x)\ dx\)</span>, <span class="math inline">\(\forall \alpha \geq 0\)</span></p>
 </div>
+<p></p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb21-1"><a href="series-de-tiempo.html#cb21-1"></a>n <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb21-2"><a href="series-de-tiempo.html#cb21-2"></a>p <span class="ot">&lt;-</span> <span class="fl">0.3</span></span>
+<span id="cb21-3"><a href="series-de-tiempo.html#cb21-3"></a>k <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb21-4"><a href="series-de-tiempo.html#cb21-4"></a>m <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb21-5"><a href="series-de-tiempo.html#cb21-5"></a>N <span class="ot">&lt;-</span> <span class="fu">rnbinom</span>( <span class="at">n =</span> m, <span class="at">size =</span> n, <span class="at">prob =</span> p  ) <span class="co"># simular una muestra de tamaño m</span></span>
+<span id="cb21-6"><a href="series-de-tiempo.html#cb21-6"></a>pk <span class="ot">&lt;-</span> <span class="fu">dnbinom</span>( <span class="at">x =</span> k, <span class="at">size =</span> n, <span class="at">prob =</span> p ) <span class="co"># cálculo de probabilidad P( N = k )</span></span>
+<span id="cb21-7"><a href="series-de-tiempo.html#cb21-7"></a>Pk <span class="ot">&lt;-</span> <span class="fu">pnbinom</span>( <span class="at">q =</span> k, <span class="at">size =</span> n, <span class="at">prob =</span> p ) <span class="co"># cálculo de probabilidad P( N &lt;= k )</span></span></code></pre></div>
+<p></p>
 <p>Asociado a estas distribuciones discretas existe un resultado de caracterización, el cual permite
 seleccionar la distribución de conteo.</p>
 <!------------------------------------------------------------------------------------------------->
@@ -309,6 +325,15 @@ M_X( t ) = \frac{\exp(bt)-\exp(at)}{t(b-a)}
 \mathbb{E}[X] = \frac{a + b}{2},\qquad \mathbb{V}[X] = \frac{(b - a)^2}{12}
 \end{equation}\]</span></p>
 </div>
+<p></p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb22-1"><a href="series-de-tiempo.html#cb22-1"></a>a <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb22-2"><a href="series-de-tiempo.html#cb22-2"></a>b <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb22-3"><a href="series-de-tiempo.html#cb22-3"></a>x <span class="ot">&lt;-</span> <span class="fl">1.5</span></span>
+<span id="cb22-4"><a href="series-de-tiempo.html#cb22-4"></a>m <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb22-5"><a href="series-de-tiempo.html#cb22-5"></a>X <span class="ot">&lt;-</span> <span class="fu">runif</span>( <span class="at">n =</span> m, <span class="at">min =</span> a, <span class="at">max =</span> b ) <span class="co"># simular una muestra de tamaño m</span></span>
+<span id="cb22-6"><a href="series-de-tiempo.html#cb22-6"></a>fx <span class="ot">&lt;-</span> <span class="fu">dunif</span>( <span class="at">x =</span> x, <span class="at">min =</span> a, <span class="at">max =</span> b ) <span class="co"># cálculo de probabilidad f(x)</span></span>
+<span id="cb22-7"><a href="series-de-tiempo.html#cb22-7"></a>Fk <span class="ot">&lt;-</span> <span class="fu">punif</span>( <span class="at">q =</span> x, <span class="at">min =</span> a, <span class="at">max =</span> b ) <span class="co"># cálculo de probabilidad F(x)</span></span></code></pre></div>
+<p></p>
 <div class="definition">
 <p><span id="def:dexp" class="definition"><strong>Definición 4.5  (Distribución exponencial) </strong></span>Una variable aleatoria <span class="math inline">\(X\)</span> a valores reales, sigue una distribución exponencial
 <span class="math inline">\(X \rightsquigarrow Exp( \lambda )\)</span> de parámetros <span class="math inline">\(\lambda &gt; 0\)</span>, si su función de distribución
@@ -327,6 +352,14 @@ M_X( t ) = \frac{\lambda}{\lambda - t}
 \mathbb{E}[X] = \frac{1}{\lambda},\qquad \mathbb{V}[X] = \frac{1}{\lambda^2}
 \end{equation}\]</span></p>
 </div>
+<p></p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb23-1"><a href="series-de-tiempo.html#cb23-1"></a>lambda <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb23-2"><a href="series-de-tiempo.html#cb23-2"></a>x <span class="ot">&lt;-</span> <span class="fl">1.5</span></span>
+<span id="cb23-3"><a href="series-de-tiempo.html#cb23-3"></a>m <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb23-4"><a href="series-de-tiempo.html#cb23-4"></a>X <span class="ot">&lt;-</span> <span class="fu">rexp</span>( <span class="at">n =</span> m, <span class="at">rate =</span> lambda ) <span class="co"># simular una muestra de tamaño m</span></span>
+<span id="cb23-5"><a href="series-de-tiempo.html#cb23-5"></a>fx <span class="ot">&lt;-</span> <span class="fu">dexp</span>( <span class="at">x =</span> x, <span class="at">rate =</span> lambda ) <span class="co"># cálculo de probabilidad f(x)</span></span>
+<span id="cb23-6"><a href="series-de-tiempo.html#cb23-6"></a>Fk <span class="ot">&lt;-</span> <span class="fu">pexp</span>( <span class="at">q =</span> x, <span class="at">rate =</span> lambda ) <span class="co"># cálculo de probabilidad F(x)</span></span></code></pre></div>
+<p></p>
 <div class="definition">
 <p><span id="def:dnorm" class="definition"><strong>Definición 4.6  (Distribución normal) </strong></span>Una variable aleatoria <span class="math inline">\(X\)</span> a valores reales, sigue una distribución normal
 <span class="math inline">\(X \rightsquigarrow N( \mu, \sigma )\)</span> de parámetros <span class="math inline">\(\mu \in \mathbb{R}\)</span>, <span class="math inline">\(\sigma &gt; 0\)</span>, si su
@@ -345,6 +378,15 @@ M_X( t ) = \exp\left( t \mu + \frac{1}{2} t^2 \sigma^2 \right)
 \mathbb{E}[X] = \mu,\qquad \mathbb{V}[X] = \sigma^2
 \end{equation}\]</span></p>
 </div>
+<p></p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb24-1"><a href="series-de-tiempo.html#cb24-1"></a>mu <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb24-2"><a href="series-de-tiempo.html#cb24-2"></a>sigma <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb24-3"><a href="series-de-tiempo.html#cb24-3"></a>x <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb24-4"><a href="series-de-tiempo.html#cb24-4"></a>m <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb24-5"><a href="series-de-tiempo.html#cb24-5"></a>X <span class="ot">&lt;-</span> <span class="fu">rnorm</span>( <span class="at">n =</span> m, <span class="at">mean =</span> mu, <span class="at">sd =</span> sigma ) <span class="co"># simular una muestra de tamaño m</span></span>
+<span id="cb24-6"><a href="series-de-tiempo.html#cb24-6"></a>fx <span class="ot">&lt;-</span> <span class="fu">dnorm</span>( <span class="at">x =</span> x, <span class="at">mean =</span> mu, <span class="at">sd =</span> sigma ) <span class="co"># cálculo de probabilidad f(x)</span></span>
+<span id="cb24-7"><a href="series-de-tiempo.html#cb24-7"></a>Fk <span class="ot">&lt;-</span> <span class="fu">pnorm</span>( <span class="at">q =</span> x, <span class="at">mean =</span> mu, <span class="at">sd =</span> sigma ) <span class="co"># cálculo de probabilidad F(x)</span></span></code></pre></div>
+<p></p>
 <div class="definition">
 <p><span id="def:dlnorm" class="definition"><strong>Definición 4.7  (Distribución log-normal) </strong></span>Una variable aleatoria <span class="math inline">\(X\)</span> a valores reales, sigue una distribución log-normal
 <span class="math inline">\(X \rightsquigarrow LN( \mu, \sigma )\)</span> de parámetros <span class="math inline">\(\mu &gt; 0\)</span>, <span class="math inline">\(\sigma &gt; 0\)</span>, si su
@@ -362,7 +404,16 @@ No hay forma analítica para <span class="math inline">\(M_X\)</span>
 \mathbb{V}[X] = \exp\left( 2 \mu + \sigma^2 \right) \left( \exp( \sigma^2 ) - 1 \right)
 \end{equation}\]</span></p>
 </div>
-<p>En pocas, una variable aleatoria <span class="math inline">\(X \rightsquigarrow LN( \mu, \sigma )\)</span> sigue una distribución
+<p></p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb25-1"><a href="series-de-tiempo.html#cb25-1"></a>mu <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb25-2"><a href="series-de-tiempo.html#cb25-2"></a>sigma <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb25-3"><a href="series-de-tiempo.html#cb25-3"></a>x <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb25-4"><a href="series-de-tiempo.html#cb25-4"></a>m <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb25-5"><a href="series-de-tiempo.html#cb25-5"></a>X <span class="ot">&lt;-</span> <span class="fu">rlnorm</span>( <span class="at">n =</span> m, <span class="at">meanlog =</span> mu, <span class="at">sdlog =</span> sigma ) <span class="co"># simular una muestra de tamaño m</span></span>
+<span id="cb25-6"><a href="series-de-tiempo.html#cb25-6"></a>fx <span class="ot">&lt;-</span> <span class="fu">dlnorm</span>( <span class="at">x =</span> x, <span class="at">meanlog =</span> mu, <span class="at">sdlog =</span> sigma ) <span class="co"># cálculo de probabilidad f(x)</span></span>
+<span id="cb25-7"><a href="series-de-tiempo.html#cb25-7"></a>Fk <span class="ot">&lt;-</span> <span class="fu">plnorm</span>( <span class="at">q =</span> x, <span class="at">meanlog =</span> mu, <span class="at">sdlog =</span> sigma ) <span class="co"># cálculo de probabilidad F(x)</span></span></code></pre></div>
+<p>
+En pocas, una variable aleatoria <span class="math inline">\(X \rightsquigarrow LN( \mu, \sigma )\)</span> sigue una distribución
 log-normal si y solamente si la variable aleatoria dada por su logaritmo <span class="math inline">\(\ln( X ) \rightsquigarrow N( \mu, \sigma )\)</span>
 sigue una distribución normal.</p>
 <div class="definition">
@@ -389,6 +440,16 @@ f_X( x )
 \right.
 \end{equation}\]</span></p>
 </div>
+<p></p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb26-1"><a href="series-de-tiempo.html#cb26-1"></a>xi <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb26-2"><a href="series-de-tiempo.html#cb26-2"></a>mu <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb26-3"><a href="series-de-tiempo.html#cb26-3"></a>sigma <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb26-4"><a href="series-de-tiempo.html#cb26-4"></a>x <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb26-5"><a href="series-de-tiempo.html#cb26-5"></a>m <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb26-6"><a href="series-de-tiempo.html#cb26-6"></a>X <span class="ot">&lt;-</span> <span class="fu">rgpd</span>( <span class="at">n =</span> m, <span class="at">xi =</span> xi, <span class="at">mu =</span> mu, <span class="at">beta =</span> sigma ) <span class="co"># simular una muestra de tamaño m</span></span>
+<span id="cb26-7"><a href="series-de-tiempo.html#cb26-7"></a>fx <span class="ot">&lt;-</span> <span class="fu">dgpd</span>( <span class="at">x =</span> x, <span class="at">xi =</span> xi, <span class="at">mu =</span> mu, <span class="at">beta =</span> sigma ) <span class="co"># cálculo de probabilidad f(x)</span></span>
+<span id="cb26-8"><a href="series-de-tiempo.html#cb26-8"></a>Fk <span class="ot">&lt;-</span> <span class="fu">pgpd</span>( <span class="at">q =</span> x, <span class="at">xi =</span> xi, <span class="at">mu =</span> mu, <span class="at">beta =</span> sigma ) <span class="co"># cálculo de probabilidad F(x)</span></span></code></pre></div>
+<p></p>
 <div class="definition">
 <p><span id="def:dgev" class="definition"><strong>Definición 4.9  (Distribución de valores extremos generalizada) </strong></span>Una variable aleatoria <span class="math inline">\(X\)</span> a valores reales, sigue una distribución generalizada de valores extremos
 <span class="math inline">\(X \rightsquigarrow GEV( \mu, \sigma, \xi )\)</span> de parámetros <span class="math inline">\(\mu \in \mathbb{R}, \sigma &gt; 0, \xi \in \mathbb{R}\)</span>,
@@ -419,6 +480,16 @@ f_X( x )
 \right.
 \end{equation}\]</span></p>
 </div>
+<p></p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb27-1"><a href="series-de-tiempo.html#cb27-1"></a>xi <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">1</span></span>
+<span id="cb27-2"><a href="series-de-tiempo.html#cb27-2"></a>mu <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb27-3"><a href="series-de-tiempo.html#cb27-3"></a>sigma <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb27-4"><a href="series-de-tiempo.html#cb27-4"></a>x <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb27-5"><a href="series-de-tiempo.html#cb27-5"></a>m <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb27-6"><a href="series-de-tiempo.html#cb27-6"></a>X <span class="ot">&lt;-</span> <span class="fu">rgev</span>( <span class="at">n =</span> m, <span class="at">xi =</span> xi, <span class="at">mu =</span> mu, <span class="at">beta =</span> sigma ) <span class="co"># simular una muestra de tamaño m</span></span>
+<span id="cb27-7"><a href="series-de-tiempo.html#cb27-7"></a>fx <span class="ot">&lt;-</span> <span class="fu">dgev</span>( <span class="at">x =</span> x, <span class="at">xi =</span> xi, <span class="at">mu =</span> mu, <span class="at">beta =</span> sigma ) <span class="co"># cálculo de probabilidad f(x)</span></span>
+<span id="cb27-8"><a href="series-de-tiempo.html#cb27-8"></a>Fk <span class="ot">&lt;-</span> <span class="fu">pgev</span>( <span class="at">q =</span> x, <span class="at">xi =</span> xi, <span class="at">mu =</span> mu, <span class="at">beta =</span> sigma ) <span class="co"># cálculo de probabilidad F(x)</span></span></code></pre></div>
+<p></p>
 <!------------------------------------------------------------------------------------------------->
 </div>
 <div id="familia-de-panjer" class="section level2 hasAnchor" number="4.3">
