@@ -455,6 +455,7 @@ local({
 ```{r l2c2, warning = FALSE}
 library( actuar )
 library( data.table )
+library( fExtremes )
 library( fitdistrplus )
 library( ggplot2 )
 library( googledrive )

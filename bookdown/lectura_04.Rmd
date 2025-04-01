@@ -13,8 +13,15 @@ P( N = k ) = \binom{n}{k} p^k ( 1 - p )^{n-k}, \qquad
 \forall k \in \{0,\ldots, n\}
 \end{equation}
 :::
-En R se puede para trabajar con variables aleatorias de binomiales se puede utilizar las siguientes
-funciones
+```{r l4c1}
+n <- 10
+p <- 0.3
+k <- 2
+m <- 100
+N <- rbinom( n = m, size = n, prob = p ) # simular una muestra de tamaño m
+pk <- dbinom( x = k, size = n, prob = p ) # cálculo de probabilidad P( N = k )
+Pk <- pbinom( q = k, size = n, prob = p ) # cálculo de probabilidad P( N <= k )
+```
 
 ::: {.definition #dpois name="Distribución de Poisson"}
 Una variable aleatoria $N$ que toma valores en $\mathbb{N}$ se dice que sigue una distribución 
@@ -26,9 +33,9 @@ P( N = k ) = \exp\left( -\lambda \right) \frac{\lambda^k}{k!}, \qquad
 :::
 ```{r l4c2}
 lambda <- 2
-n <- 10
 k <- 2
-N <- rpois( n = n, lambda = lambda ) # simular una muestra de tamaño n, N sigue Pois( lambda )
+m <- 100
+N <- rpois( n = m, lambda = lambda ) # simular una muestra de tamaño m
 pk <- dpois( k, lambda = lambda ) # cálculo de probabilidad P( N = k )
 Pk <- ppois( k, lambda = lambda ) # cálculo de probabilidad P( N <= k )
 ```
@@ -44,6 +51,15 @@ P( N = k ) = \binom{\alpha + k - 1}{k} p^\alpha ( 1 - p )^k
 \end{equation}
 donde $\Gamma( \alpha ) = \int\limits_0^{+\infty} x^{\alpha - 1} \exp(-x)\ dx$, $\forall \alpha \geq 0$
 :::
+```{r l4c3}
+n <- 10
+p <- 0.3
+k <- 2
+m <- 100
+N <- rnbinom( n = m, size = n, prob = p  ) # simular una muestra de tamaño m
+pk <- dnbinom( x = k, size = n, prob = p ) # cálculo de probabilidad P( N = k )
+Pk <- pnbinom( q = k, size = n, prob = p ) # cálculo de probabilidad P( N <= k )
+```
 
 Asociado a estas distribuciones discretas existe un resultado de caracterización, el cual permite
 seleccionar la distribución de conteo.
@@ -69,6 +85,15 @@ M_X( t ) = \frac{\exp(bt)-\exp(at)}{t(b-a)}
 \mathbb{E}[X] = \frac{a + b}{2},\qquad \mathbb{V}[X] = \frac{(b - a)^2}{12}
 \end{equation}
 :::
+```{r l4c4}
+a <- 1
+b <- 2
+x <- 1.5
+m <- 100
+X <- runif( n = m, min = a, max = b ) # simular una muestra de tamaño m
+fx <- dunif( x = x, min = a, max = b ) # cálculo de probabilidad f(x)
+Fk <- punif( q = x, min = a, max = b ) # cálculo de probabilidad F(x)
+```
 
 ::: {.definition #dexp name="Distribución exponencial"}
 Una variable aleatoria $X$ a valores reales, sigue una distribución exponencial 
@@ -88,6 +113,14 @@ M_X( t ) = \frac{\lambda}{\lambda - t}
 \mathbb{E}[X] = \frac{1}{\lambda},\qquad \mathbb{V}[X] = \frac{1}{\lambda^2}
 \end{equation}
 :::
+```{r l4c5}
+lambda <- 2
+x <- 1.5
+m <- 100
+X <- rexp( n = m, rate = lambda ) # simular una muestra de tamaño m
+fx <- dexp( x = x, rate = lambda ) # cálculo de probabilidad f(x)
+Fk <- pexp( q = x, rate = lambda ) # cálculo de probabilidad F(x)
+```
 
 ::: {.definition #dnorm name="Distribución normal"}
 Una variable aleatoria $X$ a valores reales, sigue una distribución normal 
@@ -107,6 +140,15 @@ M_X( t ) = \exp\left( t \mu + \frac{1}{2} t^2 \sigma^2 \right)
 \mathbb{E}[X] = \mu,\qquad \mathbb{V}[X] = \sigma^2
 \end{equation}
 :::
+```{r l4c6}
+mu <- 2
+sigma <- 1
+x <- 3
+m <- 100
+X <- rnorm( n = m, mean = mu, sd = sigma ) # simular una muestra de tamaño m
+fx <- dnorm( x = x, mean = mu, sd = sigma ) # cálculo de probabilidad f(x)
+Fk <- pnorm( q = x, mean = mu, sd = sigma ) # cálculo de probabilidad F(x)
+```
 
 ::: {.definition #dlnorm name="Distribución log-normal"}
 Una variable aleatoria $X$ a valores reales, sigue una distribución log-normal 
@@ -125,6 +167,15 @@ No hay forma analítica para $M_X$
 \mathbb{V}[X] = \exp\left( 2 \mu + \sigma^2 \right) \left( \exp( \sigma^2 ) - 1 \right)
 \end{equation}
 :::
+```{r l4c7}
+mu <- 2
+sigma <- 1
+x <- 3
+m <- 100
+X <- rlnorm( n = m, meanlog = mu, sdlog = sigma ) # simular una muestra de tamaño m
+fx <- dlnorm( x = x, meanlog = mu, sdlog = sigma ) # cálculo de probabilidad f(x)
+Fk <- plnorm( q = x, meanlog = mu, sdlog = sigma ) # cálculo de probabilidad F(x)
+```
 En pocas, una variable aleatoria $X \rightsquigarrow LN( \mu, \sigma )$ sigue una distribución 
 log-normal si y solamente si la variable aleatoria dada por su logaritmo $\ln( X ) \rightsquigarrow N( \mu, \sigma )$ 
 sigue una distribución normal.
@@ -153,6 +204,16 @@ f_X( x )
 \right.
 \end{equation}
 :::
+```{r l4c8}
+xi <- 1
+mu <- 2
+sigma <- 1
+x <- 3
+m <- 100
+X <- rgpd( n = m, xi = xi, mu = mu, beta = sigma ) # simular una muestra de tamaño m
+fx <- dgpd( x = x, xi = xi, mu = mu, beta = sigma ) # cálculo de probabilidad f(x)
+Fk <- pgpd( q = x, xi = xi, mu = mu, beta = sigma ) # cálculo de probabilidad F(x)
+```
 
 ::: {.definition #dgev  name="Distribución de valores extremos generalizada"}
 Una variable aleatoria $X$ a valores reales, sigue una distribución generalizada de valores extremos
@@ -184,6 +245,16 @@ f_X( x )
 \right.
 \end{equation}
 :::
+```{r l4c9}
+xi <- -1
+mu <- 2
+sigma <- 1
+x <- 3
+m <- 100
+X <- rgev( n = m, xi = xi, mu = mu, beta = sigma ) # simular una muestra de tamaño m
+fx <- dgev( x = x, xi = xi, mu = mu, beta = sigma ) # cálculo de probabilidad f(x)
+Fk <- pgev( q = x, xi = xi, mu = mu, beta = sigma ) # cálculo de probabilidad F(x)
+```
 
 <!------------------------------------------------------------------------------------------------->
 ## Familia de Panjer
