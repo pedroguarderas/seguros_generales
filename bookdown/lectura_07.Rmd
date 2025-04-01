@@ -1,7 +1,7 @@
 # Estimación de valores extremos
 
-::: {.definition #dmaxstab  name="Max-stable family"}
-
+::: {.definition #dmaxstab  name="Familia max-estable"}
+dd
 :::
  
 ::: {.theorem #tftg  name="Fisher-Tippett-Gnedenko"}
@@ -18,9 +18,19 @@ tenemos que $G$ es una de las siguientes distribuciones acumuladas:
 
 1. **Tipo I**, una distribución de Gumbel $G(x) = \exp( -\exp( -x ) ), x \in \mathbb{R}$
 
-2. **Tipo II**, una distribución de Frechet $G( x ) = \exp( -x^{-\alpha} )$, para $x \geq 0$ y 
+2. **Tipo II**, una distribución de Frechet $G( x ) = \mathbf{1}_{(0,+\infty)}( x ) \exp( -x^{-\alpha} )$, para $x \geq 0$ y 
 $\alpha > 0$,
 
-3. **Tipo III**, una distribución de Weibull inversa $G(x) = \exp( -( -x )^{\alpha} )$, para
+3. **Tipo III**, una distribución de Weibull inversa $G(x) = \mathbf{1}_{(-\infty,0)}( x ) \exp( -( -x )^{\alpha} )$, para
 $x \leq 0, \alpha > 0$
 :::
+
+
+::: {.theorem #pbh name="Pickands-Balkema-De Haan"}
+Sea $F_u$ la distribución de exceso asociada a la variable aleatoria $X$ y con umbral de 
+condicionamiento $u > 0$. Entonces, para cualquier $\varepsilon \in \mathbb{R}$.
+\begin{equation}
+\underset{u \longrightarrow x}{\lim} \underset{x > 0}{\sup} 
+\left| F_u( x ) - G_{\varepsilon,\beta(u)( x )} \right| = 0
+\end{equation}
+::: 
