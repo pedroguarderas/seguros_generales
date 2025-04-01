@@ -559,4 +559,21 @@ En conclusión para determinar la densidad de probabilidad de $S$ basta conocer 
 Fourier de la distribución de los reclamos individuales, multiplicarla por si misma $n$ veces y 
 tomar la transformada de Fourier inversa.
 
+\begin{eqnarray*}
+\mathcal{F}\left( f_S \right)
+& = & \mathcal{F}\left( \sum\limits_{n=0}^{+\infty} p_n f_X^{\star n} \right) \\
+& = & \sum\limits_{n=0}^{+\infty} p_n \mathcal{F}\left( f_X^{\star n} \right) \\
+& = & \sum\limits_{n=0}^{+\infty} p_n \mathcal{F}\left( f_X \right)^{n}
+\end{eqnarray*}
+
+como consecuencia
+\begin{eqnarray*}
+f_S 
+& = & \mathcal{F}^{-1}\left( \mathcal{F}\left( f_S \right) \right)\\
+& = & \mathcal{F}^{-1}\left( \sum\limits_{n=0}^{+\infty} p_n \mathcal{F}\left( f_X \right)^{n} \right)\quad
+\text{Una sola inversión} \\
+& = & \sum\limits_{n=0}^{+\infty} p_n \mathcal{F}^{-1}\left( \mathcal{F}\left( f_X \right)^{n} \right)\quad
+\text{Una inversión por cada término en la suma}
+\end{eqnarray*}
+
 
