@@ -21,6 +21,7 @@ def:dnorm
 def:dlnorm
 def:dgpd
 def:dgev
+def:dtst
 def:fampanjer
 prp:chfampanjer
 exm:l3ex1
@@ -49,6 +50,7 @@ distribuciones
 distribuciones-discretas
 distribuciones-continuas
 familia-de-panjer
+estimación
 modelos-de-pérdida-agregada
 pasivos-y-activos-de-una-aseguradora
 pasivos
