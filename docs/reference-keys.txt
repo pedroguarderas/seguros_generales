@@ -31,6 +31,16 @@ exm:l3ex1
 exm:l3ex2
 exm:l3ex3
 exm:l3ex4
+def:VaR
+prp:varinv
+def:TVaR
+prp:TVaRcohe
+def:CTE
+prp:eqtvarcte
+def:CVaR
+def:ES
+def:EVaR
+prp:EVaRcohe
 def:dmaxstab
 thm:tftg
 thm:pbh
@@ -70,9 +80,9 @@ aplicación-del-deducible
 algoritmo-de-panjer
 estimación-usando-la-transformada-de-fourier
 tarificación
+medidas-de-riesgo
 prima
 segmentación
-medidas-de-riesgo
 deducibles
 modelos-lineales-generalizados-glm
 familia-exponencial

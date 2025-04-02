@@ -1,5 +1,131 @@
+<!------------------------------------------------------------------------------------------------->
 # Tarificación
 
+<!------------------------------------------------------------------------------------------------->
+## Medidas de riesgo
+
+::: {.definition #spv name="Medida de riesgo coherente"}
+Una **medida de riesgo coeherente** es una función $\zeta: \mathbb{R} \longrightarrow \mathbb{R}$, 
+que satisface la siguientes propiedades:
+
+1. **Homogenidad positiva**, para cualquier $a > 0$
+\begin{equation}
+\zeta( a X ) = a \zeta( X )
+\end{equation}
+
+2. **Invarianza ante las traslaciones**, para cualquier $a > 0$
+\begin{equation}
+\zeta( \alpha X + a ) = \zeta( \alpha X ) + a
+\end{equation}
+
+3. **Monotonicidad**, Si $X \leq Y$
+\begin{equation}
+\zeta( X ) \leq \zeta( Y )
+\end{equation}
+
+4. **Sub-aditividad**
+\begin{equation}
+\zeta( X + Y ) \leq \zeta( X ) + \zeta( Y )
+\end{equation}
+:::
+
+::: {.definition #VaR name="Valor en riesgo"}
+Dada una variable aleatoria a valores reales $X$, el **valor en riesgo** (value at risk) de $X$ al 
+nivel de probabilidad $\alpha \in (0,1)$ está dado por
+\begin{equation}
+VaR_{\alpha}( X ) = \inf\left\{ x \in \mathbb{R} \middle| F_X( x ) > \alpha \right\}
+\end{equation}
+:::
+
+::: {.proposition #varinv}
+Si la función de distribución acumulada $F_X$ es contínua, entonces 
+$VaR_{\alpha}( X ) = F_X^{-1}( \alpha )$.
+:::
+
+Por otra parte, $VaR_{\alpha}$ para cualquier $\alpha$ no es una medida de riesgo sub-additiva.
+
+::: {.definition #TVaR name="Valor en riesgo en la cola"}
+Dada una variable aleatoria a valores reales $X$, el **valor en riesgo en la colas** 
+(tail value at risk) de $X$ al nivel de probabilidad $\alpha \in (0,1)$ está dado por
+\begin{equation}
+TVaR_{\alpha}( X ) = \frac{1}{1-\alpha} \int\limits_{\alpha}^1 VaR_u( X )\ du
+\end{equation}
+:::
+
+::: {.proposition #TVaRcohe name="Coherencia de la medida TVaR"}
+La medida de riesgo $TVaR_{\alpha}$ es una medida de riesgo coherente si la variable aleatoria
+sobre la cual se mide es una variable aleatoria continua.
+:::
+
+::: {.definition #CTE name="Esperanza condicional en la cola"} 
+Dada una variable aleatoria a valores reales $X$, la **esperanza condicional en la cola** 
+(conditional tail expectation) de $X$ al nivel de probabilidad $\alpha \in (0,1)$ está dado por
+\begin{equation}
+CTE_{\alpha}( X ) = \mathbb{E}\left[ X \middle| X > VaR_{\alpha}( X ) \right]
+\end{equation}
+:::
+
+::: {.proposition #eqtvarcte}
+Si la función de distribución acumulada $F_X$ de la variable aleatoria $X$ es continua, entonces
+se tiene la siguiente igualdad
+\begin{equation}
+CTE_{\alpha}( X ) = TVaR_{\alpha}( X )
+\end{equation}
+:::
+
+::: {.definition #CVaR name="Valor en riesgo condicionado"}
+Dada una variable aleatoria a valores reales $X$, el **valor en riesgo condicionado** 
+(conditional value at risk) de $X$ al nivel de probabilidad $\alpha \in (0,1)$ está dado por
+\begin{equation}
+CVaR_{\alpha}( X ) = \mathbb{E}\left[ X - VaR_{\alpha}( X ) \middle| X > VaR_{\alpha}( X ) \right]
+= CTE_{\alpha}( X ) - VaR_{\alpha}( X )
+\end{equation}
+:::
+
+::: {.definition #ES name="Déficit esperado"}
+Dada una variable aleatoria a valores reales $X$, el **déficit esperado** (expected shortfall) de 
+$X$ al nivel de probabilidad $\alpha \in (0,1)$ está dado por
+\begin{equation}
+ES_{\alpha}( X ) = \mathbb{E}\left[ \max\left( X - VaR_{\alpha}( X ), 0 \right) \right]
+\end{equation}
+:::
+
+::: {.definition #EVaR name="Valor en riesgo entrópico"}
+Dada una variable aleatoria a valores reales $X$, el **valor en riesgo entrópico** 
+(entropic value at risk) de $X$ al nivel de probabilidad $\alpha \in (0,1)$ está dado por
+\begin{equation}
+EVaR_{\alpha}( X ) = \inf\left\{ \frac{1}{t} \ln\left( \frac{M_X( t )}{1 - \alpha} \right) \middle| t > 0 \right\}
+\end{equation}
+:::
+
+::: {.proposition #EVaRcohe name="Coherencia de la medida EVaR"}
+La medida de riesgo $EVaR_{\alpha}$ es una medida de riesgo coherente.
+:::
+
+```{r l5c4}
+u <- 4
+s <- 0.5
+n <- 1e4
+X <- rlnorm( n, meanlog = u, sdlog = s )
+k <- seq( 0, 1, 0.2 ) 
+VaRX <- quantile( X, probs = k, names = FALSE )
+TVaRX <- sapply( 
+  1:length( VaRX ), 
+  FUN = function( i ) ifelse( k[ i ] < 1, ( 1 / ( 1 - k[ i ] ) ) * mean( X * ( X > VaRX[ i ] ) ), max( X ) ) )
+
+hist( X, breaks = 100, xlim = c( 0, 1.1 * max( X ) ) )
+abline( v = VaRX, col = 'red' )
+
+hist( X, breaks = 100, xlim = c( 0, 1.1 * max( X ) ) )
+abline( v = TVaRX, col = 'blue' )
+```
+
+```{r l5c5}
+plot( k, VaRX, ylim = c( 0, 1e3 ) )
+points( k, TVaRX, col = 'red' )
+```
+
+<!------------------------------------------------------------------------------------------------->
 ## Prima
 La prima es la cantidad de dinero que un individuo o entidad pagan por una póliza de seguro, la cual
 está diseñada para cubrir ciertos riesgos personales o comerciales.
@@ -156,66 +282,6 @@ En muchas ocasiones es necesario tener en cuenta algunas características asocia
 de asegurado, de tal forma que la prima sea lo más eficiente y adecuado según el riesgo cubierto y
 las características del mismo. La idea de segmentar la población es obtener grupos homogéneos 
 con riesgos similares.
-
-<!------------------------------------------------------------------------------------------------->
-## Medidas de riesgo
-
-::: {.definition #spv name="Medida de riesgo coherente"}
-Una **medida de riesgo coeherente** es una función $\zeta: \mathbb{R} \longrightarrow \mathbb{R}$, 
-que satisface la siguientes propiedades:
-
-1. **Homogenidad positiva**, para cualquier $a > 0$
-\begin{equation}
-\zeta( a X ) = a \zeta( X )
-\end{equation}
-
-2. **Invarianza ante las traslaciones**, para cualquier $a > 0$
-\begin{equation}
-\zeta( \alpha X + a ) = \zeta( \alpha X ) + a
-\end{equation}
-
-3. **Monotonicidad**, Si $X \leq Y$
-\begin{equation}
-\zeta( X ) \leq \zeta( Y )
-\end{equation}
-
-4. **Sub-aditividad**
-\begin{equation}
-\zeta( X + Y ) \leq \zeta( X ) + \zeta( Y )
-\end{equation}
-:::
-
-\begin{equation}
-VaR_{\alpha}( X ) = F_X^{-1}( \alpha )
-\end{equation}
-
-\begin{equation}
-TVaR_{\alpha}( X ) = \frac{1}{1-\alpha} \int\limits_{\alpha}^1 VaR_u( X )\ du
-\end{equation}
-
-```{r l5c4}
-u <- 4
-s <- 0.5
-n <- 1e4
-X <- rlnorm( n, meanlog = u, sdlog = s )
-k <- seq( 0, 1, 0.2 ) 
-VaRX <- quantile( X, probs = k, names = FALSE )
-TVaRX <- sapply( 
-  1:length( VaRX ), 
-  FUN = function( i ) ifelse( k[ i ] < 1, ( 1 / ( 1 - k[ i ] ) ) * mean( X * ( X > VaRX[ i ] ) ), max( X ) ) )
-
-hist( X, breaks = 100, xlim = c( 0, 1.1 * max( X ) ) )
-abline( v = VaRX, col = 'red' )
-
-hist( X, breaks = 100, xlim = c( 0, 1.1 * max( X ) ) )
-abline( v = TVaRX, col = 'blue' )
-```
-
-```{r l5c5}
-plot( k, VaRX, ylim = c( 0, 1e3 ) )
-points( k, TVaRX, col = 'red' )
-```
-
 
 <!------------------------------------------------------------------------------------------------->
 ## Deducibles
