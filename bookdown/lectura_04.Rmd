@@ -49,7 +49,7 @@
   c. Siniestros sucedidos, no reportados, no resueltos, no pagados
   
   
-$R$ Ganancia
+$R$ Ganancia o rendimiento
 $P$ Ingreso por primas
 $I$ Ingreso por inversiones
 $S$ Pago de siniestros
@@ -294,13 +294,14 @@ S =
 \end{array}
 \right.
 \end{equation}
-o de forma más compacta y equivalente $S = \mathbf{1}_{\mathbb{N}^*}( N ) \sum\limits_{i=1}^N X_i$
+o de forma más compacta se tan solo utilizar la igualdad $S = \sum\limits_{i=1}^N X_i$, donde se 
+asume que la suma da $0$ si $N = 0$.
 
 El valor esperado del total de reclamos $S$, está dado por:
 \begin{eqnarray*}
 \mathbb{E}[S]
-& = & \mathbb{E}\left[ \mathbf{1}_{\mathbb{N}^*}( N ) \sum\limits_{i=1}^N X_i \right] \\
-& = & \sum\limits_{n=0}^{+\infty} \mathbb{E}\left[ \mathbf{1}_{\mathbb{N}^*}( N ) 
+& = & \mathbb{E}\left[ \sum\limits_{i=1}^N X_i \right] \\
+& = & \sum\limits_{n=0}^{+\infty} \mathbb{E}\left[ 
 \sum\limits_{i=1}^n X_i\ \middle|\ N = n \right]P( N = n )\quad
 \text{utilizando la esperanza condicional} \\
 & = & 0 P( N = 0 ) + \sum\limits_{n=1}^{+\infty} \mathbb{E}\left[ \sum\limits_{i=1}^n X_i\ \middle|\ N = n \right]P( N = n ) \\
@@ -443,6 +444,36 @@ se realiza un ajuste al valor $n$ que es el número máximo de siniestros. Adem�
 innecesario de valores simulados de reclamos $X_i$ ya que algunos se multiplicaran por $B_i$, la 
 cual solo toma valores $\{0,1\}$.
 
+<!------------------------------------------------------------------------------------------------->
+## Modelos mixtos
+En algunos casos en particular se considera un modelo de agregación que es una mixtura entre el
+modelo individual y el modelo colectivo. Se parte de considerar un número $n$ de unidades aseguradas
+donde para cada unidad $i \in \{1, \ldots, n\}$, se considera que puede presentar una cantidad 
+de reclamos dados por una variable aleatoria discreta $N_i$, y así para cada presentar un número
+de reclamos $X_{i,1}, \ldots, X_{i,N_i}$. Así el reclamo total viene dado por la expresión
+\begin{equation}
+S = \sum\limits_{i=1}^n \sum\limits_{j=1}^{N_i} X_{i,j}
+\end{equation}
+
+<!------------------------------------------------------------------------------------------------->
+## Modelos con variables explicativas
+En algunos casos más generales, donde la población presenta heterogeneidad respecto del riesgo al
+cual están expuestos, como también de las dimensiones de sus reclamos, se considera que existen 
+variables aleatorias adicionales $Y_1, \ldots, Y_n$ que determinan el número de reclamos $N$ y 
+el valor de los siniestros $\{X_i\}$. Es decir no hay independencia entre $\{Y_j\}$ y $N$ así 
+como tampoco entre $\{Y_j\}$ y $\{X_i\}$. Es así que un modelo colectivo $S = \sum\limits_{i=1}^N X_i$
+su estudio, estimación y tarificación debe ser realizada de forma condicional respecto de las 
+variables aleatorias explicativas $\{Y_j\}$,
+\begin{equation}
+\mathbb{E}[ S ] 
+= \mathbb{E}\left[ \mathbb{E}\left[ S \middle| Y_1, \ldots, Y_n \right] \right]
+\end{equation}
+de donde es necesario estimar cada una de las esperanzas condicionadas 
+$\mathbb{E}\left[ S \middle| Y_1, \ldots, Y_n \right]$.
+
+En la práctica las variables explicativas $\{ Y_j \}$ suelen ser seleccionadas para caracterizar 
+el perfil de riesgo de cada cliente. Para su selección se suele utilizar algunos criterios de tipo 
+económico, financiero, legal y estadístico.
 
 <!------------------------------------------------------------------------------------------------->
 ## Aplicación del deducible
