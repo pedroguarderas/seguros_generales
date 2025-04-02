@@ -186,8 +186,8 @@ div.csl-indent {
 <li class="chapter" data-level="3" data-path="distribuciones.html"><a href="distribuciones.html"><i class="fa fa-check"></i><b>3</b> Distribuciones</a>
 <ul>
 <li class="chapter" data-level="3.1" data-path="distribuciones.html"><a href="distribuciones.html#distribuciones-discretas"><i class="fa fa-check"></i><b>3.1</b> Distribuciones discretas</a></li>
-<li class="chapter" data-level="3.2" data-path="distribuciones.html"><a href="distribuciones.html#distribuciones-continuas"><i class="fa fa-check"></i><b>3.2</b> Distribuciones continuas</a></li>
-<li class="chapter" data-level="3.3" data-path="distribuciones.html"><a href="distribuciones.html#familia-de-panjer"><i class="fa fa-check"></i><b>3.3</b> Familia de Panjer</a></li>
+<li class="chapter" data-level="3.2" data-path="distribuciones.html"><a href="distribuciones.html#familia-de-panjer"><i class="fa fa-check"></i><b>3.2</b> Familia de Panjer</a></li>
+<li class="chapter" data-level="3.3" data-path="distribuciones.html"><a href="distribuciones.html#distribuciones-continuas"><i class="fa fa-check"></i><b>3.3</b> Distribuciones continuas</a></li>
 <li class="chapter" data-level="3.4" data-path="distribuciones.html"><a href="distribuciones.html#estimación"><i class="fa fa-check"></i><b>3.4</b> Estimación</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html"><i class="fa fa-check"></i><b>4</b> Modelos de pérdida agregada</a>
@@ -207,9 +207,11 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="4.5.1" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html#algoritmo-de-simulación-1"><i class="fa fa-check"></i><b>4.5.1</b> Algoritmo de simulación</a></li>
 </ul></li>
-<li class="chapter" data-level="4.6" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html#aplicación-del-deducible"><i class="fa fa-check"></i><b>4.6</b> Aplicación del deducible</a></li>
-<li class="chapter" data-level="4.7" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html#algoritmo-de-panjer"><i class="fa fa-check"></i><b>4.7</b> Algoritmo de Panjer</a></li>
-<li class="chapter" data-level="4.8" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html#estimación-usando-la-transformada-de-fourier"><i class="fa fa-check"></i><b>4.8</b> Estimación usando la transformada de Fourier</a></li>
+<li class="chapter" data-level="4.6" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html#modelos-mixtos"><i class="fa fa-check"></i><b>4.6</b> Modelos mixtos</a></li>
+<li class="chapter" data-level="4.7" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html#modelos-con-variables-explicativas"><i class="fa fa-check"></i><b>4.7</b> Modelos con variables explicativas</a></li>
+<li class="chapter" data-level="4.8" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html#aplicación-del-deducible"><i class="fa fa-check"></i><b>4.8</b> Aplicación del deducible</a></li>
+<li class="chapter" data-level="4.9" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html#algoritmo-de-panjer"><i class="fa fa-check"></i><b>4.9</b> Algoritmo de Panjer</a></li>
+<li class="chapter" data-level="4.10" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html#estimación-usando-la-transformada-de-fourier"><i class="fa fa-check"></i><b>4.10</b> Estimación usando la transformada de Fourier</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="tarificación.html"><a href="tarificación.html"><i class="fa fa-check"></i><b>5</b> Tarificación</a>
 <ul>
@@ -283,7 +285,7 @@ div.csl-indent {
 <li><p>Siniestros sucedidos, reportados, no resueltos, no pagados</p></li>
 <li><p>Siniestros sucedidos, no reportados, no resueltos, no pagados</p></li>
 </ol>
-<p><span class="math inline">\(R\)</span> Ganancia
+<p><span class="math inline">\(R\)</span> Ganancia o rendimiento
 <span class="math inline">\(P\)</span> Ingreso por primas
 <span class="math inline">\(I\)</span> Ingreso por inversiones
 <span class="math inline">\(S\)</span> Pago de siniestros
@@ -381,20 +383,20 @@ de las severidades <span class="math inline">\(X_1, \ldots, X_n\)</span> y se co
 severidad <span class="math inline">\(X_i\)</span> sigue una ley log-normal <span class="math inline">\(LN( \mu_i, \sigma_i )\)</span>, de parámetros <span class="math inline">\(\mu_i, \sigma_i\)</span>,
 para <span class="math inline">\(i \in \{1,\ldots, n\}\)</span>.</p>
 <p></p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb21-1"><a href="modelos-de-pérdida-agregada.html#cb21-1"></a><span class="co"># 1. número de distribuciones</span></span>
-<span id="cb21-2"><a href="modelos-de-pérdida-agregada.html#cb21-2"></a>n <span class="ot">&lt;-</span> <span class="dv">200</span></span>
-<span id="cb21-3"><a href="modelos-de-pérdida-agregada.html#cb21-3"></a><span class="co"># parámetros para las n distribuciones</span></span>
-<span id="cb21-4"><a href="modelos-de-pérdida-agregada.html#cb21-4"></a>mu <span class="ot">&lt;-</span> <span class="fu">seq</span>( <span class="dv">1</span>, <span class="dv">2</span>, <span class="at">length.out =</span> n )</span>
-<span id="cb21-5"><a href="modelos-de-pérdida-agregada.html#cb21-5"></a>sigma <span class="ot">&lt;-</span> <span class="fu">seq</span>( <span class="dv">2</span>, <span class="dv">3</span>, <span class="at">length.out =</span> n )</span>
-<span id="cb21-6"><a href="modelos-de-pérdida-agregada.html#cb21-6"></a></span>
-<span id="cb21-7"><a href="modelos-de-pérdida-agregada.html#cb21-7"></a><span class="co"># 2. número de simulaciones</span></span>
-<span id="cb21-8"><a href="modelos-de-pérdida-agregada.html#cb21-8"></a>m <span class="ot">&lt;-</span> <span class="fl">1e4</span> </span>
-<span id="cb21-9"><a href="modelos-de-pérdida-agregada.html#cb21-9"></a></span>
-<span id="cb21-10"><a href="modelos-de-pérdida-agregada.html#cb21-10"></a><span class="co"># 3. simulación de severidades</span></span>
-<span id="cb21-11"><a href="modelos-de-pérdida-agregada.html#cb21-11"></a>X <span class="ot">&lt;-</span> <span class="fu">lapply</span>( <span class="dv">1</span><span class="sc">:</span>m, <span class="at">FUN =</span> <span class="cf">function</span>( i ) <span class="fu">sapply</span>( <span class="dv">1</span><span class="sc">:</span>n, <span class="at">FUN =</span> <span class="cf">function</span>( j ) <span class="fu">rlnorm</span>( <span class="dv">1</span>, <span class="at">meanlog =</span> mu[ j ], <span class="at">sdlog =</span> sigma[ j ] ) ) )</span>
-<span id="cb21-12"><a href="modelos-de-pérdida-agregada.html#cb21-12"></a></span>
-<span id="cb21-13"><a href="modelos-de-pérdida-agregada.html#cb21-13"></a><span class="co"># 4. simulación de severidad total</span></span>
-<span id="cb21-14"><a href="modelos-de-pérdida-agregada.html#cb21-14"></a>S <span class="ot">&lt;-</span> <span class="fu">sapply</span>( X, <span class="at">FUN =</span> <span class="cf">function</span>( x ) <span class="fu">sum</span>( x ) )</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb22-1"><a href="modelos-de-pérdida-agregada.html#cb22-1"></a><span class="co"># 1. número de distribuciones</span></span>
+<span id="cb22-2"><a href="modelos-de-pérdida-agregada.html#cb22-2"></a>n <span class="ot">&lt;-</span> <span class="dv">200</span></span>
+<span id="cb22-3"><a href="modelos-de-pérdida-agregada.html#cb22-3"></a><span class="co"># parámetros para las n distribuciones</span></span>
+<span id="cb22-4"><a href="modelos-de-pérdida-agregada.html#cb22-4"></a>mu <span class="ot">&lt;-</span> <span class="fu">seq</span>( <span class="dv">1</span>, <span class="dv">2</span>, <span class="at">length.out =</span> n )</span>
+<span id="cb22-5"><a href="modelos-de-pérdida-agregada.html#cb22-5"></a>sigma <span class="ot">&lt;-</span> <span class="fu">seq</span>( <span class="dv">2</span>, <span class="dv">3</span>, <span class="at">length.out =</span> n )</span>
+<span id="cb22-6"><a href="modelos-de-pérdida-agregada.html#cb22-6"></a></span>
+<span id="cb22-7"><a href="modelos-de-pérdida-agregada.html#cb22-7"></a><span class="co"># 2. número de simulaciones</span></span>
+<span id="cb22-8"><a href="modelos-de-pérdida-agregada.html#cb22-8"></a>m <span class="ot">&lt;-</span> <span class="fl">1e4</span> </span>
+<span id="cb22-9"><a href="modelos-de-pérdida-agregada.html#cb22-9"></a></span>
+<span id="cb22-10"><a href="modelos-de-pérdida-agregada.html#cb22-10"></a><span class="co"># 3. simulación de severidades</span></span>
+<span id="cb22-11"><a href="modelos-de-pérdida-agregada.html#cb22-11"></a>X <span class="ot">&lt;-</span> <span class="fu">lapply</span>( <span class="dv">1</span><span class="sc">:</span>m, <span class="at">FUN =</span> <span class="cf">function</span>( i ) <span class="fu">sapply</span>( <span class="dv">1</span><span class="sc">:</span>n, <span class="at">FUN =</span> <span class="cf">function</span>( j ) <span class="fu">rlnorm</span>( <span class="dv">1</span>, <span class="at">meanlog =</span> mu[ j ], <span class="at">sdlog =</span> sigma[ j ] ) ) )</span>
+<span id="cb22-12"><a href="modelos-de-pérdida-agregada.html#cb22-12"></a></span>
+<span id="cb22-13"><a href="modelos-de-pérdida-agregada.html#cb22-13"></a><span class="co"># 4. simulación de severidad total</span></span>
+<span id="cb22-14"><a href="modelos-de-pérdida-agregada.html#cb22-14"></a>S <span class="ot">&lt;-</span> <span class="fu">sapply</span>( X, <span class="at">FUN =</span> <span class="cf">function</span>( x ) <span class="fu">sum</span>( x ) )</span></code></pre></div>
 <p></p>
 </div>
 <p>En el ejemplo anterior es de notar que la densidad de probabilidad de la severidad <span class="math inline">\(S\)</span> resulta de la
@@ -410,21 +412,21 @@ el resultado de acotación de <a href="consideraciones-preliminares.html#thm:ddk
 <p>Para construir <span class="math inline">\(F_m\)</span> en R, se puede utilizar la función ya empaquetada <code>ecdf</code> (empirical cumulative
 distribution function).</p>
 <p></p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb22-1"><a href="modelos-de-pérdida-agregada.html#cb22-1"></a><span class="co"># estimación distribución acumulada empírica de S</span></span>
-<span id="cb22-2"><a href="modelos-de-pérdida-agregada.html#cb22-2"></a>Fm <span class="ot">&lt;-</span> <span class="fu">ecdf</span>( S )</span>
-<span id="cb22-3"><a href="modelos-de-pérdida-agregada.html#cb22-3"></a></span>
-<span id="cb22-4"><a href="modelos-de-pérdida-agregada.html#cb22-4"></a><span class="co"># esperanza empírica</span></span>
-<span id="cb22-5"><a href="modelos-de-pérdida-agregada.html#cb22-5"></a>EeS <span class="ot">&lt;-</span> <span class="fu">mean</span>( S )</span>
-<span id="cb22-6"><a href="modelos-de-pérdida-agregada.html#cb22-6"></a></span>
-<span id="cb22-7"><a href="modelos-de-pérdida-agregada.html#cb22-7"></a><span class="co"># esperanza teórica</span></span>
-<span id="cb22-8"><a href="modelos-de-pérdida-agregada.html#cb22-8"></a>ES <span class="ot">&lt;-</span> <span class="fu">sum</span>( <span class="fu">sapply</span>( <span class="dv">1</span><span class="sc">:</span>n, <span class="at">FUN =</span> <span class="cf">function</span>( i ) <span class="fu">exp</span>( mu[i] <span class="sc">+</span> <span class="fl">0.5</span> <span class="sc">*</span> sigma[i]<span class="sc">^</span><span class="dv">2</span> ) ) )</span>
-<span id="cb22-9"><a href="modelos-de-pérdida-agregada.html#cb22-9"></a></span>
-<span id="cb22-10"><a href="modelos-de-pérdida-agregada.html#cb22-10"></a>s <span class="ot">&lt;-</span> <span class="fu">seq</span>( <span class="fu">quantile</span>( S, <span class="at">probs =</span> <span class="fl">0.01</span> ), <span class="fu">quantile</span>( S, <span class="at">probs =</span> <span class="fl">0.99</span> ), <span class="at">length.out =</span> <span class="fl">1e3</span> )</span>
-<span id="cb22-11"><a href="modelos-de-pérdida-agregada.html#cb22-11"></a>Fms <span class="ot">&lt;-</span> <span class="fu">sapply</span>( s, <span class="at">FUN =</span> Fm )</span>
-<span id="cb22-12"><a href="modelos-de-pérdida-agregada.html#cb22-12"></a></span>
-<span id="cb22-13"><a href="modelos-de-pérdida-agregada.html#cb22-13"></a><span class="fu">plot</span>( s, Fms, <span class="at">type =</span> <span class="st">&#39;s&#39;</span> )</span>
-<span id="cb22-14"><a href="modelos-de-pérdida-agregada.html#cb22-14"></a><span class="fu">abline</span>( <span class="at">v =</span> EeS, <span class="at">col =</span> <span class="st">&#39;red&#39;</span> )</span>
-<span id="cb22-15"><a href="modelos-de-pérdida-agregada.html#cb22-15"></a><span class="fu">abline</span>( <span class="at">v =</span> ES, <span class="at">col =</span> <span class="st">&#39;orange&#39;</span> )</span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb23-1"><a href="modelos-de-pérdida-agregada.html#cb23-1"></a><span class="co"># estimación distribución acumulada empírica de S</span></span>
+<span id="cb23-2"><a href="modelos-de-pérdida-agregada.html#cb23-2"></a>Fm <span class="ot">&lt;-</span> <span class="fu">ecdf</span>( S )</span>
+<span id="cb23-3"><a href="modelos-de-pérdida-agregada.html#cb23-3"></a></span>
+<span id="cb23-4"><a href="modelos-de-pérdida-agregada.html#cb23-4"></a><span class="co"># esperanza empírica</span></span>
+<span id="cb23-5"><a href="modelos-de-pérdida-agregada.html#cb23-5"></a>EeS <span class="ot">&lt;-</span> <span class="fu">mean</span>( S )</span>
+<span id="cb23-6"><a href="modelos-de-pérdida-agregada.html#cb23-6"></a></span>
+<span id="cb23-7"><a href="modelos-de-pérdida-agregada.html#cb23-7"></a><span class="co"># esperanza teórica</span></span>
+<span id="cb23-8"><a href="modelos-de-pérdida-agregada.html#cb23-8"></a>ES <span class="ot">&lt;-</span> <span class="fu">sum</span>( <span class="fu">sapply</span>( <span class="dv">1</span><span class="sc">:</span>n, <span class="at">FUN =</span> <span class="cf">function</span>( i ) <span class="fu">exp</span>( mu[i] <span class="sc">+</span> <span class="fl">0.5</span> <span class="sc">*</span> sigma[i]<span class="sc">^</span><span class="dv">2</span> ) ) )</span>
+<span id="cb23-9"><a href="modelos-de-pérdida-agregada.html#cb23-9"></a></span>
+<span id="cb23-10"><a href="modelos-de-pérdida-agregada.html#cb23-10"></a>s <span class="ot">&lt;-</span> <span class="fu">seq</span>( <span class="fu">quantile</span>( S, <span class="at">probs =</span> <span class="fl">0.01</span> ), <span class="fu">quantile</span>( S, <span class="at">probs =</span> <span class="fl">0.99</span> ), <span class="at">length.out =</span> <span class="fl">1e3</span> )</span>
+<span id="cb23-11"><a href="modelos-de-pérdida-agregada.html#cb23-11"></a>Fms <span class="ot">&lt;-</span> <span class="fu">sapply</span>( s, <span class="at">FUN =</span> Fm )</span>
+<span id="cb23-12"><a href="modelos-de-pérdida-agregada.html#cb23-12"></a></span>
+<span id="cb23-13"><a href="modelos-de-pérdida-agregada.html#cb23-13"></a><span class="fu">plot</span>( s, Fms, <span class="at">type =</span> <span class="st">&#39;s&#39;</span> )</span>
+<span id="cb23-14"><a href="modelos-de-pérdida-agregada.html#cb23-14"></a><span class="fu">abline</span>( <span class="at">v =</span> EeS, <span class="at">col =</span> <span class="st">&#39;red&#39;</span> )</span>
+<span id="cb23-15"><a href="modelos-de-pérdida-agregada.html#cb23-15"></a><span class="fu">abline</span>( <span class="at">v =</span> ES, <span class="at">col =</span> <span class="st">&#39;orange&#39;</span> )</span></code></pre></div>
 <p><img src="seguros_generales_files/figure-html/l3c2-1.png" width="700" /></p>
 <p></p>
 <p>Para calcular la esperanza de la severidad total <span class="math inline">\(S\)</span>, también se puede utilizar una aproximación
@@ -436,15 +438,15 @@ a la integral de Riemann-Stieltjes utilizando la distribución acumulada empíri
 \end{equation}\]</span></p>
 <p>Esta aproximación en R puede ser implementada de la siguiente forma:</p>
 <p></p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb23-1"><a href="modelos-de-pérdida-agregada.html#cb23-1"></a>N <span class="ot">&lt;-</span> <span class="fl">1e5</span></span>
-<span id="cb23-2"><a href="modelos-de-pérdida-agregada.html#cb23-2"></a>s <span class="ot">&lt;-</span> <span class="fu">seq</span>( <span class="fu">min</span>( S ), <span class="fu">max</span>( S ), <span class="at">length.out =</span> N )</span>
-<span id="cb23-3"><a href="modelos-de-pérdida-agregada.html#cb23-3"></a>EmS <span class="ot">&lt;-</span> <span class="fu">sum</span>( s[<span class="sc">-</span>N] <span class="sc">*</span> <span class="fu">diff</span>( <span class="fu">sapply</span>( s, <span class="at">FUN =</span> Fm ) ) )</span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb24-1"><a href="modelos-de-pérdida-agregada.html#cb24-1"></a>N <span class="ot">&lt;-</span> <span class="fl">1e5</span></span>
+<span id="cb24-2"><a href="modelos-de-pérdida-agregada.html#cb24-2"></a>s <span class="ot">&lt;-</span> <span class="fu">seq</span>( <span class="fu">min</span>( S ), <span class="fu">max</span>( S ), <span class="at">length.out =</span> N )</span>
+<span id="cb24-3"><a href="modelos-de-pérdida-agregada.html#cb24-3"></a>EmS <span class="ot">&lt;-</span> <span class="fu">sum</span>( s[<span class="sc">-</span>N] <span class="sc">*</span> <span class="fu">diff</span>( <span class="fu">sapply</span>( s, <span class="at">FUN =</span> Fm ) ) )</span></code></pre></div>
 <p></p>
 <p>De ello tenemos los siguientes resultados de cálculo para el valor esperado de la severidad total
 <span class="math display">\[\begin{eqnarray*}
 \mathbb{E}[S] = \sum\limits_{i=1}^n e^{ \mu_i + \frac{1}{2} \sigma_i^2 } &amp; = &amp; 34562.7208, \\
-\overline{S} = \frac{1}{m} \sum\limits_{i=1}^m S_i &amp; = &amp; 37966.7358, \\
-\sum\limits_{i=1}^N s_{i} \left( F_m( s_{i+1} ) - F_m( s_{i} ) \right) &amp; = &amp; 37890.3615
+\overline{S} = \frac{1}{m} \sum\limits_{i=1}^m S_i &amp; = &amp; 35310.2092, \\
+\sum\limits_{i=1}^N s_{i} \left( F_m( s_{i+1} ) - F_m( s_{i} ) \right) &amp; = &amp; 35291.6154
 \end{eqnarray*}\]</span></p>
 <p>Lo bueno de poseer una buena aproximación a la distribución acumulada de una variable aleatoria, es
 que podemos calcular algunos otros valores de importancia relacionados a la variable aleatoria y
@@ -483,7 +485,7 @@ S = \sum\limits_{i=1}^n X_i = \sum\limits_{i=1}^n M \mathbf{1}_{A_i}
 = \sum\limits_{i=1}^n \mathbf{E}\left[ M \mathbf{1}_{A_i} \right]
 = M \sum\limits_{i=1}^n P( A_i )
 \end{equation}\]</span>
-la última igualdad resulta de las propiedades de la función indicatriz <a href="consideraciones-preliminares.html#def:indicatriz">2.8</a>.</p>
+la última igualdad resulta de las propiedades de la función indicatriz <a href="consideraciones-preliminares.html#def:indicatriz">2.9</a>.</p>
 <p>Si en caso todos los <span class="math inline">\(P(A_i) = p\)</span> tienen la misma probabilidad, el valor total esperado de reclamos
 toma la siguiente forma:
 <span class="math display">\[\begin{equation}
@@ -508,12 +510,13 @@ S =
 \end{array}
 \right.
 \end{equation}\]</span>
-o de forma más compacta y equivalente <span class="math inline">\(S = \mathbf{1}_{\mathbb{N}^*}( N ) \sum\limits_{i=1}^N X_i\)</span></p>
+o de forma más compacta se tan solo utilizar la igualdad <span class="math inline">\(S = \sum\limits_{i=1}^N X_i\)</span>, donde se
+asume que la suma da <span class="math inline">\(0\)</span> si <span class="math inline">\(N = 0\)</span>.</p>
 <p>El valor esperado del total de reclamos <span class="math inline">\(S\)</span>, está dado por:
 <span class="math display">\[\begin{eqnarray*}
 \mathbb{E}[S]
-&amp; = &amp; \mathbb{E}\left[ \mathbf{1}_{\mathbb{N}^*}( N ) \sum\limits_{i=1}^N X_i \right] \\
-&amp; = &amp; \sum\limits_{n=0}^{+\infty} \mathbb{E}\left[ \mathbf{1}_{\mathbb{N}^*}( N )
+&amp; = &amp; \mathbb{E}\left[ \sum\limits_{i=1}^N X_i \right] \\
+&amp; = &amp; \sum\limits_{n=0}^{+\infty} \mathbb{E}\left[
 \sum\limits_{i=1}^n X_i\ \middle|\ N = n \right]P( N = n )\quad
 \text{utilizando la esperanza condicional} \\
 &amp; = &amp; 0 P( N = 0 ) + \sum\limits_{n=1}^{+\infty} \mathbb{E}\left[ \sum\limits_{i=1}^n X_i\ \middle|\ N = n \right]P( N = n ) \\
@@ -559,22 +562,22 @@ como ya lo hemos realizado, utilizando las funciones de aplicación vectorial <c
 <span class="math inline">\(X \rightsquigarrow LN( \mu, \sigma )\)</span>, siendo además cada uno de los reclamos indepencientes entre
 si.</p>
 <p></p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb24-1"><a href="modelos-de-pérdida-agregada.html#cb24-1"></a><span class="co"># 1. selección de simulaciones</span></span>
-<span id="cb24-2"><a href="modelos-de-pérdida-agregada.html#cb24-2"></a>m <span class="ot">&lt;-</span> <span class="fl">1e4</span></span>
-<span id="cb24-3"><a href="modelos-de-pérdida-agregada.html#cb24-3"></a></span>
-<span id="cb24-4"><a href="modelos-de-pérdida-agregada.html#cb24-4"></a><span class="co"># 2. especificación de los parámetros para las distribuciones</span></span>
-<span id="cb24-5"><a href="modelos-de-pérdida-agregada.html#cb24-5"></a>u <span class="ot">&lt;-</span> <span class="dv">5</span></span>
-<span id="cb24-6"><a href="modelos-de-pérdida-agregada.html#cb24-6"></a>s <span class="ot">&lt;-</span> <span class="dv">2</span></span>
-<span id="cb24-7"><a href="modelos-de-pérdida-agregada.html#cb24-7"></a>l <span class="ot">&lt;-</span> <span class="dv">3</span></span>
-<span id="cb24-8"><a href="modelos-de-pérdida-agregada.html#cb24-8"></a></span>
-<span id="cb24-9"><a href="modelos-de-pérdida-agregada.html#cb24-9"></a><span class="co"># 3. simulación del conteo de siniestros</span></span>
-<span id="cb24-10"><a href="modelos-de-pérdida-agregada.html#cb24-10"></a>N <span class="ot">&lt;-</span> <span class="fu">rpois</span>( <span class="at">n =</span> m, <span class="at">lambda =</span> l )</span>
-<span id="cb24-11"><a href="modelos-de-pérdida-agregada.html#cb24-11"></a></span>
-<span id="cb24-12"><a href="modelos-de-pérdida-agregada.html#cb24-12"></a><span class="co"># 4. simulación de la severidad de los reclamos</span></span>
-<span id="cb24-13"><a href="modelos-de-pérdida-agregada.html#cb24-13"></a>X <span class="ot">&lt;-</span> <span class="fu">lapply</span>( N, <span class="at">FUN =</span> <span class="cf">function</span>( n ) <span class="fu">rlnorm</span>( n, <span class="at">meanlog =</span> u, <span class="at">sdlog =</span> s ) )</span>
-<span id="cb24-14"><a href="modelos-de-pérdida-agregada.html#cb24-14"></a></span>
-<span id="cb24-15"><a href="modelos-de-pérdida-agregada.html#cb24-15"></a><span class="co"># 5. reclamo total, agregación por cada simulación</span></span>
-<span id="cb24-16"><a href="modelos-de-pérdida-agregada.html#cb24-16"></a>S <span class="ot">&lt;-</span> <span class="fu">sapply</span>( X, <span class="at">FUN =</span> <span class="cf">function</span>( x ) <span class="fu">sum</span>( x, <span class="at">na.rm =</span> <span class="cn">TRUE</span> ) )</span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb25-1"><a href="modelos-de-pérdida-agregada.html#cb25-1"></a><span class="co"># 1. selección de simulaciones</span></span>
+<span id="cb25-2"><a href="modelos-de-pérdida-agregada.html#cb25-2"></a>m <span class="ot">&lt;-</span> <span class="fl">1e4</span></span>
+<span id="cb25-3"><a href="modelos-de-pérdida-agregada.html#cb25-3"></a></span>
+<span id="cb25-4"><a href="modelos-de-pérdida-agregada.html#cb25-4"></a><span class="co"># 2. especificación de los parámetros para las distribuciones</span></span>
+<span id="cb25-5"><a href="modelos-de-pérdida-agregada.html#cb25-5"></a>u <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb25-6"><a href="modelos-de-pérdida-agregada.html#cb25-6"></a>s <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb25-7"><a href="modelos-de-pérdida-agregada.html#cb25-7"></a>l <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb25-8"><a href="modelos-de-pérdida-agregada.html#cb25-8"></a></span>
+<span id="cb25-9"><a href="modelos-de-pérdida-agregada.html#cb25-9"></a><span class="co"># 3. simulación del conteo de siniestros</span></span>
+<span id="cb25-10"><a href="modelos-de-pérdida-agregada.html#cb25-10"></a>N <span class="ot">&lt;-</span> <span class="fu">rpois</span>( <span class="at">n =</span> m, <span class="at">lambda =</span> l )</span>
+<span id="cb25-11"><a href="modelos-de-pérdida-agregada.html#cb25-11"></a></span>
+<span id="cb25-12"><a href="modelos-de-pérdida-agregada.html#cb25-12"></a><span class="co"># 4. simulación de la severidad de los reclamos</span></span>
+<span id="cb25-13"><a href="modelos-de-pérdida-agregada.html#cb25-13"></a>X <span class="ot">&lt;-</span> <span class="fu">lapply</span>( N, <span class="at">FUN =</span> <span class="cf">function</span>( n ) <span class="fu">rlnorm</span>( n, <span class="at">meanlog =</span> u, <span class="at">sdlog =</span> s ) )</span>
+<span id="cb25-14"><a href="modelos-de-pérdida-agregada.html#cb25-14"></a></span>
+<span id="cb25-15"><a href="modelos-de-pérdida-agregada.html#cb25-15"></a><span class="co"># 5. reclamo total, agregación por cada simulación</span></span>
+<span id="cb25-16"><a href="modelos-de-pérdida-agregada.html#cb25-16"></a>S <span class="ot">&lt;-</span> <span class="fu">sapply</span>( X, <span class="at">FUN =</span> <span class="cf">function</span>( x ) <span class="fu">sum</span>( x, <span class="at">na.rm =</span> <span class="cn">TRUE</span> ) )</span></code></pre></div>
 <p></p>
 </div>
 <p>Es de notar que una algoritmo como el descrito tiene una falencia cuando la frecuencia de siniestros
@@ -621,21 +624,21 @@ reclamos consideraremos <span class="math inline">\(X_i \rightsquigarrow LN( \mu
 Si consideramos generar la simulación como un modelo individual, generamos variables aleatorias
 <span class="math inline">\(B_i \rightsquigarrow Ber(p)\)</span>, para todo <span class="math inline">\(i \in \{1,\ldots,n\}\)</span>.</p>
 <p></p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb25-1"><a href="modelos-de-pérdida-agregada.html#cb25-1"></a>m <span class="ot">&lt;-</span> <span class="fl">1e4</span></span>
-<span id="cb25-2"><a href="modelos-de-pérdida-agregada.html#cb25-2"></a>n <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
-<span id="cb25-3"><a href="modelos-de-pérdida-agregada.html#cb25-3"></a>p <span class="ot">&lt;-</span> <span class="fl">0.2</span></span>
-<span id="cb25-4"><a href="modelos-de-pérdida-agregada.html#cb25-4"></a>mu <span class="ot">&lt;-</span> <span class="dv">5</span></span>
-<span id="cb25-5"><a href="modelos-de-pérdida-agregada.html#cb25-5"></a>sigma <span class="ot">&lt;-</span> <span class="dv">2</span></span>
-<span id="cb25-6"><a href="modelos-de-pérdida-agregada.html#cb25-6"></a>B <span class="ot">&lt;-</span> <span class="fu">lapply</span>( <span class="dv">1</span><span class="sc">:</span>m, <span class="at">FUN =</span> <span class="cf">function</span>( i ) <span class="fu">rbinom</span>( n, <span class="at">size =</span> <span class="dv">1</span>, <span class="at">prob =</span> p ) )</span>
-<span id="cb25-7"><a href="modelos-de-pérdida-agregada.html#cb25-7"></a>X <span class="ot">&lt;-</span> <span class="fu">lapply</span>( <span class="dv">1</span><span class="sc">:</span>m, <span class="at">FUN =</span> <span class="cf">function</span>( i ) <span class="fu">rlnorm</span>( n, <span class="at">meanlog =</span> mu, <span class="at">sdlog =</span> sigma ) )</span>
-<span id="cb25-8"><a href="modelos-de-pérdida-agregada.html#cb25-8"></a>S <span class="ot">&lt;-</span> <span class="fu">sapply</span>( <span class="dv">1</span><span class="sc">:</span>m, <span class="at">FUN =</span> <span class="cf">function</span>( i ) <span class="fu">sum</span>( B[[ i ]] <span class="sc">*</span> X[[ i ]], <span class="at">na.rm =</span> <span class="cn">TRUE</span> ) )</span>
-<span id="cb25-9"><a href="modelos-de-pérdida-agregada.html#cb25-9"></a></span>
-<span id="cb25-10"><a href="modelos-de-pérdida-agregada.html#cb25-10"></a>EeS <span class="ot">&lt;-</span> <span class="fu">mean</span>( S )</span>
-<span id="cb25-11"><a href="modelos-de-pérdida-agregada.html#cb25-11"></a>ES <span class="ot">&lt;-</span> n <span class="sc">*</span> p <span class="sc">*</span> <span class="fu">exp</span>( mu <span class="sc">+</span> <span class="fl">0.5</span> <span class="sc">*</span> sigma<span class="sc">^</span><span class="dv">2</span> )</span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb26-1"><a href="modelos-de-pérdida-agregada.html#cb26-1"></a>m <span class="ot">&lt;-</span> <span class="fl">1e4</span></span>
+<span id="cb26-2"><a href="modelos-de-pérdida-agregada.html#cb26-2"></a>n <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
+<span id="cb26-3"><a href="modelos-de-pérdida-agregada.html#cb26-3"></a>p <span class="ot">&lt;-</span> <span class="fl">0.2</span></span>
+<span id="cb26-4"><a href="modelos-de-pérdida-agregada.html#cb26-4"></a>mu <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb26-5"><a href="modelos-de-pérdida-agregada.html#cb26-5"></a>sigma <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb26-6"><a href="modelos-de-pérdida-agregada.html#cb26-6"></a>B <span class="ot">&lt;-</span> <span class="fu">lapply</span>( <span class="dv">1</span><span class="sc">:</span>m, <span class="at">FUN =</span> <span class="cf">function</span>( i ) <span class="fu">rbinom</span>( n, <span class="at">size =</span> <span class="dv">1</span>, <span class="at">prob =</span> p ) )</span>
+<span id="cb26-7"><a href="modelos-de-pérdida-agregada.html#cb26-7"></a>X <span class="ot">&lt;-</span> <span class="fu">lapply</span>( <span class="dv">1</span><span class="sc">:</span>m, <span class="at">FUN =</span> <span class="cf">function</span>( i ) <span class="fu">rlnorm</span>( n, <span class="at">meanlog =</span> mu, <span class="at">sdlog =</span> sigma ) )</span>
+<span id="cb26-8"><a href="modelos-de-pérdida-agregada.html#cb26-8"></a>S <span class="ot">&lt;-</span> <span class="fu">sapply</span>( <span class="dv">1</span><span class="sc">:</span>m, <span class="at">FUN =</span> <span class="cf">function</span>( i ) <span class="fu">sum</span>( B[[ i ]] <span class="sc">*</span> X[[ i ]], <span class="at">na.rm =</span> <span class="cn">TRUE</span> ) )</span>
+<span id="cb26-9"><a href="modelos-de-pérdida-agregada.html#cb26-9"></a></span>
+<span id="cb26-10"><a href="modelos-de-pérdida-agregada.html#cb26-10"></a>EeS <span class="ot">&lt;-</span> <span class="fu">mean</span>( S )</span>
+<span id="cb26-11"><a href="modelos-de-pérdida-agregada.html#cb26-11"></a>ES <span class="ot">&lt;-</span> n <span class="sc">*</span> p <span class="sc">*</span> <span class="fu">exp</span>( mu <span class="sc">+</span> <span class="fl">0.5</span> <span class="sc">*</span> sigma<span class="sc">^</span><span class="dv">2</span> )</span></code></pre></div>
 <p></p>
 <p><span class="math display">\[\begin{eqnarray*}
 \mathbb{E}[S] = n p e^{ \mu + \frac{1}{2} \sigma^2 } &amp; = &amp; 219326.6317, \\
-\overline{S} = \frac{1}{m} \sum\limits_{i=1}^m S_i &amp; = &amp; 219599.9969,
+\overline{S} = \frac{1}{m} \sum\limits_{i=1}^m S_i &amp; = &amp; 217963.6774,
 \end{eqnarray*}\]</span></p>
 </div>
 <p>Es importante observar que si la frecuencia de reclamos es superior a <span class="math inline">\(1\)</span>, sea este por póliza,
@@ -646,43 +649,75 @@ cual solo toma valores <span class="math inline">\(\{0,1\}\)</span>.</p>
 <!------------------------------------------------------------------------------------------------->
 </div>
 </div>
-<div id="aplicación-del-deducible" class="section level2 hasAnchor" number="4.6">
-<h2><span class="header-section-number">4.6</span> Aplicación del deducible<a href="modelos-de-pérdida-agregada.html#aplicación-del-deducible" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="modelos-mixtos" class="section level2 hasAnchor" number="4.6">
+<h2><span class="header-section-number">4.6</span> Modelos mixtos<a href="modelos-de-pérdida-agregada.html#modelos-mixtos" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>En algunos casos en particular se considera un modelo de agregación que es una mixtura entre el
+modelo individual y el modelo colectivo. Se parte de considerar un número <span class="math inline">\(n\)</span> de unidades aseguradas
+donde para cada unidad <span class="math inline">\(i \in \{1, \ldots, n\}\)</span>, se considera que puede presentar una cantidad
+de reclamos dados por una variable aleatoria discreta <span class="math inline">\(N_i\)</span>, y así para cada presentar un número
+de reclamos <span class="math inline">\(X_{i,1}, \ldots, X_{i,N_i}\)</span>. Así el reclamo total viene dado por la expresión
+<span class="math display">\[\begin{equation}
+S = \sum\limits_{i=1}^n \sum\limits_{j=1}^{N_i} X_{i,j}
+\end{equation}\]</span></p>
+<!------------------------------------------------------------------------------------------------->
+</div>
+<div id="modelos-con-variables-explicativas" class="section level2 hasAnchor" number="4.7">
+<h2><span class="header-section-number">4.7</span> Modelos con variables explicativas<a href="modelos-de-pérdida-agregada.html#modelos-con-variables-explicativas" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>En algunos casos más generales, donde la población presenta heterogeneidad respecto del riesgo al
+cual están expuestos, como también de las dimensiones de sus reclamos, se considera que existen
+variables aleatorias adicionales <span class="math inline">\(Y_1, \ldots, Y_n\)</span> que determinan el número de reclamos <span class="math inline">\(N\)</span> y
+el valor de los siniestros <span class="math inline">\(\{X_i\}\)</span>. Es decir no hay independencia entre <span class="math inline">\(\{Y_j\}\)</span> y <span class="math inline">\(N\)</span> así
+como tampoco entre <span class="math inline">\(\{Y_j\}\)</span> y <span class="math inline">\(\{X_i\}\)</span>. Es así que un modelo colectivo <span class="math inline">\(S = \sum\limits_{i=1}^N X_i\)</span>
+su estudio, estimación y tarificación debe ser realizada de forma condicional respecto de las
+variables aleatorias explicativas <span class="math inline">\(\{Y_j\}\)</span>,
+<span class="math display">\[\begin{equation}
+\mathbb{E}[ S ]
+= \mathbb{E}\left[ \mathbb{E}\left[ S \middle| Y_1, \ldots, Y_n \right] \right]
+\end{equation}\]</span>
+de donde es necesario estimar cada una de las esperanzas condicionadas
+<span class="math inline">\(\mathbb{E}\left[ S \middle| Y_1, \ldots, Y_n \right]\)</span>.</p>
+<p>En la práctica las variables explicativas <span class="math inline">\(\{ Y_j \}\)</span> suelen ser seleccionadas para caracterizar
+el perfil de riesgo de cada cliente. Para su selección se suele utilizar algunos criterios de tipo
+económico, financiero, legal y estadístico.</p>
+<!------------------------------------------------------------------------------------------------->
+</div>
+<div id="aplicación-del-deducible" class="section level2 hasAnchor" number="4.8">
+<h2><span class="header-section-number">4.8</span> Aplicación del deducible<a href="modelos-de-pérdida-agregada.html#aplicación-del-deducible" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>En muchas ocasiones según las condiciones de los contratos de seguro y el apetito de riesgo del
 asegurador, se configura funciones deducibles sobre los reclamos.</p>
 <p></p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb26-1"><a href="modelos-de-pérdida-agregada.html#cb26-1"></a><span class="co"># 1. selección de simulaciones</span></span>
-<span id="cb26-2"><a href="modelos-de-pérdida-agregada.html#cb26-2"></a>m <span class="ot">&lt;-</span> <span class="fl">1e4</span></span>
-<span id="cb26-3"><a href="modelos-de-pérdida-agregada.html#cb26-3"></a></span>
-<span id="cb26-4"><a href="modelos-de-pérdida-agregada.html#cb26-4"></a><span class="co"># 2. especificación de los parámetros para las distribuciones</span></span>
-<span id="cb26-5"><a href="modelos-de-pérdida-agregada.html#cb26-5"></a>u <span class="ot">&lt;-</span> <span class="dv">5</span></span>
-<span id="cb26-6"><a href="modelos-de-pérdida-agregada.html#cb26-6"></a>s <span class="ot">&lt;-</span> <span class="dv">2</span></span>
-<span id="cb26-7"><a href="modelos-de-pérdida-agregada.html#cb26-7"></a>l <span class="ot">&lt;-</span> <span class="dv">3</span></span>
-<span id="cb26-8"><a href="modelos-de-pérdida-agregada.html#cb26-8"></a></span>
-<span id="cb26-9"><a href="modelos-de-pérdida-agregada.html#cb26-9"></a><span class="co"># 3. se especifica la función deducible</span></span>
-<span id="cb26-10"><a href="modelos-de-pérdida-agregada.html#cb26-10"></a>D <span class="ot">&lt;-</span> <span class="cf">function</span>( x, d, M ) {</span>
-<span id="cb26-11"><a href="modelos-de-pérdida-agregada.html#cb26-11"></a>  <span class="fu">return</span>( <span class="fu">min</span>( <span class="fu">max</span>( x <span class="sc">-</span> d, <span class="dv">0</span> ), M ) )</span>
-<span id="cb26-12"><a href="modelos-de-pérdida-agregada.html#cb26-12"></a>}</span>
-<span id="cb26-13"><a href="modelos-de-pérdida-agregada.html#cb26-13"></a></span>
-<span id="cb26-14"><a href="modelos-de-pérdida-agregada.html#cb26-14"></a><span class="co"># 4. simulación del conteo de siniestros</span></span>
-<span id="cb26-15"><a href="modelos-de-pérdida-agregada.html#cb26-15"></a>N <span class="ot">&lt;-</span> <span class="fu">rpois</span>( <span class="at">n =</span> m, <span class="at">lambda =</span> l )</span>
-<span id="cb26-16"><a href="modelos-de-pérdida-agregada.html#cb26-16"></a></span>
-<span id="cb26-17"><a href="modelos-de-pérdida-agregada.html#cb26-17"></a><span class="co"># 5. simulación de la severidad de los reclamos</span></span>
-<span id="cb26-18"><a href="modelos-de-pérdida-agregada.html#cb26-18"></a>X <span class="ot">&lt;-</span> <span class="fu">lapply</span>( N, <span class="at">FUN =</span> <span class="cf">function</span>( n ) <span class="fu">rlnorm</span>( n, <span class="at">meanlog =</span> u, <span class="at">sdlog =</span> s ) )</span>
-<span id="cb26-19"><a href="modelos-de-pérdida-agregada.html#cb26-19"></a></span>
-<span id="cb26-20"><a href="modelos-de-pérdida-agregada.html#cb26-20"></a><span class="co"># 6. se aplica el deducible a los reclamos</span></span>
-<span id="cb26-21"><a href="modelos-de-pérdida-agregada.html#cb26-21"></a>DX <span class="ot">&lt;-</span> <span class="fu">lapply</span>( X, <span class="at">FUN =</span> <span class="cf">function</span>( x ) <span class="fu">sapply</span>( x, <span class="at">FUN =</span> <span class="cf">function</span>( y ) <span class="fu">D</span>( y, <span class="dv">10</span>, <span class="dv">1000</span> ) ) )</span>
-<span id="cb26-22"><a href="modelos-de-pérdida-agregada.html#cb26-22"></a></span>
-<span id="cb26-23"><a href="modelos-de-pérdida-agregada.html#cb26-23"></a><span class="co"># 7. reclamo total, agregación por cada simulación</span></span>
-<span id="cb26-24"><a href="modelos-de-pérdida-agregada.html#cb26-24"></a>S <span class="ot">&lt;-</span> <span class="fu">sapply</span>( DX, <span class="at">FUN =</span> <span class="cf">function</span>( x ) <span class="fu">ifelse</span>( <span class="fu">length</span>( x ) <span class="sc">==</span> <span class="dv">0</span>, <span class="dv">0</span>, <span class="fu">sum</span>( x, <span class="at">na.rm =</span> <span class="cn">TRUE</span> ) ) )</span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb27-1"><a href="modelos-de-pérdida-agregada.html#cb27-1"></a><span class="co"># 1. selección de simulaciones</span></span>
+<span id="cb27-2"><a href="modelos-de-pérdida-agregada.html#cb27-2"></a>m <span class="ot">&lt;-</span> <span class="fl">1e4</span></span>
+<span id="cb27-3"><a href="modelos-de-pérdida-agregada.html#cb27-3"></a></span>
+<span id="cb27-4"><a href="modelos-de-pérdida-agregada.html#cb27-4"></a><span class="co"># 2. especificación de los parámetros para las distribuciones</span></span>
+<span id="cb27-5"><a href="modelos-de-pérdida-agregada.html#cb27-5"></a>u <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb27-6"><a href="modelos-de-pérdida-agregada.html#cb27-6"></a>s <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb27-7"><a href="modelos-de-pérdida-agregada.html#cb27-7"></a>l <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb27-8"><a href="modelos-de-pérdida-agregada.html#cb27-8"></a></span>
+<span id="cb27-9"><a href="modelos-de-pérdida-agregada.html#cb27-9"></a><span class="co"># 3. se especifica la función deducible</span></span>
+<span id="cb27-10"><a href="modelos-de-pérdida-agregada.html#cb27-10"></a>D <span class="ot">&lt;-</span> <span class="cf">function</span>( x, d, M ) {</span>
+<span id="cb27-11"><a href="modelos-de-pérdida-agregada.html#cb27-11"></a>  <span class="fu">return</span>( <span class="fu">min</span>( <span class="fu">max</span>( x <span class="sc">-</span> d, <span class="dv">0</span> ), M ) )</span>
+<span id="cb27-12"><a href="modelos-de-pérdida-agregada.html#cb27-12"></a>}</span>
+<span id="cb27-13"><a href="modelos-de-pérdida-agregada.html#cb27-13"></a></span>
+<span id="cb27-14"><a href="modelos-de-pérdida-agregada.html#cb27-14"></a><span class="co"># 4. simulación del conteo de siniestros</span></span>
+<span id="cb27-15"><a href="modelos-de-pérdida-agregada.html#cb27-15"></a>N <span class="ot">&lt;-</span> <span class="fu">rpois</span>( <span class="at">n =</span> m, <span class="at">lambda =</span> l )</span>
+<span id="cb27-16"><a href="modelos-de-pérdida-agregada.html#cb27-16"></a></span>
+<span id="cb27-17"><a href="modelos-de-pérdida-agregada.html#cb27-17"></a><span class="co"># 5. simulación de la severidad de los reclamos</span></span>
+<span id="cb27-18"><a href="modelos-de-pérdida-agregada.html#cb27-18"></a>X <span class="ot">&lt;-</span> <span class="fu">lapply</span>( N, <span class="at">FUN =</span> <span class="cf">function</span>( n ) <span class="fu">rlnorm</span>( n, <span class="at">meanlog =</span> u, <span class="at">sdlog =</span> s ) )</span>
+<span id="cb27-19"><a href="modelos-de-pérdida-agregada.html#cb27-19"></a></span>
+<span id="cb27-20"><a href="modelos-de-pérdida-agregada.html#cb27-20"></a><span class="co"># 6. se aplica el deducible a los reclamos</span></span>
+<span id="cb27-21"><a href="modelos-de-pérdida-agregada.html#cb27-21"></a>DX <span class="ot">&lt;-</span> <span class="fu">lapply</span>( X, <span class="at">FUN =</span> <span class="cf">function</span>( x ) <span class="fu">sapply</span>( x, <span class="at">FUN =</span> <span class="cf">function</span>( y ) <span class="fu">D</span>( y, <span class="dv">10</span>, <span class="dv">1000</span> ) ) )</span>
+<span id="cb27-22"><a href="modelos-de-pérdida-agregada.html#cb27-22"></a></span>
+<span id="cb27-23"><a href="modelos-de-pérdida-agregada.html#cb27-23"></a><span class="co"># 7. reclamo total, agregación por cada simulación</span></span>
+<span id="cb27-24"><a href="modelos-de-pérdida-agregada.html#cb27-24"></a>S <span class="ot">&lt;-</span> <span class="fu">sapply</span>( DX, <span class="at">FUN =</span> <span class="cf">function</span>( x ) <span class="fu">ifelse</span>( <span class="fu">length</span>( x ) <span class="sc">==</span> <span class="dv">0</span>, <span class="dv">0</span>, <span class="fu">sum</span>( x, <span class="at">na.rm =</span> <span class="cn">TRUE</span> ) ) )</span></code></pre></div>
 <p></p>
 <p><span class="math inline">\(S_1, \ldots, S_m \rightsquigarrow F_S\)</span></p>
 <p></p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb27-1"><a href="modelos-de-pérdida-agregada.html#cb27-1"></a>FS <span class="ot">&lt;-</span> <span class="fu">seq</span>( <span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.01</span> )</span>
-<span id="cb27-2"><a href="modelos-de-pérdida-agregada.html#cb27-2"></a>Sq <span class="ot">&lt;-</span> <span class="fu">quantile</span>( S, <span class="at">probs =</span> FS )</span>
-<span id="cb27-3"><a href="modelos-de-pérdida-agregada.html#cb27-3"></a>ES <span class="ot">&lt;-</span> <span class="fu">mean</span>( S )</span>
-<span id="cb27-4"><a href="modelos-de-pérdida-agregada.html#cb27-4"></a><span class="fu">plot</span>( Sq, FS, <span class="at">type =</span> <span class="st">&#39;s&#39;</span>, <span class="at">col =</span> <span class="st">&#39;darkgreen&#39;</span> )</span>
-<span id="cb27-5"><a href="modelos-de-pérdida-agregada.html#cb27-5"></a><span class="fu">abline</span>( <span class="at">v =</span> ES, <span class="at">col =</span> <span class="st">&#39;red&#39;</span> )</span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb28-1"><a href="modelos-de-pérdida-agregada.html#cb28-1"></a>FS <span class="ot">&lt;-</span> <span class="fu">seq</span>( <span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.01</span> )</span>
+<span id="cb28-2"><a href="modelos-de-pérdida-agregada.html#cb28-2"></a>Sq <span class="ot">&lt;-</span> <span class="fu">quantile</span>( S, <span class="at">probs =</span> FS )</span>
+<span id="cb28-3"><a href="modelos-de-pérdida-agregada.html#cb28-3"></a>ES <span class="ot">&lt;-</span> <span class="fu">mean</span>( S )</span>
+<span id="cb28-4"><a href="modelos-de-pérdida-agregada.html#cb28-4"></a><span class="fu">plot</span>( Sq, FS, <span class="at">type =</span> <span class="st">&#39;s&#39;</span>, <span class="at">col =</span> <span class="st">&#39;darkgreen&#39;</span> )</span>
+<span id="cb28-5"><a href="modelos-de-pérdida-agregada.html#cb28-5"></a><span class="fu">abline</span>( <span class="at">v =</span> ES, <span class="at">col =</span> <span class="st">&#39;red&#39;</span> )</span></code></pre></div>
 <p><img src="seguros_generales_files/figure-html/l3c8-1.png" width="700" /></p>
 <p></p>
 <div class="example">
@@ -690,56 +725,56 @@ asegurador, se configura funciones deducibles sobre los reclamos.</p>
 teorema del límite central <a href="consideraciones-preliminares.html#thm:tlc">2.2</a>. Generaremos una simulación aleatoria de la suma
 agregada <span class="math inline">\(S_n\)</span> y mostraresmo s</p>
 <p></p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb28-1"><a href="modelos-de-pérdida-agregada.html#cb28-1"></a>m <span class="ot">&lt;-</span> <span class="dv">500</span></span>
-<span id="cb28-2"><a href="modelos-de-pérdida-agregada.html#cb28-2"></a>n <span class="ot">&lt;-</span> <span class="dv">5000</span></span>
-<span id="cb28-3"><a href="modelos-de-pérdida-agregada.html#cb28-3"></a>u <span class="ot">&lt;-</span> <span class="dv">4</span></span>
-<span id="cb28-4"><a href="modelos-de-pérdida-agregada.html#cb28-4"></a>s <span class="ot">&lt;-</span> <span class="dv">2</span></span>
-<span id="cb28-5"><a href="modelos-de-pérdida-agregada.html#cb28-5"></a>X <span class="ot">&lt;-</span> <span class="fu">lapply</span>( <span class="dv">1</span><span class="sc">:</span>m, <span class="at">FUN =</span> <span class="cf">function</span>( j ) <span class="fu">rlnorm</span>( n, <span class="at">meanlog =</span> u, <span class="at">sdlog =</span> s ) )</span>
-<span id="cb28-6"><a href="modelos-de-pérdida-agregada.html#cb28-6"></a>EX <span class="ot">&lt;-</span> <span class="fu">exp</span>( u <span class="sc">+</span> <span class="fl">0.5</span> <span class="sc">*</span> s<span class="sc">^</span><span class="dv">2</span> )</span>
-<span id="cb28-7"><a href="modelos-de-pérdida-agregada.html#cb28-7"></a>SDX <span class="ot">&lt;-</span> <span class="fu">sqrt</span>( ( <span class="fu">exp</span>( s<span class="sc">^</span><span class="dv">2</span> ) <span class="sc">-</span> <span class="dv">1</span> ) <span class="sc">*</span> <span class="fu">exp</span>( <span class="dv">2</span> <span class="sc">*</span> u <span class="sc">+</span> s<span class="sc">^</span><span class="dv">2</span> ) )</span>
-<span id="cb28-8"><a href="modelos-de-pérdida-agregada.html#cb28-8"></a>S <span class="ot">&lt;-</span> <span class="fu">lapply</span>( X, <span class="at">FUN =</span> <span class="cf">function</span>( x ) <span class="fu">cumsum</span>( x ) )</span>
-<span id="cb28-9"><a href="modelos-de-pérdida-agregada.html#cb28-9"></a>ES <span class="ot">&lt;-</span> <span class="fu">sapply</span>( <span class="dv">1</span><span class="sc">:</span>n, <span class="at">FUN =</span> <span class="cf">function</span>( i ) <span class="fu">mean</span>( <span class="fu">sapply</span>( <span class="dv">1</span><span class="sc">:</span>m, <span class="at">FUN =</span> <span class="cf">function</span>( j ) S[[ j ]][ i ] ) ) )</span>
-<span id="cb28-10"><a href="modelos-de-pérdida-agregada.html#cb28-10"></a>VS <span class="ot">&lt;-</span> <span class="fu">sapply</span>( <span class="dv">1</span><span class="sc">:</span>n, <span class="at">FUN =</span> <span class="cf">function</span>( i ) <span class="fu">var</span>( <span class="fu">sapply</span>( <span class="dv">1</span><span class="sc">:</span>m, <span class="at">FUN =</span> <span class="cf">function</span>( j ) S[[ j ]][ i ] ) ) )</span>
-<span id="cb28-11"><a href="modelos-de-pérdida-agregada.html#cb28-11"></a>NS <span class="ot">&lt;-</span> <span class="fu">lapply</span>( S, <span class="at">FUN =</span> <span class="cf">function</span>( s ) ( s <span class="sc">-</span> ES ) <span class="sc">/</span> <span class="fu">sqrt</span>( <span class="fu">abs</span>( VS ) ) )</span>
-<span id="cb28-12"><a href="modelos-de-pérdida-agregada.html#cb28-12"></a>z <span class="ot">&lt;-</span> <span class="fu">seq</span>( <span class="sc">-</span><span class="dv">4</span>, <span class="dv">4</span>, <span class="at">length.out =</span> <span class="dv">100</span> )</span>
-<span id="cb28-13"><a href="modelos-de-pérdida-agregada.html#cb28-13"></a>FSn <span class="ot">&lt;-</span> <span class="fu">lapply</span>( <span class="dv">1</span><span class="sc">:</span>n, <span class="at">FUN =</span> <span class="cf">function</span>( i ) <span class="fu">ecdf</span>( <span class="fu">sapply</span>( <span class="dv">1</span><span class="sc">:</span>m, <span class="at">FUN =</span> <span class="cf">function</span>( j ) NS[[ j ]][ i ] ) )( z ) )</span>
-<span id="cb28-14"><a href="modelos-de-pérdida-agregada.html#cb28-14"></a>D <span class="ot">&lt;-</span> <span class="fu">sapply</span>( FSn, <span class="at">FUN =</span> <span class="cf">function</span>( Fn ) <span class="fu">max</span>( <span class="fu">abs</span>( Fn <span class="sc">-</span> <span class="fu">pnorm</span>( z ) ) ) )</span>
-<span id="cb28-15"><a href="modelos-de-pérdida-agregada.html#cb28-15"></a></span>
-<span id="cb28-16"><a href="modelos-de-pérdida-agregada.html#cb28-16"></a>C <span class="ot">&lt;-</span> <span class="fl">0.015</span></span>
-<span id="cb28-17"><a href="modelos-de-pérdida-agregada.html#cb28-17"></a><span class="co"># C &lt;- 1 / sqrt( 2 * pi )</span></span>
-<span id="cb28-18"><a href="modelos-de-pérdida-agregada.html#cb28-18"></a>rho <span class="ot">&lt;-</span> <span class="fu">exp</span>( <span class="dv">3</span> <span class="sc">*</span> u <span class="sc">+</span> <span class="dv">3</span><span class="sc">^</span><span class="dv">2</span> <span class="sc">*</span> s<span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> <span class="dv">2</span> )</span>
-<span id="cb28-19"><a href="modelos-de-pérdida-agregada.html#cb28-19"></a>Bn <span class="ot">&lt;-</span> C <span class="sc">*</span> rho <span class="sc">/</span> ( SDX<span class="sc">^</span><span class="dv">3</span> <span class="sc">*</span> <span class="fu">sqrt</span>( <span class="dv">1</span><span class="sc">:</span>n ) )</span>
-<span id="cb28-20"><a href="modelos-de-pérdida-agregada.html#cb28-20"></a></span>
-<span id="cb28-21"><a href="modelos-de-pérdida-agregada.html#cb28-21"></a><span class="fu">plot</span>( <span class="dv">1</span><span class="sc">:</span>n, D, <span class="at">pch =</span> <span class="dv">16</span>, <span class="at">cex =</span> <span class="fl">0.5</span>, <span class="at">type =</span> <span class="st">&#39;l&#39;</span>, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">lty =</span> <span class="dv">1</span>, <span class="at">ylim =</span> <span class="fu">c</span>( <span class="dv">0</span>, <span class="fl">0.5</span> ), <span class="at">col =</span> <span class="st">&#39;royalblue4&#39;</span> )</span>
-<span id="cb28-22"><a href="modelos-de-pérdida-agregada.html#cb28-22"></a><span class="fu">points</span>( <span class="dv">1</span><span class="sc">:</span>n, Bn, <span class="at">type =</span> <span class="st">&#39;l&#39;</span>, <span class="at">lty =</span> <span class="dv">1</span>, <span class="at">col =</span> <span class="st">&#39;red&#39;</span> )</span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb29-1"><a href="modelos-de-pérdida-agregada.html#cb29-1"></a>m <span class="ot">&lt;-</span> <span class="dv">500</span></span>
+<span id="cb29-2"><a href="modelos-de-pérdida-agregada.html#cb29-2"></a>n <span class="ot">&lt;-</span> <span class="dv">5000</span></span>
+<span id="cb29-3"><a href="modelos-de-pérdida-agregada.html#cb29-3"></a>u <span class="ot">&lt;-</span> <span class="dv">4</span></span>
+<span id="cb29-4"><a href="modelos-de-pérdida-agregada.html#cb29-4"></a>s <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb29-5"><a href="modelos-de-pérdida-agregada.html#cb29-5"></a>X <span class="ot">&lt;-</span> <span class="fu">lapply</span>( <span class="dv">1</span><span class="sc">:</span>m, <span class="at">FUN =</span> <span class="cf">function</span>( j ) <span class="fu">rlnorm</span>( n, <span class="at">meanlog =</span> u, <span class="at">sdlog =</span> s ) )</span>
+<span id="cb29-6"><a href="modelos-de-pérdida-agregada.html#cb29-6"></a>EX <span class="ot">&lt;-</span> <span class="fu">exp</span>( u <span class="sc">+</span> <span class="fl">0.5</span> <span class="sc">*</span> s<span class="sc">^</span><span class="dv">2</span> )</span>
+<span id="cb29-7"><a href="modelos-de-pérdida-agregada.html#cb29-7"></a>SDX <span class="ot">&lt;-</span> <span class="fu">sqrt</span>( ( <span class="fu">exp</span>( s<span class="sc">^</span><span class="dv">2</span> ) <span class="sc">-</span> <span class="dv">1</span> ) <span class="sc">*</span> <span class="fu">exp</span>( <span class="dv">2</span> <span class="sc">*</span> u <span class="sc">+</span> s<span class="sc">^</span><span class="dv">2</span> ) )</span>
+<span id="cb29-8"><a href="modelos-de-pérdida-agregada.html#cb29-8"></a>S <span class="ot">&lt;-</span> <span class="fu">lapply</span>( X, <span class="at">FUN =</span> <span class="cf">function</span>( x ) <span class="fu">cumsum</span>( x ) )</span>
+<span id="cb29-9"><a href="modelos-de-pérdida-agregada.html#cb29-9"></a>ES <span class="ot">&lt;-</span> <span class="fu">sapply</span>( <span class="dv">1</span><span class="sc">:</span>n, <span class="at">FUN =</span> <span class="cf">function</span>( i ) <span class="fu">mean</span>( <span class="fu">sapply</span>( <span class="dv">1</span><span class="sc">:</span>m, <span class="at">FUN =</span> <span class="cf">function</span>( j ) S[[ j ]][ i ] ) ) )</span>
+<span id="cb29-10"><a href="modelos-de-pérdida-agregada.html#cb29-10"></a>VS <span class="ot">&lt;-</span> <span class="fu">sapply</span>( <span class="dv">1</span><span class="sc">:</span>n, <span class="at">FUN =</span> <span class="cf">function</span>( i ) <span class="fu">var</span>( <span class="fu">sapply</span>( <span class="dv">1</span><span class="sc">:</span>m, <span class="at">FUN =</span> <span class="cf">function</span>( j ) S[[ j ]][ i ] ) ) )</span>
+<span id="cb29-11"><a href="modelos-de-pérdida-agregada.html#cb29-11"></a>NS <span class="ot">&lt;-</span> <span class="fu">lapply</span>( S, <span class="at">FUN =</span> <span class="cf">function</span>( s ) ( s <span class="sc">-</span> ES ) <span class="sc">/</span> <span class="fu">sqrt</span>( <span class="fu">abs</span>( VS ) ) )</span>
+<span id="cb29-12"><a href="modelos-de-pérdida-agregada.html#cb29-12"></a>z <span class="ot">&lt;-</span> <span class="fu">seq</span>( <span class="sc">-</span><span class="dv">4</span>, <span class="dv">4</span>, <span class="at">length.out =</span> <span class="dv">100</span> )</span>
+<span id="cb29-13"><a href="modelos-de-pérdida-agregada.html#cb29-13"></a>FSn <span class="ot">&lt;-</span> <span class="fu">lapply</span>( <span class="dv">1</span><span class="sc">:</span>n, <span class="at">FUN =</span> <span class="cf">function</span>( i ) <span class="fu">ecdf</span>( <span class="fu">sapply</span>( <span class="dv">1</span><span class="sc">:</span>m, <span class="at">FUN =</span> <span class="cf">function</span>( j ) NS[[ j ]][ i ] ) )( z ) )</span>
+<span id="cb29-14"><a href="modelos-de-pérdida-agregada.html#cb29-14"></a>D <span class="ot">&lt;-</span> <span class="fu">sapply</span>( FSn, <span class="at">FUN =</span> <span class="cf">function</span>( Fn ) <span class="fu">max</span>( <span class="fu">abs</span>( Fn <span class="sc">-</span> <span class="fu">pnorm</span>( z ) ) ) )</span>
+<span id="cb29-15"><a href="modelos-de-pérdida-agregada.html#cb29-15"></a></span>
+<span id="cb29-16"><a href="modelos-de-pérdida-agregada.html#cb29-16"></a>C <span class="ot">&lt;-</span> <span class="fl">0.015</span></span>
+<span id="cb29-17"><a href="modelos-de-pérdida-agregada.html#cb29-17"></a><span class="co"># C &lt;- 1 / sqrt( 2 * pi )</span></span>
+<span id="cb29-18"><a href="modelos-de-pérdida-agregada.html#cb29-18"></a>rho <span class="ot">&lt;-</span> <span class="fu">exp</span>( <span class="dv">3</span> <span class="sc">*</span> u <span class="sc">+</span> <span class="dv">3</span><span class="sc">^</span><span class="dv">2</span> <span class="sc">*</span> s<span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> <span class="dv">2</span> )</span>
+<span id="cb29-19"><a href="modelos-de-pérdida-agregada.html#cb29-19"></a>Bn <span class="ot">&lt;-</span> C <span class="sc">*</span> rho <span class="sc">/</span> ( SDX<span class="sc">^</span><span class="dv">3</span> <span class="sc">*</span> <span class="fu">sqrt</span>( <span class="dv">1</span><span class="sc">:</span>n ) )</span>
+<span id="cb29-20"><a href="modelos-de-pérdida-agregada.html#cb29-20"></a></span>
+<span id="cb29-21"><a href="modelos-de-pérdida-agregada.html#cb29-21"></a><span class="fu">plot</span>( <span class="dv">1</span><span class="sc">:</span>n, D, <span class="at">pch =</span> <span class="dv">16</span>, <span class="at">cex =</span> <span class="fl">0.5</span>, <span class="at">type =</span> <span class="st">&#39;l&#39;</span>, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">lty =</span> <span class="dv">1</span>, <span class="at">ylim =</span> <span class="fu">c</span>( <span class="dv">0</span>, <span class="fl">0.5</span> ), <span class="at">col =</span> <span class="st">&#39;royalblue4&#39;</span> )</span>
+<span id="cb29-22"><a href="modelos-de-pérdida-agregada.html#cb29-22"></a><span class="fu">points</span>( <span class="dv">1</span><span class="sc">:</span>n, Bn, <span class="at">type =</span> <span class="st">&#39;l&#39;</span>, <span class="at">lty =</span> <span class="dv">1</span>, <span class="at">col =</span> <span class="st">&#39;red&#39;</span> )</span></code></pre></div>
 <p><img src="seguros_generales_files/figure-html/l3c9-1.png" width="700" /></p>
 <p></p>
 </div>
 <p></p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb29-1"><a href="modelos-de-pérdida-agregada.html#cb29-1"></a>l <span class="ot">&lt;-</span> <span class="dv">3</span></span>
-<span id="cb29-2"><a href="modelos-de-pérdida-agregada.html#cb29-2"></a>n <span class="ot">&lt;-</span> <span class="dv">300</span></span>
-<span id="cb29-3"><a href="modelos-de-pérdida-agregada.html#cb29-3"></a>dt <span class="ot">&lt;-</span> <span class="fu">rexp</span>( <span class="at">n =</span> n, <span class="at">rate =</span> <span class="dv">1</span> <span class="sc">/</span> l )</span>
-<span id="cb29-4"><a href="modelos-de-pérdida-agregada.html#cb29-4"></a>t <span class="ot">&lt;-</span> <span class="fu">c</span>( <span class="dv">0</span>, <span class="fu">cumsum</span>( dt ) )</span>
-<span id="cb29-5"><a href="modelos-de-pérdida-agregada.html#cb29-5"></a>dN <span class="ot">&lt;-</span> <span class="fu">sapply</span>( dt, <span class="at">FUN =</span> <span class="cf">function</span>( w ) <span class="fu">rpois</span>( <span class="dv">1</span>, <span class="at">lambda =</span> l <span class="sc">*</span> w ) )</span>
-<span id="cb29-6"><a href="modelos-de-pérdida-agregada.html#cb29-6"></a>N <span class="ot">&lt;-</span> <span class="fu">c</span>( <span class="dv">0</span>, <span class="fu">cumsum</span>( dN ) )</span>
-<span id="cb29-7"><a href="modelos-de-pérdida-agregada.html#cb29-7"></a>sh <span class="ot">&lt;-</span> <span class="dv">3</span></span>
-<span id="cb29-8"><a href="modelos-de-pérdida-agregada.html#cb29-8"></a>rt <span class="ot">&lt;-</span> <span class="dv">2</span></span>
-<span id="cb29-9"><a href="modelos-de-pérdida-agregada.html#cb29-9"></a>X <span class="ot">&lt;-</span> <span class="fu">lapply</span>( dN, <span class="at">FUN =</span> <span class="cf">function</span>( n ) <span class="fu">rgamma</span>( n, <span class="at">shape =</span> sh, <span class="at">rate =</span> rt ) )</span>
-<span id="cb29-10"><a href="modelos-de-pérdida-agregada.html#cb29-10"></a>dS <span class="ot">&lt;-</span> <span class="fu">sapply</span>( X, <span class="at">FUN =</span> <span class="cf">function</span>( x ) <span class="fu">sum</span>( x ) )</span>
-<span id="cb29-11"><a href="modelos-de-pérdida-agregada.html#cb29-11"></a>S <span class="ot">&lt;-</span> <span class="fu">c</span>( <span class="dv">0</span>, <span class="fu">cumsum</span>( dS ) )</span>
-<span id="cb29-12"><a href="modelos-de-pérdida-agregada.html#cb29-12"></a><span class="fu">plot</span>( t, N, <span class="at">type =</span> <span class="st">&#39;s&#39;</span> )</span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb30-1"><a href="modelos-de-pérdida-agregada.html#cb30-1"></a>l <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb30-2"><a href="modelos-de-pérdida-agregada.html#cb30-2"></a>n <span class="ot">&lt;-</span> <span class="dv">300</span></span>
+<span id="cb30-3"><a href="modelos-de-pérdida-agregada.html#cb30-3"></a>dt <span class="ot">&lt;-</span> <span class="fu">rexp</span>( <span class="at">n =</span> n, <span class="at">rate =</span> <span class="dv">1</span> <span class="sc">/</span> l )</span>
+<span id="cb30-4"><a href="modelos-de-pérdida-agregada.html#cb30-4"></a>t <span class="ot">&lt;-</span> <span class="fu">c</span>( <span class="dv">0</span>, <span class="fu">cumsum</span>( dt ) )</span>
+<span id="cb30-5"><a href="modelos-de-pérdida-agregada.html#cb30-5"></a>dN <span class="ot">&lt;-</span> <span class="fu">sapply</span>( dt, <span class="at">FUN =</span> <span class="cf">function</span>( w ) <span class="fu">rpois</span>( <span class="dv">1</span>, <span class="at">lambda =</span> l <span class="sc">*</span> w ) )</span>
+<span id="cb30-6"><a href="modelos-de-pérdida-agregada.html#cb30-6"></a>N <span class="ot">&lt;-</span> <span class="fu">c</span>( <span class="dv">0</span>, <span class="fu">cumsum</span>( dN ) )</span>
+<span id="cb30-7"><a href="modelos-de-pérdida-agregada.html#cb30-7"></a>sh <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb30-8"><a href="modelos-de-pérdida-agregada.html#cb30-8"></a>rt <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb30-9"><a href="modelos-de-pérdida-agregada.html#cb30-9"></a>X <span class="ot">&lt;-</span> <span class="fu">lapply</span>( dN, <span class="at">FUN =</span> <span class="cf">function</span>( n ) <span class="fu">rgamma</span>( n, <span class="at">shape =</span> sh, <span class="at">rate =</span> rt ) )</span>
+<span id="cb30-10"><a href="modelos-de-pérdida-agregada.html#cb30-10"></a>dS <span class="ot">&lt;-</span> <span class="fu">sapply</span>( X, <span class="at">FUN =</span> <span class="cf">function</span>( x ) <span class="fu">sum</span>( x ) )</span>
+<span id="cb30-11"><a href="modelos-de-pérdida-agregada.html#cb30-11"></a>S <span class="ot">&lt;-</span> <span class="fu">c</span>( <span class="dv">0</span>, <span class="fu">cumsum</span>( dS ) )</span>
+<span id="cb30-12"><a href="modelos-de-pérdida-agregada.html#cb30-12"></a><span class="fu">plot</span>( t, N, <span class="at">type =</span> <span class="st">&#39;s&#39;</span> )</span></code></pre></div>
 <p><img src="seguros_generales_files/figure-html/l3c10-1.png" width="700" /></p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb30-1"><a href="modelos-de-pérdida-agregada.html#cb30-1"></a><span class="fu">plot</span>( t, S, <span class="at">type =</span> <span class="st">&#39;s&#39;</span> )</span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb31-1"><a href="modelos-de-pérdida-agregada.html#cb31-1"></a><span class="fu">plot</span>( t, S, <span class="at">type =</span> <span class="st">&#39;s&#39;</span> )</span></code></pre></div>
 <p><img src="seguros_generales_files/figure-html/l3c10-2.png" width="700" /></p>
 <p></p>
 <!------------------------------------------------------------------------------------------------->
 </div>
-<div id="algoritmo-de-panjer" class="section level2 hasAnchor" number="4.7">
-<h2><span class="header-section-number">4.7</span> Algoritmo de Panjer<a href="modelos-de-pérdida-agregada.html#algoritmo-de-panjer" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="algoritmo-de-panjer" class="section level2 hasAnchor" number="4.9">
+<h2><span class="header-section-number">4.9</span> Algoritmo de Panjer<a href="modelos-de-pérdida-agregada.html#algoritmo-de-panjer" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <!------------------------------------------------------------------------------------------------->
 </div>
-<div id="estimación-usando-la-transformada-de-fourier" class="section level2 hasAnchor" number="4.8">
-<h2><span class="header-section-number">4.8</span> Estimación usando la transformada de Fourier<a href="modelos-de-pérdida-agregada.html#estimación-usando-la-transformada-de-fourier" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="estimación-usando-la-transformada-de-fourier" class="section level2 hasAnchor" number="4.10">
+<h2><span class="header-section-number">4.10</span> Estimación usando la transformada de Fourier<a href="modelos-de-pérdida-agregada.html#estimación-usando-la-transformada-de-fourier" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Para el caso del modelo individual de riesgos podemos hacer uso de la siguiente estimación de la
 densidad de probabilidad de los reclamos totales <span class="math inline">\(S\)</span>, utilizando la transformada de Fourier. En la
 implementación numérica se utiliza la transformada de Fourier rápida (FFT).

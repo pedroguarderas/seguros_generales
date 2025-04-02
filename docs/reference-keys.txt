@@ -4,6 +4,7 @@ def:cd
 def:spv
 def:lp
 def:em
+def:mgf
 def:ind
 def:indicatriz
 def:dsum
@@ -15,6 +16,9 @@ thm:ddkw
 def:dbinom
 def:dpois
 def:dnbinom
+def:dgeo
+def:fampanjer
+prp:chfampanjer
 def:dunif
 def:dexp
 def:dnorm
@@ -23,8 +27,6 @@ def:dgpd
 def:dgev
 def:dtst
 def:dbetra
-def:fampanjer
-prp:chfampanjer
 exm:l3ex1
 exm:l3ex2
 exm:l3ex3
@@ -49,8 +51,8 @@ equilibrio-financiero
 consideraciones-de-programación-en-r
 distribuciones
 distribuciones-discretas
-distribuciones-continuas
 familia-de-panjer
+distribuciones-continuas
 estimación
 modelos-de-pérdida-agregada
 pasivos-y-activos-de-una-aseguradora
@@ -62,6 +64,8 @@ modelo-individual
 algoritmo-de-simulación
 modelo-colectivo
 algoritmo-de-simulación-1
+modelos-mixtos
+modelos-con-variables-explicativas
 aplicación-del-deducible
 algoritmo-de-panjer
 estimación-usando-la-transformada-de-fourier

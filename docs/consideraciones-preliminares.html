@@ -186,8 +186,8 @@ div.csl-indent {
 <li class="chapter" data-level="3" data-path="distribuciones.html"><a href="distribuciones.html"><i class="fa fa-check"></i><b>3</b> Distribuciones</a>
 <ul>
 <li class="chapter" data-level="3.1" data-path="distribuciones.html"><a href="distribuciones.html#distribuciones-discretas"><i class="fa fa-check"></i><b>3.1</b> Distribuciones discretas</a></li>
-<li class="chapter" data-level="3.2" data-path="distribuciones.html"><a href="distribuciones.html#distribuciones-continuas"><i class="fa fa-check"></i><b>3.2</b> Distribuciones continuas</a></li>
-<li class="chapter" data-level="3.3" data-path="distribuciones.html"><a href="distribuciones.html#familia-de-panjer"><i class="fa fa-check"></i><b>3.3</b> Familia de Panjer</a></li>
+<li class="chapter" data-level="3.2" data-path="distribuciones.html"><a href="distribuciones.html#familia-de-panjer"><i class="fa fa-check"></i><b>3.2</b> Familia de Panjer</a></li>
+<li class="chapter" data-level="3.3" data-path="distribuciones.html"><a href="distribuciones.html#distribuciones-continuas"><i class="fa fa-check"></i><b>3.3</b> Distribuciones continuas</a></li>
 <li class="chapter" data-level="3.4" data-path="distribuciones.html"><a href="distribuciones.html#estimación"><i class="fa fa-check"></i><b>3.4</b> Estimación</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html"><i class="fa fa-check"></i><b>4</b> Modelos de pérdida agregada</a>
@@ -207,9 +207,11 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="4.5.1" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html#algoritmo-de-simulación-1"><i class="fa fa-check"></i><b>4.5.1</b> Algoritmo de simulación</a></li>
 </ul></li>
-<li class="chapter" data-level="4.6" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html#aplicación-del-deducible"><i class="fa fa-check"></i><b>4.6</b> Aplicación del deducible</a></li>
-<li class="chapter" data-level="4.7" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html#algoritmo-de-panjer"><i class="fa fa-check"></i><b>4.7</b> Algoritmo de Panjer</a></li>
-<li class="chapter" data-level="4.8" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html#estimación-usando-la-transformada-de-fourier"><i class="fa fa-check"></i><b>4.8</b> Estimación usando la transformada de Fourier</a></li>
+<li class="chapter" data-level="4.6" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html#modelos-mixtos"><i class="fa fa-check"></i><b>4.6</b> Modelos mixtos</a></li>
+<li class="chapter" data-level="4.7" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html#modelos-con-variables-explicativas"><i class="fa fa-check"></i><b>4.7</b> Modelos con variables explicativas</a></li>
+<li class="chapter" data-level="4.8" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html#aplicación-del-deducible"><i class="fa fa-check"></i><b>4.8</b> Aplicación del deducible</a></li>
+<li class="chapter" data-level="4.9" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html#algoritmo-de-panjer"><i class="fa fa-check"></i><b>4.9</b> Algoritmo de Panjer</a></li>
+<li class="chapter" data-level="4.10" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html#estimación-usando-la-transformada-de-fourier"><i class="fa fa-check"></i><b>4.10</b> Estimación usando la transformada de Fourier</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="tarificación.html"><a href="tarificación.html"><i class="fa fa-check"></i><b>5</b> Tarificación</a>
 <ul>
@@ -370,6 +372,24 @@ la esperanza matemática como la siguiente expresión:
 </div>
 <!------------------------------------------------------------------------------------------------->
 <div class="definition">
+<p><span id="def:mgf" class="definition"><strong>Definición 2.7  (Función generadora de momentos) </strong></span>La <strong>función generadora de momento</strong> de la variable aleatoria a valores reales <span class="math inline">\(X\)</span>, es la función:
+<span class="math display">\[\begin{equation}
+M_X( t ) = \mathbb{E}\left[ \exp( t X ) \right]
+\end{equation}\]</span></p>
+</div>
+<p>Si <span class="math inline">\(X_1, \ldots, X_n\)</span> son variables aleatorias y <span class="math inline">\(Y = X_1 + \cdots + X_n\)</span>, entonces
+<span class="math display">\[\begin{eqnarray*}
+M_Y( t )
+&amp; = &amp; \mathbb{E}\left[ \exp\left( t Y \right) \right] \\
+&amp; = &amp; \mathbb{E}\left[ \exp\left( t \sum\limits_{i=1}^n X_i \right) \right] \\
+&amp; = &amp; \prod\limits_{i=1}^n \mathbb{E}\left[ \exp\left( t X_i \right) \right],\qquad
+\text{si las variables $X_i$ son independientes} \\
+&amp; = &amp; \left( \mathbb{E}\left[ \exp\left( t X \right) \right] \right)^n,\qquad
+\text{si las variables $X_i$ son identicamente distribuidas} \\
+&amp; = &amp; \left( M_X( t ) \right)^n
+\end{eqnarray*}\]</span></p>
+<!------------------------------------------------------------------------------------------------->
+<div class="definition">
 <p><span id="def:em" class="definition"><strong>Definición 2.6  (Varianza) </strong></span>Así mismo su <strong>varianza</strong> es la dada por:
 <span class="math display">\[\begin{equation}
 \mathbb{V}[ X ]
@@ -379,7 +399,7 @@ la esperanza matemática como la siguiente expresión:
 </div>
 <!------------------------------------------------------------------------------------------------->
 <div class="definition">
-<p><span id="def:ind" class="definition"><strong>Definición 2.7  (Independencia de variables aleatorias) </strong></span>Dos variables aleatorias a valores reales <span class="math inline">\(X\)</span> y <span class="math inline">\(Y\)</span>, se dicen independientes si para cualquier par
+<p><span id="def:ind" class="definition"><strong>Definición 2.8  (Independencia de variables aleatorias) </strong></span>Dos variables aleatorias a valores reales <span class="math inline">\(X\)</span> y <span class="math inline">\(Y\)</span>, se dicen independientes si para cualquier par
 de eventos <span class="math inline">\(A\)</span> y <span class="math inline">\(B\)</span>, sucede la siguiente factorización de probabilidades
 <span class="math display">\[\begin{equation}
 P( X \in A \wedge Y \in B ) = P( X \in A ) P( Y \in B)
@@ -400,7 +420,7 @@ f_{X,Y}( x, y ) = f_X( x ) f_Y( y )
 <p>La siguiente función es utilidad para comprender algunos resultados en teoría de probabilidades.
 También, es bastante útil para realizar de forma más clara y rápida algunos cálculos.</p>
 <div class="definition">
-<p><span id="def:indicatriz" class="definition"><strong>Definición 2.8  (Función indicatriz) </strong></span>La <strong>función indicatriz</strong> de un conjunto <span class="math inline">\(A \subset \Omega\)</span>, es la función
+<p><span id="def:indicatriz" class="definition"><strong>Definición 2.9  (Función indicatriz) </strong></span>La <strong>función indicatriz</strong> de un conjunto <span class="math inline">\(A \subset \Omega\)</span>, es la función
 <span class="math inline">\(\mathbf{1}_A : \Omega \longrightarrow \{0,1\}\)</span>, que toma los valores
 <span class="math inline">\(\mathbf{1}_A( \omega ) = 0\)</span>, si <span class="math inline">\(\omega \notin A\)</span> y <span class="math inline">\(\mathbf{1}_A( \omega ) = 1\)</span>, si
 <span class="math inline">\(\omega \in A\)</span>.</p>
@@ -416,7 +436,7 @@ esperanza es precisamente la probabilidad del evento <span class="math inline">\
 \end{equation}\]</span></p>
 <!------------------------------------------------------------------------------------------------->
 <div class="definition">
-<p><span id="def:dsum" class="definition"><strong>Definición 2.9  (Distribución de la suma de variables aleatorias) </strong></span>Dadas dos variables aleatorias a valores reales <span class="math inline">\(X\)</span> y <span class="math inline">\(Y\)</span>, con funciones de distribución acumulada
+<p><span id="def:dsum" class="definition"><strong>Definición 2.10  (Distribución de la suma de variables aleatorias) </strong></span>Dadas dos variables aleatorias a valores reales <span class="math inline">\(X\)</span> y <span class="math inline">\(Y\)</span>, con funciones de distribución acumulada
 <span class="math inline">\(F_X\)</span> y <span class="math inline">\(F_Y\)</span> respectivamente, la distribución acumulada <span class="math inline">\(F_Z\)</span> de la variable aleatoria <span class="math inline">\(Z = X + Y\)</span>
 está dada por la siguiente expresión:
 <span class="math display">\[\begin{equation}
@@ -441,7 +461,7 @@ más compacta <span class="math inline">\(f^{\star k}\)</span>, para el producto
 valores extremos que se pueden presentar en el estudio de los valores de siniestros que se presentan
 en un seguro.</p>
 <div class="definition">
-<p><span id="def:dec" class="definition"><strong>Definición 2.10  (Distribución de exceso condicionada) </strong></span>La <strong>distribución de exceso condicionada</strong> asociada a una variable aleatoria <span class="math inline">\(X\)</span> con distribución
+<p><span id="def:dec" class="definition"><strong>Definición 2.11  (Distribución de exceso condicionada) </strong></span>La <strong>distribución de exceso condicionada</strong> asociada a una variable aleatoria <span class="math inline">\(X\)</span> con distribución
 de probabilidad acumulada <span class="math inline">\(F\)</span> y a un umbral de condicionamiento <span class="math inline">\(u &gt; 0\)</span>, está dada por:
 <span class="math display">\[\begin{equation}
 F_u( y ) = P\left( X - u \leq y \mid X &gt; u \right)
