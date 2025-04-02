@@ -23,7 +23,7 @@
 <meta name="author" content="" />
 
 
-<meta name="date" content="2025-04-01" />
+<meta name="date" content="2025-04-02" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -362,6 +362,34 @@ M_X( t ) = \frac{\lambda}{\lambda - t}
 <span id="cb13-6"><a href="distribuciones.html#cb13-6"></a>Fk <span class="ot">&lt;-</span> <span class="fu">pexp</span>( <span class="at">q =</span> x, <span class="at">rate =</span> lambda ) <span class="co"># cálculo de probabilidad F(x)</span></span></code></pre></div>
 <p></p>
 <div class="definition">
+<p><span id="def:dnorm" class="definition"><strong>Definición 3.6  (Distribución gamma) </strong></span>Una variable aleatoria <span class="math inline">\(X\)</span> a valores reales, sigue una distribución gamma
+<span class="math inline">\(X \rightsquigarrow Gamma( \alpha, \beta )\)</span> de parámetros <span class="math inline">\(\alpha &gt; 0\)</span>, <span class="math inline">\(\beta &gt; 0\)</span>, si su
+función de distribución acumulada es de la siguiente forma:
+<span class="math display">\[\begin{equation}
+F_X( x ) = \frac{\beta^\alpha}{\Gamma( \alpha )} \int\limits_{0}^{x} u^{\alpha-1} \exp(-\beta u)\ du
+\end{equation}\]</span>
+la densidad de probabilidad automáticamente está dada por la función:
+<span class="math display">\[\begin{equation}
+f_X( x ) = \mathbf{1}_{[0,+\infty}( x ) \frac{\beta^\alpha}{\Gamma( \alpha )} x^{\alpha-1} \exp(-\beta x)
+\end{equation}\]</span>
+<span class="math display">\[\begin{equation}
+M_X( t ) = \left( \frac{\beta}{\beta - t} \right)^\alpha,\qquad \text{si}\ t &lt; \beta
+\end{equation}\]</span>
+<span class="math display">\[\begin{equation}
+\mathbb{E}[X] = \frac{\alpha}{\beta},\qquad
+\mathbb{V}[X] = \frac{\alpha}{\beta^2}
+\end{equation}\]</span></p>
+</div>
+<p></p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb14-1"><a href="distribuciones.html#cb14-1"></a>alpha <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb14-2"><a href="distribuciones.html#cb14-2"></a>beta <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb14-3"><a href="distribuciones.html#cb14-3"></a>x <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb14-4"><a href="distribuciones.html#cb14-4"></a>m <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb14-5"><a href="distribuciones.html#cb14-5"></a>X <span class="ot">&lt;-</span> <span class="fu">rgamma</span>( <span class="at">n =</span> m, <span class="at">shape =</span> alpha, <span class="at">scale =</span> beta ) <span class="co"># simular una muestra de tamaño m</span></span>
+<span id="cb14-6"><a href="distribuciones.html#cb14-6"></a>fx <span class="ot">&lt;-</span> <span class="fu">dgamma</span>( <span class="at">x =</span> x, <span class="at">shape =</span> alpha, <span class="at">scale =</span> beta ) <span class="co"># cálculo de la densidad f(x)</span></span>
+<span id="cb14-7"><a href="distribuciones.html#cb14-7"></a>Fk <span class="ot">&lt;-</span> <span class="fu">pgamma</span>( <span class="at">q =</span> x, <span class="at">shape =</span> alpha, <span class="at">scale =</span> beta ) <span class="co"># cálculo de probabilidad F(x)</span></span></code></pre></div>
+<p></p>
+<div class="definition">
 <p><span id="def:dnorm" class="definition"><strong>Definición 3.6  (Distribución normal) </strong></span>Una variable aleatoria <span class="math inline">\(X\)</span> a valores reales, sigue una distribución normal
 <span class="math inline">\(X \rightsquigarrow N( \mu, \sigma )\)</span> de parámetros <span class="math inline">\(\mu \in \mathbb{R}\)</span>, <span class="math inline">\(\sigma &gt; 0\)</span>, si su
 función de distribución acumulada es de la siguiente forma:
@@ -380,20 +408,20 @@ M_X( t ) = \exp\left( t \mu + \frac{1}{2} t^2 \sigma^2 \right)
 \end{equation}\]</span></p>
 </div>
 <p></p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb14-1"><a href="distribuciones.html#cb14-1"></a>mu <span class="ot">&lt;-</span> <span class="dv">2</span></span>
-<span id="cb14-2"><a href="distribuciones.html#cb14-2"></a>sigma <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb14-3"><a href="distribuciones.html#cb14-3"></a>x <span class="ot">&lt;-</span> <span class="dv">3</span></span>
-<span id="cb14-4"><a href="distribuciones.html#cb14-4"></a>m <span class="ot">&lt;-</span> <span class="dv">100</span></span>
-<span id="cb14-5"><a href="distribuciones.html#cb14-5"></a>X <span class="ot">&lt;-</span> <span class="fu">rnorm</span>( <span class="at">n =</span> m, <span class="at">mean =</span> mu, <span class="at">sd =</span> sigma ) <span class="co"># simular una muestra de tamaño m</span></span>
-<span id="cb14-6"><a href="distribuciones.html#cb14-6"></a>fx <span class="ot">&lt;-</span> <span class="fu">dnorm</span>( <span class="at">x =</span> x, <span class="at">mean =</span> mu, <span class="at">sd =</span> sigma ) <span class="co"># cálculo de la densidad f(x)</span></span>
-<span id="cb14-7"><a href="distribuciones.html#cb14-7"></a>Fk <span class="ot">&lt;-</span> <span class="fu">pnorm</span>( <span class="at">q =</span> x, <span class="at">mean =</span> mu, <span class="at">sd =</span> sigma ) <span class="co"># cálculo de probabilidad F(x)</span></span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb15-1"><a href="distribuciones.html#cb15-1"></a>mu <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb15-2"><a href="distribuciones.html#cb15-2"></a>sigma <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb15-3"><a href="distribuciones.html#cb15-3"></a>x <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb15-4"><a href="distribuciones.html#cb15-4"></a>m <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb15-5"><a href="distribuciones.html#cb15-5"></a>X <span class="ot">&lt;-</span> <span class="fu">rnorm</span>( <span class="at">n =</span> m, <span class="at">mean =</span> mu, <span class="at">sd =</span> sigma ) <span class="co"># simular una muestra de tamaño m</span></span>
+<span id="cb15-6"><a href="distribuciones.html#cb15-6"></a>fx <span class="ot">&lt;-</span> <span class="fu">dnorm</span>( <span class="at">x =</span> x, <span class="at">mean =</span> mu, <span class="at">sd =</span> sigma ) <span class="co"># cálculo de la densidad f(x)</span></span>
+<span id="cb15-7"><a href="distribuciones.html#cb15-7"></a>Fk <span class="ot">&lt;-</span> <span class="fu">pnorm</span>( <span class="at">q =</span> x, <span class="at">mean =</span> mu, <span class="at">sd =</span> sigma ) <span class="co"># cálculo de probabilidad F(x)</span></span></code></pre></div>
 <p></p>
 <div class="definition">
 <p><span id="def:dlnorm" class="definition"><strong>Definición 3.7  (Distribución log-normal) </strong></span>Una variable aleatoria <span class="math inline">\(X\)</span> a valores reales, sigue una distribución log-normal
 <span class="math inline">\(X \rightsquigarrow LN( \mu, \sigma )\)</span> de parámetros <span class="math inline">\(\mu &gt; 0\)</span>, <span class="math inline">\(\sigma &gt; 0\)</span>, si su
 función de distribución acumulada es de la siguiente forma:
 <span class="math display">\[\begin{equation}
-F_X( x ) = \frac{1}{\sqrt{2\pi} \sigma} \int\limits_{0}^{\ln(x)} \exp\left( -\frac{(y - \mu)^2}{\sigma^2} \right)\ dy
+F_X( x ) = \frac{1}{\sqrt{2\pi} \sigma} \int\limits_{0}^{x} \frac{1}{y} \exp\left( -\frac{(\ln(y) - \mu)^2}{\sigma^2} \right)\ dy
 \end{equation}\]</span>
 la densidad de probabilidad automáticamente está dada por la función:
 <span class="math display">\[\begin{equation}
@@ -406,13 +434,13 @@ No hay forma analítica para <span class="math inline">\(M_X\)</span>
 \end{equation}\]</span></p>
 </div>
 <p></p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb15-1"><a href="distribuciones.html#cb15-1"></a>mu <span class="ot">&lt;-</span> <span class="dv">2</span></span>
-<span id="cb15-2"><a href="distribuciones.html#cb15-2"></a>sigma <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb15-3"><a href="distribuciones.html#cb15-3"></a>x <span class="ot">&lt;-</span> <span class="dv">3</span></span>
-<span id="cb15-4"><a href="distribuciones.html#cb15-4"></a>m <span class="ot">&lt;-</span> <span class="dv">100</span></span>
-<span id="cb15-5"><a href="distribuciones.html#cb15-5"></a>X <span class="ot">&lt;-</span> <span class="fu">rlnorm</span>( <span class="at">n =</span> m, <span class="at">meanlog =</span> mu, <span class="at">sdlog =</span> sigma ) <span class="co"># simular una muestra de tamaño m</span></span>
-<span id="cb15-6"><a href="distribuciones.html#cb15-6"></a>fx <span class="ot">&lt;-</span> <span class="fu">dlnorm</span>( <span class="at">x =</span> x, <span class="at">meanlog =</span> mu, <span class="at">sdlog =</span> sigma ) <span class="co"># cálculo de la densidad f(x)</span></span>
-<span id="cb15-7"><a href="distribuciones.html#cb15-7"></a>Fk <span class="ot">&lt;-</span> <span class="fu">plnorm</span>( <span class="at">q =</span> x, <span class="at">meanlog =</span> mu, <span class="at">sdlog =</span> sigma ) <span class="co"># cálculo de probabilidad F(x)</span></span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb16-1"><a href="distribuciones.html#cb16-1"></a>mu <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb16-2"><a href="distribuciones.html#cb16-2"></a>sigma <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb16-3"><a href="distribuciones.html#cb16-3"></a>x <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb16-4"><a href="distribuciones.html#cb16-4"></a>m <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb16-5"><a href="distribuciones.html#cb16-5"></a>X <span class="ot">&lt;-</span> <span class="fu">rlnorm</span>( <span class="at">n =</span> m, <span class="at">meanlog =</span> mu, <span class="at">sdlog =</span> sigma ) <span class="co"># simular una muestra de tamaño m</span></span>
+<span id="cb16-6"><a href="distribuciones.html#cb16-6"></a>fx <span class="ot">&lt;-</span> <span class="fu">dlnorm</span>( <span class="at">x =</span> x, <span class="at">meanlog =</span> mu, <span class="at">sdlog =</span> sigma ) <span class="co"># cálculo de la densidad f(x)</span></span>
+<span id="cb16-7"><a href="distribuciones.html#cb16-7"></a>Fk <span class="ot">&lt;-</span> <span class="fu">plnorm</span>( <span class="at">q =</span> x, <span class="at">meanlog =</span> mu, <span class="at">sdlog =</span> sigma ) <span class="co"># cálculo de probabilidad F(x)</span></span></code></pre></div>
 <p>
 En pocas, una variable aleatoria <span class="math inline">\(X \rightsquigarrow LN( \mu, \sigma )\)</span> sigue una distribución
 log-normal si y solamente si la variable aleatoria dada por su logaritmo <span class="math inline">\(\ln( X ) \rightsquigarrow N( \mu, \sigma )\)</span>
@@ -442,14 +470,14 @@ f_X( x )
 \end{equation}\]</span></p>
 </div>
 <p></p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb16-1"><a href="distribuciones.html#cb16-1"></a>xi <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb16-2"><a href="distribuciones.html#cb16-2"></a>mu <span class="ot">&lt;-</span> <span class="dv">2</span></span>
-<span id="cb16-3"><a href="distribuciones.html#cb16-3"></a>sigma <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb16-4"><a href="distribuciones.html#cb16-4"></a>x <span class="ot">&lt;-</span> <span class="dv">3</span></span>
-<span id="cb16-5"><a href="distribuciones.html#cb16-5"></a>m <span class="ot">&lt;-</span> <span class="dv">100</span></span>
-<span id="cb16-6"><a href="distribuciones.html#cb16-6"></a>X <span class="ot">&lt;-</span> <span class="fu">rgpd</span>( <span class="at">n =</span> m, <span class="at">xi =</span> xi, <span class="at">mu =</span> mu, <span class="at">beta =</span> sigma ) <span class="co"># simular una muestra de tamaño m</span></span>
-<span id="cb16-7"><a href="distribuciones.html#cb16-7"></a>fx <span class="ot">&lt;-</span> <span class="fu">dgpd</span>( <span class="at">x =</span> x, <span class="at">xi =</span> xi, <span class="at">mu =</span> mu, <span class="at">beta =</span> sigma ) <span class="co"># cálculo de la densidad f(x)</span></span>
-<span id="cb16-8"><a href="distribuciones.html#cb16-8"></a>Fk <span class="ot">&lt;-</span> <span class="fu">pgpd</span>( <span class="at">q =</span> x, <span class="at">xi =</span> xi, <span class="at">mu =</span> mu, <span class="at">beta =</span> sigma ) <span class="co"># cálculo de probabilidad F(x)</span></span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb17-1"><a href="distribuciones.html#cb17-1"></a>xi <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb17-2"><a href="distribuciones.html#cb17-2"></a>mu <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb17-3"><a href="distribuciones.html#cb17-3"></a>sigma <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb17-4"><a href="distribuciones.html#cb17-4"></a>x <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb17-5"><a href="distribuciones.html#cb17-5"></a>m <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb17-6"><a href="distribuciones.html#cb17-6"></a>X <span class="ot">&lt;-</span> <span class="fu">rgpd</span>( <span class="at">n =</span> m, <span class="at">xi =</span> xi, <span class="at">mu =</span> mu, <span class="at">beta =</span> sigma ) <span class="co"># simular una muestra de tamaño m</span></span>
+<span id="cb17-7"><a href="distribuciones.html#cb17-7"></a>fx <span class="ot">&lt;-</span> <span class="fu">dgpd</span>( <span class="at">x =</span> x, <span class="at">xi =</span> xi, <span class="at">mu =</span> mu, <span class="at">beta =</span> sigma ) <span class="co"># cálculo de la densidad f(x)</span></span>
+<span id="cb17-8"><a href="distribuciones.html#cb17-8"></a>Fk <span class="ot">&lt;-</span> <span class="fu">pgpd</span>( <span class="at">q =</span> x, <span class="at">xi =</span> xi, <span class="at">mu =</span> mu, <span class="at">beta =</span> sigma ) <span class="co"># cálculo de probabilidad F(x)</span></span></code></pre></div>
 <p></p>
 <div class="definition">
 <p><span id="def:dgev" class="definition"><strong>Definición 3.9  (Distribución de valores extremos generalizada) </strong></span>Una variable aleatoria <span class="math inline">\(X\)</span> a valores reales, sigue una distribución generalizada de valores extremos
@@ -482,14 +510,14 @@ f_X( x )
 \end{equation}\]</span></p>
 </div>
 <p></p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb17-1"><a href="distribuciones.html#cb17-1"></a>xi <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">1</span></span>
-<span id="cb17-2"><a href="distribuciones.html#cb17-2"></a>mu <span class="ot">&lt;-</span> <span class="dv">2</span></span>
-<span id="cb17-3"><a href="distribuciones.html#cb17-3"></a>sigma <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb17-4"><a href="distribuciones.html#cb17-4"></a>x <span class="ot">&lt;-</span> <span class="dv">3</span></span>
-<span id="cb17-5"><a href="distribuciones.html#cb17-5"></a>m <span class="ot">&lt;-</span> <span class="dv">100</span></span>
-<span id="cb17-6"><a href="distribuciones.html#cb17-6"></a>X <span class="ot">&lt;-</span> <span class="fu">rgev</span>( <span class="at">n =</span> m, <span class="at">xi =</span> xi, <span class="at">mu =</span> mu, <span class="at">beta =</span> sigma ) <span class="co"># simular una muestra de tamaño m</span></span>
-<span id="cb17-7"><a href="distribuciones.html#cb17-7"></a>fx <span class="ot">&lt;-</span> <span class="fu">dgev</span>( <span class="at">x =</span> x, <span class="at">xi =</span> xi, <span class="at">mu =</span> mu, <span class="at">beta =</span> sigma ) <span class="co"># cálculo de la densidad f(x)</span></span>
-<span id="cb17-8"><a href="distribuciones.html#cb17-8"></a>Fk <span class="ot">&lt;-</span> <span class="fu">pgev</span>( <span class="at">q =</span> x, <span class="at">xi =</span> xi, <span class="at">mu =</span> mu, <span class="at">beta =</span> sigma ) <span class="co"># cálculo de probabilidad F(x)</span></span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb18-1"><a href="distribuciones.html#cb18-1"></a>xi <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">1</span></span>
+<span id="cb18-2"><a href="distribuciones.html#cb18-2"></a>mu <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb18-3"><a href="distribuciones.html#cb18-3"></a>sigma <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb18-4"><a href="distribuciones.html#cb18-4"></a>x <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb18-5"><a href="distribuciones.html#cb18-5"></a>m <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb18-6"><a href="distribuciones.html#cb18-6"></a>X <span class="ot">&lt;-</span> <span class="fu">rgev</span>( <span class="at">n =</span> m, <span class="at">xi =</span> xi, <span class="at">mu =</span> mu, <span class="at">beta =</span> sigma ) <span class="co"># simular una muestra de tamaño m</span></span>
+<span id="cb18-7"><a href="distribuciones.html#cb18-7"></a>fx <span class="ot">&lt;-</span> <span class="fu">dgev</span>( <span class="at">x =</span> x, <span class="at">xi =</span> xi, <span class="at">mu =</span> mu, <span class="at">beta =</span> sigma ) <span class="co"># cálculo de la densidad f(x)</span></span>
+<span id="cb18-8"><a href="distribuciones.html#cb18-8"></a>Fk <span class="ot">&lt;-</span> <span class="fu">pgev</span>( <span class="at">q =</span> x, <span class="at">xi =</span> xi, <span class="at">mu =</span> mu, <span class="at">beta =</span> sigma ) <span class="co"># cálculo de probabilidad F(x)</span></span></code></pre></div>
 <p></p>
 <div class="definition">
 <p><span id="def:dtst" class="definition"><strong>Definición 3.10  (Distribución t de Student) </strong></span>Una variable aleatoria <span class="math inline">\(X\)</span> a valores reales, sigue una distribución t de Student
@@ -544,19 +572,70 @@ La función generadora de momentos <span class="math inline">\(M_X( t )\)</span>
 \end{equation}\]</span></p>
 </div>
 <p></p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb18-1"><a href="distribuciones.html#cb18-1"></a>nu <span class="ot">&lt;-</span> <span class="dv">3</span></span>
-<span id="cb18-2"><a href="distribuciones.html#cb18-2"></a>x <span class="ot">&lt;-</span> <span class="dv">4</span></span>
-<span id="cb18-3"><a href="distribuciones.html#cb18-3"></a>m <span class="ot">&lt;-</span> <span class="dv">100</span></span>
-<span id="cb18-4"><a href="distribuciones.html#cb18-4"></a>X <span class="ot">&lt;-</span> <span class="fu">rt</span>( <span class="at">n =</span> m, <span class="at">df =</span> nu ) <span class="co"># simular una muestra de tamaño m</span></span>
-<span id="cb18-5"><a href="distribuciones.html#cb18-5"></a>fx <span class="ot">&lt;-</span> <span class="fu">dt</span>( <span class="at">x =</span> x, <span class="at">df =</span> nu ) <span class="co"># cálculo de la densidad f(x)</span></span>
-<span id="cb18-6"><a href="distribuciones.html#cb18-6"></a>Fk <span class="ot">&lt;-</span> <span class="fu">pt</span>( <span class="at">q =</span> x, <span class="at">df =</span> nu ) <span class="co"># cálculo de probabilidad F(x)</span></span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb19-1"><a href="distribuciones.html#cb19-1"></a>nu <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb19-2"><a href="distribuciones.html#cb19-2"></a>x <span class="ot">&lt;-</span> <span class="dv">4</span></span>
+<span id="cb19-3"><a href="distribuciones.html#cb19-3"></a>m <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb19-4"><a href="distribuciones.html#cb19-4"></a>X <span class="ot">&lt;-</span> <span class="fu">rt</span>( <span class="at">n =</span> m, <span class="at">df =</span> nu ) <span class="co"># simular una muestra de tamaño m</span></span>
+<span id="cb19-5"><a href="distribuciones.html#cb19-5"></a>fx <span class="ot">&lt;-</span> <span class="fu">dt</span>( <span class="at">x =</span> x, <span class="at">df =</span> nu ) <span class="co"># cálculo de la densidad f(x)</span></span>
+<span id="cb19-6"><a href="distribuciones.html#cb19-6"></a>Fk <span class="ot">&lt;-</span> <span class="fu">pt</span>( <span class="at">q =</span> x, <span class="at">df =</span> nu ) <span class="co"># cálculo de probabilidad F(x)</span></span></code></pre></div>
 <p></p>
+<div class="definition">
+<p><span id="def:dbetra" class="definition"><strong>Definición 3.11  (Distribución beta transformada) </strong></span>Una variable aleatoria <span class="math inline">\(X\)</span> a valores reales, sigue una distribución beta transformada
+<span class="math inline">\(X \rightsquigarrow BT( \alpha, \gamma, \tau, \theta )\)</span> de parámetros <span class="math inline">\(\alpha &gt; 0, \gamma &gt; 0, \tau &gt; 0, \theta &gt; 0\)</span>,
+si su función de distribución acumulada es de la siguiente forma:
+<span class="math display">\[\begin{equation}
+F_X( x )
+= \frac{\Gamma(\alpha + \tau)}{\Gamma( \alpha ) \Gamma( \tau )}
+\int\limits_{0}^{x}
+\frac{ \gamma \left( \frac{u}{\theta} \right)^{\gamma \tau}}{u\left( 1 + \left( \frac{u}{\theta} \right)^{\gamma}\right)^{\alpha + \tau}}\
+du
+\end{equation}\]</span>\end{equation}
+además se puede verificar que su densidad de probabilidad está dada por la función
+<span class="math display">\[\begin{equation}
+f_X( x )
+= \mathbf{1}_{[0,+\infty)}( x )
+\frac{\Gamma(\alpha + \tau)}{\Gamma( \alpha ) \Gamma( \tau )}
+\frac{ \gamma \left( \frac{x}{\theta} \right)^{\gamma \tau}}{x\left( 1 + \left( \frac{x}{\theta} \right)^{\gamma}\right)^{\alpha + \tau}}
+\end{equation}\]</span></p>
+<p><span class="math display">\[\begin{eqnarray*}
+\mathbb{E}[X^k]
+&amp; = &amp; \frac{\theta^k \Gamma\left( \tau + \frac{k}{\gamma}\right) \Gamma\left( \tau - \frac{k}{\gamma}\right)}{\Gamma( \alpha ) \Gamma( \tau )},
+\quad \text{si}\ -\tau \gamma &lt; k &lt; \tau \gamma \\
+\mathbb{E}[X]
+&amp; = &amp; \frac{\theta \Gamma\left( \tau + \frac{1}{\gamma}\right) \Gamma\left( \tau - \frac{1}{\gamma}\right)}{\Gamma( \alpha ) \Gamma( \tau )} \\
+\mathbb{V}[X]
+&amp; = &amp; \frac{\theta^2 \Gamma\left( \tau + \frac{2}{\gamma}\right) \Gamma\left( \tau - \frac{2}{\gamma}\right)}{\Gamma( \alpha ) \Gamma( \tau )}
+- \frac{\theta^2 \Gamma\left( \tau + \frac{1}{\gamma}\right)^2 \Gamma\left( \tau - \frac{1}{\gamma}\right)^2}{\Gamma( \alpha )^2 \Gamma( \tau )^2}
+\end{eqnarray*}\]</span></p>
+</div>
+<p></p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb20-1"><a href="distribuciones.html#cb20-1"></a>alpha <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb20-2"><a href="distribuciones.html#cb20-2"></a>gamma <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb20-3"><a href="distribuciones.html#cb20-3"></a>tau <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb20-4"><a href="distribuciones.html#cb20-4"></a>theta <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb20-5"><a href="distribuciones.html#cb20-5"></a>x <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb20-6"><a href="distribuciones.html#cb20-6"></a>m <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb20-7"><a href="distribuciones.html#cb20-7"></a>X <span class="ot">&lt;-</span> <span class="fu">rtrbeta</span>( <span class="at">n =</span> m, <span class="at">shape1 =</span> alpha, <span class="at">shape2 =</span> gamma, <span class="at">shape3 =</span> tau, <span class="at">scale =</span> theta ) <span class="co"># simular una muestra de tamaño m</span></span>
+<span id="cb20-8"><a href="distribuciones.html#cb20-8"></a>fx <span class="ot">&lt;-</span> <span class="fu">dtrbeta</span>( <span class="at">x =</span> x, <span class="at">shape1 =</span> alpha, <span class="at">shape2 =</span> gamma, <span class="at">shape3 =</span> tau, <span class="at">scale =</span> theta ) <span class="co"># cálculo de la densidad f(x)</span></span>
+<span id="cb20-9"><a href="distribuciones.html#cb20-9"></a>Fk <span class="ot">&lt;-</span> <span class="fu">ptrbeta</span>( <span class="at">q =</span> x, <span class="at">shape1 =</span> alpha, <span class="at">shape2 =</span> gamma, <span class="at">shape3 =</span> tau, <span class="at">scale =</span> theta ) <span class="co"># cálculo de probabilidad F(x)</span></span></code></pre></div>
+<p></p>
+<p>Dentro de la familia beta transformada se cuenta algunas distribuciones de probabilidad:</p>
+<ol style="list-style-type: decimal">
+<li><p>La distribución de Burr para <span class="math inline">\(\tau = 1\)</span></p></li>
+<li><p>La distribución de log-logística para <span class="math inline">\(\alpha = \tau = 1\)</span></p></li>
+<li><p>La distribución de paralogística para <span class="math inline">\(\alpha = \gamma, \tau = 1\)</span></p></li>
+<li><p>La distribución de generalizada de Pareto para <span class="math inline">\(\gamma = 1\)</span></p></li>
+<li><p>La distribución de Pareto para <span class="math inline">\(\gamma = \tau = 1\)</span></p></li>
+<li><p>La distribución de inversa de Burr para <span class="math inline">\(\alpha = 1\)</span></p></li>
+<li><p>La distribución de inversa de Pareto para <span class="math inline">\(\alpha = \gamma = 1\)</span></p></li>
+<li><p>La distribución de inversa paralogística para <span class="math inline">\(\alpha = 1, \gamma = \tau\)</span></p></li>
+</ol>
 <!------------------------------------------------------------------------------------------------->
 </div>
 <div id="familia-de-panjer" class="section level2 hasAnchor" number="3.3">
 <h2><span class="header-section-number">3.3</span> Familia de Panjer<a href="distribuciones.html#familia-de-panjer" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div class="definition">
-<p><span id="def:fampanjer" class="definition"><strong>Definición 3.11  (Familia de Panjer) </strong></span>Una variable aleatoria discreta <span class="math inline">\(N\)</span>, que toma valores enteros positivos <span class="math inline">\(N \in \mathbb{N}\)</span>, se dice
+<p><span id="def:fampanjer" class="definition"><strong>Definición 3.12  (Familia de Panjer) </strong></span>Una variable aleatoria discreta <span class="math inline">\(N\)</span>, que toma valores enteros positivos <span class="math inline">\(N \in \mathbb{N}\)</span>, se dice
 que pertenece a la <strong>familia de Panjer</strong>, si sus probabilidades <span class="math inline">\(p_k = P( N = k )\)</span> para cada
 <span class="math inline">\(k \in \mathbb{N}\)</span>, satisfacen la siguiente relación de recurrencia.
 <span class="math display">\[\begin{equation}

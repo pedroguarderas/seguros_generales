@@ -122,6 +122,35 @@ fx <- dexp( x = x, rate = lambda ) # cálculo de la densidad f(x)
 Fk <- pexp( q = x, rate = lambda ) # cálculo de probabilidad F(x)
 ```
 
+::: {.definition #dnorm name="Distribución gamma"}
+Una variable aleatoria $X$ a valores reales, sigue una distribución gamma 
+$X \rightsquigarrow Gamma( \alpha, \beta )$ de parámetros $\alpha > 0$, $\beta > 0$, si su 
+función de distribución acumulada es de la siguiente forma:
+\begin{equation}
+F_X( x ) = \frac{\beta^\alpha}{\Gamma( \alpha )} \int\limits_{0}^{x} u^{\alpha-1} \exp(-\beta u)\ du
+\end{equation}
+la densidad de probabilidad automáticamente está dada por la función:
+\begin{equation}
+f_X( x ) = \mathbf{1}_{[0,+\infty}( x ) \frac{\beta^\alpha}{\Gamma( \alpha )} x^{\alpha-1} \exp(-\beta x)
+\end{equation}
+\begin{equation}
+M_X( t ) = \left( \frac{\beta}{\beta - t} \right)^\alpha,\qquad \text{si}\ t < \beta
+\end{equation}
+\begin{equation}
+\mathbb{E}[X] = \frac{\alpha}{\beta},\qquad 
+\mathbb{V}[X] = \frac{\alpha}{\beta^2}
+\end{equation}
+:::
+```{r l4c6}
+alpha <- 2
+beta <- 1
+x <- 3
+m <- 100
+X <- rgamma( n = m, shape = alpha, scale = beta ) # simular una muestra de tamaño m
+fx <- dgamma( x = x, shape = alpha, scale = beta ) # cálculo de la densidad f(x)
+Fk <- pgamma( q = x, shape = alpha, scale = beta ) # cálculo de probabilidad F(x)
+```
+
 ::: {.definition #dnorm name="Distribución normal"}
 Una variable aleatoria $X$ a valores reales, sigue una distribución normal 
 $X \rightsquigarrow N( \mu, \sigma )$ de parámetros $\mu \in \mathbb{R}$, $\sigma > 0$, si su 
@@ -140,7 +169,7 @@ M_X( t ) = \exp\left( t \mu + \frac{1}{2} t^2 \sigma^2 \right)
 \mathbb{E}[X] = \mu,\qquad \mathbb{V}[X] = \sigma^2
 \end{equation}
 :::
-```{r l4c6}
+```{r l4c7}
 mu <- 2
 sigma <- 1
 x <- 3
@@ -155,7 +184,7 @@ Una variable aleatoria $X$ a valores reales, sigue una distribución log-normal
 $X \rightsquigarrow LN( \mu, \sigma )$ de parámetros $\mu > 0$, $\sigma > 0$, si su 
 función de distribución acumulada es de la siguiente forma:
 \begin{equation}
-F_X( x ) = \frac{1}{\sqrt{2\pi} \sigma} \int\limits_{0}^{\ln(x)} \exp\left( -\frac{(y - \mu)^2}{\sigma^2} \right)\ dy
+F_X( x ) = \frac{1}{\sqrt{2\pi} \sigma} \int\limits_{0}^{x} \frac{1}{y} \exp\left( -\frac{(\ln(y) - \mu)^2}{\sigma^2} \right)\ dy
 \end{equation}
 la densidad de probabilidad automáticamente está dada por la función:
 \begin{equation}
@@ -167,7 +196,7 @@ No hay forma analítica para $M_X$
 \mathbb{V}[X] = \exp\left( 2 \mu + \sigma^2 \right) \left( \exp( \sigma^2 ) - 1 \right)
 \end{equation}
 :::
-```{r l4c7}
+```{r l4c8}
 mu <- 2
 sigma <- 1
 x <- 3
@@ -204,7 +233,7 @@ f_X( x )
 \right.
 \end{equation}
 :::
-```{r l4c8}
+```{r l4c9}
 xi <- 1
 mu <- 2
 sigma <- 1
@@ -245,7 +274,7 @@ f_X( x )
 \right.
 \end{equation}
 :::
-```{r l4c9}
+```{r l4c10}
 xi <- -1
 mu <- 2
 sigma <- 1
@@ -309,7 +338,7 @@ La función generadora de momentos $M_X( t )$ no está definida
 \right.
 \end{equation}
 :::
-```{r l4c10}
+```{r l4c11}
 nu <- 3
 x <- 4
 m <- 100
@@ -320,44 +349,63 @@ Fk <- pt( q = x, df = nu ) # cálculo de probabilidad F(x)
 
 ::: {.definition #dbetra  name="Distribución beta transformada"}
 Una variable aleatoria $X$ a valores reales, sigue una distribución beta transformada
-$X \rightsquigarrow \beta( \alpha, \theta, \gamma, \tau )$ de parámetros 
-$\alpha, \theta, \gamma, \tau$, si su función de distribución acumulada es de la siguiente forma:
+$X \rightsquigarrow BT( \alpha, \gamma, \tau, \theta )$ de parámetros $\alpha > 0, \gamma > 0, \tau > 0, \theta > 0$, 
+si su función de distribución acumulada es de la siguiente forma:
 \begin{equation}
 F_X( x ) 
-= \left\{
-\begin{array}{ll}
-\exp\left( -\exp\left( -\frac{x-\mu}{\sigma} \right) \right) 
-& \text{si}\ \xi = 0 \\
-\exp\left( -\left( 1 + \xi \frac{x-\mu}{\sigma} \right)^{-\frac{1}{\xi}} \right) 
-& \text{si}\ \xi \neq 0, 1 + \xi\frac{x - \mu}{\sigma} > 0
-\end{array}
-\right.
+= \frac{\Gamma(\alpha + \tau)}{\Gamma( \alpha ) \Gamma( \tau )} 
+\int\limits_{0}^{x}
+\frac{ \gamma \left( \frac{u}{\theta} \right)^{\gamma \tau}}{u\left( 1 + \left( \frac{u}{\theta} \right)^{\gamma}\right)^{\alpha + \tau}}\
+du
 \end{equation}
 además se puede verificar que su densidad de probabilidad está dada por la función
 \begin{equation}
 f_X( x )
-= \left\{
-\begin{array}{ll}
-\exp\left(-\frac{x-\mu}{\sigma}\right) 
-\exp\left(-\exp\left(-\frac{x-\mu}{\sigma}\right)\right) 
-& \text{si}\ \xi = 0 \\
-\left( 1 + \xi \frac{x - \mu}{\sigma}\right)^{-1-\frac{1}{\xi}} 
-\exp\left( -\left( 1 + \xi \frac{x-\mu}{\sigma} \right)^{-\frac{1}{\xi}} \right)
- & \text{si}\ \xi \neq 0, 1 + \xi\frac{x - \mu}{\sigma} > 0
-\end{array}
-\right.
+= \mathbf{1}_{[0,+\infty)}( x )
+\frac{\Gamma(\alpha + \tau)}{\Gamma( \alpha ) \Gamma( \tau )} 
+\frac{ \gamma \left( \frac{x}{\theta} \right)^{\gamma \tau}}{x\left( 1 + \left( \frac{x}{\theta} \right)^{\gamma}\right)^{\alpha + \tau}}
 \end{equation}
+
+\begin{eqnarray*}
+\mathbb{E}[X^k] 
+& = & \frac{\theta^k \Gamma\left( \tau + \frac{k}{\gamma}\right) \Gamma\left( \tau - \frac{k}{\gamma}\right)}{\Gamma( \alpha ) \Gamma( \tau )},
+\quad \text{si}\ -\tau \gamma < k < \tau \gamma \\
+\mathbb{E}[X]
+& = & \frac{\theta \Gamma\left( \tau + \frac{1}{\gamma}\right) \Gamma\left( \tau - \frac{1}{\gamma}\right)}{\Gamma( \alpha ) \Gamma( \tau )} \\
+\mathbb{V}[X] 
+& = & \frac{\theta^2 \Gamma\left( \tau + \frac{2}{\gamma}\right) \Gamma\left( \tau - \frac{2}{\gamma}\right)}{\Gamma( \alpha ) \Gamma( \tau )}
+- \frac{\theta^2 \Gamma\left( \tau + \frac{1}{\gamma}\right)^2 \Gamma\left( \tau - \frac{1}{\gamma}\right)^2}{\Gamma( \alpha )^2 \Gamma( \tau )^2}
+\end{eqnarray*}
 :::
-```{r l4c11}
-xi <- -1
-mu <- 2
-sigma <- 1
+```{r l4c12}
+alpha <- 1
+gamma <- 1
+tau <- 1
+theta <- 1
 x <- 3
 m <- 100
-X <- rgev( n = m, xi = xi, mu = mu, beta = sigma ) # simular una muestra de tamaño m
-fx <- dgev( x = x, xi = xi, mu = mu, beta = sigma ) # cálculo de la densidad f(x)
-Fk <- pt( q = x, df = nu ) # cálculo de probabilidad F(x)
+X <- rtrbeta( n = m, shape1 = alpha, shape2 = gamma, shape3 = tau, scale = theta ) # simular una muestra de tamaño m
+fx <- dtrbeta( x = x, shape1 = alpha, shape2 = gamma, shape3 = tau, scale = theta ) # cálculo de la densidad f(x)
+Fk <- ptrbeta( q = x, shape1 = alpha, shape2 = gamma, shape3 = tau, scale = theta ) # cálculo de probabilidad F(x)
 ```
+
+Dentro de la familia beta transformada se cuenta algunas distribuciones de probabilidad:
+
+1. La distribución de Burr para $\tau = 1$
+
+2. La distribución de log-logística para $\alpha = \tau = 1$
+
+3. La distribución de paralogística para $\alpha = \gamma, \tau = 1$
+
+4. La distribución de generalizada de Pareto para $\gamma = 1$
+
+5. La distribución de Pareto para $\gamma = \tau = 1$
+
+6. La distribución de inversa de Burr para $\alpha = 1$
+
+7. La distribución de inversa de Pareto para $\alpha = \gamma = 1$
+
+8. La distribución de inversa paralogística para $\alpha = 1, \gamma = \tau$
   
 <!------------------------------------------------------------------------------------------------->
 ## Familia de Panjer
