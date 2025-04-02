@@ -12,15 +12,27 @@ $p \in [0, 1]$, si:
 P( N = k ) = \binom{n}{k} p^k ( 1 - p )^{n-k}, \qquad
 \forall k \in \{0,\ldots, n\}
 \end{equation}
+esta distribución discreta se caracteriza por presentar el valor $k \frac{p_k}{p_{k-1}}$ decreciente
+conforme cambia $k \in \mathbb{N}$
 :::
 ```{r l4c1}
-n <- 10
+n <- 50
 p <- 0.3
 k <- 2
 m <- 100
 N <- rbinom( n = m, size = n, prob = p ) # simular una muestra de tamaño m
 pk <- dbinom( x = k, size = n, prob = p ) # cálculo de probabilidad P( N = k )
 Pk <- pbinom( q = k, size = n, prob = p ) # cálculo de probabilidad P( N <= k )
+
+p <- dbinom( x = 0:n, size = n, prob = p )
+v <- 1:n * p[ 2:(n + 1) ] / p[ 1:n ]
+
+plt <- ggplot() +
+  geom_point( aes( x = 1:n, y = v ), colour = 'darkred' ) + 
+  xlab( TeX( "$k$" ) ) + 
+  ylab( TeX( "$k \\frac{p_k}{p_{k-1}}$" ) ) + 
+  theme_bw()
+plot( plt )
 ```
 
 ::: {.definition #dpois name="Distribución de Poisson"}
@@ -30,14 +42,27 @@ o ley de Poisson $N \rightsquigarrow Pois( n, p )$, con parámetro $\lambda \in 
 P( N = k ) = \exp\left( -\lambda \right) \frac{\lambda^k}{k!}, \qquad
 \forall k \in \mathbb{N}
 \end{equation}
+esta distribución discreta se caracteriza por presentar el valor $k \frac{p_k}{p_{k-1}}$ constante
+conforme cambia $k \in \mathbb{N}$
 :::
 ```{r l4c2}
 lambda <- 2
 k <- 2
 m <- 100
 N <- rpois( n = m, lambda = lambda ) # simular una muestra de tamaño m
-pk <- dpois( k, lambda = lambda ) # cálculo de probabilidad P( N = k )
-Pk <- ppois( k, lambda = lambda ) # cálculo de probabilidad P( N <= k )
+pk <- dpois( x = k, lambda = lambda ) # cálculo de probabilidad P( N = k )
+Pk <- ppois( q = k, lambda = lambda ) # cálculo de probabilidad P( N <= k )
+
+n <- 50
+p <- dpois( x = 0:n, lambda = lambda )
+v <- 1:n * p[ 2:(n + 1) ] / p[ 1:n ]
+
+plt <- ggplot() +
+  geom_point( aes( x = 1:n, y = v ), colour = 'darkred' ) + 
+  xlab( TeX( "$k$" ) ) + 
+  ylab( TeX( "$k \\frac{p_k}{p_{k-1}}$" ) ) + 
+  theme_bw()
+plot( plt )
 ```
 
 ::: {.definition #dnbinom name="Distribución binomial negativa"}
@@ -49,20 +74,86 @@ P( N = k ) = \binom{\alpha + k - 1}{k} p^\alpha ( 1 - p )^k
 = \frac{\Gamma( \alpha + k )}{\Gamma(k+1) \Gamma(\alpha)}p^\alpha ( 1 - p )^k, \qquad
 \forall k \in \mathbb{N}
 \end{equation}
-donde $\Gamma( \alpha ) = \int\limits_0^{+\infty} x^{\alpha - 1} \exp(-x)\ dx$, $\forall \alpha \geq 0$
+donde $\Gamma( \alpha ) = \int\limits_0^{+\infty} x^{\alpha - 1} \exp(-x)\ dx$, $\forall \alpha \geq 0$.
+
+Esta distribución discreta se caracteriza por presentar el valor $k \frac{p_k}{p_{k-1}}$ creciente
+conforme cambia $k \in \mathbb{N}$
 :::
 ```{r l4c3}
-n <- 10
+alpha <- 2.5
 p <- 0.3
 k <- 2
 m <- 100
-N <- rnbinom( n = m, size = n, prob = p  ) # simular una muestra de tamaño m
-pk <- dnbinom( x = k, size = n, prob = p ) # cálculo de probabilidad P( N = k )
-Pk <- pnbinom( q = k, size = n, prob = p ) # cálculo de probabilidad P( N <= k )
+N <- rnbinom( n = m, size = alpha, prob = p  ) # simular una muestra de tamaño m
+pk <- dnbinom( x = k, size = alpha, prob = p ) # cálculo de probabilidad P( N = k )
+Pk <- pnbinom( q = k, size = alpha, prob = p ) # cálculo de probabilidad P( N <= k )
+
+n <- 50
+p <- dnbinom( x = 0:n, size = alpha, prob = p )
+v <- 1:n * p[ 2:(n + 1) ] / p[ 1:n ]
+
+plt <- ggplot() +
+  geom_point( aes( x = 1:n, y = v ), colour = 'darkred' ) + 
+  xlab( TeX( "$k$" ) ) + 
+  ylab( TeX( "$k \\frac{p_k}{p_{k-1}}$" ) ) + 
+  theme_bw()
+plot( plt )
 ```
+
+::: {.definition #dgeo name="Distribución geométrica"}
+Una variable aleatoria $N$ que toma valores en $\mathbb{N}$ se dice que sigue una distribución 
+o ley geométrica $N \rightsquigarrow Geo( p )$, con parámetro $p \in (0,1]$, si:
+\begin{equation}
+P( N = k ) = ( 1 - p )^k p, \qquad
+\forall k \in \mathbb{N}
+\end{equation}
+:::
+```{r l4c4}
+p <- 0.3
+k <- 2
+m <- 100
+N <- rgeom( n = m, prob = p  ) # simular una muestra de tamaño m
+pk <- dgeom( x = k, prob = p ) # cálculo de probabilidad P( N = k )
+Pk <- pgeom( q = k, prob = p ) # cálculo de probabilidad P( N <= k )
+```
+Es fácil darse cuenta que la distribución geométrica $Geo( p )$ es una binomial negativa $BN( 1, p )$,
+con $\alpha = 1$.
 
 Asociado a estas distribuciones discretas existe un resultado de caracterización, el cual permite
 seleccionar la distribución de conteo.
+
+<!------------------------------------------------------------------------------------------------->
+## Familia de Panjer
+
+El criterio anterior para identificar el tipo de distribución, mediante la observación del
+comportamiento de la variable $k \frac{p_k}{p_{k-1}}$, se formaliza precisamente en la definición
+de la familia de Panjer.
+
+::: {.definition #fampanjer name="Familia de Panjer"}
+Una variable aleatoria discreta $N$, que toma valores enteros positivos $N \in \mathbb{N}$, se dice
+que pertenece a la **familia de Panjer**, si sus probabilidades $p_k = P( N = k )$ para cada 
+$k \in \mathbb{N}$, satisfacen la siguiente relación de recurrencia.
+\begin{equation}
+p_k = \left( a + \frac{b}{k} \right)p_{k-1},\qquad \forall k \in \mathbb{N} \setminus \{0\} 
+\end{equation}
+:::
+
+Además tenemos la siguiente proposición que caracteriza a la distribución de las variables 
+aleatorias en la familia de Panjer.
+
+::: {.proposition #chfampanjer name="Caracterización familia de Panjer"}
+Las únicas leyes de probabilidad que satisfacen la relación de recurrencia anterior son:
+
+1. La ley de Poisson, la cual se obtiene para $a = 0$ y $b > 0$
+
+2. La ley binomial negativa, la cual se obtiene para $0 < a < 1$ y $a + b > 0$
+
+3. La ley binomial, la cual se obtenida para $a < 0$ y $b = -a(m + 1)$, para cierto $m$ entero y 
+positivo.
+:::
+
+Para una demostración detallada de la proposición anterior se puede consultar @MathAssuNV1 o 
+en https://nonlifemaths.github.io/.
 
 <!------------------------------------------------------------------------------------------------->
 ## Distribuciones continuas
@@ -85,7 +176,7 @@ M_X( t ) = \frac{\exp(bt)-\exp(at)}{t(b-a)}
 \mathbb{E}[X] = \frac{a + b}{2},\qquad \mathbb{V}[X] = \frac{(b - a)^2}{12}
 \end{equation}
 :::
-```{r l4c4}
+```{r l4c5}
 a <- 1
 b <- 2
 x <- 1.5
@@ -113,7 +204,7 @@ M_X( t ) = \frac{\lambda}{\lambda - t}
 \mathbb{E}[X] = \frac{1}{\lambda},\qquad \mathbb{V}[X] = \frac{1}{\lambda^2}
 \end{equation}
 :::
-```{r l4c5}
+```{r l4c6}
 lambda <- 2
 x <- 1.5
 m <- 100
@@ -141,7 +232,7 @@ M_X( t ) = \left( \frac{\beta}{\beta - t} \right)^\alpha,\qquad \text{si}\ t < \
 \mathbb{V}[X] = \frac{\alpha}{\beta^2}
 \end{equation}
 :::
-```{r l4c6}
+```{r l4c7}
 alpha <- 2
 beta <- 1
 x <- 3
@@ -169,7 +260,7 @@ M_X( t ) = \exp\left( t \mu + \frac{1}{2} t^2 \sigma^2 \right)
 \mathbb{E}[X] = \mu,\qquad \mathbb{V}[X] = \sigma^2
 \end{equation}
 :::
-```{r l4c7}
+```{r l4c8}
 mu <- 2
 sigma <- 1
 x <- 3
@@ -196,7 +287,7 @@ No hay forma analítica para $M_X$
 \mathbb{V}[X] = \exp\left( 2 \mu + \sigma^2 \right) \left( \exp( \sigma^2 ) - 1 \right)
 \end{equation}
 :::
-```{r l4c8}
+```{r l4c9}
 mu <- 2
 sigma <- 1
 x <- 3
@@ -233,7 +324,7 @@ f_X( x )
 \right.
 \end{equation}
 :::
-```{r l4c9}
+```{r l4c10}
 xi <- 1
 mu <- 2
 sigma <- 1
@@ -274,7 +365,7 @@ f_X( x )
 \right.
 \end{equation}
 :::
-```{r l4c10}
+```{r l4c11}
 xi <- -1
 mu <- 2
 sigma <- 1
@@ -338,7 +429,7 @@ La función generadora de momentos $M_X( t )$ no está definida
 \right.
 \end{equation}
 :::
-```{r l4c11}
+```{r l4c12}
 nu <- 3
 x <- 4
 m <- 100
@@ -352,13 +443,12 @@ Una variable aleatoria $X$ a valores reales, sigue una distribución beta transf
 $X \rightsquigarrow BT( \alpha, \gamma, \tau, \theta )$ de parámetros $\alpha > 0, \gamma > 0, \tau > 0, \theta > 0$, 
 si su función de distribución acumulada es de la siguiente forma:
 \begin{equation}
-F_X( x ) 
-= \frac{\Gamma(\alpha + \tau)}{\Gamma( \alpha ) \Gamma( \tau )} 
-\int\limits_{0}^{x}
-\frac{ \gamma \left( \frac{u}{\theta} \right)^{\gamma \tau}}{u\left( 1 + \left( \frac{u}{\theta} \right)^{\gamma}\right)^{\alpha + \tau}}\
-du
+F_X( x ) = \frac{\Gamma(\alpha + \tau)}{\Gamma( \alpha ) \Gamma( \tau )}
+\int\limits_0^x
+\frac{\gamma \left( \frac{u}{\theta} \right)^{\gamma \tau}}{u\left( 1 + \left( \frac{u}{\theta} \right)^{\gamma}\right)^{\alpha + \tau}}\ du
 \end{equation}
-además se puede verificar que su densidad de probabilidad está dada por la función
+
+además se puede verificar que su densidad de probabilidad está dada por la función:
 \begin{equation}
 f_X( x )
 = \mathbf{1}_{[0,+\infty)}( x )
@@ -377,7 +467,7 @@ f_X( x )
 - \frac{\theta^2 \Gamma\left( \tau + \frac{1}{\gamma}\right)^2 \Gamma\left( \tau - \frac{1}{\gamma}\right)^2}{\Gamma( \alpha )^2 \Gamma( \tau )^2}
 \end{eqnarray*}
 :::
-```{r l4c12}
+```{r l4c13}
 alpha <- 1
 gamma <- 1
 tau <- 1
@@ -406,35 +496,7 @@ Dentro de la familia beta transformada se cuenta algunas distribuciones de proba
 7. La distribución de inversa de Pareto para $\alpha = \gamma = 1$
 
 8. La distribución de inversa paralogística para $\alpha = 1, \gamma = \tau$
-  
-<!------------------------------------------------------------------------------------------------->
-## Familia de Panjer
 
-::: {.definition #fampanjer name="Familia de Panjer"}
-Una variable aleatoria discreta $N$, que toma valores enteros positivos $N \in \mathbb{N}$, se dice
-que pertenece a la **familia de Panjer**, si sus probabilidades $p_k = P( N = k )$ para cada 
-$k \in \mathbb{N}$, satisfacen la siguiente relación de recurrencia.
-\begin{equation}
-p_k = \left( a + \frac{b}{k} \right)p_{k-1},\qquad \forall k \in \mathbb{N} \setminus \{0\} 
-\end{equation}
-:::
-
-Además tenemos la siguiente proposición que caracteriza a la distribución de las variables 
-aleatorias en la familia de Panjer.
-
-::: {.proposition #chfampanjer name="Caracterización familia de Panjer"}
-Las únicas leyes de probabilidad que satisfacen la relación de recurrencia anterior son:
-
-1. La ley de Poisson, la cual se obtiene para $a = 0$ y $b > 0$
-
-2. La ley binomial negativa, la cual se obtiene para $0 < a < 1$ y $a + b > 0$
-
-3. La ley binomial, la cual se obtenida para $a < 0$ y $b = -a(m + 1)$, para cierto $m$ entero y 
-positivo.
-:::
-
-Para una demostración detallada de la proposición anterior se puede consultar @MathAssuNV1 o 
-en https://nonlifemaths.github.io/.
 
 <!------------------------------------------------------------------------------------------------->
 ## Estimación
