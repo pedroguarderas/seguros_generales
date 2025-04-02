@@ -97,7 +97,6 @@ S( x ) = 1 - F( x ) = 1 - P( X \leq x ) = P( X > x )
 
 <!------------------------------------------------------------------------------------------------->
 ::: {.definition #lp name="Función de densidad de probabilidad"}
-
 La **densidad de probabilidad** o también la **ley de probabilidad** de una variable aleatoria 
 a valores reales $X$, es una función $f: \mathbb{R} \longrightarrow \mathbb{R}$, tal que
 \begin{equation}
@@ -145,6 +144,26 @@ La esperanza matemática goza de las siguientes propiedades:
 \mathbb{E}[X] \leq \mathbb{E}[Y]
 \end{equation}
 :::
+
+<!------------------------------------------------------------------------------------------------->
+::: {.definition #mgf name="Función generadora de momentos"}
+La **función generadora de momento** de la variable aleatoria a valores reales $X$, es la función:
+\begin{equation}
+M_X( t ) = \mathbb{E}\left[ \exp( t X ) \right]
+\end{equation}
+:::
+
+Si $X_1, \ldots, X_n$ son variables aleatorias y $Y = X_1 + \cdots + X_n$, entonces
+\begin{eqnarray*}
+M_Y( t ) 
+& = & \mathbb{E}\left[ \exp\left( t Y \right) \right] \\
+& = & \mathbb{E}\left[ \exp\left( t \sum\limits_{i=1}^n X_i \right) \right] \\
+& = & \prod\limits_{i=1}^n \mathbb{E}\left[ \exp\left( t X_i \right) \right],\qquad 
+\text{si las variables $X_i$ son independientes} \\
+& = & \left( \mathbb{E}\left[ \exp\left( t X \right) \right] \right)^n,\qquad 
+\text{si las variables $X_i$ son identicamente distribuidas} \\
+& = & \left( M_X( t ) \right)^n
+\end{eqnarray*}
 
 <!------------------------------------------------------------------------------------------------->
 ::: {.definition #em name="Varianza"}
