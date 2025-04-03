@@ -244,17 +244,6 @@ I <- as.numeric( S > VaRS )
 P_TVaR <- mean( S * I ) / mean( I )
 ```
 
-```{r l5c2}
-alph <- 0.01
-e <- unlist( lapply( seq( 1, 6, 1 ), FUN = function( n ) seq( 9, 1, -0.2 ) * 10^{-n} ) )
-n <- log( 2 / alph ) / e^2
-plot( e, n, type = 'l', xlim = c( 0, 0.00001 ) )
-dt <- data.table( e, n )
-cat( paste( paste0( formatC( e, digits = 10, format = 'f' ), ', ', formatC( n, digits = 30, format = 'f' ) ), collapse = '\n' ) )
-
-d <- n * 8 / 1024^2
-```
-
 ```{r l5c3}
 n <- 1e3
 S <- rgamma( n, shape = A, scale = theta )
@@ -266,7 +255,7 @@ Fs <- pgamma( s, shape = A, scale = theta )
 
 alph <- 0.02
 er <- sqrt( log( 2 / alph ) / ( 2 * n ) )
-abs( Fs - Fns ) > er 
+mean( abs( Fs - Fns ) > er )
 
 plot( s, Fs, type = 'l', ylim = c( -er, 1 + er ) )
 points( s, Fns - er, col = 'red', type = 'l' )

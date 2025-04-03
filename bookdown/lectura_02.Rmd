@@ -32,6 +32,83 @@ el conjunto $X$, no es más que una función de $\mathbb{N}$ con valores en $X$,
 10. $\underset{x \rightarrow y}{\lim} f(x) = a$ noción de límite,
 
 <!------------------------------------------------------------------------------------------------->
+## Consideraciones de programación en R
+En el transcurso del presente curso utilizaremos algunos paquetes de R, acá la lista de carga de los
+mismos
+```{r l2c1, include = FALSE}
+options( width = 120 )
+
+knitr::opts_chunk$set(size = 'footnotesize', dpi = 100, warning = FALSE, echo = TRUE, class.source = "numberLines lineAnchors")
+def.chunk.hook  <- knitr::knit_hooks$get("chunk")
+knitr::knit_hooks$set(chunk = function(x, options) {
+  x <- def.chunk.hook(x, options)
+  ifelse( options$size != "normalsize", paste0("\n \\", options$size,"\n\n", x, "\n\n \\normalsize"), x)
+})
+
+local({
+  hook_output <- knitr::knit_hooks$get('output')
+  knitr::knit_hooks$set(output = function(x, options) {
+    if (!is.null(options$max.height)) options$attr.output <- c(
+      options$attr.output,
+      sprintf('style="max-height: %s;"', options$max.height)
+    )
+    hook_output(x, options)
+  })
+})
+```
+
+```{r l2c2, warning = FALSE}
+library( actuar )
+library( data.table )
+library( fExtremes )
+library( fitdistrplus )
+library( ggplot2 )
+library( googledrive )
+library( kableExtra )
+library( knitr )
+library( latex2exp )
+library( lubridate )
+library( openxlsx )
+library( readxl )
+library( rmarkdown )
+library( shiny )
+library( wesanderson )
+
+options( scipen = 9999 )
+options( stringsAsFactors = FALSE )
+```
+
+Para definir una variable utilizamos el operador de asignación `<-`, también se puede utilizar `=`.
+
+Un vector se define con la función de concatenación `c`
+```{r l2c3}
+x <- c( 1, 2, 3 )
+print( x )
+```
+
+Un función se define con la sentencia `function`
+```{r l2c4}
+f <- function( t ) {
+  return( t^2 )
+}
+```
+
+Si buscamos aplicar una función sobre un vector, podemos utilizar `sapply`
+```{r l2c5}
+y <- sapply( x, FUN = f )
+print( y )
+```
+
+```{r l2c6}
+z <- lapply( x, FUN = f )
+print( z )
+```
+
+Para muchas tareas que están relacionadas con el manejo de datos, podemos utilizar las 
+funcionalidades del paquete de R, `data.table`. Para trabajar con fechas recomendamos utilizar
+el paquete `lubridate`.
+
+<!------------------------------------------------------------------------------------------------->
 ## Consideraciones de probabilidades
 
 <!------------------------------------------------------------------------------------------------->
@@ -354,6 +431,39 @@ P\left( \underset{x \in \mathbb{R}}{\sup} \left| F_n( x ) - F( x ) \right| > \va
 Como podemos notar el orden de convergencia del teorema es $\sqrt{n}$ en el tamaño de observaciones,
 esto quiere decir que la convergencia es menos que el orden lineal.
 
+ Acorde a la desigualdad \@ref(thm:ddkw), para tener un probabilidad baja de aproximación 
+ $\delta > 0$ en un error de discrepancia $\varepsilon >0$, necesitamos satisfacer la desigualdad.
+\begin{eqnarray*}
+2 e^{-2n \varepsilon^2 } & \leq & \delta \\
+2n \varepsilon^2 & \geq & -\ln\left( \frac{\delta}{2} \right) \\
+n & \geq & \left\lceil -\frac{1}{2\varepsilon^2} \ln\left( \frac{\delta}{2} \right) \right\rceil
+\end{eqnarray*}
+así se observa que para tener una aproximación de orden $\delta$ y con un error de discrepancia
+$\varepsilon$, se requiere como mínimo realizar un número de simulaciones $n$ de orden 
+logarítmico en $\delta$ y cuadrático en $\varepsilon$.
+
+```{r l2c7}
+delta <- 1e-6
+e <- unlist( lapply( seq( 1, 9, 1 ), FUN = function( n ) seq( 9, 1, -1 ) * 10^{-n} ) )
+n <- ceiling( -log( delta / 2 ) / ( 2 * e^2 ) )
+```
+
+```{r l2t1, echo = TRUE, results = 'asis'}
+dt <- data.table( delta = delta, e, n, d = 8 * n / 1024^3 )
+dt %>%
+  kable(
+    caption = 'Error versus número de simulaciones',
+    row.names = FALSE,
+    col.names = c( "$\\delta$", "$\\varepsilon$", "$n$", "GB" ),
+    align = 'llrr',
+    digits = c( 10, 20, 0, 10 ),
+    format.args = list( big.mark = ',', decimal.mark = '.', scientific = FALSE ),
+    escape = FALSE ) %>%
+  kable_classic( font_size = 14, full_width = FALSE, html_font = "Cambria" ) %>%
+  scroll_box( width = "750px", height = "500px" )
+```
+
+
 <!------------------------------------------------------------------------------------------------->
 ## Consideraciones financieras
 Antes de desarrollar el contenido propio del curso, debemos tener en cuenta algunas consideraciones
@@ -445,79 +555,3 @@ prospectiva.
 \end{equation}
 algunas veces se considera la parte prospectiva con el signo menos.
 
-<!------------------------------------------------------------------------------------------------->
-## Consideraciones de programación en R
-En el transcurso del presente curso utilizaremos algunos paquetes de R, acá la lista de carga de los
-mismos
-```{r l2c1, include = FALSE}
-options( width = 120 )
-
-knitr::opts_chunk$set(size = 'footnotesize', dpi = 100, warning = FALSE, echo = TRUE, class.source = "numberLines lineAnchors")
-def.chunk.hook  <- knitr::knit_hooks$get("chunk")
-knitr::knit_hooks$set(chunk = function(x, options) {
-  x <- def.chunk.hook(x, options)
-  ifelse( options$size != "normalsize", paste0("\n \\", options$size,"\n\n", x, "\n\n \\normalsize"), x)
-})
-
-local({
-  hook_output <- knitr::knit_hooks$get('output')
-  knitr::knit_hooks$set(output = function(x, options) {
-    if (!is.null(options$max.height)) options$attr.output <- c(
-      options$attr.output,
-      sprintf('style="max-height: %s;"', options$max.height)
-    )
-    hook_output(x, options)
-  })
-})
-```
-
-```{r l2c2, warning = FALSE}
-library( actuar )
-library( data.table )
-library( fExtremes )
-library( fitdistrplus )
-library( ggplot2 )
-library( googledrive )
-library( kableExtra )
-library( knitr )
-library( latex2exp )
-library( lubridate )
-library( openxlsx )
-library( readxl )
-library( rmarkdown )
-library( shiny )
-library( wesanderson )
-
-options( scipen = 9999 )
-options( stringsAsFactors = FALSE )
-```
-
-Para definir una variable utilizamos el operador de asignación `<-`, también se puede utilizar `=`.
-
-Un vector se define con la función de concatenación `c`
-```{r l2c3}
-x <- c( 1, 2, 3 )
-print( x )
-```
-
-Un función se define con la sentencia `function`
-```{r l2c4}
-f <- function( t ) {
-  return( t^2 )
-}
-```
-
-Si buscamos aplicar una función sobre un vector, podemos utilizar `sapply`
-```{r l2c5}
-y <- sapply( x, FUN = f )
-print( y )
-```
-
-```{r l2c6}
-z <- lapply( x, FUN = f )
-print( z )
-```
-
-Para muchas tareas que están relacionadas con el manejo de datos, podemos utilizar las 
-funcionalidades del paquete de R, `data.table`. Para trabajar con fechas recomendamos utilizar
-el paquete `lubridate`.
