@@ -13,6 +13,7 @@ prp:chebdes
 thm:bein
 thm:tlc
 thm:ddkw
+tab:l2t1
 def:dbinom
 def:dpois
 def:dnbinom
@@ -50,6 +51,7 @@ resultados-de-aprendizaje
 contenidos-propuestos
 consideraciones-preliminares
 consideraciones-de-matemáticas
+consideraciones-de-programación-en-r
 consideraciones-de-probabilidades
 desigualdades-de-concentración
 consideraciones-estadísticas
@@ -58,7 +60,6 @@ función-de-actualización-o-descuento
 flujos-financieros
 flujos-financieros-probables
 equilibrio-financiero
-consideraciones-de-programación-en-r
 distribuciones
 distribuciones-discretas
 familia-de-panjer
