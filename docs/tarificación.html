@@ -251,7 +251,7 @@ comportamiento futuro de los reclamos totales <span class="math inline">\(S\)</s
 <!------------------------------------------------------------------------------------------------->
 <div id="tarificación-en-grandes-términos" class="section level2 hasAnchor" number="5.1">
 <h2><span class="header-section-number">5.1</span> Tarificación en grandes términos<a href="tarificación.html#tarificación-en-grandes-términos" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>La tarificación que conlleva a la selección de la prima <span class="math inline">\(P\)</span> debe tomar en cuenta como se manejan y
+<p>La tarificación que conlleva a la selección de la prima <span class="math inline">\(\Pi\)</span> debe tomar en cuenta como se manejan y
 equilibran los activos y pasivos en el negocio asegurador.</p>
 <p><strong>Pasivos</strong></p>
 <ol style="list-style-type: decimal">
@@ -278,7 +278,7 @@ reasegurador.</p>
 <p>En términos generales se busca equilibrar el resultado operativo del ramo de negocio <span class="math inline">\(R\)</span> a lo largo
 de la vida del ramo. El resultado <span class="math inline">\(R\)</span> a su vez está dado por la siguiente relación:
 <span class="math display">\[\begin{equation}
-R = P + I - S - G - K
+R = \Pi + I - S - G - K
 \end{equation}\]</span>
 donde las variables a considerarse en principio son:</p>
 <ol style="list-style-type: decimal">
@@ -621,7 +621,7 @@ they may prefer to take a higher deductible to get a lower premium.</p></li>
 <span id="cb43-5"><a href="tarificación.html#cb43-5"></a>k <span class="ot">&lt;-</span> <span class="fu">seq</span>( <span class="dv">1</span>, <span class="dv">100</span>, <span class="dv">1</span> )</span>
 <span id="cb43-6"><a href="tarificación.html#cb43-6"></a>p <span class="ot">&lt;-</span> p0 <span class="sc">*</span> <span class="fu">cumprod</span>( <span class="fu">c</span>( <span class="dv">1</span>, a <span class="sc">+</span> b <span class="sc">/</span> k ) )</span>
 <span id="cb43-7"><a href="tarificación.html#cb43-7"></a><span class="fu">sum</span>( p )</span></code></pre></div>
-<pre><code>## [1] 1.601825</code></pre>
+<pre><code>## [1] 1.600953</code></pre>
 <div class="sourceCode" id="cb45"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb45-1"><a href="tarificación.html#cb45-1"></a>k <span class="ot">&lt;-</span> <span class="fu">seq</span>( <span class="dv">0</span>, <span class="dv">100</span>, <span class="dv">1</span> )</span>
 <span id="cb45-2"><a href="tarificación.html#cb45-2"></a><span class="fu">sum</span>( <span class="fu">dpois</span>( k, <span class="at">lambda =</span> l ) )</span></code></pre></div>
 <pre><code>## [1] 1</code></pre>

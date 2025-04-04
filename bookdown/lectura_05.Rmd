@@ -8,7 +8,7 @@ $K$ destinado para hacer frente al riesgo subscrito y los costos generales $G$
 <!------------------------------------------------------------------------------------------------->
 ## Tarificación en grandes términos
 
-La tarificación que conlleva a la selección de la prima $P$ debe tomar en cuenta como se manejan y 
+La tarificación que conlleva a la selección de la prima $\Pi$ debe tomar en cuenta como se manejan y 
 equilibran los activos y pasivos en el negocio asegurador.
 
 **Pasivos**
@@ -47,7 +47,7 @@ reasegurador.
 En términos generales se busca equilibrar el resultado operativo del ramo de negocio $R$ a lo largo 
 de la vida del ramo. El resultado $R$ a su vez está dado por la siguiente relación:
 \begin{equation}
-R = P + I - S - G - K
+R = \Pi + I - S - G - K
 \end{equation}
 donde las variables a considerarse en principio son:
 
