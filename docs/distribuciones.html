@@ -673,7 +673,59 @@ La función generadora de momentos <span class="math inline">\(M_X( t )\)</span>
 <span id="cb22-6"><a href="distribuciones.html#cb22-6"></a>Fk <span class="ot">&lt;-</span> <span class="fu">pt</span>( <span class="at">q =</span> x, <span class="at">df =</span> nu ) <span class="co"># cálculo de probabilidad F(x)</span></span></code></pre></div>
 <p></p>
 <div class="definition">
-<p><span id="def:dbetra" class="definition"><strong>Definición 3.13  (Distribución beta transformada) </strong></span>Una variable aleatoria <span class="math inline">\(X\)</span> a valores reales, sigue una distribución beta transformada
+<p><span id="def:dgammatra" class="definition"><strong>Definición 3.13  (Distribución gamma transformada) </strong></span>Una variable aleatoria <span class="math inline">\(X\)</span> a valores reales, sigue una distribución gamma transformada
+<span class="math inline">\(X \rightsquigarrow GT( \alpha, \tau, \theta )\)</span> de parámetros <span class="math inline">\(\alpha &gt; 0, \tau &gt; 0, \theta &gt; 0\)</span>,
+si su función de distribución acumulada es de la siguiente forma:
+<span class="math display">\[\begin{equation}
+F_X( x ) = \frac{\tau}{\Gamma( \alpha )}
+\int\limits_{0}^x
+\frac{1}{u} \left( \frac{u}{\theta} \right)^{\alpha} \exp\left(-\left( \frac{u}{\theta} \right)^{\tau}\right)\ du
+\end{equation}\]</span></p>
+<p>además se puede verificar que su densidad de probabilidad está dada por la función:
+<span class="math display">\[\begin{equation}
+f_X( x )
+=
+\left\{
+\begin{array}{ll}
+0 &amp; \text{si}\ x \leq 0 \\
+\frac{\tau}{x \Gamma( \alpha )} \left( \frac{x}{\theta} \right)^{\alpha} \exp\left(-\left( \frac{x}{\theta} \right)^{\tau}\right) &amp; \text{si}\ x &gt; 0
+\end{array}
+\right.
+\end{equation}\]</span>
+<span class="math display">\[\begin{eqnarray*}
+\mathbb{E}[X^k]
+&amp; = &amp; \frac{\theta^k \Gamma\left( \alpha + \frac{k}{\tau}\right)}{\Gamma( \alpha )},
+\quad \text{si}\ k &gt; -\alpha \tau \\
+\mathbb{E}[X]
+&amp; = &amp; \frac{\theta \Gamma\left( \alpha + \frac{1}{\tau}\right)}{\Gamma( \alpha )},
+\quad \text{si}\ 1 &gt; -\alpha \tau \\
+\mathbb{V}[X]
+&amp; = &amp; \frac{\theta^2 \Gamma\left( \alpha + \frac{2}{\tau}\right)}{\Gamma( \alpha )}
+- \frac{\theta^2 \Gamma\left( \alpha + \frac{1}{\tau}\right)^2}{\Gamma( \alpha )^2}
+\end{eqnarray*}\]</span></p>
+</div>
+<p></p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb23-1"><a href="distribuciones.html#cb23-1"></a>alpha <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb23-2"><a href="distribuciones.html#cb23-2"></a>tau <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb23-3"><a href="distribuciones.html#cb23-3"></a>theta <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb23-4"><a href="distribuciones.html#cb23-4"></a>x <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb23-5"><a href="distribuciones.html#cb23-5"></a>m <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb23-6"><a href="distribuciones.html#cb23-6"></a>X <span class="ot">&lt;-</span> <span class="fu">rtrgamma</span>( <span class="at">n =</span> m, <span class="at">shape1 =</span> alpha, <span class="at">shape2 =</span> tau, <span class="at">scale =</span> theta ) <span class="co"># simular una muestra de tamaño m</span></span>
+<span id="cb23-7"><a href="distribuciones.html#cb23-7"></a>fx <span class="ot">&lt;-</span> <span class="fu">dtrgamma</span>( <span class="at">x =</span> x, <span class="at">shape1 =</span> alpha, <span class="at">shape2 =</span> tau, <span class="at">scale =</span> theta ) <span class="co"># cálculo de la densidad f(x)</span></span>
+<span id="cb23-8"><a href="distribuciones.html#cb23-8"></a>Fk <span class="ot">&lt;-</span> <span class="fu">ptrgamma</span>( <span class="at">q =</span> x, <span class="at">shape1 =</span> alpha, <span class="at">shape2 =</span> tau, <span class="at">scale =</span> theta ) <span class="co"># cálculo de probabilidad F(x)</span></span></code></pre></div>
+<p></p>
+<p>En la familia gamma se incluyen las siguientes distribuciones:</p>
+<ol style="list-style-type: decimal">
+<li><p>La distribución inversa gamma transformada, es decir es una familia estable por inversión</p></li>
+<li><p>La distribución gamma para <span class="math inline">\(\alpha = n/2\)</span> y <span class="math inline">\(\theta = 2\)</span></p></li>
+<li><p>La distribución inversa gamma</p></li>
+<li><p>La distribución de Weibull</p></li>
+<li><p>La distribución inversa de Weibull</p></li>
+<li><p>La distribución exponencial</p></li>
+<li><p>La distribución inversa exponencial</p></li>
+</ol>
+<div class="definition">
+<p><span id="def:dbetra" class="definition"><strong>Definición 3.14  (Distribución beta transformada) </strong></span>Una variable aleatoria <span class="math inline">\(X\)</span> a valores reales, sigue una distribución beta transformada
 <span class="math inline">\(X \rightsquigarrow BT( \alpha, \gamma, \tau, \theta )\)</span> de parámetros <span class="math inline">\(\alpha &gt; 0, \gamma &gt; 0, \tau &gt; 0, \theta &gt; 0\)</span>,
 si su función de distribución acumulada es de la siguiente forma:
 <span class="math display">\[\begin{equation}
@@ -700,15 +752,15 @@ f_X( x )
 \end{eqnarray*}\]</span></p>
 </div>
 <p></p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb23-1"><a href="distribuciones.html#cb23-1"></a>alpha <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb23-2"><a href="distribuciones.html#cb23-2"></a>gamma <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb23-3"><a href="distribuciones.html#cb23-3"></a>tau <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb23-4"><a href="distribuciones.html#cb23-4"></a>theta <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb23-5"><a href="distribuciones.html#cb23-5"></a>x <span class="ot">&lt;-</span> <span class="dv">3</span></span>
-<span id="cb23-6"><a href="distribuciones.html#cb23-6"></a>m <span class="ot">&lt;-</span> <span class="dv">100</span></span>
-<span id="cb23-7"><a href="distribuciones.html#cb23-7"></a>X <span class="ot">&lt;-</span> <span class="fu">rtrbeta</span>( <span class="at">n =</span> m, <span class="at">shape1 =</span> alpha, <span class="at">shape2 =</span> gamma, <span class="at">shape3 =</span> tau, <span class="at">scale =</span> theta ) <span class="co"># simular una muestra de tamaño m</span></span>
-<span id="cb23-8"><a href="distribuciones.html#cb23-8"></a>fx <span class="ot">&lt;-</span> <span class="fu">dtrbeta</span>( <span class="at">x =</span> x, <span class="at">shape1 =</span> alpha, <span class="at">shape2 =</span> gamma, <span class="at">shape3 =</span> tau, <span class="at">scale =</span> theta ) <span class="co"># cálculo de la densidad f(x)</span></span>
-<span id="cb23-9"><a href="distribuciones.html#cb23-9"></a>Fk <span class="ot">&lt;-</span> <span class="fu">ptrbeta</span>( <span class="at">q =</span> x, <span class="at">shape1 =</span> alpha, <span class="at">shape2 =</span> gamma, <span class="at">shape3 =</span> tau, <span class="at">scale =</span> theta ) <span class="co"># cálculo de probabilidad F(x)</span></span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb24-1"><a href="distribuciones.html#cb24-1"></a>alpha <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb24-2"><a href="distribuciones.html#cb24-2"></a>gamma <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb24-3"><a href="distribuciones.html#cb24-3"></a>tau <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb24-4"><a href="distribuciones.html#cb24-4"></a>theta <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb24-5"><a href="distribuciones.html#cb24-5"></a>x <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb24-6"><a href="distribuciones.html#cb24-6"></a>m <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb24-7"><a href="distribuciones.html#cb24-7"></a>X <span class="ot">&lt;-</span> <span class="fu">rtrbeta</span>( <span class="at">n =</span> m, <span class="at">shape1 =</span> alpha, <span class="at">shape2 =</span> gamma, <span class="at">shape3 =</span> tau, <span class="at">scale =</span> theta ) <span class="co"># simular una muestra de tamaño m</span></span>
+<span id="cb24-8"><a href="distribuciones.html#cb24-8"></a>fx <span class="ot">&lt;-</span> <span class="fu">dtrbeta</span>( <span class="at">x =</span> x, <span class="at">shape1 =</span> alpha, <span class="at">shape2 =</span> gamma, <span class="at">shape3 =</span> tau, <span class="at">scale =</span> theta ) <span class="co"># cálculo de la densidad f(x)</span></span>
+<span id="cb24-9"><a href="distribuciones.html#cb24-9"></a>Fk <span class="ot">&lt;-</span> <span class="fu">ptrbeta</span>( <span class="at">q =</span> x, <span class="at">shape1 =</span> alpha, <span class="at">shape2 =</span> gamma, <span class="at">shape3 =</span> tau, <span class="at">scale =</span> theta ) <span class="co"># cálculo de probabilidad F(x)</span></span></code></pre></div>
 <p></p>
 <p>Dentro de la familia beta transformada se cuenta algunas distribuciones de probabilidad:</p>
 <ol style="list-style-type: decimal">

@@ -27,6 +27,7 @@ def:dlnorm
 def:dgpd
 def:dgev
 def:dtst
+def:dgammatra
 def:dbetra
 exm:l3ex1
 exm:l3ex2
