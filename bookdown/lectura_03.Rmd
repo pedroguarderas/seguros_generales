@@ -442,6 +442,66 @@ fx <- dt( x = x, df = nu ) # cálculo de la densidad f(x)
 Fk <- pt( q = x, df = nu ) # cálculo de probabilidad F(x)
 ```
 
+::: {.definition #dgammatra  name="Distribución gamma transformada"}
+Una variable aleatoria $X$ a valores reales, sigue una distribución gamma transformada
+$X \rightsquigarrow GT( \alpha, \tau, \theta )$ de parámetros $\alpha > 0, \tau > 0, \theta > 0$, 
+si su función de distribución acumulada es de la siguiente forma:
+\begin{equation}
+F_X( x ) = \frac{\tau}{\Gamma( \alpha )}
+\int\limits_{0}^x 
+\frac{1}{u} \left( \frac{u}{\theta} \right)^{\alpha} \exp\left(-\left( \frac{u}{\theta} \right)^{\tau}\right)\ du
+\end{equation}
+
+además se puede verificar que su densidad de probabilidad está dada por la función:
+\begin{equation}
+f_X( x )
+= 
+\left\{
+\begin{array}{ll}
+0 & \text{si}\ x \leq 0 \\
+\frac{\tau}{x \Gamma( \alpha )} \left( \frac{x}{\theta} \right)^{\alpha} \exp\left(-\left( \frac{x}{\theta} \right)^{\tau}\right) & \text{si}\ x > 0
+\end{array}
+\right.
+\end{equation}
+\begin{eqnarray*}
+\mathbb{E}[X^k] 
+& = & \frac{\theta^k \Gamma\left( \alpha + \frac{k}{\tau}\right)}{\Gamma( \alpha )},
+\quad \text{si}\ k > -\alpha \tau \\
+\mathbb{E}[X]
+& = & \frac{\theta \Gamma\left( \alpha + \frac{1}{\tau}\right)}{\Gamma( \alpha )},
+\quad \text{si}\ 1 > -\alpha \tau \\
+\mathbb{V}[X] 
+& = & \frac{\theta^2 \Gamma\left( \alpha + \frac{2}{\tau}\right)}{\Gamma( \alpha )}
+- \frac{\theta^2 \Gamma\left( \alpha + \frac{1}{\tau}\right)^2}{\Gamma( \alpha )^2}
+\end{eqnarray*}
+:::
+```{r l4c13}
+alpha <- 1
+tau <- 1
+theta <- 1
+x <- 3
+m <- 100
+X <- rtrgamma( n = m, shape1 = alpha, shape2 = tau, scale = theta ) # simular una muestra de tamaño m
+fx <- dtrgamma( x = x, shape1 = alpha, shape2 = tau, scale = theta ) # cálculo de la densidad f(x)
+Fk <- ptrgamma( q = x, shape1 = alpha, shape2 = tau, scale = theta ) # cálculo de probabilidad F(x)
+```
+
+En la familia gamma se incluyen las siguientes distribuciones:
+
+1. La distribución inversa gamma transformada, es decir es una familia estable por inversión
+
+2. La distribución gamma para $\alpha = n/2$ y $\theta = 2$
+
+3. La distribución inversa gamma
+
+4. La distribución de Weibull
+
+5. La distribución inversa de Weibull
+
+6. La distribución exponencial
+
+7. La distribución inversa exponencial
+
 ::: {.definition #dbetra  name="Distribución beta transformada"}
 Una variable aleatoria $X$ a valores reales, sigue una distribución beta transformada
 $X \rightsquigarrow BT( \alpha, \gamma, \tau, \theta )$ de parámetros $\alpha > 0, \gamma > 0, \tau > 0, \theta > 0$, 
@@ -471,7 +531,7 @@ f_X( x )
 - \frac{\theta^2 \Gamma\left( \tau + \frac{1}{\gamma}\right)^2 \Gamma\left( \tau - \frac{1}{\gamma}\right)^2}{\Gamma( \alpha )^2 \Gamma( \tau )^2}
 \end{eqnarray*}
 :::
-```{r l4c13}
+```{r l4c14}
 alpha <- 1
 gamma <- 1
 tau <- 1
