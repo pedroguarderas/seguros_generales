@@ -443,7 +443,7 @@ $\varepsilon$, se requiere como mínimo realizar un número de simulaciones $n$ 
 logarítmico en $\delta$ y cuadrático en $\varepsilon$.
 
 ```{r l2c7}
-delta <- 1e-6
+delta <- 0.01
 e <- unlist( lapply( seq( 1, 9, 1 ), FUN = function( n ) seq( 9, 1, -1 ) * 10^{-n} ) )
 n <- ceiling( -log( delta / 2 ) / ( 2 * e^2 ) )
 ```
@@ -520,7 +520,7 @@ VAP_t( c ) = \sum\limits_{k = 1}^n v( t, t_k ) \mathbb{E}\left[ c( t_k ) \right]
 \end{equation}
 
 <!------------------------------------------------------------------------------------------------->
-### Equilibrio financiero
+### Equilibrio financiero {#sec:equifin}
 Se dice que un flujo financiero $c(t_1), c(t_2), \cdots, c(t_n)$ como el anterior, está en 
 **equilibrio financiero** si:
 \begin{equation}

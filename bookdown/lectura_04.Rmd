@@ -1,63 +1,6 @@
 <!------------------------------------------------------------------------------------------------->
 # Modelos de pérdida agregada
 
-
-<!------------------------------------------------------------------------------------------------->
-## Pasivos y activos de una aseguradora
-
-### Pasivos
-
-1. Capitales propios
-
-2. Reservas técnicas
-
-3. Reservas para otros riesgos
-
-4. Deudas o depósitos en dinero recibidos por cesiones
-
-5. Otras deudas por pagar
-
-
-### Activos 
-
-1. Capital suscrito no desembolsado
-
-2. Activos no materiales
-
-3. Inversiones
-
-4. Parte de reaseguros en reservas técnicas
-
-5. Deudas por cobrar
-
-6. Otros activos
-
-
-<!------------------------------------------------------------------------------------------------->
-## Reservas técnicas
-
-1. Reservas para primas no adquiridas
-
-2. Reservas de riesgos en curso
-
-3. Reservas de siniestros a pagar
-
-  a. Siniestros sucedidos, reportados, resueltos, no pagados
-  
-  b. Siniestros sucedidos, reportados, no resueltos, no pagados
-  
-  c. Siniestros sucedidos, no reportados, no resueltos, no pagados
-  
-  
-$R$ Ganancia o rendimiento
-$P$ Ingreso por primas
-$I$ Ingreso por inversiones
-$S$ Pago de siniestros
-$G$ Gastos de subscripción
-\begin{equation}
-R = P + I - S - G
-\end{equation}
-
 <!------------------------------------------------------------------------------------------------->
 ## Mutualización del riesgo
 La idea de mantener un seguro está basada en la mutualización de los riesgos. La mutualización 
