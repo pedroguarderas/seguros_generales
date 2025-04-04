@@ -16,13 +16,14 @@ S = \sum\limits_{i=1}^n X_i
 \end{equation}
 El conocer la distribución del costo total $S$ es una tarea crucial para el asegurador.
 
-El costo total esperado esta dado claramente por la siguiente expresión.
+El valore esperado de de los reclamos totales, puede ser calculado fácilmente utilizando las
+propiedades de linealidad de la esperanza matemática $\mathbb{E}$
 \begin{equation}
 \mathbb{E}[ S ]
 = \mathbb{E}\left[ \sum\limits_{i=1}^n X_i \right] 
 = \sum\limits_{i=1}^n \mathbb{E}\left[ X_i \right]
 \end{equation}
-la varianza de la variable aleatoria del costo total $S$, está dada por:
+por su parte, la varianza de la variable aleatoria del costo total $S$, está dada por:
 \begin{eqnarray*}
 \mathbb{V}\left[ S \right]
 & = & \mathbb{V}\left[ \sum\limits_{i=1}^n X_i \right] \\
@@ -32,22 +33,15 @@ la varianza de la variable aleatoria del costo total $S$, está dada por:
 + 2\sum\limits_{i=1}^{n-1} \sum\limits_{j=i+1}^n \mathbb{C}\left[ X_i, X_j \right]
 \end{eqnarray*}
 
-$S_n = \sum\limits_{i=1}^n X_i$
+Muchas de las veces el número total de reclamos $n$ es incierto y por tal razón es mejor considerar
+que el número de siniestros vendrá dado por otra variable aleatoria discreta $N$ que solo tomará 
+valores en $\mathbb{N}$
 \begin{equation}
-W_n = \frac{S_n}{n}
+S = \sum\limits_{i=1}^N X_i
 \end{equation}
 
-\begin{equation}
-\mathbb{E}\left[ W_n \right]
-= \mathbb{E}\left[ \frac{S_n}{n} \right] 
-= \frac{1}{n} \mathbb{E}\left[ S_n \right]
-\end{equation}
-
-\begin{equation}
-\mathbb{V}\left[ W_n \right]
-= \mathbb{V}\left[ \frac{S_n}{n} \right]
-= \frac{1}{n^2} \mathbb{V}\left[ S_n \right]
-\end{equation}
+Esto nos lleva a considerar diferentes modelos de agregación de reclamos o pérdidas como se suele 
+decir en inglés "loss models" @PanjerLoss2012, @LossModFur.
 
 <!------------------------------------------------------------------------------------------------->
 ## Modelo individual
@@ -541,3 +535,18 @@ f_S
 \end{eqnarray*}
 
 
+\begin{equation}
+W_n = \frac{S_n}{n}
+\end{equation}
+
+\begin{equation}
+\mathbb{E}\left[ W_n \right]
+= \mathbb{E}\left[ \frac{S_n}{n} \right] 
+= \frac{1}{n} \mathbb{E}\left[ S_n \right]
+\end{equation}
+
+\begin{equation}
+\mathbb{V}\left[ W_n \right]
+= \mathbb{V}\left[ \frac{S_n}{n} \right]
+= \frac{1}{n^2} \mathbb{V}\left[ S_n \right]
+\end{equation}

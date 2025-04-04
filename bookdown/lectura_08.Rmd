@@ -1,36 +1,77 @@
 # Estimación de valores extremos
 
-::: {.definition #dmaxstab  name="Familia max-estable"}
-dd
+::: {.definition #dmaxstab  name="Distribución con cola pesada"}
+Una variable aleatoria a valores reales $X$ se dice que tiene su distribución $F$  es de 
+**cola pesada hacia la derecha** si el siguiente límite no es finito.
+\begin{equation}
+\underset{x \rightarrow +\infty}{\lim} \exp( t x ) P( X > x ) 
+= \underset{x \rightarrow +\infty}{\lim} \exp( t x ) ( 1 - F( x ) ) 
+= + \infty, \qquad \forall t > 0
+\end{equation}
+
+de forma muy similar diremos que la distribución tiene **cola pesada hacia la izquierda** si 
+\begin{equation}
+\underset{x \rightarrow +\infty}{\lim} \exp( -t x ) P( X \leq x ) 
+= \underset{x \rightarrow +\infty}{\lim} \exp( -t x ) F( x )
+= + \infty, \qquad \forall t > 0
+\end{equation}
 :::
+
+Como consecuencia de la definición anterior, las variables aleatoria a valores reales que tiene
+cola pesada no poseen función generadora de momentos ya que la integral a continuación diverge 
+para cualquier valor $t > 0$
+\begin{equation}
+\int\limits_{\mathbb{R}} \exp( t x ) dF( x ) = + \infty
+\end{equation}
  
-::: {.theorem #tftg  name="Fisher-Tippett-Gnedenko"}
+::: {.theorem #tvalext1  name="Fisher-Tippett-Gnedenko"}
 Si consideramos una secuencia de variables aleatorias $\{X_i\}_{i\in \mathbb{N}}$ las mismas
 son i.i.d, con distribución acumulada $F$. Entonces, si existen dos sucesiones de valores reales 
-$\{a_n\}_{n \in \mathbb{N}}$ y $\{b_n\}_{n \in \mathbb{N}}$, tales que 
-$a_n > 0, \forall n \in \mathbb{N}$ y una distribución acumulada no degenerada $G$, de tal forma 
-que:
+$\{a_n\}_{n \in \mathbb{N}}$ y $\{b_n\}_{n \in \mathbb{N}}$, con $a_n > 0$ para cualquier 
+$n \in \mathbb{N}$ y una distribución acumulada no degenerada $G$, de tal forma que para la 
+variable aleatoria del máximo $M_n = \max\{ X_1, \ldots, X_n \}$ se satisfaga el siguiente límite
 \begin{equation}
-\underset{n \rightarrow +\infty}{\lim} ( F\left( a_n x + b_n \right) )^n = G( x ),
+\underset{n \rightarrow +\infty}{\lim} P\left( \frac{M_n - b_n}{a_n} < x\right)
+= \underset{n \rightarrow +\infty}{\lim} ( F\left( a_n x + b_n \right) )^n 
+= G( x ),
 \forall x \in \mathbb{R}
 \end{equation}
-tenemos que $G$ es una de las siguientes distribuciones acumuladas:
+decimos por tanto que la distribución $F$ pertenece al **máximo dominio de atracción** de $G$ y lo
+representamos por $F \in MDA( G )$.
 
-1. **Tipo I**, una distribución de Gumbel $G(x) = \exp( -\exp( -x ) ), x \in \mathbb{R}$
+Además, las distribuciones $G$ vienen caracterizadas por ser alguna de las distribuciones 
+valores extremos generalizadas $GEV( \mu, \sigma, \xi )$. Las cuales engloban tres tipos 
+relevantes:
 
-2. **Tipo II**, una distribución de Frechet $G( x ) = \mathbf{1}_{(0,+\infty)}( x ) \exp( -x^{-\alpha} )$, para $x \geq 0$ y 
-$\alpha > 0$,
+1. **Tipo I**, una distribución de Gumbel 
+$G(x) = \exp\left( -\exp\left( -\frac{x-\mu}{\sigma} \right) \right)$, para 
+$x \in \mathbb{R}, \xi = 0$
 
-3. **Tipo III**, una distribución de Weibull inversa $G(x) = \mathbf{1}_{(-\infty,0)}( x ) \exp( -( -x )^{\alpha} )$, para
-$x \leq 0, \alpha > 0$
+2. **Tipo II**, una distribución de Fréchet 
+$G( x ) = \exp\left( -\left(1 + \xi\frac{x-\mu}{\sigma}\right)^{-\frac{1}{\xi}} \right)$, para 
+$x > \mu - \frac{\sigma}{\xi}$ y $\frac{1}{\xi} > 0$,
+
+3. **Tipo III**, una distribución de Weibull inversa 
+$G( x ) = \exp\left( -\left(1 - |\xi|\frac{x-\mu}{\sigma}\right)^{\frac{1}{\xi}} \right)$, para 
+$x < \mu + \frac{\sigma}{|\xi|}$ y $\frac{1}{\xi} < 0$,
 :::
 
-
-::: {.theorem #pbh name="Pickands-Balkema-De Haan"}
+::: {.theorem #tvalext2 name="Pickands-Balkema-De Haan"}
 Sea $F_u$ la distribución de exceso asociada a la variable aleatoria $X$ y con umbral de 
-condicionamiento $u > 0$. Entonces, para cualquier $\varepsilon \in \mathbb{R}$.
+condicionamiento $u > 0$. Entonces, para cualquier $\varepsilon \in \mathbb{R}$ tenemos que 
+$F \in MDA( H )$ para alguna distribución $H = GEV( \mu, \sigma, \varepsilon )$ si y solamente
+si existe una distribución $G = GPD( \nu, \beta, \varepsilon )$, de tal forma que el siguiente 
+límite se satisface.
 \begin{equation}
-\underset{u \longrightarrow x}{\lim} \underset{x > 0}{\sup} 
-\left| F_u( x ) - G_{\varepsilon,\beta(u)( x )} \right| = 0
+\underset{u \longrightarrow x_F}{\lim} \underset{0 < x < x_F - u}{\sup} 
+\left| F_u( x ) - G( x ) \right| = 0
 \end{equation}
-::: 
+donde $x_F = \sup\{ x\in \mathbb{R} \mid F(x) < 1 \}$ y $\nu, \beta$ dependen de los parámetros 
+$\mu$, $\sigma$ y $u$.
+:::
+
+El teorema anterior \@ref(thm:tvalext2) en cierta forma sugiere que si en el límite la distribución de 
+exceso a partir de un valor de condicionamiento $u$ cada vez se comporta más como una distribución 
+de generalizada de Pareto. Entonces, la distribución de los máximos que se observen de una muestra
+de la variable aleatoria $X$ tienen un comportamiento que puede ser descrito por una distribución 
+de valores extremos generalizada.

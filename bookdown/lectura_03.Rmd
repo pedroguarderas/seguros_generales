@@ -323,6 +323,10 @@ f_X( x )
 \end{array}
 \right.
 \end{equation}
+\begin{equation}
+M_X( t ) = \exp(\theta \mu) \sum\limits_{j=0}^{+\infty} \frac{\theta^j \sigma^j}
+{\prod\limits_{k=0}^j ( 1 - k \xi )}
+\end{equation}
 :::
 ```{r l4c10}
 xi <- 1
@@ -496,6 +500,10 @@ Dentro de la familia beta transformada se cuenta algunas distribuciones de proba
 7. La distribución de inversa de Pareto para $\alpha = \gamma = 1$
 
 8. La distribución de inversa paralogística para $\alpha = 1, \gamma = \tau$
+
+La distribución transformada gamma es un caso límite de la distribución transformada beta, cuando
+$\theta \rightarrow +\infty, \alpha \rightarrow +\infty$ y 
+$\theta \alpha^{-\frac{1}{\gamma}} \rightarrow \xi$
 
 
 <!------------------------------------------------------------------------------------------------->
