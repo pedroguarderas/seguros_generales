@@ -247,7 +247,7 @@ div.csl-indent {
 <h1><span class="header-section-number">Capítulo 5</span> Tarificación<a href="tarificación.html#tarificación" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>Para realizar la tarificación de un producto de seguro, además de estudiar y estimar el
 comportamiento futuro de los reclamos totales <span class="math inline">\(S\)</span>, es necesario también tomar en cuenta el capital
-destinado y constitutivo <span class="math inline">\(C\)</span> para hacer frente al riesgo subscrito y los costos generales <span class="math inline">\(G\)</span></p>
+<span class="math inline">\(K\)</span> destinado para hacer frente al riesgo subscrito y los costos generales <span class="math inline">\(G\)</span></p>
 <!------------------------------------------------------------------------------------------------->
 <div id="tarificación-en-grandes-términos" class="section level2 hasAnchor" number="5.1">
 <h2><span class="header-section-number">5.1</span> Tarificación en grandes términos<a href="tarificación.html#tarificación-en-grandes-términos" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -282,31 +282,58 @@ R = P + I - S - G - K
 \end{equation}\]</span>
 donde las variables a considerarse en principio son:</p>
 <ol style="list-style-type: decimal">
-<li><p><span class="math inline">\(P\)</span> Ingreso por primas</p></li>
+<li><p><span class="math inline">\(\Pi\)</span> Ingreso por primas</p></li>
 <li><p><span class="math inline">\(I\)</span> Ingreso por inversiones</p></li>
 <li><p><span class="math inline">\(S\)</span> Pago de siniestros</p></li>
 <li><p><span class="math inline">\(G\)</span> Gastos de subscripción</p></li>
 <li><p><span class="math inline">\(K\)</span> Coste de capital</p></li>
 </ol>
 <p>En varias ocasiones el ciclo del negocio puede ser corto y no permite considerar un ingreso por
-inversiones <span class="math inline">\(I = 0\)</span>.</p>
+inversiones <span class="math inline">\(I = 0\)</span>.
+<span class="math display">\[\begin{equation}
+R = \Pi - S - G - K
+\end{equation}\]</span></p>
 <p>Sería ideal que a lo largo de la vida del ramo el resultado mantenga <span class="math inline">\(R &gt; 0\)</span>, pero al tratarse de
 un negocio que depende de la aleatoriedad de los reclamos, es bastante complicado encontrar un
-costo de capital <span class="math inline">\(K\)</span> y una prima <span class="math inline">\(P\)</span> que siempre asegure ante todo escenario que se mantenga
+costo de capital <span class="math inline">\(K\)</span> y una prima <span class="math inline">\(\Pi\)</span> que siempre asegure ante todo escenario que se mantenga
 la positividad. Ante este riesgo continuo se busca minimizar la probabilidad de ruina <span class="math inline">\(R &lt; 0\)</span>
 a un nivel <span class="math inline">\(\alpha &gt; 0\)</span> adecuado
 <span class="math display">\[\begin{equation}
-P( R &lt; 0 ) \leq \alpha
+P( R &lt; 0 ) &lt; \alpha
 \end{equation}\]</span></p>
 <p>Muchas de las veces se parte del principio de equilibrio financiero <a href="consideraciones-preliminares.html#sec:equifin">2.6.4</a>, donde
 se busca la igualdad <span class="math inline">\(\mathbb{E}[R] = 0\)</span>, la misma implica la siguiente relación:
 <span class="math display">\[\begin{eqnarray*}
-0
-&amp; = &amp; \mathbb{E}[R] \\
-&amp; = &amp; \mathbb{E}[R\mid R \geq 0]P( R \geq 0 ) + \mathbb{E}[R\mid R &lt; 0]P( R &lt; 0 ) \\
+0 &amp; = &amp; \mathbb{E}[R] \\
+0 &amp; = &amp; \mathbb{E}[R\mid R \geq 0]P( R \geq 0 ) + \mathbb{E}[R\mid R &lt; 0]P( R &lt; 0 ) \\
 \mathbb{E}[R\mid R \geq 0]P( R \geq 0 ) &amp; = &amp; -\mathbb{E}[R\mid R &lt; 0]P( R &lt; 0 ) \\
 \frac{P( R &lt; 0 )}{P( R \geq 0 ) } &amp; = &amp; -\frac{\mathbb{E}[R\mid R \geq 0]}{\mathbb{E}[R\mid R &lt; 0]}
-\end{eqnarray*}\]</span></p>
+\end{eqnarray*}\]</span>
+en el equilibrio financiero, la proporción de la probabilidad de ruina respecto de la probabilidad
+de no estar en ruina es igual a la proporción entre la esperanza condicional del resultado cuando
+no se produce la ruina respecto de la esperanza condicional cuando si se produce la ruina.</p>
+<p>Es usual asumir que la única parte aleatoria de <span class="math inline">\(R\)</span> viene dada por el valor de los reclamos totales,
+en razón de esto se tiene:
+<span class="math display">\[\begin{equation}
+\mathbb{E}[ R ] = \Pi - \mathbb{E}[S] - G - K
+\end{equation}\]</span></p>
+<p>El <strong>coste de capital</strong> <span class="math inline">\(K\)</span> es el dinero que se requiere adicional para estar cubiertos a un nivel
+de solvencia adecuado en caso se presenten mayores variaciones en el valor observado del reclamo
+total <span class="math inline">\(S\)</span> y el esperado <span class="math inline">\(\mathbb{E}[S]\)</span>. Para ello se suele utilizar una <strong>medida de riesgo</strong>
+<span class="math inline">\(\zeta\)</span> que permita controlar la probabilidad de ruina <span class="math inline">\(P( R &lt; 0)\)</span> al nivel de <span class="math inline">\(\alpha &gt; 0\)</span>, así se
+suele tomar
+<span class="math display">\[\begin{equation}
+K = \zeta( S ) - \mathbb{E}[S]
+\end{equation}\]</span>
+de tal forma que
+<span class="math display">\[\begin{equation}
+P( \Pi - S - G - K &lt; 0 ) = P( \Pi - G - \zeta(S) - ( S - \mathbb{E}[S] ) &lt; 0 ) &lt; \alpha.
+\end{equation}\]</span></p>
+<p>De la relación anterior se observa que una vez seleccionado el nivel de cobertura <span class="math inline">\(\alpha\)</span> y la
+medida de riesgo <span class="math inline">\(\zeta\)</span>, las variables correspondientes a la prima <span class="math inline">\(\Pi\)</span> y a los gastos <span class="math inline">\(G\)</span> quedan
+libres, de ahí resulta un margen que permite seleccionar la prima más óptima para un producto de
+seguro, así como también optimizar los gastos <span class="math inline">\(G\)</span>. Este proceso de selección es precisamente lo que
+llamamos <strong>tarificación</strong> (pricing).</p>
 <!------------------------------------------------------------------------------------------------->
 </div>
 <div id="medidas-de-riesgo" class="section level2 hasAnchor" number="5.2">
@@ -333,6 +360,7 @@ que satisface la siguientes propiedades:</p>
 \end{equation}\]</span></p></li>
 </ol>
 </div>
+<p>En lo que continúa citamos algunas de las medidas de riesgo usualmente utilizadas.</p>
 <div class="definition">
 <p><span id="def:VaR" class="definition"><strong>Definición 5.1  (Valor en riesgo) </strong></span>Dada una variable aleatoria a valores reales <span class="math inline">\(X\)</span>, el <strong>valor en riesgo</strong> (value at risk) de <span class="math inline">\(X\)</span> al
 nivel de probabilidad <span class="math inline">\(\alpha \in (0,1)\)</span> está dado por
@@ -344,7 +372,7 @@ VaR_{\alpha}( X ) = \inf\left\{ x \in \mathbb{R} \middle| F_X( x ) &gt; \alpha \
 <p><span id="prp:varinv" class="proposition"><strong>Proposición 5.1  </strong></span>Si la función de distribución acumulada <span class="math inline">\(F_X\)</span> es contínua, entonces
 <span class="math inline">\(VaR_{\alpha}( X ) = F_X^{-1}( \alpha )\)</span>.</p>
 </div>
-<p>Por otra parte, <span class="math inline">\(VaR_{\alpha}\)</span> para cualquier <span class="math inline">\(\alpha\)</span> no es una medida de riesgo sub-additiva.</p>
+<p>Por otra parte, <span class="math inline">\(VaR_{\alpha}\)</span> para cualquier <span class="math inline">\(\alpha\)</span> no es una medida de riesgo sub-aditiva.</p>
 <div class="definition">
 <p><span id="def:TVaR" class="definition"><strong>Definición 5.2  (Valor en riesgo en la cola) </strong></span>Dada una variable aleatoria a valores reales <span class="math inline">\(X\)</span>, el <strong>valor en riesgo en la colas</strong>
 (tail value at risk) de <span class="math inline">\(X\)</span> al nivel de probabilidad <span class="math inline">\(\alpha \in (0,1)\)</span> está dado por
@@ -593,7 +621,7 @@ they may prefer to take a higher deductible to get a lower premium.</p></li>
 <span id="cb43-5"><a href="tarificación.html#cb43-5"></a>k <span class="ot">&lt;-</span> <span class="fu">seq</span>( <span class="dv">1</span>, <span class="dv">100</span>, <span class="dv">1</span> )</span>
 <span id="cb43-6"><a href="tarificación.html#cb43-6"></a>p <span class="ot">&lt;-</span> p0 <span class="sc">*</span> <span class="fu">cumprod</span>( <span class="fu">c</span>( <span class="dv">1</span>, a <span class="sc">+</span> b <span class="sc">/</span> k ) )</span>
 <span id="cb43-7"><a href="tarificación.html#cb43-7"></a><span class="fu">sum</span>( p )</span></code></pre></div>
-<pre><code>## [1] 1.43664</code></pre>
+<pre><code>## [1] 1.601825</code></pre>
 <div class="sourceCode" id="cb45"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb45-1"><a href="tarificación.html#cb45-1"></a>k <span class="ot">&lt;-</span> <span class="fu">seq</span>( <span class="dv">0</span>, <span class="dv">100</span>, <span class="dv">1</span> )</span>
 <span id="cb45-2"><a href="tarificación.html#cb45-2"></a><span class="fu">sum</span>( <span class="fu">dpois</span>( k, <span class="at">lambda =</span> l ) )</span></code></pre></div>
 <pre><code>## [1] 1</code></pre>
