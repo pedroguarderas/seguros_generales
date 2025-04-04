@@ -172,17 +172,19 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="2" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html"><i class="fa fa-check"></i><b>2</b> Consideraciones preliminares</a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#consideraciones-de-matemáticas"><i class="fa fa-check"></i><b>2.1</b> Consideraciones de matemáticas</a></li>
+<li class="chapter" data-level="2.1" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#consideraciones-matemáticas"><i class="fa fa-check"></i><b>2.1</b> Consideraciones matemáticas</a></li>
 <li class="chapter" data-level="2.2" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#consideraciones-de-programación-en-r"><i class="fa fa-check"></i><b>2.2</b> Consideraciones de programación en R</a></li>
 <li class="chapter" data-level="2.3" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#consideraciones-de-probabilidades"><i class="fa fa-check"></i><b>2.3</b> Consideraciones de probabilidades</a></li>
-<li class="chapter" data-level="2.4" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#desigualdades-de-concentración"><i class="fa fa-check"></i><b>2.4</b> Desigualdades de concentración</a></li>
-<li class="chapter" data-level="2.5" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#consideraciones-estadísticas"><i class="fa fa-check"></i><b>2.5</b> Consideraciones estadísticas</a></li>
-<li class="chapter" data-level="2.6" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#consideraciones-financieras"><i class="fa fa-check"></i><b>2.6</b> Consideraciones financieras</a>
+<li class="chapter" data-level="2.4" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#consideraciones-estadísticas"><i class="fa fa-check"></i><b>2.4</b> Consideraciones estadísticas</a>
 <ul>
-<li class="chapter" data-level="2.6.1" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#función-de-actualización-o-descuento"><i class="fa fa-check"></i><b>2.6.1</b> Función de actualización o descuento</a></li>
-<li class="chapter" data-level="2.6.2" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#flujos-financieros"><i class="fa fa-check"></i><b>2.6.2</b> Flujos financieros</a></li>
-<li class="chapter" data-level="2.6.3" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#flujos-financieros-probables"><i class="fa fa-check"></i><b>2.6.3</b> Flujos financieros probables</a></li>
-<li class="chapter" data-level="2.6.4" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#sec:equifin"><i class="fa fa-check"></i><b>2.6.4</b> Equilibrio financiero</a></li>
+<li class="chapter" data-level="2.4.1" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#desigualdades-de-concentración"><i class="fa fa-check"></i><b>2.4.1</b> Desigualdades de concentración</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#consideraciones-financieras"><i class="fa fa-check"></i><b>2.5</b> Consideraciones financieras</a>
+<ul>
+<li class="chapter" data-level="2.5.1" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#función-de-actualización-o-descuento"><i class="fa fa-check"></i><b>2.5.1</b> Función de actualización o descuento</a></li>
+<li class="chapter" data-level="2.5.2" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#flujos-financieros"><i class="fa fa-check"></i><b>2.5.2</b> Flujos financieros</a></li>
+<li class="chapter" data-level="2.5.3" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#flujos-financieros-probables"><i class="fa fa-check"></i><b>2.5.3</b> Flujos financieros probables</a></li>
+<li class="chapter" data-level="2.5.4" data-path="consideraciones-preliminares.html"><a href="consideraciones-preliminares.html#sec:equifin"><i class="fa fa-check"></i><b>2.5.4</b> Equilibrio financiero</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="distribuciones.html"><a href="distribuciones.html"><i class="fa fa-check"></i><b>3</b> Distribuciones</a>
@@ -259,13 +261,14 @@ costo total del portafolio está dado por la suma de todos estos riesgos.
 S = \sum\limits_{i=1}^n X_i
 \end{equation}\]</span>
 El conocer la distribución del costo total <span class="math inline">\(S\)</span> es una tarea crucial para el asegurador.</p>
-<p>El costo total esperado esta dado claramente por la siguiente expresión.
+<p>El valore esperado de de los reclamos totales, puede ser calculado fácilmente utilizando las
+propiedades de linealidad de la esperanza matemática <span class="math inline">\(\mathbb{E}\)</span>
 <span class="math display">\[\begin{equation}
 \mathbb{E}[ S ]
 = \mathbb{E}\left[ \sum\limits_{i=1}^n X_i \right]
 = \sum\limits_{i=1}^n \mathbb{E}\left[ X_i \right]
 \end{equation}\]</span>
-la varianza de la variable aleatoria del costo total <span class="math inline">\(S\)</span>, está dada por:
+por su parte, la varianza de la variable aleatoria del costo total <span class="math inline">\(S\)</span>, está dada por:
 <span class="math display">\[\begin{eqnarray*}
 \mathbb{V}\left[ S \right]
 &amp; = &amp; \mathbb{V}\left[ \sum\limits_{i=1}^n X_i \right] \\
@@ -274,20 +277,14 @@ la varianza de la variable aleatoria del costo total <span class="math inline">\
 &amp; = &amp; \sum\limits_{i=1}^n \mathbb{V}\left[ X_i \right]
 + 2\sum\limits_{i=1}^{n-1} \sum\limits_{j=i+1}^n \mathbb{C}\left[ X_i, X_j \right]
 \end{eqnarray*}\]</span></p>
-<p><span class="math inline">\(S_n = \sum\limits_{i=1}^n X_i\)</span>
+<p>Muchas de las veces el número total de reclamos <span class="math inline">\(n\)</span> es incierto y por tal razón es mejor considerar
+que el número de siniestros vendrá dado por otra variable aleatoria discreta <span class="math inline">\(N\)</span> que solo tomará
+valores en <span class="math inline">\(\mathbb{N}\)</span>
 <span class="math display">\[\begin{equation}
-W_n = \frac{S_n}{n}
+S = \sum\limits_{i=1}^N X_i
 \end{equation}\]</span></p>
-<p><span class="math display">\[\begin{equation}
-\mathbb{E}\left[ W_n \right]
-= \mathbb{E}\left[ \frac{S_n}{n} \right]
-= \frac{1}{n} \mathbb{E}\left[ S_n \right]
-\end{equation}\]</span></p>
-<p><span class="math display">\[\begin{equation}
-\mathbb{V}\left[ W_n \right]
-= \mathbb{V}\left[ \frac{S_n}{n} \right]
-= \frac{1}{n^2} \mathbb{V}\left[ S_n \right]
-\end{equation}\]</span></p>
+<p>Esto nos lleva a considerar diferentes modelos de agregación de reclamos o pérdidas como se suele
+decir en inglés “loss models” <span class="citation">[<a href="#ref-PanjerLoss2012">1</a>]</span>, <span class="citation">[<a href="#ref-LossModFur">2</a>]</span>.</p>
 <!------------------------------------------------------------------------------------------------->
 </div>
 <div id="modelo-individual" class="section level2 hasAnchor" number="4.2">
@@ -396,8 +393,8 @@ a la integral de Riemann-Stieltjes utilizando la distribución acumulada empíri
 <p>De ello tenemos los siguientes resultados de cálculo para el valor esperado de la severidad total
 <span class="math display">\[\begin{eqnarray*}
 \mathbb{E}[S] = \sum\limits_{i=1}^n e^{ \mu_i + \frac{1}{2} \sigma_i^2 } &amp; = &amp; 34562.7208, \\
-\overline{S} = \frac{1}{m} \sum\limits_{i=1}^m S_i &amp; = &amp; 37292.5483, \\
-\sum\limits_{i=1}^N s_{i} \left( F_m( s_{i+1} ) - F_m( s_{i} ) \right) &amp; = &amp; 37150.0076
+\overline{S} = \frac{1}{m} \sum\limits_{i=1}^m S_i &amp; = &amp; 34296.7430, \\
+\sum\limits_{i=1}^N s_{i} \left( F_m( s_{i+1} ) - F_m( s_{i} ) \right) &amp; = &amp; 34280.4243
 \end{eqnarray*}\]</span></p>
 <p>Lo bueno de poseer una buena aproximación a la distribución acumulada de una variable aleatoria, es
 que podemos calcular algunos otros valores de importancia relacionados a la variable aleatoria y
@@ -579,7 +576,7 @@ Si consideramos generar la simulación como un modelo individual, generamos vari
 <p></p>
 <p><span class="math display">\[\begin{eqnarray*}
 \mathbb{E}[S] = n p e^{ \mu + \frac{1}{2} \sigma^2 } &amp; = &amp; 219326.6317, \\
-\overline{S} = \frac{1}{m} \sum\limits_{i=1}^m S_i &amp; = &amp; 219810.0758,
+\overline{S} = \frac{1}{m} \sum\limits_{i=1}^m S_i &amp; = &amp; 218900.2208,
 \end{eqnarray*}\]</span></p>
 </div>
 <p>Es importante observar que si la frecuencia de reclamos es superior a <span class="math inline">\(1\)</span>, sea este por póliza,
@@ -663,7 +660,7 @@ asegurador, se configura funciones deducibles sobre los reclamos.</p>
 <p></p>
 <div class="example">
 <p><span id="exm:l3ex4" class="example"><strong>Ejemplo 4.4  </strong></span>En este caso en particular estudiaremos la velocidad de convergencia del método resultante del
-teorema del límite central <a href="consideraciones-preliminares.html#thm:tlc">2.2</a>. Generaremos una simulación aleatoria de la suma
+teorema del límite central <a href="consideraciones-preliminares.html#thm:tlc">2.1</a>. Generaremos una simulación aleatoria de la suma
 agregada <span class="math inline">\(S_n\)</span> y mostraresmo s</p>
 <p></p>
 <div class="sourceCode" id="cb31"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb31-1"><a href="modelos-de-pérdida-agregada.html#cb31-1"></a>m <span class="ot">&lt;-</span> <span class="dv">500</span></span>
@@ -748,8 +745,30 @@ f_S
 &amp; = &amp; \sum\limits_{n=0}^{+\infty} p_n \mathcal{F}^{-1}\left( \mathcal{F}\left( f_X \right)^{n} \right)\quad
 \text{Una inversión por cada término en la suma}
 \end{eqnarray*}\]</span></p>
+<p><span class="math display">\[\begin{equation}
+W_n = \frac{S_n}{n}
+\end{equation}\]</span></p>
+<p><span class="math display">\[\begin{equation}
+\mathbb{E}\left[ W_n \right]
+= \mathbb{E}\left[ \frac{S_n}{n} \right]
+= \frac{1}{n} \mathbb{E}\left[ S_n \right]
+\end{equation}\]</span></p>
+<p><span class="math display">\[\begin{equation}
+\mathbb{V}\left[ W_n \right]
+= \mathbb{V}\left[ \frac{S_n}{n} \right]
+= \frac{1}{n^2} \mathbb{V}\left[ S_n \right]
+\end{equation}\]</span></p>
 
 <!------------------------------------------------------------------------------------------------->
+</div>
+</div>
+<h3> Bibliografía<a href="bibliografía.html#bibliografía" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="refs" class="references csl-bib-body">
+<div id="ref-PanjerLoss2012" class="csl-entry">
+<div class="csl-left-margin">[1] </div><div class="csl-right-inline"><span class="smallcaps">A. Klugman</span>, S., <span class="smallcaps">H. Panjer</span>, H. and <span class="smallcaps">E. Willmot</span>, G. (2012). <em><span class="nocase">Loss Models, From Data to Decisions</span></em>. John Wiley &amp; Sons, Inc, Hoboken, New Jersey, United States.</div>
+</div>
+<div id="ref-LossModFur" class="csl-entry">
+<div class="csl-left-margin">[2] </div><div class="csl-right-inline"><span class="smallcaps">A. Klugman</span>, S., <span class="smallcaps">H. Panjer</span>, H. and <span class="smallcaps">E. Willmot</span>, G. (2013). <em><span>Loss Models, Further Topics</span></em>. John Wiley &amp; Sons, Inc, Hoboken, New Jersey, United States.</div>
 </div>
 </div>
             </section>
