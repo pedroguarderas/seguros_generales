@@ -98,14 +98,14 @@ de $T(X)$ en función de $A$
 estamos en la capacidad de concluir que:
 \begin{equation}
 \mathbb{E}\left[ \frac{\partial \eta}{\partial \theta_i}( \theta )  \cdot T( X ) \right]
- = \frac{\partial A}{\partial \theta_i}( \theta )
+= \frac{\partial A}{\partial \theta_i}( \theta )
 \end{equation}
 
 Cuando se da el caso que $\eta$ y $T$ son las funciones identidad, la relación anterior se reduce 
 a la siguiente igualdad:
 \begin{equation}
 \mathbb{E}\left[ X_i \right]
- = \frac{\partial A}{\partial \theta_i}( \theta )
+= \frac{\partial A}{\partial \theta_i}( \theta )
 \end{equation}
 
 <!------------------------------------------------------------------------------------------------->
@@ -142,6 +142,16 @@ observados, pero en función del nuevo parámetro $\beta$, de ahí la parte line
 \eta( g( \beta x_i ) ) \cdot T( y_i ) - A( g( \beta x_i ) \right)
 \end{equation} 
 
+De ello resulta el problema de maximización de verosimilitud que se busca resolver para ajustar un 
+modelo GLM.
+\begin{equation}
+\underset{\beta \in \mathbb{R}^{q \times n}}{\sup} \ell( \beta ) 
+= \underset{\beta \in \mathbb{R}^{q \times n}}{\sup} \sum\limits_{i=1}^N \left( \log h( y_i ) +
+\eta( g( \beta x_i ) ) \cdot T( y_i ) - A( g( \beta x_i ) \right)
+\end{equation}
+es de notar que el término $\sum\limits_{i=1}^N \log h( y_i )$ no depende de $\beta$ y por tal 
+razón puede ser omitido al momento de maximizar la verosimilitud.
+
 En varias ocasiones no todos los parámetros $\theta$ de la densidad de probabilidad son 
 considerados, sino tan solo una parte de los mismos, los otros parámetros se consideran como un
 valor constante ya dado o también como un parámetro a determinar. Así, se divide 
@@ -154,4 +164,54 @@ computacional de estimación. En este contexto la función de verosimilitud toma
 = \sum\limits_{i=1}^N \left( \log h( y_i ) +
 \eta( g( \beta x_i ), \theta_2 ) \cdot T( y_i ) - A( g( \beta x_i ), \theta_2 ) \right)
 \end{equation} 
+
+::: {.example #l6ex1 name="Regresión de Poisson"}
+En este caso presentamos el modelo bastante utilizado conocido como regresión de Poisson. En donde 
+suponemos que $N \rightsquigarrow Pois( \lambda( x ) ER( x ) ) = Pois( g( \beta x ) ER( x ) )$
+donde $\lambda$ es el parámetro a estimar en función de las variables explicativas $x$.
+\begin{equation}
+\mathbb{E}[ N ] = \lambda( x ) ER( x ) = g( \beta x ) ER( x )
+\end{equation}
+
+\begin{equation}
+P( N = n ) = \exp(-g( \beta x ) ER( x )) \frac{g( \beta x )^n ER( x )^n}{n!}
+\end{equation}
+
+```{r l6t1, echo = TRUE, results = 'asis'}
+# la librería CASdatasets fue previamente cargada
+data( beMTPL97 )
+beMTPL97 <- as.data.table( beMTPL97 )
+
+# Impresión de las primeras filas de la tabla
+beMTPL97[ 1:100 ] %>%
+  kable(
+    caption = "Pólizas y reclamos de automóviles en Bélgica",
+    row.names = FALSE,
+    col.names = names( beMTPL97 ),
+    align = paste0( rep( "r", ncol( beMTPL97 ) ), collapse = "" ),
+    digits = c( 0, 2, 0, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 4 ),
+    format.args = list( big.mark = ',', decimal.mark = '.', scientific = FALSE ),
+    escape = FALSE ) %>%
+  kable_classic( font_size = 14, full_width = FALSE, html_font = "Cambria" ) %>%
+  scroll_box( width = "750px", height = "500px" )
+```
+
+```{r l6c1}
+model_N <- glm( formula = nclaims ~ ageph + sex + power + fuel + offset( log( expo ) ) + 0, 
+                family = poisson( link = 'log' ), 
+                data = beMTPL97 )
+summary( model_N )
+```
+
+
+```{r l6c2}
+pob <- expand.grid( ageph = seq( 18, 90, 1 ), 
+                    sex = c( 'male', 'female' ),
+                    power = seq( 10, 250 ),
+                    fuel = c( 'gasoline', 'diesel' ),
+                    expo = 1 )
+pob <- as.data.table( pob )
+pob[ , EN := predict( model_N, newdata = pob, type = 'response' ) ]
+```
+:::
 

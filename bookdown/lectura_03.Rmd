@@ -15,7 +15,7 @@ P( N = k ) = \binom{n}{k} p^k ( 1 - p )^{n-k}, \qquad
 esta distribución discreta se caracteriza por presentar el valor $k \frac{p_k}{p_{k-1}}$ decreciente
 conforme cambia $k \in \mathbb{N}$
 :::
-```{r l4c1}
+```{r l3c1}
 n <- 50
 p <- 0.3
 k <- 2
@@ -45,7 +45,7 @@ P( N = k ) = \exp\left( -\lambda \right) \frac{\lambda^k}{k!}, \qquad
 esta distribución discreta se caracteriza por presentar el valor $k \frac{p_k}{p_{k-1}}$ constante
 conforme cambia $k \in \mathbb{N}$
 :::
-```{r l4c2}
+```{r l3c2}
 lambda <- 2
 k <- 2
 m <- 100
@@ -79,7 +79,7 @@ donde $\Gamma( \alpha ) = \int\limits_0^{+\infty} x^{\alpha - 1} \exp(-x)\ dx$, 
 Esta distribución discreta se caracteriza por presentar el valor $k \frac{p_k}{p_{k-1}}$ creciente
 conforme cambia $k \in \mathbb{N}$
 :::
-```{r l4c3}
+```{r l3c3}
 alpha <- 2.5
 p <- 0.3
 k <- 2
@@ -108,7 +108,7 @@ P( N = k ) = ( 1 - p )^k p, \qquad
 \forall k \in \mathbb{N}
 \end{equation}
 :::
-```{r l4c4}
+```{r l3c4}
 p <- 0.3
 k <- 2
 m <- 100
@@ -145,15 +145,52 @@ aleatorias en la familia de Panjer.
 Las únicas leyes de probabilidad que satisfacen la relación de recurrencia anterior son:
 
 1. La ley de Poisson, la cual se obtiene para $a = 0$ y $b > 0$
+\begin{equation}
+k \frac{p_k}{p_{k-1}} = b > 0,\quad \text{constante en $k$}
+\end{equation}
 
 2. La ley binomial negativa, la cual se obtiene para $0 < a < 1$ y $a + b > 0$
+\begin{equation}
+k \frac{p_k}{p_{k-1}} = a k + b > 0,\quad \text{creciente en $k$}
+\end{equation}
 
 3. La ley binomial, la cual se obtenida para $a < 0$ y $b = -a(m + 1)$, para cierto $m$ entero y 
 positivo.
+\begin{equation}
+k \frac{p_k}{p_{k-1}} = a( k - m - 1 ) < 0, \quad \text{decreciente en $k$}
+\end{equation}
 :::
 
 Para una demostración detallada de la proposición anterior se puede consultar @MathAssuNV1 o 
 en https://nonlifemaths.github.io/.
+
+
+```{r l3t1, echo = TRUE, results = 'asis'}
+# la librería CASdatasets fue previamente cargada
+data( beMTPL97 )
+beMTPL97 <- as.data.table( beMTPL97 )
+conteo <- beMTPL97[ , list( fn = .N ), by = list( sex, fuel, N = nclaims ) ]
+conteo[ , pn := fn / sum( fn ), by = list( sex, fuel ) ]
+setorder( conteo, sex, fuel, N )
+conteo[ , pns := shift( pn, type = 'lag', fill = 0 ) ]
+conteo[ , jn := N * pns / pn ]
+
+conteo %>%
+  kable(
+    caption = 'Estimación conteos por sexo',
+    row.names = FALSE,
+    col.names = c( "sexo", "fuel", "$N$", "$f_k$", "$p_k$", "$p_{k+1}$", "$k \\frac{p_{k+1}}{p_k}$" ),
+    align = 'llrrrrr',
+    digits = c( 0, 0, 0, 0, 5, 5, 5 ),
+    format.args = list( big.mark = ',', decimal.mark = '.', scientific = FALSE ),
+    escape = FALSE ) %>%
+  kable_classic( font_size = 14, full_width = FALSE, html_font = "Cambria" ) %>%
+  scroll_box( width = "750px", height = "500px" )
+```
+
+```{r l3c5}
+plot( conteo$N, conteo$jn )
+```
 
 <!------------------------------------------------------------------------------------------------->
 ## Distribuciones continuas
@@ -176,7 +213,7 @@ M_X( t ) = \frac{\exp(bt)-\exp(at)}{t(b-a)}
 \mathbb{E}[X] = \frac{a + b}{2},\qquad \mathbb{V}[X] = \frac{(b - a)^2}{12}
 \end{equation}
 :::
-```{r l4c5}
+```{r l3c6}
 a <- 1
 b <- 2
 x <- 1.5
@@ -204,7 +241,7 @@ M_X( t ) = \frac{\lambda}{\lambda - t}
 \mathbb{E}[X] = \frac{1}{\lambda},\qquad \mathbb{V}[X] = \frac{1}{\lambda^2}
 \end{equation}
 :::
-```{r l4c6}
+```{r l3c7}
 lambda <- 2
 x <- 1.5
 m <- 100
@@ -232,7 +269,7 @@ M_X( t ) = \left( \frac{\beta}{\beta - t} \right)^\alpha,\qquad \text{si}\ t < \
 \mathbb{V}[X] = \frac{\alpha}{\beta^2}
 \end{equation}
 :::
-```{r l4c7}
+```{r l3c8}
 alpha <- 2
 beta <- 1
 x <- 3
@@ -260,7 +297,7 @@ M_X( t ) = \exp\left( t \mu + \frac{1}{2} t^2 \sigma^2 \right)
 \mathbb{E}[X] = \mu,\qquad \mathbb{V}[X] = \sigma^2
 \end{equation}
 :::
-```{r l4c8}
+```{r l3c9}
 mu <- 2
 sigma <- 1
 x <- 3
@@ -287,7 +324,7 @@ No hay forma analítica para $M_X$
 \mathbb{V}[X] = \exp\left( 2 \mu + \sigma^2 \right) \left( \exp( \sigma^2 ) - 1 \right)
 \end{equation}
 :::
-```{r l4c9}
+```{r l3c10}
 mu <- 2
 sigma <- 1
 x <- 3
@@ -328,7 +365,7 @@ M_X( t ) = \exp(\theta \mu) \sum\limits_{j=0}^{+\infty} \frac{\theta^j \sigma^j}
 {\prod\limits_{k=0}^j ( 1 - k \xi )}
 \end{equation}
 :::
-```{r l4c10}
+```{r l3c11}
 xi <- 1
 mu <- 2
 sigma <- 1
@@ -369,7 +406,7 @@ f_X( x )
 \right.
 \end{equation}
 :::
-```{r l4c11}
+```{r l3c12}
 xi <- -1
 mu <- 2
 sigma <- 1
@@ -433,7 +470,7 @@ La función generadora de momentos $M_X( t )$ no está definida
 \right.
 \end{equation}
 :::
-```{r l4c12}
+```{r l3c13}
 nu <- 3
 x <- 4
 m <- 100
@@ -475,7 +512,7 @@ f_X( x )
 - \frac{\theta^2 \Gamma\left( \alpha + \frac{1}{\tau}\right)^2}{\Gamma( \alpha )^2}
 \end{eqnarray*}
 :::
-```{r l4c13}
+```{r l3c14}
 alpha <- 1
 tau <- 1
 theta <- 1
@@ -531,7 +568,7 @@ f_X( x )
 - \frac{\theta^2 \Gamma\left( \tau + \frac{1}{\gamma}\right)^2 \Gamma\left( \tau - \frac{1}{\gamma}\right)^2}{\Gamma( \alpha )^2 \Gamma( \tau )^2}
 \end{eqnarray*}
 :::
-```{r l4c14}
+```{r l3c15}
 alpha <- 1
 gamma <- 1
 tau <- 1

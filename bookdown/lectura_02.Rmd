@@ -183,7 +183,9 @@ P( a \leq X \leq b ) = F( b ) - F( a ) = \int\limits_a^b f( x )\ dx
 
 Así se satisface la siguiente igualdad
 \begin{equation}
-F( x ) = \int\limits_{-\infty}^x f( x )\ dx
+F( x )
+= \int\limits_{(-\infty,x]} f( x )\ dx 
+= \int\limits_{-\infty}^x f( x )\ dx
 \end{equation}
 :::
 
@@ -399,7 +401,7 @@ P\left( \left| X - \mathbb{E}[X] \right| > \varepsilon \right) < \frac{1}{\varep
 \end{equation}
 :::
 
-::: {.theorem #bein  name="Desigualdad de Berry-Esséen"}
+::: {.theorem #bein name="Desigualdad de Berry-Esséen"}
 Sean $X_1, \ldots X_n$ variables aleatoria i.i.d, con media y varianza finitas, i.e 
 $\mathbb{E}[X] < +\infty$ y $\mathbb{V}[X] < +\infty$ y además con tercer momento absoluto finito
 $\mathbb{E}\left[\left|X - \mathbb{E}[X]\right|^3\right] < +\infty$. Entonces, la distribución 

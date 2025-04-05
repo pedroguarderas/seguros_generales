@@ -93,7 +93,7 @@ $S_i = \sum\limits_{j=1}^n X_{i,j}$
 El siguiente código ejemplifica el algoritmo anterior, donde se asume que cada variable aleatoria de 
 severidad $X_i$ sigue una ley log-normal $LN( \mu_i, \sigma_i )$, de parámetros $\mu_i, \sigma_i$, 
 para $i \in \{1,\ldots, n\}$.
-```{r l3c1}
+```{r l4c1}
 # 1. número de distribuciones
 n <- 200
 # parámetros para las n distribuciones
@@ -125,7 +125,7 @@ el resultado de acotación de \@ref(thm:ddkw) nos da un criterio de convergencia
 
 Para construir $F_m$ en R, se puede utilizar la función ya empaquetada `ecdf` (empirical cumulative
 distribution function).
-```{r l3c2}
+```{r l4c2}
 # estimación distribución acumulada empírica de S
 Fm <- ecdf( S )
 
@@ -152,7 +152,7 @@ a la integral de Riemann-Stieltjes utilizando la distribución acumulada empíri
 \end{equation}
 
 Esta aproximación en R puede ser implementada de la siguiente forma:
-```{r l3c3}
+```{r l4c3}
 N <- 1e5
 s <- seq( min( S ), max( S ), length.out = N )
 EmS <- sum( s[-N] * diff( sapply( s, FUN = Fm ) ) )
@@ -174,7 +174,7 @@ no tan solo utilizar medidas de tendencia central. Sin embargo, para que esta ap
 <!-- La imagen a continuación muestra el tamaño de la simulación $n$ en función de los parámetros -->
 <!-- $\delta$ y $\varepsilon$. Como se puede observar para tener un error de discrepancia útil, el -->
 <!-- número de simulaciones crece rápidamente -->
-<!-- ```{r l3c4} -->
+<!-- ```{r l4c4} -->
 <!-- e <- seq( 1e-6, 1e-3, length.out = 25 ) -->
 <!-- d <- seq( 1e-6, 1e-3, length.out = length( e ) ) -->
 <!-- n <- outer( e, d, FUN = function( e, d ) return( log( -log( d / 2 ) / ( 2 * e^2 ) ) ) ) -->
@@ -275,10 +275,10 @@ como ya lo hemos realizado, utilizando las funciones de aplicación vectorial `s
 ::: {.example #l3ex3}
 Consideramos el caso de un modelo colectivo para el cuál el conteo de siniestros 
 $N \rightsquigarrow Pois( \lambda )$ y la distribución de cada uno de los reclamos 
-$\{X_i\}_{i\in \N}$, está dada por la misma distribución de probabilidad 
+$\{X_i\}_{i\in \mathbb{N}}$, está dada por la misma distribución de probabilidad 
 $X \rightsquigarrow LN( \mu, \sigma )$, siendo además cada uno de los reclamos indepencientes entre
 si.
-```{r l3c5}
+```{r l4c5}
 # 1. selección de simulaciones
 m <- 1e4
 
@@ -345,7 +345,7 @@ número de pólizas vendidas, esto supone que solo se presenta un reclamo por p�
 reclamos consideraremos  $X_i \rightsquigarrow LN( \mu, \sigma )$, para todo $i \in \{1,\ldots,n\}$. 
 Si consideramos generar la simulación como un modelo individual, generamos variables aleatorias
 $B_i \rightsquigarrow Ber(p)$, para todo $i \in \{1,\ldots,n\}$.
-```{r l3c6}
+```{r l4c6}
 m <- 1e4
 n <- 1000
 p <- 0.2
@@ -408,7 +408,7 @@ económico, financiero, legal y estadístico.
 En muchas ocasiones según las condiciones de los contratos de seguro y el apetito de riesgo del 
 asegurador, se configura funciones deducibles sobre los reclamos.
 
-```{r l3c7}
+```{r l4c7}
 # 1. selección de simulaciones
 m <- 1e4
 
@@ -436,7 +436,7 @@ S <- sapply( DX, FUN = function( x ) ifelse( length( x ) == 0, 0, sum( x, na.rm 
 ```
 
 $S_1, \ldots, S_m \rightsquigarrow F_S$
-```{r l3c8}
+```{r l4c8}
 FS <- seq( 0, 1, 0.01 )
 Sq <- quantile( S, probs = FS )
 ES <- mean( S )
@@ -448,7 +448,7 @@ abline( v = ES, col = 'red' )
 En este caso en particular estudiaremos la velocidad de convergencia del método resultante del 
 teorema del límite central \@ref(thm:tlc). Generaremos una simulación aleatoria de la suma
 agregada $S_n$ y mostraresmo s
-```{r l3c9}
+```{r l4c9}
 m <- 500
 n <- 5000
 u <- 4
@@ -475,7 +475,7 @@ points( 1:n, Bn, type = 'l', lty = 1, col = 'red' )
 :::
 
 
-```{r l3c10}
+```{r l4c10}
 l <- 3
 n <- 300
 dt <- rexp( n = n, rate = 1 / l )
