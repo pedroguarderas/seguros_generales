@@ -23,7 +23,7 @@
 <meta name="author" content="" />
 
 
-<meta name="date" content="2025-04-04" />
+<meta name="date" content="2025-04-05" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -369,6 +369,15 @@ observados, pero en función del nuevo parámetro <span class="math inline">\(\b
 = \sum\limits_{i=1}^N \left( \log h( y_i ) +
 \eta( g( \beta x_i ) ) \cdot T( y_i ) - A( g( \beta x_i ) \right)
 \end{equation}\]</span></p>
+<p>De ello resulta el problema de maximización de verosimilitud que se busca resolver para ajustar un
+modelo GLM.
+<span class="math display">\[\begin{equation}
+\underset{\beta \in \mathbb{R}^{q \times n}}{\sup} \ell( \beta )
+= \underset{\beta \in \mathbb{R}^{q \times n}}{\sup} \sum\limits_{i=1}^N \left( \log h( y_i ) +
+\eta( g( \beta x_i ) ) \cdot T( y_i ) - A( g( \beta x_i ) \right)
+\end{equation}\]</span>
+es de notar que el término <span class="math inline">\(\sum\limits_{i=1}^N \log h( y_i )\)</span> no depende de <span class="math inline">\(\beta\)</span> y por tal
+razón puede ser omitido al momento de maximizar la verosimilitud.</p>
 <p>En varias ocasiones no todos los parámetros <span class="math inline">\(\theta\)</span> de la densidad de probabilidad son
 considerados, sino tan solo una parte de los mismos, los otros parámetros se consideran como un
 valor constante ya dado o también como un parámetro a determinar. Así, se divide
@@ -381,6 +390,5739 @@ computacional de estimación. En este contexto la función de verosimilitud toma
 = \sum\limits_{i=1}^N \left( \log h( y_i ) +
 \eta( g( \beta x_i ), \theta_2 ) \cdot T( y_i ) - A( g( \beta x_i ), \theta_2 ) \right)
 \end{equation}\]</span></p>
+<div class="example">
+<p><span id="exm:l6ex1" class="example"><strong>Ejemplo 6.1  (Regresión de Poisson) </strong></span>En este caso presentamos el modelo bastante utilizado conocido como regresión de Poisson. En donde
+suponemos que <span class="math inline">\(N \rightsquigarrow Pois( \lambda( x ) ER( x ) ) = Pois( g( \beta x ) ER( x ) )\)</span>
+donde <span class="math inline">\(\lambda\)</span> es el parámetro a estimar en función de las variables explicativas <span class="math inline">\(x\)</span>.
+<span class="math display">\[\begin{equation}
+\mathbb{E}[ N ] = \lambda( x ) ER( x ) = g( \beta x ) ER( x )
+\end{equation}\]</span></p>
+<p><span class="math display">\[\begin{equation}
+P( N = n ) = \exp(-g( \beta x ) ER( x )) \frac{g( \beta x )^n ER( x )^n}{n!}
+\end{equation}\]</span></p>
+<p></p>
+<div class="sourceCode" id="cb53"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb53-1"><a href="modelos-lineales-generalizados-glm.html#cb53-1"></a><span class="co"># la librería CASdatasets fue previamente cargada</span></span>
+<span id="cb53-2"><a href="modelos-lineales-generalizados-glm.html#cb53-2"></a><span class="fu">data</span>( beMTPL97 )</span>
+<span id="cb53-3"><a href="modelos-lineales-generalizados-glm.html#cb53-3"></a>beMTPL97 <span class="ot">&lt;-</span> <span class="fu">as.data.table</span>( beMTPL97 )</span>
+<span id="cb53-4"><a href="modelos-lineales-generalizados-glm.html#cb53-4"></a></span>
+<span id="cb53-5"><a href="modelos-lineales-generalizados-glm.html#cb53-5"></a><span class="co"># Impresión de las primeras filas de la tabla</span></span>
+<span id="cb53-6"><a href="modelos-lineales-generalizados-glm.html#cb53-6"></a>beMTPL97[ <span class="dv">1</span><span class="sc">:</span><span class="dv">100</span> ] <span class="sc">%&gt;%</span></span>
+<span id="cb53-7"><a href="modelos-lineales-generalizados-glm.html#cb53-7"></a>  <span class="fu">kable</span>(</span>
+<span id="cb53-8"><a href="modelos-lineales-generalizados-glm.html#cb53-8"></a>    <span class="at">caption =</span> <span class="st">&quot;Pólizas y reclamos de automóviles en Bélgica&quot;</span>,</span>
+<span id="cb53-9"><a href="modelos-lineales-generalizados-glm.html#cb53-9"></a>    <span class="at">row.names =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb53-10"><a href="modelos-lineales-generalizados-glm.html#cb53-10"></a>    <span class="at">col.names =</span> <span class="fu">names</span>( beMTPL97 ),</span>
+<span id="cb53-11"><a href="modelos-lineales-generalizados-glm.html#cb53-11"></a>    <span class="at">align =</span> <span class="fu">paste0</span>( <span class="fu">rep</span>( <span class="st">&quot;r&quot;</span>, <span class="fu">ncol</span>( beMTPL97 ) ), <span class="at">collapse =</span> <span class="st">&quot;&quot;</span> ),</span>
+<span id="cb53-12"><a href="modelos-lineales-generalizados-glm.html#cb53-12"></a>    <span class="at">digits =</span> <span class="fu">c</span>( <span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">4</span>, <span class="dv">4</span> ),</span>
+<span id="cb53-13"><a href="modelos-lineales-generalizados-glm.html#cb53-13"></a>    <span class="at">format.args =</span> <span class="fu">list</span>( <span class="at">big.mark =</span> <span class="st">&#39;,&#39;</span>, <span class="at">decimal.mark =</span> <span class="st">&#39;.&#39;</span>, <span class="at">scientific =</span> <span class="cn">FALSE</span> ),</span>
+<span id="cb53-14"><a href="modelos-lineales-generalizados-glm.html#cb53-14"></a>    <span class="at">escape =</span> <span class="cn">FALSE</span> ) <span class="sc">%&gt;%</span></span>
+<span id="cb53-15"><a href="modelos-lineales-generalizados-glm.html#cb53-15"></a>  <span class="fu">kable_classic</span>( <span class="at">font_size =</span> <span class="dv">14</span>, <span class="at">full_width =</span> <span class="cn">FALSE</span>, <span class="at">html_font =</span> <span class="st">&quot;Cambria&quot;</span> ) <span class="sc">%&gt;%</span></span>
+<span id="cb53-16"><a href="modelos-lineales-generalizados-glm.html#cb53-16"></a>  <span class="fu">scroll_box</span>( <span class="at">width =</span> <span class="st">&quot;750px&quot;</span>, <span class="at">height =</span> <span class="st">&quot;500px&quot;</span> )</span></code></pre></div>
+<div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:500px; overflow-x: scroll; width:750px; ">
+<table class=" lightable-classic" style="font-size: 14px; color: black; font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
+<caption style="font-size: initial !important;">
+<span id="tab:l6t1">Tabla 6.1: </span><span id="tab:l6t1">Tabla 6.2: </span>Pólizas y reclamos de automóviles en Bélgica
+</caption>
+<thead>
+<tr>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+id
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+expo
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+claim
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+nclaims
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+amount
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+average
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+coverage
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+ageph
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+sex
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+bm
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+power
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+agec
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+fuel
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+use
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+fleet
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+postcode
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+long
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+lat
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1,618.00
+</td>
+<td style="text-align:right;">
+1,618.00
+</td>
+<td style="text-align:right;">
+TPL
+</td>
+<td style="text-align:right;">
+50
+</td>
+<td style="text-align:right;">
+male
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+77
+</td>
+<td style="text-align:right;">
+12
+</td>
+<td style="text-align:right;">
+gasoline
+</td>
+<td style="text-align:right;">
+private
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1,000
+</td>
+<td style="text-align:right;">
+4.3552
+</td>
+<td style="text-align:right;">
+50.8454
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+TPL+
+</td>
+<td style="text-align:right;">
+64
+</td>
+<td style="text-align:right;">
+female
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+66
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+gasoline
+</td>
+<td style="text-align:right;">
+private
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1,000
+</td>
+<td style="text-align:right;">
+4.3552
+</td>
+<td style="text-align:right;">
+50.8454
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+TPL
+</td>
+<td style="text-align:right;">
+60
+</td>
+<td style="text-align:right;">
+male
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+70
+</td>
+<td style="text-align:right;">
+10
+</td>
+<td style="text-align:right;">
+diesel
+</td>
+<td style="text-align:right;">
+private
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1,000
+</td>
+<td style="text-align:right;">
+4.3552
+</td>
+<td style="text-align:right;">
+50.8454
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+TPL
+</td>
+<td style="text-align:right;">
+77
+</td>
+<td style="text-align:right;">
+male
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+57
+</td>
+<td style="text-align:right;">
+15
+</td>
+<td style="text-align:right;">
+gasoline
+</td>
+<td style="text-align:right;">
+private
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1,000
+</td>
+<td style="text-align:right;">
+4.3552
+</td>
+<td style="text-align:right;">
+50.8454
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+0.05
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+155.97
+</td>
+<td style="text-align:right;">
+155.97
+</td>
+<td style="text-align:right;">
+TPL
+</td>
+<td style="text-align:right;">
+28
+</td>
+<td style="text-align:right;">
+female
+</td>
+<td style="text-align:right;">
+9
+</td>
+<td style="text-align:right;">
+70
+</td>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:right;">
+gasoline
+</td>
+<td style="text-align:right;">
+private
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1,000
+</td>
+<td style="text-align:right;">
+4.3552
+</td>
+<td style="text-align:right;">
+50.8454
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+TPL
+</td>
+<td style="text-align:right;">
+26
+</td>
+<td style="text-align:right;">
+male
+</td>
+<td style="text-align:right;">
+11
+</td>
+<td style="text-align:right;">
+70
+</td>
+<td style="text-align:right;">
+12
+</td>
+<td style="text-align:right;">
+gasoline
+</td>
+<td style="text-align:right;">
+private
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1,000
+</td>
+<td style="text-align:right;">
+4.3552
+</td>
+<td style="text-align:right;">
+50.8454
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+155.97
+</td>
+<td style="text-align:right;">
+155.97
+</td>
+<td style="text-align:right;">
+TPL++
+</td>
+<td style="text-align:right;">
+26
+</td>
+<td style="text-align:right;">
+male
+</td>
+<td style="text-align:right;">
+11
+</td>
+<td style="text-align:right;">
+55
+</td>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:right;">
+gasoline
+</td>
+<td style="text-align:right;">
+private
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1,000
+</td>
+<td style="text-align:right;">
+4.3552
+</td>
+<td style="text-align:right;">
+50.8454
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:right;">
+0.40
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+TPL
+</td>
+<td style="text-align:right;">
+58
+</td>
+<td style="text-align:right;">
+female
+</td>
+<td style="text-align:right;">
+11
+</td>
+<td style="text-align:right;">
+47
+</td>
+<td style="text-align:right;">
+14
+</td>
+<td style="text-align:right;">
+gasoline
+</td>
+<td style="text-align:right;">
+private
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1,000
+</td>
+<td style="text-align:right;">
+4.3552
+</td>
+<td style="text-align:right;">
+50.8454
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+9
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+TPL++
+</td>
+<td style="text-align:right;">
+59
+</td>
+<td style="text-align:right;">
+male
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+98
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+gasoline
+</td>
+<td style="text-align:right;">
+private
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1,000
+</td>
+<td style="text-align:right;">
+4.3552
+</td>
+<td style="text-align:right;">
+50.8454
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+10
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+TPL+
+</td>
+<td style="text-align:right;">
+34
+</td>
+<td style="text-align:right;">
+male
+</td>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:right;">
+74
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+gasoline
+</td>
+<td style="text-align:right;">
+private
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1,000
+</td>
+<td style="text-align:right;">
+4.3552
+</td>
+<td style="text-align:right;">
+50.8454
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+11
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+544.87
+</td>
+<td style="text-align:right;">
+544.87
+</td>
+<td style="text-align:right;">
+TPL++
+</td>
+<td style="text-align:right;">
+39
+</td>
+<td style="text-align:right;">
+male
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+85
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+diesel
+</td>
+<td style="text-align:right;">
+private
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1,000
+</td>
+<td style="text-align:right;">
+4.3552
+</td>
+<td style="text-align:right;">
+50.8454
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+12
+</td>
+<td style="text-align:right;">
+0.98
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+TPL
+</td>
+<td style="text-align:right;">
+55
+</td>
+<td style="text-align:right;">
+male
+</td>
+<td style="text-align:right;">
+11
+</td>
+<td style="text-align:right;">
+87
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+diesel
+</td>
+<td style="text-align:right;">
+private
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1,000
+</td>
+<td style="text-align:right;">
+4.3552
+</td>
+<td style="text-align:right;">
+50.8454
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+13
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+TPL+
+</td>
+<td style="text-align:right;">
+77
+</td>
+<td style="text-align:right;">
+male
+</td>
+<td style="text-align:right;">
+9
+</td>
+<td style="text-align:right;">
+104
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+gasoline
+</td>
+<td style="text-align:right;">
+private
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1,000
+</td>
+<td style="text-align:right;">
+4.3552
+</td>
+<td style="text-align:right;">
+50.8454
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+14
+</td>
+<td style="text-align:right;">
+0.97
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+TPL
+</td>
+<td style="text-align:right;">
+49
+</td>
+<td style="text-align:right;">
+male
+</td>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:right;">
+71
+</td>
+<td style="text-align:right;">
+19
+</td>
+<td style="text-align:right;">
+gasoline
+</td>
+<td style="text-align:right;">
+private
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1,000
+</td>
+<td style="text-align:right;">
+4.3552
+</td>
+<td style="text-align:right;">
+50.8454
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+15
+</td>
+<td style="text-align:right;">
+0.58
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+TPL
+</td>
+<td style="text-align:right;">
+63
+</td>
+<td style="text-align:right;">
+male
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+104
+</td>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:right;">
+gasoline
+</td>
+<td style="text-align:right;">
+private
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1,000
+</td>
+<td style="text-align:right;">
+4.3552
+</td>
+<td style="text-align:right;">
+50.8454
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+16
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+TPL++
+</td>
+<td style="text-align:right;">
+43
+</td>
+<td style="text-align:right;">
+male
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+85
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+diesel
+</td>
+<td style="text-align:right;">
+private
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1,000
+</td>
+<td style="text-align:right;">
+4.3552
+</td>
+<td style="text-align:right;">
+50.8454
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+17
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+TPL+
+</td>
+<td style="text-align:right;">
+51
+</td>
+<td style="text-align:right;">
+male
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+113
+</td>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:right;">
+gasoline
+</td>
+<td style="text-align:right;">
+private
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1,000
+</td>
+<td style="text-align:right;">
+4.3552
+</td>
+<td style="text-align:right;">
+50.8454
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+18
+</td>
+<td style="text-align:right;">
+0.21
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+TPL
+</td>
+<td style="text-align:right;">
+67
+</td>
+<td style="text-align:right;">
+male
+</td>
+<td style="text-align:right;">
+10
+</td>
+<td style="text-align:right;">
+130
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+gasoline
+</td>
+<td style="text-align:right;">
+private
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1,000
+</td>
+<td style="text-align:right;">
+4.3552
+</td>
+<td style="text-align:right;">
+50.8454
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+19
+</td>
+<td style="text-align:right;">
+0.18
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+TPL
+</td>
+<td style="text-align:right;">
+52
+</td>
+<td style="text-align:right;">
+male
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+125
+</td>
+<td style="text-align:right;">
+16
+</td>
+<td style="text-align:right;">
+gasoline
+</td>
+<td style="text-align:right;">
+private
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1,000
+</td>
+<td style="text-align:right;">
+4.3552
+</td>
+<td style="text-align:right;">
+50.8454
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+20
+</td>
+<td style="text-align:right;">
+0.89
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+TPL++
+</td>
+<td style="text-align:right;">
+40
+</td>
+<td style="text-align:right;">
+male
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+66
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+diesel
+</td>
+<td style="text-align:right;">
+private
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1,000
+</td>
+<td style="text-align:right;">
+4.3552
+</td>
+<td style="text-align:right;">
+50.8454
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+21
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+TPL+
+</td>
+<td style="text-align:right;">
+45
+</td>
+<td style="text-align:right;">
+male
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+128
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+gasoline
+</td>
+<td style="text-align:right;">
+private
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1,000
+</td>
+<td style="text-align:right;">
+4.3552
+</td>
+<td style="text-align:right;">
+50.8454
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+22
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+252.03
+</td>
+<td style="text-align:right;">
+252.03
+</td>
+<td style="text-align:right;">
+TPL
+</td>
+<td style="text-align:right;">
+34
+</td>
+<td style="text-align:right;">
+male
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+119
+</td>
+<td style="text-align:right;">
+9
+</td>
+<td style="text-align:right;">
+gasoline
+</td>
+<td style="text-align:right;">
+private
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1,000
+</td>
+<td style="text-align:right;">
+4.3552
+</td>
+<td style="text-align:right;">
+50.8454
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+23
+</td>
+<td style="text-align:right;">
+0.85
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+TPL+
+</td>
+<td style="text-align:right;">
+47
+</td>
+<td style="text-align:right;">
+male
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+85
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+gasoline
+</td>
+<td style="text-align:right;">
+private
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1,000
+</td>
+<td style="text-align:right;">
+4.3552
+</td>
+<td style="text-align:right;">
+50.8454
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+24
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+TPL+
+</td>
+<td style="text-align:right;">
+51
+</td>
+<td style="text-align:right;">
+male
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+98
+</td>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:right;">
+gasoline
+</td>
+<td style="text-align:right;">
+private
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1,000
+</td>
+<td style="text-align:right;">
+4.3552
+</td>
+<td style="text-align:right;">
+50.8454
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+25
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+TPL
+</td>
+<td style="text-align:right;">
+61
+</td>
+<td style="text-align:right;">
+male
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+98
+</td>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:right;">
+gasoline
+</td>
+<td style="text-align:right;">
+private
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1,000
+</td>
+<td style="text-align:right;">
+4.3552
+</td>
+<td style="text-align:right;">
+50.8454
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+26
+</td>
+<td style="text-align:right;">
+0.90
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+TPL
+</td>
+<td style="text-align:right;">
+65
+</td>
+<td style="text-align:right;">
+male
+</td>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:right;">
+51
+</td>
+<td style="text-align:right;">
+11
+</td>
+<td style="text-align:right;">
+diesel
+</td>
+<td style="text-align:right;">
+private
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1,000
+</td>
+<td style="text-align:right;">
+4.3552
+</td>
+<td style="text-align:right;">
+50.8454
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+27
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+TPL
+</td>
+<td style="text-align:right;">
+57
+</td>
+<td style="text-align:right;">
+male
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+98
+</td>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:right;">
+gasoline
+</td>
+<td style="text-align:right;">
+private
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1,000
+</td>
+<td style="text-align:right;">
+4.3552
+</td>
+<td style="text-align:right;">
+50.8454
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+28
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+TPL
+</td>
+<td style="text-align:right;">
+38
+</td>
+<td style="text-align:right;">
+male
+</td>
+<td style="text-align:right;">
+11
+</td>
+<td style="text-align:right;">
+74
+</td>
+<td style="text-align:right;">
+15
+</td>
+<td style="text-align:right;">
+gasoline
+</td>
+<td style="text-align:right;">
+private
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1,000
+</td>
+<td style="text-align:right;">
+4.3552
+</td>
+<td style="text-align:right;">
+50.8454
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+29
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+TPL+
+</td>
+<td style="text-align:right;">
+59
+</td>
+<td style="text-align:right;">
+male
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+85
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+gasoline
+</td>
+<td style="text-align:right;">
+private
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1,000
+</td>
+<td style="text-align:right;">
+4.3552
+</td>
+<td style="text-align:right;">
+50.8454
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+30
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+TPL
+</td>
+<td style="text-align:right;">
+31
+</td>
+<td style="text-align:right;">
+male
+</td>
+<td style="text-align:right;">
+9
+</td>
+<td style="text-align:right;">
+98
+</td>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:right;">
+gasoline
+</td>
+<td style="text-align:right;">
+private
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1,000
+</td>
+<td style="text-align:right;">
+4.3552
+</td>
+<td style="text-align:right;">
+50.8454
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+31
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+232.60
+</td>
+<td style="text-align:right;">
+116.30
+</td>
+<td style="text-align:right;">
+TPL
+</td>
+<td style="text-align:right;">
+33
+</td>
+<td style="text-align:right;">
+male
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+101
+</td>
+<td style="text-align:right;">
+9
+</td>
+<td style="text-align:right;">
+gasoline
+</td>
+<td style="text-align:right;">
+private
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1,000
+</td>
+<td style="text-align:right;">
+4.3552
+</td>
+<td style="text-align:right;">
+50.8454
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+32
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+TPL
+</td>
+<td style="text-align:right;">
+53
+</td>
+<td style="text-align:right;">
+male
+</td>
+<td style="text-align:right;">
+10
+</td>
+<td style="text-align:right;">
+55
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+diesel
+</td>
+<td style="text-align:right;">
+private
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1,000
+</td>
+<td style="text-align:right;">
+4.3552
+</td>
+<td style="text-align:right;">
+50.8454
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+33
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+TPL+
+</td>
+<td style="text-align:right;">
+47
+</td>
+<td style="text-align:right;">
+male
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+55
+</td>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:right;">
+diesel
+</td>
+<td style="text-align:right;">
+work
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1,000
+</td>
+<td style="text-align:right;">
+4.3552
+</td>
+<td style="text-align:right;">
+50.8454
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+34
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+TPL+
+</td>
+<td style="text-align:right;">
+65
+</td>
+<td style="text-align:right;">
+male
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+110
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+gasoline
+</td>
+<td style="text-align:right;">
+private
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1,000
+</td>
+<td style="text-align:right;">
+4.3552
+</td>
+<td style="text-align:right;">
+50.8454
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+35
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+TPL+
+</td>
+<td style="text-align:right;">
+62
+</td>
+<td style="text-align:right;">
+female
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+55
+</td>
+<td style="text-align:right;">
+11
+</td>
+<td style="text-align:right;">
+gasoline
+</td>
+<td style="text-align:right;">
+private
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1,000
+</td>
+<td style="text-align:right;">
+4.3552
+</td>
+<td style="text-align:right;">
+50.8454
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+36
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+TPL++
+</td>
+<td style="text-align:right;">
+39
+</td>
+<td style="text-align:right;">
+male
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+66
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+diesel
+</td>
+<td style="text-align:right;">
+work
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1,000
+</td>
+<td style="text-align:right;">
+4.3552
+</td>
+<td style="text-align:right;">
+50.8454
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+37
+</td>
+<td style="text-align:right;">
+0.68
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+TPL++
+</td>
+<td style="text-align:right;">
+64
+</td>
+<td style="text-align:right;">
+male
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+66
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+diesel
+</td>
+<td style="text-align:right;">
+private
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1,000
+</td>
+<td style="text-align:right;">
+4.3552
+</td>
+<td style="text-align:right;">
+50.8454
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+38
+</td>
+<td style="text-align:right;">
+0.84
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+TPL+
+</td>
+<td style="text-align:right;">
+28
+</td>
+<td style="text-align:right;">
+male
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+59
+</td>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:right;">
+diesel
+</td>
+<td style="text-align:right;">
+private
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1,000
+</td>
+<td style="text-align:right;">
+4.3552
+</td>
+<td style="text-align:right;">
+50.8454
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+39
+</td>
+<td style="text-align:right;">
+0.98
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+TPL
+</td>
+<td style="text-align:right;">
+56
+</td>
+<td style="text-align:right;">
+male
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+98
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+gasoline
+</td>
+<td style="text-align:right;">
+private
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1,000
+</td>
+<td style="text-align:right;">
+4.3552
+</td>
+<td style="text-align:right;">
+50.8454
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+40
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+62.42
+</td>
+<td style="text-align:right;">
+62.42
+</td>
+<td style="text-align:right;">
+TPL
+</td>
+<td style="text-align:right;">
+41
+</td>
+<td style="text-align:right;">
+female
+</td>
+<td style="text-align:right;">
+11
+</td>
+<td style="text-align:right;">
+66
+</td>
+<td style="text-align:right;">
+10
+</td>
+<td style="text-align:right;">
+gasoline
+</td>
+<td style="text-align:right;">
+private
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1,000
+</td>
+<td style="text-align:right;">
+4.3552
+</td>
+<td style="text-align:right;">
+50.8454
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+41
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+TPL++
+</td>
+<td style="text-align:right;">
+28
+</td>
+<td style="text-align:right;">
+male
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+85
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+gasoline
+</td>
+<td style="text-align:right;">
+private
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1,000
+</td>
+<td style="text-align:right;">
+4.3552
+</td>
+<td style="text-align:right;">
+50.8454
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+42
+</td>
+<td style="text-align:right;">
+0.17
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+TPL+
+</td>
+<td style="text-align:right;">
+58
+</td>
+<td style="text-align:right;">
+male
+</td>
+<td style="text-align:right;">
+10
+</td>
+<td style="text-align:right;">
+50
+</td>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:right;">
+diesel
+</td>
+<td style="text-align:right;">
+private
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1,000
+</td>
+<td style="text-align:right;">
+4.3552
+</td>
+<td style="text-align:right;">
+50.8454
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+43
+</td>
+<td style="text-align:right;">
+0.48
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+TPL
+</td>
+<td style="text-align:right;">
+31
+</td>
+<td style="text-align:right;">
+male
+</td>
+<td style="text-align:right;">
+11
+</td>
+<td style="text-align:right;">
+50
+</td>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:right;">
+diesel
+</td>
+<td style="text-align:right;">
+private
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1,000
+</td>
+<td style="text-align:right;">
+4.3552
+</td>
+<td style="text-align:right;">
+50.8454
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+44
+</td>
+<td style="text-align:right;">
+0.20
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+TPL
+</td>
+<td style="text-align:right;">
+40
+</td>
+<td style="text-align:right;">
+male
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+66
+</td>
+<td style="text-align:right;">
+14
+</td>
+<td style="text-align:right;">
+gasoline
+</td>
+<td style="text-align:right;">
+private
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1,000
+</td>
+<td style="text-align:right;">
+4.3552
+</td>
+<td style="text-align:right;">
+50.8454
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+45
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+TPL+
+</td>
+<td style="text-align:right;">
+70
+</td>
+<td style="text-align:right;">
+female
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+55
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+diesel
+</td>
+<td style="text-align:right;">
+private
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1,000
+</td>
+<td style="text-align:right;">
+4.3552
+</td>
+<td style="text-align:right;">
+50.8454
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+46
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+TPL+
+</td>
+<td style="text-align:right;">
+51
+</td>
+<td style="text-align:right;">
+male
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+55
+</td>
+<td style="text-align:right;">
+10
+</td>
+<td style="text-align:right;">
+gasoline
+</td>
+<td style="text-align:right;">
+private
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1,000
+</td>
+<td style="text-align:right;">
+4.3552
+</td>
+<td style="text-align:right;">
+50.8454
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+47
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+TPL++
+</td>
+<td style="text-align:right;">
+57
+</td>
+<td style="text-align:right;">
+male
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+110
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+gasoline
+</td>
+<td style="text-align:right;">
+work
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1,000
+</td>
+<td style="text-align:right;">
+4.3552
+</td>
+<td style="text-align:right;">
+50.8454
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+48
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+164.65
+</td>
+<td style="text-align:right;">
+164.65
+</td>
+<td style="text-align:right;">
+TPL
+</td>
+<td style="text-align:right;">
+47
+</td>
+<td style="text-align:right;">
+male
+</td>
+<td style="text-align:right;">
+11
+</td>
+<td style="text-align:right;">
+55
+</td>
+<td style="text-align:right;">
+16
+</td>
+<td style="text-align:right;">
+gasoline
+</td>
+<td style="text-align:right;">
+private
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1,000
+</td>
+<td style="text-align:right;">
+4.3552
+</td>
+<td style="text-align:right;">
+50.8454
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+49
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+TPL+
+</td>
+<td style="text-align:right;">
+46
+</td>
+<td style="text-align:right;">
+male
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+44
+</td>
+<td style="text-align:right;">
+16
+</td>
+<td style="text-align:right;">
+gasoline
+</td>
+<td style="text-align:right;">
+private
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1,000
+</td>
+<td style="text-align:right;">
+4.3552
+</td>
+<td style="text-align:right;">
+50.8454
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+50
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+TPL++
+</td>
+<td style="text-align:right;">
+31
+</td>
+<td style="text-align:right;">
+male
+</td>
+<td style="text-align:right;">
+10
+</td>
+<td style="text-align:right;">
+110
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+gasoline
+</td>
+<td style="text-align:right;">
+private
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1,000
+</td>
+<td style="text-align:right;">
+4.3552
+</td>
+<td style="text-align:right;">
+50.8454
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+51
+</td>
+<td style="text-align:right;">
+0.59
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+TPL+
+</td>
+<td style="text-align:right;">
+66
+</td>
+<td style="text-align:right;">
+male
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+50
+</td>
+<td style="text-align:right;">
+9
+</td>
+<td style="text-align:right;">
+diesel
+</td>
+<td style="text-align:right;">
+private
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1,000
+</td>
+<td style="text-align:right;">
+4.3552
+</td>
+<td style="text-align:right;">
+50.8454
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+52
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+562.72
+</td>
+<td style="text-align:right;">
+562.72
+</td>
+<td style="text-align:right;">
+TPL++
+</td>
+<td style="text-align:right;">
+36
+</td>
+<td style="text-align:right;">
+male
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+98
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+gasoline
+</td>
+<td style="text-align:right;">
+private
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1,000
+</td>
+<td style="text-align:right;">
+4.3552
+</td>
+<td style="text-align:right;">
+50.8454
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+53
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+461.75
+</td>
+<td style="text-align:right;">
+461.75
+</td>
+<td style="text-align:right;">
+TPL++
+</td>
+<td style="text-align:right;">
+37
+</td>
+<td style="text-align:right;">
+male
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+94
+</td>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:right;">
+gasoline
+</td>
+<td style="text-align:right;">
+private
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1,000
+</td>
+<td style="text-align:right;">
+4.3552
+</td>
+<td style="text-align:right;">
+50.8454
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+54
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+TPL+
+</td>
+<td style="text-align:right;">
+36
+</td>
+<td style="text-align:right;">
+male
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+55
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+gasoline
+</td>
+<td style="text-align:right;">
+private
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1,000
+</td>
+<td style="text-align:right;">
+4.3552
+</td>
+<td style="text-align:right;">
+50.8454
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+55
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+TPL
+</td>
+<td style="text-align:right;">
+78
+</td>
+<td style="text-align:right;">
+male
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+87
+</td>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:right;">
+gasoline
+</td>
+<td style="text-align:right;">
+private
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1,000
+</td>
+<td style="text-align:right;">
+4.3552
+</td>
+<td style="text-align:right;">
+50.8454
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+56
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+TPL
+</td>
+<td style="text-align:right;">
+58
+</td>
+<td style="text-align:right;">
+male
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+151
+</td>
+<td style="text-align:right;">
+23
+</td>
+<td style="text-align:right;">
+gasoline
+</td>
+<td style="text-align:right;">
+private
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1,000
+</td>
+<td style="text-align:right;">
+4.3552
+</td>
+<td style="text-align:right;">
+50.8454
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+57
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+TPL+
+</td>
+<td style="text-align:right;">
+31
+</td>
+<td style="text-align:right;">
+male
+</td>
+<td style="text-align:right;">
+12
+</td>
+<td style="text-align:right;">
+66
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+gasoline
+</td>
+<td style="text-align:right;">
+work
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1,000
+</td>
+<td style="text-align:right;">
+4.3552
+</td>
+<td style="text-align:right;">
+50.8454
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+58
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+2,852.76
+</td>
+<td style="text-align:right;">
+1,426.38
+</td>
+<td style="text-align:right;">
+TPL++
+</td>
+<td style="text-align:right;">
+24
+</td>
+<td style="text-align:right;">
+male
+</td>
+<td style="text-align:right;">
+11
+</td>
+<td style="text-align:right;">
+70
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+gasoline
+</td>
+<td style="text-align:right;">
+private
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1,000
+</td>
+<td style="text-align:right;">
+4.3552
+</td>
+<td style="text-align:right;">
+50.8454
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+59
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+TPL
+</td>
+<td style="text-align:right;">
+74
+</td>
+<td style="text-align:right;">
+female
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+29
+</td>
+<td style="text-align:right;">
+14
+</td>
+<td style="text-align:right;">
+gasoline
+</td>
+<td style="text-align:right;">
+private
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1,000
+</td>
+<td style="text-align:right;">
+4.3552
+</td>
+<td style="text-align:right;">
+50.8454
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+60
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+TPL
+</td>
+<td style="text-align:right;">
+26
+</td>
+<td style="text-align:right;">
+female
+</td>
+<td style="text-align:right;">
+11
+</td>
+<td style="text-align:right;">
+29
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+gasoline
+</td>
+<td style="text-align:right;">
+private
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1,000
+</td>
+<td style="text-align:right;">
+4.3552
+</td>
+<td style="text-align:right;">
+50.8454
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+61
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+TPL++
+</td>
+<td style="text-align:right;">
+46
+</td>
+<td style="text-align:right;">
+male
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+75
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+gasoline
+</td>
+<td style="text-align:right;">
+work
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1,000
+</td>
+<td style="text-align:right;">
+4.3552
+</td>
+<td style="text-align:right;">
+50.8454
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+62
+</td>
+<td style="text-align:right;">
+0.13
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+TPL
+</td>
+<td style="text-align:right;">
+34
+</td>
+<td style="text-align:right;">
+male
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+100
+</td>
+<td style="text-align:right;">
+16
+</td>
+<td style="text-align:right;">
+gasoline
+</td>
+<td style="text-align:right;">
+private
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1,000
+</td>
+<td style="text-align:right;">
+4.3552
+</td>
+<td style="text-align:right;">
+50.8454
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+63
+</td>
+<td style="text-align:right;">
+0.29
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+TPL
+</td>
+<td style="text-align:right;">
+51
+</td>
+<td style="text-align:right;">
+male
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+85
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+gasoline
+</td>
+<td style="text-align:right;">
+private
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1,000
+</td>
+<td style="text-align:right;">
+4.3552
+</td>
+<td style="text-align:right;">
+50.8454
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+64
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+16.86
+</td>
+<td style="text-align:right;">
+16.86
+</td>
+<td style="text-align:right;">
+TPL++
+</td>
+<td style="text-align:right;">
+54
+</td>
+<td style="text-align:right;">
+male
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+103
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+gasoline
+</td>
+<td style="text-align:right;">
+work
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1,000
+</td>
+<td style="text-align:right;">
+4.3552
+</td>
+<td style="text-align:right;">
+50.8454
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+65
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+TPL++
+</td>
+<td style="text-align:right;">
+43
+</td>
+<td style="text-align:right;">
+male
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+85
+</td>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:right;">
+diesel
+</td>
+<td style="text-align:right;">
+private
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1,000
+</td>
+<td style="text-align:right;">
+4.3552
+</td>
+<td style="text-align:right;">
+50.8454
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+66
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+TPL+
+</td>
+<td style="text-align:right;">
+35
+</td>
+<td style="text-align:right;">
+male
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+105
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+diesel
+</td>
+<td style="text-align:right;">
+private
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1,000
+</td>
+<td style="text-align:right;">
+4.3552
+</td>
+<td style="text-align:right;">
+50.8454
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+67
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+TPL
+</td>
+<td style="text-align:right;">
+37
+</td>
+<td style="text-align:right;">
+male
+</td>
+<td style="text-align:right;">
+10
+</td>
+<td style="text-align:right;">
+95
+</td>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:right;">
+gasoline
+</td>
+<td style="text-align:right;">
+work
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1,000
+</td>
+<td style="text-align:right;">
+4.3552
+</td>
+<td style="text-align:right;">
+50.8454
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+68
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+99.23
+</td>
+<td style="text-align:right;">
+49.62
+</td>
+<td style="text-align:right;">
+TPL+
+</td>
+<td style="text-align:right;">
+56
+</td>
+<td style="text-align:right;">
+male
+</td>
+<td style="text-align:right;">
+13
+</td>
+<td style="text-align:right;">
+103
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+gasoline
+</td>
+<td style="text-align:right;">
+work
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1,000
+</td>
+<td style="text-align:right;">
+4.3552
+</td>
+<td style="text-align:right;">
+50.8454
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+69
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+TPL+
+</td>
+<td style="text-align:right;">
+39
+</td>
+<td style="text-align:right;">
+male
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+75
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+gasoline
+</td>
+<td style="text-align:right;">
+work
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1,000
+</td>
+<td style="text-align:right;">
+4.3552
+</td>
+<td style="text-align:right;">
+50.8454
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+70
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+TPL
+</td>
+<td style="text-align:right;">
+62
+</td>
+<td style="text-align:right;">
+female
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+65
+</td>
+<td style="text-align:right;">
+12
+</td>
+<td style="text-align:right;">
+gasoline
+</td>
+<td style="text-align:right;">
+private
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1,000
+</td>
+<td style="text-align:right;">
+4.3552
+</td>
+<td style="text-align:right;">
+50.8454
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+71
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+TPL++
+</td>
+<td style="text-align:right;">
+33
+</td>
+<td style="text-align:right;">
+male
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+110
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+gasoline
+</td>
+<td style="text-align:right;">
+private
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1,000
+</td>
+<td style="text-align:right;">
+4.3552
+</td>
+<td style="text-align:right;">
+50.8454
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+72
+</td>
+<td style="text-align:right;">
+0.13
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+TPL
+</td>
+<td style="text-align:right;">
+24
+</td>
+<td style="text-align:right;">
+male
+</td>
+<td style="text-align:right;">
+9
+</td>
+<td style="text-align:right;">
+83
+</td>
+<td style="text-align:right;">
+10
+</td>
+<td style="text-align:right;">
+gasoline
+</td>
+<td style="text-align:right;">
+private
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1,000
+</td>
+<td style="text-align:right;">
+4.3552
+</td>
+<td style="text-align:right;">
+50.8454
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+73
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+TPL++
+</td>
+<td style="text-align:right;">
+39
+</td>
+<td style="text-align:right;">
+male
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+110
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+gasoline
+</td>
+<td style="text-align:right;">
+private
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1,000
+</td>
+<td style="text-align:right;">
+4.3552
+</td>
+<td style="text-align:right;">
+50.8454
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+74
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+TPL
+</td>
+<td style="text-align:right;">
+36
+</td>
+<td style="text-align:right;">
+male
+</td>
+<td style="text-align:right;">
+11
+</td>
+<td style="text-align:right;">
+72
+</td>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:right;">
+gasoline
+</td>
+<td style="text-align:right;">
+private
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1,000
+</td>
+<td style="text-align:right;">
+4.3552
+</td>
+<td style="text-align:right;">
+50.8454
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+75
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+TPL
+</td>
+<td style="text-align:right;">
+37
+</td>
+<td style="text-align:right;">
+male
+</td>
+<td style="text-align:right;">
+11
+</td>
+<td style="text-align:right;">
+77
+</td>
+<td style="text-align:right;">
+16
+</td>
+<td style="text-align:right;">
+gasoline
+</td>
+<td style="text-align:right;">
+private
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1,000
+</td>
+<td style="text-align:right;">
+4.3552
+</td>
+<td style="text-align:right;">
+50.8454
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+76
+</td>
+<td style="text-align:right;">
+0.45
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+TPL
+</td>
+<td style="text-align:right;">
+52
+</td>
+<td style="text-align:right;">
+male
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+63
+</td>
+<td style="text-align:right;">
+12
+</td>
+<td style="text-align:right;">
+diesel
+</td>
+<td style="text-align:right;">
+private
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1,000
+</td>
+<td style="text-align:right;">
+4.3552
+</td>
+<td style="text-align:right;">
+50.8454
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+77
+</td>
+<td style="text-align:right;">
+0.47
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+TPL
+</td>
+<td style="text-align:right;">
+27
+</td>
+<td style="text-align:right;">
+male
+</td>
+<td style="text-align:right;">
+11
+</td>
+<td style="text-align:right;">
+92
+</td>
+<td style="text-align:right;">
+14
+</td>
+<td style="text-align:right;">
+gasoline
+</td>
+<td style="text-align:right;">
+private
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1,000
+</td>
+<td style="text-align:right;">
+4.3552
+</td>
+<td style="text-align:right;">
+50.8454
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+78
+</td>
+<td style="text-align:right;">
+0.64
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+TPL++
+</td>
+<td style="text-align:right;">
+33
+</td>
+<td style="text-align:right;">
+male
+</td>
+<td style="text-align:right;">
+12
+</td>
+<td style="text-align:right;">
+75
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+gasoline
+</td>
+<td style="text-align:right;">
+work
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1,000
+</td>
+<td style="text-align:right;">
+4.3552
+</td>
+<td style="text-align:right;">
+50.8454
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+79
+</td>
+<td style="text-align:right;">
+0.34
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+TPL++
+</td>
+<td style="text-align:right;">
+43
+</td>
+<td style="text-align:right;">
+male
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+85
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+diesel
+</td>
+<td style="text-align:right;">
+private
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1,000
+</td>
+<td style="text-align:right;">
+4.3552
+</td>
+<td style="text-align:right;">
+50.8454
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+80
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+TPL++
+</td>
+<td style="text-align:right;">
+68
+</td>
+<td style="text-align:right;">
+male
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+110
+</td>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:right;">
+gasoline
+</td>
+<td style="text-align:right;">
+work
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1,000
+</td>
+<td style="text-align:right;">
+4.3552
+</td>
+<td style="text-align:right;">
+50.8454
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+81
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+TPL+
+</td>
+<td style="text-align:right;">
+55
+</td>
+<td style="text-align:right;">
+female
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+92
+</td>
+<td style="text-align:right;">
+14
+</td>
+<td style="text-align:right;">
+gasoline
+</td>
+<td style="text-align:right;">
+private
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1,000
+</td>
+<td style="text-align:right;">
+4.3552
+</td>
+<td style="text-align:right;">
+50.8454
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+82
+</td>
+<td style="text-align:right;">
+0.38
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+TPL+
+</td>
+<td style="text-align:right;">
+41
+</td>
+<td style="text-align:right;">
+male
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+124
+</td>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:right;">
+gasoline
+</td>
+<td style="text-align:right;">
+work
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1,000
+</td>
+<td style="text-align:right;">
+4.3552
+</td>
+<td style="text-align:right;">
+50.8454
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+83
+</td>
+<td style="text-align:right;">
+0.55
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+TPL
+</td>
+<td style="text-align:right;">
+55
+</td>
+<td style="text-align:right;">
+male
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+90
+</td>
+<td style="text-align:right;">
+16
+</td>
+<td style="text-align:right;">
+gasoline
+</td>
+<td style="text-align:right;">
+private
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1,000
+</td>
+<td style="text-align:right;">
+4.3552
+</td>
+<td style="text-align:right;">
+50.8454
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+84
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+TPL
+</td>
+<td style="text-align:right;">
+43
+</td>
+<td style="text-align:right;">
+female
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+85
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+gasoline
+</td>
+<td style="text-align:right;">
+private
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1,000
+</td>
+<td style="text-align:right;">
+4.3552
+</td>
+<td style="text-align:right;">
+50.8454
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+85
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1,837.16
+</td>
+<td style="text-align:right;">
+1,837.16
+</td>
+<td style="text-align:right;">
+TPL+
+</td>
+<td style="text-align:right;">
+35
+</td>
+<td style="text-align:right;">
+male
+</td>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:right;">
+85
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+diesel
+</td>
+<td style="text-align:right;">
+private
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1,000
+</td>
+<td style="text-align:right;">
+4.3552
+</td>
+<td style="text-align:right;">
+50.8454
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+86
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+TPL++
+</td>
+<td style="text-align:right;">
+29
+</td>
+<td style="text-align:right;">
+male
+</td>
+<td style="text-align:right;">
+14
+</td>
+<td style="text-align:right;">
+66
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+diesel
+</td>
+<td style="text-align:right;">
+work
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1,000
+</td>
+<td style="text-align:right;">
+4.3552
+</td>
+<td style="text-align:right;">
+50.8454
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+87
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+158.38
+</td>
+<td style="text-align:right;">
+158.38
+</td>
+<td style="text-align:right;">
+TPL
+</td>
+<td style="text-align:right;">
+45
+</td>
+<td style="text-align:right;">
+female
+</td>
+<td style="text-align:right;">
+11
+</td>
+<td style="text-align:right;">
+83
+</td>
+<td style="text-align:right;">
+9
+</td>
+<td style="text-align:right;">
+gasoline
+</td>
+<td style="text-align:right;">
+private
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1,000
+</td>
+<td style="text-align:right;">
+4.3552
+</td>
+<td style="text-align:right;">
+50.8454
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+88
+</td>
+<td style="text-align:right;">
+0.46
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+TPL++
+</td>
+<td style="text-align:right;">
+51
+</td>
+<td style="text-align:right;">
+male
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+83
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+gasoline
+</td>
+<td style="text-align:right;">
+private
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1,000
+</td>
+<td style="text-align:right;">
+4.3552
+</td>
+<td style="text-align:right;">
+50.8454
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+89
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+TPL++
+</td>
+<td style="text-align:right;">
+51
+</td>
+<td style="text-align:right;">
+male
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+110
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+gasoline
+</td>
+<td style="text-align:right;">
+private
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1,000
+</td>
+<td style="text-align:right;">
+4.3552
+</td>
+<td style="text-align:right;">
+50.8454
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+90
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1,306.10
+</td>
+<td style="text-align:right;">
+1,306.10
+</td>
+<td style="text-align:right;">
+TPL
+</td>
+<td style="text-align:right;">
+23
+</td>
+<td style="text-align:right;">
+male
+</td>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:right;">
+90
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+gasoline
+</td>
+<td style="text-align:right;">
+private
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1,000
+</td>
+<td style="text-align:right;">
+4.3552
+</td>
+<td style="text-align:right;">
+50.8454
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+91
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+TPL++
+</td>
+<td style="text-align:right;">
+36
+</td>
+<td style="text-align:right;">
+female
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+74
+</td>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:right;">
+gasoline
+</td>
+<td style="text-align:right;">
+private
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1,000
+</td>
+<td style="text-align:right;">
+4.3552
+</td>
+<td style="text-align:right;">
+50.8454
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+92
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1,363.41
+</td>
+<td style="text-align:right;">
+1,363.41
+</td>
+<td style="text-align:right;">
+TPL
+</td>
+<td style="text-align:right;">
+27
+</td>
+<td style="text-align:right;">
+male
+</td>
+<td style="text-align:right;">
+11
+</td>
+<td style="text-align:right;">
+66
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+diesel
+</td>
+<td style="text-align:right;">
+private
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1,000
+</td>
+<td style="text-align:right;">
+4.3552
+</td>
+<td style="text-align:right;">
+50.8454
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+93
+</td>
+<td style="text-align:right;">
+0.07
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+TPL
+</td>
+<td style="text-align:right;">
+29
+</td>
+<td style="text-align:right;">
+male
+</td>
+<td style="text-align:right;">
+13
+</td>
+<td style="text-align:right;">
+75
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+gasoline
+</td>
+<td style="text-align:right;">
+work
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1,000
+</td>
+<td style="text-align:right;">
+4.3552
+</td>
+<td style="text-align:right;">
+50.8454
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+94
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+70.80
+</td>
+<td style="text-align:right;">
+70.80
+</td>
+<td style="text-align:right;">
+TPL++
+</td>
+<td style="text-align:right;">
+54
+</td>
+<td style="text-align:right;">
+male
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+110
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+gasoline
+</td>
+<td style="text-align:right;">
+private
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1,000
+</td>
+<td style="text-align:right;">
+4.3552
+</td>
+<td style="text-align:right;">
+50.8454
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+95
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+TPL++
+</td>
+<td style="text-align:right;">
+68
+</td>
+<td style="text-align:right;">
+male
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+85
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+diesel
+</td>
+<td style="text-align:right;">
+private
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1,000
+</td>
+<td style="text-align:right;">
+4.3552
+</td>
+<td style="text-align:right;">
+50.8454
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+96
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+TPL+
+</td>
+<td style="text-align:right;">
+58
+</td>
+<td style="text-align:right;">
+female
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+110
+</td>
+<td style="text-align:right;">
+10
+</td>
+<td style="text-align:right;">
+gasoline
+</td>
+<td style="text-align:right;">
+work
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1,000
+</td>
+<td style="text-align:right;">
+4.3552
+</td>
+<td style="text-align:right;">
+50.8454
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+97
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+TPL+
+</td>
+<td style="text-align:right;">
+69
+</td>
+<td style="text-align:right;">
+male
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+85
+</td>
+<td style="text-align:right;">
+11
+</td>
+<td style="text-align:right;">
+diesel
+</td>
+<td style="text-align:right;">
+work
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1,000
+</td>
+<td style="text-align:right;">
+4.3552
+</td>
+<td style="text-align:right;">
+50.8454
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+98
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+TPL+
+</td>
+<td style="text-align:right;">
+52
+</td>
+<td style="text-align:right;">
+female
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+68
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+diesel
+</td>
+<td style="text-align:right;">
+private
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1,000
+</td>
+<td style="text-align:right;">
+4.3552
+</td>
+<td style="text-align:right;">
+50.8454
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+99
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+TPL
+</td>
+<td style="text-align:right;">
+34
+</td>
+<td style="text-align:right;">
+male
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+19
+</td>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:right;">
+gasoline
+</td>
+<td style="text-align:right;">
+private
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1,000
+</td>
+<td style="text-align:right;">
+4.3552
+</td>
+<td style="text-align:right;">
+50.8454
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+100
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+TPL++
+</td>
+<td style="text-align:right;">
+34
+</td>
+<td style="text-align:right;">
+male
+</td>
+<td style="text-align:right;">
+12
+</td>
+<td style="text-align:right;">
+51
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+diesel
+</td>
+<td style="text-align:right;">
+private
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1,000
+</td>
+<td style="text-align:right;">
+4.3552
+</td>
+<td style="text-align:right;">
+50.8454
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p></p>
+<p></p>
+<div class="sourceCode" id="cb54"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb54-1"><a href="modelos-lineales-generalizados-glm.html#cb54-1"></a>model_N <span class="ot">&lt;-</span> <span class="fu">glm</span>( <span class="at">formula =</span> nclaims <span class="sc">~</span> ageph <span class="sc">+</span> sex <span class="sc">+</span> power <span class="sc">+</span> fuel <span class="sc">+</span> <span class="fu">offset</span>( <span class="fu">log</span>( expo ) ) <span class="sc">+</span> <span class="dv">0</span>, </span>
+<span id="cb54-2"><a href="modelos-lineales-generalizados-glm.html#cb54-2"></a>                <span class="at">family =</span> <span class="fu">poisson</span>( <span class="at">link =</span> <span class="st">&#39;log&#39;</span> ), </span>
+<span id="cb54-3"><a href="modelos-lineales-generalizados-glm.html#cb54-3"></a>                <span class="at">data =</span> beMTPL97 )</span>
+<span id="cb54-4"><a href="modelos-lineales-generalizados-glm.html#cb54-4"></a><span class="fu">summary</span>( model_N )</span></code></pre></div>
+<pre><code>## 
+## Call:
+## glm(formula = nclaims ~ ageph + sex + power + fuel + offset(log(expo)) + 
+##     0, family = poisson(link = &quot;log&quot;), data = beMTPL97)
+## 
+## Coefficients:
+##              Estimate Std. Error z value             Pr(&gt;|z|)    
+## ageph      -0.0156271  0.0005075 -30.790 &lt; 0.0000000000000002 ***
+## sexfemale  -1.4098356  0.0321659 -43.830 &lt; 0.0000000000000002 ***
+## sexmale    -1.4580104  0.0342743 -42.540 &lt; 0.0000000000000002 ***
+## power       0.0024994  0.0003722   6.715      0.0000000000189 ***
+## fueldiesel  0.1400478  0.0150980   9.276 &lt; 0.0000000000000002 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for poisson family taken to be 1)
+## 
+##     Null deviance: 260164  on 163212  degrees of freedom
+## Residual deviance:  88652  on 163207  degrees of freedom
+## AIC: 126354
+## 
+## Number of Fisher Scoring iterations: 6</code></pre>
+<p></p>
+<p></p>
+<div class="sourceCode" id="cb56"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb56-1"><a href="modelos-lineales-generalizados-glm.html#cb56-1"></a>pob <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>( <span class="at">ageph =</span> <span class="fu">seq</span>( <span class="dv">18</span>, <span class="dv">90</span>, <span class="dv">1</span> ), </span>
+<span id="cb56-2"><a href="modelos-lineales-generalizados-glm.html#cb56-2"></a>                    <span class="at">sex =</span> <span class="fu">c</span>( <span class="st">&#39;male&#39;</span>, <span class="st">&#39;female&#39;</span> ),</span>
+<span id="cb56-3"><a href="modelos-lineales-generalizados-glm.html#cb56-3"></a>                    <span class="at">power =</span> <span class="fu">seq</span>( <span class="dv">10</span>, <span class="dv">250</span> ),</span>
+<span id="cb56-4"><a href="modelos-lineales-generalizados-glm.html#cb56-4"></a>                    <span class="at">fuel =</span> <span class="fu">c</span>( <span class="st">&#39;gasoline&#39;</span>, <span class="st">&#39;diesel&#39;</span> ),</span>
+<span id="cb56-5"><a href="modelos-lineales-generalizados-glm.html#cb56-5"></a>                    <span class="at">expo =</span> <span class="dv">1</span> )</span>
+<span id="cb56-6"><a href="modelos-lineales-generalizados-glm.html#cb56-6"></a>pob <span class="ot">&lt;-</span> <span class="fu">as.data.table</span>( pob )</span>
+<span id="cb56-7"><a href="modelos-lineales-generalizados-glm.html#cb56-7"></a>pob[ , EN <span class="sc">:=</span> <span class="fu">predict</span>( model_N, <span class="at">newdata =</span> pob, <span class="at">type =</span> <span class="st">&#39;response&#39;</span> ) ]</span></code></pre></div>
+<p></p>
+</div>
 
 </div>
 </div>

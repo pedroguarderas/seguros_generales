@@ -20,6 +20,7 @@ def:dnbinom
 def:dgeo
 def:fampanjer
 prp:chfampanjer
+tab:l3t1
 def:dunif
 def:dexp
 def:dnorm
@@ -43,6 +44,8 @@ def:CVaR
 def:ES
 def:EVaR
 prp:EVaRcohe
+exm:l6ex1
+tab:l6t1
 def:dmaxstab
 thm:tvalext1
 thm:tvalext2
