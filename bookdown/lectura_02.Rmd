@@ -1,41 +1,48 @@
 <!------------------------------------------------------------------------------------------------->
-# Consideraciones preliminares
+# Preliminares
   
 <!------------------------------------------------------------------------------------------------->
-## Consideraciones matemáticas
+## Notación matemática
 
-Utilizaremos alguna notación matemática a lo largo de estas notas:
+1. $\mathbb{N}$ el conjunto de los números naturales $\mathbb{N} = \{0,1,\ldots,\}$
 
-1. $\mathbb{N}$ conjunto de los números naturales $\mathbb{N} = \{0,1,\ldots,\}$,
-
-2. $\mathbb{R}$ conjunto de los números reales,
+2. $\mathbb{R}$ el conjunto de los números reales
 
 3. $\overline{\mathbb{R}} = \mathbb{R} \cup \{ +\infty \} \cup \{ -\infty \}$ el conjunto de los 
-reales más los infinitos,
+reales extendido incluyendo los infinitos
 
-4. $<$ símbolo de menor que, $>$ símbolo de mayor que, $\leq$ símbolo de menor o igual que,
-$\geq$ símbolo de mayor o igual que,
+<!-- 4. $<$ símbolo de menor que, $>$ símbolo de mayor que, $\leq$ símbolo de menor o igual que, -->
+<!-- $\geq$ símbolo de mayor o igual que, -->
 
-5. $f: X \longrightarrow Y$ denota la función que toma valores en $X$ y entrega valores en $Y$,
+5. $f: X \longrightarrow Y$ la función que toma valores en $X$ y entrega valores en $Y$
 
-6. $\sum\limits_{k=0}^n x_k$ suma de valores de una lista $x_0,\ldots,x_n$,
+6. $\sum\limits_{k=0}^n x_k$ es la suma de los elementos $x_0,\ldots,x_n$ de una lista
 
-7. $[ a, b ] = \left\{ x \in \mathbb{R} \middle| x \geq a, x \leq b \right\}$ intervalo cerrado para
-cualquier $a,b \in \overline{\mathbb{R}}$,
+7. $[ a, b ] = \left\{ x \in \mathbb{R} \mid x \geq a \land x \leq b \right\}$ intervalo cerrado para
+cualquier $a,b \in \overline{\mathbb{R}}$
 
-8. $(a,b) = \left\{ x \in \mathbb{R} \middle| x \geq a, x \leq b \right\}$ intervalo abierto para 
-cualquier $a,b \in \overline{\mathbb{R}}$,
+8. $(a,b) = \left\{ x \in \mathbb{R} \mid x \gt a \land x \lt b \right\}$ intervalo abierto para 
+cualquier $a,b \in \overline{\mathbb{R}}$
 
-9. $\{x_n\}_{n\in\mathbb{N}} = \left\{ x_n \in X \middle| n \in \mathbb{N} \right\}$ secuencia en 
-el conjunto $X$, no es más que una función de $\mathbb{N}$ con valores en $X$,
+9. $\{x_n\}_{n\in\mathbb{N}} = \left\{ x_n \in X \mid n \in \mathbb{N} \right\}$ secuencia en 
+el conjunto $X$, no es más que una función de $\mathbb{N}$ con valores en $X$
 
-10. $\underset{x \rightarrow y}{\lim} f(x) = a$ noción de límite,
+10. $\underset{x \rightarrow y}{\lim} f(x) = a$ límite de la funcion $f(x)$ cuando $x$ tiende a $y$.
 
 
 <!------------------------------------------------------------------------------------------------->
 ## Consideraciones de programación en R
-En el transcurso del presente curso utilizaremos algunos paquetes de R, acá la lista de carga de los
-mismos
+
+### Opciones usuales {-}
+
+```{r l2c0, warning = FALSE}
+options( scipen = 9999 )
+options( stringsAsFactors = FALSE )
+```
+
+### Paquetes usuales {-}
+
+
 ```{r l2c1, include = FALSE}
 options( width = 120 )
 
@@ -74,20 +81,19 @@ library( readxl )
 library( rmarkdown )
 library( shiny )
 library( wesanderson )
-
-options( scipen = 9999 )
-options( stringsAsFactors = FALSE )
 ```
+
+### Estructuras básicas {-}
 
 Para definir una variable utilizamos el operador de asignación `<-`, también se puede utilizar `=`.
 
-Un vector se define con la función de concatenación `c`
+Un **vector** se define con la función de concatenación `c`
 ```{r l2c3}
 x <- c( 1, 2, 3 )
 print( x )
 ```
 
-Un función se define con la sentencia `function`
+Una **función** se define con la sentencia `function`
 ```{r l2c4}
 f <- function( t ) {
   return( t^2 )
@@ -110,7 +116,27 @@ funcionalidades del paquete de R, `data.table`. Para trabajar con fechas recomen
 el paquete `lubridate`.
 
 <!------------------------------------------------------------------------------------------------->
-## Consideraciones de probabilidades
+# Variables aleatorias
+
+> Un ***fenómeno*** es un hecho que puede ser observado.
+> 
+> Un ***experimento*** es la observación de un fenómeno bajo condiciones específicas.
+> 
+> Un ***resultado*** es la información obtenida de un experimento.
+> 
+> Un ***evento*** es un conjunto de uno o más resultados posibles.
+> 
+> Un ***fenómeno estocástico*** es un fenómeno sobre el que se realiza un experimento que puede
+arrojar más de un resultado posible.
+> 
+> Un evento asociado a un fenómeno estocástico se denomina ***evento contingente***.
+
+La ***probabilidad*** es una medida de las posibilidades de que ocurra un evento contingente que 
+toma valores en $[0,1]$.
+
+Una ***variable aleatoria*** es una función que asigna un valor numérico a todo evento contingente.
+mide en una escala entre 0 y 1.
+
 
 <!------------------------------------------------------------------------------------------------->
 ::: {.definition #va name="Variable aleatoria"}
@@ -260,13 +286,13 @@ Así mismo su **varianza** es la dada por:
 Dos variables aleatorias a valores reales $X$ y $Y$, se dicen independientes si para cualquier par
 de eventos $A$ y $B$, sucede la siguiente factorización de probabilidades
 \begin{equation}
-P( X \in A \wedge Y \in B ) = P( X \in A ) P( Y \in B)
+P( X \in A \land Y \in B ) = P( X \in A ) P( Y \in B)
 \end{equation}
 
 La propiedad anterior, en particular para la función de distribución conjunta, toma la siguiente 
 forma:
 \begin{equation}
-F_{X,Y}( x, y ) = P( X \leq x \wedge Y \leq y ) 
+F_{X,Y}( x, y ) = P( X \leq x \land Y \leq y ) 
 = P( X \leq x ) P( Y \leq y ) 
 = F_{X}( x ) F_{Y}( y )
 \end{equation}

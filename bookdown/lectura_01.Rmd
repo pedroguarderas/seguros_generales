@@ -4,6 +4,8 @@
 
 **Matemática Actuarial de los Seguros Generales**
 
+**Profesor: Leonardo Vélez Aguirre, MSc.**
+
 ## Resultados de aprendizaje
 
 - Contrastar los criterios de valoración actuarial en los seguros generales, así como elaborar y aplicar
@@ -19,30 +21,53 @@ consecuencias técnicas de dichas modificaciones.
 
 ## Contenidos propuestos
 
-1. Distribuciones compuestas
+1. **Distribuciones compuestas**
 
 2. Series de tiempo
 
-3. El Proceso de Riesgo: Distribución clase (a,b) y algoritmo de Panjer, Distribución de siniestralidad 
-agregada
+3. **El Proceso de Riesgo: Distribución clase (a,b) y algoritmo de Panjer, Distribución de siniestralidad 
+agregada**
 
 4. Modelos Lineales Generalizados (GLMs): para datos binarios y recuentos
 
-5. Proceso de Tarificación
+5. **Proceso de Tarificación**
 
-6. Tarificación a priori: cálculo de la prima pura
+6. **Tarificación a priori: cálculo de la prima pura**
 
 7. Tarificación a posteriori: sistemas Bonus-Malus
 
-8. Teoría de la Ruina
+8. **Teoría de la Ruina**
 
-En cuanto a las referencias utilizaremos los siguientes libros guía, @PanjerLoss2012, 
-@LossModFur, @modevquant, @MathAssuNV1, @MathAssuNV2, https://nonlifemaths.github.io/. 
-Utilizaremos algunos otras referencias de soporte, que serán de utilidad para quien desee profundizar 
-con más detalle en algunos conceptos @funmathstat, @prinsrisk, @QRisk:2015, @KNight, @mathstat1, @mathstat2. 
-En cuanto a la parte computacional, haremos uso del paquete para R, @actuar.
+## Referencias bibliográficas
+
+### Principales libros guía {-}
+
+@PanjerLoss2012, 
+@LossModFur, 
+@modevquant, 
+@MathAssuNV1, 
+@MathAssuNV2, 
+https://nonlifemaths.github.io/. 
+
+### Otras referencias de soporte {-}
+
+De utilidad para quien desee profundizar con más detalle en algunos conceptos
+
+@funmathstat, 
+@prinsrisk, 
+@QRisk:2015, 
+@KNight, 
+@mathstat1, 
+@mathstat2. 
+
 
 GIL FANA: Elementos de Matemáticas para las Ciencias del Seguro. Fundación Mapfre Estudios. 1991
+
+### Requerimientos informáticos {-}
+
+1. Lenguaje R
+2. Editor de código: RStudio, VScode, ...
+3. Paquete R *actuar* @actuar.
 
 
 
