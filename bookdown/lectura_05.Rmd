@@ -86,7 +86,12 @@ se busca la igualdad $\mathbb{E}[R] = 0$, la misma implica la siguiente relació
 \end{eqnarray*}
 en el equilibrio financiero, la proporción de la probabilidad de ruina respecto de la probabilidad
 de no estar en ruina es igual a la proporción entre la esperanza condicional del resultado cuando 
-no se produce la ruina respecto de la esperanza condicional cuando si se produce la ruina.
+no se produce la ruina respecto de la esperanza condicional cuando si se produce la ruina. 
+
+Un modelo puede estar equilibrado financieramente $\mathbb{E}[R] = 0$, pero se desconoce la 
+probabilidad de ruina $P( R < 0)$, esta podría ser muy grande. La razón anterior permite estimar
+la relevancia de la probabilidad de ruina en un modelo equilibrado, con el uso de las esperanzas
+condicionales.
 
 Es usual asumir que la única parte aleatoria de $R$ viene dada por el valor de los reclamos totales,
 en razón de esto se tiene:
