@@ -21,7 +21,7 @@ reales extendido incluyendo los infinitos
 7. $[ a, b ] = \left\{ x \in \mathbb{R} \mid x \geq a \land x \leq b \right\}$ intervalo cerrado para
 cualquier $a,b \in \overline{\mathbb{R}}$
 
-8. $(a,b) = \left\{ x \in \mathbb{R} \mid x \gt a \land x \lt b \right\}$ intervalo abierto para 
+8. $(a,b) = \left\{ x \in \mathbb{R} \mid x > a \land x < b \right\}$ intervalo abierto para 
 cualquier $a,b \in \overline{\mathbb{R}}$
 
 9. $\{x_n\}_{n\in\mathbb{N}} = \left\{ x_n \in X \mid n \in \mathbb{N} \right\}$ secuencia en 
@@ -446,7 +446,7 @@ acumulada de la ley normal $\Phi$.
 ::: {.theorem #ddkw name="Desigualdad Dvoretzky–Kiefer–Wolfowitz"}
 Dada una serie de variables aleatorias a valores reales $X_1, \ldots, X_n$, independientes
 entre si e idénticamente distribuidas (i.i.d), con distribución acumulada $F$, tenemos la siguiente
-desigualdad asociada a la distribución acumulada empírica 
+desigualdad asociada a la **distribución acumulada empírica**
 \begin{equation}
 F_n( x ) = \frac{1}{n}\sum\limits_{i=1}^n \mathbf{1}_{(-\infty,x]}( X_i )
 \end{equation}
@@ -491,6 +491,27 @@ dt %>%
   kable_classic( font_size = 14, full_width = FALSE, html_font = "Cambria" ) %>%
   scroll_box( width = "750px", height = "500px" )
 ```
+
+::: {.definition #probemp name="Medida de probabilidad empírica"}
+A partir de una muestra de $X_1, \ldots, X_n$ de una variable aleatoria $X$, podemos definir
+también la **medida de probabilidad empírica** asociada a la muestra $X_1, \ldots, X_n$. Así 
+para cualquier evento del espacio muestral $\Omega$, $A \subset \Omega$
+\begin{equation}
+P_n( B ) = \frac{1}{n} \sum\limits_{i=1}^n \mathbb{1}_{B}\left( X_i \right)
+\end{equation}
+:::
+
+A partir de la medida empírica de probabilidad, podemos extraer la de para la distribución acumulada
+empírica $F_n$, la cual la hemos definido con anterioridad, para ello consideremos 
+$P_n( (-\infty,x])$ para cualquier $x \in \mathbb{R}$
+\begin{equation}
+P_n( (-\infty,x])
+= \frac{1}{n} \sum\limits_{i=1}^n \mathbb{1}_{(-\infty,x]}\left( X_i \right) 
+= F_n( x )
+\end{equation}
+
+Para muchos resultados asociados a la estimación de estadística la variantes empíricas $P_n$ y $F_n$
+son de utilidad.
 
 <!------------------------------------------------------------------------------------------------->
 ## Consideraciones financieras
