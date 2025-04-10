@@ -606,9 +606,39 @@ $\theta \alpha^{-\frac{1}{\gamma}} \rightarrow \xi$
 <!------------------------------------------------------------------------------------------------->
 ## Estimación
 
-1. Maximización de la verosimilitud
+En la práctica se observa la realización de una variable aleatoria $X$, es decir se tiene una 
+muestra de la misma $X_1, \ldots, X_n$. Pero, no se dispone de la distribución $F$ o de la densidad 
+$f$ que la describe. Como ya hemos mencionado, conociendo la distribución se puede inferir algunas
+propiedades sobre la variable. De ahí surge la necesidad de buscar la mejor distribución $F$ posible
+a partir de la muestra. 
 
-2. Momentos
+Para ello se ha formulado diferentes aproximaciones, entre las cuales citamos las siguientes:
 
-3. Métodos no paramétricos
+1. Método de sustitución
+
+2. Método de los momentos
+
+3. Método de la distancia mínima
+
+4. Método de maximización de la verosimilitud
+
+::: {.definition #bestinses  name="Estimador insesgado"}
+Se dice que un estimador $\theta_1$ se dice **insesgado** para estimar el parámetro $\theta$, si se 
+cumple que:
+\begin{equation}
+\mathbb{E}\left[ \theta_1 \right] = \theta
+\end{equation}
+caso contrario se dirá que el estimador es **sesgado** o que presenta un **error sistemático**.
+:::
+
+::: {.definition #bestcuadmean  name="Mejor en media cuadrática"}
+Se dice que un estimador $\theta_1$ es mejor estimador en media cuadrática que el estimador 
+$\theta_2$, respecto del parámetro $\theta$, si se cumple la siguiente desigualdad
+\begin{equation}
+\mathbb{E}\left[ \left( \theta_1 - \theta \right)^2 \right]
+< \mathbb{E}\left[ \left( \theta_2 - \theta \right)^2 \right]
+\end{equation}
+:::
+
+
 
