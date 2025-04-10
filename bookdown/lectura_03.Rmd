@@ -622,6 +622,120 @@ Para ello se ha formulado diferentes aproximaciones, entre las cuales citamos la
 
 4. Método de maximización de la verosimilitud
 
+<!------------------------------------------------------------------------------------------------->
+### Método de sustitución
+
+Se considera que para la medida de de probabilidad $P_X$ que caracteriza a la variable aleatoria 
+$X$ está dentro de una familia de funciones que dependen de un parámetro $\theta \in \Theta$, es 
+decir para cada $\theta$, $P( \theta )$ es una medida de probabilidad y para algún 
+$\theta \in \Theta, P_X = P( \theta )$. 
+
+Entonces, se parte de suponer que existe funcional $G$ actuando sobre el conjunto de medidas de 
+probabilidad $\mathcal{P}$ que contiene al conjunto
+$P( \Theta ) = \{ P(\theta) \mid \theta \in \Theta\} \subset \mathcal{P}$ y que toma valores 
+en $\Theta$, i.e. $G: \mathcal{P} \longrightarrow \Theta$. De tal forma que $P( \Theta )$ es 
+invariante, es decir:
+\begin{equation}
+G( P( \theta ) ) = \theta,\quad \forall \theta \in \Theta
+\end{equation}
+
+Así se construye un **estimador por el método de sustitución** si a partir de la medida de 
+probabilidad empírica $P_n$ construida con una muestra $X_1, \ldots, X_n$ de la variable
+aleatoria $X$, se toma como parámetro el dado por:
+\begin{equation}
+\widehat{\theta} = G\left( P_n \right)
+\end{equation}
+
+En otras palabras se sustituye el parámetro $\theta$ por $\widehat{\theta}$. Esto implica que 
+se aproxima la medida $P_X$ que caracteriza a $X$, con la aproximación
+$P_X \approx P(\widehat{\theta})$.
+
+Es de notar que a priori no se hace establece ninguna medida de la calidad de la aproximación, 
+para ello hay que adjuntar algunos otros criterios que caracterizan un buen tipo de estimador.
+
+En otras ocasiones a partir de la muestra se define un estimador del parámetro $\theta \in \Theta$
+a partir de una familia de funciones medibles que dependen directamente de la 
+muestra $X_1, \ldots, X_n$ y su tamaño $n$, i.e. una función $\theta_n( X_1, \ldots, X_n )$. Se 
+puede considerar el caso anterior como un caso en particular de este tipo de funciones, ya que 
+se puede definir $\theta_n( X_1, \ldots, X_n ) = G( P_n )$, pero hay que tener cuidado que $G$ es 
+un funcional y como tal puede resultar una función que no es medible.
+
+::: {.definition #estsus  name="Estimadores convergentes"}
+En el mismo contexto anterior. Si la variable aleatoria $X$ está caracterizada por la medida 
+$P_X = P( \theta )$, para algún $\theta \in \Theta$. Decimos que una familia de estimadores 
+$\{\theta_n\}$ es **convergente** si al generar cada vez una muestra más grande el estimador
+$\theta_n( X_1, \ldots, X_n )$ converge en probabilidad a $\theta$. Esto quiere decir que 
+para cualquier $\varepsilon > 0$
+\begin{equation}
+\underset{n \rightarrow +\infty}{\lim} 
+P\left( \left| \theta_n( X_1, \ldots, X_n ) - \theta \right| \geq \varepsilon \right) = 0
+\end{equation}
+
+Decimos que **converge fuertemente** si la convergencia de la familia de estimadores 
+$\theta_n( X_1, \ldots, X_n )$ a $\theta$ se da **casi seguramente** o **casi todas partes**. Esto 
+en término de límites implica que:
+\begin{equation}
+P\left( \underset{n \rightarrow +\infty}{\lim} \theta_n( X_1, \ldots, X_n ) = \theta \right) = 1
+\end{equation}
+En otras palabras, la probabilidad de que el límite del estimador $\theta_n( X_1, \ldots, X_n )$ 
+sea igual a $\theta$ es $1$, salvo un conjunto de medida nula para $P$. De ahí resulta 
+la terminología de convergencia casi segura o convergencia en casi todas partes.
+
+<!------------------------------------------------------------------------------------------------->
+### Método de momentos
+
+Un estimador de momento se contruye a partir de una relación función entre la media de una función
+medible $g$ y el parámetro $\theta \in \Theta$ que caracteriza a la distribución o medida de 
+probabilidad de la variable aleatoria $X$. Es decir, existen funciones $g$ y $m$ a valores reales
+de tal forma que
+\begin{equation}
+m( \theta ) 
+= \mathbb{E}_{P_X} \left[ g( X ) \right] 
+= \int\limits g( x ) dP_X( x )
+= \int\limits g( x ) dP_{\theta}( x )
+\end{equation}
+
+Si de alguna forma se puede invertir $m$, de tal forma que se pueda determinar $\theta$, en tal 
+caso se pude utilizar un **estimador por momentos** a partir de una muestra de la variable aleatoria
+$X_1, \ldots, X_n$
+\begin{equation}
+\widehat{\theta} 
+= \theta_n\left( X_1, \ldots, X_n \right)
+= m^{-1}\left( \overline{g} \right)
+\end{equation}
+donde
+\begin{equation}
+\overline{g}
+= \int\limits g( x ) dP_n( x )
+= \frac{1}{n}\sum\limits_{i=1}^n g\left( X_i \right)
+\end{equation}
+
+Si en caso $\overline{g}$ está fuera de la imagen de $m$, $\overline{g} \notin m( \Theta )$, la 
+inversión no sería posible. Para resolver este problema se puede recurrir a una distancia $d$ y 
+buscar $\hat{g}$ tal que minimize la distancia a $m( \Theta )$, i.e. 
+$\hat{g} = \underset{h \in m( \Theta )}{\arg \inf}\ d( \overline{g}, h)$. Una vez determinado 
+$\hat{g}$ se toma como estimador de momentos su inversa con $m$, i.e. 
+$\widehat{\theta} = m^{-1}( \hat{g} )$.
+
+Es de notar que en el caso anterior, la selección de la mejor distancia $d$ no es para nada 
+evidente y puede ser un problema tanto o más difícil que la misma estimación del parámetro 
+$\theta$ o la inversión de $m$. 
+
+La estimación por momentos en los casos más elaborados lleva a buscar la solución de problemas no 
+lineales, que no suelen ser estables y que deben estar bien definidos para proveer una solución 
+única.
+
+<!------------------------------------------------------------------------------------------------->
+### Método de la distancia mínima
+
+
+<!------------------------------------------------------------------------------------------------->
+###  Método de maximización de la verosimilitud
+
+
+<!------------------------------------------------------------------------------------------------->
+### Calidad de estimadores
+
 ::: {.definition #bestinses  name="Estimador insesgado"}
 Se dice que un estimador $\theta_1$ se dice **insesgado** para estimar el parámetro $\theta$, si se 
 cumple que:
@@ -631,14 +745,11 @@ cumple que:
 caso contrario se dirá que el estimador es **sesgado** o que presenta un **error sistemático**.
 :::
 
-::: {.definition #bestcuadmean  name="Mejor en media cuadrática"}
+::: {.definition #bestcuadmean  name="Mejor estimador en media cuadrática"}
 Se dice que un estimador $\theta_1$ es mejor estimador en media cuadrática que el estimador 
 $\theta_2$, respecto del parámetro $\theta$, si se cumple la siguiente desigualdad
 \begin{equation}
 \mathbb{E}\left[ \left( \theta_1 - \theta \right)^2 \right]
 < \mathbb{E}\left[ \left( \theta_2 - \theta \right)^2 \right]
 \end{equation}
-:::
-
-
 
