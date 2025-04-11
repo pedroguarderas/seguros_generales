@@ -1,3 +1,4 @@
+def:probmed
 def:va
 def:vad
 def:cd
@@ -61,7 +62,7 @@ referencias-bibliográficas
 preliminares
 notación-matemática
 consideraciones-de-programación-en-r
-variables-aleatorias
+probabilidad-y-estadística
 consideraciones-estadísticas
 desigualdades-de-concentración
 consideraciones-financieras
@@ -100,6 +101,5 @@ reservas-técnicas
 modelos-lineales-generalizados-glm
 familia-exponencial
 modelo-lineal-generalizado-glm
-series-de-tiempo
 estimación-de-valores-extremos
 bibliografía
