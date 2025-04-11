@@ -23,7 +23,7 @@
 <meta name="author" content="" />
 
 
-<meta name="date" content="2025-04-10" />
+<meta name="date" content="2025-04-11" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -239,7 +239,17 @@ div.csl-indent {
 <li class="chapter" data-level="6.4" data-path="tarificación.html"><a href="tarificación.html#segmentación"><i class="fa fa-check"></i><b>6.4</b> Segmentación</a></li>
 <li class="chapter" data-level="6.5" data-path="tarificación.html"><a href="tarificación.html#deducibles"><i class="fa fa-check"></i><b>6.5</b> Deducibles</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="reservas-técnicas.html"><a href="reservas-técnicas.html"><i class="fa fa-check"></i><b>7</b> Reservas técnicas</a></li>
+<li class="chapter" data-level="7" data-path="reservas-técnicas.html"><a href="reservas-técnicas.html"><i class="fa fa-check"></i><b>7</b> Reservas técnicas</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="reservas-técnicas.html"><a href="reservas-técnicas.html#reservas-para-primas-no-adquiridas"><i class="fa fa-check"></i><b>7.1</b> Reservas para primas no adquiridas</a></li>
+<li class="chapter" data-level="7.2" data-path="reservas-técnicas.html"><a href="reservas-técnicas.html#reservas-de-riesgos-en-curso"><i class="fa fa-check"></i><b>7.2</b> Reservas de riesgos en curso</a></li>
+<li class="chapter" data-level="7.3" data-path="reservas-técnicas.html"><a href="reservas-técnicas.html#reservas-de-siniestros-a-pagar"><i class="fa fa-check"></i><b>7.3</b> Reservas de siniestros a pagar</a>
+<ul>
+<li class="chapter" data-level="7.3.1" data-path="reservas-técnicas.html"><a href="reservas-técnicas.html#siniestros-sucedidos-reportados-resueltos-no-pagados"><i class="fa fa-check"></i><b>7.3.1</b> Siniestros sucedidos, reportados, resueltos, no pagados</a></li>
+<li class="chapter" data-level="7.3.2" data-path="reservas-técnicas.html"><a href="reservas-técnicas.html#siniestros-sucedidos-reportados-no-resueltos-no-pagados"><i class="fa fa-check"></i><b>7.3.2</b> Siniestros sucedidos, reportados, no resueltos, no pagados</a></li>
+<li class="chapter" data-level="7.3.3" data-path="reservas-técnicas.html"><a href="reservas-técnicas.html#siniestros-sucedidos-no-reportados-no-resueltos-no-pagados"><i class="fa fa-check"></i><b>7.3.3</b> Siniestros sucedidos, no reportados, no resueltos, no pagados</a></li>
+</ul></li>
+</ul></li>
 <li class="chapter" data-level="8" data-path="modelos-lineales-generalizados-glm.html"><a href="modelos-lineales-generalizados-glm.html"><i class="fa fa-check"></i><b>8</b> Modelos lineales generalizados (GLM)</a>
 <ul>
 <li class="chapter" data-level="8.1" data-path="modelos-lineales-generalizados-glm.html"><a href="modelos-lineales-generalizados-glm.html#familia-exponencial"><i class="fa fa-check"></i><b>8.1</b> Familia exponencial</a></li>
@@ -412,8 +422,8 @@ a la integral de Riemann-Stieltjes utilizando la distribución acumulada empíri
 <p>De ello tenemos los siguientes resultados de cálculo para el valor esperado de la severidad total
 <span class="math display">\[\begin{eqnarray*}
 \mathbb{E}[S] = \sum\limits_{i=1}^n e^{ \mu_i + \frac{1}{2} \sigma_i^2 } &amp; = &amp; 34562.7208, \\
-\overline{S} = \frac{1}{m} \sum\limits_{i=1}^m S_i &amp; = &amp; 34373.1887, \\
-\sum\limits_{i=1}^N s_{i} \left( F_m( s_{i+1} ) - F_m( s_{i} ) \right) &amp; = &amp; 34338.5379
+\overline{S} = \frac{1}{m} \sum\limits_{i=1}^m S_i &amp; = &amp; 33704.7658, \\
+\sum\limits_{i=1}^N s_{i} \left( F_m( s_{i+1} ) - F_m( s_{i} ) \right) &amp; = &amp; 33687.6274
 \end{eqnarray*}\]</span></p>
 <p>Lo bueno de poseer una buena aproximación a la distribución acumulada de una variable aleatoria, es
 que podemos calcular algunos otros valores de importancia relacionados a la variable aleatoria y
@@ -595,7 +605,7 @@ Si consideramos generar la simulación como un modelo individual, generamos vari
 <p></p>
 <p><span class="math display">\[\begin{eqnarray*}
 \mathbb{E}[S] = n p e^{ \mu + \frac{1}{2} \sigma^2 } &amp; = &amp; 219326.6317, \\
-\overline{S} = \frac{1}{m} \sum\limits_{i=1}^m S_i &amp; = &amp; 220197.7151,
+\overline{S} = \frac{1}{m} \sum\limits_{i=1}^m S_i &amp; = &amp; 218465.5112,
 \end{eqnarray*}\]</span></p>
 </div>
 <p>Es importante observar que si la frecuencia de reclamos es superior a <span class="math inline">\(1\)</span>, sea este por póliza,

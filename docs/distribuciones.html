@@ -23,7 +23,7 @@
 <meta name="author" content="" />
 
 
-<meta name="date" content="2025-04-10" />
+<meta name="date" content="2025-04-11" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -239,7 +239,17 @@ div.csl-indent {
 <li class="chapter" data-level="6.4" data-path="tarificación.html"><a href="tarificación.html#segmentación"><i class="fa fa-check"></i><b>6.4</b> Segmentación</a></li>
 <li class="chapter" data-level="6.5" data-path="tarificación.html"><a href="tarificación.html#deducibles"><i class="fa fa-check"></i><b>6.5</b> Deducibles</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="reservas-técnicas.html"><a href="reservas-técnicas.html"><i class="fa fa-check"></i><b>7</b> Reservas técnicas</a></li>
+<li class="chapter" data-level="7" data-path="reservas-técnicas.html"><a href="reservas-técnicas.html"><i class="fa fa-check"></i><b>7</b> Reservas técnicas</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="reservas-técnicas.html"><a href="reservas-técnicas.html#reservas-para-primas-no-adquiridas"><i class="fa fa-check"></i><b>7.1</b> Reservas para primas no adquiridas</a></li>
+<li class="chapter" data-level="7.2" data-path="reservas-técnicas.html"><a href="reservas-técnicas.html#reservas-de-riesgos-en-curso"><i class="fa fa-check"></i><b>7.2</b> Reservas de riesgos en curso</a></li>
+<li class="chapter" data-level="7.3" data-path="reservas-técnicas.html"><a href="reservas-técnicas.html#reservas-de-siniestros-a-pagar"><i class="fa fa-check"></i><b>7.3</b> Reservas de siniestros a pagar</a>
+<ul>
+<li class="chapter" data-level="7.3.1" data-path="reservas-técnicas.html"><a href="reservas-técnicas.html#siniestros-sucedidos-reportados-resueltos-no-pagados"><i class="fa fa-check"></i><b>7.3.1</b> Siniestros sucedidos, reportados, resueltos, no pagados</a></li>
+<li class="chapter" data-level="7.3.2" data-path="reservas-técnicas.html"><a href="reservas-técnicas.html#siniestros-sucedidos-reportados-no-resueltos-no-pagados"><i class="fa fa-check"></i><b>7.3.2</b> Siniestros sucedidos, reportados, no resueltos, no pagados</a></li>
+<li class="chapter" data-level="7.3.3" data-path="reservas-técnicas.html"><a href="reservas-técnicas.html#siniestros-sucedidos-no-reportados-no-resueltos-no-pagados"><i class="fa fa-check"></i><b>7.3.3</b> Siniestros sucedidos, no reportados, no resueltos, no pagados</a></li>
+</ul></li>
+</ul></li>
 <li class="chapter" data-level="8" data-path="modelos-lineales-generalizados-glm.html"><a href="modelos-lineales-generalizados-glm.html"><i class="fa fa-check"></i><b>8</b> Modelos lineales generalizados (GLM)</a>
 <ul>
 <li class="chapter" data-level="8.1" data-path="modelos-lineales-generalizados-glm.html"><a href="modelos-lineales-generalizados-glm.html#familia-exponencial"><i class="fa fa-check"></i><b>8.1</b> Familia exponencial</a></li>
@@ -1449,8 +1459,8 @@ de tal forma que
 <span class="math display">\[\begin{equation}
 m( \theta )
 = \mathbb{E}_{P_X} \left[ g( X ) \right]
-= \int\limits g( x ) dP_X( x )
-= \int\limits g( x ) dP_{\theta}( x )
+= \int\limits_{\mathbb{R}} g( x ) dP_X( x )
+= \int\limits_{\mathbb{R}} g( x ) dP_{\theta}( x )
 \end{equation}\]</span></p>
 <p>Si de alguna forma se puede invertir <span class="math inline">\(m\)</span>, de tal forma que se pueda determinar <span class="math inline">\(\theta\)</span>, en tal
 caso se pude utilizar un <strong>estimador por momentos</strong> a partir de una muestra de la variable aleatoria
@@ -1463,7 +1473,7 @@ caso se pude utilizar un <strong>estimador por momentos</strong> a partir de una
 donde
 <span class="math display">\[\begin{equation}
 \overline{g}
-= \int\limits g( x ) dP_n( x )
+= \int\limits_{\mathbb{R}} g( x ) dP_n( x )
 = \frac{1}{n}\sum\limits_{i=1}^n g\left( X_i \right)
 \end{equation}\]</span></p>
 <p>Si en caso <span class="math inline">\(\overline{g}\)</span> está fuera de la imagen de <span class="math inline">\(m\)</span>, <span class="math inline">\(\overline{g} \notin m( \Theta )\)</span>, la
@@ -1506,7 +1516,7 @@ d(P,Q) = \underset{x}{\sup} \left| F_P( x ) - F_Q( x ) \right|
 \end{equation}\]</span></p></li>
 <li><p>Distancia cuadrática entre las distribuciones acumuladas correspondientes
 <span class="math display">\[\begin{equation}
-d( P, Q ) = \int\limits \left( F_P( x ) - F_Q( x ) \right)^2\ dF_Q( x )
+d( P, Q ) = \int\limits_{\mathbb{R}} \left( F_P( x ) - F_Q( x ) \right)^2\ dF_Q( x )
 \end{equation}\]</span></p></li>
 <li><p>Distancia de Wasserstein, para <span class="math inline">\(p &gt; 1\)</span>
 <span class="math display">\[\begin{equation}

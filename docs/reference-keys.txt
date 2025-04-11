@@ -49,6 +49,7 @@ def:CVaR
 def:ES
 def:EVaR
 prp:EVaRcohe
+exm:l6ex2
 exm:l6ex1
 tab:l6t1
 def:dmaxstab
@@ -98,6 +99,12 @@ prima
 segmentación
 deducibles
 reservas-técnicas
+reservas-para-primas-no-adquiridas
+reservas-de-riesgos-en-curso
+reservas-de-siniestros-a-pagar
+siniestros-sucedidos-reportados-resueltos-no-pagados
+siniestros-sucedidos-reportados-no-resueltos-no-pagados
+siniestros-sucedidos-no-reportados-no-resueltos-no-pagados
 modelos-lineales-generalizados-glm
 familia-exponencial
 modelo-lineal-generalizado-glm
