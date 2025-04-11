@@ -25,6 +25,7 @@ para cualquier valor $t > 0$
 \int\limits_{\mathbb{R}} \exp( t x ) dF( x ) = + \infty
 \end{equation}
  
+<!------------------------------------------------------------------------------------------------->
 ::: {.theorem #tvalext1  name="Fisher-Tippett-Gnedenko"}
 Si consideramos una secuencia de variables aleatorias $\{X_i\}_{i\in \mathbb{N}}$ las mismas
 son i.i.d, con distribución acumulada $F$. Entonces, si existen dos sucesiones de valores reales 
@@ -57,12 +58,13 @@ $G( x ) = \exp\left( -\left(1 - |\xi|\frac{x-\mu}{\sigma}\right)^{\frac{1}{\xi}}
 $x < \mu + \frac{\sigma}{|\xi|}$ y $\frac{1}{\xi} < 0$,
 :::
 
+<!------------------------------------------------------------------------------------------------->
 ::: {.theorem #tvalext2 name="Pickands-Balkema-De Haan"}
 Sea $F_u$ la distribución de exceso asociada a la variable aleatoria $X$ y con umbral de 
 condicionamiento $u > 0$. Entonces, para cualquier $\varepsilon \in \mathbb{R}$ tenemos que 
 $F \in MDA( H )$ para alguna distribución $H = GEV( \mu, \sigma, \varepsilon )$ si y solamente
 si existe una distribución $G = GPD( \nu, \beta, \varepsilon )$, de tal forma que el siguiente 
-límite se satisface.
+límite se satisface por la distribución de exceso $F_u$.
 \begin{equation}
 \underset{u \longrightarrow x_F}{\lim} \underset{0 < x < x_F - u}{\sup} 
 \left| F_u( x ) - G( x ) \right| = 0
@@ -76,3 +78,55 @@ exceso a partir de un valor de condicionamiento $u$ cada vez se comporta más co
 de generalizada de Pareto. Entonces, la distribución de los máximos que se observen de una muestra
 de la variable aleatoria $X$ tienen un comportamiento que puede ser descrito por una distribución 
 de valores extremos generalizada.
+
+Un forma de estimar si hay la posibilidad de presentar valores extremos es tomando un corte a un 
+nivel $u$ de los valores observados de reclamos $X_1, \ldots, X_n$, es decir tomar de la muestra 
+todos los valores $\{ X_i \mid X_i \geq u \}$, a estos valores realizarles un test de ajuste
+a una distribución de Pareto generalizada $GPD( \nu, \beta, \varepsilon )$, si el test es aceptable
+y no se rechaza la hipótesis nula, entonces tenemos el resultado de aproximación anterior 
+\@ref(thm:tvalext2). Luego se puede simular los reclamos de forma condiciona.
+
+<!------------------------------------------------------------------------------------------------->
+## Estimación con valores extremos
+
+Para generar un modelo utilizando valores extremos se puede tomar la siguiente aproximación 
+haciendo uso \@ref(thm:tvalext2)
+
+1. Seleccionar un valor de corte $u > 0$,
+
+2. A partir de la muestra de valores de reclamos observados, tomar aquellos valores observados 
+tales que $X_i \geq u$,
+
+3. Al conjunto $\{ X_i \mid X_i \geq u \}$ aplicarle un test de ajuste a una distribución de Pareto
+generalizada $GPD( u, \beta, \varepsilon )$, donde $u$ está fijo como parámetro,
+
+4. Si el test es satisfactorio, buscar un nuevo $u$, realizar nuevamente los pasos 2 y 3. Comparar
+el resultado de ajuste con el anterior y decidir cuál $u$ mantener según algún criterio de 
+selección estadística. Usualmente un criterio de información o la significancia de los valores $p$
+
+   Si llegamos a obtener un resultado satisfactorio para algún $u > 0$, podemos concluir con cierto
+nivel de certeza, que los valores extremos de los reclamos si pueden ser descritos con una 
+distribución de valores extremos generalizada $GEV( \mu, \sigma, \varepsilon )$ o de forma 
+equivalente que los reclamos en la cola $X \geq u$ pueden ser descritos con una distribución de 
+Pareto generalizada $GPD( u, \beta, \varepsilon )$.
+
+5. Se ajusta una distribución de severidad $F$ a todos los reclamos en la muestra $X$
+
+6. Si la prueba anterior fue satisfactoria para algún $u > 0$. Se determina a que percentil 
+$p_u$ pertenece, esto se lo puede realizar a partir de la muestra mismo $F_n( X \leq u ) = p_u$ o 
+con la distribución ajustada para los reclamos $F( X \leq u ) = p_u$.
+
+<!------------------------------------------------------------------------------------------------->
+## Simulación con valores extremos
+Si en caso se desea simular los reclamos, se toma con probabilidad $p_u$ un muestra con la 
+distribución truncada $X \rightsquigarrow F_{(u)}( x ) = F( x \mid X \leq u ) = \frac{F(\min(u,x))}{F(u)}$ y con 
+probabilidad $1 - p_u$ una muestra con la distribución de Pareto generalizada estimada 
+$X \rightsquigarrow G = GPD( u, \beta, \varepsilon )$.
+
+Así, en particular al esperanza de $X$ tiene al forma
+\begin{equation}
+\mathbb{E}[ X ]
+= \mathbb{E}[ X \mid X \leq u ] P( X \leq u ) + \mathbb{E}[ X \mid X > u ] P( X > u ) 
+= p_u \mathbb{E}_{F_{(u)}}[ X ] + \left( 1 - p_u \right) \mathbb{E}_{G}[ X ]
+\end{equation}
+
