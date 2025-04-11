@@ -692,8 +692,8 @@ de tal forma que
 \begin{equation}
 m( \theta ) 
 = \mathbb{E}_{P_X} \left[ g( X ) \right] 
-= \int\limits g( x ) dP_X( x )
-= \int\limits g( x ) dP_{\theta}( x )
+= \int\limits_{\mathbb{R}} g( x ) dP_X( x )
+= \int\limits_{\mathbb{R}} g( x ) dP_{\theta}( x )
 \end{equation}
 
 Si de alguna forma se puede invertir $m$, de tal forma que se pueda determinar $\theta$, en tal 
@@ -707,7 +707,7 @@ $X_1, \ldots, X_n$
 donde
 \begin{equation}
 \overline{g}
-= \int\limits g( x ) dP_n( x )
+= \int\limits_{\mathbb{R}} g( x ) dP_n( x )
 = \frac{1}{n}\sum\limits_{i=1}^n g\left( X_i \right)
 \end{equation}
 
@@ -757,7 +757,7 @@ d(P,Q) = \underset{x}{\sup} \left| F_P( x ) - F_Q( x ) \right|
 
 - Distancia cuadrática entre las distribuciones acumuladas correspondientes
 \begin{equation}
-d( P, Q ) = \int\limits \left( F_P( x ) - F_Q( x ) \right)^2\ dF_Q( x )
+d( P, Q ) = \int\limits_{\mathbb{R}} \left( F_P( x ) - F_Q( x ) \right)^2\ dF_Q( x )
 \end{equation}
 
 - Distancia de Wasserstein, para $p > 1$
@@ -771,7 +771,6 @@ donde
 \Gamma( P, Q ) = \left\{ \mu \middle| \text{$\mu$ es medida de probabilidad sobre $\Omega \times \Omega$, 
 cuyas distribuciones marginales son $P$ y $Q$}\right\}
 \end{equation}
-
 
 <!------------------------------------------------------------------------------------------------->
 ###  Método de maximización de la verosimilitud

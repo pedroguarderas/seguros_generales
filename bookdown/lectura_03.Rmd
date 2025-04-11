@@ -135,6 +135,7 @@ F( x )
 Considerando una variable aleatoria discreta $K : \Omega \longrightarrow D = \{k_1, \ldots, k_n\} \subset \mathbb{R}$, la **esperanza matemática** está dada por:
 \begin{equation}
 \mathbb{E}[ K ] 
+= \mathbb{E}_P[ K ] 
 = \sum\limits_{i=0}^{\infty} k_i P\left( K = k_i \right)
 = \sum\limits_{i=0}^{\infty} k_i p_i
 \end{equation}
@@ -143,6 +144,7 @@ Para el caso de una variable aleatoria continua $X : \Omega \longrightarrow \mat
 reales, la esperanza matemática está dada por
 \begin{equation}
 \mathbb{E}[ X ]
+= \mathbb{E}_P[ K ] 
 = \int\limits_{\mathbb{\Omega}} X( \omega )\ dP( \omega )
 = \int\limits_{\mathbb{R}} x\ dF( x )
 \end{equation}

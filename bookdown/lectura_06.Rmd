@@ -157,7 +157,7 @@ VaR_{\alpha}( X ) = \inf\left\{ x \in \mathbb{R} \middle| F_X( x ) > \alpha \rig
 :::
 
 ::: {.proposition #varinv}
-Si la función de distribución acumulada $F_X$ es contínua, entonces 
+Si la función de distribución acumulada $F_X$ es continua, entonces 
 $VaR_{\alpha}( X ) = F_X^{-1}( \alpha )$.
 :::
 
@@ -221,6 +221,9 @@ EVaR_{\alpha}( X ) = \inf\left\{ \frac{1}{t} \ln\left( \frac{M_X( t )}{1 - \alph
 La medida de riesgo $EVaR_{\alpha}$ es una medida de riesgo coherente.
 :::
 
+::: {.example #l6ex2}
+Podemos considerar el caso particular donde todos los reclamos se suponen independientes e 
+idénticamente distribuidos (i.i.d), en este caso con distribución $X_i \rightsquigarrow LN(\mu,\sigma)$
 ```{r l5c1}
 u <- 4
 s <- 0.5
@@ -231,18 +234,13 @@ VaRX <- quantile( X, probs = k, names = FALSE )
 TVaRX <- sapply( 
   1:length( VaRX ), 
   FUN = function( i ) ifelse( k[ i ] < 1, ( 1 / ( 1 - k[ i ] ) ) * mean( X * ( X > VaRX[ i ] ) ), max( X ) ) )
-
-hist( X, breaks = 100, xlim = c( 0, 1.1 * max( X ) ) )
-abline( v = VaRX, col = 'red' )
-
-hist( X, breaks = 100, xlim = c( 0, 1.1 * max( X ) ) )
-abline( v = TVaRX, col = 'blue' )
 ```
 
 ```{r l5c2}
 plot( k, VaRX, ylim = c( 0, 1e3 ) )
 points( k, TVaRX, col = 'red' )
 ```
+:::
 
 <!------------------------------------------------------------------------------------------------->
 ## Prima
@@ -325,7 +323,7 @@ de todos los valores en riesgo $VaR_u$, con $u \geq \alpha$.
 P = \rho( S ) = TVaR_\alpha( S ) = \frac{1}{1-\alpha} \int\limits_{\alpha}^1 VaR_u( S )\ du
 \end{equation}
 
-::: {.example #l6ex1}
+::: {.example #l6ex2}
 Consideremos el caso donde todos los siniestros son igualmente distribuidos e independientes (i.i.d) 
 $X_i \rightsquigarrow Gamma( \alpha_i, \theta )$, para $i \in \{1,\ldots,n\}$, el número de 
 unidades aseguradas está dado por $n \in \mathbb{N}$. Utilizaremos el modelo individual para
