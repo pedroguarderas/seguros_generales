@@ -33,7 +33,7 @@ options( scipen = 999 )
 options( stringsAsFactors = FALSE )
 
 # Parámetros ---------------------------------------------------------------------------------------
-wd <- getActiveProject()
+wd <- paste0( getActiveProject(), '/' )
 
 # Creando directorios ------------------------------------------------------------------------------
 dirs <- c( 'Data', 'RData', 'LaTeX' )
