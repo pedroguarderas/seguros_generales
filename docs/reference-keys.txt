@@ -31,6 +31,7 @@ def:dgev
 def:dtst
 def:dgammatra
 def:dbetra
+def:estsus
 def:bestinses
 def:bestcuadmean
 exm:l3ex1
@@ -73,6 +74,11 @@ distribuciones-discretas
 familia-de-panjer
 distribuciones-continuas
 estimación
+método-de-sustitución
+método-de-momentos
+método-de-la-distancia-mínima
+método-de-maximización-de-la-verosimilitud
+calidad-de-estimadores
 modelos-de-pérdida-agregada
 mutualización-del-riesgo
 modelo-individual

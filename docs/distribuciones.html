@@ -23,7 +23,7 @@
 <meta name="author" content="" />
 
 
-<meta name="date" content="2025-04-09" />
+<meta name="date" content="2025-04-10" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -205,7 +205,14 @@ div.csl-indent {
 <li class="chapter" data-level="4.1" data-path="distribuciones.html"><a href="distribuciones.html#distribuciones-discretas"><i class="fa fa-check"></i><b>4.1</b> Distribuciones discretas</a></li>
 <li class="chapter" data-level="4.2" data-path="distribuciones.html"><a href="distribuciones.html#familia-de-panjer"><i class="fa fa-check"></i><b>4.2</b> Familia de Panjer</a></li>
 <li class="chapter" data-level="4.3" data-path="distribuciones.html"><a href="distribuciones.html#distribuciones-continuas"><i class="fa fa-check"></i><b>4.3</b> Distribuciones continuas</a></li>
-<li class="chapter" data-level="4.4" data-path="distribuciones.html"><a href="distribuciones.html#estimación"><i class="fa fa-check"></i><b>4.4</b> Estimación</a></li>
+<li class="chapter" data-level="4.4" data-path="distribuciones.html"><a href="distribuciones.html#estimación"><i class="fa fa-check"></i><b>4.4</b> Estimación</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="distribuciones.html"><a href="distribuciones.html#método-de-sustitución"><i class="fa fa-check"></i><b>4.4.1</b> Método de sustitución</a></li>
+<li class="chapter" data-level="4.4.2" data-path="distribuciones.html"><a href="distribuciones.html#método-de-momentos"><i class="fa fa-check"></i><b>4.4.2</b> Método de momentos</a></li>
+<li class="chapter" data-level="4.4.3" data-path="distribuciones.html"><a href="distribuciones.html#método-de-la-distancia-mínima"><i class="fa fa-check"></i><b>4.4.3</b> Método de la distancia mínima</a></li>
+<li class="chapter" data-level="4.4.4" data-path="distribuciones.html"><a href="distribuciones.html#método-de-maximización-de-la-verosimilitud"><i class="fa fa-check"></i><b>4.4.4</b> Método de maximización de la verosimilitud</a></li>
+<li class="chapter" data-level="4.4.5" data-path="distribuciones.html"><a href="distribuciones.html#calidad-de-estimadores"><i class="fa fa-check"></i><b>4.4.5</b> Calidad de estimadores</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html"><i class="fa fa-check"></i><b>5</b> Modelos de pérdida agregada</a>
 <ul>
@@ -1380,8 +1387,170 @@ a partir de la muestra.</p>
 <li><p>Método de la distancia mínima</p></li>
 <li><p>Método de maximización de la verosimilitud</p></li>
 </ol>
+<!------------------------------------------------------------------------------------------------->
+<div id="método-de-sustitución" class="section level3 hasAnchor" number="4.4.1">
+<h3><span class="header-section-number">4.4.1</span> Método de sustitución<a href="distribuciones.html#método-de-sustitución" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Se considera que para la medida de de probabilidad <span class="math inline">\(P_X\)</span> que caracteriza a la variable aleatoria
+<span class="math inline">\(X\)</span> está dentro de una familia de funciones que dependen de un parámetro <span class="math inline">\(\theta \in \Theta\)</span>, es
+decir para cada <span class="math inline">\(\theta\)</span>, <span class="math inline">\(P_{\theta}\)</span> es una medida de probabilidad y para algún
+<span class="math inline">\(\theta \in \Theta, P_X = P_{\theta}\)</span>.</p>
+<p>Entonces, se parte de suponer que existe funcional <span class="math inline">\(G\)</span> actuando sobre el conjunto de medidas de
+probabilidad <span class="math inline">\(\mathcal{P}\)</span> que contiene al conjunto
+<span class="math inline">\(P( \Theta ) = \{ P_{\theta} \mid \theta \in \Theta\} \subset \mathcal{P}\)</span> y que toma valores
+en <span class="math inline">\(\Theta\)</span>, i.e. <span class="math inline">\(G: \mathcal{P} \longrightarrow \Theta\)</span>. De tal forma que <span class="math inline">\(P_{\theta}\)</span> es
+invariante, es decir:
+<span class="math display">\[\begin{equation}
+G( P_{\theta} ) = \theta,\quad \forall \theta \in \Theta
+\end{equation}\]</span></p>
+<p>Así se construye un <strong>estimador por el método de sustitución</strong> si a partir de la medida de
+probabilidad empírica <span class="math inline">\(P_n\)</span> construida con una muestra <span class="math inline">\(X_1, \ldots, X_n\)</span> de la variable
+aleatoria <span class="math inline">\(X\)</span>, se toma como parámetro el dado por:
+<span class="math display">\[\begin{equation}
+\widehat{\theta} = G\left( P_n \right)
+\end{equation}\]</span></p>
+<p>En otras palabras se sustituye el parámetro <span class="math inline">\(\theta\)</span> por <span class="math inline">\(\widehat{\theta}\)</span>. Esto implica que
+se aproxima la medida <span class="math inline">\(P_X\)</span> que caracteriza a <span class="math inline">\(X\)</span>, con la aproximación
+<span class="math inline">\(P_X \approx P_{\widehat{\theta}}\)</span>.</p>
+<p>Es de notar que a priori no se hace establece ninguna medida de la calidad de la aproximación,
+para ello hay que adjuntar algunos otros criterios que caracterizan un buen tipo de estimador.</p>
+<p>En otras ocasiones a partir de la muestra se define un estimador del parámetro <span class="math inline">\(\theta \in \Theta\)</span>
+a partir de una familia de funciones medibles que dependen directamente de la
+muestra <span class="math inline">\(X_1, \ldots, X_n\)</span> y su tamaño <span class="math inline">\(n\)</span>, i.e. una función <span class="math inline">\(\theta_n( X_1, \ldots, X_n )\)</span>. Se
+puede considerar el caso anterior como un caso en particular de este tipo de funciones, ya que
+se puede definir <span class="math inline">\(\theta_n( X_1, \ldots, X_n ) = G( P_n )\)</span>, pero hay que tener cuidado que <span class="math inline">\(G\)</span> es
+un funcional y como tal puede resultar una función que no es medible.</p>
 <div class="definition">
-<p><span id="def:bestinses" class="definition"><strong>Definición 4.15  (Estimador insesgado) </strong></span>Se dice que un estimador <span class="math inline">\(\theta_1\)</span> se dice <strong>insesgado</strong> para estimar el parámetro <span class="math inline">\(\theta\)</span>, si se
+<p><span id="def:estsus" class="definition"><strong>Definición 4.15  (Estimadores convergentes) </strong></span>En el mismo contexto anterior. Si la variable aleatoria <span class="math inline">\(X\)</span> está caracterizada por la medida
+<span class="math inline">\(P_X = P_{\theta}\)</span>, para algún <span class="math inline">\(\theta \in \Theta\)</span>. Decimos que una familia de estimadores
+<span class="math inline">\(\{\theta_n\}\)</span> es <strong>convergente</strong> si al generar cada vez una muestra más grande el estimador
+<span class="math inline">\(\theta_n( X_1, \ldots, X_n )\)</span> converge en probabilidad a <span class="math inline">\(\theta\)</span>. Esto quiere decir que
+para cualquier <span class="math inline">\(\varepsilon &gt; 0\)</span>
+<span class="math display">\[\begin{equation}
+\underset{n \rightarrow +\infty}{\lim}
+P_{\theta}\left( \left| \theta_n( X_1, \ldots, X_n ) - \theta \right| \geq \varepsilon \right) = 0
+\end{equation}\]</span></p>
+<p>Decimos que <strong>converge fuertemente</strong> si la convergencia de la familia de estimadores
+<span class="math inline">\(\theta_n( X_1, \ldots, X_n )\)</span> a <span class="math inline">\(\theta\)</span> se da <strong>casi seguramente</strong> o <strong>casi todas partes</strong>. Esto
+en término de límites implica que:
+<span class="math display">\[\begin{equation}
+P_{\theta}\left( \underset{n \rightarrow +\infty}{\lim} \theta_n( X_1, \ldots, X_n ) = \theta \right) = 1
+\end{equation}\]</span>
+En otras palabras, la probabilidad de que el límite del estimador <span class="math inline">\(\theta_n( X_1, \ldots, X_n )\)</span>
+sea igual a <span class="math inline">\(\theta\)</span> es <span class="math inline">\(1\)</span>, salvo un conjunto de medida nula para <span class="math inline">\(P_{\theta}\)</span>. De ahí resulta
+la terminología de convergencia casi segura o convergencia en casi todas partes.</p>
+</div>
+<!------------------------------------------------------------------------------------------------->
+</div>
+<div id="método-de-momentos" class="section level3 hasAnchor" number="4.4.2">
+<h3><span class="header-section-number">4.4.2</span> Método de momentos<a href="distribuciones.html#método-de-momentos" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Un estimador de momento se contruye a partir de una relación función entre la media de una función
+medible <span class="math inline">\(g\)</span> y el parámetro <span class="math inline">\(\theta \in \Theta\)</span> que caracteriza a la distribución o medida de
+probabilidad de la variable aleatoria <span class="math inline">\(X\)</span>. Es decir, existen funciones <span class="math inline">\(g\)</span> y <span class="math inline">\(m\)</span> a valores reales
+de tal forma que
+<span class="math display">\[\begin{equation}
+m( \theta )
+= \mathbb{E}_{P_X} \left[ g( X ) \right]
+= \int\limits g( x ) dP_X( x )
+= \int\limits g( x ) dP_{\theta}( x )
+\end{equation}\]</span></p>
+<p>Si de alguna forma se puede invertir <span class="math inline">\(m\)</span>, de tal forma que se pueda determinar <span class="math inline">\(\theta\)</span>, en tal
+caso se pude utilizar un <strong>estimador por momentos</strong> a partir de una muestra de la variable aleatoria
+<span class="math inline">\(X_1, \ldots, X_n\)</span>
+<span class="math display">\[\begin{equation}
+\widehat{\theta}
+= \theta_n\left( X_1, \ldots, X_n \right)
+= m^{-1}\left( \overline{g} \right)
+\end{equation}\]</span>
+donde
+<span class="math display">\[\begin{equation}
+\overline{g}
+= \int\limits g( x ) dP_n( x )
+= \frac{1}{n}\sum\limits_{i=1}^n g\left( X_i \right)
+\end{equation}\]</span></p>
+<p>Si en caso <span class="math inline">\(\overline{g}\)</span> está fuera de la imagen de <span class="math inline">\(m\)</span>, <span class="math inline">\(\overline{g} \notin m( \Theta )\)</span>, la
+inversión no sería posible. Para resolver este problema se puede recurrir a una distancia <span class="math inline">\(d\)</span> y
+buscar <span class="math inline">\(\hat{g}\)</span> tal que minimize la distancia a <span class="math inline">\(m( \Theta )\)</span>, i.e. 
+<span class="math inline">\(\hat{g} = \underset{h \in m( \Theta )}{\arg \inf}\ d( \overline{g}, h)\)</span>. Una vez determinado
+<span class="math inline">\(\hat{g}\)</span> se toma como estimador de momentos su inversa con <span class="math inline">\(m\)</span>, i.e. 
+<span class="math inline">\(\widehat{\theta} = m^{-1}( \hat{g} )\)</span>.</p>
+<p>Es de notar que en el caso anterior, la selección de la mejor distancia <span class="math inline">\(d\)</span> no es para nada
+evidente y puede ser un problema tanto o más difícil que la misma estimación del parámetro
+<span class="math inline">\(\theta\)</span> o la inversión de <span class="math inline">\(m\)</span>.</p>
+<p>La estimación por momentos en los casos más elaborados lleva a buscar la solución de problemas no
+lineales, que no suelen ser estables y que deben estar bien definidos para proveer una solución
+única.</p>
+<!------------------------------------------------------------------------------------------------->
+</div>
+<div id="método-de-la-distancia-mínima" class="section level3 hasAnchor" number="4.4.3">
+<h3><span class="header-section-number">4.4.3</span> Método de la distancia mínima<a href="distribuciones.html#método-de-la-distancia-mínima" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Este método requiere de la definición de una distancia sobre el espacio de distribuciones de
+probabilidad <span class="math inline">\(\mathcal{P}\)</span>, i.e. una función <span class="math inline">\(d : \mathcal{P} \times \mathcal{P} \longrightarrow \mathbb{R}_+\)</span>
+que satisface las siguientes propiedades:</p>
+<ol style="list-style-type: decimal">
+<li><p>Propiedad de simetría, para cualquier <span class="math inline">\(P, Q \in \mathcal{P}\)</span>, <span class="math inline">\(d( P, Q ) = d( Q, P )\)</span>,</p></li>
+<li><p>Para cualquier <span class="math inline">\(P \in \mathcal{P}\)</span>, <span class="math inline">\(d( P, P ) = 0\)</span>.</p></li>
+<li><p>Desigualdad triangular, para cualquier <span class="math inline">\(P,Q,R \in \mathcal{P}\)</span>
+<span class="math display">\[\begin{equation}
+d( P, Q ) \leq d( P, R ) + d( R, Q )
+\end{equation}\]</span></p></li>
+</ol>
+<p>A partir de la medida empírica de probabilidad <span class="math inline">\(P_n\)</span>, se busca una probabilidad <span class="math inline">\(P_{\theta}\)</span> que
+minimize la distancia medida con <span class="math inline">\(d\)</span>. Así resulta el estimador con el <strong>método de distancia mínima</strong>
+<span class="math display">\[\begin{equation}
+\widehat{\theta} = \underset{\theta \in \Theta}{\arg\,\inf\,} d\left( P_{\theta}, P_n \right)
+\end{equation}\]</span></p>
+<p>Entra las distancias que se puede considerar tenemos las siguientes</p>
+<ul>
+<li><p>Distancia del supremo entre las distribuciones acumuladas correspondientes
+<span class="math display">\[\begin{equation}
+d(P,Q) = \underset{x}{\sup} \left| F_P( x ) - F_Q( x ) \right|
+\end{equation}\]</span></p></li>
+<li><p>Distancia cuadrática entre las distribuciones acumuladas correspondientes
+<span class="math display">\[\begin{equation}
+d( P, Q ) = \int\limits \left( F_P( x ) - F_Q( x ) \right)^2\ dF_Q( x )
+\end{equation}\]</span></p></li>
+<li><p>Distancia de Wasserstein, para <span class="math inline">\(p &gt; 1\)</span>
+<span class="math display">\[\begin{equation}
+d( P, Q )
+= W_p( P, Q )
+= \underset{(X,Y) \rightsquigarrow \mu \in \Gamma( P, Q )}{\inf} \mathbb{E}_{\mu}\left[ |X - Y|^p \right]^{\frac{1}{p}}
+\end{equation}\]</span>
+donde
+<span class="math display">\[\begin{equation}
+\Gamma( P, Q ) = \left\{ \mu \middle| \text{$\mu$ es medida de probabilidad sobre $\Omega \times \Omega$,
+cuyas distribuciones marginales son $P$ y $Q$}\right\}
+\end{equation}\]</span></p></li>
+</ul>
+<!------------------------------------------------------------------------------------------------->
+</div>
+<div id="método-de-maximización-de-la-verosimilitud" class="section level3 hasAnchor" number="4.4.4">
+<h3><span class="header-section-number">4.4.4</span> Método de maximización de la verosimilitud<a href="distribuciones.html#método-de-maximización-de-la-verosimilitud" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>La estimación de verosimilitud parte de asumir que se observan una cierta cantidad de eventos
+independientes <span class="math inline">\(B_1, \ldots, B_n\)</span>, relacionados precisamente a la variable aleatoria en estudio <span class="math inline">\(X\)</span>.</p>
+<p>Se postula precisamente que la mejor medida de probabilidad es aquella que maximiza la probabilidad
+de observar estos eventos independientes. En el caso en particular de la estimación de una medida
+de probabilidad en una familia <span class="math inline">\(\{P_{\theta}\}\)</span> con <span class="math inline">\(\theta \in \Theta\)</span>, se busca maximizar la
+probabilidad:
+<span class="math display">\[\begin{equation}
+\underset{\theta \in \Theta}{\sup} \prod\limits_{i=1}^n P_{\theta}\left( B_i \right)
+\end{equation}\]</span></p>
+<p>o de forma equivalente, si se toma logaritmos:
+<span class="math display">\[\begin{equation}
+\underset{\theta \in \Theta}{\sup} \sum\limits_{i=1}^n \log P_{\theta} \left( B_i \right)
+\end{equation}\]</span></p>
+<p>Así, el estimador por verosimilitud, es el dado por:
+<span class="math display">\[\begin{equation}
+\widehat{\theta}
+= \underset{\theta \in \Theta}{\arg\,\sup\,} \sum\limits_{i=1}^n \log P_{\theta} \left( B_i \right)
+\end{equation}\]</span></p>
+<p>En la práctica los eventos que se observa <span class="math inline">\(B_i\)</span> son puntuales y son precisamente los valores
+que toma la variable aleatoria <span class="math inline">\(X\)</span>. Es decir, se observa una muestra <span class="math inline">\(X_1, \ldots, X_n\)</span>.</p>
+<!------------------------------------------------------------------------------------------------->
+</div>
+<div id="calidad-de-estimadores" class="section level3 hasAnchor" number="4.4.5">
+<h3><span class="header-section-number">4.4.5</span> Calidad de estimadores<a href="distribuciones.html#calidad-de-estimadores" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="definition">
+<p><span id="def:bestinses" class="definition"><strong>Definición 4.16  (Estimador insesgado) </strong></span>Se dice que un estimador <span class="math inline">\(\theta_1\)</span> se dice <strong>insesgado</strong> para estimar el parámetro <span class="math inline">\(\theta\)</span>, si se
 cumple que:
 <span class="math display">\[\begin{equation}
 \mathbb{E}\left[ \theta_1 \right] = \theta
@@ -1389,7 +1558,7 @@ cumple que:
 caso contrario se dirá que el estimador es <strong>sesgado</strong> o que presenta un <strong>error sistemático</strong>.</p>
 </div>
 <div class="definition">
-<p><span id="def:bestcuadmean" class="definition"><strong>Definición 4.16  (Mejor en media cuadrática) </strong></span>Se dice que un estimador <span class="math inline">\(\theta_1\)</span> es mejor estimador en media cuadrática que el estimador
+<p><span id="def:bestcuadmean" class="definition"><strong>Definición 4.17  (Mejor estimador en media cuadrática) </strong></span>Se dice que un estimador <span class="math inline">\(\theta_1\)</span> es mejor estimador en media cuadrática que el estimador
 <span class="math inline">\(\theta_2\)</span>, respecto del parámetro <span class="math inline">\(\theta\)</span>, si se cumple la siguiente desigualdad
 <span class="math display">\[\begin{equation}
 \mathbb{E}\left[ \left( \theta_1 - \theta \right)^2 \right]
@@ -1398,6 +1567,7 @@ caso contrario se dirá que el estimador es <strong>sesgado</strong> o que prese
 </div>
 
 <!------------------------------------------------------------------------------------------------->
+</div>
 </div>
 </div>
 <h3> Bibliografía<a href="bibliografía.html#bibliografía" class="anchor-section" aria-label="Anchor link to header"></a></h3>
