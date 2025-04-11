@@ -1,217 +1,510 @@
 <!------------------------------------------------------------------------------------------------->
-# Modelos lineales generalizados (GLM)
+# Tarificación
+
+Para realizar la tarificación de un producto de seguro, además de estudiar y estimar el 
+comportamiento futuro de los reclamos totales $S$, es necesario también tomar en cuenta el capital 
+$K$ destinado para hacer frente al riesgo subscrito y los costos generales $G$
 
 <!------------------------------------------------------------------------------------------------->
-## Familia exponencial
+## Tarificación en grandes términos
 
-De forma amplia, un modelo lineal generalizado aprovecha algunas propiedades de la distribución de 
-probabilidad $f_X$ de la variable (vector) aleatoria $X : \Omega \longrightarrow \mathbb{R}^n$ en 
-estudio. Se parte de asumir que $X$ tiene una distribución dentro de la **familia exponencial**, es 
-decir, existen:
+La tarificación que conlleva a la selección de la prima $\Pi$ debe tomar en cuenta como se manejan y 
+equilibran los activos y pasivos en el negocio asegurador.
 
-1. Un conjunto admisible de parámetros $\Theta \subset \mathbb{R}^m$, así cada parámetro 
-$\theta = ( \theta_1, \ldots, \theta_m )^T \in \Theta$,
+**Pasivos**
 
-2. Una función $T: \mathbb{R}^n \longrightarrow \mathbb{R}^p$
+1. Capitales propios
 
-3. Una función $A: \mathbb{R}^m \longrightarrow \mathbb{R}$
+2. Reservas técnicas
 
-4. Una función $\eta: \mathbb{R}^m \longrightarrow \mathbb{R}^p$
+3. Reservas para otros riesgos
 
-de tal forma que:
+4. Deudas o depósitos en dinero recibidos por cesiones
+
+5. Otras deudas por pagar
+
+
+**Activos**
+
+1. Capital suscrito no desembolsado
+
+2. Activos no materiales
+
+3. Inversiones
+
+4. Parte de reaseguros en reservas técnicas
+
+5. Deudas por cobrar
+
+6. Otros activos
+
+En el proceso de tarificación no es pertinente incluir todos los activos de la empresa, ya que 
+muchos de estos no tienen la liquidez necesaria como para ser considerados un tipo de activo 
+viable para la tarificación. Tampoco se toma en cuenta el dinero recibido por la cesión de primas
+en un ramo en particular, ya que esto constituye un nivel más arriba propio del negocio 
+reasegurador.
+
+En términos generales se busca equilibrar el resultado operativo del ramo de negocio $R$ a lo largo 
+de la vida del ramo. El resultado $R$ a su vez está dado por la siguiente relación:
 \begin{equation}
-f_X( x \mid \theta ) = h( x ) \exp\left( \eta( \theta ) \cdot T( x ) - A( \theta ) \right)
+R = \Pi + I - S - G - K
+\end{equation}
+donde las variables a considerarse en principio son:
+
+1. $\Pi$ Ingreso por primas
+
+2. $I$ Ingreso por inversiones
+
+3. $S$ Pago de siniestros
+
+4. $G$ Gastos de subscripción
+
+5. $K$ Coste de capital 
+
+En varias ocasiones el ciclo del negocio puede ser corto y no permite considerar un ingreso por
+inversiones $I = 0$.
+\begin{equation}
+R = \Pi - S - G - K
 \end{equation}
 
-Al tener varias observaciones independientes de la misma variable aleatoria $x_1, \ldots, x_N$,
-su distribución conjunta se puede expresar como:
+Sería ideal que a lo largo de la vida del ramo el resultado mantenga $R > 0$, pero al tratarse de 
+un negocio que depende de la aleatoriedad de los reclamos, es bastante complicado encontrar un 
+costo de capital $K$ y una prima $\Pi$ que siempre asegure ante todo escenario que se mantenga 
+la positividad. Ante este riesgo continuo se busca minimizar la probabilidad de ruina $R < 0$ 
+a un nivel $\alpha > 0$ adecuado
 \begin{equation}
-f_{X_1,\ldots,X_N}( x_1, \ldots, x_N \mid \theta )
-= \prod\limits_{i=1}^N f_{X_i}( x_i \mid \theta )
+P( R < 0 ) < \alpha
 \end{equation}
 
-La función de verosimilitud logarítmica, "log-likelihood", toma una forma específica, la cual puede
-ser trabajada con comodidad para la maximización de verosimilitud.
-
+Muchas de las veces se parte del principio de equilibrio financiero \@ref(sec:equifin), donde 
+se busca la igualdad $\mathbb{E}[R] = 0$, la misma implica la siguiente relación:
 \begin{eqnarray*}
-\ell( \theta )
-& = & \log f_{X_1,\ldots,X_N}( x_1, \ldots, x_N \mid \theta ) \\
-& = & \sum\limits_{i=1}^N \log f_{X_i}( x_i \mid \theta ) \\
-& = & \sum\limits_{i=1}^N \left( \log h( x_i ) + \eta( \theta ) \cdot T( x_i ) - A( \theta )  \right)
+0 & = & \mathbb{E}[R] \\
+0 & = & \mathbb{E}[R\mid R \geq 0]P( R \geq 0 ) + \mathbb{E}[R\mid R < 0]P( R < 0 ) \\
+\mathbb{E}[R\mid R \geq 0]P( R \geq 0 ) & = & -\mathbb{E}[R\mid R < 0]P( R < 0 ) \\
+\frac{P( R < 0 )}{P( R \geq 0 ) } & = & -\frac{\mathbb{E}[R\mid R \geq 0]}{\mathbb{E}[R\mid R < 0]}
 \end{eqnarray*}
+en el equilibrio financiero, la proporción de la probabilidad de ruina respecto de la probabilidad
+de no estar en ruina es igual a la proporción entre la esperanza condicional del resultado cuando 
+no se produce la ruina respecto de la esperanza condicional cuando si se produce la ruina. 
 
-lo que podemos observar es que existe una casi linealidad respecto de la variable $\theta$. Esta 
-propiedad permite obtener un problema de maximización de verosimilitud que puede ser atacado con 
-varios paquetes de optimización numérica de una forma eficiente.
+Un modelo puede estar equilibrado financieramente $\mathbb{E}[R] = 0$, pero se desconoce la 
+probabilidad de ruina $P( R < 0)$, esta podría ser muy grande. La razón anterior permite estimar
+la relevancia de la probabilidad de ruina en un modelo equilibrado, con el uso de las esperanzas
+condicionales.
 
+Es usual asumir que la única parte aleatoria de $R$ viene dada por el valor de los reclamos totales,
+en razón de esto se tiene:
 \begin{equation}
-\underset{\theta \in \Theta}{\sup} \ell( \theta )
-= \underset{\theta \in \Theta}{\sup}  
-\sum\limits_{i=1}^N \left( \eta( \theta ) \cdot T( x_i ) - A( \theta )  \right)
+\mathbb{E}[ R ] = \Pi - \mathbb{E}[S] - G - K
 \end{equation}
 
-Usualmente, este problema se suele atacar mediante la anulación del gradiente de la función 
-objetivo, esto lo realiza la mayor parte de paquetes de software. El sistema a resolver es el 
-siguiente sistema, usualmente no lineal, de dimensión $m$:
-
+El **coste de capital** $K$ es el dinero que se requiere adicional para estar cubiertos a un nivel 
+de solvencia adecuado en caso se presenten mayores variaciones en el valor observado del reclamo 
+total $S$ y el esperado $\mathbb{E}[S]$. Para ello se suele utilizar una **medida de riesgo** 
+$\zeta$ que permita controlar la probabilidad de ruina $P( R < 0)$ al nivel de $\alpha > 0$, así se 
+suele tomar
 \begin{equation}
-\frac{\partial \ell}{\partial \theta_i}( \theta ) 
-= \sum\limits_{i=1}^N \left( \frac{\partial \eta}{\partial \theta_i}( \theta ) \cdot T( x_i ) - 
-\frac{\partial A}{\partial \theta_i}( \theta ) \right) 
-= 0,\qquad \forall i \in \{1,\ldots, m\}
+K = \zeta( S ) - \mathbb{E}[S]
+\end{equation}
+de tal forma que
+\begin{equation}
+P( \Pi - S - G - K < 0 ) = P( \Pi - G - \zeta(S) - ( S - \mathbb{E}[S] ) < 0 ) < \alpha.
 \end{equation}
 
-En la familia exponential tenemos las siguientes distribuciones: *normal, exponencial, log-normal,
-gamma, chi-cuadrado, beta, Dirichlet, Bernoulli, Poisson, binomial, geométrica, binomial negativa,
-von Mises-Fisher, Pareto con valor mínimo conocido, Gaussiana inversa, gamma inversa, multinomial
-con número $n$ conocido, Wishart, categórica*.
-
-Por la condición de normalización de la densidad de probabilidad $f_X$, se satisface la igualdad:
-\begin{eqnarray*}
-1 & = & \int\limits f_X( x \mid \theta )\ dx \\
-1 & = & \int\limits h( x ) \exp\left( \eta( \theta ) \cdot T( x ) - A( \theta ) \right)\ dx \\
-1 & = & \int\limits h( x ) \exp\left( \eta( \theta ) \cdot T( x ) \right) \exp\left( - A( \theta ) \right)\ dx \\
-1 & = &  \exp\left( - A( \theta ) \right) \int\limits h( x ) \exp\left( \eta( \theta ) \cdot T( x ) \right)\ dx \\
-\exp\left( A( \theta ) \right) & = & \int\limits h( x ) \exp\left( \eta( \theta ) \cdot T( x ) \right)\ dx \\
-A( \theta ) & = & \log\left( \int\limits h( x ) \exp\left( \eta( \theta ) \cdot T( x ) \right)\ dx \right)
-\end{eqnarray*}
-
-de donde se determina precisamente la forma que tiene la función $A$ y su el papel como factor 
-de normalización para la distribución de la variable aleatoria $X$.
-
-Así mismo, podemos establecer una cierta relación para la espera de los valores observados 
-de $T(X)$ en función de $A$
-\begin{eqnarray*}
-0 & = & \frac{\partial}{\partial \theta_i} 1 \\
-0 & = & \frac{\partial}{\partial \theta_i} \int\limits f_X( x \mid \theta )\ dx \\
-0 & = & \int\limits h( x ) \frac{\partial}{\partial \theta_i} \exp\left( \eta( \theta ) \cdot T( x ) - A( \theta ) \right)\ dx \\
-0 & = & \int\limits h( x ) \exp\left( \eta( \theta ) \cdot T( x ) - A( \theta ) \right) 
-\left( \frac{\partial \eta}{\partial \theta_i}( \theta )  \cdot T( x ) -  \frac{\partial A}{\partial \theta_i}( \theta ) \right)\ dx \\ 
-0 & = & \int\limits h( x ) \exp\left( \eta( \theta ) \cdot T( x ) - A( \theta ) \right) 
-\frac{\partial \eta}{\partial \theta_i}( \theta )  \cdot T( x )\ dx \\
-& & - \frac{\partial A}{\partial \theta_i} ( \theta )
-\int\limits h( x ) \exp\left( \eta( \theta ) \cdot T( x ) - A( \theta ) \right)\ dx \\
-0 & = & \int \limits \frac{\partial \eta}{\partial \theta_i}( \theta )  \cdot T( x ) f_X( x \mid \theta )\ dx
-- \frac{\partial A}{\partial \theta_i}( \theta ) \int \limits f_X( x \mid \theta )\ dx
-\end{eqnarray*}
-
-estamos en la capacidad de concluir que:
-\begin{equation}
-\mathbb{E}\left[ \frac{\partial \eta}{\partial \theta_i}( \theta )  \cdot T( X ) \right]
-= \frac{\partial A}{\partial \theta_i}( \theta )
-\end{equation}
-
-Cuando se da el caso que $\eta$ y $T$ son las funciones identidad, la relación anterior se reduce 
-a la siguiente igualdad:
-\begin{equation}
-\mathbb{E}\left[ X_i \right]
-= \frac{\partial A}{\partial \theta_i}( \theta )
-\end{equation}
+De la relación anterior se observa que una vez seleccionado el nivel de cobertura $\alpha$ y la 
+medida de riesgo $\zeta$, las variables correspondientes a la prima $\Pi$ y a los gastos $G$ quedan 
+libres, de ahí resulta un margen que permite seleccionar la prima más óptima para un producto de 
+seguro, así como también optimizar los gastos $G$. Este proceso de selección es precisamente lo que 
+llamamos **tarificación** (pricing).
 
 <!------------------------------------------------------------------------------------------------->
-## Modelo lineal generalizado (GLM)
-Precisamente, un **modelo lineal generalizado** (**GLM** por sus siglas en inglés) busca explotar 
-las propiedades de las variables aleatorias que poseen una densidad de probabilidad dada por alguna 
-de la funciones de la familia exponencial. Para más detalles se puede consultar @mathstat1.
+## Medidas de riesgo
 
-La idea general es poder describir el comportamiento de una variable aleatoria $Y$ que se presume
-puede ser descrita por alguna función de la familia exponencial, a partir de otras variables 
-aleatorias $X : \Omega \longrightarrow \mathbb{R}^n$ mediante una **función de vínculo** 
-$g: \mathbb{R}^q \longrightarrow \mathbb{R}^m$ entre $\theta$ y $X$, a través del paso por una 
-composición con una función lineal $\beta : \mathbb{R}^n \longrightarrow \mathbb{R}^q$, de tal 
-forma que:
+::: {.definition #spv name="Medida de riesgo coherente"}
+Una **medida de riesgo coeherente** es una función $\zeta: \mathbb{R} \longrightarrow \mathbb{R}$, 
+que satisface la siguientes propiedades:
+
+1. **Homogenidad positiva**, para cualquier $a > 0$
 \begin{equation}
-\theta = g( \beta( X ) ) = g( \beta X )
+\zeta( a X ) = a \zeta( X )
 \end{equation}
 
-Así, un GLM prescribe una distribución de probabilidad para $Y$ que tendrá la siguiente forma y 
-será dependiente de los parámetros $\beta$ y las variables explicativas $X$
+2. **Invarianza ante las traslaciones**, para cualquier $a > 0$
 \begin{equation}
-f_Y( y \mid \theta ) 
-= f_Y( y \mid g( \beta x ) )
-= h( y ) \exp\left( \eta( g( \beta x ) ) \cdot T( y ) - A( g( \beta x ) ) \right)
+\zeta( \alpha X + a ) = \zeta( \alpha X ) + a
 \end{equation}
 
-En la aplicación, el ajuste de un modelo GLM a $N \in \mathbb{N}$ observaciones $y_1, \ldots, y_N$
-de la variable aleatoria $Y$ y sus respectivas variables explicativas $x_1, \ldots, x_N$. Se asume
-independencias entre las observaciones y se busca maximizar la verosimilitud de los valores 
-observados, pero en función del nuevo parámetro $\beta$, de ahí la parte lineal del modelo.
+3. **Monotonicidad**, Si $X \leq Y$
 \begin{equation}
-\ell( \beta )
-= \sum\limits_{i=1}^N \left( \log h( y_i ) +
-\eta( g( \beta x_i ) ) \cdot T( y_i ) - A( g( \beta x_i ) \right)
-\end{equation} 
-
-De ello resulta el problema de maximización de verosimilitud que se busca resolver para ajustar un 
-modelo GLM.
-\begin{equation}
-\underset{\beta \in \mathbb{R}^{q \times n}}{\sup} \ell( \beta ) 
-= \underset{\beta \in \mathbb{R}^{q \times n}}{\sup} \sum\limits_{i=1}^N \left( \log h( y_i ) +
-\eta( g( \beta x_i ) ) \cdot T( y_i ) - A( g( \beta x_i ) \right)
-\end{equation}
-es de notar que el término $\sum\limits_{i=1}^N \log h( y_i )$ no depende de $\beta$ y por tal 
-razón puede ser omitido al momento de maximizar la verosimilitud.
-
-En varias ocasiones no todos los parámetros $\theta$ de la densidad de probabilidad son 
-considerados, sino tan solo una parte de los mismos, los otros parámetros se consideran como un
-valor constante ya dado o también como un parámetro a determinar. Así, se divide 
-$\theta = ( \theta_1, \theta_2 ), \theta_1 \in \mathbb{R}^{m_1}, \theta_2 \in \mathbb{R}^{m_2}, m = m_1 + m_2$, 
-donde solo se establece una función de vínculo para la primera parte $\theta_1 = g( \beta X )$. 
-Esta consideración en muchos casos ayuda a simplificar la formulación del modelo y el costo 
-computacional de estimación. En este contexto la función de verosimilitud tomaría la forma:
-\begin{equation}
-\ell( \beta, \theta_2 )
-= \sum\limits_{i=1}^N \left( \log h( y_i ) +
-\eta( g( \beta x_i ), \theta_2 ) \cdot T( y_i ) - A( g( \beta x_i ), \theta_2 ) \right)
-\end{equation} 
-
-::: {.example #l6ex1 name="Regresión de Poisson"}
-En este caso presentamos el modelo bastante utilizado conocido como regresión de Poisson. En donde 
-suponemos que $N \rightsquigarrow Pois( \lambda( x ) ER( x ) ) = Pois( g( \beta x ) ER( x ) )$
-donde $\lambda$ es el parámetro a estimar en función de las variables explicativas $x$.
-\begin{equation}
-\mathbb{E}[ N ] = \lambda( x ) ER( x ) = g( \beta x ) ER( x )
+\zeta( X ) \leq \zeta( Y )
 \end{equation}
 
+4. **Sub-aditividad**
 \begin{equation}
-P( N = n ) = \exp(-g( \beta x ) ER( x )) \frac{g( \beta x )^n ER( x )^n}{n!}
+\zeta( X + Y ) \leq \zeta( X ) + \zeta( Y )
 \end{equation}
+:::
 
-```{r l6t1, echo = TRUE, results = 'asis'}
-# la librería CASdatasets fue previamente cargada
-data( beMTPL97 )
-beMTPL97 <- as.data.table( beMTPL97 )
+En lo que continúa citamos algunas de las medidas de riesgo usualmente utilizadas.
 
-# Impresión de las primeras filas de la tabla
-beMTPL97[ 1:100 ] %>%
-  kable(
-    caption = "Pólizas y reclamos de automóviles en Bélgica",
-    row.names = FALSE,
-    col.names = names( beMTPL97 ),
-    align = paste0( rep( "r", ncol( beMTPL97 ) ), collapse = "" ),
-    digits = c( 0, 2, 0, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 4 ),
-    format.args = list( big.mark = ',', decimal.mark = '.', scientific = FALSE ),
-    escape = FALSE ) %>%
-  kable_classic( font_size = 14, full_width = FALSE, html_font = "Cambria" ) %>%
-  scroll_box( width = "750px", height = "500px" )
+::: {.definition #VaR name="Valor en riesgo"}
+Dada una variable aleatoria a valores reales $X$, el **valor en riesgo** (value at risk) de $X$ al 
+nivel de probabilidad $\alpha \in (0,1)$ está dado por
+\begin{equation}
+VaR_{\alpha}( X ) = \inf\left\{ x \in \mathbb{R} \middle| F_X( x ) > \alpha \right\}
+\end{equation}
+:::
+
+::: {.proposition #varinv}
+Si la función de distribución acumulada $F_X$ es contínua, entonces 
+$VaR_{\alpha}( X ) = F_X^{-1}( \alpha )$.
+:::
+
+Por otra parte, $VaR_{\alpha}$ para cualquier $\alpha$ no es una medida de riesgo sub-aditiva.
+
+::: {.definition #TVaR name="Valor en riesgo en la cola"}
+Dada una variable aleatoria a valores reales $X$, el **valor en riesgo en la colas** 
+(tail value at risk) de $X$ al nivel de probabilidad $\alpha \in (0,1)$ está dado por
+\begin{equation}
+TVaR_{\alpha}( X ) = \frac{1}{1-\alpha} \int\limits_{\alpha}^1 VaR_u( X )\ du
+\end{equation}
+:::
+
+::: {.proposition #TVaRcohe name="Coherencia de la medida TVaR"}
+La medida de riesgo $TVaR_{\alpha}$ es una medida de riesgo coherente si la variable aleatoria
+sobre la cual se mide es una variable aleatoria continua.
+:::
+
+::: {.definition #CTE name="Esperanza condicional en la cola"} 
+Dada una variable aleatoria a valores reales $X$, la **esperanza condicional en la cola** 
+(conditional tail expectation) de $X$ al nivel de probabilidad $\alpha \in (0,1)$ está dado por
+\begin{equation}
+CTE_{\alpha}( X ) = \mathbb{E}\left[ X \middle| X > VaR_{\alpha}( X ) \right]
+\end{equation}
+:::
+
+::: {.proposition #eqtvarcte}
+Si la función de distribución acumulada $F_X$ de la variable aleatoria $X$ es continua, entonces
+se tiene la siguiente igualdad
+\begin{equation}
+CTE_{\alpha}( X ) = TVaR_{\alpha}( X )
+\end{equation}
+:::
+
+::: {.definition #CVaR name="Valor en riesgo condicionado"}
+Dada una variable aleatoria a valores reales $X$, el **valor en riesgo condicionado** 
+(conditional value at risk) de $X$ al nivel de probabilidad $\alpha \in (0,1)$ está dado por
+\begin{equation}
+CVaR_{\alpha}( X ) = \mathbb{E}\left[ X - VaR_{\alpha}( X ) \middle| X > VaR_{\alpha}( X ) \right]
+= CTE_{\alpha}( X ) - VaR_{\alpha}( X )
+\end{equation}
+:::
+
+::: {.definition #ES name="Déficit esperado"}
+Dada una variable aleatoria a valores reales $X$, el **déficit esperado** (expected shortfall) de 
+$X$ al nivel de probabilidad $\alpha \in (0,1)$ está dado por
+\begin{equation}
+ES_{\alpha}( X ) = \mathbb{E}\left[ \max\left( X - VaR_{\alpha}( X ), 0 \right) \right]
+\end{equation}
+:::
+
+::: {.definition #EVaR name="Valor en riesgo entrópico"}
+Dada una variable aleatoria a valores reales $X$, el **valor en riesgo entrópico** 
+(entropic value at risk) de $X$ al nivel de probabilidad $\alpha \in (0,1)$ está dado por
+\begin{equation}
+EVaR_{\alpha}( X ) = \inf\left\{ \frac{1}{t} \ln\left( \frac{M_X( t )}{1 - \alpha} \right) \middle| t > 0 \right\}
+\end{equation}
+:::
+
+::: {.proposition #EVaRcohe name="Coherencia de la medida EVaR"}
+La medida de riesgo $EVaR_{\alpha}$ es una medida de riesgo coherente.
+:::
+
+```{r l5c1}
+u <- 4
+s <- 0.5
+n <- 1e4
+X <- rlnorm( n, meanlog = u, sdlog = s )
+k <- seq( 0, 1, 0.2 ) 
+VaRX <- quantile( X, probs = k, names = FALSE )
+TVaRX <- sapply( 
+  1:length( VaRX ), 
+  FUN = function( i ) ifelse( k[ i ] < 1, ( 1 / ( 1 - k[ i ] ) ) * mean( X * ( X > VaRX[ i ] ) ), max( X ) ) )
+
+hist( X, breaks = 100, xlim = c( 0, 1.1 * max( X ) ) )
+abline( v = VaRX, col = 'red' )
+
+hist( X, breaks = 100, xlim = c( 0, 1.1 * max( X ) ) )
+abline( v = TVaRX, col = 'blue' )
 ```
 
-```{r l6c1}
-model_N <- glm( formula = nclaims ~ ageph + sex + power + fuel + offset( log( expo ) ) + 0, 
-                family = poisson( link = 'log' ), 
-                data = beMTPL97 )
-summary( model_N )
+```{r l5c2}
+plot( k, VaRX, ylim = c( 0, 1e3 ) )
+points( k, TVaRX, col = 'red' )
 ```
 
+<!------------------------------------------------------------------------------------------------->
+## Prima
+La prima es la cantidad de dinero que un individuo o entidad pagan por una póliza de seguro, la cual
+está diseñada para cubrir ciertos riesgos personales o comerciales.
 
-```{r l6c2}
-pob <- expand.grid( ageph = seq( 18, 90, 1 ), 
-                    sex = c( 'male', 'female' ),
-                    power = seq( 10, 250 ),
-                    fuel = c( 'gasoline', 'diesel' ),
-                    expo = 1 )
-pob <- as.data.table( pob )
-pob[ , EN := predict( model_N, newdata = pob, type = 'response' ) ]
+La determinación de las primas por parte del asegurador hace uso de la mutualización del riesgo y
+diversificación, para así poder asumir la transferencia del riesgo por parte de sus asegurados. Así
+por tanto, es deseable que cualquier método que se utilice para la estimación de primas, se 
+satisfaga, algunas propiedades importantes.
+
+Sin consideramos dos riesgos a cubrir $S_1$ y $S_2$, entonces la función que estima $\rho$ las primas 
+sería aconsejable satisfaga las siguientes propiedades.
+
+1. Si se decide cobrir por compleo dos riesgos $S_1$ y $S_2$ en un mismo producto, el valor de la 
+prima deberá ser menor o igual al valor que se resultaría de cubrir cada uno de los riesgos con 
+productos separados.
+\begin{equation}
+\rho( S_1 + S_2 ) \leq \rho( S_1 ) + \rho( S_2 )
+\end{equation}
+
+2. El asumir mayor riesgo debe tener como consecuencia el aumento de la prima
+\begin{equation}
+\rho( S_1 ) \leq \rho( S_1 + S_2 )
+\end{equation}
+Esta propiedad implica que al configurar un producto de seguro con mejor cobertura, se espera 
+una prima de mayor costo.
+
+3. Si el riesgo a cubrir está limitado, es decir $P( S \leq M ) = 1$, para un valor $M > 0$, 
+entonces jamás la prima será superior a $M$
+\begin{equation}
+\rho( S ) \leq M
+\end{equation}
+Esto se traduce a que ningún asegurado estará interesado en adquirir una póliza para cubrir un 
+riesgo por encima del valor total asegurado.
+
+
+Es así que hay algunos principios para la estimación de primas, aquí citamos algunos de los más 
+conocidos:
+
+1. Prima neta, o prima pura de riesgo
+\begin{equation}
+  \rho( S ) = \mathbb{E}[S] \approx \overline{S}
+\end{equation}
+
+2. Prima de riesgo con recargo sobre la esperanza matemática
+\begin{equation}
+  P = \rho( S ) = (1 + \rho) \mathbb{E}[S] \approx (1 + \rho) \overline{S}
+\end{equation}
+
+3. Prima de riesgo con recargo sobre la varianza
+\begin{equation}
+  P = \rho( S ) = \mathbb{E}[S] + \rho \mathbb{V}[S] 
+  \approx \overline{S} + \rho \sigma_S^2
+\end{equation}
+
+4. Prima de riesgo con recargo sobre la desviación
+\begin{equation}
+  P = \rho( S ) = \mathbb{E}[S] + \rho \sqrt{\mathbb{V}[S]}
+  \approx \overline{S} + \rho \sigma_S
+\end{equation} 
+
+5. Prima de riesgo con principio exponencial para $t > 0$
+\begin{equation}
+  P = \rho( S )
+  = \frac{1}{2} \mathbb{E}\left[\exp(tS)\right]
+  = \frac{1}{2} M_N\big( \ln M_X( t ) \big)
+  \approx \frac{1}{m} \sum\limits_{i=1}^m \exp\left(t S_i\right)
+\end{equation}
+
+6. Prima de percentiles para un valor de confianza $\alpha \in [0,1]$ o prima de valor en riesgo 
+$VaR_\alpha$
+\begin{equation}
+  P = \rho( S ) = VaR_\alpha( S ) =  F_S^{-1}( \alpha )
+\end{equation}
+
+7. Prima de valor en riesgo en la cola (Tail Value at Risk) $TVaR_\alpha$. Es el promedio uniforme
+de todos los valores en riesgo $VaR_u$, con $u \geq \alpha$.
+\begin{equation}
+P = \rho( S ) = TVaR_\alpha( S ) = \frac{1}{1-\alpha} \int\limits_{\alpha}^1 VaR_u( S )\ du
+\end{equation}
+
+::: {.example #l6ex1}
+Consideremos el caso donde todos los siniestros son igualmente distribuidos e independientes (i.i.d) 
+$X_i \rightsquigarrow Gamma( \alpha_i, \theta )$, para $i \in \{1,\ldots,n\}$, el número de 
+unidades aseguradas está dado por $n \in \mathbb{N}$. Utilizaremos el modelo individual para
+la agregación de los reclamos y obtener el reclamo total $S = \sum\limits_{i=1}^n X_i$.
+
+Como todas las variables $X_i$ siguen una ley $Gamma( \alpha_i, \theta )$, sabemos que la 
+familia $Gamma$ es cerrada por adición, es decir, a suma de variables aleatorias con ley $Gamma$
+también sigue una ley $Gamma$. En este caso en particular para el reclamo total tenemos que 
+$S \rightsquigarrow Gamma\left( \sum\limits_{i=1}^n \alpha_i \right)$.
+
+Es de notar que cada variable aleatoria $X_i$ tiene un parámetro diferente $\alpha_i$. 
+
+Estudiemos la variable $S$ utilizando un algoritmo de simulación, para así calcular algunas primas
+en las diferentes formas que hemos citado. Primeramente definamos los parámetros
+```{r l5c3}
+# número de unidades aseguradas
+n <- 1000
+
+# parámetros para cada X_i
+a <- runif( n, 5, 10 )
+
+# parámetro theta, común a todas las X_i
+theta <- 4
+
+# parámetro para S
+A <- sum( a )
+```
+Ya que cada $X_i \rightsquigarrow Gamma( \alpha_i, \theta )$, podemos calcular de forma determinista
+las experanzas de $\mathbb{E}[X_i]$, para cada $i \in \{1,\ldots,n\}$ y de igual forma podemos 
+calcular la esperanza del reclamo total $\mathbb{E}[S] = \sum\limits_{i=1}^n \mathbb{E}[X_i]$. 
+Además como asumimos independencia entre los $X_i$, la varianza de $S$ también puede ser calculada
+fácilmente como $\mathbb{V}[S] = \sum\limits_{i=1}^n \mathbb{V}[X_i]$.
+```{r l5c4}
+EX <- a * theta
+VX <- a * theta^2
+ES <- sum( EX )
+VS <- sum( VX )
+SDS <- sqrt( VS )
+```
+
+La variable aleatoria del reclamo total $S$ la podemos simular, tomando una muestra de tamaño $m$, 
+i.e. $S_1,\ldots,S_m$.
+```{r l5c5}
+m <- 1e5
+S <- rgamma( m, shape = A, scale = theta )
+``` 
+
+Prima pura:
+```{r l5c6}
+P <- ES
+P <- mean( S )
+
+alpha <- 0.95
+P_avg <- ( 1 + alpha ) * ES
+P_avg <- ( 1 + alpha ) * mean( S )
+
+P_var <- ES + alpha * VS
+P_var <- mean( S ) + alpha * var( S )
+
+P_sde <- ES + alpha * SDS
+P_sde <- mean( S ) + alpha * sd( S )
+
+VaRS <- qgamma( alpha, shape = A, scale = theta )
+P_VaR <- VaRS
+P_VaR <- quantile( S, probs = alpha )
+
+P_TVaR <- ( 1 / ( 1 - alpha ) ) * ( A * theta ) * ( 1 - pgamma( VaRS, shape = A + 1, scale = theta ) )
+P_TVaR <- ( 1 / ( 1 - alpha ) ) * integrate( f = function( u ) qgamma( u, shape = A, scale = theta ), alpha, 1 )$value
+P_TVaR <- mean( sapply( runif( m, alpha, 1 ), FUN = function( k ) qgamma( k, shape = A, scale = theta ) ) )
+I <- as.numeric( S > VaRS )
+P_TVaR <- mean( S * I ) / mean( I )
+```
+
+```{r l5c7}
+n <- 1e3
+S <- rgamma( n, shape = A, scale = theta )
+smin <- qgamma( 0.001, shape = A, scale = theta )
+smax <- qgamma( 0.999, shape = A, scale = theta )
+s <- seq( smin, smax, length.out = 1000 )
+Fns <- ecdf( S )( s )
+Fs <- pgamma( s, shape = A, scale = theta )
+
+alph <- 0.02
+er <- sqrt( log( 2 / alph ) / ( 2 * n ) )
+mean( abs( Fs - Fns ) > er )
+
+plot( s, Fs, type = 'l', ylim = c( -er, 1 + er ) )
+points( s, Fns - er, col = 'red', type = 'l' )
+points( s, Fns + er, col = 'red', type = 'l' )
+
+hist( pgamma( S, shape = A, scale = theta ), breaks = 5 )
 ```
 :::
 
+<!------------------------------------------------------------------------------------------------->
+## Segmentación
+
+En muchas ocasiones es necesario tener en cuenta algunas características asociadas al riesgo 
+de asegurado, de tal forma que la prima sea lo más eficiente y adecuado según el riesgo cubierto y
+las características del mismo. La idea de segmentar la población es obtener grupos homogéneos 
+con riesgos similares.
+
+<!------------------------------------------------------------------------------------------------->
+## Deducibles
+
+El principal objetivo de los deducibles, es el reducir los costos de atención de los reclamos 
+usualmente mediante la exclusión de siniestros usualmente numerosos debidos a reclamos pequeños.
+En otras ocasiones, los deducibles están diseñados para incentivar al asegurado para evitar 
+y prevenir siniestros por cierto monto límite.
+
+1. Prevención de la pérdida - as the compensation is reduced by a deductible the retention of the 
+insured is positive; This makes out a good case for avoiding the loss; 
+
+2. Reducción de la pérdida - the fact a deductible puts the policyholder at risk of obtaining 
+only partial compensation provides an economic incentive to reduce the extend of the damage; 
+
+3. Evitar pequeñas pérdidas - where administration costs are dominant for small losses, the 
+administration costs will often exceed the loss itself, and hence the insurance company would want 
+the policyholder to pay it himself; 
+
+4. Reducción de la prima - premium reduction can be an important aspect for the policyholders, 
+they may prefer to take a higher deductible to get a lower premium.
+
+
+```{r l5c8}
+n <- 1e5
+l <- 3
+dat <- data.table( id = 1:n, k = rpois( n, lambda = l )  )
+datf <- dat[ , list( fk = .N ), by = k ]
+setorder( datf, k )
+datf[ , fks := shift( fk, n = 1 ) ]
+datf[ , gk := k * fk / fks ]
+datf <- datf[ !is.na( gk ) ]
+plot( datf$k, datf$gk )
+```
+
+```{r l5c9}
+dflm <- lm( formula = gk ~ k, data = datf, method = 'qr' )
+a <- coef( dflm )[ 2 ]
+b <- coef( dflm )[ 1 ]
+p0 <- exp( -b )
+k <- seq( 1, 100, 1 )
+p <- p0 * cumprod( c( 1, a + b / k ) )
+sum( p )
+k <- seq( 0, 100, 1 )
+sum( dpois( k, lambda = l ) )
+EN <- sum( k * p )
+```
+
+```{r l5c10}
+D <- function( x, d ) return( max( x - d, 0 ) )
+d <- 100
+u <- 6
+s <- 0.3
+n <- 1e3
+X <- rlnorm( n, meanlog = u, sdlog = s )
+DX <- sapply( X, FUN = D, d )
+x <- seq( 0, 1e3, length.out = 500 )
+FXe <- ecdf( X )
+FDXe <- ecdf( DX )
+Fx <- sapply( x, FUN = function( x ) FXe( x ) )
+FDx <- sapply( x, FUN = function( x ) FDXe( x ) )
+plot( x, Fx, type = 's' )
+points( x, FDx, type = 's', col = 'blue' )
+```
+
+```{r l5c11}
+D <- function( x, M ) return( min( x, M ) )
+M <- 600
+u <- 6
+s <- 0.3
+n <- 1e4
+X <- rlnorm( n, meanlog = u, sdlog = s )
+DX <- sapply( X, FUN = D, M )
+x <- seq( 0, 1e3, length.out = 500 )
+FXe <- ecdf( X )
+FDXe <- ecdf( DX )
+Fx <- sapply( x, FUN = function( x ) FXe( x ) )
+FDx <- sapply( x, FUN = function( x ) FDXe( x ) )
+plot( x, Fx, type = 's' )
+points( x, FDx, type = 's', col = 'blue' )
+```

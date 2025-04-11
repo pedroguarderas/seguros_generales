@@ -1,1 +1,14 @@
-# Series de tiempo
+<!------------------------------------------------------------------------------------------------->
+# Reservas técnicas
+
+## Reservas para primas no adquiridas
+
+## Reservas de riesgos en curso
+
+## Reservas de siniestros a pagar
+
+### Siniestros sucedidos, reportados, resueltos, no pagados
+  
+### Siniestros sucedidos, reportados, no resueltos, no pagados
+  
+### Siniestros sucedidos, no reportados, no resueltos, no pagados

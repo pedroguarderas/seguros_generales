@@ -1,491 +1,552 @@
 <!------------------------------------------------------------------------------------------------->
-# Tarificación
-
-Para realizar la tarificación de un producto de seguro, además de estudiar y estimar el 
-comportamiento futuro de los reclamos totales $S$, es necesario también tomar en cuenta el capital 
-$K$ destinado para hacer frente al riesgo subscrito y los costos generales $G$
+# Modelos de pérdida agregada
 
 <!------------------------------------------------------------------------------------------------->
-## Tarificación en grandes términos
+## Mutualización del riesgo
+La idea de mantener un seguro está basada en la mutualización de los riesgos. La mutualización 
+como tal nace del mismo mecanismo bajo el cual funciona un seguro, cada asegurado transfiera 
+su riesgo individual a la compañia de seguros por su parte, la suma total de estos riesgos $S$ es 
+el riesgo total que asume el asegurador.
 
-La tarificación que conlleva a la selección de la prima $\Pi$ debe tomar en cuenta como se manejan y 
-equilibran los activos y pasivos en el negocio asegurador.
-
-**Pasivos**
-
-1. Capitales propios
-
-2. Reservas técnicas
-
-3. Reservas para otros riesgos
-
-4. Deudas o depósitos en dinero recibidos por cesiones
-
-5. Otras deudas por pagar
-
-
-**Activos**
-
-1. Capital suscrito no desembolsado
-
-2. Activos no materiales
-
-3. Inversiones
-
-4. Parte de reaseguros en reservas técnicas
-
-5. Deudas por cobrar
-
-6. Otros activos
-
-En el proceso de tarificación no es pertinente incluir todos los activos de la empresa, ya que 
-muchos de estos no tienen la liquidez necesaria como para ser considerados un tipo de activo 
-viable para la tarificación. Tampoco se toma en cuenta el dinero recibido por la cesión de primas
-en un ramo en particular, ya que esto constituye un nivel más arriba propio del negocio 
-reasegurador.
-
-En términos generales se busca equilibrar el resultado operativo del ramo de negocio $R$ a lo largo 
-de la vida del ramo. El resultado $R$ a su vez está dado por la siguiente relación:
+Los riesgos de cada uno de los $n \in \mathbb{N}$ asegurados, pueden ser representados por variables 
+aleatorias $X_1,\ldots X_n$, las mismas pueden ser independientes o dependientes entre ellas. El 
+costo total del portafolio está dado por la suma de todos estos riesgos.
 \begin{equation}
-R = \Pi + I - S - G - K
+S = \sum\limits_{i=1}^n X_i
 \end{equation}
-donde las variables a considerarse en principio son:
+El conocer la distribución del costo total $S$ es una tarea crucial para el asegurador.
 
-1. $\Pi$ Ingreso por primas
-
-2. $I$ Ingreso por inversiones
-
-3. $S$ Pago de siniestros
-
-4. $G$ Gastos de subscripción
-
-5. $K$ Coste de capital 
-
-En varias ocasiones el ciclo del negocio puede ser corto y no permite considerar un ingreso por
-inversiones $I = 0$.
+El valore esperado de de los reclamos totales, puede ser calculado fácilmente utilizando las
+propiedades de linealidad de la esperanza matemática $\mathbb{E}$
 \begin{equation}
-R = \Pi - S - G - K
+\mathbb{E}[ S ]
+= \mathbb{E}\left[ \sum\limits_{i=1}^n X_i \right] 
+= \sum\limits_{i=1}^n \mathbb{E}\left[ X_i \right]
 \end{equation}
-
-Sería ideal que a lo largo de la vida del ramo el resultado mantenga $R > 0$, pero al tratarse de 
-un negocio que depende de la aleatoriedad de los reclamos, es bastante complicado encontrar un 
-costo de capital $K$ y una prima $\Pi$ que siempre asegure ante todo escenario que se mantenga 
-la positividad. Ante este riesgo continuo se busca minimizar la probabilidad de ruina $R < 0$ 
-a un nivel $\alpha > 0$ adecuado
-\begin{equation}
-P( R < 0 ) < \alpha
-\end{equation}
-
-Muchas de las veces se parte del principio de equilibrio financiero \@ref(sec:equifin), donde 
-se busca la igualdad $\mathbb{E}[R] = 0$, la misma implica la siguiente relación:
+por su parte, la varianza de la variable aleatoria del costo total $S$, está dada por:
 \begin{eqnarray*}
-0 & = & \mathbb{E}[R] \\
-0 & = & \mathbb{E}[R\mid R \geq 0]P( R \geq 0 ) + \mathbb{E}[R\mid R < 0]P( R < 0 ) \\
-\mathbb{E}[R\mid R \geq 0]P( R \geq 0 ) & = & -\mathbb{E}[R\mid R < 0]P( R < 0 ) \\
-\frac{P( R < 0 )}{P( R \geq 0 ) } & = & -\frac{\mathbb{E}[R\mid R \geq 0]}{\mathbb{E}[R\mid R < 0]}
+\mathbb{V}\left[ S \right]
+& = & \mathbb{V}\left[ \sum\limits_{i=1}^n X_i \right] \\
+& = & \sum\limits_{i=1}^n \mathbb{V}\left[ X_i \right] 
++ \sum\limits_{i=1}^n \sum\limits_{j=1,j\neq i}^n \mathbb{C}\left[ X_i, X_j \right] \\
+& = & \sum\limits_{i=1}^n \mathbb{V}\left[ X_i \right] 
++ 2\sum\limits_{i=1}^{n-1} \sum\limits_{j=i+1}^n \mathbb{C}\left[ X_i, X_j \right]
 \end{eqnarray*}
-en el equilibrio financiero, la proporción de la probabilidad de ruina respecto de la probabilidad
-de no estar en ruina es igual a la proporción entre la esperanza condicional del resultado cuando 
-no se produce la ruina respecto de la esperanza condicional cuando si se produce la ruina. 
 
-Un modelo puede estar equilibrado financieramente $\mathbb{E}[R] = 0$, pero se desconoce la 
-probabilidad de ruina $P( R < 0)$, esta podría ser muy grande. La razón anterior permite estimar
-la relevancia de la probabilidad de ruina en un modelo equilibrado, con el uso de las esperanzas
-condicionales.
-
-Es usual asumir que la única parte aleatoria de $R$ viene dada por el valor de los reclamos totales,
-en razón de esto se tiene:
+Muchas de las veces el número total de reclamos $n$ es incierto y por tal razón es mejor considerar
+que el número de siniestros vendrá dado por otra variable aleatoria discreta $N$ que solo tomará 
+valores en $\mathbb{N}$
 \begin{equation}
-\mathbb{E}[ R ] = \Pi - \mathbb{E}[S] - G - K
+S = \sum\limits_{i=1}^N X_i
 \end{equation}
 
-El **coste de capital** $K$ es el dinero que se requiere adicional para estar cubiertos a un nivel 
-de solvencia adecuado en caso se presenten mayores variaciones en el valor observado del reclamo 
-total $S$ y el esperado $\mathbb{E}[S]$. Para ello se suele utilizar una **medida de riesgo** 
-$\zeta$ que permita controlar la probabilidad de ruina $P( R < 0)$ al nivel de $\alpha > 0$, así se 
-suele tomar
-\begin{equation}
-K = \zeta( S ) - \mathbb{E}[S]
-\end{equation}
-de tal forma que
-\begin{equation}
-P( \Pi - S - G - K < 0 ) = P( \Pi - G - \zeta(S) - ( S - \mathbb{E}[S] ) < 0 ) < \alpha.
-\end{equation}
-
-De la relación anterior se observa que una vez seleccionado el nivel de cobertura $\alpha$ y la 
-medida de riesgo $\zeta$, las variables correspondientes a la prima $\Pi$ y a los gastos $G$ quedan 
-libres, de ahí resulta un margen que permite seleccionar la prima más óptima para un producto de 
-seguro, así como también optimizar los gastos $G$. Este proceso de selección es precisamente lo que 
-llamamos **tarificación** (pricing).
+Esto nos lleva a considerar diferentes modelos de agregación de reclamos o pérdidas como se suele 
+decir en inglés "loss models" @PanjerLoss2012, @LossModFur.
 
 <!------------------------------------------------------------------------------------------------->
-## Medidas de riesgo
-
-::: {.definition #spv name="Medida de riesgo coherente"}
-Una **medida de riesgo coeherente** es una función $\zeta: \mathbb{R} \longrightarrow \mathbb{R}$, 
-que satisface la siguientes propiedades:
-
-1. **Homogenidad positiva**, para cualquier $a > 0$
+## Modelo individual
+En el modelo de riesgos individuales consideramos que el número de siniestros que se producirán es
+conocido, por ejemplo puede ser a lo sumo el tamaño de la población asegurada, en tal caso la
+variable aleatoria $N$ pasa a ser una constante, que representaremos por $n$. De esta forma, la
+severidad total puede ser fácilmente representada por: 
 \begin{equation}
-\zeta( a X ) = a \zeta( X )
+  S = \sum\limits_{i=1}^n X_i
 \end{equation}
 
-2. **Invarianza ante las traslaciones**, para cualquier $a > 0$
-\begin{equation}
-\zeta( \alpha X + a ) = \zeta( \alpha X ) + a
-\end{equation}
+La hipótesis más usual que sostiene a este modelo es la indenpendencia entre cada uno de los
+reclamos $X_i$ y $X_j$ son independientes para cualquier $1 \leq i \neq j \leq n$.
 
-3. **Monotonicidad**, Si $X \leq Y$
-\begin{equation}
-\zeta( X ) \leq \zeta( Y )
-\end{equation}
+El valor esperado de la severidad total $S$ es:
+\begin{eqnarray*}
+\mathbb{E}[S]
+& = & \mathbb{E}\left[ \sum\limits_{i=1}^n X_i \right] \\
+& = & \sum\limits_{i=1}^n \mathbb{E}\left[ X_i \right]
+\end{eqnarray*}
 
-4. **Sub-aditividad**
-\begin{equation}
-\zeta( X + Y ) \leq \zeta( X ) + \zeta( Y )
-\end{equation}
-:::
+Así mismo con la varianza de $S$.
+\begin{eqnarray*}
+\mathbb{V}\left[ S \right]
+& = & \mathbb{V}\left[ \sum\limits_{i=1}^n X_i \right] \\
+& = & \sum\limits_{i=1}^n \mathbb{V}\left[ X_i \right] 
++ \sum\limits_{i=1}^n \sum\limits_{j=1,j\neq i}^n \mathbb{C}\left[ X_i, X_j \right] \\
+& = & \sum\limits_{i=1}^n \mathbb{V}\left[ X_i \right]\quad \text{si $\{X_i\}$ sin son independientes entre si} \\
+& = & n \mathbb{V}\left[ X \right]\quad \text{si $\{X_i\}$ sin son idénticamente distribuidas }
+\end{eqnarray*}
 
-En lo que continúa citamos algunas de las medidas de riesgo usualmente utilizadas.
-
-::: {.definition #VaR name="Valor en riesgo"}
-Dada una variable aleatoria a valores reales $X$, el **valor en riesgo** (value at risk) de $X$ al 
-nivel de probabilidad $\alpha \in (0,1)$ está dado por
-\begin{equation}
-VaR_{\alpha}( X ) = \inf\left\{ x \in \mathbb{R} \middle| F_X( x ) > \alpha \right\}
-\end{equation}
-:::
-
-::: {.proposition #varinv}
-Si la función de distribución acumulada $F_X$ es contínua, entonces 
-$VaR_{\alpha}( X ) = F_X^{-1}( \alpha )$.
-:::
-
-Por otra parte, $VaR_{\alpha}$ para cualquier $\alpha$ no es una medida de riesgo sub-aditiva.
-
-::: {.definition #TVaR name="Valor en riesgo en la cola"}
-Dada una variable aleatoria a valores reales $X$, el **valor en riesgo en la colas** 
-(tail value at risk) de $X$ al nivel de probabilidad $\alpha \in (0,1)$ está dado por
-\begin{equation}
-TVaR_{\alpha}( X ) = \frac{1}{1-\alpha} \int\limits_{\alpha}^1 VaR_u( X )\ du
-\end{equation}
-:::
-
-::: {.proposition #TVaRcohe name="Coherencia de la medida TVaR"}
-La medida de riesgo $TVaR_{\alpha}$ es una medida de riesgo coherente si la variable aleatoria
-sobre la cual se mide es una variable aleatoria continua.
-:::
-
-::: {.definition #CTE name="Esperanza condicional en la cola"} 
-Dada una variable aleatoria a valores reales $X$, la **esperanza condicional en la cola** 
-(conditional tail expectation) de $X$ al nivel de probabilidad $\alpha \in (0,1)$ está dado por
-\begin{equation}
-CTE_{\alpha}( X ) = \mathbb{E}\left[ X \middle| X > VaR_{\alpha}( X ) \right]
-\end{equation}
-:::
-
-::: {.proposition #eqtvarcte}
-Si la función de distribución acumulada $F_X$ de la variable aleatoria $X$ es continua, entonces
-se tiene la siguiente igualdad
-\begin{equation}
-CTE_{\alpha}( X ) = TVaR_{\alpha}( X )
-\end{equation}
-:::
-
-::: {.definition #CVaR name="Valor en riesgo condicionado"}
-Dada una variable aleatoria a valores reales $X$, el **valor en riesgo condicionado** 
-(conditional value at risk) de $X$ al nivel de probabilidad $\alpha \in (0,1)$ está dado por
-\begin{equation}
-CVaR_{\alpha}( X ) = \mathbb{E}\left[ X - VaR_{\alpha}( X ) \middle| X > VaR_{\alpha}( X ) \right]
-= CTE_{\alpha}( X ) - VaR_{\alpha}( X )
-\end{equation}
-:::
-
-::: {.definition #ES name="Déficit esperado"}
-Dada una variable aleatoria a valores reales $X$, el **déficit esperado** (expected shortfall) de 
-$X$ al nivel de probabilidad $\alpha \in (0,1)$ está dado por
-\begin{equation}
-ES_{\alpha}( X ) = \mathbb{E}\left[ \max\left( X - VaR_{\alpha}( X ), 0 \right) \right]
-\end{equation}
-:::
-
-::: {.definition #EVaR name="Valor en riesgo entrópico"}
-Dada una variable aleatoria a valores reales $X$, el **valor en riesgo entrópico** 
-(entropic value at risk) de $X$ al nivel de probabilidad $\alpha \in (0,1)$ está dado por
-\begin{equation}
-EVaR_{\alpha}( X ) = \inf\left\{ \frac{1}{t} \ln\left( \frac{M_X( t )}{1 - \alpha} \right) \middle| t > 0 \right\}
-\end{equation}
-:::
-
-::: {.proposition #EVaRcohe name="Coherencia de la medida EVaR"}
-La medida de riesgo $EVaR_{\alpha}$ es una medida de riesgo coherente.
-:::
-
-```{r l5c4}
-u <- 4
-s <- 0.5
-n <- 1e4
-X <- rlnorm( n, meanlog = u, sdlog = s )
-k <- seq( 0, 1, 0.2 ) 
-VaRX <- quantile( X, probs = k, names = FALSE )
-TVaRX <- sapply( 
-  1:length( VaRX ), 
-  FUN = function( i ) ifelse( k[ i ] < 1, ( 1 / ( 1 - k[ i ] ) ) * mean( X * ( X > VaRX[ i ] ) ), max( X ) ) )
-
-hist( X, breaks = 100, xlim = c( 0, 1.1 * max( X ) ) )
-abline( v = VaRX, col = 'red' )
-
-hist( X, breaks = 100, xlim = c( 0, 1.1 * max( X ) ) )
-abline( v = TVaRX, col = 'blue' )
-```
-
-```{r l5c5}
-plot( k, VaRX, ylim = c( 0, 1e3 ) )
-points( k, TVaRX, col = 'red' )
-```
 
 <!------------------------------------------------------------------------------------------------->
-## Prima
-La prima es la cantidad de dinero que un individuo o entidad pagan por una póliza de seguro, la cual
-está diseñada para cubrir ciertos riesgos personales o comerciales.
+### Algoritmo de simulación
+Se puede simular la severidad total $S$ para el caso donde se asume independencia entre cada una 
+de las severidades $X_1, \ldots, X_n$ y se conoce cada una de sus densidades de probabilidad
+$f_{X_1}, \ldots, f_{X_n}$ o distribuciones de probabilidad $F_{X_1}, \ldots, F_{X_n}$.
 
-La determinación de las primas por parte del asegurador hace uso de la mutualización del riesgo y
-diversificación, para así poder asumir la transferencia del riesgo por parte de sus asegurados. Así
-por tanto, es deseable que cualquier método que se utilice para la estimación de primas, se 
-satisfaga, algunas propiedades importantes.
+1. Se tiene fijo $n \in \mathbb{N}$,
 
-Sin consideramos dos riesgos a cubrir $S_1$ y $S_2$, entonces la función que estima $\rho$ las primas 
-sería aconsejable satisfaga las siguientes propiedades.
+2. Se fija el número de simulaciones $m \in \mathbb{N}$
 
-1. Si se decide cobrir por compleo dos riesgos $S_1$ y $S_2$ en un mismo producto, el valor de la 
-prima deberá ser menor o igual al valor que se resultaría de cubrir cada uno de los riesgos con 
-productos separados.
+3. Para cada $i \in \{1, \ldots, m\}$ se extrae una muestra $X_{i,1} \rightsquigarrow f_{X_1},\ldots,X_{i,n} \rightsquigarrow f_{X_n}$,
+
+4. Para cada $i \in \{1, \ldots, m\}$ se calcula la severidad total para la muestra $i$, 
+$S_i = \sum\limits_{j=1}^n X_{i,j}$
+
+::: {.example #l3ex1}
+El siguiente código ejemplifica el algoritmo anterior, donde se asume que cada variable aleatoria de 
+severidad $X_i$ sigue una ley log-normal $LN( \mu_i, \sigma_i )$, de parámetros $\mu_i, \sigma_i$, 
+para $i \in \{1,\ldots, n\}$.
+```{r l4c1}
+# 1. número de distribuciones
+n <- 200
+# parámetros para las n distribuciones
+mu <- seq( 1, 2, length.out = n )
+sigma <- seq( 2, 3, length.out = n )
+
+# 2. número de simulaciones
+m <- 1e4 
+
+# 3. simulación de severidades
+X <- lapply( 1:m, FUN = function( i ) sapply( 1:n, FUN = function( j ) rlnorm( 1, meanlog = mu[ j ], sdlog = sigma[ j ] ) ) )
+
+# 4. simulación de severidad total
+S <- sapply( X, FUN = function( x ) sum( x ) )
+```
+:::
+
+En el ejemplo anterior es de notar que la densidad de probabilidad de la severidad $S$ resulta de la
+convolución de las $n$ densidades individuales $f_S = f_{X_1} \star \cdots \star f_{X_n}$, la cual
+no presenta una forma analítica conocida. 
+
+De la imposibilidad anterior se se puede ver la utilidad de trabajar con la simulación aleatoria de 
+la variable $S$. Se puede estimar la distribución acumulada de probabilidad $F_S$ a partir 
+de la distribución empírica $F_m$ de la muestra, con:
 \begin{equation}
-\rho( S_1 + S_2 ) \leq \rho( S_1 ) + \rho( S_2 )
+F_S( s ) \approx F_m( s ) = \frac{1}{m} \sum\limits_{i=1}^m \mathbf {1}_{(-\infty,s]}( S_i )
 \end{equation}
+el resultado de acotación de \@ref(thm:ddkw) nos da un criterio de convergencia de $F_m$ a $F_S$
 
-2. El asumir mayor riesgo debe tener como consecuencia el aumento de la prima
-\begin{equation}
-\rho( S_1 ) \leq \rho( S_1 + S_2 )
-\end{equation}
-Esta propiedad implica que al configurar un producto de seguro con mejor cobertura, se espera 
-una prima de mayor costo.
+Para construir $F_m$ en R, se puede utilizar la función ya empaquetada `ecdf` (empirical cumulative
+distribution function).
+```{r l4c2}
+# estimación distribución acumulada empírica de S
+Fm <- ecdf( S )
 
-3. Si el riesgo a cubrir está limitado, es decir $P( S \leq M ) = 1$, para un valor $M > 0$, 
-entonces jamás la prima será superior a $M$
-\begin{equation}
-\rho( S ) \leq M
-\end{equation}
-Esto se traduce a que ningún asegurado estará interesado en adquirir una póliza para cubrir un 
-riesgo por encima del valor total asegurado.
+# esperanza empírica
+EeS <- mean( S )
 
+# esperanza teórica
+ES <- sum( sapply( 1:n, FUN = function( i ) exp( mu[i] + 0.5 * sigma[i]^2 ) ) )
 
-Es así que hay algunos principios para la estimación de primas, aquí citamos algunos de los más 
-conocidos:
+s <- seq( quantile( S, probs = 0.01 ), quantile( S, probs = 0.99 ), length.out = 1e3 )
+Fms <- sapply( s, FUN = Fm )
 
-1. Prima neta, o prima pura de riesgo
-\begin{equation}
-  \rho( S ) = \mathbb{E}[S]
-\end{equation}
-
-2. Prima de riesgo con recargo sobre la esperanza matemática
-\begin{equation}
-  P = \rho( S ) = (1 + \rho) \mathbb{E}[S]
-\end{equation}
-
-3. Prima de riesgo con recargo sobre la varianza
-\begin{equation}
-  P = \rho( S ) = \mathbb{E}[S] + \rho \mathbb{V}[S]
-\end{equation}
-
-4. Prima de riesgo con recargo sobre la desviación
-\begin{equation}
-  P = \rho( S ) = \mathbb{E}[S] + \rho \sqrt{\mathbb{V}[S]}
-\end{equation} 
-
-5. Prima de riesgo con principio exponencial para $t > 0$
-\begin{equation}
-  P = \rho( S )
-  = \frac{1}{2} \mathbb{E}\left[e^{tS}\right]
-  = \frac{1}{2} M_N\big( \ln M_X( t ) \big)
-\end{equation}
-
-6. Prima de percentiles para un valor de confianza $\alpha \in [0,1]$ o prima de valor en riesgo 
-$VaR_\alpha$
-\begin{equation}
-  P = \rho( S ) = VaR_\alpha( S ) =  F_S^{-1}( \alpha )
-\end{equation}
-
-7. Prima de valor en riesgo en la cola (Tail Value at Risk) $TVaR_\alpha$. Es el promedio uniforme
-de todos los valores en riesgo $VaR_u$, con $u \geq \alpha$.
-\begin{equation}
-P = \rho( S ) = TVaR_\alpha( S ) = \frac{1}{1-\alpha} \int\limits_{\alpha}^1 VaR_u( S )\ du
-\end{equation}
-
-
-$X_i \rightsquigarrow Gamma( \alpha_i, \theta )$, para $i \in \{1,\ldots,n\}$, 
-$S \rightsquigarrow Gamma\left( \sum\limits_{i=1}^n \alpha_i \right)$
-```{r l5c1}
-n <- 1000
-a <- runif( n, 5, 10 )
-A <- sum( a )
-theta <- 4
-EX <- a * theta
-VX <- a * theta^2
-ES <- sum( EX )
-VS <- sum( VX )
-SDS <- sqrt( VS )
-
-m <- 1e5
-S <- rgamma( m, shape = A, scale = theta )
-
-alpha <- 0.95
-P <- ES
-P <- mean( S )
-
-P_avg <- ( 1 + alpha ) * ES
-P_avg <- ( 1 + alpha ) * mean( S )
-
-P_var <- ES + alpha * VS
-P_var <- mean( S ) + alpha * var( S )
-
-P_sde <- ES + alpha * SDS
-P_sde <- mean( S ) + alpha * sd( S )
-
-VaRS <- qgamma( alpha, shape = A, scale = theta )
-P_VaR <- VaRS
-P_VaR <- quantile( S, probs = alpha )
-
-P_TVaR <- ( 1 / ( 1 - alpha ) ) * ( A * theta ) * ( 1 - pgamma( VaRS, shape = A + 1, scale = theta ) )
-P_TVaR <- ( 1 / ( 1 - alpha ) ) * integrate( f = function( u ) qgamma( u, shape = A, scale = theta ), alpha, 1 )$value
-P_TVaR <- mean( sapply( runif( m, alpha, 1 ), FUN = function( k ) qgamma( k, shape = A, scale = theta ) ) )
-I <- as.numeric( S > VaRS )
-P_TVaR <- mean( S * I ) / mean( I )
+plot( s, Fms, type = 's' )
+abline( v = EeS, col = 'red' )
+abline( v = ES, col = 'orange' )
 ```
 
-```{r l5c3}
-n <- 1e3
-S <- rgamma( n, shape = A, scale = theta )
-smin <- qgamma( 0.001, shape = A, scale = theta )
-smax <- qgamma( 0.999, shape = A, scale = theta )
-s <- seq( smin, smax, length.out = 1000 )
-Fns <- ecdf( S )( s )
-Fs <- pgamma( s, shape = A, scale = theta )
+Para calcular la esperanza de la severidad total $S$, también se puede utilizar una aproximación 
+a la integral de Riemann-Stieltjes utilizando la distribución acumulada empírica $F_m$.
+\begin{equation}
+\mathbb{E}[ S ] = \int\limits_{\mathbb{R}} s dF_S( s )
+\approx \int\limits_{\mathbb{R}} s dF_m( s )
+\approx \sum\limits_{i=1}^N s_{i} \left( F_m( s_{i+1} ) - F_m( s_{i} ) \right)
+\end{equation}
 
-alph <- 0.02
-er <- sqrt( log( 2 / alph ) / ( 2 * n ) )
-mean( abs( Fs - Fns ) > er )
-
-plot( s, Fs, type = 'l', ylim = c( -er, 1 + er ) )
-points( s, Fns - er, col = 'red', type = 'l' )
-points( s, Fns + er, col = 'red', type = 'l' )
-
-hist( pgamma( S, shape = A, scale = theta ), breaks = 5 )
+Esta aproximación en R puede ser implementada de la siguiente forma:
+```{r l4c3}
+N <- 1e5
+s <- seq( min( S ), max( S ), length.out = N )
+EmS <- sum( s[-N] * diff( sapply( s, FUN = Fm ) ) )
 ```
 
+De ello tenemos los siguientes resultados de cálculo para el valor esperado de la severidad total
+\begin{eqnarray*}
+\mathbb{E}[S] = \sum\limits_{i=1}^n e^{ \mu_i + \frac{1}{2} \sigma_i^2 } & = & `r formatC( ES, digits = 4, format = 'f' )`, \\
+\overline{S} = \frac{1}{m} \sum\limits_{i=1}^m S_i & = & `r formatC( EeS, digits = 4, format = 'f' )`, \\
+\sum\limits_{i=1}^N s_{i} \left( F_m( s_{i+1} ) - F_m( s_{i} ) \right) & = & `r formatC( EmS, digits = 4, format = 'f' )`
+\end{eqnarray*}
+
+Lo bueno de poseer una buena aproximación a la distribución acumulada de una variable aleatoria, es 
+que podemos calcular algunos otros valores de importancia relacionados a la variable aleatoria y
+no tan solo utilizar medidas de tendencia central. Sin embargo, para que esta aproximación sea 
+útil se requiere reducir el error de probabilidad \@ref(thm:ddkw).
+
+
+<!-- La imagen a continuación muestra el tamaño de la simulación $n$ en función de los parámetros -->
+<!-- $\delta$ y $\varepsilon$. Como se puede observar para tener un error de discrepancia útil, el -->
+<!-- número de simulaciones crece rápidamente -->
+<!-- ```{r l4c4} -->
+<!-- e <- seq( 1e-6, 1e-3, length.out = 25 ) -->
+<!-- d <- seq( 1e-6, 1e-3, length.out = length( e ) ) -->
+<!-- n <- outer( e, d, FUN = function( e, d ) return( log( -log( d / 2 ) / ( 2 * e^2 ) ) ) ) -->
+<!-- persp( e, d, n, col = 'darkgreen', theta = 140, phi = 20 ) -->
+<!-- ``` -->
+
+::: {.example #l3ex2}
+Podemos considerar el caso sencillo donde el valor posible de severidad es determinista, es decir
+para cada póliza $i\in \{1,\ldots,n\}$, el valor de severidad probable es único $M > 0$ si en caso 
+se da un evento $A_i$, esto lo podemos expresar como $X_i = M \mathbf{1}_{A_i}$ es constante. Así, pérdida
+total está dada por:
+\begin{equation} 
+S = \sum\limits_{i=1}^n X_i = \sum\limits_{i=1}^n M \mathbf{1}_{A_i} 
+\end{equation}
+
+El valor total esperado de reclamos está dado por:
+\begin{equation}
+\mathbf{E}[ S ] 
+= \sum\limits_{i=1}^n \mathbf{E}\left[ M \mathbf{1}_{A_i} \right]
+= M \sum\limits_{i=1}^n P( A_i )
+\end{equation}
+la última igualdad resulta de las propiedades de la función indicatriz \@ref(def:indicatriz).
+
+Si en caso todos los $P(A_i) = p$ tienen la misma probabilidad, el valor total esperado de reclamos
+toma la siguiente forma:
+\begin{equation}
+\mathbb{E}[S] = n M p
+\end{equation}
+:::
+
 <!------------------------------------------------------------------------------------------------->
-## Segmentación
+## Modelo colectivo
 
-En muchas ocasiones es necesario tener en cuenta algunas características asociadas al riesgo 
-de asegurado, de tal forma que la prima sea lo más eficiente y adecuado según el riesgo cubierto y
-las características del mismo. La idea de segmentar la población es obtener grupos homogéneos 
-con riesgos similares.
+El modelo colectivo de riesgo considera un número de reclamos descritos por una variable aleatoria 
+discreta $N$. Los reclamos corresponden a un número de pólizas en un periodo específico, el valor 
+de cada reclamo $i \in \{1,\ldots,N\}$ está representado por las variables aleatorias $X_i$. 
+Usualmente, se considera que cada uno de los reclamos $X_i$ están idénticamente distribuidos.
+\begin{equation}
+S = 
+\left\{
+\begin{array}{ll}
+\sum\limits_{i=1}^N X_i & \text{si}\ N > 0 \\
+0 & \text{si}\ N = 0
+\end{array}
+\right.
+\end{equation}
+o de forma más compacta se tan solo utilizar la igualdad $S = \sum\limits_{i=1}^N X_i$, donde se 
+asume que la suma da $0$ si $N = 0$.
+
+El valor esperado del total de reclamos $S$, está dado por:
+\begin{eqnarray*}
+\mathbb{E}[S]
+& = & \mathbb{E}\left[ \sum\limits_{i=1}^N X_i \right] \\
+& = & \sum\limits_{n=0}^{+\infty} \mathbb{E}\left[ 
+\sum\limits_{i=1}^n X_i\ \middle|\ N = n \right]P( N = n )\quad
+\text{utilizando la esperanza condicional} \\
+& = & 0 P( N = 0 ) + \sum\limits_{n=1}^{+\infty} \mathbb{E}\left[ \sum\limits_{i=1}^n X_i\ \middle|\ N = n \right]P( N = n ) \\
+& = & \sum\limits_{n=1}^{+\infty} \sum\limits_{i=1}^n \mathbb{E}\left[ X_i \mid N = n \right]P( N = n )\quad
+\text{linealidad de la esperanza} \\
+& = & \sum\limits_{n=0}^{+\infty} n \mathbb{E}\left[ X \mid N = n \right]P( N = n )\quad
+\text{si $\{X_i\}$ son idénticamente distribuidas} \\
+& = & \mathbb{E}\left[ X \right] \sum\limits_{n=0}^{+\infty} n P( N = n )\quad
+\text{si $X$ y $N$ son independientes} \\
+& = & \mathbb{E}[ N ] \mathbb{E}[ X ] 
+\end{eqnarray*}
+
+La distribución acumulada del reclamo total $S$ tiene la forma:
+\begin{eqnarray*}
+F_S( s ) 
+& = & P( S \leq s ) \\
+& = & P\left( \sum\limits_{i=1}^N X_i \leq s \right) \\
+& = & \sum\limits_{n=0}^{+\infty} P\left( \sum\limits_{i=1}^n X_i \leq s \middle| N = n \right) P( N = n )\quad \text{utilizando la probabilidad condicional} \\
+& = & \sum\limits_{n=0}^{+\infty} P\left( \sum\limits_{i=1}^n X_i \leq s \right) p_n\quad \text{si $X_i$ y $N$ son independientes} \\
+& = & \sum\limits_{n=0}^{+\infty} F_{X_1} \star \cdots \star F_{X_n}( s ) p_n\quad \text{distribución de la suma de variables aleatorias} \\
+& = & \sum\limits_{n=0}^{+\infty} F^{\star n}_{X}( s ) p_n\quad \text{si $\{X_i\}$ son idénticamente distribuidas}
+\end{eqnarray*}
+tomando $F^{\star 0}_{X}( s ) = 1$
 
 <!------------------------------------------------------------------------------------------------->
-## Deducibles
+### Algoritmo de simulación
+La variable del reclamo total $S$ puede ser simulada mediante el siguiente método montecarlo.
+Si $N$ sigue una ley discreta $f_N$ y cada valor severidad $X$ son idénticamente distribuidos 
+con ley $f_X$.
 
-El principal objetivo de los deducibles, es el reducir los costos de atención de los reclamos 
-usualmente mediante la exclusión de siniestros usualmente numerosos debidos a reclamos pequeños.
-En otras ocasiones, los deducibles están diseñados para incentivar al asegurado para evitar 
-y prevenir siniestros por cierto monto límite.
+1. Seleccionar el número de simulaciones $m$,
 
-1. Prevención de la pérdida - as the compensation is reduced by a deductible the retention of the 
-insured is positive; This makes out a good case for avoiding the loss; 
+2. Se genera una muestra de tamaño $m$ de variables $N_1, \ldots, N_m$ con ley $f_N$,
 
-2. Reducción de la pérdida - the fact a deductible puts the policyholder at risk of obtaining 
-only partial compensation provides an economic incentive to reduce the extend of the damage; 
+3. Se genera para cada $i \in \{1,\ldots,m\}$ una muestra de tamaño $N_i$ de variables aleatorias 
+$X_{i,1}, \ldots X_{i,N_i}$ con ley $f_X$,
 
-3. Evitar pequeñas pérdidas - where administration costs are dominant for small losses, the 
-administration costs will often exceed the loss itself, and hence the insurance company would want 
-the policyholder to pay it himself; 
+4. Se calcula los reclamos totales $S_1, \ldots, S_m$ para cada simulación $i = \{1, \ldots, m\}$, 
+mediante la siguiente suma $S_i = \sum\limits_{j=1}^{N_i} X_{i,j}$.
 
-4. Reducción de la prima - premium reduction can be an important aspect for the policyholders, 
-they may prefer to take a higher deductible to get a lower premium.
+En el lenguaje de programación R, este método de simulación puede ser fácilmente implementado, 
+como ya lo hemos realizado, utilizando las funciones de aplicación vectorial `sapply` y `lapply`. 
 
+::: {.example #l3ex3}
+Consideramos el caso de un modelo colectivo para el cuál el conteo de siniestros 
+$N \rightsquigarrow Pois( \lambda )$ y la distribución de cada uno de los reclamos 
+$\{X_i\}_{i\in \mathbb{N}}$, está dada por la misma distribución de probabilidad 
+$X \rightsquigarrow LN( \mu, \sigma )$, siendo además cada uno de los reclamos indepencientes entre
+si.
+```{r l4c5}
+# 1. selección de simulaciones
+m <- 1e4
 
-```{r l5c6}
-n <- 1e5
+# 2. especificación de los parámetros para las distribuciones
+u <- 5
+s <- 2
 l <- 3
-dat <- data.table( id = 1:n, k = rpois( n, lambda = l )  )
-datf <- dat[ , list( fk = .N ), by = k ]
-setorder( datf, k )
-datf[ , fks := shift( fk, n = 1 ) ]
-datf[ , gk := k * fk / fks ]
-datf <- datf[ !is.na( gk ) ]
-plot( datf$k, datf$gk )
+
+# 3. simulación del conteo de siniestros
+N <- rpois( n = m, lambda = l )
+
+# 4. simulación de la severidad de los reclamos
+X <- lapply( N, FUN = function( n ) rlnorm( n, meanlog = u, sdlog = s ) )
+
+# 5. reclamo total, agregación por cada simulación
+S <- sapply( X, FUN = function( x ) sum( x, na.rm = TRUE ) )
+```
+:::
+
+Es de notar que una algoritmo como el descrito tiene una falencia cuando la frecuencia de siniestros
+es poco observada, esto sucede cuando la probabilidad $P( N = 0 )$ es alta y por tal razón para 
+generar suficientes reclamos y así poder tener cálculos con una buena aproximación numérica, 
+con el uso de simulaciones se necesitará muchas simulaciones.
+
+Es interesante observar que el modelo colectivo puede ser muchas veces calculado de forma similar
+a un modelo individual, para ciertos casos particulares. Por ejemplo, si consideramos el caso 
+cuando la variable aleatoria del conteo de siniestros $N \rightsquigarrow Bin( n, p )$ sigue una 
+distribución binomial con parámetros $n$ y $p$ y los reclamos individuales $\{ X_i \}$ son i.i.d.
+A partir de esto, el reclamo total $S$ puede ser expresado de dos formas
+\begin{equation}
+S = \sum\limits_{k=0}^{N} X_k
+= \sum\limits_{k=0}^n B_k X_k
+\end{equation}
+donde $B_k \rightsquigarrow Ber( p )$ y es independientes de $X_k$. Así el modelo colectivo se 
+transforma en un modelo individual con $n$ constante y valores de reclamos individuales dados por 
+la variable aleatoria $Y_k = B_k X_k$.
+
+Para este caso en particular
+\begin{eqnarray*}
+\mathbb{E}[ S ] 
+& = & \mathbb{E}\left[ \sum\limits_{k=0}^{n} B_k X_k \right] \\
+& = & \sum\limits_{k=0}^{n} \mathbb{E}\left[ B_k X_k \right] \\
+& = & n \mathbb{E}[ B X ] \\
+& = & n \mathbb{E}[ B ] \mathbb{E}[ X ] \\
+& = & n p \mathbb{E}[ X ]
+\end{eqnarray*}
+
+así mismo,
+\begin{eqnarray*}
+\mathbb{V}[ S ]
+& = & n \mathbb{V}[ B X ] \\
+& = & n \left( \mathbb{E}[ B^2 X^2 ] - \mathbb{E}[ B X ]^2 \right) \\
+& = & n \left( \mathbb{E}[ B^2 ] \mathbb{E}[ X^2 ] - \mathbb{E}[ B ]^2 \mathbb{E}[ X ]^2 \right) \\
+& = & n \left( p \mathbb{E}[ X^2 ] - p^2 \mathbb{E}[ X ]^2 \right) \\
+& = & n \left( p \mathbb{E}[ X^2 ] - p \mathbb{E}[ X ]^2 + p \mathbb{E}[ X ]^2  - p^2 \mathbb{E}[ X ]^2 \right) \\
+& = & n \left( p \mathbb{V}[ X ] + p ( 1 - p ) \mathbb{E}[ X ]^2 \right) \\
+& = & n \left( \mathbb{E}[B] \mathbb{V}[ X ] + \mathbb{V}[B] \mathbb{E}[ X ]^2 \right)
+\end{eqnarray*}
+
+::: {.example #l3ex3}
+Hacemos uso del algoritmo de simulación, pero bajo la consideración anterior donde el conteo 
+de siniestros $N \rightsquigarrow Bin( n, p )$, en algunos casos se puede considerar $n$ como el 
+número de pólizas vendidas, esto supone que solo se presenta un reclamo por póliza. Por su parte los
+reclamos consideraremos  $X_i \rightsquigarrow LN( \mu, \sigma )$, para todo $i \in \{1,\ldots,n\}$. 
+Si consideramos generar la simulación como un modelo individual, generamos variables aleatorias
+$B_i \rightsquigarrow Ber(p)$, para todo $i \in \{1,\ldots,n\}$.
+```{r l4c6}
+m <- 1e4
+n <- 1000
+p <- 0.2
+mu <- 5
+sigma <- 2
+B <- lapply( 1:m, FUN = function( i ) rbinom( n, size = 1, prob = p ) )
+X <- lapply( 1:m, FUN = function( i ) rlnorm( n, meanlog = mu, sdlog = sigma ) )
+S <- sapply( 1:m, FUN = function( i ) sum( B[[ i ]] * X[[ i ]], na.rm = TRUE ) )
+
+EeS <- mean( S )
+ES <- n * p * exp( mu + 0.5 * sigma^2 )
 ```
 
-```{r l5c7}
-dflm <- lm( formula = gk ~ k, data = datf, method = 'qr' )
-a <- coef( dflm )[ 2 ]
-b <- coef( dflm )[ 1 ]
-p0 <- exp( -b )
-k <- seq( 1, 100, 1 )
-p <- p0 * cumprod( c( 1, a + b / k ) )
-sum( p )
-k <- seq( 0, 100, 1 )
-sum( dpois( k, lambda = l ) )
-EN <- sum( k * p )
+\begin{eqnarray*}
+\mathbb{E}[S] = n p e^{ \mu + \frac{1}{2} \sigma^2 } & = & `r formatC( ES, digits = 4, format = 'f' )`, \\
+\overline{S} = \frac{1}{m} \sum\limits_{i=1}^m S_i & = & `r formatC( EeS, digits = 4, format = 'f' )`, 
+\end{eqnarray*}
+:::
+
+Es importante observar que si la frecuencia de reclamos es superior a $1$, sea este por póliza, 
+individuo o en general por unidad asegurada, la aproximación anterior no es la correcta si no 
+se realiza un ajuste al valor $n$ que es el número máximo de siniestros. Además, hay un gasto 
+innecesario de valores simulados de reclamos $X_i$ ya que algunos se multiplicaran por $B_i$, la 
+cual solo toma valores $\{0,1\}$.
+
+<!------------------------------------------------------------------------------------------------->
+## Modelos mixtos
+En algunos casos en particular se considera un modelo de agregación que es una mixtura entre el
+modelo individual y el modelo colectivo. Se parte de considerar un número $n$ de unidades aseguradas
+donde para cada unidad $i \in \{1, \ldots, n\}$, se considera que puede presentar una cantidad 
+de reclamos dados por una variable aleatoria discreta $N_i$, y así para cada presentar un número
+de reclamos $X_{i,1}, \ldots, X_{i,N_i}$. Así el reclamo total viene dado por la expresión
+\begin{equation}
+S = \sum\limits_{i=1}^n \sum\limits_{j=1}^{N_i} X_{i,j}
+\end{equation}
+
+<!------------------------------------------------------------------------------------------------->
+## Modelos con variables explicativas
+En algunos casos más generales, donde la población presenta heterogeneidad respecto del riesgo al
+cual están expuestos, como también de las dimensiones de sus reclamos, se considera que existen 
+variables aleatorias adicionales $Y_1, \ldots, Y_n$ que determinan el número de reclamos $N$ y 
+el valor de los siniestros $\{X_i\}$. Es decir no hay independencia entre $\{Y_j\}$ y $N$ así 
+como tampoco entre $\{Y_j\}$ y $\{X_i\}$. Es así que un modelo colectivo $S = \sum\limits_{i=1}^N X_i$
+su estudio, estimación y tarificación debe ser realizada de forma condicional respecto de las 
+variables aleatorias explicativas $\{Y_j\}$,
+\begin{equation}
+\mathbb{E}[ S ] 
+= \mathbb{E}\left[ \mathbb{E}\left[ S \middle| Y_1, \ldots, Y_n \right] \right]
+\end{equation}
+de donde es necesario estimar cada una de las esperanzas condicionadas 
+$\mathbb{E}\left[ S \middle| Y_1, \ldots, Y_n \right]$.
+
+En la práctica las variables explicativas $\{ Y_j \}$ suelen ser seleccionadas para caracterizar 
+el perfil de riesgo de cada cliente. Para su selección se suele utilizar algunos criterios de tipo 
+económico, financiero, legal y estadístico.
+
+<!------------------------------------------------------------------------------------------------->
+## Aplicación del deducible
+
+En muchas ocasiones según las condiciones de los contratos de seguro y el apetito de riesgo del 
+asegurador, se configura funciones deducibles sobre los reclamos.
+
+```{r l4c7}
+# 1. selección de simulaciones
+m <- 1e4
+
+# 2. especificación de los parámetros para las distribuciones
+u <- 5
+s <- 2
+l <- 3
+
+# 3. se especifica la función deducible
+D <- function( x, d, M ) {
+  return( min( max( x - d, 0 ), M ) )
+}
+
+# 4. simulación del conteo de siniestros
+N <- rpois( n = m, lambda = l )
+
+# 5. simulación de la severidad de los reclamos
+X <- lapply( N, FUN = function( n ) rlnorm( n, meanlog = u, sdlog = s ) )
+
+# 6. se aplica el deducible a los reclamos
+DX <- lapply( X, FUN = function( x ) sapply( x, FUN = function( y ) D( y, 10, 1000 ) ) )
+
+# 7. reclamo total, agregación por cada simulación
+S <- sapply( DX, FUN = function( x ) ifelse( length( x ) == 0, 0, sum( x, na.rm = TRUE ) ) )
 ```
 
-```{r l5c8}
-D <- function( x, d ) return( max( x - d, 0 ) )
-d <- 100
-u <- 6
-s <- 0.3
-n <- 1e3
-X <- rlnorm( n, meanlog = u, sdlog = s )
-DX <- sapply( X, FUN = D, d )
-x <- seq( 0, 1e3, length.out = 500 )
-FXe <- ecdf( X )
-FDXe <- ecdf( DX )
-Fx <- sapply( x, FUN = function( x ) FXe( x ) )
-FDx <- sapply( x, FUN = function( x ) FDXe( x ) )
-plot( x, Fx, type = 's' )
-points( x, FDx, type = 's', col = 'blue' )
+$S_1, \ldots, S_m \rightsquigarrow F_S$
+```{r l4c8}
+FS <- seq( 0, 1, 0.01 )
+Sq <- quantile( S, probs = FS )
+ES <- mean( S )
+plot( Sq, FS, type = 's', col = 'darkgreen' )
+abline( v = ES, col = 'red' )
 ```
 
+::: {.example #l3ex4}
+En este caso en particular estudiaremos la velocidad de convergencia del método resultante del 
+teorema del límite central \@ref(thm:tlc). Generaremos una simulación aleatoria de la suma
+agregada $S_n$ y mostraresmo s
+```{r l4c9}
+m <- 500
+n <- 5000
+u <- 4
+s <- 2
+X <- lapply( 1:m, FUN = function( j ) rlnorm( n, meanlog = u, sdlog = s ) )
+EX <- exp( u + 0.5 * s^2 )
+SDX <- sqrt( ( exp( s^2 ) - 1 ) * exp( 2 * u + s^2 ) )
+S <- lapply( X, FUN = function( x ) cumsum( x ) )
+ES <- sapply( 1:n, FUN = function( i ) mean( sapply( 1:m, FUN = function( j ) S[[ j ]][ i ] ) ) )
+VS <- sapply( 1:n, FUN = function( i ) var( sapply( 1:m, FUN = function( j ) S[[ j ]][ i ] ) ) )
+NS <- lapply( S, FUN = function( s ) ( s - ES ) / sqrt( abs( VS ) ) )
+z <- seq( -4, 4, length.out = 100 )
+FSn <- lapply( 1:n, FUN = function( i ) ecdf( sapply( 1:m, FUN = function( j ) NS[[ j ]][ i ] ) )( z ) )
+D <- sapply( FSn, FUN = function( Fn ) max( abs( Fn - pnorm( z ) ) ) )
 
-```{r l5c9}
-D <- function( x, M ) return( min( x, M ) )
-M <- 600
-u <- 6
-s <- 0.3
-n <- 1e4
-X <- rlnorm( n, meanlog = u, sdlog = s )
-DX <- sapply( X, FUN = D, M )
-x <- seq( 0, 1e3, length.out = 500 )
-FXe <- ecdf( X )
-FDXe <- ecdf( DX )
-Fx <- sapply( x, FUN = function( x ) FXe( x ) )
-FDx <- sapply( x, FUN = function( x ) FDXe( x ) )
-plot( x, Fx, type = 's' )
-points( x, FDx, type = 's', col = 'blue' )
+C <- 0.015
+# C <- 1 / sqrt( 2 * pi )
+rho <- exp( 3 * u + 3^2 * s^2 / 2 )
+Bn <- C * rho / ( SDX^3 * sqrt( 1:n ) )
+
+plot( 1:n, D, pch = 16, cex = 0.5, type = 'l', lwd = 2, lty = 1, ylim = c( 0, 0.5 ), col = 'royalblue4' )
+points( 1:n, Bn, type = 'l', lty = 1, col = 'red' )
+```
+:::
+
+
+```{r l4c10}
+l <- 3
+n <- 300
+dt <- rexp( n = n, rate = 1 / l )
+t <- c( 0, cumsum( dt ) )
+dN <- sapply( dt, FUN = function( w ) rpois( 1, lambda = l * w ) )
+N <- c( 0, cumsum( dN ) )
+sh <- 3
+rt <- 2
+X <- lapply( dN, FUN = function( n ) rgamma( n, shape = sh, rate = rt ) )
+dS <- sapply( X, FUN = function( x ) sum( x ) )
+S <- c( 0, cumsum( dS ) )
+plot( t, N, type = 's' )
+plot( t, S, type = 's' )
 ```
 
 <!------------------------------------------------------------------------------------------------->
-## Reservas técnicas
+## Algoritmo de Panjer
 
-1. Reservas para primas no adquiridas
+<!------------------------------------------------------------------------------------------------->
+## Estimación usando la transformada de Fourier
 
-2. Reservas de riesgos en curso
+Para el caso del modelo individual de riesgos podemos hacer uso de la siguiente estimación de la
+densidad de probabilidad de los reclamos totales $S$, utilizando la transformada de Fourier. En la 
+implementación numérica se utiliza la transformada de Fourier rápida (FFT).
+\begin{equation}
+\mathcal{F}\left( f_S \right)
+= \mathcal{F}\left( f^{\star n}_X \right)
+= \mathcal{F}\left( f_X \right)^{n}
+\end{equation}
 
-3. Reservas de siniestros a pagar
+Por tanto de esta relación como la transformada de Fourier es invertible, existe $\mathcal{F}^{-1}$. 
+Resulta el siguiente método para calcular la densidad de $S$
+\begin{equation}
+f_S = \mathcal{F}^{-1}\left( \mathcal{F}\left( f_S \right) \right)
+= \mathcal{F}^{-1}\left(\mathcal{F}\left( f_X \right)^{n} \right)
+\end{equation}
 
-  a. Siniestros sucedidos, reportados, resueltos, no pagados
-  
-  b. Siniestros sucedidos, reportados, no resueltos, no pagados
-  
-  c. Siniestros sucedidos, no reportados, no resueltos, no pagados
-  
-  
+En conclusión para determinar la densidad de probabilidad de $S$ basta conocer la transformada de
+Fourier de la distribución de los reclamos individuales, multiplicarla por si misma $n$ veces y 
+tomar la transformada de Fourier inversa.
+
+\begin{eqnarray*}
+\mathcal{F}\left( f_S \right)
+& = & \mathcal{F}\left( \sum\limits_{n=0}^{+\infty} p_n f_X^{\star n} \right) \\
+& = & \sum\limits_{n=0}^{+\infty} p_n \mathcal{F}\left( f_X^{\star n} \right) \\
+& = & \sum\limits_{n=0}^{+\infty} p_n \mathcal{F}\left( f_X \right)^{n}
+\end{eqnarray*}
+
+como consecuencia
+\begin{eqnarray*}
+f_S 
+& = & \mathcal{F}^{-1}\left( \mathcal{F}\left( f_S \right) \right)\\
+& = & \mathcal{F}^{-1}\left( \sum\limits_{n=0}^{+\infty} p_n \mathcal{F}\left( f_X \right)^{n} \right)\quad
+\text{Una sola inversión} \\
+& = & \sum\limits_{n=0}^{+\infty} p_n \mathcal{F}^{-1}\left( \mathcal{F}\left( f_X \right)^{n} \right)\quad
+\text{Una inversión por cada término en la suma}
+\end{eqnarray*}
+
+
+\begin{equation}
+W_n = \frac{S_n}{n}
+\end{equation}
+
+\begin{equation}
+\mathbb{E}\left[ W_n \right]
+= \mathbb{E}\left[ \frac{S_n}{n} \right] 
+= \frac{1}{n} \mathbb{E}\left[ S_n \right]
+\end{equation}
+
+\begin{equation}
+\mathbb{V}\left[ W_n \right]
+= \mathbb{V}\left[ \frac{S_n}{n} \right]
+= \frac{1}{n^2} \mathbb{V}\left[ S_n \right]
+\end{equation}

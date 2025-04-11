@@ -1,15 +1,18 @@
+<!------------------------------------------------------------------------------------------------->
 # Introducción
 
+<!------------------------------------------------------------------------------------------------->
 ## Materia
 
 **Matemática Actuarial de los Seguros Generales**
 
 **Profesor: Leonardo Vélez Aguirre, MSc.**
 
+<!------------------------------------------------------------------------------------------------->
 ## Resultados de aprendizaje
 
-- Contrastar los criterios de valoración actuarial en los seguros generales, así como elaborar y aplicar
-las bases técnicas.
+- Contrastar los criterios de valoración actuarial en los seguros generales, así como elaborar y 
+aplicar las bases técnicas.
 
 - Aprender a obtener la distribución y momentos correspondientes de la siniestralidad total pagada
 por el asegurador y por el reasegurador en presencia de franquicias y reaseguro.
@@ -25,8 +28,8 @@ consecuencias técnicas de dichas modificaciones.
 
 2. Series de tiempo
 
-3. **El Proceso de Riesgo: Distribución clase (a,b) y algoritmo de Panjer, Distribución de siniestralidad 
-agregada**
+3. **El Proceso de Riesgo: Distribución clase (a,b) y algoritmo de Panjer, Distribución de 
+siniestralidad agregada**
 
 4. Modelos Lineales Generalizados (GLMs): para datos binarios y recuentos
 
@@ -38,6 +41,7 @@ agregada**
 
 8. **Teoría de la Ruina**
 
+<!------------------------------------------------------------------------------------------------->
 ## Referencias bibliográficas
 
 ### Principales libros guía {-}
@@ -68,6 +72,3 @@ GIL FANA: Elementos de Matemáticas para las Ciencias del Seguro. Fundación Map
 1. Lenguaje R
 2. Editor de código: RStudio, VScode, ...
 3. Paquete R *actuar* @actuar.
-
-
-

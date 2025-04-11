@@ -1,824 +1,520 @@
 <!------------------------------------------------------------------------------------------------->
-# Distribuciones
+# Probabilidad y Estadística
+
+> Un ***fenómeno*** es un hecho que puede ser observado.
+> 
+> Un ***experimento*** es la observación de un fenómeno bajo condiciones específicas.
+> 
+> Un ***resultado*** es la información obtenida de un experimento.
+> 
+> Un ***evento*** es un conjunto de uno o más resultados posibles.
+> 
+> Un ***fenómeno estocástico*** es un fenómeno sobre el que se realiza un experimento que puede
+arrojar más de un resultado posible.
+> 
+> Un evento asociado a un fenómeno estocástico se denomina ***evento contingente***.
 
 <!------------------------------------------------------------------------------------------------->
-## Distribuciones discretas
+::: {.definition #probmed name="Medida de probabilidad"}
+La ***probabilidad*** es una medida de las posibilidades de que ocurra un evento contingente que 
+toma valores en $[0,1]$.
 
-::: {.definition #dbinom name="Distribución binomial"}
-Una variable aleatoria $N$ que toma valores en $\mathbb{N}$ se dice que sigue una distribución 
-o ley de binomial $N \rightsquigarrow Bin( n, p )$, con parámetros $n \in \mathbb{N}$ y 
-$p \in [0, 1]$, si:
+Formalmente, la probabilidad se la define como una medida, una función 
 \begin{equation}
-P( N = k ) = \binom{n}{k} p^k ( 1 - p )^{n-k}, \qquad
-\forall k \in \{0,\ldots, n\}
+P: \mathcal{F} \longrightarrow [0,1]
 \end{equation}
-esta distribución discreta se caracteriza por presentar el valor $k \frac{p_k}{p_{k-1}}$ decreciente
-conforme cambia $k \in \mathbb{N}$
-:::
-```{r l3c1}
-n <- 50
-p <- 0.3
-k <- 2
-m <- 100
-N <- rbinom( n = m, size = n, prob = p ) # simular una muestra de tamaño m
-pk <- dbinom( x = k, size = n, prob = p ) # cálculo de probabilidad P( N = k )
-Pk <- pbinom( q = k, size = n, prob = p ) # cálculo de probabilidad P( N <= k )
+sobre los eventos $\mathcal{F} \subset \mathcal{P}( \Omega )$ del espacio muestral $\Omega$.
 
-p <- dbinom( x = 0:n, size = n, prob = p )
-v <- 1:n * p[ 2:(n + 1) ] / p[ 1:n ]
+1. Si $A, B \in \mathcal{F}$ son disjuntos $A \cap B = \emptyset$, entonces 
+$P( A \cup B ) = P( A ) + P( B )$
 
-plt <- ggplot() +
-  geom_point( aes( x = 1:n, y = v ), colour = 'darkred' ) + 
-  xlab( TeX( "$k$" ) ) + 
-  ylab( TeX( "$k \\frac{p_k}{p_{k-1}}$" ) ) + 
-  theme_bw()
-plot( plt )
-```
+2. $P( \Omega ) = 1$
 
-::: {.definition #dpois name="Distribución de Poisson"}
-Una variable aleatoria $N$ que toma valores en $\mathbb{N}$ se dice que sigue una distribución 
-o ley de Poisson $N \rightsquigarrow Pois( n, p )$, con parámetro $\lambda \in \mathbb{R}$, si:
+Para cualquier par de eventos $A, B \in \mathcal{F}$, la **probabilidad condicional** de $A$ dado 
+$B$, está dada por:
 \begin{equation}
-P( N = k ) = \exp\left( -\lambda \right) \frac{\lambda^k}{k!}, \qquad
-\forall k \in \mathbb{N}
-\end{equation}
-esta distribución discreta se caracteriza por presentar el valor $k \frac{p_k}{p_{k-1}}$ constante
-conforme cambia $k \in \mathbb{N}$
-:::
-```{r l3c2}
-lambda <- 2
-k <- 2
-m <- 100
-N <- rpois( n = m, lambda = lambda ) # simular una muestra de tamaño m
-pk <- dpois( x = k, lambda = lambda ) # cálculo de probabilidad P( N = k )
-Pk <- ppois( q = k, lambda = lambda ) # cálculo de probabilidad P( N <= k )
-
-n <- 50
-p <- dpois( x = 0:n, lambda = lambda )
-v <- 1:n * p[ 2:(n + 1) ] / p[ 1:n ]
-
-plt <- ggplot() +
-  geom_point( aes( x = 1:n, y = v ), colour = 'darkred' ) + 
-  xlab( TeX( "$k$" ) ) + 
-  ylab( TeX( "$k \\frac{p_k}{p_{k-1}}$" ) ) + 
-  theme_bw()
-plot( plt )
-```
-
-::: {.definition #dnbinom name="Distribución binomial negativa"}
-Una variable aleatoria $N$ que toma valores en $\mathbb{N}$ se dice que sigue una distribución 
-o ley de  binomial negativa $N \rightsquigarrow NBin( \alpha, p )$, con parámetro $\alpha > 0$ y 
-$p \in (0,1)$, si:
-\begin{equation}
-P( N = k ) = \binom{\alpha + k - 1}{k} p^\alpha ( 1 - p )^k
-= \frac{\Gamma( \alpha + k )}{\Gamma(k+1) \Gamma(\alpha)}p^\alpha ( 1 - p )^k, \qquad
-\forall k \in \mathbb{N}
-\end{equation}
-donde $\Gamma( \alpha ) = \int\limits_0^{+\infty} x^{\alpha - 1} \exp(-x)\ dx$, $\forall \alpha \geq 0$.
-
-Esta distribución discreta se caracteriza por presentar el valor $k \frac{p_k}{p_{k-1}}$ creciente
-conforme cambia $k \in \mathbb{N}$
-:::
-```{r l3c3}
-alpha <- 2.5
-p <- 0.3
-k <- 2
-m <- 100
-N <- rnbinom( n = m, size = alpha, prob = p  ) # simular una muestra de tamaño m
-pk <- dnbinom( x = k, size = alpha, prob = p ) # cálculo de probabilidad P( N = k )
-Pk <- pnbinom( q = k, size = alpha, prob = p ) # cálculo de probabilidad P( N <= k )
-
-n <- 50
-p <- dnbinom( x = 0:n, size = alpha, prob = p )
-v <- 1:n * p[ 2:(n + 1) ] / p[ 1:n ]
-
-plt <- ggplot() +
-  geom_point( aes( x = 1:n, y = v ), colour = 'darkred' ) + 
-  xlab( TeX( "$k$" ) ) + 
-  ylab( TeX( "$k \\frac{p_k}{p_{k-1}}$" ) ) + 
-  theme_bw()
-plot( plt )
-```
-
-::: {.definition #dgeo name="Distribución geométrica"}
-Una variable aleatoria $N$ que toma valores en $\mathbb{N}$ se dice que sigue una distribución 
-o ley geométrica $N \rightsquigarrow Geo( p )$, con parámetro $p \in (0,1]$, si:
-\begin{equation}
-P( N = k ) = ( 1 - p )^k p, \qquad
-\forall k \in \mathbb{N}
+P( A \mid B ) = \frac{P( A \cap B)}{P(B)}
 \end{equation}
 :::
-```{r l3c4}
-p <- 0.3
-k <- 2
-m <- 100
-N <- rgeom( n = m, prob = p  ) # simular una muestra de tamaño m
-pk <- dgeom( x = k, prob = p ) # cálculo de probabilidad P( N = k )
-Pk <- pgeom( q = k, prob = p ) # cálculo de probabilidad P( N <= k )
-```
-Es fácil darse cuenta que la distribución geométrica $Geo( p )$ es una binomial negativa $BN( 1, p )$,
-con $\alpha = 1$.
-
-Asociado a estas distribuciones discretas existe un resultado de caracterización, el cual permite
-seleccionar la distribución de conteo.
 
 <!------------------------------------------------------------------------------------------------->
-## Familia de Panjer
+::: {.definition #va name="Variable aleatoria"}
+Una ***variable aleatoria*** es una función que asigna un valor numérico a todo evento contingente.
+mide en una escala entre 0 y 1.
 
-El criterio anterior para identificar el tipo de distribución, mediante la observación del
-comportamiento de la variable $k \frac{p_k}{p_{k-1}}$, se formaliza precisamente en la definición
-de la familia de Panjer.
-
-::: {.definition #fampanjer name="Familia de Panjer"}
-Una variable aleatoria discreta $N$, que toma valores enteros positivos $N \in \mathbb{N}$, se dice
-que pertenece a la **familia de Panjer**, si sus probabilidades $p_k = P( N = k )$ para cada 
-$k \in \mathbb{N}$, satisfacen la siguiente relación de recurrencia.
+Una variable aleatoria $X: \Omega \longrightarrow D$ que parte del espacio muestral $\Omega$ y toma 
+valores en el conjunto de los números reales  $\mathbb{R}$, decimos que sigue la ley 
+$f : \mathbb{R} \longrightarrow \mathbb{R}$, si para cualquier evento $A \subset \Omega$
 \begin{equation}
-p_k = \left( a + \frac{b}{k} \right)p_{k-1},\qquad \forall k \in \mathbb{N} \setminus \{0\} 
+P( X \in A )
+= \int\limits_{A} dP_X( x )
+= \int\limits_{A} d(P \circ X^{-1})( x )
+= \int\limits_{X^{-1}( A )} dP( \omega )
 \end{equation}
 :::
 
-Además tenemos la siguiente proposición que caracteriza a la distribución de las variables 
-aleatorias en la familia de Panjer.
+La idea de variable aleatoria a valores reales se puede extender fácilmente al caso de varias 
+variables aleatorias, un vector aleatorio que toma valores en $\mathbb{R}^n$, i.e. una función
+medible $X : \Omega \longrightarrow \mathbb{R}^n$.
 
-::: {.proposition #chfampanjer name="Caracterización familia de Panjer"}
-Las únicas leyes de probabilidad que satisfacen la relación de recurrencia anterior son:
-
-1. La ley de Poisson, la cual se obtiene para $a = 0$ y $b > 0$
+<!------------------------------------------------------------------------------------------------->
+::: {.definition #vad name="Variable aleatoria discreta"}
+Una variable aleatoria $K: \Omega \longrightarrow D$ que parte del espacio muestral $\Omega$ y toma 
+valores en un conjunto discreto $D = \left\{k_i \in \mathbb{R} | i \in \mathbb{N} \right\}$, sigue 
+una probabilidad discreta dada por las probabilidades $p_i \in [0,1]$ , $i \in \mathbb{N}$, si
 \begin{equation}
-k \frac{p_k}{p_{k-1}} = b > 0,\quad \text{constante en $k$}
+P\left( K = k_i \right) = p_i,\qquad \forall i \in \mathbb{N}
+\end{equation}
+Además se cumple la **condición de normalización** que es muy importante.
+\begin{equation}
+\sum\limits_{i = 0}^{\infty} p_i = 1
+\end{equation}
+las probabilidades *¡Nunca son negativas!* y *!Suman siempre 1!*.
+:::
+
+<!------------------------------------------------------------------------------------------------->
+::: {.definition #cd name="Función de distribución acumulada"}
+Consideramos una variable aleatoria a valores reales $X$, la **función de distribución acumulada**
+$F$ asociada a la variable aleatoria $X$, está dada por la siguiente relación:
+\begin{equation}
+F( x ) = P( X \leq x ) = P\left( X^{-1}\left( (-\infty, x ] \right) \right)
 \end{equation}
 
-2. La ley binomial negativa, la cual se obtiene para $0 < a < 1$ y $a + b > 0$
-\begin{equation}
-k \frac{p_k}{p_{k-1}} = a k + b > 0,\quad \text{creciente en $k$}
-\end{equation}
+La función de distribución acumulada, tiene las siguientes propiedades:
 
-3. La ley binomial, la cual se obtenida para $a < 0$ y $b = -a(m + 1)$, para cierto $m$ entero y 
-positivo.
+  1. Para cualquier $x \in \mathbb{R}$, $0 \leq F( x ) \leq 1$,
+  
+  2. La función $F$ es no decreciente,
+  
+  3. La función $F$ es continua por derecha,
+  
+  4. Se satisfacen los siguientes límites:
+  
 \begin{equation}
-k \frac{p_k}{p_{k-1}} = a( k - m - 1 ) < 0, \quad \text{decreciente en $k$}
+\underset{x \rightarrow -\infty}{\lim} F( x ) = 0\qquad
+\underset{x \rightarrow +\infty}{\lim} F( x ) = 1
 \end{equation}
 :::
 
-Para una demostración detallada de la proposición anterior se puede consultar @MathAssuNV1 o 
-en https://nonlifemaths.github.io/.
+Cuando se trata de un variable aleatoria con varias componentes reales $X = ( X_1, \ldots, X_n )$ 
+toma valores en $\mathbb{R}^n$. Se extiende la definición de distribución acumulada por 
+para valores reales $x = ( x_1, \ldots, x_n ) \in \mathbb{R}^n$
+\begin{equation}
+F\left( x_1, \ldots, x_n \right) 
+= P\left( X_1 \leq x_1 \land \cdots \land X_n \leq x_n \right)
+= P\left( \bigcap_{i=1}^n X_i^{-1}\left( (-\infty, x_i ] \right) \right)
+\end{equation}
 
+<!------------------------------------------------------------------------------------------------->
+::: {.definition #spv name="Función supervivencia"}
+La función de **supervivencia** $S : \mathbb{R} \longrightarrow \mathbb{R}$ está asociada a una 
+variable aleatoria $X$, está dada por la siguiente:
+\begin{equation}
+S( x ) = 1 - F( x ) = 1 - P( X \leq x ) = P( X > x )
+\end{equation}
+:::
 
-```{r l3t1, echo = TRUE, results = 'asis'}
-# la librería CASdatasets fue previamente cargada
-data( beMTPL97 )
-beMTPL97 <- as.data.table( beMTPL97 )
-conteo <- beMTPL97[ , list( fn = .N ), by = list( sex, fuel, N = nclaims ) ]
-conteo[ , pn := fn / sum( fn ), by = list( sex, fuel ) ]
-setorder( conteo, sex, fuel, N )
-conteo[ , pns := shift( pn, type = 'lag', fill = 0 ) ]
-conteo[ , jn := N * pns / pn ]
+<!------------------------------------------------------------------------------------------------->
+::: {.definition #lp name="Función de densidad de probabilidad"}
+La **densidad de probabilidad** o también la **ley de probabilidad** de una variable aleatoria 
+a valores reales $X$, es una función $f: \mathbb{R} \longrightarrow \mathbb{R}$, tal que
+\begin{equation}
+P( a \leq X \leq b ) = F( b ) - F( a ) = \int\limits_a^b f( x )\ dx
+\end{equation}
 
-conteo %>%
+Así se satisface la siguiente igualdad
+\begin{equation}
+F( x )
+= \int\limits_{(-\infty,x]} f( x )\ dx 
+= \int\limits_{-\infty}^x f( x )\ dx
+\end{equation}
+:::
+
+<!------------------------------------------------------------------------------------------------->
+::: {.definition #em name="Esperanza matemática"}
+Considerando una variable aleatoria discreta $K : \Omega \longrightarrow D = \{k_1, \ldots, k_n\} \subset \mathbb{R}$, la **esperanza matemática** está dada por:
+\begin{equation}
+\mathbb{E}[ K ] 
+= \sum\limits_{i=0}^{\infty} k_i P\left( K = k_i \right)
+= \sum\limits_{i=0}^{\infty} k_i p_i
+\end{equation}
+
+Para el caso de una variable aleatoria continua $X : \Omega \longrightarrow \mathbb{R}$ a valores 
+reales, la esperanza matemática está dada por
+\begin{equation}
+\mathbb{E}[ X ]
+= \int\limits_{\mathbb{\Omega}} X( \omega )\ dP( \omega )
+= \int\limits_{\mathbb{R}} x\ dF( x )
+\end{equation}
+Cuando la función de densidad de probabilidad está bien definida es posible expresar y calcular 
+la esperanza matemática como la siguiente expresión:
+\begin{equation}
+\mathbb{E}[ X ]
+= \int\limits_{\mathbb{R}} x f( x )\ dx
+\end{equation}
+
+La esperanza matemática goza de las siguientes propiedades:
+
+1. Linealidad, $a \in \mathbb{R}$
+\begin{equation}
+\mathbb{E}[ aX + Y ] = a \mathbb{E}[ X ] + \mathbb{E}[ Y ]
+\end{equation}
+
+2. Monotonía, si $X \leq Y$, entonces
+\begin{equation}
+\mathbb{E}[X] \leq \mathbb{E}[Y]
+\end{equation}
+:::
+
+<!------------------------------------------------------------------------------------------------->
+::: {.definition #mgf name="Función generadora de momentos"}
+La **función generadora de momento** de la variable aleatoria a valores reales $X$, es la función:
+\begin{equation}
+M_X( t ) = \mathbb{E}\left[ \exp( t X ) \right]
+\end{equation}
+:::
+
+Si $X_1, \ldots, X_n$ son variables aleatorias y $Y = X_1 + \cdots + X_n$, entonces
+\begin{eqnarray*}
+M_Y( t ) 
+& = & \mathbb{E}\left[ \exp\left( t Y \right) \right] \\
+& = & \mathbb{E}\left[ \exp\left( t \sum\limits_{i=1}^n X_i \right) \right] \\
+& = & \prod\limits_{i=1}^n \mathbb{E}\left[ \exp\left( t X_i \right) \right],\qquad 
+\text{si las variables $X_i$ son independientes} \\
+& = & \left( \mathbb{E}\left[ \exp\left( t X \right) \right] \right)^n,\qquad 
+\text{si las variables $X_i$ son identicamente distribuidas} \\
+& = & \left( M_X( t ) \right)^n
+\end{eqnarray*}
+
+<!------------------------------------------------------------------------------------------------->
+::: {.definition #em name="Varianza"}
+Así mismo su **varianza** es la dada por:
+\begin{equation}
+\mathbb{V}[ X ] 
+= \mathbb{E}\left[ \left( X - \mathbb{E}[ X ] \right)^2 \right]
+= \mathbb{E}\left[ X^2 \right] - \mathbb{E}\left[ X \right]^2
+\end{equation}
+:::
+
+<!------------------------------------------------------------------------------------------------->
+::: {.definition #ind name="Independencia de variables aleatorias"}
+Dos variables aleatorias a valores reales $X$ y $Y$, se dicen independientes si para cualquier par
+de eventos $A$ y $B$, sucede la siguiente factorización de probabilidades
+\begin{equation}
+P( X \in A \land Y \in B ) = P( X \in A ) P( Y \in B)
+\end{equation}
+
+La propiedad anterior, en particular para la función de distribución conjunta, toma la siguiente 
+forma:
+\begin{equation}
+F_{X,Y}( x, y ) = P( X \leq x \land Y \leq y ) 
+= P( X \leq x ) P( Y \leq y ) 
+= F_{X}( x ) F_{Y}( y )
+\end{equation}
+
+Así mismo, para la densidad de probabilidad conjunto, sucede la siguiente factorización
+\begin{equation}
+f_{X,Y}( x, y ) = f_X( x ) f_Y( y )
+\end{equation}
+:::
+
+<!------------------------------------------------------------------------------------------------->
+La siguiente función es utilidad para comprender algunos resultados en teoría de probabilidades. 
+También, es bastante útil para realizar de forma más clara y rápida algunos cálculos.
+
+::: {.definition #indicatriz name="Función indicatriz"}
+La **función indicatriz** de un conjunto $A \subset \Omega$, es la función 
+$\mathbf{1}_A : \Omega \longrightarrow \{0,1\}$, que toma los valores 
+$\mathbf{1}_A( \omega ) = 0$, si $\omega \notin A$ y $\mathbf{1}_A( \omega ) = 1$, si 
+$\omega \in A$.
+:::
+
+La función indicatriz $\mathbf{1}_A$ sobre un evento $A$ del espacio muestral $\Omega$, también se puede
+interpretar como una variable aleatoria, que tan solo tomo los valores $0$ o $1$. Es más, su 
+esperanza es precisamente la probabilidad del evento $A$.
+\begin{equation}
+\mathbb{E}\left[ \mathbf{1}_A \right] 
+= \int\limits_\Omega \mathbf{1}_A( \omega )\ dP( \omega )
+= \int\limits_A dP( \omega )
+= P( A )
+\end{equation}
+
+<!------------------------------------------------------------------------------------------------->
+::: {.definition #dsum name="Distribución de la suma de variables aleatorias"}
+Dadas dos variables aleatorias a valores reales $X$ y $Y$, con funciones de distribución acumulada
+$F_X$ y $F_Y$ respectivamente, la distribución acumulada $F_Z$ de la variable aleatoria $Z = X + Y$ 
+está dada por la siguiente expresión:
+\begin{equation}
+F_Z( z )
+= P( Z \leq z )
+= F_X \star F_Y ( z )
+= \int\limits_{\mathbb{R}} F_X( x - y )dF_Y( y )
+\end{equation}
+
+si en caso se puede definir las densidades de probabilidad $f_X$ y $f_Y$ para las variables 
+aleatorias $X$ y $Y$, entonces:
+\begin{equation}
+f_Z( z ) = f_X \star f_Y ( z )
+= \int\limits_{\mathbb{R}} f_X( x - y ) f_Y( y )\ dy
+\end{equation}
+
+El producto $\star$ se conoce como convolución de funciones, el mismo es simétrico.
+:::
+
+Para cuando se realiza la convolución de varias veces la misma función, se opta por una notación 
+más compacta $f^{\star k}$, para el producto de convolución $k$-veces la misma función 
+$f \star f \star \cdots \star f$.
+
+<!------------------------------------------------------------------------------------------------->
+La siguiente definición de distribución de exceso condicionada es útil para el estudio de los 
+valores extremos que se pueden presentar en el estudio de los valores de siniestros que se presentan
+en un seguro.
+
+::: {.definition #dexceso name="Distribución de exceso condicionada"}
+La **distribución de exceso condicionada** asociada a una variable aleatoria $X$ con distribución 
+de probabilidad acumulada $F$ y a un umbral de condicionamiento $u > 0$, está dada por:
+\begin{equation}
+F_u( y ) = P\left( X - u \leq y \mid X > u \right) 
+= \frac{P\left( u < X \leq y + u\right)}{P(X > u)}
+= \frac{F( u + y ) - F( u )}{ 1 - F( u )}
+\end{equation}
+:::
+
+<!------------------------------------------------------------------------------------------------->
+## Consideraciones estadísticas
+
+De las ramas de las Matemáticas la Estadística ciertamente es la más subestimada, en muchos casos
+menospreciada. Sin embargo, no sin mucha pretención, sino más bien honestidad, se puede decir
+que la Estadística es una de las ramas más complicadas de las Ciencias en general, ya que busca
+en muchos casos comprender, explicar y predecir fenómenos reales. En su fundamentación, al 
+profundizar en ella, uno encontrará un sin número de conceptos, métodos y teorías con
+un amplio espectro de complejidad, que incluso se sustentan en ideas filosóficas bastante elaboradas
+y poco comprendidas.
+
+No olvidar, la Estadística busca de frente y sin rodeos extraer conocimiento de la realidad y no 
+hay algo más complejo y duro que la realidad misma.
+
+Muchos de las herramientas de las estadística se resumen en algunas recetas o aplicaciones de 
+software, sin embargo, no se debe olvidar que en muchos casos estas herramientas hacen uso de 
+muchos métodos bastante avanzados y complejos en lo que respecta al conocimiento Matemático.
+
+::: {.theorem #tlc name="Teorema del límite central"}
+Consideramos las variables aleatorias $X_1,\ldots,X_n$, independientes e idénticamente distribuidas 
+(i.i.d) con media común finita $\mathbb{E}[X_i] = \mu < +\infty$ y varianza común finita
+$\mathbb{V}[ X_i ] = \sigma^2 < +\infty$, para todo $i \in \{1, \ldots, n \}$. Si consideramos la
+variable aleatoria de la suma total $S_n = \sum\limits_{i=1}^n X_i$, entonces
+\begin{equation}
+\frac{S_n - \mathbb{E}[S_n]}{\mathbb{V}[ S_n ]} \overset{d}{\longrightarrow} Z
+\end{equation}
+cuando $n \rightarrow +\infty$, donde $Z \rightsquigarrow N( 0, 1 )$. 
+
+Más aún
+\begin{equation}
+\underset{n \rightarrow +\infty}{\lim} P\left( \frac{S_n 
+- \mathbb{E}[S_n]}{\mathbb{V}[ S_n ]} \leq z \right)
+= \Phi( z )
+\end{equation}
+:::
+
+El teorema del límite central en su forma usual no proporciona una tasa de convergencia es decir,
+la variable aleatoria $\frac{S_n - \mathbb{E}[S_n]}{\mathbb{V}[ S_n ]}$ tiende a tener un 
+comportamiento de una variable aleatoria normal estándar conforme aumenta $n$, pero no estamos 
+seguros que tamaño debe tomar $n$ para que esto se cumpla con una alta certeza. Para ello adicional
+al \@ref(thm:tlc) se debe considerar otros resultados asociados a desigualdades de concentración.
+
+El siguiente teorema es de gran ayuda para estimar la tasa de convergencia del resultado anterior
+\@ref(thm:tlc).
+
+<!------------------------------------------------------------------------------------------------->
+### Desigualdades de concentración 
+
+Para muchos fines prácticos es importante encontrar una buena estimación de donde se encuentran 
+concentrados los valores de una distribución de probabilidad, para ello existen varios resultados
+que caracterizan precisamente ello, estos se conocen como desigualdades de concentración.
+
+::: {.proposition #chebdes name="Desigualdad de Chebyshev (Чебышёв)"}
+Dada una variable aleatoria $X$ con esperanza y varianza finitas $\mathbb{E}[X] <+ \infty$ y 
+$\mathbb{V}[X] < +\infty$, tenemos que se satisface la siguiente desigualdad para cualquier 
+$varepsilon > 0$
+\begin{equation}
+P\left( \left| X - \mathbb{E}[X] \right| > \varepsilon \right) < \frac{1}{\varepsilon^2}
+\mathbb{V}[ X ]
+\end{equation}
+:::
+
+::: {.theorem #bein name="Desigualdad de Berry-Esséen"}
+Sean $X_1, \ldots X_n$ variables aleatoria i.i.d, con media y varianza finitas, i.e 
+$\mathbb{E}[X] < +\infty$ y $\mathbb{V}[X] < +\infty$ y además con tercer momento absoluto finito
+$\mathbb{E}\left[\left|X - \mathbb{E}[X]\right|^3\right] < +\infty$. Entonces, la distribución 
+acumulada $F_n$ de la variable aleatoria
+\begin{equation}
+U_n = \frac{S_n - \mathbb{E}[ S_n ]}{\mathbb{V}[ S_n ]}
+\end{equation}
+con $S_n = \sum\limits_{i=1}^n X_i$. Satisface la siguiente desigualdad respecto de la distribución 
+acumulada de la ley normal $\Phi$.
+\begin{equation}
+\underset{u}{\sup}\left| F_n( u ) - \Phi( u ) \right| \leq \frac{A}{\sqrt{n}} 
+\frac{\mathbb{E}\left[\left|X - \mathbb{E}[X]\right|^3\right]}{\sqrt{\mathbb{V}[X]}^3}
+\end{equation}
+:::
+
+::: {.theorem #ddkw name="Desigualdad Dvoretzky–Kiefer–Wolfowitz"}
+Dada una serie de variables aleatorias a valores reales $X_1, \ldots, X_n$, independientes
+entre si e idénticamente distribuidas (i.i.d), con distribución acumulada $F$, tenemos la siguiente
+desigualdad asociada a la **distribución acumulada empírica**
+\begin{equation}
+F_n( x ) = \frac{1}{n}\sum\limits_{i=1}^n \mathbf{1}_{(-\infty,x]}( X_i )
+\end{equation}
+y su aproximación a $F$.
+\begin{equation}
+P\left( \underset{x \in \mathbb{R}}{\sup} \left| F_n( x ) - F( x ) \right| > \varepsilon \right) 
+\leq 2 e^{-2n \varepsilon^2 }\qquad \forall \varepsilon > 0
+\end{equation}
+:::
+
+Como podemos notar el orden de convergencia del teorema es $\sqrt{n}$ en el tamaño de observaciones,
+esto quiere decir que la convergencia es menos que el orden lineal.
+
+Acorde a la desigualdad \@ref(thm:ddkw), para tener un probabilidad baja de aproximación 
+$\delta > 0$ en un error de discrepancia $\varepsilon >0$, necesitamos satisfacer la desigualdad.
+\begin{eqnarray*}
+2 e^{-2n \varepsilon^2 } & \leq & \delta \\
+2n \varepsilon^2 & \geq & -\ln\left( \frac{\delta}{2} \right) \\
+n & \geq & \left\lceil -\frac{1}{2\varepsilon^2} \ln\left( \frac{\delta}{2} \right) \right\rceil
+\end{eqnarray*}
+así se observa que para tener una aproximación de orden $\delta$ y con un error de discrepancia
+$\varepsilon$, se requiere como mínimo realizar un número de simulaciones $n$ de orden 
+logarítmico en $\delta$ y cuadrático en $\varepsilon$.
+
+```{r l2c7}
+delta <- 0.01
+e <- unlist( lapply( seq( 1, 9, 1 ), FUN = function( n ) seq( 9, 1, -1 ) * 10^{-n} ) )
+n <- ceiling( -log( delta / 2 ) / ( 2 * e^2 ) )
+```
+
+```{r l2t1, echo = TRUE, results = 'asis'}
+dt <- data.table( delta = delta, e, n, d = 8 * n / 1024^3 )
+dt %>%
   kable(
-    caption = 'Estimación conteos por sexo',
+    caption = 'Error versus número de simulaciones',
     row.names = FALSE,
-    col.names = c( "sexo", "fuel", "$N$", "$f_k$", "$p_k$", "$p_{k+1}$", "$k \\frac{p_{k+1}}{p_k}$" ),
-    align = 'llrrrrr',
-    digits = c( 0, 0, 0, 0, 5, 5, 5 ),
+    col.names = c( "$\\delta$", "$\\varepsilon$", "$n$", "GB" ),
+    align = 'llrr',
+    digits = c( 10, 20, 0, 10 ),
     format.args = list( big.mark = ',', decimal.mark = '.', scientific = FALSE ),
     escape = FALSE ) %>%
   kable_classic( font_size = 14, full_width = FALSE, html_font = "Cambria" ) %>%
   scroll_box( width = "750px", height = "500px" )
 ```
 
-```{r l3c5}
-plot( conteo$N, conteo$jn )
-```
+::: {.definition #probemp name="Medida de probabilidad empírica"}
+A partir de una muestra de $X_1, \ldots, X_n$ de una variable aleatoria $X$, podemos definir
+también la **medida de probabilidad empírica** asociada a la muestra $X_1, \ldots, X_n$. Así 
+para cualquier evento del espacio muestral $\Omega$, $A \subset \Omega$
+\begin{equation}
+P_n( B ) = \frac{1}{n} \sum\limits_{i=1}^n \mathbb{1}_{B}\left( X_i \right)
+\end{equation}
+:::
+
+A partir de la medida empírica de probabilidad, podemos extraer la de para la distribución acumulada
+empírica $F_n$, la cual la hemos definido con anterioridad, para ello consideremos 
+$P_n( (-\infty,x])$ para cualquier $x \in \mathbb{R}$
+\begin{equation}
+P_n( (-\infty,x])
+= \frac{1}{n} \sum\limits_{i=1}^n \mathbb{1}_{(-\infty,x]}\left( X_i \right) 
+= F_n( x )
+\end{equation}
+
+Para muchos resultados asociados a la estimación de estadística la variantes empíricas $P_n$ y $F_n$
+son de utilidad.
 
 <!------------------------------------------------------------------------------------------------->
-## Distribuciones continuas
+## Consideraciones financieras
+Antes de desarrollar el contenido propio del curso, debemos tener en cuenta algunas consideraciones
+financieras como las siguientes:
 
-::: {.definition #dunif name="Distribución uniforme"}
-Una variable aleatoria $X$ a valores reales, sigue una distribución uniforme 
-$X \rightsquigarrow Unif( a, b )$ de parámetros $a, b \in \mathbb{R}$, si su función de distribución
-acumulada es de la siguiente forma:
-\begin{equation}
-F_X( x ) = \frac{x-a}{b-a} \mathbf{1}_{[a,b)}( x ) + \mathbf{1}_{[b,+\infty)}( x )
-\end{equation}
-sin mucho esfuerzo se puede verificar que su densidad de probabilidad está dada por la función
-\begin{equation}
-f_X( x ) = \frac{1}{b-a}\mathbf{1}_{[a,b]}( x )
-\end{equation}
-\begin{equation}
-M_X( t ) = \frac{\exp(bt)-\exp(at)}{t(b-a)}
-\end{equation}
-\begin{equation}
-\mathbb{E}[X] = \frac{a + b}{2},\qquad \mathbb{V}[X] = \frac{(b - a)^2}{12}
-\end{equation}
-:::
-```{r l3c6}
-a <- 1
-b <- 2
-x <- 1.5
-m <- 100
-X <- runif( n = m, min = a, max = b ) # simular una muestra de tamaño m
-fx <- dunif( x = x, min = a, max = b ) # cálculo de la densidad f(x)
-Fk <- punif( q = x, min = a, max = b ) # cálculo de probabilidad F(x)
-```
+<!------------------------------------------------------------------------------------------------->
+### Función de actualización o descuento
+La **función de actualización** de flujos $v: \mathbb{R} \times \mathbb{R} \longrightarrow [0,1]$, al
+evaluar en $s, t \in \mathbb{R}, s\leq t, v(s,t)$, diremos que actualizamos los flujos que se 
+producen en el tiempo $t$, valorados desde el tiempo $s$. Además la función de actualización tiene
+las siguientes propiedades:
+  
+1. Si $s = t, v(s,t) = 1$,
+  
+2. Si $s \leq t, v(s,t) \leq 1$,
+  
+3. Si $r \leq s \leq t, v( r, s ) v( s, t ) = v( r, t )$.
 
-::: {.definition #dexp name="Distribución exponencial"}
-Una variable aleatoria $X$ a valores reales, sigue una distribución exponencial 
-$X \rightsquigarrow Exp( \lambda )$ de parámetros $\lambda > 0$, si su función de distribución
-acumulada es de la siguiente forma:
-\begin{equation}
-F_X( x ) = \mathbf{1}_{(0,+\infty)}( x ) \left( 1 - \exp\left( -\lambda x \right) \right)
-\end{equation}
-sin mucho esfuerzo se puede verificar que su densidad de probabilidad está dada por la función
-\begin{equation}
-f_X( x ) = \mathbf{1}_{(0,+\infty)}( x ) \lambda \exp\left( -\lambda x \right)
-\end{equation}
-\begin{equation}
-M_X( t ) = \frac{\lambda}{\lambda - t}
-\end{equation}
-\begin{equation}
-\mathbb{E}[X] = \frac{1}{\lambda},\qquad \mathbb{V}[X] = \frac{1}{\lambda^2}
-\end{equation}
-:::
-```{r l3c7}
-lambda <- 2
-x <- 1.5
-m <- 100
-X <- rexp( n = m, rate = lambda ) # simular una muestra de tamaño m
-fx <- dexp( x = x, rate = lambda ) # cálculo de la densidad f(x)
-Fk <- pexp( q = x, rate = lambda ) # cálculo de probabilidad F(x)
-```
+El caso más particular y sencillo se presenta cuando la función de actualización es generada
+por una tasa constante $i \in [0,1]$, es decir, $v(s,t) = ( 1 + i )^{t-s}$.
 
-::: {.definition #dnorm name="Distribución gamma"}
-Una variable aleatoria $X$ a valores reales, sigue una distribución gamma 
-$X \rightsquigarrow Gamma( \alpha, \beta )$ de parámetros $\alpha > 0$, $\beta > 0$, si su 
-función de distribución acumulada es de la siguiente forma:
-\begin{equation}
-F_X( x ) = \frac{\beta^\alpha}{\Gamma( \alpha )} \int\limits_{0}^{x} u^{\alpha-1} \exp(-\beta u)\ du
-\end{equation}
-la densidad de probabilidad automáticamente está dada por la función:
-\begin{equation}
-f_X( x ) = \mathbf{1}_{[0,+\infty}( x ) \frac{\beta^\alpha}{\Gamma( \alpha )} x^{\alpha-1} \exp(-\beta x)
-\end{equation}
-\begin{equation}
-M_X( t ) = \left( \frac{\beta}{\beta - t} \right)^\alpha,\qquad \text{si}\ t < \beta
-\end{equation}
-\begin{equation}
-\mathbb{E}[X] = \frac{\alpha}{\beta},\qquad 
-\mathbb{V}[X] = \frac{\alpha}{\beta^2}
-\end{equation}
-:::
-```{r l3c8}
-alpha <- 2
-beta <- 1
-x <- 3
-m <- 100
-X <- rgamma( n = m, shape = alpha, scale = beta ) # simular una muestra de tamaño m
-fx <- dgamma( x = x, shape = alpha, scale = beta ) # cálculo de la densidad f(x)
-Fk <- pgamma( q = x, shape = alpha, scale = beta ) # cálculo de probabilidad F(x)
-```
+La **función de capitalización**, es la función $u: \mathbb{R} \times \mathbb{R} \longrightarrow [0,1]$,
+tal que $u( s, t ) v( s, t ) = 1$.
 
-::: {.definition #dnorm name="Distribución normal"}
-Una variable aleatoria $X$ a valores reales, sigue una distribución normal 
-$X \rightsquigarrow N( \mu, \sigma )$ de parámetros $\mu \in \mathbb{R}$, $\sigma > 0$, si su 
-función de distribución acumulada es de la siguiente forma:
-\begin{equation}
-F_X( x ) = \frac{1}{\sqrt{2\pi} \sigma} \int\limits_{-\infty}^x \exp\left( -\frac{(y - \mu)^2}{\sigma^2} \right)\ dy
-\end{equation}
-la densidad de probabilidad automáticamente está dada por la función:
-\begin{equation}
-f_X( x ) = \frac{1}{\sqrt{2\pi}} \exp\left( -\frac{(x - \mu)^2}{\sigma^2} \right)
-\end{equation}
-\begin{equation}
-M_X( t ) = \exp\left( t \mu + \frac{1}{2} t^2 \sigma^2 \right)
-\end{equation}
-\begin{equation}
-\mathbb{E}[X] = \mu,\qquad \mathbb{V}[X] = \sigma^2
-\end{equation}
-:::
-```{r l3c9}
-mu <- 2
-sigma <- 1
-x <- 3
-m <- 100
-X <- rnorm( n = m, mean = mu, sd = sigma ) # simular una muestra de tamaño m
-fx <- dnorm( x = x, mean = mu, sd = sigma ) # cálculo de la densidad f(x)
-Fk <- pnorm( q = x, mean = mu, sd = sigma ) # cálculo de probabilidad F(x)
-```
+<!------------------------------------------------------------------------------------------------->
+### Flujos financieros
+Un flujo financiero discreto $c$ es una serie de valores reales $c(t_1), c(t_2), \cdots, c(t_n)$ 
+que se producen en un número discreto de tiempos $t_0 < t_1 < \cdots < t_n$. 
 
-::: {.definition #dlnorm name="Distribución log-normal"}
-Una variable aleatoria $X$ a valores reales, sigue una distribución log-normal 
-$X \rightsquigarrow LN( \mu, \sigma )$ de parámetros $\mu > 0$, $\sigma > 0$, si su 
-función de distribución acumulada es de la siguiente forma:
+El **valor presente** de estos flujos, en un tiempo $t \leq t_0$, se lo puede calcular utilizando 
+precisamente la función de actualización $v$
 \begin{equation}
-F_X( x ) = \frac{1}{\sqrt{2\pi} \sigma} \int\limits_{0}^{x} \frac{1}{y} \exp\left( -\frac{(\ln(y) - \mu)^2}{\sigma^2} \right)\ dy
+VP_t( c ) = \sum\limits_{k = 1}^n v( t, t_k )  c( t_k )
 \end{equation}
-la densidad de probabilidad automáticamente está dada por la función:
-\begin{equation}
-f_X( x ) = \frac{1}{x\sqrt{2\pi} \sigma}  \exp\left( -\frac{(\ln(x) - \mu)^2}{\sigma^2} \right)
-\end{equation}
-No hay forma analítica para $M_X$
-\begin{equation}
-\mathbb{E}[X] = \exp\left( \mu + \frac{1}{2}\sigma^2 \right),\qquad 
-\mathbb{V}[X] = \exp\left( 2 \mu + \sigma^2 \right) \left( \exp( \sigma^2 ) - 1 \right)
-\end{equation}
-:::
-```{r l3c10}
-mu <- 2
-sigma <- 1
-x <- 3
-m <- 100
-X <- rlnorm( n = m, meanlog = mu, sdlog = sigma ) # simular una muestra de tamaño m
-fx <- dlnorm( x = x, meanlog = mu, sdlog = sigma ) # cálculo de la densidad f(x)
-Fk <- plnorm( q = x, meanlog = mu, sdlog = sigma ) # cálculo de probabilidad F(x)
-```
-En pocas, una variable aleatoria $X \rightsquigarrow LN( \mu, \sigma )$ sigue una distribución 
-log-normal si y solamente si la variable aleatoria dada por su logaritmo $\ln( X ) \rightsquigarrow N( \mu, \sigma )$ 
-sigue una distribución normal.
+cuando $t=0$, se suele solo expresar $VP( c ) = VP_0( c )$.
 
-::: {.definition #dgpd name="Distribución de Pareto generalizada"}
-Una variable aleatoria $X$ a valores reales, sigue una distribución de Pareto generalizada
-$X \rightsquigarrow GPD( \mu, \sigma, \xi )$ de parámetros $\mu \in \mathbb{R}, \sigma > 0, \xi \in \mathbb{R}$, 
-si su función de distribución acumulada es de la siguiente forma:
-\begin{equation}
-F_X( x )
-= \left \{
-\begin{array}{ll}
-1 - \left( 1 + \xi \frac{x-\mu}{\sigma} \right)^{-\frac{1}{\xi}} & \text{si}\ \xi \neq 0 \\
-1 - \exp\left( -\frac{x-\mu}{\sigma} \right) & \text{si}\ \xi = 0
-\end{array}
-\right.
-\end{equation}
-y su densidad de probabilidad está dada por la función
-\begin{equation}
-f_X( x )
-= \left \{
-\begin{array}{ll}
-\frac{1}{\sigma} \left( 1 + \xi \frac{x-\mu}{\sigma} \right)^{-1-\frac{1}{\xi}} & \text{si}\ \xi \neq 0 \\
-\frac{1}{\sigma} \exp\left( -\frac{x-\mu}{\sigma} \right) & \text{si}\ \xi = 0
-\end{array}
-\right.
-\end{equation}
-\begin{equation}
-M_X( t ) = \exp(\theta \mu) \sum\limits_{j=0}^{+\infty} \frac{\theta^j \sigma^j}
-{\prod\limits_{k=0}^j ( 1 - k \xi )}
-\end{equation}
-:::
-```{r l3c11}
-xi <- 1
-mu <- 2
-sigma <- 1
-x <- 3
-m <- 100
-X <- rgpd( n = m, xi = xi, mu = mu, beta = sigma ) # simular una muestra de tamaño m
-fx <- dgpd( x = x, xi = xi, mu = mu, beta = sigma ) # cálculo de la densidad f(x)
-Fk <- pgpd( q = x, xi = xi, mu = mu, beta = sigma ) # cálculo de probabilidad F(x)
-```
+<!------------------------------------------------------------------------------------------------->
+### Flujos financieros probables
+Un flujo financiero discreto $c$ es una serie de valores reales $c(t_1), c(t_2), \cdots, c(t_n)$ 
+que se producen en un número discreto de tiempos $t_0 < t_1 < \cdots < t_n$. 
 
-::: {.definition #dgev  name="Distribución de valores extremos generalizada"}
-Una variable aleatoria $X$ a valores reales, sigue una distribución generalizada de valores extremos
-$X \rightsquigarrow GEV( \mu, \sigma, \xi )$ de parámetros $\mu \in \mathbb{R}, \sigma > 0, \xi \in \mathbb{R}$, 
-si su función de distribución acumulada es de la siguiente forma:
+El **valor actuarial presente** de estos flujos, en un tiempo $t \leq t_0$, se lo puede calcular 
+utilizando precisamente la función de actualización $v$
 \begin{equation}
-F_X( x ) 
-= \left\{
-\begin{array}{ll}
-\exp\left( -\exp\left( -\frac{x-\mu}{\sigma} \right) \right) 
-& \text{si}\ \xi = 0 \\
-\exp\left( -\left( 1 + \xi \frac{x-\mu}{\sigma} \right)^{-\frac{1}{\xi}} \right) 
-& \text{si}\ \xi \neq 0, 1 + \xi\frac{x - \mu}{\sigma} > 0
-\end{array}
-\right.
+VAP_t( c ) = \mathbb{E}\left[ \sum\limits_{k = 1}^n v( t, t_k )  c( t_k ) \right]
+= \sum\limits_{k = 1}^n v( t, t_k ) \mathbb{E}\left[ c( t_k ) \right]
 \end{equation}
-además se puede verificar que su densidad de probabilidad está dada por la función
-\begin{equation}
-f_X( x )
-= \left\{
-\begin{array}{ll}
-\exp\left(-\frac{x-\mu}{\sigma}\right) 
-\exp\left(-\exp\left(-\frac{x-\mu}{\sigma}\right)\right) 
-& \text{si}\ \xi = 0 \\
-\left( 1 + \xi \frac{x - \mu}{\sigma}\right)^{-1-\frac{1}{\xi}} 
-\exp\left( -\left( 1 + \xi \frac{x-\mu}{\sigma} \right)^{-\frac{1}{\xi}} \right)
- & \text{si}\ \xi \neq 0, 1 + \xi\frac{x - \mu}{\sigma} > 0
-\end{array}
-\right.
-\end{equation}
-:::
-```{r l3c12}
-xi <- -1
-mu <- 2
-sigma <- 1
-x <- 3
-m <- 100
-X <- rgev( n = m, xi = xi, mu = mu, beta = sigma ) # simular una muestra de tamaño m
-fx <- dgev( x = x, xi = xi, mu = mu, beta = sigma ) # cálculo de la densidad f(x)
-Fk <- pgev( q = x, xi = xi, mu = mu, beta = sigma ) # cálculo de probabilidad F(x)
-```
+cuando $t=0$, se suele solo expresar $VAP( c ) = VAP_0( c )$.
 
-::: {.definition #dtst  name="Distribución t de Student"}
-Una variable aleatoria $X$ a valores reales, sigue una distribución t de Student
-$X \rightsquigarrow t( \nu )$ de parámetros $\nu > 0$, 
-si su función de distribución acumulada es de la siguiente forma:
+Si cada $c(t_k)$ es una variable aleatoria discreta
 \begin{equation}
-F_X( x ) 
-= \frac{1}{2} + \frac{x}{\sqrt{\pi \nu}} 
-\frac{\Gamma\left( \frac{\nu + 1}{2} \right)}{\Gamma\left( \frac{\nu}{2} \right)}
-F\left( \frac{1}{2}, \frac{\nu+1}{2}, \frac{3}{2}, -\frac{x^2}{\nu} \right)
-\end{equation}
-donde $F$ es la función hipergeométrica.
-\begin{equation}
-F( a, b, c, z ) = \sum\limits_{n=0}^{+\infty} \frac{(a)_n (b)_n}{(c)_n} \frac{z^n}{n!}
-\end{equation}
-con
-\begin{equation}
-(a)_n 
-= \left\{
-\begin{array}{ll}
-1 & n = 0 \\
-a( a + 1 ) \cdots (a + n - 1) & n > 0
-\end{array}
-\right.
-\end{equation}
-Además, se puede verificar que su densidad de probabilidad está dada por la función
-\begin{equation}
-f_X( x )
-= \frac{x}{\sqrt{\pi \nu}} 
-\frac{\Gamma\left(\frac{\nu+1}{2}\right)}{\Gamma\left( \frac{\nu}{2} \right)}
-\left( 1 + \frac{x^2}{\nu} \right)^{-\frac{\nu+1}{2}}
-\end{equation}
-La función generadora de momentos $M_X( t )$ no está definida
-\begin{equation}
-\mathbb{E}[X] 
-= \left\{
-\begin{array}{ll}
-0 & \text{si}\ \nu > 0 \\
-\text{no definida} & \text{si}\ \nu \leq 0
-\end{array}
-\right.
+VAP_t( c ) = \sum\limits_{k = 1}^n v( t, t_k ) \mathbb{E}\left[ c( t_k ) \right]
+= \sum\limits_{k = 1}^n \sum\limits_{i=1}^{\infty} v( t, t_k ) c_i( t_k ) p_i( t_k )
 \end{equation}
 
+<!------------------------------------------------------------------------------------------------->
+### Equilibrio financiero {#sec:equifin}
+Se dice que un flujo financiero $c(t_1), c(t_2), \cdots, c(t_n)$ como el anterior, está en 
+**equilibrio financiero** si:
 \begin{equation}
-\mathbb{V}[X] 
-= \left\{
-\begin{array}{ll}
-\frac{\nu}{\nu-2} & \text{si}\ \nu > 2 \\
-+\infty & \text{si}\ 1 < \nu \leq 2 \\
-\text{no definida} & \text{si}\ \nu \leq 1
-\end{array}
-\right.
-\end{equation}
-:::
-```{r l3c13}
-nu <- 3
-x <- 4
-m <- 100
-X <- rt( n = m, df = nu ) # simular una muestra de tamaño m
-fx <- dt( x = x, df = nu ) # cálculo de la densidad f(x)
-Fk <- pt( q = x, df = nu ) # cálculo de probabilidad F(x)
-```
-
-::: {.definition #dgammatra  name="Distribución gamma transformada"}
-Una variable aleatoria $X$ a valores reales, sigue una distribución gamma transformada
-$X \rightsquigarrow GT( \alpha, \tau, \theta )$ de parámetros $\alpha > 0, \tau > 0, \theta > 0$, 
-si su función de distribución acumulada es de la siguiente forma:
-\begin{equation}
-F_X( x ) = \frac{\tau}{\Gamma( \alpha )}
-\int\limits_{0}^x 
-\frac{1}{u} \left( \frac{u}{\theta} \right)^{\alpha} \exp\left(-\left( \frac{u}{\theta} \right)^{\tau}\right)\ du
+VP_0( c ) = \sum\limits_{k=0}^{n} v( 0, t_k ) c( t_k ) =  0
 \end{equation}
 
-además se puede verificar que su densidad de probabilidad está dada por la función:
-\begin{equation}
-f_X( x )
-= 
-\left\{
-\begin{array}{ll}
-0 & \text{si}\ x \leq 0 \\
-\frac{\tau}{x \Gamma( \alpha )} \left( \frac{x}{\theta} \right)^{\alpha} \exp\left(-\left( \frac{x}{\theta} \right)^{\tau}\right) & \text{si}\ x > 0
-\end{array}
-\right.
-\end{equation}
+El equilibrio financiero se mantiene en el tiempo, basta observar que para cualquier instante 
+$t \geq 0$
 \begin{eqnarray*}
-\mathbb{E}[X^k] 
-& = & \frac{\theta^k \Gamma\left( \alpha + \frac{k}{\tau}\right)}{\Gamma( \alpha )},
-\quad \text{si}\ k > -\alpha \tau \\
-\mathbb{E}[X]
-& = & \frac{\theta \Gamma\left( \alpha + \frac{1}{\tau}\right)}{\Gamma( \alpha )},
-\quad \text{si}\ 1 > -\alpha \tau \\
-\mathbb{V}[X] 
-& = & \frac{\theta^2 \Gamma\left( \alpha + \frac{2}{\tau}\right)}{\Gamma( \alpha )}
-- \frac{\theta^2 \Gamma\left( \alpha + \frac{1}{\tau}\right)^2}{\Gamma( \alpha )^2}
+0 & = & u( 0, t ) VP_0( c ) \\
+& = & u( 0, t ) \sum\limits_{k=0}^{n} v( 0, t_k ) c( t_k ) \\
+& = & \sum\limits_{t_k \leq t} u( 0, t ) v( 0, t_k ) c( t_k ) 
++ \sum\limits_{t_k > t} u( 0, t ) v( 0, t_k ) c( t_k ) \\
+& = & \sum\limits_{t_k \leq t} u( 0, t_k ) u( t_k, t ) v( 0, t_k ) c( t_k ) 
++ \sum\limits_{t_k > t} u( 0, t ) v( 0, t ) v( t, t_k ) c( t_k ) \\
+& = & \sum\limits_{t_k \leq t} u( t_k, t ) c( t_k ) 
++ \sum\limits_{t_k > t} v( t, t_k ) c( t_k ) \\
 \end{eqnarray*}
-:::
-```{r l3c14}
-alpha <- 1
-tau <- 1
-theta <- 1
-x <- 3
-m <- 100
-X <- rtrgamma( n = m, shape1 = alpha, shape2 = tau, scale = theta ) # simular una muestra de tamaño m
-fx <- dtrgamma( x = x, shape1 = alpha, shape2 = tau, scale = theta ) # cálculo de la densidad f(x)
-Fk <- ptrgamma( q = x, shape1 = alpha, shape2 = tau, scale = theta ) # cálculo de probabilidad F(x)
-```
 
-En la familia gamma se incluyen las siguientes distribuciones:
+Esto implica que el valor actualizado a cualquier instante $t$ de un flujo financiero $c$ que 
+está en equilibrio en un inicio, se mantiene también en equilibrio; siempre y cuando se preserve
+los flujos y tasas de actualización. A pesar de ser un resultado evidente, en la izquierda tenemos 
+los  flujos capitalizados hasta el tiempo $t$ y en la derecha tenemos los flujos actualizados al 
+tiempo $t$. La expresión de la izquierda se conoce como la parte **retrospectiva** y la expresión de 
+la derecha como la parte **prospectiva**.
 
-1. La distribución inversa gamma transformada, es decir es una familia estable por inversión
-
-2. La distribución gamma para $\alpha = n/2$ y $\theta = 2$
-
-3. La distribución inversa gamma
-
-4. La distribución de Weibull
-
-5. La distribución inversa de Weibull
-
-6. La distribución exponencial
-
-7. La distribución inversa exponencial
-
-::: {.definition #dbetra  name="Distribución beta transformada"}
-Una variable aleatoria $X$ a valores reales, sigue una distribución beta transformada
-$X \rightsquigarrow BT( \alpha, \gamma, \tau, \theta )$ de parámetros $\alpha > 0, \gamma > 0, \tau > 0, \theta > 0$, 
-si su función de distribución acumulada es de la siguiente forma:
+En condiciones de equilibrio financiero la parte retrospectiva se igual con menos la parte 
+prospectiva.
 \begin{equation}
-F_X( x ) = \frac{\Gamma(\alpha + \tau)}{\Gamma( \alpha ) \Gamma( \tau )}
-\int\limits_0^x
-\frac{\gamma \left( \frac{u}{\theta} \right)^{\gamma \tau}}{u\left( 1 + \left( \frac{u}{\theta} \right)^{\gamma}\right)^{\alpha + \tau}}\ du
+\sum\limits_{t_k \leq t} u( t_k, t ) c( t_k ) = 
+-\sum\limits_{t_k > t} v( t, t_k ) c( t_k )
 \end{equation}
-
-además se puede verificar que su densidad de probabilidad está dada por la función:
-\begin{equation}
-f_X( x )
-= \mathbf{1}_{[0,+\infty)}( x )
-\frac{\Gamma(\alpha + \tau)}{\Gamma( \alpha ) \Gamma( \tau )} 
-\frac{ \gamma \left( \frac{x}{\theta} \right)^{\gamma \tau}}{x\left( 1 + \left( \frac{x}{\theta} \right)^{\gamma}\right)^{\alpha + \tau}}
-\end{equation}
-
-\begin{eqnarray*}
-\mathbb{E}[X^k] 
-& = & \frac{\theta^k \Gamma\left( \tau + \frac{k}{\gamma}\right) \Gamma\left( \tau - \frac{k}{\gamma}\right)}{\Gamma( \alpha ) \Gamma( \tau )},
-\quad \text{si}\ -\tau \gamma < k < \tau \gamma \\
-\mathbb{E}[X]
-& = & \frac{\theta \Gamma\left( \tau + \frac{1}{\gamma}\right) \Gamma\left( \tau - \frac{1}{\gamma}\right)}{\Gamma( \alpha ) \Gamma( \tau )} \\
-\mathbb{V}[X] 
-& = & \frac{\theta^2 \Gamma\left( \tau + \frac{2}{\gamma}\right) \Gamma\left( \tau - \frac{2}{\gamma}\right)}{\Gamma( \alpha ) \Gamma( \tau )}
-- \frac{\theta^2 \Gamma\left( \tau + \frac{1}{\gamma}\right)^2 \Gamma\left( \tau - \frac{1}{\gamma}\right)^2}{\Gamma( \alpha )^2 \Gamma( \tau )^2}
-\end{eqnarray*}
-:::
-```{r l3c15}
-alpha <- 1
-gamma <- 1
-tau <- 1
-theta <- 1
-x <- 3
-m <- 100
-X <- rtrbeta( n = m, shape1 = alpha, shape2 = gamma, shape3 = tau, scale = theta ) # simular una muestra de tamaño m
-fx <- dtrbeta( x = x, shape1 = alpha, shape2 = gamma, shape3 = tau, scale = theta ) # cálculo de la densidad f(x)
-Fk <- ptrbeta( q = x, shape1 = alpha, shape2 = gamma, shape3 = tau, scale = theta ) # cálculo de probabilidad F(x)
-```
-
-Dentro de la familia beta transformada se cuenta algunas distribuciones de probabilidad:
-
-1. La distribución de Burr para $\tau = 1$
-
-2. La distribución de log-logística para $\alpha = \tau = 1$
-
-3. La distribución de paralogística para $\alpha = \gamma, \tau = 1$
-
-4. La distribución de generalizada de Pareto para $\gamma = 1$
-
-5. La distribución de Pareto para $\gamma = \tau = 1$
-
-6. La distribución de inversa de Burr para $\alpha = 1$
-
-7. La distribución de inversa de Pareto para $\alpha = \gamma = 1$
-
-8. La distribución de inversa paralogística para $\alpha = 1, \gamma = \tau$
-
-La distribución transformada gamma es un caso límite de la distribución transformada beta, cuando
-$\theta \rightarrow +\infty, \alpha \rightarrow +\infty$ y 
-$\theta \alpha^{-\frac{1}{\gamma}} \rightarrow \xi$
-
-
-<!------------------------------------------------------------------------------------------------->
-## Estimación
-
-En la práctica se observa la realización de una variable aleatoria $X$, es decir se tiene una 
-muestra de la misma $X_1, \ldots, X_n$. Pero, no se dispone de la distribución $F$ o de la densidad 
-$f$ que la describe. Como ya hemos mencionado, conociendo la distribución se puede inferir algunas
-propiedades sobre la variable. De ahí surge la necesidad de buscar la mejor distribución $F$ posible
-a partir de la muestra. 
-
-Para ello se ha formulado diferentes aproximaciones, entre las cuales citamos las siguientes:
-
-1. Método de sustitución
-
-2. Método de los momentos
-
-3. Método de la distancia mínima
-
-4. Método de maximización de la verosimilitud
-
-<!------------------------------------------------------------------------------------------------->
-### Método de sustitución
-
-Se considera que para la medida de de probabilidad $P_X$ que caracteriza a la variable aleatoria 
-$X$ está dentro de una familia de funciones que dependen de un parámetro $\theta \in \Theta$, es 
-decir para cada $\theta$, $P_{\theta}$ es una medida de probabilidad y para algún 
-$\theta \in \Theta, P_X = P_{\theta}$. 
-
-Entonces, se parte de suponer que existe funcional $G$ actuando sobre el conjunto de medidas de 
-probabilidad $\mathcal{P}$ que contiene al conjunto
-$P( \Theta ) = \{ P_{\theta} \mid \theta \in \Theta\} \subset \mathcal{P}$ y que toma valores 
-en $\Theta$, i.e. $G: \mathcal{P} \longrightarrow \Theta$. De tal forma que $P_{\theta}$ es 
-invariante, es decir:
-\begin{equation}
-G( P_{\theta} ) = \theta,\quad \forall \theta \in \Theta
-\end{equation}
-
-Así se construye un **estimador por el método de sustitución** si a partir de la medida de 
-probabilidad empírica $P_n$ construida con una muestra $X_1, \ldots, X_n$ de la variable
-aleatoria $X$, se toma como parámetro el dado por:
-\begin{equation}
-\widehat{\theta} = G\left( P_n \right)
-\end{equation}
-
-En otras palabras se sustituye el parámetro $\theta$ por $\widehat{\theta}$. Esto implica que 
-se aproxima la medida $P_X$ que caracteriza a $X$, con la aproximación
-$P_X \approx P_{\widehat{\theta}}$.
-
-Es de notar que a priori no se hace establece ninguna medida de la calidad de la aproximación, 
-para ello hay que adjuntar algunos otros criterios que caracterizan un buen tipo de estimador.
-
-En otras ocasiones a partir de la muestra se define un estimador del parámetro $\theta \in \Theta$
-a partir de una familia de funciones medibles que dependen directamente de la 
-muestra $X_1, \ldots, X_n$ y su tamaño $n$, i.e. una función $\theta_n( X_1, \ldots, X_n )$. Se 
-puede considerar el caso anterior como un caso en particular de este tipo de funciones, ya que 
-se puede definir $\theta_n( X_1, \ldots, X_n ) = G( P_n )$, pero hay que tener cuidado que $G$ es 
-un funcional y como tal puede resultar una función que no es medible.
-
-::: {.definition #estsus  name="Estimadores convergentes"}
-En el mismo contexto anterior. Si la variable aleatoria $X$ está caracterizada por la medida 
-$P_X = P_{\theta}$, para algún $\theta \in \Theta$. Decimos que una familia de estimadores 
-$\{\theta_n\}$ es **convergente** si al generar cada vez una muestra más grande el estimador
-$\theta_n( X_1, \ldots, X_n )$ converge en probabilidad a $\theta$. Esto quiere decir que 
-para cualquier $\varepsilon > 0$
-\begin{equation}
-\underset{n \rightarrow +\infty}{\lim} 
-P_{\theta}\left( \left| \theta_n( X_1, \ldots, X_n ) - \theta \right| \geq \varepsilon \right) = 0
-\end{equation}
-
-Decimos que **converge fuertemente** si la convergencia de la familia de estimadores 
-$\theta_n( X_1, \ldots, X_n )$ a $\theta$ se da **casi seguramente** o **casi todas partes**. Esto 
-en término de límites implica que:
-\begin{equation}
-P_{\theta}\left( \underset{n \rightarrow +\infty}{\lim} \theta_n( X_1, \ldots, X_n ) = \theta \right) = 1
-\end{equation}
-En otras palabras, la probabilidad de que el límite del estimador $\theta_n( X_1, \ldots, X_n )$ 
-sea igual a $\theta$ es $1$, salvo un conjunto de medida nula para $P_{\theta}$. De ahí resulta 
-la terminología de convergencia casi segura o convergencia en casi todas partes.
-:::
-
-<!------------------------------------------------------------------------------------------------->
-### Método de momentos
-
-Un estimador de momento se contruye a partir de una relación función entre la media de una función
-medible $g$ y el parámetro $\theta \in \Theta$ que caracteriza a la distribución o medida de 
-probabilidad de la variable aleatoria $X$. Es decir, existen funciones $g$ y $m$ a valores reales
-de tal forma que
-\begin{equation}
-m( \theta ) 
-= \mathbb{E}_{P_X} \left[ g( X ) \right] 
-= \int\limits g( x ) dP_X( x )
-= \int\limits g( x ) dP_{\theta}( x )
-\end{equation}
-
-Si de alguna forma se puede invertir $m$, de tal forma que se pueda determinar $\theta$, en tal 
-caso se pude utilizar un **estimador por momentos** a partir de una muestra de la variable aleatoria
-$X_1, \ldots, X_n$
-\begin{equation}
-\widehat{\theta} 
-= \theta_n\left( X_1, \ldots, X_n \right)
-= m^{-1}\left( \overline{g} \right)
-\end{equation}
-donde
-\begin{equation}
-\overline{g}
-= \int\limits g( x ) dP_n( x )
-= \frac{1}{n}\sum\limits_{i=1}^n g\left( X_i \right)
-\end{equation}
-
-Si en caso $\overline{g}$ está fuera de la imagen de $m$, $\overline{g} \notin m( \Theta )$, la 
-inversión no sería posible. Para resolver este problema se puede recurrir a una distancia $d$ y 
-buscar $\hat{g}$ tal que minimize la distancia a $m( \Theta )$, i.e. 
-$\hat{g} = \underset{h \in m( \Theta )}{\arg \inf}\ d( \overline{g}, h)$. Una vez determinado 
-$\hat{g}$ se toma como estimador de momentos su inversa con $m$, i.e. 
-$\widehat{\theta} = m^{-1}( \hat{g} )$.
-
-Es de notar que en el caso anterior, la selección de la mejor distancia $d$ no es para nada 
-evidente y puede ser un problema tanto o más difícil que la misma estimación del parámetro 
-$\theta$ o la inversión de $m$. 
-
-La estimación por momentos en los casos más elaborados lleva a buscar la solución de problemas no 
-lineales, que no suelen ser estables y que deben estar bien definidos para proveer una solución 
-única.
-
-<!------------------------------------------------------------------------------------------------->
-### Método de la distancia mínima
-
-Este método requiere de la definición de una distancia sobre el espacio de distribuciones de 
-probabilidad $\mathcal{P}$, i.e. una función $d : \mathcal{P} \times \mathcal{P} \longrightarrow \mathbb{R}_+$
-que satisface las siguientes propiedades:
-
-1. Propiedad de simetría, para cualquier $P, Q \in \mathcal{P}$, $d( P, Q ) = d( Q, P )$,
-
-2. Para cualquier $P \in \mathcal{P}$, $d( P, P ) = 0$.
-
-3. Desigualdad triangular, para cualquier $P,Q,R \in \mathcal{P}$
-\begin{equation}
-d( P, Q ) \leq d( P, R ) + d( R, Q )
-\end{equation}
-
-A partir de la medida empírica de probabilidad $P_n$, se busca una probabilidad $P_{\theta}$ que 
-minimize la distancia medida con $d$. Así resulta el estimador con el **método de distancia mínima**
-\begin{equation}
-\widehat{\theta} = \underset{\theta \in \Theta}{\arg\,\inf\,} d\left( P_{\theta}, P_n \right)
-\end{equation}
-
-Entra las distancias que se puede considerar tenemos las siguientes
-
-- Distancia del supremo entre las distribuciones acumuladas correspondientes
-\begin{equation}
-d(P,Q) = \underset{x}{\sup} \left| F_P( x ) - F_Q( x ) \right|
-\end{equation}
-
-- Distancia cuadrática entre las distribuciones acumuladas correspondientes
-\begin{equation}
-d( P, Q ) = \int\limits \left( F_P( x ) - F_Q( x ) \right)^2\ dF_Q( x )
-\end{equation}
-
-- Distancia de Wasserstein, para $p > 1$
-\begin{equation}
-d( P, Q )
-= W_p( P, Q )
-= \underset{(X,Y) \rightsquigarrow \mu \in \Gamma( P, Q )}{\inf} \mathbb{E}_{\mu}\left[ |X - Y|^p \right]^{\frac{1}{p}}
-\end{equation}
-donde
-\begin{equation}
-\Gamma( P, Q ) = \left\{ \mu \middle| \text{$\mu$ es medida de probabilidad sobre $\Omega \times \Omega$, 
-cuyas distribuciones marginales son $P$ y $Q$}\right\}
-\end{equation}
-
-
-<!------------------------------------------------------------------------------------------------->
-###  Método de maximización de la verosimilitud
-
-La estimación de verosimilitud parte de asumir que se observan una cierta cantidad de eventos 
-independientes $B_1, \ldots, B_n$, relacionados precisamente a la variable aleatoria en estudio $X$.
-
-Se postula precisamente que la mejor medida de probabilidad es aquella que maximiza la probabilidad 
-de observar estos eventos independientes. En el caso en particular de la estimación de una medida
-de probabilidad en una familia $\{P_{\theta}\}$ con $\theta \in \Theta$, se busca maximizar la 
-probabilidad:
-\begin{equation}
-\underset{\theta \in \Theta}{\sup} \prod\limits_{i=1}^n P_{\theta}\left( B_i \right)
-\end{equation}
-
-o de forma equivalente, si se toma logaritmos:
-\begin{equation}
-\underset{\theta \in \Theta}{\sup} \sum\limits_{i=1}^n \log P_{\theta} \left( B_i \right)
-\end{equation}
-
-Así, el estimador por verosimilitud, es el dado por:
-\begin{equation}
-\widehat{\theta} 
-= \underset{\theta \in \Theta}{\arg\,\sup\,} \sum\limits_{i=1}^n \log P_{\theta} \left( B_i \right)
-\end{equation}
-
-En la práctica los eventos que se observa $B_i$ son puntuales y son precisamente los valores 
-que toma la variable aleatoria $X$. Es decir, se observa una muestra $X_1, \ldots, X_n$.
-
-
-<!------------------------------------------------------------------------------------------------->
-### Calidad de estimadores
-
-::: {.definition #bestinses  name="Estimador insesgado"}
-Se dice que un estimador $\theta_1$ se dice **insesgado** para estimar el parámetro $\theta$, si se 
-cumple que:
-\begin{equation}
-\mathbb{E}\left[ \theta_1 \right] = \theta
-\end{equation}
-caso contrario se dirá que el estimador es **sesgado** o que presenta un **error sistemático**.
-:::
-
-::: {.definition #bestcuadmean  name="Mejor estimador en media cuadrática"}
-Se dice que un estimador $\theta_1$ es mejor estimador en media cuadrática que el estimador 
-$\theta_2$, respecto del parámetro $\theta$, si se cumple la siguiente desigualdad
-\begin{equation}
-\mathbb{E}\left[ \left( \theta_1 - \theta \right)^2 \right]
-< \mathbb{E}\left[ \left( \theta_2 - \theta \right)^2 \right]
-\end{equation}
-:::
+algunas veces se considera la parte prospectiva con el signo menos.

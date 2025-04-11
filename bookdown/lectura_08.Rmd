@@ -1,77 +1,216 @@
-# Estimación de valores extremos
+<!------------------------------------------------------------------------------------------------->
+# Modelos lineales generalizados (GLM)
 
-::: {.definition #dmaxstab  name="Distribución con cola pesada"}
-Una variable aleatoria a valores reales $X$ se dice que tiene su distribución $F$  es de 
-**cola pesada hacia la derecha** si el siguiente límite no es finito.
+<!------------------------------------------------------------------------------------------------->
+## Familia exponencial
+
+De forma amplia, un modelo lineal generalizado aprovecha algunas propiedades de la distribución de 
+probabilidad $f_X$ de la variable (vector) aleatoria $X : \Omega \longrightarrow \mathbb{R}^n$ en 
+estudio. Se parte de asumir que $X$ tiene una distribución dentro de la **familia exponencial**, es 
+decir, existen:
+
+1. Un conjunto admisible de parámetros $\Theta \subset \mathbb{R}^m$, así cada parámetro 
+$\theta = ( \theta_1, \ldots, \theta_m )^T \in \Theta$,
+
+2. Una función $T: \mathbb{R}^n \longrightarrow \mathbb{R}^p$
+
+3. Una función $A: \mathbb{R}^m \longrightarrow \mathbb{R}$
+
+4. Una función $\eta: \mathbb{R}^m \longrightarrow \mathbb{R}^p$
+
+de tal forma que:
 \begin{equation}
-\underset{x \rightarrow +\infty}{\lim} \exp( t x ) P( X > x ) 
-= \underset{x \rightarrow +\infty}{\lim} \exp( t x ) ( 1 - F( x ) ) 
-= + \infty, \qquad \forall t > 0
+f_X( x \mid \theta ) = h( x ) \exp\left( \eta( \theta ) \cdot T( x ) - A( \theta ) \right)
 \end{equation}
 
-de forma muy similar diremos que la distribución tiene **cola pesada hacia la izquierda** si 
+Al tener varias observaciones independientes de la misma variable aleatoria $x_1, \ldots, x_N$,
+su distribución conjunta se puede expresar como:
 \begin{equation}
-\underset{x \rightarrow +\infty}{\lim} \exp( -t x ) P( X \leq x ) 
-= \underset{x \rightarrow +\infty}{\lim} \exp( -t x ) F( x )
-= + \infty, \qquad \forall t > 0
+f_{X_1,\ldots,X_N}( x_1, \ldots, x_N \mid \theta )
+= \prod\limits_{i=1}^N f_{X_i}( x_i \mid \theta )
 \end{equation}
+
+La función de verosimilitud logarítmica, "log-likelihood", toma una forma específica, la cual puede
+ser trabajada con comodidad para la maximización de verosimilitud.
+
+\begin{eqnarray*}
+\ell( \theta )
+& = & \log f_{X_1,\ldots,X_N}( x_1, \ldots, x_N \mid \theta ) \\
+& = & \sum\limits_{i=1}^N \log f_{X_i}( x_i \mid \theta ) \\
+& = & \sum\limits_{i=1}^N \left( \log h( x_i ) + \eta( \theta ) \cdot T( x_i ) - A( \theta )  \right)
+\end{eqnarray*}
+
+lo que podemos observar es que existe una casi linealidad respecto de la variable $\theta$. Esta 
+propiedad permite obtener un problema de maximización de verosimilitud que puede ser atacado con 
+varios paquetes de optimización numérica de una forma eficiente.
+
+\begin{equation}
+\underset{\theta \in \Theta}{\sup} \ell( \theta )
+= \underset{\theta \in \Theta}{\sup}  
+\sum\limits_{i=1}^N \left( \eta( \theta ) \cdot T( x_i ) - A( \theta )  \right)
+\end{equation}
+
+Usualmente, este problema se suele atacar mediante la anulación del gradiente de la función 
+objetivo, esto lo realiza la mayor parte de paquetes de software. El sistema a resolver es el 
+siguiente sistema, usualmente no lineal, de dimensión $m$:
+
+\begin{equation}
+\frac{\partial \ell}{\partial \theta_i}( \theta ) 
+= \sum\limits_{i=1}^N \left( \frac{\partial \eta}{\partial \theta_i}( \theta ) \cdot T( x_i ) - 
+\frac{\partial A}{\partial \theta_i}( \theta ) \right) 
+= 0,\qquad \forall i \in \{1,\ldots, m\}
+\end{equation}
+
+En la familia exponential tenemos las siguientes distribuciones: *normal, exponencial, log-normal,
+gamma, chi-cuadrado, beta, Dirichlet, Bernoulli, Poisson, binomial, geométrica, binomial negativa,
+von Mises-Fisher, Pareto con valor mínimo conocido, Gaussiana inversa, gamma inversa, multinomial
+con número $n$ conocido, Wishart, categórica*.
+
+Por la condición de normalización de la densidad de probabilidad $f_X$, se satisface la igualdad:
+\begin{eqnarray*}
+1 & = & \int\limits f_X( x \mid \theta )\ dx \\
+1 & = & \int\limits h( x ) \exp\left( \eta( \theta ) \cdot T( x ) - A( \theta ) \right)\ dx \\
+1 & = & \int\limits h( x ) \exp\left( \eta( \theta ) \cdot T( x ) \right) \exp\left( - A( \theta ) \right)\ dx \\
+1 & = &  \exp\left( - A( \theta ) \right) \int\limits h( x ) \exp\left( \eta( \theta ) \cdot T( x ) \right)\ dx \\
+\exp\left( A( \theta ) \right) & = & \int\limits h( x ) \exp\left( \eta( \theta ) \cdot T( x ) \right)\ dx \\
+A( \theta ) & = & \log\left( \int\limits h( x ) \exp\left( \eta( \theta ) \cdot T( x ) \right)\ dx \right)
+\end{eqnarray*}
+
+de donde se determina precisamente la forma que tiene la función $A$ y su el papel como factor 
+de normalización para la distribución de la variable aleatoria $X$.
+
+Así mismo, podemos establecer una cierta relación para la espera de los valores observados 
+de $T(X)$ en función de $A$
+\begin{eqnarray*}
+0 & = & \frac{\partial}{\partial \theta_i} 1 \\
+0 & = & \frac{\partial}{\partial \theta_i} \int\limits f_X( x \mid \theta )\ dx \\
+0 & = & \int\limits h( x ) \frac{\partial}{\partial \theta_i} \exp\left( \eta( \theta ) \cdot T( x ) - A( \theta ) \right)\ dx \\
+0 & = & \int\limits h( x ) \exp\left( \eta( \theta ) \cdot T( x ) - A( \theta ) \right) 
+\left( \frac{\partial \eta}{\partial \theta_i}( \theta )  \cdot T( x ) -  \frac{\partial A}{\partial \theta_i}( \theta ) \right)\ dx \\ 
+0 & = & \int\limits h( x ) \exp\left( \eta( \theta ) \cdot T( x ) - A( \theta ) \right) 
+\frac{\partial \eta}{\partial \theta_i}( \theta )  \cdot T( x )\ dx \\
+& & - \frac{\partial A}{\partial \theta_i} ( \theta )
+\int\limits h( x ) \exp\left( \eta( \theta ) \cdot T( x ) - A( \theta ) \right)\ dx \\
+0 & = & \int \limits \frac{\partial \eta}{\partial \theta_i}( \theta )  \cdot T( x ) f_X( x \mid \theta )\ dx
+- \frac{\partial A}{\partial \theta_i}( \theta ) \int \limits f_X( x \mid \theta )\ dx
+\end{eqnarray*}
+
+estamos en la capacidad de concluir que:
+\begin{equation}
+\mathbb{E}\left[ \frac{\partial \eta}{\partial \theta_i}( \theta )  \cdot T( X ) \right]
+= \frac{\partial A}{\partial \theta_i}( \theta )
+\end{equation}
+
+Cuando se da el caso que $\eta$ y $T$ son las funciones identidad, la relación anterior se reduce 
+a la siguiente igualdad:
+\begin{equation}
+\mathbb{E}\left[ X_i \right]
+= \frac{\partial A}{\partial \theta_i}( \theta )
+\end{equation}
+
+<!------------------------------------------------------------------------------------------------->
+## Modelo lineal generalizado (GLM)
+Precisamente, un **modelo lineal generalizado** (**GLM** por sus siglas en inglés) busca explotar 
+las propiedades de las variables aleatorias que poseen una densidad de probabilidad dada por alguna 
+de la funciones de la familia exponencial. Para más detalles se puede consultar @mathstat1.
+
+La idea general es poder describir el comportamiento de una variable aleatoria $Y$ que se presume
+puede ser descrita por alguna función de la familia exponencial, a partir de otras variables 
+aleatorias $X : \Omega \longrightarrow \mathbb{R}^n$ mediante una **función de vínculo** 
+$g: \mathbb{R}^q \longrightarrow \mathbb{R}^m$ entre $\theta$ y $X$, a través del paso por una 
+composición con una función lineal $\beta : \mathbb{R}^n \longrightarrow \mathbb{R}^q$, de tal 
+forma que:
+\begin{equation}
+\theta = g( \beta( X ) ) = g( \beta X )
+\end{equation}
+
+Así, un GLM prescribe una distribución de probabilidad para $Y$ que tendrá la siguiente forma y 
+será dependiente de los parámetros $\beta$ y las variables explicativas $X$
+\begin{equation}
+f_Y( y \mid \theta ) 
+= f_Y( y \mid g( \beta x ) )
+= h( y ) \exp\left( \eta( g( \beta x ) ) \cdot T( y ) - A( g( \beta x ) ) \right)
+\end{equation}
+
+En la aplicación, el ajuste de un modelo GLM a $N \in \mathbb{N}$ observaciones $y_1, \ldots, y_N$
+de la variable aleatoria $Y$ y sus respectivas variables explicativas $x_1, \ldots, x_N$. Se asume
+independencias entre las observaciones y se busca maximizar la verosimilitud de los valores 
+observados, pero en función del nuevo parámetro $\beta$, de ahí la parte lineal del modelo.
+\begin{equation}
+\ell( \beta )
+= \sum\limits_{i=1}^N \left( \log h( y_i ) +
+\eta( g( \beta x_i ) ) \cdot T( y_i ) - A( g( \beta x_i ) \right)
+\end{equation} 
+
+De ello resulta el problema de maximización de verosimilitud que se busca resolver para ajustar un 
+modelo GLM.
+\begin{equation}
+\underset{\beta \in \mathbb{R}^{q \times n}}{\sup} \ell( \beta ) 
+= \underset{\beta \in \mathbb{R}^{q \times n}}{\sup} \sum\limits_{i=1}^N \left( \log h( y_i ) +
+\eta( g( \beta x_i ) ) \cdot T( y_i ) - A( g( \beta x_i ) \right)
+\end{equation}
+es de notar que el término $\sum\limits_{i=1}^N \log h( y_i )$ no depende de $\beta$ y por tal 
+razón puede ser omitido al momento de maximizar la verosimilitud.
+
+En varias ocasiones no todos los parámetros $\theta$ de la densidad de probabilidad son 
+considerados, sino tan solo una parte de los mismos, los otros parámetros se consideran como un
+valor constante ya dado o también como un parámetro a determinar. Así, se divide 
+$\theta = ( \theta_1, \theta_2 ), \theta_1 \in \mathbb{R}^{m_1}, \theta_2 \in \mathbb{R}^{m_2}, m = m_1 + m_2$, 
+donde solo se establece una función de vínculo para la primera parte $\theta_1 = g( \beta X )$. 
+Esta consideración en muchos casos ayuda a simplificar la formulación del modelo y el costo 
+computacional de estimación. En este contexto la función de verosimilitud tomaría la forma:
+\begin{equation}
+\ell( \beta, \theta_2 )
+= \sum\limits_{i=1}^N \left( \log h( y_i ) +
+\eta( g( \beta x_i ), \theta_2 ) \cdot T( y_i ) - A( g( \beta x_i ), \theta_2 ) \right)
+\end{equation} 
+
+::: {.example #l6ex1 name="Regresión de Poisson"}
+En este caso presentamos el modelo bastante utilizado conocido como regresión de Poisson. En donde 
+suponemos que $N \rightsquigarrow Pois( \lambda( x ) ER( x ) ) = Pois( g( \beta x ) ER( x ) )$
+donde $\lambda$ es el parámetro a estimar en función de las variables explicativas $x$.
+\begin{equation}
+\mathbb{E}[ N ] = \lambda( x ) ER( x ) = g( \beta x ) ER( x )
+\end{equation}
+
+\begin{equation}
+P( N = n ) = \exp(-g( \beta x ) ER( x )) \frac{g( \beta x )^n ER( x )^n}{n!}
+\end{equation}
+
+```{r l6t1, echo = TRUE, results = 'asis'}
+# la librería CASdatasets fue previamente cargada
+data( beMTPL97 )
+beMTPL97 <- as.data.table( beMTPL97 )
+
+# Impresión de las primeras filas de la tabla
+beMTPL97[ 1:100 ] %>%
+  kable(
+    caption = "Pólizas y reclamos de automóviles en Bélgica",
+    row.names = FALSE,
+    col.names = names( beMTPL97 ),
+    align = paste0( rep( "r", ncol( beMTPL97 ) ), collapse = "" ),
+    digits = c( 0, 2, 0, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 4 ),
+    format.args = list( big.mark = ',', decimal.mark = '.', scientific = FALSE ),
+    escape = FALSE ) %>%
+  kable_classic( font_size = 14, full_width = FALSE, html_font = "Cambria" ) %>%
+  scroll_box( width = "750px", height = "500px" )
+```
+
+```{r l6c1}
+model_N <- glm( formula = nclaims ~ ageph + sex + power + fuel + offset( log( expo ) ) + 0, 
+                family = poisson( link = 'log' ), 
+                data = beMTPL97 )
+summary( model_N )
+```
+
+
+```{r l6c2}
+pob <- expand.grid( ageph = seq( 18, 90, 1 ), 
+                    sex = c( 'male', 'female' ),
+                    power = seq( 10, 250 ),
+                    fuel = c( 'gasoline', 'diesel' ),
+                    expo = 1 )
+pob <- as.data.table( pob )
+pob[ , EN := predict( model_N, newdata = pob, type = 'response' ) ]
+```
 :::
-
-Como consecuencia de la definición anterior, las variables aleatoria a valores reales que tiene
-cola pesada no poseen función generadora de momentos ya que la integral a continuación diverge 
-para cualquier valor $t > 0$
-\begin{equation}
-\int\limits_{\mathbb{R}} \exp( t x ) dF( x ) = + \infty
-\end{equation}
- 
-::: {.theorem #tvalext1  name="Fisher-Tippett-Gnedenko"}
-Si consideramos una secuencia de variables aleatorias $\{X_i\}_{i\in \mathbb{N}}$ las mismas
-son i.i.d, con distribución acumulada $F$. Entonces, si existen dos sucesiones de valores reales 
-$\{a_n\}_{n \in \mathbb{N}}$ y $\{b_n\}_{n \in \mathbb{N}}$, con $a_n > 0$ para cualquier 
-$n \in \mathbb{N}$ y una distribución acumulada no degenerada $G$, de tal forma que para la 
-variable aleatoria del máximo $M_n = \max\{ X_1, \ldots, X_n \}$ se satisfaga el siguiente límite
-\begin{equation}
-\underset{n \rightarrow +\infty}{\lim} P\left( \frac{M_n - b_n}{a_n} < x\right)
-= \underset{n \rightarrow +\infty}{\lim} ( F\left( a_n x + b_n \right) )^n 
-= G( x ),
-\forall x \in \mathbb{R}
-\end{equation}
-decimos por tanto que la distribución $F$ pertenece al **máximo dominio de atracción** de $G$ y lo
-representamos por $F \in MDA( G )$.
-
-Además, las distribuciones $G$ vienen caracterizadas por ser alguna de las distribuciones 
-valores extremos generalizadas $GEV( \mu, \sigma, \xi )$. Las cuales engloban tres tipos 
-relevantes:
-
-1. **Tipo I**, una distribución de Gumbel 
-$G(x) = \exp\left( -\exp\left( -\frac{x-\mu}{\sigma} \right) \right)$, para 
-$x \in \mathbb{R}, \xi = 0$
-
-2. **Tipo II**, una distribución de Fréchet 
-$G( x ) = \exp\left( -\left(1 + \xi\frac{x-\mu}{\sigma}\right)^{-\frac{1}{\xi}} \right)$, para 
-$x > \mu - \frac{\sigma}{\xi}$ y $\frac{1}{\xi} > 0$,
-
-3. **Tipo III**, una distribución de Weibull inversa 
-$G( x ) = \exp\left( -\left(1 - |\xi|\frac{x-\mu}{\sigma}\right)^{\frac{1}{\xi}} \right)$, para 
-$x < \mu + \frac{\sigma}{|\xi|}$ y $\frac{1}{\xi} < 0$,
-:::
-
-::: {.theorem #tvalext2 name="Pickands-Balkema-De Haan"}
-Sea $F_u$ la distribución de exceso asociada a la variable aleatoria $X$ y con umbral de 
-condicionamiento $u > 0$. Entonces, para cualquier $\varepsilon \in \mathbb{R}$ tenemos que 
-$F \in MDA( H )$ para alguna distribución $H = GEV( \mu, \sigma, \varepsilon )$ si y solamente
-si existe una distribución $G = GPD( \nu, \beta, \varepsilon )$, de tal forma que el siguiente 
-límite se satisface.
-\begin{equation}
-\underset{u \longrightarrow x_F}{\lim} \underset{0 < x < x_F - u}{\sup} 
-\left| F_u( x ) - G( x ) \right| = 0
-\end{equation}
-donde $x_F = \sup\{ x\in \mathbb{R} \mid F(x) < 1 \}$ y $\nu, \beta$ dependen de los parámetros 
-$\mu$, $\sigma$ y $u$.
-:::
-
-El teorema anterior \@ref(thm:tvalext2) en cierta forma sugiere que si en el límite la distribución de 
-exceso a partir de un valor de condicionamiento $u$ cada vez se comporta más como una distribución 
-de generalizada de Pareto. Entonces, la distribución de los máximos que se observen de una muestra
-de la variable aleatoria $X$ tienen un comportamiento que puede ser descrito por una distribución 
-de valores extremos generalizada.
