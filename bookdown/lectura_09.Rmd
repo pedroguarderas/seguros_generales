@@ -97,13 +97,13 @@ los cuales es imposible estimar de forma adecuada alguna distribución de valore
 Para generar un modelo utilizando valores extremos se puede tomar la siguiente aproximación 
 haciendo uso \@ref(thm:tvalext2)
 
-1. Seleccionar un valor de corte $u > 0$,
+1. Seleccionar un valor de corte $u > 0$.
 
 2. A partir de la muestra de valores de reclamos observados, tomar aquellos valores observados 
-tales que $X_i \geq u$,
+tales que $X_i \geq u$.
 
 3. Al conjunto $\{ X_i \mid X_i \geq u \}$ aplicarle un test de ajuste a una distribución de Pareto
-generalizada $GPD( u, \beta, \varepsilon )$, donde $u$ está fijo como parámetro,
+generalizada $GPD( u, \beta, \varepsilon )$, donde $u$ está fijo como parámetro.
 
 4. Si el test es satisfactorio, buscar un nuevo $u$, realizar nuevamente los pasos 2 y 3. Comparar
 el resultado de ajuste con el anterior y decidir cuál $u$ mantener según algún criterio de 
@@ -115,7 +115,10 @@ distribución de valores extremos generalizada $GEV( \mu, \sigma, \varepsilon )$
 equivalente que los reclamos en la cola $X \geq u$ pueden ser descritos con una distribución de 
 Pareto generalizada $GPD( u, \beta, \varepsilon )$.
 
-5. Se ajusta una distribución de severidad $F$ a todos los reclamos en la muestra $X$
+5. Se ajusta una distribución de severidad $F$ a todos los reclamos en la muestra $X$. La 
+distribución que se ajusta, debe estar precisamente dentro de la familia de funciones que están el 
+dominio máximo de atracción de la familia de distribuciones de valores extremos generalizadas, 
+i.e. $F \in MDA( GEV( \mu, \sigma, \varepsilon ) )$.
 
 6. Si la prueba anterior fue satisfactoria para algún $u > 0$. Se determina a que percentil 
 $p_u$ pertenece, esto se lo puede realizar a partir de la muestra mismo $F_n( X \leq u ) = p_u$ o 

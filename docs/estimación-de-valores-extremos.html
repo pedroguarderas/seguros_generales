@@ -366,11 +366,11 @@ los cuales es imposible estimar de forma adecuada alguna distribución de valore
 <p>Para generar un modelo utilizando valores extremos se puede tomar la siguiente aproximación
 haciendo uso <a href="estimación-de-valores-extremos.html#thm:tvalext2">9.2</a></p>
 <ol style="list-style-type: decimal">
-<li><p>Seleccionar un valor de corte <span class="math inline">\(u &gt; 0\)</span>,</p></li>
+<li><p>Seleccionar un valor de corte <span class="math inline">\(u &gt; 0\)</span>.</p></li>
 <li><p>A partir de la muestra de valores de reclamos observados, tomar aquellos valores observados
-tales que <span class="math inline">\(X_i \geq u\)</span>,</p></li>
+tales que <span class="math inline">\(X_i \geq u\)</span>.</p></li>
 <li><p>Al conjunto <span class="math inline">\(\{ X_i \mid X_i \geq u \}\)</span> aplicarle un test de ajuste a una distribución de Pareto
-generalizada <span class="math inline">\(GPD( u, \beta, \varepsilon )\)</span>, donde <span class="math inline">\(u\)</span> está fijo como parámetro,</p></li>
+generalizada <span class="math inline">\(GPD( u, \beta, \varepsilon )\)</span>, donde <span class="math inline">\(u\)</span> está fijo como parámetro.</p></li>
 <li><p>Si el test es satisfactorio, buscar un nuevo <span class="math inline">\(u\)</span>, realizar nuevamente los pasos 2 y 3. Comparar
 el resultado de ajuste con el anterior y decidir cuál <span class="math inline">\(u\)</span> mantener según algún criterio de
 selección estadística. Usualmente un criterio de información o la significancia de los valores <span class="math inline">\(p\)</span></p>
@@ -379,7 +379,10 @@ nivel de certeza, que los valores extremos de los reclamos si pueden ser descrit
 distribución de valores extremos generalizada <span class="math inline">\(GEV( \mu, \sigma, \varepsilon )\)</span> o de forma
 equivalente que los reclamos en la cola <span class="math inline">\(X \geq u\)</span> pueden ser descritos con una distribución de
 Pareto generalizada <span class="math inline">\(GPD( u, \beta, \varepsilon )\)</span>.</p></li>
-<li><p>Se ajusta una distribución de severidad <span class="math inline">\(F\)</span> a todos los reclamos en la muestra <span class="math inline">\(X\)</span></p></li>
+<li><p>Se ajusta una distribución de severidad <span class="math inline">\(F\)</span> a todos los reclamos en la muestra <span class="math inline">\(X\)</span>. La
+distribución que se ajusta, debe estar precisamente dentro de la familia de funciones que están el
+dominio máximo de atracción de la familia de distribuciones de valores extremos generalizadas,
+i.e. <span class="math inline">\(F \in MDA( GEV( \mu, \sigma, \varepsilon ) )\)</span>.</p></li>
 <li><p>Si la prueba anterior fue satisfactoria para algún <span class="math inline">\(u &gt; 0\)</span>. Se determina a que percentil
 <span class="math inline">\(p_u\)</span> pertenece, esto se lo puede realizar a partir de la muestra mismo <span class="math inline">\(F_n( X \leq u ) = p_u\)</span> o
 con la distribución ajustada para los reclamos <span class="math inline">\(F( X \leq u ) = p_u\)</span>.</p></li>
