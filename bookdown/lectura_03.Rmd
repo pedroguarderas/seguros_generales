@@ -627,16 +627,16 @@ Para ello se ha formulado diferentes aproximaciones, entre las cuales citamos la
 
 Se considera que para la medida de de probabilidad $P_X$ que caracteriza a la variable aleatoria 
 $X$ está dentro de una familia de funciones que dependen de un parámetro $\theta \in \Theta$, es 
-decir para cada $\theta$, $P( \theta )$ es una medida de probabilidad y para algún 
-$\theta \in \Theta, P_X = P( \theta )$. 
+decir para cada $\theta$, $P_{\theta}$ es una medida de probabilidad y para algún 
+$\theta \in \Theta, P_X = P_{\theta}$. 
 
 Entonces, se parte de suponer que existe funcional $G$ actuando sobre el conjunto de medidas de 
 probabilidad $\mathcal{P}$ que contiene al conjunto
-$P( \Theta ) = \{ P(\theta) \mid \theta \in \Theta\} \subset \mathcal{P}$ y que toma valores 
-en $\Theta$, i.e. $G: \mathcal{P} \longrightarrow \Theta$. De tal forma que $P( \Theta )$ es 
+$P( \Theta ) = \{ P_{\theta} \mid \theta \in \Theta\} \subset \mathcal{P}$ y que toma valores 
+en $\Theta$, i.e. $G: \mathcal{P} \longrightarrow \Theta$. De tal forma que $P_{\theta}$ es 
 invariante, es decir:
 \begin{equation}
-G( P( \theta ) ) = \theta,\quad \forall \theta \in \Theta
+G( P_{\theta} ) = \theta,\quad \forall \theta \in \Theta
 \end{equation}
 
 Así se construye un **estimador por el método de sustitución** si a partir de la medida de 
@@ -648,7 +648,7 @@ aleatoria $X$, se toma como parámetro el dado por:
 
 En otras palabras se sustituye el parámetro $\theta$ por $\widehat{\theta}$. Esto implica que 
 se aproxima la medida $P_X$ que caracteriza a $X$, con la aproximación
-$P_X \approx P(\widehat{\theta})$.
+$P_X \approx P_{\widehat{\theta}}$.
 
 Es de notar que a priori no se hace establece ninguna medida de la calidad de la aproximación, 
 para ello hay que adjuntar algunos otros criterios que caracterizan un buen tipo de estimador.
@@ -662,24 +662,25 @@ un funcional y como tal puede resultar una función que no es medible.
 
 ::: {.definition #estsus  name="Estimadores convergentes"}
 En el mismo contexto anterior. Si la variable aleatoria $X$ está caracterizada por la medida 
-$P_X = P( \theta )$, para algún $\theta \in \Theta$. Decimos que una familia de estimadores 
+$P_X = P_{\theta}$, para algún $\theta \in \Theta$. Decimos que una familia de estimadores 
 $\{\theta_n\}$ es **convergente** si al generar cada vez una muestra más grande el estimador
 $\theta_n( X_1, \ldots, X_n )$ converge en probabilidad a $\theta$. Esto quiere decir que 
 para cualquier $\varepsilon > 0$
 \begin{equation}
 \underset{n \rightarrow +\infty}{\lim} 
-P\left( \left| \theta_n( X_1, \ldots, X_n ) - \theta \right| \geq \varepsilon \right) = 0
+P_{\theta}\left( \left| \theta_n( X_1, \ldots, X_n ) - \theta \right| \geq \varepsilon \right) = 0
 \end{equation}
 
 Decimos que **converge fuertemente** si la convergencia de la familia de estimadores 
 $\theta_n( X_1, \ldots, X_n )$ a $\theta$ se da **casi seguramente** o **casi todas partes**. Esto 
 en término de límites implica que:
 \begin{equation}
-P\left( \underset{n \rightarrow +\infty}{\lim} \theta_n( X_1, \ldots, X_n ) = \theta \right) = 1
+P_{\theta}\left( \underset{n \rightarrow +\infty}{\lim} \theta_n( X_1, \ldots, X_n ) = \theta \right) = 1
 \end{equation}
 En otras palabras, la probabilidad de que el límite del estimador $\theta_n( X_1, \ldots, X_n )$ 
-sea igual a $\theta$ es $1$, salvo un conjunto de medida nula para $P$. De ahí resulta 
+sea igual a $\theta$ es $1$, salvo un conjunto de medida nula para $P_{\theta}$. De ahí resulta 
 la terminología de convergencia casi segura o convergencia en casi todas partes.
+:::
 
 <!------------------------------------------------------------------------------------------------->
 ### Método de momentos
@@ -728,9 +729,77 @@ lineales, que no suelen ser estables y que deben estar bien definidos para prove
 <!------------------------------------------------------------------------------------------------->
 ### Método de la distancia mínima
 
+Este método requiere de la definición de una distancia sobre el espacio de distribuciones de 
+probabilidad $\mathcal{P}$, i.e. una función $d : \mathcal{P} \times \mathcal{P} \longrightarrow \mathbb{R}_+$
+que satisface las siguientes propiedades:
+
+1. Propiedad de simetría, para cualquier $P, Q \in \mathcal{P}$, $d( P, Q ) = d( Q, P )$,
+
+2. Para cualquier $P \in \mathcal{P}$, $d( P, P ) = 0$.
+
+3. Desigualdad triangular, para cualquier $P,Q,R \in \mathcal{P}$
+\begin{equation}
+d( P, Q ) \leq d( P, R ) + d( R, Q )
+\end{equation}
+
+A partir de la medida empírica de probabilidad $P_n$, se busca una probabilidad $P_{\theta}$ que 
+minimize la distancia medida con $d$. Así resulta el estimador con el **método de distancia mínima**
+\begin{equation}
+\widehat{\theta} = \underset{\theta \in \Theta}{\arg\,\inf\,} d\left( P_{\theta}, P_n \right)
+\end{equation}
+
+Entra las distancias que se puede considerar tenemos las siguientes
+
+- Distancia del supremo entre las distribuciones acumuladas correspondientes
+\begin{equation}
+d(P,Q) = \underset{x}{\sup} \left| F_P( x ) - F_Q( x ) \right|
+\end{equation}
+
+- Distancia cuadrática entre las distribuciones acumuladas correspondientes
+\begin{equation}
+d( P, Q ) = \int\limits \left( F_P( x ) - F_Q( x ) \right)^2\ dF_Q( x )
+\end{equation}
+
+- Distancia de Wasserstein, para $p > 1$
+\begin{equation}
+d( P, Q )
+= W_p( P, Q )
+= \underset{(X,Y) \rightsquigarrow \mu \in \Gamma( P, Q )}{\inf} \mathbb{E}_{\mu}\left[ |X - Y|^p \right]^{\frac{1}{p}}
+\end{equation}
+donde
+\begin{equation}
+\Gamma( P, Q ) = \left\{ \mu \middle| \text{$\mu$ es medida de probabilidad sobre $\Omega \times \Omega$, 
+cuyas distribuciones marginales son $P$ y $Q$}\right\}
+\end{equation}
+
 
 <!------------------------------------------------------------------------------------------------->
 ###  Método de maximización de la verosimilitud
+
+La estimación de verosimilitud parte de asumir que se observan una cierta cantidad de eventos 
+independientes $B_1, \ldots, B_n$, relacionados precisamente a la variable aleatoria en estudio $X$.
+
+Se postula precisamente que la mejor medida de probabilidad es aquella que maximiza la probabilidad 
+de observar estos eventos independientes. En el caso en particular de la estimación de una medida
+de probabilidad en una familia $\{P_{\theta}\}$ con $\theta \in \Theta$, se busca maximizar la 
+probabilidad:
+\begin{equation}
+\underset{\theta \in \Theta}{\sup} \prod\limits_{i=1}^n P_{\theta}\left( B_i \right)
+\end{equation}
+
+o de forma equivalente, si se toma logaritmos:
+\begin{equation}
+\underset{\theta \in \Theta}{\sup} \sum\limits_{i=1}^n \log P_{\theta} \left( B_i \right)
+\end{equation}
+
+Así, el estimador por verosimilitud, es el dado por:
+\begin{equation}
+\widehat{\theta} 
+= \underset{\theta \in \Theta}{\arg\,\sup\,} \sum\limits_{i=1}^n \log P_{\theta} \left( B_i \right)
+\end{equation}
+
+En la práctica los eventos que se observa $B_i$ son puntuales y son precisamente los valores 
+que toma la variable aleatoria $X$. Es decir, se observa una muestra $X_1, \ldots, X_n$.
 
 
 <!------------------------------------------------------------------------------------------------->
@@ -752,4 +821,4 @@ $\theta_2$, respecto del parámetro $\theta$, si se cumple la siguiente desigual
 \mathbb{E}\left[ \left( \theta_1 - \theta \right)^2 \right]
 < \mathbb{E}\left[ \left( \theta_2 - \theta \right)^2 \right]
 \end{equation}
-
+:::
