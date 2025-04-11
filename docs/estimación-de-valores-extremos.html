@@ -255,7 +255,11 @@ div.csl-indent {
 <li class="chapter" data-level="8.1" data-path="modelos-lineales-generalizados-glm.html"><a href="modelos-lineales-generalizados-glm.html#familia-exponencial"><i class="fa fa-check"></i><b>8.1</b> Familia exponencial</a></li>
 <li class="chapter" data-level="8.2" data-path="modelos-lineales-generalizados-glm.html"><a href="modelos-lineales-generalizados-glm.html#modelo-lineal-generalizado-glm"><i class="fa fa-check"></i><b>8.2</b> Modelo lineal generalizado (GLM)</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="estimación-de-valores-extremos.html"><a href="estimación-de-valores-extremos.html"><i class="fa fa-check"></i><b>9</b> Estimación de valores extremos</a></li>
+<li class="chapter" data-level="9" data-path="estimación-de-valores-extremos.html"><a href="estimación-de-valores-extremos.html"><i class="fa fa-check"></i><b>9</b> Estimación de valores extremos</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="estimación-de-valores-extremos.html"><a href="estimación-de-valores-extremos.html#estimación-con-valores-extremos"><i class="fa fa-check"></i><b>9.1</b> Estimación con valores extremos</a></li>
+<li class="chapter" data-level="9.2" data-path="estimación-de-valores-extremos.html"><a href="estimación-de-valores-extremos.html#simulación-con-valores-extremos"><i class="fa fa-check"></i><b>9.2</b> Simulación con valores extremos</a></li>
+</ul></li>
 <li class="chapter" data-level="10" data-path="bibliografía.html"><a href="bibliografía.html"><i class="fa fa-check"></i><b>10</b> Bibliografía</a></li>
 </ul>
 
@@ -297,6 +301,7 @@ para cualquier valor <span class="math inline">\(t &gt; 0\)</span>
 <span class="math display">\[\begin{equation}
 \int\limits_{\mathbb{R}} \exp( t x ) dF( x ) = + \infty
 \end{equation}\]</span></p>
+<!------------------------------------------------------------------------------------------------->
 <div class="theorem">
 <p><span id="thm:tvalext1" class="theorem"><strong>Teorema 9.1  (Fisher-Tippett-Gnedenko) </strong></span>Si consideramos una secuencia de variables aleatorias <span class="math inline">\(\{X_i\}_{i\in \mathbb{N}}\)</span> las mismas
 son i.i.d, con distribución acumulada <span class="math inline">\(F\)</span>. Entonces, si existen dos sucesiones de valores reales
@@ -326,12 +331,13 @@ relevantes:</p>
 <span class="math inline">\(x &lt; \mu + \frac{\sigma}{|\xi|}\)</span> y <span class="math inline">\(\frac{1}{\xi} &lt; 0\)</span>,</p></li>
 </ol>
 </div>
+<!------------------------------------------------------------------------------------------------->
 <div class="theorem">
 <p><span id="thm:tvalext2" class="theorem"><strong>Teorema 9.2  (Pickands-Balkema-De Haan) </strong></span>Sea <span class="math inline">\(F_u\)</span> la distribución de exceso asociada a la variable aleatoria <span class="math inline">\(X\)</span> y con umbral de
 condicionamiento <span class="math inline">\(u &gt; 0\)</span>. Entonces, para cualquier <span class="math inline">\(\varepsilon \in \mathbb{R}\)</span> tenemos que
 <span class="math inline">\(F \in MDA( H )\)</span> para alguna distribución <span class="math inline">\(H = GEV( \mu, \sigma, \varepsilon )\)</span> si y solamente
 si existe una distribución <span class="math inline">\(G = GPD( \nu, \beta, \varepsilon )\)</span>, de tal forma que el siguiente
-límite se satisface.
+límite se satisface por la distribución de exceso <span class="math inline">\(F_u\)</span>.
 <span class="math display">\[\begin{equation}
 \underset{u \longrightarrow x_F}{\lim} \underset{0 &lt; x &lt; x_F - u}{\sup}
 \left| F_u( x ) - G( x ) \right| = 0
@@ -344,8 +350,53 @@ exceso a partir de un valor de condicionamiento <span class="math inline">\(u\)<
 de generalizada de Pareto. Entonces, la distribución de los máximos que se observen de una muestra
 de la variable aleatoria <span class="math inline">\(X\)</span> tienen un comportamiento que puede ser descrito por una distribución
 de valores extremos generalizada.</p>
+<p>Un forma de estimar si hay la posibilidad de presentar valores extremos es tomando un corte a un
+nivel <span class="math inline">\(u\)</span> de los valores observados de reclamos <span class="math inline">\(X_1, \ldots, X_n\)</span>, es decir tomar de la muestra
+todos los valores <span class="math inline">\(\{ X_i \mid X_i \geq u \}\)</span>, a estos valores realizarles un test de ajuste
+a una distribución de Pareto generalizada <span class="math inline">\(GPD( \nu, \beta, \varepsilon )\)</span>, si el test es aceptable
+y no se rechaza la hipótesis nula, entonces tenemos el resultado de aproximación anterior
+<a href="estimación-de-valores-extremos.html#thm:tvalext2">9.2</a>. Luego se puede simular los reclamos de forma condiciona.</p>
+<!------------------------------------------------------------------------------------------------->
+<div id="estimación-con-valores-extremos" class="section level2 hasAnchor" number="9.1">
+<h2><span class="header-section-number">9.1</span> Estimación con valores extremos<a href="estimación-de-valores-extremos.html#estimación-con-valores-extremos" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Para generar un modelo utilizando valores extremos se puede tomar la siguiente aproximación
+haciendo uso <a href="estimación-de-valores-extremos.html#thm:tvalext2">9.2</a></p>
+<ol style="list-style-type: decimal">
+<li><p>Seleccionar un valor de corte <span class="math inline">\(u &gt; 0\)</span>,</p></li>
+<li><p>A partir de la muestra de valores de reclamos observados, tomar aquellos valores observados
+tales que <span class="math inline">\(X_i \geq u\)</span>,</p></li>
+<li><p>Al conjunto <span class="math inline">\(\{ X_i \mid X_i \geq u \}\)</span> aplicarle un test de ajuste a una distribución de Pareto
+generalizada <span class="math inline">\(GPD( u, \beta, \varepsilon )\)</span>, donde <span class="math inline">\(u\)</span> está fijo como parámetro,</p></li>
+<li><p>Si el test es satisfactorio, buscar un nuevo <span class="math inline">\(u\)</span>, realizar nuevamente los pasos 2 y 3. Comparar
+el resultado de ajuste con el anterior y decidir cuál <span class="math inline">\(u\)</span> mantener según algún criterio de
+selección estadística. Usualmente un criterio de información o la significancia de los valores <span class="math inline">\(p\)</span></p>
+<p>Si llegamos a obtener un resultado satisfactorio para algún <span class="math inline">\(u &gt; 0\)</span>, podemos concluir con cierto
+nivel de certeza, que los valores extremos de los reclamos si pueden ser descritos con una
+distribución de valores extremos generalizada <span class="math inline">\(GEV( \mu, \sigma, \varepsilon )\)</span> o de forma
+equivalente que los reclamos en la cola <span class="math inline">\(X \geq u\)</span> pueden ser descritos con una distribución de
+Pareto generalizada <span class="math inline">\(GPD( u, \beta, \varepsilon )\)</span>.</p></li>
+<li><p>Se ajusta una distribución de severidad <span class="math inline">\(F\)</span> a todos los reclamos en la muestra <span class="math inline">\(X\)</span></p></li>
+<li><p>Si la prueba anterior fue satisfactoria para algún <span class="math inline">\(u &gt; 0\)</span>. Se determina a que percentil
+<span class="math inline">\(p_u\)</span> pertenece, esto se lo puede realizar a partir de la muestra mismo <span class="math inline">\(F_n( X \leq u ) = p_u\)</span> o
+con la distribución ajustada para los reclamos <span class="math inline">\(F( X \leq u ) = p_u\)</span>.</p></li>
+</ol>
+<!------------------------------------------------------------------------------------------------->
+</div>
+<div id="simulación-con-valores-extremos" class="section level2 hasAnchor" number="9.2">
+<h2><span class="header-section-number">9.2</span> Simulación con valores extremos<a href="estimación-de-valores-extremos.html#simulación-con-valores-extremos" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Si en caso se desea simular los reclamos, se toma con probabilidad <span class="math inline">\(p_u\)</span> un muestra con la
+distribución truncada <span class="math inline">\(X \rightsquigarrow F_{(u)}( x ) = F( x \mid X \leq u ) = \frac{F(\min(u,x))}{F(u)}\)</span> y con
+probabilidad <span class="math inline">\(1 - p_u\)</span> una muestra con la distribución de Pareto generalizada estimada
+<span class="math inline">\(X \rightsquigarrow G = GPD( u, \beta, \varepsilon )\)</span>.</p>
+<p>Así, en particular al esperanza de <span class="math inline">\(X\)</span> tiene al forma
+<span class="math display">\[\begin{equation}
+\mathbb{E}[ X ]
+= \mathbb{E}[ X \mid X \leq u ] P( X \leq u ) + \mathbb{E}[ X \mid X &gt; u ] P( X &gt; u )
+= p_u \mathbb{E}_{F_{(u)}}[ X ] + \left( 1 - p_u \right) \mathbb{E}_{G}[ X ]
+\end{equation}\]</span></p>
 
 <!------------------------------------------------------------------------------------------------->
+</div>
 </div>
             </section>
 

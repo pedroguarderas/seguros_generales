@@ -109,4 +109,6 @@ modelos-lineales-generalizados-glm
 familia-exponencial
 modelo-lineal-generalizado-glm
 estimación-de-valores-extremos
+estimación-con-valores-extremos
+simulación-con-valores-extremos
 bibliografía
