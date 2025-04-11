@@ -138,3 +138,10 @@ Así, en particular al esperanza de $X$ tiene al forma
 = p_u \mathbb{E}_{F_{(u)}}[ X ] + \left( 1 - p_u \right) \mathbb{E}_{G}[ X ]
 \end{equation}
 
+Si la muestra inicial es lo suficientemente representable y por tanto tiene un buen tamaño, el 
+valor $p_u$ puede ser realmente cercano a $1$, por tal razón si se decide realizar una simulación de 
+valores extremos de tamaño $m$, se tiene que tomar en cuenta que en promedio $m ( 1 - p_u )$ de esos 
+valores serán valores extremos, si $m$ no es lo suficientemente grande puede que los valores 
+extremos simulados se cero y habrá sido inútil el haber realizado una estimación más compleja con 
+valores extremos, ya que no se la está utilizando en las simulaciones. En tales circunstancias es 
+mucho mejor utilizar algún algoritmo determinista que supere este problema.

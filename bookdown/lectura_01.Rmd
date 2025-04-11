@@ -4,7 +4,8 @@
 <!------------------------------------------------------------------------------------------------->
 ## Materia
 
-**Matemática Actuarial de los Seguros Generales**
+Las presentes notas de curso han sido creadas para el curso de **Matemática Actuarial de los 
+Seguros Generales**.
 
 **Profesor: Leonardo Vélez Aguirre, MSc.**
 
