@@ -86,6 +86,11 @@ a una distribución de Pareto generalizada $GPD( \nu, \beta, \varepsilon )$, si 
 y no se rechaza la hipótesis nula, entonces tenemos el resultado de aproximación anterior 
 \@ref(thm:tvalext2). Luego se puede simular los reclamos de forma condiciona.
 
+Es importante observar antes de continuar que para estudiar los valores extremos de reclamos estos
+no deben haber pasado por alguna deducción, después de aplicar alguna función deducible $D$, sino 
+posiblemente estaremos en el caso inútil de tener valores truncados, con una cola limitada, para 
+los cuales es imposible estimar de forma adecuada alguna distribución de valores extremos.
+
 <!------------------------------------------------------------------------------------------------->
 ## Estimación con valores extremos
 
