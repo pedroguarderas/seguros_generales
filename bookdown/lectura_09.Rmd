@@ -12,8 +12,8 @@ Una variable aleatoria a valores reales $X$ se dice que tiene su distribución $
 
 de forma muy similar diremos que la distribución tiene **cola pesada hacia la izquierda** si 
 \begin{equation}
-\underset{x \rightarrow +\infty}{\lim} \exp( -t x ) P( X \leq x ) 
-= \underset{x \rightarrow +\infty}{\lim} \exp( -t x ) F( x )
+\underset{x \rightarrow -\infty}{\lim} \exp( -t x ) P( X \leq x ) 
+= \underset{x \rightarrow -\infty}{\lim} \exp( -t x ) F( x )
 = + \infty, \qquad \forall t > 0
 \end{equation}
 :::
