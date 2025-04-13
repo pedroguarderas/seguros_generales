@@ -456,8 +456,8 @@ a la integral de Riemann-Stieltjes utilizando la distribución acumulada empíri
 <p>De ello tenemos los siguientes resultados de cálculo para el valor esperado de la severidad total
 <span class="math display">\[\begin{eqnarray*}
 \mathbb{E}[S] = \sum\limits_{i=1}^n e^{ \mu_i + \frac{1}{2} \sigma_i^2 } &amp; = &amp; 34562.7208, \\
-\overline{S} = \frac{1}{m} \sum\limits_{i=1}^m S_i &amp; = &amp; 34614.9465, \\
-\sum\limits_{i=1}^N s_{i} \left( F_m( s_{i+1} ) - F_m( s_{i} ) \right) &amp; = &amp; 34562.3151
+\overline{S} = \frac{1}{m} \sum\limits_{i=1}^m S_i &amp; = &amp; 33510.8661, \\
+\sum\limits_{i=1}^N s_{i} \left( F_m( s_{i+1} ) - F_m( s_{i} ) \right) &amp; = &amp; 33478.4349
 \end{eqnarray*}\]</span></p>
 <p>Lo bueno de poseer una buena aproximación a la distribución acumulada de una variable aleatoria, es
 que podemos calcular algunos otros valores de importancia relacionados a la variable aleatoria y
@@ -482,8 +482,8 @@ S = \sum\limits_{i=1}^n X_i = \sum\limits_{i=1}^n M \mathbf{1}_{A_i}
 \end{equation}\]</span></p>
 <p>El valor total esperado de reclamos está dado por:
 <span class="math display">\[\begin{equation}
-\mathbf{E}[ S ]
-= \sum\limits_{i=1}^n \mathbf{E}\left[ M \mathbf{1}_{A_i} \right]
+\mathbb{E}[ S ]
+= \sum\limits_{i=1}^n \mathbb{E}\left[ M \mathbf{1}_{A_i} \right]
 = M \sum\limits_{i=1}^n P( A_i )
 \end{equation}\]</span>
 la última igualdad resulta de las propiedades de la función indicatriz <a href="probabilidad-y-estadística.html#def:indicatriz">3.14</a>.</p>
@@ -643,14 +643,15 @@ Si consideramos generar la simulación como un modelo individual, generamos vari
 <p></p>
 <p><span class="math display">\[\begin{eqnarray*}
 \mathbb{E}[S] = n p e^{ \mu + \frac{1}{2} \sigma^2 } &amp; = &amp; 219326.6317, \\
-\overline{S} = \frac{1}{m} \sum\limits_{i=1}^m S_i &amp; = &amp; 219532.6777,
+\overline{S} = \frac{1}{m} \sum\limits_{i=1}^m S_i &amp; = &amp; 220707.0785,
 \end{eqnarray*}\]</span></p>
 </div>
 <p>Es importante observar que si la frecuencia de reclamos es superior a <span class="math inline">\(1\)</span>, sea este por póliza,
 individuo o en general por unidad asegurada, la aproximación anterior no es la correcta si no
-se realiza un ajuste al valor <span class="math inline">\(n\)</span> que es el número máximo de siniestros. Además, hay un gasto
-innecesario de valores simulados de reclamos <span class="math inline">\(X_i\)</span> ya que algunos se multiplicaran por <span class="math inline">\(B_i\)</span>, la
-cual solo toma valores <span class="math inline">\(\{0,1\}\)</span>.</p>
+se realiza un ajuste al valor <span class="math inline">\(n\)</span> que es el número máximo de siniestros. Sino también, se puede
+considera que las variables de los reclamos es la suma total de reclamos por póliza.</p>
+<p>Por otra parte, es de notar que en el cálculo hay un gasto innecesario de valores simulados de
+reclamos <span class="math inline">\(X_i\)</span> ya que algunos se multiplicaran por <span class="math inline">\(B_i\)</span>, la cual solo toma valores <span class="math inline">\(\{0,1\}\)</span>.</p>
 <!------------------------------------------------------------------------------------------------->
 </div>
 </div>
@@ -662,7 +663,9 @@ donde para cada unidad <span class="math inline">\(i \in \{1, \ldots, n\}\)</spa
 de reclamos dados por una variable aleatoria discreta <span class="math inline">\(N_i\)</span>, y así para cada presentar un número
 de reclamos <span class="math inline">\(X_{i,1}, \ldots, X_{i,N_i}\)</span>. Así el reclamo total viene dado por la expresión
 <span class="math display">\[\begin{equation}
-S = \sum\limits_{i=1}^n \sum\limits_{j=1}^{N_i} X_{i,j}
+S
+= \sum\limits_{i=1}^n X_i
+= \sum\limits_{i=1}^n \sum\limits_{j=1}^{N_i} X_{i,j}
 \end{equation}\]</span></p>
 <!------------------------------------------------------------------------------------------------->
 </div>
