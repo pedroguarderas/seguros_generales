@@ -49,6 +49,7 @@
 
 
 
+<link href="libs/codefolding-lua-1.1/codefolding-lua.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
@@ -718,11 +719,14 @@ así se observa que para tener una aproximación de orden <span class="math inli
 <span class="math inline">\(\varepsilon\)</span>, se requiere como mínimo realizar un número de simulaciones <span class="math inline">\(n\)</span> de orden
 logarítmico en <span class="math inline">\(\delta\)</span> y cuadrático en <span class="math inline">\(\varepsilon\)</span>.</p>
 <p></p>
+<details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb10"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb10-1"><a href="probabilidad-y-estadística.html#cb10-1"></a>delta <span class="ot">&lt;-</span> <span class="fl">0.01</span></span>
 <span id="cb10-2"><a href="probabilidad-y-estadística.html#cb10-2"></a>e <span class="ot">&lt;-</span> <span class="fu">unlist</span>( <span class="fu">lapply</span>( <span class="fu">seq</span>( <span class="dv">1</span>, <span class="dv">9</span>, <span class="dv">1</span> ), <span class="at">FUN =</span> <span class="cf">function</span>( n ) <span class="fu">seq</span>( <span class="dv">9</span>, <span class="dv">1</span>, <span class="sc">-</span><span class="dv">1</span> ) <span class="sc">*</span> <span class="dv">10</span><span class="sc">^</span>{<span class="sc">-</span>n} ) )</span>
 <span id="cb10-3"><a href="probabilidad-y-estadística.html#cb10-3"></a>n <span class="ot">&lt;-</span> <span class="fu">ceiling</span>( <span class="sc">-</span><span class="fu">log</span>( delta <span class="sc">/</span> <span class="dv">2</span> ) <span class="sc">/</span> ( <span class="dv">2</span> <span class="sc">*</span> e<span class="sc">^</span><span class="dv">2</span> ) )</span></code></pre></div>
+</details>
 <p></p>
 <p></p>
+<details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb11"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb11-1"><a href="probabilidad-y-estadística.html#cb11-1"></a>dt <span class="ot">&lt;-</span> <span class="fu">data.table</span>( <span class="at">delta =</span> delta, e, n, <span class="at">d =</span> <span class="dv">8</span> <span class="sc">*</span> n <span class="sc">/</span> <span class="dv">1024</span><span class="sc">^</span><span class="dv">3</span> )</span>
 <span id="cb11-2"><a href="probabilidad-y-estadística.html#cb11-2"></a>dt <span class="sc">%&gt;%</span></span>
 <span id="cb11-3"><a href="probabilidad-y-estadística.html#cb11-3"></a>  <span class="fu">kable</span>(</span>
@@ -735,6 +739,7 @@ logarítmico en <span class="math inline">\(\delta\)</span> y cuadrático en <sp
 <span id="cb11-10"><a href="probabilidad-y-estadística.html#cb11-10"></a>    <span class="at">escape =</span> <span class="cn">FALSE</span> ) <span class="sc">%&gt;%</span></span>
 <span id="cb11-11"><a href="probabilidad-y-estadística.html#cb11-11"></a>  <span class="fu">kable_classic</span>( <span class="at">font_size =</span> <span class="dv">14</span>, <span class="at">full_width =</span> <span class="cn">FALSE</span>, <span class="at">html_font =</span> <span class="st">&quot;Cambria&quot;</span> ) <span class="sc">%&gt;%</span></span>
 <span id="cb11-12"><a href="probabilidad-y-estadística.html#cb11-12"></a>  <span class="fu">scroll_box</span>( <span class="at">width =</span> <span class="st">&quot;750px&quot;</span>, <span class="at">height =</span> <span class="st">&quot;500px&quot;</span> )</span></code></pre></div>
+</details>
 <div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:500px; overflow-x: scroll; width:750px; ">
 <table class=" lightable-classic" style="font-size: 14px; color: black; font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
 <caption style="font-size: initial !important;">
@@ -2061,7 +2066,7 @@ gitbook.start({
   "toc": {
     "collapse": "section"
   },
-  "split_by": "rmd"
+  "split_by": "chapter"
 });
 });
 </script>

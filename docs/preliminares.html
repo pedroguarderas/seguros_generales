@@ -49,6 +49,7 @@
 
 
 
+<link href="libs/codefolding-lua-1.1/codefolding-lua.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
@@ -308,13 +309,16 @@ el conjunto <span class="math inline">\(X\)</span>, no es más que una función 
 <h2><span class="header-section-number">2.2</span> Consideraciones de programación en R<a href="preliminares.html#consideraciones-de-programación-en-r" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div id="opciones-usuales" class="section level3 unnumbered hasAnchor">
 <h3>Opciones usuales<a href="preliminares.html#opciones-usuales" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="preliminares.html#cb1-1" tabindex="-1"></a><span class="fu">options</span>( <span class="at">scipen =</span> <span class="dv">9999</span> )</span>
 <span id="cb1-2"><a href="preliminares.html#cb1-2" tabindex="-1"></a><span class="fu">options</span>( <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span> )</span></code></pre></div>
+</details>
 <!------------------------------------------------------------------------------------------------->
 </div>
 <div id="paquetes-usuales" class="section level3 unnumbered hasAnchor">
 <h3>Paquetes usuales<a href="preliminares.html#paquetes-usuales" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p></p>
+<details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb2"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb2-1"><a href="preliminares.html#cb2-1"></a><span class="fu">library</span>( actuar )</span>
 <span id="cb2-2"><a href="preliminares.html#cb2-2"></a><span class="fu">library</span>( data.table )</span>
 <span id="cb2-3"><a href="preliminares.html#cb2-3"></a><span class="fu">library</span>( fExtremes )</span>
@@ -330,6 +334,7 @@ el conjunto <span class="math inline">\(X\)</span>, no es más que una función 
 <span id="cb2-13"><a href="preliminares.html#cb2-13"></a><span class="fu">library</span>( rmarkdown )</span>
 <span id="cb2-14"><a href="preliminares.html#cb2-14"></a><span class="fu">library</span>( shiny )</span>
 <span id="cb2-15"><a href="preliminares.html#cb2-15"></a><span class="fu">library</span>( wesanderson )</span></code></pre></div>
+</details>
 <p></p>
 <!------------------------------------------------------------------------------------------------->
 </div>
@@ -338,25 +343,33 @@ el conjunto <span class="math inline">\(X\)</span>, no es más que una función 
 <p>Para definir una variable utilizamos el operador de asignación <code>&lt;-</code>, también se puede utilizar <code>=</code>.</p>
 <p>Un <strong>vector</strong> se define con la función de concatenación <code>c</code></p>
 <p></p>
+<details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb3"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb3-1"><a href="preliminares.html#cb3-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>( <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span> )</span>
 <span id="cb3-2"><a href="preliminares.html#cb3-2"></a><span class="fu">print</span>( x )</span></code></pre></div>
+</details>
 <pre><code>## [1] 1 2 3</code></pre>
 <p></p>
 <p>Una <strong>función</strong> se define con la sentencia <code>function</code></p>
 <p></p>
+<details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb5"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb5-1"><a href="preliminares.html#cb5-1"></a>f <span class="ot">&lt;-</span> <span class="cf">function</span>( t ) {</span>
 <span id="cb5-2"><a href="preliminares.html#cb5-2"></a>  <span class="fu">return</span>( t<span class="sc">^</span><span class="dv">2</span> )</span>
 <span id="cb5-3"><a href="preliminares.html#cb5-3"></a>}</span></code></pre></div>
+</details>
 <p></p>
 <p>Si buscamos aplicar una función sobre un vector, podemos utilizar <code>sapply</code></p>
 <p></p>
+<details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb6"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb6-1"><a href="preliminares.html#cb6-1"></a>y <span class="ot">&lt;-</span> <span class="fu">sapply</span>( x, <span class="at">FUN =</span> f )</span>
 <span id="cb6-2"><a href="preliminares.html#cb6-2"></a><span class="fu">print</span>( y )</span></code></pre></div>
+</details>
 <pre><code>## [1] 1 4 9</code></pre>
 <p></p>
 <p></p>
+<details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb8"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb8-1"><a href="preliminares.html#cb8-1"></a>z <span class="ot">&lt;-</span> <span class="fu">lapply</span>( x, <span class="at">FUN =</span> f )</span>
 <span id="cb8-2"><a href="preliminares.html#cb8-2"></a><span class="fu">print</span>( z )</span></code></pre></div>
+</details>
 <pre><code>## [[1]]
 ## [1] 1
 ## 
@@ -432,7 +445,7 @@ gitbook.start({
   "toc": {
     "collapse": "section"
   },
-  "split_by": "rmd"
+  "split_by": "chapter"
 });
 });
 </script>
