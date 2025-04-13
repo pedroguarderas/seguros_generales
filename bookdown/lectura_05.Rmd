@@ -64,7 +64,7 @@ menos estos una infinidad si $N$ puede tomar valores tendiendo al infinito. En t
 hay que comprender y estimar la frecuencia, severidad de los reclamos que están asociados al riesgo 
 cubierto. 
 
-Los términos integrales asociados a al severidad presentan un verdadero reto estadístico y 
+Los términos integrales asociados a la severidad presentan un verdadero reto estadístico y 
 computacional; hace unos años atrás se creo unos nuevos algoritmos para calcular estos términos 
 @aep_algo, @gaep_algo.
 

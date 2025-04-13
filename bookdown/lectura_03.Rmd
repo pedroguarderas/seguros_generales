@@ -4,6 +4,7 @@
 Antes de introduccir algunos conceptos necesarios para nuestro estudio, necesitamos de algunos 
 conceptos de base.
 
+<!------------------------------------------------------------------------------------------------->
 ::: {.definition #defconcep name="Conceptos base"}
 En breves términos, utilizaremos los siguientes conceptos
 
@@ -43,10 +44,10 @@ conjuntos. Tiene las siguientes propiedades:
 2. El complemento de un evento también es parte de $\mathcal{F}$, es decir si $A \in \mathcal{F}$, 
 entonces $A^c = \Omega \setminus A \in \mathcal{F}$.
 
-3. La unión de eventos es un evento, si $A, B \in \mathcal{F}$, entonces $A \cup B \mathcal{F}$,
+3. La unión de eventos es un evento, si $A, B \in \mathcal{F}$, entonces $A \cup B \in \mathcal{F}$,
 
 4. Aunque redunde, la intersección de eventos es un evento, si $A, B \in \mathcal{F}$, entonces 
-$A \cap B \mathcal{F}$.
+$A \cap B \in \mathcal{F}$.
 :::
 
 <!------------------------------------------------------------------------------------------------->
@@ -74,8 +75,8 @@ P( A \mid B ) = \frac{P( A \cap B)}{P(B)}
 
 Una **propiedad** sobre sobre $\Omega$ viene caracterizada por una función de verificación 
 $V : \Omega \longrightarrow \{0,1\}$ de tal forma, se dice que un evento $A \in \mathcal{F}$ 
-satisface la propiedad dada por $V$ si $V(\omega) = 1, \forall \omega \in A$. Entonces decimos que 
-se satisface la propiedad en $V$ en **casi en todas partes** o **casi seguramente** si para todo 
+satisface la propiedad dada por $V$ si $V(\omega) = 1$, para todo $\omega \in A$. Entonces decimos 
+que se satisface la propiedad en $V$ en **casi en todas partes** o **casi seguramente** si para todo 
 evento $N \in \mathcal{F}$ que no satisfaga $V$ mantiene una medida nula, es decir $P( N ) = 0$ y 
 para cualquier $\omega \in \Omega \setminus N$ se satisface $V$, $V( \omega ) = 1$. En otras 
 palabras en ciertos experimentos hay resultados que se pueden presentar, están dentro de las 
@@ -203,11 +204,49 @@ F( x )
 = \int\limits_{(-\infty,x]} f( x )\ dx 
 = \int\limits_{-\infty}^x f( x )\ dx
 \end{equation}
+
+Esto implica que $f$ es la derivada de $F$, i.e. $\frac{dF}{dx} = f$, por tal razón $f$ estará bien 
+definida siempre y cuando la derivada de $F$ esté bien definida.
 :::
 
 <!------------------------------------------------------------------------------------------------->
+La siguiente función es utilidad para comprender algunos resultados en teoría de probabilidades. 
+También, es bastante útil para realizar de forma más clara y rápida algunos cálculos.
+
+::: {.definition #indicatriz name="Función indicatriz"}
+La **función indicatriz** de un conjunto $A \subset \Omega$, es la función 
+$\mathbf{1}_A : \Omega \longrightarrow \{0,1\}$, que toma los valores 
+$\mathbf{1}_A( \omega ) = 0$, si $\omega \notin A$ y $\mathbf{1}_A( \omega ) = 1$, si 
+$\omega \in A$.
+:::
+
+<!------------------------------------------------------------------------------------------------->
+::: {.definition #probemp name="Medida de probabilidad empírica"}
+A partir de una muestra de $X_1, \ldots, X_n$ de una variable aleatoria $X$, podemos definir
+también la **medida de probabilidad empírica** asociada a la muestra $X_1, \ldots, X_n$. Así 
+para cualquier evento del espacio muestral $\Omega$, $A \subset \Omega$
+\begin{equation}
+P_n( B ) = \frac{1}{n} \sum\limits_{i=1}^n \mathbf{1}_{B}\left( X_i \right)
+\end{equation}
+:::
+
+A partir de la medida empírica de probabilidad, podemos extraer la de para la distribución acumulada
+empírica $F_n$, la cual la hemos definido con anterioridad, para ello consideremos 
+$P_n( (-\infty,x])$ para cualquier $x \in \mathbb{R}$
+\begin{equation}
+P_n( (-\infty,x])
+= \frac{1}{n} \sum\limits_{i=1}^n \mathbf{1}_{(-\infty,x]}\left( X_i \right) 
+= F_n( x )
+\end{equation}
+
+Para muchos resultados asociados a la estimación de estadística la variantes empíricas $P_n$ y $F_n$
+son de utilidad.
+
+<!------------------------------------------------------------------------------------------------->
 ::: {.definition #em name="Esperanza matemática"}
-Considerando una variable aleatoria discreta $K : \Omega \longrightarrow D = \{k_1, \ldots, k_n\} \subset \mathbb{R}$, la **esperanza matemática** está dada por:
+Considerando una variable aleatoria discreta $K : \Omega \longrightarrow D \subset \mathbb{R}$, 
+donde $D$ es un conjunto discreto, es decir sus elementos se pueden contar y poner en 
+correspondencia con $\mathbb{N}$. Entonces, la **esperanza matemática** se define como:
 \begin{equation}
 \mathbb{E}[ K ] 
 = \mathbb{E}_P[ K ] 
@@ -242,7 +281,7 @@ La esperanza matemática goza de las siguientes propiedades:
 \mathbb{E}[X] \leq \mathbb{E}[Y]
 \end{equation}
 
-3. La esperanza de una constante $a \in \mathbb{R}$ es la constante misma.
+3. La esperanza de una constante $a \in \mathbb{R}$ es la misma constante.
 \begin{equation}
 \mathbb{E}[a] = \int\limits_{\mathbb{R}} a\ dF_X( x ) = a\int\limits_{\mathbb{R}} dF_X( x ) = a
 \end{equation}
@@ -250,6 +289,16 @@ La esperanza matemática goza de las siguientes propiedades:
 
 De esto resulta que la esperanza jamás puede ser mayor que cualquiera de los valores que toma 
 la variable aleatoria $X$.
+
+La función indicatriz $\mathbf{1}_A$ sobre un evento $A$ del espacio muestral $\Omega$, también se puede
+interpretar como una variable aleatoria, que tan solo tomo los valores $0$ o $1$. Es más, su 
+esperanza es precisamente la probabilidad del evento $A$.
+\begin{equation}
+\mathbb{E}\left[ \mathbf{1}_A \right] 
+= \int\limits_\Omega \mathbf{1}_A( \omega )\ dP( \omega )
+= \int\limits_A dP( \omega )
+= P( A )
+\end{equation}
 
 <!------------------------------------------------------------------------------------------------->
 ::: {.definition #mgf name="Función generadora de momentos"}
@@ -311,6 +360,18 @@ son independientes, también se puede factorar la densidad de probabilidad.
 f_{X,Y}( x, y ) = f_X( x ) f_Y( y )
 \end{equation}
 
+En el desarrollo a continuación haremos bastante uso de familias de variables aleatorias 
+$X_1, \ldots, X_n$ las cuales muchas de las veces se consideraran que son 
+**independientes entre si e idénticamente distribuidas**, es usual designarlas con las siglas
+**i.i.d.**. Esta situación si las $X_1, \ldots, X_n$ siguen la misma distribución, su distribución 
+conjunta tiene la siguiente forma:
+\begin{equation}
+F( x_1, \ldots, x_n ) 
+P( X_1 \leq x_1 \land \cdots \land X_n \leq x_n )
+= \prod\limits_{i=1}^n P( X_i \leq x_i )
+= \prod\limits_{i=1}^n F( x_i )
+\end{equation}
+
 <!------------------------------------------------------------------------------------------------->
 ::: {.definition #defmixdis name="Mixtura de distribuciones"}
 Un caso de especial interés para estudiar algunos problemas actuariales se da cuando se dispone
@@ -362,27 +423,6 @@ De forma integral esta se la puede expresar como:
 
 No está por demás notar que $\mathbb{C}[ X, X ] = \mathbb{V}[ X ]$
 :::
-
-<!------------------------------------------------------------------------------------------------->
-La siguiente función es utilidad para comprender algunos resultados en teoría de probabilidades. 
-También, es bastante útil para realizar de forma más clara y rápida algunos cálculos.
-
-::: {.definition #indicatriz name="Función indicatriz"}
-La **función indicatriz** de un conjunto $A \subset \Omega$, es la función 
-$\mathbf{1}_A : \Omega \longrightarrow \{0,1\}$, que toma los valores 
-$\mathbf{1}_A( \omega ) = 0$, si $\omega \notin A$ y $\mathbf{1}_A( \omega ) = 1$, si 
-$\omega \in A$.
-:::
-
-La función indicatriz $\mathbf{1}_A$ sobre un evento $A$ del espacio muestral $\Omega$, también se puede
-interpretar como una variable aleatoria, que tan solo tomo los valores $0$ o $1$. Es más, su 
-esperanza es precisamente la probabilidad del evento $A$.
-\begin{equation}
-\mathbb{E}\left[ \mathbf{1}_A \right] 
-= \int\limits_\Omega \mathbf{1}_A( \omega )\ dP( \omega )
-= \int\limits_A dP( \omega )
-= P( A )
-\end{equation}
 
 <!------------------------------------------------------------------------------------------------->
 ::: {.definition #dsum name="Distribución de la suma de variables aleatorias"}
@@ -444,8 +484,8 @@ software, sin embargo, no se debe olvidar que en muchos casos estas herramientas
 muchos métodos bastante avanzados y complejos en lo que respecta al conocimiento Matemático.
 
 ::: {.theorem #tlc name="Teorema del límite central"}
-Consideramos las variables aleatorias $X_1,\ldots,X_n$, independientes e idénticamente distribuidas 
-(i.i.d) con media común finita $\mathbb{E}[X_i] = \mu < +\infty$ y varianza común finita
+Consideramos las variables aleatorias $X_1,\ldots,X_n$ i.i.d. con media común finita 
+$\mathbb{E}[X_i] = \mu < +\infty$ y varianza común finita
 $\mathbb{V}[ X_i ] = \sigma^2 < +\infty$, para todo $i \in \{1, \ldots, n \}$. Si consideramos la
 variable aleatoria de la suma total $S_n = \sum\limits_{i=1}^n X_i$, entonces
 \begin{equation}
@@ -488,25 +528,25 @@ P\left( \left| X - \mathbb{E}[X] \right| > \varepsilon \right) < \frac{1}{\varep
 :::
 
 ::: {.theorem #bein name="Desigualdad de Berry-Esséen"}
-Sean $X_1, \ldots X_n$ variables aleatoria i.i.d, con media y varianza finitas, i.e 
+Sean $X_1, \ldots X_n$ variables aleatorias i.i.d., con media y varianza finitas, i.e 
 $\mathbb{E}[X] < +\infty$ y $\mathbb{V}[X] < +\infty$ y además con tercer momento absoluto finito
 $\mathbb{E}\left[\left|X - \mathbb{E}[X]\right|^3\right] < +\infty$. Entonces, la distribución 
-acumulada $F_n$ de la variable aleatoria
+acumulada $F_{U_n}$ de la variable aleatoria
 \begin{equation}
 U_n = \frac{S_n - \mathbb{E}[ S_n ]}{\mathbb{V}[ S_n ]}
 \end{equation}
 con $S_n = \sum\limits_{i=1}^n X_i$. Satisface la siguiente desigualdad respecto de la distribución 
 acumulada de la ley normal $\Phi$.
 \begin{equation}
-\underset{u}{\sup}\left| F_n( u ) - \Phi( u ) \right| \leq \frac{A}{\sqrt{n}} 
+\underset{u}{\sup}\left| F_{U_n}( u ) - \Phi( u ) \right| \leq \frac{A}{\sqrt{n}} 
 \frac{\mathbb{E}\left[\left|X - \mathbb{E}[X]\right|^3\right]}{\sqrt{\mathbb{V}[X]}^3}
 \end{equation}
 :::
 
 ::: {.theorem #ddkw name="Desigualdad Dvoretzky–Kiefer–Wolfowitz"}
-Dada una serie de variables aleatorias a valores reales $X_1, \ldots, X_n$, independientes
-entre si e idénticamente distribuidas (i.i.d), con distribución acumulada $F$, tenemos la siguiente
-desigualdad asociada a la **distribución acumulada empírica**
+Dada una serie de variables aleatorias a valores reales $X_1, \ldots, X_n$, i.i.d., con 
+distribución acumulada $F$, tenemos la siguiente desigualdad asociada a la 
+**distribución acumulada empírica**
 \begin{equation}
 F_n( x ) = \frac{1}{n}\sum\limits_{i=1}^n \mathbf{1}_{(-\infty,x]}( X_i )
 \end{equation}
@@ -549,29 +589,33 @@ dt %>%
     format.args = list( big.mark = ',', decimal.mark = '.', scientific = FALSE ),
     escape = FALSE ) %>%
   kable_classic( font_size = 14, full_width = FALSE, html_font = "Cambria" ) %>%
-  scroll_box( width = "750px", height = "500px" )
+  scroll_box( width = "1050px", height = "500px" )
 ```
 
-::: {.definition #probemp name="Medida de probabilidad empírica"}
-A partir de una muestra de $X_1, \ldots, X_n$ de una variable aleatoria $X$, podemos definir
-también la **medida de probabilidad empírica** asociada a la muestra $X_1, \ldots, X_n$. Así 
-para cualquier evento del espacio muestral $\Omega$, $A \subset \Omega$
+<!------------------------------------------------------------------------------------------------->
+::: {.theorem #dchernoff name="Desigualdad de Chernoff"}
+Dada una variable aleatoria $X$ a valores reales, para la cual si existe y está bien definida
+su función generadora de momentos $M$, entonces se satisface la siguientes desigualdades para 
+cualquier $\varepsilon \in \mathbb{R}$.
 \begin{equation}
-P_n( B ) = \frac{1}{n} \sum\limits_{i=1}^n \mathbb{1}_{B}\left( X_i \right)
+P( X \geq \varepsilon ) \leq \underset{t > 0}{\inf} \exp( -t \varepsilon ) M( t )
+\end{equation}
+así mismo
+\begin{equation}
+P( X \leq \varepsilon ) \leq \underset{t < 0}{\inf} \exp( -t \varepsilon ) M( t )
 \end{equation}
 :::
 
-A partir de la medida empírica de probabilidad, podemos extraer la de para la distribución acumulada
-empírica $F_n$, la cual la hemos definido con anterioridad, para ello consideremos 
-$P_n( (-\infty,x])$ para cualquier $x \in \mathbb{R}$
+<!------------------------------------------------------------------------------------------------->
+::: {.theorem #dpaleyzyg name="Desigualdad de Paley-Zygmund"}
+Dada una variable aleatoria $X$ a valores reales, que solo toma valores no negativos $X \geq 0$ y 
+que además tiene varianza finita $\mathbb{V}[X] < +\infty$, entonces si tomamos un valor 
+$\rho \in [0,1]$, se satisface la siguiente desigualdad:
 \begin{equation}
-P_n( (-\infty,x])
-= \frac{1}{n} \sum\limits_{i=1}^n \mathbb{1}_{(-\infty,x]}\left( X_i \right) 
-= F_n( x )
+P( X \geq \rho \mathbb{E}[ X ] ) \geq ( 1 - \rho )^2 \frac{\mathbb{E}[ X ]^2}{\mathbb{E}[ X^2 ]}
 \end{equation}
+:::
 
-Para muchos resultados asociados a la estimación de estadística la variantes empíricas $P_n$ y $F_n$
-son de utilidad.
 
 <!------------------------------------------------------------------------------------------------->
 ## Consideraciones financieras
@@ -580,6 +624,8 @@ financieras como las siguientes:
 
 <!------------------------------------------------------------------------------------------------->
 ### Función de actualización o descuento
+
+::: {.definition #deffact name="Funciones de atualización y capitalización"}
 La **función de actualización** de flujos $v: \mathbb{R} \times \mathbb{R} \longrightarrow [0,1]$, al
 evaluar en $s, t \in \mathbb{R}, s\leq t, v(s,t)$, diremos que actualizamos los flujos que se 
 producen en el tiempo $t$, valorados desde el tiempo $s$. Además la función de actualización tiene
@@ -591,11 +637,16 @@ las siguientes propiedades:
   
 3. Si $r \leq s \leq t, v( r, s ) v( s, t ) = v( r, t )$.
 
-El caso más particular y sencillo se presenta cuando la función de actualización es generada
-por una tasa constante $i \in [0,1]$, es decir, $v(s,t) = ( 1 + i )^{t-s}$.
-
 La **función de capitalización**, es la función $u: \mathbb{R} \times \mathbb{R} \longrightarrow [0,1]$,
 tal que $u( s, t ) v( s, t ) = 1$.
+:::
+
+El caso más particular y sencillo se presenta cuando la función de actualización es generada
+por una tasa constante $i \in \mathbb{R}$ en el tiempo, es decir, la función de actualización toma 
+la forma 
+\begin{equation}
+v(s,t) = ( 1 + i )^{-(t-s)}
+\end{equation}
 
 <!------------------------------------------------------------------------------------------------->
 ### Flujos financieros
@@ -656,7 +707,7 @@ los  flujos capitalizados hasta el tiempo $t$ y en la derecha tenemos los flujos
 tiempo $t$. La expresión de la izquierda se conoce como la parte **retrospectiva** y la expresión de 
 la derecha como la parte **prospectiva**.
 
-En condiciones de equilibrio financiero la parte retrospectiva se igual con menos la parte 
+En condiciones de equilibrio financiero la parte retrospectiva es igual a menos la parte 
 prospectiva.
 \begin{equation}
 \sum\limits_{t_k \leq t} u( t_k, t ) c( t_k ) = 
