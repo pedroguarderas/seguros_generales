@@ -82,6 +82,7 @@ rm( dr, dirs )
 # Copiando bibliografía ----------------------------------------------------------------------------
 file.copy( '~/Development/bibliography/Bibtex/bibliografia_libros.bib', 'bookdown/bibliografia_libros.bib', overwrite = TRUE )
 file.copy( '~/Development/bibliography/Bibtex/bibliografia_paquetes.bib', 'bookdown/bibliografia_paquetes.bib', overwrite = TRUE )
+file.copy( '~/Development/bibliography/Bibtex/bibliografia_articulos.bib', 'bookdown/bibliografia_articulos.bib', overwrite = TRUE )
 
 # Descarga datos e información ---------------------------------------------------------------------
 # Descarga información si en caso está presente en la fuente de origen en Google Drive
