@@ -29,6 +29,10 @@ el conjunto $X$, no es más que una función de $\mathbb{N}$ con valores en $X$
 
 10. $\underset{x \rightarrow y}{\lim} f(x) = a$ límite de la funcion $f(x)$ cuando $x$ tiende a $y$.
 
+11. $\inf A$ es la mayor de las cotas inferiores de $A$.
+
+12. $\sup A$ es la menor de las cotas superiores de $A$.
+
 
 <!------------------------------------------------------------------------------------------------->
 ## Consideraciones de programación en R
