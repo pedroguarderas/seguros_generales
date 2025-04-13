@@ -52,6 +52,8 @@ prp:EVaRcohe
 exm:l6ex2
 exm:l6ex1
 tab:l6t1
+tab:l6t2
+tab:l6t3
 def:dmaxstab
 thm:tvalext1
 thm:tvalext2
