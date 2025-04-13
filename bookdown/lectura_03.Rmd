@@ -71,25 +71,45 @@ $B$, está dada por:
 \begin{equation}
 P( A \mid B ) = \frac{P( A \cap B)}{P(B)}
 \end{equation}
+
+Una **propiedad** sobre sobre $\Omega$ viene caracterizada por una función de verificación 
+$V : \Omega \longrightarrow \{0,1\}$ de tal forma, se dice que un evento $A \in \mathcal{F}$ 
+satisface la propiedad dada por $V$ si $V(\omega) = 1, \forall \omega \in A$. Entonces decimos que 
+se satisface la propiedad en $V$ en **casi en todas partes** o **casi seguramente** si para todo 
+evento $N \in \mathcal{F}$ que no satisfaga $V$ mantiene una medida nula, es decir $P( N ) = 0$ y 
+para cualquier $\omega \in \Omega \setminus N$ se satisface $V$, $V( \omega ) = 1$. En otras 
+palabras en ciertos experimentos hay resultados que se pueden presentar, están dentro de las 
+opciones, sin embargo en caso de presentarse no hay forma que se pueda medirlos.
 :::
+
+En muchas ocasiones se observa los resultados a través de la realización de un experimento, y es 
+usual que a cada experimente se le asocie un único resultado. Esta noción permite la definición de 
+una variable aleatoria.
 
 <!------------------------------------------------------------------------------------------------->
 ::: {.definition #va name="Variable aleatoria"}
 Una ***variable aleatoria*** es una función que asigna un valor numérico a todo evento contingente.
-mide en una escala entre 0 y 1.
 
 Una variable aleatoria $X: \Omega \longrightarrow D$ que parte del espacio muestral $\Omega$ y toma 
-valores en el conjunto de los números reales  $\mathbb{R}$, decimos que sigue la ley 
-$f : \mathbb{R} \longrightarrow \mathbb{R}$, si para cualquier evento $A \subset \Omega$
-\begin{equation}
-P( X \in A )
-= \int\limits_{A} dP_X( x )
-= \int\limits_{A} d(P \circ X^{-1})( x )
-= \int\limits_{X^{-1}( A )} dP( \omega )
-\end{equation}
+valores en el conjunto de los números reales  $\mathbb{R}$. Como la variable aleatoria es el 
+resultado de un experimento, el cual debe ser medible, es natural esperar que todo intervalo 
+observado sea el resultado de un evento en el espacio muestra $\Omega$. De forma más clara, la 
+imagen recíproca de un cualquier intervalo $A \subset \mathbb{R}$ es un evento en $\mathcal{F}$, 
+i.e. $X^{-1}( A ) \in \mathcal{F}$ esto precisamente se designa como una **función medible**.
+
+De $X$ se puede construir o heredar otra medida a partir de $P$, esta se representa $P_X$ y tan
+solo mide los eventos que son imagen de $X$. Es decir para cualquier intervalo $A \in \mathbb{R}$
+\begin{eqnarray*}
+P_X( A )
+& = & P( X^{-1}( A ) )\qquad \text{definición de la notación} \\ 
+& = & P(\{ \omega \in \Omega \mid X( \omega ) \in A \})\qquad \text{definición de imagen recíproca} \\ 
+& = & \int\limits_{X^{-1}( A )} dP( \omega )\qquad \text{representación en forma integral}
+\end{eqnarray*}
+a partir de la medida $P_X$ precisamente se puede determinar algunas funciones que se conocen como 
+distribuciones o densidades de probabilidad.
 :::
 
-La idea de variable aleatoria a valores reales se puede extender fácilmente al caso de varias 
+De la idea de variable aleatoria a valores reales se puede extender fácilmente al caso de varias 
 variables aleatorias, un vector aleatorio que toma valores en $\mathbb{R}^n$, i.e. una función
 medible $X : \Omega \longrightarrow \mathbb{R}^n$.
 
@@ -113,7 +133,11 @@ las probabilidades *¡Nunca son negativas!* y *!Suman siempre 1!*.
 Consideramos una variable aleatoria a valores reales $X$, la **función de distribución acumulada**
 $F$ asociada a la variable aleatoria $X$, está dada por la siguiente relación:
 \begin{equation}
-F( x ) = P( X \leq x ) = P\left( X^{-1}\left( (-\infty, x ] \right) \right)
+F( x ) 
+= P( X \leq x )
+= P_X( (-\infty, x] ) 
+= P( X \in (-\infty, x] ) 
+= P\left( X^{-1}\left( (-\infty, x ] \right) \right)
 \end{equation}
 
 La función de distribución acumulada, tiene las siguientes propiedades:
