@@ -51,7 +51,7 @@ F( S \leq s )
 & = & P\left( \sum\limits_{i=1}^N X_i \leq s \land N \in \mathbb{N} \right) \\
 & = & P\left( \bigcup\limits_{n\in \mathbb{N}} \sum\limits_{i=1}^N X_i \leq s \land N \in \{n\} \right) \\
 & = & \sum\limits_{n=0}^{+\infty} P\left( \sum\limits_{i=1}^n X_i \leq s \land N = n \right) 
-\qquad \text{por independencia de eventos disjuntos} \\
+\qquad \text{probabilidad de eventos disjuntos} \\
 & = & \sum\limits_{n=0}^{+\infty} P\left( \sum\limits_{i=1}^n X_i \leq s \mid N = n \right) P( N = n )
 \qquad \text{propiedades de la probabilidad condicional} \\
 & = & \sum\limits_{n=0}^{+\infty} \int\limits_{\left\{\sum\limits_{i=1}^n x_i \leq s\right\}} dF_n( x_1, \ldots, x_n )\ p_n
