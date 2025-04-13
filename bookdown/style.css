@@ -14,3 +14,11 @@
   font-style: normal;
  } 
  
+.book-body {
+  margin: 20px;
+}
+
+.book .book-body .page-wrapper .page-inner {
+  max-width: 50%;
+}
+ 
