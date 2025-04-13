@@ -200,9 +200,37 @@ beMTPL97[ 1:100 ] %>%
 model_N <- glm( formula = nclaims ~ ageph + sex + power + fuel + offset( log( expo ) ) + 0, 
                 family = poisson( link = 'log' ), 
                 data = beMTPL97 )
-summary( model_N )
 ```
 
+```{r l6t2, echo = TRUE, results = 'asis'}
+dat <- tidy( model_N )
+dat %>%
+  kable(
+    caption = "Resultados del modelo GLM",
+    row.names = FALSE,
+    col.names = names( dat ),
+    align = 'lrrrr',
+    digits = c( 0, 6, 6, 6, 6 ),
+    format.args = list( big.mark = ',', decimal.mark = '.', scientific = FALSE ),
+    escape = FALSE ) %>%
+  kable_classic( font_size = 14, full_width = FALSE, html_font = "Cambria" ) %>%
+  scroll_box( width = "750px", height = "300px" )
+```
+
+```{r l6t3, echo = TRUE, results = 'asis'}
+dat <- glance( model_N )
+dat %>%
+  kable(
+    caption = "Resultados del modelo GLM",
+    row.names = FALSE,
+    col.names = names( dat ),
+    align = paste0( rep( "r", ncol( dat ) ), collapse = "" ),
+    digits = c( 4, 0, 2, 2, 2, 2, 0, 0 ),
+    format.args = list( big.mark = ',', decimal.mark = '.', scientific = FALSE ),
+    escape = FALSE ) %>%
+  kable_classic( font_size = 14, full_width = FALSE, html_font = "Cambria" ) %>%
+  scroll_box( width = "750px", height = "200px" )
+```
 
 ```{r l6c2}
 pob <- expand.grid( ageph = seq( 18, 90, 1 ), 
