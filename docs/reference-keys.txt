@@ -6,12 +6,13 @@ def:vad
 def:cd
 def:spv
 def:lp
+def:indicatriz
+def:probemp
 def:em
 def:mgf
 def:ind
 def:defmixdis
 def:defcov
-def:indicatriz
 def:dsum
 def:dexceso
 thm:tlc
@@ -19,7 +20,9 @@ prp:chebdes
 thm:bein
 thm:ddkw
 tab:l2t1
-def:probemp
+thm:dchernoff
+thm:dpaleyzyg
+def:deffact
 def:dbinom
 def:dpois
 def:dnbinom

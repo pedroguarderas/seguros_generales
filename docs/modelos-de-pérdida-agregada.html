@@ -339,7 +339,7 @@ debemos comprender y estimar cada uno de los reclamos <span class="math inline">
 menos estos una infinidad si <span class="math inline">\(N\)</span> puede tomar valores tendiendo al infinito. En términos resumidos,
 hay que comprender y estimar la frecuencia, severidad de los reclamos que están asociados al riesgo
 cubierto.</p>
-<p>Los términos integrales asociados a al severidad presentan un verdadero reto estadístico y
+<p>Los términos integrales asociados a la severidad presentan un verdadero reto estadístico y
 computacional; hace unos años atrás se creo unos nuevos algoritmos para calcular estos términos
 <span class="citation">[<a href="bibliografía.html#ref-aep_algo">13</a>]</span>, <span class="citation">[<a href="bibliografía.html#ref-gaep_algo">14</a>]</span>.</p>
 <!------------------------------------------------------------------------------------------------->
@@ -456,8 +456,8 @@ a la integral de Riemann-Stieltjes utilizando la distribución acumulada empíri
 <p>De ello tenemos los siguientes resultados de cálculo para el valor esperado de la severidad total
 <span class="math display">\[\begin{eqnarray*}
 \mathbb{E}[S] = \sum\limits_{i=1}^n e^{ \mu_i + \frac{1}{2} \sigma_i^2 } &amp; = &amp; 34562.7208, \\
-\overline{S} = \frac{1}{m} \sum\limits_{i=1}^m S_i &amp; = &amp; 33510.8661, \\
-\sum\limits_{i=1}^N s_{i} \left( F_m( s_{i+1} ) - F_m( s_{i} ) \right) &amp; = &amp; 33478.4349
+\overline{S} = \frac{1}{m} \sum\limits_{i=1}^m S_i &amp; = &amp; 33940.1904, \\
+\sum\limits_{i=1}^N s_{i} \left( F_m( s_{i+1} ) - F_m( s_{i} ) \right) &amp; = &amp; 33924.4766
 \end{eqnarray*}\]</span></p>
 <p>Lo bueno de poseer una buena aproximación a la distribución acumulada de una variable aleatoria, es
 que podemos calcular algunos otros valores de importancia relacionados a la variable aleatoria y
@@ -486,7 +486,7 @@ S = \sum\limits_{i=1}^n X_i = \sum\limits_{i=1}^n M \mathbf{1}_{A_i}
 = \sum\limits_{i=1}^n \mathbb{E}\left[ M \mathbf{1}_{A_i} \right]
 = M \sum\limits_{i=1}^n P( A_i )
 \end{equation}\]</span>
-la última igualdad resulta de las propiedades de la función indicatriz <a href="probabilidad-y-estadística.html#def:indicatriz">3.14</a>.</p>
+la última igualdad resulta de las propiedades de la función indicatriz <a href="probabilidad-y-estadística.html#def:indicatriz">3.9</a>.</p>
 <p>Si en caso todos los <span class="math inline">\(P(A_i) = p\)</span> tienen la misma probabilidad, el valor total esperado de reclamos
 toma la siguiente forma:
 <span class="math display">\[\begin{equation}
@@ -643,7 +643,7 @@ Si consideramos generar la simulación como un modelo individual, generamos vari
 <p></p>
 <p><span class="math display">\[\begin{eqnarray*}
 \mathbb{E}[S] = n p e^{ \mu + \frac{1}{2} \sigma^2 } &amp; = &amp; 219326.6317, \\
-\overline{S} = \frac{1}{m} \sum\limits_{i=1}^m S_i &amp; = &amp; 220707.0785,
+\overline{S} = \frac{1}{m} \sum\limits_{i=1}^m S_i &amp; = &amp; 219778.9801,
 \end{eqnarray*}\]</span></p>
 </div>
 <p>Es importante observar que si la frecuencia de reclamos es superior a <span class="math inline">\(1\)</span>, sea este por póliza,
