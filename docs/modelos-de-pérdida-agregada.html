@@ -23,7 +23,7 @@
 <meta name="author" content="" />
 
 
-<meta name="date" content="2025-04-12" />
+<meta name="date" content="2025-04-13" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -318,6 +318,29 @@ S = \sum\limits_{i=1}^N X_i
 \end{equation}\]</span></p>
 <p>Esto nos lleva a considerar diferentes modelos de agregación de reclamos o pérdidas como se suele
 decir en inglés “loss models” <span class="citation">[<a href="#ref-PanjerLoss2012">1</a>]</span>, <span class="citation">[<a href="#ref-LossModFur">2</a>]</span>.</p>
+<p>De forma preliminar estudiemos la forma general que podría tener la distribución de <span class="math inline">\(S\)</span>, sin realizar
+alguna hipótesis previa sobre el comportamiento de las variables aleatorias <span class="math inline">\(X_1, \ldots, X_n\)</span> y <span class="math inline">\(N\)</span>.
+<span class="math display">\[\begin{eqnarray*}
+F( S \leq s )
+&amp; = &amp; P\left( \sum\limits_{i=1}^N X_i \leq s \right) \\
+&amp; = &amp; P\left( \sum\limits_{i=1}^N X_i \leq s \land N \in \mathbb{N} \right) \\
+&amp; = &amp; P\left( \bigcup\limits_{n\in \mathbb{N}} \sum\limits_{i=1}^N X_i \leq s \land N \in \{n\} \right) \\
+&amp; = &amp; \sum\limits_{n=0}^{+\infty} P\left( \sum\limits_{i=1}^n X_i \leq s \land N = n \right)
+\qquad \text{por independencia de eventos disjuntos} \\
+&amp; = &amp; \sum\limits_{n=0}^{+\infty} P\left( \sum\limits_{i=1}^n X_i \leq s \mid N = n \right) P( N = n )
+\qquad \text{propiedades de la probabilidad condicional} \\
+&amp; = &amp; \sum\limits_{n=0}^{+\infty} \int\limits_{\left\{\sum\limits_{i=1}^n x_i \leq s\right\}} dF_n( x_1, \ldots, x_n )\ p_n
+\qquad \text{$F_n$ es la distribución conjunta de $X_1, \ldots, X_n$}
+\end{eqnarray*}\]</span>
+la última expresión es importante de retener, nos dice que para comprender el comportamiento de
+los reclamos totales <span class="math inline">\(S\)</span>, debemos estudiar y estimar la frecuencia de los reclamos <span class="math inline">\(N\)</span>, y también
+debemos comprender y estimar cada uno de los reclamos <span class="math inline">\(X_i\)</span> y también su interacción, siendo al
+menos estos una infinidad si <span class="math inline">\(N\)</span> puede tomar valores tendiendo al infinito. En términos resumidos,
+hay que comprender y estimar la frecuencia, severidad de los reclamos que están asociados al riesgo
+cubierto.</p>
+<p>Los términos integrales asociados a al severidad presentan un verdadero reto estadístico y
+computacional; hace unos años atrás se creo unos nuevos algoritmos para calcular estos términos
+<span class="citation">[<a href="#ref-aep_algo">13</a>]</span>, <span class="citation">[<a href="#ref-gaep_algo">14</a>]</span>.</p>
 <!------------------------------------------------------------------------------------------------->
 </div>
 <div id="modelo-individual" class="section level2 hasAnchor" number="5.2">
@@ -426,8 +449,8 @@ a la integral de Riemann-Stieltjes utilizando la distribución acumulada empíri
 <p>De ello tenemos los siguientes resultados de cálculo para el valor esperado de la severidad total
 <span class="math display">\[\begin{eqnarray*}
 \mathbb{E}[S] = \sum\limits_{i=1}^n e^{ \mu_i + \frac{1}{2} \sigma_i^2 } &amp; = &amp; 34562.7208, \\
-\overline{S} = \frac{1}{m} \sum\limits_{i=1}^m S_i &amp; = &amp; 34365.3320, \\
-\sum\limits_{i=1}^N s_{i} \left( F_m( s_{i+1} ) - F_m( s_{i} ) \right) &amp; = &amp; 34332.4285
+\overline{S} = \frac{1}{m} \sum\limits_{i=1}^m S_i &amp; = &amp; 32847.1176, \\
+\sum\limits_{i=1}^N s_{i} \left( F_m( s_{i+1} ) - F_m( s_{i} ) \right) &amp; = &amp; 32836.0091
 \end{eqnarray*}\]</span></p>
 <p>Lo bueno de poseer una buena aproximación a la distribución acumulada de una variable aleatoria, es
 que podemos calcular algunos otros valores de importancia relacionados a la variable aleatoria y
@@ -456,7 +479,7 @@ S = \sum\limits_{i=1}^n X_i = \sum\limits_{i=1}^n M \mathbf{1}_{A_i}
 = \sum\limits_{i=1}^n \mathbf{E}\left[ M \mathbf{1}_{A_i} \right]
 = M \sum\limits_{i=1}^n P( A_i )
 \end{equation}\]</span>
-la última igualdad resulta de las propiedades de la función indicatriz <a href="probabilidad-y-estadística.html#def:indicatriz">3.10</a>.</p>
+la última igualdad resulta de las propiedades de la función indicatriz <a href="probabilidad-y-estadística.html#def:indicatriz">3.14</a>.</p>
 <p>Si en caso todos los <span class="math inline">\(P(A_i) = p\)</span> tienen la misma probabilidad, el valor total esperado de reclamos
 toma la siguiente forma:
 <span class="math display">\[\begin{equation}
@@ -609,7 +632,7 @@ Si consideramos generar la simulación como un modelo individual, generamos vari
 <p></p>
 <p><span class="math display">\[\begin{eqnarray*}
 \mathbb{E}[S] = n p e^{ \mu + \frac{1}{2} \sigma^2 } &amp; = &amp; 219326.6317, \\
-\overline{S} = \frac{1}{m} \sum\limits_{i=1}^m S_i &amp; = &amp; 219525.2309,
+\overline{S} = \frac{1}{m} \sum\limits_{i=1}^m S_i &amp; = &amp; 220795.4334,
 \end{eqnarray*}\]</span></p>
 </div>
 <p>Es importante observar que si la frecuencia de reclamos es superior a <span class="math inline">\(1\)</span>, sea este por póliza,
@@ -802,6 +825,12 @@ W_n = \frac{S_n}{n}
 </div>
 <div id="ref-LossModFur" class="csl-entry">
 <div class="csl-left-margin">[2] </div><div class="csl-right-inline"><span class="smallcaps">A. Klugman</span>, S., <span class="smallcaps">H. Panjer</span>, H. and <span class="smallcaps">E. Willmot</span>, G. (2013). <em><span>Loss Models, Further Topics</span></em>. John Wiley &amp; Sons, Inc, Hoboken, New Jersey, United States.</div>
+</div>
+<div id="ref-aep_algo" class="csl-entry">
+<div class="csl-left-margin">[13] </div><div class="csl-right-inline"><span class="smallcaps">Arbenz</span>, P., <span class="smallcaps">Embrechts</span>, P. and <span class="smallcaps">Puccetti</span>, G. (2011). <a href="https://doi.org/10.3150/10-bej284"><span class="nocase">The AEP algorithm for the fast computation of the distribution of the sum of dependent random variables</span></a>. <em>Bernoulli</em> <strong>17</strong>.</div>
+</div>
+<div id="ref-gaep_algo" class="csl-entry">
+<div class="csl-left-margin">[14] </div><div class="csl-right-inline"><span class="smallcaps">Arbenz</span>, P., <span class="smallcaps">Embrechts</span>, P. and <span class="smallcaps">Puccetti</span>, G. (2012). <a href="http://dx.doi.org/10.1080/17442508.2011.566337"><span class="nocase">The GAEP algorithm for the fast computation of the distribution of a function of dependent random variables</span></a>. <em>Stochastics: An International Journal of Probability and Stochastic Processes</em> <strong>84</strong>.</div>
 </div>
 </div>
             </section>

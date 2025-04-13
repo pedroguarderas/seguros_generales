@@ -23,7 +23,7 @@
 <meta name="author" content="" />
 
 
-<meta name="date" content="2025-04-12" />
+<meta name="date" content="2025-04-13" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -378,7 +378,7 @@ llamamos <strong>tarificación</strong> (pricing).</p>
 <div id="medidas-de-riesgo" class="section level2 hasAnchor" number="6.2">
 <h2><span class="header-section-number">6.2</span> Medidas de riesgo<a href="tarificación.html#medidas-de-riesgo" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div class="definition">
-<p><span id="def:spv" class="definition"><strong>Definición 3.5  (Medida de riesgo coherente) </strong></span>Una <strong>medida de riesgo coeherente</strong> es una función <span class="math inline">\(\zeta: \mathbb{R} \longrightarrow \mathbb{R}\)</span>,
+<p><span id="def:spv" class="definition"><strong>Definición 3.7  (Medida de riesgo coherente) </strong></span>Una <strong>medida de riesgo coeherente</strong> es una función <span class="math inline">\(\zeta: \mathbb{R} \longrightarrow \mathbb{R}\)</span>,
 que satisface la siguientes propiedades:</p>
 <ol style="list-style-type: decimal">
 <li><p><strong>Homogenidad positiva</strong>, para cualquier <span class="math inline">\(a &gt; 0\)</span>
@@ -562,37 +562,40 @@ la agregación de los reclamos y obtener el reclamo total <span class="math inli
 <p>Como todas las variables <span class="math inline">\(X_i\)</span> siguen una ley <span class="math inline">\(Gamma( \alpha_i, \theta )\)</span>, sabemos que la
 familia <span class="math inline">\(Gamma\)</span> es cerrada por adición, es decir, a suma de variables aleatorias con ley <span class="math inline">\(Gamma\)</span>
 también sigue una ley <span class="math inline">\(Gamma\)</span>. En este caso en particular para el reclamo total tenemos que
-<span class="math inline">\(S \rightsquigarrow Gamma\left( \sum\limits_{i=1}^n \alpha_i \right)\)</span>.</p>
-<p>Es de notar que cada variable aleatoria <span class="math inline">\(X_i\)</span> tiene un parámetro diferente <span class="math inline">\(\alpha_i\)</span>.</p>
-<p>Estudiemos la variable <span class="math inline">\(S\)</span> utilizando un algoritmo de simulación, para así calcular algunas primas
-en las diferentes formas que hemos citado. Primeramente definamos los parámetros</p>
-<p></p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb40-1"><a href="tarificación.html#cb40-1"></a><span class="co"># número de unidades aseguradas</span></span>
-<span id="cb40-2"><a href="tarificación.html#cb40-2"></a>n <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
-<span id="cb40-3"><a href="tarificación.html#cb40-3"></a></span>
-<span id="cb40-4"><a href="tarificación.html#cb40-4"></a><span class="co"># parámetros para cada X_i</span></span>
-<span id="cb40-5"><a href="tarificación.html#cb40-5"></a>a <span class="ot">&lt;-</span> <span class="fu">runif</span>( n, <span class="dv">5</span>, <span class="dv">10</span> )</span>
-<span id="cb40-6"><a href="tarificación.html#cb40-6"></a></span>
-<span id="cb40-7"><a href="tarificación.html#cb40-7"></a><span class="co"># parámetro theta, común a todas las X_i</span></span>
-<span id="cb40-8"><a href="tarificación.html#cb40-8"></a>theta <span class="ot">&lt;-</span> <span class="dv">4</span></span>
-<span id="cb40-9"><a href="tarificación.html#cb40-9"></a></span>
-<span id="cb40-10"><a href="tarificación.html#cb40-10"></a><span class="co"># parámetro para S</span></span>
-<span id="cb40-11"><a href="tarificación.html#cb40-11"></a>A <span class="ot">&lt;-</span> <span class="fu">sum</span>( a )</span></code></pre></div>
-<p>
-Ya que cada <span class="math inline">\(X_i \rightsquigarrow Gamma( \alpha_i, \theta )\)</span>, podemos calcular de forma determinista
+<span class="math inline">\(S \rightsquigarrow Gamma\left( \sum\limits_{i=1}^n \alpha_i, \theta \right)\)</span>.</p>
+<p>Es de notar que para cada <span class="math inline">\(i\in \{1,\ldots,n\}\)</span>, la variable aleatoria <span class="math inline">\(X_i\)</span> correspondiente al
+<span class="math inline">\(i\)</span>-ésimo reclamo tiene como parámetro un diferente factor <span class="math inline">\(\alpha_i\)</span>, pero el mismo factor
+<span class="math inline">\(\theta\)</span>.</p>
+<p>Ya que cada <span class="math inline">\(X_i \rightsquigarrow Gamma( \alpha_i, \theta )\)</span>, podemos calcular de forma determinista
 las experanzas de <span class="math inline">\(\mathbb{E}[X_i]\)</span>, para cada <span class="math inline">\(i \in \{1,\ldots,n\}\)</span> y de igual forma podemos
 calcular la esperanza del reclamo total <span class="math inline">\(\mathbb{E}[S] = \sum\limits_{i=1}^n \mathbb{E}[X_i]\)</span>.
 Además como asumimos independencia entre los <span class="math inline">\(X_i\)</span>, la varianza de <span class="math inline">\(S\)</span> también puede ser calculada
 fácilmente como <span class="math inline">\(\mathbb{V}[S] = \sum\limits_{i=1}^n \mathbb{V}[X_i]\)</span>.</p>
 <p></p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb41-1"><a href="tarificación.html#cb41-1"></a>EX <span class="ot">&lt;-</span> a <span class="sc">*</span> theta</span>
-<span id="cb41-2"><a href="tarificación.html#cb41-2"></a>VX <span class="ot">&lt;-</span> a <span class="sc">*</span> theta<span class="sc">^</span><span class="dv">2</span></span>
-<span id="cb41-3"><a href="tarificación.html#cb41-3"></a>ES <span class="ot">&lt;-</span> <span class="fu">sum</span>( EX )</span>
-<span id="cb41-4"><a href="tarificación.html#cb41-4"></a>VS <span class="ot">&lt;-</span> <span class="fu">sum</span>( VX )</span>
-<span id="cb41-5"><a href="tarificación.html#cb41-5"></a>SDS <span class="ot">&lt;-</span> <span class="fu">sqrt</span>( VS )</span></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb40-1"><a href="tarificación.html#cb40-1"></a>EX <span class="ot">&lt;-</span> a <span class="sc">*</span> theta</span>
+<span id="cb40-2"><a href="tarificación.html#cb40-2"></a>VX <span class="ot">&lt;-</span> a <span class="sc">*</span> theta<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb40-3"><a href="tarificación.html#cb40-3"></a>ES <span class="ot">&lt;-</span> <span class="fu">sum</span>( EX )</span>
+<span id="cb40-4"><a href="tarificación.html#cb40-4"></a>VS <span class="ot">&lt;-</span> <span class="fu">sum</span>( VX )</span>
+<span id="cb40-5"><a href="tarificación.html#cb40-5"></a>SDS <span class="ot">&lt;-</span> <span class="fu">sqrt</span>( VS )</span></code></pre></div>
 <p></p>
-<p>La variable aleatoria del reclamo total <span class="math inline">\(S\)</span> la podemos simular, tomando una muestra de tamaño <span class="math inline">\(m\)</span>,
-i.e. <span class="math inline">\(S_1,\ldots,S_m\)</span>.</p>
+<p>También estamos en la capacidad de simular la variable <span class="math inline">\(S\)</span> utilizando un algoritmo de aleatorio,
+para así aproximar los cálculos de sus momentos y otros estadísticos. Primeramente definamos los
+parámetros.</p>
+<p></p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb41-1"><a href="tarificación.html#cb41-1"></a><span class="co"># número de unidades aseguradas</span></span>
+<span id="cb41-2"><a href="tarificación.html#cb41-2"></a>n <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
+<span id="cb41-3"><a href="tarificación.html#cb41-3"></a></span>
+<span id="cb41-4"><a href="tarificación.html#cb41-4"></a><span class="co"># parámetros para cada X_i</span></span>
+<span id="cb41-5"><a href="tarificación.html#cb41-5"></a>a <span class="ot">&lt;-</span> <span class="fu">runif</span>( n, <span class="dv">5</span>, <span class="dv">10</span> )</span>
+<span id="cb41-6"><a href="tarificación.html#cb41-6"></a></span>
+<span id="cb41-7"><a href="tarificación.html#cb41-7"></a><span class="co"># parámetro theta, común a todas las X_i</span></span>
+<span id="cb41-8"><a href="tarificación.html#cb41-8"></a>theta <span class="ot">&lt;-</span> <span class="dv">4</span></span>
+<span id="cb41-9"><a href="tarificación.html#cb41-9"></a></span>
+<span id="cb41-10"><a href="tarificación.html#cb41-10"></a><span class="co"># parámetro para S</span></span>
+<span id="cb41-11"><a href="tarificación.html#cb41-11"></a>A <span class="ot">&lt;-</span> <span class="fu">sum</span>( a )</span></code></pre></div>
+<p></p>
+<p>La variable aleatoria del reclamo total <span class="math inline">\(S\)</span> la podemos simular tomando una muestra i.i.d de tamaño <span class="math inline">\(m\)</span>,
+i.e. <span class="math inline">\(S_1,\ldots,S_m\)</span> de la distribución <span class="math inline">\(Gamma\left( \sum\limits_{i=1}^n \alpha_i, \theta \right)\)</span>.</p>
 <p></p>
 <div class="sourceCode" id="cb42"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb42-1"><a href="tarificación.html#cb42-1"></a>m <span class="ot">&lt;-</span> <span class="fl">1e5</span></span>
 <span id="cb42-2"><a href="tarificación.html#cb42-2"></a>S <span class="ot">&lt;-</span> <span class="fu">rgamma</span>( m, <span class="at">shape =</span> A, <span class="at">scale =</span> theta )</span></code></pre></div>
@@ -690,7 +693,7 @@ they may prefer to take a higher deductible to get a lower premium.</p></li>
 <span id="cb49-5"><a href="tarificación.html#cb49-5"></a>k <span class="ot">&lt;-</span> <span class="fu">seq</span>( <span class="dv">1</span>, <span class="dv">100</span>, <span class="dv">1</span> )</span>
 <span id="cb49-6"><a href="tarificación.html#cb49-6"></a>p <span class="ot">&lt;-</span> p0 <span class="sc">*</span> <span class="fu">cumprod</span>( <span class="fu">c</span>( <span class="dv">1</span>, a <span class="sc">+</span> b <span class="sc">/</span> k ) )</span>
 <span id="cb49-7"><a href="tarificación.html#cb49-7"></a><span class="fu">sum</span>( p )</span></code></pre></div>
-<pre><code>## [1] 1.890547</code></pre>
+<pre><code>## [1] 1.390575</code></pre>
 <div class="sourceCode" id="cb51"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb51-1"><a href="tarificación.html#cb51-1"></a>k <span class="ot">&lt;-</span> <span class="fu">seq</span>( <span class="dv">0</span>, <span class="dv">100</span>, <span class="dv">1</span> )</span>
 <span id="cb51-2"><a href="tarificación.html#cb51-2"></a><span class="fu">sum</span>( <span class="fu">dpois</span>( k, <span class="at">lambda =</span> l ) )</span></code></pre></div>
 <pre><code>## [1] 1</code></pre>
