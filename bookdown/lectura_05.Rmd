@@ -217,8 +217,8 @@ S = \sum\limits_{i=1}^n X_i = \sum\limits_{i=1}^n M \mathbf{1}_{A_i}
 
 El valor total esperado de reclamos está dado por:
 \begin{equation}
-\mathbf{E}[ S ] 
-= \sum\limits_{i=1}^n \mathbf{E}\left[ M \mathbf{1}_{A_i} \right]
+\mathbb{E}[ S ] 
+= \sum\limits_{i=1}^n \mathbb{E}\left[ M \mathbf{1}_{A_i} \right]
 = M \sum\limits_{i=1}^n P( A_i )
 \end{equation}
 la última igualdad resulta de las propiedades de la función indicatriz \@ref(def:indicatriz).
@@ -392,9 +392,11 @@ ES <- n * p * exp( mu + 0.5 * sigma^2 )
 
 Es importante observar que si la frecuencia de reclamos es superior a $1$, sea este por póliza, 
 individuo o en general por unidad asegurada, la aproximación anterior no es la correcta si no 
-se realiza un ajuste al valor $n$ que es el número máximo de siniestros. Además, hay un gasto 
-innecesario de valores simulados de reclamos $X_i$ ya que algunos se multiplicaran por $B_i$, la 
-cual solo toma valores $\{0,1\}$.
+se realiza un ajuste al valor $n$ que es el número máximo de siniestros. Sino también, se puede 
+considera que las variables de los reclamos es la suma total de reclamos por póliza.
+
+Por otra parte, es de notar que en el cálculo hay un gasto innecesario de valores simulados de 
+reclamos $X_i$ ya que algunos se multiplicaran por $B_i$, la cual solo toma valores $\{0,1\}$.
 
 <!------------------------------------------------------------------------------------------------->
 ## Modelos mixtos
@@ -404,7 +406,9 @@ donde para cada unidad $i \in \{1, \ldots, n\}$, se considera que puede presenta
 de reclamos dados por una variable aleatoria discreta $N_i$, y así para cada presentar un número
 de reclamos $X_{i,1}, \ldots, X_{i,N_i}$. Así el reclamo total viene dado por la expresión
 \begin{equation}
-S = \sum\limits_{i=1}^n \sum\limits_{j=1}^{N_i} X_{i,j}
+S 
+= \sum\limits_{i=1}^n X_i
+= \sum\limits_{i=1}^n \sum\limits_{j=1}^{N_i} X_{i,j}
 \end{equation}
 
 <!------------------------------------------------------------------------------------------------->
