@@ -43,6 +43,31 @@ S = \sum\limits_{i=1}^N X_i
 Esto nos lleva a considerar diferentes modelos de agregación de reclamos o pérdidas como se suele 
 decir en inglés "loss models" @PanjerLoss2012, @LossModFur.
 
+De forma preliminar estudiemos la forma general que podría tener la distribución de $S$, sin realizar
+alguna hipótesis previa sobre el comportamiento de las variables aleatorias $X_1, \ldots, X_n$ y $N$.
+\begin{eqnarray*}
+F( S \leq s )
+& = & P\left( \sum\limits_{i=1}^N X_i \leq s \right) \\
+& = & P\left( \sum\limits_{i=1}^N X_i \leq s \land N \in \mathbb{N} \right) \\
+& = & P\left( \bigcup\limits_{n\in \mathbb{N}} \sum\limits_{i=1}^N X_i \leq s \land N \in \{n\} \right) \\
+& = & \sum\limits_{n=0}^{+\infty} P\left( \sum\limits_{i=1}^n X_i \leq s \land N = n \right) 
+\qquad \text{por independencia de eventos disjuntos} \\
+& = & \sum\limits_{n=0}^{+\infty} P\left( \sum\limits_{i=1}^n X_i \leq s \mid N = n \right) P( N = n )
+\qquad \text{propiedades de la probabilidad condicional} \\
+& = & \sum\limits_{n=0}^{+\infty} \int\limits_{\left\{\sum\limits_{i=1}^n x_i \leq s\right\}} dF_n( x_1, \ldots, x_n )\ p_n
+\qquad \text{$F_n$ es la distribución conjunta de $X_1, \ldots, X_n$}
+\end{eqnarray*}
+la última expresión es importante de retener, nos dice que para comprender el comportamiento de 
+los reclamos totales $S$, debemos estudiar y estimar la frecuencia de los reclamos $N$, y también 
+debemos comprender y estimar cada uno de los reclamos $X_i$ y también su interacción, siendo al 
+menos estos una infinidad si $N$ puede tomar valores tendiendo al infinito. En términos resumidos, 
+hay que comprender y estimar la frecuencia, severidad de los reclamos que están asociados al riesgo 
+cubierto. 
+
+Los términos integrales asociados a al severidad presentan un verdadero reto estadístico y 
+computacional; hace unos años atrás se creo unos nuevos algoritmos para calcular estos términos 
+@aep_algo, @gaep_algo.
+
 <!------------------------------------------------------------------------------------------------->
 ## Modelo individual
 En el modelo de riesgos individuales consideramos que el número de siniestros que se producirán es

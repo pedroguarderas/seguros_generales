@@ -1,25 +1,59 @@
 <!------------------------------------------------------------------------------------------------->
 # Probabilidad y Estadística
 
-> Un ***fenómeno*** es un hecho que puede ser observado.
-> 
-> Un ***experimento*** es la observación de un fenómeno bajo condiciones específicas.
-> 
-> Un ***resultado*** es la información obtenida de un experimento.
-> 
-> Un ***evento*** es un conjunto de uno o más resultados posibles.
-> 
-> Un ***fenómeno estocástico*** es un fenómeno sobre el que se realiza un experimento que puede
+Antes de introduccir algunos conceptos necesarios para nuestro estudio, necesitamos de algunos 
+conceptos de base.
+
+::: {.definition #defconcep name="Conceptos base"}
+En breves términos, utilizaremos los siguientes conceptos
+
+1. Un ***fenómeno*** es un hecho que puede ser observado.
+
+2. Un ***fenómeno estocástico*** es un fenómeno sobre el que se realiza un experimento que puede
 arrojar más de un resultado posible.
-> 
-> Un evento asociado a un fenómeno estocástico se denomina ***evento contingente***.
+
+3. Un ***experimento*** es la observación de un fenómeno bajo condiciones específicas.
+
+4. Un ***resultado*** es la información obtenida de un experimento.
+:::
+
+En relación a lo anterior, también tenemos estas definiciones ya más formales.
+
+:::  {.definition #defevent name="Espacio muestral y eventos"}
+El conjunto de todos los resultados lo denominamos ***espacio muestral*** y usualmente lo 
+notamos por $\Omega$.
+
+Un ***evento*** es un conjunto de uno o más resultados posibles. En pocas palabras un evento 
+$A$ es un subcojunto de $\Omega$, i.e. $A \subset \Omega$.
+
+En algunas ocasiones, para dar mayor precisión a la naturaleza de los eventos, si este está asociado 
+a un fenómeno estocástico se denomina ***evento contingente***.
+
+No todos los subconjuntos de $\Omega$ necesariamente son un evento, usualmente hay subconjuntos que 
+no pueden resultar de un experimento. Así, si agrupamos todos los eventos usualmente tenemos un 
+conjunto menor a las partes $\mathcal{P}(\Omega)$ de $\Omega$. El conjunto de todos los eventos se 
+conoce como una ***álgebra de eventos***, ***$\sigma$-álgebra*** o ***tribu***. Usualmente se la 
+nota por $\mathcal{F}$, es claro que $\mathcal{F} \subset \mathcal{P}(\Omega)$.
+
+El álgebra de eventos, se denomina así, ya que usualmente es cerrada para algunas operaciones de 
+conjuntos. Tiene las siguientes propiedades:
+
+1. Todos los resultados de espacio muestral están en $\mathcal{F}$, es decir $\Omega \in \mathcal{F}$
+
+2. El complemento de un evento también es parte de $\mathcal{F}$, es decir si $A \in \mathcal{F}$, 
+entonces $A^c = \Omega \setminus A \in \mathcal{F}$.
+
+3. La unión de eventos es un evento, si $A, B \in \mathcal{F}$, entonces $A \cup B \mathcal{F}$,
+
+4. Aunque redunde, la intersección de eventos es un evento, si $A, B \in \mathcal{F}$, entonces 
+$A \cap B \mathcal{F}$.
+:::
 
 <!------------------------------------------------------------------------------------------------->
 ::: {.definition #probmed name="Medida de probabilidad"}
 La ***probabilidad*** es una medida de las posibilidades de que ocurra un evento contingente que 
-toma valores en $[0,1]$.
-
-Formalmente, la probabilidad se la define como una medida, una función 
+toma valores en $[0,1]$. Formalmente, la probabilidad se la define como una **medida**, esto es una 
+función de conjuntos
 \begin{equation}
 P: \mathcal{F} \longrightarrow [0,1]
 \end{equation}
@@ -29,6 +63,8 @@ sobre los eventos $\mathcal{F} \subset \mathcal{P}( \Omega )$ del espacio muestr
 $P( A \cup B ) = P( A ) + P( B )$
 
 2. $P( \Omega ) = 1$
+
+3. $P( \emptyset ) = 0$
 
 Para cualquier par de eventos $A, B \in \mathcal{F}$, la **probabilidad condicional** de $A$ dado 
 $B$, está dada por:
@@ -105,6 +141,21 @@ F\left( x_1, \ldots, x_n \right)
 = P\left( \bigcap_{i=1}^n X_i^{-1}\left( (-\infty, x_i ] \right) \right)
 \end{equation}
 
+También se puede tener una interpretación de una función de **distribución acumulada condicionada**.
+Consideremos el caso más sencillo con dos variables aleatorias $X$ y $Y$ a valores reales, que 
+tienen distribución conjunta acumulada $F_{X,Y}$. Es de observar que para cualesquier $x,y \in \mathbb{R}$ 
+\begin{eqnarray*}
+F_{X,Y}( x, y )
+& = & P( X \leq x \land Y \leq y ) \\
+& = & P( X \leq x \mid Y \leq y ) P( Y \leq y ) \\
+& = & F_{X|Y}( x \mid Y \leq y ) F_Y( y )
+\end{eqnarray*}
+de estas igualdades surge la **distribución acumulada condicionada** de $X$ dado que $Y \leq y$, 
+\begin{equation}
+F_{X|Y}( x \mid Y \leq y ) = \frac{F_{X,Y}( x, y )}{F_Y( y )}
+\end{equation}
+está bien definida para $F_Y( y ) \neq 0$
+
 <!------------------------------------------------------------------------------------------------->
 ::: {.definition #spv name="Función supervivencia"}
 La función de **supervivencia** $S : \mathbb{R} \longrightarrow \mathbb{R}$ está asociada a una 
@@ -166,7 +217,15 @@ La esperanza matemática goza de las siguientes propiedades:
 \begin{equation}
 \mathbb{E}[X] \leq \mathbb{E}[Y]
 \end{equation}
+
+3. La esperanza de una constante $a \in \mathbb{R}$ es la constante misma.
+\begin{equation}
+\mathbb{E}[a] = \int\limits_{\mathbb{R}} a\ dF_X( x ) = a\int\limits_{\mathbb{R}} dF_X( x ) = a
+\end{equation}
 :::
+
+De esto resulta que la esperanza jamás puede ser mayor que cualquiera de los valores que toma 
+la variable aleatoria $X$.
 
 <!------------------------------------------------------------------------------------------------->
 ::: {.definition #mgf name="Función generadora de momentos"}
@@ -213,11 +272,70 @@ F_{X,Y}( x, y ) = P( X \leq x \land Y \leq y )
 = P( X \leq x ) P( Y \leq y ) 
 = F_{X}( x ) F_{Y}( y )
 \end{equation}
+:::
 
-Así mismo, para la densidad de probabilidad conjunto, sucede la siguiente factorización
+Para cuando tratamos con dos variables aleatorias $X$ y $Y$, si en caso existe y está bien definida
+las derivadas hasta el segundo orden de la función de distribución acumulada conjunta $F_{X,Y}$. 
+En tal caso se puede definir la respectiva densidad de probabilidad
+\begin{equation}
+f_{X,Y}( x, y ) = \frac{\partial^2 F_{X,Y}}{\partial x \partial y}( x, y )
+\end{equation}
+
+Así mismo, para la densidad de probabilidad conjunta, si en caso las variables aleatoria $X$ y $Y$
+son independientes, también se puede factorar la densidad de probabilidad.
 \begin{equation}
 f_{X,Y}( x, y ) = f_X( x ) f_Y( y )
 \end{equation}
+
+<!------------------------------------------------------------------------------------------------->
+::: {.definition #defmixdis name="Mixtura de distribuciones"}
+Un caso de especial interés para estudiar algunos problemas actuariales se da cuando se dispone
+de dos variables aleatorias, $N$ que toma solo valores discretos (numerables) los cuales pueden
+ser finitos como infinitos, por ejemplo: $N$ toma valores $\mathbb{N}$ y otra variable aleatoria
+$X$ que toma valores continuos reales en $\mathbb{R}$. La distribución conjunta puede generarse 
+de la siguiente forma
+\begin{eqnarray*}
+F( n, x ) 
+& = & P( N = n \land X \leq x ) \\
+& = & P( X \leq x \mid N = n  ) P( N = n )\qquad \text{propiedades de la probabilidad condicional} \\
+& = & F_n( x ) p_n\qquad \text{simplificando notación} \\
+\end{eqnarray*}
+$F_n( x )$ es la ley condicionada de $X$ dado que $N = n$ y $p_n = P( N = n )$
+
+Además, es de notar que:
+\begin{eqnarray*}
+F_X( x )
+& = & P( X \leq x ) \\
+& = & P( X \leq x \land N \in \mathbb{N} ) \\
+& = & P\left( X \leq x \land N \in \bigcup_{n \in \mathbb{N}} \{n\} \right) \\
+& = & \sum\limits_{n \in \mathbb{N}} P\left( X \leq x \land N \in \{n\} \right) \\
+& = & \sum\limits_{n \in \mathbb{N}} P\left( X \leq x \land N = n \right) \\
+& = & \sum\limits_{n \in \mathbb{N}} P\left( X \leq x\ \middle|\ N = n \right) P( N = n ) \\
+& = & \sum\limits_{n \in \mathbb{N}} F_n( x ) p_n 
+\end{eqnarray*}
+la distribución de $F_X$ de $X$ no es más que una mixtura de las distribuciones condicionales de $X$
+para cada $n \in \mathbb{N}$.
+:::
+
+<!------------------------------------------------------------------------------------------------->
+::: {.definition #defcov name="Covarianza"}
+La **covarianza** de dos variables aleatorias, está dada por la siguiente expresión:
+\begin{equation}
+\mathbb{C}[ X, Y ] 
+= \mathbb{E}\left[ \left( X - \mathbb{E}[ X ] \right)\left( Y - \mathbb{E}[ Y ] \right) \right]
+= \mathbb{E}\left[ X Y \right] - \mathbb{E}\left[ X \right]\mathbb{E}\left[ Y \right]
+\end{equation}
+
+De forma integral esta se la puede expresar como:
+\begin{eqnarray*}
+\mathbb{C}[ X, Y ] 
+& = & \int\limits_{\mathbb{R}^2} xy\ dP( x, y ) 
+- \int\limits_{\mathbb{R}^2} x\ dP( x, y )\int\limits_{\mathbb{R}^2} y\ dP( x, y ) \\
+& = & \int\limits_{\mathbb{R}^2} xy f_{X,Y}( x, y )\ dx dy
+- \int\limits_{\mathbb{R}^2} x f_{X,Y}( x, y )\ dx dy\int\limits_{\mathbb{R}^2} y f_{X,Y}( x, y )\ dx dy
+\end{eqnarray*}
+
+No está por demás notar que $\mathbb{C}[ X, X ] = \mathbb{V}[ X ]$
 :::
 
 <!------------------------------------------------------------------------------------------------->

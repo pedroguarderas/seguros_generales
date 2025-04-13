@@ -332,25 +332,12 @@ la agregación de los reclamos y obtener el reclamo total $S = \sum\limits_{i=1}
 Como todas las variables $X_i$ siguen una ley $Gamma( \alpha_i, \theta )$, sabemos que la 
 familia $Gamma$ es cerrada por adición, es decir, a suma de variables aleatorias con ley $Gamma$
 también sigue una ley $Gamma$. En este caso en particular para el reclamo total tenemos que 
-$S \rightsquigarrow Gamma\left( \sum\limits_{i=1}^n \alpha_i \right)$.
+$S \rightsquigarrow Gamma\left( \sum\limits_{i=1}^n \alpha_i, \theta \right)$.
 
-Es de notar que cada variable aleatoria $X_i$ tiene un parámetro diferente $\alpha_i$. 
+Es de notar que para cada $i\in \{1,\ldots,n\}$, la variable aleatoria $X_i$ correspondiente al
+$i$-ésimo reclamo tiene como parámetro un diferente factor $\alpha_i$, pero el mismo factor 
+$\theta$. 
 
-Estudiemos la variable $S$ utilizando un algoritmo de simulación, para así calcular algunas primas
-en las diferentes formas que hemos citado. Primeramente definamos los parámetros
-```{r l5c3}
-# número de unidades aseguradas
-n <- 1000
-
-# parámetros para cada X_i
-a <- runif( n, 5, 10 )
-
-# parámetro theta, común a todas las X_i
-theta <- 4
-
-# parámetro para S
-A <- sum( a )
-```
 Ya que cada $X_i \rightsquigarrow Gamma( \alpha_i, \theta )$, podemos calcular de forma determinista
 las experanzas de $\mathbb{E}[X_i]$, para cada $i \in \{1,\ldots,n\}$ y de igual forma podemos 
 calcular la esperanza del reclamo total $\mathbb{E}[S] = \sum\limits_{i=1}^n \mathbb{E}[X_i]$. 
@@ -364,8 +351,26 @@ VS <- sum( VX )
 SDS <- sqrt( VS )
 ```
 
-La variable aleatoria del reclamo total $S$ la podemos simular, tomando una muestra de tamaño $m$, 
-i.e. $S_1,\ldots,S_m$.
+También estamos en la capacidad de simular la variable $S$ utilizando un algoritmo de aleatorio, 
+para así aproximar los cálculos de sus momentos y otros estadísticos. Primeramente definamos los 
+parámetros.
+```{r l5c3}
+# número de unidades aseguradas
+n <- 1000
+
+# parámetros para cada X_i
+a <- runif( n, 5, 10 )
+
+# parámetro theta, común a todas las X_i
+theta <- 4
+
+# parámetro para S
+A <- sum( a )
+```
+
+
+La variable aleatoria del reclamo total $S$ la podemos simular tomando una muestra i.i.d de tamaño $m$, 
+i.e. $S_1,\ldots,S_m$ de la distribución $Gamma\left( \sum\limits_{i=1}^n \alpha_i, \theta \right)$.
 ```{r l5c5}
 m <- 1e5
 S <- rgamma( m, shape = A, scale = theta )

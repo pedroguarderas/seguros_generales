@@ -25,6 +25,6 @@ output:
     latex_engine: xelatex
     citation_package: biblatex
     keep_tex: yes
-bibliography: [bibliografia_libros.bib, bibliografia_paquetes.bib]
+bibliography: [bibliografia_libros.bib, bibliografia_paquetes.bib, bibliografia_articulos.bib]
 csl: electronic-journal-of-statistics.csl
 ---
