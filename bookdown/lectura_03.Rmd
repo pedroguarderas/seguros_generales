@@ -253,7 +253,7 @@ la variable aleatoria $X$.
 
 <!------------------------------------------------------------------------------------------------->
 ::: {.definition #mgf name="Función generadora de momentos"}
-La **función generadora de momento** de la variable aleatoria a valores reales $X$, es la función:
+La **función generadora de momentos** de la variable aleatoria a valores reales $X$, es la función:
 \begin{equation}
 M_X( t ) = \mathbb{E}\left[ \exp( t X ) \right]
 \end{equation}
@@ -332,6 +332,7 @@ F_X( x )
 & = & P( X \leq x ) \\
 & = & P( X \leq x \land N \in \mathbb{N} ) \\
 & = & P\left( X \leq x \land N \in \bigcup_{n \in \mathbb{N}} \{n\} \right) \\
+& = & P\left( \bigcup_{n \in \mathbb{N}} \left\{ X \leq x \land N \in \{n\} \right\} \right) \\
 & = & \sum\limits_{n \in \mathbb{N}} P\left( X \leq x \land N \in \{n\} \right) \\
 & = & \sum\limits_{n \in \mathbb{N}} P\left( X \leq x \land N = n \right) \\
 & = & \sum\limits_{n \in \mathbb{N}} P\left( X \leq x\ \middle|\ N = n \right) P( N = n ) \\

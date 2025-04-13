@@ -337,22 +337,39 @@ sobre los eventos <span class="math inline">\(\mathcal{F} \subset \mathcal{P}( \
 <span class="math display">\[\begin{equation}
 P( A \mid B ) = \frac{P( A \cap B)}{P(B)}
 \end{equation}\]</span></p>
+<p>Una <strong>propiedad</strong> sobre sobre <span class="math inline">\(\Omega\)</span> viene caracterizada por una función de verificación
+<span class="math inline">\(V : \Omega \longrightarrow \{0,1\}\)</span> de tal forma, se dice que un evento <span class="math inline">\(A \in \mathcal{F}\)</span>
+satisface la propiedad dada por <span class="math inline">\(V\)</span> si <span class="math inline">\(V(\omega) = 1, \forall \omega \in A\)</span>. Entonces decimos que
+se satisface la propiedad en <span class="math inline">\(V\)</span> en <strong>casi en todas partes</strong> o <strong>casi seguramente</strong> si para todo
+evento <span class="math inline">\(N \in \mathcal{F}\)</span> que no satisfaga <span class="math inline">\(V\)</span> mantiene una medida nula, es decir <span class="math inline">\(P( N ) = 0\)</span> y
+para cualquier <span class="math inline">\(\omega \in \Omega \setminus N\)</span> se satisface <span class="math inline">\(V\)</span>, <span class="math inline">\(V( \omega ) = 1\)</span>. En otras
+palabras en ciertos experimentos hay resultados que se pueden presentar, están dentro de las
+opciones, sin embargo en caso de presentarse no hay forma que se pueda medirlos.</p>
 </div>
+<p>En muchas ocasiones se observa los resultados a través de la realización de un experimento, y es
+usual que a cada experimente se le asocie un único resultado. Esta noción permite la definición de
+una variable aleatoria.</p>
 <!------------------------------------------------------------------------------------------------->
 <div class="definition">
-<p><span id="def:va" class="definition"><strong>Definición 3.4  (Variable aleatoria) </strong></span>Una <strong><em>variable aleatoria</em></strong> es una función que asigna un valor numérico a todo evento contingente.
-mide en una escala entre 0 y 1.</p>
+<p><span id="def:va" class="definition"><strong>Definición 3.4  (Variable aleatoria) </strong></span>Una <strong><em>variable aleatoria</em></strong> es una función que asigna un valor numérico a todo evento contingente.</p>
 <p>Una variable aleatoria <span class="math inline">\(X: \Omega \longrightarrow D\)</span> que parte del espacio muestral <span class="math inline">\(\Omega\)</span> y toma
-valores en el conjunto de los números reales <span class="math inline">\(\mathbb{R}\)</span>, decimos que sigue la ley
-<span class="math inline">\(f : \mathbb{R} \longrightarrow \mathbb{R}\)</span>, si para cualquier evento <span class="math inline">\(A \subset \Omega\)</span>
-<span class="math display">\[\begin{equation}
-P( X \in A )
-= \int\limits_{A} dP_X( x )
-= \int\limits_{A} d(P \circ X^{-1})( x )
-= \int\limits_{X^{-1}( A )} dP( \omega )
-\end{equation}\]</span></p>
+valores en el conjunto de los números reales <span class="math inline">\(\mathbb{R}\)</span>. Como la variable aleatoria es el
+resultado de un experimento, el cual debe ser medible, es natural esperar que todo intervalo
+observado sea el resultado de un evento en el espacio muestra <span class="math inline">\(\Omega\)</span>. De forma más clara, la
+imagen recíproca de un cualquier intervalo <span class="math inline">\(A \subset \mathbb{R}\)</span> es un evento en <span class="math inline">\(\mathcal{F}\)</span>,
+i.e. <span class="math inline">\(X^{-1}( A ) \in \mathcal{F}\)</span> esto precisamente se designa como una <strong>función medible</strong>.</p>
+<p>De <span class="math inline">\(X\)</span> se puede construir o heredar otra medida a partir de <span class="math inline">\(P\)</span>, esta se representa <span class="math inline">\(P_X\)</span> y tan
+solo mide los eventos que son imagen de <span class="math inline">\(X\)</span>. Es decir para cualquier intervalo <span class="math inline">\(A \in \mathbb{R}\)</span>
+<span class="math display">\[\begin{eqnarray*}
+P_X( A )
+&amp; = &amp; P( X^{-1}( A ) )\qquad \text{definición de la notación} \\
+&amp; = &amp; P(\{ \omega \in \Omega \mid X( \omega ) \in A \})\qquad \text{definición de imagen recíproca} \\
+&amp; = &amp; \int\limits_{X^{-1}( A )} dP( \omega )\qquad \text{representación en forma integral}
+\end{eqnarray*}\]</span>
+a partir de la medida <span class="math inline">\(P_X\)</span> precisamente se puede determinar algunas funciones que se conocen como
+distribuciones o densidades de probabilidad.</p>
 </div>
-<p>La idea de variable aleatoria a valores reales se puede extender fácilmente al caso de varias
+<p>De la idea de variable aleatoria a valores reales se puede extender fácilmente al caso de varias
 variables aleatorias, un vector aleatorio que toma valores en <span class="math inline">\(\mathbb{R}^n\)</span>, i.e. una función
 medible <span class="math inline">\(X : \Omega \longrightarrow \mathbb{R}^n\)</span>.</p>
 <!------------------------------------------------------------------------------------------------->
@@ -374,7 +391,11 @@ las probabilidades <em>¡Nunca son negativas!</em> y <em>!Suman siempre 1!</em>.
 <p><span id="def:cd" class="definition"><strong>Definición 3.6  (Función de distribución acumulada) </strong></span>Consideramos una variable aleatoria a valores reales <span class="math inline">\(X\)</span>, la <strong>función de distribución acumulada</strong>
 <span class="math inline">\(F\)</span> asociada a la variable aleatoria <span class="math inline">\(X\)</span>, está dada por la siguiente relación:
 <span class="math display">\[\begin{equation}
-F( x ) = P( X \leq x ) = P\left( X^{-1}\left( (-\infty, x ] \right) \right)
+F( x )
+= P( X \leq x )
+= P_X( (-\infty, x] )
+= P( X \in (-\infty, x] )
+= P\left( X^{-1}\left( (-\infty, x ] \right) \right)
 \end{equation}\]</span></p>
 <p>La función de distribución acumulada, tiene las siguientes propiedades:</p>
 <ol style="list-style-type: decimal">
@@ -475,7 +496,7 @@ la esperanza matemática como la siguiente expresión:
 la variable aleatoria <span class="math inline">\(X\)</span>.</p>
 <!------------------------------------------------------------------------------------------------->
 <div class="definition">
-<p><span id="def:mgf" class="definition"><strong>Definición 3.10  (Función generadora de momentos) </strong></span>La <strong>función generadora de momento</strong> de la variable aleatoria a valores reales <span class="math inline">\(X\)</span>, es la función:
+<p><span id="def:mgf" class="definition"><strong>Definición 3.10  (Función generadora de momentos) </strong></span>La <strong>función generadora de momentos</strong> de la variable aleatoria a valores reales <span class="math inline">\(X\)</span>, es la función:
 <span class="math display">\[\begin{equation}
 M_X( t ) = \mathbb{E}\left[ \exp( t X ) \right]
 \end{equation}\]</span></p>
@@ -546,6 +567,7 @@ F_X( x )
 &amp; = &amp; P( X \leq x ) \\
 &amp; = &amp; P( X \leq x \land N \in \mathbb{N} ) \\
 &amp; = &amp; P\left( X \leq x \land N \in \bigcup_{n \in \mathbb{N}} \{n\} \right) \\
+&amp; = &amp; P\left( \bigcup_{n \in \mathbb{N}} \left\{ X \leq x \land N \in \{n\} \right\} \right) \\
 &amp; = &amp; \sum\limits_{n \in \mathbb{N}} P\left( X \leq x \land N \in \{n\} \right) \\
 &amp; = &amp; \sum\limits_{n \in \mathbb{N}} P\left( X \leq x \land N = n \right) \\
 &amp; = &amp; \sum\limits_{n \in \mathbb{N}} P\left( X \leq x\ \middle|\ N = n \right) P( N = n ) \\
