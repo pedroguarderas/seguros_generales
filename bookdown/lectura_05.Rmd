@@ -52,7 +52,7 @@ F( S \leq s )
 & = & P\left( \bigcup\limits_{n\in \mathbb{N}} \left\{ \sum\limits_{i=1}^N X_i \leq s \land N \in \{n\} \right\}\right) \\
 & = & \sum\limits_{n=0}^{+\infty} P\left( \sum\limits_{i=1}^n X_i \leq s \land N = n \right) 
 \qquad \text{probabilidad de eventos disjuntos} \\
-& = & \sum\limits_{n=0}^{+\infty} P\left( \sum\limits_{i=1}^n X_i \leq s \mid N = n \right) P( N = n )
+& = & \sum\limits_{n=0}^{+\infty} P\left( \sum\limits_{i=1}^n X_i \leq s\ \middle|\ N = n \right) P( N = n )
 \qquad \text{propiedades de la probabilidad condicional} \\
 & = & \sum\limits_{n=0}^{+\infty} \int\limits_{\left\{\sum\limits_{i=1}^n x_i \leq s\right\}} dF_n( x_1, \ldots, x_n )\ p_n
 \qquad \text{$F_n$ es la distribución conjunta de $X_1, \ldots, X_n$}
@@ -61,7 +61,7 @@ la última expresión es importante de retener, nos dice que para comprender el 
 los reclamos totales $S$, debemos estudiar y estimar la frecuencia de los reclamos $N$, y también 
 debemos comprender y estimar cada uno de los reclamos $X_i$ y también su interacción, siendo al 
 menos estos una infinidad si $N$ puede tomar valores tendiendo al infinito. En términos resumidos, 
-hay que comprender y estimar la frecuencia, severidad de los reclamos que están asociados al riesgo 
+hay que comprender y estimar la frecuencia y severidad de los reclamos que están asociados al riesgo 
 cubierto. 
 
 Los términos integrales asociados a la severidad presentan un verdadero reto estadístico y 
@@ -85,7 +85,8 @@ El valor esperado de la severidad total $S$ es:
 \begin{eqnarray*}
 \mathbb{E}[S]
 & = & \mathbb{E}\left[ \sum\limits_{i=1}^n X_i \right] \\
-& = & \sum\limits_{i=1}^n \mathbb{E}\left[ X_i \right]
+& = & \sum\limits_{i=1}^n \mathbb{E}\left[ X_i \right] \\
+& = & n \mathbb{E}[X] \quad \text{si $\{X_i\}$ son idénticamente distribuidas}
 \end{eqnarray*}
 
 Así mismo con la varianza de $S$.
@@ -95,9 +96,47 @@ Así mismo con la varianza de $S$.
 & = & \sum\limits_{i=1}^n \mathbb{V}\left[ X_i \right] 
 + \sum\limits_{i=1}^n \sum\limits_{j=1,j\neq i}^n \mathbb{C}\left[ X_i, X_j \right] \\
 & = & \sum\limits_{i=1}^n \mathbb{V}\left[ X_i \right]\quad \text{si $\{X_i\}$ sin son independientes entre si} \\
-& = & n \mathbb{V}\left[ X \right]\quad \text{si $\{X_i\}$ sin son idénticamente distribuidas }
+& = & n \mathbb{V}\left[ X \right]\quad \text{si $\{X_i\}$ sin son idénticamente distribuidas}
 \end{eqnarray*}
 
+Al tener un número determinado de reclamos $n \in \mathbb{N}$, la distribución de probabilidad del
+total de reclamos $S$ puede ser calculada de una forma maś sencilla.
+\begin{eqnarray*}
+F_S( x )
+& = & F_{X_1} \star \cdots \star F_{S_n} ( s )\quad \text{sin $\{X_i\}$ son independientes} \\
+& = & F_{X}^{\star n}( s )\quad \text{si $\{X_i\}$ son idénticamente distribuidas}
+\end{eqnarray*}
+
+así mismo, si las densidades de probabilidad están bien definidas, entonces
+\begin{eqnarray*}
+f_S( s )
+& = & f_{X_1} \star \cdots \star f_{S_n} ( s )\quad \text{sin $\{X_i\}$ son independientes} \\
+& = & f_{X}^{\star n}( s )\quad \text{si $\{X_i\}$ son idénticamente distribuidas}
+\end{eqnarray*}
+
+Una posible estrategias para estimar $F_S$ o $f_S$ es utilizar la transformada de Fourier 
+$\mathcal{F}$, la cual convierte las convoluciones en productos y luego invertir de nuevo la 
+transformada de Fourier.
+\begin{eqnarray*}
+F_S 
+& = & \mathcal{F}^{-1}\left( \mathcal{F}\left( F_S \right) \right) \\
+& = & \mathcal{F}^{-1}\left( \mathcal{F}\left( F_{X_1} \star \cdots \star F_{X_n} \right) \right)
+\quad \text{sin $\{X_i\}$ son independientes} \\
+& = & \mathcal{F}^{-1}\left( \prod\limits_{i=1}^n \mathcal{F}\left( F_{X_i} \right) \right) \\ 
+& = & \mathcal{F}^{-1}\left( \mathcal{F}\left( F_{X} \right)^n \right)
+\quad \text{si $\{X_i\}$ sin son idénticamente distribuidas } \\
+\end{eqnarray*}
+
+o de forma equivalente para la densidad $f_S$
+\begin{eqnarray*}
+f_S 
+& = & \mathcal{F}^{-1}\left( \mathcal{F}\left( f_S \right) \right) \\
+& = & \mathcal{F}^{-1}\left( \mathcal{F}\left( f_{X_1} \star \cdots \star f_{X_n} \right) \right)
+\quad \text{sin $\{X_i\}$ son independientes} \\
+& = & \mathcal{F}^{-1}\left( \prod\limits_{i=1}^n \mathcal{F}\left( f_{X_i} \right) \right) \\ 
+& = & \mathcal{F}^{-1}\left( \mathcal{F}\left( f_{X} \right)^n \right)
+\quad \text{si $\{X_i\}$ sin son idénticamente distribuidas } \\
+\end{eqnarray*}
 
 <!------------------------------------------------------------------------------------------------->
 ### Algoritmo de simulación
@@ -254,16 +293,43 @@ El valor esperado del total de reclamos $S$, está dado por:
 \mathbb{E}[S]
 & = & \mathbb{E}\left[ \sum\limits_{i=1}^N X_i \right] \\
 & = & \sum\limits_{n=0}^{+\infty} \mathbb{E}\left[ 
-\sum\limits_{i=1}^n X_i\ \middle|\ N = n \right]P( N = n )\quad
-\text{utilizando la esperanza condicional} \\
+\sum\limits_{i=1}^n X_i\ \middle|\ N = n \right]P( N = n )
+\quad \text{utilizando la esperanza condicional} \\
 & = & 0 P( N = 0 ) + \sum\limits_{n=1}^{+\infty} \mathbb{E}\left[ \sum\limits_{i=1}^n X_i\ \middle|\ N = n \right]P( N = n ) \\
-& = & \sum\limits_{n=1}^{+\infty} \sum\limits_{i=1}^n \mathbb{E}\left[ X_i \mid N = n \right]P( N = n )\quad
-\text{linealidad de la esperanza} \\
-& = & \sum\limits_{n=0}^{+\infty} n \mathbb{E}\left[ X \mid N = n \right]P( N = n )\quad
-\text{si $\{X_i\}$ son idénticamente distribuidas} \\
-& = & \mathbb{E}\left[ X \right] \sum\limits_{n=0}^{+\infty} n P( N = n )\quad
-\text{si $X$ y $N$ son independientes} \\
+& = & \sum\limits_{n=1}^{+\infty} \sum\limits_{i=1}^n \mathbb{E}\left[ X_i \mid N = n \right]P( N = n )
+\quad \text{linealidad de la esperanza} \\
+& = & \sum\limits_{n=0}^{+\infty} n \mathbb{E}\left[ X \mid N = n \right]P( N = n )
+\quad \text{si $\{X_i\}$ son idénticamente distribuidas} \\
+& = & \mathbb{E}\left[ X \right] \sum\limits_{n=0}^{+\infty} n P( N = n )
+\quad \text{si $X$ y $N$ son independientes} \\
 & = & \mathbb{E}[ N ] \mathbb{E}[ X ] 
+\end{eqnarray*}
+
+También podemos calcular la varianza de los reclamos totales $S$, para ello necesitamos primeramente
+calcular su segundo momento.
+\begin{eqnarray*}
+\mathbb{E}[S^2]
+& = & \mathbb{E}\left[ \left( \sum\limits_{i=1}^N X_i \right)^2 \right] \\
+& = & \sum\limits_{n=0}^\infty \mathbb{E}\left[ \sum\limits_{i, j=1}^n X_i X_j \middle| N = n \right] P( N = n ) 
+\quad \text{propiedades de la esperanza condicional} \\
+& = & \sum\limits_{n=0}^\infty \sum\limits_{i, j=1}^n \mathbb{E}\left[ X_i X_j \right] P( N = n ) 
+\quad \text{si $\{X_i\}$ y $N$ son independientes} \\
+& = & \sum\limits_{n=0}^\infty \left( \sum\limits_{i=1}^n \mathbb{E}\left[ X_i^2 \right] 
++ \sum\limits_{i,j=1,i\neq j}^n \mathbb{E}\left[ X_i X_j \right] \right) P( N = n ) \\
+& = & \sum\limits_{n=0}^\infty \left( n \mathbb{E}\left[ X^2 \right] + n(n-1) \mathbb{E}\left[ X \right]^2 \right) P( N = n ) 
+\quad \text{si $\{X_i\}$ son i.i.d} \\
+& = & \mathbb{E}\left[N\right] \mathbb{E}\left[X^2\right] + \mathbb{E}\left[N^2\right] \mathbb{E}\left[X\right]^2 
+- \mathbb{E}\left[N\right] \mathbb{E}\left[X\right]^2 \\
+& = & \mathbb{E}\left[N\right] \mathbb{V}\left[X\right] + \mathbb{E}\left[N^2\right] \mathbb{E}\left[X\right]^2
+\end{eqnarray*}
+
+finalmente la varianza de $S$ tiene la siguiente expresión
+\begin{eqnarray*}
+\mathbb{V}\left[S\right]
+& = & \mathbb{E}\left[S^2\right] - \mathbb{E}\left[S\right]^2 \\
+& = & \mathbb{E}\left[N\right] \mathbb{V}\left[X\right] 
++ \mathbb{E}\left[N^2\right] \mathbb{E}\left[X\right]^2 - \mathbb{E}\left[N\right]^2 \mathbb{E}\left[X\right]^2 \\
+& = & \mathbb{E}\left[N\right] \mathbb{V}\left[X\right] + \mathbb{V}\left[N\right] \mathbb{E}\left[X\right]^2
 \end{eqnarray*}
 
 La distribución acumulada del reclamo total $S$ tiene la forma:

@@ -483,6 +483,19 @@ Muchos de las herramientas de las estadística se resumen en algunas recetas o a
 software, sin embargo, no se debe olvidar que en muchos casos estas herramientas hacen uso de 
 muchos métodos bastante avanzados y complejos en lo que respecta al conocimiento Matemático.
 
+::: {.theorem #twln name="Ley débil de los grandes números"}
+Consideramos la secuencia de variables aleatorias $\{X_i\}_{i\in \mathbb{N}}$ las cuales 
+consideraremos que son i.i.d. y con media común finita $\mathbb{E}[X_i] = \mu < +\infty$. Entonces,
+se satisface el siguiente límite en probabilidad
+\begin{equation}
+\frac{1}{n} \sum\limits_{i=1}^n X_i \rightarrow \mu
+\end{equation}
+esto quiere decir que para cualquier $\varepsilon > 0$ se satisface el siguiente límite
+\begin{equation}
+\underset{n \rightarrow +\infty}{\lim} P\left( \left| \sum\limits_{i=1}^n X_i - \mu \right|\right) = 0
+\end{equation}
+:::
+
 ::: {.theorem #tlc name="Teorema del límite central"}
 Consideramos las variables aleatorias $X_1,\ldots,X_n$ i.i.d. con media común finita 
 $\mathbb{E}[X_i] = \mu < +\infty$ y varianza común finita
@@ -616,6 +629,182 @@ P( X \geq \rho \mathbb{E}[ X ] ) \geq ( 1 - \rho )^2 \frac{\mathbb{E}[ X ]^2}{\m
 \end{equation}
 :::
 
+## Consideraciones de Análisis
+
+<!------------------------------------------------------------------------------------------------->
+::: {.definition #dfouriertrans name="Tansformada de Fourier"}
+La **transformada de Fourier** para una función integrable $f : \mathbb{R}^n \longrightarrow \mathbb{R}$, 
+está definida como:
+\begin{equation}
+\mathcal{F}( f )( \omega ) = \frac{1}{(2\pi)^{\frac{n}{2}}} 
+\int\limits_{\mathbb{R}^n} f( x ) \exp( -i \omega \cdot x )\ dx
+\end{equation}
+
+la inversa de la transformada de Fourier, para una función $g : \mathbb{R}^n \longrightarrow \mathbb{R}$,
+está dada por:
+\begin{equation}
+\mathcal{F}^{-1}( g ) = \frac{1}{(2\pi)^{\frac{n}{2}}} 
+\int\limits_{\mathbb{R}^n} g( x ) \exp( i \omega \cdot x )\ dx
+\end{equation}
+
+se satisface la siguiente igualdad
+\begin{equation}
+\mathcal{F}^{-1}\left( \mathcal{F}( f ) \right) = f
+\end{equation}
+
+Además, la transformada de Fourier satisface las siguientes propiedades:
+
+1. La transformada de Fourier es lineal, si $a,b \in \mathbb{R}$ y 
+$f :\mathbb{R}^n \longrightarrow \mathbb{R}$ y $g :\mathbb{R}^n \longrightarrow \mathbb{R}$, funciones
+integrables.
+\begin{equation}
+\mathcal{F}\left( a f + b g \right) = a \mathcal{F}( f ) + b \mathcal{F}( g )
+\end{equation}
+
+2. La transformada de Fourier de la convolución de funciones es el producto de las transformadas de 
+Fourier.
+\begin{equation}
+\mathcal{F}\left( f \star g \right) = \mathcal{F}( f ) \mathcal{F}( g )
+\end{equation}
+:::
+
+Para el caso de 1-dimensional podemos tener la siguiente aproximación a la transformada de Fourier
+\begin{eqnarray*}
+\mathcal{F}( f )( \omega )
+& = & \int\limits_{\mathbb{R}} f( x ) \exp( -2\pi i \omega x )\ dx \\
+& \approx & \int\limits_{a}^b f( x ) \exp( -2\pi i \omega x )\ dx
+\quad \text{dominio finito $[ a, b ]$ que concentra la integral} \\
+& \approx & \sum\limits_{k=0}^{N-1} f( x_k ) \exp( -2 \pi i \omega x_k ) h
+\quad \text{discretización de la integral} \\
+& = & h \sum\limits_{k=0}^{N-1} f( x_k ) \exp( -2\pi i \omega ( a + k h ) ) \\
+& = & h \exp( -i 2\pi \omega a ) \sum\limits_{k=0}^{N-1} f( x_k ) \exp\left( -2\pi i \omega k \frac{b - a}{N} \right)
+\end{eqnarray*}
+donde $\{f_k\}$ es la secuencia finita de números $f_k = f( x_k )$ y $DFT$ es la transformada de 
+Fourier Discreta. La anterior relación es una aproximación para todo $\omega$. En particular se
+puede considerar $\omega_j = \frac{j}{b-a}$
+\begin{eqnarray*}
+\mathcal{F}( f )\left( \omega_j \right) 
+& = & h \exp\left( -2\pi i \frac{j}{b-a} a \right) 
+\sum\limits_{k=0}^{N-1} f( x_k ) \exp\left( -2\pi i \frac{jk}{N} \right) \\
+\hat{f}_j & = & h \exp\left( -2\pi i \frac{j}{b-a} a \right) \left( DFT\left[ \{f_k\} \right] \right)_j
+\quad \text{Por definición de la $DFT$}
+\end{eqnarray*}
+
+entonces, lo anterior implica que podemos recuperar los valores aproximados a $f(x_k)$ utilizando
+la transformada de Fourier discreta y su inversión.
+\begin{equation}
+\{f( x_k )\}
+\approx DFT^{-1}\left[ DFT\left[ \{f_k\} \right] \right]
+= DFT^{-1}\left[ \left\{ \frac{1}{h} \exp\left( 2\pi i \frac{j}{b-a} a \right) \hat{f}_j \right\} \right]
+\end{equation}
+
+```{r l2c8}
+N <- 3001
+alpha <- 2
+theta <- 3
+b <- qgamma( 0.999, shape = alpha, scale = theta )
+a <- 0
+h <- ( b - a ) / N
+n <- 0:N
+x <- a + n * h
+
+w <- n / ( b - a )
+eta <- h * exp( -2 * pi * 1i * w * a )
+f <- sapply( x, FUN = function( x ) dgamma( x, shape = alpha, scale = theta ) )
+Ff <- eta * fft( f )
+IFf <- fft( eta^(-1) * Ff, inverse = TRUE ) / ( N + 1 )
+IFf <- Re( IFf )
+err <- norm( f - IFf, type = '2' )
+```
+El error cuadrático de esta aproximación para el caso de la distribución $Gamma( \alpha, \theta )$,
+como es de esperar es bastante pequeño.
+\begin{equation}
+\left\| \{f( x_k ) \} - 
+DFT^{-1}\left[ \left\{ \frac{1}{h} \exp\left( 2\pi i \frac{j}{b-a} a \right) \hat{f}_j \right\} \right] \right\|_2
+= `r formatC( err, digits = 20, format = 'f' )`
+\end{equation}
+
+Como se puede observar se superponen cada una de las distribuciones la discretización $f_k$ y la 
+calculada con inversión de la transformada de Fourier discreta.
+```{r l2g1}
+plot( x, f, type = 'l' )
+points( x, Re( IFf ), col = 'green', pch = 16, cex = 0.5 )
+
+e <- f - IFf
+e <- e / sd( e )
+hist( e, breaks = 40, xlim = c( -6, 6 ) )
+```
+
+Esta aproximación es realmente de utilidad cuando se tiene que determinar la densidad de la 
+suma $S_n = \sum\limits_{i=1}^n X_i$ de varias variables aleatorias 
+$X_1 \rightsquigarrow f_{X_1}, \ldots, X_n \rightsquigarrow f_{X_n}$ que son independientes, pero 
+que podrían ser o no idénticamente distribuidas. Claramente la densidad de probabilidad de $S$
+está dada por la convolución de las densidades de probabilidad de cada una de las variables 
+aleatorias $X_1, \ldots, X_n$.
+\begin{equation}
+f_S = f_{X_1} \star \cdots \star f_{X_n}
+\end{equation}
+sin embargo esta convolución implica el realizar un interación en $n$-dimensiones.
+
+Con el suso de la transformada de Fourier sabemos por la independencia entre las variables $\{X_i\}$
+que $\mathcal{F}\left( f_S \right) = \prod\limits_{i=1}^n \mathcal{F}\left( F_{X_i} \right)$. Por otra 
+parte, con lo anterior sabemos que es posible aproximar numéricamente cada $\mathcal{F}\left( X_i \rigt)$ 
+con una serie $\{\hat{f}_{i,j}\}$ dada por la discretización de la transformada de Fourier y su aplicación 
+sobre la discretización $f_{i,k} = f_{X_i}( s_k )$. Por tanto, para cada $i \in \{1, \ldots, n\}$, 
+se puede calcular de forma separada las aproximaciones a cada una de las transformadas
+\begin{equation}
+\mathcal{F}( f_{X_i} )\left( \omega_j \right)  
+\approx \hat{f}_{i,j} 
+= h \exp\left( -2\pi i \omega_j a \right) \left( DFT\left[ \{f_{i,k}\} \right]  \right)_j
+\end{equation}
+
+con lo anterior, se puede también realizar una aproximación a la trasformada de Fourier $\mathcal{F}[f_S]$ 
+de la densidad de probabilidad $f_S$, como el producto de sus transformadas de Fourier.
+\begin{equation}
+\mathcal{F}( f_{S} )\left( \omega_j \right)  
+= \prod\limits_{i=1}^n \mathcal{F}\left( F_{X_i} \right)\left( \omega_j \right)
+\approx \prod\limits_{i=1}^n \hat{f}_{i,j}
+\end{equation}
+
+finalmente utilizando la inversión de la transformada de Fourier discreta podemos calcular una 
+serie que precisamente aproxima a la densidad $f_S$
+\begin{equation}
+\{ f_{S}( s_k ) \}
+\approx DFT^{-1}\left[ \left\{ \frac{1}{h} \exp\left( 2\pi i \omega_j a \right) 
+\prod\limits_{i=1}^n \hat{f}_{i,j} \right\} \right]
+\end{equation}
+
+```{r l2c9}
+N <- 7000
+alpha <- c( 2, 3, 5, 7, 9, 11, 1, 3, 5, 9 )
+theta <- 3
+b <- sum( sapply( alpha, FUN = function( a ) qgamma( 0.99, shape = a, scale = theta ) ) )
+a <- 0
+h <- ( b - a ) / N
+n <- 0:N
+s <- a + n * h
+
+w <- n / ( b - a )
+eta <- h * exp( -2 * pi * 1i * w * a )
+f <- lapply( alpha, function( a ) sapply( s, FUN = function( sk ) dgamma( sk, shape = a, scale = theta ) ) )
+Ff <- lapply( f, FUN = function( fi ) eta * fft( fi ) )
+FS <- rep( 1, N + 1 )
+for ( i in 1:length( f ) ) {
+  FS <- FS * Ff[[ i ]]
+}
+IFfS <- fft( eta^(-1) * FS, inverse = TRUE ) / ( N + 1 )
+fS <- Re( IFfS )
+fSx <- sapply( s, FUN = function( sk ) dgamma( sk, shape = sum( alpha ), scale = theta ) )
+```
+
+```{r l2g2}
+plot( s, fSx, type = 'l' )
+points( s, fS, col = 'green', pch = 16, cex = 0.5 )
+
+e <- fS - fSx
+e <- e / sd( e )
+hist( e, breaks = 40, xlim = c( -6, 6 ) )
+```
 
 <!------------------------------------------------------------------------------------------------->
 ## Consideraciones financieras
