@@ -2040,7 +2040,12 @@ Fourier.
 <!------------------------------------------------------------------------------------------------->
 <div id="aproximación-numérica-en-una-dimensión" class="section level3 hasAnchor" number="3.4.1">
 <h3><span class="header-section-number">3.4.1</span> Aproximación numérica en una dimensión<a href="probabilidad-y-estadística.html#aproximación-numérica-en-una-dimensión" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Para el caso de 1-dimensional podemos tener la siguiente aproximación a la transformada de Fourier
+<p>Para el caso de 1-dimensional podemos tener la siguiente aproximación a la transformada de Fourier.
+Consideramos el caso donde la función <span class="math inline">\(f\)</span> está concentrada en su mayoría en un intervalo <span class="math inline">\([a,b]\)</span>,
+la mayor parte de su integral está ahí. Luego para aproximar la integral consideramos una
+discretización uniforme del intervalo <span class="math inline">\([a,b]\)</span>, seleccionando un tamaño <span class="math inline">\(N \in \mathbb{N}\)</span> y tomando
+valores discretos <span class="math inline">\(x_k = a + k h\)</span>, con <span class="math inline">\(h = \frac{b-a}{N}\)</span> y <span class="math inline">\(k \in \{0, \ldots, N\}\)</span>. Así, tenemos
+la siguiente aproximación a la transformada de Fourier.
 <span class="math display">\[\begin{eqnarray*}
 \mathcal{F}( f )( \omega )
 &amp; = &amp; \int\limits_{\mathbb{R}} f( x ) \exp( -2\pi i \omega x )\ dx \\
