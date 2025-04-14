@@ -131,12 +131,10 @@ arrojar más de un resultado posible.
 > 
 > Un evento asociado a un fenómeno estocástico se denomina ***evento contingente***.
 
+Una ***variable aleatoria*** es una función que asigna un valor numérico a todo evento contingente.
+
 La ***probabilidad*** es una medida de las posibilidades de que ocurra un evento contingente que 
 toma valores en $[0,1]$.
-
-Una ***variable aleatoria*** es una función que asigna un valor numérico a todo evento contingente.
-mide en una escala entre 0 y 1.
-
 
 <!------------------------------------------------------------------------------------------------->
 ::: {.definition #va name="Variable aleatoria"}
