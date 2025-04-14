@@ -5,6 +5,9 @@ Antes de introduccir algunos conceptos necesarios para nuestro estudio, necesita
 conceptos de base.
 
 <!------------------------------------------------------------------------------------------------->
+## Probabilidad y conceptos asociados
+
+<!------------------------------------------------------------------------------------------------->
 ::: {.definition #defconcep name="Conceptos base"}
 En breves términos, utilizaremos los siguientes conceptos
 
@@ -466,7 +469,7 @@ F_u( y ) = P\left( X - u \leq y \mid X > u \right)
 :::
 
 <!------------------------------------------------------------------------------------------------->
-## Consideraciones estadísticas
+## Resultados de convergencia
 
 De las ramas de las Matemáticas la Estadística ciertamente es la más subestimada, en muchos casos
 menospreciada. Sin embargo, no sin mucha pretención, sino más bien honestidad, se puede decir
@@ -524,7 +527,7 @@ El siguiente teorema es de gran ayuda para estimar la tasa de convergencia del r
 \@ref(thm:tlc).
 
 <!------------------------------------------------------------------------------------------------->
-### Desigualdades de concentración 
+## Desigualdades de concentración 
 
 Para muchos fines prácticos es importante encontrar una buena estimación de donde se encuentran 
 concentrados los valores de una distribución de probabilidad, para ello existen varios resultados
@@ -630,7 +633,7 @@ P( X \geq \rho \mathbb{E}[ X ] ) \geq ( 1 - \rho )^2 \frac{\mathbb{E}[ X ]^2}{\m
 :::
 
 <!------------------------------------------------------------------------------------------------->
-## Consideraciones de Análisis
+## Transformada de Fourier, contínua y discreta
 
 <!------------------------------------------------------------------------------------------------->
 ::: {.definition #dfouriertrans name="Tansformada de Fourier"}
@@ -668,6 +671,9 @@ Fourier.
 \mathcal{F}\left( f \star g \right) = \mathcal{F}( f ) \mathcal{F}( g )
 \end{equation}
 :::
+
+<!------------------------------------------------------------------------------------------------->
+### Aproximación numérica en una dimensión
 
 Para el caso de 1-dimensional podemos tener la siguiente aproximación a la transformada de Fourier
 \begin{eqnarray*}
@@ -735,6 +741,9 @@ e <- f - IFf
 e <- e / sd( e )
 hist( e, breaks = 40, xlim = c( -6, 6 ) )
 ```
+
+<!------------------------------------------------------------------------------------------------->
+### Uso de la transformada de Fourier
 
 Esta aproximación es realmente de utilidad cuando se tiene que determinar la densidad de la 
 suma $S_n = \sum\limits_{i=1}^n X_i$ de varias variables aleatorias 
