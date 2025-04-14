@@ -11,8 +11,7 @@
 3. $\overline{\mathbb{R}} = \mathbb{R} \cup \{ +\infty \} \cup \{ -\infty \}$ el conjunto de los 
 reales extendido incluyendo los infinitos
 
-<!-- 4. $<$ símbolo de menor que, $>$ símbolo de mayor que, $\leq$ símbolo de menor o igual que, -->
-<!-- $\geq$ símbolo de mayor o igual que, -->
+4. $x \approx y$ indica que el valor $y$ es aproximado al valor $x$
 
 5. $f: X \longrightarrow Y$ la función que toma valores en $X$ y entrega valores en $Y$
 
@@ -27,7 +26,7 @@ cualquier $a,b \in \overline{\mathbb{R}}$
 9. $\{x_n\}_{n\in\mathbb{N}} = \left\{ x_n \in X \mid n \in \mathbb{N} \right\}$ secuencia en 
 el conjunto $X$, no es más que una función de $\mathbb{N}$ con valores en $X$
 
-10. $\underset{x \rightarrow y}{\lim} f(x) = a$ límite de la funcion $f(x)$ cuando $x$ tiende a $y$.
+10. $\underset{x \rightarrow y}{\lim} f(x) = a$ límite de la función $f(x)$ cuando $x$ tiende a $y$.
 
 11. $\inf A$ es la mayor de las cotas inferiores de $A$.
 
