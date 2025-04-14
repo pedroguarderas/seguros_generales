@@ -679,8 +679,8 @@ Para el caso de 1-dimensional podemos tener la siguiente aproximación a la tran
 Consideramos el caso donde la función $f$ está concentrada en su mayoría en un intervalo $[a,b]$, 
 la mayor parte de su integral está ahí. Luego para aproximar la integral consideramos una 
 discretización uniforme del intervalo $[a,b]$, seleccionando un tamaño $N \in \mathbb{N}$ y tomando 
-valores discretos $x_k = a + k h$, con $h = \frac{b-a}{N}$ y $k \in \{0, \ldots, N\}$. Así, tenemos 
-la siguiente aproximación a la transformada de Fourier.
+una secuencia de valores discretos $x_k = a + k h$, con $h = \frac{b-a}{N}$ y $k \in \{0, \ldots, N\}$. 
+Así, tenemos la siguiente aproximación a la transformada de Fourier.
 \begin{eqnarray*}
 \mathcal{F}( f )( \omega )
 & = & \int\limits_{\mathbb{R}} f( x ) \exp( -2\pi i \omega x )\ dx \\
