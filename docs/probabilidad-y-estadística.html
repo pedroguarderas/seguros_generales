@@ -23,7 +23,7 @@
 <meta name="author" content="" />
 
 
-<meta name="date" content="2025-04-13" />
+<meta name="date" content="2025-04-14" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -193,12 +193,13 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="3.1.1" data-path="probabilidad-y-estadística.html"><a href="probabilidad-y-estadística.html#desigualdades-de-concentración"><i class="fa fa-check"></i><b>3.1.1</b> Desigualdades de concentración</a></li>
 </ul></li>
-<li class="chapter" data-level="3.2" data-path="probabilidad-y-estadística.html"><a href="probabilidad-y-estadística.html#consideraciones-financieras"><i class="fa fa-check"></i><b>3.2</b> Consideraciones financieras</a>
+<li class="chapter" data-level="3.2" data-path="probabilidad-y-estadística.html"><a href="probabilidad-y-estadística.html#consideraciones-de-análisis"><i class="fa fa-check"></i><b>3.2</b> Consideraciones de Análisis</a></li>
+<li class="chapter" data-level="3.3" data-path="probabilidad-y-estadística.html"><a href="probabilidad-y-estadística.html#consideraciones-financieras"><i class="fa fa-check"></i><b>3.3</b> Consideraciones financieras</a>
 <ul>
-<li class="chapter" data-level="3.2.1" data-path="probabilidad-y-estadística.html"><a href="probabilidad-y-estadística.html#función-de-actualización-o-descuento"><i class="fa fa-check"></i><b>3.2.1</b> Función de actualización o descuento</a></li>
-<li class="chapter" data-level="3.2.2" data-path="probabilidad-y-estadística.html"><a href="probabilidad-y-estadística.html#flujos-financieros"><i class="fa fa-check"></i><b>3.2.2</b> Flujos financieros</a></li>
-<li class="chapter" data-level="3.2.3" data-path="probabilidad-y-estadística.html"><a href="probabilidad-y-estadística.html#flujos-financieros-probables"><i class="fa fa-check"></i><b>3.2.3</b> Flujos financieros probables</a></li>
-<li class="chapter" data-level="3.2.4" data-path="probabilidad-y-estadística.html"><a href="probabilidad-y-estadística.html#sec:equifin"><i class="fa fa-check"></i><b>3.2.4</b> Equilibrio financiero</a></li>
+<li class="chapter" data-level="3.3.1" data-path="probabilidad-y-estadística.html"><a href="probabilidad-y-estadística.html#función-de-actualización-o-descuento"><i class="fa fa-check"></i><b>3.3.1</b> Función de actualización o descuento</a></li>
+<li class="chapter" data-level="3.3.2" data-path="probabilidad-y-estadística.html"><a href="probabilidad-y-estadística.html#flujos-financieros"><i class="fa fa-check"></i><b>3.3.2</b> Flujos financieros</a></li>
+<li class="chapter" data-level="3.3.3" data-path="probabilidad-y-estadística.html"><a href="probabilidad-y-estadística.html#flujos-financieros-probables"><i class="fa fa-check"></i><b>3.3.3</b> Flujos financieros probables</a></li>
+<li class="chapter" data-level="3.3.4" data-path="probabilidad-y-estadística.html"><a href="probabilidad-y-estadística.html#sec:equifin"><i class="fa fa-check"></i><b>3.3.4</b> Equilibrio financiero</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="distribuciones.html"><a href="distribuciones.html"><i class="fa fa-check"></i><b>4</b> Distribuciones</a>
@@ -698,7 +699,19 @@ hay algo más complejo y duro que la realidad misma.</p>
 software, sin embargo, no se debe olvidar que en muchos casos estas herramientas hacen uso de
 muchos métodos bastante avanzados y complejos en lo que respecta al conocimiento Matemático.</p>
 <div class="theorem">
-<p><span id="thm:tlc" class="theorem"><strong>Teorema 3.1  (Teorema del límite central) </strong></span>Consideramos las variables aleatorias <span class="math inline">\(X_1,\ldots,X_n\)</span> i.i.d. con media común finita
+<p><span id="thm:twln" class="theorem"><strong>Teorema 3.1  (Ley débil de los grandes números) </strong></span>Consideramos la secuencia de variables aleatorias <span class="math inline">\(\{X_i\}_{i\in \mathbb{N}}\)</span> las cuales
+consideraremos que son i.i.d. y con media común finita <span class="math inline">\(\mathbb{E}[X_i] = \mu &lt; +\infty\)</span>. Entonces,
+se satisface el siguiente límite en probabilidad
+<span class="math display">\[\begin{equation}
+\frac{1}{n} \sum\limits_{i=1}^n X_i \rightarrow \mu
+\end{equation}\]</span>
+esto quiere decir que para cualquier <span class="math inline">\(\varepsilon &gt; 0\)</span> se satisface el siguiente límite
+<span class="math display">\[\begin{equation}
+\underset{n \rightarrow +\infty}{\lim} P\left( \left| \sum\limits_{i=1}^n X_i - \mu \right|\right) = 0
+\end{equation}\]</span></p>
+</div>
+<div class="theorem">
+<p><span id="thm:tlc" class="theorem"><strong>Teorema 3.2  (Teorema del límite central) </strong></span>Consideramos las variables aleatorias <span class="math inline">\(X_1,\ldots,X_n\)</span> i.i.d. con media común finita
 <span class="math inline">\(\mathbb{E}[X_i] = \mu &lt; +\infty\)</span> y varianza común finita
 <span class="math inline">\(\mathbb{V}[ X_i ] = \sigma^2 &lt; +\infty\)</span>, para todo <span class="math inline">\(i \in \{1, \ldots, n \}\)</span>. Si consideramos la
 variable aleatoria de la suma total <span class="math inline">\(S_n = \sum\limits_{i=1}^n X_i\)</span>, entonces
@@ -717,9 +730,9 @@ cuando <span class="math inline">\(n \rightarrow +\infty\)</span>, donde <span c
 la variable aleatoria <span class="math inline">\(\frac{S_n - \mathbb{E}[S_n]}{\mathbb{V}[ S_n ]}\)</span> tiende a tener un
 comportamiento de una variable aleatoria normal estándar conforme aumenta <span class="math inline">\(n\)</span>, pero no estamos
 seguros que tamaño debe tomar <span class="math inline">\(n\)</span> para que esto se cumpla con una alta certeza. Para ello adicional
-al <a href="probabilidad-y-estadística.html#thm:tlc">3.1</a> se debe considerar otros resultados asociados a desigualdades de concentración.</p>
+al <a href="probabilidad-y-estadística.html#thm:tlc">3.2</a> se debe considerar otros resultados asociados a desigualdades de concentración.</p>
 <p>El siguiente teorema es de gran ayuda para estimar la tasa de convergencia del resultado anterior
-<a href="probabilidad-y-estadística.html#thm:tlc">3.1</a>.</p>
+<a href="probabilidad-y-estadística.html#thm:tlc">3.2</a>.</p>
 <!------------------------------------------------------------------------------------------------->
 <div id="desigualdades-de-concentración" class="section level3 hasAnchor" number="3.1.1">
 <h3><span class="header-section-number">3.1.1</span> Desigualdades de concentración<a href="probabilidad-y-estadística.html#desigualdades-de-concentración" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -736,7 +749,7 @@ P\left( \left| X - \mathbb{E}[X] \right| &gt; \varepsilon \right) &lt; \frac{1}{
 \end{equation}\]</span></p>
 </div>
 <div class="theorem">
-<p><span id="thm:bein" class="theorem"><strong>Teorema 3.2  (Desigualdad de Berry-Esséen) </strong></span>Sean <span class="math inline">\(X_1, \ldots X_n\)</span> variables aleatorias i.i.d., con media y varianza finitas, i.e
+<p><span id="thm:bein" class="theorem"><strong>Teorema 3.3  (Desigualdad de Berry-Esséen) </strong></span>Sean <span class="math inline">\(X_1, \ldots X_n\)</span> variables aleatorias i.i.d., con media y varianza finitas, i.e
 <span class="math inline">\(\mathbb{E}[X] &lt; +\infty\)</span> y <span class="math inline">\(\mathbb{V}[X] &lt; +\infty\)</span> y además con tercer momento absoluto finito
 <span class="math inline">\(\mathbb{E}\left[\left|X - \mathbb{E}[X]\right|^3\right] &lt; +\infty\)</span>. Entonces, la distribución
 acumulada <span class="math inline">\(F_{U_n}\)</span> de la variable aleatoria
@@ -751,7 +764,7 @@ acumulada de la ley normal <span class="math inline">\(\Phi\)</span>.
 \end{equation}\]</span></p>
 </div>
 <div class="theorem">
-<p><span id="thm:ddkw" class="theorem"><strong>Teorema 3.3  (Desigualdad Dvoretzky–Kiefer–Wolfowitz) </strong></span>Dada una serie de variables aleatorias a valores reales <span class="math inline">\(X_1, \ldots, X_n\)</span>, i.i.d., con
+<p><span id="thm:ddkw" class="theorem"><strong>Teorema 3.4  (Desigualdad Dvoretzky–Kiefer–Wolfowitz) </strong></span>Dada una serie de variables aleatorias a valores reales <span class="math inline">\(X_1, \ldots, X_n\)</span>, i.i.d., con
 distribución acumulada <span class="math inline">\(F\)</span>, tenemos la siguiente desigualdad asociada a la
 <strong>distribución acumulada empírica</strong>
 <span class="math display">\[\begin{equation}
@@ -765,7 +778,7 @@ P\left( \underset{x \in \mathbb{R}}{\sup} \left| F_n( x ) - F( x ) \right| &gt; 
 </div>
 <p>Como podemos notar el orden de convergencia del teorema es <span class="math inline">\(\sqrt{n}\)</span> en el tamaño de observaciones,
 esto quiere decir que la convergencia es menos que el orden lineal.</p>
-<p>Acorde a la desigualdad <a href="probabilidad-y-estadística.html#thm:ddkw">3.3</a>, para tener un probabilidad baja de aproximación
+<p>Acorde a la desigualdad <a href="probabilidad-y-estadística.html#thm:ddkw">3.4</a>, para tener un probabilidad baja de aproximación
 <span class="math inline">\(\delta &gt; 0\)</span> en un error de discrepancia <span class="math inline">\(\varepsilon &gt;0\)</span>, necesitamos satisfacer la desigualdad.
 <span class="math display">\[\begin{eqnarray*}
 2 e^{-2n \varepsilon^2 } &amp; \leq &amp; \delta \\
@@ -1959,7 +1972,7 @@ GB
 <p></p>
 <!------------------------------------------------------------------------------------------------->
 <div class="theorem">
-<p><span id="thm:dchernoff" class="theorem"><strong>Teorema 3.4  (Desigualdad de Chernoff) </strong></span>Dada una variable aleatoria <span class="math inline">\(X\)</span> a valores reales, para la cual si existe y está bien definida
+<p><span id="thm:dchernoff" class="theorem"><strong>Teorema 3.5  (Desigualdad de Chernoff) </strong></span>Dada una variable aleatoria <span class="math inline">\(X\)</span> a valores reales, para la cual si existe y está bien definida
 su función generadora de momentos <span class="math inline">\(M\)</span>, entonces se satisface la siguientes desigualdades para
 cualquier <span class="math inline">\(\varepsilon \in \mathbb{R}\)</span>.
 <span class="math display">\[\begin{equation}
@@ -1972,7 +1985,7 @@ P( X \leq \varepsilon ) \leq \underset{t &lt; 0}{\inf} \exp( -t \varepsilon ) M(
 </div>
 <!------------------------------------------------------------------------------------------------->
 <div class="theorem">
-<p><span id="thm:dpaleyzyg" class="theorem"><strong>Teorema 3.5  (Desigualdad de Paley-Zygmund) </strong></span>Dada una variable aleatoria <span class="math inline">\(X\)</span> a valores reales, que solo toma valores no negativos <span class="math inline">\(X \geq 0\)</span> y
+<p><span id="thm:dpaleyzyg" class="theorem"><strong>Teorema 3.6  (Desigualdad de Paley-Zygmund) </strong></span>Dada una variable aleatoria <span class="math inline">\(X\)</span> a valores reales, que solo toma valores no negativos <span class="math inline">\(X \geq 0\)</span> y
 que además tiene varianza finita <span class="math inline">\(\mathbb{V}[X] &lt; +\infty\)</span>, entonces si tomamos un valor
 <span class="math inline">\(\rho \in [0,1]\)</span>, se satisface la siguiente desigualdad:
 <span class="math display">\[\begin{equation}
@@ -1982,15 +1995,195 @@ P( X \geq \rho \mathbb{E}[ X ] ) \geq ( 1 - \rho )^2 \frac{\mathbb{E}[ X ]^2}{\m
 <!------------------------------------------------------------------------------------------------->
 </div>
 </div>
-<div id="consideraciones-financieras" class="section level2 hasAnchor" number="3.2">
-<h2><span class="header-section-number">3.2</span> Consideraciones financieras<a href="probabilidad-y-estadística.html#consideraciones-financieras" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="consideraciones-de-análisis" class="section level2 hasAnchor" number="3.2">
+<h2><span class="header-section-number">3.2</span> Consideraciones de Análisis<a href="probabilidad-y-estadística.html#consideraciones-de-análisis" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<!------------------------------------------------------------------------------------------------->
+<div class="definition">
+<p><span id="def:dfouriertrans" class="definition"><strong>Definición 3.18  (Tansformada de Fourier) </strong></span>La <strong>transformada de Fourier</strong> para una función integrable <span class="math inline">\(f : \mathbb{R}^n \longrightarrow \mathbb{R}\)</span>,
+está definida como:
+<span class="math display">\[\begin{equation}
+\mathcal{F}( f )( \omega ) =
+\int\limits_{\mathbb{R}^n} f( x ) \exp( -2 \pi i \omega \cdot x )\ dx
+\end{equation}\]</span></p>
+<p>la inversa de la transformada de Fourier, para una función <span class="math inline">\(g : \mathbb{R}^n \longrightarrow \mathbb{R}\)</span>,
+está dada por:
+<span class="math display">\[\begin{equation}
+\mathcal{F}^{-1}( g ) =
+\int\limits_{\mathbb{R}^n} g( x ) \exp( 2 \pi i \omega \cdot x )\ dx
+\end{equation}\]</span></p>
+<p>se satisface la siguiente igualdad
+<span class="math display">\[\begin{equation}
+\mathcal{F}^{-1}\left( \mathcal{F}( f ) \right) = f
+\end{equation}\]</span></p>
+<p>Además, la transformada de Fourier satisface las siguientes propiedades:</p>
+<ol style="list-style-type: decimal">
+<li><p>La transformada de Fourier es lineal, si <span class="math inline">\(a,b \in \mathbb{R}\)</span> y
+<span class="math inline">\(f :\mathbb{R}^n \longrightarrow \mathbb{R}\)</span> y <span class="math inline">\(g :\mathbb{R}^n \longrightarrow \mathbb{R}\)</span>, funciones
+integrables.
+<span class="math display">\[\begin{equation}
+\mathcal{F}\left( a f + b g \right) = a \mathcal{F}( f ) + b \mathcal{F}( g )
+\end{equation}\]</span></p></li>
+<li><p>La transformada de Fourier de la convolución de funciones es el producto de las transformadas de
+Fourier.
+<span class="math display">\[\begin{equation}
+\mathcal{F}\left( f \star g \right) = \mathcal{F}( f ) \mathcal{F}( g )
+\end{equation}\]</span></p></li>
+</ol>
+</div>
+<p>Para el caso de 1-dimensional podemos tener la siguiente aproximación a la transformada de Fourier
+<span class="math display">\[\begin{eqnarray*}
+\mathcal{F}( f )( \omega )
+&amp; = &amp; \int\limits_{\mathbb{R}} f( x ) \exp( -2\pi i \omega x )\ dx \\
+&amp; \approx &amp; \int\limits_{a}^b f( x ) \exp( -2\pi i \omega x )\ dx
+\quad \text{dominio finito $[ a, b ]$ que concentra la integral} \\
+&amp; \approx &amp; \sum\limits_{k=0}^{N-1} f( x_k ) \exp( -2 \pi i \omega x_k ) h
+\quad \text{discretización de la integral} \\
+&amp; = &amp; h \sum\limits_{k=0}^{N-1} f( x_k ) \exp( -2\pi i \omega ( a + k h ) ) \\
+&amp; = &amp; h \exp( -i 2\pi \omega a ) \sum\limits_{k=0}^{N-1} f( x_k ) \exp\left( -2\pi i \omega k \frac{b - a}{N} \right)
+\end{eqnarray*}\]</span>
+donde <span class="math inline">\(\{f_k\}\)</span> es la secuencia finita de números <span class="math inline">\(f_k = f( x_k )\)</span> y <span class="math inline">\(DFT\)</span> es la transformada de
+Fourier Discreta. La anterior relación es una aproximación para todo <span class="math inline">\(\omega\)</span>. En particular se
+puede considerar <span class="math inline">\(\omega_j = \frac{j}{b-a}\)</span>
+<span class="math display">\[\begin{eqnarray*}
+\mathcal{F}( f )\left( \omega_j \right)
+&amp; = &amp; h \exp\left( -2\pi i \frac{j}{b-a} a \right)
+\sum\limits_{k=0}^{N-1} f( x_k ) \exp\left( -2\pi i \frac{jk}{N} \right) \\
+\hat{f}_j &amp; = &amp; h \exp\left( -2\pi i \frac{j}{b-a} a \right) \left( DFT\left[ \{f_k\} \right] \right)_j
+\quad \text{por definición de la $DFT$}
+\end{eqnarray*}\]</span></p>
+<p>entonces, lo anterior implica que podemos recuperar los valores aproximados a <span class="math inline">\(f(x_k)\)</span> utilizando
+la transformada de Fourier discreta y su inversión.
+<span class="math display">\[\begin{equation}
+\{f( x_k )\}
+\approx DFT^{-1}\left[ DFT\left[ \{f_k\} \right] \right]
+= DFT^{-1}\left[ \left\{ \frac{1}{h} \exp\left( 2\pi i \frac{j}{b-a} a \right) \hat{f}_j \right\} \right]
+\end{equation}\]</span></p>
+<p></p>
+<details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
+<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb12-1"><a href="probabilidad-y-estadística.html#cb12-1"></a>N <span class="ot">&lt;-</span> <span class="dv">3001</span></span>
+<span id="cb12-2"><a href="probabilidad-y-estadística.html#cb12-2"></a>alpha <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb12-3"><a href="probabilidad-y-estadística.html#cb12-3"></a>theta <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb12-4"><a href="probabilidad-y-estadística.html#cb12-4"></a>b <span class="ot">&lt;-</span> <span class="fu">qgamma</span>( <span class="fl">0.999</span>, <span class="at">shape =</span> alpha, <span class="at">scale =</span> theta )</span>
+<span id="cb12-5"><a href="probabilidad-y-estadística.html#cb12-5"></a>a <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb12-6"><a href="probabilidad-y-estadística.html#cb12-6"></a>h <span class="ot">&lt;-</span> ( b <span class="sc">-</span> a ) <span class="sc">/</span> N</span>
+<span id="cb12-7"><a href="probabilidad-y-estadística.html#cb12-7"></a>n <span class="ot">&lt;-</span> <span class="dv">0</span><span class="sc">:</span>N</span>
+<span id="cb12-8"><a href="probabilidad-y-estadística.html#cb12-8"></a>x <span class="ot">&lt;-</span> a <span class="sc">+</span> n <span class="sc">*</span> h</span>
+<span id="cb12-9"><a href="probabilidad-y-estadística.html#cb12-9"></a></span>
+<span id="cb12-10"><a href="probabilidad-y-estadística.html#cb12-10"></a>w <span class="ot">&lt;-</span> n <span class="sc">/</span> ( b <span class="sc">-</span> a )</span>
+<span id="cb12-11"><a href="probabilidad-y-estadística.html#cb12-11"></a>eta <span class="ot">&lt;-</span> h <span class="sc">*</span> <span class="fu">exp</span>( <span class="sc">-</span><span class="dv">2</span> <span class="sc">*</span> pi <span class="sc">*</span> <span class="dv">1</span><span class="dt">i</span> <span class="sc">*</span> w <span class="sc">*</span> a )</span>
+<span id="cb12-12"><a href="probabilidad-y-estadística.html#cb12-12"></a>f <span class="ot">&lt;-</span> <span class="fu">sapply</span>( x, <span class="at">FUN =</span> <span class="cf">function</span>( x ) <span class="fu">dgamma</span>( x, <span class="at">shape =</span> alpha, <span class="at">scale =</span> theta ) )</span>
+<span id="cb12-13"><a href="probabilidad-y-estadística.html#cb12-13"></a>Ff <span class="ot">&lt;-</span> eta <span class="sc">*</span> <span class="fu">fft</span>( f )</span>
+<span id="cb12-14"><a href="probabilidad-y-estadística.html#cb12-14"></a>IFf <span class="ot">&lt;-</span> <span class="fu">fft</span>( eta<span class="sc">^</span>(<span class="sc">-</span><span class="dv">1</span>) <span class="sc">*</span> Ff, <span class="at">inverse =</span> <span class="cn">TRUE</span> ) <span class="sc">/</span> ( N <span class="sc">+</span> <span class="dv">1</span> )</span>
+<span id="cb12-15"><a href="probabilidad-y-estadística.html#cb12-15"></a>IFf <span class="ot">&lt;-</span> <span class="fu">Re</span>( IFf )</span>
+<span id="cb12-16"><a href="probabilidad-y-estadística.html#cb12-16"></a>err <span class="ot">&lt;-</span> <span class="fu">norm</span>( f <span class="sc">-</span> IFf, <span class="at">type =</span> <span class="st">&#39;2&#39;</span> )</span></code></pre></div>
+</details>
+<p>
+El error cuadrático de esta aproximación para el caso de la distribución <span class="math inline">\(Gamma( \alpha, \theta )\)</span>,
+como es de esperar es bastante pequeño.
+<span class="math display">\[\begin{equation}
+\left\| \{f( x_k ) \} -
+DFT^{-1}\left[ \left\{ \frac{1}{h} \exp\left( 2\pi i \frac{j}{b-a} a \right) \hat{f}_j \right\} \right] \right\|_2
+= 0.00000000000000380764
+\end{equation}\]</span></p>
+<p>Como se puede observar se superponen cada una de las distribuciones la discretización <span class="math inline">\(f_k\)</span> y la
+calculada con inversión de la transformada de Fourier discreta.</p>
+<p></p>
+<details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
+<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb13-1"><a href="probabilidad-y-estadística.html#cb13-1"></a><span class="fu">plot</span>( x, f, <span class="at">type =</span> <span class="st">&#39;l&#39;</span> )</span>
+<span id="cb13-2"><a href="probabilidad-y-estadística.html#cb13-2"></a><span class="fu">points</span>( x, <span class="fu">Re</span>( IFf ), <span class="at">col =</span> <span class="st">&#39;green&#39;</span>, <span class="at">pch =</span> <span class="dv">16</span>, <span class="at">cex =</span> <span class="fl">0.5</span> )</span></code></pre></div>
+</details>
+<p><img src="seguros_generales_files/figure-html/l2g1-1.png" width="700" /></p>
+<details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
+<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb14-1"><a href="probabilidad-y-estadística.html#cb14-1"></a>e <span class="ot">&lt;-</span> f <span class="sc">-</span> IFf</span>
+<span id="cb14-2"><a href="probabilidad-y-estadística.html#cb14-2"></a>e <span class="ot">&lt;-</span> e <span class="sc">/</span> <span class="fu">sd</span>( e )</span>
+<span id="cb14-3"><a href="probabilidad-y-estadística.html#cb14-3"></a><span class="fu">hist</span>( e, <span class="at">breaks =</span> <span class="dv">40</span>, <span class="at">xlim =</span> <span class="fu">c</span>( <span class="sc">-</span><span class="dv">6</span>, <span class="dv">6</span> ) )</span></code></pre></div>
+</details>
+<p><img src="seguros_generales_files/figure-html/l2g1-2.png" width="700" /></p>
+<p></p>
+<p>Esta aproximación es realmente de utilidad cuando se tiene que determinar la densidad de la
+suma <span class="math inline">\(S_n = \sum\limits_{i=1}^n X_i\)</span> de varias variables aleatorias
+<span class="math inline">\(X_1 \rightsquigarrow f_{X_1}, \ldots, X_n \rightsquigarrow f_{X_n}\)</span> que son independientes, pero
+que podrían ser o no idénticamente distribuidas. Claramente la densidad de probabilidad de <span class="math inline">\(S\)</span>
+está dada por la convolución de las densidades de probabilidad de cada una de las variables
+aleatorias <span class="math inline">\(X_1, \ldots, X_n\)</span>.
+<span class="math display">\[\begin{equation}
+f_S = f_{X_1} \star \cdots \star f_{X_n}
+\end{equation}\]</span>
+sin embargo esta convolución implica el realizar un interación en <span class="math inline">\(n\)</span>-dimensiones.</p>
+<p>Con el uso de la transformada de Fourier sabemos por la independencia entre las variables <span class="math inline">\(\{X_i\}\)</span>
+que <span class="math inline">\(\mathcal{F}\left( f_S \right) = \prod\limits_{i=1}^n \mathcal{F}\left( F_{X_i} \right)\)</span>. Por otra
+parte, con lo anterior sabemos que es posible aproximar numéricamente cada <span class="math inline">\(\mathcal{F}\left( X_i \right)\)</span>
+con una serie <span class="math inline">\(\{\hat{f}_{i,j}\}\)</span> dada por la discretización de la transformada de Fourier y su aplicación
+sobre la discretización <span class="math inline">\(f_{i,k} = f_{X_i}( s_k )\)</span>. Por tanto, para cada <span class="math inline">\(i \in \{1, \ldots, n\}\)</span>,
+se puede calcular de forma separada las aproximaciones a cada una de las transformadas
+<span class="math display">\[\begin{equation}
+\mathcal{F}( f_{X_i} )\left( \omega_j \right)  
+\approx \hat{f}_{i,j}
+= h \exp\left( -2\pi i \omega_j a \right) \left( DFT\left[ \{f_{i,k}\} \right]  \right)_j
+\end{equation}\]</span></p>
+<p>con lo anterior, se puede también realizar una aproximación a la trasformada de Fourier
+<span class="math inline">\(\mathcal{F}\left( f_S \right)\)</span> de la densidad de probabilidad <span class="math inline">\(f_S\)</span>, como el producto de sus
+transformadas de Fourier.
+<span class="math display">\[\begin{equation}
+\mathcal{F}( f_{S} )\left( \omega_j \right)  
+= \prod\limits_{i=1}^n \mathcal{F}\left( F_{X_i} \right)\left( \omega_j \right)
+\approx \prod\limits_{i=1}^n \hat{f}_{i,j}
+\end{equation}\]</span></p>
+<p>finalmente utilizando la inversión de la transformada de Fourier discreta podemos calcular una
+serie que precisamente aproxima a la densidad <span class="math inline">\(f_S\)</span>
+<span class="math display">\[\begin{equation}
+\{ f_{S}( s_k ) \}
+\approx DFT^{-1}\left[ \left\{ \frac{1}{h} \exp\left( 2\pi i \omega_j a \right)
+\prod\limits_{i=1}^n \hat{f}_{i,j} \right\} \right]
+\end{equation}\]</span></p>
+<p></p>
+<details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
+<div class="sourceCode" id="cb15"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb15-1"><a href="probabilidad-y-estadística.html#cb15-1"></a>N <span class="ot">&lt;-</span> <span class="dv">7000</span></span>
+<span id="cb15-2"><a href="probabilidad-y-estadística.html#cb15-2"></a>alpha <span class="ot">&lt;-</span> <span class="fu">c</span>( <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">9</span>, <span class="dv">11</span>, <span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">9</span> )</span>
+<span id="cb15-3"><a href="probabilidad-y-estadística.html#cb15-3"></a>theta <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb15-4"><a href="probabilidad-y-estadística.html#cb15-4"></a>b <span class="ot">&lt;-</span> <span class="fu">sum</span>( <span class="fu">sapply</span>( alpha, <span class="at">FUN =</span> <span class="cf">function</span>( a ) <span class="fu">qgamma</span>( <span class="fl">0.99</span>, <span class="at">shape =</span> a, <span class="at">scale =</span> theta ) ) )</span>
+<span id="cb15-5"><a href="probabilidad-y-estadística.html#cb15-5"></a>a <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb15-6"><a href="probabilidad-y-estadística.html#cb15-6"></a>h <span class="ot">&lt;-</span> ( b <span class="sc">-</span> a ) <span class="sc">/</span> N</span>
+<span id="cb15-7"><a href="probabilidad-y-estadística.html#cb15-7"></a>n <span class="ot">&lt;-</span> <span class="dv">0</span><span class="sc">:</span>N</span>
+<span id="cb15-8"><a href="probabilidad-y-estadística.html#cb15-8"></a>s <span class="ot">&lt;-</span> a <span class="sc">+</span> n <span class="sc">*</span> h</span>
+<span id="cb15-9"><a href="probabilidad-y-estadística.html#cb15-9"></a></span>
+<span id="cb15-10"><a href="probabilidad-y-estadística.html#cb15-10"></a>w <span class="ot">&lt;-</span> n <span class="sc">/</span> ( b <span class="sc">-</span> a )</span>
+<span id="cb15-11"><a href="probabilidad-y-estadística.html#cb15-11"></a>eta <span class="ot">&lt;-</span> h <span class="sc">*</span> <span class="fu">exp</span>( <span class="sc">-</span><span class="dv">2</span> <span class="sc">*</span> pi <span class="sc">*</span> <span class="dv">1</span><span class="dt">i</span> <span class="sc">*</span> w <span class="sc">*</span> a )</span>
+<span id="cb15-12"><a href="probabilidad-y-estadística.html#cb15-12"></a>f <span class="ot">&lt;-</span> <span class="fu">lapply</span>( alpha, <span class="cf">function</span>( a ) <span class="fu">sapply</span>( s, <span class="at">FUN =</span> <span class="cf">function</span>( sk ) <span class="fu">dgamma</span>( sk, <span class="at">shape =</span> a, <span class="at">scale =</span> theta ) ) )</span>
+<span id="cb15-13"><a href="probabilidad-y-estadística.html#cb15-13"></a>Ff <span class="ot">&lt;-</span> <span class="fu">lapply</span>( f, <span class="at">FUN =</span> <span class="cf">function</span>( fi ) eta <span class="sc">*</span> <span class="fu">fft</span>( fi ) )</span>
+<span id="cb15-14"><a href="probabilidad-y-estadística.html#cb15-14"></a>FS <span class="ot">&lt;-</span> <span class="fu">rep</span>( <span class="dv">1</span>, N <span class="sc">+</span> <span class="dv">1</span> )</span>
+<span id="cb15-15"><a href="probabilidad-y-estadística.html#cb15-15"></a><span class="cf">for</span> ( i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>( f ) ) {</span>
+<span id="cb15-16"><a href="probabilidad-y-estadística.html#cb15-16"></a>  FS <span class="ot">&lt;-</span> FS <span class="sc">*</span> Ff[[ i ]]</span>
+<span id="cb15-17"><a href="probabilidad-y-estadística.html#cb15-17"></a>}</span>
+<span id="cb15-18"><a href="probabilidad-y-estadística.html#cb15-18"></a>IFfS <span class="ot">&lt;-</span> <span class="fu">fft</span>( eta<span class="sc">^</span>(<span class="sc">-</span><span class="dv">1</span>) <span class="sc">*</span> FS, <span class="at">inverse =</span> <span class="cn">TRUE</span> ) <span class="sc">/</span> ( N <span class="sc">+</span> <span class="dv">1</span> )</span>
+<span id="cb15-19"><a href="probabilidad-y-estadística.html#cb15-19"></a>fS <span class="ot">&lt;-</span> <span class="fu">Re</span>( IFfS )</span>
+<span id="cb15-20"><a href="probabilidad-y-estadística.html#cb15-20"></a>fSx <span class="ot">&lt;-</span> <span class="fu">sapply</span>( s, <span class="at">FUN =</span> <span class="cf">function</span>( sk ) <span class="fu">dgamma</span>( sk, <span class="at">shape =</span> <span class="fu">sum</span>( alpha ), <span class="at">scale =</span> theta ) )</span></code></pre></div>
+</details>
+<p></p>
+<p></p>
+<details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
+<div class="sourceCode" id="cb16"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb16-1"><a href="probabilidad-y-estadística.html#cb16-1"></a><span class="fu">plot</span>( s, fSx, <span class="at">type =</span> <span class="st">&#39;l&#39;</span> )</span>
+<span id="cb16-2"><a href="probabilidad-y-estadística.html#cb16-2"></a><span class="fu">points</span>( s, fS, <span class="at">col =</span> <span class="st">&#39;green&#39;</span>, <span class="at">pch =</span> <span class="dv">16</span>, <span class="at">cex =</span> <span class="fl">0.5</span> )</span></code></pre></div>
+</details>
+<p><img src="seguros_generales_files/figure-html/l2g2-1.png" width="700" /></p>
+<details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
+<div class="sourceCode" id="cb17"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb17-1"><a href="probabilidad-y-estadística.html#cb17-1"></a>e <span class="ot">&lt;-</span> fS <span class="sc">-</span> fSx</span>
+<span id="cb17-2"><a href="probabilidad-y-estadística.html#cb17-2"></a>e <span class="ot">&lt;-</span> e <span class="sc">/</span> <span class="fu">sd</span>( e )</span>
+<span id="cb17-3"><a href="probabilidad-y-estadística.html#cb17-3"></a><span class="fu">hist</span>( e, <span class="at">breaks =</span> <span class="dv">40</span>, <span class="at">xlim =</span> <span class="fu">c</span>( <span class="sc">-</span><span class="dv">6</span>, <span class="dv">6</span> ) )</span></code></pre></div>
+</details>
+<p><img src="seguros_generales_files/figure-html/l2g2-2.png" width="700" /></p>
+<p></p>
+<!------------------------------------------------------------------------------------------------->
+</div>
+<div id="consideraciones-financieras" class="section level2 hasAnchor" number="3.3">
+<h2><span class="header-section-number">3.3</span> Consideraciones financieras<a href="probabilidad-y-estadística.html#consideraciones-financieras" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Antes de desarrollar el contenido propio del curso, debemos tener en cuenta algunas consideraciones
 financieras como las siguientes:</p>
 <!------------------------------------------------------------------------------------------------->
-<div id="función-de-actualización-o-descuento" class="section level3 hasAnchor" number="3.2.1">
-<h3><span class="header-section-number">3.2.1</span> Función de actualización o descuento<a href="probabilidad-y-estadística.html#función-de-actualización-o-descuento" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="función-de-actualización-o-descuento" class="section level3 hasAnchor" number="3.3.1">
+<h3><span class="header-section-number">3.3.1</span> Función de actualización o descuento<a href="probabilidad-y-estadística.html#función-de-actualización-o-descuento" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="definition">
-<p><span id="def:deffact" class="definition"><strong>Definición 3.18  (Funciones de atualización y capitalización) </strong></span>La <strong>función de actualización</strong> de flujos <span class="math inline">\(v: \mathbb{R} \times \mathbb{R} \longrightarrow [0,1]\)</span>, al
+<p><span id="def:deffact" class="definition"><strong>Definición 3.19  (Funciones de atualización y capitalización) </strong></span>La <strong>función de actualización</strong> de flujos <span class="math inline">\(v: \mathbb{R} \times \mathbb{R} \longrightarrow [0,1]\)</span>, al
 evaluar en <span class="math inline">\(s, t \in \mathbb{R}, s\leq t, v(s,t)\)</span>, diremos que actualizamos los flujos que se
 producen en el tiempo <span class="math inline">\(t\)</span>, valorados desde el tiempo <span class="math inline">\(s\)</span>. Además la función de actualización tiene
 las siguientes propiedades:</p>
@@ -2010,8 +2203,8 @@ v(s,t) = ( 1 + i )^{-(t-s)}
 \end{equation}\]</span></p>
 <!------------------------------------------------------------------------------------------------->
 </div>
-<div id="flujos-financieros" class="section level3 hasAnchor" number="3.2.2">
-<h3><span class="header-section-number">3.2.2</span> Flujos financieros<a href="probabilidad-y-estadística.html#flujos-financieros" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="flujos-financieros" class="section level3 hasAnchor" number="3.3.2">
+<h3><span class="header-section-number">3.3.2</span> Flujos financieros<a href="probabilidad-y-estadística.html#flujos-financieros" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Un flujo financiero discreto <span class="math inline">\(c\)</span> es una serie de valores reales <span class="math inline">\(c(t_1), c(t_2), \cdots, c(t_n)\)</span>
 que se producen en un número discreto de tiempos <span class="math inline">\(t_0 &lt; t_1 &lt; \cdots &lt; t_n\)</span>.</p>
 <p>El <strong>valor presente</strong> de estos flujos, en un tiempo <span class="math inline">\(t \leq t_0\)</span>, se lo puede calcular utilizando
@@ -2022,8 +2215,8 @@ VP_t( c ) = \sum\limits_{k = 1}^n v( t, t_k )  c( t_k )
 cuando <span class="math inline">\(t=0\)</span>, se suele solo expresar <span class="math inline">\(VP( c ) = VP_0( c )\)</span>.</p>
 <!------------------------------------------------------------------------------------------------->
 </div>
-<div id="flujos-financieros-probables" class="section level3 hasAnchor" number="3.2.3">
-<h3><span class="header-section-number">3.2.3</span> Flujos financieros probables<a href="probabilidad-y-estadística.html#flujos-financieros-probables" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="flujos-financieros-probables" class="section level3 hasAnchor" number="3.3.3">
+<h3><span class="header-section-number">3.3.3</span> Flujos financieros probables<a href="probabilidad-y-estadística.html#flujos-financieros-probables" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Un flujo financiero discreto <span class="math inline">\(c\)</span> es una serie de valores reales <span class="math inline">\(c(t_1), c(t_2), \cdots, c(t_n)\)</span>
 que se producen en un número discreto de tiempos <span class="math inline">\(t_0 &lt; t_1 &lt; \cdots &lt; t_n\)</span>.</p>
 <p>El <strong>valor actuarial presente</strong> de estos flujos, en un tiempo <span class="math inline">\(t \leq t_0\)</span>, se lo puede calcular
@@ -2040,8 +2233,8 @@ VAP_t( c ) = \sum\limits_{k = 1}^n v( t, t_k ) \mathbb{E}\left[ c( t_k ) \right]
 \end{equation}\]</span></p>
 <!------------------------------------------------------------------------------------------------->
 </div>
-<div id="sec:equifin" class="section level3 hasAnchor" number="3.2.4">
-<h3><span class="header-section-number">3.2.4</span> Equilibrio financiero<a href="probabilidad-y-estadística.html#sec:equifin" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="sec:equifin" class="section level3 hasAnchor" number="3.3.4">
+<h3><span class="header-section-number">3.3.4</span> Equilibrio financiero<a href="probabilidad-y-estadística.html#sec:equifin" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Se dice que un flujo financiero <span class="math inline">\(c(t_1), c(t_2), \cdots, c(t_n)\)</span> como el anterior, está en
 <strong>equilibrio financiero</strong> si:
 <span class="math display">\[\begin{equation}

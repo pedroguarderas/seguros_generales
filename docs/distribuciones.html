@@ -23,7 +23,7 @@
 <meta name="author" content="" />
 
 
-<meta name="date" content="2025-04-13" />
+<meta name="date" content="2025-04-14" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -193,12 +193,13 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="3.1.1" data-path="probabilidad-y-estadística.html"><a href="probabilidad-y-estadística.html#desigualdades-de-concentración"><i class="fa fa-check"></i><b>3.1.1</b> Desigualdades de concentración</a></li>
 </ul></li>
-<li class="chapter" data-level="3.2" data-path="probabilidad-y-estadística.html"><a href="probabilidad-y-estadística.html#consideraciones-financieras"><i class="fa fa-check"></i><b>3.2</b> Consideraciones financieras</a>
+<li class="chapter" data-level="3.2" data-path="probabilidad-y-estadística.html"><a href="probabilidad-y-estadística.html#consideraciones-de-análisis"><i class="fa fa-check"></i><b>3.2</b> Consideraciones de Análisis</a></li>
+<li class="chapter" data-level="3.3" data-path="probabilidad-y-estadística.html"><a href="probabilidad-y-estadística.html#consideraciones-financieras"><i class="fa fa-check"></i><b>3.3</b> Consideraciones financieras</a>
 <ul>
-<li class="chapter" data-level="3.2.1" data-path="probabilidad-y-estadística.html"><a href="probabilidad-y-estadística.html#función-de-actualización-o-descuento"><i class="fa fa-check"></i><b>3.2.1</b> Función de actualización o descuento</a></li>
-<li class="chapter" data-level="3.2.2" data-path="probabilidad-y-estadística.html"><a href="probabilidad-y-estadística.html#flujos-financieros"><i class="fa fa-check"></i><b>3.2.2</b> Flujos financieros</a></li>
-<li class="chapter" data-level="3.2.3" data-path="probabilidad-y-estadística.html"><a href="probabilidad-y-estadística.html#flujos-financieros-probables"><i class="fa fa-check"></i><b>3.2.3</b> Flujos financieros probables</a></li>
-<li class="chapter" data-level="3.2.4" data-path="probabilidad-y-estadística.html"><a href="probabilidad-y-estadística.html#sec:equifin"><i class="fa fa-check"></i><b>3.2.4</b> Equilibrio financiero</a></li>
+<li class="chapter" data-level="3.3.1" data-path="probabilidad-y-estadística.html"><a href="probabilidad-y-estadística.html#función-de-actualización-o-descuento"><i class="fa fa-check"></i><b>3.3.1</b> Función de actualización o descuento</a></li>
+<li class="chapter" data-level="3.3.2" data-path="probabilidad-y-estadística.html"><a href="probabilidad-y-estadística.html#flujos-financieros"><i class="fa fa-check"></i><b>3.3.2</b> Flujos financieros</a></li>
+<li class="chapter" data-level="3.3.3" data-path="probabilidad-y-estadística.html"><a href="probabilidad-y-estadística.html#flujos-financieros-probables"><i class="fa fa-check"></i><b>3.3.3</b> Flujos financieros probables</a></li>
+<li class="chapter" data-level="3.3.4" data-path="probabilidad-y-estadística.html"><a href="probabilidad-y-estadística.html#sec:equifin"><i class="fa fa-check"></i><b>3.3.4</b> Equilibrio financiero</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="distribuciones.html"><a href="distribuciones.html"><i class="fa fa-check"></i><b>4</b> Distribuciones</a>
@@ -297,23 +298,23 @@ conforme cambia <span class="math inline">\(k \in \mathbb{N}\)</span></p>
 </div>
 <p></p>
 <details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb12-1"><a href="distribuciones.html#cb12-1"></a>n <span class="ot">&lt;-</span> <span class="dv">50</span></span>
-<span id="cb12-2"><a href="distribuciones.html#cb12-2"></a>p <span class="ot">&lt;-</span> <span class="fl">0.3</span></span>
-<span id="cb12-3"><a href="distribuciones.html#cb12-3"></a>k <span class="ot">&lt;-</span> <span class="dv">2</span></span>
-<span id="cb12-4"><a href="distribuciones.html#cb12-4"></a>m <span class="ot">&lt;-</span> <span class="dv">100</span></span>
-<span id="cb12-5"><a href="distribuciones.html#cb12-5"></a>N <span class="ot">&lt;-</span> <span class="fu">rbinom</span>( <span class="at">n =</span> m, <span class="at">size =</span> n, <span class="at">prob =</span> p ) <span class="co"># simular una muestra de tamaño m</span></span>
-<span id="cb12-6"><a href="distribuciones.html#cb12-6"></a>pk <span class="ot">&lt;-</span> <span class="fu">dbinom</span>( <span class="at">x =</span> k, <span class="at">size =</span> n, <span class="at">prob =</span> p ) <span class="co"># cálculo de probabilidad P( N = k )</span></span>
-<span id="cb12-7"><a href="distribuciones.html#cb12-7"></a>Pk <span class="ot">&lt;-</span> <span class="fu">pbinom</span>( <span class="at">q =</span> k, <span class="at">size =</span> n, <span class="at">prob =</span> p ) <span class="co"># cálculo de probabilidad P( N &lt;= k )</span></span>
-<span id="cb12-8"><a href="distribuciones.html#cb12-8"></a></span>
-<span id="cb12-9"><a href="distribuciones.html#cb12-9"></a>p <span class="ot">&lt;-</span> <span class="fu">dbinom</span>( <span class="at">x =</span> <span class="dv">0</span><span class="sc">:</span>n, <span class="at">size =</span> n, <span class="at">prob =</span> p )</span>
-<span id="cb12-10"><a href="distribuciones.html#cb12-10"></a>v <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span>n <span class="sc">*</span> p[ <span class="dv">2</span><span class="sc">:</span>(n <span class="sc">+</span> <span class="dv">1</span>) ] <span class="sc">/</span> p[ <span class="dv">1</span><span class="sc">:</span>n ]</span>
-<span id="cb12-11"><a href="distribuciones.html#cb12-11"></a></span>
-<span id="cb12-12"><a href="distribuciones.html#cb12-12"></a>plt <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb12-13"><a href="distribuciones.html#cb12-13"></a>  <span class="fu">geom_point</span>( <span class="fu">aes</span>( <span class="at">x =</span> <span class="dv">1</span><span class="sc">:</span>n, <span class="at">y =</span> v ), <span class="at">colour =</span> <span class="st">&#39;darkred&#39;</span> ) <span class="sc">+</span> </span>
-<span id="cb12-14"><a href="distribuciones.html#cb12-14"></a>  <span class="fu">xlab</span>( <span class="fu">TeX</span>( <span class="st">&quot;$k$&quot;</span> ) ) <span class="sc">+</span> </span>
-<span id="cb12-15"><a href="distribuciones.html#cb12-15"></a>  <span class="fu">ylab</span>( <span class="fu">TeX</span>( <span class="st">&quot;$k </span><span class="sc">\\</span><span class="st">frac{p_k}{p_{k-1}}$&quot;</span> ) ) <span class="sc">+</span> </span>
-<span id="cb12-16"><a href="distribuciones.html#cb12-16"></a>  <span class="fu">theme_bw</span>()</span>
-<span id="cb12-17"><a href="distribuciones.html#cb12-17"></a><span class="fu">plot</span>( plt )</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb18-1"><a href="distribuciones.html#cb18-1"></a>n <span class="ot">&lt;-</span> <span class="dv">50</span></span>
+<span id="cb18-2"><a href="distribuciones.html#cb18-2"></a>p <span class="ot">&lt;-</span> <span class="fl">0.3</span></span>
+<span id="cb18-3"><a href="distribuciones.html#cb18-3"></a>k <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb18-4"><a href="distribuciones.html#cb18-4"></a>m <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb18-5"><a href="distribuciones.html#cb18-5"></a>N <span class="ot">&lt;-</span> <span class="fu">rbinom</span>( <span class="at">n =</span> m, <span class="at">size =</span> n, <span class="at">prob =</span> p ) <span class="co"># simular una muestra de tamaño m</span></span>
+<span id="cb18-6"><a href="distribuciones.html#cb18-6"></a>pk <span class="ot">&lt;-</span> <span class="fu">dbinom</span>( <span class="at">x =</span> k, <span class="at">size =</span> n, <span class="at">prob =</span> p ) <span class="co"># cálculo de probabilidad P( N = k )</span></span>
+<span id="cb18-7"><a href="distribuciones.html#cb18-7"></a>Pk <span class="ot">&lt;-</span> <span class="fu">pbinom</span>( <span class="at">q =</span> k, <span class="at">size =</span> n, <span class="at">prob =</span> p ) <span class="co"># cálculo de probabilidad P( N &lt;= k )</span></span>
+<span id="cb18-8"><a href="distribuciones.html#cb18-8"></a></span>
+<span id="cb18-9"><a href="distribuciones.html#cb18-9"></a>p <span class="ot">&lt;-</span> <span class="fu">dbinom</span>( <span class="at">x =</span> <span class="dv">0</span><span class="sc">:</span>n, <span class="at">size =</span> n, <span class="at">prob =</span> p )</span>
+<span id="cb18-10"><a href="distribuciones.html#cb18-10"></a>v <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span>n <span class="sc">*</span> p[ <span class="dv">2</span><span class="sc">:</span>(n <span class="sc">+</span> <span class="dv">1</span>) ] <span class="sc">/</span> p[ <span class="dv">1</span><span class="sc">:</span>n ]</span>
+<span id="cb18-11"><a href="distribuciones.html#cb18-11"></a></span>
+<span id="cb18-12"><a href="distribuciones.html#cb18-12"></a>plt <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb18-13"><a href="distribuciones.html#cb18-13"></a>  <span class="fu">geom_point</span>( <span class="fu">aes</span>( <span class="at">x =</span> <span class="dv">1</span><span class="sc">:</span>n, <span class="at">y =</span> v ), <span class="at">colour =</span> <span class="st">&#39;darkred&#39;</span> ) <span class="sc">+</span> </span>
+<span id="cb18-14"><a href="distribuciones.html#cb18-14"></a>  <span class="fu">xlab</span>( <span class="fu">TeX</span>( <span class="st">&quot;$k$&quot;</span> ) ) <span class="sc">+</span> </span>
+<span id="cb18-15"><a href="distribuciones.html#cb18-15"></a>  <span class="fu">ylab</span>( <span class="fu">TeX</span>( <span class="st">&quot;$k </span><span class="sc">\\</span><span class="st">frac{p_k}{p_{k-1}}$&quot;</span> ) ) <span class="sc">+</span> </span>
+<span id="cb18-16"><a href="distribuciones.html#cb18-16"></a>  <span class="fu">theme_bw</span>()</span>
+<span id="cb18-17"><a href="distribuciones.html#cb18-17"></a><span class="fu">plot</span>( plt )</span></code></pre></div>
 </details>
 <p><img src="seguros_generales_files/figure-html/l3c1-1.png" width="700" /></p>
 <p></p>
@@ -329,23 +330,23 @@ conforme cambia <span class="math inline">\(k \in \mathbb{N}\)</span></p>
 </div>
 <p></p>
 <details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb13-1"><a href="distribuciones.html#cb13-1"></a>lambda <span class="ot">&lt;-</span> <span class="dv">2</span></span>
-<span id="cb13-2"><a href="distribuciones.html#cb13-2"></a>k <span class="ot">&lt;-</span> <span class="dv">2</span></span>
-<span id="cb13-3"><a href="distribuciones.html#cb13-3"></a>m <span class="ot">&lt;-</span> <span class="dv">100</span></span>
-<span id="cb13-4"><a href="distribuciones.html#cb13-4"></a>N <span class="ot">&lt;-</span> <span class="fu">rpois</span>( <span class="at">n =</span> m, <span class="at">lambda =</span> lambda ) <span class="co"># simular una muestra de tamaño m</span></span>
-<span id="cb13-5"><a href="distribuciones.html#cb13-5"></a>pk <span class="ot">&lt;-</span> <span class="fu">dpois</span>( <span class="at">x =</span> k, <span class="at">lambda =</span> lambda ) <span class="co"># cálculo de probabilidad P( N = k )</span></span>
-<span id="cb13-6"><a href="distribuciones.html#cb13-6"></a>Pk <span class="ot">&lt;-</span> <span class="fu">ppois</span>( <span class="at">q =</span> k, <span class="at">lambda =</span> lambda ) <span class="co"># cálculo de probabilidad P( N &lt;= k )</span></span>
-<span id="cb13-7"><a href="distribuciones.html#cb13-7"></a></span>
-<span id="cb13-8"><a href="distribuciones.html#cb13-8"></a>n <span class="ot">&lt;-</span> <span class="dv">50</span></span>
-<span id="cb13-9"><a href="distribuciones.html#cb13-9"></a>p <span class="ot">&lt;-</span> <span class="fu">dpois</span>( <span class="at">x =</span> <span class="dv">0</span><span class="sc">:</span>n, <span class="at">lambda =</span> lambda )</span>
-<span id="cb13-10"><a href="distribuciones.html#cb13-10"></a>v <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span>n <span class="sc">*</span> p[ <span class="dv">2</span><span class="sc">:</span>(n <span class="sc">+</span> <span class="dv">1</span>) ] <span class="sc">/</span> p[ <span class="dv">1</span><span class="sc">:</span>n ]</span>
-<span id="cb13-11"><a href="distribuciones.html#cb13-11"></a></span>
-<span id="cb13-12"><a href="distribuciones.html#cb13-12"></a>plt <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb13-13"><a href="distribuciones.html#cb13-13"></a>  <span class="fu">geom_point</span>( <span class="fu">aes</span>( <span class="at">x =</span> <span class="dv">1</span><span class="sc">:</span>n, <span class="at">y =</span> v ), <span class="at">colour =</span> <span class="st">&#39;darkred&#39;</span> ) <span class="sc">+</span> </span>
-<span id="cb13-14"><a href="distribuciones.html#cb13-14"></a>  <span class="fu">xlab</span>( <span class="fu">TeX</span>( <span class="st">&quot;$k$&quot;</span> ) ) <span class="sc">+</span> </span>
-<span id="cb13-15"><a href="distribuciones.html#cb13-15"></a>  <span class="fu">ylab</span>( <span class="fu">TeX</span>( <span class="st">&quot;$k </span><span class="sc">\\</span><span class="st">frac{p_k}{p_{k-1}}$&quot;</span> ) ) <span class="sc">+</span> </span>
-<span id="cb13-16"><a href="distribuciones.html#cb13-16"></a>  <span class="fu">theme_bw</span>()</span>
-<span id="cb13-17"><a href="distribuciones.html#cb13-17"></a><span class="fu">plot</span>( plt )</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb19-1"><a href="distribuciones.html#cb19-1"></a>lambda <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb19-2"><a href="distribuciones.html#cb19-2"></a>k <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb19-3"><a href="distribuciones.html#cb19-3"></a>m <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb19-4"><a href="distribuciones.html#cb19-4"></a>N <span class="ot">&lt;-</span> <span class="fu">rpois</span>( <span class="at">n =</span> m, <span class="at">lambda =</span> lambda ) <span class="co"># simular una muestra de tamaño m</span></span>
+<span id="cb19-5"><a href="distribuciones.html#cb19-5"></a>pk <span class="ot">&lt;-</span> <span class="fu">dpois</span>( <span class="at">x =</span> k, <span class="at">lambda =</span> lambda ) <span class="co"># cálculo de probabilidad P( N = k )</span></span>
+<span id="cb19-6"><a href="distribuciones.html#cb19-6"></a>Pk <span class="ot">&lt;-</span> <span class="fu">ppois</span>( <span class="at">q =</span> k, <span class="at">lambda =</span> lambda ) <span class="co"># cálculo de probabilidad P( N &lt;= k )</span></span>
+<span id="cb19-7"><a href="distribuciones.html#cb19-7"></a></span>
+<span id="cb19-8"><a href="distribuciones.html#cb19-8"></a>n <span class="ot">&lt;-</span> <span class="dv">50</span></span>
+<span id="cb19-9"><a href="distribuciones.html#cb19-9"></a>p <span class="ot">&lt;-</span> <span class="fu">dpois</span>( <span class="at">x =</span> <span class="dv">0</span><span class="sc">:</span>n, <span class="at">lambda =</span> lambda )</span>
+<span id="cb19-10"><a href="distribuciones.html#cb19-10"></a>v <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span>n <span class="sc">*</span> p[ <span class="dv">2</span><span class="sc">:</span>(n <span class="sc">+</span> <span class="dv">1</span>) ] <span class="sc">/</span> p[ <span class="dv">1</span><span class="sc">:</span>n ]</span>
+<span id="cb19-11"><a href="distribuciones.html#cb19-11"></a></span>
+<span id="cb19-12"><a href="distribuciones.html#cb19-12"></a>plt <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb19-13"><a href="distribuciones.html#cb19-13"></a>  <span class="fu">geom_point</span>( <span class="fu">aes</span>( <span class="at">x =</span> <span class="dv">1</span><span class="sc">:</span>n, <span class="at">y =</span> v ), <span class="at">colour =</span> <span class="st">&#39;darkred&#39;</span> ) <span class="sc">+</span> </span>
+<span id="cb19-14"><a href="distribuciones.html#cb19-14"></a>  <span class="fu">xlab</span>( <span class="fu">TeX</span>( <span class="st">&quot;$k$&quot;</span> ) ) <span class="sc">+</span> </span>
+<span id="cb19-15"><a href="distribuciones.html#cb19-15"></a>  <span class="fu">ylab</span>( <span class="fu">TeX</span>( <span class="st">&quot;$k </span><span class="sc">\\</span><span class="st">frac{p_k}{p_{k-1}}$&quot;</span> ) ) <span class="sc">+</span> </span>
+<span id="cb19-16"><a href="distribuciones.html#cb19-16"></a>  <span class="fu">theme_bw</span>()</span>
+<span id="cb19-17"><a href="distribuciones.html#cb19-17"></a><span class="fu">plot</span>( plt )</span></code></pre></div>
 </details>
 <p><img src="seguros_generales_files/figure-html/l3c2-1.png" width="700" /></p>
 <p></p>
@@ -364,24 +365,24 @@ conforme cambia <span class="math inline">\(k \in \mathbb{N}\)</span></p>
 </div>
 <p></p>
 <details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb14-1"><a href="distribuciones.html#cb14-1"></a>alpha <span class="ot">&lt;-</span> <span class="fl">2.5</span></span>
-<span id="cb14-2"><a href="distribuciones.html#cb14-2"></a>p <span class="ot">&lt;-</span> <span class="fl">0.3</span></span>
-<span id="cb14-3"><a href="distribuciones.html#cb14-3"></a>k <span class="ot">&lt;-</span> <span class="dv">2</span></span>
-<span id="cb14-4"><a href="distribuciones.html#cb14-4"></a>m <span class="ot">&lt;-</span> <span class="dv">100</span></span>
-<span id="cb14-5"><a href="distribuciones.html#cb14-5"></a>N <span class="ot">&lt;-</span> <span class="fu">rnbinom</span>( <span class="at">n =</span> m, <span class="at">size =</span> alpha, <span class="at">prob =</span> p  ) <span class="co"># simular una muestra de tamaño m</span></span>
-<span id="cb14-6"><a href="distribuciones.html#cb14-6"></a>pk <span class="ot">&lt;-</span> <span class="fu">dnbinom</span>( <span class="at">x =</span> k, <span class="at">size =</span> alpha, <span class="at">prob =</span> p ) <span class="co"># cálculo de probabilidad P( N = k )</span></span>
-<span id="cb14-7"><a href="distribuciones.html#cb14-7"></a>Pk <span class="ot">&lt;-</span> <span class="fu">pnbinom</span>( <span class="at">q =</span> k, <span class="at">size =</span> alpha, <span class="at">prob =</span> p ) <span class="co"># cálculo de probabilidad P( N &lt;= k )</span></span>
-<span id="cb14-8"><a href="distribuciones.html#cb14-8"></a></span>
-<span id="cb14-9"><a href="distribuciones.html#cb14-9"></a>n <span class="ot">&lt;-</span> <span class="dv">50</span></span>
-<span id="cb14-10"><a href="distribuciones.html#cb14-10"></a>p <span class="ot">&lt;-</span> <span class="fu">dnbinom</span>( <span class="at">x =</span> <span class="dv">0</span><span class="sc">:</span>n, <span class="at">size =</span> alpha, <span class="at">prob =</span> p )</span>
-<span id="cb14-11"><a href="distribuciones.html#cb14-11"></a>v <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span>n <span class="sc">*</span> p[ <span class="dv">2</span><span class="sc">:</span>(n <span class="sc">+</span> <span class="dv">1</span>) ] <span class="sc">/</span> p[ <span class="dv">1</span><span class="sc">:</span>n ]</span>
-<span id="cb14-12"><a href="distribuciones.html#cb14-12"></a></span>
-<span id="cb14-13"><a href="distribuciones.html#cb14-13"></a>plt <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb14-14"><a href="distribuciones.html#cb14-14"></a>  <span class="fu">geom_point</span>( <span class="fu">aes</span>( <span class="at">x =</span> <span class="dv">1</span><span class="sc">:</span>n, <span class="at">y =</span> v ), <span class="at">colour =</span> <span class="st">&#39;darkred&#39;</span> ) <span class="sc">+</span> </span>
-<span id="cb14-15"><a href="distribuciones.html#cb14-15"></a>  <span class="fu">xlab</span>( <span class="fu">TeX</span>( <span class="st">&quot;$k$&quot;</span> ) ) <span class="sc">+</span> </span>
-<span id="cb14-16"><a href="distribuciones.html#cb14-16"></a>  <span class="fu">ylab</span>( <span class="fu">TeX</span>( <span class="st">&quot;$k </span><span class="sc">\\</span><span class="st">frac{p_k}{p_{k-1}}$&quot;</span> ) ) <span class="sc">+</span> </span>
-<span id="cb14-17"><a href="distribuciones.html#cb14-17"></a>  <span class="fu">theme_bw</span>()</span>
-<span id="cb14-18"><a href="distribuciones.html#cb14-18"></a><span class="fu">plot</span>( plt )</span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb20-1"><a href="distribuciones.html#cb20-1"></a>alpha <span class="ot">&lt;-</span> <span class="fl">2.5</span></span>
+<span id="cb20-2"><a href="distribuciones.html#cb20-2"></a>p <span class="ot">&lt;-</span> <span class="fl">0.3</span></span>
+<span id="cb20-3"><a href="distribuciones.html#cb20-3"></a>k <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb20-4"><a href="distribuciones.html#cb20-4"></a>m <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb20-5"><a href="distribuciones.html#cb20-5"></a>N <span class="ot">&lt;-</span> <span class="fu">rnbinom</span>( <span class="at">n =</span> m, <span class="at">size =</span> alpha, <span class="at">prob =</span> p  ) <span class="co"># simular una muestra de tamaño m</span></span>
+<span id="cb20-6"><a href="distribuciones.html#cb20-6"></a>pk <span class="ot">&lt;-</span> <span class="fu">dnbinom</span>( <span class="at">x =</span> k, <span class="at">size =</span> alpha, <span class="at">prob =</span> p ) <span class="co"># cálculo de probabilidad P( N = k )</span></span>
+<span id="cb20-7"><a href="distribuciones.html#cb20-7"></a>Pk <span class="ot">&lt;-</span> <span class="fu">pnbinom</span>( <span class="at">q =</span> k, <span class="at">size =</span> alpha, <span class="at">prob =</span> p ) <span class="co"># cálculo de probabilidad P( N &lt;= k )</span></span>
+<span id="cb20-8"><a href="distribuciones.html#cb20-8"></a></span>
+<span id="cb20-9"><a href="distribuciones.html#cb20-9"></a>n <span class="ot">&lt;-</span> <span class="dv">50</span></span>
+<span id="cb20-10"><a href="distribuciones.html#cb20-10"></a>p <span class="ot">&lt;-</span> <span class="fu">dnbinom</span>( <span class="at">x =</span> <span class="dv">0</span><span class="sc">:</span>n, <span class="at">size =</span> alpha, <span class="at">prob =</span> p )</span>
+<span id="cb20-11"><a href="distribuciones.html#cb20-11"></a>v <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span>n <span class="sc">*</span> p[ <span class="dv">2</span><span class="sc">:</span>(n <span class="sc">+</span> <span class="dv">1</span>) ] <span class="sc">/</span> p[ <span class="dv">1</span><span class="sc">:</span>n ]</span>
+<span id="cb20-12"><a href="distribuciones.html#cb20-12"></a></span>
+<span id="cb20-13"><a href="distribuciones.html#cb20-13"></a>plt <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb20-14"><a href="distribuciones.html#cb20-14"></a>  <span class="fu">geom_point</span>( <span class="fu">aes</span>( <span class="at">x =</span> <span class="dv">1</span><span class="sc">:</span>n, <span class="at">y =</span> v ), <span class="at">colour =</span> <span class="st">&#39;darkred&#39;</span> ) <span class="sc">+</span> </span>
+<span id="cb20-15"><a href="distribuciones.html#cb20-15"></a>  <span class="fu">xlab</span>( <span class="fu">TeX</span>( <span class="st">&quot;$k$&quot;</span> ) ) <span class="sc">+</span> </span>
+<span id="cb20-16"><a href="distribuciones.html#cb20-16"></a>  <span class="fu">ylab</span>( <span class="fu">TeX</span>( <span class="st">&quot;$k </span><span class="sc">\\</span><span class="st">frac{p_k}{p_{k-1}}$&quot;</span> ) ) <span class="sc">+</span> </span>
+<span id="cb20-17"><a href="distribuciones.html#cb20-17"></a>  <span class="fu">theme_bw</span>()</span>
+<span id="cb20-18"><a href="distribuciones.html#cb20-18"></a><span class="fu">plot</span>( plt )</span></code></pre></div>
 </details>
 <p><img src="seguros_generales_files/figure-html/l3c3-1.png" width="700" /></p>
 <p></p>
@@ -395,12 +396,12 @@ P( N = k ) = ( 1 - p )^k p, \qquad
 </div>
 <p></p>
 <details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb15"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb15-1"><a href="distribuciones.html#cb15-1"></a>p <span class="ot">&lt;-</span> <span class="fl">0.3</span></span>
-<span id="cb15-2"><a href="distribuciones.html#cb15-2"></a>k <span class="ot">&lt;-</span> <span class="dv">2</span></span>
-<span id="cb15-3"><a href="distribuciones.html#cb15-3"></a>m <span class="ot">&lt;-</span> <span class="dv">100</span></span>
-<span id="cb15-4"><a href="distribuciones.html#cb15-4"></a>N <span class="ot">&lt;-</span> <span class="fu">rgeom</span>( <span class="at">n =</span> m, <span class="at">prob =</span> p  ) <span class="co"># simular una muestra de tamaño m</span></span>
-<span id="cb15-5"><a href="distribuciones.html#cb15-5"></a>pk <span class="ot">&lt;-</span> <span class="fu">dgeom</span>( <span class="at">x =</span> k, <span class="at">prob =</span> p ) <span class="co"># cálculo de probabilidad P( N = k )</span></span>
-<span id="cb15-6"><a href="distribuciones.html#cb15-6"></a>Pk <span class="ot">&lt;-</span> <span class="fu">pgeom</span>( <span class="at">q =</span> k, <span class="at">prob =</span> p ) <span class="co"># cálculo de probabilidad P( N &lt;= k )</span></span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb21-1"><a href="distribuciones.html#cb21-1"></a>p <span class="ot">&lt;-</span> <span class="fl">0.3</span></span>
+<span id="cb21-2"><a href="distribuciones.html#cb21-2"></a>k <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb21-3"><a href="distribuciones.html#cb21-3"></a>m <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb21-4"><a href="distribuciones.html#cb21-4"></a>N <span class="ot">&lt;-</span> <span class="fu">rgeom</span>( <span class="at">n =</span> m, <span class="at">prob =</span> p  ) <span class="co"># simular una muestra de tamaño m</span></span>
+<span id="cb21-5"><a href="distribuciones.html#cb21-5"></a>pk <span class="ot">&lt;-</span> <span class="fu">dgeom</span>( <span class="at">x =</span> k, <span class="at">prob =</span> p ) <span class="co"># cálculo de probabilidad P( N = k )</span></span>
+<span id="cb21-6"><a href="distribuciones.html#cb21-6"></a>Pk <span class="ot">&lt;-</span> <span class="fu">pgeom</span>( <span class="at">q =</span> k, <span class="at">prob =</span> p ) <span class="co"># cálculo de probabilidad P( N &lt;= k )</span></span></code></pre></div>
 </details>
 <p>
 Es fácil darse cuenta que la distribución geométrica <span class="math inline">\(Geo( p )\)</span> es una binomial negativa <span class="math inline">\(BN( 1, p )\)</span>,
@@ -446,26 +447,26 @@ k \frac{p_k}{p_{k-1}} = a( k - m - 1 ) &lt; 0, \quad \text{decreciente en $k$}
 en <a href="https://nonlifemaths.github.io/" class="uri">https://nonlifemaths.github.io/</a>.</p>
 <p></p>
 <details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb16"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb16-1"><a href="distribuciones.html#cb16-1"></a><span class="co"># la librería CASdatasets fue previamente cargada</span></span>
-<span id="cb16-2"><a href="distribuciones.html#cb16-2"></a><span class="fu">data</span>( beMTPL97 )</span>
-<span id="cb16-3"><a href="distribuciones.html#cb16-3"></a>beMTPL97 <span class="ot">&lt;-</span> <span class="fu">as.data.table</span>( beMTPL97 )</span>
-<span id="cb16-4"><a href="distribuciones.html#cb16-4"></a>conteo <span class="ot">&lt;-</span> beMTPL97[ , <span class="fu">list</span>( <span class="at">fn =</span> .N ), by <span class="ot">=</span> <span class="fu">list</span>( sex, fuel, <span class="at">N =</span> nclaims ) ]</span>
-<span id="cb16-5"><a href="distribuciones.html#cb16-5"></a>conteo[ , pn <span class="sc">:=</span> fn <span class="sc">/</span> <span class="fu">sum</span>( fn ), by <span class="ot">=</span> <span class="fu">list</span>( sex, fuel ) ]</span>
-<span id="cb16-6"><a href="distribuciones.html#cb16-6"></a><span class="fu">setorder</span>( conteo, sex, fuel, N )</span>
-<span id="cb16-7"><a href="distribuciones.html#cb16-7"></a>conteo[ , pns <span class="sc">:=</span> <span class="fu">shift</span>( pn, <span class="at">type =</span> <span class="st">&#39;lag&#39;</span>, <span class="at">fill =</span> <span class="dv">0</span> ) ]</span>
-<span id="cb16-8"><a href="distribuciones.html#cb16-8"></a>conteo[ , jn <span class="sc">:=</span> N <span class="sc">*</span> pns <span class="sc">/</span> pn ]</span>
-<span id="cb16-9"><a href="distribuciones.html#cb16-9"></a></span>
-<span id="cb16-10"><a href="distribuciones.html#cb16-10"></a>conteo <span class="sc">%&gt;%</span></span>
-<span id="cb16-11"><a href="distribuciones.html#cb16-11"></a>  <span class="fu">kable</span>(</span>
-<span id="cb16-12"><a href="distribuciones.html#cb16-12"></a>    <span class="at">caption =</span> <span class="st">&#39;Estimación conteos por sexo&#39;</span>,</span>
-<span id="cb16-13"><a href="distribuciones.html#cb16-13"></a>    <span class="at">row.names =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb16-14"><a href="distribuciones.html#cb16-14"></a>    <span class="at">col.names =</span> <span class="fu">c</span>( <span class="st">&quot;sexo&quot;</span>, <span class="st">&quot;fuel&quot;</span>, <span class="st">&quot;$N$&quot;</span>, <span class="st">&quot;$f_k$&quot;</span>, <span class="st">&quot;$p_k$&quot;</span>, <span class="st">&quot;$p_{k+1}$&quot;</span>, <span class="st">&quot;$k </span><span class="sc">\\</span><span class="st">frac{p_{k+1}}{p_k}$&quot;</span> ),</span>
-<span id="cb16-15"><a href="distribuciones.html#cb16-15"></a>    <span class="at">align =</span> <span class="st">&#39;llrrrrr&#39;</span>,</span>
-<span id="cb16-16"><a href="distribuciones.html#cb16-16"></a>    <span class="at">digits =</span> <span class="fu">c</span>( <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">5</span> ),</span>
-<span id="cb16-17"><a href="distribuciones.html#cb16-17"></a>    <span class="at">format.args =</span> <span class="fu">list</span>( <span class="at">big.mark =</span> <span class="st">&#39;,&#39;</span>, <span class="at">decimal.mark =</span> <span class="st">&#39;.&#39;</span>, <span class="at">scientific =</span> <span class="cn">FALSE</span> ),</span>
-<span id="cb16-18"><a href="distribuciones.html#cb16-18"></a>    <span class="at">escape =</span> <span class="cn">FALSE</span> ) <span class="sc">%&gt;%</span></span>
-<span id="cb16-19"><a href="distribuciones.html#cb16-19"></a>  <span class="fu">kable_classic</span>( <span class="at">font_size =</span> <span class="dv">14</span>, <span class="at">full_width =</span> <span class="cn">FALSE</span>, <span class="at">html_font =</span> <span class="st">&quot;Cambria&quot;</span> ) <span class="sc">%&gt;%</span></span>
-<span id="cb16-20"><a href="distribuciones.html#cb16-20"></a>  <span class="fu">scroll_box</span>( <span class="at">width =</span> <span class="st">&quot;750px&quot;</span>, <span class="at">height =</span> <span class="st">&quot;500px&quot;</span> )</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb22-1"><a href="distribuciones.html#cb22-1"></a><span class="co"># la librería CASdatasets fue previamente cargada</span></span>
+<span id="cb22-2"><a href="distribuciones.html#cb22-2"></a><span class="fu">data</span>( beMTPL97 )</span>
+<span id="cb22-3"><a href="distribuciones.html#cb22-3"></a>beMTPL97 <span class="ot">&lt;-</span> <span class="fu">as.data.table</span>( beMTPL97 )</span>
+<span id="cb22-4"><a href="distribuciones.html#cb22-4"></a>conteo <span class="ot">&lt;-</span> beMTPL97[ , <span class="fu">list</span>( <span class="at">fn =</span> .N ), by <span class="ot">=</span> <span class="fu">list</span>( sex, fuel, <span class="at">N =</span> nclaims ) ]</span>
+<span id="cb22-5"><a href="distribuciones.html#cb22-5"></a>conteo[ , pn <span class="sc">:=</span> fn <span class="sc">/</span> <span class="fu">sum</span>( fn ), by <span class="ot">=</span> <span class="fu">list</span>( sex, fuel ) ]</span>
+<span id="cb22-6"><a href="distribuciones.html#cb22-6"></a><span class="fu">setorder</span>( conteo, sex, fuel, N )</span>
+<span id="cb22-7"><a href="distribuciones.html#cb22-7"></a>conteo[ , pns <span class="sc">:=</span> <span class="fu">shift</span>( pn, <span class="at">type =</span> <span class="st">&#39;lag&#39;</span>, <span class="at">fill =</span> <span class="dv">0</span> ) ]</span>
+<span id="cb22-8"><a href="distribuciones.html#cb22-8"></a>conteo[ , jn <span class="sc">:=</span> N <span class="sc">*</span> pns <span class="sc">/</span> pn ]</span>
+<span id="cb22-9"><a href="distribuciones.html#cb22-9"></a></span>
+<span id="cb22-10"><a href="distribuciones.html#cb22-10"></a>conteo <span class="sc">%&gt;%</span></span>
+<span id="cb22-11"><a href="distribuciones.html#cb22-11"></a>  <span class="fu">kable</span>(</span>
+<span id="cb22-12"><a href="distribuciones.html#cb22-12"></a>    <span class="at">caption =</span> <span class="st">&#39;Estimación conteos por sexo&#39;</span>,</span>
+<span id="cb22-13"><a href="distribuciones.html#cb22-13"></a>    <span class="at">row.names =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb22-14"><a href="distribuciones.html#cb22-14"></a>    <span class="at">col.names =</span> <span class="fu">c</span>( <span class="st">&quot;sexo&quot;</span>, <span class="st">&quot;fuel&quot;</span>, <span class="st">&quot;$N$&quot;</span>, <span class="st">&quot;$f_k$&quot;</span>, <span class="st">&quot;$p_k$&quot;</span>, <span class="st">&quot;$p_{k+1}$&quot;</span>, <span class="st">&quot;$k </span><span class="sc">\\</span><span class="st">frac{p_{k+1}}{p_k}$&quot;</span> ),</span>
+<span id="cb22-15"><a href="distribuciones.html#cb22-15"></a>    <span class="at">align =</span> <span class="st">&#39;llrrrrr&#39;</span>,</span>
+<span id="cb22-16"><a href="distribuciones.html#cb22-16"></a>    <span class="at">digits =</span> <span class="fu">c</span>( <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">5</span> ),</span>
+<span id="cb22-17"><a href="distribuciones.html#cb22-17"></a>    <span class="at">format.args =</span> <span class="fu">list</span>( <span class="at">big.mark =</span> <span class="st">&#39;,&#39;</span>, <span class="at">decimal.mark =</span> <span class="st">&#39;.&#39;</span>, <span class="at">scientific =</span> <span class="cn">FALSE</span> ),</span>
+<span id="cb22-18"><a href="distribuciones.html#cb22-18"></a>    <span class="at">escape =</span> <span class="cn">FALSE</span> ) <span class="sc">%&gt;%</span></span>
+<span id="cb22-19"><a href="distribuciones.html#cb22-19"></a>  <span class="fu">kable_classic</span>( <span class="at">font_size =</span> <span class="dv">14</span>, <span class="at">full_width =</span> <span class="cn">FALSE</span>, <span class="at">html_font =</span> <span class="st">&quot;Cambria&quot;</span> ) <span class="sc">%&gt;%</span></span>
+<span id="cb22-20"><a href="distribuciones.html#cb22-20"></a>  <span class="fu">scroll_box</span>( <span class="at">width =</span> <span class="st">&quot;750px&quot;</span>, <span class="at">height =</span> <span class="st">&quot;500px&quot;</span> )</span></code></pre></div>
 </details>
 <div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:500px; overflow-x: scroll; width:750px; ">
 <table class=" lightable-classic" style="font-size: 14px; color: black; font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
@@ -1010,7 +1011,7 @@ diesel
 <p></p>
 <p></p>
 <details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb17"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb17-1"><a href="distribuciones.html#cb17-1"></a><span class="fu">plot</span>( conteo<span class="sc">$</span>N, conteo<span class="sc">$</span>jn )</span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb23-1"><a href="distribuciones.html#cb23-1"></a><span class="fu">plot</span>( conteo<span class="sc">$</span>N, conteo<span class="sc">$</span>jn )</span></code></pre></div>
 </details>
 <p><img src="seguros_generales_files/figure-html/l3c5-1.png" width="700" /></p>
 <p></p>
@@ -1038,13 +1039,13 @@ M_X( t ) = \frac{\exp(bt)-\exp(at)}{t(b-a)}
 </div>
 <p></p>
 <details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb18"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb18-1"><a href="distribuciones.html#cb18-1"></a>a <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb18-2"><a href="distribuciones.html#cb18-2"></a>b <span class="ot">&lt;-</span> <span class="dv">2</span></span>
-<span id="cb18-3"><a href="distribuciones.html#cb18-3"></a>x <span class="ot">&lt;-</span> <span class="fl">1.5</span></span>
-<span id="cb18-4"><a href="distribuciones.html#cb18-4"></a>m <span class="ot">&lt;-</span> <span class="dv">100</span></span>
-<span id="cb18-5"><a href="distribuciones.html#cb18-5"></a>X <span class="ot">&lt;-</span> <span class="fu">runif</span>( <span class="at">n =</span> m, <span class="at">min =</span> a, <span class="at">max =</span> b ) <span class="co"># simular una muestra de tamaño m</span></span>
-<span id="cb18-6"><a href="distribuciones.html#cb18-6"></a>fx <span class="ot">&lt;-</span> <span class="fu">dunif</span>( <span class="at">x =</span> x, <span class="at">min =</span> a, <span class="at">max =</span> b ) <span class="co"># cálculo de la densidad f(x)</span></span>
-<span id="cb18-7"><a href="distribuciones.html#cb18-7"></a>Fk <span class="ot">&lt;-</span> <span class="fu">punif</span>( <span class="at">q =</span> x, <span class="at">min =</span> a, <span class="at">max =</span> b ) <span class="co"># cálculo de probabilidad F(x)</span></span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb24-1"><a href="distribuciones.html#cb24-1"></a>a <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb24-2"><a href="distribuciones.html#cb24-2"></a>b <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb24-3"><a href="distribuciones.html#cb24-3"></a>x <span class="ot">&lt;-</span> <span class="fl">1.5</span></span>
+<span id="cb24-4"><a href="distribuciones.html#cb24-4"></a>m <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb24-5"><a href="distribuciones.html#cb24-5"></a>X <span class="ot">&lt;-</span> <span class="fu">runif</span>( <span class="at">n =</span> m, <span class="at">min =</span> a, <span class="at">max =</span> b ) <span class="co"># simular una muestra de tamaño m</span></span>
+<span id="cb24-6"><a href="distribuciones.html#cb24-6"></a>fx <span class="ot">&lt;-</span> <span class="fu">dunif</span>( <span class="at">x =</span> x, <span class="at">min =</span> a, <span class="at">max =</span> b ) <span class="co"># cálculo de la densidad f(x)</span></span>
+<span id="cb24-7"><a href="distribuciones.html#cb24-7"></a>Fk <span class="ot">&lt;-</span> <span class="fu">punif</span>( <span class="at">q =</span> x, <span class="at">min =</span> a, <span class="at">max =</span> b ) <span class="co"># cálculo de probabilidad F(x)</span></span></code></pre></div>
 </details>
 <p></p>
 <div class="definition">
@@ -1067,12 +1068,12 @@ M_X( t ) = \frac{\lambda}{\lambda - t}
 </div>
 <p></p>
 <details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb19"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb19-1"><a href="distribuciones.html#cb19-1"></a>lambda <span class="ot">&lt;-</span> <span class="dv">2</span></span>
-<span id="cb19-2"><a href="distribuciones.html#cb19-2"></a>x <span class="ot">&lt;-</span> <span class="fl">1.5</span></span>
-<span id="cb19-3"><a href="distribuciones.html#cb19-3"></a>m <span class="ot">&lt;-</span> <span class="dv">100</span></span>
-<span id="cb19-4"><a href="distribuciones.html#cb19-4"></a>X <span class="ot">&lt;-</span> <span class="fu">rexp</span>( <span class="at">n =</span> m, <span class="at">rate =</span> lambda ) <span class="co"># simular una muestra de tamaño m</span></span>
-<span id="cb19-5"><a href="distribuciones.html#cb19-5"></a>fx <span class="ot">&lt;-</span> <span class="fu">dexp</span>( <span class="at">x =</span> x, <span class="at">rate =</span> lambda ) <span class="co"># cálculo de la densidad f(x)</span></span>
-<span id="cb19-6"><a href="distribuciones.html#cb19-6"></a>Fk <span class="ot">&lt;-</span> <span class="fu">pexp</span>( <span class="at">q =</span> x, <span class="at">rate =</span> lambda ) <span class="co"># cálculo de probabilidad F(x)</span></span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb25-1"><a href="distribuciones.html#cb25-1"></a>lambda <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb25-2"><a href="distribuciones.html#cb25-2"></a>x <span class="ot">&lt;-</span> <span class="fl">1.5</span></span>
+<span id="cb25-3"><a href="distribuciones.html#cb25-3"></a>m <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb25-4"><a href="distribuciones.html#cb25-4"></a>X <span class="ot">&lt;-</span> <span class="fu">rexp</span>( <span class="at">n =</span> m, <span class="at">rate =</span> lambda ) <span class="co"># simular una muestra de tamaño m</span></span>
+<span id="cb25-5"><a href="distribuciones.html#cb25-5"></a>fx <span class="ot">&lt;-</span> <span class="fu">dexp</span>( <span class="at">x =</span> x, <span class="at">rate =</span> lambda ) <span class="co"># cálculo de la densidad f(x)</span></span>
+<span id="cb25-6"><a href="distribuciones.html#cb25-6"></a>Fk <span class="ot">&lt;-</span> <span class="fu">pexp</span>( <span class="at">q =</span> x, <span class="at">rate =</span> lambda ) <span class="co"># cálculo de probabilidad F(x)</span></span></code></pre></div>
 </details>
 <p></p>
 <div class="definition">
@@ -1096,13 +1097,13 @@ M_X( t ) = \left( \frac{\beta}{\beta - t} \right)^\alpha,\qquad \text{si}\ t &lt
 </div>
 <p></p>
 <details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb20"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb20-1"><a href="distribuciones.html#cb20-1"></a>alpha <span class="ot">&lt;-</span> <span class="dv">2</span></span>
-<span id="cb20-2"><a href="distribuciones.html#cb20-2"></a>beta <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb20-3"><a href="distribuciones.html#cb20-3"></a>x <span class="ot">&lt;-</span> <span class="dv">3</span></span>
-<span id="cb20-4"><a href="distribuciones.html#cb20-4"></a>m <span class="ot">&lt;-</span> <span class="dv">100</span></span>
-<span id="cb20-5"><a href="distribuciones.html#cb20-5"></a>X <span class="ot">&lt;-</span> <span class="fu">rgamma</span>( <span class="at">n =</span> m, <span class="at">shape =</span> alpha, <span class="at">scale =</span> beta ) <span class="co"># simular una muestra de tamaño m</span></span>
-<span id="cb20-6"><a href="distribuciones.html#cb20-6"></a>fx <span class="ot">&lt;-</span> <span class="fu">dgamma</span>( <span class="at">x =</span> x, <span class="at">shape =</span> alpha, <span class="at">scale =</span> beta ) <span class="co"># cálculo de la densidad f(x)</span></span>
-<span id="cb20-7"><a href="distribuciones.html#cb20-7"></a>Fk <span class="ot">&lt;-</span> <span class="fu">pgamma</span>( <span class="at">q =</span> x, <span class="at">shape =</span> alpha, <span class="at">scale =</span> beta ) <span class="co"># cálculo de probabilidad F(x)</span></span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb26-1"><a href="distribuciones.html#cb26-1"></a>alpha <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb26-2"><a href="distribuciones.html#cb26-2"></a>beta <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb26-3"><a href="distribuciones.html#cb26-3"></a>x <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb26-4"><a href="distribuciones.html#cb26-4"></a>m <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb26-5"><a href="distribuciones.html#cb26-5"></a>X <span class="ot">&lt;-</span> <span class="fu">rgamma</span>( <span class="at">n =</span> m, <span class="at">shape =</span> alpha, <span class="at">scale =</span> beta ) <span class="co"># simular una muestra de tamaño m</span></span>
+<span id="cb26-6"><a href="distribuciones.html#cb26-6"></a>fx <span class="ot">&lt;-</span> <span class="fu">dgamma</span>( <span class="at">x =</span> x, <span class="at">shape =</span> alpha, <span class="at">scale =</span> beta ) <span class="co"># cálculo de la densidad f(x)</span></span>
+<span id="cb26-7"><a href="distribuciones.html#cb26-7"></a>Fk <span class="ot">&lt;-</span> <span class="fu">pgamma</span>( <span class="at">q =</span> x, <span class="at">shape =</span> alpha, <span class="at">scale =</span> beta ) <span class="co"># cálculo de probabilidad F(x)</span></span></code></pre></div>
 </details>
 <p></p>
 <div class="definition">
@@ -1125,13 +1126,13 @@ M_X( t ) = \exp\left( t \mu + \frac{1}{2} t^2 \sigma^2 \right)
 </div>
 <p></p>
 <details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb21"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb21-1"><a href="distribuciones.html#cb21-1"></a>mu <span class="ot">&lt;-</span> <span class="dv">2</span></span>
-<span id="cb21-2"><a href="distribuciones.html#cb21-2"></a>sigma <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb21-3"><a href="distribuciones.html#cb21-3"></a>x <span class="ot">&lt;-</span> <span class="dv">3</span></span>
-<span id="cb21-4"><a href="distribuciones.html#cb21-4"></a>m <span class="ot">&lt;-</span> <span class="dv">100</span></span>
-<span id="cb21-5"><a href="distribuciones.html#cb21-5"></a>X <span class="ot">&lt;-</span> <span class="fu">rnorm</span>( <span class="at">n =</span> m, <span class="at">mean =</span> mu, <span class="at">sd =</span> sigma ) <span class="co"># simular una muestra de tamaño m</span></span>
-<span id="cb21-6"><a href="distribuciones.html#cb21-6"></a>fx <span class="ot">&lt;-</span> <span class="fu">dnorm</span>( <span class="at">x =</span> x, <span class="at">mean =</span> mu, <span class="at">sd =</span> sigma ) <span class="co"># cálculo de la densidad f(x)</span></span>
-<span id="cb21-7"><a href="distribuciones.html#cb21-7"></a>Fk <span class="ot">&lt;-</span> <span class="fu">pnorm</span>( <span class="at">q =</span> x, <span class="at">mean =</span> mu, <span class="at">sd =</span> sigma ) <span class="co"># cálculo de probabilidad F(x)</span></span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb27-1"><a href="distribuciones.html#cb27-1"></a>mu <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb27-2"><a href="distribuciones.html#cb27-2"></a>sigma <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb27-3"><a href="distribuciones.html#cb27-3"></a>x <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb27-4"><a href="distribuciones.html#cb27-4"></a>m <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb27-5"><a href="distribuciones.html#cb27-5"></a>X <span class="ot">&lt;-</span> <span class="fu">rnorm</span>( <span class="at">n =</span> m, <span class="at">mean =</span> mu, <span class="at">sd =</span> sigma ) <span class="co"># simular una muestra de tamaño m</span></span>
+<span id="cb27-6"><a href="distribuciones.html#cb27-6"></a>fx <span class="ot">&lt;-</span> <span class="fu">dnorm</span>( <span class="at">x =</span> x, <span class="at">mean =</span> mu, <span class="at">sd =</span> sigma ) <span class="co"># cálculo de la densidad f(x)</span></span>
+<span id="cb27-7"><a href="distribuciones.html#cb27-7"></a>Fk <span class="ot">&lt;-</span> <span class="fu">pnorm</span>( <span class="at">q =</span> x, <span class="at">mean =</span> mu, <span class="at">sd =</span> sigma ) <span class="co"># cálculo de probabilidad F(x)</span></span></code></pre></div>
 </details>
 <p></p>
 <div class="definition">
@@ -1153,13 +1154,13 @@ No hay forma analítica para <span class="math inline">\(M_X\)</span>
 </div>
 <p></p>
 <details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb22"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb22-1"><a href="distribuciones.html#cb22-1"></a>mu <span class="ot">&lt;-</span> <span class="dv">2</span></span>
-<span id="cb22-2"><a href="distribuciones.html#cb22-2"></a>sigma <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb22-3"><a href="distribuciones.html#cb22-3"></a>x <span class="ot">&lt;-</span> <span class="dv">3</span></span>
-<span id="cb22-4"><a href="distribuciones.html#cb22-4"></a>m <span class="ot">&lt;-</span> <span class="dv">100</span></span>
-<span id="cb22-5"><a href="distribuciones.html#cb22-5"></a>X <span class="ot">&lt;-</span> <span class="fu">rlnorm</span>( <span class="at">n =</span> m, <span class="at">meanlog =</span> mu, <span class="at">sdlog =</span> sigma ) <span class="co"># simular una muestra de tamaño m</span></span>
-<span id="cb22-6"><a href="distribuciones.html#cb22-6"></a>fx <span class="ot">&lt;-</span> <span class="fu">dlnorm</span>( <span class="at">x =</span> x, <span class="at">meanlog =</span> mu, <span class="at">sdlog =</span> sigma ) <span class="co"># cálculo de la densidad f(x)</span></span>
-<span id="cb22-7"><a href="distribuciones.html#cb22-7"></a>Fk <span class="ot">&lt;-</span> <span class="fu">plnorm</span>( <span class="at">q =</span> x, <span class="at">meanlog =</span> mu, <span class="at">sdlog =</span> sigma ) <span class="co"># cálculo de probabilidad F(x)</span></span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb28-1"><a href="distribuciones.html#cb28-1"></a>mu <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb28-2"><a href="distribuciones.html#cb28-2"></a>sigma <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb28-3"><a href="distribuciones.html#cb28-3"></a>x <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb28-4"><a href="distribuciones.html#cb28-4"></a>m <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb28-5"><a href="distribuciones.html#cb28-5"></a>X <span class="ot">&lt;-</span> <span class="fu">rlnorm</span>( <span class="at">n =</span> m, <span class="at">meanlog =</span> mu, <span class="at">sdlog =</span> sigma ) <span class="co"># simular una muestra de tamaño m</span></span>
+<span id="cb28-6"><a href="distribuciones.html#cb28-6"></a>fx <span class="ot">&lt;-</span> <span class="fu">dlnorm</span>( <span class="at">x =</span> x, <span class="at">meanlog =</span> mu, <span class="at">sdlog =</span> sigma ) <span class="co"># cálculo de la densidad f(x)</span></span>
+<span id="cb28-7"><a href="distribuciones.html#cb28-7"></a>Fk <span class="ot">&lt;-</span> <span class="fu">plnorm</span>( <span class="at">q =</span> x, <span class="at">meanlog =</span> mu, <span class="at">sdlog =</span> sigma ) <span class="co"># cálculo de probabilidad F(x)</span></span></code></pre></div>
 </details>
 <p>
 En pocas, una variable aleatoria <span class="math inline">\(X \rightsquigarrow LN( \mu, \sigma )\)</span> sigue una distribución
@@ -1195,14 +1196,14 @@ M_X( t ) = \exp(\theta \mu) \sum\limits_{j=0}^{+\infty} \frac{\theta^j \sigma^j}
 </div>
 <p></p>
 <details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb23"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb23-1"><a href="distribuciones.html#cb23-1"></a>xi <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb23-2"><a href="distribuciones.html#cb23-2"></a>mu <span class="ot">&lt;-</span> <span class="dv">2</span></span>
-<span id="cb23-3"><a href="distribuciones.html#cb23-3"></a>sigma <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb23-4"><a href="distribuciones.html#cb23-4"></a>x <span class="ot">&lt;-</span> <span class="dv">3</span></span>
-<span id="cb23-5"><a href="distribuciones.html#cb23-5"></a>m <span class="ot">&lt;-</span> <span class="dv">100</span></span>
-<span id="cb23-6"><a href="distribuciones.html#cb23-6"></a>X <span class="ot">&lt;-</span> <span class="fu">rgpd</span>( <span class="at">n =</span> m, <span class="at">xi =</span> xi, <span class="at">mu =</span> mu, <span class="at">beta =</span> sigma ) <span class="co"># simular una muestra de tamaño m</span></span>
-<span id="cb23-7"><a href="distribuciones.html#cb23-7"></a>fx <span class="ot">&lt;-</span> <span class="fu">dgpd</span>( <span class="at">x =</span> x, <span class="at">xi =</span> xi, <span class="at">mu =</span> mu, <span class="at">beta =</span> sigma ) <span class="co"># cálculo de la densidad f(x)</span></span>
-<span id="cb23-8"><a href="distribuciones.html#cb23-8"></a>Fk <span class="ot">&lt;-</span> <span class="fu">pgpd</span>( <span class="at">q =</span> x, <span class="at">xi =</span> xi, <span class="at">mu =</span> mu, <span class="at">beta =</span> sigma ) <span class="co"># cálculo de probabilidad F(x)</span></span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb29-1"><a href="distribuciones.html#cb29-1"></a>xi <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb29-2"><a href="distribuciones.html#cb29-2"></a>mu <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb29-3"><a href="distribuciones.html#cb29-3"></a>sigma <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb29-4"><a href="distribuciones.html#cb29-4"></a>x <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb29-5"><a href="distribuciones.html#cb29-5"></a>m <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb29-6"><a href="distribuciones.html#cb29-6"></a>X <span class="ot">&lt;-</span> <span class="fu">rgpd</span>( <span class="at">n =</span> m, <span class="at">xi =</span> xi, <span class="at">mu =</span> mu, <span class="at">beta =</span> sigma ) <span class="co"># simular una muestra de tamaño m</span></span>
+<span id="cb29-7"><a href="distribuciones.html#cb29-7"></a>fx <span class="ot">&lt;-</span> <span class="fu">dgpd</span>( <span class="at">x =</span> x, <span class="at">xi =</span> xi, <span class="at">mu =</span> mu, <span class="at">beta =</span> sigma ) <span class="co"># cálculo de la densidad f(x)</span></span>
+<span id="cb29-8"><a href="distribuciones.html#cb29-8"></a>Fk <span class="ot">&lt;-</span> <span class="fu">pgpd</span>( <span class="at">q =</span> x, <span class="at">xi =</span> xi, <span class="at">mu =</span> mu, <span class="at">beta =</span> sigma ) <span class="co"># cálculo de probabilidad F(x)</span></span></code></pre></div>
 </details>
 <p></p>
 <div class="definition">
@@ -1237,14 +1238,14 @@ f_X( x )
 </div>
 <p></p>
 <details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb24"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb24-1"><a href="distribuciones.html#cb24-1"></a>xi <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">1</span></span>
-<span id="cb24-2"><a href="distribuciones.html#cb24-2"></a>mu <span class="ot">&lt;-</span> <span class="dv">2</span></span>
-<span id="cb24-3"><a href="distribuciones.html#cb24-3"></a>sigma <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb24-4"><a href="distribuciones.html#cb24-4"></a>x <span class="ot">&lt;-</span> <span class="dv">3</span></span>
-<span id="cb24-5"><a href="distribuciones.html#cb24-5"></a>m <span class="ot">&lt;-</span> <span class="dv">100</span></span>
-<span id="cb24-6"><a href="distribuciones.html#cb24-6"></a>X <span class="ot">&lt;-</span> <span class="fu">rgev</span>( <span class="at">n =</span> m, <span class="at">xi =</span> xi, <span class="at">mu =</span> mu, <span class="at">beta =</span> sigma ) <span class="co"># simular una muestra de tamaño m</span></span>
-<span id="cb24-7"><a href="distribuciones.html#cb24-7"></a>fx <span class="ot">&lt;-</span> <span class="fu">dgev</span>( <span class="at">x =</span> x, <span class="at">xi =</span> xi, <span class="at">mu =</span> mu, <span class="at">beta =</span> sigma ) <span class="co"># cálculo de la densidad f(x)</span></span>
-<span id="cb24-8"><a href="distribuciones.html#cb24-8"></a>Fk <span class="ot">&lt;-</span> <span class="fu">pgev</span>( <span class="at">q =</span> x, <span class="at">xi =</span> xi, <span class="at">mu =</span> mu, <span class="at">beta =</span> sigma ) <span class="co"># cálculo de probabilidad F(x)</span></span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb30-1"><a href="distribuciones.html#cb30-1"></a>xi <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">1</span></span>
+<span id="cb30-2"><a href="distribuciones.html#cb30-2"></a>mu <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb30-3"><a href="distribuciones.html#cb30-3"></a>sigma <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb30-4"><a href="distribuciones.html#cb30-4"></a>x <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb30-5"><a href="distribuciones.html#cb30-5"></a>m <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb30-6"><a href="distribuciones.html#cb30-6"></a>X <span class="ot">&lt;-</span> <span class="fu">rgev</span>( <span class="at">n =</span> m, <span class="at">xi =</span> xi, <span class="at">mu =</span> mu, <span class="at">beta =</span> sigma ) <span class="co"># simular una muestra de tamaño m</span></span>
+<span id="cb30-7"><a href="distribuciones.html#cb30-7"></a>fx <span class="ot">&lt;-</span> <span class="fu">dgev</span>( <span class="at">x =</span> x, <span class="at">xi =</span> xi, <span class="at">mu =</span> mu, <span class="at">beta =</span> sigma ) <span class="co"># cálculo de la densidad f(x)</span></span>
+<span id="cb30-8"><a href="distribuciones.html#cb30-8"></a>Fk <span class="ot">&lt;-</span> <span class="fu">pgev</span>( <span class="at">q =</span> x, <span class="at">xi =</span> xi, <span class="at">mu =</span> mu, <span class="at">beta =</span> sigma ) <span class="co"># cálculo de probabilidad F(x)</span></span></code></pre></div>
 </details>
 <p></p>
 <div class="definition">
@@ -1301,12 +1302,12 @@ La función generadora de momentos <span class="math inline">\(M_X( t )\)</span>
 </div>
 <p></p>
 <details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb25"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb25-1"><a href="distribuciones.html#cb25-1"></a>nu <span class="ot">&lt;-</span> <span class="dv">3</span></span>
-<span id="cb25-2"><a href="distribuciones.html#cb25-2"></a>x <span class="ot">&lt;-</span> <span class="dv">4</span></span>
-<span id="cb25-3"><a href="distribuciones.html#cb25-3"></a>m <span class="ot">&lt;-</span> <span class="dv">100</span></span>
-<span id="cb25-4"><a href="distribuciones.html#cb25-4"></a>X <span class="ot">&lt;-</span> <span class="fu">rt</span>( <span class="at">n =</span> m, <span class="at">df =</span> nu ) <span class="co"># simular una muestra de tamaño m</span></span>
-<span id="cb25-5"><a href="distribuciones.html#cb25-5"></a>fx <span class="ot">&lt;-</span> <span class="fu">dt</span>( <span class="at">x =</span> x, <span class="at">df =</span> nu ) <span class="co"># cálculo de la densidad f(x)</span></span>
-<span id="cb25-6"><a href="distribuciones.html#cb25-6"></a>Fk <span class="ot">&lt;-</span> <span class="fu">pt</span>( <span class="at">q =</span> x, <span class="at">df =</span> nu ) <span class="co"># cálculo de probabilidad F(x)</span></span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb31-1"><a href="distribuciones.html#cb31-1"></a>nu <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb31-2"><a href="distribuciones.html#cb31-2"></a>x <span class="ot">&lt;-</span> <span class="dv">4</span></span>
+<span id="cb31-3"><a href="distribuciones.html#cb31-3"></a>m <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb31-4"><a href="distribuciones.html#cb31-4"></a>X <span class="ot">&lt;-</span> <span class="fu">rt</span>( <span class="at">n =</span> m, <span class="at">df =</span> nu ) <span class="co"># simular una muestra de tamaño m</span></span>
+<span id="cb31-5"><a href="distribuciones.html#cb31-5"></a>fx <span class="ot">&lt;-</span> <span class="fu">dt</span>( <span class="at">x =</span> x, <span class="at">df =</span> nu ) <span class="co"># cálculo de la densidad f(x)</span></span>
+<span id="cb31-6"><a href="distribuciones.html#cb31-6"></a>Fk <span class="ot">&lt;-</span> <span class="fu">pt</span>( <span class="at">q =</span> x, <span class="at">df =</span> nu ) <span class="co"># cálculo de probabilidad F(x)</span></span></code></pre></div>
 </details>
 <p></p>
 <div class="definition">
@@ -1343,14 +1344,14 @@ f_X( x )
 </div>
 <p></p>
 <details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb26"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb26-1"><a href="distribuciones.html#cb26-1"></a>alpha <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb26-2"><a href="distribuciones.html#cb26-2"></a>tau <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb26-3"><a href="distribuciones.html#cb26-3"></a>theta <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb26-4"><a href="distribuciones.html#cb26-4"></a>x <span class="ot">&lt;-</span> <span class="dv">3</span></span>
-<span id="cb26-5"><a href="distribuciones.html#cb26-5"></a>m <span class="ot">&lt;-</span> <span class="dv">100</span></span>
-<span id="cb26-6"><a href="distribuciones.html#cb26-6"></a>X <span class="ot">&lt;-</span> <span class="fu">rtrgamma</span>( <span class="at">n =</span> m, <span class="at">shape1 =</span> alpha, <span class="at">shape2 =</span> tau, <span class="at">scale =</span> theta ) <span class="co"># simular una muestra de tamaño m</span></span>
-<span id="cb26-7"><a href="distribuciones.html#cb26-7"></a>fx <span class="ot">&lt;-</span> <span class="fu">dtrgamma</span>( <span class="at">x =</span> x, <span class="at">shape1 =</span> alpha, <span class="at">shape2 =</span> tau, <span class="at">scale =</span> theta ) <span class="co"># cálculo de la densidad f(x)</span></span>
-<span id="cb26-8"><a href="distribuciones.html#cb26-8"></a>Fk <span class="ot">&lt;-</span> <span class="fu">ptrgamma</span>( <span class="at">q =</span> x, <span class="at">shape1 =</span> alpha, <span class="at">shape2 =</span> tau, <span class="at">scale =</span> theta ) <span class="co"># cálculo de probabilidad F(x)</span></span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb32-1"><a href="distribuciones.html#cb32-1"></a>alpha <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb32-2"><a href="distribuciones.html#cb32-2"></a>tau <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb32-3"><a href="distribuciones.html#cb32-3"></a>theta <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb32-4"><a href="distribuciones.html#cb32-4"></a>x <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb32-5"><a href="distribuciones.html#cb32-5"></a>m <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb32-6"><a href="distribuciones.html#cb32-6"></a>X <span class="ot">&lt;-</span> <span class="fu">rtrgamma</span>( <span class="at">n =</span> m, <span class="at">shape1 =</span> alpha, <span class="at">shape2 =</span> tau, <span class="at">scale =</span> theta ) <span class="co"># simular una muestra de tamaño m</span></span>
+<span id="cb32-7"><a href="distribuciones.html#cb32-7"></a>fx <span class="ot">&lt;-</span> <span class="fu">dtrgamma</span>( <span class="at">x =</span> x, <span class="at">shape1 =</span> alpha, <span class="at">shape2 =</span> tau, <span class="at">scale =</span> theta ) <span class="co"># cálculo de la densidad f(x)</span></span>
+<span id="cb32-8"><a href="distribuciones.html#cb32-8"></a>Fk <span class="ot">&lt;-</span> <span class="fu">ptrgamma</span>( <span class="at">q =</span> x, <span class="at">shape1 =</span> alpha, <span class="at">shape2 =</span> tau, <span class="at">scale =</span> theta ) <span class="co"># cálculo de probabilidad F(x)</span></span></code></pre></div>
 </details>
 <p></p>
 <p>En la familia gamma se incluyen las siguientes distribuciones:</p>
@@ -1392,15 +1393,15 @@ f_X( x )
 </div>
 <p></p>
 <details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb27"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb27-1"><a href="distribuciones.html#cb27-1"></a>alpha <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb27-2"><a href="distribuciones.html#cb27-2"></a>gamma <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb27-3"><a href="distribuciones.html#cb27-3"></a>tau <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb27-4"><a href="distribuciones.html#cb27-4"></a>theta <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb27-5"><a href="distribuciones.html#cb27-5"></a>x <span class="ot">&lt;-</span> <span class="dv">3</span></span>
-<span id="cb27-6"><a href="distribuciones.html#cb27-6"></a>m <span class="ot">&lt;-</span> <span class="dv">100</span></span>
-<span id="cb27-7"><a href="distribuciones.html#cb27-7"></a>X <span class="ot">&lt;-</span> <span class="fu">rtrbeta</span>( <span class="at">n =</span> m, <span class="at">shape1 =</span> alpha, <span class="at">shape2 =</span> gamma, <span class="at">shape3 =</span> tau, <span class="at">scale =</span> theta ) <span class="co"># simular una muestra de tamaño m</span></span>
-<span id="cb27-8"><a href="distribuciones.html#cb27-8"></a>fx <span class="ot">&lt;-</span> <span class="fu">dtrbeta</span>( <span class="at">x =</span> x, <span class="at">shape1 =</span> alpha, <span class="at">shape2 =</span> gamma, <span class="at">shape3 =</span> tau, <span class="at">scale =</span> theta ) <span class="co"># cálculo de la densidad f(x)</span></span>
-<span id="cb27-9"><a href="distribuciones.html#cb27-9"></a>Fk <span class="ot">&lt;-</span> <span class="fu">ptrbeta</span>( <span class="at">q =</span> x, <span class="at">shape1 =</span> alpha, <span class="at">shape2 =</span> gamma, <span class="at">shape3 =</span> tau, <span class="at">scale =</span> theta ) <span class="co"># cálculo de probabilidad F(x)</span></span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb33-1"><a href="distribuciones.html#cb33-1"></a>alpha <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb33-2"><a href="distribuciones.html#cb33-2"></a>gamma <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb33-3"><a href="distribuciones.html#cb33-3"></a>tau <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb33-4"><a href="distribuciones.html#cb33-4"></a>theta <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb33-5"><a href="distribuciones.html#cb33-5"></a>x <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb33-6"><a href="distribuciones.html#cb33-6"></a>m <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb33-7"><a href="distribuciones.html#cb33-7"></a>X <span class="ot">&lt;-</span> <span class="fu">rtrbeta</span>( <span class="at">n =</span> m, <span class="at">shape1 =</span> alpha, <span class="at">shape2 =</span> gamma, <span class="at">shape3 =</span> tau, <span class="at">scale =</span> theta ) <span class="co"># simular una muestra de tamaño m</span></span>
+<span id="cb33-8"><a href="distribuciones.html#cb33-8"></a>fx <span class="ot">&lt;-</span> <span class="fu">dtrbeta</span>( <span class="at">x =</span> x, <span class="at">shape1 =</span> alpha, <span class="at">shape2 =</span> gamma, <span class="at">shape3 =</span> tau, <span class="at">scale =</span> theta ) <span class="co"># cálculo de la densidad f(x)</span></span>
+<span id="cb33-9"><a href="distribuciones.html#cb33-9"></a>Fk <span class="ot">&lt;-</span> <span class="fu">ptrbeta</span>( <span class="at">q =</span> x, <span class="at">shape1 =</span> alpha, <span class="at">shape2 =</span> gamma, <span class="at">shape3 =</span> tau, <span class="at">scale =</span> theta ) <span class="co"># cálculo de probabilidad F(x)</span></span></code></pre></div>
 </details>
 <p></p>
 <p>Dentro de la familia beta transformada se cuenta algunas distribuciones de probabilidad:</p>
@@ -1591,6 +1592,15 @@ probabilidad:
 \end{equation}\]</span></p>
 <p>En la práctica los eventos que se observa <span class="math inline">\(B_i\)</span> son puntuales y son precisamente los valores
 que toma la variable aleatoria <span class="math inline">\(X\)</span>. Es decir, se observa una muestra <span class="math inline">\(X_1, \ldots, X_n\)</span>.</p>
+<p>Podemos tener una variable aleatoria discreta <span class="math inline">\(N\)</span>, de la cual hemos observado una muestra de
+<span class="math inline">\(N_1, \ldots, N_m\)</span> asumiendo independencia entre cada una de las observaciones. Podemos ademas
+suponer que <span class="math inline">\(N\)</span> pertenece a la familia de distribuciones discretas en la clase <span class="math inline">\((0,a,b)\)</span> y por tanto
+<span class="math inline">\(P( N = 0 ) = p_0\)</span> es un parámetro inicial <span class="math inline">\(p_n = ( a + b/n) p_{n-1}\)</span>, para cualquier
+<span class="math inline">\(n &gt; 1\)</span>.
+<span class="math display">\[\begin{equation}
+P\left( N_1 = n_1 \land \cdots \land N_m = n_m \right)
+= \prod\limits_{i=1}^m p_i^{n_i}
+\end{equation}\]</span></p>
 <!------------------------------------------------------------------------------------------------->
 </div>
 <div id="calidad-de-estimadores" class="section level3 hasAnchor" number="4.4.5">

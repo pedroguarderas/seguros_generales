@@ -15,6 +15,7 @@ def:defmixdis
 def:defcov
 def:dsum
 def:dexceso
+thm:twln
 thm:tlc
 prp:chebdes
 thm:bein
@@ -22,6 +23,7 @@ thm:ddkw
 tab:l2t1
 thm:dchernoff
 thm:dpaleyzyg
+def:dfouriertrans
 def:deffact
 def:dbinom
 def:dpois
@@ -75,6 +77,7 @@ consideraciones-de-programación-en-r
 probabilidad-y-estadística
 consideraciones-estadísticas
 desigualdades-de-concentración
+consideraciones-de-análisis
 consideraciones-financieras
 función-de-actualización-o-descuento
 flujos-financieros
