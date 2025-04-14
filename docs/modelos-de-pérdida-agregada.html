@@ -189,17 +189,20 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="3" data-path="probabilidad-y-estadística.html"><a href="probabilidad-y-estadística.html"><i class="fa fa-check"></i><b>3</b> Probabilidad y Estadística</a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="probabilidad-y-estadística.html"><a href="probabilidad-y-estadística.html#consideraciones-estadísticas"><i class="fa fa-check"></i><b>3.1</b> Consideraciones estadísticas</a>
+<li class="chapter" data-level="3.1" data-path="probabilidad-y-estadística.html"><a href="probabilidad-y-estadística.html#probabilidad-y-conceptos-asociados"><i class="fa fa-check"></i><b>3.1</b> Probabilidad y conceptos asociados</a></li>
+<li class="chapter" data-level="3.2" data-path="probabilidad-y-estadística.html"><a href="probabilidad-y-estadística.html#resultados-de-convergencia"><i class="fa fa-check"></i><b>3.2</b> Resultados de convergencia</a></li>
+<li class="chapter" data-level="3.3" data-path="probabilidad-y-estadística.html"><a href="probabilidad-y-estadística.html#desigualdades-de-concentración"><i class="fa fa-check"></i><b>3.3</b> Desigualdades de concentración</a></li>
+<li class="chapter" data-level="3.4" data-path="probabilidad-y-estadística.html"><a href="probabilidad-y-estadística.html#transformada-de-fourier-contínua-y-discreta"><i class="fa fa-check"></i><b>3.4</b> Transformada de Fourier, contínua y discreta</a>
 <ul>
-<li class="chapter" data-level="3.1.1" data-path="probabilidad-y-estadística.html"><a href="probabilidad-y-estadística.html#desigualdades-de-concentración"><i class="fa fa-check"></i><b>3.1.1</b> Desigualdades de concentración</a></li>
+<li class="chapter" data-level="3.4.1" data-path="probabilidad-y-estadística.html"><a href="probabilidad-y-estadística.html#aproximación-numérica-en-una-dimensión"><i class="fa fa-check"></i><b>3.4.1</b> Aproximación numérica en una dimensión</a></li>
+<li class="chapter" data-level="3.4.2" data-path="probabilidad-y-estadística.html"><a href="probabilidad-y-estadística.html#uso-de-la-transformada-de-fourier"><i class="fa fa-check"></i><b>3.4.2</b> Uso de la transformada de Fourier</a></li>
 </ul></li>
-<li class="chapter" data-level="3.2" data-path="probabilidad-y-estadística.html"><a href="probabilidad-y-estadística.html#consideraciones-de-análisis"><i class="fa fa-check"></i><b>3.2</b> Consideraciones de Análisis</a></li>
-<li class="chapter" data-level="3.3" data-path="probabilidad-y-estadística.html"><a href="probabilidad-y-estadística.html#consideraciones-financieras"><i class="fa fa-check"></i><b>3.3</b> Consideraciones financieras</a>
+<li class="chapter" data-level="3.5" data-path="probabilidad-y-estadística.html"><a href="probabilidad-y-estadística.html#consideraciones-financieras"><i class="fa fa-check"></i><b>3.5</b> Consideraciones financieras</a>
 <ul>
-<li class="chapter" data-level="3.3.1" data-path="probabilidad-y-estadística.html"><a href="probabilidad-y-estadística.html#función-de-actualización-o-descuento"><i class="fa fa-check"></i><b>3.3.1</b> Función de actualización o descuento</a></li>
-<li class="chapter" data-level="3.3.2" data-path="probabilidad-y-estadística.html"><a href="probabilidad-y-estadística.html#flujos-financieros"><i class="fa fa-check"></i><b>3.3.2</b> Flujos financieros</a></li>
-<li class="chapter" data-level="3.3.3" data-path="probabilidad-y-estadística.html"><a href="probabilidad-y-estadística.html#flujos-financieros-probables"><i class="fa fa-check"></i><b>3.3.3</b> Flujos financieros probables</a></li>
-<li class="chapter" data-level="3.3.4" data-path="probabilidad-y-estadística.html"><a href="probabilidad-y-estadística.html#sec:equifin"><i class="fa fa-check"></i><b>3.3.4</b> Equilibrio financiero</a></li>
+<li class="chapter" data-level="3.5.1" data-path="probabilidad-y-estadística.html"><a href="probabilidad-y-estadística.html#función-de-actualización-o-descuento"><i class="fa fa-check"></i><b>3.5.1</b> Función de actualización o descuento</a></li>
+<li class="chapter" data-level="3.5.2" data-path="probabilidad-y-estadística.html"><a href="probabilidad-y-estadística.html#flujos-financieros"><i class="fa fa-check"></i><b>3.5.2</b> Flujos financieros</a></li>
+<li class="chapter" data-level="3.5.3" data-path="probabilidad-y-estadística.html"><a href="probabilidad-y-estadística.html#flujos-financieros-probables"><i class="fa fa-check"></i><b>3.5.3</b> Flujos financieros probables</a></li>
+<li class="chapter" data-level="3.5.4" data-path="probabilidad-y-estadística.html"><a href="probabilidad-y-estadística.html#sec:equifin"><i class="fa fa-check"></i><b>3.5.4</b> Equilibrio financiero</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="distribuciones.html"><a href="distribuciones.html"><i class="fa fa-check"></i><b>4</b> Distribuciones</a>
@@ -493,8 +496,8 @@ a la integral de Riemann-Stieltjes utilizando la distribución acumulada empíri
 <p>De ello tenemos los siguientes resultados de cálculo para el valor esperado de la severidad total
 <span class="math display">\[\begin{eqnarray*}
 \mathbb{E}[S] = \sum\limits_{i=1}^n e^{ \mu_i + \frac{1}{2} \sigma_i^2 } &amp; = &amp; 34562.7208, \\
-\overline{S} = \frac{1}{m} \sum\limits_{i=1}^m S_i &amp; = &amp; 32704.9562, \\
-\sum\limits_{i=1}^N s_{i} \left( F_m( s_{i+1} ) - F_m( s_{i} ) \right) &amp; = &amp; 32682.0356
+\overline{S} = \frac{1}{m} \sum\limits_{i=1}^m S_i &amp; = &amp; 32633.4318, \\
+\sum\limits_{i=1}^N s_{i} \left( F_m( s_{i+1} ) - F_m( s_{i} ) \right) &amp; = &amp; 32616.0226
 \end{eqnarray*}\]</span></p>
 <p>Lo bueno de poseer una buena aproximación a la distribución acumulada de una variable aleatoria, es
 que podemos calcular algunos otros valores de importancia relacionados a la variable aleatoria y
@@ -705,7 +708,7 @@ Si consideramos generar la simulación como un modelo individual, generamos vari
 <p></p>
 <p><span class="math display">\[\begin{eqnarray*}
 \mathbb{E}[S] = n p e^{ \mu + \frac{1}{2} \sigma^2 } &amp; = &amp; 219326.6317, \\
-\overline{S} = \frac{1}{m} \sum\limits_{i=1}^m S_i &amp; = &amp; 218047.2187,
+\overline{S} = \frac{1}{m} \sum\limits_{i=1}^m S_i &amp; = &amp; 219463.6329,
 \end{eqnarray*}\]</span></p>
 </div>
 <p>Es importante observar que si la frecuencia de reclamos es superior a <span class="math inline">\(1\)</span>, sea este por póliza,

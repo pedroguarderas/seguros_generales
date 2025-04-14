@@ -75,9 +75,12 @@ preliminares
 notación-matemática
 consideraciones-de-programación-en-r
 probabilidad-y-estadística
-consideraciones-estadísticas
+probabilidad-y-conceptos-asociados
+resultados-de-convergencia
 desigualdades-de-concentración
-consideraciones-de-análisis
+transformada-de-fourier-contínua-y-discreta
+aproximación-numérica-en-una-dimensión
+uso-de-la-transformada-de-fourier
 consideraciones-financieras
 función-de-actualización-o-descuento
 flujos-financieros
