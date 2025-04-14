@@ -629,6 +629,7 @@ P( X \geq \rho \mathbb{E}[ X ] ) \geq ( 1 - \rho )^2 \frac{\mathbb{E}[ X ]^2}{\m
 \end{equation}
 :::
 
+<!------------------------------------------------------------------------------------------------->
 ## Consideraciones de Análisis
 
 <!------------------------------------------------------------------------------------------------->
@@ -636,15 +637,15 @@ P( X \geq \rho \mathbb{E}[ X ] ) \geq ( 1 - \rho )^2 \frac{\mathbb{E}[ X ]^2}{\m
 La **transformada de Fourier** para una función integrable $f : \mathbb{R}^n \longrightarrow \mathbb{R}$, 
 está definida como:
 \begin{equation}
-\mathcal{F}( f )( \omega ) = \frac{1}{(2\pi)^{\frac{n}{2}}} 
-\int\limits_{\mathbb{R}^n} f( x ) \exp( -i \omega \cdot x )\ dx
+\mathcal{F}( f )( \omega ) = 
+\int\limits_{\mathbb{R}^n} f( x ) \exp( -2 \pi i \omega \cdot x )\ dx
 \end{equation}
 
 la inversa de la transformada de Fourier, para una función $g : \mathbb{R}^n \longrightarrow \mathbb{R}$,
 está dada por:
 \begin{equation}
-\mathcal{F}^{-1}( g ) = \frac{1}{(2\pi)^{\frac{n}{2}}} 
-\int\limits_{\mathbb{R}^n} g( x ) \exp( i \omega \cdot x )\ dx
+\mathcal{F}^{-1}( g ) = 
+\int\limits_{\mathbb{R}^n} g( x ) \exp( 2 \pi i \omega \cdot x )\ dx
 \end{equation}
 
 se satisface la siguiente igualdad
@@ -687,7 +688,7 @@ puede considerar $\omega_j = \frac{j}{b-a}$
 & = & h \exp\left( -2\pi i \frac{j}{b-a} a \right) 
 \sum\limits_{k=0}^{N-1} f( x_k ) \exp\left( -2\pi i \frac{jk}{N} \right) \\
 \hat{f}_j & = & h \exp\left( -2\pi i \frac{j}{b-a} a \right) \left( DFT\left[ \{f_k\} \right] \right)_j
-\quad \text{Por definición de la $DFT$}
+\quad \text{por definición de la $DFT$}
 \end{eqnarray*}
 
 entonces, lo anterior implica que podemos recuperar los valores aproximados a $f(x_k)$ utilizando
@@ -746,9 +747,9 @@ f_S = f_{X_1} \star \cdots \star f_{X_n}
 \end{equation}
 sin embargo esta convolución implica el realizar un interación en $n$-dimensiones.
 
-Con el suso de la transformada de Fourier sabemos por la independencia entre las variables $\{X_i\}$
+Con el uso de la transformada de Fourier sabemos por la independencia entre las variables $\{X_i\}$
 que $\mathcal{F}\left( f_S \right) = \prod\limits_{i=1}^n \mathcal{F}\left( F_{X_i} \right)$. Por otra 
-parte, con lo anterior sabemos que es posible aproximar numéricamente cada $\mathcal{F}\left( X_i \rigt)$ 
+parte, con lo anterior sabemos que es posible aproximar numéricamente cada $\mathcal{F}\left( X_i \right)$ 
 con una serie $\{\hat{f}_{i,j}\}$ dada por la discretización de la transformada de Fourier y su aplicación 
 sobre la discretización $f_{i,k} = f_{X_i}( s_k )$. Por tanto, para cada $i \in \{1, \ldots, n\}$, 
 se puede calcular de forma separada las aproximaciones a cada una de las transformadas
@@ -758,8 +759,9 @@ se puede calcular de forma separada las aproximaciones a cada una de las transfo
 = h \exp\left( -2\pi i \omega_j a \right) \left( DFT\left[ \{f_{i,k}\} \right]  \right)_j
 \end{equation}
 
-con lo anterior, se puede también realizar una aproximación a la trasformada de Fourier $\mathcal{F}[f_S]$ 
-de la densidad de probabilidad $f_S$, como el producto de sus transformadas de Fourier.
+con lo anterior, se puede también realizar una aproximación a la trasformada de Fourier 
+$\mathcal{F}\left( f_S \right)$ de la densidad de probabilidad $f_S$, como el producto de sus 
+transformadas de Fourier.
 \begin{equation}
 \mathcal{F}( f_{S} )\left( \omega_j \right)  
 = \prod\limits_{i=1}^n \mathcal{F}\left( F_{X_i} \right)\left( \omega_j \right)
