@@ -68,6 +68,7 @@ options( stringsAsFactors = FALSE )
 
 # Parámetros ---------------------------------------------------------------------------------------
 wd <- paste0( getActiveProject(), '/' )
+setwd( wd )
 
 # Creando directorios ------------------------------------------------------------------------------
 dirs <- c( 'Data', 'RData', 'LaTeX' )
@@ -115,5 +116,7 @@ render_book( input = "index.Rmd", output_format = "bookdown::gitbook", output_di
 
 # render_book( input = "index.Rmd", output_format = "bookdown::pdf_book", output_dir = outdir,
 #              encoding = "UTF-8", config_file = "_bookdown.yml" )
+
+wd <- paste0( getActiveProject(), '/' )
 setwd( wd )
 gc()
