@@ -16,6 +16,7 @@ esta distribución discreta se caracteriza por presentar el valor $k \frac{p_k}{
 conforme cambia $k \in \N$
 :::
 ```{r l4c1}
+set.seed(94312)
 n <- 50
 p <- 0.3
 k <- 2

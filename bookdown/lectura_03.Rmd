@@ -920,6 +920,7 @@ precisamente aproxima a la densidad $f_S$
 
 ```{r l3c9}
 N <- 10000
+set.seed(94312)
 alpha <- sample( x = seq( 1, 20, length = 40 ), size = 50, replace = TRUE )
 theta <- 3
 b <- sum( sapply( alpha, FUN = function( a ) qgamma( 0.9999, shape = a, scale = theta ) ) )

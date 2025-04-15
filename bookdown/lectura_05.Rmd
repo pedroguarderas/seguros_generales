@@ -157,6 +157,8 @@ El siguiente código ejemplifica el algoritmo anterior, donde se asume que cada 
 severidad $X_i$ sigue una ley log-normal $LN( \mu_i, \sigma_i )$, de parámetros $\mu_i, \sigma_i$, 
 para $i \in \{1,\ldots, n\}$.
 ```{r l5c1}
+set.seed(94312)
+
 # 1. número de distribuciones
 n <- 200
 # parámetros para las n distribuciones
