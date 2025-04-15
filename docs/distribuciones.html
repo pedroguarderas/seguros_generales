@@ -423,7 +423,7 @@ de la familia de Panjer.</p>
 que pertenece a la <strong>familia de Panjer</strong>, si sus probabilidades <span class="math inline">\(p_k = P( N = k )\)</span> para cada
 <span class="math inline">\(k \in \mathbb{N}\)</span>, satisfacen la siguiente relación de recurrencia.
 <span class="math display">\[\begin{equation}
-p_k = \left( a + \frac{b}{k} \right)p_{k-1},\qquad \forall k \in \mathbb{N} \setminus \{0\}
+p_k = \left( a + \frac{b}{k} \right)p_{k-1},\qquad \forall k \in \mathbb{N}\setminus \{0\}
 \end{equation}\]</span></p>
 </div>
 <p>Además tenemos la siguiente proposición que caracteriza a la distribución de las variables
@@ -1340,7 +1340,7 @@ f_X( x )
 \mathbb{E}[X]
 &amp; = &amp; \frac{\theta \Gamma\left( \alpha + \frac{1}{\tau}\right)}{\Gamma( \alpha )},
 \quad \text{si}\ 1 &gt; -\alpha \tau \\
-\mathbb{V}[X]
+\[X]
 &amp; = &amp; \frac{\theta^2 \Gamma\left( \alpha + \frac{2}{\tau}\right)}{\Gamma( \alpha )}
 - \frac{\theta^2 \Gamma\left( \alpha + \frac{1}{\tau}\right)^2}{\Gamma( \alpha )^2}
 \end{eqnarray*}\]</span></p>
@@ -1520,7 +1520,7 @@ donde
 <p>Si en caso <span class="math inline">\(\overline{g}\)</span> está fuera de la imagen de <span class="math inline">\(m\)</span>, <span class="math inline">\(\overline{g} \notin m( \Theta )\)</span>, la
 inversión no sería posible. Para resolver este problema se puede recurrir a una distancia <span class="math inline">\(d\)</span> y
 buscar <span class="math inline">\(\hat{g}\)</span> tal que minimize la distancia a <span class="math inline">\(m( \Theta )\)</span>, i.e. 
-<span class="math inline">\(\hat{g} = \underset{h \in m( \Theta )}{\arg \inf}\ d( \overline{g}, h)\)</span>. Una vez determinado
+<span class="math inline">\(\hat{g} = \underset{h \in m( \Theta )}{\operatorname{arginf}}\ d( \overline{g}, h)\)</span>. Una vez determinado
 <span class="math inline">\(\hat{g}\)</span> se toma como estimador de momentos su inversa con <span class="math inline">\(m\)</span>, i.e. 
 <span class="math inline">\(\widehat{\theta} = m^{-1}( \hat{g} )\)</span>.</p>
 <p>Es de notar que en el caso anterior, la selección de la mejor distancia <span class="math inline">\(d\)</span> no es para nada
@@ -1547,7 +1547,7 @@ d( P, Q ) \leq d( P, R ) + d( R, Q )
 <p>A partir de la medida empírica de probabilidad <span class="math inline">\(P_n\)</span>, se busca una probabilidad <span class="math inline">\(P_{\theta}\)</span> que
 minimize la distancia medida con <span class="math inline">\(d\)</span>. Así resulta el estimador con el <strong>método de distancia mínima</strong>
 <span class="math display">\[\begin{equation}
-\widehat{\theta} = \underset{\theta \in \Theta}{\arg\,\inf\,} d\left( P_{\theta}, P_n \right)
+\widehat{\theta} = \underset{\theta \in \Theta}{\operatorname{arginf}} d\left( P_{\theta}, P_n \right)
 \end{equation}\]</span></p>
 <p>Entra las distancias que se puede considerar tenemos las siguientes</p>
 <ul>
@@ -1591,7 +1591,7 @@ probabilidad:
 <p>Así, el estimador por verosimilitud, es el dado por:
 <span class="math display">\[\begin{equation}
 \widehat{\theta}
-= \underset{\theta \in \Theta}{\arg\,\sup\,} \sum\limits_{i=1}^n \log P_{\theta} \left( B_i \right)
+= \underset{\theta \in \Theta}{\operatorname{argsup}} \sum\limits_{i=1}^n \log P_{\theta} \left( B_i \right)
 \end{equation}\]</span></p>
 <p>En la práctica los eventos que se observa <span class="math inline">\(B_i\)</span> son puntuales y son precisamente los valores
 que toma la variable aleatoria <span class="math inline">\(X\)</span>. Es decir, se observa una muestra <span class="math inline">\(X_1, \ldots, X_n\)</span>.</p>

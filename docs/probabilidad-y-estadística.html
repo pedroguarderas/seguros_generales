@@ -383,7 +383,7 @@ medible <span class="math inline">\(X : \Omega \longrightarrow \mathbb{R}^n\)</s
 <!------------------------------------------------------------------------------------------------->
 <div class="definition">
 <p><span id="def:vad" class="definition"><strong>Definición 3.5  (Variable aleatoria discreta) </strong></span>Una variable aleatoria <span class="math inline">\(K: \Omega \longrightarrow D\)</span> que parte del espacio muestral <span class="math inline">\(\Omega\)</span> y toma
-valores en un conjunto discreto <span class="math inline">\(D = \left\{k_i \in \mathbb{R} | i \in \mathbb{N} \right\}\)</span>, sigue
+valores en un conjunto discreto <span class="math inline">\(D = \left\{k_i \in \mathbb{R}| i \in \mathbb{N} \right\}\)</span>, sigue
 una probabilidad discreta dada por las probabilidades <span class="math inline">\(p_i \in [0,1]\)</span> , <span class="math inline">\(i \in \mathbb{N}\)</span>, si
 <span class="math display">\[\begin{equation}
 P\left( K = k_i \right) = p_i,\qquad \forall i \in \mathbb{N}
@@ -441,7 +441,7 @@ F_{X|Y}( x \mid Y \leq y ) = \frac{F_{X,Y}( x, y )}{F_Y( y )}
 está bien definida para <span class="math inline">\(F_Y( y ) \neq 0\)</span></p>
 <!------------------------------------------------------------------------------------------------->
 <div class="definition">
-<p><span id="def:spv" class="definition"><strong>Definición 3.7  (Función supervivencia) </strong></span>La función de <strong>supervivencia</strong> <span class="math inline">\(S : \mathbb{R} \longrightarrow \mathbb{R}\)</span> está asociada a una
+<p><span id="def:spv" class="definition"><strong>Definición 3.7  (Función supervivencia) </strong></span>La función de <strong>supervivencia</strong> <span class="math inline">\(S : \mathbb{R}\longrightarrow \mathbb{R}\)</span> está asociada a una
 variable aleatoria <span class="math inline">\(X\)</span>, está dada por la siguiente:
 <span class="math display">\[\begin{equation}
 S( x ) = 1 - F( x ) = 1 - P( X \leq x ) = P( X &gt; x )
@@ -450,7 +450,7 @@ S( x ) = 1 - F( x ) = 1 - P( X \leq x ) = P( X &gt; x )
 <!------------------------------------------------------------------------------------------------->
 <div class="definition">
 <p><span id="def:lp" class="definition"><strong>Definición 3.8  (Función de densidad de probabilidad) </strong></span>La <strong>densidad de probabilidad</strong> o también la <strong>ley de probabilidad</strong> de una variable aleatoria
-a valores reales <span class="math inline">\(X\)</span>, es una función <span class="math inline">\(f: \mathbb{R} \longrightarrow \mathbb{R}\)</span>, tal que
+a valores reales <span class="math inline">\(X\)</span>, es una función <span class="math inline">\(f: \mathbb{R}\longrightarrow \mathbb{R}\)</span>, tal que
 <span class="math display">\[\begin{equation}
 P( a \leq X \leq b ) = F( b ) - F( a ) = \int\limits_a^b f( x )\ dx
 \end{equation}\]</span></p>
@@ -2007,20 +2007,24 @@ P( X \geq \rho \mathbb{E}[ X ] ) \geq ( 1 - \rho )^2 \frac{\mathbb{E}[ X ]^2}{\m
 <!------------------------------------------------------------------------------------------------->
 <div class="definition">
 <p><span id="def:dfouriertrans" class="definition"><strong>Definición 3.18  (Tansformada de Fourier) </strong></span>La <strong>transformada de Fourier</strong> para una función integrable <span class="math inline">\(f : \mathbb{R}^n \longrightarrow \mathbb{R}\)</span>,
-está definida como:
-<span class="math display">\[\begin{equation}
-\mathcal{F}( f )( \omega ) =
+está definida como un funcional que toma funciones acotadas y general una función usualmente
+integrable a valores complejos en general. De forma más formal, se puede definir la transformada
+de Fourier como una función
+<span class="math inline">\(\mathscr{F}: L^1( \mathbb{R}^n ) \longrightarrow L^{\infty} \left( \mathbb{R}^n, \mathbb{C} \right)\)</span></p>
+<p><span class="math display">\[\begin{equation}
+\mathscr{F}( f )( \omega ) =
 \int\limits_{\mathbb{R}^n} f( x ) \exp( -2 \pi i \omega \cdot x )\ dx
-\end{equation}\]</span></p>
+\end{equation}\]</span>
+donde <span class="math inline">\(i\)</span> es la cantidad compleja <span class="math inline">\(i = \sqrt{-1}\)</span>.</p>
 <p>la inversa de la transformada de Fourier, para una función <span class="math inline">\(g : \mathbb{R}^n \longrightarrow \mathbb{R}\)</span>,
 está dada por:
 <span class="math display">\[\begin{equation}
-\mathcal{F}^{-1}( g ) =
+\mathscr{F}^{-1}( g ) =
 \int\limits_{\mathbb{R}^n} g( x ) \exp( 2 \pi i \omega \cdot x )\ dx
 \end{equation}\]</span></p>
 <p>se satisface la siguiente igualdad
 <span class="math display">\[\begin{equation}
-\mathcal{F}^{-1}\left( \mathcal{F}( f ) \right) = f
+\mathscr{F}^{-1}\left( \mathscr{F}( f ) \right) = f
 \end{equation}\]</span></p>
 <p>Además, la transformada de Fourier satisface las siguientes propiedades:</p>
 <ol style="list-style-type: decimal">
@@ -2028,14 +2032,31 @@ está dada por:
 <span class="math inline">\(f :\mathbb{R}^n \longrightarrow \mathbb{R}\)</span> y <span class="math inline">\(g :\mathbb{R}^n \longrightarrow \mathbb{R}\)</span>, funciones
 integrables.
 <span class="math display">\[\begin{equation}
-\mathcal{F}\left( a f + b g \right) = a \mathcal{F}( f ) + b \mathcal{F}( g )
+\mathscr{F}\left( a f + b g \right) = a \mathscr{F}( f ) + b \mathscr{F}( g )
 \end{equation}\]</span></p></li>
 <li><p>La transformada de Fourier de la convolución de funciones es el producto de las transformadas de
 Fourier.
 <span class="math display">\[\begin{equation}
-\mathcal{F}\left( f \star g \right) = \mathcal{F}( f ) \mathcal{F}( g )
+\mathscr{F}\left( f \star g \right) = \mathscr{F}( f ) \mathscr{F}( g )
 \end{equation}\]</span></p></li>
 </ol>
+</div>
+<div class="definition">
+<p><span id="def:dfouriertransd" class="definition"><strong>Definición 3.19  (Tansformada de Fourier discreta) </strong></span>Dada una secuencia finita de números <span class="math inline">\(x_0, \ldots, x_{N-1}\)</span>, también notada por
+<span class="math inline">\(\{x_k\}_{k \in \{0,\ldots,N-1\}}\)</span> o simplemente <span class="math inline">\(\{x_k\}\)</span> cuando quede entendida su dimensión,
+claramente <span class="math inline">\(\{x_k\}\)</span> puede ser interpretada como un vector en <span class="math inline">\(\mathbb{R}^n\)</span>, indexado desde <span class="math inline">\(0\)</span>.
+Entonces, la <strong>transformada de Fourier discreta</strong> de la secuencia <span class="math inline">\(\{x_k\}\)</span> es la función
+<span class="math inline">\(\operatorname{DFT}: \mathbb{R}^n \longrightarrow \mathbb{R}^n\)</span>, definida por:
+<span class="math display">\[\begin{equation}
+\operatorname{DFT}\left[ \{x_k\} \right]
+= \left\{ \sum\limits_{k=0}^{N-1} x_k \exp\left( -2\pi i \frac{jk}{N} \right) \right\}_j
+\end{equation}\]</span>
+con <span class="math inline">\(j \in \{0, \ldots, N-1 \}\)</span>.</p>
+<p>la inversa de la transformada de Fourier discreta, está simplemente dada por:
+<span class="math display">\[\begin{equation}
+\operatorname{DFT}^{-1}\left[ \{x_k\} \right]
+= \left\{ \frac{1}{N} \sum\limits_{k=0}^{N-1} x_k \exp\left( 2\pi i \frac{jk}{N} \right) \right\}_j
+\end{equation}\]</span></p>
 </div>
 <!------------------------------------------------------------------------------------------------->
 <div id="aproximación-numérica-en-una-dimensión" class="section level3 hasAnchor" number="3.4.1">
@@ -2047,7 +2068,7 @@ discretización uniforme del intervalo <span class="math inline">\([a,b]\)</span
 una secuencia de valores discretos <span class="math inline">\(x_k = a + k h\)</span>, con <span class="math inline">\(h = \frac{b-a}{N}\)</span> y <span class="math inline">\(k \in \{0, \ldots, N\}\)</span>.
 Así, tenemos la siguiente aproximación a la transformada de Fourier.
 <span class="math display">\[\begin{eqnarray*}
-\mathcal{F}( f )( \omega )
+\mathscr{F}( f )( \omega )
 &amp; = &amp; \int\limits_{\mathbb{R}} f( x ) \exp( -2\pi i \omega x )\ dx \\
 &amp; \approx &amp; \int\limits_{a}^b f( x ) \exp( -2\pi i \omega x )\ dx
 \quad \text{dominio finito $[ a, b ]$ que concentra la integral} \\
@@ -2056,22 +2077,29 @@ Así, tenemos la siguiente aproximación a la transformada de Fourier.
 &amp; = &amp; h \sum\limits_{k=0}^{N-1} f( x_k ) \exp( -2\pi i \omega ( a + k h ) ) \\
 &amp; = &amp; h \exp( -i 2\pi \omega a ) \sum\limits_{k=0}^{N-1} f( x_k ) \exp\left( -2\pi i \omega k \frac{b - a}{N} \right)
 \end{eqnarray*}\]</span>
-donde <span class="math inline">\(\{f_k\}\)</span> es la secuencia finita de números <span class="math inline">\(f_k = f( x_k )\)</span> y <span class="math inline">\(DFT\)</span> es la transformada de
+donde <span class="math inline">\(\{f_k\}\)</span> es la secuencia finita de números <span class="math inline">\(f_k = f( x_k )\)</span> y <span class="math inline">\(\operatorname{DFT}\)</span> es la transformada de
 Fourier Discreta. La anterior relación es una aproximación para todo <span class="math inline">\(\omega\)</span>. En particular se
 puede considerar <span class="math inline">\(\omega_j = \frac{j}{b-a}\)</span>
 <span class="math display">\[\begin{eqnarray*}
-\mathcal{F}( f )\left( \omega_j \right)
+\mathscr{F}( f )\left( \omega_j \right)
 &amp; = &amp; h \exp\left( -2\pi i \frac{j}{b-a} a \right)
 \sum\limits_{k=0}^{N-1} f( x_k ) \exp\left( -2\pi i \frac{jk}{N} \right) \\
-\hat{f}_j &amp; = &amp; h \exp\left( -2\pi i \frac{j}{b-a} a \right) \left( DFT\left[ \{f_k\} \right] \right)_j
-\quad \text{por definición de la $DFT$}
+\hat{f}_j &amp; = &amp; h \exp\left( -2\pi i \frac{j}{b-a} a \right) \left( \operatorname{DFT}\left[ \{f_k\} \right] \right)_j
+\quad \text{por definición de la $\operatorname{DFT}$}
 \end{eqnarray*}\]</span></p>
 <p>entonces, lo anterior implica que podemos recuperar los valores aproximados a <span class="math inline">\(f(x_k)\)</span> utilizando
 la transformada de Fourier discreta y su inversión.
 <span class="math display">\[\begin{equation}
 \{f( x_k )\}
-\approx DFT^{-1}\left[ DFT\left[ \{f_k\} \right] \right]
-= DFT^{-1}\left[ \left\{ \frac{1}{h} \exp\left( 2\pi i \frac{j}{b-a} a \right) \hat{f}_j \right\} \right]
+\approx \operatorname{DFT}^{-1}\left[ \operatorname{DFT}\left[ \{f_k\} \right] \right]
+= \operatorname{DFT}^{-1}\left[ \left\{ \frac{1}{h} \exp\left( 2\pi i \frac{j}{b-a} a \right) \hat{f}_j \right\} \right]
+\end{equation}\]</span></p>
+<p>es de notar que numérica por la aritmética en coma flotante la expresión <span class="math inline">\(\operatorname{DFT}^{-1}\left[ \left\{ \frac{1}{h} \exp\left( 2\pi i \frac{j}{b-a} a \right) \hat{f}_j \right\} \right]\)</span> puede tener parte compleja
+muy pequeña, cercana a <span class="math inline">\(0\)</span>. Para superar este posible problema numérico tomamos solo la parte real.
+<span class="math display">\[\begin{equation}
+\{f( x_k )\}
+\approx \operatorname{Re}\left( \operatorname{DFT}^{-1}\left[ \left\{ \frac{1}{h} \exp\left( 2\pi i \frac{j}{b-a} a \right)
+\hat{f}_j \right\} \right] \right)
 \end{equation}\]</span></p>
 <p></p>
 <details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
@@ -2097,7 +2125,7 @@ El error cuadrático de esta aproximación para el caso de la distribución <spa
 como es de esperar es bastante pequeño.
 <span class="math display">\[\begin{equation}
 \left\| \{f( x_k ) \} -
-DFT^{-1}\left[ \left\{ \frac{1}{h} \exp\left( 2\pi i \frac{j}{b-a} a \right) \hat{f}_j \right\} \right] \right\|_2
+\operatorname{DFT}^{-1}\left[ \left\{ \frac{1}{h} \exp\left( 2\pi i \frac{j}{b-a} a \right) \hat{f}_j \right\} \right] \right\|_2
 = 0.00000000000000380764
 \end{equation}\]</span></p>
 <p>Como se puede observar se superponen cada una de las distribuciones la discretización <span class="math inline">\(f_k\)</span> y la
@@ -2111,7 +2139,7 @@ calculada con inversión de la transformada de Fourier discreta.</p>
 <details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb14"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb14-1"><a href="probabilidad-y-estadística.html#cb14-1"></a>e <span class="ot">&lt;-</span> f <span class="sc">-</span> IFf</span>
 <span id="cb14-2"><a href="probabilidad-y-estadística.html#cb14-2"></a>e <span class="ot">&lt;-</span> e <span class="sc">/</span> <span class="fu">sd</span>( e )</span>
-<span id="cb14-3"><a href="probabilidad-y-estadística.html#cb14-3"></a><span class="fu">hist</span>( e, <span class="at">breaks =</span> <span class="dv">40</span>, <span class="at">xlim =</span> <span class="fu">c</span>( <span class="sc">-</span><span class="dv">6</span>, <span class="dv">6</span> ) )</span></code></pre></div>
+<span id="cb14-3"><a href="probabilidad-y-estadística.html#cb14-3"></a><span class="fu">hist</span>( e, <span class="at">breaks =</span> <span class="dv">40</span>, <span class="at">xlim =</span> <span class="fu">c</span>( <span class="sc">-</span><span class="dv">6</span>, <span class="dv">6</span> ), <span class="at">probability =</span> <span class="cn">TRUE</span> )</span></code></pre></div>
 </details>
 <p><img src="seguros_generales_files/figure-html/l2g1-2.png" width="700" /></p>
 <p></p>
@@ -2128,31 +2156,31 @@ aleatorias <span class="math inline">\(X_1, \ldots, X_n\)</span>.
 <span class="math display">\[\begin{equation}
 f_S = f_{X_1} \star \cdots \star f_{X_n}
 \end{equation}\]</span>
-sin embargo esta convolución implica el realizar un interación en <span class="math inline">\(n\)</span>-dimensiones.</p>
+sin embargo esta convolución implica el realizar una interacción en <span class="math inline">\(n\)</span>-dimensiones.</p>
 <p>Con el uso de la transformada de Fourier sabemos por la independencia entre las variables <span class="math inline">\(\{X_i\}\)</span>
-que <span class="math inline">\(\mathcal{F}\left( f_S \right) = \prod\limits_{i=1}^n \mathcal{F}\left( F_{X_i} \right)\)</span>. Por otra
-parte, con lo anterior sabemos que es posible aproximar numéricamente cada <span class="math inline">\(\mathcal{F}\left( X_i \right)\)</span>
+que <span class="math inline">\(\mathscr{F}\left( f_S \right) = \prod\limits_{i=1}^n \mathscr{F}\left( F_{X_i} \right)\)</span>. Por otra
+parte, con lo anterior sabemos que es posible aproximar numéricamente cada <span class="math inline">\(\mathscr{F}\left( X_i \right)\)</span>
 con una serie <span class="math inline">\(\{\hat{f}_{i,j}\}\)</span> dada por la discretización de la transformada de Fourier y su aplicación
 sobre la discretización <span class="math inline">\(f_{i,k} = f_{X_i}( s_k )\)</span>. Por tanto, para cada <span class="math inline">\(i \in \{1, \ldots, n\}\)</span>,
 se puede calcular de forma separada las aproximaciones a cada una de las transformadas
 <span class="math display">\[\begin{equation}
-\mathcal{F}( f_{X_i} )\left( \omega_j \right)  
+\mathscr{F}( f_{X_i} )\left( \omega_j \right)  
 \approx \hat{f}_{i,j}
-= h \exp\left( -2\pi i \omega_j a \right) \left( DFT\left[ \{f_{i,k}\} \right]  \right)_j
+= h \exp\left( -2\pi i \omega_j a \right) \left( \operatorname{DFT}\left[ \{f_{i,k}\} \right]  \right)_j
 \end{equation}\]</span></p>
 <p>con lo anterior, se puede también realizar una aproximación a la trasformada de Fourier
-<span class="math inline">\(\mathcal{F}\left( f_S \right)\)</span> de la densidad de probabilidad <span class="math inline">\(f_S\)</span>, como el producto de sus
+<span class="math inline">\(\mathscr{F}\left( f_S \right)\)</span> de la densidad de probabilidad <span class="math inline">\(f_S\)</span>, como el producto de sus
 transformadas de Fourier.
 <span class="math display">\[\begin{equation}
-\mathcal{F}( f_{S} )\left( \omega_j \right)  
-= \prod\limits_{i=1}^n \mathcal{F}\left( F_{X_i} \right)\left( \omega_j \right)
+\mathscr{F}( f_{S} )\left( \omega_j \right)  
+= \prod\limits_{i=1}^n \mathscr{F}\left( F_{X_i} \right)\left( \omega_j \right)
 \approx \prod\limits_{i=1}^n \hat{f}_{i,j}
 \end{equation}\]</span></p>
 <p>finalmente utilizando la inversión de la transformada de Fourier discreta podemos calcular una
 serie que precisamente aproxima a la densidad <span class="math inline">\(f_S\)</span>
 <span class="math display">\[\begin{equation}
 \{ f_{S}( s_k ) \}
-\approx DFT^{-1}\left[ \left\{ \frac{1}{h} \exp\left( 2\pi i \omega_j a \right)
+\approx \operatorname{DFT}^{-1}\left[ \left\{ \frac{1}{h} \exp\left( 2\pi i \omega_j a \right)
 \prod\limits_{i=1}^n \hat{f}_{i,j} \right\} \right]
 \end{equation}\]</span></p>
 <p></p>
@@ -2203,7 +2231,7 @@ financieras como las siguientes:</p>
 <div id="función-de-actualización-o-descuento" class="section level3 hasAnchor" number="3.5.1">
 <h3><span class="header-section-number">3.5.1</span> Función de actualización o descuento<a href="probabilidad-y-estadística.html#función-de-actualización-o-descuento" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="definition">
-<p><span id="def:deffact" class="definition"><strong>Definición 3.19  (Funciones de atualización y capitalización) </strong></span>La <strong>función de actualización</strong> de flujos <span class="math inline">\(v: \mathbb{R} \times \mathbb{R} \longrightarrow [0,1]\)</span>, al
+<p><span id="def:deffact" class="definition"><strong>Definición 3.20  (Funciones de atualización y capitalización) </strong></span>La <strong>función de actualización</strong> de flujos <span class="math inline">\(v: \mathbb{R}\times \mathbb{R}\longrightarrow [0,1]\)</span>, al
 evaluar en <span class="math inline">\(s, t \in \mathbb{R}, s\leq t, v(s,t)\)</span>, diremos que actualizamos los flujos que se
 producen en el tiempo <span class="math inline">\(t\)</span>, valorados desde el tiempo <span class="math inline">\(s\)</span>. Además la función de actualización tiene
 las siguientes propiedades:</p>
@@ -2212,7 +2240,7 @@ las siguientes propiedades:</p>
 <li><p>Si <span class="math inline">\(s \leq t, v(s,t) \leq 1\)</span>,</p></li>
 <li><p>Si <span class="math inline">\(r \leq s \leq t, v( r, s ) v( s, t ) = v( r, t )\)</span>.</p></li>
 </ol>
-<p>La <strong>función de capitalización</strong>, es la función <span class="math inline">\(u: \mathbb{R} \times \mathbb{R} \longrightarrow [0,1]\)</span>,
+<p>La <strong>función de capitalización</strong>, es la función <span class="math inline">\(u: \mathbb{R}\times \mathbb{R}\longrightarrow [0,1]\)</span>,
 tal que <span class="math inline">\(u( s, t ) v( s, t ) = 1\)</span>.</p>
 </div>
 <p>El caso más particular y sencillo se presenta cuando la función de actualización es generada

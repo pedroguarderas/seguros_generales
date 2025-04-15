@@ -383,7 +383,7 @@ llamamos <strong>tarificación</strong> (pricing).</p>
 <div id="medidas-de-riesgo" class="section level2 hasAnchor" number="6.2">
 <h2><span class="header-section-number">6.2</span> Medidas de riesgo<a href="tarificación.html#medidas-de-riesgo" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div class="definition">
-<p><span id="def:spv" class="definition"><strong>Definición 3.7  (Medida de riesgo coherente) </strong></span>Una <strong>medida de riesgo coeherente</strong> es una función <span class="math inline">\(\zeta: \mathbb{R} \longrightarrow \mathbb{R}\)</span>,
+<p><span id="def:spv" class="definition"><strong>Definición 3.7  (Medida de riesgo coherente) </strong></span>Una <strong>medida de riesgo coeherente</strong> es una función <span class="math inline">\(\zeta: \mathbb{R}\longrightarrow \mathbb{R}\)</span>,
 que satisface la siguientes propiedades:</p>
 <ol style="list-style-type: decimal">
 <li><p><strong>Homogenidad positiva</strong>, para cualquier <span class="math inline">\(a &gt; 0\)</span>
@@ -406,66 +406,66 @@ que satisface la siguientes propiedades:</p>
 </div>
 <p>En lo que continúa citamos algunas de las medidas de riesgo usualmente utilizadas.</p>
 <div class="definition">
-<p><span id="def:VaR" class="definition"><strong>Definición 6.1  (Valor en riesgo) </strong></span>Dada una variable aleatoria a valores reales <span class="math inline">\(X\)</span>, el <strong>valor en riesgo</strong> (value at risk) de <span class="math inline">\(X\)</span> al
+<p><span id="def:dVaR" class="definition"><strong>Definición 6.1  (Valor en riesgo) </strong></span>Dada una variable aleatoria a valores reales <span class="math inline">\(X\)</span>, el <strong>valor en riesgo</strong> (value at risk) de <span class="math inline">\(X\)</span> al
 nivel de probabilidad <span class="math inline">\(\alpha \in (0,1)\)</span> está dado por
 <span class="math display">\[\begin{equation}
-VaR_{\alpha}( X ) = \inf\left\{ x \in \mathbb{R} \middle| F_X( x ) &gt; \alpha \right\}
+\operatorname{VaR}_{\alpha}( X ) = \inf\left\{ x \in \mathbb{R}\middle| F_X( x ) &gt; \alpha \right\}
 \end{equation}\]</span></p>
 </div>
 <div class="proposition">
 <p><span id="prp:varinv" class="proposition"><strong>Proposición 6.1  </strong></span>Si la función de distribución acumulada <span class="math inline">\(F_X\)</span> es continua, entonces
-<span class="math inline">\(VaR_{\alpha}( X ) = F_X^{-1}( \alpha )\)</span>.</p>
+<span class="math inline">\(\operatorname{VaR}_{\alpha}( X ) = F_X^{-1}( \alpha )\)</span>.</p>
 </div>
-<p>Por otra parte, <span class="math inline">\(VaR_{\alpha}\)</span> para cualquier <span class="math inline">\(\alpha\)</span> no es una medida de riesgo sub-aditiva.</p>
+<p>Por otra parte, <span class="math inline">\(\operatorname{VaR}_{\alpha}\)</span> para cualquier <span class="math inline">\(\alpha\)</span> no es una medida de riesgo sub-aditiva.</p>
 <div class="definition">
-<p><span id="def:TVaR" class="definition"><strong>Definición 6.2  (Valor en riesgo en la cola) </strong></span>Dada una variable aleatoria a valores reales <span class="math inline">\(X\)</span>, el <strong>valor en riesgo en la colas</strong>
+<p><span id="def:dTVaR" class="definition"><strong>Definición 6.2  (Valor en riesgo en la cola) </strong></span>Dada una variable aleatoria a valores reales <span class="math inline">\(X\)</span>, el <strong>valor en riesgo en la colas</strong>
 (tail value at risk) de <span class="math inline">\(X\)</span> al nivel de probabilidad <span class="math inline">\(\alpha \in (0,1)\)</span> está dado por
 <span class="math display">\[\begin{equation}
-TVaR_{\alpha}( X ) = \frac{1}{1-\alpha} \int\limits_{\alpha}^1 VaR_u( X )\ du
+\operatorname{TVaR}_{\alpha}( X ) = \frac{1}{1-\alpha} \int\limits_{\alpha}^1 \operatorname{VaR}_u( X )\ du
 \end{equation}\]</span></p>
 </div>
 <div class="proposition">
-<p><span id="prp:TVaRcohe" class="proposition"><strong>Proposición 6.2  (Coherencia de la medida TVaR) </strong></span>La medida de riesgo <span class="math inline">\(TVaR_{\alpha}\)</span> es una medida de riesgo coherente si la variable aleatoria
+<p><span id="prp:TVaRcohe" class="proposition"><strong>Proposición 6.2  (Coherencia de la medida TVaR) </strong></span>La medida de riesgo <span class="math inline">\(\operatorname{TVaR}_{\alpha}\)</span> es una medida de riesgo coherente si la variable aleatoria
 sobre la cual se mide es una variable aleatoria continua.</p>
 </div>
 <div class="definition">
-<p><span id="def:CTE" class="definition"><strong>Definición 6.3  (Esperanza condicional en la cola) </strong></span>Dada una variable aleatoria a valores reales <span class="math inline">\(X\)</span>, la <strong>esperanza condicional en la cola</strong>
+<p><span id="def:dCTE" class="definition"><strong>Definición 6.3  (Esperanza condicional en la cola) </strong></span>Dada una variable aleatoria a valores reales <span class="math inline">\(X\)</span>, la <strong>esperanza condicional en la cola</strong>
 (conditional tail expectation) de <span class="math inline">\(X\)</span> al nivel de probabilidad <span class="math inline">\(\alpha \in (0,1)\)</span> está dado por
 <span class="math display">\[\begin{equation}
-CTE_{\alpha}( X ) = \mathbb{E}\left[ X \middle| X &gt; VaR_{\alpha}( X ) \right]
+\operatorname{CTE}_{\alpha}( X ) = \mathbb{E}\left[ X \middle| X &gt; \operatorname{VaR}_{\alpha}( X ) \right]
 \end{equation}\]</span></p>
 </div>
 <div class="proposition">
 <p><span id="prp:eqtvarcte" class="proposition"><strong>Proposición 6.3  </strong></span>Si la función de distribución acumulada <span class="math inline">\(F_X\)</span> de la variable aleatoria <span class="math inline">\(X\)</span> es continua, entonces
 se tiene la siguiente igualdad
 <span class="math display">\[\begin{equation}
-CTE_{\alpha}( X ) = TVaR_{\alpha}( X )
+\operatorname{CTE}_{\alpha}( X ) = \operatorname{TVaR}_{\alpha}( X )
 \end{equation}\]</span></p>
 </div>
 <div class="definition">
-<p><span id="def:CVaR" class="definition"><strong>Definición 6.4  (Valor en riesgo condicionado) </strong></span>Dada una variable aleatoria a valores reales <span class="math inline">\(X\)</span>, el <strong>valor en riesgo condicionado</strong>
+<p><span id="def:dCVaR" class="definition"><strong>Definición 6.4  (Valor en riesgo condicionado) </strong></span>Dada una variable aleatoria a valores reales <span class="math inline">\(X\)</span>, el <strong>valor en riesgo condicionado</strong>
 (conditional value at risk) de <span class="math inline">\(X\)</span> al nivel de probabilidad <span class="math inline">\(\alpha \in (0,1)\)</span> está dado por
 <span class="math display">\[\begin{equation}
-CVaR_{\alpha}( X ) = \mathbb{E}\left[ X - VaR_{\alpha}( X ) \middle| X &gt; VaR_{\alpha}( X ) \right]
-= CTE_{\alpha}( X ) - VaR_{\alpha}( X )
+\operatorname{CVaR}_{\alpha}( X ) = \mathbb{E}\left[ X - \operatorname{VaR}_{\alpha}( X ) \middle| X &gt; \operatorname{VaR}_{\alpha}( X ) \right]
+= \operatorname{CTE}_{\alpha}( X ) - \operatorname{VaR}_{\alpha}( X )
 \end{equation}\]</span></p>
 </div>
 <div class="definition">
-<p><span id="def:ES" class="definition"><strong>Definición 6.5  (Déficit esperado) </strong></span>Dada una variable aleatoria a valores reales <span class="math inline">\(X\)</span>, el <strong>déficit esperado</strong> (expected shortfall) de
+<p><span id="def:dES" class="definition"><strong>Definición 6.5  (Déficit esperado) </strong></span>Dada una variable aleatoria a valores reales <span class="math inline">\(X\)</span>, el <strong>déficit esperado</strong> (expected shortfall) de
 <span class="math inline">\(X\)</span> al nivel de probabilidad <span class="math inline">\(\alpha \in (0,1)\)</span> está dado por
 <span class="math display">\[\begin{equation}
-ES_{\alpha}( X ) = \mathbb{E}\left[ \max\left( X - VaR_{\alpha}( X ), 0 \right) \right]
+\operatorname{ES}_{\alpha}( X ) = \mathbb{E}\left[ \max\left( X - \operatorname{VaR}_{\alpha}( X ), 0 \right) \right]
 \end{equation}\]</span></p>
 </div>
 <div class="definition">
-<p><span id="def:EVaR" class="definition"><strong>Definición 6.6  (Valor en riesgo entrópico) </strong></span>Dada una variable aleatoria a valores reales <span class="math inline">\(X\)</span>, el <strong>valor en riesgo entrópico</strong>
+<p><span id="def:dEVaR" class="definition"><strong>Definición 6.6  (Valor en riesgo entrópico) </strong></span>Dada una variable aleatoria a valores reales <span class="math inline">\(X\)</span>, el <strong>valor en riesgo entrópico</strong>
 (entropic value at risk) de <span class="math inline">\(X\)</span> al nivel de probabilidad <span class="math inline">\(\alpha \in (0,1)\)</span> está dado por
 <span class="math display">\[\begin{equation}
-EVaR_{\alpha}( X ) = \inf\left\{ \frac{1}{t} \ln\left( \frac{M_X( t )}{1 - \alpha} \right) \middle| t &gt; 0 \right\}
+\operatorname{EVaR}_{\alpha}( X ) = \inf\left\{ \frac{1}{t} \ln\left( \frac{M_X( t )}{1 - \alpha} \right) \middle| t &gt; 0 \right\}
 \end{equation}\]</span></p>
 </div>
 <div class="proposition">
-<p><span id="prp:EVaRcohe" class="proposition"><strong>Proposición 6.4  (Coherencia de la medida EVaR) </strong></span>La medida de riesgo <span class="math inline">\(EVaR_{\alpha}\)</span> es una medida de riesgo coherente.</p>
+<p><span id="prp:EVaRcohe" class="proposition"><strong>Proposición 6.4  (Coherencia de la medida EVaR) </strong></span>La medida de riesgo <span class="math inline">\(\operatorname{EVaR}_{\alpha}\)</span> es una medida de riesgo coherente.</p>
 </div>
 <div class="example">
 <p><span id="exm:l6ex2" class="example"><strong>Ejemplo 6.1  </strong></span>Podemos considerar el caso particular donde todos los reclamos se suponen independientes e
@@ -555,12 +555,12 @@ conocidos:</p>
 <li><p>Prima de percentiles para un valor de confianza <span class="math inline">\(\alpha \in [0,1]\)</span> o prima de valor en riesgo
 <span class="math inline">\(VaR_\alpha\)</span>
 <span class="math display">\[\begin{equation}
-  P = \rho( S ) = VaR_\alpha( S ) =  F_S^{-1}( \alpha )
+  P = \rho( S ) = \operatorname{VaR}_\alpha( S ) =  F_S^{-1}( \alpha )
 \end{equation}\]</span></p></li>
 <li><p>Prima de valor en riesgo en la cola (Tail Value at Risk) <span class="math inline">\(TVaR_\alpha\)</span>. Es el promedio uniforme
 de todos los valores en riesgo <span class="math inline">\(VaR_u\)</span>, con <span class="math inline">\(u \geq \alpha\)</span>.
 <span class="math display">\[\begin{equation}
-P = \rho( S ) = TVaR_\alpha( S ) = \frac{1}{1-\alpha} \int\limits_{\alpha}^1 VaR_u( S )\ du
+P = \rho( S ) = \operatorname{TVaR}_\alpha( S ) = \frac{1}{1-\alpha} \int\limits_{\alpha}^1 \operatorname{VaR}_u( S )\ du
 \end{equation}\]</span></p></li>
 </ol>
 <div class="example">
@@ -720,7 +720,7 @@ they may prefer to take a higher deductible to get a lower premium.</p></li>
 <span id="cb55-6"><a href="tarificación.html#cb55-6"></a>p <span class="ot">&lt;-</span> p0 <span class="sc">*</span> <span class="fu">cumprod</span>( <span class="fu">c</span>( <span class="dv">1</span>, a <span class="sc">+</span> b <span class="sc">/</span> k ) )</span>
 <span id="cb55-7"><a href="tarificación.html#cb55-7"></a><span class="fu">sum</span>( p )</span></code></pre></div>
 </details>
-<pre><code>## [1] 0.9593162</code></pre>
+<pre><code>## [1] 0.9761849</code></pre>
 <details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb57"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb57-1"><a href="tarificación.html#cb57-1"></a>k <span class="ot">&lt;-</span> <span class="fu">seq</span>( <span class="dv">0</span>, <span class="dv">100</span>, <span class="dv">1</span> )</span>
 <span id="cb57-2"><a href="tarificación.html#cb57-2"></a><span class="fu">sum</span>( <span class="fu">dpois</span>( k, <span class="at">lambda =</span> l ) )</span></code></pre></div>

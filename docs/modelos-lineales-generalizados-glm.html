@@ -329,9 +329,9 @@ varios paquetes de optimización numérica de una forma eficiente.</p>
 objetivo, esto lo realiza la mayor parte de paquetes de software. El sistema a resolver es el
 siguiente sistema, usualmente no lineal, de dimensión <span class="math inline">\(m\)</span>:</p>
 <p><span class="math display">\[\begin{equation}
-\frac{\partial \ell}{\partial \theta_i}( \theta )
-= \sum\limits_{i=1}^N \left( \frac{\partial \eta}{\partial \theta_i}( \theta ) \cdot T( x_i ) -
-\frac{\partial A}{\partial \theta_i}( \theta ) \right)
+\frac{\partial\ell}{\partial\theta_i}( \theta )
+= \sum\limits_{i=1}^N \left( \frac{\partial\eta}{\partial\theta_i}( \theta ) \cdot T( x_i ) -
+\frac{\partial A}{\partial\theta_i}( \theta ) \right)
 = 0,\qquad \forall i \in \{1,\ldots, m\}
 \end{equation}\]</span></p>
 <p>En la familia exponential tenemos las siguientes distribuciones: <em>normal, exponencial, log-normal,
@@ -352,28 +352,28 @@ de normalización para la distribución de la variable aleatoria <span class="ma
 <p>Así mismo, podemos establecer una cierta relación para la espera de los valores observados
 de <span class="math inline">\(T(X)\)</span> en función de <span class="math inline">\(A\)</span>
 <span class="math display">\[\begin{eqnarray*}
-0 &amp; = &amp; \frac{\partial}{\partial \theta_i} 1 \\
-0 &amp; = &amp; \frac{\partial}{\partial \theta_i} \int\limits f_X( x \mid \theta )\ dx \\
-0 &amp; = &amp; \int\limits h( x ) \frac{\partial}{\partial \theta_i} \exp\left( \eta( \theta ) \cdot T( x ) - A( \theta ) \right)\ dx \\
+0 &amp; = &amp; \frac{\partial}{\partial\theta_i} 1 \\
+0 &amp; = &amp; \frac{\partial}{\partial\theta_i} \int\limits f_X( x \mid \theta )\ dx \\
+0 &amp; = &amp; \int\limits h( x ) \frac{\partial}{\partial\theta_i} \exp\left( \eta( \theta ) \cdot T( x ) - A( \theta ) \right)\ dx \\
 0 &amp; = &amp; \int\limits h( x ) \exp\left( \eta( \theta ) \cdot T( x ) - A( \theta ) \right)
-\left( \frac{\partial \eta}{\partial \theta_i}( \theta )  \cdot T( x ) -  \frac{\partial A}{\partial \theta_i}( \theta ) \right)\ dx \\
+\left( \frac{\partial\eta}{\partial\theta_i}( \theta )  \cdot T( x ) -  \frac{\partial A}{\partial\theta_i}( \theta ) \right)\ dx \\
 0 &amp; = &amp; \int\limits h( x ) \exp\left( \eta( \theta ) \cdot T( x ) - A( \theta ) \right)
-\frac{\partial \eta}{\partial \theta_i}( \theta )  \cdot T( x )\ dx \\
-&amp; &amp; - \frac{\partial A}{\partial \theta_i} ( \theta )
+\frac{\partial\eta}{\partial\theta_i}( \theta )  \cdot T( x )\ dx \\
+&amp; &amp; - \frac{\partial A}{\partial\theta_i} ( \theta )
 \int\limits h( x ) \exp\left( \eta( \theta ) \cdot T( x ) - A( \theta ) \right)\ dx \\
-0 &amp; = &amp; \int \limits \frac{\partial \eta}{\partial \theta_i}( \theta )  \cdot T( x ) f_X( x \mid \theta )\ dx
-- \frac{\partial A}{\partial \theta_i}( \theta ) \int \limits f_X( x \mid \theta )\ dx
+0 &amp; = &amp; \int \limits \frac{\partial\eta}{\partial\theta_i}( \theta )  \cdot T( x ) f_X( x \mid \theta )\ dx
+- \frac{\partial A}{\partial\theta_i}( \theta ) \int \limits f_X( x \mid \theta )\ dx
 \end{eqnarray*}\]</span></p>
 <p>estamos en la capacidad de concluir que:
 <span class="math display">\[\begin{equation}
-\mathbb{E}\left[ \frac{\partial \eta}{\partial \theta_i}( \theta )  \cdot T( X ) \right]
-= \frac{\partial A}{\partial \theta_i}( \theta )
+\mathbb{E}\left[ \frac{\partial\eta}{\partial\theta_i}( \theta )  \cdot T( X ) \right]
+= \frac{\partial A}{\partial\theta_i}( \theta )
 \end{equation}\]</span></p>
 <p>Cuando se da el caso que <span class="math inline">\(\eta\)</span> y <span class="math inline">\(T\)</span> son las funciones identidad, la relación anterior se reduce
 a la siguiente igualdad:
 <span class="math display">\[\begin{equation}
 \mathbb{E}\left[ X_i \right]
-= \frac{\partial A}{\partial \theta_i}( \theta )
+= \frac{\partial A}{\partial\theta_i}( \theta )
 \end{equation}\]</span></p>
 <!------------------------------------------------------------------------------------------------->
 </div>

@@ -328,7 +328,7 @@ alguna hipótesis previa sobre el comportamiento de las variables aleatorias <sp
 <span class="math display">\[\begin{eqnarray*}
 F( S \leq s )
 &amp; = &amp; P\left( \sum\limits_{i=1}^N X_i \leq s \right) \\
-&amp; = &amp; P\left( \sum\limits_{i=1}^N X_i \leq s \land N \in \mathbb{N} \right) \\
+&amp; = &amp; P\left( \sum\limits_{i=1}^N X_i \leq s \land N \in \mathbb{N}\right) \\
 &amp; = &amp; P\left( \bigcup\limits_{n\in \mathbb{N}} \left\{ \sum\limits_{i=1}^N X_i \leq s \land N \in \{n\} \right\}\right) \\
 &amp; = &amp; \sum\limits_{n=0}^{+\infty} P\left( \sum\limits_{i=1}^n X_i \leq s \land N = n \right)
 \qquad \text{probabilidad de eventos disjuntos} \\
@@ -389,25 +389,25 @@ f_S( s )
 &amp; = &amp; f_{X}^{\star n}( s )\quad \text{si $\{X_i\}$ son idénticamente distribuidas}
 \end{eqnarray*}\]</span></p>
 <p>Una posible estrategias para estimar <span class="math inline">\(F_S\)</span> o <span class="math inline">\(f_S\)</span> es utilizar la transformada de Fourier
-<span class="math inline">\(\mathcal{F}\)</span>, la cual convierte las convoluciones en productos y luego invertir de nuevo la
+<span class="math inline">\(\mathscr{F}\)</span>, la cual convierte las convoluciones en productos y luego invertir de nuevo la
 transformada de Fourier.
 <span class="math display">\[\begin{eqnarray*}
 F_S
-&amp; = &amp; \mathcal{F}^{-1}\left( \mathcal{F}\left( F_S \right) \right) \\
-&amp; = &amp; \mathcal{F}^{-1}\left( \mathcal{F}\left( F_{X_1} \star \cdots \star F_{X_n} \right) \right)
+&amp; = &amp; \mathscr{F}^{-1}\left( \mathscr{F}\left( F_S \right) \right) \\
+&amp; = &amp; \mathscr{F}^{-1}\left( \mathscr{F}\left( F_{X_1} \star \cdots \star F_{X_n} \right) \right)
 \quad \text{sin $\{X_i\}$ son independientes} \\
-&amp; = &amp; \mathcal{F}^{-1}\left( \prod\limits_{i=1}^n \mathcal{F}\left( F_{X_i} \right) \right) \\
-&amp; = &amp; \mathcal{F}^{-1}\left( \mathcal{F}\left( F_{X} \right)^n \right)
+&amp; = &amp; \mathscr{F}^{-1}\left( \prod\limits_{i=1}^n \mathscr{F}\left( F_{X_i} \right) \right) \\
+&amp; = &amp; \mathscr{F}^{-1}\left( \mathscr{F}\left( F_{X} \right)^n \right)
 \quad \text{si $\{X_i\}$ sin son idénticamente distribuidas } \\
 \end{eqnarray*}\]</span></p>
 <p>o de forma equivalente para la densidad <span class="math inline">\(f_S\)</span>
 <span class="math display">\[\begin{eqnarray*}
 f_S
-&amp; = &amp; \mathcal{F}^{-1}\left( \mathcal{F}\left( f_S \right) \right) \\
-&amp; = &amp; \mathcal{F}^{-1}\left( \mathcal{F}\left( f_{X_1} \star \cdots \star f_{X_n} \right) \right)
+&amp; = &amp; \mathscr{F}^{-1}\left( \mathscr{F}\left( f_S \right) \right) \\
+&amp; = &amp; \mathscr{F}^{-1}\left( \mathscr{F}\left( f_{X_1} \star \cdots \star f_{X_n} \right) \right)
 \quad \text{sin $\{X_i\}$ son independientes} \\
-&amp; = &amp; \mathcal{F}^{-1}\left( \prod\limits_{i=1}^n \mathcal{F}\left( f_{X_i} \right) \right) \\
-&amp; = &amp; \mathcal{F}^{-1}\left( \mathcal{F}\left( f_{X} \right)^n \right)
+&amp; = &amp; \mathscr{F}^{-1}\left( \prod\limits_{i=1}^n \mathscr{F}\left( f_{X_i} \right) \right) \\
+&amp; = &amp; \mathscr{F}^{-1}\left( \mathscr{F}\left( f_{X} \right)^n \right)
 \quad \text{si $\{X_i\}$ sin son idénticamente distribuidas } \\
 \end{eqnarray*}\]</span></p>
 <!------------------------------------------------------------------------------------------------->
@@ -496,8 +496,8 @@ a la integral de Riemann-Stieltjes utilizando la distribución acumulada empíri
 <p>De ello tenemos los siguientes resultados de cálculo para el valor esperado de la severidad total
 <span class="math display">\[\begin{eqnarray*}
 \mathbb{E}[S] = \sum\limits_{i=1}^n e^{ \mu_i + \frac{1}{2} \sigma_i^2 } &amp; = &amp; 34562.7208, \\
-\overline{S} = \frac{1}{m} \sum\limits_{i=1}^m S_i &amp; = &amp; 36306.4674, \\
-\sum\limits_{i=1}^N s_{i} \left( F_m( s_{i+1} ) - F_m( s_{i} ) \right) &amp; = &amp; 36252.8329
+\overline{S} = \frac{1}{m} \sum\limits_{i=1}^m S_i &amp; = &amp; 33923.6794, \\
+\sum\limits_{i=1}^N s_{i} \left( F_m( s_{i+1} ) - F_m( s_{i} ) \right) &amp; = &amp; 33898.2295
 \end{eqnarray*}\]</span></p>
 <p>Lo bueno de poseer una buena aproximación a la distribución acumulada de una variable aleatoria, es
 que podemos calcular algunos otros valores de importancia relacionados a la variable aleatoria y
@@ -708,7 +708,7 @@ Si consideramos generar la simulación como un modelo individual, generamos vari
 <p></p>
 <p><span class="math display">\[\begin{eqnarray*}
 \mathbb{E}[S] = n p e^{ \mu + \frac{1}{2} \sigma^2 } &amp; = &amp; 219326.6317, \\
-\overline{S} = \frac{1}{m} \sum\limits_{i=1}^m S_i &amp; = &amp; 219038.8999,
+\overline{S} = \frac{1}{m} \sum\limits_{i=1}^m S_i &amp; = &amp; 218551.8441,
 \end{eqnarray*}\]</span></p>
 </div>
 <p>Es importante observar que si la frecuencia de reclamos es superior a <span class="math inline">\(1\)</span>, sea este por póliza,
@@ -862,32 +862,32 @@ agregada <span class="math inline">\(S_n\)</span> y mostraresmo s</p>
 densidad de probabilidad de los reclamos totales <span class="math inline">\(S\)</span>, utilizando la transformada de Fourier. En la
 implementación numérica se utiliza la transformada de Fourier rápida (FFT).
 <span class="math display">\[\begin{equation}
-\mathcal{F}\left( f_S \right)
-= \mathcal{F}\left( f^{\star n}_X \right)
-= \mathcal{F}\left( f_X \right)^{n}
+\mathscr{F}\left( f_S \right)
+= \mathscr{F}\left( f^{\star n}_X \right)
+= \mathscr{F}\left( f_X \right)^{n}
 \end{equation}\]</span></p>
-<p>Por tanto de esta relación como la transformada de Fourier es invertible, existe <span class="math inline">\(\mathcal{F}^{-1}\)</span>.
+<p>Por tanto de esta relación como la transformada de Fourier es invertible, existe <span class="math inline">\(\mathscr{F}^{-1}\)</span>.
 Resulta el siguiente método para calcular la densidad de <span class="math inline">\(S\)</span>
 <span class="math display">\[\begin{equation}
-f_S = \mathcal{F}^{-1}\left( \mathcal{F}\left( f_S \right) \right)
-= \mathcal{F}^{-1}\left(\mathcal{F}\left( f_X \right)^{n} \right)
+f_S = \mathscr{F}^{-1}\left( \mathscr{F}\left( f_S \right) \right)
+= \mathscr{F}^{-1}\left(\mathscr{F}\left( f_X \right)^{n} \right)
 \end{equation}\]</span></p>
 <p>En conclusión para determinar la densidad de probabilidad de <span class="math inline">\(S\)</span> basta conocer la transformada de
 Fourier de la distribución de los reclamos individuales, multiplicarla por si misma <span class="math inline">\(n\)</span> veces y
 tomar la transformada de Fourier inversa.</p>
 <p><span class="math display">\[\begin{eqnarray*}
-\mathcal{F}\left( f_S \right)
-&amp; = &amp; \mathcal{F}\left( \sum\limits_{n=0}^{+\infty} p_n f_X^{\star n} \right) \\
-&amp; = &amp; \sum\limits_{n=0}^{+\infty} p_n \mathcal{F}\left( f_X^{\star n} \right) \\
-&amp; = &amp; \sum\limits_{n=0}^{+\infty} p_n \mathcal{F}\left( f_X \right)^{n}
+\mathscr{F}\left( f_S \right)
+&amp; = &amp; \mathscr{F}\left( \sum\limits_{n=0}^{+\infty} p_n f_X^{\star n} \right) \\
+&amp; = &amp; \sum\limits_{n=0}^{+\infty} p_n \mathscr{F}\left( f_X^{\star n} \right) \\
+&amp; = &amp; \sum\limits_{n=0}^{+\infty} p_n \mathscr{F}\left( f_X \right)^{n}
 \end{eqnarray*}\]</span></p>
 <p>como consecuencia
 <span class="math display">\[\begin{eqnarray*}
 f_S
-&amp; = &amp; \mathcal{F}^{-1}\left( \mathcal{F}\left( f_S \right) \right)\\
-&amp; = &amp; \mathcal{F}^{-1}\left( \sum\limits_{n=0}^{+\infty} p_n \mathcal{F}\left( f_X \right)^{n} \right)\quad
+&amp; = &amp; \mathscr{F}^{-1}\left( \mathscr{F}\left( f_S \right) \right)\\
+&amp; = &amp; \mathscr{F}^{-1}\left( \sum\limits_{n=0}^{+\infty} p_n \mathscr{F}\left( f_X \right)^{n} \right)\quad
 \text{Una sola inversión} \\
-&amp; = &amp; \sum\limits_{n=0}^{+\infty} p_n \mathcal{F}^{-1}\left( \mathcal{F}\left( f_X \right)^{n} \right)\quad
+&amp; = &amp; \sum\limits_{n=0}^{+\infty} p_n \mathscr{F}^{-1}\left( \mathscr{F}\left( f_X \right)^{n} \right)\quad
 \text{Una inversión por cada término en la suma}
 \end{eqnarray*}\]</span></p>
 <p><span class="math display">\[\begin{equation}
