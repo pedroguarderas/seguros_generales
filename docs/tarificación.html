@@ -23,7 +23,7 @@
 <meta name="author" content="" />
 
 
-<meta name="date" content="2025-04-14" />
+<meta name="date" content="2025-04-15" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -488,7 +488,7 @@ idénticamente distribuidos (i.i.d), en este caso con distribución <span class=
 <div class="sourceCode" id="cb45"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb45-1"><a href="tarificación.html#cb45-1"></a><span class="fu">plot</span>( k, VaRX, <span class="at">ylim =</span> <span class="fu">c</span>( <span class="dv">0</span>, <span class="fl">1e3</span> ) )</span>
 <span id="cb45-2"><a href="tarificación.html#cb45-2"></a><span class="fu">points</span>( k, TVaRX, <span class="at">col =</span> <span class="st">&#39;red&#39;</span> )</span></code></pre></div>
 </details>
-<p><img src="seguros_generales_files/figure-html/l5c2-1.png" width="700" /></p>
+<p><img src="seguros_generales_files/figure-html/l6c2-1.png" width="700" /></p>
 <p></p>
 </div>
 <!------------------------------------------------------------------------------------------------->
@@ -580,31 +580,31 @@ las experanzas de <span class="math inline">\(\mathbb{E}[X_i]\)</span>, para cad
 calcular la esperanza del reclamo total <span class="math inline">\(\mathbb{E}[S] = \sum\limits_{i=1}^n \mathbb{E}[X_i]\)</span>.
 Además como asumimos independencia entre los <span class="math inline">\(X_i\)</span>, la varianza de <span class="math inline">\(S\)</span> también puede ser calculada
 fácilmente como <span class="math inline">\(\mathbb{V}[S] = \sum\limits_{i=1}^n \mathbb{V}[X_i]\)</span>.</p>
-<p></p>
-<details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb46"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb46-1"><a href="tarificación.html#cb46-1"></a>EX <span class="ot">&lt;-</span> a <span class="sc">*</span> theta</span>
-<span id="cb46-2"><a href="tarificación.html#cb46-2"></a>VX <span class="ot">&lt;-</span> a <span class="sc">*</span> theta<span class="sc">^</span><span class="dv">2</span></span>
-<span id="cb46-3"><a href="tarificación.html#cb46-3"></a>ES <span class="ot">&lt;-</span> <span class="fu">sum</span>( EX )</span>
-<span id="cb46-4"><a href="tarificación.html#cb46-4"></a>VS <span class="ot">&lt;-</span> <span class="fu">sum</span>( VX )</span>
-<span id="cb46-5"><a href="tarificación.html#cb46-5"></a>SDS <span class="ot">&lt;-</span> <span class="fu">sqrt</span>( VS )</span></code></pre></div>
-</details>
-<p></p>
 <p>También estamos en la capacidad de simular la variable <span class="math inline">\(S\)</span> utilizando un algoritmo de aleatorio,
 para así aproximar los cálculos de sus momentos y otros estadísticos. Primeramente definamos los
 parámetros.</p>
 <p></p>
 <details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb47"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb47-1"><a href="tarificación.html#cb47-1"></a><span class="co"># número de unidades aseguradas</span></span>
-<span id="cb47-2"><a href="tarificación.html#cb47-2"></a>n <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
-<span id="cb47-3"><a href="tarificación.html#cb47-3"></a></span>
-<span id="cb47-4"><a href="tarificación.html#cb47-4"></a><span class="co"># parámetros para cada X_i</span></span>
-<span id="cb47-5"><a href="tarificación.html#cb47-5"></a>a <span class="ot">&lt;-</span> <span class="fu">runif</span>( n, <span class="dv">5</span>, <span class="dv">10</span> )</span>
-<span id="cb47-6"><a href="tarificación.html#cb47-6"></a></span>
-<span id="cb47-7"><a href="tarificación.html#cb47-7"></a><span class="co"># parámetro theta, común a todas las X_i</span></span>
-<span id="cb47-8"><a href="tarificación.html#cb47-8"></a>theta <span class="ot">&lt;-</span> <span class="dv">4</span></span>
-<span id="cb47-9"><a href="tarificación.html#cb47-9"></a></span>
-<span id="cb47-10"><a href="tarificación.html#cb47-10"></a><span class="co"># parámetro para S</span></span>
-<span id="cb47-11"><a href="tarificación.html#cb47-11"></a>A <span class="ot">&lt;-</span> <span class="fu">sum</span>( a )</span></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb46-1"><a href="tarificación.html#cb46-1"></a><span class="co"># número de unidades aseguradas</span></span>
+<span id="cb46-2"><a href="tarificación.html#cb46-2"></a>n <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
+<span id="cb46-3"><a href="tarificación.html#cb46-3"></a></span>
+<span id="cb46-4"><a href="tarificación.html#cb46-4"></a><span class="co"># parámetros para cada X_i</span></span>
+<span id="cb46-5"><a href="tarificación.html#cb46-5"></a>a <span class="ot">&lt;-</span> <span class="fu">runif</span>( n, <span class="dv">5</span>, <span class="dv">10</span> )</span>
+<span id="cb46-6"><a href="tarificación.html#cb46-6"></a></span>
+<span id="cb46-7"><a href="tarificación.html#cb46-7"></a><span class="co"># parámetro theta, común a todas las X_i</span></span>
+<span id="cb46-8"><a href="tarificación.html#cb46-8"></a>theta <span class="ot">&lt;-</span> <span class="dv">4</span></span>
+<span id="cb46-9"><a href="tarificación.html#cb46-9"></a></span>
+<span id="cb46-10"><a href="tarificación.html#cb46-10"></a><span class="co"># parámetro para S</span></span>
+<span id="cb46-11"><a href="tarificación.html#cb46-11"></a>A <span class="ot">&lt;-</span> <span class="fu">sum</span>( a )</span></code></pre></div>
+</details>
+<p></p>
+<p></p>
+<details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
+<div class="sourceCode" id="cb47"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb47-1"><a href="tarificación.html#cb47-1"></a>EX <span class="ot">&lt;-</span> a <span class="sc">*</span> theta</span>
+<span id="cb47-2"><a href="tarificación.html#cb47-2"></a>VX <span class="ot">&lt;-</span> a <span class="sc">*</span> theta<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb47-3"><a href="tarificación.html#cb47-3"></a>ES <span class="ot">&lt;-</span> <span class="fu">sum</span>( EX )</span>
+<span id="cb47-4"><a href="tarificación.html#cb47-4"></a>VS <span class="ot">&lt;-</span> <span class="fu">sum</span>( VX )</span>
+<span id="cb47-5"><a href="tarificación.html#cb47-5"></a>SDS <span class="ot">&lt;-</span> <span class="fu">sqrt</span>( VS )</span></code></pre></div>
 </details>
 <p></p>
 <p>La variable aleatoria del reclamo total <span class="math inline">\(S\)</span> la podemos simular tomando una muestra i.i.d de tamaño <span class="math inline">\(m\)</span>,
@@ -662,11 +662,11 @@ i.e. <span class="math inline">\(S_1,\ldots,S_m\)</span> de la distribución <s
 <span id="cb52-2"><a href="tarificación.html#cb52-2"></a><span class="fu">points</span>( s, Fns <span class="sc">-</span> er, <span class="at">col =</span> <span class="st">&#39;red&#39;</span>, <span class="at">type =</span> <span class="st">&#39;l&#39;</span> )</span>
 <span id="cb52-3"><a href="tarificación.html#cb52-3"></a><span class="fu">points</span>( s, Fns <span class="sc">+</span> er, <span class="at">col =</span> <span class="st">&#39;red&#39;</span>, <span class="at">type =</span> <span class="st">&#39;l&#39;</span> )</span></code></pre></div>
 </details>
-<p><img src="seguros_generales_files/figure-html/l5c7-1.png" width="700" /></p>
+<p><img src="seguros_generales_files/figure-html/l6c7-1.png" width="700" /></p>
 <details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb53"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb53-1"><a href="tarificación.html#cb53-1"></a><span class="fu">hist</span>( <span class="fu">pgamma</span>( S, <span class="at">shape =</span> A, <span class="at">scale =</span> theta ), <span class="at">breaks =</span> <span class="dv">5</span> )</span></code></pre></div>
 </details>
-<p><img src="seguros_generales_files/figure-html/l5c7-2.png" width="700" /></p>
+<p><img src="seguros_generales_files/figure-html/l6c7-2.png" width="700" /></p>
 <p></p>
 </div>
 <!------------------------------------------------------------------------------------------------->
@@ -708,7 +708,7 @@ they may prefer to take a higher deductible to get a lower premium.</p></li>
 <span id="cb54-8"><a href="tarificación.html#cb54-8"></a>datf <span class="ot">&lt;-</span> datf[ <span class="sc">!</span><span class="fu">is.na</span>( gk ) ]</span>
 <span id="cb54-9"><a href="tarificación.html#cb54-9"></a><span class="fu">plot</span>( datf<span class="sc">$</span>k, datf<span class="sc">$</span>gk )</span></code></pre></div>
 </details>
-<p><img src="seguros_generales_files/figure-html/l5c8-1.png" width="700" /></p>
+<p><img src="seguros_generales_files/figure-html/l6c8-1.png" width="700" /></p>
 <p></p>
 <p></p>
 <details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
@@ -720,7 +720,7 @@ they may prefer to take a higher deductible to get a lower premium.</p></li>
 <span id="cb55-6"><a href="tarificación.html#cb55-6"></a>p <span class="ot">&lt;-</span> p0 <span class="sc">*</span> <span class="fu">cumprod</span>( <span class="fu">c</span>( <span class="dv">1</span>, a <span class="sc">+</span> b <span class="sc">/</span> k ) )</span>
 <span id="cb55-7"><a href="tarificación.html#cb55-7"></a><span class="fu">sum</span>( p )</span></code></pre></div>
 </details>
-<pre><code>## [1] 0.9761849</code></pre>
+<pre><code>## [1] 0.9496377</code></pre>
 <details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb57"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb57-1"><a href="tarificación.html#cb57-1"></a>k <span class="ot">&lt;-</span> <span class="fu">seq</span>( <span class="dv">0</span>, <span class="dv">100</span>, <span class="dv">1</span> )</span>
 <span id="cb57-2"><a href="tarificación.html#cb57-2"></a><span class="fu">sum</span>( <span class="fu">dpois</span>( k, <span class="at">lambda =</span> l ) )</span></code></pre></div>
@@ -747,7 +747,7 @@ they may prefer to take a higher deductible to get a lower premium.</p></li>
 <span id="cb60-13"><a href="tarificación.html#cb60-13"></a><span class="fu">plot</span>( x, Fx, <span class="at">type =</span> <span class="st">&#39;s&#39;</span> )</span>
 <span id="cb60-14"><a href="tarificación.html#cb60-14"></a><span class="fu">points</span>( x, FDx, <span class="at">type =</span> <span class="st">&#39;s&#39;</span>, <span class="at">col =</span> <span class="st">&#39;blue&#39;</span> )</span></code></pre></div>
 </details>
-<p><img src="seguros_generales_files/figure-html/l5c10-1.png" width="700" /></p>
+<p><img src="seguros_generales_files/figure-html/l6c10-1.png" width="700" /></p>
 <p></p>
 <p></p>
 <details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
@@ -766,7 +766,9 @@ they may prefer to take a higher deductible to get a lower premium.</p></li>
 <span id="cb61-13"><a href="tarificación.html#cb61-13"></a><span class="fu">plot</span>( x, Fx, <span class="at">type =</span> <span class="st">&#39;s&#39;</span> )</span>
 <span id="cb61-14"><a href="tarificación.html#cb61-14"></a><span class="fu">points</span>( x, FDx, <span class="at">type =</span> <span class="st">&#39;s&#39;</span>, <span class="at">col =</span> <span class="st">&#39;blue&#39;</span> )</span></code></pre></div>
 </details>
-<p><img src="seguros_generales_files/figure-html/l5c11-1.png" width="700" /></p>
+<p><img src="seguros_generales_files/figure-html/l6c11-1.png" width="700" /></p>
+<p></p>
+<p></p>
 <p></p>
 
 <!------------------------------------------------------------------------------------------------->

@@ -20,7 +20,7 @@ thm:tlc
 prp:chebdes
 thm:bein
 thm:ddkw
-tab:l2t1
+tab:l3t1
 thm:dchernoff
 thm:dpaleyzyg
 def:dfouriertrans
@@ -32,7 +32,7 @@ def:dnbinom
 def:dgeo
 def:fampanjer
 prp:chfampanjer
-tab:l3t1
+tab:l4t1
 def:dunif
 def:dexp
 def:dnorm
@@ -61,9 +61,9 @@ def:dEVaR
 prp:EVaRcohe
 exm:l6ex2
 exm:l6ex1
-tab:l6t1
-tab:l6t2
-tab:l6t3
+tab:l8t1
+tab:l8t2
+tab:l8t3
 def:dmaxstab
 thm:tvalext1
 thm:tvalext2

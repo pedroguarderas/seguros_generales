@@ -23,7 +23,7 @@
 <meta name="author" content="" />
 
 
-<meta name="date" content="2025-04-14" />
+<meta name="date" content="2025-04-15" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -476,7 +476,7 @@ distribution function).</p>
 <span id="cb35-14"><a href="modelos-de-pérdida-agregada.html#cb35-14"></a><span class="fu">abline</span>( <span class="at">v =</span> EeS, <span class="at">col =</span> <span class="st">&#39;red&#39;</span> )</span>
 <span id="cb35-15"><a href="modelos-de-pérdida-agregada.html#cb35-15"></a><span class="fu">abline</span>( <span class="at">v =</span> ES, <span class="at">col =</span> <span class="st">&#39;orange&#39;</span> )</span></code></pre></div>
 </details>
-<p><img src="seguros_generales_files/figure-html/l4c2-1.png" width="700" /></p>
+<p><img src="seguros_generales_files/figure-html/l5c2-1.png" width="700" /></p>
 <p></p>
 <p>Para calcular la esperanza de la severidad total <span class="math inline">\(S\)</span>, también se puede utilizar una aproximación
 a la integral de Riemann-Stieltjes utilizando la distribución acumulada empírica <span class="math inline">\(F_m\)</span>.
@@ -496,8 +496,8 @@ a la integral de Riemann-Stieltjes utilizando la distribución acumulada empíri
 <p>De ello tenemos los siguientes resultados de cálculo para el valor esperado de la severidad total
 <span class="math display">\[\begin{eqnarray*}
 \mathbb{E}[S] = \sum\limits_{i=1}^n e^{ \mu_i + \frac{1}{2} \sigma_i^2 } &amp; = &amp; 34562.7208, \\
-\overline{S} = \frac{1}{m} \sum\limits_{i=1}^m S_i &amp; = &amp; 33923.6794, \\
-\sum\limits_{i=1}^N s_{i} \left( F_m( s_{i+1} ) - F_m( s_{i} ) \right) &amp; = &amp; 33898.2295
+\overline{S} = \frac{1}{m} \sum\limits_{i=1}^m S_i &amp; = &amp; 34273.2536, \\
+\sum\limits_{i=1}^N s_{i} \left( F_m( s_{i+1} ) - F_m( s_{i} ) \right) &amp; = &amp; 34255.6677
 \end{eqnarray*}\]</span></p>
 <p>Lo bueno de poseer una buena aproximación a la distribución acumulada de una variable aleatoria, es
 que podemos calcular algunos otros valores de importancia relacionados a la variable aleatoria y
@@ -506,7 +506,7 @@ no tan solo utilizar medidas de tendencia central. Sin embargo, para que esta ap
 <!-- La imagen a continuación muestra el tamaño de la simulación $n$ en función de los parámetros -->
 <!-- $\delta$ y $\varepsilon$. Como se puede observar para tener un error de discrepancia útil, el -->
 <!-- número de simulaciones crece rápidamente -->
-<!-- ```{r l4c4} -->
+<!-- ```{r l5c4} -->
 <!-- e <- seq( 1e-6, 1e-3, length.out = 25 ) -->
 <!-- d <- seq( 1e-6, 1e-3, length.out = length( e ) ) -->
 <!-- n <- outer( e, d, FUN = function( e, d ) return( log( -log( d / 2 ) / ( 2 * e^2 ) ) ) ) -->
@@ -708,7 +708,7 @@ Si consideramos generar la simulación como un modelo individual, generamos vari
 <p></p>
 <p><span class="math display">\[\begin{eqnarray*}
 \mathbb{E}[S] = n p e^{ \mu + \frac{1}{2} \sigma^2 } &amp; = &amp; 219326.6317, \\
-\overline{S} = \frac{1}{m} \sum\limits_{i=1}^m S_i &amp; = &amp; 218551.8441,
+\overline{S} = \frac{1}{m} \sum\limits_{i=1}^m S_i &amp; = &amp; 219188.2640,
 \end{eqnarray*}\]</span></p>
 </div>
 <p>Es importante observar que si la frecuencia de reclamos es superior a <span class="math inline">\(1\)</span>, sea este por póliza,
@@ -795,7 +795,7 @@ asegurador, se configura funciones deducibles sobre los reclamos.</p>
 <span id="cb40-4"><a href="modelos-de-pérdida-agregada.html#cb40-4"></a><span class="fu">plot</span>( Sq, FS, <span class="at">type =</span> <span class="st">&#39;s&#39;</span>, <span class="at">col =</span> <span class="st">&#39;darkgreen&#39;</span> )</span>
 <span id="cb40-5"><a href="modelos-de-pérdida-agregada.html#cb40-5"></a><span class="fu">abline</span>( <span class="at">v =</span> ES, <span class="at">col =</span> <span class="st">&#39;red&#39;</span> )</span></code></pre></div>
 </details>
-<p><img src="seguros_generales_files/figure-html/l4c8-1.png" width="700" /></p>
+<p><img src="seguros_generales_files/figure-html/l5c8-1.png" width="700" /></p>
 <p></p>
 <div class="example">
 <p><span id="exm:l3ex4" class="example"><strong>Ejemplo 5.4  </strong></span>En este caso en particular estudiaremos la velocidad de convergencia del método resultante del
@@ -804,7 +804,7 @@ agregada <span class="math inline">\(S_n\)</span> y mostraresmo s</p>
 <p></p>
 <details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb41"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb41-1"><a href="modelos-de-pérdida-agregada.html#cb41-1"></a>m <span class="ot">&lt;-</span> <span class="dv">500</span></span>
-<span id="cb41-2"><a href="modelos-de-pérdida-agregada.html#cb41-2"></a>n <span class="ot">&lt;-</span> <span class="dv">5000</span></span>
+<span id="cb41-2"><a href="modelos-de-pérdida-agregada.html#cb41-2"></a>n <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
 <span id="cb41-3"><a href="modelos-de-pérdida-agregada.html#cb41-3"></a>u <span class="ot">&lt;-</span> <span class="dv">4</span></span>
 <span id="cb41-4"><a href="modelos-de-pérdida-agregada.html#cb41-4"></a>s <span class="ot">&lt;-</span> <span class="dv">2</span></span>
 <span id="cb41-5"><a href="modelos-de-pérdida-agregada.html#cb41-5"></a>X <span class="ot">&lt;-</span> <span class="fu">lapply</span>( <span class="dv">1</span><span class="sc">:</span>m, <span class="at">FUN =</span> <span class="cf">function</span>( j ) <span class="fu">rlnorm</span>( n, <span class="at">meanlog =</span> u, <span class="at">sdlog =</span> s ) )</span>
@@ -826,7 +826,7 @@ agregada <span class="math inline">\(S_n\)</span> y mostraresmo s</p>
 <span id="cb41-21"><a href="modelos-de-pérdida-agregada.html#cb41-21"></a><span class="fu">plot</span>( <span class="dv">1</span><span class="sc">:</span>n, D, <span class="at">pch =</span> <span class="dv">16</span>, <span class="at">cex =</span> <span class="fl">0.5</span>, <span class="at">type =</span> <span class="st">&#39;l&#39;</span>, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">lty =</span> <span class="dv">1</span>, <span class="at">ylim =</span> <span class="fu">c</span>( <span class="dv">0</span>, <span class="fl">0.5</span> ), <span class="at">col =</span> <span class="st">&#39;royalblue4&#39;</span> )</span>
 <span id="cb41-22"><a href="modelos-de-pérdida-agregada.html#cb41-22"></a><span class="fu">points</span>( <span class="dv">1</span><span class="sc">:</span>n, Bn, <span class="at">type =</span> <span class="st">&#39;l&#39;</span>, <span class="at">lty =</span> <span class="dv">1</span>, <span class="at">col =</span> <span class="st">&#39;red&#39;</span> )</span></code></pre></div>
 </details>
-<p><img src="seguros_generales_files/figure-html/l4c9-1.png" width="700" /></p>
+<p><img src="seguros_generales_files/figure-html/l5c9-1.png" width="700" /></p>
 <p></p>
 </div>
 <p></p>
@@ -844,11 +844,11 @@ agregada <span class="math inline">\(S_n\)</span> y mostraresmo s</p>
 <span id="cb42-11"><a href="modelos-de-pérdida-agregada.html#cb42-11"></a>S <span class="ot">&lt;-</span> <span class="fu">c</span>( <span class="dv">0</span>, <span class="fu">cumsum</span>( dS ) )</span>
 <span id="cb42-12"><a href="modelos-de-pérdida-agregada.html#cb42-12"></a><span class="fu">plot</span>( t, N, <span class="at">type =</span> <span class="st">&#39;s&#39;</span> )</span></code></pre></div>
 </details>
-<p><img src="seguros_generales_files/figure-html/l4c10-1.png" width="700" /></p>
+<p><img src="seguros_generales_files/figure-html/l5c10-1.png" width="700" /></p>
 <details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb43"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb43-1"><a href="modelos-de-pérdida-agregada.html#cb43-1"></a><span class="fu">plot</span>( t, S, <span class="at">type =</span> <span class="st">&#39;s&#39;</span> )</span></code></pre></div>
 </details>
-<p><img src="seguros_generales_files/figure-html/l4c10-2.png" width="700" /></p>
+<p><img src="seguros_generales_files/figure-html/l5c10-2.png" width="700" /></p>
 <p></p>
 <!------------------------------------------------------------------------------------------------->
 </div>
@@ -903,6 +903,8 @@ W_n = \frac{S_n}{n}
 = \mathbb{V}\left[ \frac{S_n}{n} \right]
 = \frac{1}{n^2} \mathbb{V}\left[ S_n \right]
 \end{equation}\]</span></p>
+<p></p>
+<p></p>
 
 <!------------------------------------------------------------------------------------------------->
 </div>
