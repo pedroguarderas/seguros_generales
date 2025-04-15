@@ -121,4 +121,460 @@ el paquete `lubridate`. Para trabajar con distribuciones de probabilidad que se 
 modelar valores extremos utilizamos `fExtremes`. Para varias funcionalidades asociadas a la 
 estimación de modelos de pérdida utilizamos `actuar`.
 
+<!------------------------------------------------------------------------------------------------->
+# Variables aleatorias
 
+> Un ***fenómeno*** es un hecho que puede ser observado.
+> 
+> Un ***experimento*** es la observación de un fenómeno bajo condiciones específicas.
+> 
+> Un ***resultado*** es la información obtenida de un experimento.
+> 
+> Un ***evento*** es un conjunto de uno o más resultados posibles.
+> 
+> Un ***fenómeno estocástico*** es un fenómeno sobre el que se realiza un experimento que puede
+arrojar más de un resultado posible.
+> 
+> Un evento asociado a un fenómeno estocástico se denomina ***evento contingente***.
+
+Una ***variable aleatoria*** es una función que asigna un valor numérico a todo evento contingente.
+
+La ***probabilidad*** es una medida de las posibilidades de que ocurra un evento contingente que 
+toma valores en $[0,1]$.
+
+<!------------------------------------------------------------------------------------------------->
+::: {.definition #va name="Variable aleatoria"}
+Una variable aleatoria $X: \Omega \longrightarrow D$ que parte del espacio muestral $\Omega$ y toma 
+valores en el conjunto de los números reales  $\mathbb{R}$, decimos que sigue la ley 
+$f : \mathbb{R} \longrightarrow \mathbb{R}$, si para cualquier evento $A \subset \Omega$
+\begin{equation}
+P( X \in A )
+= \int\limits_{A} dP_X( x )
+= \int\limits_{A} d(P \circ X^{-1})( x )
+= \int\limits_{X^{-1}( A )} dP( \omega )
+\end{equation}
+:::
+
+<!------------------------------------------------------------------------------------------------->
+::: {.definition #vad name="Variable aleatoria discreta"}
+Una variable aleatoria $K: \Omega \longrightarrow D$ que parte del espacio muestral $\Omega$ y toma 
+valores en un conjunto discreto $D = \left\{k_i \in \mathbb{R} | i \in \mathbb{N} \right\}$, sigue 
+una probabilidad discreta dada por las probabilidades $p_i \in [0,1]$ , $i \in \mathbb{N}$, si
+\begin{equation}
+P\left( K = k_i \right) = p_i,\qquad \forall i \in \mathbb{N}
+\end{equation}
+Además se cumple la **condición de normalización** que es muy importante.
+\begin{equation}
+\sum\limits_{i = 0}^{\infty} p_i = 1
+\end{equation}
+las probabilidades *¡Nunca son negativas!* y *!Suman siempre 1!*.
+:::
+
+<!------------------------------------------------------------------------------------------------->
+::: {.definition #cd name="Función de distribución acumulada"}
+Consideramos una variable aleatoria a valores reales $X$, la **función de distribución acumulada**
+$F$ asociada a la variable aleatoria $X$, está dada por la siguiente relación:
+\begin{equation}
+F( x ) = P( X \leq x )
+\end{equation}
+
+La función de distribución acumulada, tiene las siguientes propiedades:
+
+  1. Para cualquier $x \in \mathbb{R}$, $0 \leq F( x ) \leq 1$,
+  
+  2. La función $F$ es no decreciente,
+  
+  3. La función $F$ es continua por derecha,
+  
+  4. Se satisfacen los siguientes límites:
+  
+\begin{equation}
+\underset{x \rightarrow -\infty}{\lim} F( x ) = 0\qquad
+\underset{x \rightarrow +\infty}{\lim} F( x ) = 1
+\end{equation}
+:::
+
+<!------------------------------------------------------------------------------------------------->
+::: {.definition #spv name="Función supervivencia"}
+La función de **supervivencia** $S : \mathbb{R} \longrightarrow \mathbb{R}$ está asociada a una 
+variable aleatoria $X$, está dada por la siguiente:
+\begin{equation}
+S( x ) = 1 - F( x ) = 1 - P( X \leq x ) = P( X > x )
+\end{equation}
+:::
+
+<!------------------------------------------------------------------------------------------------->
+::: {.definition #lp name="Función de densidad de probabilidad"}
+La **densidad de probabilidad** o también la **ley de probabilidad** de una variable aleatoria 
+a valores reales $X$, es una función $f: \mathbb{R} \longrightarrow \mathbb{R}$, tal que
+\begin{equation}
+P( a \leq X \leq b ) = F( b ) - F( a ) = \int\limits_a^b f( x )\ dx
+\end{equation}
+
+Así se satisface la siguiente igualdad
+\begin{equation}
+F( x )
+= \int\limits_{(-\infty,x]} f( x )\ dx 
+= \int\limits_{-\infty}^x f( x )\ dx
+\end{equation}
+:::
+
+<!------------------------------------------------------------------------------------------------->
+::: {.definition #em name="Esperanza matemática"}
+Considerando una variable aleatoria discreta $K : \Omega \longrightarrow D = \{k_1, \ldots, k_n\} \subset \mathbb{R}$, la **esperanza matemática** está dada por:
+\begin{equation}
+\mathbb{E}[ K ] 
+= \sum\limits_{i=0}^{\infty} k_i P\left( K = k_i \right)
+= \sum\limits_{i=0}^{\infty} k_i p_i
+\end{equation}
+
+Para el caso de una variable aleatoria continua $X : \Omega \longrightarrow \mathbb{R}$ a valores 
+reales, la esperanza matemática está dada por
+\begin{equation}
+\mathbb{E}[ X ]
+= \int\limits_{\mathbb{\Omega}} X( \omega )\ dP( \omega )
+= \int\limits_{\mathbb{R}} x\ dF( x )
+\end{equation}
+Cuando la función de densidad de probabilidad está bien definida es posible expresar y calcular 
+la esperanza matemática como la siguiente expresión:
+\begin{equation}
+\mathbb{E}[ X ]
+= \int\limits_{\mathbb{R}} x f( x )\ dx
+\end{equation}
+
+La esperanza matemática goza de las siguientes propiedades:
+
+1. Linealidad, $a \in \mathbb{R}$
+\begin{equation}
+\mathbb{E}[ aX + Y ] = a \mathbb{E}[ X ] + \mathbb{E}[ Y ]
+\end{equation}
+
+2. Monotonía, si $X \leq Y$, entonces
+\begin{equation}
+\mathbb{E}[X] \leq \mathbb{E}[Y]
+\end{equation}
+:::
+
+<!------------------------------------------------------------------------------------------------->
+::: {.definition #mgf name="Función generadora de momentos"}
+La **función generadora de momento** de la variable aleatoria a valores reales $X$, es la función:
+\begin{equation}
+M_X( t ) = \mathbb{E}\left[ \exp( t X ) \right]
+\end{equation}
+:::
+
+Si $X_1, \ldots, X_n$ son variables aleatorias y $Y = X_1 + \cdots + X_n$, entonces
+\begin{eqnarray*}
+M_Y( t ) 
+& = & \mathbb{E}\left[ \exp\left( t Y \right) \right] \\
+& = & \mathbb{E}\left[ \exp\left( t \sum\limits_{i=1}^n X_i \right) \right] \\
+& = & \prod\limits_{i=1}^n \mathbb{E}\left[ \exp\left( t X_i \right) \right],\qquad 
+\text{si las variables $X_i$ son independientes} \\
+& = & \left( \mathbb{E}\left[ \exp\left( t X \right) \right] \right)^n,\qquad 
+\text{si las variables $X_i$ son identicamente distribuidas} \\
+& = & \left( M_X( t ) \right)^n
+\end{eqnarray*}
+
+<!------------------------------------------------------------------------------------------------->
+::: {.definition #em name="Varianza"}
+Así mismo su **varianza** es la dada por:
+\begin{equation}
+\mathbb{V}[ X ] 
+= \mathbb{E}\left[ \left( X - \mathbb{E}[ X ] \right)^2 \right]
+= \mathbb{E}\left[ X^2 \right] - \mathbb{E}\left[ X \right]^2
+\end{equation}
+:::
+
+<!------------------------------------------------------------------------------------------------->
+::: {.definition #ind name="Independencia de variables aleatorias"}
+Dos variables aleatorias a valores reales $X$ y $Y$, se dicen independientes si para cualquier par
+de eventos $A$ y $B$, sucede la siguiente factorización de probabilidades
+\begin{equation}
+P( X \in A \land Y \in B ) = P( X \in A ) P( Y \in B)
+\end{equation}
+
+La propiedad anterior, en particular para la función de distribución conjunta, toma la siguiente 
+forma:
+\begin{equation}
+F_{X,Y}( x, y ) = P( X \leq x \land Y \leq y ) 
+= P( X \leq x ) P( Y \leq y ) 
+= F_{X}( x ) F_{Y}( y )
+\end{equation}
+
+Así mismo, para la densidad de probabilidad conjunto, sucede la siguiente factorización
+\begin{equation}
+f_{X,Y}( x, y ) = f_X( x ) f_Y( y )
+\end{equation}
+:::
+
+<!------------------------------------------------------------------------------------------------->
+La siguiente función es utilidad para comprender algunos resultados en teoría de probabilidades. 
+También, es bastante útil para realizar de forma más clara y rápida algunos cálculos.
+
+::: {.definition #indicatriz name="Función indicatriz"}
+La **función indicatriz** de un conjunto $A \subset \Omega$, es la función 
+$\mathbf{1}_A : \Omega \longrightarrow \{0,1\}$, que toma los valores 
+$\mathbf{1}_A( \omega ) = 0$, si $\omega \notin A$ y $\mathbf{1}_A( \omega ) = 1$, si 
+$\omega \in A$.
+:::
+
+La función indicatriz $\mathbf{1}_A$ sobre un evento $A$ del espacio muestral $\Omega$, también se puede
+interpretar como una variable aleatoria, que tan solo tomo los valores $0$ o $1$. Es más, su 
+esperanza es precisamente la probabilidad del evento $A$.
+\begin{equation}
+\mathbb{E}\left[ \mathbf{1}_A \right] 
+= \int\limits_\Omega \mathbf{1}_A( \omega )\ dP( \omega )
+= \int\limits_A dP( \omega )
+= P( A )
+\end{equation}
+
+<!------------------------------------------------------------------------------------------------->
+::: {.definition #dsum name="Distribución de la suma de variables aleatorias"}
+Dadas dos variables aleatorias a valores reales $X$ y $Y$, con funciones de distribución acumulada
+$F_X$ y $F_Y$ respectivamente, la distribución acumulada $F_Z$ de la variable aleatoria $Z = X + Y$ 
+está dada por la siguiente expresión:
+\begin{equation}
+F_Z( z )
+= P( Z \leq z )
+= F_X \star F_Y ( z )
+= \int\limits_{\mathbb{R}} F_X( x - y )dF_Y( y )
+\end{equation}
+
+si en caso se puede definir las densidades de probabilidad $f_X$ y $f_Y$ para las variables 
+aleatorias $X$ y $Y$, entonces:
+\begin{equation}
+f_Z( z ) = f_X \star f_Y ( z )
+= \int\limits_{\mathbb{R}} f_X( x - y ) f_Y( y )\ dy
+\end{equation}
+
+El producto $\star$ se conoce como convolución de funciones, el mismo es simétrico.
+:::
+
+Para cuando se realiza la convolución de varias veces la misma función, se opta por una notación 
+más compacta $f^{\star k}$, para el producto de convolución $k$-veces la misma función 
+$f \star f \star \cdots \star f$.
+
+<!------------------------------------------------------------------------------------------------->
+La siguiente definición de distribución de exceso condicionada es útil para el estudio de los 
+valores extremos que se pueden presentar en el estudio de los valores de siniestros que se presentan
+en un seguro.
+
+::: {.definition #dexceso name="Distribución de exceso condicionada"}
+La **distribución de exceso condicionada** asociada a una variable aleatoria $X$ con distribución 
+de probabilidad acumulada $F$ y a un umbral de condicionamiento $u > 0$, está dada por:
+\begin{equation}
+F_u( y ) = P\left( X - u \leq y \mid X > u \right) 
+= \frac{P\left( u < X \leq y + u\right)}{P(X > u)}
+= \frac{F( u + y ) - F( u )}{ 1 - F( u )}
+\end{equation}
+:::
+
+<!------------------------------------------------------------------------------------------------->
+## Consideraciones estadísticas
+
+De las ramas de las Matemáticas la Estadística ciertamente es la más subestimada, en muchos casos
+menospreciada. Sin embargo, no sin mucha pretención, sino más bien honestidad, se puede decir
+que la Estadística es una de las ramas más complicadas de las Ciencias en general, ya que busca
+en muchos casos comprender, explicar y predecir fenómenos reales. En su fundamentación, al 
+profundizar en ella, uno encontrará un sin número de conceptos, métodos y teorías con
+un amplio espectro de complejidad, que incluso se sustentan en ideas filosóficas bastante elaboradas
+y poco comprendidas.
+
+No olvidar, la Estadística busca de frente y sin rodeos extraer conocimiento de la realidad y no 
+hay algo más complejo y duro que la realidad misma.
+
+Muchos de las herramientas de las estadística se resumen en algunas recetas o aplicaciones de 
+software, sin embargo, no se debe olvidar que en muchos casos estas herramientas hacen uso de 
+muchos métodos bastante avanzados y complejos en lo que respecta al conocimiento Matemático.
+
+::: {.theorem #tlc name="Teorema del límite central"}
+Consideramos las variables aleatorias $X_1,\ldots,X_n$, independientes e idénticamente distribuidas 
+(i.i.d) con media común finita $\mathbb{E}[X_i] = \mu < +\infty$ y varianza común finita
+$\mathbb{V}[ X_i ] = \sigma^2 < +\infty$, para todo $i \in \{1, \ldots, n \}$. Si consideramos la
+variable aleatoria de la suma total $S_n = \sum\limits_{i=1}^n X_i$, entonces
+\begin{equation}
+\frac{S_n - \mathbb{E}[S_n]}{\mathbb{V}[ S_n ]} \overset{d}{\longrightarrow} Z
+\end{equation}
+cuando $n \rightarrow +\infty$, donde $Z \rightsquigarrow N( 0, 1 )$. 
+
+Más aún
+\begin{equation}
+\underset{n \rightarrow +\infty}{\lim} P\left( \frac{S_n 
+- \mathbb{E}[S_n]}{\mathbb{V}[ S_n ]} \leq z \right)
+= \Phi( z )
+\end{equation}
+:::
+
+El teorema del límite central en su forma usual no proporciona una tasa de convergencia es decir,
+la variable aleatoria $\frac{S_n - \mathbb{E}[S_n]}{\mathbb{V}[ S_n ]}$ tiende a tener un 
+comportamiento de una variable aleatoria normal estándar conforme aumenta $n$, pero no estamos 
+seguros que tamaño debe tomar $n$ para que esto se cumpla con una alta certeza. Para ello adicional
+al \@ref(thm:tlc) se debe considerar otros resultados asociados a desigualdades de concentración.
+
+El siguiente teorema es de gran ayuda para estimar la tasa de convergencia del resultado anterior
+\@ref(thm:tlc).
+
+<!------------------------------------------------------------------------------------------------->
+### Desigualdades de concentración 
+
+Para muchos fines prácticos es importante encontrar una buena estimación de donde se encuentran 
+concentrados los valores de una distribución de probabilidad, para ello existen varios resultados
+que caracterizan precisamente ello, estos se conocen como desigualdades de concentración.
+
+::: {.proposition #chebdes name="Desigualdad de Chebyshev (Чебышёв)"}
+Dada una variable aleatoria $X$ con esperanza y varianza finitas $\mathbb{E}[X] <+ \infty$ y 
+$\mathbb{V}[X] < +\infty$, tenemos que se satisface la siguiente desigualdad para cualquier 
+$varepsilon > 0$
+\begin{equation}
+P\left( \left| X - \mathbb{E}[X] \right| > \varepsilon \right) < \frac{1}{\varepsilon^2}
+\mathbb{V}[ X ]
+\end{equation}
+:::
+
+::: {.theorem #bein name="Desigualdad de Berry-Esséen"}
+Sean $X_1, \ldots X_n$ variables aleatoria i.i.d, con media y varianza finitas, i.e 
+$\mathbb{E}[X] < +\infty$ y $\mathbb{V}[X] < +\infty$ y además con tercer momento absoluto finito
+$\mathbb{E}\left[\left|X - \mathbb{E}[X]\right|^3\right] < +\infty$. Entonces, la distribución 
+acumulada $F_n$ de la variable aleatoria
+\begin{equation}
+U_n = \frac{S_n - \mathbb{E}[ S_n ]}{\mathbb{V}[ S_n ]}
+\end{equation}
+con $S_n = \sum\limits_{i=1}^n X_i$. Satisface la siguiente desigualdad respecto de la distribución 
+acumulada de la ley normal $\Phi$.
+\begin{equation}
+\underset{u}{\sup}\left| F_n( u ) - \Phi( u ) \right| \leq \frac{A}{\sqrt{n}} 
+\frac{\mathbb{E}\left[\left|X - \mathbb{E}[X]\right|^3\right]}{\sqrt{\mathbb{V}[X]}^3}
+\end{equation}
+:::
+
+::: {.theorem #ddkw name="Desigualdad Dvoretzky–Kiefer–Wolfowitz"}
+Dada una serie de variables aleatorias a valores reales $X_1, \ldots, X_n$, independientes
+entre si e idénticamente distribuidas (i.i.d), con distribución acumulada $F$, tenemos la siguiente
+desigualdad asociada a la distribución acumulada empírica 
+\begin{equation}
+F_n( x ) = \frac{1}{n}\sum\limits_{i=1}^n \mathbf{1}_{(-\infty,x]}( X_i )
+\end{equation}
+y su aproximación a $F$.
+\begin{equation}
+P\left( \underset{x \in \mathbb{R}}{\sup} \left| F_n( x ) - F( x ) \right| > \varepsilon \right) 
+\leq 2 e^{-2n \varepsilon^2 }\qquad \forall \varepsilon > 0
+\end{equation}
+:::
+
+Como podemos notar el orden de convergencia del teorema es $\sqrt{n}$ en el tamaño de observaciones,
+esto quiere decir que la convergencia es menos que el orden lineal.
+
+Acorde a la desigualdad \@ref(thm:ddkw), para tener un probabilidad baja de aproximación 
+$\delta > 0$ en un error de discrepancia $\varepsilon >0$, necesitamos satisfacer la desigualdad.
+\begin{eqnarray*}
+2 e^{-2n \varepsilon^2 } & \leq & \delta \\
+2n \varepsilon^2 & \geq & -\ln\left( \frac{\delta}{2} \right) \\
+n & \geq & \left\lceil -\frac{1}{2\varepsilon^2} \ln\left( \frac{\delta}{2} \right) \right\rceil
+\end{eqnarray*}
+así se observa que para tener una aproximación de orden $\delta$ y con un error de discrepancia
+$\varepsilon$, se requiere como mínimo realizar un número de simulaciones $n$ de orden 
+logarítmico en $\delta$ y cuadrático en $\varepsilon$.
+
+```{r l2c7}
+delta <- 0.01
+e <- unlist( lapply( seq( 1, 9, 1 ), FUN = function( n ) seq( 9, 1, -1 ) * 10^{-n} ) )
+n <- ceiling( -log( delta / 2 ) / ( 2 * e^2 ) )
+```
+
+```{r l2t1, echo = TRUE, results = 'asis'}
+dt <- data.table( delta = delta, e, n, d = 8 * n / 1024^3 )
+dt %>%
+  kable(
+    caption = 'Error versus número de simulaciones',
+    row.names = FALSE,
+    col.names = c( "$\\delta$", "$\\varepsilon$", "$n$", "GB" ),
+    align = 'llrr',
+    digits = c( 10, 20, 0, 10 ),
+    format.args = list( big.mark = ',', decimal.mark = '.', scientific = FALSE ),
+    escape = FALSE ) %>%
+  kable_classic( font_size = 14, full_width = FALSE, html_font = "Cambria" ) %>%
+  scroll_box( width = "750px", height = "500px" )
+```
+
+<!------------------------------------------------------------------------------------------------->
+## Consideraciones financieras
+Antes de desarrollar el contenido propio del curso, debemos tener en cuenta algunas consideraciones
+financieras como las siguientes:
+
+<!------------------------------------------------------------------------------------------------->
+### Función de actualización o descuento
+La **función de actualización** de flujos $v: \mathbb{R} \times \mathbb{R} \longrightarrow [0,1]$, al
+evaluar en $s, t \in \mathbb{R}, s\leq t, v(s,t)$, diremos que actualizamos los flujos que se 
+producen en el tiempo $t$, valorados desde el tiempo $s$. Además la función de actualización tiene
+las siguientes propiedades:
+  
+1. Si $s = t, v(s,t) = 1$,
+  
+2. Si $s \leq t, v(s,t) \leq 1$,
+  
+3. Si $r \leq s \leq t, v( r, s ) v( s, t ) = v( r, t )$.
+
+El caso más particular y sencillo se presenta cuando la función de actualización es generada
+por una tasa constante $i \in [0,1]$, es decir, $v(s,t) = ( 1 + i )^{t-s}$.
+
+La **función de capitalización**, es la función $u: \mathbb{R} \times \mathbb{R} \longrightarrow [0,1]$,
+tal que $u( s, t ) v( s, t ) = 1$.
+
+<!------------------------------------------------------------------------------------------------->
+### Flujos financieros
+Un flujo financiero discreto $c$ es una serie de valores reales $c(t_1), c(t_2), \cdots, c(t_n)$ 
+que se producen en un número discreto de tiempos $t_0 < t_1 < \cdots < t_n$. 
+
+El **valor presente** de estos flujos, en un tiempo $t \leq t_0$, se lo puede calcular utilizando 
+precisamente la función de actualización $v$
+\begin{equation}
+VP_t( c ) = \sum\limits_{k = 1}^n v( t, t_k )  c( t_k )
+\end{equation}
+cuando $t=0$, se suele solo expresar $VP( c ) = VP_0( c )$.
+
+<!------------------------------------------------------------------------------------------------->
+### Flujos financieros probables
+Un flujo financiero discreto $c$ es una serie de valores reales $c(t_1), c(t_2), \cdots, c(t_n)$ 
+que se producen en un número discreto de tiempos $t_0 < t_1 < \cdots < t_n$. 
+
+El **valor actuarial presente** de estos flujos, en un tiempo $t \leq t_0$, se lo puede calcular 
+utilizando precisamente la función de actualización $v$
+\begin{equation}
+VAP_t( c ) = \mathbb{E}\left[ \sum\limits_{k = 1}^n v( t, t_k )  c( t_k ) \right]
+= \sum\limits_{k = 1}^n v( t, t_k ) \mathbb{E}\left[ c( t_k ) \right]
+\end{equation}
+cuando $t=0$, se suele solo expresar $VAP( c ) = VAP_0( c )$.
+
+Si cada $c(t_k)$ es una variable aleatoria discreta
+\begin{equation}
+VAP_t( c ) = \sum\limits_{k = 1}^n v( t, t_k ) \mathbb{E}\left[ c( t_k ) \right]
+= \sum\limits_{k = 1}^n \sum\limits_{i=1}^{\infty} v( t, t_k ) c_i( t_k ) p_i( t_k )
+\end{equation}
+
+<!------------------------------------------------------------------------------------------------->
+### Equilibrio financiero {#sec:equifin}
+Se dice que un flujo financiero $c(t_1), c(t_2), \cdots, c(t_n)$ como el anterior, está en 
+**equilibrio financiero** si:
+\begin{equation}
+VP_0( c ) = \sum\limits_{k=0}^{n} v( 0, t_k ) c( t_k ) =  0
+\end{equation}
+
+El equilibrio financiero se mantiene en el tiempo, basta observar que para cualquier instante 
+$t \geq 0$
+\begin{eqnarray*}
+0 & = & u( 0, t ) VP_0( c ) \\
+& = & u( 0, t ) \sum\limits_{k=0}^{n} v( 0, t_k ) c( t_k ) \\
+& = & \sum\limits_{t_k \leq t} u( 0, t ) v( 0, t_k ) c( t_k ) 
++ \sum\limits_{t_k > t} u( 0, t ) v( 0, t_k ) c( t_k ) \\
+& = & \sum\limits_{t_k \leq t} u( 0, t_k ) u( t_k, t ) v( 0, t_k ) c( t_k ) 
++ \sum\limits_{t_k > t} u( 0, t ) v( 0, t ) v( t, t_k ) c( t_k ) \\
+& = & \sum\limits_{t_k \leq t} u( t_k, t ) c( t_k ) 
++ \sum\limits_{t_k > t} v( t, t_k ) c( t_k ) \\
+\end{eqnarray*}
+
+Esto implica que el valor actualizado a cualquier instante $t$ de un flujo financiero $c$ que 
+está en equilibrio en un inicio, se mantiene también en equilibrio; siempre y cuando se preserve
+los flujos y tasas de actualización. A pesar de ser un resultado evidente, en la izquierda tenemos 
+los  flujos capitalizados hasta el tiempo $t$ y en la derecha tenemos los flujos actualizados al 
+tiempo $t$. La expresión de la izquierda se conoce como la parte **retrospectiva** y la expresión de 
+la derecha como la parte **prospectiva**.
