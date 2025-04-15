@@ -302,23 +302,24 @@ conforme cambia <span class="math inline">\(k \in \mathbb{N}\)</span></p>
 </div>
 <p></p>
 <details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb18"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb18-1"><a href="distribuciones.html#cb18-1"></a>n <span class="ot">&lt;-</span> <span class="dv">50</span></span>
-<span id="cb18-2"><a href="distribuciones.html#cb18-2"></a>p <span class="ot">&lt;-</span> <span class="fl">0.3</span></span>
-<span id="cb18-3"><a href="distribuciones.html#cb18-3"></a>k <span class="ot">&lt;-</span> <span class="dv">2</span></span>
-<span id="cb18-4"><a href="distribuciones.html#cb18-4"></a>m <span class="ot">&lt;-</span> <span class="dv">100</span></span>
-<span id="cb18-5"><a href="distribuciones.html#cb18-5"></a>N <span class="ot">&lt;-</span> <span class="fu">rbinom</span>( <span class="at">n =</span> m, <span class="at">size =</span> n, <span class="at">prob =</span> p ) <span class="co"># simular una muestra de tamaño m</span></span>
-<span id="cb18-6"><a href="distribuciones.html#cb18-6"></a>pk <span class="ot">&lt;-</span> <span class="fu">dbinom</span>( <span class="at">x =</span> k, <span class="at">size =</span> n, <span class="at">prob =</span> p ) <span class="co"># cálculo de probabilidad P( N = k )</span></span>
-<span id="cb18-7"><a href="distribuciones.html#cb18-7"></a>Pk <span class="ot">&lt;-</span> <span class="fu">pbinom</span>( <span class="at">q =</span> k, <span class="at">size =</span> n, <span class="at">prob =</span> p ) <span class="co"># cálculo de probabilidad P( N &lt;= k )</span></span>
-<span id="cb18-8"><a href="distribuciones.html#cb18-8"></a></span>
-<span id="cb18-9"><a href="distribuciones.html#cb18-9"></a>p <span class="ot">&lt;-</span> <span class="fu">dbinom</span>( <span class="at">x =</span> <span class="dv">0</span><span class="sc">:</span>n, <span class="at">size =</span> n, <span class="at">prob =</span> p )</span>
-<span id="cb18-10"><a href="distribuciones.html#cb18-10"></a>v <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span>n <span class="sc">*</span> p[ <span class="dv">2</span><span class="sc">:</span>(n <span class="sc">+</span> <span class="dv">1</span>) ] <span class="sc">/</span> p[ <span class="dv">1</span><span class="sc">:</span>n ]</span>
-<span id="cb18-11"><a href="distribuciones.html#cb18-11"></a></span>
-<span id="cb18-12"><a href="distribuciones.html#cb18-12"></a>plt <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb18-13"><a href="distribuciones.html#cb18-13"></a>  <span class="fu">geom_point</span>( <span class="fu">aes</span>( <span class="at">x =</span> <span class="dv">1</span><span class="sc">:</span>n, <span class="at">y =</span> v ), <span class="at">colour =</span> <span class="st">&#39;darkred&#39;</span> ) <span class="sc">+</span> </span>
-<span id="cb18-14"><a href="distribuciones.html#cb18-14"></a>  <span class="fu">xlab</span>( <span class="fu">TeX</span>( <span class="st">&quot;$k$&quot;</span> ) ) <span class="sc">+</span> </span>
-<span id="cb18-15"><a href="distribuciones.html#cb18-15"></a>  <span class="fu">ylab</span>( <span class="fu">TeX</span>( <span class="st">&quot;$k </span><span class="sc">\\</span><span class="st">frac{p_k}{p_{k-1}}$&quot;</span> ) ) <span class="sc">+</span> </span>
-<span id="cb18-16"><a href="distribuciones.html#cb18-16"></a>  <span class="fu">theme_bw</span>()</span>
-<span id="cb18-17"><a href="distribuciones.html#cb18-17"></a><span class="fu">plot</span>( plt )</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb18-1"><a href="distribuciones.html#cb18-1"></a><span class="fu">set.seed</span>(<span class="dv">94312</span>)</span>
+<span id="cb18-2"><a href="distribuciones.html#cb18-2"></a>n <span class="ot">&lt;-</span> <span class="dv">50</span></span>
+<span id="cb18-3"><a href="distribuciones.html#cb18-3"></a>p <span class="ot">&lt;-</span> <span class="fl">0.3</span></span>
+<span id="cb18-4"><a href="distribuciones.html#cb18-4"></a>k <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb18-5"><a href="distribuciones.html#cb18-5"></a>m <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb18-6"><a href="distribuciones.html#cb18-6"></a>N <span class="ot">&lt;-</span> <span class="fu">rbinom</span>( <span class="at">n =</span> m, <span class="at">size =</span> n, <span class="at">prob =</span> p ) <span class="co"># simular una muestra de tamaño m</span></span>
+<span id="cb18-7"><a href="distribuciones.html#cb18-7"></a>pk <span class="ot">&lt;-</span> <span class="fu">dbinom</span>( <span class="at">x =</span> k, <span class="at">size =</span> n, <span class="at">prob =</span> p ) <span class="co"># cálculo de probabilidad P( N = k )</span></span>
+<span id="cb18-8"><a href="distribuciones.html#cb18-8"></a>Pk <span class="ot">&lt;-</span> <span class="fu">pbinom</span>( <span class="at">q =</span> k, <span class="at">size =</span> n, <span class="at">prob =</span> p ) <span class="co"># cálculo de probabilidad P( N &lt;= k )</span></span>
+<span id="cb18-9"><a href="distribuciones.html#cb18-9"></a></span>
+<span id="cb18-10"><a href="distribuciones.html#cb18-10"></a>p <span class="ot">&lt;-</span> <span class="fu">dbinom</span>( <span class="at">x =</span> <span class="dv">0</span><span class="sc">:</span>n, <span class="at">size =</span> n, <span class="at">prob =</span> p )</span>
+<span id="cb18-11"><a href="distribuciones.html#cb18-11"></a>v <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span>n <span class="sc">*</span> p[ <span class="dv">2</span><span class="sc">:</span>(n <span class="sc">+</span> <span class="dv">1</span>) ] <span class="sc">/</span> p[ <span class="dv">1</span><span class="sc">:</span>n ]</span>
+<span id="cb18-12"><a href="distribuciones.html#cb18-12"></a></span>
+<span id="cb18-13"><a href="distribuciones.html#cb18-13"></a>plt <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb18-14"><a href="distribuciones.html#cb18-14"></a>  <span class="fu">geom_point</span>( <span class="fu">aes</span>( <span class="at">x =</span> <span class="dv">1</span><span class="sc">:</span>n, <span class="at">y =</span> v ), <span class="at">colour =</span> <span class="st">&#39;darkred&#39;</span> ) <span class="sc">+</span> </span>
+<span id="cb18-15"><a href="distribuciones.html#cb18-15"></a>  <span class="fu">xlab</span>( <span class="fu">TeX</span>( <span class="st">&quot;$k$&quot;</span> ) ) <span class="sc">+</span> </span>
+<span id="cb18-16"><a href="distribuciones.html#cb18-16"></a>  <span class="fu">ylab</span>( <span class="fu">TeX</span>( <span class="st">&quot;$k </span><span class="sc">\\</span><span class="st">frac{p_k}{p_{k-1}}$&quot;</span> ) ) <span class="sc">+</span> </span>
+<span id="cb18-17"><a href="distribuciones.html#cb18-17"></a>  <span class="fu">theme_bw</span>()</span>
+<span id="cb18-18"><a href="distribuciones.html#cb18-18"></a><span class="fu">plot</span>( plt )</span></code></pre></div>
 </details>
 <p><img src="seguros_generales_files/figure-html/l4c1-1.png" width="700" /></p>
 <p></p>

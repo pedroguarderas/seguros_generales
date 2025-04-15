@@ -429,20 +429,22 @@ severidad <span class="math inline">\(X_i\)</span> sigue una ley log-normal <spa
 para <span class="math inline">\(i \in \{1,\ldots, n\}\)</span>.</p>
 <p></p>
 <details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb34"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb34-1"><a href="modelos-de-pérdida-agregada.html#cb34-1"></a><span class="co"># 1. número de distribuciones</span></span>
-<span id="cb34-2"><a href="modelos-de-pérdida-agregada.html#cb34-2"></a>n <span class="ot">&lt;-</span> <span class="dv">200</span></span>
-<span id="cb34-3"><a href="modelos-de-pérdida-agregada.html#cb34-3"></a><span class="co"># parámetros para las n distribuciones</span></span>
-<span id="cb34-4"><a href="modelos-de-pérdida-agregada.html#cb34-4"></a>mu <span class="ot">&lt;-</span> <span class="fu">seq</span>( <span class="dv">1</span>, <span class="dv">2</span>, <span class="at">length.out =</span> n )</span>
-<span id="cb34-5"><a href="modelos-de-pérdida-agregada.html#cb34-5"></a>sigma <span class="ot">&lt;-</span> <span class="fu">seq</span>( <span class="dv">2</span>, <span class="dv">3</span>, <span class="at">length.out =</span> n )</span>
-<span id="cb34-6"><a href="modelos-de-pérdida-agregada.html#cb34-6"></a></span>
-<span id="cb34-7"><a href="modelos-de-pérdida-agregada.html#cb34-7"></a><span class="co"># 2. número de simulaciones</span></span>
-<span id="cb34-8"><a href="modelos-de-pérdida-agregada.html#cb34-8"></a>m <span class="ot">&lt;-</span> <span class="fl">1e4</span> </span>
-<span id="cb34-9"><a href="modelos-de-pérdida-agregada.html#cb34-9"></a></span>
-<span id="cb34-10"><a href="modelos-de-pérdida-agregada.html#cb34-10"></a><span class="co"># 3. simulación de severidades</span></span>
-<span id="cb34-11"><a href="modelos-de-pérdida-agregada.html#cb34-11"></a>X <span class="ot">&lt;-</span> <span class="fu">lapply</span>( <span class="dv">1</span><span class="sc">:</span>m, <span class="at">FUN =</span> <span class="cf">function</span>( i ) <span class="fu">sapply</span>( <span class="dv">1</span><span class="sc">:</span>n, <span class="at">FUN =</span> <span class="cf">function</span>( j ) <span class="fu">rlnorm</span>( <span class="dv">1</span>, <span class="at">meanlog =</span> mu[ j ], <span class="at">sdlog =</span> sigma[ j ] ) ) )</span>
-<span id="cb34-12"><a href="modelos-de-pérdida-agregada.html#cb34-12"></a></span>
-<span id="cb34-13"><a href="modelos-de-pérdida-agregada.html#cb34-13"></a><span class="co"># 4. simulación de severidad total</span></span>
-<span id="cb34-14"><a href="modelos-de-pérdida-agregada.html#cb34-14"></a>S <span class="ot">&lt;-</span> <span class="fu">sapply</span>( X, <span class="at">FUN =</span> <span class="cf">function</span>( x ) <span class="fu">sum</span>( x ) )</span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb34-1"><a href="modelos-de-pérdida-agregada.html#cb34-1"></a><span class="fu">set.seed</span>(<span class="dv">94312</span>)</span>
+<span id="cb34-2"><a href="modelos-de-pérdida-agregada.html#cb34-2"></a></span>
+<span id="cb34-3"><a href="modelos-de-pérdida-agregada.html#cb34-3"></a><span class="co"># 1. número de distribuciones</span></span>
+<span id="cb34-4"><a href="modelos-de-pérdida-agregada.html#cb34-4"></a>n <span class="ot">&lt;-</span> <span class="dv">200</span></span>
+<span id="cb34-5"><a href="modelos-de-pérdida-agregada.html#cb34-5"></a><span class="co"># parámetros para las n distribuciones</span></span>
+<span id="cb34-6"><a href="modelos-de-pérdida-agregada.html#cb34-6"></a>mu <span class="ot">&lt;-</span> <span class="fu">seq</span>( <span class="dv">1</span>, <span class="dv">2</span>, <span class="at">length.out =</span> n )</span>
+<span id="cb34-7"><a href="modelos-de-pérdida-agregada.html#cb34-7"></a>sigma <span class="ot">&lt;-</span> <span class="fu">seq</span>( <span class="dv">2</span>, <span class="dv">3</span>, <span class="at">length.out =</span> n )</span>
+<span id="cb34-8"><a href="modelos-de-pérdida-agregada.html#cb34-8"></a></span>
+<span id="cb34-9"><a href="modelos-de-pérdida-agregada.html#cb34-9"></a><span class="co"># 2. número de simulaciones</span></span>
+<span id="cb34-10"><a href="modelos-de-pérdida-agregada.html#cb34-10"></a>m <span class="ot">&lt;-</span> <span class="fl">1e4</span> </span>
+<span id="cb34-11"><a href="modelos-de-pérdida-agregada.html#cb34-11"></a></span>
+<span id="cb34-12"><a href="modelos-de-pérdida-agregada.html#cb34-12"></a><span class="co"># 3. simulación de severidades</span></span>
+<span id="cb34-13"><a href="modelos-de-pérdida-agregada.html#cb34-13"></a>X <span class="ot">&lt;-</span> <span class="fu">lapply</span>( <span class="dv">1</span><span class="sc">:</span>m, <span class="at">FUN =</span> <span class="cf">function</span>( i ) <span class="fu">sapply</span>( <span class="dv">1</span><span class="sc">:</span>n, <span class="at">FUN =</span> <span class="cf">function</span>( j ) <span class="fu">rlnorm</span>( <span class="dv">1</span>, <span class="at">meanlog =</span> mu[ j ], <span class="at">sdlog =</span> sigma[ j ] ) ) )</span>
+<span id="cb34-14"><a href="modelos-de-pérdida-agregada.html#cb34-14"></a></span>
+<span id="cb34-15"><a href="modelos-de-pérdida-agregada.html#cb34-15"></a><span class="co"># 4. simulación de severidad total</span></span>
+<span id="cb34-16"><a href="modelos-de-pérdida-agregada.html#cb34-16"></a>S <span class="ot">&lt;-</span> <span class="fu">sapply</span>( X, <span class="at">FUN =</span> <span class="cf">function</span>( x ) <span class="fu">sum</span>( x ) )</span></code></pre></div>
 </details>
 <p></p>
 </div>
@@ -496,8 +498,8 @@ a la integral de Riemann-Stieltjes utilizando la distribución acumulada empíri
 <p>De ello tenemos los siguientes resultados de cálculo para el valor esperado de la severidad total
 <span class="math display">\[\begin{eqnarray*}
 \mathbb{E}[S] = \sum\limits_{i=1}^n e^{ \mu_i + \frac{1}{2} \sigma_i^2 } &amp; = &amp; 34562.7208, \\
-\overline{S} = \frac{1}{m} \sum\limits_{i=1}^m S_i &amp; = &amp; 35805.0631, \\
-\sum\limits_{i=1}^N s_{i} \left( F_m( s_{i+1} ) - F_m( s_{i} ) \right) &amp; = &amp; 35677.4091
+\overline{S} = \frac{1}{m} \sum\limits_{i=1}^m S_i &amp; = &amp; 34696.1778, \\
+\sum\limits_{i=1}^N s_{i} \left( F_m( s_{i+1} ) - F_m( s_{i} ) \right) &amp; = &amp; 34667.8086
 \end{eqnarray*}\]</span></p>
 <p>Lo bueno de poseer una buena aproximación a la distribución acumulada de una variable aleatoria, es
 que podemos calcular algunos otros valores de importancia relacionados a la variable aleatoria y
@@ -712,7 +714,7 @@ Si consideramos generar la simulación como un modelo individual, generamos vari
 <p></p>
 <p><span class="math display">\[\begin{eqnarray*}
 \mathbb{E}[S] = n p e^{ \mu + \frac{1}{2} \sigma^2 } &amp; = &amp; 219326.6317, \\
-\overline{S} = \frac{1}{m} \sum\limits_{i=1}^m S_i &amp; = &amp; 220338.7282,
+\overline{S} = \frac{1}{m} \sum\limits_{i=1}^m S_i &amp; = &amp; 220503.6869,
 \end{eqnarray*}\]</span></p>
 </div>
 <p>Es importante observar que si la frecuencia de reclamos es superior a <span class="math inline">\(1\)</span>, sea este por póliza,

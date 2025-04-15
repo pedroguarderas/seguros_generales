@@ -473,15 +473,16 @@ se tiene la siguiente igualdad
 idénticamente distribuidos (i.i.d), en este caso con distribución <span class="math inline">\(X_i \rightsquigarrow LN(\mu,\sigma)\)</span></p>
 <p></p>
 <details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb44"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb44-1"><a href="tarificación.html#cb44-1"></a>u <span class="ot">&lt;-</span> <span class="dv">4</span></span>
-<span id="cb44-2"><a href="tarificación.html#cb44-2"></a>s <span class="ot">&lt;-</span> <span class="fl">0.5</span></span>
-<span id="cb44-3"><a href="tarificación.html#cb44-3"></a>n <span class="ot">&lt;-</span> <span class="fl">1e4</span></span>
-<span id="cb44-4"><a href="tarificación.html#cb44-4"></a>X <span class="ot">&lt;-</span> <span class="fu">rlnorm</span>( n, <span class="at">meanlog =</span> u, <span class="at">sdlog =</span> s )</span>
-<span id="cb44-5"><a href="tarificación.html#cb44-5"></a>k <span class="ot">&lt;-</span> <span class="fu">seq</span>( <span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.2</span> ) </span>
-<span id="cb44-6"><a href="tarificación.html#cb44-6"></a>VaRX <span class="ot">&lt;-</span> <span class="fu">quantile</span>( X, <span class="at">probs =</span> k, <span class="at">names =</span> <span class="cn">FALSE</span> )</span>
-<span id="cb44-7"><a href="tarificación.html#cb44-7"></a>TVaRX <span class="ot">&lt;-</span> <span class="fu">sapply</span>( </span>
-<span id="cb44-8"><a href="tarificación.html#cb44-8"></a>  <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>( VaRX ), </span>
-<span id="cb44-9"><a href="tarificación.html#cb44-9"></a>  <span class="at">FUN =</span> <span class="cf">function</span>( i ) <span class="fu">ifelse</span>( k[ i ] <span class="sc">&lt;</span> <span class="dv">1</span>, ( <span class="dv">1</span> <span class="sc">/</span> ( <span class="dv">1</span> <span class="sc">-</span> k[ i ] ) ) <span class="sc">*</span> <span class="fu">mean</span>( X <span class="sc">*</span> ( X <span class="sc">&gt;</span> VaRX[ i ] ) ), <span class="fu">max</span>( X ) ) )</span></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb44-1"><a href="tarificación.html#cb44-1"></a><span class="fu">set.seed</span>(<span class="dv">94312</span>)</span>
+<span id="cb44-2"><a href="tarificación.html#cb44-2"></a>u <span class="ot">&lt;-</span> <span class="dv">4</span></span>
+<span id="cb44-3"><a href="tarificación.html#cb44-3"></a>s <span class="ot">&lt;-</span> <span class="fl">0.5</span></span>
+<span id="cb44-4"><a href="tarificación.html#cb44-4"></a>n <span class="ot">&lt;-</span> <span class="fl">1e4</span></span>
+<span id="cb44-5"><a href="tarificación.html#cb44-5"></a>X <span class="ot">&lt;-</span> <span class="fu">rlnorm</span>( n, <span class="at">meanlog =</span> u, <span class="at">sdlog =</span> s )</span>
+<span id="cb44-6"><a href="tarificación.html#cb44-6"></a>k <span class="ot">&lt;-</span> <span class="fu">seq</span>( <span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.2</span> ) </span>
+<span id="cb44-7"><a href="tarificación.html#cb44-7"></a>VaRX <span class="ot">&lt;-</span> <span class="fu">quantile</span>( X, <span class="at">probs =</span> k, <span class="at">names =</span> <span class="cn">FALSE</span> )</span>
+<span id="cb44-8"><a href="tarificación.html#cb44-8"></a>TVaRX <span class="ot">&lt;-</span> <span class="fu">sapply</span>( </span>
+<span id="cb44-9"><a href="tarificación.html#cb44-9"></a>  <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>( VaRX ), </span>
+<span id="cb44-10"><a href="tarificación.html#cb44-10"></a>  <span class="at">FUN =</span> <span class="cf">function</span>( i ) <span class="fu">ifelse</span>( k[ i ] <span class="sc">&lt;</span> <span class="dv">1</span>, ( <span class="dv">1</span> <span class="sc">/</span> ( <span class="dv">1</span> <span class="sc">-</span> k[ i ] ) ) <span class="sc">*</span> <span class="fu">mean</span>( X <span class="sc">*</span> ( X <span class="sc">&gt;</span> VaRX[ i ] ) ), <span class="fu">max</span>( X ) ) )</span></code></pre></div>
 </details>
 <p></p>
 <p></p>
@@ -721,7 +722,7 @@ they may prefer to take a higher deductible to get a lower premium.</p></li>
 <span id="cb55-6"><a href="tarificación.html#cb55-6"></a>p <span class="ot">&lt;-</span> p0 <span class="sc">*</span> <span class="fu">cumprod</span>( <span class="fu">c</span>( <span class="dv">1</span>, a <span class="sc">+</span> b <span class="sc">/</span> k ) )</span>
 <span id="cb55-7"><a href="tarificación.html#cb55-7"></a><span class="fu">sum</span>( p )</span></code></pre></div>
 </details>
-<pre><code>## [1] 1.138913</code></pre>
+<pre><code>## [1] 0.9577607</code></pre>
 <details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb57"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb57-1"><a href="tarificación.html#cb57-1"></a>k <span class="ot">&lt;-</span> <span class="fu">seq</span>( <span class="dv">0</span>, <span class="dv">100</span>, <span class="dv">1</span> )</span>
 <span id="cb57-2"><a href="tarificación.html#cb57-2"></a><span class="fu">sum</span>( <span class="fu">dpois</span>( k, <span class="at">lambda =</span> l ) )</span></code></pre></div>
