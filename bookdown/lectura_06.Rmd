@@ -77,18 +77,18 @@ P( R < 0 ) < \alpha
 \end{equation}
 
 Muchas de las veces se parte del principio de equilibrio financiero \@ref(sec:equifin), donde 
-se busca la igualdad $\mathbb{E}[R] = 0$, la misma implica la siguiente relación:
+se busca la igualdad $\E[R] = 0$, la misma implica la siguiente relación:
 \begin{eqnarray*}
-0 & = & \mathbb{E}[R] \\
-0 & = & \mathbb{E}[R\mid R \geq 0]P( R \geq 0 ) + \mathbb{E}[R\mid R < 0]P( R < 0 ) \\
-\mathbb{E}[R\mid R \geq 0]P( R \geq 0 ) & = & -\mathbb{E}[R\mid R < 0]P( R < 0 ) \\
-\frac{P( R < 0 )}{P( R \geq 0 ) } & = & -\frac{\mathbb{E}[R\mid R \geq 0]}{\mathbb{E}[R\mid R < 0]}
+0 & = & \E[R] \\
+0 & = & \E[R\mid R \geq 0]P( R \geq 0 ) + \E[R\mid R < 0]P( R < 0 ) \\
+\E[R\mid R \geq 0]P( R \geq 0 ) & = & -\E[R\mid R < 0]P( R < 0 ) \\
+\frac{P( R < 0 )}{P( R \geq 0 ) } & = & -\frac{\E[R\mid R \geq 0]}{\E[R\mid R < 0]}
 \end{eqnarray*}
 en el equilibrio financiero, la proporción de la probabilidad de ruina respecto de la probabilidad
 de no estar en ruina es igual a la proporción entre la esperanza condicional del resultado cuando 
 no se produce la ruina respecto de la esperanza condicional cuando si se produce la ruina. 
 
-Un modelo puede estar equilibrado financieramente $\mathbb{E}[R] = 0$, pero se desconoce la 
+Un modelo puede estar equilibrado financieramente $\E[R] = 0$, pero se desconoce la 
 probabilidad de ruina $P( R < 0)$, esta podría ser muy grande. La razón anterior permite estimar
 la relevancia de la probabilidad de ruina en un modelo equilibrado, con el uso de las esperanzas
 condicionales.
@@ -96,20 +96,20 @@ condicionales.
 Es usual asumir que la única parte aleatoria de $R$ viene dada por el valor de los reclamos totales,
 en razón de esto se tiene:
 \begin{equation}
-\mathbb{E}[ R ] = \Pi - \mathbb{E}[S] - G - K
+\E[ R ] = \Pi - \E[S] - G - K
 \end{equation}
 
 El **coste de capital** $K$ es el dinero que se requiere adicional para estar cubiertos a un nivel 
 de solvencia adecuado en caso se presenten mayores variaciones en el valor observado del reclamo 
-total $S$ y el esperado $\mathbb{E}[S]$. Para ello se suele utilizar una **medida de riesgo** 
+total $S$ y el esperado $\E[S]$. Para ello se suele utilizar una **medida de riesgo** 
 $\zeta$ que permita controlar la probabilidad de ruina $P( R < 0)$ al nivel de $\alpha > 0$, así se 
 suele tomar
 \begin{equation}
-K = \zeta( S ) - \mathbb{E}[S]
+K = \zeta( S ) - \E[S]
 \end{equation}
 de tal forma que
 \begin{equation}
-P( \Pi - S - G - K < 0 ) = P( \Pi - G - \zeta(S) - ( S - \mathbb{E}[S] ) < 0 ) < \alpha.
+P( \Pi - S - G - K < 0 ) = P( \Pi - G - \zeta(S) - ( S - \E[S] ) < 0 ) < \alpha.
 \end{equation}
 
 De la relación anterior se observa que una vez seleccionado el nivel de cobertura $\alpha$ y la 
@@ -122,7 +122,7 @@ llamamos **tarificación** (pricing).
 ## Medidas de riesgo
 
 ::: {.definition #spv name="Medida de riesgo coherente"}
-Una **medida de riesgo coeherente** es una función $\zeta: \mathbb{R} \longrightarrow \mathbb{R}$, 
+Una **medida de riesgo coeherente** es una función $\zeta: \R \longrightarrow \R$, 
 que satisface la siguientes propiedades:
 
 1. **Homogenidad positiva**, para cualquier $a > 0$
@@ -148,39 +148,39 @@ que satisface la siguientes propiedades:
 
 En lo que continúa citamos algunas de las medidas de riesgo usualmente utilizadas.
 
-::: {.definition #VaR name="Valor en riesgo"}
+::: {.definition #dVaR name="Valor en riesgo"}
 Dada una variable aleatoria a valores reales $X$, el **valor en riesgo** (value at risk) de $X$ al 
 nivel de probabilidad $\alpha \in (0,1)$ está dado por
 \begin{equation}
-VaR_{\alpha}( X ) = \inf\left\{ x \in \mathbb{R} \middle| F_X( x ) > \alpha \right\}
+\VaR_{\alpha}( X ) = \inf\left\{ x \in \R \middle| F_X( x ) > \alpha \right\}
 \end{equation}
 :::
 
 ::: {.proposition #varinv}
 Si la función de distribución acumulada $F_X$ es continua, entonces 
-$VaR_{\alpha}( X ) = F_X^{-1}( \alpha )$.
+$\VaR_{\alpha}( X ) = F_X^{-1}( \alpha )$.
 :::
 
-Por otra parte, $VaR_{\alpha}$ para cualquier $\alpha$ no es una medida de riesgo sub-aditiva.
+Por otra parte, $\VaR_{\alpha}$ para cualquier $\alpha$ no es una medida de riesgo sub-aditiva.
 
-::: {.definition #TVaR name="Valor en riesgo en la cola"}
+::: {.definition #dTVaR name="Valor en riesgo en la cola"}
 Dada una variable aleatoria a valores reales $X$, el **valor en riesgo en la colas** 
 (tail value at risk) de $X$ al nivel de probabilidad $\alpha \in (0,1)$ está dado por
 \begin{equation}
-TVaR_{\alpha}( X ) = \frac{1}{1-\alpha} \int\limits_{\alpha}^1 VaR_u( X )\ du
+\TVaR_{\alpha}( X ) = \frac{1}{1-\alpha} \int\limits_{\alpha}^1 \VaR_u( X )\ du
 \end{equation}
 :::
 
 ::: {.proposition #TVaRcohe name="Coherencia de la medida TVaR"}
-La medida de riesgo $TVaR_{\alpha}$ es una medida de riesgo coherente si la variable aleatoria
+La medida de riesgo $\TVaR_{\alpha}$ es una medida de riesgo coherente si la variable aleatoria
 sobre la cual se mide es una variable aleatoria continua.
 :::
 
-::: {.definition #CTE name="Esperanza condicional en la cola"} 
+::: {.definition #dCTE name="Esperanza condicional en la cola"} 
 Dada una variable aleatoria a valores reales $X$, la **esperanza condicional en la cola** 
 (conditional tail expectation) de $X$ al nivel de probabilidad $\alpha \in (0,1)$ está dado por
 \begin{equation}
-CTE_{\alpha}( X ) = \mathbb{E}\left[ X \middle| X > VaR_{\alpha}( X ) \right]
+\CTE_{\alpha}( X ) = \E\left[ X \middle| X > \VaR_{\alpha}( X ) \right]
 \end{equation}
 :::
 
@@ -188,37 +188,37 @@ CTE_{\alpha}( X ) = \mathbb{E}\left[ X \middle| X > VaR_{\alpha}( X ) \right]
 Si la función de distribución acumulada $F_X$ de la variable aleatoria $X$ es continua, entonces
 se tiene la siguiente igualdad
 \begin{equation}
-CTE_{\alpha}( X ) = TVaR_{\alpha}( X )
+\CTE_{\alpha}( X ) = \TVaR_{\alpha}( X )
 \end{equation}
 :::
 
-::: {.definition #CVaR name="Valor en riesgo condicionado"}
+::: {.definition #dCVaR name="Valor en riesgo condicionado"}
 Dada una variable aleatoria a valores reales $X$, el **valor en riesgo condicionado** 
 (conditional value at risk) de $X$ al nivel de probabilidad $\alpha \in (0,1)$ está dado por
 \begin{equation}
-CVaR_{\alpha}( X ) = \mathbb{E}\left[ X - VaR_{\alpha}( X ) \middle| X > VaR_{\alpha}( X ) \right]
-= CTE_{\alpha}( X ) - VaR_{\alpha}( X )
+\CVaR_{\alpha}( X ) = \E\left[ X - \VaR_{\alpha}( X ) \middle| X > \VaR_{\alpha}( X ) \right]
+= \CTE_{\alpha}( X ) - \VaR_{\alpha}( X )
 \end{equation}
 :::
 
-::: {.definition #ES name="Déficit esperado"}
+::: {.definition #dES name="Déficit esperado"}
 Dada una variable aleatoria a valores reales $X$, el **déficit esperado** (expected shortfall) de 
 $X$ al nivel de probabilidad $\alpha \in (0,1)$ está dado por
 \begin{equation}
-ES_{\alpha}( X ) = \mathbb{E}\left[ \max\left( X - VaR_{\alpha}( X ), 0 \right) \right]
+\ES_{\alpha}( X ) = \E\left[ \max\left( X - \VaR_{\alpha}( X ), 0 \right) \right]
 \end{equation}
 :::
 
-::: {.definition #EVaR name="Valor en riesgo entrópico"}
+::: {.definition #dEVaR name="Valor en riesgo entrópico"}
 Dada una variable aleatoria a valores reales $X$, el **valor en riesgo entrópico** 
 (entropic value at risk) de $X$ al nivel de probabilidad $\alpha \in (0,1)$ está dado por
 \begin{equation}
-EVaR_{\alpha}( X ) = \inf\left\{ \frac{1}{t} \ln\left( \frac{M_X( t )}{1 - \alpha} \right) \middle| t > 0 \right\}
+\EVaR_{\alpha}( X ) = \inf\left\{ \frac{1}{t} \ln\left( \frac{M_X( t )}{1 - \alpha} \right) \middle| t > 0 \right\}
 \end{equation}
 :::
 
 ::: {.proposition #EVaRcohe name="Coherencia de la medida EVaR"}
-La medida de riesgo $EVaR_{\alpha}$ es una medida de riesgo coherente.
+La medida de riesgo $\EVaR_{\alpha}$ es una medida de riesgo coherente.
 :::
 
 ::: {.example #l6ex2}
@@ -283,30 +283,30 @@ conocidos:
 
 1. Prima neta, o prima pura de riesgo
 \begin{equation}
-  \rho( S ) = \mathbb{E}[S] \approx \overline{S}
+  \rho( S ) = \E[S] \approx \overline{S}
 \end{equation}
 
 2. Prima de riesgo con recargo sobre la esperanza matemática
 \begin{equation}
-  P = \rho( S ) = (1 + \rho) \mathbb{E}[S] \approx (1 + \rho) \overline{S}
+  P = \rho( S ) = (1 + \rho) \E[S] \approx (1 + \rho) \overline{S}
 \end{equation}
 
 3. Prima de riesgo con recargo sobre la varianza
 \begin{equation}
-  P = \rho( S ) = \mathbb{E}[S] + \rho \mathbb{V}[S] 
+  P = \rho( S ) = \E[S] + \rho \V[S] 
   \approx \overline{S} + \rho \sigma_S^2
 \end{equation}
 
 4. Prima de riesgo con recargo sobre la desviación
 \begin{equation}
-  P = \rho( S ) = \mathbb{E}[S] + \rho \sqrt{\mathbb{V}[S]}
+  P = \rho( S ) = \E[S] + \rho \sqrt{\V[S]}
   \approx \overline{S} + \rho \sigma_S
 \end{equation} 
 
 5. Prima de riesgo con principio exponencial para $t > 0$
 \begin{equation}
   P = \rho( S )
-  = \frac{1}{2} \mathbb{E}\left[\exp(tS)\right]
+  = \frac{1}{2} \E\left[\exp(tS)\right]
   = \frac{1}{2} M_N\big( \ln M_X( t ) \big)
   \approx \frac{1}{m} \sum\limits_{i=1}^m \exp\left(t S_i\right)
 \end{equation}
@@ -314,19 +314,19 @@ conocidos:
 6. Prima de percentiles para un valor de confianza $\alpha \in [0,1]$ o prima de valor en riesgo 
 $VaR_\alpha$
 \begin{equation}
-  P = \rho( S ) = VaR_\alpha( S ) =  F_S^{-1}( \alpha )
+  P = \rho( S ) = \VaR_\alpha( S ) =  F_S^{-1}( \alpha )
 \end{equation}
 
 7. Prima de valor en riesgo en la cola (Tail Value at Risk) $TVaR_\alpha$. Es el promedio uniforme
 de todos los valores en riesgo $VaR_u$, con $u \geq \alpha$.
 \begin{equation}
-P = \rho( S ) = TVaR_\alpha( S ) = \frac{1}{1-\alpha} \int\limits_{\alpha}^1 VaR_u( S )\ du
+P = \rho( S ) = \TVaR_\alpha( S ) = \frac{1}{1-\alpha} \int\limits_{\alpha}^1 \VaR_u( S )\ du
 \end{equation}
 
 ::: {.example #l6ex2}
 Consideremos el caso donde todos los siniestros son igualmente distribuidos e independientes (i.i.d) 
 $X_i \rightsquigarrow Gamma( \alpha_i, \theta )$, para $i \in \{1,\ldots,n\}$, el número de 
-unidades aseguradas está dado por $n \in \mathbb{N}$. Utilizaremos el modelo individual para
+unidades aseguradas está dado por $n \in \N$. Utilizaremos el modelo individual para
 la agregación de los reclamos y obtener el reclamo total $S = \sum\limits_{i=1}^n X_i$.
 
 Como todas las variables $X_i$ siguen una ley $Gamma( \alpha_i, \theta )$, sabemos que la 
@@ -339,10 +339,10 @@ $i$-ésimo reclamo tiene como parámetro un diferente factor $\alpha_i$, pero el
 $\theta$. 
 
 Ya que cada $X_i \rightsquigarrow Gamma( \alpha_i, \theta )$, podemos calcular de forma determinista
-las experanzas de $\mathbb{E}[X_i]$, para cada $i \in \{1,\ldots,n\}$ y de igual forma podemos 
-calcular la esperanza del reclamo total $\mathbb{E}[S] = \sum\limits_{i=1}^n \mathbb{E}[X_i]$. 
+las experanzas de $\E[X_i]$, para cada $i \in \{1,\ldots,n\}$ y de igual forma podemos 
+calcular la esperanza del reclamo total $\E[S] = \sum\limits_{i=1}^n \E[X_i]$. 
 Además como asumimos independencia entre los $X_i$, la varianza de $S$ también puede ser calculada
-fácilmente como $\mathbb{V}[S] = \sum\limits_{i=1}^n \mathbb{V}[X_i]$.
+fácilmente como $\V[S] = \sum\limits_{i=1}^n \V[X_i]$.
 ```{r l5c4}
 EX <- a * theta
 VX <- a * theta^2

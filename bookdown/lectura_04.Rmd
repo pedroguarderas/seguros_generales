@@ -5,15 +5,15 @@
 ## Distribuciones discretas
 
 ::: {.definition #dbinom name="Distribución binomial"}
-Una variable aleatoria $N$ que toma valores en $\mathbb{N}$ se dice que sigue una distribución 
-o ley de binomial $N \rightsquigarrow Bin( n, p )$, con parámetros $n \in \mathbb{N}$ y 
+Una variable aleatoria $N$ que toma valores en $\N$ se dice que sigue una distribución 
+o ley de binomial $N \rightsquigarrow Bin( n, p )$, con parámetros $n \in \N$ y 
 $p \in [0, 1]$, si:
 \begin{equation}
 P( N = k ) = \binom{n}{k} p^k ( 1 - p )^{n-k}, \qquad
 \forall k \in \{0,\ldots, n\}
 \end{equation}
 esta distribución discreta se caracteriza por presentar el valor $k \frac{p_k}{p_{k-1}}$ decreciente
-conforme cambia $k \in \mathbb{N}$
+conforme cambia $k \in \N$
 :::
 ```{r l3c1}
 n <- 50
@@ -36,14 +36,14 @@ plot( plt )
 ```
 
 ::: {.definition #dpois name="Distribución de Poisson"}
-Una variable aleatoria $N$ que toma valores en $\mathbb{N}$ se dice que sigue una distribución 
-o ley de Poisson $N \rightsquigarrow Pois( n, p )$, con parámetro $\lambda \in \mathbb{R}$, si:
+Una variable aleatoria $N$ que toma valores en $\N$ se dice que sigue una distribución 
+o ley de Poisson $N \rightsquigarrow Pois( n, p )$, con parámetro $\lambda \in \R$, si:
 \begin{equation}
 P( N = k ) = \exp\left( -\lambda \right) \frac{\lambda^k}{k!}, \qquad
-\forall k \in \mathbb{N}
+\forall k \in \N
 \end{equation}
 esta distribución discreta se caracteriza por presentar el valor $k \frac{p_k}{p_{k-1}}$ constante
-conforme cambia $k \in \mathbb{N}$
+conforme cambia $k \in \N$
 :::
 ```{r l3c2}
 lambda <- 2
@@ -66,18 +66,18 @@ plot( plt )
 ```
 
 ::: {.definition #dnbinom name="Distribución binomial negativa"}
-Una variable aleatoria $N$ que toma valores en $\mathbb{N}$ se dice que sigue una distribución 
+Una variable aleatoria $N$ que toma valores en $\N$ se dice que sigue una distribución 
 o ley de  binomial negativa $N \rightsquigarrow NBin( \alpha, p )$, con parámetro $\alpha > 0$ y 
 $p \in (0,1)$, si:
 \begin{equation}
 P( N = k ) = \binom{\alpha + k - 1}{k} p^\alpha ( 1 - p )^k
 = \frac{\Gamma( \alpha + k )}{\Gamma(k+1) \Gamma(\alpha)}p^\alpha ( 1 - p )^k, \qquad
-\forall k \in \mathbb{N}
+\forall k \in \N
 \end{equation}
 donde $\Gamma( \alpha ) = \int\limits_0^{+\infty} x^{\alpha - 1} \exp(-x)\ dx$, $\forall \alpha \geq 0$.
 
 Esta distribución discreta se caracteriza por presentar el valor $k \frac{p_k}{p_{k-1}}$ creciente
-conforme cambia $k \in \mathbb{N}$
+conforme cambia $k \in \N$
 :::
 ```{r l3c3}
 alpha <- 2.5
@@ -101,11 +101,11 @@ plot( plt )
 ```
 
 ::: {.definition #dgeo name="Distribución geométrica"}
-Una variable aleatoria $N$ que toma valores en $\mathbb{N}$ se dice que sigue una distribución 
+Una variable aleatoria $N$ que toma valores en $\N$ se dice que sigue una distribución 
 o ley geométrica $N \rightsquigarrow Geo( p )$, con parámetro $p \in (0,1]$, si:
 \begin{equation}
 P( N = k ) = ( 1 - p )^k p, \qquad
-\forall k \in \mathbb{N}
+\forall k \in \N
 \end{equation}
 :::
 ```{r l3c4}
@@ -130,11 +130,11 @@ comportamiento de la variable $k \frac{p_k}{p_{k-1}}$, se formaliza precisamente
 de la familia de Panjer.
 
 ::: {.definition #fampanjer name="Familia de Panjer"}
-Una variable aleatoria discreta $N$, que toma valores enteros positivos $N \in \mathbb{N}$, se dice
+Una variable aleatoria discreta $N$, que toma valores enteros positivos $N \in \N$, se dice
 que pertenece a la **familia de Panjer**, si sus probabilidades $p_k = P( N = k )$ para cada 
-$k \in \mathbb{N}$, satisfacen la siguiente relación de recurrencia.
+$k \in \N$, satisfacen la siguiente relación de recurrencia.
 \begin{equation}
-p_k = \left( a + \frac{b}{k} \right)p_{k-1},\qquad \forall k \in \mathbb{N} \setminus \{0\} 
+p_k = \left( a + \frac{b}{k} \right)p_{k-1},\qquad \forall k \in \N \setminus \{0\} 
 \end{equation}
 :::
 
@@ -197,7 +197,7 @@ plot( conteo$N, conteo$jn )
 
 ::: {.definition #dunif name="Distribución uniforme"}
 Una variable aleatoria $X$ a valores reales, sigue una distribución uniforme 
-$X \rightsquigarrow Unif( a, b )$ de parámetros $a, b \in \mathbb{R}$, si su función de distribución
+$X \rightsquigarrow Unif( a, b )$ de parámetros $a, b \in \R$, si su función de distribución
 acumulada es de la siguiente forma:
 \begin{equation}
 F_X( x ) = \frac{x-a}{b-a} \mathbf{1}_{[a,b)}( x ) + \mathbf{1}_{[b,+\infty)}( x )
@@ -210,7 +210,7 @@ f_X( x ) = \frac{1}{b-a}\mathbf{1}_{[a,b]}( x )
 M_X( t ) = \frac{\exp(bt)-\exp(at)}{t(b-a)}
 \end{equation}
 \begin{equation}
-\mathbb{E}[X] = \frac{a + b}{2},\qquad \mathbb{V}[X] = \frac{(b - a)^2}{12}
+\E[X] = \frac{a + b}{2},\qquad \V[X] = \frac{(b - a)^2}{12}
 \end{equation}
 :::
 ```{r l3c6}
@@ -238,7 +238,7 @@ f_X( x ) = \mathbf{1}_{(0,+\infty)}( x ) \lambda \exp\left( -\lambda x \right)
 M_X( t ) = \frac{\lambda}{\lambda - t}
 \end{equation}
 \begin{equation}
-\mathbb{E}[X] = \frac{1}{\lambda},\qquad \mathbb{V}[X] = \frac{1}{\lambda^2}
+\E[X] = \frac{1}{\lambda},\qquad \V[X] = \frac{1}{\lambda^2}
 \end{equation}
 :::
 ```{r l3c7}
@@ -265,8 +265,8 @@ f_X( x ) = \mathbf{1}_{[0,+\infty}( x ) \frac{\beta^\alpha}{\Gamma( \alpha )} x^
 M_X( t ) = \left( \frac{\beta}{\beta - t} \right)^\alpha,\qquad \text{si}\ t < \beta
 \end{equation}
 \begin{equation}
-\mathbb{E}[X] = \frac{\alpha}{\beta},\qquad 
-\mathbb{V}[X] = \frac{\alpha}{\beta^2}
+\E[X] = \frac{\alpha}{\beta},\qquad 
+\V[X] = \frac{\alpha}{\beta^2}
 \end{equation}
 :::
 ```{r l3c8}
@@ -281,7 +281,7 @@ Fk <- pgamma( q = x, shape = alpha, scale = beta ) # cálculo de probabilidad F(
 
 ::: {.definition #dnorm name="Distribución normal"}
 Una variable aleatoria $X$ a valores reales, sigue una distribución normal 
-$X \rightsquigarrow N( \mu, \sigma )$ de parámetros $\mu \in \mathbb{R}$, $\sigma > 0$, si su 
+$X \rightsquigarrow N( \mu, \sigma )$ de parámetros $\mu \in \R$, $\sigma > 0$, si su 
 función de distribución acumulada es de la siguiente forma:
 \begin{equation}
 F_X( x ) = \frac{1}{\sqrt{2\pi} \sigma} \int\limits_{-\infty}^x \exp\left( -\frac{(y - \mu)^2}{\sigma^2} \right)\ dy
@@ -294,7 +294,7 @@ f_X( x ) = \frac{1}{\sqrt{2\pi}} \exp\left( -\frac{(x - \mu)^2}{\sigma^2} \right
 M_X( t ) = \exp\left( t \mu + \frac{1}{2} t^2 \sigma^2 \right)
 \end{equation}
 \begin{equation}
-\mathbb{E}[X] = \mu,\qquad \mathbb{V}[X] = \sigma^2
+\E[X] = \mu,\qquad \V[X] = \sigma^2
 \end{equation}
 :::
 ```{r l3c9}
@@ -320,8 +320,8 @@ f_X( x ) = \frac{1}{x\sqrt{2\pi} \sigma}  \exp\left( -\frac{(\ln(x) - \mu)^2}{\s
 \end{equation}
 No hay forma analítica para $M_X$
 \begin{equation}
-\mathbb{E}[X] = \exp\left( \mu + \frac{1}{2}\sigma^2 \right),\qquad 
-\mathbb{V}[X] = \exp\left( 2 \mu + \sigma^2 \right) \left( \exp( \sigma^2 ) - 1 \right)
+\E[X] = \exp\left( \mu + \frac{1}{2}\sigma^2 \right),\qquad 
+\V[X] = \exp\left( 2 \mu + \sigma^2 \right) \left( \exp( \sigma^2 ) - 1 \right)
 \end{equation}
 :::
 ```{r l3c10}
@@ -339,7 +339,7 @@ sigue una distribución normal.
 
 ::: {.definition #dgpd name="Distribución de Pareto generalizada"}
 Una variable aleatoria $X$ a valores reales, sigue una distribución de Pareto generalizada
-$X \rightsquigarrow GPD( \mu, \sigma, \xi )$ de parámetros $\mu \in \mathbb{R}, \sigma > 0, \xi \in \mathbb{R}$, 
+$X \rightsquigarrow GPD( \mu, \sigma, \xi )$ de parámetros $\mu \in \R, \sigma > 0, \xi \in \R$, 
 si su función de distribución acumulada es de la siguiente forma:
 \begin{equation}
 F_X( x )
@@ -378,7 +378,7 @@ Fk <- pgpd( q = x, xi = xi, mu = mu, beta = sigma ) # cálculo de probabilidad F
 
 ::: {.definition #dgev  name="Distribución de valores extremos generalizada"}
 Una variable aleatoria $X$ a valores reales, sigue una distribución generalizada de valores extremos
-$X \rightsquigarrow GEV( \mu, \sigma, \xi )$ de parámetros $\mu \in \mathbb{R}, \sigma > 0, \xi \in \mathbb{R}$, 
+$X \rightsquigarrow GEV( \mu, \sigma, \xi )$ de parámetros $\mu \in \R, \sigma > 0, \xi \in \R$, 
 si su función de distribución acumulada es de la siguiente forma:
 \begin{equation}
 F_X( x ) 
@@ -450,7 +450,7 @@ f_X( x )
 \end{equation}
 La función generadora de momentos $M_X( t )$ no está definida
 \begin{equation}
-\mathbb{E}[X] 
+\E[X] 
 = \left\{
 \begin{array}{ll}
 0 & \text{si}\ \nu > 0 \\
@@ -460,7 +460,7 @@ La función generadora de momentos $M_X( t )$ no está definida
 \end{equation}
 
 \begin{equation}
-\mathbb{V}[X] 
+\V[X] 
 = \left\{
 \begin{array}{ll}
 \frac{\nu}{\nu-2} & \text{si}\ \nu > 2 \\
@@ -501,13 +501,13 @@ f_X( x )
 \right.
 \end{equation}
 \begin{eqnarray*}
-\mathbb{E}[X^k] 
+\E[X^k] 
 & = & \frac{\theta^k \Gamma\left( \alpha + \frac{k}{\tau}\right)}{\Gamma( \alpha )},
 \quad \text{si}\ k > -\alpha \tau \\
-\mathbb{E}[X]
+\E[X]
 & = & \frac{\theta \Gamma\left( \alpha + \frac{1}{\tau}\right)}{\Gamma( \alpha )},
 \quad \text{si}\ 1 > -\alpha \tau \\
-\mathbb{V}[X] 
+\[X] 
 & = & \frac{\theta^2 \Gamma\left( \alpha + \frac{2}{\tau}\right)}{\Gamma( \alpha )}
 - \frac{\theta^2 \Gamma\left( \alpha + \frac{1}{\tau}\right)^2}{\Gamma( \alpha )^2}
 \end{eqnarray*}
@@ -558,12 +558,12 @@ f_X( x )
 \end{equation}
 
 \begin{eqnarray*}
-\mathbb{E}[X^k] 
+\E[X^k] 
 & = & \frac{\theta^k \Gamma\left( \tau + \frac{k}{\gamma}\right) \Gamma\left( \tau - \frac{k}{\gamma}\right)}{\Gamma( \alpha ) \Gamma( \tau )},
 \quad \text{si}\ -\tau \gamma < k < \tau \gamma \\
-\mathbb{E}[X]
+\E[X]
 & = & \frac{\theta \Gamma\left( \tau + \frac{1}{\gamma}\right) \Gamma\left( \tau - \frac{1}{\gamma}\right)}{\Gamma( \alpha ) \Gamma( \tau )} \\
-\mathbb{V}[X] 
+\V[X] 
 & = & \frac{\theta^2 \Gamma\left( \tau + \frac{2}{\gamma}\right) \Gamma\left( \tau - \frac{2}{\gamma}\right)}{\Gamma( \alpha ) \Gamma( \tau )}
 - \frac{\theta^2 \Gamma\left( \tau + \frac{1}{\gamma}\right)^2 \Gamma\left( \tau - \frac{1}{\gamma}\right)^2}{\Gamma( \alpha )^2 \Gamma( \tau )^2}
 \end{eqnarray*}
@@ -691,9 +691,9 @@ probabilidad de la variable aleatoria $X$. Es decir, existen funciones $g$ y $m$
 de tal forma que
 \begin{equation}
 m( \theta ) 
-= \mathbb{E}_{P_X} \left[ g( X ) \right] 
-= \int\limits_{\mathbb{R}} g( x ) dP_X( x )
-= \int\limits_{\mathbb{R}} g( x ) dP_{\theta}( x )
+= \E_{P_X} \left[ g( X ) \right] 
+= \int\limits_{\R} g( x ) dP_X( x )
+= \int\limits_{\R} g( x ) dP_{\theta}( x )
 \end{equation}
 
 Si de alguna forma se puede invertir $m$, de tal forma que se pueda determinar $\theta$, en tal 
@@ -707,14 +707,14 @@ $X_1, \ldots, X_n$
 donde
 \begin{equation}
 \overline{g}
-= \int\limits_{\mathbb{R}} g( x ) dP_n( x )
+= \int\limits_{\R} g( x ) dP_n( x )
 = \frac{1}{n}\sum\limits_{i=1}^n g\left( X_i \right)
 \end{equation}
 
 Si en caso $\overline{g}$ está fuera de la imagen de $m$, $\overline{g} \notin m( \Theta )$, la 
 inversión no sería posible. Para resolver este problema se puede recurrir a una distancia $d$ y 
 buscar $\hat{g}$ tal que minimize la distancia a $m( \Theta )$, i.e. 
-$\hat{g} = \underset{h \in m( \Theta )}{\arg \inf}\ d( \overline{g}, h)$. Una vez determinado 
+$\hat{g} = \underset{h \in m( \Theta )}{\arginf}\ d( \overline{g}, h)$. Una vez determinado 
 $\hat{g}$ se toma como estimador de momentos su inversa con $m$, i.e. 
 $\widehat{\theta} = m^{-1}( \hat{g} )$.
 
@@ -730,7 +730,7 @@ lineales, que no suelen ser estables y que deben estar bien definidos para prove
 ### Método de la distancia mínima
 
 Este método requiere de la definición de una distancia sobre el espacio de distribuciones de 
-probabilidad $\mathcal{P}$, i.e. una función $d : \mathcal{P} \times \mathcal{P} \longrightarrow \mathbb{R}_+$
+probabilidad $\mathcal{P}$, i.e. una función $d : \mathcal{P} \times \mathcal{P} \longrightarrow \R_+$
 que satisface las siguientes propiedades:
 
 1. Propiedad de simetría, para cualquier $P, Q \in \mathcal{P}$, $d( P, Q ) = d( Q, P )$,
@@ -745,7 +745,7 @@ d( P, Q ) \leq d( P, R ) + d( R, Q )
 A partir de la medida empírica de probabilidad $P_n$, se busca una probabilidad $P_{\theta}$ que 
 minimize la distancia medida con $d$. Así resulta el estimador con el **método de distancia mínima**
 \begin{equation}
-\widehat{\theta} = \underset{\theta \in \Theta}{\arg\,\inf\,} d\left( P_{\theta}, P_n \right)
+\widehat{\theta} = \underset{\theta \in \Theta}{\arginf} d\left( P_{\theta}, P_n \right)
 \end{equation}
 
 Entra las distancias que se puede considerar tenemos las siguientes
@@ -757,14 +757,14 @@ d(P,Q) = \underset{x}{\sup} \left| F_P( x ) - F_Q( x ) \right|
 
 - Distancia cuadrática entre las distribuciones acumuladas correspondientes
 \begin{equation}
-d( P, Q ) = \int\limits_{\mathbb{R}} \left( F_P( x ) - F_Q( x ) \right)^2\ dF_Q( x )
+d( P, Q ) = \int\limits_{\R} \left( F_P( x ) - F_Q( x ) \right)^2\ dF_Q( x )
 \end{equation}
 
 - Distancia de Wasserstein, para $p > 1$
 \begin{equation}
 d( P, Q )
 = W_p( P, Q )
-= \underset{(X,Y) \rightsquigarrow \mu \in \Gamma( P, Q )}{\inf} \mathbb{E}_{\mu}\left[ |X - Y|^p \right]^{\frac{1}{p}}
+= \underset{(X,Y) \rightsquigarrow \mu \in \Gamma( P, Q )}{\inf} \E_{\mu}\left[ |X - Y|^p \right]^{\frac{1}{p}}
 \end{equation}
 donde
 \begin{equation}
@@ -794,7 +794,7 @@ o de forma equivalente, si se toma logaritmos:
 Así, el estimador por verosimilitud, es el dado por:
 \begin{equation}
 \widehat{\theta} 
-= \underset{\theta \in \Theta}{\arg\,\sup\,} \sum\limits_{i=1}^n \log P_{\theta} \left( B_i \right)
+= \underset{\theta \in \Theta}{\argsup} \sum\limits_{i=1}^n \log P_{\theta} \left( B_i \right)
 \end{equation}
 
 En la práctica los eventos que se observa $B_i$ son puntuales y son precisamente los valores 
@@ -817,7 +817,7 @@ P\left( N_1 = n_1 \land \cdots \land N_m = n_m \right)
 Se dice que un estimador $\theta_1$ se dice **insesgado** para estimar el parámetro $\theta$, si se 
 cumple que:
 \begin{equation}
-\mathbb{E}\left[ \theta_1 \right] = \theta
+\E\left[ \theta_1 \right] = \theta
 \end{equation}
 caso contrario se dirá que el estimador es **sesgado** o que presenta un **error sistemático**.
 :::
@@ -826,7 +826,7 @@ caso contrario se dirá que el estimador es **sesgado** o que presenta un **erro
 Se dice que un estimador $\theta_1$ es mejor estimador en media cuadrática que el estimador 
 $\theta_2$, respecto del parámetro $\theta$, si se cumple la siguiente desigualdad
 \begin{equation}
-\mathbb{E}\left[ \left( \theta_1 - \theta \right)^2 \right]
-< \mathbb{E}\left[ \left( \theta_2 - \theta \right)^2 \right]
+\E\left[ \left( \theta_1 - \theta \right)^2 \right]
+< \E\left[ \left( \theta_2 - \theta \right)^2 \right]
 \end{equation}
 :::

@@ -4,11 +4,11 @@
 <!------------------------------------------------------------------------------------------------->
 ## Notación matemática
 
-1. $\mathbb{N}$ el conjunto de los números naturales $\mathbb{N} = \{0,1,\ldots,\}$
+1. $\N$ el conjunto de los números naturales $\N = \{0,1,\ldots,\}$
 
-2. $\mathbb{R}$ el conjunto de los números reales
+2. $\R$ el conjunto de los números reales
 
-3. $\overline{\mathbb{R}} = \mathbb{R} \cup \{ +\infty \} \cup \{ -\infty \}$ el conjunto de los 
+3. $\overline{\R} = \R \cup \{ +\infty \} \cup \{ -\infty \}$ el conjunto de los 
 reales extendido incluyendo los infinitos
 
 4. $x \approx y$ indica que el valor $y$ es aproximado al valor $x$
@@ -17,14 +17,14 @@ reales extendido incluyendo los infinitos
 
 6. $\sum\limits_{k=0}^n x_k$ es la suma de los elementos $x_0,\ldots,x_n$ de una lista
 
-7. $[ a, b ] = \left\{ x \in \mathbb{R} \mid x \geq a \land x \leq b \right\}$ intervalo cerrado para
-cualquier $a,b \in \overline{\mathbb{R}}$
+7. $[ a, b ] = \left\{ x \in \R \mid x \geq a \land x \leq b \right\}$ intervalo cerrado para
+cualquier $a,b \in \overline{\R}$
 
-8. $(a,b) = \left\{ x \in \mathbb{R} \mid x > a \land x < b \right\}$ intervalo abierto para 
-cualquier $a,b \in \overline{\mathbb{R}}$
+8. $(a,b) = \left\{ x \in \R \mid x > a \land x < b \right\}$ intervalo abierto para 
+cualquier $a,b \in \overline{\R}$
 
-9. $\{x_n\}_{n\in\mathbb{N}} = \left\{ x_n \in X \mid n \in \mathbb{N} \right\}$ secuencia en 
-el conjunto $X$, no es más que una función de $\mathbb{N}$ con valores en $X$
+9. $\{x_n\}_{n\in\N} = \left\{ x_n \in X \mid n \in \N \right\}$ secuencia en 
+el conjunto $X$, no es más que una función de $\N$ con valores en $X$
 
 10. $\underset{x \rightarrow y}{\lim} f(x) = a$ límite de la función $f(x)$ cuando $x$ tiende a $y$.
 

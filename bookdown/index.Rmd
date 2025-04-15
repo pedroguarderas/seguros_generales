@@ -28,3 +28,20 @@ output:
 bibliography: [bibliografia_libros.bib, bibliografia_paquetes.bib, bibliografia_articulos.bib]
 csl: electronic-journal-of-statistics.csl
 ---
+
+<!------------------------------------------------------------------------------------------------->
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Fo}{\mathscr{F}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\V}{\mathbb{V}}
+\newcommand{\D}{\partial}
+\newcommand{\arginf}{\operatorname{arginf}}
+\newcommand{\argsup}{\operatorname{argsup}}
+\newcommand{\DFT}{\operatorname{DFT}}
+\newcommand{\VaR}{\operatorname{VaR}}
+\newcommand{\CVaR}{\operatorname{CVaR}}
+\newcommand{\TVaR}{\operatorname{TVaR}}
+\newcommand{\EVaR}{\operatorname{EVaR}}
+\newcommand{\CTE}{\operatorname{CTE}}
+\newcommand{\ES}{\operatorname{ES}}

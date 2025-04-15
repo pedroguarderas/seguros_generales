@@ -8,7 +8,7 @@ como tal nace del mismo mecanismo bajo el cual funciona un seguro, cada asegurad
 su riesgo individual a la compañia de seguros por su parte, la suma total de estos riesgos $S$ es 
 el riesgo total que asume el asegurador.
 
-Los riesgos de cada uno de los $n \in \mathbb{N}$ asegurados, pueden ser representados por variables 
+Los riesgos de cada uno de los $n \in \N$ asegurados, pueden ser representados por variables 
 aleatorias $X_1,\ldots X_n$, las mismas pueden ser independientes o dependientes entre ellas. El 
 costo total del portafolio está dado por la suma de todos estos riesgos.
 \begin{equation}
@@ -17,25 +17,25 @@ S = \sum\limits_{i=1}^n X_i
 El conocer la distribución del costo total $S$ es una tarea crucial para el asegurador.
 
 El valore esperado de de los reclamos totales, puede ser calculado fácilmente utilizando las
-propiedades de linealidad de la esperanza matemática $\mathbb{E}$
+propiedades de linealidad de la esperanza matemática $\E$
 \begin{equation}
-\mathbb{E}[ S ]
-= \mathbb{E}\left[ \sum\limits_{i=1}^n X_i \right] 
-= \sum\limits_{i=1}^n \mathbb{E}\left[ X_i \right]
+\E[ S ]
+= \E\left[ \sum\limits_{i=1}^n X_i \right] 
+= \sum\limits_{i=1}^n \E\left[ X_i \right]
 \end{equation}
 por su parte, la varianza de la variable aleatoria del costo total $S$, está dada por:
 \begin{eqnarray*}
-\mathbb{V}\left[ S \right]
-& = & \mathbb{V}\left[ \sum\limits_{i=1}^n X_i \right] \\
-& = & \sum\limits_{i=1}^n \mathbb{V}\left[ X_i \right] 
+\V\left[ S \right]
+& = & \V\left[ \sum\limits_{i=1}^n X_i \right] \\
+& = & \sum\limits_{i=1}^n \V\left[ X_i \right] 
 + \sum\limits_{i=1}^n \sum\limits_{j=1,j\neq i}^n \mathbb{C}\left[ X_i, X_j \right] \\
-& = & \sum\limits_{i=1}^n \mathbb{V}\left[ X_i \right] 
+& = & \sum\limits_{i=1}^n \V\left[ X_i \right] 
 + 2\sum\limits_{i=1}^{n-1} \sum\limits_{j=i+1}^n \mathbb{C}\left[ X_i, X_j \right]
 \end{eqnarray*}
 
 Muchas de las veces el número total de reclamos $n$ es incierto y por tal razón es mejor considerar
 que el número de siniestros vendrá dado por otra variable aleatoria discreta $N$ que solo tomará 
-valores en $\mathbb{N}$
+valores en $\N$
 \begin{equation}
 S = \sum\limits_{i=1}^N X_i
 \end{equation}
@@ -48,8 +48,8 @@ alguna hipótesis previa sobre el comportamiento de las variables aleatorias $X_
 \begin{eqnarray*}
 F( S \leq s )
 & = & P\left( \sum\limits_{i=1}^N X_i \leq s \right) \\
-& = & P\left( \sum\limits_{i=1}^N X_i \leq s \land N \in \mathbb{N} \right) \\
-& = & P\left( \bigcup\limits_{n\in \mathbb{N}} \left\{ \sum\limits_{i=1}^N X_i \leq s \land N \in \{n\} \right\}\right) \\
+& = & P\left( \sum\limits_{i=1}^N X_i \leq s \land N \in \N \right) \\
+& = & P\left( \bigcup\limits_{n\in \N} \left\{ \sum\limits_{i=1}^N X_i \leq s \land N \in \{n\} \right\}\right) \\
 & = & \sum\limits_{n=0}^{+\infty} P\left( \sum\limits_{i=1}^n X_i \leq s \land N = n \right) 
 \qquad \text{probabilidad de eventos disjuntos} \\
 & = & \sum\limits_{n=0}^{+\infty} P\left( \sum\limits_{i=1}^n X_i \leq s\ \middle|\ N = n \right) P( N = n )
@@ -83,23 +83,23 @@ reclamos $X_i$ y $X_j$ son independientes para cualquier $1 \leq i \neq j \leq n
 
 El valor esperado de la severidad total $S$ es:
 \begin{eqnarray*}
-\mathbb{E}[S]
-& = & \mathbb{E}\left[ \sum\limits_{i=1}^n X_i \right] \\
-& = & \sum\limits_{i=1}^n \mathbb{E}\left[ X_i \right] \\
-& = & n \mathbb{E}[X] \quad \text{si $\{X_i\}$ son idénticamente distribuidas}
+\E[S]
+& = & \E\left[ \sum\limits_{i=1}^n X_i \right] \\
+& = & \sum\limits_{i=1}^n \E\left[ X_i \right] \\
+& = & n \E[X] \quad \text{si $\{X_i\}$ son idénticamente distribuidas}
 \end{eqnarray*}
 
 Así mismo con la varianza de $S$.
 \begin{eqnarray*}
-\mathbb{V}\left[ S \right]
-& = & \mathbb{V}\left[ \sum\limits_{i=1}^n X_i \right] \\
-& = & \sum\limits_{i=1}^n \mathbb{V}\left[ X_i \right] 
+\V\left[ S \right]
+& = & \V\left[ \sum\limits_{i=1}^n X_i \right] \\
+& = & \sum\limits_{i=1}^n \V\left[ X_i \right] 
 + \sum\limits_{i=1}^n \sum\limits_{j=1,j\neq i}^n \mathbb{C}\left[ X_i, X_j \right] \\
-& = & \sum\limits_{i=1}^n \mathbb{V}\left[ X_i \right]\quad \text{si $\{X_i\}$ sin son independientes entre si} \\
-& = & n \mathbb{V}\left[ X \right]\quad \text{si $\{X_i\}$ sin son idénticamente distribuidas}
+& = & \sum\limits_{i=1}^n \V\left[ X_i \right]\quad \text{si $\{X_i\}$ sin son independientes entre si} \\
+& = & n \V\left[ X \right]\quad \text{si $\{X_i\}$ sin son idénticamente distribuidas}
 \end{eqnarray*}
 
-Al tener un número determinado de reclamos $n \in \mathbb{N}$, la distribución de probabilidad del
+Al tener un número determinado de reclamos $n \in \N$, la distribución de probabilidad del
 total de reclamos $S$ puede ser calculada de una forma maś sencilla.
 \begin{eqnarray*}
 F_S( x )
@@ -115,26 +115,26 @@ f_S( s )
 \end{eqnarray*}
 
 Una posible estrategias para estimar $F_S$ o $f_S$ es utilizar la transformada de Fourier 
-$\mathcal{F}$, la cual convierte las convoluciones en productos y luego invertir de nuevo la 
+$\Fo$, la cual convierte las convoluciones en productos y luego invertir de nuevo la 
 transformada de Fourier.
 \begin{eqnarray*}
 F_S 
-& = & \mathcal{F}^{-1}\left( \mathcal{F}\left( F_S \right) \right) \\
-& = & \mathcal{F}^{-1}\left( \mathcal{F}\left( F_{X_1} \star \cdots \star F_{X_n} \right) \right)
+& = & \Fo^{-1}\left( \Fo\left( F_S \right) \right) \\
+& = & \Fo^{-1}\left( \Fo\left( F_{X_1} \star \cdots \star F_{X_n} \right) \right)
 \quad \text{sin $\{X_i\}$ son independientes} \\
-& = & \mathcal{F}^{-1}\left( \prod\limits_{i=1}^n \mathcal{F}\left( F_{X_i} \right) \right) \\ 
-& = & \mathcal{F}^{-1}\left( \mathcal{F}\left( F_{X} \right)^n \right)
+& = & \Fo^{-1}\left( \prod\limits_{i=1}^n \Fo\left( F_{X_i} \right) \right) \\ 
+& = & \Fo^{-1}\left( \Fo\left( F_{X} \right)^n \right)
 \quad \text{si $\{X_i\}$ sin son idénticamente distribuidas } \\
 \end{eqnarray*}
 
 o de forma equivalente para la densidad $f_S$
 \begin{eqnarray*}
 f_S 
-& = & \mathcal{F}^{-1}\left( \mathcal{F}\left( f_S \right) \right) \\
-& = & \mathcal{F}^{-1}\left( \mathcal{F}\left( f_{X_1} \star \cdots \star f_{X_n} \right) \right)
+& = & \Fo^{-1}\left( \Fo\left( f_S \right) \right) \\
+& = & \Fo^{-1}\left( \Fo\left( f_{X_1} \star \cdots \star f_{X_n} \right) \right)
 \quad \text{sin $\{X_i\}$ son independientes} \\
-& = & \mathcal{F}^{-1}\left( \prod\limits_{i=1}^n \mathcal{F}\left( f_{X_i} \right) \right) \\ 
-& = & \mathcal{F}^{-1}\left( \mathcal{F}\left( f_{X} \right)^n \right)
+& = & \Fo^{-1}\left( \prod\limits_{i=1}^n \Fo\left( f_{X_i} \right) \right) \\ 
+& = & \Fo^{-1}\left( \Fo\left( f_{X} \right)^n \right)
 \quad \text{si $\{X_i\}$ sin son idénticamente distribuidas } \\
 \end{eqnarray*}
 
@@ -144,9 +144,9 @@ Se puede simular la severidad total $S$ para el caso donde se asume independenci
 de las severidades $X_1, \ldots, X_n$ y se conoce cada una de sus densidades de probabilidad
 $f_{X_1}, \ldots, f_{X_n}$ o distribuciones de probabilidad $F_{X_1}, \ldots, F_{X_n}$.
 
-1. Se tiene fijo $n \in \mathbb{N}$,
+1. Se tiene fijo $n \in \N$,
 
-2. Se fija el número de simulaciones $m \in \mathbb{N}$
+2. Se fija el número de simulaciones $m \in \N$
 
 3. Para cada $i \in \{1, \ldots, m\}$ se extrae una muestra $X_{i,1} \rightsquigarrow f_{X_1},\ldots,X_{i,n} \rightsquigarrow f_{X_n}$,
 
@@ -210,8 +210,8 @@ abline( v = ES, col = 'orange' )
 Para calcular la esperanza de la severidad total $S$, también se puede utilizar una aproximación 
 a la integral de Riemann-Stieltjes utilizando la distribución acumulada empírica $F_m$.
 \begin{equation}
-\mathbb{E}[ S ] = \int\limits_{\mathbb{R}} s dF_S( s )
-\approx \int\limits_{\mathbb{R}} s dF_m( s )
+\E[ S ] = \int\limits_{\R} s dF_S( s )
+\approx \int\limits_{\R} s dF_m( s )
 \approx \sum\limits_{i=1}^N s_{i} \left( F_m( s_{i+1} ) - F_m( s_{i} ) \right)
 \end{equation}
 
@@ -224,7 +224,7 @@ EmS <- sum( s[-N] * diff( sapply( s, FUN = Fm ) ) )
 
 De ello tenemos los siguientes resultados de cálculo para el valor esperado de la severidad total
 \begin{eqnarray*}
-\mathbb{E}[S] = \sum\limits_{i=1}^n e^{ \mu_i + \frac{1}{2} \sigma_i^2 } & = & `r formatC( ES, digits = 4, format = 'f' )`, \\
+\E[S] = \sum\limits_{i=1}^n e^{ \mu_i + \frac{1}{2} \sigma_i^2 } & = & `r formatC( ES, digits = 4, format = 'f' )`, \\
 \overline{S} = \frac{1}{m} \sum\limits_{i=1}^m S_i & = & `r formatC( EeS, digits = 4, format = 'f' )`, \\
 \sum\limits_{i=1}^N s_{i} \left( F_m( s_{i+1} ) - F_m( s_{i} ) \right) & = & `r formatC( EmS, digits = 4, format = 'f' )`
 \end{eqnarray*}
@@ -256,8 +256,8 @@ S = \sum\limits_{i=1}^n X_i = \sum\limits_{i=1}^n M \mathbf{1}_{A_i}
 
 El valor total esperado de reclamos está dado por:
 \begin{equation}
-\mathbb{E}[ S ] 
-= \sum\limits_{i=1}^n \mathbb{E}\left[ M \mathbf{1}_{A_i} \right]
+\E[ S ] 
+= \sum\limits_{i=1}^n \E\left[ M \mathbf{1}_{A_i} \right]
 = M \sum\limits_{i=1}^n P( A_i )
 \end{equation}
 la última igualdad resulta de las propiedades de la función indicatriz \@ref(def:indicatriz).
@@ -265,7 +265,7 @@ la última igualdad resulta de las propiedades de la función indicatriz \@ref(d
 Si en caso todos los $P(A_i) = p$ tienen la misma probabilidad, el valor total esperado de reclamos
 toma la siguiente forma:
 \begin{equation}
-\mathbb{E}[S] = n M p
+\E[S] = n M p
 \end{equation}
 :::
 
@@ -290,46 +290,46 @@ asume que la suma da $0$ si $N = 0$.
 
 El valor esperado del total de reclamos $S$, está dado por:
 \begin{eqnarray*}
-\mathbb{E}[S]
-& = & \mathbb{E}\left[ \sum\limits_{i=1}^N X_i \right] \\
-& = & \sum\limits_{n=0}^{+\infty} \mathbb{E}\left[ 
+\E[S]
+& = & \E\left[ \sum\limits_{i=1}^N X_i \right] \\
+& = & \sum\limits_{n=0}^{+\infty} \E\left[ 
 \sum\limits_{i=1}^n X_i\ \middle|\ N = n \right]P( N = n )
 \quad \text{utilizando la esperanza condicional} \\
-& = & 0 P( N = 0 ) + \sum\limits_{n=1}^{+\infty} \mathbb{E}\left[ \sum\limits_{i=1}^n X_i\ \middle|\ N = n \right]P( N = n ) \\
-& = & \sum\limits_{n=1}^{+\infty} \sum\limits_{i=1}^n \mathbb{E}\left[ X_i \mid N = n \right]P( N = n )
+& = & 0 P( N = 0 ) + \sum\limits_{n=1}^{+\infty} \E\left[ \sum\limits_{i=1}^n X_i\ \middle|\ N = n \right]P( N = n ) \\
+& = & \sum\limits_{n=1}^{+\infty} \sum\limits_{i=1}^n \E\left[ X_i \mid N = n \right]P( N = n )
 \quad \text{linealidad de la esperanza} \\
-& = & \sum\limits_{n=0}^{+\infty} n \mathbb{E}\left[ X \mid N = n \right]P( N = n )
+& = & \sum\limits_{n=0}^{+\infty} n \E\left[ X \mid N = n \right]P( N = n )
 \quad \text{si $\{X_i\}$ son idénticamente distribuidas} \\
-& = & \mathbb{E}\left[ X \right] \sum\limits_{n=0}^{+\infty} n P( N = n )
+& = & \E\left[ X \right] \sum\limits_{n=0}^{+\infty} n P( N = n )
 \quad \text{si $X$ y $N$ son independientes} \\
-& = & \mathbb{E}[ N ] \mathbb{E}[ X ] 
+& = & \E[ N ] \E[ X ] 
 \end{eqnarray*}
 
 También podemos calcular la varianza de los reclamos totales $S$, para ello necesitamos primeramente
 calcular su segundo momento.
 \begin{eqnarray*}
-\mathbb{E}[S^2]
-& = & \mathbb{E}\left[ \left( \sum\limits_{i=1}^N X_i \right)^2 \right] \\
-& = & \sum\limits_{n=0}^\infty \mathbb{E}\left[ \sum\limits_{i, j=1}^n X_i X_j \middle| N = n \right] P( N = n ) 
+\E[S^2]
+& = & \E\left[ \left( \sum\limits_{i=1}^N X_i \right)^2 \right] \\
+& = & \sum\limits_{n=0}^\infty \E\left[ \sum\limits_{i, j=1}^n X_i X_j \middle| N = n \right] P( N = n ) 
 \quad \text{propiedades de la esperanza condicional} \\
-& = & \sum\limits_{n=0}^\infty \sum\limits_{i, j=1}^n \mathbb{E}\left[ X_i X_j \right] P( N = n ) 
+& = & \sum\limits_{n=0}^\infty \sum\limits_{i, j=1}^n \E\left[ X_i X_j \right] P( N = n ) 
 \quad \text{si $\{X_i\}$ y $N$ son independientes} \\
-& = & \sum\limits_{n=0}^\infty \left( \sum\limits_{i=1}^n \mathbb{E}\left[ X_i^2 \right] 
-+ \sum\limits_{i,j=1,i\neq j}^n \mathbb{E}\left[ X_i X_j \right] \right) P( N = n ) \\
-& = & \sum\limits_{n=0}^\infty \left( n \mathbb{E}\left[ X^2 \right] + n(n-1) \mathbb{E}\left[ X \right]^2 \right) P( N = n ) 
+& = & \sum\limits_{n=0}^\infty \left( \sum\limits_{i=1}^n \E\left[ X_i^2 \right] 
++ \sum\limits_{i,j=1,i\neq j}^n \E\left[ X_i X_j \right] \right) P( N = n ) \\
+& = & \sum\limits_{n=0}^\infty \left( n \E\left[ X^2 \right] + n(n-1) \E\left[ X \right]^2 \right) P( N = n ) 
 \quad \text{si $\{X_i\}$ son i.i.d} \\
-& = & \mathbb{E}\left[N\right] \mathbb{E}\left[X^2\right] + \mathbb{E}\left[N^2\right] \mathbb{E}\left[X\right]^2 
-- \mathbb{E}\left[N\right] \mathbb{E}\left[X\right]^2 \\
-& = & \mathbb{E}\left[N\right] \mathbb{V}\left[X\right] + \mathbb{E}\left[N^2\right] \mathbb{E}\left[X\right]^2
+& = & \E\left[N\right] \E\left[X^2\right] + \E\left[N^2\right] \E\left[X\right]^2 
+- \E\left[N\right] \E\left[X\right]^2 \\
+& = & \E\left[N\right] \V\left[X\right] + \E\left[N^2\right] \E\left[X\right]^2
 \end{eqnarray*}
 
 finalmente la varianza de $S$ tiene la siguiente expresión
 \begin{eqnarray*}
-\mathbb{V}\left[S\right]
-& = & \mathbb{E}\left[S^2\right] - \mathbb{E}\left[S\right]^2 \\
-& = & \mathbb{E}\left[N\right] \mathbb{V}\left[X\right] 
-+ \mathbb{E}\left[N^2\right] \mathbb{E}\left[X\right]^2 - \mathbb{E}\left[N\right]^2 \mathbb{E}\left[X\right]^2 \\
-& = & \mathbb{E}\left[N\right] \mathbb{V}\left[X\right] + \mathbb{V}\left[N\right] \mathbb{E}\left[X\right]^2
+\V\left[S\right]
+& = & \E\left[S^2\right] - \E\left[S\right]^2 \\
+& = & \E\left[N\right] \V\left[X\right] 
++ \E\left[N^2\right] \E\left[X\right]^2 - \E\left[N\right]^2 \E\left[X\right]^2 \\
+& = & \E\left[N\right] \V\left[X\right] + \V\left[N\right] \E\left[X\right]^2
 \end{eqnarray*}
 
 La distribución acumulada del reclamo total $S$ tiene la forma:
@@ -366,7 +366,7 @@ como ya lo hemos realizado, utilizando las funciones de aplicación vectorial `s
 ::: {.example #l3ex3}
 Consideramos el caso de un modelo colectivo para el cuál el conteo de siniestros 
 $N \rightsquigarrow Pois( \lambda )$ y la distribución de cada uno de los reclamos 
-$\{X_i\}_{i\in \mathbb{N}}$, está dada por la misma distribución de probabilidad 
+$\{X_i\}_{i\in \N}$, está dada por la misma distribución de probabilidad 
 $X \rightsquigarrow LN( \mu, \sigma )$, siendo además cada uno de los reclamos indepencientes entre
 si.
 ```{r l4c5}
@@ -409,24 +409,24 @@ la variable aleatoria $Y_k = B_k X_k$.
 
 Para este caso en particular
 \begin{eqnarray*}
-\mathbb{E}[ S ] 
-& = & \mathbb{E}\left[ \sum\limits_{k=0}^{n} B_k X_k \right] \\
-& = & \sum\limits_{k=0}^{n} \mathbb{E}\left[ B_k X_k \right] \\
-& = & n \mathbb{E}[ B X ] \\
-& = & n \mathbb{E}[ B ] \mathbb{E}[ X ] \\
-& = & n p \mathbb{E}[ X ]
+\E[ S ] 
+& = & \E\left[ \sum\limits_{k=0}^{n} B_k X_k \right] \\
+& = & \sum\limits_{k=0}^{n} \E\left[ B_k X_k \right] \\
+& = & n \E[ B X ] \\
+& = & n \E[ B ] \E[ X ] \\
+& = & n p \E[ X ]
 \end{eqnarray*}
 
 así mismo,
 \begin{eqnarray*}
-\mathbb{V}[ S ]
-& = & n \mathbb{V}[ B X ] \\
-& = & n \left( \mathbb{E}[ B^2 X^2 ] - \mathbb{E}[ B X ]^2 \right) \\
-& = & n \left( \mathbb{E}[ B^2 ] \mathbb{E}[ X^2 ] - \mathbb{E}[ B ]^2 \mathbb{E}[ X ]^2 \right) \\
-& = & n \left( p \mathbb{E}[ X^2 ] - p^2 \mathbb{E}[ X ]^2 \right) \\
-& = & n \left( p \mathbb{E}[ X^2 ] - p \mathbb{E}[ X ]^2 + p \mathbb{E}[ X ]^2  - p^2 \mathbb{E}[ X ]^2 \right) \\
-& = & n \left( p \mathbb{V}[ X ] + p ( 1 - p ) \mathbb{E}[ X ]^2 \right) \\
-& = & n \left( \mathbb{E}[B] \mathbb{V}[ X ] + \mathbb{V}[B] \mathbb{E}[ X ]^2 \right)
+\V[ S ]
+& = & n \V[ B X ] \\
+& = & n \left( \E[ B^2 X^2 ] - \E[ B X ]^2 \right) \\
+& = & n \left( \E[ B^2 ] \E[ X^2 ] - \E[ B ]^2 \E[ X ]^2 \right) \\
+& = & n \left( p \E[ X^2 ] - p^2 \E[ X ]^2 \right) \\
+& = & n \left( p \E[ X^2 ] - p \E[ X ]^2 + p \E[ X ]^2  - p^2 \E[ X ]^2 \right) \\
+& = & n \left( p \V[ X ] + p ( 1 - p ) \E[ X ]^2 \right) \\
+& = & n \left( \E[B] \V[ X ] + \V[B] \E[ X ]^2 \right)
 \end{eqnarray*}
 
 ::: {.example #l3ex3}
@@ -451,7 +451,7 @@ ES <- n * p * exp( mu + 0.5 * sigma^2 )
 ```
 
 \begin{eqnarray*}
-\mathbb{E}[S] = n p e^{ \mu + \frac{1}{2} \sigma^2 } & = & `r formatC( ES, digits = 4, format = 'f' )`, \\
+\E[S] = n p e^{ \mu + \frac{1}{2} \sigma^2 } & = & `r formatC( ES, digits = 4, format = 'f' )`, \\
 \overline{S} = \frac{1}{m} \sum\limits_{i=1}^m S_i & = & `r formatC( EeS, digits = 4, format = 'f' )`, 
 \end{eqnarray*}
 :::
@@ -487,11 +487,11 @@ como tampoco entre $\{Y_j\}$ y $\{X_i\}$. Es así que un modelo colectivo $S = \
 su estudio, estimación y tarificación debe ser realizada de forma condicional respecto de las 
 variables aleatorias explicativas $\{Y_j\}$,
 \begin{equation}
-\mathbb{E}[ S ] 
-= \mathbb{E}\left[ \mathbb{E}\left[ S \middle| Y_1, \ldots, Y_n \right] \right]
+\E[ S ] 
+= \E\left[ \E\left[ S \middle| Y_1, \ldots, Y_n \right] \right]
 \end{equation}
 de donde es necesario estimar cada una de las esperanzas condicionadas 
-$\mathbb{E}\left[ S \middle| Y_1, \ldots, Y_n \right]$.
+$\E\left[ S \middle| Y_1, \ldots, Y_n \right]$.
 
 En la práctica las variables explicativas $\{ Y_j \}$ suelen ser seleccionadas para caracterizar 
 el perfil de riesgo de cada cliente. Para su selección se suele utilizar algunos criterios de tipo 
@@ -596,16 +596,16 @@ Para el caso del modelo individual de riesgos podemos hacer uso de la siguiente 
 densidad de probabilidad de los reclamos totales $S$, utilizando la transformada de Fourier. En la 
 implementación numérica se utiliza la transformada de Fourier rápida (FFT).
 \begin{equation}
-\mathcal{F}\left( f_S \right)
-= \mathcal{F}\left( f^{\star n}_X \right)
-= \mathcal{F}\left( f_X \right)^{n}
+\Fo\left( f_S \right)
+= \Fo\left( f^{\star n}_X \right)
+= \Fo\left( f_X \right)^{n}
 \end{equation}
 
-Por tanto de esta relación como la transformada de Fourier es invertible, existe $\mathcal{F}^{-1}$. 
+Por tanto de esta relación como la transformada de Fourier es invertible, existe $\Fo^{-1}$. 
 Resulta el siguiente método para calcular la densidad de $S$
 \begin{equation}
-f_S = \mathcal{F}^{-1}\left( \mathcal{F}\left( f_S \right) \right)
-= \mathcal{F}^{-1}\left(\mathcal{F}\left( f_X \right)^{n} \right)
+f_S = \Fo^{-1}\left( \Fo\left( f_S \right) \right)
+= \Fo^{-1}\left(\Fo\left( f_X \right)^{n} \right)
 \end{equation}
 
 En conclusión para determinar la densidad de probabilidad de $S$ basta conocer la transformada de
@@ -613,19 +613,19 @@ Fourier de la distribución de los reclamos individuales, multiplicarla por si m
 tomar la transformada de Fourier inversa.
 
 \begin{eqnarray*}
-\mathcal{F}\left( f_S \right)
-& = & \mathcal{F}\left( \sum\limits_{n=0}^{+\infty} p_n f_X^{\star n} \right) \\
-& = & \sum\limits_{n=0}^{+\infty} p_n \mathcal{F}\left( f_X^{\star n} \right) \\
-& = & \sum\limits_{n=0}^{+\infty} p_n \mathcal{F}\left( f_X \right)^{n}
+\Fo\left( f_S \right)
+& = & \Fo\left( \sum\limits_{n=0}^{+\infty} p_n f_X^{\star n} \right) \\
+& = & \sum\limits_{n=0}^{+\infty} p_n \Fo\left( f_X^{\star n} \right) \\
+& = & \sum\limits_{n=0}^{+\infty} p_n \Fo\left( f_X \right)^{n}
 \end{eqnarray*}
 
 como consecuencia
 \begin{eqnarray*}
 f_S 
-& = & \mathcal{F}^{-1}\left( \mathcal{F}\left( f_S \right) \right)\\
-& = & \mathcal{F}^{-1}\left( \sum\limits_{n=0}^{+\infty} p_n \mathcal{F}\left( f_X \right)^{n} \right)\quad
+& = & \Fo^{-1}\left( \Fo\left( f_S \right) \right)\\
+& = & \Fo^{-1}\left( \sum\limits_{n=0}^{+\infty} p_n \Fo\left( f_X \right)^{n} \right)\quad
 \text{Una sola inversión} \\
-& = & \sum\limits_{n=0}^{+\infty} p_n \mathcal{F}^{-1}\left( \mathcal{F}\left( f_X \right)^{n} \right)\quad
+& = & \sum\limits_{n=0}^{+\infty} p_n \Fo^{-1}\left( \Fo\left( f_X \right)^{n} \right)\quad
 \text{Una inversión por cada término en la suma}
 \end{eqnarray*}
 
@@ -635,13 +635,13 @@ W_n = \frac{S_n}{n}
 \end{equation}
 
 \begin{equation}
-\mathbb{E}\left[ W_n \right]
-= \mathbb{E}\left[ \frac{S_n}{n} \right] 
-= \frac{1}{n} \mathbb{E}\left[ S_n \right]
+\E\left[ W_n \right]
+= \E\left[ \frac{S_n}{n} \right] 
+= \frac{1}{n} \E\left[ S_n \right]
 \end{equation}
 
 \begin{equation}
-\mathbb{V}\left[ W_n \right]
-= \mathbb{V}\left[ \frac{S_n}{n} \right]
-= \frac{1}{n^2} \mathbb{V}\left[ S_n \right]
+\V\left[ W_n \right]
+= \V\left[ \frac{S_n}{n} \right]
+= \frac{1}{n^2} \V\left[ S_n \right]
 \end{equation}
