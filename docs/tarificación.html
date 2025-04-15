@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Capítulo 6 Tarificación | Matemática Actuarial de los Seguros Generales</title>
+  <meta name="description" content="Capítulo 6 Tarificación | Matemática Actuarial de los Seguros Generales" />
+  <meta name="generator" content="bookdown 0.42 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Capítulo 6 Tarificación | Matemática Actuarial de los Seguros Generales" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Capítulo 6 Tarificación | Matemática Actuarial de los Seguros Generales" />
+  
+  
+  
+
+<meta name="author" content="" />
+
+
+<meta name="date" content="2025-04-14" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="modelos-de-pérdida-agregada.html"/>
+<link rel="next" href="reservas-técnicas.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/codefolding-lua-1.1/codefolding-lua.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<script type="text/javascript"
+   src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="introducción.html"><a href="introducción.html"><i class="fa fa-check"></i><b>1</b> Introducción</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="introducción.html"><a href="introducción.html#materia"><i class="fa fa-check"></i><b>1.1</b> Materia</a></li>
+<li class="chapter" data-level="1.2" data-path="introducción.html"><a href="introducción.html#resultados-de-aprendizaje"><i class="fa fa-check"></i><b>1.2</b> Resultados de aprendizaje</a></li>
+<li class="chapter" data-level="1.3" data-path="introducción.html"><a href="introducción.html#contenidos-propuestos"><i class="fa fa-check"></i><b>1.3</b> Contenidos propuestos</a></li>
+<li class="chapter" data-level="1.4" data-path="introducción.html"><a href="introducción.html#referencias-bibliográficas"><i class="fa fa-check"></i><b>1.4</b> Referencias bibliográficas</a>
+<ul>
+<li class="chapter" data-level="" data-path="introducción.html"><a href="introducción.html#principales-libros-guía"><i class="fa fa-check"></i>Principales libros guía</a></li>
+<li class="chapter" data-level="" data-path="introducción.html"><a href="introducción.html#otras-referencias-de-soporte"><i class="fa fa-check"></i>Otras referencias de soporte</a></li>
+<li class="chapter" data-level="" data-path="introducción.html"><a href="introducción.html#requerimientos-informáticos"><i class="fa fa-check"></i>Requerimientos informáticos</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="preliminares.html"><a href="preliminares.html"><i class="fa fa-check"></i><b>2</b> Preliminares</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="preliminares.html"><a href="preliminares.html#notación-matemática"><i class="fa fa-check"></i><b>2.1</b> Notación matemática</a></li>
+<li class="chapter" data-level="2.2" data-path="preliminares.html"><a href="preliminares.html#consideraciones-de-programación-en-r"><i class="fa fa-check"></i><b>2.2</b> Consideraciones de programación en R</a>
+<ul>
+<li class="chapter" data-level="" data-path="preliminares.html"><a href="preliminares.html#opciones-usuales"><i class="fa fa-check"></i>Opciones usuales</a></li>
+<li class="chapter" data-level="" data-path="preliminares.html"><a href="preliminares.html#paquetes-usuales"><i class="fa fa-check"></i>Paquetes usuales</a></li>
+<li class="chapter" data-level="" data-path="preliminares.html"><a href="preliminares.html#estructuras-básicas"><i class="fa fa-check"></i>Estructuras básicas</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="probabilidad-y-estadística.html"><a href="probabilidad-y-estadística.html"><i class="fa fa-check"></i><b>3</b> Probabilidad y Estadística</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="probabilidad-y-estadística.html"><a href="probabilidad-y-estadística.html#probabilidad-y-conceptos-asociados"><i class="fa fa-check"></i><b>3.1</b> Probabilidad y conceptos asociados</a></li>
+<li class="chapter" data-level="3.2" data-path="probabilidad-y-estadística.html"><a href="probabilidad-y-estadística.html#resultados-de-convergencia"><i class="fa fa-check"></i><b>3.2</b> Resultados de convergencia</a></li>
+<li class="chapter" data-level="3.3" data-path="probabilidad-y-estadística.html"><a href="probabilidad-y-estadística.html#desigualdades-de-concentración"><i class="fa fa-check"></i><b>3.3</b> Desigualdades de concentración</a></li>
+<li class="chapter" data-level="3.4" data-path="probabilidad-y-estadística.html"><a href="probabilidad-y-estadística.html#transformada-de-fourier-contínua-y-discreta"><i class="fa fa-check"></i><b>3.4</b> Transformada de Fourier, contínua y discreta</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="probabilidad-y-estadística.html"><a href="probabilidad-y-estadística.html#aproximación-numérica-en-una-dimensión"><i class="fa fa-check"></i><b>3.4.1</b> Aproximación numérica en una dimensión</a></li>
+<li class="chapter" data-level="3.4.2" data-path="probabilidad-y-estadística.html"><a href="probabilidad-y-estadística.html#uso-de-la-transformada-de-fourier"><i class="fa fa-check"></i><b>3.4.2</b> Uso de la transformada de Fourier</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="probabilidad-y-estadística.html"><a href="probabilidad-y-estadística.html#consideraciones-financieras"><i class="fa fa-check"></i><b>3.5</b> Consideraciones financieras</a>
+<ul>
+<li class="chapter" data-level="3.5.1" data-path="probabilidad-y-estadística.html"><a href="probabilidad-y-estadística.html#función-de-actualización-o-descuento"><i class="fa fa-check"></i><b>3.5.1</b> Función de actualización o descuento</a></li>
+<li class="chapter" data-level="3.5.2" data-path="probabilidad-y-estadística.html"><a href="probabilidad-y-estadística.html#flujos-financieros"><i class="fa fa-check"></i><b>3.5.2</b> Flujos financieros</a></li>
+<li class="chapter" data-level="3.5.3" data-path="probabilidad-y-estadística.html"><a href="probabilidad-y-estadística.html#flujos-financieros-probables"><i class="fa fa-check"></i><b>3.5.3</b> Flujos financieros probables</a></li>
+<li class="chapter" data-level="3.5.4" data-path="probabilidad-y-estadística.html"><a href="probabilidad-y-estadística.html#sec:equifin"><i class="fa fa-check"></i><b>3.5.4</b> Equilibrio financiero</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="distribuciones.html"><a href="distribuciones.html"><i class="fa fa-check"></i><b>4</b> Distribuciones</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="distribuciones.html"><a href="distribuciones.html#distribuciones-discretas"><i class="fa fa-check"></i><b>4.1</b> Distribuciones discretas</a></li>
+<li class="chapter" data-level="4.2" data-path="distribuciones.html"><a href="distribuciones.html#familia-de-panjer"><i class="fa fa-check"></i><b>4.2</b> Familia de Panjer</a></li>
+<li class="chapter" data-level="4.3" data-path="distribuciones.html"><a href="distribuciones.html#distribuciones-continuas"><i class="fa fa-check"></i><b>4.3</b> Distribuciones continuas</a></li>
+<li class="chapter" data-level="4.4" data-path="distribuciones.html"><a href="distribuciones.html#estimación"><i class="fa fa-check"></i><b>4.4</b> Estimación</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="distribuciones.html"><a href="distribuciones.html#método-de-sustitución"><i class="fa fa-check"></i><b>4.4.1</b> Método de sustitución</a></li>
+<li class="chapter" data-level="4.4.2" data-path="distribuciones.html"><a href="distribuciones.html#método-de-momentos"><i class="fa fa-check"></i><b>4.4.2</b> Método de momentos</a></li>
+<li class="chapter" data-level="4.4.3" data-path="distribuciones.html"><a href="distribuciones.html#método-de-la-distancia-mínima"><i class="fa fa-check"></i><b>4.4.3</b> Método de la distancia mínima</a></li>
+<li class="chapter" data-level="4.4.4" data-path="distribuciones.html"><a href="distribuciones.html#método-de-maximización-de-la-verosimilitud"><i class="fa fa-check"></i><b>4.4.4</b> Método de maximización de la verosimilitud</a></li>
+<li class="chapter" data-level="4.4.5" data-path="distribuciones.html"><a href="distribuciones.html#calidad-de-estimadores"><i class="fa fa-check"></i><b>4.4.5</b> Calidad de estimadores</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html"><i class="fa fa-check"></i><b>5</b> Modelos de pérdida agregada</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html#mutualización-del-riesgo"><i class="fa fa-check"></i><b>5.1</b> Mutualización del riesgo</a></li>
+<li class="chapter" data-level="5.2" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html#modelo-individual"><i class="fa fa-check"></i><b>5.2</b> Modelo individual</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html#algoritmo-de-simulación"><i class="fa fa-check"></i><b>5.2.1</b> Algoritmo de simulación</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html#modelo-colectivo"><i class="fa fa-check"></i><b>5.3</b> Modelo colectivo</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html#algoritmo-de-simulación-1"><i class="fa fa-check"></i><b>5.3.1</b> Algoritmo de simulación</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html#modelos-mixtos"><i class="fa fa-check"></i><b>5.4</b> Modelos mixtos</a></li>
+<li class="chapter" data-level="5.5" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html#modelos-con-variables-explicativas"><i class="fa fa-check"></i><b>5.5</b> Modelos con variables explicativas</a></li>
+<li class="chapter" data-level="5.6" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html#aplicación-del-deducible"><i class="fa fa-check"></i><b>5.6</b> Aplicación del deducible</a></li>
+<li class="chapter" data-level="5.7" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html#algoritmo-de-panjer"><i class="fa fa-check"></i><b>5.7</b> Algoritmo de Panjer</a></li>
+<li class="chapter" data-level="5.8" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html#estimación-usando-la-transformada-de-fourier"><i class="fa fa-check"></i><b>5.8</b> Estimación usando la transformada de Fourier</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="tarificación.html"><a href="tarificación.html"><i class="fa fa-check"></i><b>6</b> Tarificación</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="tarificación.html"><a href="tarificación.html#tarificación-en-grandes-términos"><i class="fa fa-check"></i><b>6.1</b> Tarificación en grandes términos</a></li>
+<li class="chapter" data-level="6.2" data-path="tarificación.html"><a href="tarificación.html#medidas-de-riesgo"><i class="fa fa-check"></i><b>6.2</b> Medidas de riesgo</a></li>
+<li class="chapter" data-level="6.3" data-path="tarificación.html"><a href="tarificación.html#prima"><i class="fa fa-check"></i><b>6.3</b> Prima</a></li>
+<li class="chapter" data-level="6.4" data-path="tarificación.html"><a href="tarificación.html#segmentación"><i class="fa fa-check"></i><b>6.4</b> Segmentación</a></li>
+<li class="chapter" data-level="6.5" data-path="tarificación.html"><a href="tarificación.html#deducibles"><i class="fa fa-check"></i><b>6.5</b> Deducibles</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="reservas-técnicas.html"><a href="reservas-técnicas.html"><i class="fa fa-check"></i><b>7</b> Reservas técnicas</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="reservas-técnicas.html"><a href="reservas-técnicas.html#reservas-para-primas-no-adquiridas"><i class="fa fa-check"></i><b>7.1</b> Reservas para primas no adquiridas</a></li>
+<li class="chapter" data-level="7.2" data-path="reservas-técnicas.html"><a href="reservas-técnicas.html#reservas-de-riesgos-en-curso"><i class="fa fa-check"></i><b>7.2</b> Reservas de riesgos en curso</a></li>
+<li class="chapter" data-level="7.3" data-path="reservas-técnicas.html"><a href="reservas-técnicas.html#reservas-de-siniestros-a-pagar"><i class="fa fa-check"></i><b>7.3</b> Reservas de siniestros a pagar</a>
+<ul>
+<li class="chapter" data-level="7.3.1" data-path="reservas-técnicas.html"><a href="reservas-técnicas.html#siniestros-sucedidos-reportados-resueltos-no-pagados"><i class="fa fa-check"></i><b>7.3.1</b> Siniestros sucedidos, reportados, resueltos, no pagados</a></li>
+<li class="chapter" data-level="7.3.2" data-path="reservas-técnicas.html"><a href="reservas-técnicas.html#siniestros-sucedidos-reportados-no-resueltos-no-pagados"><i class="fa fa-check"></i><b>7.3.2</b> Siniestros sucedidos, reportados, no resueltos, no pagados</a></li>
+<li class="chapter" data-level="7.3.3" data-path="reservas-técnicas.html"><a href="reservas-técnicas.html#siniestros-sucedidos-no-reportados-no-resueltos-no-pagados"><i class="fa fa-check"></i><b>7.3.3</b> Siniestros sucedidos, no reportados, no resueltos, no pagados</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="modelos-lineales-generalizados-glm.html"><a href="modelos-lineales-generalizados-glm.html"><i class="fa fa-check"></i><b>8</b> Modelos lineales generalizados (GLM)</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="modelos-lineales-generalizados-glm.html"><a href="modelos-lineales-generalizados-glm.html#familia-exponencial"><i class="fa fa-check"></i><b>8.1</b> Familia exponencial</a></li>
+<li class="chapter" data-level="8.2" data-path="modelos-lineales-generalizados-glm.html"><a href="modelos-lineales-generalizados-glm.html#modelo-lineal-generalizado-glm"><i class="fa fa-check"></i><b>8.2</b> Modelo lineal generalizado (GLM)</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="estimación-de-valores-extremos.html"><a href="estimación-de-valores-extremos.html"><i class="fa fa-check"></i><b>9</b> Estimación de valores extremos</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="estimación-de-valores-extremos.html"><a href="estimación-de-valores-extremos.html#estimación-con-valores-extremos"><i class="fa fa-check"></i><b>9.1</b> Estimación con valores extremos</a></li>
+<li class="chapter" data-level="9.2" data-path="estimación-de-valores-extremos.html"><a href="estimación-de-valores-extremos.html#simulación-con-valores-extremos"><i class="fa fa-check"></i><b>9.2</b> Simulación con valores extremos</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="bibliografía.html"><a href="bibliografía.html"><i class="fa fa-check"></i><b>10</b> Bibliografía</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Matemática Actuarial de los Seguros Generales</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="tarificación" class="section level1 hasAnchor" number="6">
+<h1><span class="header-section-number">Capítulo 6</span> Tarificación<a href="tarificación.html#tarificación" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Para realizar la tarificación de un producto de seguro, además de estudiar y estimar el
+comportamiento futuro de los reclamos totales <span class="math inline">\(S\)</span>, es necesario también tomar en cuenta el capital
+<span class="math inline">\(K\)</span> destinado para hacer frente al riesgo subscrito y los costos generales <span class="math inline">\(G\)</span></p>
+<!------------------------------------------------------------------------------------------------->
+<div id="tarificación-en-grandes-términos" class="section level2 hasAnchor" number="6.1">
+<h2><span class="header-section-number">6.1</span> Tarificación en grandes términos<a href="tarificación.html#tarificación-en-grandes-términos" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>La tarificación que conlleva a la selección de la prima <span class="math inline">\(\Pi\)</span> debe tomar en cuenta como se manejan y
+equilibran los activos y pasivos en el negocio asegurador.</p>
+<p><strong>Pasivos</strong></p>
+<ol style="list-style-type: decimal">
+<li><p>Capitales propios</p></li>
+<li><p>Reservas técnicas</p></li>
+<li><p>Reservas para otros riesgos</p></li>
+<li><p>Deudas o depósitos en dinero recibidos por cesiones</p></li>
+<li><p>Otras deudas por pagar</p></li>
+</ol>
+<p><strong>Activos</strong></p>
+<ol style="list-style-type: decimal">
+<li><p>Capital suscrito no desembolsado</p></li>
+<li><p>Activos no materiales</p></li>
+<li><p>Inversiones</p></li>
+<li><p>Parte de reaseguros en reservas técnicas</p></li>
+<li><p>Deudas por cobrar</p></li>
+<li><p>Otros activos</p></li>
+</ol>
+<p>En el proceso de tarificación no es pertinente incluir todos los activos de la empresa, ya que
+muchos de estos no tienen la liquidez necesaria como para ser considerados un tipo de activo
+viable para la tarificación. Tampoco se toma en cuenta el dinero recibido por la cesión de primas
+en un ramo en particular, ya que esto constituye un nivel más arriba propio del negocio
+reasegurador.</p>
+<p>En términos generales se busca equilibrar el resultado operativo del ramo de negocio <span class="math inline">\(R\)</span> a lo largo
+de la vida del ramo. El resultado <span class="math inline">\(R\)</span> a su vez está dado por la siguiente relación:
+<span class="math display">\[\begin{equation}
+R = \Pi + I - S - G - K
+\end{equation}\]</span>
+donde las variables a considerarse en principio son:</p>
+<ol style="list-style-type: decimal">
+<li><p><span class="math inline">\(\Pi\)</span> Ingreso por primas</p></li>
+<li><p><span class="math inline">\(I\)</span> Ingreso por inversiones</p></li>
+<li><p><span class="math inline">\(S\)</span> Pago de siniestros</p></li>
+<li><p><span class="math inline">\(G\)</span> Gastos de subscripción</p></li>
+<li><p><span class="math inline">\(K\)</span> Coste de capital</p></li>
+</ol>
+<p>En varias ocasiones el ciclo del negocio puede ser corto y no permite considerar un ingreso por
+inversiones <span class="math inline">\(I = 0\)</span>.
+<span class="math display">\[\begin{equation}
+R = \Pi - S - G - K
+\end{equation}\]</span></p>
+<p>Sería ideal que a lo largo de la vida del ramo el resultado mantenga <span class="math inline">\(R &gt; 0\)</span>, pero al tratarse de
+un negocio que depende de la aleatoriedad de los reclamos, es bastante complicado encontrar un
+costo de capital <span class="math inline">\(K\)</span> y una prima <span class="math inline">\(\Pi\)</span> que siempre asegure ante todo escenario que se mantenga
+la positividad. Ante este riesgo continuo se busca minimizar la probabilidad de ruina <span class="math inline">\(R &lt; 0\)</span>
+a un nivel <span class="math inline">\(\alpha &gt; 0\)</span> adecuado
+<span class="math display">\[\begin{equation}
+P( R &lt; 0 ) &lt; \alpha
+\end{equation}\]</span></p>
+<p>Muchas de las veces se parte del principio de equilibrio financiero <a href="probabilidad-y-estadística.html#sec:equifin">3.5.4</a>, donde
+se busca la igualdad <span class="math inline">\(\mathbb{E}[R] = 0\)</span>, la misma implica la siguiente relación:
+<span class="math display">\[\begin{eqnarray*}
+0 &amp; = &amp; \mathbb{E}[R] \\
+0 &amp; = &amp; \mathbb{E}[R\mid R \geq 0]P( R \geq 0 ) + \mathbb{E}[R\mid R &lt; 0]P( R &lt; 0 ) \\
+\mathbb{E}[R\mid R \geq 0]P( R \geq 0 ) &amp; = &amp; -\mathbb{E}[R\mid R &lt; 0]P( R &lt; 0 ) \\
+\frac{P( R &lt; 0 )}{P( R \geq 0 ) } &amp; = &amp; -\frac{\mathbb{E}[R\mid R \geq 0]}{\mathbb{E}[R\mid R &lt; 0]}
+\end{eqnarray*}\]</span>
+en el equilibrio financiero, la proporción de la probabilidad de ruina respecto de la probabilidad
+de no estar en ruina es igual a la proporción entre la esperanza condicional del resultado cuando
+no se produce la ruina respecto de la esperanza condicional cuando si se produce la ruina.</p>
+<p>Un modelo puede estar equilibrado financieramente <span class="math inline">\(\mathbb{E}[R] = 0\)</span>, pero se desconoce la
+probabilidad de ruina <span class="math inline">\(P( R &lt; 0)\)</span>, esta podría ser muy grande. La razón anterior permite estimar
+la relevancia de la probabilidad de ruina en un modelo equilibrado, con el uso de las esperanzas
+condicionales.</p>
+<p>Es usual asumir que la única parte aleatoria de <span class="math inline">\(R\)</span> viene dada por el valor de los reclamos totales,
+en razón de esto se tiene:
+<span class="math display">\[\begin{equation}
+\mathbb{E}[ R ] = \Pi - \mathbb{E}[S] - G - K
+\end{equation}\]</span></p>
+<p>El <strong>coste de capital</strong> <span class="math inline">\(K\)</span> es el dinero que se requiere adicional para estar cubiertos a un nivel
+de solvencia adecuado en caso se presenten mayores variaciones en el valor observado del reclamo
+total <span class="math inline">\(S\)</span> y el esperado <span class="math inline">\(\mathbb{E}[S]\)</span>. Para ello se suele utilizar una <strong>medida de riesgo</strong>
+<span class="math inline">\(\zeta\)</span> que permita controlar la probabilidad de ruina <span class="math inline">\(P( R &lt; 0)\)</span> al nivel de <span class="math inline">\(\alpha &gt; 0\)</span>, así se
+suele tomar
+<span class="math display">\[\begin{equation}
+K = \zeta( S ) - \mathbb{E}[S]
+\end{equation}\]</span>
+de tal forma que
+<span class="math display">\[\begin{equation}
+P( \Pi - S - G - K &lt; 0 ) = P( \Pi - G - \zeta(S) - ( S - \mathbb{E}[S] ) &lt; 0 ) &lt; \alpha.
+\end{equation}\]</span></p>
+<p>De la relación anterior se observa que una vez seleccionado el nivel de cobertura <span class="math inline">\(\alpha\)</span> y la
+medida de riesgo <span class="math inline">\(\zeta\)</span>, las variables correspondientes a la prima <span class="math inline">\(\Pi\)</span> y a los gastos <span class="math inline">\(G\)</span> quedan
+libres, de ahí resulta un margen que permite seleccionar la prima más óptima para un producto de
+seguro, así como también optimizar los gastos <span class="math inline">\(G\)</span>. Este proceso de selección es precisamente lo que
+llamamos <strong>tarificación</strong> (pricing).</p>
+<!------------------------------------------------------------------------------------------------->
+</div>
+<div id="medidas-de-riesgo" class="section level2 hasAnchor" number="6.2">
+<h2><span class="header-section-number">6.2</span> Medidas de riesgo<a href="tarificación.html#medidas-de-riesgo" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="definition">
+<p><span id="def:spv" class="definition"><strong>Definición 3.7  (Medida de riesgo coherente) </strong></span>Una <strong>medida de riesgo coeherente</strong> es una función <span class="math inline">\(\zeta: \mathbb{R} \longrightarrow \mathbb{R}\)</span>,
+que satisface la siguientes propiedades:</p>
+<ol style="list-style-type: decimal">
+<li><p><strong>Homogenidad positiva</strong>, para cualquier <span class="math inline">\(a &gt; 0\)</span>
+<span class="math display">\[\begin{equation}
+\zeta( a X ) = a \zeta( X )
+\end{equation}\]</span></p></li>
+<li><p><strong>Invarianza ante las traslaciones</strong>, para cualquier <span class="math inline">\(a &gt; 0\)</span>
+<span class="math display">\[\begin{equation}
+\zeta( \alpha X + a ) = \zeta( \alpha X ) + a
+\end{equation}\]</span></p></li>
+<li><p><strong>Monotonicidad</strong>, Si <span class="math inline">\(X \leq Y\)</span>
+<span class="math display">\[\begin{equation}
+\zeta( X ) \leq \zeta( Y )
+\end{equation}\]</span></p></li>
+<li><p><strong>Sub-aditividad</strong>
+<span class="math display">\[\begin{equation}
+\zeta( X + Y ) \leq \zeta( X ) + \zeta( Y )
+\end{equation}\]</span></p></li>
+</ol>
+</div>
+<p>En lo que continúa citamos algunas de las medidas de riesgo usualmente utilizadas.</p>
+<div class="definition">
+<p><span id="def:VaR" class="definition"><strong>Definición 6.1  (Valor en riesgo) </strong></span>Dada una variable aleatoria a valores reales <span class="math inline">\(X\)</span>, el <strong>valor en riesgo</strong> (value at risk) de <span class="math inline">\(X\)</span> al
+nivel de probabilidad <span class="math inline">\(\alpha \in (0,1)\)</span> está dado por
+<span class="math display">\[\begin{equation}
+VaR_{\alpha}( X ) = \inf\left\{ x \in \mathbb{R} \middle| F_X( x ) &gt; \alpha \right\}
+\end{equation}\]</span></p>
+</div>
+<div class="proposition">
+<p><span id="prp:varinv" class="proposition"><strong>Proposición 6.1  </strong></span>Si la función de distribución acumulada <span class="math inline">\(F_X\)</span> es continua, entonces
+<span class="math inline">\(VaR_{\alpha}( X ) = F_X^{-1}( \alpha )\)</span>.</p>
+</div>
+<p>Por otra parte, <span class="math inline">\(VaR_{\alpha}\)</span> para cualquier <span class="math inline">\(\alpha\)</span> no es una medida de riesgo sub-aditiva.</p>
+<div class="definition">
+<p><span id="def:TVaR" class="definition"><strong>Definición 6.2  (Valor en riesgo en la cola) </strong></span>Dada una variable aleatoria a valores reales <span class="math inline">\(X\)</span>, el <strong>valor en riesgo en la colas</strong>
+(tail value at risk) de <span class="math inline">\(X\)</span> al nivel de probabilidad <span class="math inline">\(\alpha \in (0,1)\)</span> está dado por
+<span class="math display">\[\begin{equation}
+TVaR_{\alpha}( X ) = \frac{1}{1-\alpha} \int\limits_{\alpha}^1 VaR_u( X )\ du
+\end{equation}\]</span></p>
+</div>
+<div class="proposition">
+<p><span id="prp:TVaRcohe" class="proposition"><strong>Proposición 6.2  (Coherencia de la medida TVaR) </strong></span>La medida de riesgo <span class="math inline">\(TVaR_{\alpha}\)</span> es una medida de riesgo coherente si la variable aleatoria
+sobre la cual se mide es una variable aleatoria continua.</p>
+</div>
+<div class="definition">
+<p><span id="def:CTE" class="definition"><strong>Definición 6.3  (Esperanza condicional en la cola) </strong></span>Dada una variable aleatoria a valores reales <span class="math inline">\(X\)</span>, la <strong>esperanza condicional en la cola</strong>
+(conditional tail expectation) de <span class="math inline">\(X\)</span> al nivel de probabilidad <span class="math inline">\(\alpha \in (0,1)\)</span> está dado por
+<span class="math display">\[\begin{equation}
+CTE_{\alpha}( X ) = \mathbb{E}\left[ X \middle| X &gt; VaR_{\alpha}( X ) \right]
+\end{equation}\]</span></p>
+</div>
+<div class="proposition">
+<p><span id="prp:eqtvarcte" class="proposition"><strong>Proposición 6.3  </strong></span>Si la función de distribución acumulada <span class="math inline">\(F_X\)</span> de la variable aleatoria <span class="math inline">\(X\)</span> es continua, entonces
+se tiene la siguiente igualdad
+<span class="math display">\[\begin{equation}
+CTE_{\alpha}( X ) = TVaR_{\alpha}( X )
+\end{equation}\]</span></p>
+</div>
+<div class="definition">
+<p><span id="def:CVaR" class="definition"><strong>Definición 6.4  (Valor en riesgo condicionado) </strong></span>Dada una variable aleatoria a valores reales <span class="math inline">\(X\)</span>, el <strong>valor en riesgo condicionado</strong>
+(conditional value at risk) de <span class="math inline">\(X\)</span> al nivel de probabilidad <span class="math inline">\(\alpha \in (0,1)\)</span> está dado por
+<span class="math display">\[\begin{equation}
+CVaR_{\alpha}( X ) = \mathbb{E}\left[ X - VaR_{\alpha}( X ) \middle| X &gt; VaR_{\alpha}( X ) \right]
+= CTE_{\alpha}( X ) - VaR_{\alpha}( X )
+\end{equation}\]</span></p>
+</div>
+<div class="definition">
+<p><span id="def:ES" class="definition"><strong>Definición 6.5  (Déficit esperado) </strong></span>Dada una variable aleatoria a valores reales <span class="math inline">\(X\)</span>, el <strong>déficit esperado</strong> (expected shortfall) de
+<span class="math inline">\(X\)</span> al nivel de probabilidad <span class="math inline">\(\alpha \in (0,1)\)</span> está dado por
+<span class="math display">\[\begin{equation}
+ES_{\alpha}( X ) = \mathbb{E}\left[ \max\left( X - VaR_{\alpha}( X ), 0 \right) \right]
+\end{equation}\]</span></p>
+</div>
+<div class="definition">
+<p><span id="def:EVaR" class="definition"><strong>Definición 6.6  (Valor en riesgo entrópico) </strong></span>Dada una variable aleatoria a valores reales <span class="math inline">\(X\)</span>, el <strong>valor en riesgo entrópico</strong>
+(entropic value at risk) de <span class="math inline">\(X\)</span> al nivel de probabilidad <span class="math inline">\(\alpha \in (0,1)\)</span> está dado por
+<span class="math display">\[\begin{equation}
+EVaR_{\alpha}( X ) = \inf\left\{ \frac{1}{t} \ln\left( \frac{M_X( t )}{1 - \alpha} \right) \middle| t &gt; 0 \right\}
+\end{equation}\]</span></p>
+</div>
+<div class="proposition">
+<p><span id="prp:EVaRcohe" class="proposition"><strong>Proposición 6.4  (Coherencia de la medida EVaR) </strong></span>La medida de riesgo <span class="math inline">\(EVaR_{\alpha}\)</span> es una medida de riesgo coherente.</p>
+</div>
+<div class="example">
+<p><span id="exm:l6ex2" class="example"><strong>Ejemplo 6.1  </strong></span>Podemos considerar el caso particular donde todos los reclamos se suponen independientes e
+idénticamente distribuidos (i.i.d), en este caso con distribución <span class="math inline">\(X_i \rightsquigarrow LN(\mu,\sigma)\)</span></p>
+<p></p>
+<details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
+<div class="sourceCode" id="cb44"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb44-1"><a href="tarificación.html#cb44-1"></a>u <span class="ot">&lt;-</span> <span class="dv">4</span></span>
+<span id="cb44-2"><a href="tarificación.html#cb44-2"></a>s <span class="ot">&lt;-</span> <span class="fl">0.5</span></span>
+<span id="cb44-3"><a href="tarificación.html#cb44-3"></a>n <span class="ot">&lt;-</span> <span class="fl">1e4</span></span>
+<span id="cb44-4"><a href="tarificación.html#cb44-4"></a>X <span class="ot">&lt;-</span> <span class="fu">rlnorm</span>( n, <span class="at">meanlog =</span> u, <span class="at">sdlog =</span> s )</span>
+<span id="cb44-5"><a href="tarificación.html#cb44-5"></a>k <span class="ot">&lt;-</span> <span class="fu">seq</span>( <span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.2</span> ) </span>
+<span id="cb44-6"><a href="tarificación.html#cb44-6"></a>VaRX <span class="ot">&lt;-</span> <span class="fu">quantile</span>( X, <span class="at">probs =</span> k, <span class="at">names =</span> <span class="cn">FALSE</span> )</span>
+<span id="cb44-7"><a href="tarificación.html#cb44-7"></a>TVaRX <span class="ot">&lt;-</span> <span class="fu">sapply</span>( </span>
+<span id="cb44-8"><a href="tarificación.html#cb44-8"></a>  <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>( VaRX ), </span>
+<span id="cb44-9"><a href="tarificación.html#cb44-9"></a>  <span class="at">FUN =</span> <span class="cf">function</span>( i ) <span class="fu">ifelse</span>( k[ i ] <span class="sc">&lt;</span> <span class="dv">1</span>, ( <span class="dv">1</span> <span class="sc">/</span> ( <span class="dv">1</span> <span class="sc">-</span> k[ i ] ) ) <span class="sc">*</span> <span class="fu">mean</span>( X <span class="sc">*</span> ( X <span class="sc">&gt;</span> VaRX[ i ] ) ), <span class="fu">max</span>( X ) ) )</span></code></pre></div>
+</details>
+<p></p>
+<p></p>
+<details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
+<div class="sourceCode" id="cb45"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb45-1"><a href="tarificación.html#cb45-1"></a><span class="fu">plot</span>( k, VaRX, <span class="at">ylim =</span> <span class="fu">c</span>( <span class="dv">0</span>, <span class="fl">1e3</span> ) )</span>
+<span id="cb45-2"><a href="tarificación.html#cb45-2"></a><span class="fu">points</span>( k, TVaRX, <span class="at">col =</span> <span class="st">&#39;red&#39;</span> )</span></code></pre></div>
+</details>
+<p><img src="seguros_generales_files/figure-html/l5c2-1.png" width="700" /></p>
+<p></p>
+</div>
+<!------------------------------------------------------------------------------------------------->
+</div>
+<div id="prima" class="section level2 hasAnchor" number="6.3">
+<h2><span class="header-section-number">6.3</span> Prima<a href="tarificación.html#prima" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>La prima es la cantidad de dinero que un individuo o entidad pagan por una póliza de seguro, la cual
+está diseñada para cubrir ciertos riesgos personales o comerciales.</p>
+<p>La determinación de las primas por parte del asegurador hace uso de la mutualización del riesgo y
+diversificación, para así poder asumir la transferencia del riesgo por parte de sus asegurados. Así
+por tanto, es deseable que cualquier método que se utilice para la estimación de primas, se
+satisfaga, algunas propiedades importantes.</p>
+<p>Sin consideramos dos riesgos a cubrir <span class="math inline">\(S_1\)</span> y <span class="math inline">\(S_2\)</span>, entonces la función que estima <span class="math inline">\(\rho\)</span> las primas
+sería aconsejable satisfaga las siguientes propiedades.</p>
+<ol style="list-style-type: decimal">
+<li><p>Si se decide cobrir por compleo dos riesgos <span class="math inline">\(S_1\)</span> y <span class="math inline">\(S_2\)</span> en un mismo producto, el valor de la
+prima deberá ser menor o igual al valor que se resultaría de cubrir cada uno de los riesgos con
+productos separados.
+<span class="math display">\[\begin{equation}
+\rho( S_1 + S_2 ) \leq \rho( S_1 ) + \rho( S_2 )
+\end{equation}\]</span></p></li>
+<li><p>El asumir mayor riesgo debe tener como consecuencia el aumento de la prima
+<span class="math display">\[\begin{equation}
+\rho( S_1 ) \leq \rho( S_1 + S_2 )
+\end{equation}\]</span>
+Esta propiedad implica que al configurar un producto de seguro con mejor cobertura, se espera
+una prima de mayor costo.</p></li>
+<li><p>Si el riesgo a cubrir está limitado, es decir <span class="math inline">\(P( S \leq M ) = 1\)</span>, para un valor <span class="math inline">\(M &gt; 0\)</span>,
+entonces jamás la prima será superior a <span class="math inline">\(M\)</span>
+<span class="math display">\[\begin{equation}
+\rho( S ) \leq M
+\end{equation}\]</span>
+Esto se traduce a que ningún asegurado estará interesado en adquirir una póliza para cubrir un
+riesgo por encima del valor total asegurado.</p></li>
+</ol>
+<p>Es así que hay algunos principios para la estimación de primas, aquí citamos algunos de los más
+conocidos:</p>
+<ol style="list-style-type: decimal">
+<li><p>Prima neta, o prima pura de riesgo
+<span class="math display">\[\begin{equation}
+  \rho( S ) = \mathbb{E}[S] \approx \overline{S}
+\end{equation}\]</span></p></li>
+<li><p>Prima de riesgo con recargo sobre la esperanza matemática
+<span class="math display">\[\begin{equation}
+  P = \rho( S ) = (1 + \rho) \mathbb{E}[S] \approx (1 + \rho) \overline{S}
+\end{equation}\]</span></p></li>
+<li><p>Prima de riesgo con recargo sobre la varianza
+<span class="math display">\[\begin{equation}
+  P = \rho( S ) = \mathbb{E}[S] + \rho \mathbb{V}[S]
+  \approx \overline{S} + \rho \sigma_S^2
+\end{equation}\]</span></p></li>
+<li><p>Prima de riesgo con recargo sobre la desviación
+<span class="math display">\[\begin{equation}
+  P = \rho( S ) = \mathbb{E}[S] + \rho \sqrt{\mathbb{V}[S]}
+  \approx \overline{S} + \rho \sigma_S
+\end{equation}\]</span></p></li>
+<li><p>Prima de riesgo con principio exponencial para <span class="math inline">\(t &gt; 0\)</span>
+<span class="math display">\[\begin{equation}
+  P = \rho( S )
+  = \frac{1}{2} \mathbb{E}\left[\exp(tS)\right]
+  = \frac{1}{2} M_N\big( \ln M_X( t ) \big)
+  \approx \frac{1}{m} \sum\limits_{i=1}^m \exp\left(t S_i\right)
+\end{equation}\]</span></p></li>
+<li><p>Prima de percentiles para un valor de confianza <span class="math inline">\(\alpha \in [0,1]\)</span> o prima de valor en riesgo
+<span class="math inline">\(VaR_\alpha\)</span>
+<span class="math display">\[\begin{equation}
+  P = \rho( S ) = VaR_\alpha( S ) =  F_S^{-1}( \alpha )
+\end{equation}\]</span></p></li>
+<li><p>Prima de valor en riesgo en la cola (Tail Value at Risk) <span class="math inline">\(TVaR_\alpha\)</span>. Es el promedio uniforme
+de todos los valores en riesgo <span class="math inline">\(VaR_u\)</span>, con <span class="math inline">\(u \geq \alpha\)</span>.
+<span class="math display">\[\begin{equation}
+P = \rho( S ) = TVaR_\alpha( S ) = \frac{1}{1-\alpha} \int\limits_{\alpha}^1 VaR_u( S )\ du
+\end{equation}\]</span></p></li>
+</ol>
+<div class="example">
+<p><span id="exm:l6ex2" class="example"><strong>Ejemplo 6.1  </strong></span>Consideremos el caso donde todos los siniestros son igualmente distribuidos e independientes (i.i.d)
+<span class="math inline">\(X_i \rightsquigarrow Gamma( \alpha_i, \theta )\)</span>, para <span class="math inline">\(i \in \{1,\ldots,n\}\)</span>, el número de
+unidades aseguradas está dado por <span class="math inline">\(n \in \mathbb{N}\)</span>. Utilizaremos el modelo individual para
+la agregación de los reclamos y obtener el reclamo total <span class="math inline">\(S = \sum\limits_{i=1}^n X_i\)</span>.</p>
+<p>Como todas las variables <span class="math inline">\(X_i\)</span> siguen una ley <span class="math inline">\(Gamma( \alpha_i, \theta )\)</span>, sabemos que la
+familia <span class="math inline">\(Gamma\)</span> es cerrada por adición, es decir, a suma de variables aleatorias con ley <span class="math inline">\(Gamma\)</span>
+también sigue una ley <span class="math inline">\(Gamma\)</span>. En este caso en particular para el reclamo total tenemos que
+<span class="math inline">\(S \rightsquigarrow Gamma\left( \sum\limits_{i=1}^n \alpha_i, \theta \right)\)</span>.</p>
+<p>Es de notar que para cada <span class="math inline">\(i\in \{1,\ldots,n\}\)</span>, la variable aleatoria <span class="math inline">\(X_i\)</span> correspondiente al
+<span class="math inline">\(i\)</span>-ésimo reclamo tiene como parámetro un diferente factor <span class="math inline">\(\alpha_i\)</span>, pero el mismo factor
+<span class="math inline">\(\theta\)</span>.</p>
+<p>Ya que cada <span class="math inline">\(X_i \rightsquigarrow Gamma( \alpha_i, \theta )\)</span>, podemos calcular de forma determinista
+las experanzas de <span class="math inline">\(\mathbb{E}[X_i]\)</span>, para cada <span class="math inline">\(i \in \{1,\ldots,n\}\)</span> y de igual forma podemos
+calcular la esperanza del reclamo total <span class="math inline">\(\mathbb{E}[S] = \sum\limits_{i=1}^n \mathbb{E}[X_i]\)</span>.
+Además como asumimos independencia entre los <span class="math inline">\(X_i\)</span>, la varianza de <span class="math inline">\(S\)</span> también puede ser calculada
+fácilmente como <span class="math inline">\(\mathbb{V}[S] = \sum\limits_{i=1}^n \mathbb{V}[X_i]\)</span>.</p>
+<p></p>
+<details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
+<div class="sourceCode" id="cb46"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb46-1"><a href="tarificación.html#cb46-1"></a>EX <span class="ot">&lt;-</span> a <span class="sc">*</span> theta</span>
+<span id="cb46-2"><a href="tarificación.html#cb46-2"></a>VX <span class="ot">&lt;-</span> a <span class="sc">*</span> theta<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb46-3"><a href="tarificación.html#cb46-3"></a>ES <span class="ot">&lt;-</span> <span class="fu">sum</span>( EX )</span>
+<span id="cb46-4"><a href="tarificación.html#cb46-4"></a>VS <span class="ot">&lt;-</span> <span class="fu">sum</span>( VX )</span>
+<span id="cb46-5"><a href="tarificación.html#cb46-5"></a>SDS <span class="ot">&lt;-</span> <span class="fu">sqrt</span>( VS )</span></code></pre></div>
+</details>
+<p></p>
+<p>También estamos en la capacidad de simular la variable <span class="math inline">\(S\)</span> utilizando un algoritmo de aleatorio,
+para así aproximar los cálculos de sus momentos y otros estadísticos. Primeramente definamos los
+parámetros.</p>
+<p></p>
+<details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
+<div class="sourceCode" id="cb47"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb47-1"><a href="tarificación.html#cb47-1"></a><span class="co"># número de unidades aseguradas</span></span>
+<span id="cb47-2"><a href="tarificación.html#cb47-2"></a>n <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
+<span id="cb47-3"><a href="tarificación.html#cb47-3"></a></span>
+<span id="cb47-4"><a href="tarificación.html#cb47-4"></a><span class="co"># parámetros para cada X_i</span></span>
+<span id="cb47-5"><a href="tarificación.html#cb47-5"></a>a <span class="ot">&lt;-</span> <span class="fu">runif</span>( n, <span class="dv">5</span>, <span class="dv">10</span> )</span>
+<span id="cb47-6"><a href="tarificación.html#cb47-6"></a></span>
+<span id="cb47-7"><a href="tarificación.html#cb47-7"></a><span class="co"># parámetro theta, común a todas las X_i</span></span>
+<span id="cb47-8"><a href="tarificación.html#cb47-8"></a>theta <span class="ot">&lt;-</span> <span class="dv">4</span></span>
+<span id="cb47-9"><a href="tarificación.html#cb47-9"></a></span>
+<span id="cb47-10"><a href="tarificación.html#cb47-10"></a><span class="co"># parámetro para S</span></span>
+<span id="cb47-11"><a href="tarificación.html#cb47-11"></a>A <span class="ot">&lt;-</span> <span class="fu">sum</span>( a )</span></code></pre></div>
+</details>
+<p></p>
+<p>La variable aleatoria del reclamo total <span class="math inline">\(S\)</span> la podemos simular tomando una muestra i.i.d de tamaño <span class="math inline">\(m\)</span>,
+i.e. <span class="math inline">\(S_1,\ldots,S_m\)</span> de la distribución <span class="math inline">\(Gamma\left( \sum\limits_{i=1}^n \alpha_i, \theta \right)\)</span>.</p>
+<p></p>
+<details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
+<div class="sourceCode" id="cb48"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb48-1"><a href="tarificación.html#cb48-1"></a>m <span class="ot">&lt;-</span> <span class="fl">1e5</span></span>
+<span id="cb48-2"><a href="tarificación.html#cb48-2"></a>S <span class="ot">&lt;-</span> <span class="fu">rgamma</span>( m, <span class="at">shape =</span> A, <span class="at">scale =</span> theta )</span></code></pre></div>
+</details>
+<p></p>
+<p>Prima pura:</p>
+<p></p>
+<details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
+<div class="sourceCode" id="cb49"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb49-1"><a href="tarificación.html#cb49-1"></a>P <span class="ot">&lt;-</span> ES</span>
+<span id="cb49-2"><a href="tarificación.html#cb49-2"></a>P <span class="ot">&lt;-</span> <span class="fu">mean</span>( S )</span>
+<span id="cb49-3"><a href="tarificación.html#cb49-3"></a></span>
+<span id="cb49-4"><a href="tarificación.html#cb49-4"></a>alpha <span class="ot">&lt;-</span> <span class="fl">0.95</span></span>
+<span id="cb49-5"><a href="tarificación.html#cb49-5"></a>P_avg <span class="ot">&lt;-</span> ( <span class="dv">1</span> <span class="sc">+</span> alpha ) <span class="sc">*</span> ES</span>
+<span id="cb49-6"><a href="tarificación.html#cb49-6"></a>P_avg <span class="ot">&lt;-</span> ( <span class="dv">1</span> <span class="sc">+</span> alpha ) <span class="sc">*</span> <span class="fu">mean</span>( S )</span>
+<span id="cb49-7"><a href="tarificación.html#cb49-7"></a></span>
+<span id="cb49-8"><a href="tarificación.html#cb49-8"></a>P_var <span class="ot">&lt;-</span> ES <span class="sc">+</span> alpha <span class="sc">*</span> VS</span>
+<span id="cb49-9"><a href="tarificación.html#cb49-9"></a>P_var <span class="ot">&lt;-</span> <span class="fu">mean</span>( S ) <span class="sc">+</span> alpha <span class="sc">*</span> <span class="fu">var</span>( S )</span>
+<span id="cb49-10"><a href="tarificación.html#cb49-10"></a></span>
+<span id="cb49-11"><a href="tarificación.html#cb49-11"></a>P_sde <span class="ot">&lt;-</span> ES <span class="sc">+</span> alpha <span class="sc">*</span> SDS</span>
+<span id="cb49-12"><a href="tarificación.html#cb49-12"></a>P_sde <span class="ot">&lt;-</span> <span class="fu">mean</span>( S ) <span class="sc">+</span> alpha <span class="sc">*</span> <span class="fu">sd</span>( S )</span>
+<span id="cb49-13"><a href="tarificación.html#cb49-13"></a></span>
+<span id="cb49-14"><a href="tarificación.html#cb49-14"></a>VaRS <span class="ot">&lt;-</span> <span class="fu">qgamma</span>( alpha, <span class="at">shape =</span> A, <span class="at">scale =</span> theta )</span>
+<span id="cb49-15"><a href="tarificación.html#cb49-15"></a>P_VaR <span class="ot">&lt;-</span> VaRS</span>
+<span id="cb49-16"><a href="tarificación.html#cb49-16"></a>P_VaR <span class="ot">&lt;-</span> <span class="fu">quantile</span>( S, <span class="at">probs =</span> alpha )</span>
+<span id="cb49-17"><a href="tarificación.html#cb49-17"></a></span>
+<span id="cb49-18"><a href="tarificación.html#cb49-18"></a>P_TVaR <span class="ot">&lt;-</span> ( <span class="dv">1</span> <span class="sc">/</span> ( <span class="dv">1</span> <span class="sc">-</span> alpha ) ) <span class="sc">*</span> ( A <span class="sc">*</span> theta ) <span class="sc">*</span> ( <span class="dv">1</span> <span class="sc">-</span> <span class="fu">pgamma</span>( VaRS, <span class="at">shape =</span> A <span class="sc">+</span> <span class="dv">1</span>, <span class="at">scale =</span> theta ) )</span>
+<span id="cb49-19"><a href="tarificación.html#cb49-19"></a>P_TVaR <span class="ot">&lt;-</span> ( <span class="dv">1</span> <span class="sc">/</span> ( <span class="dv">1</span> <span class="sc">-</span> alpha ) ) <span class="sc">*</span> <span class="fu">integrate</span>( <span class="at">f =</span> <span class="cf">function</span>( u ) <span class="fu">qgamma</span>( u, <span class="at">shape =</span> A, <span class="at">scale =</span> theta ), alpha, <span class="dv">1</span> )<span class="sc">$</span>value</span>
+<span id="cb49-20"><a href="tarificación.html#cb49-20"></a>P_TVaR <span class="ot">&lt;-</span> <span class="fu">mean</span>( <span class="fu">sapply</span>( <span class="fu">runif</span>( m, alpha, <span class="dv">1</span> ), <span class="at">FUN =</span> <span class="cf">function</span>( k ) <span class="fu">qgamma</span>( k, <span class="at">shape =</span> A, <span class="at">scale =</span> theta ) ) )</span>
+<span id="cb49-21"><a href="tarificación.html#cb49-21"></a>I <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>( S <span class="sc">&gt;</span> VaRS )</span>
+<span id="cb49-22"><a href="tarificación.html#cb49-22"></a>P_TVaR <span class="ot">&lt;-</span> <span class="fu">mean</span>( S <span class="sc">*</span> I ) <span class="sc">/</span> <span class="fu">mean</span>( I )</span></code></pre></div>
+</details>
+<p></p>
+<p></p>
+<details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
+<div class="sourceCode" id="cb50"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb50-1"><a href="tarificación.html#cb50-1"></a>n <span class="ot">&lt;-</span> <span class="fl">1e3</span></span>
+<span id="cb50-2"><a href="tarificación.html#cb50-2"></a>S <span class="ot">&lt;-</span> <span class="fu">rgamma</span>( n, <span class="at">shape =</span> A, <span class="at">scale =</span> theta )</span>
+<span id="cb50-3"><a href="tarificación.html#cb50-3"></a>smin <span class="ot">&lt;-</span> <span class="fu">qgamma</span>( <span class="fl">0.001</span>, <span class="at">shape =</span> A, <span class="at">scale =</span> theta )</span>
+<span id="cb50-4"><a href="tarificación.html#cb50-4"></a>smax <span class="ot">&lt;-</span> <span class="fu">qgamma</span>( <span class="fl">0.999</span>, <span class="at">shape =</span> A, <span class="at">scale =</span> theta )</span>
+<span id="cb50-5"><a href="tarificación.html#cb50-5"></a>s <span class="ot">&lt;-</span> <span class="fu">seq</span>( smin, smax, <span class="at">length.out =</span> <span class="dv">1000</span> )</span>
+<span id="cb50-6"><a href="tarificación.html#cb50-6"></a>Fns <span class="ot">&lt;-</span> <span class="fu">ecdf</span>( S )( s )</span>
+<span id="cb50-7"><a href="tarificación.html#cb50-7"></a>Fs <span class="ot">&lt;-</span> <span class="fu">pgamma</span>( s, <span class="at">shape =</span> A, <span class="at">scale =</span> theta )</span>
+<span id="cb50-8"><a href="tarificación.html#cb50-8"></a></span>
+<span id="cb50-9"><a href="tarificación.html#cb50-9"></a>alph <span class="ot">&lt;-</span> <span class="fl">0.02</span></span>
+<span id="cb50-10"><a href="tarificación.html#cb50-10"></a>er <span class="ot">&lt;-</span> <span class="fu">sqrt</span>( <span class="fu">log</span>( <span class="dv">2</span> <span class="sc">/</span> alph ) <span class="sc">/</span> ( <span class="dv">2</span> <span class="sc">*</span> n ) )</span>
+<span id="cb50-11"><a href="tarificación.html#cb50-11"></a><span class="fu">mean</span>( <span class="fu">abs</span>( Fs <span class="sc">-</span> Fns ) <span class="sc">&gt;</span> er )</span></code></pre></div>
+</details>
+<pre><code>## [1] 0</code></pre>
+<details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
+<div class="sourceCode" id="cb52"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb52-1"><a href="tarificación.html#cb52-1"></a><span class="fu">plot</span>( s, Fs, <span class="at">type =</span> <span class="st">&#39;l&#39;</span>, <span class="at">ylim =</span> <span class="fu">c</span>( <span class="sc">-</span>er, <span class="dv">1</span> <span class="sc">+</span> er ) )</span>
+<span id="cb52-2"><a href="tarificación.html#cb52-2"></a><span class="fu">points</span>( s, Fns <span class="sc">-</span> er, <span class="at">col =</span> <span class="st">&#39;red&#39;</span>, <span class="at">type =</span> <span class="st">&#39;l&#39;</span> )</span>
+<span id="cb52-3"><a href="tarificación.html#cb52-3"></a><span class="fu">points</span>( s, Fns <span class="sc">+</span> er, <span class="at">col =</span> <span class="st">&#39;red&#39;</span>, <span class="at">type =</span> <span class="st">&#39;l&#39;</span> )</span></code></pre></div>
+</details>
+<p><img src="seguros_generales_files/figure-html/l5c7-1.png" width="700" /></p>
+<details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
+<div class="sourceCode" id="cb53"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb53-1"><a href="tarificación.html#cb53-1"></a><span class="fu">hist</span>( <span class="fu">pgamma</span>( S, <span class="at">shape =</span> A, <span class="at">scale =</span> theta ), <span class="at">breaks =</span> <span class="dv">5</span> )</span></code></pre></div>
+</details>
+<p><img src="seguros_generales_files/figure-html/l5c7-2.png" width="700" /></p>
+<p></p>
+</div>
+<!------------------------------------------------------------------------------------------------->
+</div>
+<div id="segmentación" class="section level2 hasAnchor" number="6.4">
+<h2><span class="header-section-number">6.4</span> Segmentación<a href="tarificación.html#segmentación" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>En muchas ocasiones es necesario tener en cuenta algunas características asociadas al riesgo
+de asegurado, de tal forma que la prima sea lo más eficiente y adecuado según el riesgo cubierto y
+las características del mismo. La idea de segmentar la población es obtener grupos homogéneos
+con riesgos similares.</p>
+<!------------------------------------------------------------------------------------------------->
+</div>
+<div id="deducibles" class="section level2 hasAnchor" number="6.5">
+<h2><span class="header-section-number">6.5</span> Deducibles<a href="tarificación.html#deducibles" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>El principal objetivo de los deducibles, es el reducir los costos de atención de los reclamos
+usualmente mediante la exclusión de siniestros usualmente numerosos debidos a reclamos pequeños.
+En otras ocasiones, los deducibles están diseñados para incentivar al asegurado para evitar
+y prevenir siniestros por cierto monto límite.</p>
+<ol style="list-style-type: decimal">
+<li><p>Prevención de la pérdida - as the compensation is reduced by a deductible the retention of the
+insured is positive; This makes out a good case for avoiding the loss;</p></li>
+<li><p>Reducción de la pérdida - the fact a deductible puts the policyholder at risk of obtaining
+only partial compensation provides an economic incentive to reduce the extend of the damage;</p></li>
+<li><p>Evitar pequeñas pérdidas - where administration costs are dominant for small losses, the
+administration costs will often exceed the loss itself, and hence the insurance company would want
+the policyholder to pay it himself;</p></li>
+<li><p>Reducción de la prima - premium reduction can be an important aspect for the policyholders,
+they may prefer to take a higher deductible to get a lower premium.</p></li>
+</ol>
+<p></p>
+<details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
+<div class="sourceCode" id="cb54"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb54-1"><a href="tarificación.html#cb54-1"></a>n <span class="ot">&lt;-</span> <span class="fl">1e5</span></span>
+<span id="cb54-2"><a href="tarificación.html#cb54-2"></a>l <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb54-3"><a href="tarificación.html#cb54-3"></a>dat <span class="ot">&lt;-</span> <span class="fu">data.table</span>( <span class="at">id =</span> <span class="dv">1</span><span class="sc">:</span>n, <span class="at">k =</span> <span class="fu">rpois</span>( n, <span class="at">lambda =</span> l )  )</span>
+<span id="cb54-4"><a href="tarificación.html#cb54-4"></a>datf <span class="ot">&lt;-</span> dat[ , <span class="fu">list</span>( <span class="at">fk =</span> .N ), by <span class="ot">=</span> k ]</span>
+<span id="cb54-5"><a href="tarificación.html#cb54-5"></a><span class="fu">setorder</span>( datf, k )</span>
+<span id="cb54-6"><a href="tarificación.html#cb54-6"></a>datf[ , fks <span class="sc">:=</span> <span class="fu">shift</span>( fk, <span class="at">n =</span> <span class="dv">1</span> ) ]</span>
+<span id="cb54-7"><a href="tarificación.html#cb54-7"></a>datf[ , gk <span class="sc">:=</span> k <span class="sc">*</span> fk <span class="sc">/</span> fks ]</span>
+<span id="cb54-8"><a href="tarificación.html#cb54-8"></a>datf <span class="ot">&lt;-</span> datf[ <span class="sc">!</span><span class="fu">is.na</span>( gk ) ]</span>
+<span id="cb54-9"><a href="tarificación.html#cb54-9"></a><span class="fu">plot</span>( datf<span class="sc">$</span>k, datf<span class="sc">$</span>gk )</span></code></pre></div>
+</details>
+<p><img src="seguros_generales_files/figure-html/l5c8-1.png" width="700" /></p>
+<p></p>
+<p></p>
+<details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
+<div class="sourceCode" id="cb55"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb55-1"><a href="tarificación.html#cb55-1"></a>dflm <span class="ot">&lt;-</span> <span class="fu">lm</span>( <span class="at">formula =</span> gk <span class="sc">~</span> k, <span class="at">data =</span> datf, <span class="at">method =</span> <span class="st">&#39;qr&#39;</span> )</span>
+<span id="cb55-2"><a href="tarificación.html#cb55-2"></a>a <span class="ot">&lt;-</span> <span class="fu">coef</span>( dflm )[ <span class="dv">2</span> ]</span>
+<span id="cb55-3"><a href="tarificación.html#cb55-3"></a>b <span class="ot">&lt;-</span> <span class="fu">coef</span>( dflm )[ <span class="dv">1</span> ]</span>
+<span id="cb55-4"><a href="tarificación.html#cb55-4"></a>p0 <span class="ot">&lt;-</span> <span class="fu">exp</span>( <span class="sc">-</span>b )</span>
+<span id="cb55-5"><a href="tarificación.html#cb55-5"></a>k <span class="ot">&lt;-</span> <span class="fu">seq</span>( <span class="dv">1</span>, <span class="dv">100</span>, <span class="dv">1</span> )</span>
+<span id="cb55-6"><a href="tarificación.html#cb55-6"></a>p <span class="ot">&lt;-</span> p0 <span class="sc">*</span> <span class="fu">cumprod</span>( <span class="fu">c</span>( <span class="dv">1</span>, a <span class="sc">+</span> b <span class="sc">/</span> k ) )</span>
+<span id="cb55-7"><a href="tarificación.html#cb55-7"></a><span class="fu">sum</span>( p )</span></code></pre></div>
+</details>
+<pre><code>## [1] 0.9593162</code></pre>
+<details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
+<div class="sourceCode" id="cb57"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb57-1"><a href="tarificación.html#cb57-1"></a>k <span class="ot">&lt;-</span> <span class="fu">seq</span>( <span class="dv">0</span>, <span class="dv">100</span>, <span class="dv">1</span> )</span>
+<span id="cb57-2"><a href="tarificación.html#cb57-2"></a><span class="fu">sum</span>( <span class="fu">dpois</span>( k, <span class="at">lambda =</span> l ) )</span></code></pre></div>
+</details>
+<pre><code>## [1] 1</code></pre>
+<details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
+<div class="sourceCode" id="cb59"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb59-1"><a href="tarificación.html#cb59-1"></a>EN <span class="ot">&lt;-</span> <span class="fu">sum</span>( k <span class="sc">*</span> p )</span></code></pre></div>
+</details>
+<p></p>
+<p></p>
+<details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
+<div class="sourceCode" id="cb60"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb60-1"><a href="tarificación.html#cb60-1"></a>D <span class="ot">&lt;-</span> <span class="cf">function</span>( x, d ) <span class="fu">return</span>( <span class="fu">max</span>( x <span class="sc">-</span> d, <span class="dv">0</span> ) )</span>
+<span id="cb60-2"><a href="tarificación.html#cb60-2"></a>d <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb60-3"><a href="tarificación.html#cb60-3"></a>u <span class="ot">&lt;-</span> <span class="dv">6</span></span>
+<span id="cb60-4"><a href="tarificación.html#cb60-4"></a>s <span class="ot">&lt;-</span> <span class="fl">0.3</span></span>
+<span id="cb60-5"><a href="tarificación.html#cb60-5"></a>n <span class="ot">&lt;-</span> <span class="fl">1e3</span></span>
+<span id="cb60-6"><a href="tarificación.html#cb60-6"></a>X <span class="ot">&lt;-</span> <span class="fu">rlnorm</span>( n, <span class="at">meanlog =</span> u, <span class="at">sdlog =</span> s )</span>
+<span id="cb60-7"><a href="tarificación.html#cb60-7"></a>DX <span class="ot">&lt;-</span> <span class="fu">sapply</span>( X, <span class="at">FUN =</span> D, d )</span>
+<span id="cb60-8"><a href="tarificación.html#cb60-8"></a>x <span class="ot">&lt;-</span> <span class="fu">seq</span>( <span class="dv">0</span>, <span class="fl">1e3</span>, <span class="at">length.out =</span> <span class="dv">500</span> )</span>
+<span id="cb60-9"><a href="tarificación.html#cb60-9"></a>FXe <span class="ot">&lt;-</span> <span class="fu">ecdf</span>( X )</span>
+<span id="cb60-10"><a href="tarificación.html#cb60-10"></a>FDXe <span class="ot">&lt;-</span> <span class="fu">ecdf</span>( DX )</span>
+<span id="cb60-11"><a href="tarificación.html#cb60-11"></a>Fx <span class="ot">&lt;-</span> <span class="fu">sapply</span>( x, <span class="at">FUN =</span> <span class="cf">function</span>( x ) <span class="fu">FXe</span>( x ) )</span>
+<span id="cb60-12"><a href="tarificación.html#cb60-12"></a>FDx <span class="ot">&lt;-</span> <span class="fu">sapply</span>( x, <span class="at">FUN =</span> <span class="cf">function</span>( x ) <span class="fu">FDXe</span>( x ) )</span>
+<span id="cb60-13"><a href="tarificación.html#cb60-13"></a><span class="fu">plot</span>( x, Fx, <span class="at">type =</span> <span class="st">&#39;s&#39;</span> )</span>
+<span id="cb60-14"><a href="tarificación.html#cb60-14"></a><span class="fu">points</span>( x, FDx, <span class="at">type =</span> <span class="st">&#39;s&#39;</span>, <span class="at">col =</span> <span class="st">&#39;blue&#39;</span> )</span></code></pre></div>
+</details>
+<p><img src="seguros_generales_files/figure-html/l5c10-1.png" width="700" /></p>
+<p></p>
+<p></p>
+<details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
+<div class="sourceCode" id="cb61"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb61-1"><a href="tarificación.html#cb61-1"></a>D <span class="ot">&lt;-</span> <span class="cf">function</span>( x, M ) <span class="fu">return</span>( <span class="fu">min</span>( x, M ) )</span>
+<span id="cb61-2"><a href="tarificación.html#cb61-2"></a>M <span class="ot">&lt;-</span> <span class="dv">600</span></span>
+<span id="cb61-3"><a href="tarificación.html#cb61-3"></a>u <span class="ot">&lt;-</span> <span class="dv">6</span></span>
+<span id="cb61-4"><a href="tarificación.html#cb61-4"></a>s <span class="ot">&lt;-</span> <span class="fl">0.3</span></span>
+<span id="cb61-5"><a href="tarificación.html#cb61-5"></a>n <span class="ot">&lt;-</span> <span class="fl">1e4</span></span>
+<span id="cb61-6"><a href="tarificación.html#cb61-6"></a>X <span class="ot">&lt;-</span> <span class="fu">rlnorm</span>( n, <span class="at">meanlog =</span> u, <span class="at">sdlog =</span> s )</span>
+<span id="cb61-7"><a href="tarificación.html#cb61-7"></a>DX <span class="ot">&lt;-</span> <span class="fu">sapply</span>( X, <span class="at">FUN =</span> D, M )</span>
+<span id="cb61-8"><a href="tarificación.html#cb61-8"></a>x <span class="ot">&lt;-</span> <span class="fu">seq</span>( <span class="dv">0</span>, <span class="fl">1e3</span>, <span class="at">length.out =</span> <span class="dv">500</span> )</span>
+<span id="cb61-9"><a href="tarificación.html#cb61-9"></a>FXe <span class="ot">&lt;-</span> <span class="fu">ecdf</span>( X )</span>
+<span id="cb61-10"><a href="tarificación.html#cb61-10"></a>FDXe <span class="ot">&lt;-</span> <span class="fu">ecdf</span>( DX )</span>
+<span id="cb61-11"><a href="tarificación.html#cb61-11"></a>Fx <span class="ot">&lt;-</span> <span class="fu">sapply</span>( x, <span class="at">FUN =</span> <span class="cf">function</span>( x ) <span class="fu">FXe</span>( x ) )</span>
+<span id="cb61-12"><a href="tarificación.html#cb61-12"></a>FDx <span class="ot">&lt;-</span> <span class="fu">sapply</span>( x, <span class="at">FUN =</span> <span class="cf">function</span>( x ) <span class="fu">FDXe</span>( x ) )</span>
+<span id="cb61-13"><a href="tarificación.html#cb61-13"></a><span class="fu">plot</span>( x, Fx, <span class="at">type =</span> <span class="st">&#39;s&#39;</span> )</span>
+<span id="cb61-14"><a href="tarificación.html#cb61-14"></a><span class="fu">points</span>( x, FDx, <span class="at">type =</span> <span class="st">&#39;s&#39;</span>, <span class="at">col =</span> <span class="st">&#39;blue&#39;</span> )</span></code></pre></div>
+</details>
+<p><img src="seguros_generales_files/figure-html/l5c11-1.png" width="700" /></p>
+<p></p>
+
+<!------------------------------------------------------------------------------------------------->
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="modelos-de-pérdida-agregada.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="reservas-técnicas.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": false,
+    "facebook": true,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": null,
+    "text": null
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": ["seguros_generales.pdf", "seguros_generales.epub"],
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "section"
+  },
+  "split_by": "chapter"
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

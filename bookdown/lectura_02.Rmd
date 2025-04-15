@@ -11,8 +11,7 @@
 3. $\overline{\mathbb{R}} = \mathbb{R} \cup \{ +\infty \} \cup \{ -\infty \}$ el conjunto de los 
 reales extendido incluyendo los infinitos
 
-<!-- 4. $<$ símbolo de menor que, $>$ símbolo de mayor que, $\leq$ símbolo de menor o igual que, -->
-<!-- $\geq$ símbolo de mayor o igual que, -->
+4. $x \approx y$ indica que el valor $y$ es aproximado al valor $x$
 
 5. $f: X \longrightarrow Y$ la función que toma valores en $X$ y entrega valores en $Y$
 
@@ -21,13 +20,17 @@ reales extendido incluyendo los infinitos
 7. $[ a, b ] = \left\{ x \in \mathbb{R} \mid x \geq a \land x \leq b \right\}$ intervalo cerrado para
 cualquier $a,b \in \overline{\mathbb{R}}$
 
-8. $(a,b) = \left\{ x \in \mathbb{R} \mid x \gt a \land x \lt b \right\}$ intervalo abierto para 
+8. $(a,b) = \left\{ x \in \mathbb{R} \mid x > a \land x < b \right\}$ intervalo abierto para 
 cualquier $a,b \in \overline{\mathbb{R}}$
 
 9. $\{x_n\}_{n\in\mathbb{N}} = \left\{ x_n \in X \mid n \in \mathbb{N} \right\}$ secuencia en 
 el conjunto $X$, no es más que una función de $\mathbb{N}$ con valores en $X$
 
-10. $\underset{x \rightarrow y}{\lim} f(x) = a$ límite de la funcion $f(x)$ cuando $x$ tiende a $y$.
+10. $\underset{x \rightarrow y}{\lim} f(x) = a$ límite de la función $f(x)$ cuando $x$ tiende a $y$.
+
+11. $\inf A$ es la mayor de las cotas inferiores de $A$.
+
+12. $\sup A$ es la menor de las cotas superiores de $A$.
 
 
 <!------------------------------------------------------------------------------------------------->
@@ -40,8 +43,8 @@ options( scipen = 9999 )
 options( stringsAsFactors = FALSE )
 ```
 
+<!------------------------------------------------------------------------------------------------->
 ### Paquetes usuales {-}
-
 
 ```{r l2c1, include = FALSE}
 options( width = 120 )
@@ -83,6 +86,7 @@ library( shiny )
 library( wesanderson )
 ```
 
+<!------------------------------------------------------------------------------------------------->
 ### Estructuras básicas {-}
 
 Para definir una variable utilizamos el operador de asignación `<-`, también se puede utilizar `=`.
@@ -113,7 +117,9 @@ print( z )
 
 Para muchas tareas que están relacionadas con el manejo de datos, podemos utilizar las 
 funcionalidades del paquete de R, `data.table`. Para trabajar con fechas recomendamos utilizar
-el paquete `lubridate`.
+el paquete `lubridate`. Para trabajar con distribuciones de probabilidad que se utilizan para 
+modelar valores extremos utilizamos `fExtremes`. Para varias funcionalidades asociadas a la 
+estimación de modelos de pérdida utilizamos `actuar`.
 
 <!------------------------------------------------------------------------------------------------->
 # Variables aleatorias
@@ -572,12 +578,3 @@ los flujos y tasas de actualización. A pesar de ser un resultado evidente, en l
 los  flujos capitalizados hasta el tiempo $t$ y en la derecha tenemos los flujos actualizados al 
 tiempo $t$. La expresión de la izquierda se conoce como la parte **retrospectiva** y la expresión de 
 la derecha como la parte **prospectiva**.
-
-En condiciones de equilibrio financiero la parte retrospectiva se igual con menos la parte 
-prospectiva.
-\begin{equation}
-\sum\limits_{t_k \leq t} u( t_k, t ) c( t_k ) = 
--\sum\limits_{t_k > t} v( t, t_k ) c( t_k )
-\end{equation}
-algunas veces se considera la parte prospectiva con el signo menos.
-
