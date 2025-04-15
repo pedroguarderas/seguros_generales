@@ -64,9 +64,8 @@ menos estos una infinidad si $N$ puede tomar valores tendiendo al infinito. En t
 hay que comprender y estimar la frecuencia y severidad de los reclamos que están asociados al riesgo 
 cubierto. 
 
-Los términos integrales asociados a la severidad presentan un verdadero reto estadístico y 
-computacional; hace unos años atrás se creo unos nuevos algoritmos para calcular estos términos 
-@aep_algo, @gaep_algo.
+Los términos integrales $\int\limits_{\left\{\sum\limits_{i=1}^n x_i \leq s\right\}} dF_n( x_1, \ldots, x_n )$ asociados a la severidad presentan un verdadero reto estadístico y computacional; hace unos años 
+atrás se desarrolló unos nuevos algoritmos para calcular estos términos @aep_algo, @gaep_algo.
 
 <!------------------------------------------------------------------------------------------------->
 ## Modelo individual
@@ -103,14 +102,14 @@ Al tener un número determinado de reclamos $n \in \N$, la distribución de prob
 total de reclamos $S$ puede ser calculada de una forma maś sencilla.
 \begin{eqnarray*}
 F_S( x )
-& = & F_{X_1} \star \cdots \star F_{S_n} ( s )\quad \text{sin $\{X_i\}$ son independientes} \\
+& = & F_{X_1} \star \cdots \star F_{X_n} ( s )\quad \text{sin $\{X_i\}$ son independientes} \\
 & = & F_{X}^{\star n}( s )\quad \text{si $\{X_i\}$ son idénticamente distribuidas}
 \end{eqnarray*}
 
 así mismo, si las densidades de probabilidad están bien definidas, entonces
 \begin{eqnarray*}
 f_S( s )
-& = & f_{X_1} \star \cdots \star f_{S_n} ( s )\quad \text{sin $\{X_i\}$ son independientes} \\
+& = & f_{X_1} \star \cdots \star f_{X_n} ( s )\quad \text{sin $\{X_i\}$ son independientes} \\
 & = & f_{X}^{\star n}( s )\quad \text{si $\{X_i\}$ son idénticamente distribuidas}
 \end{eqnarray*}
 
@@ -342,7 +341,12 @@ F_S( s )
 & = & \sum\limits_{n=0}^{+\infty} F_{X_1} \star \cdots \star F_{X_n}( s ) p_n\quad \text{distribución de la suma de variables aleatorias} \\
 & = & \sum\limits_{n=0}^{+\infty} F^{\star n}_{X}( s ) p_n\quad \text{si $\{X_i\}$ son idénticamente distribuidas}
 \end{eqnarray*}
-tomando $F^{\star 0}_{X}( s ) = 1$
+tomando $F^{\star 0}_{X}( s ) = 1$. 
+
+Este último resultado muestra que la distribución de probabilidad de $S$ no es más que una mixtura
+de las distribuciones para los modelos individuales $F^{\star n}_{X}$ tomando para mezclarlas las 
+probabilidades $p_n = P( N = n )$ de la variable aleatoria discreta $N$ que describe la frecuencia
+de los reclamos.
 
 <!------------------------------------------------------------------------------------------------->
 ### Algoritmo de simulación
@@ -496,6 +500,43 @@ $\E\left[ S \middle| Y_1, \ldots, Y_n \right]$.
 En la práctica las variables explicativas $\{ Y_j \}$ suelen ser seleccionadas para caracterizar 
 el perfil de riesgo de cada cliente. Para su selección se suele utilizar algunos criterios de tipo 
 económico, financiero, legal y estadístico.
+
+<!------------------------------------------------------------------------------------------------->
+## Proceso estocástico de reclamos totales
+
+Hasta el momento no hemos considerado que los reclamos se producen en el tiempo, que cada reclamo
+está bien vinculado al tiempo; es más podemos identificar algunos instantes en el tiempo que le 
+corresponde, tenemos así el tiempo cuando se suscita el siniestro o tiempo de ocurrencia, el tiempo 
+de aviso cuando se comunica al asegurador el siniestro y un tiempo de pago. Los dos últimos
+no son directos asociados al evento del siniestro sino están asociados a otras variables que pueden
+afectar la demora para comunicar un siniestro por parte del asegurado y la demora para cancelarlo
+por parte del asegurador.
+
+Así por tanto si tenemos una secuencia de siniestros $\{X_n\}_{n\in\N^*}$, estos los podemos 
+considerar ordenados en el tiempo conforme han venido presentándose en instantes 
+$T_1 \leq \cdots \leq T_n \leq \cdots$, es decir se le asocia a los reclamos $\{X_n\}$ la secuencia 
+de los **tiempos de arribo** $\{T_n\}_{n\in\N^*}$, donde $T_1 > 0$ y $T_{n+1} \geq T_n$, para 
+cualquier $n \in \N$. Ciertamente, es de esperar que los tiempos de arribo sean variables 
+aleatorias y están asociados a la frecuencia $N$ en un periodo dado, ya que $N$ cuenta los tiempos
+de arribo hasta un tiempo dado, transformamos así a $N$ en una variable aleatoria dependiente del 
+tiempo, en lo que se conoce como un **proceso estocástico**.
+\begin{equation}
+N( t )
+= \#\left\{ k \in \N\ \middle|\ T_k \leq t \right\} 
+= \sum\limits_{k=0}^{+\infty} \mathbf{1}_{(-\infty,t]}\left( T_k \right)
+\end{equation}
+
+Inmediatamente de este razonamiento, resulta que los reclamos totales también se transforman en 
+proceso estocástico.
+\begin{equation}
+S( t ) = \sum\limits_{i=1}^{N( t )} X_i
+\end{equation}
+
+Además, se pueden identificar las variables aleatorias de **tiempos entre arribos**
+\begin{equation}
+W_n = T_n - T_{n-1},\quad \forall n \in \N
+\end{equation}
+tomando $T_0 = 0$.
 
 <!------------------------------------------------------------------------------------------------->
 ## Aplicación del deducible

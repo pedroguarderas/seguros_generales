@@ -45,3 +45,4 @@ csl: electronic-journal-of-statistics.csl
 \newcommand{\EVaR}{\operatorname{EVaR}}
 \newcommand{\CTE}{\operatorname{CTE}}
 \newcommand{\ES}{\operatorname{ES}}
+\newcommand{\Re}{\operatorname{Re}}

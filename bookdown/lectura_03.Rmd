@@ -213,6 +213,48 @@ definida siempre y cuando la derivada de $F$ esté bien definida.
 :::
 
 <!------------------------------------------------------------------------------------------------->
+::: {.definition #ind name="Independencia de variables aleatorias"}
+Dos variables aleatorias a valores reales $X$ y $Y$, se dicen independientes si para cualquier par
+de eventos $A$ y $B$, sucede la siguiente factorización de probabilidades
+\begin{equation}
+P( X \in A \land Y \in B ) = P( X \in A ) P( Y \in B)
+\end{equation}
+
+La propiedad anterior, en particular para la función de distribución conjunta, toma la siguiente 
+forma:
+\begin{equation}
+F_{X,Y}( x, y ) = P( X \leq x \land Y \leq y ) 
+= P( X \leq x ) P( Y \leq y ) 
+= F_{X}( x ) F_{Y}( y )
+\end{equation}
+:::
+
+Para cuando tratamos con dos variables aleatorias $X$ y $Y$, si en caso existe y está bien definida
+las derivadas hasta el segundo orden de la función de distribución acumulada conjunta $F_{X,Y}$. 
+En tal caso se puede definir la respectiva densidad de probabilidad
+\begin{equation}
+f_{X,Y}( x, y ) = \frac{\D^2 F_{X,Y}}{\D x \D y}( x, y )
+\end{equation}
+
+Así mismo, para la densidad de probabilidad conjunta, si en caso las variables aleatoria $X$ y $Y$
+son independientes, también se puede factorar la densidad de probabilidad.
+\begin{equation}
+f_{X,Y}( x, y ) = f_X( x ) f_Y( y )
+\end{equation}
+
+En el desarrollo a continuación haremos bastante uso de familias de variables aleatorias 
+$X_1, \ldots, X_n$ las cuales muchas de las veces se consideraran que son 
+**independientes entre si e idénticamente distribuidas**, es usual designarlas con las siglas
+**i.i.d.**. Esta situación si las $X_1, \ldots, X_n$ siguen la misma distribución, su distribución 
+conjunta tiene la siguiente forma:
+\begin{equation}
+F( x_1, \ldots, x_n ) 
+P( X_1 \leq x_1 \land \cdots \land X_n \leq x_n )
+= \prod\limits_{i=1}^n P( X_i \leq x_i )
+= \prod\limits_{i=1}^n F( x_i )
+\end{equation}
+
+<!------------------------------------------------------------------------------------------------->
 La siguiente función es utilidad para comprender algunos resultados en teoría de probabilidades. 
 También, es bastante útil para realizar de forma más clara y rápida algunos cálculos.
 
@@ -222,6 +264,59 @@ $\mathbf{1}_A : \Omega \longrightarrow \{0,1\}$, que toma los valores
 $\mathbf{1}_A( \omega ) = 0$, si $\omega \notin A$ y $\mathbf{1}_A( \omega ) = 1$, si 
 $\omega \in A$.
 :::
+
+Hay un caso atípico que suele ser útil, esto sucede cuando la variable aleatoria 
+$X : \Omega \longrightarrow \R$, es constante, quiere decir que tenemos un $a \in \R$, tal que
+$X( \omega ) = a$ para todo $\omega \in \R$. En este caso la distribución de probabilidad acumulada 
+$F$ de $X$, tiene la siguiente forma particular.
+\begin{equation}
+F( x ) = P( X \leq x ) = \mathbf{1}_{[a, +\infty)}( x )
+\end{equation}
+
+::: {.proposition #pindconst}
+Las constantes o variables aleatorias constantes son independientes de cualquier otra variable
+aleatoria.
+:::
+
+:::{.proof}
+Consideremos $X$ una constante o variable aleatoria constante, tal que existe un $a \in \R$, tal 
+que $X( \omega ) = a$ para cualquier $\omega \in Omega$ y $Y$ una variable aleatoria cualquiera 
+a valores reales. Para cualesquier intervalos $A, B \subset \R$. Entonces tenemos dos casos, 
+primero $X \notin A$, entonces $\emptyset = \{ \omega \in \Omega \mid X( \omega ) \in A \}$, 
+por otra parte si $y \in A$, entonces $\Omega = \{ \omega \in \Omega \mid X( \omega ) \in A \}$,
+como consecuencia
+\begin{equation}
+P( X \in A ) = P\left( X^{-1}(A) \right) 
+= P\left( \{ \omega \in \Omega \mid X( \omega ) \in A \} \right)
+= \mathbf{1}_{A}( a )
+\end{equation}
+
+Ahora consideramos los casos anteriores para la probabilidad conjunta, primero el caso $X \notin A$
+\begin{eqnarray*}
+P\left( X \in A \land Y \in B \right)
+& = & P\left( X^{-1}(A) \cap Y^{-1}(B) \right) \\
+& = & P\left( \{ \omega \in \Omega \mid X( \omega ) \in A \} \cap \{ \omega \in \Omega \mid Y( \omega ) \in B \} \right) \\
+& = & P\left( \emptyset \cap \{ \omega \in \Omega \mid Y( \omega ) \in B \} \right) \\
+& = & P( \emptyset ) \\
+& = & 0
+\end{eqnarray*}
+
+El segundo caso $X \in A$
+\begin{eqnarray*}
+P\left( X \in A \land Y \in B \right)
+& = & P\left( X^{-1}(A) \cap Y^{-1}(B) \right) \\
+& = & P\left( \{ \omega \in \Omega \mid X( \omega ) \in A \} \cap \{ \omega \in \Omega \mid Y( \omega ) \in B \} \right) \\
+& = & P\left( \Omega \cap \{ \omega \in \Omega \mid Y( \omega ) \in B \} \right) \\
+& = & P( Y \in B )
+\end{eqnarray*}
+
+Esto quiere decir en conclusión que
+\begin{equation}
+P( X \in A \land Y \in B ) = \mathbf{1}_{A}( a ) P( Y \in B ) = P( X \in A ) P( Y \in B ) 
+\end{equation}
+por tanto $X$ y $Y$ son independientes
+:::
+
 
 <!------------------------------------------------------------------------------------------------->
 ::: {.definition #probemp name="Medida de probabilidad empírica"}
@@ -332,48 +427,6 @@ Así mismo su **varianza** es la dada por:
 = \E\left[ X^2 \right] - \E\left[ X \right]^2
 \end{equation}
 :::
-
-<!------------------------------------------------------------------------------------------------->
-::: {.definition #ind name="Independencia de variables aleatorias"}
-Dos variables aleatorias a valores reales $X$ y $Y$, se dicen independientes si para cualquier par
-de eventos $A$ y $B$, sucede la siguiente factorización de probabilidades
-\begin{equation}
-P( X \in A \land Y \in B ) = P( X \in A ) P( Y \in B)
-\end{equation}
-
-La propiedad anterior, en particular para la función de distribución conjunta, toma la siguiente 
-forma:
-\begin{equation}
-F_{X,Y}( x, y ) = P( X \leq x \land Y \leq y ) 
-= P( X \leq x ) P( Y \leq y ) 
-= F_{X}( x ) F_{Y}( y )
-\end{equation}
-:::
-
-Para cuando tratamos con dos variables aleatorias $X$ y $Y$, si en caso existe y está bien definida
-las derivadas hasta el segundo orden de la función de distribución acumulada conjunta $F_{X,Y}$. 
-En tal caso se puede definir la respectiva densidad de probabilidad
-\begin{equation}
-f_{X,Y}( x, y ) = \frac{\D^2 F_{X,Y}}{\D x \D y}( x, y )
-\end{equation}
-
-Así mismo, para la densidad de probabilidad conjunta, si en caso las variables aleatoria $X$ y $Y$
-son independientes, también se puede factorar la densidad de probabilidad.
-\begin{equation}
-f_{X,Y}( x, y ) = f_X( x ) f_Y( y )
-\end{equation}
-
-En el desarrollo a continuación haremos bastante uso de familias de variables aleatorias 
-$X_1, \ldots, X_n$ las cuales muchas de las veces se consideraran que son 
-**independientes entre si e idénticamente distribuidas**, es usual designarlas con las siglas
-**i.i.d.**. Esta situación si las $X_1, \ldots, X_n$ siguen la misma distribución, su distribución 
-conjunta tiene la siguiente forma:
-\begin{equation}
-F( x_1, \ldots, x_n ) 
-P( X_1 \leq x_1 \land \cdots \land X_n \leq x_n )
-= \prod\limits_{i=1}^n P( X_i \leq x_i )
-= \prod\limits_{i=1}^n F( x_i )
-\end{equation}
 
 <!------------------------------------------------------------------------------------------------->
 ::: {.definition #defmixdis name="Mixtura de distribuciones"}
@@ -738,7 +791,7 @@ es de notar que numérica por la aritmética en coma flotante la expresión $\DF
 muy pequeña, cercana a $0$. Para superar este posible problema numérico tomamos solo la parte real.
 \begin{equation}
 \{f( x_k )\} 
-\approx \operatorname{Re}\left( \DFT^{-1}\left[ \left\{ \frac{1}{h} \exp\left( 2\pi i \frac{j}{b-a} a \right) 
+\approx \Re\left( \DFT^{-1}\left[ \left\{ \frac{1}{h} \exp\left( 2\pi i \frac{j}{b-a} a \right) 
 \hat{f}_j \right\} \right] \right)
 \end{equation}
 
@@ -793,33 +846,37 @@ f_S = f_{X_1} \star \cdots \star f_{X_n}
 \end{equation}
 sin embargo esta convolución implica el realizar una interacción en $n$-dimensiones.
 
-Con el uso de la transformada de Fourier sabemos por la independencia entre las variables $\{X_i\}$
-que $\Fo\left( f_S \right) = \prod\limits_{i=1}^n \Fo\left( F_{X_i} \right)$. Por otra 
-parte, con lo anterior sabemos que es posible aproximar numéricamente cada $\Fo\left( X_i \right)$ 
+Si las las variables aleatorias $\{X_i\}$ son independientes sabemos además que 
+\begin{equation}
+\Fo\left( f_S \right) = \prod\limits_{i=1}^n \Fo\left( f_{X_i} \right)
+\end{equation}
+
+Por otra parte, con lo anterior sabemos que es posible aproximar numéricamente cada $\Fo\left( f_{X_i} \right)$ 
 con una serie $\{\hat{f}_{i,j}\}$ dada por la discretización de la transformada de Fourier y su aplicación 
-sobre la discretización $f_{i,k} = f_{X_i}( s_k )$. Por tanto, para cada $i \in \{1, \ldots, n\}$, 
-se puede calcular de forma separada las aproximaciones a cada una de las transformadas
+sobre la discretización de la densidad de probabilidad $f_{i,k} = f_{X_i}( s_k )$. Por tanto, para cada 
+de las densidades con $i \in \{1, \ldots, n\}$ y $\omega_j = \frac{b-a}{N}$, se puede calcular de 
+forma separada las aproximaciones a cada una de las transformadas
 \begin{equation}
 \Fo( f_{X_i} )\left( \omega_j \right)  
 \approx \hat{f}_{i,j} 
 = h \exp\left( -2\pi i \omega_j a \right) \left( \DFT\left[ \{f_{i,k}\} \right]  \right)_j
 \end{equation}
 
-con lo anterior, se puede también realizar una aproximación a la trasformada de Fourier 
-$\Fo\left( f_S \right)$ de la densidad de probabilidad $f_S$, como el producto de sus 
+con lo anterior, también, se puede realizar una aproximación a la trasformada de Fourier 
+$\Fo\left( f_S \right)$ de la densidad de probabilidad que buscamos $f_S$, como el producto de sus 
 transformadas de Fourier.
 \begin{equation}
 \Fo( f_{S} )\left( \omega_j \right)  
-= \prod\limits_{i=1}^n \Fo\left( F_{X_i} \right)\left( \omega_j \right)
+= \prod\limits_{i=1}^n \Fo\left( f_{X_i} \right)\left( \omega_j \right)
 \approx \prod\limits_{i=1}^n \hat{f}_{i,j}
 \end{equation}
 
-finalmente utilizando la inversión de la transformada de Fourier discreta podemos calcular una 
-serie que precisamente aproxima a la densidad $f_S$
+utilizando la inversión de la transformada de Fourier discreta podemos calcular una serie que 
+precisamente aproxima a la densidad $f_S$
 \begin{equation}
 \{ f_{S}( s_k ) \}
-\approx \DFT^{-1}\left[ \left\{ \frac{1}{h} \exp\left( 2\pi i \omega_j a \right) 
-\prod\limits_{i=1}^n \hat{f}_{i,j} \right\} \right]
+\approx \Re\left( \DFT^{-1}\left[ \left\{ \frac{1}{h} \exp\left( 2\pi i \omega_j a \right) 
+\prod\limits_{i=1}^n \hat{f}_{i,j} \right\} \right] \right)
 \end{equation}
 
 ```{r l3c9}
