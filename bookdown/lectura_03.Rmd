@@ -506,6 +506,46 @@ Para cuando se realiza la convolución de varias veces la misma función, se opt
 más compacta $f^{\star k}$, para el producto de convolución $k$-veces la misma función 
 $f \star f \star \cdots \star f$.
 
+Cuando se tiene dos variables aleatorias independientes $X$ y $Y$, muchas de las veces nos interesamos 
+a trabajar con la variable aleatoria dada por el mínimo entre estas variables, i.e. $Z = \min( X, Y )$.
+De ello surge la necesidad de determinar la distribución de probabilidad acumulada $F_Z$ de $Z$, a 
+partir de las distribuciones de $F_X$ de $X$ y $F_Y$ de $Y$.
+\begin{eqnarray*}
+F_Z( z ) 
+& = & P( Z \leq z ) \\
+& = & 1 - P( Z > z ) \\
+& = & 1 - P( \min(X,Y) > z ) \\
+& = & 1 - P( X > z \land Y > z ) \\
+& = & 1 - P( X > z ) P( Y > z ) \\
+& = & 1 - \left( 1 - F_X( z ) \right) \left( 1 - F_Y( z ) \right) \\
+& = & F_X( z ) + F_Y( z ) - F_X( z ) F_Y( z )
+\end{eqnarray*}
+
+En particular cuando $Y = a$ es constante tenemos la siguiente distribución de probabilidad para 
+$Z = \min( X, Y ) = \min( X, a )$
+\begin{equation}
+F_Z( z ) = F_X( z ) + \mathbf{1}_{[a,+\infty)}( z ) - \mathbf{1}_{[a,+\infty)}( z ) F_X( z )
+= \mathbf{1}_{(-\infty,a)}( z ) F_X( z ) + \mathbf{1}_{[a,+\infty)}( z )
+\end{equation}
+
+De forma similar nos podemos también interesar a la variable aleatoria que expresa el máximo 
+entre otras dos variables, i.e. $Z = \max( X, Y )$, por un razonamiento similar podemos obtener
+la distribución de probabilidad $F_Z$ de $Z$.
+\begin{eqnarray*}
+F_Z( z ) 
+& = & P( Z \leq z ) \\
+& = & P( \max(X,Y) \leq z ) \\
+& = & P( X \leq z \land Y \leq z ) \\
+& = & P( X \leq z ) P( Y \leq z ) \\
+& = & F_X( z ) F_Y( z )
+\end{eqnarray*}
+
+De forma análoga el caso cuando $Y = a$ es una constante se reduce a la siguiente distribución
+de probabilidad para $Z$.
+\begin{equation}
+F_Z( z ) = \mathbf{1}_{[a,+\infty)}( z ) F_X( z )
+\end{equation}
+
 <!------------------------------------------------------------------------------------------------->
 La siguiente definición de distribución de exceso condicionada es útil para el estudio de los 
 valores extremos que se pueden presentar en el estudio de los valores de siniestros que se presentan
