@@ -232,9 +232,10 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="5.4" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html#modelos-mixtos"><i class="fa fa-check"></i><b>5.4</b> Modelos mixtos</a></li>
 <li class="chapter" data-level="5.5" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html#modelos-con-variables-explicativas"><i class="fa fa-check"></i><b>5.5</b> Modelos con variables explicativas</a></li>
-<li class="chapter" data-level="5.6" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html#aplicación-del-deducible"><i class="fa fa-check"></i><b>5.6</b> Aplicación del deducible</a></li>
-<li class="chapter" data-level="5.7" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html#algoritmo-de-panjer"><i class="fa fa-check"></i><b>5.7</b> Algoritmo de Panjer</a></li>
-<li class="chapter" data-level="5.8" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html#estimación-usando-la-transformada-de-fourier"><i class="fa fa-check"></i><b>5.8</b> Estimación usando la transformada de Fourier</a></li>
+<li class="chapter" data-level="5.6" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html#proceso-estocástico-de-reclamos-totales"><i class="fa fa-check"></i><b>5.6</b> Proceso estocástico de reclamos totales</a></li>
+<li class="chapter" data-level="5.7" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html#aplicación-del-deducible"><i class="fa fa-check"></i><b>5.7</b> Aplicación del deducible</a></li>
+<li class="chapter" data-level="5.8" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html#algoritmo-de-panjer"><i class="fa fa-check"></i><b>5.8</b> Algoritmo de Panjer</a></li>
+<li class="chapter" data-level="5.9" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html#estimación-usando-la-transformada-de-fourier"><i class="fa fa-check"></i><b>5.9</b> Estimación usando la transformada de Fourier</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="tarificación.html"><a href="tarificación.html"><i class="fa fa-check"></i><b>6</b> Tarificación</a>
 <ul>
@@ -464,17 +465,100 @@ F( x )
 definida siempre y cuando la derivada de <span class="math inline">\(F\)</span> esté bien definida.</p>
 </div>
 <!------------------------------------------------------------------------------------------------->
+<div class="definition">
+<p><span id="def:ind" class="definition"><strong>Definición 3.9  (Independencia de variables aleatorias) </strong></span>Dos variables aleatorias a valores reales <span class="math inline">\(X\)</span> y <span class="math inline">\(Y\)</span>, se dicen independientes si para cualquier par
+de eventos <span class="math inline">\(A\)</span> y <span class="math inline">\(B\)</span>, sucede la siguiente factorización de probabilidades
+<span class="math display">\[\begin{equation}
+P( X \in A \land Y \in B ) = P( X \in A ) P( Y \in B)
+\end{equation}\]</span></p>
+<p>La propiedad anterior, en particular para la función de distribución conjunta, toma la siguiente
+forma:
+<span class="math display">\[\begin{equation}
+F_{X,Y}( x, y ) = P( X \leq x \land Y \leq y )
+= P( X \leq x ) P( Y \leq y )
+= F_{X}( x ) F_{Y}( y )
+\end{equation}\]</span></p>
+</div>
+<p>Para cuando tratamos con dos variables aleatorias <span class="math inline">\(X\)</span> y <span class="math inline">\(Y\)</span>, si en caso existe y está bien definida
+las derivadas hasta el segundo orden de la función de distribución acumulada conjunta <span class="math inline">\(F_{X,Y}\)</span>.
+En tal caso se puede definir la respectiva densidad de probabilidad
+<span class="math display">\[\begin{equation}
+f_{X,Y}( x, y ) = \frac{\partial^2 F_{X,Y}}{\partial x \partial y}( x, y )
+\end{equation}\]</span></p>
+<p>Así mismo, para la densidad de probabilidad conjunta, si en caso las variables aleatoria <span class="math inline">\(X\)</span> y <span class="math inline">\(Y\)</span>
+son independientes, también se puede factorar la densidad de probabilidad.
+<span class="math display">\[\begin{equation}
+f_{X,Y}( x, y ) = f_X( x ) f_Y( y )
+\end{equation}\]</span></p>
+<p>En el desarrollo a continuación haremos bastante uso de familias de variables aleatorias
+<span class="math inline">\(X_1, \ldots, X_n\)</span> las cuales muchas de las veces se consideraran que son
+<strong>independientes entre si e idénticamente distribuidas</strong>, es usual designarlas con las siglas
+<strong>i.i.d.</strong>. Esta situación si las <span class="math inline">\(X_1, \ldots, X_n\)</span> siguen la misma distribución, su distribución
+conjunta tiene la siguiente forma:
+<span class="math display">\[\begin{equation}
+F( x_1, \ldots, x_n )
+P( X_1 \leq x_1 \land \cdots \land X_n \leq x_n )
+= \prod\limits_{i=1}^n P( X_i \leq x_i )
+= \prod\limits_{i=1}^n F( x_i )
+\end{equation}\]</span></p>
+<!------------------------------------------------------------------------------------------------->
 <p>La siguiente función es utilidad para comprender algunos resultados en teoría de probabilidades.
 También, es bastante útil para realizar de forma más clara y rápida algunos cálculos.</p>
 <div class="definition">
-<p><span id="def:indicatriz" class="definition"><strong>Definición 3.9  (Función indicatriz) </strong></span>La <strong>función indicatriz</strong> de un conjunto <span class="math inline">\(A \subset \Omega\)</span>, es la función
+<p><span id="def:indicatriz" class="definition"><strong>Definición 3.10  (Función indicatriz) </strong></span>La <strong>función indicatriz</strong> de un conjunto <span class="math inline">\(A \subset \Omega\)</span>, es la función
 <span class="math inline">\(\mathbf{1}_A : \Omega \longrightarrow \{0,1\}\)</span>, que toma los valores
 <span class="math inline">\(\mathbf{1}_A( \omega ) = 0\)</span>, si <span class="math inline">\(\omega \notin A\)</span> y <span class="math inline">\(\mathbf{1}_A( \omega ) = 1\)</span>, si
 <span class="math inline">\(\omega \in A\)</span>.</p>
 </div>
+<p>Hay un caso atípico que suele ser útil, esto sucede cuando la variable aleatoria
+<span class="math inline">\(X : \Omega \longrightarrow \mathbb{R}\)</span>, es constante, quiere decir que tenemos un <span class="math inline">\(a \in \mathbb{R}\)</span>, tal que
+<span class="math inline">\(X( \omega ) = a\)</span> para todo <span class="math inline">\(\omega \in \mathbb{R}\)</span>. En este caso la distribución de probabilidad acumulada
+<span class="math inline">\(F\)</span> de <span class="math inline">\(X\)</span>, tiene la siguiente forma particular.
+<span class="math display">\[\begin{equation}
+F( x ) = P( X \leq x ) = \mathbf{1}_{[a, +\infty)}( x )
+\end{equation}\]</span></p>
+<div class="proposition">
+<p><span id="prp:pindconst" class="proposition"><strong>Proposición 3.1  </strong></span>Las constantes o variables aleatorias constantes son independientes de cualquier otra variable
+aleatoria.</p>
+</div>
+<div class="proof">
+<p><span id="unlabeled-div-1" class="proof"><em>Demostración</em>. </span>Consideremos <span class="math inline">\(X\)</span> una constante o variable aleatoria constante, tal que existe un <span class="math inline">\(a \in \mathbb{R}\)</span>, tal
+que <span class="math inline">\(X( \omega ) = a\)</span> para cualquier <span class="math inline">\(\omega \in Omega\)</span> y <span class="math inline">\(Y\)</span> una variable aleatoria cualquiera
+a valores reales. Para cualesquier intervalos <span class="math inline">\(A, B \subset \mathbb{R}\)</span>. Entonces tenemos dos casos,
+primero <span class="math inline">\(X \notin A\)</span>, entonces <span class="math inline">\(\emptyset = \{ \omega \in \Omega \mid X( \omega ) \in A \}\)</span>,
+por otra parte si <span class="math inline">\(y \in A\)</span>, entonces <span class="math inline">\(\Omega = \{ \omega \in \Omega \mid X( \omega ) \in A \}\)</span>,
+como consecuencia
+<span class="math display">\[\begin{equation}
+P( X \in A ) = P\left( X^{-1}(A) \right)
+= P\left( \{ \omega \in \Omega \mid X( \omega ) \in A \} \right)
+= \mathbf{1}_{A}( a )
+\end{equation}\]</span></p>
+<p>Ahora consideramos los casos anteriores para la probabilidad conjunta, primero el caso <span class="math inline">\(X \notin A\)</span>
+<span class="math display">\[\begin{eqnarray*}
+P\left( X \in A \land Y \in B \right)
+&amp; = &amp; P\left( X^{-1}(A) \cap Y^{-1}(B) \right) \\
+&amp; = &amp; P\left( \{ \omega \in \Omega \mid X( \omega ) \in A \} \cap \{ \omega \in \Omega \mid Y( \omega ) \in B \} \right) \\
+&amp; = &amp; P\left( \emptyset \cap \{ \omega \in \Omega \mid Y( \omega ) \in B \} \right) \\
+&amp; = &amp; P( \emptyset ) \\
+&amp; = &amp; 0
+\end{eqnarray*}\]</span></p>
+<p>El segundo caso <span class="math inline">\(X \in A\)</span>
+<span class="math display">\[\begin{eqnarray*}
+P\left( X \in A \land Y \in B \right)
+&amp; = &amp; P\left( X^{-1}(A) \cap Y^{-1}(B) \right) \\
+&amp; = &amp; P\left( \{ \omega \in \Omega \mid X( \omega ) \in A \} \cap \{ \omega \in \Omega \mid Y( \omega ) \in B \} \right) \\
+&amp; = &amp; P\left( \Omega \cap \{ \omega \in \Omega \mid Y( \omega ) \in B \} \right) \\
+&amp; = &amp; P( Y \in B )
+\end{eqnarray*}\]</span></p>
+<p>Esto quiere decir en conclusión que
+<span class="math display">\[\begin{equation}
+P( X \in A \land Y \in B ) = \mathbf{1}_{A}( a ) P( Y \in B ) = P( X \in A ) P( Y \in B )
+\end{equation}\]</span>
+por tanto <span class="math inline">\(X\)</span> y <span class="math inline">\(Y\)</span> son independientes</p>
+</div>
 <!------------------------------------------------------------------------------------------------->
 <div class="definition">
-<p><span id="def:probemp" class="definition"><strong>Definición 3.10  (Medida de probabilidad empírica) </strong></span>A partir de una muestra de <span class="math inline">\(X_1, \ldots, X_n\)</span> de una variable aleatoria <span class="math inline">\(X\)</span>, podemos definir
+<p><span id="def:probemp" class="definition"><strong>Definición 3.11  (Medida de probabilidad empírica) </strong></span>A partir de una muestra de <span class="math inline">\(X_1, \ldots, X_n\)</span> de una variable aleatoria <span class="math inline">\(X\)</span>, podemos definir
 también la <strong>medida de probabilidad empírica</strong> asociada a la muestra <span class="math inline">\(X_1, \ldots, X_n\)</span>. Así
 para cualquier evento del espacio muestral <span class="math inline">\(\Omega\)</span>, <span class="math inline">\(A \subset \Omega\)</span>
 <span class="math display">\[\begin{equation}
@@ -493,7 +577,7 @@ P_n( (-\infty,x])
 son de utilidad.</p>
 <!------------------------------------------------------------------------------------------------->
 <div class="definition">
-<p><span id="def:em" class="definition"><strong>Definición 3.11  (Esperanza matemática) </strong></span>Considerando una variable aleatoria discreta <span class="math inline">\(K : \Omega \longrightarrow D \subset \mathbb{R}\)</span>,
+<p><span id="def:em" class="definition"><strong>Definición 3.12  (Esperanza matemática) </strong></span>Considerando una variable aleatoria discreta <span class="math inline">\(K : \Omega \longrightarrow D \subset \mathbb{R}\)</span>,
 donde <span class="math inline">\(D\)</span> es un conjunto discreto, es decir sus elementos se pueden contar y poner en
 correspondencia con <span class="math inline">\(\mathbb{N}\)</span>. Entonces, la <strong>esperanza matemática</strong> se define como:
 <span class="math display">\[\begin{equation}
@@ -545,7 +629,7 @@ esperanza es precisamente la probabilidad del evento <span class="math inline">\
 \end{equation}\]</span></p>
 <!------------------------------------------------------------------------------------------------->
 <div class="definition">
-<p><span id="def:mgf" class="definition"><strong>Definición 3.12  (Función generadora de momentos) </strong></span>La <strong>función generadora de momentos</strong> de la variable aleatoria a valores reales <span class="math inline">\(X\)</span>, es la función:
+<p><span id="def:mgf" class="definition"><strong>Definición 3.13  (Función generadora de momentos) </strong></span>La <strong>función generadora de momentos</strong> de la variable aleatoria a valores reales <span class="math inline">\(X\)</span>, es la función:
 <span class="math display">\[\begin{equation}
 M_X( t ) = \mathbb{E}\left[ \exp( t X ) \right]
 \end{equation}\]</span></p>
@@ -563,50 +647,13 @@ M_Y( t )
 \end{eqnarray*}\]</span></p>
 <!------------------------------------------------------------------------------------------------->
 <div class="definition">
-<p><span id="def:em" class="definition"><strong>Definición 3.11  (Varianza) </strong></span>Así mismo su <strong>varianza</strong> es la dada por:
+<p><span id="def:em" class="definition"><strong>Definición 3.12  (Varianza) </strong></span>Así mismo su <strong>varianza</strong> es la dada por:
 <span class="math display">\[\begin{equation}
 \mathbb{V}[ X ]
 = \mathbb{E}\left[ \left( X - \mathbb{E}[ X ] \right)^2 \right]
 = \mathbb{E}\left[ X^2 \right] - \mathbb{E}\left[ X \right]^2
 \end{equation}\]</span></p>
 </div>
-<!------------------------------------------------------------------------------------------------->
-<div class="definition">
-<p><span id="def:ind" class="definition"><strong>Definición 3.13  (Independencia de variables aleatorias) </strong></span>Dos variables aleatorias a valores reales <span class="math inline">\(X\)</span> y <span class="math inline">\(Y\)</span>, se dicen independientes si para cualquier par
-de eventos <span class="math inline">\(A\)</span> y <span class="math inline">\(B\)</span>, sucede la siguiente factorización de probabilidades
-<span class="math display">\[\begin{equation}
-P( X \in A \land Y \in B ) = P( X \in A ) P( Y \in B)
-\end{equation}\]</span></p>
-<p>La propiedad anterior, en particular para la función de distribución conjunta, toma la siguiente
-forma:
-<span class="math display">\[\begin{equation}
-F_{X,Y}( x, y ) = P( X \leq x \land Y \leq y )
-= P( X \leq x ) P( Y \leq y )
-= F_{X}( x ) F_{Y}( y )
-\end{equation}\]</span></p>
-</div>
-<p>Para cuando tratamos con dos variables aleatorias <span class="math inline">\(X\)</span> y <span class="math inline">\(Y\)</span>, si en caso existe y está bien definida
-las derivadas hasta el segundo orden de la función de distribución acumulada conjunta <span class="math inline">\(F_{X,Y}\)</span>.
-En tal caso se puede definir la respectiva densidad de probabilidad
-<span class="math display">\[\begin{equation}
-f_{X,Y}( x, y ) = \frac{\partial^2 F_{X,Y}}{\partial x \partial y}( x, y )
-\end{equation}\]</span></p>
-<p>Así mismo, para la densidad de probabilidad conjunta, si en caso las variables aleatoria <span class="math inline">\(X\)</span> y <span class="math inline">\(Y\)</span>
-son independientes, también se puede factorar la densidad de probabilidad.
-<span class="math display">\[\begin{equation}
-f_{X,Y}( x, y ) = f_X( x ) f_Y( y )
-\end{equation}\]</span></p>
-<p>En el desarrollo a continuación haremos bastante uso de familias de variables aleatorias
-<span class="math inline">\(X_1, \ldots, X_n\)</span> las cuales muchas de las veces se consideraran que son
-<strong>independientes entre si e idénticamente distribuidas</strong>, es usual designarlas con las siglas
-<strong>i.i.d.</strong>. Esta situación si las <span class="math inline">\(X_1, \ldots, X_n\)</span> siguen la misma distribución, su distribución
-conjunta tiene la siguiente forma:
-<span class="math display">\[\begin{equation}
-F( x_1, \ldots, x_n )
-P( X_1 \leq x_1 \land \cdots \land X_n \leq x_n )
-= \prod\limits_{i=1}^n P( X_i \leq x_i )
-= \prod\limits_{i=1}^n F( x_i )
-\end{equation}\]</span></p>
 <!------------------------------------------------------------------------------------------------->
 <div class="definition">
 <p><span id="def:defmixdis" class="definition"><strong>Definición 3.14  (Mixtura de distribuciones) </strong></span>Un caso de especial interés para estudiar algunos problemas actuariales se da cuando se dispone
@@ -748,7 +795,7 @@ al <a href="probabilidad-y-estadística.html#thm:tlc">3.2</a> se debe considerar
 concentrados los valores de una distribución de probabilidad, para ello existen varios resultados
 que caracterizan precisamente ello, estos se conocen como desigualdades de concentración.</p>
 <div class="proposition">
-<p><span id="prp:chebdes" class="proposition"><strong>Proposición 3.1  (Desigualdad de Chebyshev (Чебышёв)) </strong></span>Dada una variable aleatoria <span class="math inline">\(X\)</span> con esperanza y varianza finitas <span class="math inline">\(\mathbb{E}[X] &lt;+ \infty\)</span> y
+<p><span id="prp:chebdes" class="proposition"><strong>Proposición 3.2  (Desigualdad de Chebyshev (Чебышёв)) </strong></span>Dada una variable aleatoria <span class="math inline">\(X\)</span> con esperanza y varianza finitas <span class="math inline">\(\mathbb{E}[X] &lt;+ \infty\)</span> y
 <span class="math inline">\(\mathbb{V}[X] &lt; +\infty\)</span>, tenemos que se satisface la siguiente desigualdad para cualquier
 <span class="math inline">\(varepsilon &gt; 0\)</span>
 <span class="math display">\[\begin{equation}
@@ -2157,31 +2204,34 @@ aleatorias <span class="math inline">\(X_1, \ldots, X_n\)</span>.
 f_S = f_{X_1} \star \cdots \star f_{X_n}
 \end{equation}\]</span>
 sin embargo esta convolución implica el realizar una interacción en <span class="math inline">\(n\)</span>-dimensiones.</p>
-<p>Con el uso de la transformada de Fourier sabemos por la independencia entre las variables <span class="math inline">\(\{X_i\}\)</span>
-que <span class="math inline">\(\mathscr{F}\left( f_S \right) = \prod\limits_{i=1}^n \mathscr{F}\left( F_{X_i} \right)\)</span>. Por otra
-parte, con lo anterior sabemos que es posible aproximar numéricamente cada <span class="math inline">\(\mathscr{F}\left( X_i \right)\)</span>
+<p>Si las las variables aleatorias <span class="math inline">\(\{X_i\}\)</span> son independientes sabemos además que
+<span class="math display">\[\begin{equation}
+\mathscr{F}\left( f_S \right) = \prod\limits_{i=1}^n \mathscr{F}\left( f_{X_i} \right)
+\end{equation}\]</span></p>
+<p>Por otra parte, con lo anterior sabemos que es posible aproximar numéricamente cada <span class="math inline">\(\mathscr{F}\left( f_{X_i} \right)\)</span>
 con una serie <span class="math inline">\(\{\hat{f}_{i,j}\}\)</span> dada por la discretización de la transformada de Fourier y su aplicación
-sobre la discretización <span class="math inline">\(f_{i,k} = f_{X_i}( s_k )\)</span>. Por tanto, para cada <span class="math inline">\(i \in \{1, \ldots, n\}\)</span>,
-se puede calcular de forma separada las aproximaciones a cada una de las transformadas
+sobre la discretización de la densidad de probabilidad <span class="math inline">\(f_{i,k} = f_{X_i}( s_k )\)</span>. Por tanto, para cada
+de las densidades con <span class="math inline">\(i \in \{1, \ldots, n\}\)</span> y <span class="math inline">\(\omega_j = \frac{b-a}{N}\)</span>, se puede calcular de
+forma separada las aproximaciones a cada una de las transformadas
 <span class="math display">\[\begin{equation}
 \mathscr{F}( f_{X_i} )\left( \omega_j \right)  
 \approx \hat{f}_{i,j}
 = h \exp\left( -2\pi i \omega_j a \right) \left( \operatorname{DFT}\left[ \{f_{i,k}\} \right]  \right)_j
 \end{equation}\]</span></p>
-<p>con lo anterior, se puede también realizar una aproximación a la trasformada de Fourier
-<span class="math inline">\(\mathscr{F}\left( f_S \right)\)</span> de la densidad de probabilidad <span class="math inline">\(f_S\)</span>, como el producto de sus
+<p>con lo anterior, también, se puede realizar una aproximación a la trasformada de Fourier
+<span class="math inline">\(\mathscr{F}\left( f_S \right)\)</span> de la densidad de probabilidad que buscamos <span class="math inline">\(f_S\)</span>, como el producto de sus
 transformadas de Fourier.
 <span class="math display">\[\begin{equation}
 \mathscr{F}( f_{S} )\left( \omega_j \right)  
-= \prod\limits_{i=1}^n \mathscr{F}\left( F_{X_i} \right)\left( \omega_j \right)
+= \prod\limits_{i=1}^n \mathscr{F}\left( f_{X_i} \right)\left( \omega_j \right)
 \approx \prod\limits_{i=1}^n \hat{f}_{i,j}
 \end{equation}\]</span></p>
-<p>finalmente utilizando la inversión de la transformada de Fourier discreta podemos calcular una
-serie que precisamente aproxima a la densidad <span class="math inline">\(f_S\)</span>
+<p>utilizando la inversión de la transformada de Fourier discreta podemos calcular una serie que
+precisamente aproxima a la densidad <span class="math inline">\(f_S\)</span>
 <span class="math display">\[\begin{equation}
 \{ f_{S}( s_k ) \}
-\approx \operatorname{DFT}^{-1}\left[ \left\{ \frac{1}{h} \exp\left( 2\pi i \omega_j a \right)
-\prod\limits_{i=1}^n \hat{f}_{i,j} \right\} \right]
+\approx \operatorname{Re}\left( \operatorname{DFT}^{-1}\left[ \left\{ \frac{1}{h} \exp\left( 2\pi i \omega_j a \right)
+\prod\limits_{i=1}^n \hat{f}_{i,j} \right\} \right] \right)
 \end{equation}\]</span></p>
 <p></p>
 <details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>

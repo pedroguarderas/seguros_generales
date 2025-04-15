@@ -6,11 +6,12 @@ def:vad
 def:cd
 def:spv
 def:lp
+def:ind
 def:indicatriz
+prp:pindconst
 def:probemp
 def:em
 def:mgf
-def:ind
 def:defmixdis
 def:defcov
 def:dsum
@@ -105,6 +106,7 @@ modelo-colectivo
 algoritmo-de-simulación-1
 modelos-mixtos
 modelos-con-variables-explicativas
+proceso-estocástico-de-reclamos-totales
 aplicación-del-deducible
 algoritmo-de-panjer
 estimación-usando-la-transformada-de-fourier

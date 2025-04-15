@@ -232,9 +232,10 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="5.4" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html#modelos-mixtos"><i class="fa fa-check"></i><b>5.4</b> Modelos mixtos</a></li>
 <li class="chapter" data-level="5.5" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html#modelos-con-variables-explicativas"><i class="fa fa-check"></i><b>5.5</b> Modelos con variables explicativas</a></li>
-<li class="chapter" data-level="5.6" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html#aplicación-del-deducible"><i class="fa fa-check"></i><b>5.6</b> Aplicación del deducible</a></li>
-<li class="chapter" data-level="5.7" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html#algoritmo-de-panjer"><i class="fa fa-check"></i><b>5.7</b> Algoritmo de Panjer</a></li>
-<li class="chapter" data-level="5.8" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html#estimación-usando-la-transformada-de-fourier"><i class="fa fa-check"></i><b>5.8</b> Estimación usando la transformada de Fourier</a></li>
+<li class="chapter" data-level="5.6" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html#proceso-estocástico-de-reclamos-totales"><i class="fa fa-check"></i><b>5.6</b> Proceso estocástico de reclamos totales</a></li>
+<li class="chapter" data-level="5.7" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html#aplicación-del-deducible"><i class="fa fa-check"></i><b>5.7</b> Aplicación del deducible</a></li>
+<li class="chapter" data-level="5.8" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html#algoritmo-de-panjer"><i class="fa fa-check"></i><b>5.8</b> Algoritmo de Panjer</a></li>
+<li class="chapter" data-level="5.9" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html#estimación-usando-la-transformada-de-fourier"><i class="fa fa-check"></i><b>5.9</b> Estimación usando la transformada de Fourier</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="tarificación.html"><a href="tarificación.html"><i class="fa fa-check"></i><b>6</b> Tarificación</a>
 <ul>
@@ -720,7 +721,7 @@ they may prefer to take a higher deductible to get a lower premium.</p></li>
 <span id="cb55-6"><a href="tarificación.html#cb55-6"></a>p <span class="ot">&lt;-</span> p0 <span class="sc">*</span> <span class="fu">cumprod</span>( <span class="fu">c</span>( <span class="dv">1</span>, a <span class="sc">+</span> b <span class="sc">/</span> k ) )</span>
 <span id="cb55-7"><a href="tarificación.html#cb55-7"></a><span class="fu">sum</span>( p )</span></code></pre></div>
 </details>
-<pre><code>## [1] 0.9496377</code></pre>
+<pre><code>## [1] 0.9132819</code></pre>
 <details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb57"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb57-1"><a href="tarificación.html#cb57-1"></a>k <span class="ot">&lt;-</span> <span class="fu">seq</span>( <span class="dv">0</span>, <span class="dv">100</span>, <span class="dv">1</span> )</span>
 <span id="cb57-2"><a href="tarificación.html#cb57-2"></a><span class="fu">sum</span>( <span class="fu">dpois</span>( k, <span class="at">lambda =</span> l ) )</span></code></pre></div>

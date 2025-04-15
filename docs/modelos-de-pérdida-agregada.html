@@ -232,9 +232,10 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="5.4" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html#modelos-mixtos"><i class="fa fa-check"></i><b>5.4</b> Modelos mixtos</a></li>
 <li class="chapter" data-level="5.5" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html#modelos-con-variables-explicativas"><i class="fa fa-check"></i><b>5.5</b> Modelos con variables explicativas</a></li>
-<li class="chapter" data-level="5.6" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html#aplicación-del-deducible"><i class="fa fa-check"></i><b>5.6</b> Aplicación del deducible</a></li>
-<li class="chapter" data-level="5.7" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html#algoritmo-de-panjer"><i class="fa fa-check"></i><b>5.7</b> Algoritmo de Panjer</a></li>
-<li class="chapter" data-level="5.8" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html#estimación-usando-la-transformada-de-fourier"><i class="fa fa-check"></i><b>5.8</b> Estimación usando la transformada de Fourier</a></li>
+<li class="chapter" data-level="5.6" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html#proceso-estocástico-de-reclamos-totales"><i class="fa fa-check"></i><b>5.6</b> Proceso estocástico de reclamos totales</a></li>
+<li class="chapter" data-level="5.7" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html#aplicación-del-deducible"><i class="fa fa-check"></i><b>5.7</b> Aplicación del deducible</a></li>
+<li class="chapter" data-level="5.8" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html#algoritmo-de-panjer"><i class="fa fa-check"></i><b>5.8</b> Algoritmo de Panjer</a></li>
+<li class="chapter" data-level="5.9" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html#estimación-usando-la-transformada-de-fourier"><i class="fa fa-check"></i><b>5.9</b> Estimación usando la transformada de Fourier</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="tarificación.html"><a href="tarificación.html"><i class="fa fa-check"></i><b>6</b> Tarificación</a>
 <ul>
@@ -343,9 +344,8 @@ debemos comprender y estimar cada uno de los reclamos <span class="math inline">
 menos estos una infinidad si <span class="math inline">\(N\)</span> puede tomar valores tendiendo al infinito. En términos resumidos,
 hay que comprender y estimar la frecuencia y severidad de los reclamos que están asociados al riesgo
 cubierto.</p>
-<p>Los términos integrales asociados a la severidad presentan un verdadero reto estadístico y
-computacional; hace unos años atrás se creo unos nuevos algoritmos para calcular estos términos
-<span class="citation">[<a href="bibliografía.html#ref-aep_algo">13</a>]</span>, <span class="citation">[<a href="bibliografía.html#ref-gaep_algo">14</a>]</span>.</p>
+<p>Los términos integrales <span class="math inline">\(\int\limits_{\left\{\sum\limits_{i=1}^n x_i \leq s\right\}} dF_n( x_1, \ldots, x_n )\)</span> asociados a la severidad presentan un verdadero reto estadístico y computacional; hace unos años
+atrás se desarrolló unos nuevos algoritmos para calcular estos términos <span class="citation">[<a href="bibliografía.html#ref-aep_algo">13</a>]</span>, <span class="citation">[<a href="bibliografía.html#ref-gaep_algo">14</a>]</span>.</p>
 <!------------------------------------------------------------------------------------------------->
 </div>
 <div id="modelo-individual" class="section level2 hasAnchor" number="5.2">
@@ -379,13 +379,13 @@ reclamos <span class="math inline">\(X_i\)</span> y <span class="math inline">\(
 total de reclamos <span class="math inline">\(S\)</span> puede ser calculada de una forma maś sencilla.
 <span class="math display">\[\begin{eqnarray*}
 F_S( x )
-&amp; = &amp; F_{X_1} \star \cdots \star F_{S_n} ( s )\quad \text{sin $\{X_i\}$ son independientes} \\
+&amp; = &amp; F_{X_1} \star \cdots \star F_{X_n} ( s )\quad \text{sin $\{X_i\}$ son independientes} \\
 &amp; = &amp; F_{X}^{\star n}( s )\quad \text{si $\{X_i\}$ son idénticamente distribuidas}
 \end{eqnarray*}\]</span></p>
 <p>así mismo, si las densidades de probabilidad están bien definidas, entonces
 <span class="math display">\[\begin{eqnarray*}
 f_S( s )
-&amp; = &amp; f_{X_1} \star \cdots \star f_{S_n} ( s )\quad \text{sin $\{X_i\}$ son independientes} \\
+&amp; = &amp; f_{X_1} \star \cdots \star f_{X_n} ( s )\quad \text{sin $\{X_i\}$ son independientes} \\
 &amp; = &amp; f_{X}^{\star n}( s )\quad \text{si $\{X_i\}$ son idénticamente distribuidas}
 \end{eqnarray*}\]</span></p>
 <p>Una posible estrategias para estimar <span class="math inline">\(F_S\)</span> o <span class="math inline">\(f_S\)</span> es utilizar la transformada de Fourier
@@ -496,8 +496,8 @@ a la integral de Riemann-Stieltjes utilizando la distribución acumulada empíri
 <p>De ello tenemos los siguientes resultados de cálculo para el valor esperado de la severidad total
 <span class="math display">\[\begin{eqnarray*}
 \mathbb{E}[S] = \sum\limits_{i=1}^n e^{ \mu_i + \frac{1}{2} \sigma_i^2 } &amp; = &amp; 34562.7208, \\
-\overline{S} = \frac{1}{m} \sum\limits_{i=1}^m S_i &amp; = &amp; 34273.2536, \\
-\sum\limits_{i=1}^N s_{i} \left( F_m( s_{i+1} ) - F_m( s_{i} ) \right) &amp; = &amp; 34255.6677
+\overline{S} = \frac{1}{m} \sum\limits_{i=1}^m S_i &amp; = &amp; 33347.7759, \\
+\sum\limits_{i=1}^N s_{i} \left( F_m( s_{i+1} ) - F_m( s_{i} ) \right) &amp; = &amp; 33323.4171
 \end{eqnarray*}\]</span></p>
 <p>Lo bueno de poseer una buena aproximación a la distribución acumulada de una variable aleatoria, es
 que podemos calcular algunos otros valores de importancia relacionados a la variable aleatoria y
@@ -526,7 +526,7 @@ S = \sum\limits_{i=1}^n X_i = \sum\limits_{i=1}^n M \mathbf{1}_{A_i}
 = \sum\limits_{i=1}^n \mathbb{E}\left[ M \mathbf{1}_{A_i} \right]
 = M \sum\limits_{i=1}^n P( A_i )
 \end{equation}\]</span>
-la última igualdad resulta de las propiedades de la función indicatriz <a href="probabilidad-y-estadística.html#def:indicatriz">3.9</a>.</p>
+la última igualdad resulta de las propiedades de la función indicatriz <a href="probabilidad-y-estadística.html#def:indicatriz">3.10</a>.</p>
 <p>Si en caso todos los <span class="math inline">\(P(A_i) = p\)</span> tienen la misma probabilidad, el valor total esperado de reclamos
 toma la siguiente forma:
 <span class="math display">\[\begin{equation}
@@ -604,7 +604,11 @@ F_S( s )
 &amp; = &amp; \sum\limits_{n=0}^{+\infty} F_{X_1} \star \cdots \star F_{X_n}( s ) p_n\quad \text{distribución de la suma de variables aleatorias} \\
 &amp; = &amp; \sum\limits_{n=0}^{+\infty} F^{\star n}_{X}( s ) p_n\quad \text{si $\{X_i\}$ son idénticamente distribuidas}
 \end{eqnarray*}\]</span>
-tomando <span class="math inline">\(F^{\star 0}_{X}( s ) = 1\)</span></p>
+tomando <span class="math inline">\(F^{\star 0}_{X}( s ) = 1\)</span>.</p>
+<p>Este último resultado muestra que la distribución de probabilidad de <span class="math inline">\(S\)</span> no es más que una mixtura
+de las distribuciones para los modelos individuales <span class="math inline">\(F^{\star n}_{X}\)</span> tomando para mezclarlas las
+probabilidades <span class="math inline">\(p_n = P( N = n )\)</span> de la variable aleatoria discreta <span class="math inline">\(N\)</span> que describe la frecuencia
+de los reclamos.</p>
 <!------------------------------------------------------------------------------------------------->
 <div id="algoritmo-de-simulación-1" class="section level3 hasAnchor" number="5.3.1">
 <h3><span class="header-section-number">5.3.1</span> Algoritmo de simulación<a href="modelos-de-pérdida-agregada.html#algoritmo-de-simulación-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -708,7 +712,7 @@ Si consideramos generar la simulación como un modelo individual, generamos vari
 <p></p>
 <p><span class="math display">\[\begin{eqnarray*}
 \mathbb{E}[S] = n p e^{ \mu + \frac{1}{2} \sigma^2 } &amp; = &amp; 219326.6317, \\
-\overline{S} = \frac{1}{m} \sum\limits_{i=1}^m S_i &amp; = &amp; 219188.2640,
+\overline{S} = \frac{1}{m} \sum\limits_{i=1}^m S_i &amp; = &amp; 218593.3764,
 \end{eqnarray*}\]</span></p>
 </div>
 <p>Es importante observar que si la frecuencia de reclamos es superior a <span class="math inline">\(1\)</span>, sea este por póliza,
@@ -754,8 +758,42 @@ el perfil de riesgo de cada cliente. Para su selección se suele utilizar alguno
 económico, financiero, legal y estadístico.</p>
 <!------------------------------------------------------------------------------------------------->
 </div>
-<div id="aplicación-del-deducible" class="section level2 hasAnchor" number="5.6">
-<h2><span class="header-section-number">5.6</span> Aplicación del deducible<a href="modelos-de-pérdida-agregada.html#aplicación-del-deducible" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="proceso-estocástico-de-reclamos-totales" class="section level2 hasAnchor" number="5.6">
+<h2><span class="header-section-number">5.6</span> Proceso estocástico de reclamos totales<a href="modelos-de-pérdida-agregada.html#proceso-estocástico-de-reclamos-totales" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Hasta el momento no hemos considerado que los reclamos se producen en el tiempo, que cada reclamo
+está bien vinculado al tiempo; es más podemos identificar algunos instantes en el tiempo que le
+corresponde, tenemos así el tiempo cuando se suscita el siniestro o tiempo de ocurrencia, el tiempo
+de aviso cuando se comunica al asegurador el siniestro y un tiempo de pago. Los dos últimos
+no son directos asociados al evento del siniestro sino están asociados a otras variables que pueden
+afectar la demora para comunicar un siniestro por parte del asegurado y la demora para cancelarlo
+por parte del asegurador.</p>
+<p>Así por tanto si tenemos una secuencia de siniestros <span class="math inline">\(\{X_n\}_{n\in\mathbb{N}^*}\)</span>, estos los podemos
+considerar ordenados en el tiempo conforme han venido presentándose en instantes
+<span class="math inline">\(T_1 \leq \cdots \leq T_n \leq \cdots\)</span>, es decir se le asocia a los reclamos <span class="math inline">\(\{X_n\}\)</span> la secuencia
+de los <strong>tiempos de arribo</strong> <span class="math inline">\(\{T_n\}_{n\in\mathbb{N}^*}\)</span>, donde <span class="math inline">\(T_1 &gt; 0\)</span> y <span class="math inline">\(T_{n+1} \geq T_n\)</span>, para
+cualquier <span class="math inline">\(n \in \mathbb{N}\)</span>. Ciertamente, es de esperar que los tiempos de arribo sean variables
+aleatorias y están asociados a la frecuencia <span class="math inline">\(N\)</span> en un periodo dado, ya que <span class="math inline">\(N\)</span> cuenta los tiempos
+de arribo hasta un tiempo dado, transformamos así a <span class="math inline">\(N\)</span> en una variable aleatoria dependiente del
+tiempo, en lo que se conoce como un <strong>proceso estocástico</strong>.
+<span class="math display">\[\begin{equation}
+N( t )
+= \#\left\{ k \in \mathbb{N}\ \middle|\ T_k \leq t \right\}
+= \sum\limits_{k=0}^{+\infty} \mathbf{1}_{(-\infty,t]}\left( T_k \right)
+\end{equation}\]</span></p>
+<p>Inmediatamente de este razonamiento, resulta que los reclamos totales también se transforman en
+proceso estocástico.
+<span class="math display">\[\begin{equation}
+S( t ) = \sum\limits_{i=1}^{N( t )} X_i
+\end{equation}\]</span></p>
+<p>Además, se pueden identificar las variables aleatorias de <strong>tiempos entre arribos</strong>
+<span class="math display">\[\begin{equation}
+W_n = T_n - T_{n-1},\quad \forall n \in \mathbb{N}
+\end{equation}\]</span>
+tomando <span class="math inline">\(T_0 = 0\)</span>.</p>
+<!------------------------------------------------------------------------------------------------->
+</div>
+<div id="aplicación-del-deducible" class="section level2 hasAnchor" number="5.7">
+<h2><span class="header-section-number">5.7</span> Aplicación del deducible<a href="modelos-de-pérdida-agregada.html#aplicación-del-deducible" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>En muchas ocasiones según las condiciones de los contratos de seguro y el apetito de riesgo del
 asegurador, se configura funciones deducibles sobre los reclamos.</p>
 <p></p>
@@ -852,12 +890,12 @@ agregada <span class="math inline">\(S_n\)</span> y mostraresmo s</p>
 <p></p>
 <!------------------------------------------------------------------------------------------------->
 </div>
-<div id="algoritmo-de-panjer" class="section level2 hasAnchor" number="5.7">
-<h2><span class="header-section-number">5.7</span> Algoritmo de Panjer<a href="modelos-de-pérdida-agregada.html#algoritmo-de-panjer" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="algoritmo-de-panjer" class="section level2 hasAnchor" number="5.8">
+<h2><span class="header-section-number">5.8</span> Algoritmo de Panjer<a href="modelos-de-pérdida-agregada.html#algoritmo-de-panjer" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <!------------------------------------------------------------------------------------------------->
 </div>
-<div id="estimación-usando-la-transformada-de-fourier" class="section level2 hasAnchor" number="5.8">
-<h2><span class="header-section-number">5.8</span> Estimación usando la transformada de Fourier<a href="modelos-de-pérdida-agregada.html#estimación-usando-la-transformada-de-fourier" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="estimación-usando-la-transformada-de-fourier" class="section level2 hasAnchor" number="5.9">
+<h2><span class="header-section-number">5.9</span> Estimación usando la transformada de Fourier<a href="modelos-de-pérdida-agregada.html#estimación-usando-la-transformada-de-fourier" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Para el caso del modelo individual de riesgos podemos hacer uso de la siguiente estimación de la
 densidad de probabilidad de los reclamos totales <span class="math inline">\(S\)</span>, utilizando la transformada de Fourier. En la
 implementación numérica se utiliza la transformada de Fourier rápida (FFT).
