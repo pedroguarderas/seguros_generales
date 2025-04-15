@@ -721,7 +721,7 @@ they may prefer to take a higher deductible to get a lower premium.</p></li>
 <span id="cb55-6"><a href="tarificación.html#cb55-6"></a>p <span class="ot">&lt;-</span> p0 <span class="sc">*</span> <span class="fu">cumprod</span>( <span class="fu">c</span>( <span class="dv">1</span>, a <span class="sc">+</span> b <span class="sc">/</span> k ) )</span>
 <span id="cb55-7"><a href="tarificación.html#cb55-7"></a><span class="fu">sum</span>( p )</span></code></pre></div>
 </details>
-<pre><code>## [1] 0.9132819</code></pre>
+<pre><code>## [1] 1.123896</code></pre>
 <details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb57"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb57-1"><a href="tarificación.html#cb57-1"></a>k <span class="ot">&lt;-</span> <span class="fu">seq</span>( <span class="dv">0</span>, <span class="dv">100</span>, <span class="dv">1</span> )</span>
 <span id="cb57-2"><a href="tarificación.html#cb57-2"></a><span class="fu">sum</span>( <span class="fu">dpois</span>( k, <span class="at">lambda =</span> l ) )</span></code></pre></div>

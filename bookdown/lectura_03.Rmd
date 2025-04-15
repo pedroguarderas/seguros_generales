@@ -770,7 +770,7 @@ Así, tenemos la siguiente aproximación a la transformada de Fourier.
 \end{eqnarray*}
 donde $\{f_k\}$ es la secuencia finita de números $f_k = f( x_k )$ y $\DFT$ es la transformada de 
 Fourier Discreta. La anterior relación es una aproximación para todo $\omega$. En particular se
-puede considerar $\omega_j = \frac{j}{b-a}$
+puede considerar $\omega_j = \frac{j}{b-a}$, para $j \in \{0,\ldots,N-1\}$
 \begin{eqnarray*}
 \Fo( f )\left( \omega_j \right) 
 & = & h \exp\left( -2\pi i \frac{j}{b-a} a \right) 
@@ -796,15 +796,14 @@ muy pequeña, cercana a $0$. Para superar este posible problema numérico tomamo
 \end{equation}
 
 ```{r l3c8}
-N <- 3001
+N <- 3000
 alpha <- 2
 theta <- 3
-b <- qgamma( 0.999, shape = alpha, scale = theta )
+b <- qgamma( 0.9999, shape = alpha, scale = theta )
 a <- 0
 h <- ( b - a ) / N
 n <- 0:N
 x <- a + n * h
-
 w <- n / ( b - a )
 eta <- h * exp( -2 * pi * 1i * w * a )
 f <- sapply( x, FUN = function( x ) dgamma( x, shape = alpha, scale = theta ) )
