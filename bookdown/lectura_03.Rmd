@@ -587,13 +587,13 @@ así se observa que para tener una aproximación de orden $\delta$ y con un erro
 $\varepsilon$, se requiere como mínimo realizar un número de simulaciones $n$ de orden 
 logarítmico en $\delta$ y cuadrático en $\varepsilon$.
 
-```{r l2c7}
+```{r l3c7}
 delta <- 0.01
 e <- unlist( lapply( seq( 1, 9, 1 ), FUN = function( n ) seq( 9, 1, -1 ) * 10^{-n} ) )
 n <- ceiling( -log( delta / 2 ) / ( 2 * e^2 ) )
 ```
 
-```{r l2t1, echo = TRUE, results = 'asis'}
+```{r l3t1, echo = TRUE, results = 'asis'}
 dt <- data.table( delta = delta, e, n, d = 8 * n / 1024^3 )
 dt %>%
   kable(
@@ -742,7 +742,7 @@ muy pequeña, cercana a $0$. Para superar este posible problema numérico tomamo
 \hat{f}_j \right\} \right] \right)
 \end{equation}
 
-```{r l2c8}
+```{r l3c8}
 N <- 3001
 alpha <- 2
 theta <- 3
@@ -770,13 +770,13 @@ como es de esperar es bastante pequeño.
 
 Como se puede observar se superponen cada una de las distribuciones la discretización $f_k$ y la 
 calculada con inversión de la transformada de Fourier discreta.
-```{r l2g1}
+```{r l3g1}
 plot( x, f, type = 'l' )
 points( x, Re( IFf ), col = 'green', pch = 16, cex = 0.5 )
 
 e <- f - IFf
-e <- e / sd( e )
-hist( e, breaks = 40, xlim = c( -6, 6 ), probability = TRUE )
+eb <- max( abs( e ) )
+hist( e, breaks = 40, xlim = c( -eb, eb ), probability = TRUE )
 ```
 
 <!------------------------------------------------------------------------------------------------->
@@ -822,16 +822,15 @@ serie que precisamente aproxima a la densidad $f_S$
 \prod\limits_{i=1}^n \hat{f}_{i,j} \right\} \right]
 \end{equation}
 
-```{r l2c9}
-N <- 7000
-alpha <- c( 2, 3, 5, 7, 9, 11, 1, 3, 5, 9 )
+```{r l3c9}
+N <- 10000
+alpha <- sample( x = seq( 1, 20, length = 40 ), size = 50, replace = TRUE )
 theta <- 3
-b <- sum( sapply( alpha, FUN = function( a ) qgamma( 0.99, shape = a, scale = theta ) ) )
+b <- sum( sapply( alpha, FUN = function( a ) qgamma( 0.9999, shape = a, scale = theta ) ) )
 a <- 0
 h <- ( b - a ) / N
 n <- 0:N
 s <- a + n * h
-
 w <- n / ( b - a )
 eta <- h * exp( -2 * pi * 1i * w * a )
 f <- lapply( alpha, function( a ) sapply( s, FUN = function( sk ) dgamma( sk, shape = a, scale = theta ) ) )
@@ -845,13 +844,13 @@ fS <- Re( IFfS )
 fSx <- sapply( s, FUN = function( sk ) dgamma( sk, shape = sum( alpha ), scale = theta ) )
 ```
 
-```{r l2g2}
+```{r l3g2}
 plot( s, fSx, type = 'l' )
 points( s, fS, col = 'green', pch = 16, cex = 0.5 )
 
 e <- fS - fSx
-e <- e / sd( e )
-hist( e, breaks = 40, xlim = c( -6, 6 ) )
+eb <- max( abs( e ) )
+hist( e, breaks = 40, xlim = c( -eb, eb ), probability = TRUE )
 ```
 
 <!------------------------------------------------------------------------------------------------->
@@ -951,3 +950,7 @@ prospectiva.
 -\sum\limits_{t_k > t} v( t, t_k ) c( t_k )
 \end{equation}
 algunas veces se considera la parte prospectiva con el signo menos.
+
+```{r l3end, echo = FALSE}
+rm( list = ls()[ ls() != 'def.chunk.hook' ] )
+```

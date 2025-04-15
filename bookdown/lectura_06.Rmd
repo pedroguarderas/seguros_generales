@@ -224,7 +224,7 @@ La medida de riesgo $\EVaR_{\alpha}$ es una medida de riesgo coherente.
 ::: {.example #l6ex2}
 Podemos considerar el caso particular donde todos los reclamos se suponen independientes e 
 idénticamente distribuidos (i.i.d), en este caso con distribución $X_i \rightsquigarrow LN(\mu,\sigma)$
-```{r l5c1}
+```{r l6c1}
 u <- 4
 s <- 0.5
 n <- 1e4
@@ -236,7 +236,7 @@ TVaRX <- sapply(
   FUN = function( i ) ifelse( k[ i ] < 1, ( 1 / ( 1 - k[ i ] ) ) * mean( X * ( X > VaRX[ i ] ) ), max( X ) ) )
 ```
 
-```{r l5c2}
+```{r l6c2}
 plot( k, VaRX, ylim = c( 0, 1e3 ) )
 points( k, TVaRX, col = 'red' )
 ```
@@ -343,18 +343,11 @@ las experanzas de $\E[X_i]$, para cada $i \in \{1,\ldots,n\}$ y de igual forma p
 calcular la esperanza del reclamo total $\E[S] = \sum\limits_{i=1}^n \E[X_i]$. 
 Además como asumimos independencia entre los $X_i$, la varianza de $S$ también puede ser calculada
 fácilmente como $\V[S] = \sum\limits_{i=1}^n \V[X_i]$.
-```{r l5c4}
-EX <- a * theta
-VX <- a * theta^2
-ES <- sum( EX )
-VS <- sum( VX )
-SDS <- sqrt( VS )
-```
 
 También estamos en la capacidad de simular la variable $S$ utilizando un algoritmo de aleatorio, 
 para así aproximar los cálculos de sus momentos y otros estadísticos. Primeramente definamos los 
 parámetros.
-```{r l5c3}
+```{r l6c3}
 # número de unidades aseguradas
 n <- 1000
 
@@ -368,16 +361,23 @@ theta <- 4
 A <- sum( a )
 ```
 
+```{r l6c4}
+EX <- a * theta
+VX <- a * theta^2
+ES <- sum( EX )
+VS <- sum( VX )
+SDS <- sqrt( VS )
+```
 
 La variable aleatoria del reclamo total $S$ la podemos simular tomando una muestra i.i.d de tamaño $m$, 
 i.e. $S_1,\ldots,S_m$ de la distribución $Gamma\left( \sum\limits_{i=1}^n \alpha_i, \theta \right)$.
-```{r l5c5}
+```{r l6c5}
 m <- 1e5
 S <- rgamma( m, shape = A, scale = theta )
 ``` 
 
 Prima pura:
-```{r l5c6}
+```{r l6c6}
 P <- ES
 P <- mean( S )
 
@@ -402,7 +402,7 @@ I <- as.numeric( S > VaRS )
 P_TVaR <- mean( S * I ) / mean( I )
 ```
 
-```{r l5c7}
+```{r l6c7}
 n <- 1e3
 S <- rgamma( n, shape = A, scale = theta )
 smin <- qgamma( 0.001, shape = A, scale = theta )
@@ -453,7 +453,7 @@ the policyholder to pay it himself;
 they may prefer to take a higher deductible to get a lower premium.
 
 
-```{r l5c8}
+```{r l6c8}
 n <- 1e5
 l <- 3
 dat <- data.table( id = 1:n, k = rpois( n, lambda = l )  )
@@ -465,7 +465,7 @@ datf <- datf[ !is.na( gk ) ]
 plot( datf$k, datf$gk )
 ```
 
-```{r l5c9}
+```{r l6c9}
 dflm <- lm( formula = gk ~ k, data = datf, method = 'qr' )
 a <- coef( dflm )[ 2 ]
 b <- coef( dflm )[ 1 ]
@@ -478,7 +478,7 @@ sum( dpois( k, lambda = l ) )
 EN <- sum( k * p )
 ```
 
-```{r l5c10}
+```{r l6c10}
 D <- function( x, d ) return( max( x - d, 0 ) )
 d <- 100
 u <- 6
@@ -495,7 +495,7 @@ plot( x, Fx, type = 's' )
 points( x, FDx, type = 's', col = 'blue' )
 ```
 
-```{r l5c11}
+```{r l6c11}
 D <- function( x, M ) return( min( x, M ) )
 M <- 600
 u <- 6
@@ -510,4 +510,9 @@ Fx <- sapply( x, FUN = function( x ) FXe( x ) )
 FDx <- sapply( x, FUN = function( x ) FDXe( x ) )
 plot( x, Fx, type = 's' )
 points( x, FDx, type = 's', col = 'blue' )
+```
+
+
+```{r l6end, echo = FALSE}
+rm( list = ls()[ ls() != 'def.chunk.hook' ] )
 ```

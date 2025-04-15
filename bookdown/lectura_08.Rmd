@@ -177,7 +177,7 @@ donde $\lambda$ es el parámetro a estimar en función de las variables explicat
 P( N = n ) = \exp(-g( \beta x ) ER( x )) \frac{g( \beta x )^n ER( x )^n}{n!}
 \end{equation}
 
-```{r l6t1, echo = TRUE, results = 'asis'}
+```{r l8t1, echo = TRUE, results = 'asis'}
 # la librería CASdatasets fue previamente cargada
 data( beMTPL97 )
 beMTPL97 <- as.data.table( beMTPL97 )
@@ -196,13 +196,13 @@ beMTPL97[ 1:100 ] %>%
   scroll_box( width = "750px", height = "500px" )
 ```
 
-```{r l6c1}
+```{r l8c1}
 model_N <- glm( formula = nclaims ~ ageph + sex + power + fuel + offset( log( expo ) ) + 0, 
                 family = poisson( link = 'log' ), 
                 data = beMTPL97 )
 ```
 
-```{r l6t2, echo = TRUE, results = 'asis'}
+```{r l8t2, echo = TRUE, results = 'asis'}
 dat <- tidy( model_N )
 dat %>%
   kable(
@@ -217,7 +217,7 @@ dat %>%
   scroll_box( width = "750px", height = "300px" )
 ```
 
-```{r l6t3, echo = TRUE, results = 'asis'}
+```{r l8t3, echo = TRUE, results = 'asis'}
 dat <- glance( model_N )
 dat %>%
   kable(
@@ -232,7 +232,7 @@ dat %>%
   scroll_box( width = "750px", height = "200px" )
 ```
 
-```{r l6c2}
+```{r l8c2}
 pob <- expand.grid( ageph = seq( 18, 90, 1 ), 
                     sex = c( 'male', 'female' ),
                     power = seq( 10, 250 ),
@@ -242,3 +242,7 @@ pob <- as.data.table( pob )
 pob[ , EN := predict( model_N, newdata = pob, type = 'response' ) ]
 ```
 :::
+
+```{r l8end, echo = FALSE}
+rm( list = ls()[ ls() != 'def.chunk.hook' ] )
+```

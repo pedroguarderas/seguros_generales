@@ -15,7 +15,7 @@ P( N = k ) = \binom{n}{k} p^k ( 1 - p )^{n-k}, \qquad
 esta distribución discreta se caracteriza por presentar el valor $k \frac{p_k}{p_{k-1}}$ decreciente
 conforme cambia $k \in \N$
 :::
-```{r l3c1}
+```{r l4c1}
 n <- 50
 p <- 0.3
 k <- 2
@@ -45,7 +45,7 @@ P( N = k ) = \exp\left( -\lambda \right) \frac{\lambda^k}{k!}, \qquad
 esta distribución discreta se caracteriza por presentar el valor $k \frac{p_k}{p_{k-1}}$ constante
 conforme cambia $k \in \N$
 :::
-```{r l3c2}
+```{r l4c2}
 lambda <- 2
 k <- 2
 m <- 100
@@ -79,7 +79,7 @@ donde $\Gamma( \alpha ) = \int\limits_0^{+\infty} x^{\alpha - 1} \exp(-x)\ dx$, 
 Esta distribución discreta se caracteriza por presentar el valor $k \frac{p_k}{p_{k-1}}$ creciente
 conforme cambia $k \in \N$
 :::
-```{r l3c3}
+```{r l4c3}
 alpha <- 2.5
 p <- 0.3
 k <- 2
@@ -108,7 +108,7 @@ P( N = k ) = ( 1 - p )^k p, \qquad
 \forall k \in \N
 \end{equation}
 :::
-```{r l3c4}
+```{r l4c4}
 p <- 0.3
 k <- 2
 m <- 100
@@ -165,7 +165,7 @@ Para una demostración detallada de la proposición anterior se puede consultar 
 en https://nonlifemaths.github.io/.
 
 
-```{r l3t1, echo = TRUE, results = 'asis'}
+```{r l4t1, echo = TRUE, results = 'asis'}
 # la librería CASdatasets fue previamente cargada
 data( beMTPL97 )
 beMTPL97 <- as.data.table( beMTPL97 )
@@ -188,7 +188,7 @@ conteo %>%
   scroll_box( width = "750px", height = "500px" )
 ```
 
-```{r l3c5}
+```{r l4c5}
 plot( conteo$N, conteo$jn )
 ```
 
@@ -213,7 +213,7 @@ M_X( t ) = \frac{\exp(bt)-\exp(at)}{t(b-a)}
 \E[X] = \frac{a + b}{2},\qquad \V[X] = \frac{(b - a)^2}{12}
 \end{equation}
 :::
-```{r l3c6}
+```{r l4c6}
 a <- 1
 b <- 2
 x <- 1.5
@@ -241,7 +241,7 @@ M_X( t ) = \frac{\lambda}{\lambda - t}
 \E[X] = \frac{1}{\lambda},\qquad \V[X] = \frac{1}{\lambda^2}
 \end{equation}
 :::
-```{r l3c7}
+```{r l4c7}
 lambda <- 2
 x <- 1.5
 m <- 100
@@ -269,7 +269,7 @@ M_X( t ) = \left( \frac{\beta}{\beta - t} \right)^\alpha,\qquad \text{si}\ t < \
 \V[X] = \frac{\alpha}{\beta^2}
 \end{equation}
 :::
-```{r l3c8}
+```{r l4c8}
 alpha <- 2
 beta <- 1
 x <- 3
@@ -297,7 +297,7 @@ M_X( t ) = \exp\left( t \mu + \frac{1}{2} t^2 \sigma^2 \right)
 \E[X] = \mu,\qquad \V[X] = \sigma^2
 \end{equation}
 :::
-```{r l3c9}
+```{r l4c9}
 mu <- 2
 sigma <- 1
 x <- 3
@@ -324,7 +324,7 @@ No hay forma analítica para $M_X$
 \V[X] = \exp\left( 2 \mu + \sigma^2 \right) \left( \exp( \sigma^2 ) - 1 \right)
 \end{equation}
 :::
-```{r l3c10}
+```{r l4c10}
 mu <- 2
 sigma <- 1
 x <- 3
@@ -365,7 +365,7 @@ M_X( t ) = \exp(\theta \mu) \sum\limits_{j=0}^{+\infty} \frac{\theta^j \sigma^j}
 {\prod\limits_{k=0}^j ( 1 - k \xi )}
 \end{equation}
 :::
-```{r l3c11}
+```{r l4c11}
 xi <- 1
 mu <- 2
 sigma <- 1
@@ -406,7 +406,7 @@ f_X( x )
 \right.
 \end{equation}
 :::
-```{r l3c12}
+```{r l4c12}
 xi <- -1
 mu <- 2
 sigma <- 1
@@ -470,7 +470,7 @@ La función generadora de momentos $M_X( t )$ no está definida
 \right.
 \end{equation}
 :::
-```{r l3c13}
+```{r l4c13}
 nu <- 3
 x <- 4
 m <- 100
@@ -507,12 +507,12 @@ f_X( x )
 \E[X]
 & = & \frac{\theta \Gamma\left( \alpha + \frac{1}{\tau}\right)}{\Gamma( \alpha )},
 \quad \text{si}\ 1 > -\alpha \tau \\
-\[X] 
+\V[X] 
 & = & \frac{\theta^2 \Gamma\left( \alpha + \frac{2}{\tau}\right)}{\Gamma( \alpha )}
 - \frac{\theta^2 \Gamma\left( \alpha + \frac{1}{\tau}\right)^2}{\Gamma( \alpha )^2}
 \end{eqnarray*}
 :::
-```{r l3c14}
+```{r l4c14}
 alpha <- 1
 tau <- 1
 theta <- 1
@@ -568,7 +568,7 @@ f_X( x )
 - \frac{\theta^2 \Gamma\left( \tau + \frac{1}{\gamma}\right)^2 \Gamma\left( \tau - \frac{1}{\gamma}\right)^2}{\Gamma( \alpha )^2 \Gamma( \tau )^2}
 \end{eqnarray*}
 :::
-```{r l3c15}
+```{r l4c15}
 alpha <- 1
 gamma <- 1
 tau <- 1
@@ -830,3 +830,7 @@ $\theta_2$, respecto del parámetro $\theta$, si se cumple la siguiente desigual
 < \E\left[ \left( \theta_2 - \theta \right)^2 \right]
 \end{equation}
 :::
+
+```{r l4end, echo = FALSE}
+rm( list = ls()[ ls() != 'def.chunk.hook' ] )
+```
