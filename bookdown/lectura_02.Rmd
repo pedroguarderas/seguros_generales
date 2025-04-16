@@ -32,6 +32,7 @@ el conjunto $X$, no es más que una función de $\N$ con valores en $X$
 
 12. $\sup A$ es la menor de las cotas superiores de $A$.
 
+13. $\Z$ el conjunto de los números enteros.
 
 <!------------------------------------------------------------------------------------------------->
 ## Consideraciones de programación en R
