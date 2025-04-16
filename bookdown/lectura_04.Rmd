@@ -8,10 +8,10 @@
 Una variable aleatoria $N$ que toma valores en $\N$ se dice que sigue una distribución 
 o ley de binomial $N \rightsquigarrow Bin( n, p )$, con parámetros $n \in \N$ y 
 $p \in [0, 1]$, si:
-\begin{equation}
+$$
 P( N = k ) = \binom{n}{k} p^k ( 1 - p )^{n-k}, \qquad
 \forall k \in \{0,\ldots, n\}
-\end{equation}
+$$
 esta distribución discreta se caracteriza por presentar el valor $k \frac{p_k}{p_{k-1}}$ decreciente
 conforme cambia $k \in \N$
 :::
@@ -39,10 +39,10 @@ plot( plt )
 ::: {.definition #dpois name="Distribución de Poisson"}
 Una variable aleatoria $N$ que toma valores en $\N$ se dice que sigue una distribución 
 o ley de Poisson $N \rightsquigarrow Pois( n, p )$, con parámetro $\lambda \in \R$, si:
-\begin{equation}
+$$
 P( N = k ) = \exp\left( -\lambda \right) \frac{\lambda^k}{k!}, \qquad
 \forall k \in \N
-\end{equation}
+$$
 esta distribución discreta se caracteriza por presentar el valor $k \frac{p_k}{p_{k-1}}$ constante
 conforme cambia $k \in \N$
 :::
@@ -70,11 +70,11 @@ plot( plt )
 Una variable aleatoria $N$ que toma valores en $\N$ se dice que sigue una distribución 
 o ley de  binomial negativa $N \rightsquigarrow NBin( \alpha, p )$, con parámetro $\alpha > 0$ y 
 $p \in (0,1)$, si:
-\begin{equation}
+$$
 P( N = k ) = \binom{\alpha + k - 1}{k} p^\alpha ( 1 - p )^k
 = \frac{\Gamma( \alpha + k )}{\Gamma(k+1) \Gamma(\alpha)}p^\alpha ( 1 - p )^k, \qquad
 \forall k \in \N
-\end{equation}
+$$
 donde $\Gamma( \alpha ) = \int\limits_0^{+\infty} x^{\alpha - 1} \exp(-x)\ dx$, $\forall \alpha \geq 0$.
 
 Esta distribución discreta se caracteriza por presentar el valor $k \frac{p_k}{p_{k-1}}$ creciente
@@ -104,10 +104,10 @@ plot( plt )
 ::: {.definition #dgeo name="Distribución geométrica"}
 Una variable aleatoria $N$ que toma valores en $\N$ se dice que sigue una distribución 
 o ley geométrica $N \rightsquigarrow Geo( p )$, con parámetro $p \in (0,1]$, si:
-\begin{equation}
+$$
 P( N = k ) = ( 1 - p )^k p, \qquad
 \forall k \in \N
-\end{equation}
+$$
 :::
 ```{r l4c4}
 p <- 0.3
@@ -134,9 +134,9 @@ de la familia de Panjer.
 Una variable aleatoria discreta $N$, que toma valores enteros positivos $N \in \N$, se dice
 que pertenece a la **familia de Panjer**, si sus probabilidades $p_k = P( N = k )$ para cada 
 $k \in \N$, satisfacen la siguiente relación de recurrencia.
-\begin{equation}
+$$
 p_k = \left( a + \frac{b}{k} \right)p_{k-1},\qquad \forall k \in \N \setminus \{0\} 
-\end{equation}
+$$
 :::
 
 Además tenemos la siguiente proposición que caracteriza a la distribución de las variables 
@@ -146,20 +146,20 @@ aleatorias en la familia de Panjer.
 Las únicas leyes de probabilidad que satisfacen la relación de recurrencia anterior son:
 
 1. La ley de Poisson, la cual se obtiene para $a = 0$ y $b > 0$
-\begin{equation}
+$$
 k \frac{p_k}{p_{k-1}} = b > 0,\quad \text{constante en $k$}
-\end{equation}
+$$
 
 2. La ley binomial negativa, la cual se obtiene para $0 < a < 1$ y $a + b > 0$
-\begin{equation}
+$$
 k \frac{p_k}{p_{k-1}} = a k + b > 0,\quad \text{creciente en $k$}
-\end{equation}
+$$
 
 3. La ley binomial, la cual se obtenida para $a < 0$ y $b = -a(m + 1)$, para cierto $m$ entero y 
 positivo.
-\begin{equation}
+$$
 k \frac{p_k}{p_{k-1}} = a( k - m - 1 ) < 0, \quad \text{decreciente en $k$}
-\end{equation}
+$$
 :::
 
 Para una demostración detallada de la proposición anterior se puede consultar @MathAssuNV1 o 
@@ -200,19 +200,19 @@ plot( conteo$N, conteo$jn )
 Una variable aleatoria $X$ a valores reales, sigue una distribución uniforme 
 $X \rightsquigarrow Unif( a, b )$ de parámetros $a, b \in \R$, si su función de distribución
 acumulada es de la siguiente forma:
-\begin{equation}
+$$
 F_X( x ) = \frac{x-a}{b-a} \mathbf{1}_{[a,b)}( x ) + \mathbf{1}_{[b,+\infty)}( x )
-\end{equation}
+$$
 sin mucho esfuerzo se puede verificar que su densidad de probabilidad está dada por la función
-\begin{equation}
+$$
 f_X( x ) = \frac{1}{b-a}\mathbf{1}_{[a,b]}( x )
-\end{equation}
-\begin{equation}
+$$
+$$
 M_X( t ) = \frac{\exp(bt)-\exp(at)}{t(b-a)}
-\end{equation}
-\begin{equation}
+$$
+$$
 \E[X] = \frac{a + b}{2},\qquad \V[X] = \frac{(b - a)^2}{12}
-\end{equation}
+$$
 :::
 ```{r l4c6}
 a <- 1
@@ -228,19 +228,19 @@ Fk <- punif( q = x, min = a, max = b ) # cálculo de probabilidad F(x)
 Una variable aleatoria $X$ a valores reales, sigue una distribución exponencial 
 $X \rightsquigarrow Exp( \lambda )$ de parámetros $\lambda > 0$, si su función de distribución
 acumulada es de la siguiente forma:
-\begin{equation}
+$$
 F_X( x ) = \mathbf{1}_{(0,+\infty)}( x ) \left( 1 - \exp\left( -\lambda x \right) \right)
-\end{equation}
+$$
 sin mucho esfuerzo se puede verificar que su densidad de probabilidad está dada por la función
-\begin{equation}
+$$
 f_X( x ) = \mathbf{1}_{(0,+\infty)}( x ) \lambda \exp\left( -\lambda x \right)
-\end{equation}
-\begin{equation}
+$$
+$$
 M_X( t ) = \frac{\lambda}{\lambda - t}
-\end{equation}
-\begin{equation}
+$$
+$$
 \E[X] = \frac{1}{\lambda},\qquad \V[X] = \frac{1}{\lambda^2}
-\end{equation}
+$$
 :::
 ```{r l4c7}
 lambda <- 2
@@ -255,20 +255,20 @@ Fk <- pexp( q = x, rate = lambda ) # cálculo de probabilidad F(x)
 Una variable aleatoria $X$ a valores reales, sigue una distribución gamma 
 $X \rightsquigarrow Gamma( \alpha, \beta )$ de parámetros $\alpha > 0$, $\beta > 0$, si su 
 función de distribución acumulada es de la siguiente forma:
-\begin{equation}
+$$
 F_X( x ) = \frac{\beta^\alpha}{\Gamma( \alpha )} \int\limits_{0}^{x} u^{\alpha-1} \exp(-\beta u)\ du
-\end{equation}
+$$
 la densidad de probabilidad automáticamente está dada por la función:
-\begin{equation}
+$$
 f_X( x ) = \mathbf{1}_{[0,+\infty}( x ) \frac{\beta^\alpha}{\Gamma( \alpha )} x^{\alpha-1} \exp(-\beta x)
-\end{equation}
-\begin{equation}
+$$
+$$
 M_X( t ) = \left( \frac{\beta}{\beta - t} \right)^\alpha,\qquad \text{si}\ t < \beta
-\end{equation}
-\begin{equation}
+$$
+$$
 \E[X] = \frac{\alpha}{\beta},\qquad 
 \V[X] = \frac{\alpha}{\beta^2}
-\end{equation}
+$$
 :::
 ```{r l4c8}
 alpha <- 2
@@ -284,19 +284,19 @@ Fk <- pgamma( q = x, shape = alpha, scale = beta ) # cálculo de probabilidad F(
 Una variable aleatoria $X$ a valores reales, sigue una distribución normal 
 $X \rightsquigarrow N( \mu, \sigma )$ de parámetros $\mu \in \R$, $\sigma > 0$, si su 
 función de distribución acumulada es de la siguiente forma:
-\begin{equation}
+$$
 F_X( x ) = \frac{1}{\sqrt{2\pi} \sigma} \int\limits_{-\infty}^x \exp\left( -\frac{(y - \mu)^2}{\sigma^2} \right)\ dy
-\end{equation}
+$$
 la densidad de probabilidad automáticamente está dada por la función:
-\begin{equation}
+$$
 f_X( x ) = \frac{1}{\sqrt{2\pi}} \exp\left( -\frac{(x - \mu)^2}{\sigma^2} \right)
-\end{equation}
-\begin{equation}
+$$
+$$
 M_X( t ) = \exp\left( t \mu + \frac{1}{2} t^2 \sigma^2 \right)
-\end{equation}
-\begin{equation}
+$$
+$$
 \E[X] = \mu,\qquad \V[X] = \sigma^2
-\end{equation}
+$$
 :::
 ```{r l4c9}
 mu <- 2
@@ -312,18 +312,18 @@ Fk <- pnorm( q = x, mean = mu, sd = sigma ) # cálculo de probabilidad F(x)
 Una variable aleatoria $X$ a valores reales, sigue una distribución log-normal 
 $X \rightsquigarrow LN( \mu, \sigma )$ de parámetros $\mu > 0$, $\sigma > 0$, si su 
 función de distribución acumulada es de la siguiente forma:
-\begin{equation}
+$$
 F_X( x ) = \frac{1}{\sqrt{2\pi} \sigma} \int\limits_{0}^{x} \frac{1}{y} \exp\left( -\frac{(\ln(y) - \mu)^2}{\sigma^2} \right)\ dy
-\end{equation}
+$$
 la densidad de probabilidad automáticamente está dada por la función:
-\begin{equation}
+$$
 f_X( x ) = \frac{1}{x\sqrt{2\pi} \sigma}  \exp\left( -\frac{(\ln(x) - \mu)^2}{\sigma^2} \right)
-\end{equation}
+$$
 No hay forma analítica para $M_X$
-\begin{equation}
+$$
 \E[X] = \exp\left( \mu + \frac{1}{2}\sigma^2 \right),\qquad 
 \V[X] = \exp\left( 2 \mu + \sigma^2 \right) \left( \exp( \sigma^2 ) - 1 \right)
-\end{equation}
+$$
 :::
 ```{r l4c10}
 mu <- 2
@@ -342,7 +342,7 @@ sigue una distribución normal.
 Una variable aleatoria $X$ a valores reales, sigue una distribución de Pareto generalizada
 $X \rightsquigarrow GPD( \mu, \sigma, \xi )$ de parámetros $\mu \in \R, \sigma > 0, \xi \in \R$, 
 si su función de distribución acumulada es de la siguiente forma:
-\begin{equation}
+$$
 F_X( x )
 = \left \{
 \begin{array}{ll}
@@ -350,9 +350,9 @@ F_X( x )
 1 - \exp\left( -\frac{x-\mu}{\sigma} \right) & \text{si}\ \xi = 0
 \end{array}
 \right.
-\end{equation}
+$$
 y su densidad de probabilidad está dada por la función
-\begin{equation}
+$$
 f_X( x )
 = \left \{
 \begin{array}{ll}
@@ -360,11 +360,11 @@ f_X( x )
 \frac{1}{\sigma} \exp\left( -\frac{x-\mu}{\sigma} \right) & \text{si}\ \xi = 0
 \end{array}
 \right.
-\end{equation}
-\begin{equation}
+$$
+$$
 M_X( t ) = \exp(\theta \mu) \sum\limits_{j=0}^{+\infty} \frac{\theta^j \sigma^j}
 {\prod\limits_{k=0}^j ( 1 - k \xi )}
-\end{equation}
+$$
 :::
 ```{r l4c11}
 xi <- 1
@@ -381,7 +381,7 @@ Fk <- pgpd( q = x, xi = xi, mu = mu, beta = sigma ) # cálculo de probabilidad F
 Una variable aleatoria $X$ a valores reales, sigue una distribución generalizada de valores extremos
 $X \rightsquigarrow GEV( \mu, \sigma, \xi )$ de parámetros $\mu \in \R, \sigma > 0, \xi \in \R$, 
 si su función de distribución acumulada es de la siguiente forma:
-\begin{equation}
+$$
 F_X( x ) 
 = \left\{
 \begin{array}{ll}
@@ -391,9 +391,9 @@ F_X( x )
 & \text{si}\ \xi \neq 0, 1 + \xi\frac{x - \mu}{\sigma} > 0
 \end{array}
 \right.
-\end{equation}
+$$
 además se puede verificar que su densidad de probabilidad está dada por la función
-\begin{equation}
+$$
 f_X( x )
 = \left\{
 \begin{array}{ll}
@@ -405,7 +405,7 @@ f_X( x )
  & \text{si}\ \xi \neq 0, 1 + \xi\frac{x - \mu}{\sigma} > 0
 \end{array}
 \right.
-\end{equation}
+$$
 :::
 ```{r l4c12}
 xi <- -1
@@ -422,18 +422,18 @@ Fk <- pgev( q = x, xi = xi, mu = mu, beta = sigma ) # cálculo de probabilidad F
 Una variable aleatoria $X$ a valores reales, sigue una distribución t de Student
 $X \rightsquigarrow t( \nu )$ de parámetros $\nu > 0$, 
 si su función de distribución acumulada es de la siguiente forma:
-\begin{equation}
+$$
 F_X( x ) 
 = \frac{1}{2} + \frac{x}{\sqrt{\pi \nu}} 
 \frac{\Gamma\left( \frac{\nu + 1}{2} \right)}{\Gamma\left( \frac{\nu}{2} \right)}
 F\left( \frac{1}{2}, \frac{\nu+1}{2}, \frac{3}{2}, -\frac{x^2}{\nu} \right)
-\end{equation}
+$$
 donde $F$ es la función hipergeométrica.
-\begin{equation}
+$$
 F( a, b, c, z ) = \sum\limits_{n=0}^{+\infty} \frac{(a)_n (b)_n}{(c)_n} \frac{z^n}{n!}
-\end{equation}
+$$
 con
-\begin{equation}
+$$
 (a)_n 
 = \left\{
 \begin{array}{ll}
@@ -441,16 +441,16 @@ con
 a( a + 1 ) \cdots (a + n - 1) & n > 0
 \end{array}
 \right.
-\end{equation}
+$$
 Además, se puede verificar que su densidad de probabilidad está dada por la función
-\begin{equation}
+$$
 f_X( x )
 = \frac{x}{\sqrt{\pi \nu}} 
 \frac{\Gamma\left(\frac{\nu+1}{2}\right)}{\Gamma\left( \frac{\nu}{2} \right)}
 \left( 1 + \frac{x^2}{\nu} \right)^{-\frac{\nu+1}{2}}
-\end{equation}
+$$
 La función generadora de momentos $M_X( t )$ no está definida
-\begin{equation}
+$$
 \E[X] 
 = \left\{
 \begin{array}{ll}
@@ -458,9 +458,9 @@ La función generadora de momentos $M_X( t )$ no está definida
 \text{no definida} & \text{si}\ \nu \leq 0
 \end{array}
 \right.
-\end{equation}
+$$
 
-\begin{equation}
+$$
 \V[X] 
 = \left\{
 \begin{array}{ll}
@@ -469,7 +469,7 @@ La función generadora de momentos $M_X( t )$ no está definida
 \text{no definida} & \text{si}\ \nu \leq 1
 \end{array}
 \right.
-\end{equation}
+$$
 :::
 ```{r l4c13}
 nu <- 3
@@ -484,14 +484,14 @@ Fk <- pt( q = x, df = nu ) # cálculo de probabilidad F(x)
 Una variable aleatoria $X$ a valores reales, sigue una distribución gamma transformada
 $X \rightsquigarrow GT( \alpha, \tau, \theta )$ de parámetros $\alpha > 0, \tau > 0, \theta > 0$, 
 si su función de distribución acumulada es de la siguiente forma:
-\begin{equation}
+$$
 F_X( x ) = \frac{\tau}{\Gamma( \alpha )}
 \int\limits_{0}^x 
 \frac{1}{u} \left( \frac{u}{\theta} \right)^{\alpha} \exp\left(-\left( \frac{u}{\theta} \right)^{\tau}\right)\ du
-\end{equation}
+$$
 
 además se puede verificar que su densidad de probabilidad está dada por la función:
-\begin{equation}
+$$
 f_X( x )
 = 
 \left\{
@@ -500,7 +500,7 @@ f_X( x )
 \frac{\tau}{x \Gamma( \alpha )} \left( \frac{x}{\theta} \right)^{\alpha} \exp\left(-\left( \frac{x}{\theta} \right)^{\tau}\right) & \text{si}\ x > 0
 \end{array}
 \right.
-\end{equation}
+$$
 \begin{eqnarray*}
 \E[X^k] 
 & = & \frac{\theta^k \Gamma\left( \alpha + \frac{k}{\tau}\right)}{\Gamma( \alpha )},
@@ -544,19 +544,19 @@ En la familia gamma se incluyen las siguientes distribuciones:
 Una variable aleatoria $X$ a valores reales, sigue una distribución beta transformada
 $X \rightsquigarrow BT( \alpha, \gamma, \tau, \theta )$ de parámetros $\alpha > 0, \gamma > 0, \tau > 0, \theta > 0$, 
 si su función de distribución acumulada es de la siguiente forma:
-\begin{equation}
+$$
 F_X( x ) = \frac{\Gamma(\alpha + \tau)}{\Gamma( \alpha ) \Gamma( \tau )}
 \int\limits_0^x
 \frac{\gamma \left( \frac{u}{\theta} \right)^{\gamma \tau}}{u\left( 1 + \left( \frac{u}{\theta} \right)^{\gamma}\right)^{\alpha + \tau}}\ du
-\end{equation}
+$$
 
 además se puede verificar que su densidad de probabilidad está dada por la función:
-\begin{equation}
+$$
 f_X( x )
 = \mathbf{1}_{[0,+\infty)}( x )
 \frac{\Gamma(\alpha + \tau)}{\Gamma( \alpha ) \Gamma( \tau )} 
 \frac{ \gamma \left( \frac{x}{\theta} \right)^{\gamma \tau}}{x\left( 1 + \left( \frac{x}{\theta} \right)^{\gamma}\right)^{\alpha + \tau}}
-\end{equation}
+$$
 
 \begin{eqnarray*}
 \E[X^k] 
@@ -636,16 +636,16 @@ probabilidad $\mathcal{P}$ que contiene al conjunto
 $P( \Theta ) = \{ P_{\theta} \mid \theta \in \Theta\} \subset \mathcal{P}$ y que toma valores 
 en $\Theta$, i.e. $G: \mathcal{P} \longrightarrow \Theta$. De tal forma que $P_{\theta}$ es 
 invariante, es decir:
-\begin{equation}
+$$
 G( P_{\theta} ) = \theta,\quad \forall \theta \in \Theta
-\end{equation}
+$$
 
 Así se construye un **estimador por el método de sustitución** si a partir de la medida de 
 probabilidad empírica $P_n$ construida con una muestra $X_1, \ldots, X_n$ de la variable
 aleatoria $X$, se toma como parámetro el dado por:
-\begin{equation}
+$$
 \widehat{\theta} = G\left( P_n \right)
-\end{equation}
+$$
 
 En otras palabras se sustituye el parámetro $\theta$ por $\widehat{\theta}$. Esto implica que 
 se aproxima la medida $P_X$ que caracteriza a $X$, con la aproximación
@@ -667,17 +667,17 @@ $P_X = P_{\theta}$, para algún $\theta \in \Theta$. Decimos que una familia de 
 $\{\theta_n\}$ es **convergente** si al generar cada vez una muestra más grande el estimador
 $\theta_n( X_1, \ldots, X_n )$ converge en probabilidad a $\theta$. Esto quiere decir que 
 para cualquier $\varepsilon > 0$
-\begin{equation}
+$$
 \underset{n \rightarrow +\infty}{\lim} 
 P_{\theta}\left( \left| \theta_n( X_1, \ldots, X_n ) - \theta \right| \geq \varepsilon \right) = 0
-\end{equation}
+$$
 
 Decimos que **converge fuertemente** si la convergencia de la familia de estimadores 
 $\theta_n( X_1, \ldots, X_n )$ a $\theta$ se da **casi seguramente** o **casi todas partes**. Esto 
 en término de límites implica que:
-\begin{equation}
+$$
 P_{\theta}\left( \underset{n \rightarrow +\infty}{\lim} \theta_n( X_1, \ldots, X_n ) = \theta \right) = 1
-\end{equation}
+$$
 En otras palabras, la probabilidad de que el límite del estimador $\theta_n( X_1, \ldots, X_n )$ 
 sea igual a $\theta$ es $1$, salvo un conjunto de medida nula para $P_{\theta}$. De ahí resulta 
 la terminología de convergencia casi segura o convergencia en casi todas partes.
@@ -690,27 +690,27 @@ Un estimador de momento se contruye a partir de una relación función entre la 
 medible $g$ y el parámetro $\theta \in \Theta$ que caracteriza a la distribución o medida de 
 probabilidad de la variable aleatoria $X$. Es decir, existen funciones $g$ y $m$ a valores reales
 de tal forma que
-\begin{equation}
+$$
 m( \theta ) 
 = \E_{P_X} \left[ g( X ) \right] 
 = \int\limits_{\R} g( x ) dP_X( x )
 = \int\limits_{\R} g( x ) dP_{\theta}( x )
-\end{equation}
+$$
 
 Si de alguna forma se puede invertir $m$, de tal forma que se pueda determinar $\theta$, en tal 
 caso se pude utilizar un **estimador por momentos** a partir de una muestra de la variable aleatoria
 $X_1, \ldots, X_n$
-\begin{equation}
+$$
 \widehat{\theta} 
 = \theta_n\left( X_1, \ldots, X_n \right)
 = m^{-1}\left( \overline{g} \right)
-\end{equation}
+$$
 donde
-\begin{equation}
+$$
 \overline{g}
 = \int\limits_{\R} g( x ) dP_n( x )
 = \frac{1}{n}\sum\limits_{i=1}^n g\left( X_i \right)
-\end{equation}
+$$
 
 Si en caso $\overline{g}$ está fuera de la imagen de $m$, $\overline{g} \notin m( \Theta )$, la 
 inversión no sería posible. Para resolver este problema se puede recurrir a una distancia $d$ y 
@@ -739,39 +739,39 @@ que satisface las siguientes propiedades:
 2. Para cualquier $P \in \mathcal{P}$, $d( P, P ) = 0$.
 
 3. Desigualdad triangular, para cualquier $P,Q,R \in \mathcal{P}$
-\begin{equation}
+$$
 d( P, Q ) \leq d( P, R ) + d( R, Q )
-\end{equation}
+$$
 
 A partir de la medida empírica de probabilidad $P_n$, se busca una probabilidad $P_{\theta}$ que 
 minimize la distancia medida con $d$. Así resulta el estimador con el **método de distancia mínima**
-\begin{equation}
+$$
 \widehat{\theta} = \underset{\theta \in \Theta}{\arginf} d\left( P_{\theta}, P_n \right)
-\end{equation}
+$$
 
 Entra las distancias que se puede considerar tenemos las siguientes
 
 - Distancia del supremo entre las distribuciones acumuladas correspondientes
-\begin{equation}
+$$
 d(P,Q) = \underset{x}{\sup} \left| F_P( x ) - F_Q( x ) \right|
-\end{equation}
+$$
 
 - Distancia cuadrática entre las distribuciones acumuladas correspondientes
-\begin{equation}
+$$
 d( P, Q ) = \int\limits_{\R} \left( F_P( x ) - F_Q( x ) \right)^2\ dF_Q( x )
-\end{equation}
+$$
 
 - Distancia de Wasserstein, para $p > 1$
-\begin{equation}
+$$
 d( P, Q )
 = W_p( P, Q )
 = \underset{(X,Y) \rightsquigarrow \mu \in \Gamma( P, Q )}{\inf} \E_{\mu}\left[ |X - Y|^p \right]^{\frac{1}{p}}
-\end{equation}
+$$
 donde
-\begin{equation}
+$$
 \Gamma( P, Q ) = \left\{ \mu \middle| \text{$\mu$ es medida de probabilidad sobre $\Omega \times \Omega$, 
 cuyas distribuciones marginales son $P$ y $Q$}\right\}
-\end{equation}
+$$
 
 <!------------------------------------------------------------------------------------------------->
 ###  Método de maximización de la verosimilitud
@@ -783,20 +783,20 @@ Se postula precisamente que la mejor medida de probabilidad es aquella que maxim
 de observar estos eventos independientes. En el caso en particular de la estimación de una medida
 de probabilidad en una familia $\{P_{\theta}\}$ con $\theta \in \Theta$, se busca maximizar la 
 probabilidad:
-\begin{equation}
+$$
 \underset{\theta \in \Theta}{\sup} \prod\limits_{i=1}^n P_{\theta}\left( B_i \right)
-\end{equation}
+$$
 
 o de forma equivalente, si se toma logaritmos:
-\begin{equation}
+$$
 \underset{\theta \in \Theta}{\sup} \sum\limits_{i=1}^n \log P_{\theta} \left( B_i \right)
-\end{equation}
+$$
 
 Así, el estimador por verosimilitud, es el dado por:
-\begin{equation}
+$$
 \widehat{\theta} 
 = \underset{\theta \in \Theta}{\argsup} \sum\limits_{i=1}^n \log P_{\theta} \left( B_i \right)
-\end{equation}
+$$
 
 En la práctica los eventos que se observa $B_i$ son puntuales y son precisamente los valores 
 que toma la variable aleatoria $X$. Es decir, se observa una muestra $X_1, \ldots, X_n$.
@@ -806,10 +806,10 @@ $N_1, \ldots, N_m$ asumiendo independencia entre cada una de las observaciones. 
 suponer que $N$ pertenece a la familia de distribuciones discretas en la clase $(0,a,b)$ y por tanto
 $P( N = 0 ) = p_0$ es un parámetro inicial $p_n = ( a + b/n) p_{n-1}$, para cualquier
 $n > 1$.
-\begin{equation}
+$$
 P\left( N_1 = n_1 \land \cdots \land N_m = n_m \right)
 = \prod\limits_{i=1}^m p_i^{n_i}
-\end{equation}
+$$
 
 <!------------------------------------------------------------------------------------------------->
 ### Calidad de estimadores
@@ -817,19 +817,19 @@ P\left( N_1 = n_1 \land \cdots \land N_m = n_m \right)
 ::: {.definition #bestinses  name="Estimador insesgado"}
 Se dice que un estimador $\theta_1$ se dice **insesgado** para estimar el parámetro $\theta$, si se 
 cumple que:
-\begin{equation}
+$$
 \E\left[ \theta_1 \right] = \theta
-\end{equation}
+$$
 caso contrario se dirá que el estimador es **sesgado** o que presenta un **error sistemático**.
 :::
 
 ::: {.definition #bestcuadmean  name="Mejor estimador en media cuadrática"}
 Se dice que un estimador $\theta_1$ es mejor estimador en media cuadrática que el estimador 
 $\theta_2$, respecto del parámetro $\theta$, si se cumple la siguiente desigualdad
-\begin{equation}
+$$
 \E\left[ \left( \theta_1 - \theta \right)^2 \right]
 < \E\left[ \left( \theta_2 - \theta \right)^2 \right]
-\end{equation}
+$$
 :::
 
 ```{r l4end, echo = FALSE}
