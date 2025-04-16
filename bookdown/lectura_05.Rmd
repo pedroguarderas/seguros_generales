@@ -44,9 +44,10 @@ Esto nos lleva a considerar diferentes modelos de agregación de reclamos o pér
 decir en inglés "loss models" @PanjerLoss2012, @LossModFur.
 
 De forma preliminar estudiemos la forma general que podría tener la distribución de $S$, sin realizar
-alguna hipótesis previa sobre el comportamiento de las variables aleatorias $X_1, \ldots, X_n$ y $N$.
+alguna hipótesis (previa sobre el comportamiento de las variables aleatorias $X_1, \ldots, X_n$ y $N$.
 \begin{eqnarray*}
-F( S \leq s )
+F_S( s ) 
+& = & P( S \leq s ) \\
 & = & P\left( \sum\limits_{i=1}^N X_i \leq s \right) \\
 & = & P\left( \sum\limits_{i=1}^N X_i \leq s \land N \in \N \right) \\
 & = & P\left( \bigcup\limits_{n\in \N} \left\{ \sum\limits_{i=1}^N X_i \leq s \land N \in \{n\} \right\}\right) \\

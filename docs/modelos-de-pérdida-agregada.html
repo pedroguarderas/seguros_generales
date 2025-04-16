@@ -23,7 +23,7 @@
 <meta name="author" content="" />
 
 
-<meta name="date" content="2025-04-15" />
+<meta name="date" content="2025-04-16" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -325,9 +325,10 @@ S = \sum\limits_{i=1}^N X_i
 <p>Esto nos lleva a considerar diferentes modelos de agregación de reclamos o pérdidas como se suele
 decir en inglés “loss models” <span class="citation">[<a href="bibliografía.html#ref-PanjerLoss2012">1</a>]</span>, <span class="citation">[<a href="bibliografía.html#ref-LossModFur">2</a>]</span>.</p>
 <p>De forma preliminar estudiemos la forma general que podría tener la distribución de <span class="math inline">\(S\)</span>, sin realizar
-alguna hipótesis previa sobre el comportamiento de las variables aleatorias <span class="math inline">\(X_1, \ldots, X_n\)</span> y <span class="math inline">\(N\)</span>.
+alguna hipótesis (previa sobre el comportamiento de las variables aleatorias <span class="math inline">\(X_1, \ldots, X_n\)</span> y <span class="math inline">\(N\)</span>.
 <span class="math display">\[\begin{eqnarray*}
-F( S \leq s )
+F_S( s )
+&amp; = &amp; P( S \leq s ) \\
 &amp; = &amp; P\left( \sum\limits_{i=1}^N X_i \leq s \right) \\
 &amp; = &amp; P\left( \sum\limits_{i=1}^N X_i \leq s \land N \in \mathbb{N}\right) \\
 &amp; = &amp; P\left( \bigcup\limits_{n\in \mathbb{N}} \left\{ \sum\limits_{i=1}^N X_i \leq s \land N \in \{n\} \right\}\right) \\
