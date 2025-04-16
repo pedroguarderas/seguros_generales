@@ -32,6 +32,7 @@ csl: electronic-journal-of-statistics.csl
 <!------------------------------------------------------------------------------------------------->
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
 \newcommand{\Fo}{\mathscr{F}}
 \newcommand{\E}{\mathbb{E}}
 \newcommand{\V}{\mathbb{V}}
