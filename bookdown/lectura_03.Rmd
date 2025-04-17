@@ -862,13 +862,28 @@ como es de esperar es bastante pequeño.
 
 Como se puede observar se superponen cada una de las distribuciones la discretización $f_k$ y la 
 calculada con inversión de la transformada de Fourier discreta.
-```{r l3g1}
-plot( x, f, type = 'l' )
-points( x, Re( IFf ), col = 'green', pch = 16, cex = 0.5 )
-
+```{r l3g1, out.width='80%', out.height='400px', fig.align='center'}
 e <- f - IFf
 eb <- max( abs( e ) )
-hist( e, breaks = 40, xlim = c( -eb, eb ), probability = TRUE )
+
+plt <- ggplot() +
+  geom_line( aes( x = x, y = f ), colour = 'darkred', size = 1 ) + 
+  geom_point( aes( x = x, y = IFf ), colour = 'olivedrab3', size = 0.25 ) + 
+  xlab( TeX( "$x$" ) ) + 
+  ylab( TeX( "$f(x)$" ) ) + 
+  theme_bw()
+plot( plt )
+
+plt <- ggplot() +
+  geom_histogram( aes( x = e, y = after_stat( density ) ), bins = 50, fill = 'grey50', colour = 'dodgerblue3' ) + 
+  geom_density() +
+  scale_x_continuous( breaks = seq( -eb, eb, length = 10 ), 
+                      labels = label_scientific( digits = 2 ),
+                      limits = c( -eb, eb ) ) +
+  scale_y_continuous( labels = label_scientific( digits = 2 ) ) +
+  ylab( TeX( "$e$" ) ) + 
+  theme_bw()
+plot( plt )
 ```
 
 <!------------------------------------------------------------------------------------------------->
@@ -941,13 +956,27 @@ fS <- Re( IFfS )
 fSx <- sapply( s, FUN = function( sk ) dgamma( sk, shape = sum( alpha ), scale = theta ) )
 ```
 
-```{r l3g2}
-plot( s, fSx, type = 'l' )
-points( s, fS, col = 'green', pch = 16, cex = 0.5 )
-
+```{r l3g2, out.width='80%', out.height='400px', fig.align='center'}
 e <- fS - fSx
 eb <- max( abs( e ) )
-hist( e, breaks = 40, xlim = c( -eb, eb ), probability = TRUE )
+
+plt <- ggplot() +
+  geom_line( aes( x = s, y = fSx ), colour = 'darkred', size = 1 ) + 
+  geom_point( aes( x = s, y = fS ), colour = 'olivedrab3', size = 0.25 ) + 
+  xlab( TeX( "$x$" ) ) + 
+  ylab( TeX( "$f_{S}(x)$" ) ) + 
+  theme_bw()
+plot( plt )
+
+plt <- ggplot() +
+  geom_histogram( aes( x = e, y = after_stat( density ) ), bins = 50, fill = 'grey50', colour = 'dodgerblue3' ) + 
+  scale_x_continuous( breaks = seq( -eb, eb, length = 10 ), 
+                      labels = label_scientific( digits = 2 ),
+                      limits = c( -eb, eb ) ) +
+  scale_y_continuous( labels = label_scientific( digits = 2 ) ) +
+  ylab( TeX( "$e$" ) ) + 
+  theme_bw()
+plot( plt )
 ```
 
 <!------------------------------------------------------------------------------------------------->
