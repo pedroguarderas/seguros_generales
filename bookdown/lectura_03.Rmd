@@ -814,7 +814,7 @@ puede considerar $\omega_j = \frac{j}{b-a}$, para $j \in \{0,\ldots,N-1\}$
 \begin{eqnarray*}
 \Fo( f )\left( \omega_j \right) 
 & = & h \exp\left( -2\pi i \frac{j}{b-a} a \right) 
-\sum\limits_{k=0}^{N-1} f( x_k ) \exp\left( -2\pi i \frac{jk}{N} \right) \\
+\sum\limits_{k=0}^{N-1} f_k \exp\left( -2\pi i \frac{jk}{N} \right) \\
 \hat{f}_j & = & h \exp\left( -2\pi i \frac{j}{b-a} a \right) \left( \DFT\left[ \{f_k\} \right] \right)_j
 \quad \text{por definición de la $\DFT$}
 \end{eqnarray*}
@@ -827,12 +827,21 @@ la transformada de Fourier discreta y su inversión.
 = \DFT^{-1}\left[ \left\{ \frac{1}{h} \exp\left( 2\pi i \frac{j}{b-a} a \right) \hat{f}_j \right\} \right]
 \end{equation}
 
-es de notar que numérica por la aritmética en coma flotante la expresión $\DFT^{-1}\left[ \left\{ \frac{1}{h} \exp\left( 2\pi i \frac{j}{b-a} a \right) \hat{f}_j \right\} \right]$ puede tener parte compleja 
-muy pequeña, cercana a $0$. Para superar este posible problema numérico tomamos solo la parte real.
+es de notar que numérica por la aritmética en coma flotante la expresión 
+$\DFT^{-1}\left[ \left\{ \frac{1}{h} \exp\left( 2\pi i \omega_j a \right) \hat{f}_j \right\} \right]$ 
+puede tener parte compleja muy pequeña, cercana a $0$. Para superar este posible problema numérico 
+tomamos solo la parte real.
 \begin{equation}
 \{f( x_k )\} 
 \approx \Re\left( \DFT^{-1}\left[ \left\{ \frac{1}{h} \exp\left( 2\pi i \frac{j}{b-a} a \right) 
 \hat{f}_j \right\} \right] \right)
+\end{equation}
+
+Ya que estamos trabajando con series $\{x_k\}$, para medir la aproximación entre una serie $\{x_k\}$
+y otra series $\{y_k\}$, de igual dimensión; podemos utilizar la norma cuadrática.
+\begin{equation}
+\left\| \{x_k\} - \{y_k\} \right\|_2
+= \left( \sum\limits_{k=0}^{N-1} \left( x_k - y_k \right)^2 \right)^{\frac{1}{2}}
 \end{equation}
 
 ```{r l3c8}
@@ -856,13 +865,13 @@ El error cuadrático de esta aproximación para el caso de la distribución $Gam
 como es de esperar es bastante pequeño.
 \begin{equation}
 \left\| \{f( x_k ) \} - 
-\DFT^{-1}\left[ \left\{ \frac{1}{h} \exp\left( 2\pi i \frac{j}{b-a} a \right) \hat{f}_j \right\} \right] \right\|_2
+\DFT^{-1}\left[ \left\{ \frac{1}{h} \exp\left( 2\pi i \omega_j a \right) \hat{f}_j \right\} \right] \right\|_2
 = `r formatC( err, digits = 20, format = 'f' )`
 \end{equation}
 
 Como se puede observar se superponen cada una de las distribuciones la discretización $f_k$ y la 
 calculada con inversión de la transformada de Fourier discreta.
-```{r l3g1, out.width='80%', out.height='400px', fig.align='center'}
+```{r l3g1, out.width='80%', out.height='400px', fig.align='center', class.source = 'fold-hide'}
 e <- f - IFf
 eb <- max( abs( e ) )
 
@@ -956,7 +965,7 @@ fS <- Re( IFfS )
 fSx <- sapply( s, FUN = function( sk ) dgamma( sk, shape = sum( alpha ), scale = theta ) )
 ```
 
-```{r l3g2, out.width='80%', out.height='400px', fig.align='center'}
+```{r l3g2, out.width='80%', out.height='400px', fig.align='center', class.source = 'fold-hide'}
 e <- fS - fSx
 eb <- max( abs( e ) )
 
