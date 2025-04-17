@@ -114,7 +114,7 @@ f_S( s )
 & = & f_{X}^{\star n}( s )\quad \text{si $\{X_i\}$ son idénticamente distribuidas}
 \end{eqnarray*}
 
-Una posible estrategias para estimar $F_S$ o $f_S$ es utilizar la transformada de Fourier 
+Una posible estrategia para estimar $F_S$ o $f_S$ es utilizar la transformada de Fourier 
 $\Fo$, la cual convierte las convoluciones en productos y luego invertir de nuevo la 
 transformada de Fourier.
 \begin{eqnarray*}
