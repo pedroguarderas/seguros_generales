@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Capítulo 3 Probabilidad y Estadística | Matemática Actuarial de los Seguros Generales</title>
   <meta name="description" content="Capítulo 3 Probabilidad y Estadística | Matemática Actuarial de los Seguros Generales" />
-  <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.42 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Capítulo 3 Probabilidad y Estadística | Matemática Actuarial de los Seguros Generales" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="" />
 
 
-<meta name="date" content="2025-04-16" />
+<meta name="date" content="2025-04-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -2214,16 +2214,31 @@ como es de esperar es bastante pequeño.
 calculada con inversión de la transformada de Fourier discreta.</p>
 <p></p>
 <details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb13-1"><a href="probabilidad-y-estadística.html#cb13-1"></a><span class="fu">plot</span>( x, f, <span class="at">type =</span> <span class="st">&#39;l&#39;</span> )</span>
-<span id="cb13-2"><a href="probabilidad-y-estadística.html#cb13-2"></a><span class="fu">points</span>( x, <span class="fu">Re</span>( IFf ), <span class="at">col =</span> <span class="st">&#39;green&#39;</span>, <span class="at">pch =</span> <span class="dv">16</span>, <span class="at">cex =</span> <span class="fl">0.5</span> )</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb13-1"><a href="probabilidad-y-estadística.html#cb13-1"></a>e <span class="ot">&lt;-</span> f <span class="sc">-</span> IFf</span>
+<span id="cb13-2"><a href="probabilidad-y-estadística.html#cb13-2"></a>eb <span class="ot">&lt;-</span> <span class="fu">max</span>( <span class="fu">abs</span>( e ) )</span>
+<span id="cb13-3"><a href="probabilidad-y-estadística.html#cb13-3"></a></span>
+<span id="cb13-4"><a href="probabilidad-y-estadística.html#cb13-4"></a>plt <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb13-5"><a href="probabilidad-y-estadística.html#cb13-5"></a>  <span class="fu">geom_line</span>( <span class="fu">aes</span>( <span class="at">x =</span> x, <span class="at">y =</span> f ), <span class="at">colour =</span> <span class="st">&#39;darkred&#39;</span>, <span class="at">size =</span> <span class="dv">1</span> ) <span class="sc">+</span> </span>
+<span id="cb13-6"><a href="probabilidad-y-estadística.html#cb13-6"></a>  <span class="fu">geom_point</span>( <span class="fu">aes</span>( <span class="at">x =</span> x, <span class="at">y =</span> IFf ), <span class="at">colour =</span> <span class="st">&#39;olivedrab3&#39;</span>, <span class="at">size =</span> <span class="fl">0.25</span> ) <span class="sc">+</span> </span>
+<span id="cb13-7"><a href="probabilidad-y-estadística.html#cb13-7"></a>  <span class="fu">xlab</span>( <span class="fu">TeX</span>( <span class="st">&quot;$x$&quot;</span> ) ) <span class="sc">+</span> </span>
+<span id="cb13-8"><a href="probabilidad-y-estadística.html#cb13-8"></a>  <span class="fu">ylab</span>( <span class="fu">TeX</span>( <span class="st">&quot;$f(x)$&quot;</span> ) ) <span class="sc">+</span> </span>
+<span id="cb13-9"><a href="probabilidad-y-estadística.html#cb13-9"></a>  <span class="fu">theme_bw</span>()</span>
+<span id="cb13-10"><a href="probabilidad-y-estadística.html#cb13-10"></a><span class="fu">plot</span>( plt )</span></code></pre></div>
 </details>
-<p><img src="seguros_generales_files/figure-html/l3g1-1.png" width="700" /></p>
+<p><img src="seguros_generales_files/figure-html/l3g1-1.png" width="80%" height="400px" style="display: block; margin: auto;" /></p>
 <details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb14-1"><a href="probabilidad-y-estadística.html#cb14-1"></a>e <span class="ot">&lt;-</span> f <span class="sc">-</span> IFf</span>
-<span id="cb14-2"><a href="probabilidad-y-estadística.html#cb14-2"></a>eb <span class="ot">&lt;-</span> <span class="fu">max</span>( <span class="fu">abs</span>( e ) )</span>
-<span id="cb14-3"><a href="probabilidad-y-estadística.html#cb14-3"></a><span class="fu">hist</span>( e, <span class="at">breaks =</span> <span class="dv">40</span>, <span class="at">xlim =</span> <span class="fu">c</span>( <span class="sc">-</span>eb, eb ), <span class="at">probability =</span> <span class="cn">TRUE</span> )</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb14-1"><a href="probabilidad-y-estadística.html#cb14-1"></a>plt <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb14-2"><a href="probabilidad-y-estadística.html#cb14-2"></a>  <span class="fu">geom_histogram</span>( <span class="fu">aes</span>( <span class="at">x =</span> e, <span class="at">y =</span> <span class="fu">after_stat</span>( density ) ), <span class="at">bins =</span> <span class="dv">50</span>, <span class="at">fill =</span> <span class="st">&#39;grey50&#39;</span>, <span class="at">colour =</span> <span class="st">&#39;dodgerblue3&#39;</span> ) <span class="sc">+</span> </span>
+<span id="cb14-3"><a href="probabilidad-y-estadística.html#cb14-3"></a>  <span class="fu">geom_density</span>() <span class="sc">+</span></span>
+<span id="cb14-4"><a href="probabilidad-y-estadística.html#cb14-4"></a>  <span class="fu">scale_x_continuous</span>( <span class="at">breaks =</span> <span class="fu">seq</span>( <span class="sc">-</span>eb, eb, <span class="at">length =</span> <span class="dv">10</span> ), </span>
+<span id="cb14-5"><a href="probabilidad-y-estadística.html#cb14-5"></a>                      <span class="at">labels =</span> <span class="fu">label_scientific</span>( <span class="at">digits =</span> <span class="dv">2</span> ),</span>
+<span id="cb14-6"><a href="probabilidad-y-estadística.html#cb14-6"></a>                      <span class="at">limits =</span> <span class="fu">c</span>( <span class="sc">-</span>eb, eb ) ) <span class="sc">+</span></span>
+<span id="cb14-7"><a href="probabilidad-y-estadística.html#cb14-7"></a>  <span class="fu">scale_y_continuous</span>( <span class="at">labels =</span> <span class="fu">label_scientific</span>( <span class="at">digits =</span> <span class="dv">2</span> ) ) <span class="sc">+</span></span>
+<span id="cb14-8"><a href="probabilidad-y-estadística.html#cb14-8"></a>  <span class="fu">ylab</span>( <span class="fu">TeX</span>( <span class="st">&quot;$e$&quot;</span> ) ) <span class="sc">+</span> </span>
+<span id="cb14-9"><a href="probabilidad-y-estadística.html#cb14-9"></a>  <span class="fu">theme_bw</span>()</span>
+<span id="cb14-10"><a href="probabilidad-y-estadística.html#cb14-10"></a><span class="fu">plot</span>( plt )</span></code></pre></div>
 </details>
-<p><img src="seguros_generales_files/figure-html/l3g1-2.png" width="700" /></p>
+<p><img src="seguros_generales_files/figure-html/l3g1-2.png" width="80%" height="400px" style="display: block; margin: auto;" /></p>
 <p></p>
 <!------------------------------------------------------------------------------------------------->
 </div>
@@ -2294,16 +2309,30 @@ precisamente aproxima a la densidad <span class="math inline">\(f_S\)</span>
 <p></p>
 <p></p>
 <details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb16"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb16-1"><a href="probabilidad-y-estadística.html#cb16-1"></a><span class="fu">plot</span>( s, fSx, <span class="at">type =</span> <span class="st">&#39;l&#39;</span> )</span>
-<span id="cb16-2"><a href="probabilidad-y-estadística.html#cb16-2"></a><span class="fu">points</span>( s, fS, <span class="at">col =</span> <span class="st">&#39;green&#39;</span>, <span class="at">pch =</span> <span class="dv">16</span>, <span class="at">cex =</span> <span class="fl">0.5</span> )</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb16-1"><a href="probabilidad-y-estadística.html#cb16-1"></a>e <span class="ot">&lt;-</span> fS <span class="sc">-</span> fSx</span>
+<span id="cb16-2"><a href="probabilidad-y-estadística.html#cb16-2"></a>eb <span class="ot">&lt;-</span> <span class="fu">max</span>( <span class="fu">abs</span>( e ) )</span>
+<span id="cb16-3"><a href="probabilidad-y-estadística.html#cb16-3"></a></span>
+<span id="cb16-4"><a href="probabilidad-y-estadística.html#cb16-4"></a>plt <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb16-5"><a href="probabilidad-y-estadística.html#cb16-5"></a>  <span class="fu">geom_line</span>( <span class="fu">aes</span>( <span class="at">x =</span> s, <span class="at">y =</span> fSx ), <span class="at">colour =</span> <span class="st">&#39;darkred&#39;</span>, <span class="at">size =</span> <span class="dv">1</span> ) <span class="sc">+</span> </span>
+<span id="cb16-6"><a href="probabilidad-y-estadística.html#cb16-6"></a>  <span class="fu">geom_point</span>( <span class="fu">aes</span>( <span class="at">x =</span> s, <span class="at">y =</span> fS ), <span class="at">colour =</span> <span class="st">&#39;olivedrab3&#39;</span>, <span class="at">size =</span> <span class="fl">0.25</span> ) <span class="sc">+</span> </span>
+<span id="cb16-7"><a href="probabilidad-y-estadística.html#cb16-7"></a>  <span class="fu">xlab</span>( <span class="fu">TeX</span>( <span class="st">&quot;$x$&quot;</span> ) ) <span class="sc">+</span> </span>
+<span id="cb16-8"><a href="probabilidad-y-estadística.html#cb16-8"></a>  <span class="fu">ylab</span>( <span class="fu">TeX</span>( <span class="st">&quot;$f_{S}(x)$&quot;</span> ) ) <span class="sc">+</span> </span>
+<span id="cb16-9"><a href="probabilidad-y-estadística.html#cb16-9"></a>  <span class="fu">theme_bw</span>()</span>
+<span id="cb16-10"><a href="probabilidad-y-estadística.html#cb16-10"></a><span class="fu">plot</span>( plt )</span></code></pre></div>
 </details>
-<p><img src="seguros_generales_files/figure-html/l3g2-1.png" width="700" /></p>
+<p><img src="seguros_generales_files/figure-html/l3g2-1.png" width="80%" height="400px" style="display: block; margin: auto;" /></p>
 <details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb17"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb17-1"><a href="probabilidad-y-estadística.html#cb17-1"></a>e <span class="ot">&lt;-</span> fS <span class="sc">-</span> fSx</span>
-<span id="cb17-2"><a href="probabilidad-y-estadística.html#cb17-2"></a>eb <span class="ot">&lt;-</span> <span class="fu">max</span>( <span class="fu">abs</span>( e ) )</span>
-<span id="cb17-3"><a href="probabilidad-y-estadística.html#cb17-3"></a><span class="fu">hist</span>( e, <span class="at">breaks =</span> <span class="dv">40</span>, <span class="at">xlim =</span> <span class="fu">c</span>( <span class="sc">-</span>eb, eb ), <span class="at">probability =</span> <span class="cn">TRUE</span> )</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb17-1"><a href="probabilidad-y-estadística.html#cb17-1"></a>plt <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb17-2"><a href="probabilidad-y-estadística.html#cb17-2"></a>  <span class="fu">geom_histogram</span>( <span class="fu">aes</span>( <span class="at">x =</span> e, <span class="at">y =</span> <span class="fu">after_stat</span>( density ) ), <span class="at">bins =</span> <span class="dv">50</span>, <span class="at">fill =</span> <span class="st">&#39;grey50&#39;</span>, <span class="at">colour =</span> <span class="st">&#39;dodgerblue3&#39;</span> ) <span class="sc">+</span> </span>
+<span id="cb17-3"><a href="probabilidad-y-estadística.html#cb17-3"></a>  <span class="fu">scale_x_continuous</span>( <span class="at">breaks =</span> <span class="fu">seq</span>( <span class="sc">-</span>eb, eb, <span class="at">length =</span> <span class="dv">10</span> ), </span>
+<span id="cb17-4"><a href="probabilidad-y-estadística.html#cb17-4"></a>                      <span class="at">labels =</span> <span class="fu">label_scientific</span>( <span class="at">digits =</span> <span class="dv">2</span> ),</span>
+<span id="cb17-5"><a href="probabilidad-y-estadística.html#cb17-5"></a>                      <span class="at">limits =</span> <span class="fu">c</span>( <span class="sc">-</span>eb, eb ) ) <span class="sc">+</span></span>
+<span id="cb17-6"><a href="probabilidad-y-estadística.html#cb17-6"></a>  <span class="fu">scale_y_continuous</span>( <span class="at">labels =</span> <span class="fu">label_scientific</span>( <span class="at">digits =</span> <span class="dv">2</span> ) ) <span class="sc">+</span></span>
+<span id="cb17-7"><a href="probabilidad-y-estadística.html#cb17-7"></a>  <span class="fu">ylab</span>( <span class="fu">TeX</span>( <span class="st">&quot;$e$&quot;</span> ) ) <span class="sc">+</span> </span>
+<span id="cb17-8"><a href="probabilidad-y-estadística.html#cb17-8"></a>  <span class="fu">theme_bw</span>()</span>
+<span id="cb17-9"><a href="probabilidad-y-estadística.html#cb17-9"></a><span class="fu">plot</span>( plt )</span></code></pre></div>
 </details>
-<p><img src="seguros_generales_files/figure-html/l3g2-2.png" width="700" /></p>
+<p><img src="seguros_generales_files/figure-html/l3g2-2.png" width="80%" height="400px" style="display: block; margin: auto;" /></p>
 <p></p>
 <!------------------------------------------------------------------------------------------------->
 </div>
