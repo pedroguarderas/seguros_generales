@@ -2141,6 +2141,12 @@ con <span class="math inline">\(j \in \{0, \ldots, N-1 \}\)</span>.</p>
 = \left\{ \frac{1}{N} \sum\limits_{k=0}^{N-1} x_k \exp\left( 2\pi i \frac{jk}{N} \right) \right\}_j
 \end{equation}\]</span></p>
 </div>
+<p>En lo que sigue trabajaremos con series <span class="math inline">\(\{x_k\}\)</span>. Para medir la distancia entre una serie
+<span class="math inline">\(\{x_k\}\)</span> y otra serie <span class="math inline">\(\{y_k\}\)</span>, ambas de igual dimensión; podemos utilizar la norma cuadrática.
+<span class="math display">\[\begin{equation}
+\left\| \{x_k\} - \{y_k\} \right\|_2
+= \left( \sum\limits_{k=0}^{N-1} \left( x_k - y_k \right)^2 \right)^{\frac{1}{2}}
+\end{equation}\]</span></p>
 <!------------------------------------------------------------------------------------------------->
 <div id="aproximación-numérica-en-una-dimensión" class="section level3 hasAnchor" number="3.4.1">
 <h3><span class="header-section-number">3.4.1</span> Aproximación numérica en una dimensión<a href="probabilidad-y-estadística.html#aproximación-numérica-en-una-dimensión" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -2166,7 +2172,7 @@ puede considerar <span class="math inline">\(\omega_j = \frac{j}{b-a}\)</span>, 
 <span class="math display">\[\begin{eqnarray*}
 \mathscr{F}( f )\left( \omega_j \right)
 &amp; = &amp; h \exp\left( -2\pi i \frac{j}{b-a} a \right)
-\sum\limits_{k=0}^{N-1} f( x_k ) \exp\left( -2\pi i \frac{jk}{N} \right) \\
+\sum\limits_{k=0}^{N-1} f_k \exp\left( -2\pi i \frac{jk}{N} \right) \\
 \hat{f}_j &amp; = &amp; h \exp\left( -2\pi i \frac{j}{b-a} a \right) \left( \operatorname{DFT}\left[ \{f_k\} \right] \right)_j
 \quad \text{por definición de la $\operatorname{DFT}$}
 \end{eqnarray*}\]</span></p>
@@ -2177,8 +2183,10 @@ la transformada de Fourier discreta y su inversión.
 \approx \operatorname{DFT}^{-1}\left[ \operatorname{DFT}\left[ \{f_k\} \right] \right]
 = \operatorname{DFT}^{-1}\left[ \left\{ \frac{1}{h} \exp\left( 2\pi i \frac{j}{b-a} a \right) \hat{f}_j \right\} \right]
 \end{equation}\]</span></p>
-<p>es de notar que numérica por la aritmética en coma flotante la expresión <span class="math inline">\(\operatorname{DFT}^{-1}\left[ \left\{ \frac{1}{h} \exp\left( 2\pi i \frac{j}{b-a} a \right) \hat{f}_j \right\} \right]\)</span> puede tener parte compleja
-muy pequeña, cercana a <span class="math inline">\(0\)</span>. Para superar este posible problema numérico tomamos solo la parte real.
+<p>es de notar que numérica por la aritmética en coma flotante la expresión
+<span class="math inline">\(\operatorname{DFT}^{-1}\left[ \left\{ \frac{1}{h} \exp\left( 2\pi i \omega_j a \right) \hat{f}_j \right\} \right]\)</span>
+puede tener parte compleja muy pequeña, cercana a <span class="math inline">\(0\)</span>. Para superar este posible problema numérico
+tomamos solo la parte real.
 <span class="math display">\[\begin{equation}
 \{f( x_k )\}
 \approx \operatorname{Re}\left( \operatorname{DFT}^{-1}\left[ \left\{ \frac{1}{h} \exp\left( 2\pi i \frac{j}{b-a} a \right)
@@ -2207,36 +2215,36 @@ El error cuadrático de esta aproximación para el caso de la distribución <spa
 como es de esperar es bastante pequeño.
 <span class="math display">\[\begin{equation}
 \left\| \{f( x_k ) \} -
-\operatorname{DFT}^{-1}\left[ \left\{ \frac{1}{h} \exp\left( 2\pi i \frac{j}{b-a} a \right) \hat{f}_j \right\} \right] \right\|_2
+\operatorname{DFT}^{-1}\left[ \left\{ \frac{1}{h} \exp\left( 2\pi i \omega_j a \right) \hat{f}_j \right\} \right] \right\|_2
 = 0.00000000000035173800
 \end{equation}\]</span></p>
 <p>Como se puede observar se superponen cada una de las distribuciones la discretización <span class="math inline">\(f_k\)</span> y la
 calculada con inversión de la transformada de Fourier discreta.</p>
 <p></p>
-<details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb13-1"><a href="probabilidad-y-estadística.html#cb13-1"></a>e <span class="ot">&lt;-</span> f <span class="sc">-</span> IFf</span>
-<span id="cb13-2"><a href="probabilidad-y-estadística.html#cb13-2"></a>eb <span class="ot">&lt;-</span> <span class="fu">max</span>( <span class="fu">abs</span>( e ) )</span>
-<span id="cb13-3"><a href="probabilidad-y-estadística.html#cb13-3"></a></span>
-<span id="cb13-4"><a href="probabilidad-y-estadística.html#cb13-4"></a>plt <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb13-5"><a href="probabilidad-y-estadística.html#cb13-5"></a>  <span class="fu">geom_line</span>( <span class="fu">aes</span>( <span class="at">x =</span> x, <span class="at">y =</span> f ), <span class="at">colour =</span> <span class="st">&#39;darkred&#39;</span>, <span class="at">size =</span> <span class="dv">1</span> ) <span class="sc">+</span> </span>
-<span id="cb13-6"><a href="probabilidad-y-estadística.html#cb13-6"></a>  <span class="fu">geom_point</span>( <span class="fu">aes</span>( <span class="at">x =</span> x, <span class="at">y =</span> IFf ), <span class="at">colour =</span> <span class="st">&#39;olivedrab3&#39;</span>, <span class="at">size =</span> <span class="fl">0.25</span> ) <span class="sc">+</span> </span>
-<span id="cb13-7"><a href="probabilidad-y-estadística.html#cb13-7"></a>  <span class="fu">xlab</span>( <span class="fu">TeX</span>( <span class="st">&quot;$x$&quot;</span> ) ) <span class="sc">+</span> </span>
-<span id="cb13-8"><a href="probabilidad-y-estadística.html#cb13-8"></a>  <span class="fu">ylab</span>( <span class="fu">TeX</span>( <span class="st">&quot;$f(x)$&quot;</span> ) ) <span class="sc">+</span> </span>
-<span id="cb13-9"><a href="probabilidad-y-estadística.html#cb13-9"></a>  <span class="fu">theme_bw</span>()</span>
-<span id="cb13-10"><a href="probabilidad-y-estadística.html#cb13-10"></a><span class="fu">plot</span>( plt )</span></code></pre></div>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r fold-hide"><code class="sourceCode r"><span id="cb13-1"><a href="probabilidad-y-estadística.html#cb13-1" tabindex="-1"></a>e <span class="ot">&lt;-</span> f <span class="sc">-</span> IFf</span>
+<span id="cb13-2"><a href="probabilidad-y-estadística.html#cb13-2" tabindex="-1"></a>eb <span class="ot">&lt;-</span> <span class="fu">max</span>( <span class="fu">abs</span>( e ) )</span>
+<span id="cb13-3"><a href="probabilidad-y-estadística.html#cb13-3" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="probabilidad-y-estadística.html#cb13-4" tabindex="-1"></a>plt <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb13-5"><a href="probabilidad-y-estadística.html#cb13-5" tabindex="-1"></a>  <span class="fu">geom_line</span>( <span class="fu">aes</span>( <span class="at">x =</span> x, <span class="at">y =</span> f ), <span class="at">colour =</span> <span class="st">&#39;darkred&#39;</span>, <span class="at">size =</span> <span class="dv">1</span> ) <span class="sc">+</span> </span>
+<span id="cb13-6"><a href="probabilidad-y-estadística.html#cb13-6" tabindex="-1"></a>  <span class="fu">geom_point</span>( <span class="fu">aes</span>( <span class="at">x =</span> x, <span class="at">y =</span> IFf ), <span class="at">colour =</span> <span class="st">&#39;olivedrab3&#39;</span>, <span class="at">size =</span> <span class="fl">0.25</span> ) <span class="sc">+</span> </span>
+<span id="cb13-7"><a href="probabilidad-y-estadística.html#cb13-7" tabindex="-1"></a>  <span class="fu">xlab</span>( <span class="fu">TeX</span>( <span class="st">&quot;$x$&quot;</span> ) ) <span class="sc">+</span> </span>
+<span id="cb13-8"><a href="probabilidad-y-estadística.html#cb13-8" tabindex="-1"></a>  <span class="fu">ylab</span>( <span class="fu">TeX</span>( <span class="st">&quot;$f(x)$&quot;</span> ) ) <span class="sc">+</span> </span>
+<span id="cb13-9"><a href="probabilidad-y-estadística.html#cb13-9" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span>
+<span id="cb13-10"><a href="probabilidad-y-estadística.html#cb13-10" tabindex="-1"></a><span class="fu">plot</span>( plt )</span></code></pre></div>
 </details>
 <p><img src="seguros_generales_files/figure-html/l3g1-1.png" width="80%" height="400px" style="display: block; margin: auto;" /></p>
-<details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb14-1"><a href="probabilidad-y-estadística.html#cb14-1"></a>plt <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb14-2"><a href="probabilidad-y-estadística.html#cb14-2"></a>  <span class="fu">geom_histogram</span>( <span class="fu">aes</span>( <span class="at">x =</span> e, <span class="at">y =</span> <span class="fu">after_stat</span>( density ) ), <span class="at">bins =</span> <span class="dv">50</span>, <span class="at">fill =</span> <span class="st">&#39;grey50&#39;</span>, <span class="at">colour =</span> <span class="st">&#39;dodgerblue3&#39;</span> ) <span class="sc">+</span> </span>
-<span id="cb14-3"><a href="probabilidad-y-estadística.html#cb14-3"></a>  <span class="fu">geom_density</span>() <span class="sc">+</span></span>
-<span id="cb14-4"><a href="probabilidad-y-estadística.html#cb14-4"></a>  <span class="fu">scale_x_continuous</span>( <span class="at">breaks =</span> <span class="fu">seq</span>( <span class="sc">-</span>eb, eb, <span class="at">length =</span> <span class="dv">10</span> ), </span>
-<span id="cb14-5"><a href="probabilidad-y-estadística.html#cb14-5"></a>                      <span class="at">labels =</span> <span class="fu">label_scientific</span>( <span class="at">digits =</span> <span class="dv">2</span> ),</span>
-<span id="cb14-6"><a href="probabilidad-y-estadística.html#cb14-6"></a>                      <span class="at">limits =</span> <span class="fu">c</span>( <span class="sc">-</span>eb, eb ) ) <span class="sc">+</span></span>
-<span id="cb14-7"><a href="probabilidad-y-estadística.html#cb14-7"></a>  <span class="fu">scale_y_continuous</span>( <span class="at">labels =</span> <span class="fu">label_scientific</span>( <span class="at">digits =</span> <span class="dv">2</span> ) ) <span class="sc">+</span></span>
-<span id="cb14-8"><a href="probabilidad-y-estadística.html#cb14-8"></a>  <span class="fu">ylab</span>( <span class="fu">TeX</span>( <span class="st">&quot;$e$&quot;</span> ) ) <span class="sc">+</span> </span>
-<span id="cb14-9"><a href="probabilidad-y-estadística.html#cb14-9"></a>  <span class="fu">theme_bw</span>()</span>
-<span id="cb14-10"><a href="probabilidad-y-estadística.html#cb14-10"></a><span class="fu">plot</span>( plt )</span></code></pre></div>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r fold-hide"><code class="sourceCode r"><span id="cb14-1"><a href="probabilidad-y-estadística.html#cb14-1" tabindex="-1"></a>plt <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb14-2"><a href="probabilidad-y-estadística.html#cb14-2" tabindex="-1"></a>  <span class="fu">geom_histogram</span>( <span class="fu">aes</span>( <span class="at">x =</span> e, <span class="at">y =</span> <span class="fu">after_stat</span>( density ) ), <span class="at">bins =</span> <span class="dv">50</span>, <span class="at">fill =</span> <span class="st">&#39;grey50&#39;</span>, <span class="at">colour =</span> <span class="st">&#39;dodgerblue3&#39;</span> ) <span class="sc">+</span> </span>
+<span id="cb14-3"><a href="probabilidad-y-estadística.html#cb14-3" tabindex="-1"></a>  <span class="fu">geom_density</span>() <span class="sc">+</span></span>
+<span id="cb14-4"><a href="probabilidad-y-estadística.html#cb14-4" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>( <span class="at">breaks =</span> <span class="fu">seq</span>( <span class="sc">-</span>eb, eb, <span class="at">length =</span> <span class="dv">10</span> ), </span>
+<span id="cb14-5"><a href="probabilidad-y-estadística.html#cb14-5" tabindex="-1"></a>                      <span class="at">labels =</span> <span class="fu">label_scientific</span>( <span class="at">digits =</span> <span class="dv">2</span> ),</span>
+<span id="cb14-6"><a href="probabilidad-y-estadística.html#cb14-6" tabindex="-1"></a>                      <span class="at">limits =</span> <span class="fu">c</span>( <span class="sc">-</span>eb, eb ) ) <span class="sc">+</span></span>
+<span id="cb14-7"><a href="probabilidad-y-estadística.html#cb14-7" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>( <span class="at">labels =</span> <span class="fu">label_scientific</span>( <span class="at">digits =</span> <span class="dv">2</span> ) ) <span class="sc">+</span></span>
+<span id="cb14-8"><a href="probabilidad-y-estadística.html#cb14-8" tabindex="-1"></a>  <span class="fu">ylab</span>( <span class="fu">TeX</span>( <span class="st">&quot;$e$&quot;</span> ) ) <span class="sc">+</span> </span>
+<span id="cb14-9"><a href="probabilidad-y-estadística.html#cb14-9" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span>
+<span id="cb14-10"><a href="probabilidad-y-estadística.html#cb14-10" tabindex="-1"></a><span class="fu">plot</span>( plt )</span></code></pre></div>
 </details>
 <p><img src="seguros_generales_files/figure-html/l3g1-2.png" width="80%" height="400px" style="display: block; margin: auto;" /></p>
 <p></p>
@@ -2308,29 +2316,29 @@ precisamente aproxima a la densidad <span class="math inline">\(f_S\)</span>
 </details>
 <p></p>
 <p></p>
-<details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb16"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb16-1"><a href="probabilidad-y-estadística.html#cb16-1"></a>e <span class="ot">&lt;-</span> fS <span class="sc">-</span> fSx</span>
-<span id="cb16-2"><a href="probabilidad-y-estadística.html#cb16-2"></a>eb <span class="ot">&lt;-</span> <span class="fu">max</span>( <span class="fu">abs</span>( e ) )</span>
-<span id="cb16-3"><a href="probabilidad-y-estadística.html#cb16-3"></a></span>
-<span id="cb16-4"><a href="probabilidad-y-estadística.html#cb16-4"></a>plt <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb16-5"><a href="probabilidad-y-estadística.html#cb16-5"></a>  <span class="fu">geom_line</span>( <span class="fu">aes</span>( <span class="at">x =</span> s, <span class="at">y =</span> fSx ), <span class="at">colour =</span> <span class="st">&#39;darkred&#39;</span>, <span class="at">size =</span> <span class="dv">1</span> ) <span class="sc">+</span> </span>
-<span id="cb16-6"><a href="probabilidad-y-estadística.html#cb16-6"></a>  <span class="fu">geom_point</span>( <span class="fu">aes</span>( <span class="at">x =</span> s, <span class="at">y =</span> fS ), <span class="at">colour =</span> <span class="st">&#39;olivedrab3&#39;</span>, <span class="at">size =</span> <span class="fl">0.25</span> ) <span class="sc">+</span> </span>
-<span id="cb16-7"><a href="probabilidad-y-estadística.html#cb16-7"></a>  <span class="fu">xlab</span>( <span class="fu">TeX</span>( <span class="st">&quot;$x$&quot;</span> ) ) <span class="sc">+</span> </span>
-<span id="cb16-8"><a href="probabilidad-y-estadística.html#cb16-8"></a>  <span class="fu">ylab</span>( <span class="fu">TeX</span>( <span class="st">&quot;$f_{S}(x)$&quot;</span> ) ) <span class="sc">+</span> </span>
-<span id="cb16-9"><a href="probabilidad-y-estadística.html#cb16-9"></a>  <span class="fu">theme_bw</span>()</span>
-<span id="cb16-10"><a href="probabilidad-y-estadística.html#cb16-10"></a><span class="fu">plot</span>( plt )</span></code></pre></div>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r fold-hide"><code class="sourceCode r"><span id="cb16-1"><a href="probabilidad-y-estadística.html#cb16-1" tabindex="-1"></a>e <span class="ot">&lt;-</span> fS <span class="sc">-</span> fSx</span>
+<span id="cb16-2"><a href="probabilidad-y-estadística.html#cb16-2" tabindex="-1"></a>eb <span class="ot">&lt;-</span> <span class="fu">max</span>( <span class="fu">abs</span>( e ) )</span>
+<span id="cb16-3"><a href="probabilidad-y-estadística.html#cb16-3" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="probabilidad-y-estadística.html#cb16-4" tabindex="-1"></a>plt <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb16-5"><a href="probabilidad-y-estadística.html#cb16-5" tabindex="-1"></a>  <span class="fu">geom_line</span>( <span class="fu">aes</span>( <span class="at">x =</span> s, <span class="at">y =</span> fSx ), <span class="at">colour =</span> <span class="st">&#39;darkred&#39;</span>, <span class="at">size =</span> <span class="dv">1</span> ) <span class="sc">+</span> </span>
+<span id="cb16-6"><a href="probabilidad-y-estadística.html#cb16-6" tabindex="-1"></a>  <span class="fu">geom_point</span>( <span class="fu">aes</span>( <span class="at">x =</span> s, <span class="at">y =</span> fS ), <span class="at">colour =</span> <span class="st">&#39;olivedrab3&#39;</span>, <span class="at">size =</span> <span class="fl">0.25</span> ) <span class="sc">+</span> </span>
+<span id="cb16-7"><a href="probabilidad-y-estadística.html#cb16-7" tabindex="-1"></a>  <span class="fu">xlab</span>( <span class="fu">TeX</span>( <span class="st">&quot;$x$&quot;</span> ) ) <span class="sc">+</span> </span>
+<span id="cb16-8"><a href="probabilidad-y-estadística.html#cb16-8" tabindex="-1"></a>  <span class="fu">ylab</span>( <span class="fu">TeX</span>( <span class="st">&quot;$f_{S}(x)$&quot;</span> ) ) <span class="sc">+</span> </span>
+<span id="cb16-9"><a href="probabilidad-y-estadística.html#cb16-9" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span>
+<span id="cb16-10"><a href="probabilidad-y-estadística.html#cb16-10" tabindex="-1"></a><span class="fu">plot</span>( plt )</span></code></pre></div>
 </details>
 <p><img src="seguros_generales_files/figure-html/l3g2-1.png" width="80%" height="400px" style="display: block; margin: auto;" /></p>
-<details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb17"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb17-1"><a href="probabilidad-y-estadística.html#cb17-1"></a>plt <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb17-2"><a href="probabilidad-y-estadística.html#cb17-2"></a>  <span class="fu">geom_histogram</span>( <span class="fu">aes</span>( <span class="at">x =</span> e, <span class="at">y =</span> <span class="fu">after_stat</span>( density ) ), <span class="at">bins =</span> <span class="dv">50</span>, <span class="at">fill =</span> <span class="st">&#39;grey50&#39;</span>, <span class="at">colour =</span> <span class="st">&#39;dodgerblue3&#39;</span> ) <span class="sc">+</span> </span>
-<span id="cb17-3"><a href="probabilidad-y-estadística.html#cb17-3"></a>  <span class="fu">scale_x_continuous</span>( <span class="at">breaks =</span> <span class="fu">seq</span>( <span class="sc">-</span>eb, eb, <span class="at">length =</span> <span class="dv">10</span> ), </span>
-<span id="cb17-4"><a href="probabilidad-y-estadística.html#cb17-4"></a>                      <span class="at">labels =</span> <span class="fu">label_scientific</span>( <span class="at">digits =</span> <span class="dv">2</span> ),</span>
-<span id="cb17-5"><a href="probabilidad-y-estadística.html#cb17-5"></a>                      <span class="at">limits =</span> <span class="fu">c</span>( <span class="sc">-</span>eb, eb ) ) <span class="sc">+</span></span>
-<span id="cb17-6"><a href="probabilidad-y-estadística.html#cb17-6"></a>  <span class="fu">scale_y_continuous</span>( <span class="at">labels =</span> <span class="fu">label_scientific</span>( <span class="at">digits =</span> <span class="dv">2</span> ) ) <span class="sc">+</span></span>
-<span id="cb17-7"><a href="probabilidad-y-estadística.html#cb17-7"></a>  <span class="fu">ylab</span>( <span class="fu">TeX</span>( <span class="st">&quot;$e$&quot;</span> ) ) <span class="sc">+</span> </span>
-<span id="cb17-8"><a href="probabilidad-y-estadística.html#cb17-8"></a>  <span class="fu">theme_bw</span>()</span>
-<span id="cb17-9"><a href="probabilidad-y-estadística.html#cb17-9"></a><span class="fu">plot</span>( plt )</span></code></pre></div>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r fold-hide"><code class="sourceCode r"><span id="cb17-1"><a href="probabilidad-y-estadística.html#cb17-1" tabindex="-1"></a>plt <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb17-2"><a href="probabilidad-y-estadística.html#cb17-2" tabindex="-1"></a>  <span class="fu">geom_histogram</span>( <span class="fu">aes</span>( <span class="at">x =</span> e, <span class="at">y =</span> <span class="fu">after_stat</span>( density ) ), <span class="at">bins =</span> <span class="dv">50</span>, <span class="at">fill =</span> <span class="st">&#39;grey50&#39;</span>, <span class="at">colour =</span> <span class="st">&#39;dodgerblue3&#39;</span> ) <span class="sc">+</span> </span>
+<span id="cb17-3"><a href="probabilidad-y-estadística.html#cb17-3" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>( <span class="at">breaks =</span> <span class="fu">seq</span>( <span class="sc">-</span>eb, eb, <span class="at">length =</span> <span class="dv">10</span> ), </span>
+<span id="cb17-4"><a href="probabilidad-y-estadística.html#cb17-4" tabindex="-1"></a>                      <span class="at">labels =</span> <span class="fu">label_scientific</span>( <span class="at">digits =</span> <span class="dv">2</span> ),</span>
+<span id="cb17-5"><a href="probabilidad-y-estadística.html#cb17-5" tabindex="-1"></a>                      <span class="at">limits =</span> <span class="fu">c</span>( <span class="sc">-</span>eb, eb ) ) <span class="sc">+</span></span>
+<span id="cb17-6"><a href="probabilidad-y-estadística.html#cb17-6" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>( <span class="at">labels =</span> <span class="fu">label_scientific</span>( <span class="at">digits =</span> <span class="dv">2</span> ) ) <span class="sc">+</span></span>
+<span id="cb17-7"><a href="probabilidad-y-estadística.html#cb17-7" tabindex="-1"></a>  <span class="fu">ylab</span>( <span class="fu">TeX</span>( <span class="st">&quot;$e$&quot;</span> ) ) <span class="sc">+</span> </span>
+<span id="cb17-8"><a href="probabilidad-y-estadística.html#cb17-8" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span>
+<span id="cb17-9"><a href="probabilidad-y-estadística.html#cb17-9" tabindex="-1"></a><span class="fu">plot</span>( plt )</span></code></pre></div>
 </details>
 <p><img src="seguros_generales_files/figure-html/l3g2-2.png" width="80%" height="400px" style="display: block; margin: auto;" /></p>
 <p></p>
