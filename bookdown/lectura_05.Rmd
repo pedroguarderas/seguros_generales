@@ -167,7 +167,7 @@ mu <- seq( 1, 2, length.out = n )
 sigma <- seq( 2, 3, length.out = n )
 
 # 2. número de simulaciones
-m <- 1e4 
+m <- 1e3 
 
 # 3. simulación de severidades
 X <- lapply( 1:m, FUN = function( i ) sapply( 1:n, FUN = function( j ) rlnorm( 1, meanlog = mu[ j ], sdlog = sigma[ j ] ) ) )
@@ -201,12 +201,19 @@ EeS <- mean( S )
 # esperanza teórica
 ES <- sum( sapply( 1:n, FUN = function( i ) exp( mu[i] + 0.5 * sigma[i]^2 ) ) )
 
-s <- seq( quantile( S, probs = 0.01 ), quantile( S, probs = 0.99 ), length.out = 1e3 )
+N <- 1e4
+s <- seq( quantile( S, probs = 0.01 ), quantile( S, probs = 0.99 ), length.out = N )
 Fms <- sapply( s, FUN = Fm )
+```
 
-plot( s, Fms, type = 's' )
-abline( v = EeS, col = 'red' )
-abline( v = ES, col = 'orange' )
+```{r l5g1, out.width='80%', out.height='400px', fig.align='center', class.source = 'fold-hide'}
+plt <- ggplot() +
+  geom_line( aes( x = s, y = Fms ), colour = 'darkred', size = 1 ) + 
+  geom_vline( xintercept = c( EeS, ES ), colour = c( 'blue', 'darkgreen' ) ) +
+  xlab( TeX( "$x$" ) ) + 
+  ylab( TeX( "$F_n(x)$" ) ) + 
+  theme_bw()
+plot( plt )
 ```
 
 Para calcular la esperanza de la severidad total $S$, también se puede utilizar una aproximación 

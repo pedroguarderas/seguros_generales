@@ -789,6 +789,13 @@ la inversa de la transformada de Fourier discreta, está simplemente dada por:
 \end{equation}
 :::
 
+En lo que sigue trabajaremos con series $\{x_k\}$. Para medir la distancia entre una serie
+$\{x_k\}$ y otra serie $\{y_k\}$, ambas de igual dimensión; podemos utilizar la norma cuadrática.
+\begin{equation}
+\left\| \{x_k\} - \{y_k\} \right\|_2
+= \left( \sum\limits_{k=0}^{N-1} \left( x_k - y_k \right)^2 \right)^{\frac{1}{2}}
+\end{equation}
+
 <!------------------------------------------------------------------------------------------------->
 ### Aproximación numérica en una dimensión
 
@@ -835,13 +842,6 @@ tomamos solo la parte real.
 \{f( x_k )\} 
 \approx \Re\left( \DFT^{-1}\left[ \left\{ \frac{1}{h} \exp\left( 2\pi i \frac{j}{b-a} a \right) 
 \hat{f}_j \right\} \right] \right)
-\end{equation}
-
-Ya que estamos trabajando con series $\{x_k\}$, para medir la aproximación entre una serie $\{x_k\}$
-y otra series $\{y_k\}$, de igual dimensión; podemos utilizar la norma cuadrática.
-\begin{equation}
-\left\| \{x_k\} - \{y_k\} \right\|_2
-= \left( \sum\limits_{k=0}^{N-1} \left( x_k - y_k \right)^2 \right)^{\frac{1}{2}}
 \end{equation}
 
 ```{r l3c8}
