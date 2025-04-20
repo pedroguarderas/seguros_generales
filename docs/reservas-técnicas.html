@@ -294,13 +294,13 @@ div.csl-indent {
 <div id="reservas-de-riesgos-en-curso" class="section level2 hasAnchor" number="7.2">
 <h2><span class="header-section-number">7.2</span> Reservas de riesgos en curso<a href="reservas-técnicas.html#reservas-de-riesgos-en-curso" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Esta reserva corresponde a la cantidad restante prima que debería ser prorrateada en el tiempo para
-cubrir de forma uniforme los reclamos de cada póliza hasta su fecha término.</p>
-<p>En otras palabras si tenemos una cantidad de pólizas vendidas <span class="math inline">\(n\)</span>, para cada póliza
-<span class="math inline">\(i \in \{1, \ldots, n \}\)</span>, le corresponde un una duración <span class="math inline">\(D_i = \left[ T^1_i,  T^2_i \right]\)</span>, con <span class="math inline">\(T^1_i &gt; 0\)</span>
-el tiempo inicial de la vigencia de la póliza, <span class="math inline">\(T^2_i &gt; T^1_i\)</span> el tiempo final de vigencia de la
-póliza y una prima pagada por la cobertura adquirida <span class="math inline">\(\Pi_i\)</span> para la <span class="math inline">\(i\)</span>-ésima póliza.</p>
-<p>Así, la forma más sencilla de calcular la reserva de riesgo en curso <span class="math inline">\(RRC\)</span> en el tiempo <span class="math inline">\(t\)</span>, está
-dada por:
+cubrir de forma uniforme los reclamos de cada póliza hasta su fecha término. En otras palabras, si
+tenemos una cantidad de pólizas vendidas <span class="math inline">\(n\)</span>, a cada póliza <span class="math inline">\(i \in \{1, \ldots, n \}\)</span>, le corresponde
+una duración <span class="math inline">\(D_i = \left[ T^1_i,  T^2_i \right]\)</span>, donde <span class="math inline">\(T^1_i &gt; 0\)</span> el tiempo inicial de la vigencia
+de la póliza, <span class="math inline">\(T^2_i &gt; T^1_i\)</span> el tiempo final de vigencia de la póliza <span class="math inline">\(i\)</span>-ésima y una prima pagada
+por la cobertura adquirida <span class="math inline">\(\Pi_i\)</span> por la venta de la <span class="math inline">\(i\)</span>-ésima póliza.</p>
+<p>Así, la forma más sencilla de calcular la <strong>reserva de riesgos en curso</strong> <span class="math inline">\(RRC\)</span> en el tiempo <span class="math inline">\(t\)</span>,
+está dada por:
 <span class="math display">\[
 RRC( t ) = \sum\limits_{i=1}^n \mathbf{1}_{\left[T^1_i, T^2_i\right]}( t ) \frac{T^2_i - t}{T^2_i - T^1_i} \Pi_i
 \]</span></p>
