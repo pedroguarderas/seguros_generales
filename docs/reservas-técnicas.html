@@ -23,7 +23,7 @@
 <meta name="author" content="" />
 
 
-<meta name="date" content="2025-04-17" />
+<meta name="date" content="2025-04-20" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -286,22 +286,74 @@ div.csl-indent {
             <section class="normal" id="section-">
 <div id="reservas-técnicas" class="section level1 hasAnchor" number="7">
 <h1><span class="header-section-number">Capítulo 7</span> Reservas técnicas<a href="reservas-técnicas.html#reservas-técnicas" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<!------------------------------------------------------------------------------------------------->
 <div id="reservas-para-primas-no-adquiridas" class="section level2 hasAnchor" number="7.1">
 <h2><span class="header-section-number">7.1</span> Reservas para primas no adquiridas<a href="reservas-técnicas.html#reservas-para-primas-no-adquiridas" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<!------------------------------------------------------------------------------------------------->
 </div>
 <div id="reservas-de-riesgos-en-curso" class="section level2 hasAnchor" number="7.2">
 <h2><span class="header-section-number">7.2</span> Reservas de riesgos en curso<a href="reservas-técnicas.html#reservas-de-riesgos-en-curso" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Esta reserva corresponde a la cantidad restante prima que debería ser prorrateada en el tiempo para
+cubrir de forma uniforme los reclamos de cada póliza hasta su fecha término.</p>
+<p>En otras palabras si tenemos una cantidad de pólizas vendidas <span class="math inline">\(n\)</span>, para cada póliza
+<span class="math inline">\(i \in \{1, \ldots, n \}\)</span>, le corresponde un una duración <span class="math inline">\(D_i = \left[ T^1_i,  T^2_i \right]\)</span>, con <span class="math inline">\(T^1_i &gt; 0\)</span>
+el tiempo inicial de la vigencia de la póliza, <span class="math inline">\(T^2_i &gt; T^1_i\)</span> el tiempo final de vigencia de la
+póliza y una prima pagada por la cobertura adquirida <span class="math inline">\(\Pi_i\)</span> para la <span class="math inline">\(i\)</span>-ésima póliza.</p>
+<p>Así, la forma más sencilla de calcular la reserva de riesgo en curso <span class="math inline">\(RRC\)</span> en el tiempo <span class="math inline">\(t\)</span>, está
+dada por:
+<span class="math display">\[
+RRC( t ) = \sum\limits_{i=1}^n \mathbf{1}_{\left[T^1_i, T^2_i\right]}( t ) \frac{T^2_i - t}{T^2_i - T^1_i} \Pi_i
+\]</span></p>
+<p>Esta metodología es la más sencilla, pero no toma en cuenta que no siempre sucede que los reclamos
+son proporcionales a la cantidad de prima restante en el tiempo. Incluso en el caso que el valor
+de los reclamos sea proporcional al tiempo restante, no necesariamente será uniformemente
+proporcional al tiempo restante de cobertura. Esto puede llevar a manera niveles de reservas de
+primas no óptimos acorde a las operaciones del asegurador.</p>
+<p>La cantidad de prima que va quedando a favor del asegurador y de la cual en teoría este puede
+disponer está dada por la <strong>prima devengada</strong> <span class="math inline">\(PDG\)</span>:
+<span class="math display">\[
+PDG( t ) = \sum\limits_{i=1}^n \mathbf{1}_{\left[T^1_i, +\infty\right)}( t )
+\frac{\min\left( t, T^2_i \right) - T^1_i}{T^2_i - T^1_i} \Pi_i
+\]</span></p>
+<p>En algunas situaciones se suele considerar tener reserva de primas por el mismo valor constante
+a los largo de la duración de la póliza. Usualmente esto se lo suele hacer para los productos de
+corto plazo con duraciones menores de un año. Así se suele dividir el conjunto de pólizas
+<span class="math inline">\(\{1,\ldots,n\} = I \cup J\)</span> en dos conjuntos disjuntos, donde <span class="math inline">\(I\)</span> contiene a las pólizas para las
+cuales se reserva proporcionalmente al tiempo y la prima y <span class="math inline">\(J\)</span> contiene aquellas pólizas para las
+cuales se mantiene la reserva constante por toda la duración de la póliza.
+<span class="math display">\[
+RRC( t ) = \sum\limits_{i \in I} \mathbf{1}_{D_i}( t ) \frac{T^2_i - t}{T^2_i - T^1_i} \Pi_i
++ \sum\limits_{i \in J} \mathbf{1}_{D_i}( t ) \Pi_i
+\]</span>
+de ingual manera la prima devengada <span class="math inline">\(PGD\)</span> está dada por:
+<span class="math display">\[
+PDG( t ) = \sum\limits_{i \in I} \mathbf{1}_{\left[T^1_i, +\infty\right)}( t )
+\frac{\min\left( t, T^2_i \right) - T^1_i}{T^2_i - T^1_i} \Pi_i
++ \sum\limits_{i \in J} \mathbf{1}_{\left(T^2_i,+\infty\right)}( t ) \Pi_i
+\]</span></p>
+<!------------------------------------------------------------------------------------------------->
 </div>
 <div id="reservas-de-siniestros-a-pagar" class="section level2 hasAnchor" number="7.3">
 <h2><span class="header-section-number">7.3</span> Reservas de siniestros a pagar<a href="reservas-técnicas.html#reservas-de-siniestros-a-pagar" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ol style="list-style-type: decimal">
+<li><span class="math inline">\(T\)</span></li>
+</ol>
+<!------------------------------------------------------------------------------------------------->
 <div id="siniestros-sucedidos-reportados-resueltos-no-pagados" class="section level3 hasAnchor" number="7.3.1">
 <h3><span class="header-section-number">7.3.1</span> Siniestros sucedidos, reportados, resueltos, no pagados<a href="reservas-técnicas.html#siniestros-sucedidos-reportados-resueltos-no-pagados" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<!------------------------------------------------------------------------------------------------->
 </div>
 <div id="siniestros-sucedidos-reportados-no-resueltos-no-pagados" class="section level3 hasAnchor" number="7.3.2">
 <h3><span class="header-section-number">7.3.2</span> Siniestros sucedidos, reportados, no resueltos, no pagados<a href="reservas-técnicas.html#siniestros-sucedidos-reportados-no-resueltos-no-pagados" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>$$</p>
+<p>$$</p>
+<!------------------------------------------------------------------------------------------------->
 </div>
 <div id="siniestros-sucedidos-no-reportados-no-resueltos-no-pagados" class="section level3 hasAnchor" number="7.3.3">
 <h3><span class="header-section-number">7.3.3</span> Siniestros sucedidos, no reportados, no resueltos, no pagados<a href="reservas-técnicas.html#siniestros-sucedidos-no-reportados-no-resueltos-no-pagados" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><span class="math display">\[
+IBNR
+\]</span></p>
 
 <!------------------------------------------------------------------------------------------------->
 </div>
