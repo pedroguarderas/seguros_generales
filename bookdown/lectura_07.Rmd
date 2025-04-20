@@ -8,15 +8,14 @@
 ## Reservas de riesgos en curso
 
 Esta reserva corresponde a la cantidad restante prima que debería ser prorrateada en el tiempo para 
-cubrir de forma uniforme los reclamos de cada póliza hasta su fecha término.
+cubrir de forma uniforme los reclamos de cada póliza hasta su fecha término. En otras palabras, si 
+tenemos una cantidad de pólizas vendidas $n$, a cada póliza $i \in \{1, \ldots, n \}$, le corresponde 
+una duración $D_i = \left[ T^1_i,  T^2_i \right]$, donde $T^1_i > 0$ el tiempo inicial de la vigencia 
+de la póliza, $T^2_i > T^1_i$ el tiempo final de vigencia de la póliza $i$-ésima y una prima pagada 
+por la cobertura adquirida $\Pi_i$ por la venta de la $i$-ésima póliza. 
 
-En otras palabras si tenemos una cantidad de pólizas vendidas $n$, para cada póliza 
-$i \in \{1, \ldots, n \}$, le corresponde un una duración $D_i = \left[ T^1_i,  T^2_i \right]$, con $T^1_i > 0$ 
-el tiempo inicial de la vigencia de la póliza, $T^2_i > T^1_i$ el tiempo final de vigencia de la 
-póliza y una prima pagada por la cobertura adquirida $\Pi_i$ para la $i$-ésima póliza. 
-
-Así, la forma más sencilla de calcular la reserva de riesgo en curso $RRC$ en el tiempo $t$, está 
-dada por:
+Así, la forma más sencilla de calcular la **reserva de riesgos en curso** $RRC$ en el tiempo $t$, 
+está dada por:
 $$
 RRC( t ) = \sum\limits_{i=1}^n \mathbf{1}_{\left[T^1_i, T^2_i\right]}( t ) \frac{T^2_i - t}{T^2_i - T^1_i} \Pi_i 
 $$
