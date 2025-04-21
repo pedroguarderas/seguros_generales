@@ -23,7 +23,7 @@
 <meta name="author" content="" />
 
 
-<meta name="date" content="2025-04-20" />
+<meta name="date" content="2025-04-21" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -296,17 +296,17 @@ el riesgo total que asume el asegurador.</p>
 <p>Los riesgos de cada uno de los <span class="math inline">\(n \in \mathbb{N}\)</span> asegurados, pueden ser representados por variables
 aleatorias <span class="math inline">\(X_1,\ldots X_n\)</span>, las mismas pueden ser independientes o dependientes entre ellas. El
 costo total del portafolio está dado por la suma de todos estos riesgos.
-<span class="math display">\[\begin{equation}
+<span class="math display">\[
 S = \sum\limits_{i=1}^n X_i
-\end{equation}\]</span>
+\]</span>
 El conocer la distribución del costo total <span class="math inline">\(S\)</span> es una tarea crucial para el asegurador.</p>
 <p>El valore esperado de de los reclamos totales, puede ser calculado fácilmente utilizando las
 propiedades de linealidad de la esperanza matemática <span class="math inline">\(\mathbb{E}\)</span>
-<span class="math display">\[\begin{equation}
+<span class="math display">\[
 \mathbb{E}[ S ]
 = \mathbb{E}\left[ \sum\limits_{i=1}^n X_i \right]
 = \sum\limits_{i=1}^n \mathbb{E}\left[ X_i \right]
-\end{equation}\]</span>
+\]</span>
 por su parte, la varianza de la variable aleatoria del costo total <span class="math inline">\(S\)</span>, está dada por:
 <span class="math display">\[\begin{eqnarray*}
 \mathbb{V}\left[ S \right]
@@ -319,9 +319,9 @@ por su parte, la varianza de la variable aleatoria del costo total <span class="
 <p>Muchas de las veces el número total de reclamos <span class="math inline">\(n\)</span> es incierto y por tal razón es mejor considerar
 que el número de siniestros vendrá dado por otra variable aleatoria discreta <span class="math inline">\(N\)</span> que solo tomará
 valores en <span class="math inline">\(\mathbb{N}\)</span>
-<span class="math display">\[\begin{equation}
+<span class="math display">\[
 S = \sum\limits_{i=1}^N X_i
-\end{equation}\]</span></p>
+\]</span></p>
 <p>Esto nos lleva a considerar diferentes modelos de agregación de reclamos o pérdidas como se suele
 decir en inglés “loss models” <span class="citation">[<a href="bibliografía.html#ref-PanjerLoss2012">1</a>]</span>, <span class="citation">[<a href="bibliografía.html#ref-LossModFur">2</a>]</span>.</p>
 <p>De forma preliminar estudiemos la forma general que podría tener la distribución de <span class="math inline">\(S\)</span>, sin realizar
@@ -355,44 +355,53 @@ atrás se desarrolló unos nuevos algoritmos para calcular estos términos <span
 conocido, por ejemplo puede ser a lo sumo el tamaño de la población asegurada, en tal caso la
 variable aleatoria <span class="math inline">\(N\)</span> pasa a ser una constante, que representaremos por <span class="math inline">\(n\)</span>. De esta forma, la
 severidad total puede ser fácilmente representada por:
-<span class="math display">\[\begin{equation}
+<span class="math display">\[
   S = \sum\limits_{i=1}^n X_i
-\end{equation}\]</span></p>
+\]</span></p>
 <p>La hipótesis más usual que sostiene a este modelo es la indenpendencia entre cada uno de los
 reclamos <span class="math inline">\(X_i\)</span> y <span class="math inline">\(X_j\)</span> son independientes para cualquier <span class="math inline">\(1 \leq i \neq j \leq n\)</span>.</p>
 <p>El valor esperado de la severidad total <span class="math inline">\(S\)</span> es:
-<span class="math display">\[\begin{eqnarray*}
+<span class="math display">\[
+\begin{eqnarray*}
 \mathbb{E}[S]
 &amp; = &amp; \mathbb{E}\left[ \sum\limits_{i=1}^n X_i \right] \\
 &amp; = &amp; \sum\limits_{i=1}^n \mathbb{E}\left[ X_i \right] \\
 &amp; = &amp; n \mathbb{E}[X] \quad \text{si $\{X_i\}$ son idénticamente distribuidas}
-\end{eqnarray*}\]</span></p>
+\end{eqnarray*}
+\]</span></p>
 <p>Así mismo con la varianza de <span class="math inline">\(S\)</span>.
-<span class="math display">\[\begin{eqnarray*}
+<span class="math display">\[
+\begin{eqnarray*}
 \mathbb{V}\left[ S \right]
 &amp; = &amp; \mathbb{V}\left[ \sum\limits_{i=1}^n X_i \right] \\
 &amp; = &amp; \sum\limits_{i=1}^n \mathbb{V}\left[ X_i \right]
 + \sum\limits_{i=1}^n \sum\limits_{j=1,j\neq i}^n \mathbb{C}\left[ X_i, X_j \right] \\
 &amp; = &amp; \sum\limits_{i=1}^n \mathbb{V}\left[ X_i \right]\quad \text{si $\{X_i\}$ sin son independientes entre si} \\
 &amp; = &amp; n \mathbb{V}\left[ X \right]\quad \text{si $\{X_i\}$ sin son idénticamente distribuidas}
-\end{eqnarray*}\]</span></p>
+\end{eqnarray*}
+\]</span></p>
 <p>Al tener un número determinado de reclamos <span class="math inline">\(n \in \mathbb{N}\)</span>, la distribución de probabilidad del
 total de reclamos <span class="math inline">\(S\)</span> puede ser calculada de una forma maś sencilla.
-<span class="math display">\[\begin{eqnarray*}
+<span class="math display">\[
+\begin{eqnarray*}
 F_S( x )
 &amp; = &amp; F_{X_1} \star \cdots \star F_{X_n} ( s )\quad \text{sin $\{X_i\}$ son independientes} \\
 &amp; = &amp; F_{X}^{\star n}( s )\quad \text{si $\{X_i\}$ son idénticamente distribuidas}
-\end{eqnarray*}\]</span></p>
+\end{eqnarray*}
+\]</span></p>
 <p>así mismo, si las densidades de probabilidad están bien definidas, entonces
-<span class="math display">\[\begin{eqnarray*}
+<span class="math display">\[
+\begin{eqnarray*}
 f_S( s )
 &amp; = &amp; f_{X_1} \star \cdots \star f_{X_n} ( s )\quad \text{sin $\{X_i\}$ son independientes} \\
 &amp; = &amp; f_{X}^{\star n}( s )\quad \text{si $\{X_i\}$ son idénticamente distribuidas}
-\end{eqnarray*}\]</span></p>
+\end{eqnarray*}
+\]</span></p>
 <p>Una posible estrategia para estimar <span class="math inline">\(F_S\)</span> o <span class="math inline">\(f_S\)</span> es utilizar la transformada de Fourier
 <span class="math inline">\(\mathscr{F}\)</span>, la cual convierte las convoluciones en productos y luego invertir de nuevo la
 transformada de Fourier.
-<span class="math display">\[\begin{eqnarray*}
+<span class="math display">\[
+\begin{eqnarray*}
 F_S
 &amp; = &amp; \mathscr{F}^{-1}\left( \mathscr{F}\left( F_S \right) \right) \\
 &amp; = &amp; \mathscr{F}^{-1}\left( \mathscr{F}\left( F_{X_1} \star \cdots \star F_{X_n} \right) \right)
@@ -400,9 +409,11 @@ F_S
 &amp; = &amp; \mathscr{F}^{-1}\left( \prod\limits_{i=1}^n \mathscr{F}\left( F_{X_i} \right) \right) \\
 &amp; = &amp; \mathscr{F}^{-1}\left( \mathscr{F}\left( F_{X} \right)^n \right)
 \quad \text{si $\{X_i\}$ sin son idénticamente distribuidas } \\
-\end{eqnarray*}\]</span></p>
+\end{eqnarray*}
+\]</span></p>
 <p>o de forma equivalente para la densidad <span class="math inline">\(f_S\)</span>
-<span class="math display">\[\begin{eqnarray*}
+<span class="math display">\[
+\begin{eqnarray*}
 f_S
 &amp; = &amp; \mathscr{F}^{-1}\left( \mathscr{F}\left( f_S \right) \right) \\
 &amp; = &amp; \mathscr{F}^{-1}\left( \mathscr{F}\left( f_{X_1} \star \cdots \star f_{X_n} \right) \right)
@@ -410,7 +421,8 @@ f_S
 &amp; = &amp; \mathscr{F}^{-1}\left( \prod\limits_{i=1}^n \mathscr{F}\left( f_{X_i} \right) \right) \\
 &amp; = &amp; \mathscr{F}^{-1}\left( \mathscr{F}\left( f_{X} \right)^n \right)
 \quad \text{si $\{X_i\}$ sin son idénticamente distribuidas } \\
-\end{eqnarray*}\]</span></p>
+\end{eqnarray*}
+\]</span></p>
 <!------------------------------------------------------------------------------------------------->
 <div id="algoritmo-de-simulación" class="section level3 hasAnchor" number="5.2.1">
 <h3><span class="header-section-number">5.2.1</span> Algoritmo de simulación<a href="modelos-de-pérdida-agregada.html#algoritmo-de-simulación" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -455,9 +467,9 @@ no presenta una forma analítica conocida.</p>
 <p>De la imposibilidad anterior se se puede ver la utilidad de trabajar con la simulación aleatoria de
 la variable <span class="math inline">\(S\)</span>. Se puede estimar la distribución acumulada de probabilidad <span class="math inline">\(F_S\)</span> a partir
 de la distribución empírica <span class="math inline">\(F_m\)</span> de la muestra, con:
-<span class="math display">\[\begin{equation}
+<span class="math display">\[
 F_S( s ) \approx F_m( s ) = \frac{1}{m} \sum\limits_{i=1}^m \mathbf {1}_{(-\infty,s]}( S_i )
-\end{equation}\]</span>
+\]</span>
 el resultado de acotación de <a href="probabilidad-y-estadística.html#thm:ddkw">3.4</a> nos da un criterio de convergencia de <span class="math inline">\(F_m\)</span> a <span class="math inline">\(F_S\)</span></p>
 <p>Para construir <span class="math inline">\(F_m\)</span> en R, se puede utilizar la función ya empaquetada <code>ecdf</code> (empirical cumulative
 distribution function).</p>
@@ -491,11 +503,11 @@ distribution function).</p>
 <p></p>
 <p>Para calcular la esperanza de la severidad total <span class="math inline">\(S\)</span>, también se puede utilizar una aproximación
 a la integral de Riemann-Stieltjes utilizando la distribución acumulada empírica <span class="math inline">\(F_m\)</span>.
-<span class="math display">\[\begin{equation}
+<span class="math display">\[
 \mathbb{E}[ S ] = \int\limits_{\mathbb{R}} s dF_S( s )
 \approx \int\limits_{\mathbb{R}} s dF_m( s )
 \approx \sum\limits_{i=1}^N s_{i} \left( F_m( s_{i+1} ) - F_m( s_{i} ) \right)
-\end{equation}\]</span></p>
+\]</span></p>
 <p>Esta aproximación en R puede ser implementada de la siguiente forma:</p>
 <p></p>
 <details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
@@ -505,11 +517,13 @@ a la integral de Riemann-Stieltjes utilizando la distribución acumulada empíri
 </details>
 <p></p>
 <p>De ello tenemos los siguientes resultados de cálculo para el valor esperado de la severidad total
-<span class="math display">\[\begin{eqnarray*}
+<span class="math display">\[
+\begin{eqnarray*}
 \mathbb{E}[S] = \sum\limits_{i=1}^n e^{ \mu_i + \frac{1}{2} \sigma_i^2 } &amp; = &amp; 34562.7208, \\
 \overline{S} = \frac{1}{m} \sum\limits_{i=1}^m S_i &amp; = &amp; 33515.9195, \\
 \sum\limits_{i=1}^N s_{i} \left( F_m( s_{i+1} ) - F_m( s_{i} ) \right) &amp; = &amp; 33494.1981
-\end{eqnarray*}\]</span></p>
+\end{eqnarray*}
+\]</span></p>
 <p>Lo bueno de poseer una buena aproximación a la distribución acumulada de una variable aleatoria, es
 que podemos calcular algunos otros valores de importancia relacionados a la variable aleatoria y
 no tan solo utilizar medidas de tendencia central. Sin embargo, para que esta aproximación sea
@@ -528,21 +542,21 @@ no tan solo utilizar medidas de tendencia central. Sin embargo, para que esta ap
 para cada póliza <span class="math inline">\(i\in \{1,\ldots,n\}\)</span>, el valor de severidad probable es único <span class="math inline">\(M &gt; 0\)</span> si en caso
 se da un evento <span class="math inline">\(A_i\)</span>, esto lo podemos expresar como <span class="math inline">\(X_i = M \mathbf{1}_{A_i}\)</span> es constante. Así, pérdida
 total está dada por:
-<span class="math display">\[\begin{equation}
+<span class="math display">\[
 S = \sum\limits_{i=1}^n X_i = \sum\limits_{i=1}^n M \mathbf{1}_{A_i}
-\end{equation}\]</span></p>
+\]</span></p>
 <p>El valor total esperado de reclamos está dado por:
-<span class="math display">\[\begin{equation}
+<span class="math display">\[
 \mathbb{E}[ S ]
 = \sum\limits_{i=1}^n \mathbb{E}\left[ M \mathbf{1}_{A_i} \right]
 = M \sum\limits_{i=1}^n P( A_i )
-\end{equation}\]</span>
+\]</span>
 la última igualdad resulta de las propiedades de la función indicatriz <a href="probabilidad-y-estadística.html#def:indicatriz">3.10</a>.</p>
 <p>Si en caso todos los <span class="math inline">\(P(A_i) = p\)</span> tienen la misma probabilidad, el valor total esperado de reclamos
 toma la siguiente forma:
-<span class="math display">\[\begin{equation}
+<span class="math display">\[
 \mathbb{E}[S] = n M p
-\end{equation}\]</span></p>
+\]</span></p>
 </div>
 <!------------------------------------------------------------------------------------------------->
 </div>
@@ -553,7 +567,7 @@ toma la siguiente forma:
 discreta <span class="math inline">\(N\)</span>. Los reclamos corresponden a un número de pólizas en un periodo específico, el valor
 de cada reclamo <span class="math inline">\(i \in \{1,\ldots,N\}\)</span> está representado por las variables aleatorias <span class="math inline">\(X_i\)</span>.
 Usualmente, se considera que cada uno de los reclamos <span class="math inline">\(X_i\)</span> están idénticamente distribuidos.
-<span class="math display">\[\begin{equation}
+<span class="math display">\[
 S =
 \left\{
 \begin{array}{ll}
@@ -561,11 +575,12 @@ S =
 0 &amp; \text{si}\ N = 0
 \end{array}
 \right.
-\end{equation}\]</span>
+\]</span>
 o de forma más compacta se tan solo utilizar la igualdad <span class="math inline">\(S = \sum\limits_{i=1}^N X_i\)</span>, donde se
 asume que la suma da <span class="math inline">\(0\)</span> si <span class="math inline">\(N = 0\)</span>.</p>
 <p>El valor esperado del total de reclamos <span class="math inline">\(S\)</span>, está dado por:
-<span class="math display">\[\begin{eqnarray*}
+<span class="math display">\[
+\begin{eqnarray*}
 \mathbb{E}[S]
 &amp; = &amp; \mathbb{E}\left[ \sum\limits_{i=1}^N X_i \right] \\
 &amp; = &amp; \sum\limits_{n=0}^{+\infty} \mathbb{E}\left[
@@ -579,10 +594,12 @@ asume que la suma da <span class="math inline">\(0\)</span> si <span class="math
 &amp; = &amp; \mathbb{E}\left[ X \right] \sum\limits_{n=0}^{+\infty} n P( N = n )
 \quad \text{si $X$ y $N$ son independientes} \\
 &amp; = &amp; \mathbb{E}[ N ] \mathbb{E}[ X ]
-\end{eqnarray*}\]</span></p>
+\end{eqnarray*}
+\]</span></p>
 <p>También podemos calcular la varianza de los reclamos totales <span class="math inline">\(S\)</span>, para ello necesitamos primeramente
 calcular su segundo momento.
-<span class="math display">\[\begin{eqnarray*}
+<span class="math display">\[
+\begin{eqnarray*}
 \mathbb{E}[S^2]
 &amp; = &amp; \mathbb{E}\left[ \left( \sum\limits_{i=1}^N X_i \right)^2 \right] \\
 &amp; = &amp; \sum\limits_{n=0}^\infty \mathbb{E}\left[ \sum\limits_{i, j=1}^n X_i X_j \middle| N = n \right] P( N = n )
@@ -596,17 +613,21 @@ calcular su segundo momento.
 &amp; = &amp; \mathbb{E}\left[N\right] \mathbb{E}\left[X^2\right] + \mathbb{E}\left[N^2\right] \mathbb{E}\left[X\right]^2
 - \mathbb{E}\left[N\right] \mathbb{E}\left[X\right]^2 \\
 &amp; = &amp; \mathbb{E}\left[N\right] \mathbb{V}\left[X\right] + \mathbb{E}\left[N^2\right] \mathbb{E}\left[X\right]^2
-\end{eqnarray*}\]</span></p>
+\end{eqnarray*}
+\]</span></p>
 <p>finalmente la varianza de <span class="math inline">\(S\)</span> tiene la siguiente expresión
-<span class="math display">\[\begin{eqnarray*}
+<span class="math display">\[
+\begin{eqnarray*}
 \mathbb{V}\left[S\right]
 &amp; = &amp; \mathbb{E}\left[S^2\right] - \mathbb{E}\left[S\right]^2 \\
 &amp; = &amp; \mathbb{E}\left[N\right] \mathbb{V}\left[X\right]
 + \mathbb{E}\left[N^2\right] \mathbb{E}\left[X\right]^2 - \mathbb{E}\left[N\right]^2 \mathbb{E}\left[X\right]^2 \\
 &amp; = &amp; \mathbb{E}\left[N\right] \mathbb{V}\left[X\right] + \mathbb{V}\left[N\right] \mathbb{E}\left[X\right]^2
-\end{eqnarray*}\]</span></p>
+\end{eqnarray*}
+\]</span></p>
 <p>La distribución acumulada del reclamo total <span class="math inline">\(S\)</span> tiene la forma:
-<span class="math display">\[\begin{eqnarray*}
+<span class="math display">\[
+\begin{eqnarray*}
 F_S( s )
 &amp; = &amp; P( S \leq s ) \\
 &amp; = &amp; P\left( \sum\limits_{i=1}^N X_i \leq s \right) \\
@@ -614,7 +635,8 @@ F_S( s )
 &amp; = &amp; \sum\limits_{n=0}^{+\infty} P\left( \sum\limits_{i=1}^n X_i \leq s \right) p_n\quad \text{si $X_i$ y $N$ son independientes} \\
 &amp; = &amp; \sum\limits_{n=0}^{+\infty} F_{X_1} \star \cdots \star F_{X_n}( s ) p_n\quad \text{distribución de la suma de variables aleatorias} \\
 &amp; = &amp; \sum\limits_{n=0}^{+\infty} F^{\star n}_{X}( s ) p_n\quad \text{si $\{X_i\}$ son idénticamente distribuidas}
-\end{eqnarray*}\]</span>
+\end{eqnarray*}
+\]</span>
 tomando <span class="math inline">\(F^{\star 0}_{X}( s ) = 1\)</span>.</p>
 <p>Este último resultado muestra que la distribución de probabilidad de <span class="math inline">\(S\)</span> no es más que una mixtura
 de las distribuciones para los modelos individuales <span class="math inline">\(F^{\star n}_{X}\)</span> tomando para mezclarlas las
@@ -672,24 +694,27 @@ a un modelo individual, para ciertos casos particulares. Por ejemplo, si conside
 cuando la variable aleatoria del conteo de siniestros <span class="math inline">\(N \rightsquigarrow Bin( n, p )\)</span> sigue una
 distribución binomial con parámetros <span class="math inline">\(n\)</span> y <span class="math inline">\(p\)</span> y los reclamos individuales <span class="math inline">\(\{ X_i \}\)</span> son i.i.d.
 A partir de esto, el reclamo total <span class="math inline">\(S\)</span> puede ser expresado de dos formas
-<span class="math display">\[\begin{equation}
+<span class="math display">\[
 S = \sum\limits_{k=0}^{N} X_k
 = \sum\limits_{k=0}^n B_k X_k
-\end{equation}\]</span>
+\]</span>
 donde <span class="math inline">\(B_k \rightsquigarrow Ber( p )\)</span> y es independientes de <span class="math inline">\(X_k\)</span>. Así el modelo colectivo se
 transforma en un modelo individual con <span class="math inline">\(n\)</span> constante y valores de reclamos individuales dados por
 la variable aleatoria <span class="math inline">\(Y_k = B_k X_k\)</span>.</p>
 <p>Para este caso en particular
-<span class="math display">\[\begin{eqnarray*}
+<span class="math display">\[
+\begin{eqnarray*}
 \mathbb{E}[ S ]
 &amp; = &amp; \mathbb{E}\left[ \sum\limits_{k=0}^{n} B_k X_k \right] \\
 &amp; = &amp; \sum\limits_{k=0}^{n} \mathbb{E}\left[ B_k X_k \right] \\
 &amp; = &amp; n \mathbb{E}[ B X ] \\
 &amp; = &amp; n \mathbb{E}[ B ] \mathbb{E}[ X ] \\
 &amp; = &amp; n p \mathbb{E}[ X ]
-\end{eqnarray*}\]</span></p>
+\end{eqnarray*}
+\]</span></p>
 <p>así mismo,
-<span class="math display">\[\begin{eqnarray*}
+<span class="math display">\[
+\begin{eqnarray*}
 \mathbb{V}[ S ]
 &amp; = &amp; n \mathbb{V}[ B X ] \\
 &amp; = &amp; n \left( \mathbb{E}[ B^2 X^2 ] - \mathbb{E}[ B X ]^2 \right) \\
@@ -698,7 +723,8 @@ la variable aleatoria <span class="math inline">\(Y_k = B_k X_k\)</span>.</p>
 &amp; = &amp; n \left( p \mathbb{E}[ X^2 ] - p \mathbb{E}[ X ]^2 + p \mathbb{E}[ X ]^2  - p^2 \mathbb{E}[ X ]^2 \right) \\
 &amp; = &amp; n \left( p \mathbb{V}[ X ] + p ( 1 - p ) \mathbb{E}[ X ]^2 \right) \\
 &amp; = &amp; n \left( \mathbb{E}[B] \mathbb{V}[ X ] + \mathbb{V}[B] \mathbb{E}[ X ]^2 \right)
-\end{eqnarray*}\]</span></p>
+\end{eqnarray*}
+\]</span></p>
 <div class="example">
 <p><span id="exm:l3ex3" class="example"><strong>Ejemplo 5.3  </strong></span>Hacemos uso del algoritmo de simulación, pero bajo la consideración anterior donde el conteo
 de siniestros <span class="math inline">\(N \rightsquigarrow Bin( n, p )\)</span>, en algunos casos se puede considerar <span class="math inline">\(n\)</span> como el
@@ -721,10 +747,12 @@ Si consideramos generar la simulación como un modelo individual, generamos vari
 <span id="cb39-11"><a href="modelos-de-pérdida-agregada.html#cb39-11"></a>ES <span class="ot">&lt;-</span> n <span class="sc">*</span> p <span class="sc">*</span> <span class="fu">exp</span>( mu <span class="sc">+</span> <span class="fl">0.5</span> <span class="sc">*</span> sigma<span class="sc">^</span><span class="dv">2</span> )</span></code></pre></div>
 </details>
 <p></p>
-<p><span class="math display">\[\begin{eqnarray*}
+<p><span class="math display">\[
+\begin{eqnarray*}
 \mathbb{E}[S] = n p e^{ \mu + \frac{1}{2} \sigma^2 } &amp; = &amp; 219326.6317, \\
 \overline{S} = \frac{1}{m} \sum\limits_{i=1}^m S_i &amp; = &amp; 219346.3972,
-\end{eqnarray*}\]</span></p>
+\end{eqnarray*}
+\]</span></p>
 </div>
 <p>Es importante observar que si la frecuencia de reclamos es superior a <span class="math inline">\(1\)</span>, sea este por póliza,
 individuo o en general por unidad asegurada, la aproximación anterior no es la correcta si no
@@ -742,11 +770,11 @@ modelo individual y el modelo colectivo. Se parte de considerar un número <span
 donde para cada unidad <span class="math inline">\(i \in \{1, \ldots, n\}\)</span>, se considera que puede presentar una cantidad
 de reclamos dados por una variable aleatoria discreta <span class="math inline">\(N_i\)</span>, y así para cada presentar un número
 de reclamos <span class="math inline">\(X_{i,1}, \ldots, X_{i,N_i}\)</span>. Así el reclamo total viene dado por la expresión
-<span class="math display">\[\begin{equation}
+<span class="math display">\[
 S
 = \sum\limits_{i=1}^n X_i
 = \sum\limits_{i=1}^n \sum\limits_{j=1}^{N_i} X_{i,j}
-\end{equation}\]</span></p>
+\]</span></p>
 <!------------------------------------------------------------------------------------------------->
 </div>
 <div id="modelos-con-variables-explicativas" class="section level2 hasAnchor" number="5.5">
@@ -758,10 +786,10 @@ el valor de los siniestros <span class="math inline">\(\{X_i\}\)</span>. Es deci
 como tampoco entre <span class="math inline">\(\{Y_j\}\)</span> y <span class="math inline">\(\{X_i\}\)</span>. Es así que un modelo colectivo <span class="math inline">\(S = \sum\limits_{i=1}^N X_i\)</span>
 su estudio, estimación y tarificación debe ser realizada de forma condicional respecto de las
 variables aleatorias explicativas <span class="math inline">\(\{Y_j\}\)</span>,
-<span class="math display">\[\begin{equation}
+<span class="math display">\[
 \mathbb{E}[ S ]
 = \mathbb{E}\left[ \mathbb{E}\left[ S \middle| Y_1, \ldots, Y_n \right] \right]
-\end{equation}\]</span>
+\]</span>
 de donde es necesario estimar cada una de las esperanzas condicionadas
 <span class="math inline">\(\mathbb{E}\left[ S \middle| Y_1, \ldots, Y_n \right]\)</span>.</p>
 <p>En la práctica las variables explicativas <span class="math inline">\(\{ Y_j \}\)</span> suelen ser seleccionadas para caracterizar
@@ -786,20 +814,20 @@ cualquier <span class="math inline">\(n \in \mathbb{N}\)</span>. Ciertamente, es
 aleatorias y están asociados a la frecuencia <span class="math inline">\(N\)</span> en un periodo dado, ya que <span class="math inline">\(N\)</span> cuenta los tiempos
 de arribo hasta un tiempo dado, transformamos así a <span class="math inline">\(N\)</span> en una variable aleatoria dependiente del
 tiempo, en lo que se conoce como un <strong>proceso estocástico</strong>.
-<span class="math display">\[\begin{equation}
+<span class="math display">\[
 N( t )
 = \#\left\{ k \in \mathbb{N}\ \middle|\ T_k \leq t \right\}
 = \sum\limits_{k=0}^{+\infty} \mathbf{1}_{(-\infty,t]}\left( T_k \right)
-\end{equation}\]</span></p>
+\]</span></p>
 <p>Inmediatamente de este razonamiento, resulta que los reclamos totales también se transforman en
 proceso estocástico.
-<span class="math display">\[\begin{equation}
+<span class="math display">\[
 S( t ) = \sum\limits_{i=1}^{N( t )} X_i
-\end{equation}\]</span></p>
+\]</span></p>
 <p>Además, se pueden identificar las variables aleatorias de <strong>tiempos entre arribos</strong>
-<span class="math display">\[\begin{equation}
+<span class="math display">\[
 W_n = T_n - T_{n-1},\quad \forall n \in \mathbb{N}
-\end{equation}\]</span>
+\]</span>
 tomando <span class="math inline">\(T_0 = 0\)</span>.</p>
 <!------------------------------------------------------------------------------------------------->
 </div>
@@ -910,48 +938,52 @@ agregada <span class="math inline">\(S_n\)</span> y mostraresmo s</p>
 <p>Para el caso del modelo individual de riesgos podemos hacer uso de la siguiente estimación de la
 densidad de probabilidad de los reclamos totales <span class="math inline">\(S\)</span>, utilizando la transformada de Fourier. En la
 implementación numérica se utiliza la transformada de Fourier rápida (FFT).
-<span class="math display">\[\begin{equation}
+<span class="math display">\[
 \mathscr{F}\left( f_S \right)
 = \mathscr{F}\left( f^{\star n}_X \right)
 = \mathscr{F}\left( f_X \right)^{n}
-\end{equation}\]</span></p>
+\]</span></p>
 <p>Por tanto de esta relación como la transformada de Fourier es invertible, existe <span class="math inline">\(\mathscr{F}^{-1}\)</span>.
 Resulta el siguiente método para calcular la densidad de <span class="math inline">\(S\)</span>
-<span class="math display">\[\begin{equation}
+<span class="math display">\[
 f_S = \mathscr{F}^{-1}\left( \mathscr{F}\left( f_S \right) \right)
 = \mathscr{F}^{-1}\left(\mathscr{F}\left( f_X \right)^{n} \right)
-\end{equation}\]</span></p>
+\]</span></p>
 <p>En conclusión para determinar la densidad de probabilidad de <span class="math inline">\(S\)</span> basta conocer la transformada de
 Fourier de la distribución de los reclamos individuales, multiplicarla por si misma <span class="math inline">\(n\)</span> veces y
-tomar la transformada de Fourier inversa.</p>
-<p><span class="math display">\[\begin{eqnarray*}
+tomar la transformada de Fourier inversa.
+<span class="math display">\[
+\begin{eqnarray*}
 \mathscr{F}\left( f_S \right)
 &amp; = &amp; \mathscr{F}\left( \sum\limits_{n=0}^{+\infty} p_n f_X^{\star n} \right) \\
 &amp; = &amp; \sum\limits_{n=0}^{+\infty} p_n \mathscr{F}\left( f_X^{\star n} \right) \\
 &amp; = &amp; \sum\limits_{n=0}^{+\infty} p_n \mathscr{F}\left( f_X \right)^{n}
-\end{eqnarray*}\]</span></p>
-<p>como consecuencia
-<span class="math display">\[\begin{eqnarray*}
+\end{eqnarray*}
+\]</span>
+como consecuencia
+<span class="math display">\[
+\begin{eqnarray*}
 f_S
 &amp; = &amp; \mathscr{F}^{-1}\left( \mathscr{F}\left( f_S \right) \right)\\
 &amp; = &amp; \mathscr{F}^{-1}\left( \sum\limits_{n=0}^{+\infty} p_n \mathscr{F}\left( f_X \right)^{n} \right)\quad
 \text{Una sola inversión} \\
 &amp; = &amp; \sum\limits_{n=0}^{+\infty} p_n \mathscr{F}^{-1}\left( \mathscr{F}\left( f_X \right)^{n} \right)\quad
 \text{Una inversión por cada término en la suma}
-\end{eqnarray*}\]</span></p>
-<p><span class="math display">\[\begin{equation}
+\end{eqnarray*}
+\]</span></p>
+<p><span class="math display">\[
 W_n = \frac{S_n}{n}
-\end{equation}\]</span></p>
-<p><span class="math display">\[\begin{equation}
+\]</span></p>
+<p><span class="math display">\[
 \mathbb{E}\left[ W_n \right]
 = \mathbb{E}\left[ \frac{S_n}{n} \right]
 = \frac{1}{n} \mathbb{E}\left[ S_n \right]
-\end{equation}\]</span></p>
-<p><span class="math display">\[\begin{equation}
+\]</span></p>
+<p><span class="math display">\[
 \mathbb{V}\left[ W_n \right]
 = \mathbb{V}\left[ \frac{S_n}{n} \right]
 = \frac{1}{n^2} \mathbb{V}\left[ S_n \right]
-\end{equation}\]</span></p>
+\]</span></p>
 <p></p>
 <p></p>
 

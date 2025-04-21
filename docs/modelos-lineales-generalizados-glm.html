@@ -23,7 +23,7 @@
 <meta name="author" content="" />
 
 
-<meta name="date" content="2025-04-20" />
+<meta name="date" content="2025-04-21" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -301,58 +301,63 @@ decir, existen:</p>
 <li><p>Una función <span class="math inline">\(\eta: \mathbb{R}^m \longrightarrow \mathbb{R}^p\)</span></p></li>
 </ol>
 <p>de tal forma que:
-<span class="math display">\[\begin{equation}
+<span class="math display">\[
 f_X( x \mid \theta ) = h( x ) \exp\left( \eta( \theta ) \cdot T( x ) - A( \theta ) \right)
-\end{equation}\]</span></p>
+\]</span></p>
 <p>Al tener varias observaciones independientes de la misma variable aleatoria <span class="math inline">\(x_1, \ldots, x_N\)</span>,
 su distribución conjunta se puede expresar como:
-<span class="math display">\[\begin{equation}
+<span class="math display">\[
 f_{X_1,\ldots,X_N}( x_1, \ldots, x_N \mid \theta )
 = \prod\limits_{i=1}^N f_{X_i}( x_i \mid \theta )
-\end{equation}\]</span></p>
+\]</span></p>
 <p>La función de verosimilitud logarítmica, “log-likelihood”, toma una forma específica, la cual puede
-ser trabajada con comodidad para la maximización de verosimilitud.</p>
-<p><span class="math display">\[\begin{eqnarray*}
+ser trabajada con comodidad para la maximización de verosimilitud.
+<span class="math display">\[
+\begin{eqnarray*}
 \ell( \theta )
 &amp; = &amp; \log f_{X_1,\ldots,X_N}( x_1, \ldots, x_N \mid \theta ) \\
 &amp; = &amp; \sum\limits_{i=1}^N \log f_{X_i}( x_i \mid \theta ) \\
 &amp; = &amp; \sum\limits_{i=1}^N \left( \log h( x_i ) + \eta( \theta ) \cdot T( x_i ) - A( \theta )  \right)
-\end{eqnarray*}\]</span></p>
-<p>lo que podemos observar es que existe una casi linealidad respecto de la variable <span class="math inline">\(\theta\)</span>. Esta
+\end{eqnarray*}
+\]</span>
+lo que podemos observar es que existe una casi linealidad respecto de la variable <span class="math inline">\(\theta\)</span>. Esta
 propiedad permite obtener un problema de maximización de verosimilitud que puede ser atacado con
 varios paquetes de optimización numérica de una forma eficiente.</p>
-<p><span class="math display">\[\begin{equation}
+<p><span class="math display">\[
 \underset{\theta \in \Theta}{\sup} \ell( \theta )
 = \underset{\theta \in \Theta}{\sup}  
 \sum\limits_{i=1}^N \left( \eta( \theta ) \cdot T( x_i ) - A( \theta )  \right)
-\end{equation}\]</span></p>
+\]</span></p>
 <p>Usualmente, este problema se suele atacar mediante la anulación del gradiente de la función
 objetivo, esto lo realiza la mayor parte de paquetes de software. El sistema a resolver es el
 siguiente sistema, usualmente no lineal, de dimensión <span class="math inline">\(m\)</span>:</p>
-<p><span class="math display">\[\begin{equation}
+<p><span class="math display">\[
 \frac{\partial\ell}{\partial\theta_i}( \theta )
 = \sum\limits_{i=1}^N \left( \frac{\partial\eta}{\partial\theta_i}( \theta ) \cdot T( x_i ) -
 \frac{\partial A}{\partial\theta_i}( \theta ) \right)
 = 0,\qquad \forall i \in \{1,\ldots, m\}
-\end{equation}\]</span></p>
+\]</span></p>
 <p>En la familia exponential tenemos las siguientes distribuciones: <em>normal, exponencial, log-normal,
 gamma, chi-cuadrado, beta, Dirichlet, Bernoulli, Poisson, binomial, geométrica, binomial negativa,
 von Mises-Fisher, Pareto con valor mínimo conocido, Gaussiana inversa, gamma inversa, multinomial
 con número <span class="math inline">\(n\)</span> conocido, Wishart, categórica</em>.</p>
 <p>Por la condición de normalización de la densidad de probabilidad <span class="math inline">\(f_X\)</span>, se satisface la igualdad:
-<span class="math display">\[\begin{eqnarray*}
+<span class="math display">\[
+\begin{eqnarray*}
 1 &amp; = &amp; \int\limits f_X( x \mid \theta )\ dx \\
 1 &amp; = &amp; \int\limits h( x ) \exp\left( \eta( \theta ) \cdot T( x ) - A( \theta ) \right)\ dx \\
 1 &amp; = &amp; \int\limits h( x ) \exp\left( \eta( \theta ) \cdot T( x ) \right) \exp\left( - A( \theta ) \right)\ dx \\
 1 &amp; = &amp;  \exp\left( - A( \theta ) \right) \int\limits h( x ) \exp\left( \eta( \theta ) \cdot T( x ) \right)\ dx \\
 \exp\left( A( \theta ) \right) &amp; = &amp; \int\limits h( x ) \exp\left( \eta( \theta ) \cdot T( x ) \right)\ dx \\
 A( \theta ) &amp; = &amp; \log\left( \int\limits h( x ) \exp\left( \eta( \theta ) \cdot T( x ) \right)\ dx \right)
-\end{eqnarray*}\]</span></p>
-<p>de donde se determina precisamente la forma que tiene la función <span class="math inline">\(A\)</span> y su el papel como factor
+\end{eqnarray*}
+\]</span>
+de donde se determina precisamente la forma que tiene la función <span class="math inline">\(A\)</span> y su el papel como factor
 de normalización para la distribución de la variable aleatoria <span class="math inline">\(X\)</span>.</p>
 <p>Así mismo, podemos establecer una cierta relación para la espera de los valores observados
 de <span class="math inline">\(T(X)\)</span> en función de <span class="math inline">\(A\)</span>
-<span class="math display">\[\begin{eqnarray*}
+<span class="math display">\[
+\begin{eqnarray*}
 0 &amp; = &amp; \frac{\partial}{\partial\theta_i} 1 \\
 0 &amp; = &amp; \frac{\partial}{\partial\theta_i} \int\limits f_X( x \mid \theta )\ dx \\
 0 &amp; = &amp; \int\limits h( x ) \frac{\partial}{\partial\theta_i} \exp\left( \eta( \theta ) \cdot T( x ) - A( \theta ) \right)\ dx \\
@@ -364,18 +369,19 @@ de <span class="math inline">\(T(X)\)</span> en función de <span class="math in
 \int\limits h( x ) \exp\left( \eta( \theta ) \cdot T( x ) - A( \theta ) \right)\ dx \\
 0 &amp; = &amp; \int \limits \frac{\partial\eta}{\partial\theta_i}( \theta )  \cdot T( x ) f_X( x \mid \theta )\ dx
 - \frac{\partial A}{\partial\theta_i}( \theta ) \int \limits f_X( x \mid \theta )\ dx
-\end{eqnarray*}\]</span></p>
-<p>estamos en la capacidad de concluir que:
-<span class="math display">\[\begin{equation}
+\end{eqnarray*}
+\]</span>
+estamos en la capacidad de concluir que:
+<span class="math display">\[
 \mathbb{E}\left[ \frac{\partial\eta}{\partial\theta_i}( \theta )  \cdot T( X ) \right]
 = \frac{\partial A}{\partial\theta_i}( \theta )
-\end{equation}\]</span></p>
+\]</span></p>
 <p>Cuando se da el caso que <span class="math inline">\(\eta\)</span> y <span class="math inline">\(T\)</span> son las funciones identidad, la relación anterior se reduce
 a la siguiente igualdad:
-<span class="math display">\[\begin{equation}
+<span class="math display">\[
 \mathbb{E}\left[ X_i \right]
 = \frac{\partial A}{\partial\theta_i}( \theta )
-\end{equation}\]</span></p>
+\]</span></p>
 <!------------------------------------------------------------------------------------------------->
 </div>
 <div id="modelo-lineal-generalizado-glm" class="section level2 hasAnchor" number="8.2">
@@ -389,32 +395,32 @@ aleatorias <span class="math inline">\(X : \Omega \longrightarrow \mathbb{R}^n\)
 <span class="math inline">\(g: \mathbb{R}^q \longrightarrow \mathbb{R}^m\)</span> entre <span class="math inline">\(\theta\)</span> y <span class="math inline">\(X\)</span>, a través del paso por una
 composición con una función lineal <span class="math inline">\(\beta : \mathbb{R}^n \longrightarrow \mathbb{R}^q\)</span>, de tal
 forma que:
-<span class="math display">\[\begin{equation}
+<span class="math display">\[
 \theta = g( \beta( X ) ) = g( \beta X )
-\end{equation}\]</span></p>
+\]</span></p>
 <p>Así, un GLM prescribe una distribución de probabilidad para <span class="math inline">\(Y\)</span> que tendrá la siguiente forma y
 será dependiente de los parámetros <span class="math inline">\(\beta\)</span> y las variables explicativas <span class="math inline">\(X\)</span>
-<span class="math display">\[\begin{equation}
+<span class="math display">\[
 f_Y( y \mid \theta )
 = f_Y( y \mid g( \beta x ) )
 = h( y ) \exp\left( \eta( g( \beta x ) ) \cdot T( y ) - A( g( \beta x ) ) \right)
-\end{equation}\]</span></p>
+\]</span></p>
 <p>En la aplicación, el ajuste de un modelo GLM a <span class="math inline">\(N \in \mathbb{N}\)</span> observaciones <span class="math inline">\(y_1, \ldots, y_N\)</span>
 de la variable aleatoria <span class="math inline">\(Y\)</span> y sus respectivas variables explicativas <span class="math inline">\(x_1, \ldots, x_N\)</span>. Se asume
 independencias entre las observaciones y se busca maximizar la verosimilitud de los valores
 observados, pero en función del nuevo parámetro <span class="math inline">\(\beta\)</span>, de ahí la parte lineal del modelo.
-<span class="math display">\[\begin{equation}
+<span class="math display">\[
 \ell( \beta )
 = \sum\limits_{i=1}^N \left( \log h( y_i ) +
 \eta( g( \beta x_i ) ) \cdot T( y_i ) - A( g( \beta x_i ) \right)
-\end{equation}\]</span></p>
+\]</span></p>
 <p>De ello resulta el problema de maximización de verosimilitud que se busca resolver para ajustar un
 modelo GLM.
-<span class="math display">\[\begin{equation}
+<span class="math display">\[
 \underset{\beta \in \mathbb{R}^{q \times n}}{\sup} \ell( \beta )
 = \underset{\beta \in \mathbb{R}^{q \times n}}{\sup} \sum\limits_{i=1}^N \left( \log h( y_i ) +
 \eta( g( \beta x_i ) ) \cdot T( y_i ) - A( g( \beta x_i ) \right)
-\end{equation}\]</span>
+\]</span>
 es de notar que el término <span class="math inline">\(\sum\limits_{i=1}^N \log h( y_i )\)</span> no depende de <span class="math inline">\(\beta\)</span> y por tal
 razón puede ser omitido al momento de maximizar la verosimilitud.</p>
 <p>En varias ocasiones no todos los parámetros <span class="math inline">\(\theta\)</span> de la densidad de probabilidad son
@@ -424,21 +430,21 @@ valor constante ya dado o también como un parámetro a determinar. Así, se div
 donde solo se establece una función de vínculo para la primera parte <span class="math inline">\(\theta_1 = g( \beta X )\)</span>.
 Esta consideración en muchos casos ayuda a simplificar la formulación del modelo y el costo
 computacional de estimación. En este contexto la función de verosimilitud tomaría la forma:
-<span class="math display">\[\begin{equation}
+<span class="math display">\[
 \ell( \beta, \theta_2 )
 = \sum\limits_{i=1}^N \left( \log h( y_i ) +
 \eta( g( \beta x_i ), \theta_2 ) \cdot T( y_i ) - A( g( \beta x_i ), \theta_2 ) \right)
-\end{equation}\]</span></p>
+\]</span></p>
 <div class="example">
 <p><span id="exm:l6ex1" class="example"><strong>Ejemplo 8.1  (Regresión de Poisson) </strong></span>En este caso presentamos el modelo bastante utilizado conocido como regresión de Poisson. En donde
 suponemos que <span class="math inline">\(N \rightsquigarrow Pois( \lambda( x ) ER( x ) ) = Pois( g( \beta x ) ER( x ) )\)</span>
 donde <span class="math inline">\(\lambda\)</span> es el parámetro a estimar en función de las variables explicativas <span class="math inline">\(x\)</span>.
-<span class="math display">\[\begin{equation}
+<span class="math display">\[
 \mathbb{E}[ N ] = \lambda( x ) ER( x ) = g( \beta x ) ER( x )
-\end{equation}\]</span></p>
-<p><span class="math display">\[\begin{equation}
+\]</span></p>
+<p><span class="math display">\[
 P( N = n ) = \exp(-g( \beta x ) ER( x )) \frac{g( \beta x )^n ER( x )^n}{n!}
-\end{equation}\]</span></p>
+\]</span></p>
 <p></p>
 <details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb63"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb63-1"><a href="modelos-lineales-generalizados-glm.html#cb63-1"></a><span class="co"># la librería CASdatasets fue previamente cargada</span></span>

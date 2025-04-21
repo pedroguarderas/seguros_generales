@@ -23,7 +23,7 @@
 <meta name="author" content="" />
 
 
-<meta name="date" content="2025-04-20" />
+<meta name="date" content="2025-04-21" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -1335,7 +1335,8 @@ f_X( x )
 \end{array}
 \right.
 \]</span>
-<span class="math display">\[\begin{eqnarray*}
+<span class="math display">\[
+\begin{eqnarray*}
 \mathbb{E}[X^k]
 &amp; = &amp; \frac{\theta^k \Gamma\left( \alpha + \frac{k}{\tau}\right)}{\Gamma( \alpha )},
 \quad \text{si}\ k &gt; -\alpha \tau \\
@@ -1345,7 +1346,8 @@ f_X( x )
 \mathbb{V}[X]
 &amp; = &amp; \frac{\theta^2 \Gamma\left( \alpha + \frac{2}{\tau}\right)}{\Gamma( \alpha )}
 - \frac{\theta^2 \Gamma\left( \alpha + \frac{1}{\tau}\right)^2}{\Gamma( \alpha )^2}
-\end{eqnarray*}\]</span></p>
+\end{eqnarray*}
+\]</span></p>
 </div>
 <p></p>
 <details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
@@ -1385,7 +1387,8 @@ f_X( x )
 \frac{\Gamma(\alpha + \tau)}{\Gamma( \alpha ) \Gamma( \tau )}
 \frac{ \gamma \left( \frac{x}{\theta} \right)^{\gamma \tau}}{x\left( 1 + \left( \frac{x}{\theta} \right)^{\gamma}\right)^{\alpha + \tau}}
 \]</span></p>
-<p><span class="math display">\[\begin{eqnarray*}
+<p><span class="math display">\[
+\begin{eqnarray*}
 \mathbb{E}[X^k]
 &amp; = &amp; \frac{\theta^k \Gamma\left( \tau + \frac{k}{\gamma}\right) \Gamma\left( \tau - \frac{k}{\gamma}\right)}{\Gamma( \alpha ) \Gamma( \tau )},
 \quad \text{si}\ -\tau \gamma &lt; k &lt; \tau \gamma \\
@@ -1394,7 +1397,8 @@ f_X( x )
 \mathbb{V}[X]
 &amp; = &amp; \frac{\theta^2 \Gamma\left( \tau + \frac{2}{\gamma}\right) \Gamma\left( \tau - \frac{2}{\gamma}\right)}{\Gamma( \alpha ) \Gamma( \tau )}
 - \frac{\theta^2 \Gamma\left( \tau + \frac{1}{\gamma}\right)^2 \Gamma\left( \tau - \frac{1}{\gamma}\right)^2}{\Gamma( \alpha )^2 \Gamma( \tau )^2}
-\end{eqnarray*}\]</span></p>
+\end{eqnarray*}
+\]</span></p>
 </div>
 <p></p>
 <details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>

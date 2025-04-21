@@ -23,7 +23,7 @@
 <meta name="author" content="" />
 
 
-<meta name="date" content="2025-04-20" />
+<meta name="date" content="2025-04-21" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -318,9 +318,9 @@ en un ramo en particular, ya que esto constituye un nivel más arriba propio del
 reasegurador.</p>
 <p>En términos generales se busca equilibrar el resultado operativo del ramo de negocio <span class="math inline">\(R\)</span> a lo largo
 de la vida del ramo. El resultado <span class="math inline">\(R\)</span> a su vez está dado por la siguiente relación:
-<span class="math display">\[\begin{equation}
+<span class="math display">\[
 R = \Pi + I - S - G - K
-\end{equation}\]</span>
+\]</span>
 donde las variables a considerarse en principio son:</p>
 <ol style="list-style-type: decimal">
 <li><p><span class="math inline">\(\Pi\)</span> Ingreso por primas</p></li>
@@ -331,25 +331,27 @@ donde las variables a considerarse en principio son:</p>
 </ol>
 <p>En varias ocasiones el ciclo del negocio puede ser corto y no permite considerar un ingreso por
 inversiones <span class="math inline">\(I = 0\)</span>.
-<span class="math display">\[\begin{equation}
+<span class="math display">\[
 R = \Pi - S - G - K
-\end{equation}\]</span></p>
+\]</span></p>
 <p>Sería ideal que a lo largo de la vida del ramo el resultado mantenga <span class="math inline">\(R &gt; 0\)</span>, pero al tratarse de
 un negocio que depende de la aleatoriedad de los reclamos, es bastante complicado encontrar un
 costo de capital <span class="math inline">\(K\)</span> y una prima <span class="math inline">\(\Pi\)</span> que siempre asegure ante todo escenario que se mantenga
 la positividad. Ante este riesgo continuo se busca minimizar la probabilidad de ruina <span class="math inline">\(R &lt; 0\)</span>
 a un nivel <span class="math inline">\(\alpha &gt; 0\)</span> adecuado
-<span class="math display">\[\begin{equation}
+<span class="math display">\[
 P( R &lt; 0 ) &lt; \alpha
-\end{equation}\]</span></p>
+\]</span></p>
 <p>Muchas de las veces se parte del principio de equilibrio financiero <a href="probabilidad-y-estadística.html#sec:equifin">3.5.4</a>, donde
 se busca la igualdad <span class="math inline">\(\mathbb{E}[R] = 0\)</span>, la misma implica la siguiente relación:
-<span class="math display">\[\begin{eqnarray*}
+<span class="math display">\[
+\begin{eqnarray*}
 0 &amp; = &amp; \mathbb{E}[R] \\
 0 &amp; = &amp; \mathbb{E}[R\mid R \geq 0]P( R \geq 0 ) + \mathbb{E}[R\mid R &lt; 0]P( R &lt; 0 ) \\
 \mathbb{E}[R\mid R \geq 0]P( R \geq 0 ) &amp; = &amp; -\mathbb{E}[R\mid R &lt; 0]P( R &lt; 0 ) \\
 \frac{P( R &lt; 0 )}{P( R \geq 0 ) } &amp; = &amp; -\frac{\mathbb{E}[R\mid R \geq 0]}{\mathbb{E}[R\mid R &lt; 0]}
-\end{eqnarray*}\]</span>
+\end{eqnarray*}
+\]</span>
 en el equilibrio financiero, la proporción de la probabilidad de ruina respecto de la probabilidad
 de no estar en ruina es igual a la proporción entre la esperanza condicional del resultado cuando
 no se produce la ruina respecto de la esperanza condicional cuando si se produce la ruina.</p>
@@ -359,21 +361,21 @@ la relevancia de la probabilidad de ruina en un modelo equilibrado, con el uso d
 condicionales.</p>
 <p>Es usual asumir que la única parte aleatoria de <span class="math inline">\(R\)</span> viene dada por el valor de los reclamos totales,
 en razón de esto se tiene:
-<span class="math display">\[\begin{equation}
+<span class="math display">\[
 \mathbb{E}[ R ] = \Pi - \mathbb{E}[S] - G - K
-\end{equation}\]</span></p>
+\]</span></p>
 <p>El <strong>coste de capital</strong> <span class="math inline">\(K\)</span> es el dinero que se requiere adicional para estar cubiertos a un nivel
 de solvencia adecuado en caso se presenten mayores variaciones en el valor observado del reclamo
 total <span class="math inline">\(S\)</span> y el esperado <span class="math inline">\(\mathbb{E}[S]\)</span>. Para ello se suele utilizar una <strong>medida de riesgo</strong>
 <span class="math inline">\(\zeta\)</span> que permita controlar la probabilidad de ruina <span class="math inline">\(P( R &lt; 0)\)</span> al nivel de <span class="math inline">\(\alpha &gt; 0\)</span>, así se
 suele tomar
-<span class="math display">\[\begin{equation}
+<span class="math display">\[
 K = \zeta( S ) - \mathbb{E}[S]
-\end{equation}\]</span>
+\]</span>
 de tal forma que
-<span class="math display">\[\begin{equation}
+<span class="math display">\[
 P( \Pi - S - G - K &lt; 0 ) = P( \Pi - G - \zeta(S) - ( S - \mathbb{E}[S] ) &lt; 0 ) &lt; \alpha.
-\end{equation}\]</span></p>
+\]</span></p>
 <p>De la relación anterior se observa que una vez seleccionado el nivel de cobertura <span class="math inline">\(\alpha\)</span> y la
 medida de riesgo <span class="math inline">\(\zeta\)</span>, las variables correspondientes a la prima <span class="math inline">\(\Pi\)</span> y a los gastos <span class="math inline">\(G\)</span> quedan
 libres, de ahí resulta un margen que permite seleccionar la prima más óptima para un producto de
@@ -388,30 +390,30 @@ llamamos <strong>tarificación</strong> (pricing).</p>
 que satisface la siguientes propiedades:</p>
 <ol style="list-style-type: decimal">
 <li><p><strong>Homogenidad positiva</strong>, para cualquier <span class="math inline">\(a &gt; 0\)</span>
-<span class="math display">\[\begin{equation}
+<span class="math display">\[
 \zeta( a X ) = a \zeta( X )
-\end{equation}\]</span></p></li>
+\]</span></p></li>
 <li><p><strong>Invarianza ante las traslaciones</strong>, para cualquier <span class="math inline">\(a &gt; 0\)</span>
-<span class="math display">\[\begin{equation}
+<span class="math display">\[
 \zeta( \alpha X + a ) = \zeta( \alpha X ) + a
-\end{equation}\]</span></p></li>
+\]</span></p></li>
 <li><p><strong>Monotonicidad</strong>, Si <span class="math inline">\(X \leq Y\)</span>
-<span class="math display">\[\begin{equation}
+<span class="math display">\[
 \zeta( X ) \leq \zeta( Y )
-\end{equation}\]</span></p></li>
+\]</span></p></li>
 <li><p><strong>Sub-aditividad</strong>
-<span class="math display">\[\begin{equation}
+<span class="math display">\[
 \zeta( X + Y ) \leq \zeta( X ) + \zeta( Y )
-\end{equation}\]</span></p></li>
+\]</span></p></li>
 </ol>
 </div>
 <p>En lo que continúa citamos algunas de las medidas de riesgo usualmente utilizadas.</p>
 <div class="definition">
 <p><span id="def:dVaR" class="definition"><strong>Definición 6.1  (Valor en riesgo) </strong></span>Dada una variable aleatoria a valores reales <span class="math inline">\(X\)</span>, el <strong>valor en riesgo</strong> (value at risk) de <span class="math inline">\(X\)</span> al
 nivel de probabilidad <span class="math inline">\(\alpha \in (0,1)\)</span> está dado por
-<span class="math display">\[\begin{equation}
+<span class="math display">\[
 \operatorname{VaR}_{\alpha}( X ) = \inf\left\{ x \in \mathbb{R}\middle| F_X( x ) &gt; \alpha \right\}
-\end{equation}\]</span></p>
+\]</span></p>
 </div>
 <div class="proposition">
 <p><span id="prp:varinv" class="proposition"><strong>Proposición 6.1  </strong></span>Si la función de distribución acumulada <span class="math inline">\(F_X\)</span> es continua, entonces
@@ -421,9 +423,9 @@ nivel de probabilidad <span class="math inline">\(\alpha \in (0,1)\)</span> est�
 <div class="definition">
 <p><span id="def:dTVaR" class="definition"><strong>Definición 6.2  (Valor en riesgo en la cola) </strong></span>Dada una variable aleatoria a valores reales <span class="math inline">\(X\)</span>, el <strong>valor en riesgo en la colas</strong>
 (tail value at risk) de <span class="math inline">\(X\)</span> al nivel de probabilidad <span class="math inline">\(\alpha \in (0,1)\)</span> está dado por
-<span class="math display">\[\begin{equation}
+<span class="math display">\[
 \operatorname{TVaR}_{\alpha}( X ) = \frac{1}{1-\alpha} \int\limits_{\alpha}^1 \operatorname{VaR}_u( X )\ du
-\end{equation}\]</span></p>
+\]</span></p>
 </div>
 <div class="proposition">
 <p><span id="prp:TVaRcohe" class="proposition"><strong>Proposición 6.2  (Coherencia de la medida TVaR) </strong></span>La medida de riesgo <span class="math inline">\(\operatorname{TVaR}_{\alpha}\)</span> es una medida de riesgo coherente si la variable aleatoria
@@ -432,38 +434,38 @@ sobre la cual se mide es una variable aleatoria continua.</p>
 <div class="definition">
 <p><span id="def:dCTE" class="definition"><strong>Definición 6.3  (Esperanza condicional en la cola) </strong></span>Dada una variable aleatoria a valores reales <span class="math inline">\(X\)</span>, la <strong>esperanza condicional en la cola</strong>
 (conditional tail expectation) de <span class="math inline">\(X\)</span> al nivel de probabilidad <span class="math inline">\(\alpha \in (0,1)\)</span> está dado por
-<span class="math display">\[\begin{equation}
+<span class="math display">\[
 \operatorname{CTE}_{\alpha}( X ) = \mathbb{E}\left[ X \middle| X &gt; \operatorname{VaR}_{\alpha}( X ) \right]
-\end{equation}\]</span></p>
+\]</span></p>
 </div>
 <div class="proposition">
 <p><span id="prp:eqtvarcte" class="proposition"><strong>Proposición 6.3  </strong></span>Si la función de distribución acumulada <span class="math inline">\(F_X\)</span> de la variable aleatoria <span class="math inline">\(X\)</span> es continua, entonces
 se tiene la siguiente igualdad
-<span class="math display">\[\begin{equation}
+<span class="math display">\[
 \operatorname{CTE}_{\alpha}( X ) = \operatorname{TVaR}_{\alpha}( X )
-\end{equation}\]</span></p>
+\]</span></p>
 </div>
 <div class="definition">
 <p><span id="def:dCVaR" class="definition"><strong>Definición 6.4  (Valor en riesgo condicionado) </strong></span>Dada una variable aleatoria a valores reales <span class="math inline">\(X\)</span>, el <strong>valor en riesgo condicionado</strong>
 (conditional value at risk) de <span class="math inline">\(X\)</span> al nivel de probabilidad <span class="math inline">\(\alpha \in (0,1)\)</span> está dado por
-<span class="math display">\[\begin{equation}
+<span class="math display">\[
 \operatorname{CVaR}_{\alpha}( X ) = \mathbb{E}\left[ X - \operatorname{VaR}_{\alpha}( X ) \middle| X &gt; \operatorname{VaR}_{\alpha}( X ) \right]
 = \operatorname{CTE}_{\alpha}( X ) - \operatorname{VaR}_{\alpha}( X )
-\end{equation}\]</span></p>
+\]</span></p>
 </div>
 <div class="definition">
 <p><span id="def:dES" class="definition"><strong>Definición 6.5  (Déficit esperado) </strong></span>Dada una variable aleatoria a valores reales <span class="math inline">\(X\)</span>, el <strong>déficit esperado</strong> (expected shortfall) de
 <span class="math inline">\(X\)</span> al nivel de probabilidad <span class="math inline">\(\alpha \in (0,1)\)</span> está dado por
-<span class="math display">\[\begin{equation}
+<span class="math display">\[
 \operatorname{ES}_{\alpha}( X ) = \mathbb{E}\left[ \max\left( X - \operatorname{VaR}_{\alpha}( X ), 0 \right) \right]
-\end{equation}\]</span></p>
+\]</span></p>
 </div>
 <div class="definition">
 <p><span id="def:dEVaR" class="definition"><strong>Definición 6.6  (Valor en riesgo entrópico) </strong></span>Dada una variable aleatoria a valores reales <span class="math inline">\(X\)</span>, el <strong>valor en riesgo entrópico</strong>
 (entropic value at risk) de <span class="math inline">\(X\)</span> al nivel de probabilidad <span class="math inline">\(\alpha \in (0,1)\)</span> está dado por
-<span class="math display">\[\begin{equation}
+<span class="math display">\[
 \operatorname{EVaR}_{\alpha}( X ) = \inf\left\{ \frac{1}{t} \ln\left( \frac{M_X( t )}{1 - \alpha} \right) \middle| t &gt; 0 \right\}
-\end{equation}\]</span></p>
+\]</span></p>
 </div>
 <div class="proposition">
 <p><span id="prp:EVaRcohe" class="proposition"><strong>Proposición 6.4  (Coherencia de la medida EVaR) </strong></span>La medida de riesgo <span class="math inline">\(\operatorname{EVaR}_{\alpha}\)</span> es una medida de riesgo coherente.</p>
@@ -509,20 +511,20 @@ sería aconsejable satisfaga las siguientes propiedades.</p>
 <li><p>Si se decide cobrir por compleo dos riesgos <span class="math inline">\(S_1\)</span> y <span class="math inline">\(S_2\)</span> en un mismo producto, el valor de la
 prima deberá ser menor o igual al valor que se resultaría de cubrir cada uno de los riesgos con
 productos separados.
-<span class="math display">\[\begin{equation}
+<span class="math display">\[
 \rho( S_1 + S_2 ) \leq \rho( S_1 ) + \rho( S_2 )
-\end{equation}\]</span></p></li>
+\]</span></p></li>
 <li><p>El asumir mayor riesgo debe tener como consecuencia el aumento de la prima
-<span class="math display">\[\begin{equation}
+<span class="math display">\[
 \rho( S_1 ) \leq \rho( S_1 + S_2 )
-\end{equation}\]</span>
+\]</span>
 Esta propiedad implica que al configurar un producto de seguro con mejor cobertura, se espera
 una prima de mayor costo.</p></li>
 <li><p>Si el riesgo a cubrir está limitado, es decir <span class="math inline">\(P( S \leq M ) = 1\)</span>, para un valor <span class="math inline">\(M &gt; 0\)</span>,
 entonces jamás la prima será superior a <span class="math inline">\(M\)</span>
-<span class="math display">\[\begin{equation}
+<span class="math display">\[
 \rho( S ) \leq M
-\end{equation}\]</span>
+\]</span>
 Esto se traduce a que ningún asegurado estará interesado en adquirir una póliza para cubrir un
 riesgo por encima del valor total asegurado.</p></li>
 </ol>
@@ -530,40 +532,40 @@ riesgo por encima del valor total asegurado.</p></li>
 conocidos:</p>
 <ol style="list-style-type: decimal">
 <li><p>Prima neta, o prima pura de riesgo
-<span class="math display">\[\begin{equation}
+<span class="math display">\[
   \rho( S ) = \mathbb{E}[S] \approx \overline{S}
-\end{equation}\]</span></p></li>
+\]</span></p></li>
 <li><p>Prima de riesgo con recargo sobre la esperanza matemática
-<span class="math display">\[\begin{equation}
+<span class="math display">\[
   P = \rho( S ) = (1 + \rho) \mathbb{E}[S] \approx (1 + \rho) \overline{S}
-\end{equation}\]</span></p></li>
+\]</span></p></li>
 <li><p>Prima de riesgo con recargo sobre la varianza
-<span class="math display">\[\begin{equation}
+<span class="math display">\[
   P = \rho( S ) = \mathbb{E}[S] + \rho \mathbb{V}[S]
   \approx \overline{S} + \rho \sigma_S^2
-\end{equation}\]</span></p></li>
+\]</span></p></li>
 <li><p>Prima de riesgo con recargo sobre la desviación
-<span class="math display">\[\begin{equation}
+<span class="math display">\[
   P = \rho( S ) = \mathbb{E}[S] + \rho \sqrt{\mathbb{V}[S]}
   \approx \overline{S} + \rho \sigma_S
-\end{equation}\]</span></p></li>
+\]</span></p></li>
 <li><p>Prima de riesgo con principio exponencial para <span class="math inline">\(t &gt; 0\)</span>
-<span class="math display">\[\begin{equation}
+<span class="math display">\[
   P = \rho( S )
   = \frac{1}{2} \mathbb{E}\left[\exp(tS)\right]
   = \frac{1}{2} M_N\big( \ln M_X( t ) \big)
   \approx \frac{1}{m} \sum\limits_{i=1}^m \exp\left(t S_i\right)
-\end{equation}\]</span></p></li>
+\]</span></p></li>
 <li><p>Prima de percentiles para un valor de confianza <span class="math inline">\(\alpha \in [0,1]\)</span> o prima de valor en riesgo
 <span class="math inline">\(VaR_\alpha\)</span>
-<span class="math display">\[\begin{equation}
+<span class="math display">\[
   P = \rho( S ) = \operatorname{VaR}_\alpha( S ) =  F_S^{-1}( \alpha )
-\end{equation}\]</span></p></li>
+\]</span></p></li>
 <li><p>Prima de valor en riesgo en la cola (Tail Value at Risk) <span class="math inline">\(TVaR_\alpha\)</span>. Es el promedio uniforme
 de todos los valores en riesgo <span class="math inline">\(VaR_u\)</span>, con <span class="math inline">\(u \geq \alpha\)</span>.
-<span class="math display">\[\begin{equation}
+<span class="math display">\[
 P = \rho( S ) = \operatorname{TVaR}_\alpha( S ) = \frac{1}{1-\alpha} \int\limits_{\alpha}^1 \operatorname{VaR}_u( S )\ du
-\end{equation}\]</span></p></li>
+\]</span></p></li>
 </ol>
 <div class="example">
 <p><span id="exm:l6ex2" class="example"><strong>Ejemplo 6.1  </strong></span>Consideremos el caso donde todos los siniestros son igualmente distribuidos e independientes (i.i.d)
