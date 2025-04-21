@@ -11,18 +11,18 @@ el riesgo total que asume el asegurador.
 Los riesgos de cada uno de los $n \in \N$ asegurados, pueden ser representados por variables 
 aleatorias $X_1,\ldots X_n$, las mismas pueden ser independientes o dependientes entre ellas. El 
 costo total del portafolio está dado por la suma de todos estos riesgos.
-\begin{equation}
+$$
 S = \sum\limits_{i=1}^n X_i
-\end{equation}
+$$
 El conocer la distribución del costo total $S$ es una tarea crucial para el asegurador.
 
 El valore esperado de de los reclamos totales, puede ser calculado fácilmente utilizando las
 propiedades de linealidad de la esperanza matemática $\E$
-\begin{equation}
+$$
 \E[ S ]
 = \E\left[ \sum\limits_{i=1}^n X_i \right] 
 = \sum\limits_{i=1}^n \E\left[ X_i \right]
-\end{equation}
+$$
 por su parte, la varianza de la variable aleatoria del costo total $S$, está dada por:
 \begin{eqnarray*}
 \V\left[ S \right]
@@ -36,9 +36,9 @@ por su parte, la varianza de la variable aleatoria del costo total $S$, está da
 Muchas de las veces el número total de reclamos $n$ es incierto y por tal razón es mejor considerar
 que el número de siniestros vendrá dado por otra variable aleatoria discreta $N$ que solo tomará 
 valores en $\N$
-\begin{equation}
+$$
 S = \sum\limits_{i=1}^N X_i
-\end{equation}
+$$
 
 Esto nos lleva a considerar diferentes modelos de agregación de reclamos o pérdidas como se suele 
 decir en inglés "loss models" @PanjerLoss2012, @LossModFur.
@@ -74,22 +74,25 @@ En el modelo de riesgos individuales consideramos que el número de siniestros q
 conocido, por ejemplo puede ser a lo sumo el tamaño de la población asegurada, en tal caso la
 variable aleatoria $N$ pasa a ser una constante, que representaremos por $n$. De esta forma, la
 severidad total puede ser fácilmente representada por: 
-\begin{equation}
+$$
   S = \sum\limits_{i=1}^n X_i
-\end{equation}
+$$
 
 La hipótesis más usual que sostiene a este modelo es la indenpendencia entre cada uno de los
 reclamos $X_i$ y $X_j$ son independientes para cualquier $1 \leq i \neq j \leq n$.
 
 El valor esperado de la severidad total $S$ es:
+$$
 \begin{eqnarray*}
 \E[S]
 & = & \E\left[ \sum\limits_{i=1}^n X_i \right] \\
 & = & \sum\limits_{i=1}^n \E\left[ X_i \right] \\
 & = & n \E[X] \quad \text{si $\{X_i\}$ son idénticamente distribuidas}
 \end{eqnarray*}
+$$
 
 Así mismo con la varianza de $S$.
+$$
 \begin{eqnarray*}
 \V\left[ S \right]
 & = & \V\left[ \sum\limits_{i=1}^n X_i \right] \\
@@ -98,25 +101,31 @@ Así mismo con la varianza de $S$.
 & = & \sum\limits_{i=1}^n \V\left[ X_i \right]\quad \text{si $\{X_i\}$ sin son independientes entre si} \\
 & = & n \V\left[ X \right]\quad \text{si $\{X_i\}$ sin son idénticamente distribuidas}
 \end{eqnarray*}
+$$
 
 Al tener un número determinado de reclamos $n \in \N$, la distribución de probabilidad del
 total de reclamos $S$ puede ser calculada de una forma maś sencilla.
+$$
 \begin{eqnarray*}
 F_S( x )
 & = & F_{X_1} \star \cdots \star F_{X_n} ( s )\quad \text{sin $\{X_i\}$ son independientes} \\
 & = & F_{X}^{\star n}( s )\quad \text{si $\{X_i\}$ son idénticamente distribuidas}
 \end{eqnarray*}
+$$
 
 así mismo, si las densidades de probabilidad están bien definidas, entonces
+$$
 \begin{eqnarray*}
 f_S( s )
 & = & f_{X_1} \star \cdots \star f_{X_n} ( s )\quad \text{sin $\{X_i\}$ son independientes} \\
 & = & f_{X}^{\star n}( s )\quad \text{si $\{X_i\}$ son idénticamente distribuidas}
 \end{eqnarray*}
+$$
 
 Una posible estrategia para estimar $F_S$ o $f_S$ es utilizar la transformada de Fourier 
 $\Fo$, la cual convierte las convoluciones en productos y luego invertir de nuevo la 
 transformada de Fourier.
+$$
 \begin{eqnarray*}
 F_S 
 & = & \Fo^{-1}\left( \Fo\left( F_S \right) \right) \\
@@ -126,8 +135,10 @@ F_S
 & = & \Fo^{-1}\left( \Fo\left( F_{X} \right)^n \right)
 \quad \text{si $\{X_i\}$ sin son idénticamente distribuidas } \\
 \end{eqnarray*}
+$$
 
 o de forma equivalente para la densidad $f_S$
+$$
 \begin{eqnarray*}
 f_S 
 & = & \Fo^{-1}\left( \Fo\left( f_S \right) \right) \\
@@ -137,6 +148,7 @@ f_S
 & = & \Fo^{-1}\left( \Fo\left( f_{X} \right)^n \right)
 \quad \text{si $\{X_i\}$ sin son idénticamente distribuidas } \\
 \end{eqnarray*}
+$$
 
 <!------------------------------------------------------------------------------------------------->
 ### Algoritmo de simulación
@@ -184,9 +196,9 @@ no presenta una forma analítica conocida.
 De la imposibilidad anterior se se puede ver la utilidad de trabajar con la simulación aleatoria de 
 la variable $S$. Se puede estimar la distribución acumulada de probabilidad $F_S$ a partir 
 de la distribución empírica $F_m$ de la muestra, con:
-\begin{equation}
+$$
 F_S( s ) \approx F_m( s ) = \frac{1}{m} \sum\limits_{i=1}^m \mathbf {1}_{(-\infty,s]}( S_i )
-\end{equation}
+$$
 el resultado de acotación de \@ref(thm:ddkw) nos da un criterio de convergencia de $F_m$ a $F_S$
 
 Para construir $F_m$ en R, se puede utilizar la función ya empaquetada `ecdf` (empirical cumulative
@@ -218,11 +230,11 @@ plot( plt )
 
 Para calcular la esperanza de la severidad total $S$, también se puede utilizar una aproximación 
 a la integral de Riemann-Stieltjes utilizando la distribución acumulada empírica $F_m$.
-\begin{equation}
+$$
 \E[ S ] = \int\limits_{\R} s dF_S( s )
 \approx \int\limits_{\R} s dF_m( s )
 \approx \sum\limits_{i=1}^N s_{i} \left( F_m( s_{i+1} ) - F_m( s_{i} ) \right)
-\end{equation}
+$$
 
 Esta aproximación en R puede ser implementada de la siguiente forma:
 ```{r l5c3}
@@ -232,11 +244,13 @@ EmS <- sum( s[-N] * diff( sapply( s, FUN = Fm ) ) )
 ```
 
 De ello tenemos los siguientes resultados de cálculo para el valor esperado de la severidad total
+$$
 \begin{eqnarray*}
 \E[S] = \sum\limits_{i=1}^n e^{ \mu_i + \frac{1}{2} \sigma_i^2 } & = & `r formatC( ES, digits = 4, format = 'f' )`, \\
 \overline{S} = \frac{1}{m} \sum\limits_{i=1}^m S_i & = & `r formatC( EeS, digits = 4, format = 'f' )`, \\
 \sum\limits_{i=1}^N s_{i} \left( F_m( s_{i+1} ) - F_m( s_{i} ) \right) & = & `r formatC( EmS, digits = 4, format = 'f' )`
 \end{eqnarray*}
+$$
 
 Lo bueno de poseer una buena aproximación a la distribución acumulada de una variable aleatoria, es 
 que podemos calcular algunos otros valores de importancia relacionados a la variable aleatoria y
@@ -259,23 +273,23 @@ Podemos considerar el caso sencillo donde el valor posible de severidad es deter
 para cada póliza $i\in \{1,\ldots,n\}$, el valor de severidad probable es único $M > 0$ si en caso 
 se da un evento $A_i$, esto lo podemos expresar como $X_i = M \mathbf{1}_{A_i}$ es constante. Así, pérdida
 total está dada por:
-\begin{equation} 
+$$ 
 S = \sum\limits_{i=1}^n X_i = \sum\limits_{i=1}^n M \mathbf{1}_{A_i} 
-\end{equation}
+$$
 
 El valor total esperado de reclamos está dado por:
-\begin{equation}
+$$
 \E[ S ] 
 = \sum\limits_{i=1}^n \E\left[ M \mathbf{1}_{A_i} \right]
 = M \sum\limits_{i=1}^n P( A_i )
-\end{equation}
+$$
 la última igualdad resulta de las propiedades de la función indicatriz \@ref(def:indicatriz).
 
 Si en caso todos los $P(A_i) = p$ tienen la misma probabilidad, el valor total esperado de reclamos
 toma la siguiente forma:
-\begin{equation}
+$$
 \E[S] = n M p
-\end{equation}
+$$
 :::
 
 <!------------------------------------------------------------------------------------------------->
@@ -285,7 +299,7 @@ El modelo colectivo de riesgo considera un número de reclamos descritos por una
 discreta $N$. Los reclamos corresponden a un número de pólizas en un periodo específico, el valor 
 de cada reclamo $i \in \{1,\ldots,N\}$ está representado por las variables aleatorias $X_i$. 
 Usualmente, se considera que cada uno de los reclamos $X_i$ están idénticamente distribuidos.
-\begin{equation}
+$$
 S = 
 \left\{
 \begin{array}{ll}
@@ -293,11 +307,12 @@ S =
 0 & \text{si}\ N = 0
 \end{array}
 \right.
-\end{equation}
+$$
 o de forma más compacta se tan solo utilizar la igualdad $S = \sum\limits_{i=1}^N X_i$, donde se 
 asume que la suma da $0$ si $N = 0$.
 
 El valor esperado del total de reclamos $S$, está dado por:
+$$
 \begin{eqnarray*}
 \E[S]
 & = & \E\left[ \sum\limits_{i=1}^N X_i \right] \\
@@ -313,9 +328,11 @@ El valor esperado del total de reclamos $S$, está dado por:
 \quad \text{si $X$ y $N$ son independientes} \\
 & = & \E[ N ] \E[ X ] 
 \end{eqnarray*}
+$$
 
 También podemos calcular la varianza de los reclamos totales $S$, para ello necesitamos primeramente
 calcular su segundo momento.
+$$
 \begin{eqnarray*}
 \E[S^2]
 & = & \E\left[ \left( \sum\limits_{i=1}^N X_i \right)^2 \right] \\
@@ -331,8 +348,10 @@ calcular su segundo momento.
 - \E\left[N\right] \E\left[X\right]^2 \\
 & = & \E\left[N\right] \V\left[X\right] + \E\left[N^2\right] \E\left[X\right]^2
 \end{eqnarray*}
+$$
 
 finalmente la varianza de $S$ tiene la siguiente expresión
+$$
 \begin{eqnarray*}
 \V\left[S\right]
 & = & \E\left[S^2\right] - \E\left[S\right]^2 \\
@@ -340,8 +359,10 @@ finalmente la varianza de $S$ tiene la siguiente expresión
 + \E\left[N^2\right] \E\left[X\right]^2 - \E\left[N\right]^2 \E\left[X\right]^2 \\
 & = & \E\left[N\right] \V\left[X\right] + \V\left[N\right] \E\left[X\right]^2
 \end{eqnarray*}
+$$
 
 La distribución acumulada del reclamo total $S$ tiene la forma:
+$$
 \begin{eqnarray*}
 F_S( s ) 
 & = & P( S \leq s ) \\
@@ -351,6 +372,7 @@ F_S( s )
 & = & \sum\limits_{n=0}^{+\infty} F_{X_1} \star \cdots \star F_{X_n}( s ) p_n\quad \text{distribución de la suma de variables aleatorias} \\
 & = & \sum\limits_{n=0}^{+\infty} F^{\star n}_{X}( s ) p_n\quad \text{si $\{X_i\}$ son idénticamente distribuidas}
 \end{eqnarray*}
+$$
 tomando $F^{\star 0}_{X}( s ) = 1$. 
 
 Este último resultado muestra que la distribución de probabilidad de $S$ no es más que una mixtura
@@ -413,15 +435,16 @@ a un modelo individual, para ciertos casos particulares. Por ejemplo, si conside
 cuando la variable aleatoria del conteo de siniestros $N \rightsquigarrow Bin( n, p )$ sigue una 
 distribución binomial con parámetros $n$ y $p$ y los reclamos individuales $\{ X_i \}$ son i.i.d.
 A partir de esto, el reclamo total $S$ puede ser expresado de dos formas
-\begin{equation}
+$$
 S = \sum\limits_{k=0}^{N} X_k
 = \sum\limits_{k=0}^n B_k X_k
-\end{equation}
+$$
 donde $B_k \rightsquigarrow Ber( p )$ y es independientes de $X_k$. Así el modelo colectivo se 
 transforma en un modelo individual con $n$ constante y valores de reclamos individuales dados por 
 la variable aleatoria $Y_k = B_k X_k$.
 
 Para este caso en particular
+$$
 \begin{eqnarray*}
 \E[ S ] 
 & = & \E\left[ \sum\limits_{k=0}^{n} B_k X_k \right] \\
@@ -430,8 +453,10 @@ Para este caso en particular
 & = & n \E[ B ] \E[ X ] \\
 & = & n p \E[ X ]
 \end{eqnarray*}
+$$
 
 así mismo,
+$$
 \begin{eqnarray*}
 \V[ S ]
 & = & n \V[ B X ] \\
@@ -442,6 +467,7 @@ así mismo,
 & = & n \left( p \V[ X ] + p ( 1 - p ) \E[ X ]^2 \right) \\
 & = & n \left( \E[B] \V[ X ] + \V[B] \E[ X ]^2 \right)
 \end{eqnarray*}
+$$
 
 ::: {.example #l3ex3}
 Hacemos uso del algoritmo de simulación, pero bajo la consideración anterior donde el conteo 
@@ -464,10 +490,12 @@ EeS <- mean( S )
 ES <- n * p * exp( mu + 0.5 * sigma^2 )
 ```
 
+$$
 \begin{eqnarray*}
 \E[S] = n p e^{ \mu + \frac{1}{2} \sigma^2 } & = & `r formatC( ES, digits = 4, format = 'f' )`, \\
 \overline{S} = \frac{1}{m} \sum\limits_{i=1}^m S_i & = & `r formatC( EeS, digits = 4, format = 'f' )`, 
 \end{eqnarray*}
+$$
 :::
 
 Es importante observar que si la frecuencia de reclamos es superior a $1$, sea este por póliza, 
@@ -485,11 +513,11 @@ modelo individual y el modelo colectivo. Se parte de considerar un número $n$ d
 donde para cada unidad $i \in \{1, \ldots, n\}$, se considera que puede presentar una cantidad 
 de reclamos dados por una variable aleatoria discreta $N_i$, y así para cada presentar un número
 de reclamos $X_{i,1}, \ldots, X_{i,N_i}$. Así el reclamo total viene dado por la expresión
-\begin{equation}
+$$
 S 
 = \sum\limits_{i=1}^n X_i
 = \sum\limits_{i=1}^n \sum\limits_{j=1}^{N_i} X_{i,j}
-\end{equation}
+$$
 
 <!------------------------------------------------------------------------------------------------->
 ## Modelos con variables explicativas
@@ -500,10 +528,10 @@ el valor de los siniestros $\{X_i\}$. Es decir no hay independencia entre $\{Y_j
 como tampoco entre $\{Y_j\}$ y $\{X_i\}$. Es así que un modelo colectivo $S = \sum\limits_{i=1}^N X_i$
 su estudio, estimación y tarificación debe ser realizada de forma condicional respecto de las 
 variables aleatorias explicativas $\{Y_j\}$,
-\begin{equation}
+$$
 \E[ S ] 
 = \E\left[ \E\left[ S \middle| Y_1, \ldots, Y_n \right] \right]
-\end{equation}
+$$
 de donde es necesario estimar cada una de las esperanzas condicionadas 
 $\E\left[ S \middle| Y_1, \ldots, Y_n \right]$.
 
@@ -530,22 +558,22 @@ cualquier $n \in \N$. Ciertamente, es de esperar que los tiempos de arribo sean 
 aleatorias y están asociados a la frecuencia $N$ en un periodo dado, ya que $N$ cuenta los tiempos
 de arribo hasta un tiempo dado, transformamos así a $N$ en una variable aleatoria dependiente del 
 tiempo, en lo que se conoce como un **proceso estocástico**.
-\begin{equation}
+$$
 N( t )
 = \#\left\{ k \in \N\ \middle|\ T_k \leq t \right\} 
 = \sum\limits_{k=0}^{+\infty} \mathbf{1}_{(-\infty,t]}\left( T_k \right)
-\end{equation}
+$$
 
 Inmediatamente de este razonamiento, resulta que los reclamos totales también se transforman en 
 proceso estocástico.
-\begin{equation}
+$$
 S( t ) = \sum\limits_{i=1}^{N( t )} X_i
-\end{equation}
+$$
 
 Además, se pueden identificar las variables aleatorias de **tiempos entre arribos**
-\begin{equation}
+$$
 W_n = T_n - T_{n-1},\quad \forall n \in \N
-\end{equation}
+$$
 tomando $T_0 = 0$.
 
 <!------------------------------------------------------------------------------------------------->
@@ -646,31 +674,32 @@ plot( t, S, type = 's' )
 Para el caso del modelo individual de riesgos podemos hacer uso de la siguiente estimación de la
 densidad de probabilidad de los reclamos totales $S$, utilizando la transformada de Fourier. En la 
 implementación numérica se utiliza la transformada de Fourier rápida (FFT).
-\begin{equation}
+$$
 \Fo\left( f_S \right)
 = \Fo\left( f^{\star n}_X \right)
 = \Fo\left( f_X \right)^{n}
-\end{equation}
+$$
 
 Por tanto de esta relación como la transformada de Fourier es invertible, existe $\Fo^{-1}$. 
 Resulta el siguiente método para calcular la densidad de $S$
-\begin{equation}
+$$
 f_S = \Fo^{-1}\left( \Fo\left( f_S \right) \right)
 = \Fo^{-1}\left(\Fo\left( f_X \right)^{n} \right)
-\end{equation}
+$$
 
 En conclusión para determinar la densidad de probabilidad de $S$ basta conocer la transformada de
 Fourier de la distribución de los reclamos individuales, multiplicarla por si misma $n$ veces y 
 tomar la transformada de Fourier inversa.
-
+$$
 \begin{eqnarray*}
 \Fo\left( f_S \right)
 & = & \Fo\left( \sum\limits_{n=0}^{+\infty} p_n f_X^{\star n} \right) \\
 & = & \sum\limits_{n=0}^{+\infty} p_n \Fo\left( f_X^{\star n} \right) \\
 & = & \sum\limits_{n=0}^{+\infty} p_n \Fo\left( f_X \right)^{n}
 \end{eqnarray*}
-
+$$
 como consecuencia
+$$
 \begin{eqnarray*}
 f_S 
 & = & \Fo^{-1}\left( \Fo\left( f_S \right) \right)\\
@@ -679,23 +708,23 @@ f_S
 & = & \sum\limits_{n=0}^{+\infty} p_n \Fo^{-1}\left( \Fo\left( f_X \right)^{n} \right)\quad
 \text{Una inversión por cada término en la suma}
 \end{eqnarray*}
+$$
 
-
-\begin{equation}
+$$
 W_n = \frac{S_n}{n}
-\end{equation}
+$$
 
-\begin{equation}
+$$
 \E\left[ W_n \right]
 = \E\left[ \frac{S_n}{n} \right] 
 = \frac{1}{n} \E\left[ S_n \right]
-\end{equation}
+$$
 
-\begin{equation}
+$$
 \V\left[ W_n \right]
 = \V\left[ \frac{S_n}{n} \right]
 = \frac{1}{n^2} \V\left[ S_n \right]
-\end{equation}
+$$
 
 ```{r l5end, echo = FALSE}
 rm( list = ls()[ ls() != 'def.chunk.hook' ] )
