@@ -17,7 +17,7 @@ por la cobertura adquirida $\Pi_i$ por la venta de la $i$-ésima póliza.
 Así, la forma más sencilla de calcular la **reserva de riesgos en curso** $RRC$ en el tiempo $t$, 
 está dada por:
 $$
-RRC( t ) = \sum\limits_{i=1}^n \mathbf{1}_{\left[T^1_i, T^2_i\right]}( t ) \frac{T^2_i - t}{T^2_i - T^1_i} \Pi_i 
+RRC( t ) = \sum\limits_{i=1}^n \mathbf{1}_{D_i}( t ) \frac{T^2_i - t}{T^2_i - T^1_i} \Pi_i 
 $$
 
 Esta metodología es la más sencilla, pero no toma en cuenta que no siempre sucede que los reclamos 
@@ -43,13 +43,29 @@ $$
 RRC( t ) = \sum\limits_{i \in I} \mathbf{1}_{D_i}( t ) \frac{T^2_i - t}{T^2_i - T^1_i} \Pi_i 
 + \sum\limits_{i \in J} \mathbf{1}_{D_i}( t ) \Pi_i 
 $$
-de ingual manera la prima devengada $PGD$ está dada por:
+de igual manera la prima devengada $PDG$ está dada por:
 $$
 PDG( t ) = \sum\limits_{i \in I} \mathbf{1}_{\left[T^1_i, +\infty\right)}( t ) 
 \frac{\min\left( t, T^2_i \right) - T^1_i}{T^2_i - T^1_i} \Pi_i 
 + \sum\limits_{i \in J} \mathbf{1}_{\left(T^2_i,+\infty\right)}( t ) \Pi_i 
 $$
 
+Para dar mayor realidad al cálculo de la reserva de riesgos en curso $RRC$, podemos incluir los
+costos de adquisición $A_i$ por cada una de las pólizas vendidas $i \in \{1, \ldots, n \}$. 
+Usualmente, este valor ya se incluye en el valor de la prima, pero es directamente utilizado para 
+solventar los costos de adquisición. De ahí que resulta razonable quitar estos costos de la prima, 
+para así ajustar la $RRC$.
+$$
+RRC( t ) = \sum\limits_{i \in I} \mathbf{1}_{D_i}( t ) \frac{T^2_i - t}{T^2_i - T^1_i} \left( \Pi_i - A_i \right)
++ \sum\limits_{i \in J} \mathbf{1}_{D_i}( t ) \left( \Pi_i - A_i \right)
+$$
+
+y de igual forma la prima devengada
+$$
+PDG( t ) = \sum\limits_{i \in I} \mathbf{1}_{\left[T^1_i, +\infty\right)}( t ) 
+\frac{\min\left( t, T^2_i \right) - T^1_i}{T^2_i - T^1_i} \left( \Pi_i - A_i \right)
++ \sum\limits_{i \in J} \mathbf{1}_{\left(T^2_i,+\infty\right)}( t ) \left( \Pi_i - A_i \right)
+$$
 
 <!------------------------------------------------------------------------------------------------->
 ## Reservas de siniestros a pagar
