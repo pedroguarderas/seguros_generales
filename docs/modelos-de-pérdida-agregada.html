@@ -308,14 +308,16 @@ propiedades de linealidad de la esperanza matemática <span class="math inline">
 = \sum\limits_{i=1}^n \mathbb{E}\left[ X_i \right]
 \]</span>
 por su parte, la varianza de la variable aleatoria del costo total <span class="math inline">\(S\)</span>, está dada por:
-<span class="math display">\[\begin{eqnarray*}
+<span class="math display">\[
+\begin{eqnarray*}
 \mathbb{V}\left[ S \right]
 &amp; = &amp; \mathbb{V}\left[ \sum\limits_{i=1}^n X_i \right] \\
 &amp; = &amp; \sum\limits_{i=1}^n \mathbb{V}\left[ X_i \right]
 + \sum\limits_{i=1}^n \sum\limits_{j=1,j\neq i}^n \mathbb{C}\left[ X_i, X_j \right] \\
 &amp; = &amp; \sum\limits_{i=1}^n \mathbb{V}\left[ X_i \right]
 + 2\sum\limits_{i=1}^{n-1} \sum\limits_{j=i+1}^n \mathbb{C}\left[ X_i, X_j \right]
-\end{eqnarray*}\]</span></p>
+\end{eqnarray*}
+\]</span></p>
 <p>Muchas de las veces el número total de reclamos <span class="math inline">\(n\)</span> es incierto y por tal razón es mejor considerar
 que el número de siniestros vendrá dado por otra variable aleatoria discreta <span class="math inline">\(N\)</span> que solo tomará
 valores en <span class="math inline">\(\mathbb{N}\)</span>
@@ -326,7 +328,8 @@ S = \sum\limits_{i=1}^N X_i
 decir en inglés “loss models” <span class="citation">[<a href="bibliografía.html#ref-PanjerLoss2012">1</a>]</span>, <span class="citation">[<a href="bibliografía.html#ref-LossModFur">2</a>]</span>.</p>
 <p>De forma preliminar estudiemos la forma general que podría tener la distribución de <span class="math inline">\(S\)</span>, sin realizar
 alguna hipótesis (previa sobre el comportamiento de las variables aleatorias <span class="math inline">\(X_1, \ldots, X_n\)</span> y <span class="math inline">\(N\)</span>.
-<span class="math display">\[\begin{eqnarray*}
+<span class="math display">\[
+\begin{eqnarray*}
 F_S( s )
 &amp; = &amp; P( S \leq s ) \\
 &amp; = &amp; P\left( \sum\limits_{i=1}^N X_i \leq s \right) \\
@@ -338,14 +341,16 @@ F_S( s )
 \qquad \text{propiedades de la probabilidad condicional} \\
 &amp; = &amp; \sum\limits_{n=0}^{+\infty} \int\limits_{\left\{\sum\limits_{i=1}^n x_i \leq s\right\}} dF_n( x_1, \ldots, x_n )\ p_n
 \qquad \text{$F_n$ es la distribución conjunta de $X_1, \ldots, X_n$}
-\end{eqnarray*}\]</span>
+\end{eqnarray*}
+\]</span>
 la última expresión es importante de retener, nos dice que para comprender el comportamiento de
 los reclamos totales <span class="math inline">\(S\)</span>, debemos estudiar y estimar la frecuencia de los reclamos <span class="math inline">\(N\)</span>, y también
 debemos comprender y estimar cada uno de los reclamos <span class="math inline">\(X_i\)</span> y también su interacción, siendo al
 menos estos una infinidad si <span class="math inline">\(N\)</span> puede tomar valores tendiendo al infinito. En términos resumidos,
 hay que comprender y estimar la frecuencia y severidad de los reclamos que están asociados al riesgo
 cubierto.</p>
-<p>Los términos integrales <span class="math inline">\(\int\limits_{\left\{\sum\limits_{i=1}^n x_i \leq s\right\}} dF_n( x_1, \ldots, x_n )\)</span> asociados a la severidad presentan un verdadero reto estadístico y computacional; hace unos años
+<p>Los términos integrales <span class="math inline">\(\int\limits_{\left\{\sum\limits_{i=1}^n x_i \leq s\right\}} dF_n( x_1, \ldots, x_n )\)</span>
+asociados a la severidad presentan un verdadero reto estadístico y computacional; hace unos años
 atrás se desarrolló unos nuevos algoritmos para calcular estos términos <span class="citation">[<a href="bibliografía.html#ref-aep_algo">13</a>]</span>, <span class="citation">[<a href="bibliografía.html#ref-gaep_algo">14</a>]</span>.</p>
 <!------------------------------------------------------------------------------------------------->
 </div>
@@ -439,7 +444,11 @@ de las severidades <span class="math inline">\(X_1, \ldots, X_n\)</span> y se co
 <div class="example">
 <p><span id="exm:l3ex1" class="example"><strong>Ejemplo 5.1  </strong></span>El siguiente código ejemplifica el algoritmo anterior, donde se asume que cada variable aleatoria de
 severidad <span class="math inline">\(X_i\)</span> sigue una ley log-normal <span class="math inline">\(LN( \mu_i, \sigma_i )\)</span>, de parámetros <span class="math inline">\(\mu_i, \sigma_i\)</span>,
-para <span class="math inline">\(i \in \{1,\ldots, n\}\)</span>.</p>
+para cada <span class="math inline">\(i \in \{1,\ldots, n\}\)</span>. El reclamo total <span class="math inline">\(S = \sum\limits_{i=1}^n X_i\)</span> sigue una ley
+de probabilidad que estará dada por la convolución de cada una de las leyes de probabilidad de
+cada reclamo <span class="math inline">\(X_i\)</span>, sin embargo estas leyes en este ejemplo son log-normales y no se conoce una
+forma explícita, analítica para la convolución de log-normales. Por tal razón, debemos aproximar
+la distribución de probabilidad de <span class="math inline">\(F_S\)</span> a partir de la distribución empírica.</p>
 <p></p>
 <details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb34"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb34-1"><a href="modelos-de-pérdida-agregada.html#cb34-1"></a><span class="fu">set.seed</span>(<span class="dv">94312</span>)</span>
@@ -460,17 +469,17 @@ para <span class="math inline">\(i \in \{1,\ldots, n\}\)</span>.</p>
 <span id="cb34-16"><a href="modelos-de-pérdida-agregada.html#cb34-16"></a>S <span class="ot">&lt;-</span> <span class="fu">sapply</span>( X, <span class="at">FUN =</span> <span class="cf">function</span>( x ) <span class="fu">sum</span>( x ) )</span></code></pre></div>
 </details>
 <p></p>
-</div>
-<p>En el ejemplo anterior es de notar que la densidad de probabilidad de la severidad <span class="math inline">\(S\)</span> resulta de la
+<p>Com ya lo mencionamos en este ejemplo densidad de probabilidad de la severidad <span class="math inline">\(S\)</span> resulta de la
 convolución de las <span class="math inline">\(n\)</span> densidades individuales <span class="math inline">\(f_S = f_{X_1} \star \cdots \star f_{X_n}\)</span>, la cual
 no presenta una forma analítica conocida.</p>
-<p>De la imposibilidad anterior se se puede ver la utilidad de trabajar con la simulación aleatoria de
-la variable <span class="math inline">\(S\)</span>. Se puede estimar la distribución acumulada de probabilidad <span class="math inline">\(F_S\)</span> a partir
-de la distribución empírica <span class="math inline">\(F_m\)</span> de la muestra, con:
+<p>De la imposibilidad anterior, como ya mencionamos se puede ver la utilidad de trabajar con la
+simulación aleatoria de la variable <span class="math inline">\(S\)</span>. Para así estimar la distribución acumulada de probabilidad
+<span class="math inline">\(F_S\)</span> a partir de la distribución empírica <span class="math inline">\(F_m\)</span> de la muestra, con:
 <span class="math display">\[
 F_S( s ) \approx F_m( s ) = \frac{1}{m} \sum\limits_{i=1}^m \mathbf {1}_{(-\infty,s]}( S_i )
 \]</span>
-el resultado de acotación de <a href="probabilidad-y-estadística.html#thm:ddkw">3.4</a> nos da un criterio de convergencia de <span class="math inline">\(F_m\)</span> a <span class="math inline">\(F_S\)</span></p>
+el resultado de concetración <a href="probabilidad-y-estadística.html#thm:ddkw">3.4</a> es más nos brinda un criterio de convergencia de
+<span class="math inline">\(F_m\)</span> a <span class="math inline">\(F_S\)</span></p>
 <p>Para construir <span class="math inline">\(F_m\)</span> en R, se puede utilizar la función ya empaquetada <code>ecdf</code> (empirical cumulative
 distribution function).</p>
 <p></p>
@@ -524,19 +533,11 @@ a la integral de Riemann-Stieltjes utilizando la distribución acumulada empíri
 \sum\limits_{i=1}^N s_{i} \left( F_m( s_{i+1} ) - F_m( s_{i} ) \right) &amp; = &amp; 33494.1981
 \end{eqnarray*}
 \]</span></p>
+</div>
 <p>Lo bueno de poseer una buena aproximación a la distribución acumulada de una variable aleatoria, es
 que podemos calcular algunos otros valores de importancia relacionados a la variable aleatoria y
 no tan solo utilizar medidas de tendencia central. Sin embargo, para que esta aproximación sea
 útil se requiere reducir el error de probabilidad <a href="probabilidad-y-estadística.html#thm:ddkw">3.4</a>.</p>
-<!-- La imagen a continuación muestra el tamaño de la simulación $n$ en función de los parámetros -->
-<!-- $\delta$ y $\varepsilon$. Como se puede observar para tener un error de discrepancia útil, el -->
-<!-- número de simulaciones crece rápidamente -->
-<!-- ```{r l5c4} -->
-<!-- e <- seq( 1e-6, 1e-3, length.out = 25 ) -->
-<!-- d <- seq( 1e-6, 1e-3, length.out = length( e ) ) -->
-<!-- n <- outer( e, d, FUN = function( e, d ) return( log( -log( d / 2 ) / ( 2 * e^2 ) ) ) ) -->
-<!-- persp( e, d, n, col = 'darkgreen', theta = 140, phi = 20 ) -->
-<!-- ``` -->
 <div class="example">
 <p><span id="exm:l3ex2" class="example"><strong>Ejemplo 5.2  </strong></span>Podemos considerar el caso sencillo donde el valor posible de severidad es determinista, es decir
 para cada póliza <span class="math inline">\(i\in \{1,\ldots,n\}\)</span>, el valor de severidad probable es único <span class="math inline">\(M &gt; 0\)</span> si en caso
