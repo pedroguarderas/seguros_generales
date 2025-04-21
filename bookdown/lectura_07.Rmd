@@ -77,12 +77,32 @@ $$
   
 <!------------------------------------------------------------------------------------------------->
 ### Siniestros sucedidos, reportados, no resueltos, no pagados
-$$
 
-$$
-  
 <!------------------------------------------------------------------------------------------------->
 ### Siniestros sucedidos, no reportados, no resueltos, no pagados
+
+La siguiente lista, aunque no exhaustiva, citamos algunos de los métodos que se utiliza para estimar
+reserva $IBNR$, para más detalle se puede consultar @reserv_Wuthrich o @non_lif_mik.
+
+1. Chain-Ladder
+
+2. Chain-Ladder con mínimos cuadrados
+
+3. Benktander-Hovinen
+
+4. Cape-Cod
+
+5. Mack
+
+6. Modelos Bayesianos
+
+7. Markov chain Monte Carlo
+
+8. Bühlmann-Straub
+
+9. Modelos basados en distribuciones
+
+10. GLM
 
 $$
 IBNR
