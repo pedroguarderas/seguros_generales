@@ -302,7 +302,7 @@ por la cobertura adquirida <span class="math inline">\(\Pi_i\)</span> por la ven
 <p>Así, la forma más sencilla de calcular la <strong>reserva de riesgos en curso</strong> <span class="math inline">\(RRC\)</span> en el tiempo <span class="math inline">\(t\)</span>,
 está dada por:
 <span class="math display">\[
-RRC( t ) = \sum\limits_{i=1}^n \mathbf{1}_{\left[T^1_i, T^2_i\right]}( t ) \frac{T^2_i - t}{T^2_i - T^1_i} \Pi_i
+RRC( t ) = \sum\limits_{i=1}^n \mathbf{1}_{D_i}( t ) \frac{T^2_i - t}{T^2_i - T^1_i} \Pi_i
 \]</span></p>
 <p>Esta metodología es la más sencilla, pero no toma en cuenta que no siempre sucede que los reclamos
 son proporcionales a la cantidad de prima restante en el tiempo. Incluso en el caso que el valor
@@ -325,11 +325,26 @@ cuales se mantiene la reserva constante por toda la duración de la póliza.
 RRC( t ) = \sum\limits_{i \in I} \mathbf{1}_{D_i}( t ) \frac{T^2_i - t}{T^2_i - T^1_i} \Pi_i
 + \sum\limits_{i \in J} \mathbf{1}_{D_i}( t ) \Pi_i
 \]</span>
-de ingual manera la prima devengada <span class="math inline">\(PGD\)</span> está dada por:
+de igual manera la prima devengada <span class="math inline">\(PGD\)</span> está dada por:
 <span class="math display">\[
 PDG( t ) = \sum\limits_{i \in I} \mathbf{1}_{\left[T^1_i, +\infty\right)}( t )
 \frac{\min\left( t, T^2_i \right) - T^1_i}{T^2_i - T^1_i} \Pi_i
 + \sum\limits_{i \in J} \mathbf{1}_{\left(T^2_i,+\infty\right)}( t ) \Pi_i
+\]</span></p>
+<p>Para dar mayor realidad al cálculo de la reserva de riesgos en curso <span class="math inline">\(RRC\)</span>, podemos incluir los
+costos de adquisición <span class="math inline">\(A_i\)</span> por cada una de las pólizas vendidas <span class="math inline">\(i \in \{1, \ldots, n \}\)</span>.
+Usualmente, este valor ya se incluye en el valor de la prima, pero es directamente utilizado para
+solventar los costos de adquisición. De ahí que resulta razonable quitar estos costos de la prima,
+para así ajustar la <span class="math inline">\(RRC\)</span>.
+<span class="math display">\[
+RRC( t ) = \sum\limits_{i \in I} \mathbf{1}_{D_i}( t ) \frac{T^2_i - t}{T^2_i - T^1_i} \left( \Pi_i - A_i \right)
++ \sum\limits_{i \in J} \mathbf{1}_{D_i}( t ) \left( \Pi_i - A_i \right)
+\]</span></p>
+<p>y de igual forma la prima devengada
+<span class="math display">\[
+PDG( t ) = \sum\limits_{i \in I} \mathbf{1}_{\left[T^1_i, +\infty\right)}( t )
+\frac{\min\left( t, T^2_i \right) - T^1_i}{T^2_i - T^1_i} \left( \Pi_i - A_i \right)
++ \sum\limits_{i \in J} \mathbf{1}_{\left(T^2_i,+\infty\right)}( t ) \left( \Pi_i - A_i \right)
 \]</span></p>
 <!------------------------------------------------------------------------------------------------->
 </div>
