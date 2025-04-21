@@ -173,7 +173,11 @@ $S_i = \sum\limits_{j=1}^n X_{i,j}$
 ::: {.example #l3ex1}
 El siguiente código ejemplifica el algoritmo anterior, donde se asume que cada variable aleatoria de 
 severidad $X_i$ sigue una ley log-normal $LN( \mu_i, \sigma_i )$, de parámetros $\mu_i, \sigma_i$, 
-para $i \in \{1,\ldots, n\}$.
+para cada $i \in \{1,\ldots, n\}$. El reclamo total $S = \sum\limits_{i=1}^n X_i$ sigue una ley 
+de probabilidad que estará dada por la convolución de cada una de las leyes de probabilidad de 
+cada reclamo $X_i$, sin embargo estas leyes en este ejemplo son log-normales y no se conoce una 
+forma explícita, analítica para la convolución de log-normales. Por tal razón, debemos aproximar
+la distribución de probabilidad de $F_S$ a partir de la distribución empírica.
 ```{r l5c1}
 set.seed(94312)
 
@@ -192,19 +196,19 @@ X <- lapply( 1:m, FUN = function( i ) sapply( 1:n, FUN = function( j ) rlnorm( 1
 # 4. simulación de severidad total
 S <- sapply( X, FUN = function( x ) sum( x ) )
 ```
-:::
 
-En el ejemplo anterior es de notar que la densidad de probabilidad de la severidad $S$ resulta de la
+Com ya lo mencionamos en este ejemplo densidad de probabilidad de la severidad $S$ resulta de la
 convolución de las $n$ densidades individuales $f_S = f_{X_1} \star \cdots \star f_{X_n}$, la cual
 no presenta una forma analítica conocida. 
 
-De la imposibilidad anterior se se puede ver la utilidad de trabajar con la simulación aleatoria de 
-la variable $S$. Se puede estimar la distribución acumulada de probabilidad $F_S$ a partir 
-de la distribución empírica $F_m$ de la muestra, con:
+De la imposibilidad anterior, como ya mencionamos se puede ver la utilidad de trabajar con la 
+simulación aleatoria de la variable $S$. Para así estimar la distribución acumulada de probabilidad 
+$F_S$ a partir de la distribución empírica $F_m$ de la muestra, con:
 $$
 F_S( s ) \approx F_m( s ) = \frac{1}{m} \sum\limits_{i=1}^m \mathbf {1}_{(-\infty,s]}( S_i )
 $$
-el resultado de acotación de \@ref(thm:ddkw) nos da un criterio de convergencia de $F_m$ a $F_S$
+el resultado de concetración \@ref(thm:ddkw) es más nos brinda un criterio de convergencia de 
+$F_m$ a $F_S$
 
 Para construir $F_m$ en R, se puede utilizar la función ya empaquetada `ecdf` (empirical cumulative
 distribution function).
@@ -256,6 +260,7 @@ $$
 \sum\limits_{i=1}^N s_{i} \left( F_m( s_{i+1} ) - F_m( s_{i} ) \right) & = & `r formatC( EmS, digits = 4, format = 'f' )`
 \end{eqnarray*}
 $$
+:::
 
 Lo bueno de poseer una buena aproximación a la distribución acumulada de una variable aleatoria, es 
 que podemos calcular algunos otros valores de importancia relacionados a la variable aleatoria y
@@ -265,8 +270,8 @@ no tan solo utilizar medidas de tendencia central. Sin embargo, para que esta ap
 ::: {.example #l3ex2}
 Podemos considerar el caso sencillo donde el valor posible de severidad es determinista, es decir
 para cada póliza $i\in \{1,\ldots,n\}$, el valor de severidad probable es único $M > 0$ si en caso 
-se da un evento $A_i$, esto lo podemos expresar como $X_i = M \mathbf{1}_{A_i}$ es constante. Así, pérdida
-total está dada por:
+se da un evento $A_i$, esto lo podemos expresar como $X_i = M \mathbf{1}_{A_i}$ es constante. Así, 
+pérdida total está dada por:
 $$ 
 S = \sum\limits_{i=1}^n X_i = \sum\limits_{i=1}^n M \mathbf{1}_{A_i} 
 $$
