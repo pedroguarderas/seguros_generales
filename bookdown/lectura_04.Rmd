@@ -501,6 +501,7 @@ f_X( x )
 \end{array}
 \right.
 $$
+$$
 \begin{eqnarray*}
 \E[X^k] 
 & = & \frac{\theta^k \Gamma\left( \alpha + \frac{k}{\tau}\right)}{\Gamma( \alpha )},
@@ -512,6 +513,7 @@ $$
 & = & \frac{\theta^2 \Gamma\left( \alpha + \frac{2}{\tau}\right)}{\Gamma( \alpha )}
 - \frac{\theta^2 \Gamma\left( \alpha + \frac{1}{\tau}\right)^2}{\Gamma( \alpha )^2}
 \end{eqnarray*}
+$$
 :::
 ```{r l4c14}
 alpha <- 1
@@ -558,6 +560,7 @@ f_X( x )
 \frac{ \gamma \left( \frac{x}{\theta} \right)^{\gamma \tau}}{x\left( 1 + \left( \frac{x}{\theta} \right)^{\gamma}\right)^{\alpha + \tau}}
 $$
 
+$$
 \begin{eqnarray*}
 \E[X^k] 
 & = & \frac{\theta^k \Gamma\left( \tau + \frac{k}{\gamma}\right) \Gamma\left( \tau - \frac{k}{\gamma}\right)}{\Gamma( \alpha ) \Gamma( \tau )},
@@ -568,6 +571,7 @@ $$
 & = & \frac{\theta^2 \Gamma\left( \tau + \frac{2}{\gamma}\right) \Gamma\left( \tau - \frac{2}{\gamma}\right)}{\Gamma( \alpha ) \Gamma( \tau )}
 - \frac{\theta^2 \Gamma\left( \tau + \frac{1}{\gamma}\right)^2 \Gamma\left( \tau - \frac{1}{\gamma}\right)^2}{\Gamma( \alpha )^2 \Gamma( \tau )^2}
 \end{eqnarray*}
+$$
 :::
 ```{r l4c15}
 alpha <- 1

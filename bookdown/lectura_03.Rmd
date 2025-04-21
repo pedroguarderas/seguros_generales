@@ -839,9 +839,12 @@ $$
 & = & h \sum\limits_{k=0}^{N-1} f( x_k ) \exp( -2\pi i \omega ( a + k h ) ) \\
 & = & h \exp( -i 2\pi \omega a ) \sum\limits_{k=0}^{N-1} f( x_k ) \exp\left( -2\pi i \omega k \frac{b - a}{N} \right)
 \end{eqnarray*}
+$$
+
 donde $\{f_k\}$ es la secuencia finita de números $f_k = f( x_k )$ y $\DFT$ es la transformada de 
 Fourier Discreta. La anterior relación es una aproximación para todo $\omega$. En particular se
 puede considerar $\omega_j = \frac{j}{b-a}$, para $j \in \{0,\ldots,N-1\}$
+$$
 \begin{eqnarray*}
 \Fo( f )\left( \omega_j \right) 
 & = & h \exp\left( -2\pi i \frac{j}{b-a} a \right) 

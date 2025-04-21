@@ -4,26 +4,26 @@
 ::: {.definition #dmaxstab  name="Distribución con cola pesada"}
 Una variable aleatoria a valores reales $X$ se dice que tiene su distribución $F$  es de 
 **cola pesada hacia la derecha** si el siguiente límite no es finito.
-\begin{equation}
+$$
 \underset{x \rightarrow +\infty}{\lim} \exp( t x ) P( X > x ) 
 = \underset{x \rightarrow +\infty}{\lim} \exp( t x ) ( 1 - F( x ) ) 
 = + \infty, \qquad \forall t > 0
-\end{equation}
+$$
 
 de forma muy similar diremos que la distribución tiene **cola pesada hacia la izquierda** si 
-\begin{equation}
+$$
 \underset{x \rightarrow -\infty}{\lim} \exp( -t x ) P( X \leq x ) 
 = \underset{x \rightarrow -\infty}{\lim} \exp( -t x ) F( x )
 = + \infty, \qquad \forall t > 0
-\end{equation}
+$$
 :::
 
 Como consecuencia de la definición anterior, las variables aleatoria a valores reales que tiene
 cola pesada no poseen función generadora de momentos ya que la integral a continuación diverge 
 para cualquier valor $t > 0$
-\begin{equation}
+$$
 \int\limits_{\R} \exp( t x ) dF( x ) = + \infty
-\end{equation}
+$$
  
 <!------------------------------------------------------------------------------------------------->
 ::: {.theorem #tvalext1  name="Fisher-Tippett-Gnedenko"}
@@ -32,12 +32,12 @@ son i.i.d, con distribución acumulada $F$. Entonces, si existen dos sucesiones 
 $\{a_n\}_{n \in \N}$ y $\{b_n\}_{n \in \N}$, con $a_n > 0$ para cualquier 
 $n \in \N$ y una distribución acumulada no degenerada $G$, de tal forma que para la 
 variable aleatoria del máximo $M_n = \max\{ X_1, \ldots, X_n \}$ se satisfaga el siguiente límite
-\begin{equation}
+$$
 \underset{n \rightarrow +\infty}{\lim} P\left( \frac{M_n - b_n}{a_n} < x\right)
 = \underset{n \rightarrow +\infty}{\lim} ( F\left( a_n x + b_n \right) )^n 
 = G( x ),
 \forall x \in \R
-\end{equation}
+$$
 decimos por tanto que la distribución $F$ pertenece al **máximo dominio de atracción** de $G$ y lo
 representamos por $F \in MDA( G )$.
 
@@ -65,10 +65,10 @@ condicionamiento $u > 0$. Entonces, para cualquier $\varepsilon \in \R$ tenemos 
 $F \in MDA( H )$ para alguna distribución $H = GEV( \mu, \sigma, \varepsilon )$ si y solamente
 si existe una distribución $G = GPD( \nu, \beta, \varepsilon )$, de tal forma que el siguiente 
 límite se satisface por la distribución de exceso $F_u$.
-\begin{equation}
+$$
 \underset{u \longrightarrow x_F}{\lim} \underset{0 < x < x_F - u}{\sup} 
 \left| F_u( x ) - G( x ) \right| = 0
-\end{equation}
+$$
 donde $x_F = \sup\{ x\in \R \mid F(x) < 1 \}$ y $\nu, \beta$ dependen de los parámetros 
 $\mu$, $\sigma$ y $u$.
 :::
@@ -132,11 +132,11 @@ probabilidad $1 - p_u$ una muestra con la distribución de Pareto generalizada e
 $X \rightsquigarrow G = GPD( u, \beta, \varepsilon )$.
 
 Así, en particular al esperanza de $X$ tiene al forma
-\begin{equation}
+$$
 \E[ X ]
 = \E[ X \mid X \leq u ] P( X \leq u ) + \E[ X \mid X > u ] P( X > u ) 
 = p_u \E_{F_{(u)}}[ X ] + \left( 1 - p_u \right) \E_{G}[ X ]
-\end{equation}
+$$
 
 Si la muestra inicial es lo suficientemente representable y por tanto tiene un buen tamaño, el 
 valor $p_u$ puede ser realmente cercano a $1$, por tal razón si se decide realizar una simulación de 
