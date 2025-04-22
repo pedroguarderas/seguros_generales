@@ -222,11 +222,11 @@ div.csl-indent {
 <li class="chapter" data-level="5" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html"><i class="fa fa-check"></i><b>5</b> Modelos de pérdida agregada</a>
 <ul>
 <li class="chapter" data-level="5.1" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html#mutualización-del-riesgo"><i class="fa fa-check"></i><b>5.1</b> Mutualización del riesgo</a></li>
-<li class="chapter" data-level="5.2" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html#modelo-individual"><i class="fa fa-check"></i><b>5.2</b> Modelo individual</a>
+<li class="chapter" data-level="5.2" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html#sec:modind"><i class="fa fa-check"></i><b>5.2</b> Modelo individual</a>
 <ul>
 <li class="chapter" data-level="5.2.1" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html#algoritmo-de-simulación"><i class="fa fa-check"></i><b>5.2.1</b> Algoritmo de simulación</a></li>
 </ul></li>
-<li class="chapter" data-level="5.3" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html#modelo-colectivo"><i class="fa fa-check"></i><b>5.3</b> Modelo colectivo</a>
+<li class="chapter" data-level="5.3" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html#sec:modcol"><i class="fa fa-check"></i><b>5.3</b> Modelo colectivo</a>
 <ul>
 <li class="chapter" data-level="5.3.1" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html#algoritmo-de-simulación-1"><i class="fa fa-check"></i><b>5.3.1</b> Algoritmo de simulación</a></li>
 </ul></li>
@@ -770,16 +770,16 @@ F_Z( z ) = F_X( z ) + \mathbf{1}_{[a,+\infty)}( z ) - \mathbf{1}_{[a,+\infty)}( 
 \]</span>
 Esta función tiene las siguientes propiedades.</p>
 <ol style="list-style-type: decimal">
-<li><p>si <span class="math inline">\(z &gt; a\)</span>, entonces <span class="math inline">\(F( z ) = 1\)</span></p></li>
-<li><p>si <span class="math inline">\(z &lt; a\)</span>, entonces <span class="math inline">\(F( z ) = F_X( z )\)</span></p></li>
-<li><p>si <span class="math inline">\(z = a\)</span>, entonces <span class="math inline">\(F( a ) = 1\)</span></p></li>
+<li><p>si <span class="math inline">\(z &gt; a\)</span>, entonces <span class="math inline">\(F_Z( z ) = 1\)</span></p></li>
+<li><p>si <span class="math inline">\(z &lt; a\)</span>, entonces <span class="math inline">\(F_Z( z ) = F_X( z )\)</span></p></li>
+<li><p>si <span class="math inline">\(z = a\)</span>, entonces <span class="math inline">\(F_Z( a ) = 1\)</span></p></li>
 <li><p>la función <span class="math inline">\(F\)</span> es discontinua en <span class="math inline">\(a\)</span>
 <span class="math display">\[
-\underset{z \nearrow a}{\lim} F( z ) = \underset{z \nearrow a}{\lim} F_X( z ) = F_X( a )
+\underset{z \nearrow a}{\lim} F_Z( z ) = \underset{z \nearrow a}{\lim} F_X( z ) = F_X( a )
 \]</span>
 por otra parte
 <span class="math display">\[
-\underset{z \searrow a}{\lim} F( z ) = \underset{z \searrow a}{\lim} \mathbf{1}_{[a,+\infty)}( z )
+\underset{z \searrow a}{\lim} F_Z( z ) = \underset{z \searrow a}{\lim} \mathbf{1}_{[a,+\infty)}( z )
 = \underset{z \searrow a}{\lim} 1 = 1
 \]</span>
 donde no necesariamente <span class="math inline">\(F_X( a )\)</span> es igual <span class="math inline">\(1\)</span>.</p></li>
