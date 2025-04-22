@@ -703,13 +703,12 @@ se conoce a $N$ como un proceso de Poisson.
 :::
 
 ```{r l5c7}
-m <- 100
-l <- 10
+m <- 200
+lambda <- 10
 N <- 100
-tmax <- 1
 
 set.seed( 432147 )
-W <- lapply( 1:m, FUN = function( n ) rexp( N, rate = l ) )
+W <- lapply( 1:m, FUN = function( n ) rexp( N, rate =lambda ) )
 Tn <- lapply( W, FUN = cumsum )
 Tnmax <- max( sapply( Tn, FUN = max ) )
 t <- seq( 0, Tnmax, length = 100 )
@@ -717,16 +716,27 @@ N <- lapply( Tn, FUN = function( Tk ) sapply( t, FUN = function( t )  sum( Tk <=
 Nmax <- max( sapply( N, FUN = max ) )
 ```
 
-```{r l5g2, out.width='80%', out.height='400px', fig.align='center', class.source = 'fold-hide'}
+```{r l5g2, out.width='80%', out.height='500px', fig.align='center', class.source = 'fold-hide'}
 Ndat <- NULL
 for ( j in 1:length( N ) ) {
   Ndat <- rbind( Ndat, data.table( t = t, m = as.factor( j ), N = N[[ j ]] ) )
 }
-cols <- wes_palette( length( N ), name = "Rushmore", type = "continuous")
+cols <- wes_palette( length( N ), name = "GrandBudapest2", type = "continuous")
 
-plt <- ggplot( data = Ndat ) +
-  geom_step( aes( x = t, y = N, group = m, colour = m ), size = 0.25 ) + 
-  scale_color_manual( values = cols ) +
+EN <- lambda * t
+EeN <- Ndat[ , list( EN = mean( N ) ), by = list( t ) ]$EN
+time <- t 
+
+plt <- ggplot( ) +
+  geom_step( data = Ndat, aes( x = t, y = N, group = m, colour = m ), size = 0.25 ) +
+  geom_line( aes( x = time, y = EN, colour = 'olivedrab2' ), size = 1 ) +
+  geom_line( aes( x = time, y = EeN, colour = 'red' ), size = 1 ) +
+  scale_color_manual( values = c( cols, 'olivedrab2', 'red' ) ) +
+  scale_x_continuous( breaks = seq( 0, Tnmax, length = 11 ),
+                      labels = formatC( seq( 0, Tnmax, length = 11 ), digits = 2, format = 'f' ), 
+                      limits = c( 0, Tnmax ), expand = c( 0, 0 ) ) +
+  scale_y_continuous( breaks = seq( 0, Nmax, length = 11 ), 
+                      limits = c( 0, Nmax ), expand = c( 0, 0 ) ) +
   xlab( TeX( "$t$" ) ) + 
   ylab( TeX( "$N(t)$" ) ) + 
   theme_bw() +
