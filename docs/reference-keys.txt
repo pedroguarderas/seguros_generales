@@ -108,6 +108,7 @@ algoritmo-de-simulación-1
 modelos-mixtos
 modelos-con-variables-explicativas
 proceso-estocástico-de-reclamos-totales
+algoritmo-de-simulación-2
 aplicación-del-deducible
 algoritmo-de-panjer
 estimación-usando-la-transformada-de-fourier

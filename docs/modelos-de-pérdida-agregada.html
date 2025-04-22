@@ -232,7 +232,10 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="5.4" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html#modelos-mixtos"><i class="fa fa-check"></i><b>5.4</b> Modelos mixtos</a></li>
 <li class="chapter" data-level="5.5" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html#modelos-con-variables-explicativas"><i class="fa fa-check"></i><b>5.5</b> Modelos con variables explicativas</a></li>
-<li class="chapter" data-level="5.6" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html#proceso-estocástico-de-reclamos-totales"><i class="fa fa-check"></i><b>5.6</b> Proceso estocástico de reclamos totales</a></li>
+<li class="chapter" data-level="5.6" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html#proceso-estocástico-de-reclamos-totales"><i class="fa fa-check"></i><b>5.6</b> Proceso estocástico de reclamos totales</a>
+<ul>
+<li class="chapter" data-level="5.6.1" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html#algoritmo-de-simulación-2"><i class="fa fa-check"></i><b>5.6.1</b> Algoritmo de simulación</a></li>
+</ul></li>
 <li class="chapter" data-level="5.7" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html#aplicación-del-deducible"><i class="fa fa-check"></i><b>5.7</b> Aplicación del deducible</a></li>
 <li class="chapter" data-level="5.8" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html#algoritmo-de-panjer"><i class="fa fa-check"></i><b>5.8</b> Algoritmo de Panjer</a></li>
 <li class="chapter" data-level="5.9" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html#estimación-usando-la-transformada-de-fourier"><i class="fa fa-check"></i><b>5.9</b> Estimación usando la transformada de Fourier</a></li>
@@ -929,6 +932,31 @@ P( N(t) = 0 )
 &amp; = &amp; \sum\limits_{n=1}^{+\infty} F_W^{\star n}( t )
 \end{eqnarray*}
 \]</span></p>
+<div id="algoritmo-de-simulación-2" class="section level3 hasAnchor" number="5.6.1">
+<h3><span class="header-section-number">5.6.1</span> Algoritmo de simulación<a href="modelos-de-pérdida-agregada.html#algoritmo-de-simulación-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ol style="list-style-type: decimal">
+<li><p>Se selecciona el número adecuado de simulaciones <span class="math inline">\(m \in \mathbb{N}\)</span>,</p></li>
+<li><p>Se selecciona el número de simulaciones de tiempos de arribo <span class="math inline">\(N \in \mathbb{N}\)</span>,</p></li>
+<li><p>Dada la distribución de los tiempos entre arribos <span class="math inline">\(F_W\)</span> para cada simulación <span class="math inline">\(i \in \{1, \ldots, m\}\)</span>
+se genera una muestra <span class="math inline">\(W_{i,1}, \ldtos, W_{i,N}\)</span> de tamaño de <span class="math inline">\(N\)</span>,</p></li>
+<li><p>Para cada simulación <span class="math inline">\(i \in \{1, \ldots, m\}\)</span> y cada <span class="math inline">\(n \in \{0, \ldots, N\}\)</span> calculalos los
+tiempos de arribo
+<span class="math display">\[
+T_{i,n} = \sum\limits_{k=1} W_{i,k}
+\]</span>
+y el tiempo inicial es tomado <span class="math inline">\(T_{i,0} = 0\)</span></p></li>
+<li><p>Se toma una malla de discretización en el tiempo <span class="math inline">\(0 = t_0 &lt; t_1 &lt; \cdots &lt; t_p = T\)</span> y calculamos
+para cada simulación <span class="math inline">\(i \in \{1,\ldots,m\}\)</span> y tiempo <span class="math inline">\(t_l\)</span>, con <span class="math inline">\(l \in \{0,\ldots,p\}\)</span>.
+<span class="math display">\[
+N_{i,l} = \#\left\{ n \in \mathbb{N}\ \middle|\ T_{i,n} \leq t \right\}
+= \sum\limits_{n=0}^{N} \mathbf{1}_{(-\infty,t_l]}\left( T_n \right)
+\]</span>
+precisamente para cada simulación <span class="math inline">\(i\)</span>, el término <span class="math inline">\(N_{i,j}\)</span> es una aproximación al proceso
+<span class="math inline">\(N( t_l )\)</span> evaluado en el tiempo <span class="math inline">\(t_l\)</span>. Así se puede tener la aproximación de la media
+<span class="math display">\[
+\mathbb{E}\left[ N( t_l ) \right] \approx \frac{1}{m} \sum\limits_{i=1}^m N_{i,l}
+\]</span></p></li>
+</ol>
 <div class="example">
 <p><span id="exm:l5ex5" class="example"><strong>Ejemplo 5.5  </strong></span>El siguiente ejemplo es de especial atención ya que es utilizado en muchas aplicaciones, podemos
 considerar el caso donde el tiempo entre arribos <span class="math inline">\(\{W_n\}\)</span> es i.i.d y con distribución de
@@ -956,7 +984,7 @@ se conoce a <span class="math inline">\(N\)</span> como un proceso de Poisson.</
 <span id="cb40-3"><a href="modelos-de-pérdida-agregada.html#cb40-3"></a>N <span class="ot">&lt;-</span> <span class="dv">100</span></span>
 <span id="cb40-4"><a href="modelos-de-pérdida-agregada.html#cb40-4"></a></span>
 <span id="cb40-5"><a href="modelos-de-pérdida-agregada.html#cb40-5"></a><span class="fu">set.seed</span>( <span class="dv">432147</span> )</span>
-<span id="cb40-6"><a href="modelos-de-pérdida-agregada.html#cb40-6"></a>W <span class="ot">&lt;-</span> <span class="fu">lapply</span>( <span class="dv">1</span><span class="sc">:</span>m, <span class="at">FUN =</span> <span class="cf">function</span>( n ) <span class="fu">rexp</span>( N, <span class="at">rate =</span>lambda ) )</span>
+<span id="cb40-6"><a href="modelos-de-pérdida-agregada.html#cb40-6"></a>W <span class="ot">&lt;-</span> <span class="fu">lapply</span>( <span class="dv">1</span><span class="sc">:</span>m, <span class="at">FUN =</span> <span class="cf">function</span>( n ) <span class="fu">rexp</span>( N, <span class="at">rate =</span> lambda ) )</span>
 <span id="cb40-7"><a href="modelos-de-pérdida-agregada.html#cb40-7"></a>Tn <span class="ot">&lt;-</span> <span class="fu">lapply</span>( W, <span class="at">FUN =</span> cumsum )</span>
 <span id="cb40-8"><a href="modelos-de-pérdida-agregada.html#cb40-8"></a>Tnmax <span class="ot">&lt;-</span> <span class="fu">max</span>( <span class="fu">sapply</span>( Tn, <span class="at">FUN =</span> max ) )</span>
 <span id="cb40-9"><a href="modelos-de-pérdida-agregada.html#cb40-9"></a>t <span class="ot">&lt;-</span> <span class="fu">seq</span>( <span class="dv">0</span>, Tnmax, <span class="at">length =</span> <span class="dv">100</span> )</span>
@@ -995,6 +1023,7 @@ se conoce a <span class="math inline">\(N\)</span> como un proceso de Poisson.</
 <p><img src="seguros_generales_files/figure-html/l5g2-1.png" width="80%" height="500px" style="display: block; margin: auto;" /></p>
 <p></p>
 <!------------------------------------------------------------------------------------------------->
+</div>
 </div>
 <div id="aplicación-del-deducible" class="section level2 hasAnchor" number="5.7">
 <h2><span class="header-section-number">5.7</span> Aplicación del deducible<a href="modelos-de-pérdida-agregada.html#aplicación-del-deducible" class="anchor-section" aria-label="Anchor link to header"></a></h2>
