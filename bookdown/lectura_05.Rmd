@@ -681,6 +681,34 @@ $$
 \end{eqnarray*}
 $$
 
+### Algoritmo de simulación
+
+1. Se selecciona el número adecuado de simulaciones $m \in \N$,
+
+2. Se selecciona el número de simulaciones de tiempos de arribo $N \in \N$,
+
+3. Dada la distribución de los tiempos entre arribos $F_W$ para cada simulación $i \in \{1, \ldots, m\}$
+se genera una muestra $W_{i,1}, \ldots, W_{i,N}$ de tamaño de $N$,
+
+4. Para cada simulación $i \in \{1, \ldots, m\}$ y cada $n \in \{0, \ldots, N\}$ calculalos los
+tiempos de arribo
+$$
+T_{i,n} = \sum\limits_{k=1} W_{i,k}
+$$
+y el tiempo inicial es tomado $T_{i,0} = 0$
+
+5. Se toma una malla de discretización en el tiempo $0 = t_0 < t_1 < \cdots < t_p = T$ y calculamos
+para cada simulación $i \in \{1,\ldots,m\}$ y tiempo $t_l$, con $l \in \{0,\ldots,p\}$.
+$$
+N_{i,l} = \#\left\{ n \in \N\ \middle|\ T_{i,n} \leq t_l \right\}
+= \sum\limits_{n=0}^{N} \mathbf{1}_{(-\infty,t_l]}\left( T_n \right)
+$$
+precisamente para cada simulación $i$, el término $N_{i,j}$ es una aproximación al proceso 
+$N( t_l )$ evaluado en el tiempo $t_l$. Así se puede tener la aproximación de la media 
+$$
+\E\left[ N( t_l ) \right] \approx \frac{1}{m} \sum\limits_{i=1}^m N_{i,l}
+$$
+
 ::: {.example #l5ex5}
 El siguiente ejemplo es de especial atención ya que es utilizado en muchas aplicaciones, podemos 
 considerar el caso donde el tiempo entre arribos $\{W_n\}$ es i.i.d y con distribución de 
@@ -708,7 +736,7 @@ lambda <- 10
 N <- 100
 
 set.seed( 432147 )
-W <- lapply( 1:m, FUN = function( n ) rexp( N, rate =lambda ) )
+W <- lapply( 1:m, FUN = function( n ) rexp( N, rate = lambda ) )
 Tn <- lapply( W, FUN = cumsum )
 Tnmax <- max( sapply( Tn, FUN = max ) )
 t <- seq( 0, Tnmax, length = 100 )
