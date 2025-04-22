@@ -253,7 +253,7 @@ $X_1, \ldots, X_n$ las cuales muchas de las veces se consideraran que son
 conjunta tiene la siguiente forma:
 $$
 F( x_1, \ldots, x_n ) 
-P( X_1 \leq x_1 \land \cdots \land X_n \leq x_n )
+= P( X_1 \leq x_1 \land \cdots \land X_n \leq x_n )
 = \prod\limits_{i=1}^n P( X_i \leq x_i )
 = \prod\limits_{i=1}^n F( x_i )
 $$
@@ -267,6 +267,16 @@ La **función indicatriz** de un conjunto $A \subset \Omega$, es la función
 $\mathbf{1}_A : \Omega \longrightarrow \{0,1\}$, que toma los valores 
 $\mathbf{1}_A( \omega ) = 0$, si $\omega \notin A$ y $\mathbf{1}_A( \omega ) = 1$, si 
 $\omega \in A$.
+
+Además esta función indicatriz tiene las siguientes propiedades
+
+1. Si $A, B \subset \Omega$, entonces $\mathbf{1}_{A \cap B} = \mathbf{1}_A \mathbf{1}_B$
+
+2. Si $A \subset \Omega$, entonces $\mathbf{1}_{A^c} = 1 - \mathbf{1}_A$
+
+3. Si $A, B \subset \Omega$, entonces $\mathbf{1}_{A\cup B} = \mathbf{1}_A + \mathbf{1}_B - \mathbf{1}_A \mathbf{1}_B$
+
+4. $\mathbf{1}_\Omega = 1$
 :::
 
 Hay un caso atípico que suele ser útil, esto sucede cuando la variable aleatoria 
@@ -546,6 +556,34 @@ $$
 F_Z( z ) = F_X( z ) + \mathbf{1}_{[a,+\infty)}( z ) - \mathbf{1}_{[a,+\infty)}( z ) F_X( z )
 = \mathbf{1}_{(-\infty,a)}( z ) F_X( z ) + \mathbf{1}_{[a,+\infty)}( z )
 $$
+Esta función tiene las siguientes propiedades.
+
+1. si $z > a$, entonces $F( z ) = 1$
+
+2. si $z < a$, entonces $F( z ) = F_X( z )$
+
+3. si $z = a$, entonces $F( a ) = 1$
+
+4. la función $F$ es discontinua en $a$
+$$
+\underset{z \nearrow a}{\lim} F( z ) = \underset{z \nearrow a}{\lim} F_X( z ) = F_X( a )
+$$
+por otra parte
+$$
+\underset{z \searrow a}{\lim} F( z ) = \underset{z \searrow a}{\lim} \mathbf{1}_{[a,+\infty)}( z )
+= \underset{z \searrow a}{\lim} 1 = 1
+$$
+donde no necesariamente $F_X( a )$ es igual $1$.
+
+5. el evento puntual $\{Z = a\}$ no tiene necesariamente probabilidad nula
+$$
+\begin{eqnarray*}
+P( Z = a ) 
+& = & P\left( \min( X, a ) = a \right) \\
+& = & P\left( X \geq a \right) \\
+& = & 1 - F_X( a )
+\end{eqnarray*}
+$$
 
 De forma similar nos podemos también interesar a la variable aleatoria que expresa el máximo 
 entre otras dos variables, i.e. $Z = \max( X, Y )$, por un razonamiento similar podemos obtener
@@ -609,7 +647,7 @@ $$
 $$
 esto quiere decir que para cualquier $\varepsilon > 0$ se satisface el siguiente límite
 $$
-\underset{n \rightarrow +\infty}{\lim} P\left( \left| \sum\limits_{i=1}^n X_i - \mu \right|\right) = 0
+\underset{n \rightarrow +\infty}{\lim} P\left( \left| \frac{1}{n}\sum\limits_{i=1}^n X_i - \mu \right|\right) = 0
 $$
 :::
 
@@ -709,11 +747,11 @@ e <- unlist( lapply( seq( 1, 9, 1 ), FUN = function( n ) seq( 9, 1, -1 ) * 10^{-
 n <- ceiling( -log( delta / 2 ) / ( 2 * e^2 ) )
 ```
 
-```{r l3t1, echo = TRUE, results = 'asis'}
+```{r l3t1, echo = TRUE, results = 'asis', out.width='80%', tab.cap='Error versus número de simulaciones' }
 dt <- data.table( delta = delta, e, n, d = 8 * n / 1024^3 )
 dt %>%
   kable(
-    caption = 'Error versus número de simulaciones',
+    caption = NULL,
     row.names = FALSE,
     col.names = c( "$\\delta$", "$\\varepsilon$", "$n$", "GB" ),
     align = 'llrr',
