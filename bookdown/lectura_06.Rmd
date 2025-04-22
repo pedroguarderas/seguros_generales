@@ -286,29 +286,29 @@ conocidos:
 
 1. Prima neta, o prima pura de riesgo
 $$
-  \rho( S ) = \E[S] \approx \overline{S}
+  \Pi = \rho( S ) = \E[S] \approx \overline{S}
 $$
 
 2. Prima de riesgo con recargo sobre la esperanza matemática
 $$
-  P = \rho( S ) = (1 + \rho) \E[S] \approx (1 + \rho) \overline{S}
+  \Pi = \rho( S ) = (1 + \rho) \E[S] \approx (1 + \rho) \overline{S}
 $$
 
 3. Prima de riesgo con recargo sobre la varianza
 $$
-  P = \rho( S ) = \E[S] + \rho \V[S] 
+  \Pi = \rho( S ) = \E[S] + \rho \V[S] 
   \approx \overline{S} + \rho \sigma_S^2
 $$
 
 4. Prima de riesgo con recargo sobre la desviación
 $$
-  P = \rho( S ) = \E[S] + \rho \sqrt{\V[S]}
+  \Pi = \rho( S ) = \E[S] + \rho \sqrt{\V[S]}
   \approx \overline{S} + \rho \sigma_S
 $$ 
 
 5. Prima de riesgo con principio exponencial para $t > 0$
 $$
-  P = \rho( S )
+  \Pi = \rho( S )
   = \frac{1}{2} \E\left[\exp(tS)\right]
   = \frac{1}{2} M_N\big( \ln M_X( t ) \big)
   \approx \frac{1}{m} \sum\limits_{i=1}^m \exp\left(t S_i\right)
@@ -317,13 +317,13 @@ $$
 6. Prima de percentiles para un valor de confianza $\alpha \in [0,1]$ o prima de valor en riesgo 
 $VaR_\alpha$
 $$
-  P = \rho( S ) = \VaR_\alpha( S ) =  F_S^{-1}( \alpha )
+  \Pi = \rho( S ) = \VaR_\alpha( S ) =  F_S^{-1}( \alpha )
 $$
 
 7. Prima de valor en riesgo en la cola (Tail Value at Risk) $TVaR_\alpha$. Es el promedio uniforme
 de todos los valores en riesgo $VaR_u$, con $u \geq \alpha$.
 $$
-P = \rho( S ) = \TVaR_\alpha( S ) = \frac{1}{1-\alpha} \int\limits_{\alpha}^1 \VaR_u( S )\ du
+  \Pi = \rho( S ) = \TVaR_\alpha( S ) = \frac{1}{1-\alpha} \int\limits_{\alpha}^1 \VaR_u( S )\ du
 $$
 
 ::: {.example #l6ex2}
