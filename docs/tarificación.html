@@ -23,7 +23,7 @@
 <meta name="author" content="" />
 
 
-<meta name="date" content="2025-04-21" />
+<meta name="date" content="2025-04-22" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -533,25 +533,25 @@ conocidos:</p>
 <ol style="list-style-type: decimal">
 <li><p>Prima neta, o prima pura de riesgo
 <span class="math display">\[
-  \rho( S ) = \mathbb{E}[S] \approx \overline{S}
+  \Pi = \rho( S ) = \mathbb{E}[S] \approx \overline{S}
 \]</span></p></li>
 <li><p>Prima de riesgo con recargo sobre la esperanza matemática
 <span class="math display">\[
-  P = \rho( S ) = (1 + \rho) \mathbb{E}[S] \approx (1 + \rho) \overline{S}
+  \Pi = \rho( S ) = (1 + \rho) \mathbb{E}[S] \approx (1 + \rho) \overline{S}
 \]</span></p></li>
 <li><p>Prima de riesgo con recargo sobre la varianza
 <span class="math display">\[
-  P = \rho( S ) = \mathbb{E}[S] + \rho \mathbb{V}[S]
+  \Pi = \rho( S ) = \mathbb{E}[S] + \rho \mathbb{V}[S]
   \approx \overline{S} + \rho \sigma_S^2
 \]</span></p></li>
 <li><p>Prima de riesgo con recargo sobre la desviación
 <span class="math display">\[
-  P = \rho( S ) = \mathbb{E}[S] + \rho \sqrt{\mathbb{V}[S]}
+  \Pi = \rho( S ) = \mathbb{E}[S] + \rho \sqrt{\mathbb{V}[S]}
   \approx \overline{S} + \rho \sigma_S
 \]</span></p></li>
 <li><p>Prima de riesgo con principio exponencial para <span class="math inline">\(t &gt; 0\)</span>
 <span class="math display">\[
-  P = \rho( S )
+  \Pi = \rho( S )
   = \frac{1}{2} \mathbb{E}\left[\exp(tS)\right]
   = \frac{1}{2} M_N\big( \ln M_X( t ) \big)
   \approx \frac{1}{m} \sum\limits_{i=1}^m \exp\left(t S_i\right)
@@ -559,12 +559,12 @@ conocidos:</p>
 <li><p>Prima de percentiles para un valor de confianza <span class="math inline">\(\alpha \in [0,1]\)</span> o prima de valor en riesgo
 <span class="math inline">\(VaR_\alpha\)</span>
 <span class="math display">\[
-  P = \rho( S ) = \operatorname{VaR}_\alpha( S ) =  F_S^{-1}( \alpha )
+  \Pi = \rho( S ) = \operatorname{VaR}_\alpha( S ) =  F_S^{-1}( \alpha )
 \]</span></p></li>
 <li><p>Prima de valor en riesgo en la cola (Tail Value at Risk) <span class="math inline">\(TVaR_\alpha\)</span>. Es el promedio uniforme
 de todos los valores en riesgo <span class="math inline">\(VaR_u\)</span>, con <span class="math inline">\(u \geq \alpha\)</span>.
 <span class="math display">\[
-P = \rho( S ) = \operatorname{TVaR}_\alpha( S ) = \frac{1}{1-\alpha} \int\limits_{\alpha}^1 \operatorname{VaR}_u( S )\ du
+  \Pi = \rho( S ) = \operatorname{TVaR}_\alpha( S ) = \frac{1}{1-\alpha} \int\limits_{\alpha}^1 \operatorname{VaR}_u( S )\ du
 \]</span></p></li>
 </ol>
 <div class="example">

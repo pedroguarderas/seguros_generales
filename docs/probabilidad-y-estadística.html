@@ -23,7 +23,7 @@
 <meta name="author" content="" />
 
 
-<meta name="date" content="2025-04-21" />
+<meta name="date" content="2025-04-22" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -501,7 +501,7 @@ f_{X,Y}( x, y ) = f_X( x ) f_Y( y )
 conjunta tiene la siguiente forma:
 <span class="math display">\[
 F( x_1, \ldots, x_n )
-P( X_1 \leq x_1 \land \cdots \land X_n \leq x_n )
+= P( X_1 \leq x_1 \land \cdots \land X_n \leq x_n )
 = \prod\limits_{i=1}^n P( X_i \leq x_i )
 = \prod\limits_{i=1}^n F( x_i )
 \]</span></p>
@@ -513,6 +513,13 @@ También, es bastante útil para realizar de forma más clara y rápida algunos 
 <span class="math inline">\(\mathbf{1}_A : \Omega \longrightarrow \{0,1\}\)</span>, que toma los valores
 <span class="math inline">\(\mathbf{1}_A( \omega ) = 0\)</span>, si <span class="math inline">\(\omega \notin A\)</span> y <span class="math inline">\(\mathbf{1}_A( \omega ) = 1\)</span>, si
 <span class="math inline">\(\omega \in A\)</span>.</p>
+<p>Además esta función indicatriz tiene las siguientes propiedades</p>
+<ol style="list-style-type: decimal">
+<li><p>Si <span class="math inline">\(A, B \subset \Omega\)</span>, entonces <span class="math inline">\(\mathbf{1}_{A \cap B} = \mathbf{1}_A \mathbf{1}_B\)</span></p></li>
+<li><p>Si <span class="math inline">\(A \subset \Omega\)</span>, entonces <span class="math inline">\(\mathbf{1}_{A^c} = 1 - \mathbf{1}_A\)</span></p></li>
+<li><p>Si <span class="math inline">\(A, B \subset \Omega\)</span>, entonces <span class="math inline">\(\mathbf{1}_{A\cup B} = \mathbf{1}_A + \mathbf{1}_B - \mathbf{1}_A \mathbf{1}_B\)</span></p></li>
+<li><p><span class="math inline">\(\mathbf{1}_\Omega = 1\)</span></p></li>
+</ol>
 </div>
 <p>Hay un caso atípico que suele ser útil, esto sucede cuando la variable aleatoria
 <span class="math inline">\(X : \Omega \longrightarrow \mathbb{R}\)</span>, es constante, quiere decir que tenemos un <span class="math inline">\(a \in \mathbb{R}\)</span>, tal que
@@ -760,7 +767,32 @@ F_Z( z )
 <span class="math display">\[
 F_Z( z ) = F_X( z ) + \mathbf{1}_{[a,+\infty)}( z ) - \mathbf{1}_{[a,+\infty)}( z ) F_X( z )
 = \mathbf{1}_{(-\infty,a)}( z ) F_X( z ) + \mathbf{1}_{[a,+\infty)}( z )
-\]</span></p>
+\]</span>
+Esta función tiene las siguientes propiedades.</p>
+<ol style="list-style-type: decimal">
+<li><p>si <span class="math inline">\(z &gt; a\)</span>, entonces <span class="math inline">\(F( z ) = 1\)</span></p></li>
+<li><p>si <span class="math inline">\(z &lt; a\)</span>, entonces <span class="math inline">\(F( z ) = F_X( z )\)</span></p></li>
+<li><p>si <span class="math inline">\(z = a\)</span>, entonces <span class="math inline">\(F( a ) = 1\)</span></p></li>
+<li><p>la función <span class="math inline">\(F\)</span> es discontinua en <span class="math inline">\(a\)</span>
+<span class="math display">\[
+\underset{z \nearrow a}{\lim} F( z ) = \underset{z \nearrow a}{\lim} F_X( z ) = F_X( a )
+\]</span>
+por otra parte
+<span class="math display">\[
+\underset{z \searrow a}{\lim} F( z ) = \underset{z \searrow a}{\lim} \mathbf{1}_{[a,+\infty)}( z )
+= \underset{z \searrow a}{\lim} 1 = 1
+\]</span>
+donde no necesariamente <span class="math inline">\(F_X( a )\)</span> es igual <span class="math inline">\(1\)</span>.</p></li>
+<li><p>el evento puntual <span class="math inline">\(\{Z = a\}\)</span> no tiene necesariamente probabilidad nula
+<span class="math display">\[
+\begin{eqnarray*}
+P( Z = a )
+&amp; = &amp; P\left( \min( X, a ) = a \right) \\
+&amp; = &amp; P\left( X \geq a \right) \\
+&amp; = &amp; 1 - F_X( a )
+\end{eqnarray*}
+\]</span></p></li>
+</ol>
 <p>De forma similar nos podemos también interesar a la variable aleatoria que expresa el máximo
 entre otras dos variables, i.e. <span class="math inline">\(Z = \max( X, Y )\)</span>, por un razonamiento similar podemos obtener
 la distribución de probabilidad <span class="math inline">\(F_Z\)</span> de <span class="math inline">\(Z\)</span>.
@@ -817,7 +849,7 @@ se satisface el siguiente límite en probabilidad
 \]</span>
 esto quiere decir que para cualquier <span class="math inline">\(\varepsilon &gt; 0\)</span> se satisface el siguiente límite
 <span class="math display">\[
-\underset{n \rightarrow +\infty}{\lim} P\left( \left| \sum\limits_{i=1}^n X_i - \mu \right|\right) = 0
+\underset{n \rightarrow +\infty}{\lim} P\left( \left| \frac{1}{n}\sum\limits_{i=1}^n X_i - \mu \right|\right) = 0
 \]</span></p>
 </div>
 <div class="theorem">
@@ -913,7 +945,7 @@ logarítmico en <span class="math inline">\(\delta\)</span> y cuadrático en <sp
 <div class="sourceCode" id="cb11"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb11-1"><a href="probabilidad-y-estadística.html#cb11-1"></a>dt <span class="ot">&lt;-</span> <span class="fu">data.table</span>( <span class="at">delta =</span> delta, e, n, <span class="at">d =</span> <span class="dv">8</span> <span class="sc">*</span> n <span class="sc">/</span> <span class="dv">1024</span><span class="sc">^</span><span class="dv">3</span> )</span>
 <span id="cb11-2"><a href="probabilidad-y-estadística.html#cb11-2"></a>dt <span class="sc">%&gt;%</span></span>
 <span id="cb11-3"><a href="probabilidad-y-estadística.html#cb11-3"></a>  <span class="fu">kable</span>(</span>
-<span id="cb11-4"><a href="probabilidad-y-estadística.html#cb11-4"></a>    <span class="at">caption =</span> <span class="st">&#39;Error versus número de simulaciones&#39;</span>,</span>
+<span id="cb11-4"><a href="probabilidad-y-estadística.html#cb11-4"></a>    <span class="at">caption =</span> <span class="cn">NULL</span>,</span>
 <span id="cb11-5"><a href="probabilidad-y-estadística.html#cb11-5"></a>    <span class="at">row.names =</span> <span class="cn">FALSE</span>,</span>
 <span id="cb11-6"><a href="probabilidad-y-estadística.html#cb11-6"></a>    <span class="at">col.names =</span> <span class="fu">c</span>( <span class="st">&quot;$</span><span class="sc">\\</span><span class="st">delta$&quot;</span>, <span class="st">&quot;$</span><span class="sc">\\</span><span class="st">varepsilon$&quot;</span>, <span class="st">&quot;$n$&quot;</span>, <span class="st">&quot;GB&quot;</span> ),</span>
 <span id="cb11-7"><a href="probabilidad-y-estadística.html#cb11-7"></a>    <span class="at">align =</span> <span class="st">&#39;llrr&#39;</span>,</span>
@@ -925,9 +957,6 @@ logarítmico en <span class="math inline">\(\delta\)</span> y cuadrático en <sp
 </details>
 <div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:500px; overflow-x: scroll; width:1050px; ">
 <table class=" lightable-classic" style="font-size: 14px; color: black; font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
-<caption style="font-size: initial !important;">
-<span id="tab:l3t1">Tabla 3.1: </span><span id="tab:l3t1">Tabla 3.2: </span>Error versus número de simulaciones
-</caption>
 <thead>
 <tr>
 <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">

@@ -23,7 +23,7 @@
 <meta name="author" content="" />
 
 
-<meta name="date" content="2025-04-21" />
+<meta name="date" content="2025-04-22" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -541,8 +541,8 @@ no tan solo utilizar medidas de tendencia central. Sin embargo, para que esta ap
 <div class="example">
 <p><span id="exm:l3ex2" class="example"><strong>Ejemplo 5.2  </strong></span>Podemos considerar el caso sencillo donde el valor posible de severidad es determinista, es decir
 para cada póliza <span class="math inline">\(i\in \{1,\ldots,n\}\)</span>, el valor de severidad probable es único <span class="math inline">\(M &gt; 0\)</span> si en caso
-se da un evento <span class="math inline">\(A_i\)</span>, esto lo podemos expresar como <span class="math inline">\(X_i = M \mathbf{1}_{A_i}\)</span> es constante. Así, pérdida
-total está dada por:
+se da un evento <span class="math inline">\(A_i\)</span>, esto lo podemos expresar como <span class="math inline">\(X_i = M \mathbf{1}_{A_i}\)</span> es constante. Así,
+pérdida total está dada por:
 <span class="math display">\[
 S = \sum\limits_{i=1}^n X_i = \sum\limits_{i=1}^n M \mathbf{1}_{A_i}
 \]</span></p>
@@ -836,6 +836,24 @@ tomando <span class="math inline">\(T_0 = 0\)</span>.</p>
 <h2><span class="header-section-number">5.7</span> Aplicación del deducible<a href="modelos-de-pérdida-agregada.html#aplicación-del-deducible" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>En muchas ocasiones según las condiciones de los contratos de seguro y el apetito de riesgo del
 asegurador, se configura funciones deducibles sobre los reclamos.</p>
+<p>Usualmente un deducible es una función <span class="math inline">\(D : \mathbb{R}\longrightarrow \mathbb{R}_+\)</span>, tal que para toda variable
+aleatoria <span class="math inline">\(X\)</span>, se satisface la siguiente desigualdad <span class="math inline">\(D( X ) \leq X\)</span>.</p>
+<ol style="list-style-type: decimal">
+<li><p><span class="math inline">\(D( X ) = \max( X - d, 0 )\)</span>, en este caso si <span class="math inline">\(X \rightsquigarrow F_X\)</span>, entonces
+<span class="math inline">\(Z = D( X ) \rightsquigarrow F_Z( z )\)</span>, donde <span class="math inline">\(F_Z( z ) = \mathbf{1}_{[d,+\infty)}( z ) F_X( z + d )\)</span></p></li>
+<li><p><span class="math inline">\(D( X ) = \min( X, M )\)</span>, en este caso si <span class="math inline">\(X \rightsquigarrow F_X\)</span>, entonces
+<span class="math inline">\(Z = D( X ) \rightsquigarrow F_Z( z )\)</span>, donde <span class="math inline">\(F_Z( z ) = \mathbf{1}_{(-\infty,M)}( z ) F_X( z ) + \mathbf{1}_{[M,+\infty)}( z )\)</span></p></li>
+<li><p><span class="math inline">\(D( X ) = \min( \max( X - d, 0 ), M )\)</span>, en este caso si <span class="math inline">\(X \rightsquigarrow F_X\)</span>, entonces
+<span class="math inline">\(Z = D( X ) \rightsquigarrow F_Z( z )\)</span>, donde <span class="math inline">\(F_Z( z ) = \mathbf{1}_{[a,M)}( z ) F_X( z + d ) + \mathbf{1}_{[M,+\infty)}( z )\)</span></p></li>
+</ol>
+<p>Al emplear el deducible el reclamo total se ve modificado y toma la forma de
+<span class="math display">\[
+S = \sum\limits_{i=1}^{N} D_i\left( X_i \right)
+\]</span>
+Hay casos donde se aplica el deducible al grupo de siniestros que presenta una póliza.
+<span class="math display">\[
+S = \sum\limits_{i=1}^n D_i\left( \sum\limits_{n=1}^{N_i} X_i \right)
+\]</span></p>
 <p></p>
 <details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb40"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb40-1"><a href="modelos-de-pérdida-agregada.html#cb40-1"></a><span class="co"># 1. selección de simulaciones</span></span>

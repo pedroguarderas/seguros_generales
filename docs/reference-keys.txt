@@ -21,7 +21,6 @@ thm:tlc
 prp:chebdes
 thm:bein
 thm:ddkw
-tab:l3t1
 thm:dchernoff
 thm:dpaleyzyg
 def:dfouriertrans
