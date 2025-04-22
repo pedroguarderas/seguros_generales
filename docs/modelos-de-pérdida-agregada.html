@@ -938,7 +938,7 @@ P( N(t) = 0 )
 <li><p>Se selecciona el número adecuado de simulaciones <span class="math inline">\(m \in \mathbb{N}\)</span>,</p></li>
 <li><p>Se selecciona el número de simulaciones de tiempos de arribo <span class="math inline">\(N \in \mathbb{N}\)</span>,</p></li>
 <li><p>Dada la distribución de los tiempos entre arribos <span class="math inline">\(F_W\)</span> para cada simulación <span class="math inline">\(i \in \{1, \ldots, m\}\)</span>
-se genera una muestra <span class="math inline">\(W_{i,1}, \ldtos, W_{i,N}\)</span> de tamaño de <span class="math inline">\(N\)</span>,</p></li>
+se genera una muestra <span class="math inline">\(W_{i,1}, \ldots, W_{i,N}\)</span> de tamaño de <span class="math inline">\(N\)</span>,</p></li>
 <li><p>Para cada simulación <span class="math inline">\(i \in \{1, \ldots, m\}\)</span> y cada <span class="math inline">\(n \in \{0, \ldots, N\}\)</span> calculalos los
 tiempos de arribo
 <span class="math display">\[
@@ -948,7 +948,7 @@ y el tiempo inicial es tomado <span class="math inline">\(T_{i,0} = 0\)</span></
 <li><p>Se toma una malla de discretización en el tiempo <span class="math inline">\(0 = t_0 &lt; t_1 &lt; \cdots &lt; t_p = T\)</span> y calculamos
 para cada simulación <span class="math inline">\(i \in \{1,\ldots,m\}\)</span> y tiempo <span class="math inline">\(t_l\)</span>, con <span class="math inline">\(l \in \{0,\ldots,p\}\)</span>.
 <span class="math display">\[
-N_{i,l} = \#\left\{ n \in \mathbb{N}\ \middle|\ T_{i,n} \leq t \right\}
+N_{i,l} = \#\left\{ n \in \mathbb{N}\ \middle|\ T_{i,n} \leq t_l \right\}
 = \sum\limits_{n=0}^{N} \mathbf{1}_{(-\infty,t_l]}\left( T_n \right)
 \]</span>
 precisamente para cada simulación <span class="math inline">\(i\)</span>, el término <span class="math inline">\(N_{i,j}\)</span> es una aproximación al proceso
