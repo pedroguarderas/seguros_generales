@@ -581,6 +581,27 @@ tomando $T_0 = 0$.
 En muchas ocasiones según las condiciones de los contratos de seguro y el apetito de riesgo del 
 asegurador, se configura funciones deducibles sobre los reclamos.
 
+Usualmente un deducible es una función $D : \R \longrightarrow \R_+$, tal que para toda variable 
+aleatoria $X$, se satisface la siguiente desigualdad $D( X ) \leq X$.
+
+1. $D( X ) = \max( X - d, 0 )$, en este caso si $X \rightsquigarrow F_X$, entonces 
+$Z = D( X ) \rightsquigarrow F_Z( z )$, donde $F_Z( z ) = \mathbf{1}_{[d,+\infty)}( z ) F_X( z + d )$
+
+2. $D( X ) = \min( X, M )$, en este caso si $X \rightsquigarrow F_X$, entonces 
+$Z = D( X ) \rightsquigarrow F_Z( z )$, donde $F_Z( z ) = \mathbf{1}_{(-\infty,M)}( z ) F_X( z ) + \mathbf{1}_{[M,+\infty)}( z )$
+
+3. $D( X ) = \min( \max( X - d, 0 ), M )$, en este caso si $X \rightsquigarrow F_X$, entonces 
+$Z = D( X ) \rightsquigarrow F_Z( z )$, donde $F_Z( z ) = \mathbf{1}_{[a,M)}( z ) F_X( z + d ) + \mathbf{1}_{[M,+\infty)}( z )$
+
+
+Al emplear el deducible el reclamo total se ve modificado y toma la forma de 
+$$
+S = \sum\limits_{i=1}^{N} D_i\left( X_i \right)
+$$
+Hay casos donde se aplica el deducible al grupo de siniestros que presenta una póliza.
+$$
+S = \sum\limits_{i=1}^n D_i\left( \sum\limits_{n=1}^{N_i} X_{i,j} \right)
+$$
 ```{r l5c7}
 # 1. selección de simulaciones
 m <- 1e4
