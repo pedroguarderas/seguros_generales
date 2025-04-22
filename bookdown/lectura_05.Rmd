@@ -59,7 +59,7 @@ F_S( s )
 & = & \sum\limits_{n=0}^{+\infty} P\left( \sum\limits_{i=1}^n X_i \leq s\ \middle|\ N = n \right) P( N = n )
 \qquad \text{propiedades de la probabilidad condicional} \\
 & = & \sum\limits_{n=0}^{+\infty} \int\limits_{\left\{\sum\limits_{i=1}^n x_i \leq s\right\}} dF_n( x_1, \ldots, x_n )\ p_n
-\qquad \text{$F_n$ es la distribución conjunta de $X_1, \ldots, X_n$}
+\qquad \text{$F_n$ es la distribución conjunta de $X_1, \ldots, X_n$ dado $N = n$} 
 \end{eqnarray*}
 $$
 la última expresión es importante de retener, nos dice que para comprender el comportamiento de 
@@ -74,7 +74,7 @@ asociados a la severidad presentan un verdadero reto estadístico y computaciona
 atrás se desarrolló unos nuevos algoritmos para calcular estos términos @aep_algo, @gaep_algo.
 
 <!------------------------------------------------------------------------------------------------->
-## Modelo individual
+## Modelo individual {#sec:modind}
 En el modelo de riesgos individuales consideramos que el número de siniestros que se producirán es
 conocido, por ejemplo puede ser a lo sumo el tamaño de la población asegurada, en tal caso la
 variable aleatoria $N$ pasa a ser una constante, que representaremos por $n$. De esta forma, la
@@ -170,7 +170,7 @@ $f_{X_1}, \ldots, f_{X_n}$ o distribuciones de probabilidad $F_{X_1}, \ldots, F_
 4. Para cada $i \in \{1, \ldots, m\}$ se calcula la severidad total para la muestra $i$, 
 $S_i = \sum\limits_{j=1}^n X_{i,j}$
 
-::: {.example #l3ex1}
+::: {.example #l5ex1}
 El siguiente código ejemplifica el algoritmo anterior, donde se asume que cada variable aleatoria de 
 severidad $X_i$ sigue una ley log-normal $LN( \mu_i, \sigma_i )$, de parámetros $\mu_i, \sigma_i$, 
 para cada $i \in \{1,\ldots, n\}$. El reclamo total $S = \sum\limits_{i=1}^n X_i$ sigue una ley 
@@ -267,7 +267,7 @@ que podemos calcular algunos otros valores de importancia relacionados a la vari
 no tan solo utilizar medidas de tendencia central. Sin embargo, para que esta aproximación sea 
 útil se requiere reducir el error de probabilidad \@ref(thm:ddkw).
 
-::: {.example #l3ex2}
+::: {.example #l5ex2}
 Podemos considerar el caso sencillo donde el valor posible de severidad es determinista, es decir
 para cada póliza $i\in \{1,\ldots,n\}$, el valor de severidad probable es único $M > 0$ si en caso 
 se da un evento $A_i$, esto lo podemos expresar como $X_i = M \mathbf{1}_{A_i}$ es constante. Así, 
@@ -292,7 +292,7 @@ $$
 :::
 
 <!------------------------------------------------------------------------------------------------->
-## Modelo colectivo
+## Modelo colectivo {#sec:modcol}
 
 El modelo colectivo de riesgo considera un número de reclamos descritos por una variable aleatoria 
 discreta $N$. Los reclamos corresponden a un número de pólizas en un periodo específico, el valor 
@@ -398,7 +398,7 @@ mediante la siguiente suma $S_i = \sum\limits_{j=1}^{N_i} X_{i,j}$.
 En el lenguaje de programación R, este método de simulación puede ser fácilmente implementado, 
 como ya lo hemos realizado, utilizando las funciones de aplicación vectorial `sapply` y `lapply`. 
 
-::: {.example #l3ex3}
+::: {.example #l5ex3}
 Consideramos el caso de un modelo colectivo para el cuál el conteo de siniestros 
 $N \rightsquigarrow Pois( \lambda )$ y la distribución de cada uno de los reclamos 
 $\{X_i\}_{i\in \N}$, está dada por la misma distribución de probabilidad 
@@ -468,7 +468,7 @@ $$
 \end{eqnarray*}
 $$
 
-::: {.example #l3ex3}
+::: {.example #l5ex4}
 Hacemos uso del algoritmo de simulación, pero bajo la consideración anterior donde el conteo 
 de siniestros $N \rightsquigarrow Bin( n, p )$, en algunos casos se puede considerar $n$ como el 
 número de pólizas vendidas, esto supone que solo se presenta un reclamo por póliza. Por su parte los
@@ -551,29 +551,188 @@ por parte del asegurador.
 
 Así por tanto si tenemos una secuencia de siniestros $\{X_n\}_{n\in\N^*}$, estos los podemos 
 considerar ordenados en el tiempo conforme han venido presentándose en instantes 
-$T_1 \leq \cdots \leq T_n \leq \cdots$, es decir se le asocia a los reclamos $\{X_n\}$ la secuencia 
-de los **tiempos de arribo** $\{T_n\}_{n\in\N^*}$, donde $T_1 > 0$ y $T_{n+1} \geq T_n$, para 
+$0= T_0 \leq T_1 \leq \cdots \leq T_n \leq \cdots$, es decir se le asocia a los reclamos $\{X_n\}$ la 
+secuencia de los **tiempos de arribo** $\{T_n\}_{n\in\N}$, donde $T_{n+1} \geq T_n$, para 
 cualquier $n \in \N$. Ciertamente, es de esperar que los tiempos de arribo sean variables 
 aleatorias y están asociados a la frecuencia $N$ en un periodo dado, ya que $N$ cuenta los tiempos
-de arribo hasta un tiempo dado, transformamos así a $N$ en una variable aleatoria dependiente del 
-tiempo, en lo que se conoce como un **proceso estocástico**.
+de arribo hasta un instante dado $t \geq 0$, bajo esta perspectiva transformamos a $N$ en una 
+variable aleatoria dependiente del tiempo, en lo que se conoce como un **proceso estocástico**.
 $$
 N( t )
-= \#\left\{ k \in \N\ \middle|\ T_k \leq t \right\} 
-= \sum\limits_{k=0}^{+\infty} \mathbf{1}_{(-\infty,t]}\left( T_k \right)
+= \#\left\{ n \in \N\ \middle|\ T_n \leq t \right\} 
+= \sum\limits_{n=0}^{+\infty} \mathbf{1}_{(-\infty,t]}\left( T_n \right)
 $$
 
 Inmediatamente de este razonamiento, resulta que los reclamos totales también se transforman en 
-proceso estocástico.
+proceso estocástico, conforme se van considerando los arribos de los reclamos.
 $$
 S( t ) = \sum\limits_{i=1}^{N( t )} X_i
 $$
+donde claramente, como hemos venido haciéndolo, si $N(t) = 0$, entonces la suma total de reclamos
+es cero, $S(t) = 0$.
 
-Además, se pueden identificar las variables aleatorias de **tiempos entre arribos**
+Además, junto con lo anterior, se pueden identificar las variables aleatorias de 
+**tiempos entre arribos**, dadas por las diferencias entre tiempos de arribo contiguos
 $$
 W_n = T_n - T_{n-1},\quad \forall n \in \N
 $$
-tomando $T_0 = 0$.
+
+Un hipótesis bien común en el modelamiento de un proceso de pérdida agregada utilizando esta 
+aproximación es asumir que los tiempos entre arribo $\{W_n\}$ son independientes entre si, es decir,
+el momento que se producen cada uno de los siniestros es de forma independiente. También se suele
+suponer independencia entre los tiempos entre arribo $\{W_n\}$ y las variables que representan 
+la magnitud de cada uno de los reclamos $\{X_n\}$.
+
+Los resultados para el cálculo de la esperanza y la varianza se pueden obtener de forma similar
+a lo que realizamos en la sección \@ref(sec:modind).
+$$
+\begin{eqnarray*}
+\E[S(t)]
+& = & \E\left[ \sum\limits_{i=1}^{N(t)} X_i \right] \\
+& = & \sum\limits_{n=0}^{+\infty} \E\left[ \sum\limits_{i=1}^n X_i\ \middle|\ N(t) = n \right]P( N(t) = n )
+\quad \text{utilizando la esperanza condicional} \\
+& = & 0 P( N(t) = 0 ) + \sum\limits_{n=1}^{+\infty} 
+\E\left[ \sum\limits_{i=1}^n X_i\ \middle|\ N(t) = n \right]P( N(t) = n ) \\
+& = & \sum\limits_{n=1}^{+\infty} \sum\limits_{i=1}^n \E\left[ X_i \mid N(t) = n \right]P( N(t) = n )
+\quad \text{linealidad de la esperanza} \\
+& = & \sum\limits_{n=0}^{+\infty} n \E\left[ X \mid N(t) = n \right]P( N(t) = n )
+\quad \text{si $\{X_i\}$ son idénticamente distribuidas} \\
+& = & \E\left[ X \right] \sum\limits_{n=0}^{+\infty} n P( N(t) = n )
+\quad \text{si $X$ y $N(t)$ son independientes} \\
+& = & \E[ N(t) ] \E[ X ] 
+\end{eqnarray*}
+$$
+
+el segundo momento de $S(t)$ se calcula de forma similar
+$$
+\begin{eqnarray*}
+\E[S(t)^2]
+& = & \E\left[ \left( \sum\limits_{i=1}^{N(t)} X_i \right)^2 \right] \\
+& = & \sum\limits_{n=0}^\infty \E\left[ \sum\limits_{i, j=1}^n X_i X_j \middle| N(t) = n \right] P( N = n ) 
+\quad \text{propiedades de la esperanza condicional} \\
+& = & \sum\limits_{n=0}^\infty \sum\limits_{i, j=1}^n \E\left[ X_i X_j \right] P( N(t) = n ) 
+\quad \text{si $\{X_i\}$ y $N(t)$ son independientes} \\
+& = & \sum\limits_{n=0}^\infty \left( \sum\limits_{i=1}^n \E\left[ X_i^2 \right] 
++ \sum\limits_{i,j=1,i\neq j}^n \E\left[ X_i X_j \right] \right) P( N(t) = n ) \\
+& = & \sum\limits_{n=0}^\infty \left( n \E\left[ X^2 \right] + n(n-1) \E\left[ X \right]^2 \right) P( N(t) = n ) 
+\quad \text{si $\{X_i\}$ son i.i.d} \\
+& = & \E\left[N(t)\right] \E\left[X^2\right] + \E\left[N(t)^2\right] \E\left[X\right]^2 
+- \E\left[N(t)\right] \E\left[X\right]^2 \\
+& = & \E\left[N(t)\right] \V\left[X\right] + \E\left[N(t)^2\right] \E\left[X\right]^2
+\end{eqnarray*}
+$$
+
+y finalmente la varianza de $S(t)$
+$$
+\begin{eqnarray*}
+\V\left[S(t)\right]
+& = & \E\left[S(t)^2\right] - \E\left[S(t)\right]^2 \\
+& = & \E\left[N(t)\right] \V\left[X\right] 
++ \E\left[N(t)^2\right] \E\left[X\right]^2 - \E\left[N(t)\right]^2 \E\left[X\right]^2 \\
+& = & \E\left[N(t)\right] \V\left[X\right] + \V\left[N(t)\right] \E\left[X\right]^2
+\end{eqnarray*}
+$$
+Si trabajamos bajo la hipótesis que los tiempos entre arribos $\{W_n\}$ son i.i.d, con distribución
+de probabilidad común $F_W$. Podemos comprender y estudiar de una forma un poco más sencilla el 
+proceso estocástico atado a la frecuencia de los siniestros $N$.
+
+Notemos primeramente que se tienen la siguiente igualdad entre los eventos 
+$$
+\{N(t) = n\}
+= \{T_n \leq \land T_{n+1} > t\}
+= \{T_n \leq \} \cap \{ T_{n+1} \leq t\}^c
+= \{T_n \leq \} \setminus \{ T_{n+1} \leq t\}
+$$
+además es de observar que $\{ T_{n+1} \leq t\} \subset \{ T_{n} \leq t\}$. Con todo esto en 
+consideración para cualquier $n > 0$.
+$$
+\begin{eqnarray*}
+P( N(t) = n )
+& = & P( T_n \leq t \land T_{n+1} > t ) \\
+& = & P( \{T_n \leq t \} \setminus \{ T_{n+1} \leq t\} ) \\
+& = & P( T_n \leq t ) - P( T_{n+1} \leq t ) \\
+& = & F_W^{\star n}( t ) - F_W^{\star n + 1}( t )
+\end{eqnarray*}
+$$
+
+el caso $n = 0$ también es sencillo
+$$
+\begin{eqnarray*}
+P( N(t) = 0 )
+& = & P( T_0 \leq t \land T_1 > t ) \\
+& = & P( \{T_0 \leq t \} \setminus \{ T_1 \leq t\} ) \\
+& = & P( T_0 \leq t ) - P( T_1 \leq t ) \\
+& = & 1 - F_W^{\star 1}( t ) \\
+& = & F_W^{\star 0}( t ) - F_W^{\star 1}( t )
+\end{eqnarray*}
+$$
+
+De lo anterior resulta que la esperanza de $N(t)$, está dada por la siguiente serie.
+$$
+\begin{eqnarray*}
+\E[ N( t ) ]
+& = & \sum\limits_{n=0}^{+\infty} n P( N(t) = n ) \\
+& = & \sum\limits_{n=0}^{+\infty} n \left( F_W^{\star n}( t ) - F_W^{\star n + 1}( t ) \right) \\
+& = & 0\left( F_W^{\star 0}( t ) - F_W^{\star 1}( t ) \right) 
++ 1\left( F_W^{\star 1}( t ) - F_W^{\star 2}( t ) \right) 
++ 2\left( F_W^{\star 2}( t ) - F_W^{\star 3}( t ) \right) 
++ \cdots \\
+& = & \sum\limits_{n=1}^{+\infty} F_W^{\star n}( t )
+\end{eqnarray*}
+$$
+
+::: {.example #l5ex5}
+El siguiente ejemplo es de especial atención ya que es utilizado en muchas aplicaciones, podemos 
+considerar el caso donde el tiempo entre arribos $\{W_n\}$ es i.i.d y con distribución de 
+probabilidad común $F_W$ dada por una ley exponencial $Exp( \lambda )$. Un resultado clásico muestra 
+que la suma de $n$ exponenciales sigue una ley gamma $Gamma(n,\lambda)$, esto implica que 
+$T_n = W_1 + \cdots + W_n \rightsquigarrow Gamma( n, \lambda )$ o también $F_W^{\star n}$ es una 
+$Gamma( n, \lambda )$. Así por tanto, el proceso estocástico de conteo 
+$N(t) = \#\left\{ n \in \N\ \middle|\ T_n \leq t \right\}$ tiene las siguientes probabilidades
+$$
+\begin{eqnarray*}
+P( N( t ) = n )
+& = & F_W^{\star n}( t ) - F_W^{\star n + 1}( t ) \\
+& = & \exp( -\lambda t ) \sum\limits_{k=n}^{+\infty} \frac{(\lambda t)^k}{k!} 
+- \exp( -\lambda t ) \sum\limits_{k={n+1}}^{+\infty} \frac{(\lambda t)^k}{k!}  \\
+& = & \exp( -\lambda t ) \frac{(\lambda t)^n}{n!}
+\end{eqnarray*}
+$$
+En conclusión $N(t)$ tiene como distribución una ley de Poisson $Pois( \lambda t )$, en particular
+se conoce a $N$ como un proceso de Poisson.
+:::
+
+```{r l5c7}
+m <- 200
+l <- 10
+N <- 100
+tmax <- 1
+
+set.seed( 432147 )
+W <- lapply( 1:m, FUN = function( n ) rexp( N, rate = l ) )
+Tn <- lapply( W, FUN = cumsum )
+Tnmax <- max( sapply( Tn, FUN = max ) )
+t <- seq( 0, Tnmax, length = 100 )
+N <- lapply( Tn, FUN = function( Tk ) sapply( t, FUN = function( t )  sum( Tk <= t ) ) )
+Nmax <- max( sapply( N, FUN = max ) )
+```
+
+```{r l5g2, out.width='80%', out.height='400px', fig.align='center', class.source = 'fold-hide'}
+Ndat <- NULL
+for ( j in 1:length( N ) ) {
+  Ndat <- rbind( Ndat, data.table( t = t, m = as.factor( j ), N = N[[ j ]] ) )
+}
+cols <- wes_palette( length( N ), name = "Rushmore", type = "continuous")
+
+plt <- ggplot( data = Ndat ) +
+  geom_step( aes( x = t, y = N, group = m, colour = m ), size = 0.5 ) + 
+  scale_color_manual( values = cols ) +
+  xlab( TeX( "$t$" ) ) + 
+  ylab( TeX( "$N(t)$" ) ) + 
+  theme_bw() +
+  theme(legend.position = "none" )
+plot( plt )
+```
 
 <!------------------------------------------------------------------------------------------------->
 ## Aplicación del deducible
@@ -602,7 +761,7 @@ Hay casos donde se aplica el deducible al grupo de siniestros que presenta una p
 $$
 S = \sum\limits_{i=1}^n D_i\left( \sum\limits_{n=1}^{N_i} X_{i,j} \right)
 $$
-```{r l5c7}
+```{r l5c8}
 # 1. selección de simulaciones
 m <- 1e4
 
@@ -630,7 +789,7 @@ S <- sapply( DX, FUN = function( x ) ifelse( length( x ) == 0, 0, sum( x, na.rm 
 ```
 
 $S_1, \ldots, S_m \rightsquigarrow F_S$
-```{r l5c8}
+```{r l5c9}
 FS <- seq( 0, 1, 0.01 )
 Sq <- quantile( S, probs = FS )
 ES <- mean( S )
@@ -638,11 +797,11 @@ plot( Sq, FS, type = 's', col = 'darkgreen' )
 abline( v = ES, col = 'red' )
 ```
 
-::: {.example #l3ex4}
+::: {.example #l5ex6}
 En este caso en particular estudiaremos la velocidad de convergencia del método resultante del 
 teorema del límite central \@ref(thm:tlc). Generaremos una simulación aleatoria de la suma
 agregada $S_n$ y mostraresmo s
-```{r l5c9}
+```{r l5c10}
 m <- 500
 n <- 1000
 u <- 4
@@ -669,7 +828,7 @@ points( 1:n, Bn, type = 'l', lty = 1, col = 'red' )
 :::
 
 
-```{r l5c10}
+```{r l5c11}
 l <- 3
 n <- 300
 dt <- rexp( n = n, rate = 1 / l )
@@ -681,8 +840,6 @@ rt <- 2
 X <- lapply( dN, FUN = function( n ) rgamma( n, shape = sh, rate = rt ) )
 dS <- sapply( X, FUN = function( x ) sum( x ) )
 S <- c( 0, cumsum( dS ) )
-plot( t, N, type = 's' )
-plot( t, S, type = 's' )
 ```
 
 <!------------------------------------------------------------------------------------------------->
