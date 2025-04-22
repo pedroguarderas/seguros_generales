@@ -558,19 +558,19 @@ F_Z( z ) = F_X( z ) + \mathbf{1}_{[a,+\infty)}( z ) - \mathbf{1}_{[a,+\infty)}( 
 $$
 Esta función tiene las siguientes propiedades.
 
-1. si $z > a$, entonces $F( z ) = 1$
+1. si $z > a$, entonces $F_Z( z ) = 1$
 
-2. si $z < a$, entonces $F( z ) = F_X( z )$
+2. si $z < a$, entonces $F_Z( z ) = F_X( z )$
 
-3. si $z = a$, entonces $F( a ) = 1$
+3. si $z = a$, entonces $F_Z( a ) = 1$
 
 4. la función $F$ es discontinua en $a$
 $$
-\underset{z \nearrow a}{\lim} F( z ) = \underset{z \nearrow a}{\lim} F_X( z ) = F_X( a )
+\underset{z \nearrow a}{\lim} F_Z( z ) = \underset{z \nearrow a}{\lim} F_X( z ) = F_X( a )
 $$
 por otra parte
 $$
-\underset{z \searrow a}{\lim} F( z ) = \underset{z \searrow a}{\lim} \mathbf{1}_{[a,+\infty)}( z )
+\underset{z \searrow a}{\lim} F_Z( z ) = \underset{z \searrow a}{\lim} \mathbf{1}_{[a,+\infty)}( z )
 = \underset{z \searrow a}{\lim} 1 = 1
 $$
 donde no necesariamente $F_X( a )$ es igual $1$.
