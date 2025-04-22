@@ -951,7 +951,7 @@ se conoce a <span class="math inline">\(N\)</span> como un proceso de Poisson.</
 </div>
 <p></p>
 <details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb40"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb40-1"><a href="modelos-de-pérdida-agregada.html#cb40-1"></a>m <span class="ot">&lt;-</span> <span class="dv">200</span></span>
+<div class="sourceCode" id="cb40"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb40-1"><a href="modelos-de-pérdida-agregada.html#cb40-1"></a>m <span class="ot">&lt;-</span> <span class="dv">100</span></span>
 <span id="cb40-2"><a href="modelos-de-pérdida-agregada.html#cb40-2"></a>l <span class="ot">&lt;-</span> <span class="dv">10</span></span>
 <span id="cb40-3"><a href="modelos-de-pérdida-agregada.html#cb40-3"></a>N <span class="ot">&lt;-</span> <span class="dv">100</span></span>
 <span id="cb40-4"><a href="modelos-de-pérdida-agregada.html#cb40-4"></a>tmax <span class="ot">&lt;-</span> <span class="dv">1</span></span>
@@ -974,7 +974,7 @@ se conoce a <span class="math inline">\(N\)</span> como un proceso de Poisson.</
 <span id="cb41-5"><a href="modelos-de-pérdida-agregada.html#cb41-5" tabindex="-1"></a>cols <span class="ot">&lt;-</span> <span class="fu">wes_palette</span>( <span class="fu">length</span>( N ), <span class="at">name =</span> <span class="st">&quot;Rushmore&quot;</span>, <span class="at">type =</span> <span class="st">&quot;continuous&quot;</span>)</span>
 <span id="cb41-6"><a href="modelos-de-pérdida-agregada.html#cb41-6" tabindex="-1"></a></span>
 <span id="cb41-7"><a href="modelos-de-pérdida-agregada.html#cb41-7" tabindex="-1"></a>plt <span class="ot">&lt;-</span> <span class="fu">ggplot</span>( <span class="at">data =</span> Ndat ) <span class="sc">+</span></span>
-<span id="cb41-8"><a href="modelos-de-pérdida-agregada.html#cb41-8" tabindex="-1"></a>  <span class="fu">geom_step</span>( <span class="fu">aes</span>( <span class="at">x =</span> t, <span class="at">y =</span> N, <span class="at">group =</span> m, <span class="at">colour =</span> m ), <span class="at">size =</span> <span class="fl">0.5</span> ) <span class="sc">+</span> </span>
+<span id="cb41-8"><a href="modelos-de-pérdida-agregada.html#cb41-8" tabindex="-1"></a>  <span class="fu">geom_step</span>( <span class="fu">aes</span>( <span class="at">x =</span> t, <span class="at">y =</span> N, <span class="at">group =</span> m, <span class="at">colour =</span> m ), <span class="at">size =</span> <span class="fl">0.25</span> ) <span class="sc">+</span> </span>
 <span id="cb41-9"><a href="modelos-de-pérdida-agregada.html#cb41-9" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>( <span class="at">values =</span> cols ) <span class="sc">+</span></span>
 <span id="cb41-10"><a href="modelos-de-pérdida-agregada.html#cb41-10" tabindex="-1"></a>  <span class="fu">xlab</span>( <span class="fu">TeX</span>( <span class="st">&quot;$t$&quot;</span> ) ) <span class="sc">+</span> </span>
 <span id="cb41-11"><a href="modelos-de-pérdida-agregada.html#cb41-11" tabindex="-1"></a>  <span class="fu">ylab</span>( <span class="fu">TeX</span>( <span class="st">&quot;$N(t)$&quot;</span> ) ) <span class="sc">+</span> </span>
