@@ -703,7 +703,7 @@ se conoce a $N$ como un proceso de Poisson.
 :::
 
 ```{r l5c7}
-m <- 200
+m <- 100
 l <- 10
 N <- 100
 tmax <- 1
@@ -725,7 +725,7 @@ for ( j in 1:length( N ) ) {
 cols <- wes_palette( length( N ), name = "Rushmore", type = "continuous")
 
 plt <- ggplot( data = Ndat ) +
-  geom_step( aes( x = t, y = N, group = m, colour = m ), size = 0.5 ) + 
+  geom_step( aes( x = t, y = N, group = m, colour = m ), size = 0.25 ) + 
   scale_color_manual( values = cols ) +
   xlab( TeX( "$t$" ) ) + 
   ylab( TeX( "$N(t)$" ) ) + 
