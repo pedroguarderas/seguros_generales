@@ -894,8 +894,8 @@ proceso estocástico atado a la frecuencia de los siniestros <span class="math i
 <span class="math display">\[
 \{N(t) = n\}
 = \{T_n \leq \land T_{n+1} &gt; t\}
-= \{T_n \leq \} \cap \{ T_{n+1} \leq t\}^c
-= \{T_n \leq \} \setminus \{ T_{n+1} \leq t\}
+= \{T_n \leq t \} \cap \{ T_{n+1} \leq t\}^c
+= \{T_n \leq t \} \setminus \{ T_{n+1} \leq t\}
 \]</span>
 además es de observar que <span class="math inline">\(\{ T_{n+1} \leq t\} \subset \{ T_{n} \leq t\}\)</span>. Con todo esto en
 consideración para cualquier <span class="math inline">\(n &gt; 0\)</span>.
@@ -968,6 +968,13 @@ cada <span class="math inline">\(S_{i,l}\)</span> es una aproximación al proces
 tiempo <span class="math inline">\(t_l\)</span>. Así resulta la aproximación
 <span class="math display">\[
 \mathbb{E}\left[ S( t_l ) \right] \approx \frac{1}{m} \sum\limits_{i=1}^m S_{i,l}
+\]</span></p></li>
+<li><p>Además, para cada instante <span class="math inline">\(t_l\)</span>, se puede aproximar la función de distribución acumulada
+<span class="math inline">\(F_{S(t_l)}\)</span> de la variable aleatoria <span class="math inline">\(S( t_l )\)</span> utilizando la distribución acumulada empírica
+generada con la muestra <span class="math inline">\(S_{1,l},\ldots,S_{m,l}\)</span>. Para cualquier <span class="math inline">\(s \in \mathbb{R}\)</span>, tenemos la aproximación
+<span class="math display">\[
+F_{S(t_l)}( s ) \approx F_{m,l}( s )
+= \frac{1}{m} \sum\limits_{i=1}^m \mathbf{1}_{(-\infty,s]}\left( S_{i,l} \right)
 \]</span></p></li>
 </ol>
 <div class="example">
@@ -1075,9 +1082,6 @@ se conoce a <span class="math inline">\(N\)</span> como un proceso de Poisson.</
 </details>
 <p><img src="seguros_generales_files/figure-html/l5g3-1.png" width="80%" height="500px" style="display: block; margin: auto;" /></p>
 <p></p>
-<p><span class="math display">\[
-F_{S(t_l)}( s ) \approx F_{m,l}( s ) = \frac{1}{m} \sum\limits_{i=1}^m \mathbf{1}_{(-\infty,s]}\left( S_{i,l} \right)
-\]</span></p>
 <p></p>
 <details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb43"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb43-1"><a href="modelos-de-pérdida-agregada.html#cb43-1"></a>FeS <span class="ot">&lt;-</span> <span class="fu">lapply</span>( <span class="dv">1</span><span class="sc">:</span>p, <span class="at">FUN =</span> <span class="cf">function</span>( l ) <span class="fu">ecdf</span>( <span class="fu">sapply</span>( S, <span class="at">FUN =</span> <span class="cf">function</span>( Si ) Si[ l ] ) ) )</span>
@@ -1097,8 +1101,8 @@ F_{S(t_l)}( s ) \approx F_{m,l}( s ) = \frac{1}{m} \sum\limits_{i=1}^m \mathbf{1
 <span id="cb44-7"><a href="modelos-de-pérdida-agregada.html#cb44-7" tabindex="-1"></a>plt <span class="ot">&lt;-</span> <span class="fu">ggplot</span>( ) <span class="sc">+</span></span>
 <span id="cb44-8"><a href="modelos-de-pérdida-agregada.html#cb44-8" tabindex="-1"></a>  <span class="fu">geom_step</span>( <span class="at">data =</span> FeSdat, <span class="fu">aes</span>( <span class="at">x =</span> s, <span class="at">y =</span> Fes, <span class="at">group =</span> m, <span class="at">colour =</span> m ), <span class="at">size =</span> <span class="fl">0.1</span> ) <span class="sc">+</span></span>
 <span id="cb44-9"><a href="modelos-de-pérdida-agregada.html#cb44-9" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>( <span class="at">values =</span> <span class="fu">c</span>( cols ) ) <span class="sc">+</span></span>
-<span id="cb44-10"><a href="modelos-de-pérdida-agregada.html#cb44-10" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>( <span class="at">breaks =</span> <span class="fu">seq</span>( <span class="dv">0</span>, Smax, <span class="at">length =</span> <span class="dv">11</span> ),</span>
-<span id="cb44-11"><a href="modelos-de-pérdida-agregada.html#cb44-11" tabindex="-1"></a>                      <span class="at">labels =</span> <span class="fu">formatC</span>( <span class="fu">seq</span>( <span class="dv">0</span>, Smax, <span class="at">length =</span> <span class="dv">11</span> ), <span class="at">digits =</span> <span class="dv">2</span>, <span class="at">format =</span> <span class="st">&#39;f&#39;</span> ), </span>
+<span id="cb44-10"><a href="modelos-de-pérdida-agregada.html#cb44-10" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>( <span class="at">breaks =</span> <span class="fu">seq</span>( <span class="dv">0</span>, Smax, <span class="at">length =</span> <span class="dv">5</span> ),</span>
+<span id="cb44-11"><a href="modelos-de-pérdida-agregada.html#cb44-11" tabindex="-1"></a>                      <span class="at">labels =</span> <span class="fu">formatC</span>( <span class="fu">seq</span>( <span class="dv">0</span>, Smax, <span class="at">length =</span> <span class="dv">5</span> ), <span class="at">digits =</span> <span class="dv">2</span>, <span class="at">format =</span> <span class="st">&#39;f&#39;</span> ), </span>
 <span id="cb44-12"><a href="modelos-de-pérdida-agregada.html#cb44-12" tabindex="-1"></a>                      <span class="at">limits =</span> <span class="fu">c</span>( <span class="dv">0</span>, Smax ), <span class="at">expand =</span> <span class="fu">c</span>( <span class="dv">0</span>, <span class="dv">0</span> ) ) <span class="sc">+</span></span>
 <span id="cb44-13"><a href="modelos-de-pérdida-agregada.html#cb44-13" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>( <span class="at">breaks =</span> <span class="fu">seq</span>( <span class="dv">0</span>, <span class="dv">1</span>, <span class="at">length =</span> <span class="dv">11</span> ),</span>
 <span id="cb44-14"><a href="modelos-de-pérdida-agregada.html#cb44-14" tabindex="-1"></a>                      <span class="at">labels =</span> <span class="fu">formatC</span>( <span class="fu">seq</span>( <span class="dv">0</span>, <span class="dv">1</span>, <span class="at">length =</span> <span class="dv">11</span> ), <span class="at">digits =</span> <span class="dv">2</span>, <span class="at">format =</span> <span class="st">&#39;f&#39;</span> ), </span>
