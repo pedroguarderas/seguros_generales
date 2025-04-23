@@ -747,19 +747,19 @@ e <- unlist( lapply( seq( 1, 9, 1 ), FUN = function( n ) seq( 9, 1, -1 ) * 10^{-
 n <- ceiling( -log( delta / 2 ) / ( 2 * e^2 ) )
 ```
 
-```{r l3t1, echo = TRUE, results = 'asis', out.width='80%', tab.cap='Error versus número de simulaciones' }
+```{r l3t1, echo = TRUE, results = 'asis', out.width='100%', tab.cap='Error versus número de simulaciones' }
 dt <- data.table( delta = delta, e, n, d = 8 * n / 1024^3 )
 dt %>%
   kable(
-    caption = NULL,
     row.names = FALSE,
     col.names = c( "$\\delta$", "$\\varepsilon$", "$n$", "GB" ),
     align = 'llrr',
     digits = c( 10, 20, 0, 10 ),
     format.args = list( big.mark = ',', decimal.mark = '.', scientific = FALSE ),
-    escape = FALSE ) %>%
-  kable_classic( font_size = 14, full_width = FALSE, html_font = "Cambria" ) %>%
-  scroll_box( width = "1050px", height = "500px" )
+    escape = FALSE,
+    centering = TRUE ) %>%
+  kable_classic( font_size = 14, full_width = FALSE, html_font = "Cambria", position = 'center' ) %>%
+  scroll_box( width = "100%", height = "500px" )
 ```
 
 <!------------------------------------------------------------------------------------------------->

@@ -179,7 +179,7 @@ $$
 P( N = n ) = \exp(-g( \beta x ) ER( x )) \frac{g( \beta x )^n ER( x )^n}{n!}
 $$
 
-```{r l8t1, echo = TRUE, results = 'asis', out.width='80%', class.source = 'fold-hide'}
+```{r l8t1, echo = TRUE, results = 'asis', out.width='100%', class.source = 'fold-hide'}
 # la librería CASdatasets fue previamente cargada
 data( beMTPL97 )
 beMTPL97 <- as.data.table( beMTPL97 )
@@ -193,9 +193,10 @@ beMTPL97[ 1:100 ] %>%
     align = paste0( rep( "r", ncol( beMTPL97 ) ), collapse = "" ),
     digits = c( 0, 2, 0, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 4 ),
     format.args = list( big.mark = ',', decimal.mark = '.', scientific = FALSE ),
-    escape = FALSE ) %>%
+    escape = FALSE,
+    centering = TRUE ) %>%
   kable_classic( font_size = 14, full_width = FALSE, html_font = "Cambria", position = "center" ) %>%
-  scroll_box( width = "750px", height = "500px" )
+  scroll_box( width = "100%", height = "500px" )
 ```
 
 ```{r l8c1}
@@ -204,7 +205,7 @@ model_N <- glm( formula = nclaims ~ ageph + sex + power + fuel + offset( log( ex
                 data = beMTPL97 )
 ```
 
-```{r l8t2, echo = TRUE, results = 'asis', out.width='80%', class.source = 'fold-hide'}
+```{r l8t2, echo = TRUE, results = 'asis', out.width='100%', class.source = 'fold-hide'}
 dat <- tidy( model_N )
 dat %>%
   kable(
@@ -214,12 +215,13 @@ dat %>%
     align = 'lrrrr',
     digits = c( 0, 6, 6, 6, 6 ),
     format.args = list( big.mark = ',', decimal.mark = '.', scientific = FALSE ),
-    escape = FALSE ) %>%
-  kable_classic( font_size = 14, full_width = FALSE, html_font = "Cambria" ) %>%
-  scroll_box( width = "750px", height = "300px" )
+    escape = FALSE,
+    centering = TRUE ) %>%
+  kable_classic( font_size = 14, full_width = FALSE, html_font = "Cambria", position = "center" ) %>%
+  scroll_box( width = "100%", height = "300px" )
 ```
 
-```{r l8t3, echo = TRUE, results = 'asis', out.width='80%', class.source = 'fold-hide'}
+```{r l8t3, echo = TRUE, results = 'asis', out.width='100%', class.source = 'fold-hide'}
 dat <- glance( model_N )
 dat %>%
   kable(
@@ -229,9 +231,10 @@ dat %>%
     align = paste0( rep( "r", ncol( dat ) ), collapse = "" ),
     digits = c( 4, 0, 2, 2, 2, 2, 0, 0 ),
     format.args = list( big.mark = ',', decimal.mark = '.', scientific = FALSE ),
-    escape = FALSE ) %>%
-  kable_classic( font_size = 14, full_width = FALSE, html_font = "Cambria" ) %>%
-  scroll_box( width = "750px", height = "200px" )
+    escape = FALSE,
+    centering = TRUE ) %>%
+  kable_classic( font_size = 14, full_width = FALSE, html_font = "Cambria", position = "center" ) %>%
+  scroll_box( width = "100%", height = "200px" )
 ```
 
 ```{r l8c2}
