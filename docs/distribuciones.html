@@ -454,32 +454,34 @@ k \frac{p_k}{p_{k-1}} = a( k - m - 1 ) &lt; 0, \quad \text{decreciente en $k$}
 <p>Para una demostración detallada de la proposición anterior se puede consultar <span class="citation">[<a href="bibliografía.html#ref-MathAssuNV1">4</a>]</span> o
 en <a href="https://nonlifemaths.github.io/" class="uri">https://nonlifemaths.github.io/</a>.</p>
 <p></p>
-<details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb22"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb22-1"><a href="distribuciones.html#cb22-1"></a><span class="co"># la librería CASdatasets fue previamente cargada</span></span>
-<span id="cb22-2"><a href="distribuciones.html#cb22-2"></a><span class="fu">data</span>( beMTPL97 )</span>
-<span id="cb22-3"><a href="distribuciones.html#cb22-3"></a>beMTPL97 <span class="ot">&lt;-</span> <span class="fu">as.data.table</span>( beMTPL97 )</span>
-<span id="cb22-4"><a href="distribuciones.html#cb22-4"></a>conteo <span class="ot">&lt;-</span> beMTPL97[ , <span class="fu">list</span>( <span class="at">fn =</span> .N ), by <span class="ot">=</span> <span class="fu">list</span>( sex, fuel, <span class="at">N =</span> nclaims ) ]</span>
-<span id="cb22-5"><a href="distribuciones.html#cb22-5"></a>conteo[ , pn <span class="sc">:=</span> fn <span class="sc">/</span> <span class="fu">sum</span>( fn ), by <span class="ot">=</span> <span class="fu">list</span>( sex, fuel ) ]</span>
-<span id="cb22-6"><a href="distribuciones.html#cb22-6"></a><span class="fu">setorder</span>( conteo, sex, fuel, N )</span>
-<span id="cb22-7"><a href="distribuciones.html#cb22-7"></a>conteo[ , pns <span class="sc">:=</span> <span class="fu">shift</span>( pn, <span class="at">type =</span> <span class="st">&#39;lag&#39;</span>, <span class="at">fill =</span> <span class="dv">0</span> ) ]</span>
-<span id="cb22-8"><a href="distribuciones.html#cb22-8"></a>conteo[ , jn <span class="sc">:=</span> N <span class="sc">*</span> pns <span class="sc">/</span> pn ]</span>
-<span id="cb22-9"><a href="distribuciones.html#cb22-9"></a></span>
-<span id="cb22-10"><a href="distribuciones.html#cb22-10"></a>conteo <span class="sc">%&gt;%</span></span>
-<span id="cb22-11"><a href="distribuciones.html#cb22-11"></a>  <span class="fu">kable</span>(</span>
-<span id="cb22-12"><a href="distribuciones.html#cb22-12"></a>    <span class="at">caption =</span> <span class="st">&#39;Estimación conteos por sexo&#39;</span>,</span>
-<span id="cb22-13"><a href="distribuciones.html#cb22-13"></a>    <span class="at">row.names =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb22-14"><a href="distribuciones.html#cb22-14"></a>    <span class="at">col.names =</span> <span class="fu">c</span>( <span class="st">&quot;sexo&quot;</span>, <span class="st">&quot;fuel&quot;</span>, <span class="st">&quot;$N$&quot;</span>, <span class="st">&quot;$f_k$&quot;</span>, <span class="st">&quot;$p_k$&quot;</span>, <span class="st">&quot;$p_{k+1}$&quot;</span>, <span class="st">&quot;$k </span><span class="sc">\\</span><span class="st">frac{p_{k+1}}{p_k}$&quot;</span> ),</span>
-<span id="cb22-15"><a href="distribuciones.html#cb22-15"></a>    <span class="at">align =</span> <span class="st">&#39;llrrrrr&#39;</span>,</span>
-<span id="cb22-16"><a href="distribuciones.html#cb22-16"></a>    <span class="at">digits =</span> <span class="fu">c</span>( <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">5</span> ),</span>
-<span id="cb22-17"><a href="distribuciones.html#cb22-17"></a>    <span class="at">format.args =</span> <span class="fu">list</span>( <span class="at">big.mark =</span> <span class="st">&#39;,&#39;</span>, <span class="at">decimal.mark =</span> <span class="st">&#39;.&#39;</span>, <span class="at">scientific =</span> <span class="cn">FALSE</span> ),</span>
-<span id="cb22-18"><a href="distribuciones.html#cb22-18"></a>    <span class="at">escape =</span> <span class="cn">FALSE</span> ) <span class="sc">%&gt;%</span></span>
-<span id="cb22-19"><a href="distribuciones.html#cb22-19"></a>  <span class="fu">kable_classic</span>( <span class="at">font_size =</span> <span class="dv">14</span>, <span class="at">full_width =</span> <span class="cn">FALSE</span>, <span class="at">html_font =</span> <span class="st">&quot;Cambria&quot;</span> ) <span class="sc">%&gt;%</span></span>
-<span id="cb22-20"><a href="distribuciones.html#cb22-20"></a>  <span class="fu">scroll_box</span>( <span class="at">width =</span> <span class="st">&quot;750px&quot;</span>, <span class="at">height =</span> <span class="st">&quot;500px&quot;</span> )</span></code></pre></div>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r fold-hide"><code class="sourceCode r"><span id="cb22-1"><a href="distribuciones.html#cb22-1" tabindex="-1"></a><span class="co"># la librería CASdatasets fue previamente cargada</span></span>
+<span id="cb22-2"><a href="distribuciones.html#cb22-2" tabindex="-1"></a><span class="fu">data</span>( beMTPL97 )</span>
+<span id="cb22-3"><a href="distribuciones.html#cb22-3" tabindex="-1"></a>beMTPL97 <span class="ot">&lt;-</span> <span class="fu">as.data.table</span>( beMTPL97 )</span>
+<span id="cb22-4"><a href="distribuciones.html#cb22-4" tabindex="-1"></a>conteo <span class="ot">&lt;-</span> beMTPL97[ , <span class="fu">list</span>( <span class="at">fn =</span> .N ), by <span class="ot">=</span> <span class="fu">list</span>( sex, fuel, <span class="at">N =</span> nclaims ) ]</span>
+<span id="cb22-5"><a href="distribuciones.html#cb22-5" tabindex="-1"></a>conteo[ , pn <span class="sc">:=</span> fn <span class="sc">/</span> <span class="fu">sum</span>( fn ), by <span class="ot">=</span> <span class="fu">list</span>( sex, fuel ) ]</span>
+<span id="cb22-6"><a href="distribuciones.html#cb22-6" tabindex="-1"></a><span class="fu">setorder</span>( conteo, sex, fuel, N )</span>
+<span id="cb22-7"><a href="distribuciones.html#cb22-7" tabindex="-1"></a>conteo[ , pns <span class="sc">:=</span> <span class="fu">shift</span>( pn, <span class="at">type =</span> <span class="st">&#39;lag&#39;</span>, <span class="at">fill =</span> <span class="dv">0</span> ) ]</span>
+<span id="cb22-8"><a href="distribuciones.html#cb22-8" tabindex="-1"></a>conteo[ , jn <span class="sc">:=</span> N <span class="sc">*</span> pns <span class="sc">/</span> pn ]</span>
+<span id="cb22-9"><a href="distribuciones.html#cb22-9" tabindex="-1"></a></span>
+<span id="cb22-10"><a href="distribuciones.html#cb22-10" tabindex="-1"></a>conteo <span class="sc">%&gt;%</span></span>
+<span id="cb22-11"><a href="distribuciones.html#cb22-11" tabindex="-1"></a>  <span class="fu">kable</span>(</span>
+<span id="cb22-12"><a href="distribuciones.html#cb22-12" tabindex="-1"></a>    <span class="at">label =</span> <span class="cn">NA</span>,</span>
+<span id="cb22-13"><a href="distribuciones.html#cb22-13" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">&#39;Estimación conteos por sexo&#39;</span>,</span>
+<span id="cb22-14"><a href="distribuciones.html#cb22-14" tabindex="-1"></a>    <span class="at">row.names =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb22-15"><a href="distribuciones.html#cb22-15" tabindex="-1"></a>    <span class="at">col.names =</span> <span class="fu">c</span>( <span class="st">&quot;sexo&quot;</span>, <span class="st">&quot;fuel&quot;</span>, <span class="st">&quot;$N$&quot;</span>, <span class="st">&quot;$f_k$&quot;</span>, <span class="st">&quot;$p_k$&quot;</span>, <span class="st">&quot;$p_{k+1}$&quot;</span>, <span class="st">&quot;$k </span><span class="sc">\\</span><span class="st">frac{p_{k+1}}{p_k}$&quot;</span> ),</span>
+<span id="cb22-16"><a href="distribuciones.html#cb22-16" tabindex="-1"></a>    <span class="at">align =</span> <span class="st">&#39;llrrrrr&#39;</span>,</span>
+<span id="cb22-17"><a href="distribuciones.html#cb22-17" tabindex="-1"></a>    <span class="at">digits =</span> <span class="fu">c</span>( <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">5</span> ),</span>
+<span id="cb22-18"><a href="distribuciones.html#cb22-18" tabindex="-1"></a>    <span class="at">format.args =</span> <span class="fu">list</span>( <span class="at">big.mark =</span> <span class="st">&#39;,&#39;</span>, <span class="at">decimal.mark =</span> <span class="st">&#39;.&#39;</span>, <span class="at">scientific =</span> <span class="cn">FALSE</span> ),</span>
+<span id="cb22-19"><a href="distribuciones.html#cb22-19" tabindex="-1"></a>    <span class="at">escape =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb22-20"><a href="distribuciones.html#cb22-20" tabindex="-1"></a>    <span class="at">centering =</span> <span class="cn">TRUE</span> ) <span class="sc">%&gt;%</span></span>
+<span id="cb22-21"><a href="distribuciones.html#cb22-21" tabindex="-1"></a>  <span class="fu">kable_classic</span>( <span class="at">font_size =</span> <span class="dv">14</span>, <span class="at">full_width =</span> <span class="cn">FALSE</span>, <span class="at">html_font =</span> <span class="st">&quot;Cambria&quot;</span>, <span class="at">position =</span> <span class="st">&quot;center&quot;</span> ) <span class="sc">%&gt;%</span></span>
+<span id="cb22-22"><a href="distribuciones.html#cb22-22" tabindex="-1"></a>  <span class="fu">scroll_box</span>( <span class="at">width =</span> <span class="st">&quot;100%&quot;</span>, <span class="at">height =</span> <span class="st">&quot;500px&quot;</span> )</span></code></pre></div>
 </details>
-<div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:500px; overflow-x: scroll; width:750px; ">
+<div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:500px; overflow-x: scroll; width:100%; ">
 <table class=" lightable-classic" style="font-size: 14px; color: black; font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
 <caption style="font-size: initial !important;">
-<span id="tab:l4t1">Tabla 4.1: </span><span id="tab:l4t1">Tabla 4.2: </span>Estimación conteos por sexo
+<span id="tab:l4t1">Tabla 4.1: </span>Estimación conteos por sexo
 </caption>
 <thead>
 <tr>
