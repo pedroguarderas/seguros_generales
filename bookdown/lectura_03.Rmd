@@ -747,10 +747,12 @@ e <- unlist( lapply( seq( 1, 9, 1 ), FUN = function( n ) seq( 9, 1, -1 ) * 10^{-
 n <- ceiling( -log( delta / 2 ) / ( 2 * e^2 ) )
 ```
 
-```{r l3t1, echo = TRUE, results = 'asis', out.width='100%', tab.cap='Error versus número de simulaciones' }
+```{r l3t1, echo = TRUE, results = 'asis', out.width='100%' }
 dt <- data.table( delta = delta, e, n, d = 8 * n / 1024^3 )
 dt %>%
   kable(
+    label = NA,
+    caption = 'Error versus número de simulaciones',
     row.names = FALSE,
     col.names = c( "$\\delta$", "$\\varepsilon$", "$n$", "GB" ),
     align = 'llrr',

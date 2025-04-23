@@ -187,6 +187,7 @@ beMTPL97 <- as.data.table( beMTPL97 )
 # Impresión de las primeras filas de la tabla
 beMTPL97[ 1:100 ] %>%
   kable(
+    label = NA,
     caption = "Pólizas y reclamos de automóviles en Bélgica",
     row.names = FALSE,
     col.names = names( beMTPL97 ),
@@ -209,6 +210,7 @@ model_N <- glm( formula = nclaims ~ ageph + sex + power + fuel + offset( log( ex
 dat <- tidy( model_N )
 dat %>%
   kable(
+    label = NA,
     caption = "Resultados del modelo GLM",
     row.names = FALSE,
     col.names = names( dat ),
@@ -225,6 +227,7 @@ dat %>%
 dat <- glance( model_N )
 dat %>%
   kable(
+    label = NA,
     caption = "Resultados del modelo GLM",
     row.names = FALSE,
     col.names = names( dat ),

@@ -166,7 +166,7 @@ Para una demostración detallada de la proposición anterior se puede consultar 
 en https://nonlifemaths.github.io/.
 
 
-```{r l4t1, echo = TRUE, results = 'asis'}
+```{r l4t1, echo = TRUE, results = 'asis', out.width='100%', class.source = 'fold-hide'}
 # la librería CASdatasets fue previamente cargada
 data( beMTPL97 )
 beMTPL97 <- as.data.table( beMTPL97 )
@@ -178,15 +178,17 @@ conteo[ , jn := N * pns / pn ]
 
 conteo %>%
   kable(
+    label = NA,
     caption = 'Estimación conteos por sexo',
     row.names = FALSE,
     col.names = c( "sexo", "fuel", "$N$", "$f_k$", "$p_k$", "$p_{k+1}$", "$k \\frac{p_{k+1}}{p_k}$" ),
     align = 'llrrrrr',
     digits = c( 0, 0, 0, 0, 5, 5, 5 ),
     format.args = list( big.mark = ',', decimal.mark = '.', scientific = FALSE ),
-    escape = FALSE ) %>%
-  kable_classic( font_size = 14, full_width = FALSE, html_font = "Cambria" ) %>%
-  scroll_box( width = "750px", height = "500px" )
+    escape = FALSE,
+    centering = TRUE ) %>%
+  kable_classic( font_size = 14, full_width = FALSE, html_font = "Cambria", position = "center" ) %>%
+  scroll_box( width = "100%", height = "500px" )
 ```
 
 ```{r l4c5}
