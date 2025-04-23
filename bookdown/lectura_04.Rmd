@@ -251,14 +251,20 @@ fx <- dexp( x = x, rate = lambda ) # cálculo de la densidad f(x)
 Fk <- pexp( q = x, rate = lambda ) # cálculo de probabilidad F(x)
 ```
 
-::: {.definition #dnorm name="Distribución gamma"}
+::: {.definition #dgamma name="Distribución gamma"}
 Una variable aleatoria $X$ a valores reales, sigue una distribución gamma 
 $X \rightsquigarrow Gamma( \alpha, \beta )$ de parámetros $\alpha > 0$, $\beta > 0$, si su 
 función de distribución acumulada es de la siguiente forma:
 $$
 F_X( x ) = \frac{\beta^\alpha}{\Gamma( \alpha )} \int\limits_{0}^{x} u^{\alpha-1} \exp(-\beta u)\ du
 $$
-la densidad de probabilidad automáticamente está dada por la función:
+si en caso $\alpha$ un entero positivo, i.e. $\alpha \in \N^*$, se puede calcular $F_X( x )$ con la siguiente serie
+$$
+F_X( x ) = 1 - \exp( -\lambda x ) \sum\limits_{n=0}^{\alpha-1} \frac{(\lambda x)^n}{n!}
+= \exp( -\lambda x ) \sum\limits_{n=\alpha}^{+\infty} \frac{(\lambda x)^n}{n!}
+$$
+
+por su parte, la densidad de probabilidad automáticamente está dada por la función:
 $$
 f_X( x ) = \mathbf{1}_{[0,+\infty}( x ) \frac{\beta^\alpha}{\Gamma( \alpha )} x^{\alpha-1} \exp(-\beta x)
 $$
