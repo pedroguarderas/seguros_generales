@@ -35,6 +35,7 @@ prp:chfampanjer
 tab:l4t1
 def:dunif
 def:dexp
+def:dgamma
 def:dnorm
 def:dlnorm
 def:dgpd

@@ -1085,13 +1085,18 @@ M_X( t ) = \frac{\lambda}{\lambda - t}
 </details>
 <p></p>
 <div class="definition">
-<p><span id="def:dnorm" class="definition"><strong>Definición 4.8  (Distribución gamma) </strong></span>Una variable aleatoria <span class="math inline">\(X\)</span> a valores reales, sigue una distribución gamma
+<p><span id="def:dgamma" class="definition"><strong>Definición 4.8  (Distribución gamma) </strong></span>Una variable aleatoria <span class="math inline">\(X\)</span> a valores reales, sigue una distribución gamma
 <span class="math inline">\(X \rightsquigarrow Gamma( \alpha, \beta )\)</span> de parámetros <span class="math inline">\(\alpha &gt; 0\)</span>, <span class="math inline">\(\beta &gt; 0\)</span>, si su
 función de distribución acumulada es de la siguiente forma:
 <span class="math display">\[
 F_X( x ) = \frac{\beta^\alpha}{\Gamma( \alpha )} \int\limits_{0}^{x} u^{\alpha-1} \exp(-\beta u)\ du
 \]</span>
-la densidad de probabilidad automáticamente está dada por la función:
+si en caso <span class="math inline">\(\alpha\)</span> un entero positivo, i.e. <span class="math inline">\(\alpha \in \mathbb{N}^*\)</span>, se puede calcular <span class="math inline">\(F_X( x )\)</span> con la siguiente serie
+<span class="math display">\[
+F_X( x ) = 1 - \exp( -\lambda x ) \sum\limits_{n=0}^{\alpha-1} \frac{(\lambda x)^n}{n!}
+= \exp( -\lambda x ) \sum\limits_{n=\alpha}^{+\infty} \frac{(\lambda x)^n}{n!}
+\]</span></p>
+<p>por su parte, la densidad de probabilidad automáticamente está dada por la función:
 <span class="math display">\[
 f_X( x ) = \mathbf{1}_{[0,+\infty}( x ) \frac{\beta^\alpha}{\Gamma( \alpha )} x^{\alpha-1} \exp(-\beta x)
 \]</span>
@@ -1115,7 +1120,7 @@ M_X( t ) = \left( \frac{\beta}{\beta - t} \right)^\alpha,\qquad \text{si}\ t &lt
 </details>
 <p></p>
 <div class="definition">
-<p><span id="def:dnorm" class="definition"><strong>Definición 4.8  (Distribución normal) </strong></span>Una variable aleatoria <span class="math inline">\(X\)</span> a valores reales, sigue una distribución normal
+<p><span id="def:dnorm" class="definition"><strong>Definición 4.9  (Distribución normal) </strong></span>Una variable aleatoria <span class="math inline">\(X\)</span> a valores reales, sigue una distribución normal
 <span class="math inline">\(X \rightsquigarrow N( \mu, \sigma )\)</span> de parámetros <span class="math inline">\(\mu \in \mathbb{R}\)</span>, <span class="math inline">\(\sigma &gt; 0\)</span>, si su
 función de distribución acumulada es de la siguiente forma:
 <span class="math display">\[
@@ -1144,7 +1149,7 @@ M_X( t ) = \exp\left( t \mu + \frac{1}{2} t^2 \sigma^2 \right)
 </details>
 <p></p>
 <div class="definition">
-<p><span id="def:dlnorm" class="definition"><strong>Definición 4.9  (Distribución log-normal) </strong></span>Una variable aleatoria <span class="math inline">\(X\)</span> a valores reales, sigue una distribución log-normal
+<p><span id="def:dlnorm" class="definition"><strong>Definición 4.10  (Distribución log-normal) </strong></span>Una variable aleatoria <span class="math inline">\(X\)</span> a valores reales, sigue una distribución log-normal
 <span class="math inline">\(X \rightsquigarrow LN( \mu, \sigma )\)</span> de parámetros <span class="math inline">\(\mu &gt; 0\)</span>, <span class="math inline">\(\sigma &gt; 0\)</span>, si su
 función de distribución acumulada es de la siguiente forma:
 <span class="math display">\[
@@ -1175,7 +1180,7 @@ En pocas, una variable aleatoria <span class="math inline">\(X \rightsquigarrow 
 log-normal si y solamente si la variable aleatoria dada por su logaritmo <span class="math inline">\(\ln( X ) \rightsquigarrow N( \mu, \sigma )\)</span>
 sigue una distribución normal.</p>
 <div class="definition">
-<p><span id="def:dgpd" class="definition"><strong>Definición 4.10  (Distribución de Pareto generalizada) </strong></span>Una variable aleatoria <span class="math inline">\(X\)</span> a valores reales, sigue una distribución de Pareto generalizada
+<p><span id="def:dgpd" class="definition"><strong>Definición 4.11  (Distribución de Pareto generalizada) </strong></span>Una variable aleatoria <span class="math inline">\(X\)</span> a valores reales, sigue una distribución de Pareto generalizada
 <span class="math inline">\(X \rightsquigarrow GPD( \mu, \sigma, \xi )\)</span> de parámetros <span class="math inline">\(\mu \in \mathbb{R}, \sigma &gt; 0, \xi \in \mathbb{R}\)</span>,
 si su función de distribución acumulada es de la siguiente forma:
 <span class="math display">\[
@@ -1215,7 +1220,7 @@ M_X( t ) = \exp(\theta \mu) \sum\limits_{j=0}^{+\infty} \frac{\theta^j \sigma^j}
 </details>
 <p></p>
 <div class="definition">
-<p><span id="def:dgev" class="definition"><strong>Definición 4.11  (Distribución de valores extremos generalizada) </strong></span>Una variable aleatoria <span class="math inline">\(X\)</span> a valores reales, sigue una distribución generalizada de valores extremos
+<p><span id="def:dgev" class="definition"><strong>Definición 4.12  (Distribución de valores extremos generalizada) </strong></span>Una variable aleatoria <span class="math inline">\(X\)</span> a valores reales, sigue una distribución generalizada de valores extremos
 <span class="math inline">\(X \rightsquigarrow GEV( \mu, \sigma, \xi )\)</span> de parámetros <span class="math inline">\(\mu \in \mathbb{R}, \sigma &gt; 0, \xi \in \mathbb{R}\)</span>,
 si su función de distribución acumulada es de la siguiente forma:
 <span class="math display">\[
@@ -1257,7 +1262,7 @@ f_X( x )
 </details>
 <p></p>
 <div class="definition">
-<p><span id="def:dtst" class="definition"><strong>Definición 4.12  (Distribución t de Student) </strong></span>Una variable aleatoria <span class="math inline">\(X\)</span> a valores reales, sigue una distribución t de Student
+<p><span id="def:dtst" class="definition"><strong>Definición 4.13  (Distribución t de Student) </strong></span>Una variable aleatoria <span class="math inline">\(X\)</span> a valores reales, sigue una distribución t de Student
 <span class="math inline">\(X \rightsquigarrow t( \nu )\)</span> de parámetros <span class="math inline">\(\nu &gt; 0\)</span>,
 si su función de distribución acumulada es de la siguiente forma:
 <span class="math display">\[
@@ -1319,7 +1324,7 @@ La función generadora de momentos <span class="math inline">\(M_X( t )\)</span>
 </details>
 <p></p>
 <div class="definition">
-<p><span id="def:dgammatra" class="definition"><strong>Definición 4.13  (Distribución gamma transformada) </strong></span>Una variable aleatoria <span class="math inline">\(X\)</span> a valores reales, sigue una distribución gamma transformada
+<p><span id="def:dgammatra" class="definition"><strong>Definición 4.14  (Distribución gamma transformada) </strong></span>Una variable aleatoria <span class="math inline">\(X\)</span> a valores reales, sigue una distribución gamma transformada
 <span class="math inline">\(X \rightsquigarrow GT( \alpha, \tau, \theta )\)</span> de parámetros <span class="math inline">\(\alpha &gt; 0, \tau &gt; 0, \theta &gt; 0\)</span>,
 si su función de distribución acumulada es de la siguiente forma:
 <span class="math display">\[
@@ -1375,7 +1380,7 @@ f_X( x )
 <li><p>La distribución inversa exponencial</p></li>
 </ol>
 <div class="definition">
-<p><span id="def:dbetra" class="definition"><strong>Definición 4.14  (Distribución beta transformada) </strong></span>Una variable aleatoria <span class="math inline">\(X\)</span> a valores reales, sigue una distribución beta transformada
+<p><span id="def:dbetra" class="definition"><strong>Definición 4.15  (Distribución beta transformada) </strong></span>Una variable aleatoria <span class="math inline">\(X\)</span> a valores reales, sigue una distribución beta transformada
 <span class="math inline">\(X \rightsquigarrow BT( \alpha, \gamma, \tau, \theta )\)</span> de parámetros <span class="math inline">\(\alpha &gt; 0, \gamma &gt; 0, \tau &gt; 0, \theta &gt; 0\)</span>,
 si su función de distribución acumulada es de la siguiente forma:
 <span class="math display">\[
@@ -1479,7 +1484,7 @@ puede considerar el caso anterior como un caso en particular de este tipo de fun
 se puede definir <span class="math inline">\(\theta_n( X_1, \ldots, X_n ) = G( P_n )\)</span>, pero hay que tener cuidado que <span class="math inline">\(G\)</span> es
 un funcional y como tal puede resultar una función que no es medible.</p>
 <div class="definition">
-<p><span id="def:estsus" class="definition"><strong>Definición 4.15  (Estimadores convergentes) </strong></span>En el mismo contexto anterior. Si la variable aleatoria <span class="math inline">\(X\)</span> está caracterizada por la medida
+<p><span id="def:estsus" class="definition"><strong>Definición 4.16  (Estimadores convergentes) </strong></span>En el mismo contexto anterior. Si la variable aleatoria <span class="math inline">\(X\)</span> está caracterizada por la medida
 <span class="math inline">\(P_X = P_{\theta}\)</span>, para algún <span class="math inline">\(\theta \in \Theta\)</span>. Decimos que una familia de estimadores
 <span class="math inline">\(\{\theta_n\}\)</span> es <strong>convergente</strong> si al generar cada vez una muestra más grande el estimador
 <span class="math inline">\(\theta_n( X_1, \ldots, X_n )\)</span> converge en probabilidad a <span class="math inline">\(\theta\)</span>. Esto quiere decir que
@@ -1618,7 +1623,7 @@ P\left( N_1 = n_1 \land \cdots \land N_m = n_m \right)
 <div id="calidad-de-estimadores" class="section level3 hasAnchor" number="4.4.5">
 <h3><span class="header-section-number">4.4.5</span> Calidad de estimadores<a href="distribuciones.html#calidad-de-estimadores" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="definition">
-<p><span id="def:bestinses" class="definition"><strong>Definición 4.16  (Estimador insesgado) </strong></span>Se dice que un estimador <span class="math inline">\(\theta_1\)</span> se dice <strong>insesgado</strong> para estimar el parámetro <span class="math inline">\(\theta\)</span>, si se
+<p><span id="def:bestinses" class="definition"><strong>Definición 4.17  (Estimador insesgado) </strong></span>Se dice que un estimador <span class="math inline">\(\theta_1\)</span> se dice <strong>insesgado</strong> para estimar el parámetro <span class="math inline">\(\theta\)</span>, si se
 cumple que:
 <span class="math display">\[
 \mathbb{E}\left[ \theta_1 \right] = \theta
@@ -1626,7 +1631,7 @@ cumple que:
 caso contrario se dirá que el estimador es <strong>sesgado</strong> o que presenta un <strong>error sistemático</strong>.</p>
 </div>
 <div class="definition">
-<p><span id="def:bestcuadmean" class="definition"><strong>Definición 4.17  (Mejor estimador en media cuadrática) </strong></span>Se dice que un estimador <span class="math inline">\(\theta_1\)</span> es mejor estimador en media cuadrática que el estimador
+<p><span id="def:bestcuadmean" class="definition"><strong>Definición 4.18  (Mejor estimador en media cuadrática) </strong></span>Se dice que un estimador <span class="math inline">\(\theta_1\)</span> es mejor estimador en media cuadrática que el estimador
 <span class="math inline">\(\theta_2\)</span>, respecto del parámetro <span class="math inline">\(\theta\)</span>, si se cumple la siguiente desigualdad
 <span class="math display">\[
 \mathbb{E}\left[ \left( \theta_1 - \theta \right)^2 \right]
