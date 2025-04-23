@@ -640,8 +640,8 @@ Notemos primeramente que se tienen la siguiente igualdad entre los eventos
 $$
 \{N(t) = n\}
 = \{T_n \leq \land T_{n+1} > t\}
-= \{T_n \leq \} \cap \{ T_{n+1} \leq t\}^c
-= \{T_n \leq \} \setminus \{ T_{n+1} \leq t\}
+= \{T_n \leq t \} \cap \{ T_{n+1} \leq t\}^c
+= \{T_n \leq t \} \setminus \{ T_{n+1} \leq t\}
 $$
 además es de observar que $\{ T_{n+1} \leq t\} \subset \{ T_{n} \leq t\}$. Con todo esto en 
 consideración para cualquier $n > 0$.
@@ -724,6 +724,13 @@ $$
 \E\left[ S( t_l ) \right] \approx \frac{1}{m} \sum\limits_{i=1}^m S_{i,l}
 $$
 
+8. Además, para cada instante $t_l$, se puede aproximar la función de distribución acumulada 
+$F_{S(t_l)}$ de la variable aleatoria $S( t_l )$ utilizando la distribución acumulada empírica
+generada con la muestra $S_{1,l},\ldots,S_{m,l}$. Para cualquier $s \in \R$, tenemos la aproximación
+$$
+F_{S(t_l)}( s ) \approx F_{m,l}( s ) 
+= \frac{1}{m} \sum\limits_{i=1}^m \mathbf{1}_{(-\infty,s]}\left( S_{i,l} \right)
+$$
 
 ::: {.example #l5ex5}
 El siguiente ejemplo es de especial atención ya que es utilizado en muchas aplicaciones, podemos 
@@ -827,9 +834,6 @@ plt <- ggplot( ) +
 plot( plt )
 ```
 
-$$
-F_{S(t_l)}( s ) \approx F_{m,l}( s ) = \frac{1}{m} \sum\limits_{i=1}^m \mathbf{1}_{(-\infty,s]}\left( S_{i,l} \right)
-$$
 ```{r l5c8}
 FeS <- lapply( 1:p, FUN = function( l ) ecdf( sapply( S, FUN = function( Si ) Si[ l ] ) ) )
 ns <- 100
@@ -847,8 +851,8 @@ cols <- wes_palette( p, name = "GrandBudapest2", type = "continuous")
 plt <- ggplot( ) +
   geom_step( data = FeSdat, aes( x = s, y = Fes, group = m, colour = m ), size = 0.1 ) +
   scale_color_manual( values = c( cols ) ) +
-  scale_x_continuous( breaks = seq( 0, Smax, length = 11 ),
-                      labels = formatC( seq( 0, Smax, length = 11 ), digits = 2, format = 'f' ), 
+  scale_x_continuous( breaks = seq( 0, Smax, length = 5 ),
+                      labels = formatC( seq( 0, Smax, length = 5 ), digits = 2, format = 'f' ), 
                       limits = c( 0, Smax ), expand = c( 0, 0 ) ) +
   scale_y_continuous( breaks = seq( 0, 1, length = 11 ),
                       labels = formatC( seq( 0, 1, length = 11 ), digits = 2, format = 'f' ), 
