@@ -948,18 +948,21 @@ logarítmico en <span class="math inline">\(\delta\)</span> y cuadrático en <sp
 <div class="sourceCode" id="cb11"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb11-1"><a href="probabilidad-y-estadística.html#cb11-1"></a>dt <span class="ot">&lt;-</span> <span class="fu">data.table</span>( <span class="at">delta =</span> delta, e, n, <span class="at">d =</span> <span class="dv">8</span> <span class="sc">*</span> n <span class="sc">/</span> <span class="dv">1024</span><span class="sc">^</span><span class="dv">3</span> )</span>
 <span id="cb11-2"><a href="probabilidad-y-estadística.html#cb11-2"></a>dt <span class="sc">%&gt;%</span></span>
 <span id="cb11-3"><a href="probabilidad-y-estadística.html#cb11-3"></a>  <span class="fu">kable</span>(</span>
-<span id="cb11-4"><a href="probabilidad-y-estadística.html#cb11-4"></a>    <span class="at">caption =</span> <span class="cn">NULL</span>,</span>
-<span id="cb11-5"><a href="probabilidad-y-estadística.html#cb11-5"></a>    <span class="at">row.names =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb11-6"><a href="probabilidad-y-estadística.html#cb11-6"></a>    <span class="at">col.names =</span> <span class="fu">c</span>( <span class="st">&quot;$</span><span class="sc">\\</span><span class="st">delta$&quot;</span>, <span class="st">&quot;$</span><span class="sc">\\</span><span class="st">varepsilon$&quot;</span>, <span class="st">&quot;$n$&quot;</span>, <span class="st">&quot;GB&quot;</span> ),</span>
-<span id="cb11-7"><a href="probabilidad-y-estadística.html#cb11-7"></a>    <span class="at">align =</span> <span class="st">&#39;llrr&#39;</span>,</span>
-<span id="cb11-8"><a href="probabilidad-y-estadística.html#cb11-8"></a>    <span class="at">digits =</span> <span class="fu">c</span>( <span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">0</span>, <span class="dv">10</span> ),</span>
-<span id="cb11-9"><a href="probabilidad-y-estadística.html#cb11-9"></a>    <span class="at">format.args =</span> <span class="fu">list</span>( <span class="at">big.mark =</span> <span class="st">&#39;,&#39;</span>, <span class="at">decimal.mark =</span> <span class="st">&#39;.&#39;</span>, <span class="at">scientific =</span> <span class="cn">FALSE</span> ),</span>
-<span id="cb11-10"><a href="probabilidad-y-estadística.html#cb11-10"></a>    <span class="at">escape =</span> <span class="cn">FALSE</span> ) <span class="sc">%&gt;%</span></span>
-<span id="cb11-11"><a href="probabilidad-y-estadística.html#cb11-11"></a>  <span class="fu">kable_classic</span>( <span class="at">font_size =</span> <span class="dv">14</span>, <span class="at">full_width =</span> <span class="cn">FALSE</span>, <span class="at">html_font =</span> <span class="st">&quot;Cambria&quot;</span> ) <span class="sc">%&gt;%</span></span>
-<span id="cb11-12"><a href="probabilidad-y-estadística.html#cb11-12"></a>  <span class="fu">scroll_box</span>( <span class="at">width =</span> <span class="st">&quot;1050px&quot;</span>, <span class="at">height =</span> <span class="st">&quot;500px&quot;</span> )</span></code></pre></div>
+<span id="cb11-4"><a href="probabilidad-y-estadística.html#cb11-4"></a>    <span class="at">row.names =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb11-5"><a href="probabilidad-y-estadística.html#cb11-5"></a>    <span class="at">col.names =</span> <span class="fu">c</span>( <span class="st">&quot;$</span><span class="sc">\\</span><span class="st">delta$&quot;</span>, <span class="st">&quot;$</span><span class="sc">\\</span><span class="st">varepsilon$&quot;</span>, <span class="st">&quot;$n$&quot;</span>, <span class="st">&quot;GB&quot;</span> ),</span>
+<span id="cb11-6"><a href="probabilidad-y-estadística.html#cb11-6"></a>    <span class="at">align =</span> <span class="st">&#39;llrr&#39;</span>,</span>
+<span id="cb11-7"><a href="probabilidad-y-estadística.html#cb11-7"></a>    <span class="at">digits =</span> <span class="fu">c</span>( <span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">0</span>, <span class="dv">10</span> ),</span>
+<span id="cb11-8"><a href="probabilidad-y-estadística.html#cb11-8"></a>    <span class="at">format.args =</span> <span class="fu">list</span>( <span class="at">big.mark =</span> <span class="st">&#39;,&#39;</span>, <span class="at">decimal.mark =</span> <span class="st">&#39;.&#39;</span>, <span class="at">scientific =</span> <span class="cn">FALSE</span> ),</span>
+<span id="cb11-9"><a href="probabilidad-y-estadística.html#cb11-9"></a>    <span class="at">escape =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb11-10"><a href="probabilidad-y-estadística.html#cb11-10"></a>    <span class="at">centering =</span> <span class="cn">TRUE</span> ) <span class="sc">%&gt;%</span></span>
+<span id="cb11-11"><a href="probabilidad-y-estadística.html#cb11-11"></a>  <span class="fu">kable_classic</span>( <span class="at">font_size =</span> <span class="dv">14</span>, <span class="at">full_width =</span> <span class="cn">FALSE</span>, <span class="at">html_font =</span> <span class="st">&quot;Cambria&quot;</span>, <span class="at">position =</span> <span class="st">&#39;center&#39;</span> ) <span class="sc">%&gt;%</span></span>
+<span id="cb11-12"><a href="probabilidad-y-estadística.html#cb11-12"></a>  <span class="fu">scroll_box</span>( <span class="at">width =</span> <span class="st">&quot;100%&quot;</span>, <span class="at">height =</span> <span class="st">&quot;500px&quot;</span> )</span></code></pre></div>
 </details>
-<div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:500px; overflow-x: scroll; width:1050px; ">
+<div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:500px; overflow-x: scroll; width:100%; ">
 <table class=" lightable-classic" style="font-size: 14px; color: black; font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
+<caption style="font-size: initial !important;">
+<span id="tab:l3t1">Tabla 3.1: </span><span id="tab:l3t1">Tabla 3.2: </span>Error versus número de simulaciones
+</caption>
 <thead>
 <tr>
 <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
