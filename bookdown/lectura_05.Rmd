@@ -709,6 +709,8 @@ $$
 \E\left[ N( t_l ) \right] \approx \frac{1}{m} \sum\limits_{i=1}^m N_{i,l}
 $$
 
+6. 
+
 ::: {.example #l5ex5}
 El siguiente ejemplo es de especial atención ya que es utilizado en muchas aplicaciones, podemos 
 considerar el caso donde el tiempo entre arribos $\{W_n\}$ es i.i.d y con distribución de 
@@ -732,28 +734,40 @@ se conoce a $N$ como un proceso de Poisson.
 :::
 
 ```{r l5c7}
-m <- 200
+m <- 1000
 lambda <- 10
-N <- 100
+Nm <- 50
+nt <- 365
+u <- 1
+s <- 3
 
 set.seed( 432147 )
-W <- lapply( 1:m, FUN = function( n ) rexp( N, rate = lambda ) )
+W <- lapply( 1:m, FUN = function( n ) rexp( Nm, rate = lambda ) )
 Tn <- lapply( W, FUN = cumsum )
 Tnmax <- max( sapply( Tn, FUN = max ) )
-t <- seq( 0, Tnmax, length = 100 )
+t <- seq( 0, Tnmax, length = nt )
+
 N <- lapply( Tn, FUN = function( Tk ) sapply( t, FUN = function( t )  sum( Tk <= t ) ) )
-Nmax <- max( sapply( N, FUN = max ) )
+Nmax <- max( sapply( N, FUN = function( Ni ) last( Ni ) ) )
+
+set.seed( 432147 )
+X <- lapply( N, FUN = function( Ni ) rlnorm( last( Ni ), meanlog = u, sdlog = s ) )
+S <- lapply( 1:m, FUN = function( i ) {
+  Si <- cumsum( X[[ i ]] )
+  return( sapply( N[[ i ]], FUN = function( Nj ) ifelse( Nj == 0, 0, Si[ Nj ] ) ) )
+} )
+Smax <- max( sapply( S, FUN = function( Si ) Si[ Nm ] ) )
 ```
 
 ```{r l5g2, out.width='80%', out.height='500px', fig.align='center', class.source = 'fold-hide'}
 Ndat <- NULL
-for ( j in 1:length( N ) ) {
-  Ndat <- rbind( Ndat, data.table( t = t, m = as.factor( j ), N = N[[ j ]] ) )
+for ( j in 1:m ) {
+  Ndat <- rbind( Ndat, data.table( t = t, m = as.factor( j ), N = N[[ j ]], S = S[[ j ]] ) )
 }
-cols <- wes_palette( length( N ), name = "GrandBudapest2", type = "continuous")
+cols <- wes_palette( m, name = "GrandBudapest2", type = "continuous")
 
 EN <- lambda * t
-EeN <- Ndat[ , list( EN = mean( N ) ), by = list( t ) ]$EN
+EeN <- sapply( 1:nt, FUN = function( l ) mean( sapply( 1:m, function( i ) N[[ i ]][ l ] ) ) )
 time <- t 
 
 plt <- ggplot( ) +
@@ -765,7 +779,31 @@ plt <- ggplot( ) +
                       labels = formatC( seq( 0, Tnmax, length = 11 ), digits = 2, format = 'f' ), 
                       limits = c( 0, Tnmax ), expand = c( 0, 0 ) ) +
   scale_y_continuous( breaks = seq( 0, Nmax, length = 11 ), 
+                      formatC( seq( 0, Nmax, length = 2 ), digits = 2, format = 'f' ), 
                       limits = c( 0, Nmax ), expand = c( 0, 0 ) ) +
+  xlab( TeX( "$t$" ) ) + 
+  ylab( TeX( "$N(t)$" ) ) + 
+  theme_bw() +
+  theme(legend.position = "none" )
+plot( plt )
+```
+
+```{r l5g3, out.width='80%', out.height='500px', fig.align='center', class.source = 'fold-hide'}
+ES <- EN * exp( u + 0.5 * s^2 )
+EeS <- sapply( 1:nt, FUN = function( l ) mean( sapply( 1:m, function( i ) S[[ i ]][ l ] ) ) )
+Sqmax <- quantile( sapply( S, FUN = function( Si ) Si[ Nm ] ), probs = 0.99 )
+
+plt <- ggplot( ) +
+  geom_step( data = Ndat, aes( x = t, y = S, group = m, colour = m ), size = 0.25 ) +
+  geom_line( aes( x = time, y = ES, colour = 'olivedrab2' ), size = 1 ) +
+  geom_line( aes( x = time, y = EeS, colour = 'red' ), size = 1 ) +
+  scale_color_manual( values = c( cols, 'olivedrab2', 'red' ) ) +
+  scale_x_continuous( breaks = seq( 0, Tnmax, length = 11 ),
+                      labels = formatC( seq( 0, Tnmax, length = 11 ), digits = 2, format = 'f' ), 
+                      limits = c( 0, Tnmax ), expand = c( 0, 0 ) ) +
+  scale_y_continuous( breaks = seq( 0, Sqmax, length = 11 ),
+                      labels = formatC( seq( 0, Sqmax, length = 11 ), digits = 2, format = 'f' ), 
+                      limits = c( 0, Sqmax ), expand = c( 0, 0 ) ) +
   xlab( TeX( "$t$" ) ) + 
   ylab( TeX( "$N(t)$" ) ) + 
   theme_bw() +
