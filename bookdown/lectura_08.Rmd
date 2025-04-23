@@ -179,7 +179,7 @@ $$
 P( N = n ) = \exp(-g( \beta x ) ER( x )) \frac{g( \beta x )^n ER( x )^n}{n!}
 $$
 
-```{r l8t1, echo = TRUE, results = 'asis'}
+```{r l8t1, echo = TRUE, results = 'asis', out.width='80%', class.source = 'fold-hide'}
 # la librería CASdatasets fue previamente cargada
 data( beMTPL97 )
 beMTPL97 <- as.data.table( beMTPL97 )
@@ -194,7 +194,7 @@ beMTPL97[ 1:100 ] %>%
     digits = c( 0, 2, 0, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 4 ),
     format.args = list( big.mark = ',', decimal.mark = '.', scientific = FALSE ),
     escape = FALSE ) %>%
-  kable_classic( font_size = 14, full_width = FALSE, html_font = "Cambria" ) %>%
+  kable_classic( font_size = 14, full_width = FALSE, html_font = "Cambria", position = "center" ) %>%
   scroll_box( width = "750px", height = "500px" )
 ```
 
@@ -204,7 +204,7 @@ model_N <- glm( formula = nclaims ~ ageph + sex + power + fuel + offset( log( ex
                 data = beMTPL97 )
 ```
 
-```{r l8t2, echo = TRUE, results = 'asis'}
+```{r l8t2, echo = TRUE, results = 'asis', out.width='80%', class.source = 'fold-hide'}
 dat <- tidy( model_N )
 dat %>%
   kable(
@@ -219,7 +219,7 @@ dat %>%
   scroll_box( width = "750px", height = "300px" )
 ```
 
-```{r l8t3, echo = TRUE, results = 'asis'}
+```{r l8t3, echo = TRUE, results = 'asis', out.width='80%', class.source = 'fold-hide'}
 dat <- glance( model_N )
 dat %>%
   kable(

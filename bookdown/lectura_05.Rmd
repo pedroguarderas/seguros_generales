@@ -722,10 +722,11 @@ $$
 P( N( t ) = n )
 & = & F_W^{\star n}( t ) - F_W^{\star n + 1}( t ) \\
 & = & \exp( -\lambda t ) \sum\limits_{k=n}^{+\infty} \frac{(\lambda t)^k}{k!} 
-- \exp( -\lambda t ) \sum\limits_{k={n+1}}^{+\infty} \frac{(\lambda t)^k}{k!}  \\
+- \exp( -\lambda t ) \sum\limits_{k={n+1}}^{+\infty} \frac{(\lambda t)^k}{k!} \\
 & = & \exp( -\lambda t ) \frac{(\lambda t)^n}{n!}
 \end{eqnarray*}
 $$
+
 En conclusión $N(t)$ tiene como distribución una ley de Poisson $Pois( \lambda t )$, en particular
 se conoce a $N$ como un proceso de Poisson.
 :::
