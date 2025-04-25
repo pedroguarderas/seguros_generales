@@ -53,6 +53,7 @@ exm:l5ex3
 exm:l5ex4
 exm:l5ex5
 exm:l5ex6
+exm:l5ex7
 def:dVaR
 prp:varinv
 def:dTVaR
@@ -112,6 +113,7 @@ modelos-con-variables-explicativas
 proceso-estocástico-de-reclamos-totales
 algoritmo-de-simulación-2
 aplicación-del-deducible
+algoritmo-de-simulación-3
 algoritmo-de-panjer
 estimación-usando-la-transformada-de-fourier
 tarificación
@@ -119,7 +121,6 @@ tarificación-en-grandes-términos
 medidas-de-riesgo
 prima
 segmentación
-deducibles
 reservas-técnicas
 reservas-para-primas-no-adquiridas
 reservas-de-riesgos-en-curso
