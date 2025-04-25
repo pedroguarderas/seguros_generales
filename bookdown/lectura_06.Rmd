@@ -434,27 +434,6 @@ de asegurado, de tal forma que la prima sea lo más eficiente y adecuado según 
 las características del mismo. La idea de segmentar la población es obtener grupos homogéneos 
 con riesgos similares.
 
-<!------------------------------------------------------------------------------------------------->
-## Deducibles
-
-El principal objetivo de los deducibles, es el reducir los costos de atención de los reclamos 
-usualmente mediante la exclusión de siniestros usualmente numerosos debidos a reclamos pequeños.
-En otras ocasiones, los deducibles están diseñados para incentivar al asegurado para evitar 
-y prevenir siniestros por cierto monto límite.
-
-1. Prevención de la pérdida - as the compensation is reduced by a deductible the retention of the 
-insured is positive; This makes out a good case for avoiding the loss; 
-
-2. Reducción de la pérdida - the fact a deductible puts the policyholder at risk of obtaining 
-only partial compensation provides an economic incentive to reduce the extend of the damage; 
-
-3. Evitar pequeñas pérdidas - where administration costs are dominant for small losses, the 
-administration costs will often exceed the loss itself, and hence the insurance company would want 
-the policyholder to pay it himself; 
-
-4. Reducción de la prima - premium reduction can be an important aspect for the policyholders, 
-they may prefer to take a higher deductible to get a lower premium.
-
 
 ```{r l6c8}
 n <- 1e5
