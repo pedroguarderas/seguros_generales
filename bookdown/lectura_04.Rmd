@@ -27,7 +27,9 @@ Pk <- pbinom( q = k, size = n, prob = p ) # cálculo de probabilidad P( N <= k )
 
 p <- dbinom( x = 0:n, size = n, prob = p )
 v <- 1:n * p[ 2:(n + 1) ] / p[ 1:n ]
+```
 
+```{r l4g1, out.width='80%', out.height='500px', fig.align='center', class.source = 'fold-hide'}
 plt <- ggplot() +
   geom_point( aes( x = 1:n, y = v ), colour = 'darkred' ) + 
   xlab( TeX( "$k$" ) ) + 
@@ -57,7 +59,9 @@ Pk <- ppois( q = k, lambda = lambda ) # cálculo de probabilidad P( N <= k )
 n <- 50
 p <- dpois( x = 0:n, lambda = lambda )
 v <- 1:n * p[ 2:(n + 1) ] / p[ 1:n ]
+```
 
+```{r l4g2, out.width='80%', out.height='500px', fig.align='center', class.source = 'fold-hide'}
 plt <- ggplot() +
   geom_point( aes( x = 1:n, y = v ), colour = 'darkred' ) + 
   xlab( TeX( "$k$" ) ) + 
@@ -92,7 +96,9 @@ Pk <- pnbinom( q = k, size = alpha, prob = p ) # cálculo de probabilidad P( N <
 n <- 50
 p <- dnbinom( x = 0:n, size = alpha, prob = p )
 v <- 1:n * p[ 2:(n + 1) ] / p[ 1:n ]
+```
 
+```{r l4g3, out.width='80%', out.height='500px', fig.align='center', class.source = 'fold-hide'}
 plt <- ggplot() +
   geom_point( aes( x = 1:n, y = v ), colour = 'darkred' ) + 
   xlab( TeX( "$k$" ) ) + 
@@ -191,8 +197,13 @@ conteo %>%
   scroll_box( width = "100%", height = "500px" )
 ```
 
-```{r l4c5}
-plot( conteo$N, conteo$jn )
+```{r l4g4, out.width='80%', out.height='500px', fig.align='center', class.source = 'fold-hide'}
+plt <- ggplot() +
+  geom_point( data = conteo, aes( x = N, y = jn ), colour = 'purple' ) + 
+  xlab( TeX( "$k$" ) ) + 
+  ylab( TeX( "$k \\frac{p_k}{p_{k-1}}$" ) ) + 
+  theme_bw()
+plot( plt )
 ```
 
 <!------------------------------------------------------------------------------------------------->
