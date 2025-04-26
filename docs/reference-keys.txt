@@ -27,6 +27,7 @@ thm:dpaleyzyg
 def:dfouriertrans
 def:dfouriertransd
 def:deffact
+exm:l5ex7
 def:dbinom
 def:dpois
 def:dnbinom
@@ -53,7 +54,6 @@ exm:l5ex3
 exm:l5ex4
 exm:l5ex5
 exm:l5ex6
-exm:l5ex7
 def:dVaR
 prp:varinv
 def:dTVaR

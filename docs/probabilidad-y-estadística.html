@@ -2502,6 +2502,53 @@ prospectiva.
 -\sum\limits_{t_k &gt; t} v( t, t_k ) c( t_k )
 \]</span>
 algunas veces se considera la parte prospectiva con el signo menos.</p>
+<div class="example">
+<p><span id="exm:l5ex7" class="example"><strong>Ejemplo 3.1  </strong></span>En este caso en particular estudiaremos la velocidad de convergencia del método resultante del
+teorema del límite central <a href="probabilidad-y-estadística.html#thm:tlc">3.2</a>. Generaremos una simulación aleatoria de la suma
+agregada <span class="math inline">\(S_n\)</span> y mostrar</p>
+<p></p>
+<details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
+<div class="sourceCode" id="cb18"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb18-1"><a href="probabilidad-y-estadística.html#cb18-1"></a>m <span class="ot">&lt;-</span> <span class="dv">500</span></span>
+<span id="cb18-2"><a href="probabilidad-y-estadística.html#cb18-2"></a>n <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
+<span id="cb18-3"><a href="probabilidad-y-estadística.html#cb18-3"></a>u <span class="ot">&lt;-</span> <span class="dv">4</span></span>
+<span id="cb18-4"><a href="probabilidad-y-estadística.html#cb18-4"></a>s <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb18-5"><a href="probabilidad-y-estadística.html#cb18-5"></a>X <span class="ot">&lt;-</span> <span class="fu">lapply</span>( <span class="dv">1</span><span class="sc">:</span>m, <span class="at">FUN =</span> <span class="cf">function</span>( j ) <span class="fu">rlnorm</span>( n, <span class="at">meanlog =</span> u, <span class="at">sdlog =</span> s ) )</span>
+<span id="cb18-6"><a href="probabilidad-y-estadística.html#cb18-6"></a>EX <span class="ot">&lt;-</span> <span class="fu">exp</span>( u <span class="sc">+</span> <span class="fl">0.5</span> <span class="sc">*</span> s<span class="sc">^</span><span class="dv">2</span> )</span>
+<span id="cb18-7"><a href="probabilidad-y-estadística.html#cb18-7"></a>SDX <span class="ot">&lt;-</span> <span class="fu">sqrt</span>( ( <span class="fu">exp</span>( s<span class="sc">^</span><span class="dv">2</span> ) <span class="sc">-</span> <span class="dv">1</span> ) <span class="sc">*</span> <span class="fu">exp</span>( <span class="dv">2</span> <span class="sc">*</span> u <span class="sc">+</span> s<span class="sc">^</span><span class="dv">2</span> ) )</span>
+<span id="cb18-8"><a href="probabilidad-y-estadística.html#cb18-8"></a>S <span class="ot">&lt;-</span> <span class="fu">lapply</span>( X, <span class="at">FUN =</span> <span class="cf">function</span>( x ) <span class="fu">cumsum</span>( x ) )</span>
+<span id="cb18-9"><a href="probabilidad-y-estadística.html#cb18-9"></a>ES <span class="ot">&lt;-</span> <span class="fu">sapply</span>( <span class="dv">1</span><span class="sc">:</span>n, <span class="at">FUN =</span> <span class="cf">function</span>( i ) <span class="fu">mean</span>( <span class="fu">sapply</span>( <span class="dv">1</span><span class="sc">:</span>m, <span class="at">FUN =</span> <span class="cf">function</span>( j ) S[[ j ]][ i ] ) ) )</span>
+<span id="cb18-10"><a href="probabilidad-y-estadística.html#cb18-10"></a>VS <span class="ot">&lt;-</span> <span class="fu">sapply</span>( <span class="dv">1</span><span class="sc">:</span>n, <span class="at">FUN =</span> <span class="cf">function</span>( i ) <span class="fu">var</span>( <span class="fu">sapply</span>( <span class="dv">1</span><span class="sc">:</span>m, <span class="at">FUN =</span> <span class="cf">function</span>( j ) S[[ j ]][ i ] ) ) )</span>
+<span id="cb18-11"><a href="probabilidad-y-estadística.html#cb18-11"></a>NS <span class="ot">&lt;-</span> <span class="fu">lapply</span>( S, <span class="at">FUN =</span> <span class="cf">function</span>( s ) ( s <span class="sc">-</span> ES ) <span class="sc">/</span> <span class="fu">sqrt</span>( <span class="fu">abs</span>( VS ) ) )</span>
+<span id="cb18-12"><a href="probabilidad-y-estadística.html#cb18-12"></a>z <span class="ot">&lt;-</span> <span class="fu">seq</span>( <span class="sc">-</span><span class="dv">4</span>, <span class="dv">4</span>, <span class="at">length.out =</span> <span class="dv">100</span> )</span>
+<span id="cb18-13"><a href="probabilidad-y-estadística.html#cb18-13"></a>FSn <span class="ot">&lt;-</span> <span class="fu">lapply</span>( <span class="dv">1</span><span class="sc">:</span>n, <span class="at">FUN =</span> <span class="cf">function</span>( i ) <span class="fu">ecdf</span>( <span class="fu">sapply</span>( <span class="dv">1</span><span class="sc">:</span>m, <span class="at">FUN =</span> <span class="cf">function</span>( j ) NS[[ j ]][ i ] ) )( z ) )</span>
+<span id="cb18-14"><a href="probabilidad-y-estadística.html#cb18-14"></a>D <span class="ot">&lt;-</span> <span class="fu">sapply</span>( FSn, <span class="at">FUN =</span> <span class="cf">function</span>( Fn ) <span class="fu">max</span>( <span class="fu">abs</span>( Fn <span class="sc">-</span> <span class="fu">pnorm</span>( z ) ) ) )</span>
+<span id="cb18-15"><a href="probabilidad-y-estadística.html#cb18-15"></a></span>
+<span id="cb18-16"><a href="probabilidad-y-estadística.html#cb18-16"></a>C <span class="ot">&lt;-</span> <span class="fl">0.015</span></span>
+<span id="cb18-17"><a href="probabilidad-y-estadística.html#cb18-17"></a><span class="co"># C &lt;- 1 / sqrt( 2 * pi )</span></span>
+<span id="cb18-18"><a href="probabilidad-y-estadística.html#cb18-18"></a>rho <span class="ot">&lt;-</span> <span class="fu">exp</span>( <span class="dv">3</span> <span class="sc">*</span> u <span class="sc">+</span> <span class="dv">3</span><span class="sc">^</span><span class="dv">2</span> <span class="sc">*</span> s<span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> <span class="dv">2</span> )</span>
+<span id="cb18-19"><a href="probabilidad-y-estadística.html#cb18-19"></a>Bn <span class="ot">&lt;-</span> C <span class="sc">*</span> rho <span class="sc">/</span> ( SDX<span class="sc">^</span><span class="dv">3</span> <span class="sc">*</span> <span class="fu">sqrt</span>( <span class="dv">1</span><span class="sc">:</span>n ) )</span>
+<span id="cb18-20"><a href="probabilidad-y-estadística.html#cb18-20"></a></span>
+<span id="cb18-21"><a href="probabilidad-y-estadística.html#cb18-21"></a><span class="fu">plot</span>( <span class="dv">1</span><span class="sc">:</span>n, D, <span class="at">pch =</span> <span class="dv">16</span>, <span class="at">cex =</span> <span class="fl">0.5</span>, <span class="at">type =</span> <span class="st">&#39;l&#39;</span>, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">lty =</span> <span class="dv">1</span>, <span class="at">ylim =</span> <span class="fu">c</span>( <span class="dv">0</span>, <span class="fl">0.5</span> ), <span class="at">col =</span> <span class="st">&#39;royalblue4&#39;</span> )</span>
+<span id="cb18-22"><a href="probabilidad-y-estadística.html#cb18-22"></a><span class="fu">points</span>( <span class="dv">1</span><span class="sc">:</span>n, Bn, <span class="at">type =</span> <span class="st">&#39;l&#39;</span>, <span class="at">lty =</span> <span class="dv">1</span>, <span class="at">col =</span> <span class="st">&#39;red&#39;</span> )</span></code></pre></div>
+</details>
+<p><img src="seguros_generales_files/figure-html/l3c10-1.png" width="700" /></p>
+<p></p>
+</div>
+<p></p>
+<details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
+<div class="sourceCode" id="cb19"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb19-1"><a href="probabilidad-y-estadística.html#cb19-1"></a>l <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb19-2"><a href="probabilidad-y-estadística.html#cb19-2"></a>n <span class="ot">&lt;-</span> <span class="dv">300</span></span>
+<span id="cb19-3"><a href="probabilidad-y-estadística.html#cb19-3"></a>dt <span class="ot">&lt;-</span> <span class="fu">rexp</span>( <span class="at">n =</span> n, <span class="at">rate =</span> <span class="dv">1</span> <span class="sc">/</span> l )</span>
+<span id="cb19-4"><a href="probabilidad-y-estadística.html#cb19-4"></a>t <span class="ot">&lt;-</span> <span class="fu">c</span>( <span class="dv">0</span>, <span class="fu">cumsum</span>( dt ) )</span>
+<span id="cb19-5"><a href="probabilidad-y-estadística.html#cb19-5"></a>dN <span class="ot">&lt;-</span> <span class="fu">sapply</span>( dt, <span class="at">FUN =</span> <span class="cf">function</span>( w ) <span class="fu">rpois</span>( <span class="dv">1</span>, <span class="at">lambda =</span> l <span class="sc">*</span> w ) )</span>
+<span id="cb19-6"><a href="probabilidad-y-estadística.html#cb19-6"></a>N <span class="ot">&lt;-</span> <span class="fu">c</span>( <span class="dv">0</span>, <span class="fu">cumsum</span>( dN ) )</span>
+<span id="cb19-7"><a href="probabilidad-y-estadística.html#cb19-7"></a>sh <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb19-8"><a href="probabilidad-y-estadística.html#cb19-8"></a>rt <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb19-9"><a href="probabilidad-y-estadística.html#cb19-9"></a>X <span class="ot">&lt;-</span> <span class="fu">lapply</span>( dN, <span class="at">FUN =</span> <span class="cf">function</span>( n ) <span class="fu">rgamma</span>( n, <span class="at">shape =</span> sh, <span class="at">rate =</span> rt ) )</span>
+<span id="cb19-10"><a href="probabilidad-y-estadística.html#cb19-10"></a>dS <span class="ot">&lt;-</span> <span class="fu">sapply</span>( X, <span class="at">FUN =</span> <span class="cf">function</span>( x ) <span class="fu">sum</span>( x ) )</span>
+<span id="cb19-11"><a href="probabilidad-y-estadística.html#cb19-11"></a>S <span class="ot">&lt;-</span> <span class="fu">c</span>( <span class="dv">0</span>, <span class="fu">cumsum</span>( dS ) )</span></code></pre></div>
+</details>
+<p></p>
 <p></p>
 <p></p>
 
