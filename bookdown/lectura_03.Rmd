@@ -1155,6 +1155,51 @@ $$
 $$
 algunas veces se considera la parte prospectiva con el signo menos.
 
+::: {.example #l5ex7}
+En este caso en particular estudiaremos la velocidad de convergencia del método resultante del 
+teorema del límite central \@ref(thm:tlc). Generaremos una simulación aleatoria de la suma
+agregada $S_n$ y mostrar
+```{r l3c10}
+m <- 500
+n <- 1000
+u <- 4
+s <- 2
+X <- lapply( 1:m, FUN = function( j ) rlnorm( n, meanlog = u, sdlog = s ) )
+EX <- exp( u + 0.5 * s^2 )
+SDX <- sqrt( ( exp( s^2 ) - 1 ) * exp( 2 * u + s^2 ) )
+S <- lapply( X, FUN = function( x ) cumsum( x ) )
+ES <- sapply( 1:n, FUN = function( i ) mean( sapply( 1:m, FUN = function( j ) S[[ j ]][ i ] ) ) )
+VS <- sapply( 1:n, FUN = function( i ) var( sapply( 1:m, FUN = function( j ) S[[ j ]][ i ] ) ) )
+NS <- lapply( S, FUN = function( s ) ( s - ES ) / sqrt( abs( VS ) ) )
+z <- seq( -4, 4, length.out = 100 )
+FSn <- lapply( 1:n, FUN = function( i ) ecdf( sapply( 1:m, FUN = function( j ) NS[[ j ]][ i ] ) )( z ) )
+D <- sapply( FSn, FUN = function( Fn ) max( abs( Fn - pnorm( z ) ) ) )
+
+C <- 0.015
+# C <- 1 / sqrt( 2 * pi )
+rho <- exp( 3 * u + 3^2 * s^2 / 2 )
+Bn <- C * rho / ( SDX^3 * sqrt( 1:n ) )
+
+plot( 1:n, D, pch = 16, cex = 0.5, type = 'l', lwd = 2, lty = 1, ylim = c( 0, 0.5 ), col = 'royalblue4' )
+points( 1:n, Bn, type = 'l', lty = 1, col = 'red' )
+```
+:::
+
+
+```{r l3c11}
+l <- 3
+n <- 300
+dt <- rexp( n = n, rate = 1 / l )
+t <- c( 0, cumsum( dt ) )
+dN <- sapply( dt, FUN = function( w ) rpois( 1, lambda = l * w ) )
+N <- c( 0, cumsum( dN ) )
+sh <- 3
+rt <- 2
+X <- lapply( dN, FUN = function( n ) rgamma( n, shape = sh, rate = rt ) )
+dS <- sapply( X, FUN = function( x ) sum( x ) )
+S <- c( 0, cumsum( dS ) )
+```
+
 ```{r l3end, echo = FALSE}
 rm( list = ls()[ ls() != 'def.chunk.hook' ] )
 ```
