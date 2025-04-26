@@ -1,30 +1,22 @@
 <!------------------------------------------------------------------------------------------------->
+
 # Modelos de pérdida agregada
 
 <!------------------------------------------------------------------------------------------------->
+
 ## Mutualización del riesgo
-La idea de mantener un seguro está basada en la mutualización de los riesgos. La mutualización 
-como tal nace del mismo mecanismo bajo el cual funciona un seguro, cada asegurado transfiera 
-su riesgo individual a la compañia de seguros por su parte, la suma total de estos riesgos $S$ es 
-el riesgo total que asume el asegurador.
 
-Los riesgos de cada uno de los $n \in \N$ asegurados, pueden ser representados por variables 
-aleatorias $X_1,\ldots X_n$, las mismas pueden ser independientes o dependientes entre ellas. El 
-costo total del portafolio está dado por la suma de todos estos riesgos.
-$$
+La idea de mantener un seguro está basada en la mutualización de los riesgos. La mutualización como tal nace del mismo mecanismo bajo el cual funciona un seguro, cada asegurado transfiera su riesgo individual a la compañia de seguros por su parte, la suma total de estos riesgos $S$ es el riesgo total que asume el asegurador.
+
+Los riesgos de cada uno de los $n \in \N$ asegurados, pueden ser representados por variables aleatorias $X_1,\ldots X_n$, las mismas pueden ser independientes o dependientes entre ellas. El costo total del portafolio está dado por la suma de todos estos riesgos. $$
 S = \sum\limits_{i=1}^n X_i
-$$
-El conocer la distribución del costo total $S$ es una tarea crucial para el asegurador.
+$$ El conocer la distribución del costo total $S$ es una tarea crucial para el asegurador.
 
-El valore esperado de de los reclamos totales, puede ser calculado fácilmente utilizando las
-propiedades de linealidad de la esperanza matemática $\E$
-$$
+El valore esperado de de los reclamos totales, puede ser calculado fácilmente utilizando las propiedades de linealidad de la esperanza matemática $\E$ $$
 \E[ S ]
 = \E\left[ \sum\limits_{i=1}^n X_i \right] 
 = \sum\limits_{i=1}^n \E\left[ X_i \right]
-$$
-por su parte, la varianza de la variable aleatoria del costo total $S$, está dada por:
-$$
+$$ por su parte, la varianza de la variable aleatoria del costo total $S$, está dada por: $$
 \begin{eqnarray*}
 \V\left[ S \right]
 & = & \V\left[ \sum\limits_{i=1}^n X_i \right] \\
@@ -35,19 +27,13 @@ $$
 \end{eqnarray*}
 $$
 
-Muchas de las veces el número total de reclamos $n$ es incierto y por tal razón es mejor considerar
-que el número de siniestros vendrá dado por otra variable aleatoria discreta $N$ que solo tomará 
-valores en $\N$
-$$
+Muchas de las veces el número total de reclamos $n$ es incierto y por tal razón es mejor considerar que el número de siniestros vendrá dado por otra variable aleatoria discreta $N$ que solo tomará valores en $\N$ $$
 S = \sum\limits_{i=1}^N X_i
 $$
 
-Esto nos lleva a considerar diferentes modelos de agregación de reclamos o pérdidas como se suele 
-decir en inglés "loss models" @PanjerLoss2012, @LossModFur.
+Esto nos lleva a considerar diferentes modelos de agregación de reclamos o pérdidas como se suele decir en inglés "loss models" @PanjerLoss2012, @LossModFur.
 
-De forma preliminar estudiemos la forma general que podría tener la distribución de $S$, sin realizar
-alguna hipótesis (previa sobre el comportamiento de las variables aleatorias $X_1, \ldots, X_n$ y $N$.
-$$
+De forma preliminar estudiemos la forma general que podría tener la distribución de $S$, sin realizar alguna hipótesis (previa sobre el comportamiento de las variables aleatorias $X_1, \ldots, X_n$ y $N$. $$
 \begin{eqnarray*}
 F_S( s ) 
 & = & P( S \leq s ) \\
@@ -61,33 +47,21 @@ F_S( s )
 & = & \sum\limits_{n=0}^{+\infty} \int\limits_{\left\{\sum\limits_{i=1}^n x_i \leq s\right\}} dF_n( x_1, \ldots, x_n )\ p_n
 \qquad \text{$F_n$ es la distribución conjunta de $X_1, \ldots, X_n$ dado $N = n$} 
 \end{eqnarray*}
-$$
-la última expresión es importante de retener, nos dice que para comprender el comportamiento de 
-los reclamos totales $S$, debemos estudiar y estimar la frecuencia de los reclamos $N$, y también 
-debemos comprender y estimar cada uno de los reclamos $X_i$ y también su interacción, siendo al 
-menos estos una infinidad si $N$ puede tomar valores tendiendo al infinito. En términos resumidos, 
-hay que comprender y estimar la frecuencia y severidad de los reclamos que están asociados al riesgo 
-cubierto. 
+$$ la última expresión es importante de retener, nos dice que para comprender el comportamiento de los reclamos totales $S$, debemos estudiar y estimar la frecuencia de los reclamos $N$, y también debemos comprender y estimar cada uno de los reclamos $X_i$ y también su interacción, siendo al menos estos una infinidad si $N$ puede tomar valores tendiendo al infinito. En términos resumidos, hay que comprender y estimar la frecuencia y severidad de los reclamos que están asociados al riesgo cubierto.
 
-Los términos integrales $\int\limits_{\left\{\sum\limits_{i=1}^n x_i \leq s\right\}} dF_n( x_1, \ldots, x_n )$ 
-asociados a la severidad presentan un verdadero reto estadístico y computacional; hace unos años 
-atrás se desarrolló unos nuevos algoritmos para calcular estos términos @aep_algo, @gaep_algo.
+Los términos integrales $\int\limits_{\left\{\sum\limits_{i=1}^n x_i \leq s\right\}} dF_n( x_1, \ldots, x_n )$ asociados a la severidad presentan un verdadero reto estadístico y computacional; hace unos años atrás se desarrolló unos nuevos algoritmos para calcular estos términos @aep_algo, @gaep_algo.
 
 <!------------------------------------------------------------------------------------------------->
+
 ## Modelo individual {#sec:modind}
-En el modelo de riesgos individuales consideramos que el número de siniestros que se producirán es
-conocido, por ejemplo puede ser a lo sumo el tamaño de la población asegurada, en tal caso la
-variable aleatoria $N$ pasa a ser una constante, que representaremos por $n$. De esta forma, la
-severidad total puede ser fácilmente representada por: 
-$$
+
+En el modelo de riesgos individuales consideramos que el número de siniestros que se producirán es conocido, por ejemplo puede ser a lo sumo el tamaño de la población asegurada, en tal caso la variable aleatoria $N$ pasa a ser una constante, que representaremos por $n$. De esta forma, la severidad total puede ser fácilmente representada por: $$
 S = \sum\limits_{i=1}^n X_i
 $$
 
-La hipótesis más usual que sostiene a este modelo es la indenpendencia entre cada uno de los
-reclamos $X_i$ y $X_j$ son independientes para cualquier $1 \leq i \neq j \leq n$.
+La hipótesis más usual que sostiene a este modelo es la indenpendencia entre cada uno de los reclamos $X_i$ y $X_j$ son independientes para cualquier $1 \leq i \neq j \leq n$.
 
-El valor esperado de la severidad total $S$ es:
-$$
+El valor esperado de la severidad total $S$ es: $$
 \begin{eqnarray*}
 \E[S]
 & = & \E\left[ \sum\limits_{i=1}^n X_i \right] \\
@@ -96,8 +70,7 @@ $$
 \end{eqnarray*}
 $$
 
-Así mismo con la varianza de $S$.
-$$
+Así mismo con la varianza de $S$. $$
 \begin{eqnarray*}
 \V\left[ S \right]
 & = & \V\left[ \sum\limits_{i=1}^n X_i \right] \\
@@ -108,9 +81,7 @@ $$
 \end{eqnarray*}
 $$
 
-Al tener un número determinado de reclamos $n \in \N$, la distribución de probabilidad del
-total de reclamos $S$ puede ser calculada de una forma maś sencilla.
-$$
+Al tener un número determinado de reclamos $n \in \N$, la distribución de probabilidad del total de reclamos $S$ puede ser calculada de una forma maś sencilla. $$
 \begin{eqnarray*}
 F_S( x )
 & = & F_{X_1} \star \cdots \star F_{X_n} ( s )\quad \text{sin $\{X_i\}$ son independientes} \\
@@ -118,8 +89,7 @@ F_S( x )
 \end{eqnarray*}
 $$
 
-así mismo, si las densidades de probabilidad están bien definidas, entonces
-$$
+así mismo, si las densidades de probabilidad están bien definidas, entonces $$
 \begin{eqnarray*}
 f_S( s )
 & = & f_{X_1} \star \cdots \star f_{X_n} ( s )\quad \text{sin $\{X_i\}$ son independientes} \\
@@ -127,10 +97,7 @@ f_S( s )
 \end{eqnarray*}
 $$
 
-Una posible estrategia para estimar $F_S$ o $f_S$ es utilizar la transformada de Fourier 
-$\Fo$, la cual convierte las convoluciones en productos y luego invertir de nuevo la 
-transformada de Fourier.
-$$
+Una posible estrategia para estimar $F_S$ o $f_S$ es utilizar la transformada de Fourier $\Fo$, la cual convierte las convoluciones en productos y luego invertir de nuevo la transformada de Fourier. $$
 \begin{eqnarray*}
 F_S 
 & = & \Fo^{-1}\left( \Fo\left( F_S \right) \right) \\
@@ -142,8 +109,7 @@ F_S
 \end{eqnarray*}
 $$
 
-o de forma equivalente para la densidad $f_S$
-$$
+o de forma equivalente para la densidad $f_S$ $$
 \begin{eqnarray*}
 f_S 
 & = & \Fo^{-1}\left( \Fo\left( f_S \right) \right) \\
@@ -156,28 +122,22 @@ f_S
 $$
 
 <!------------------------------------------------------------------------------------------------->
+
 ### Algoritmo de simulación
-Se puede simular la severidad total $S$ para el caso donde se asume independencia entre cada una 
-de las severidades $X_1, \ldots, X_n$ y se conoce cada una de sus densidades de probabilidad
-$f_{X_1}, \ldots, f_{X_n}$ o distribuciones de probabilidad $F_{X_1}, \ldots, F_{X_n}$.
 
-1. Se tiene fijo $n \in \N$,
+Se puede simular la severidad total $S$ para el caso donde se asume independencia entre cada una de las severidades $X_1, \ldots, X_n$ y se conoce cada una de sus densidades de probabilidad $f_{X_1}, \ldots, f_{X_n}$ o distribuciones de probabilidad $F_{X_1}, \ldots, F_{X_n}$.
 
-2. Se fija el número de simulaciones $m \in \N$
+1.  Se tiene fijo $n \in \N$,
 
-3. Para cada $i \in \{1, \ldots, m\}$ se extrae una muestra $X_{i,1} \rightsquigarrow f_{X_1},\ldots,X_{i,n} \rightsquigarrow f_{X_n}$,
+2.  Se fija el número de simulaciones $m \in \N$
 
-4. Para cada $i \in \{1, \ldots, m\}$ se calcula la severidad total para la muestra $i$, 
-$S_i = \sum\limits_{j=1}^n X_{i,j}$
+3.  Para cada $i \in \{1, \ldots, m\}$ se extrae una muestra $X_{i,1} \rightsquigarrow f_{X_1},\ldots,X_{i,n} \rightsquigarrow f_{X_n}$,
 
-::: {.example #l5ex1}
-El siguiente código ejemplifica el algoritmo anterior, donde se asume que cada variable aleatoria de 
-severidad $X_i$ sigue una ley log-normal $LN( \mu_i, \sigma_i )$, de parámetros $\mu_i, \sigma_i$, 
-para cada $i \in \{1,\ldots, n\}$. El reclamo total $S = \sum\limits_{i=1}^n X_i$ sigue una ley 
-de probabilidad que estará dada por la convolución de cada una de las leyes de probabilidad de 
-cada reclamo $X_i$, sin embargo estas leyes en este ejemplo son log-normales y no se conoce una 
-forma explícita, analítica para la convolución de log-normales. Por tal razón, debemos aproximar
-la distribución de probabilidad de $F_S$ a partir de la distribución empírica.
+4.  Para cada $i \in \{1, \ldots, m\}$ se calcula la severidad total para la muestra $i$, $S_i = \sum\limits_{j=1}^n X_{i,j}$
+
+::: {#l5ex1 .example}
+El siguiente código ejemplifica el algoritmo anterior, donde se asume que cada variable aleatoria de severidad $X_i$ sigue una ley log-normal $LN( \mu_i, \sigma_i )$, de parámetros $\mu_i, \sigma_i$, para cada $i \in \{1,\ldots, n\}$. El reclamo total $S = \sum\limits_{i=1}^n X_i$ sigue una ley de probabilidad que estará dada por la convolución de cada una de las leyes de probabilidad de cada reclamo $X_i$, sin embargo estas leyes en este ejemplo son log-normales y no se conoce una forma explícita, analítica para la convolución de log-normales. Por tal razón, debemos aproximar la distribución de probabilidad de $F_S$ a partir de la distribución empírica.
+
 ```{r l5c1}
 set.seed(94312)
 
@@ -197,21 +157,14 @@ X <- lapply( 1:m, FUN = function( i ) sapply( 1:n, FUN = function( j ) rlnorm( 1
 S <- sapply( X, FUN = function( x ) sum( x ) )
 ```
 
-Con ya lo mencionamos en este ejemplo densidad de probabilidad de la severidad $S$ resulta de la
-convolución de las $n$ densidades individuales $f_S = f_{X_1} \star \cdots \star f_{X_n}$, la cual
-no presenta una forma analítica conocida. 
+Con ya lo mencionamos en este ejemplo densidad de probabilidad de la severidad $S$ resulta de la convolución de las $n$ densidades individuales $f_S = f_{X_1} \star \cdots \star f_{X_n}$, la cual no presenta una forma analítica conocida.
 
-De la imposibilidad anterior, como ya mencionamos se puede ver la utilidad de trabajar con la 
-muestra aleatoria de la variable $S$. De esta manera poder estimar la distribución acumulada de 
-probabilidad $F_S$ a partir de la distribución empírica $F_m$ generada con la muestra $\{S_i\}$.
-$$
+De la imposibilidad anterior, como ya mencionamos se puede ver la utilidad de trabajar con la muestra aleatoria de la variable $S$. De esta manera poder estimar la distribución acumulada de probabilidad $F_S$ a partir de la distribución empírica $F_m$ generada con la muestra $\{S_i\}$. $$
 F_S( s ) \approx F_m( s ) = \frac{1}{m} \sum\limits_{i=1}^m \mathbf {1}_{(-\infty,s]}( S_i )
-$$
-el resultado de concentración \@ref(thm:ddkw) es más nos brinda un criterio de convergencia de 
-$F_m$ a $F_S$
+$$ el resultado de concentración \@ref(thm:ddkw) es más nos brinda un criterio de convergencia de $F_m$ a $F_S$
 
-Para construir $F_m$ en R, se puede utilizar la función ya empaquetada `ecdf` (empirical cumulative
-distribution function).
+Para construir $F_m$ en R, se puede utilizar la función ya empaquetada `ecdf` (empirical cumulative distribution function).
+
 ```{r l5c2}
 # estimación distribución acumulada empírica de S
 Fm <- ecdf( S )
@@ -237,23 +190,21 @@ plt <- ggplot() +
 plot( plt )
 ```
 
-Para calcular la esperanza de la severidad total $S$, también se puede utilizar una aproximación 
-a la integral de Riemann-Stieltjes utilizando la distribución acumulada empírica $F_m$.
-$$
+Para calcular la esperanza de la severidad total $S$, también se puede utilizar una aproximación a la integral de Riemann-Stieltjes utilizando la distribución acumulada empírica $F_m$. $$
 \E[ S ] = \int\limits_{\R} s dF_S( s )
 \approx \int\limits_{\R} s dF_m( s )
 \approx \sum\limits_{i=1}^N s_{i} \left( F_m( s_{i+1} ) - F_m( s_{i} ) \right)
 $$
 
 Esta aproximación en R puede ser implementada de la siguiente forma:
+
 ```{r l5c3}
 N <- 1e5
 s <- seq( min( S ), max( S ), length.out = N )
 EmS <- sum( s[-N] * diff( sapply( s, FUN = Fm ) ) )
 ```
 
-De ello tenemos los siguientes resultados de cálculo para el valor esperado de la severidad total
-$$
+De ello tenemos los siguientes resultados de cálculo para el valor esperado de la severidad total $$
 \begin{eqnarray*}
 \E[S] = \sum\limits_{i=1}^n e^{ \mu_i + \frac{1}{2} \sigma_i^2 } & = & `r formatC( ES, digits = 4, format = 'f' )`, \\
 \overline{S} = \frac{1}{m} \sum\limits_{i=1}^m S_i & = & `r formatC( EeS, digits = 4, format = 'f' )`, \\
@@ -262,43 +213,29 @@ $$
 $$
 :::
 
-Lo bueno de poseer una buena aproximación a la distribución acumulada de una variable aleatoria, es 
-que podemos calcular algunos otros valores de importancia relacionados a la variable aleatoria y
-no tan solo utilizar medidas de tendencia central. Sin embargo, para que esta aproximación sea 
-útil se requiere reducir el error de probabilidad \@ref(thm:ddkw).
+Lo bueno de poseer una buena aproximación a la distribución acumulada de una variable aleatoria, es que podemos calcular algunos otros valores de importancia relacionados a la variable aleatoria y no tan solo utilizar medidas de tendencia central. Sin embargo, para que esta aproximación sea útil se requiere reducir el error de probabilidad \@ref(thm:ddkw).
 
-::: {.example #l5ex2}
-Podemos considerar el caso sencillo donde el valor posible de severidad es determinista, es decir
-para cada póliza $i\in \{1,\ldots,n\}$, el valor de severidad probable es único $M > 0$ si en caso 
-se da un evento $A_i$, esto lo podemos expresar como $X_i = M \mathbf{1}_{A_i}$ es constante. Así, 
-pérdida total está dada por:
-$$ 
+::: {#l5ex2 .example}
+Podemos considerar el caso sencillo donde el valor posible de severidad es determinista, es decir para cada póliza $i\in \{1,\ldots,n\}$, el valor de severidad probable es único $M > 0$ si en caso se da un evento $A_i$, esto lo podemos expresar como $X_i = M \mathbf{1}_{A_i}$ es constante. Así, pérdida total está dada por: $$ 
 S = \sum\limits_{i=1}^n X_i = \sum\limits_{i=1}^n M \mathbf{1}_{A_i} 
 $$
 
-El valor total esperado de reclamos está dado por:
-$$
+El valor total esperado de reclamos está dado por: $$
 \E[ S ] 
 = \sum\limits_{i=1}^n \E\left[ M \mathbf{1}_{A_i} \right]
 = M \sum\limits_{i=1}^n P( A_i )
-$$
-la última igualdad resulta de las propiedades de la función indicatriz \@ref(def:indicatriz).
+$$ la última igualdad resulta de las propiedades de la función indicatriz \@ref(def:indicatriz).
 
-Si en caso todos los $P(A_i) = p$ tienen la misma probabilidad, el valor total esperado de reclamos
-toma la siguiente forma:
-$$
+Si en caso todos los $P(A_i) = p$ tienen la misma probabilidad, el valor total esperado de reclamos toma la siguiente forma: $$
 \E[S] = n M p
 $$
 :::
 
 <!------------------------------------------------------------------------------------------------->
+
 ## Modelo colectivo {#sec:modcol}
 
-El modelo colectivo de riesgo considera un número de reclamos descritos por una variable aleatoria 
-discreta $N$. Los reclamos corresponden a un número de pólizas en un periodo específico, el valor 
-de cada reclamo $i \in \{1,\ldots,N\}$ está representado por las variables aleatorias $X_i$. 
-Usualmente, se considera que cada uno de los reclamos $X_i$ están idénticamente distribuidos.
-$$
+El modelo colectivo de riesgo considera un número de reclamos descritos por una variable aleatoria discreta $N$. Los reclamos corresponden a un número de pólizas en un periodo específico, el valor de cada reclamo $i \in \{1,\ldots,N\}$ está representado por las variables aleatorias $X_i$. Usualmente, se considera que cada uno de los reclamos $X_i$ están idénticamente distribuidos. $$
 S = 
 \left\{
 \begin{array}{ll}
@@ -306,12 +243,9 @@ S =
 0 & \text{si}\ N = 0
 \end{array}
 \right.
-$$
-o de forma más compacta se puede tan definir $S = \sum\limits_{i=1}^N X_i$, donde se asume que la 
-suma da $0$ si el número de elementos en la suma $N = 0$.
+$$ o de forma más compacta se puede tan definir $S = \sum\limits_{i=1}^N X_i$, donde se asume que la suma da $0$ si el número de elementos en la suma $N = 0$.
 
-El valor esperado del total de reclamos $S$, está dado por:
-$$
+El valor esperado del total de reclamos $S$, está dado por: $$
 \begin{eqnarray*}
 \E[S]
 & = & \E\left[ \sum\limits_{i=1}^N X_i \right] \\
@@ -329,9 +263,7 @@ $$
 \end{eqnarray*}
 $$
 
-También podemos calcular la varianza de los reclamos totales $S$, para ello necesitamos primeramente
-calcular su segundo momento.
-$$
+También podemos calcular la varianza de los reclamos totales $S$, para ello necesitamos primeramente calcular su segundo momento. $$
 \begin{eqnarray*}
 \E[S^2]
 & = & \E\left[ \left( \sum\limits_{i=1}^N X_i \right)^2 \right] \\
@@ -349,8 +281,7 @@ $$
 \end{eqnarray*}
 $$
 
-finalmente la varianza de $S$ tiene la siguiente expresión
-$$
+finalmente la varianza de $S$ tiene la siguiente expresión $$
 \begin{eqnarray*}
 \V\left[S\right]
 & = & \E\left[S^2\right] - \E\left[S\right]^2 \\
@@ -360,8 +291,7 @@ $$
 \end{eqnarray*}
 $$
 
-La distribución acumulada del reclamo total $S$ tiene la forma:
-$$
+La distribución acumulada del reclamo total $S$ tiene la forma: $$
 \begin{eqnarray*}
 F_S( s ) 
 & = & P( S \leq s ) \\
@@ -371,39 +301,29 @@ F_S( s )
 & = & \sum\limits_{n=0}^{+\infty} F_{X_1} \star \cdots \star F_{X_n}( s ) p_n\quad \text{distribución de la suma de variables aleatorias} \\
 & = & \sum\limits_{n=0}^{+\infty} F^{\star n}_{X}( s ) p_n\quad \text{si $\{X_i\}$ son idénticamente distribuidas}
 \end{eqnarray*}
-$$
-tomando $F^{\star 0}_{X}( s ) = 1$. 
+$$ tomando $F^{\star 0}_{X}( s ) = 1$.
 
-Este último resultado muestra que la distribución de probabilidad de $S$ no es más que una mixtura
-de las distribuciones para los modelos individuales $F^{\star n}_{X}$ tomando para mezclarlas las 
-probabilidades $p_n = P( N = n )$ de la variable aleatoria discreta $N$ que describe la frecuencia
-de los reclamos.
+Este último resultado muestra que la distribución de probabilidad de $S$ no es más que una mixtura de las distribuciones para los modelos individuales $F^{\star n}_{X}$ tomando para mezclarlas las probabilidades $p_n = P( N = n )$ de la variable aleatoria discreta $N$ que describe la frecuencia de los reclamos.
 
 <!------------------------------------------------------------------------------------------------->
+
 ### Algoritmo de simulación
-La variable del reclamo total $S$ puede ser simulada mediante el siguiente método montecarlo.
-Si $N$ sigue una ley discreta $f_N$ y cada valor severidad $X$ son idénticamente distribuidos 
-con ley $f_X$.
 
-1. Seleccionar el número de simulaciones $m$,
+La variable del reclamo total $S$ puede ser simulada mediante el siguiente método montecarlo. Si $N$ sigue una ley discreta $f_N$ y cada valor severidad $X$ son idénticamente distribuidos con ley $f_X$.
 
-2. Se genera una muestra de tamaño $m$ de variables $N_1, \ldots, N_m$ con ley $f_N$,
+1.  Seleccionar el número de simulaciones $m$,
 
-3. Se genera para cada $i \in \{1,\ldots,m\}$ una muestra de tamaño $N_i$ de variables aleatorias 
-$X_{i,1}, \ldots X_{i,N_i}$ con ley $f_X$,
+2.  Se genera una muestra de tamaño $m$ de variables $N_1, \ldots, N_m$ con ley $f_N$,
 
-4. Se calcula los reclamos totales $S_1, \ldots, S_m$ para cada simulación $i = \{1, \ldots, m\}$, 
-mediante la siguiente suma $S_i = \sum\limits_{j=1}^{N_i} X_{i,j}$.
+3.  Se genera para cada $i \in \{1,\ldots,m\}$ una muestra de tamaño $N_i$ de variables aleatorias $X_{i,1}, \ldots X_{i,N_i}$ con ley $f_X$,
 
-En el lenguaje de programación R, este método de simulación puede ser fácilmente implementado, 
-como ya lo hemos realizado, utilizando las funciones de aplicación vectorial `sapply` y `lapply`. 
+4.  Se calcula los reclamos totales $S_1, \ldots, S_m$ para cada simulación $i = \{1, \ldots, m\}$, mediante la siguiente suma $S_i = \sum\limits_{j=1}^{N_i} X_{i,j}$.
 
-::: {.example #l5ex3}
-Consideramos el caso de un modelo colectivo para el cuál el conteo de siniestros 
-$N \rightsquigarrow Pois( \lambda )$ y la distribución de cada uno de los reclamos 
-$\{X_i\}_{i\in \N}$, está dada por la misma distribución de probabilidad 
-$X \rightsquigarrow LN( \mu, \sigma )$, siendo además cada uno de los reclamos indepencientes entre
-si.
+En el lenguaje de programación R, este método de simulación puede ser fácilmente implementado, como ya lo hemos realizado, utilizando las funciones de aplicación vectorial `sapply` y `lapply`.
+
+::: {#l5ex3 .example}
+Consideramos el caso de un modelo colectivo para el cuál el conteo de siniestros $N \rightsquigarrow Pois( \lambda )$ y la distribución de cada uno de los reclamos $\{X_i\}_{i\in \N}$, está dada por la misma distribución de probabilidad $X \rightsquigarrow LN( \mu, \sigma )$, siendo además cada uno de los reclamos indepencientes entre si.
+
 ```{r l5c5}
 # 1. selección de simulaciones
 m <- 1e4
@@ -424,26 +344,14 @@ S <- sapply( X, FUN = function( x ) sum( x, na.rm = TRUE ) )
 ```
 :::
 
-Es de notar que una algoritmo como el descrito tiene una falencia cuando la frecuencia de siniestros
-es poco observada, esto sucede cuando la probabilidad $P( N = 0 )$ es alta y por tal razón para 
-generar suficientes reclamos y así poder tener cálculos con una buena aproximación numérica, 
-con el uso de simulaciones se necesitará muchas simulaciones.
+Es de notar que una algoritmo como el descrito tiene una falencia cuando la frecuencia de siniestros es poco observada, esto sucede cuando la probabilidad $P( N = 0 )$ es alta y por tal razón para generar suficientes reclamos y así poder tener cálculos con una buena aproximación numérica, con el uso de simulaciones se necesitará muchas simulaciones.
 
-Es interesante observar que el modelo colectivo puede ser muchas veces calculado de forma similar
-a un modelo individual, para ciertos casos particulares. Por ejemplo, si consideramos el caso 
-cuando la variable aleatoria del conteo de siniestros $N \rightsquigarrow Bin( n, p )$ sigue una 
-distribución binomial con parámetros $n$ y $p$ y los reclamos individuales $\{ X_i \}$ son i.i.d.
-A partir de esto, el reclamo total $S$ puede ser expresado de dos formas
-$$
+Es interesante observar que el modelo colectivo puede ser muchas veces calculado de forma similar a un modelo individual, para ciertos casos particulares. Por ejemplo, si consideramos el caso cuando la variable aleatoria del conteo de siniestros $N \rightsquigarrow Bin( n, p )$ sigue una distribución binomial con parámetros $n$ y $p$ y los reclamos individuales $\{ X_i \}$ son i.i.d. A partir de esto, el reclamo total $S$ puede ser expresado de dos formas $$
 S = \sum\limits_{k=0}^{N} X_k
 = \sum\limits_{k=0}^n B_k X_k
-$$
-donde $B_k \rightsquigarrow Ber( p )$ y es independientes de $X_k$. Así el modelo colectivo se 
-transforma en un modelo individual con $n$ constante y valores de reclamos individuales dados por 
-la variable aleatoria $Y_k = B_k X_k$.
+$$ donde $B_k \rightsquigarrow Ber( p )$ y es independientes de $X_k$. Así el modelo colectivo se transforma en un modelo individual con $n$ constante y valores de reclamos individuales dados por la variable aleatoria $Y_k = B_k X_k$.
 
-Para este caso en particular
-$$
+Para este caso en particular $$
 \begin{eqnarray*}
 \E[ S ] 
 & = & \E\left[ \sum\limits_{k=0}^{n} B_k X_k \right] \\
@@ -454,8 +362,7 @@ $$
 \end{eqnarray*}
 $$
 
-así mismo,
-$$
+así mismo, $$
 \begin{eqnarray*}
 \V[ S ]
 & = & n \V[ B X ] \\
@@ -468,13 +375,9 @@ $$
 \end{eqnarray*}
 $$
 
-::: {.example #l5ex4}
-Hacemos uso del algoritmo de simulación, pero bajo la consideración anterior donde el conteo 
-de siniestros $N \rightsquigarrow Bin( n, p )$, en algunos casos se puede considerar $n$ como el 
-número de pólizas vendidas, esto supone que solo se presenta un reclamo por póliza. Por su parte los
-reclamos consideraremos  $X_i \rightsquigarrow LN( \mu, \sigma )$, para todo $i \in \{1,\ldots,n\}$. 
-Si consideramos generar la simulación como un modelo individual, generamos variables aleatorias
-$B_i \rightsquigarrow Ber(p)$, para todo $i \in \{1,\ldots,n\}$.
+::: {#l5ex4 .example}
+Hacemos uso del algoritmo de simulación, pero bajo la consideración anterior donde el conteo de siniestros $N \rightsquigarrow Bin( n, p )$, en algunos casos se puede considerar $n$ como el número de pólizas vendidas, esto supone que solo se presenta un reclamo por póliza. Por su parte los reclamos consideraremos $X_i \rightsquigarrow LN( \mu, \sigma )$, para todo $i \in \{1,\ldots,n\}$. Si consideramos generar la simulación como un modelo individual, generamos variables aleatorias $B_i \rightsquigarrow Ber(p)$, para todo $i \in \{1,\ldots,n\}$.
+
 ```{r l5c6}
 m <- 1e4
 n <- 1000
@@ -497,95 +400,54 @@ $$
 $$
 :::
 
-Es importante observar que si la frecuencia de reclamos es superior a $1$, sea este por póliza, 
-individuo o en general por unidad asegurada, la aproximación anterior no es la correcta si no 
-se realiza un ajuste al valor $n$ que es el número máximo de siniestros. Sino también, se puede 
-considera que las variables de los reclamos es la suma total de reclamos por póliza.
+Es importante observar que si la frecuencia de reclamos es superior a $1$, sea este por póliza, individuo o en general por unidad asegurada, la aproximación anterior no es la correcta si no se realiza un ajuste al valor $n$ que es el número máximo de siniestros. Sino también, se puede considera que las variables de los reclamos es la suma total de reclamos por póliza.
 
-Por otra parte, es de notar que en el cálculo hay un gasto innecesario de valores simulados de 
-reclamos $X_i$ ya que algunos se multiplicaran por $B_i$, la cual solo toma valores $\{0,1\}$.
+Por otra parte, es de notar que en el cálculo hay un gasto innecesario de valores simulados de reclamos $X_i$ ya que algunos se multiplicaran por $B_i$, la cual solo toma valores $\{0,1\}$.
 
 <!------------------------------------------------------------------------------------------------->
+
 ## Modelos mixtos
-En algunos casos en particular se considera un modelo de agregación que es una mixtura entre el
-modelo individual y el modelo colectivo. Se parte de considerar un número $n$ de unidades aseguradas
-donde para cada unidad $i \in \{1, \ldots, n\}$, se considera que puede presentar una cantidad 
-de reclamos dados por una variable aleatoria discreta $N_i$, y así para cada presentar un número
-de reclamos $X_{i,1}, \ldots, X_{i,N_i}$. Así el reclamo total viene dado por la expresión
-$$
+
+En algunos casos en particular se considera un modelo de agregación que es una mixtura entre el modelo individual y el modelo colectivo. Se parte de considerar un número $n$ de unidades aseguradas donde para cada unidad $i \in \{1, \ldots, n\}$, se considera que puede presentar una cantidad de reclamos dados por una variable aleatoria discreta $N_i$, y así para cada presentar un número de reclamos $X_{i,1}, \ldots, X_{i,N_i}$. Así el reclamo total viene dado por la expresión $$
 S 
 = \sum\limits_{i=1}^n X_i
 = \sum\limits_{i=1}^n \sum\limits_{j=1}^{N_i} X_{i,j}
 $$
 
 <!------------------------------------------------------------------------------------------------->
+
 ## Modelos con variables explicativas
-En algunos casos más generales, donde la población presenta heterogeneidad respecto del riesgo al
-cual están expuestos, como también de las dimensiones de sus reclamos, se considera que existen 
-variables aleatorias adicionales $Y_1, \ldots, Y_n$ que determinan el número de reclamos $N$ y 
-el valor de los siniestros $\{X_i\}$. Es decir no hay independencia entre $\{Y_j\}$ y $N$ así 
-como tampoco entre $\{Y_j\}$ y $\{X_i\}$. Es así que un modelo colectivo $S = \sum\limits_{i=1}^N X_i$
-su estudio, estimación y tarificación debe ser realizada de forma condicional respecto de las 
-variables aleatorias explicativas $\{Y_j\}$,
-$$
+
+En algunos casos más generales, donde la población presenta heterogeneidad respecto del riesgo al cual están expuestos, como también de las dimensiones de sus reclamos, se considera que existen variables aleatorias adicionales $Y_1, \ldots, Y_n$ que determinan el número de reclamos $N$ y el valor de los siniestros $\{X_i\}$. Es decir no hay independencia entre $\{Y_j\}$ y $N$ así como tampoco entre $\{Y_j\}$ y $\{X_i\}$. Es así que un modelo colectivo $S = \sum\limits_{i=1}^N X_i$ su estudio, estimación y tarificación debe ser realizada de forma condicional respecto de las variables aleatorias explicativas $\{Y_j\}$, $$
 \E[ S ] 
 = \E\left[ \E\left[ S \middle| Y_1, \ldots, Y_n \right] \right]
-$$
-de donde es necesario estimar cada una de las esperanzas condicionadas 
-$\E\left[ S \middle| Y_1, \ldots, Y_n \right]$.
+$$ de donde es necesario estimar cada una de las esperanzas condicionadas $\E\left[ S \middle| Y_1, \ldots, Y_n \right]$.
 
-En la práctica las variables explicativas $\{ Y_j \}$ suelen ser seleccionadas para caracterizar 
-el perfil de riesgo de cada cliente. Para su selección se suele utilizar algunos criterios de tipo 
-económico, financiero, legal y estadístico.
+En la práctica las variables explicativas $\{ Y_j \}$ suelen ser seleccionadas para caracterizar el perfil de riesgo de cada cliente. Para su selección se suele utilizar algunos criterios de tipo económico, financiero, legal y estadístico.
 
 <!------------------------------------------------------------------------------------------------->
+
 ## Proceso estocástico de reclamos totales
 
-Hasta el momento no hemos considerado que los reclamos se producen en el tiempo, que cada reclamo
-está bien vinculado al tiempo; es más podemos identificar algunos instantes en el tiempo que le 
-corresponde, tenemos así el tiempo cuando se suscita el siniestro o tiempo de ocurrencia, el tiempo 
-de aviso cuando se comunica al asegurador el siniestro y un tiempo de pago. Los dos últimos
-no son directos asociados al evento del siniestro sino están asociados a otras variables que pueden
-afectar la demora para comunicar un siniestro por parte del asegurado y la demora para cancelarlo
-por parte del asegurador.
+Hasta el momento no hemos considerado que los reclamos se producen en el tiempo, que cada reclamo está bien vinculado al tiempo; es más podemos identificar algunos instantes en el tiempo que le corresponde, tenemos así el tiempo cuando se suscita el siniestro o tiempo de ocurrencia, el tiempo de aviso cuando se comunica al asegurador el siniestro y un tiempo de pago. Los dos últimos no son directos asociados al evento del siniestro sino están asociados a otras variables que pueden afectar la demora para comunicar un siniestro por parte del asegurado y la demora para cancelarlo por parte del asegurador.
 
-Así por tanto si tenemos una secuencia de siniestros $\{X_n\}_{n\in\N^*}$, estos los podemos 
-considerar ordenados en el tiempo conforme han venido presentándose en instantes 
-$0= T_0 \leq T_1 \leq \cdots \leq T_n \leq \cdots$, es decir se le asocia a los reclamos $\{X_n\}$ la 
-secuencia de los **tiempos de arribo** $\{T_n\}_{n\in\N}$, donde $T_{n+1} \geq T_n$, para 
-cualquier $n \in \N$. Ciertamente, es de esperar que los tiempos de arribo sean variables 
-aleatorias y están asociados a la frecuencia $N$ en un periodo dado, ya que $N$ cuenta los tiempos
-de arribo hasta un instante dado $t \geq 0$, bajo esta perspectiva transformamos a $N$ en una 
-variable aleatoria dependiente del tiempo, en lo que se conoce como un **proceso estocástico**.
-$$
+Así por tanto si tenemos una secuencia de siniestros $\{X_n\}_{n\in\N^*}$, estos los podemos considerar ordenados en el tiempo conforme han venido presentándose en instantes $0= T_0 \leq T_1 \leq \cdots \leq T_n \leq \cdots$, es decir se le asocia a los reclamos $\{X_n\}$ la secuencia de los **tiempos de arribo** $\{T_n\}_{n\in\N}$, donde $T_{n+1} \geq T_n$, para cualquier $n \in \N$. Ciertamente, es de esperar que los tiempos de arribo sean variables aleatorias y están asociados a la frecuencia $N$ en un periodo dado, ya que $N$ cuenta los tiempos de arribo hasta un instante dado $t \geq 0$, bajo esta perspectiva transformamos a $N$ en una variable aleatoria dependiente del tiempo, en lo que se conoce como un **proceso estocástico**. $$
 N( t )
 = \#\left\{ n \in \N\ \middle|\ T_n \leq t \right\} 
 = \sum\limits_{n=0}^{+\infty} \mathbf{1}_{(-\infty,t]}\left( T_n \right)
 $$
 
-Inmediatamente de este razonamiento, resulta que los reclamos totales también se transforman en 
-proceso estocástico, conforme se van considerando los arribos de los reclamos.
-$$
+Inmediatamente de este razonamiento, resulta que los reclamos totales también se transforman en proceso estocástico, conforme se van considerando los arribos de los reclamos. $$
 S( t ) = \sum\limits_{i=1}^{N( t )} X_i
-$$
-donde claramente, como hemos venido haciéndolo, si $N(t) = 0$, entonces la suma total de reclamos
-es cero, $S(t) = 0$.
+$$ donde claramente, como hemos venido haciéndolo, si $N(t) = 0$, entonces la suma total de reclamos es cero, $S(t) = 0$.
 
-Además, junto con lo anterior, se pueden identificar las variables aleatorias de 
-**tiempos entre arribos**, dadas por las diferencias entre tiempos de arribo contiguos
-$$
+Además, junto con lo anterior, se pueden identificar las variables aleatorias de **tiempos entre arribos**, dadas por las diferencias entre tiempos de arribo contiguos $$
 W_n = T_n - T_{n-1},\quad \forall n \in \N
 $$
 
-Un hipótesis bien común en el modelamiento de un proceso de pérdida agregada utilizando esta 
-aproximación es asumir que los tiempos entre arribo $\{W_n\}$ son independientes entre si, es decir,
-el momento que se producen cada uno de los siniestros es de forma independiente. También se suele
-suponer independencia entre los tiempos entre arribo $\{W_n\}$ y las variables que representan 
-la magnitud de cada uno de los reclamos $\{X_n\}$.
+Un hipótesis bien común en el modelamiento de un proceso de pérdida agregada utilizando esta aproximación es asumir que los tiempos entre arribo $\{W_n\}$ son independientes entre si, es decir, el momento que se producen cada uno de los siniestros es de forma independiente. También se suele suponer independencia entre los tiempos entre arribo $\{W_n\}$ y las variables que representan la magnitud de cada uno de los reclamos $\{X_n\}$.
 
-Los resultados para el cálculo de la esperanza y la varianza se pueden obtener de forma similar
-a lo que realizamos en la sección \@ref(sec:modind).
-$$
+Los resultados para el cálculo de la esperanza y la varianza se pueden obtener de forma similar a lo que realizamos en la sección \@ref(sec:modind). $$
 \begin{eqnarray*}
 \E[S(t)]
 & = & \E\left[ \sum\limits_{i=1}^{N(t)} X_i \right] \\
@@ -603,8 +465,7 @@ $$
 \end{eqnarray*}
 $$
 
-el segundo momento de $S(t)$ se calcula de forma similar
-$$
+el segundo momento de $S(t)$ se calcula de forma similar $$
 \begin{eqnarray*}
 \E[S(t)^2]
 & = & \E\left[ \left( \sum\limits_{i=1}^{N(t)} X_i \right)^2 \right] \\
@@ -622,8 +483,7 @@ $$
 \end{eqnarray*}
 $$
 
-y finalmente la varianza de $S(t)$
-$$
+y finalmente la varianza de $S(t)$ $$
 \begin{eqnarray*}
 \V\left[S(t)\right]
 & = & \E\left[S(t)^2\right] - \E\left[S(t)\right]^2 \\
@@ -631,21 +491,14 @@ $$
 + \E\left[N(t)^2\right] \E\left[X\right]^2 - \E\left[N(t)\right]^2 \E\left[X\right]^2 \\
 & = & \E\left[N(t)\right] \V\left[X\right] + \V\left[N(t)\right] \E\left[X\right]^2
 \end{eqnarray*}
-$$
-Si trabajamos bajo la hipótesis que los tiempos entre arribos $\{W_n\}$ son i.i.d, con distribución
-de probabilidad común $F_W$. Podemos comprender y estudiar de una forma un poco más sencilla el 
-proceso estocástico atado a la frecuencia de los siniestros $N$.
+$$ Si trabajamos bajo la hipótesis que los tiempos entre arribos $\{W_n\}$ son i.i.d, con distribución de probabilidad común $F_W$. Podemos comprender y estudiar de una forma un poco más sencilla el proceso estocástico atado a la frecuencia de los siniestros $N$.
 
-Notemos primeramente que se tienen la siguiente igualdad entre los eventos 
-$$
+Notemos primeramente que se tienen la siguiente igualdad entre los eventos $$
 \{N(t) = n\}
 = \{T_n \leq \land T_{n+1} > t\}
 = \{T_n \leq t \} \cap \{ T_{n+1} \leq t\}^c
 = \{T_n \leq t \} \setminus \{ T_{n+1} \leq t\}
-$$
-además es de observar que $\{ T_{n+1} \leq t\} \subset \{ T_{n} \leq t\}$. Con todo esto en 
-consideración para cualquier $n > 0$.
-$$
+$$ además es de observar que $\{ T_{n+1} \leq t\} \subset \{ T_{n} \leq t\}$. Con todo esto en consideración para cualquier $n > 0$. $$
 \begin{eqnarray*}
 P( N(t) = n )
 & = & P( T_n \leq t \land T_{n+1} > t ) \\
@@ -655,8 +508,7 @@ P( N(t) = n )
 \end{eqnarray*}
 $$
 
-el caso $n = 0$ también es sencillo
-$$
+el caso $n = 0$ también es sencillo $$
 \begin{eqnarray*}
 P( N(t) = 0 )
 & = & P( T_0 \leq t \land T_1 > t ) \\
@@ -667,8 +519,7 @@ P( N(t) = 0 )
 \end{eqnarray*}
 $$
 
-De lo anterior resulta que la esperanza de $N(t)$, está dada por la siguiente serie.
-$$
+De lo anterior resulta que la esperanza de $N(t)$, está dada por la siguiente serie. $$
 \begin{eqnarray*}
 \E[ N( t ) ]
 & = & \sum\limits_{n=0}^{+\infty} n P( N(t) = n ) \\
@@ -683,69 +534,39 @@ $$
 
 ### Algoritmo de simulación
 
-1. Se selecciona el número adecuado de simulaciones $m \in \N^*$,
+1.  Se selecciona el número adecuado de simulaciones $m \in \N^*$,
 
-2. Se selecciona el número de simulaciones de tiempos de arribo $M \in \N^*$,
+2.  Se selecciona el número de simulaciones de tiempos de arribo $M \in \N^*$,
 
-3. Dada la distribución de los tiempos entre arribos $F_W$ para cada simulación $i \in \{1, \ldots, m\}$
-se genera una muestra $W_{i,1}, \ldots, W_{i,M}$ de tamaño de $M$,
+3.  Dada la distribución de los tiempos entre arribos $F_W$ para cada simulación $i \in \{1, \ldots, m\}$ se genera una muestra $W_{i,1}, \ldots, W_{i,M}$ de tamaño de $M$,
 
-4. Para cada simulación $i \in \{1, \ldots, m\}$ y cada $n \in \{0, \ldots, M\}$ calculamos los
-tiempos de arribo $T_{i,0},\ldots, T_{i,M}$
-$$
-T_{i,0} = 0,\qquad
-T_{i,n} = \sum\limits_{k=1}^n W_{i,k}
-$$
+4.  Para cada simulación $i \in \{1, \ldots, m\}$ y cada $n \in \{0, \ldots, M\}$ calculamos los tiempos de arribo $T_{i,0},\ldots, T_{i,M}$ $$
+    T_{i,0} = 0,\qquad
+    T_{i,n} = \sum\limits_{k=1}^n W_{i,k}
+    $$
 
-5. Se toma una malla de discretización en el tiempo $0 = t_0 < t_1 < \cdots < t_p = T$ y calculamos
-para cada simulación $i \in \{1,\ldots,m\}$ y tiempo $t_l$, con $l \in \{0,\ldots,p\}$.
-$$
-N_{i,l} = \#\left\{ n \in \N\ \middle|\ T_{i,n} \leq t_l \right\}
-= \sum\limits_{n=0}^{M} \mathbf{1}_{(-\infty,t_l]}\left( T_n \right)
-$$
-precisamente para cada simulación $i$, el término $N_{i,l}$ es una aproximación al proceso 
-$N( t_l )$ evaluado en el tiempo $t_l$. Así se puede tener la aproximación de la media 
-$$
-\E\left[ N( t_l ) \right] \approx \frac{1}{m} \sum\limits_{i=1}^m N_{i,l}
-$$
+5.  Se toma una malla de discretización en el tiempo $0 = t_0 < t_1 < \cdots < t_p = T$ y calculamos para cada simulación $i \in \{1,\ldots,m\}$ y tiempo $t_l$, con $l \in \{0,\ldots,p\}$. $$
+    N_{i,l} = \#\left\{ n \in \N\ \middle|\ T_{i,n} \leq t_l \right\}
+    = \sum\limits_{n=0}^{M} \mathbf{1}_{(-\infty,t_l]}\left( T_n \right)
+    $$ precisamente para cada simulación $i$, el término $N_{i,l}$ es una aproximación al proceso $N( t_l )$ evaluado en el tiempo $t_l$. Así se puede tener la aproximación de la media $$
+    \E\left[ N( t_l ) \right] \approx \frac{1}{m} \sum\limits_{i=1}^m N_{i,l}
+    $$
 
-6. Con la simulación el proceso estocástico $N$ podemos ahora proceder a simular los reclamos totales. 
-Para cada simulación $i \in \{1,\ldots,m\}$, tomamos una muestra de forma independiente e igualmente
-distribuida de los reclamos individuales $X_{i,1}, \ldots, X_{i,N_{i,p}}$, la cual tiene tamaño 
-$N_{i,p}$, y son tomados de la distribución de probabilidad $F_X$
+6.  Con la simulación el proceso estocástico $N$ podemos ahora proceder a simular los reclamos totales. Para cada simulación $i \in \{1,\ldots,m\}$, tomamos una muestra de forma independiente e igualmente distribuida de los reclamos individuales $X_{i,1}, \ldots, X_{i,N_{i,p}}$, la cual tiene tamaño $N_{i,p}$, y son tomados de la distribución de probabilidad $F_X$
 
-7. Para cada simulación $i \in \{1,\ldots, m\}$ y cada tiempo $t_l$ con $l \in \{0,\ldots,p\}$, 
-calculamos la suma
-$$
-S_{i,l} = \sum\limits_{j=1}^{N_{i,l}} X_{i,j}
-$$
-cada $S_{i,l}$ es una aproximación al proceso del total de reclamos $S(t_l)$ precisamente en el 
-tiempo $t_l$. Así resulta la aproximación
-$$
-\E\left[ S( t_l ) \right] \approx \frac{1}{m} \sum\limits_{i=1}^m S_{i,l}
-$$
+7.  Para cada simulación $i \in \{1,\ldots, m\}$ y cada tiempo $t_l$ con $l \in \{0,\ldots,p\}$, calculamos la suma $$
+    S_{i,l} = \sum\limits_{j=1}^{N_{i,l}} X_{i,j}
+    $$ cada $S_{i,l}$ es una aproximación al proceso del total de reclamos $S(t_l)$ precisamente en el tiempo $t_l$. Así resulta la aproximación $$
+    \E\left[ S( t_l ) \right] \approx \frac{1}{m} \sum\limits_{i=1}^m S_{i,l}
+    $$
 
-8. Además, para cada instante $t_l$, se puede aproximar la función de distribución acumulada 
-$F_{S(t_l)}$ de la variable aleatoria $S( t_l )$ utilizando la distribución acumulada empírica
-generada con la muestra $S_{1,l},\ldots,S_{m,l}$. Para cualquier $s \in \R$, tenemos la aproximación
-$$
-F_{S(t_l)}( s ) \approx F_{m,l}( s ) 
-= \frac{1}{m} \sum\limits_{i=1}^m \mathbf{1}_{(-\infty,s]}\left( S_{i,l} \right)
-$$
-El algoritmo de simulación anterior tiene una falencia, no se sabe a priori que valor $M$ se debe
-escoger para simular de forma correcta los procesos $N$ y $S$ hasta un tiempo máximo $T$ dado. Esto
-implica que si $M$ no es del tamaño adecuado, las estimaciones que se realice utilizando la 
-simulación va a degradarse conforme avanza el tiempo.
+8.  Además, para cada instante $t_l$, se puede aproximar la función de distribución acumulada $F_{S(t_l)}$ de la variable aleatoria $S( t_l )$ utilizando la distribución acumulada empírica generada con la muestra $S_{1,l},\ldots,S_{m,l}$. Para cualquier $s \in \R$, tenemos la aproximación $$
+    F_{S(t_l)}( s ) \approx F_{m,l}( s ) 
+    = \frac{1}{m} \sum\limits_{i=1}^m \mathbf{1}_{(-\infty,s]}\left( S_{i,l} \right)
+    $$ El algoritmo de simulación anterior tiene una falencia, no se sabe a priori que valor $M$ se debe escoger para simular de forma correcta los procesos $N$ y $S$ hasta un tiempo máximo $T$ dado. Esto implica que si $M$ no es del tamaño adecuado, las estimaciones que se realice utilizando la simulación va a degradarse conforme avanza el tiempo.
 
-::: {.example #l5ex5}
-El siguiente ejemplo es de especial atención ya que es utilizado en muchas aplicaciones, podemos 
-considerar el caso donde el tiempo entre arribos $\{W_n\}$ es i.i.d y con distribución de 
-probabilidad común $F_W$ dada por una ley exponencial $Exp( \lambda )$. Un resultado clásico muestra 
-que la suma de $n$ exponenciales sigue una ley gamma $Gamma(n,\lambda)$, esto implica que 
-$T_n = W_1 + \cdots + W_n \rightsquigarrow Gamma( n, \lambda )$ o también $F_W^{\star n}$ es una 
-$Gamma( n, \lambda )$. Así por tanto, el proceso estocástico de conteo 
-$N(t) = \#\left\{ n \in \N\ \middle|\ T_n \leq t \right\}$ tiene las siguientes probabilidades
-$$
+::: {#l5ex5 .example}
+El siguiente ejemplo es de especial atención ya que es utilizado en muchas aplicaciones, podemos considerar el caso donde el tiempo entre arribos $\{W_n\}$ es i.i.d y con distribución de probabilidad común $F_W$ dada por una ley exponencial $Exp( \lambda )$. Un resultado clásico muestra que la suma de $n$ exponenciales sigue una ley gamma $Gamma(n,\lambda)$, esto implica que $T_n = W_1 + \cdots + W_n \rightsquigarrow Gamma( n, \lambda )$ o también $F_W^{\star n}$ es una $Gamma( n, \lambda )$. Así por tanto, el proceso estocástico de conteo $N(t) = \#\left\{ n \in \N\ \middle|\ T_n \leq t \right\}$ tiene las siguientes probabilidades $$
 \begin{eqnarray*}
 P( N( t ) = n )
 & = & F_W^{\star n}( t ) - F_W^{\star n + 1}( t ) \\
@@ -755,8 +576,7 @@ P( N( t ) = n )
 \end{eqnarray*}
 $$
 
-En conclusión $N(t)$ tiene como distribución una ley de Poisson $Pois( \lambda t )$, en particular
-se conoce a $N$ como un proceso de Poisson.
+En conclusión $N(t)$ tiene como distribución una ley de Poisson $Pois( \lambda t )$, en particular se conoce a $N$ como un proceso de Poisson.
 :::
 
 ```{r l5c7}
@@ -791,8 +611,8 @@ ES <- EN * exp( u + 0.5 * s^2 )
 EeS <- sapply( 1:p, FUN = function( l ) mean( sapply( 1:m, function( i ) S[[ i ]][ l ] ) ) )
 ```
 
-En el gráfico a continuación presentamos todos los procesos de conteo $N_{i}$ simulados, como es de
-esperarse son funciones de escalera, siempre crecientes, que toma solo valores positivos.
+En el gráfico a continuación presentamos todos los procesos de conteo $N_{i}$ simulados, como es de esperarse son funciones de escalera, siempre crecientes, que toma solo valores positivos.
+
 ```{r l5g2, out.width='80%', out.height='500px', fig.align='center', class.source = 'fold-hide'}
 Ndat <- NULL
 for ( j in 1:m ) {
@@ -820,9 +640,8 @@ plt <- ggplot( ) +
 plot( plt )
 ```
 
-El gráfico a continuación presenta la simulación de los procesos correspondientes al total de 
-reclamos, conforme avanza el tiempo. De igual manera los procesos $S_i$ son funciones de escalera,
-siempre crecientes, con saltos correspondientes a los reclamos individuales.
+El gráfico a continuación presenta la simulación de los procesos correspondientes al total de reclamos, conforme avanza el tiempo. De igual manera los procesos $S_i$ son funciones de escalera, siempre crecientes, con saltos correspondientes a los reclamos individuales.
+
 ```{r l5g3, out.width='80%', out.height='500px', fig.align='center', class.source = 'fold-hide'}
 Sqmax <- quantile( sapply( S, FUN = function( Si ) last( Si ) ), probs = 0.99 )
 
@@ -844,8 +663,8 @@ plt <- ggplot( ) +
 plot( plt )
 ```
 
-Como se describe en el paso 8 del algoritmo de simulación, para cada tiempo $t_l$ se puede estimar
-la distribución de probabilidad de la variable aleatoria $S(t_l)$.
+Como se describe en el paso 8 del algoritmo de simulación, para cada tiempo $t_l$ se puede estimar la distribución de probabilidad de la variable aleatoria $S(t_l)$.
+
 ```{r l5c8}
 FeS <- lapply( 1:p, FUN = function( l ) ecdf( sapply( S, FUN = function( Si ) Si[ l ] ) ) )
 ns <- 100
@@ -853,9 +672,8 @@ s <- seq( 0, Smax, length = ns )
 Fes <- lapply( FeS, FUN = function( FeSl ) sapply( s, FUN = FeSl ) )
 ```
 
-La figura a continuación muestra cada una de las distribuciones de probabilidad empíricas estimadas 
-$F_{m,l}$. Se puede observar que conforme avanza el tiempo, aumenta la probabilidad de observar 
-valores mayores del proceso $S$ correspondiente al total de reclamos.
+La figura a continuación muestra cada una de las distribuciones de probabilidad empíricas estimadas $F_{m,l}$. Se puede observar que conforme avanza el tiempo, aumenta la probabilidad de observar valores mayores del proceso $S$ correspondiente al total de reclamos.
+
 ```{r l5g4, out.width='80%', out.height='500px', fig.align='center', class.source = 'fold-hide'}
 FeSdat <- NULL
 for ( j in 1:p ) {
@@ -881,90 +699,53 @@ plot( plt )
 ```
 
 <!------------------------------------------------------------------------------------------------->
+
 ## Aplicación del deducible
 
-En muchas ocasiones según las condiciones de los contratos de seguro y el apetito de riesgo del 
-asegurador, se configura funciones deducibles sobre los reclamos. El objetivo de aplicar un 
-deducible es evitar valores de reclamo en determinados rangos que no están acorde a las 
-configuraciones y estructuración de productos de seguro. Por ejemplo: se puede colocar un deducible
-para evitar el pago de valores muy pequeños de reclamos, cuya atención incluso puede implicar
-costos operativos o administrativos mayores al valor mismo de los reclamos, ante esta situación 
-se coloca una cota mínima para que de esta forma el asegurado se haga cargo por su cuenta por 
-estos valores menores.
+En muchas ocasiones según las condiciones de los contratos de seguro y el apetito de riesgo del asegurador, se configura funciones deducibles sobre los reclamos. El objetivo de aplicar un deducible es evitar valores de reclamo en determinados rangos que no están acorde a las configuraciones y estructuración de productos de seguro. Por ejemplo: se puede colocar un deducible para evitar el pago de valores muy pequeños de reclamos, cuya atención incluso puede implicar costos operativos o administrativos mayores al valor mismo de los reclamos, ante esta situación se coloca una cota mínima para que de esta forma el asegurado se haga cargo por su cuenta por estos valores menores.
 
-Es usual colocar mínimos en las colas de la distribución de reclamos, evitando así valores muy 
-pequeños o valores muy grandes, pero no sería sustentable, ni financieramente o económicamente, el 
-colocar un deducible justo donde se presenta la mayor parte de los valores de reclamos. Desde
-la perspectiva de un asegurado, ¿De qué serviría adquirir una póliza que no cubre precisamente los
-siniestros más usuales?, esta no sería una póliza apetecible en el mercado y por otra parte un 
-producto difícil de comercializar.
+Es usual colocar mínimos en las colas de la distribución de reclamos, evitando así valores muy pequeños o valores muy grandes, pero no sería sustentable, ni financieramente o económicamente, el colocar un deducible justo donde se presenta la mayor parte de los valores de reclamos. Desde la perspectiva de un asegurado, ¿De qué serviría adquirir una póliza que no cubre precisamente los siniestros más usuales?, esta no sería una póliza apetecible en el mercado y por otra parte un producto difícil de comercializar.
 
-De forma algo más puntual, un **deducible** es una función $D : \R \longrightarrow \R_+$, tal que 
-para toda variable aleatoria $X$, se satisface la siguiente desigualdad $D( X ) \leq X$.
+De forma algo más puntual, un **deducible** es una función $D : \R \longrightarrow \R_+$, tal que para toda variable aleatoria $X$, se satisface la siguiente desigualdad $D( X ) \leq X$.
 
-1. Para evitar pérdidas pequeñas se suele configurar la función deducible $D( X ) = \max( X - d, 0 )$, 
-en este caso si $X \rightsquigarrow F_X$, entonces $Z = D( X ) \rightsquigarrow F_Z( z )$, donde 
-$F_Z( z ) = \mathbf{1}_{[d,+\infty)}( z ) F_X( z + d )$.
+1.  Para evitar pérdidas pequeñas se suele configurar la función deducible $D( X ) = \max( X - d, 0 )$, en este caso si $X \rightsquigarrow F_X$, entonces $Z = D( X ) \rightsquigarrow F_Z( z )$, donde $F_Z( z ) = \mathbf{1}_{[d,+\infty)}( z ) F_X( z + d )$.
 
-2. Para prevenir los excesos de pérdida (stop loss) $D( X ) = \min( X, M )$, en este caso si 
-$X \rightsquigarrow F_X$, entonces $Z = D( X ) \rightsquigarrow F_Z( z )$, donde 
-$F_Z( z ) = \mathbf{1}_{(-\infty,M)}( z ) F_X( z ) + \mathbf{1}_{[M,+\infty)}( z )$.
+2.  Para prevenir los excesos de pérdida (stop loss) $D( X ) = \min( X, M )$, en este caso si $X \rightsquigarrow F_X$, entonces $Z = D( X ) \rightsquigarrow F_Z( z )$, donde $F_Z( z ) = \mathbf{1}_{(-\infty,M)}( z ) F_X( z ) + \mathbf{1}_{[M,+\infty)}( z )$.
 
-3. Caso mixto para evitar pérdidas pequeñas y exceso de pérdida $D( X ) = \min( \max( X - d, 0 ), M )$, 
-en este caso si $X \rightsquigarrow F_X$, entonces $Z = D( X ) \rightsquigarrow F_Z( z )$, donde 
-$F_Z( z ) = \mathbf{1}_{[a,M)}( z ) F_X( z + d ) + \mathbf{1}_{[M,+\infty)}( z )$.
+3.  Caso mixto para evitar pérdidas pequeñas y exceso de pérdida $D( X ) = \min( \max( X - d, 0 ), M )$, en este caso si $X \rightsquigarrow F_X$, entonces $Z = D( X ) \rightsquigarrow F_Z( z )$, donde $F_Z( z ) = \mathbf{1}_{[a,M)}( z ) F_X( z + d ) + \mathbf{1}_{[M,+\infty)}( z )$.
 
-4. En otros casos más elaborados se segmenta el riesgo cubierto, al existir variables explicativas
-de la naturaleza del riesgo $Y_1, \ldots, Y_m$, las cuales pueden tomar valores en un conjunto $E$
-solo se toma un subconjunto de valores posibles $A\subset E$, para los cuales es válida la cobertura.
-Así si un reclamo $X$ se explica o caracteriza por las variables anteriores se configura el 
-deducibles $D( X ) = \mathbf{1}_{A}\left( Y_1, \ldots, Y_m \right) X$.
+4.  En otros casos más elaborados se segmenta el riesgo cubierto, al existir variables explicativas de la naturaleza del riesgo $Y_1, \ldots, Y_m$, las cuales pueden tomar valores en un conjunto $E$ solo se toma un subconjunto de valores posibles $A\subset E$, para los cuales es válida la cobertura. Así si un reclamo $X$ se explica o caracteriza por las variables anteriores se configura el deducibles $D( X ) = \mathbf{1}_{A}\left( Y_1, \ldots, Y_m \right) X$.
 
-Un ejemplo del anterior deducible se suele dar en el caso de seguros de salud, donde se cubre 
-ciertos tipos de enfermedades, usualmente se suele evitar las enfermedades de tipo catastrófico 
-que estén ya presentes, en otros productos se evita los gastos odontológicos, etc.
+Un ejemplo del anterior deducible se suele dar en el caso de seguros de salud, donde se cubre ciertos tipos de enfermedades, usualmente se suele evitar las enfermedades de tipo catastrófico que estén ya presentes, en otros productos se evita los gastos odontológicos, etc.
 
-Los deducibles, pueden ser configurados de forma genérica para todos los asegurados o incluso 
-de forma personalizada por asegurado, según los productos que estos han adquirido. En general, al 
-emplear deducibles para cada uno de los reclamos individuales, el reclamo total $S$ se ve modificado, 
-y toma la forma:
-$$
+Los deducibles, pueden ser configurados de forma genérica para todos los asegurados o incluso de forma personalizada por asegurado, según los productos que estos han adquirido. En general, al emplear deducibles para cada uno de los reclamos individuales, el reclamo total $S$ se ve modificado, y toma la forma: $$
 S = \sum\limits_{i=1}^{N} D_i\left( X_i \right)
-$$
-Hay casos donde se aplica el deducible al grupo de siniestros que presenta una póliza o grupo de 
-pólizas. Esto precisamente se lo puede ver cuando se utiliza un modelo mixto de pérdida.
-$$
+$$ Hay casos donde se aplica el deducible al grupo de siniestros que presenta una póliza o grupo de pólizas. Esto precisamente se lo puede ver cuando se utiliza un modelo mixto de pérdida. $$
 S = \sum\limits_{i=1}^n D_i\left( \sum\limits_{n=1}^{N_i} X_{i,j} \right)
 $$
 
-Este caso se suele presentar en los productos que partir de una suma parcial de reclamos individuales,
-el deducible comienza a regir.
+Este caso se suele presentar en los productos que partir de una suma parcial de reclamos individuales, el deducible comienza a regir.
 
 <!------------------------------------------------------------------------------------------------->
+
 ### Algoritmo de simulación
-Presentamos una adaptación sencilla de los algoritmos de simulación anterior, incluyendo el caso 
-que se tenga un deducible aplicado de forma uniforme a todas las pólizas. 
 
-1. Seleccionar el número de simulaciones $m$,
+Presentamos una adaptación sencilla de los algoritmos de simulación anterior, incluyendo el caso que se tenga un deducible aplicado de forma uniforme a todas las pólizas.
 
-2. Se genera una muestra de tamaño $m$ de variables $N_1, \ldots, N_m$ con ley $f_N$,
+1.  Seleccionar el número de simulaciones $m$,
 
-3. Se genera para cada $i \in \{1,\ldots,m\}$ una muestra de tamaño $N_i$ de variables aleatorias 
-$X_{i,1}, \ldots X_{i,N_i}$ con ley $f_X$,
+2.  Se genera una muestra de tamaño $m$ de variables $N_1, \ldots, N_m$ con ley $f_N$,
 
-4. Se estable ce el deducible a aplicar $D : \R \longrightarrow \R$
+3.  Se genera para cada $i \in \{1,\ldots,m\}$ una muestra de tamaño $N_i$ de variables aleatorias $X_{i,1}, \ldots X_{i,N_i}$ con ley $f_X$,
 
-5. Se calcula los reclamos totales utilizando el deducible $S_1, \ldots, S_m$ para cada simulación 
-$i = \{1, \ldots, m\}$, mediante la siguiente suma $S_i = \sum\limits_{j=1}^{N_i} D\left( X_{i,j} \right)$.
+4.  Se estable ce el deducible a aplicar $D : \R \longrightarrow \R$
 
-6. Para la determinación de varios estadísticos se puede utilizar la simulación generada $\{S_i\}$
-y generar la distribución de probabilidad empírica $F_m$.
+5.  Se calcula los reclamos totales utilizando el deducible $S_1, \ldots, S_m$ para cada simulación $i = \{1, \ldots, m\}$, mediante la siguiente suma $S_i = \sum\limits_{j=1}^{N_i} D\left( X_{i,j} \right)$.
 
-::: {.example #l5ex6}
-Consideremos el caso de un modelo colectivo de pérdida donde el proceso de conteo 
-$N \rightsquigarrow Pois( \lambda )$ y la sucesión $\{X_i\}$ de reclamos individuales se considera 
-conformada por variables i.i.d, con distribución de probabilidad $LN( \mu, \sigma )$. El deducible 
-a aplicar será una función mixta de la forma $D( X ) = \min( \max( X - d, 0 ), M )$.
+6.  Para la determinación de varios estadísticos se puede utilizar la simulación generada $\{S_i\}$ y generar la distribución de probabilidad empírica $F_m$.
+
+::: {#l5ex6 .example}
+Consideremos el caso de un modelo colectivo de pérdida donde el proceso de conteo $N \rightsquigarrow Pois( \lambda )$ y la sucesión $\{X_i\}$ de reclamos individuales se considera conformada por variables i.i.d, con distribución de probabilidad $LN( \mu, \sigma )$. El deducible a aplicar será una función mixta de la forma $D( X ) = \min( \max( X - d, 0 ), M )$.
 
 ```{r l5c9}
 
@@ -996,8 +777,8 @@ DX <- lapply( X, FUN = function( x ) sapply( x, FUN = function( y ) D( y, d, M )
 S <- sapply( DX, FUN = function( x ) ifelse( length( x ) == 0, 0, sum( x, na.rm = TRUE ) ) )
 ```
 
-Como ya se lo mencionó, utilizando la simulación $\{S_i\}$ podemos determinar la distribución de 
-probabilidad empírica $F_m$ que aproxima la distribución de $F_S$.
+Como ya se lo mencionó, utilizando la simulación $\{S_i\}$ podemos determinar la distribución de probabilidad empírica $F_m$ que aproxima la distribución de $F_S$.
+
 ```{r l5c10}
 FeS <- ecdf( S )
 s <- seq( 0, max( S ), length = 100 )
@@ -1028,39 +809,71 @@ plot( plt )
 
 <!------------------------------------------------------------------------------------------------->
 ## Algoritmo de Panjer
+```{r l5c11}
+n <- 5000
+a <- 0
+b <- 2
+p0 <- 0.01
+epsilon <- 1e-10
+alpha <- 3
+theta <- 2
+xmax <- 5e2
+dist <- dgamma
+
+pardist <- list( shape = alpha, scale = theta )
+x <- seq( 0, xmax, length = n )
+N <- n - 1
+dx <- diff( x )
+fX <- sapply( x[1:N], FUN = function( y ) do.call( dist, c( y, pardist ) ) )
+
+fS <- p0
+A <- 1 / ( 1 - a * fX[ 1 ] )
+for ( k in 2:n ) {
+  fS <- c( fS, A * sum( ( a + b * x[1:(k-1)] / x[ k ] ) * fX[1:(k-1)] * fS[(k-1):1] ) )
+}
+```
+
+```{r l5g6, out.width='80%', out.height='500px', fig.align='center', class.source = 'fold-hide'}
+plt <- ggplot( ) +
+  geom_step( aes( x = x, y = fS, colour = 'purple4' ), linewidth = 1 ) +
+  scale_x_continuous( breaks = seq( 0, xmax, length = 11 ),
+                      labels = formatC( seq( 0, xmax, length = 11 ), digits = 2, format = 'f' ), 
+                      limits = c( 0, xmax ), 
+                      expand = c( 0, 0 ) ) +
+  scale_y_continuous( breaks = seq( 0, 4e3, length = 11 ),
+                      labels = formatC( seq( 0, 4e3, length = 11 ), digits = 2, format = 'f' ), 
+                      limits = c( 0, 4e3 ), 
+                      expand = c( 0, 0 ) ) +
+  xlab( TeX( "$s$" ) ) + 
+  ylab( TeX( "$f_S$" ) ) + 
+  theme_bw() +
+  theme( legend.position = "none" )
+plot( plt )
+```
 
 <!------------------------------------------------------------------------------------------------->
+
 ## Estimación usando la transformada de Fourier
 
-Para el caso del modelo individual de riesgos podemos hacer uso de la siguiente estimación de la
-densidad de probabilidad de los reclamos totales $S$, utilizando la transformada de Fourier. En la 
-implementación numérica se utiliza la transformada de Fourier rápida (FFT).
-$$
+Para el caso del modelo individual de riesgos podemos hacer uso de la siguiente estimación de la densidad de probabilidad de los reclamos totales $S$, utilizando la transformada de Fourier. En la implementación numérica se utiliza la transformada de Fourier rápida (FFT). $$
 \Fo\left( f_S \right)
 = \Fo\left( f^{\star n}_X \right)
 = \Fo\left( f_X \right)^{n}
 $$
 
-Por tanto de esta relación como la transformada de Fourier es invertible, existe $\Fo^{-1}$. 
-Resulta el siguiente método para calcular la densidad de $S$
-$$
+Por tanto de esta relación como la transformada de Fourier es invertible, existe $\Fo^{-1}$. Resulta el siguiente método para calcular la densidad de $S$ $$
 f_S = \Fo^{-1}\left( \Fo\left( f_S \right) \right)
 = \Fo^{-1}\left(\Fo\left( f_X \right)^{n} \right)
 $$
 
-En conclusión para determinar la densidad de probabilidad de $S$ basta conocer la transformada de
-Fourier de la distribución de los reclamos individuales, multiplicarla por si misma $n$ veces y 
-tomar la transformada de Fourier inversa.
-$$
+En conclusión para determinar la densidad de probabilidad de $S$ basta conocer la transformada de Fourier de la distribución de los reclamos individuales, multiplicarla por si misma $n$ veces y tomar la transformada de Fourier inversa. $$
 \begin{eqnarray*}
 \Fo\left( f_S \right)
 & = & \Fo\left( \sum\limits_{n=0}^{+\infty} p_n f_X^{\star n} \right) \\
 & = & \sum\limits_{n=0}^{+\infty} p_n \Fo\left( f_X^{\star n} \right) \\
 & = & \sum\limits_{n=0}^{+\infty} p_n \Fo\left( f_X \right)^{n}
 \end{eqnarray*}
-$$
-como consecuencia
-$$
+$$ como consecuencia $$
 \begin{eqnarray*}
 f_S 
 & = & \Fo^{-1}\left( \Fo\left( f_S \right) \right)\\
@@ -1090,4 +903,3 @@ $$
 ```{r l5end, echo = FALSE}
 rm( list = ls()[ ls() != 'def.chunk.hook' ] )
 ```
-
