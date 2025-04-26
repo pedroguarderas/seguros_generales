@@ -5,6 +5,7 @@
   font-weight: 400;
   font-size: 12pt;
   font-style: normal;
+  text-align: justify;
  }
 
 .body {
@@ -12,6 +13,7 @@
   font-weight: 400;
   font-size: 20pt;
   font-style: normal;
+  text-align: justify;
  } 
  
 .book-body {
