@@ -80,7 +80,7 @@ conocido, por ejemplo puede ser a lo sumo el tamaño de la población asegurada,
 variable aleatoria $N$ pasa a ser una constante, que representaremos por $n$. De esta forma, la
 severidad total puede ser fácilmente representada por: 
 $$
-  S = \sum\limits_{i=1}^n X_i
+S = \sum\limits_{i=1}^n X_i
 $$
 
 La hipótesis más usual que sostiene a este modelo es la indenpendencia entre cada uno de los
@@ -197,17 +197,17 @@ X <- lapply( 1:m, FUN = function( i ) sapply( 1:n, FUN = function( j ) rlnorm( 1
 S <- sapply( X, FUN = function( x ) sum( x ) )
 ```
 
-Com ya lo mencionamos en este ejemplo densidad de probabilidad de la severidad $S$ resulta de la
+Con ya lo mencionamos en este ejemplo densidad de probabilidad de la severidad $S$ resulta de la
 convolución de las $n$ densidades individuales $f_S = f_{X_1} \star \cdots \star f_{X_n}$, la cual
 no presenta una forma analítica conocida. 
 
 De la imposibilidad anterior, como ya mencionamos se puede ver la utilidad de trabajar con la 
-simulación aleatoria de la variable $S$. Para así estimar la distribución acumulada de probabilidad 
-$F_S$ a partir de la distribución empírica $F_m$ de la muestra, con:
+muestra aleatoria de la variable $S$. De esta manera poder estimar la distribución acumulada de 
+probabilidad $F_S$ a partir de la distribución empírica $F_m$ generada con la muestra $\{S_i\}$.
 $$
 F_S( s ) \approx F_m( s ) = \frac{1}{m} \sum\limits_{i=1}^m \mathbf {1}_{(-\infty,s]}( S_i )
 $$
-el resultado de concetración \@ref(thm:ddkw) es más nos brinda un criterio de convergencia de 
+el resultado de concentración \@ref(thm:ddkw) es más nos brinda un criterio de convergencia de 
 $F_m$ a $F_S$
 
 Para construir $F_m$ en R, se puede utilizar la función ya empaquetada `ecdf` (empirical cumulative
@@ -307,8 +307,8 @@ S =
 \end{array}
 \right.
 $$
-o de forma más compacta se tan solo utilizar la igualdad $S = \sum\limits_{i=1}^N X_i$, donde se 
-asume que la suma da $0$ si $N = 0$.
+o de forma más compacta se puede tan definir $S = \sum\limits_{i=1}^N X_i$, donde se asume que la 
+suma da $0$ si el número de elementos en la suma $N = 0$.
 
 El valor esperado del total de reclamos $S$, está dado por:
 $$
@@ -885,18 +885,19 @@ plot( plt )
 
 En muchas ocasiones según las condiciones de los contratos de seguro y el apetito de riesgo del 
 asegurador, se configura funciones deducibles sobre los reclamos. El objetivo de aplicar un 
-deducible es de evitar valores de reclamo en determinados rangos que no están acorde a las 
+deducible es evitar valores de reclamo en determinados rangos que no están acorde a las 
 configuraciones y estructuración de productos de seguro. Por ejemplo: se puede colocar un deducible
 para evitar el pago de valores muy pequeños de reclamos, cuya atención incluso puede implicar
 costos operativos o administrativos mayores al valor mismo de los reclamos, ante esta situación 
-se coloca una cota mínima para de tal forma que el asegurado se haga cargo por su cuenta por 
-estos valores.
+se coloca una cota mínima para que de esta forma el asegurado se haga cargo por su cuenta por 
+estos valores menores.
 
-Es usual colocar mínimos en las colas de la distribución de reclamos, evitando así o valores muy 
-pequeños valores muy grandes, pero no sería sustentable, ni financieramente o económicamente el 
-colocar un deducible justo donde se contratar la mayor parte de los valores de reclamos. Desde
+Es usual colocar mínimos en las colas de la distribución de reclamos, evitando así valores muy 
+pequeños o valores muy grandes, pero no sería sustentable, ni financieramente o económicamente, el 
+colocar un deducible justo donde se presenta la mayor parte de los valores de reclamos. Desde
 la perspectiva de un asegurado, ¿De qué serviría adquirir una póliza que no cubre precisamente los
-siniestros más usuales?. 
+siniestros más usuales?, esta no sería una póliza apetecible en el mercado y por otra parte un 
+producto difícil de comercializar.
 
 De forma algo más puntual, un **deducible** es una función $D : \R \longrightarrow \R_+$, tal que 
 para toda variable aleatoria $X$, se satisface la siguiente desigualdad $D( X ) \leq X$.
@@ -966,14 +967,14 @@ conformada por variables i.i.d, con distribución de probabilidad $LN( \mu, \sig
 a aplicar será una función mixta de la forma $D( X ) = \min( \max( X - d, 0 ), M )$.
 
 ```{r l5c9}
-  
+
 # 1. selección de simulaciones
 m <- 1e4
 
 # 2. especificación de los parámetros para las distribuciones
-u <- 5
-s <- 2
-l <- 3
+u <- 2
+s <- 3
+l <- 6
 
 # 3. se especifica la función deducible
 D <- function( x, d, M ) {
@@ -987,7 +988,7 @@ N <- rpois( n = m, lambda = l )
 X <- lapply( N, FUN = function( n ) rlnorm( n, meanlog = u, sdlog = s ) )
 
 # 6. se aplica el deducible a los reclamos
-d <- 10
+d <- 100
 M <- 1000
 DX <- lapply( X, FUN = function( x ) sapply( x, FUN = function( y ) D( y, d, M ) ) )
 
@@ -1008,64 +1009,22 @@ Smax <- max( S )
 
 plt <- ggplot( ) +
   geom_step( aes( x = s, y = Fes, group = m, colour = 'red' ), linewidth = 1 ) +
+  geom_vline( xintercept = c( d, M ), colour = 'olivedrab3' ) +
   scale_x_continuous( breaks = seq( 0, Smax, length = 11 ),
                       labels = formatC( seq( 0, Smax, length = 11 ), digits = 2, format = 'f' ), 
-                      limits = c( 0, Smax ), expand = c( 0, 0 ) ) +
+                      limits = c( 0, Smax ), 
+                      expand = c( 0, 0 ) ) +
   scale_y_continuous( breaks = seq( 0, 1, length = 11 ),
                       labels = formatC( seq( 0, 1, length = 11 ), digits = 2, format = 'f' ), 
-                      limits = c( 0, 1 ), expand = c( 0, 0 ) ) +
-  xlab( TeX( "$S$" ) ) + 
-  ylab( TeX( "$F_m$" ) ) + 
+                      limits = c( 0, 1 ), 
+                      expand = c( 0, 0 ) ) +
+  xlab( TeX( "$s$" ) ) + 
+  ylab( TeX( "$F_m( s )$" ) ) + 
   theme_bw() +
   theme( legend.position = "none" )
 plot( plt )
 ```
 :::
-
-::: {.example #l5ex7}
-En este caso en particular estudiaremos la velocidad de convergencia del método resultante del 
-teorema del límite central \@ref(thm:tlc). Generaremos una simulación aleatoria de la suma
-agregada $S_n$ y mostraresmo s
-```{r l5c11}
-m <- 500
-n <- 1000
-u <- 4
-s <- 2
-X <- lapply( 1:m, FUN = function( j ) rlnorm( n, meanlog = u, sdlog = s ) )
-EX <- exp( u + 0.5 * s^2 )
-SDX <- sqrt( ( exp( s^2 ) - 1 ) * exp( 2 * u + s^2 ) )
-S <- lapply( X, FUN = function( x ) cumsum( x ) )
-ES <- sapply( 1:n, FUN = function( i ) mean( sapply( 1:m, FUN = function( j ) S[[ j ]][ i ] ) ) )
-VS <- sapply( 1:n, FUN = function( i ) var( sapply( 1:m, FUN = function( j ) S[[ j ]][ i ] ) ) )
-NS <- lapply( S, FUN = function( s ) ( s - ES ) / sqrt( abs( VS ) ) )
-z <- seq( -4, 4, length.out = 100 )
-FSn <- lapply( 1:n, FUN = function( i ) ecdf( sapply( 1:m, FUN = function( j ) NS[[ j ]][ i ] ) )( z ) )
-D <- sapply( FSn, FUN = function( Fn ) max( abs( Fn - pnorm( z ) ) ) )
-
-C <- 0.015
-# C <- 1 / sqrt( 2 * pi )
-rho <- exp( 3 * u + 3^2 * s^2 / 2 )
-Bn <- C * rho / ( SDX^3 * sqrt( 1:n ) )
-
-plot( 1:n, D, pch = 16, cex = 0.5, type = 'l', lwd = 2, lty = 1, ylim = c( 0, 0.5 ), col = 'royalblue4' )
-points( 1:n, Bn, type = 'l', lty = 1, col = 'red' )
-```
-:::
-
-
-```{r l5c12}
-l <- 3
-n <- 300
-dt <- rexp( n = n, rate = 1 / l )
-t <- c( 0, cumsum( dt ) )
-dN <- sapply( dt, FUN = function( w ) rpois( 1, lambda = l * w ) )
-N <- c( 0, cumsum( dN ) )
-sh <- 3
-rt <- 2
-X <- lapply( dN, FUN = function( n ) rgamma( n, shape = sh, rate = rt ) )
-dS <- sapply( X, FUN = function( x ) sum( x ) )
-S <- c( 0, cumsum( dS ) )
-```
 
 <!------------------------------------------------------------------------------------------------->
 ## Algoritmo de Panjer
