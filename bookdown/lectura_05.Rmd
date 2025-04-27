@@ -1033,7 +1033,7 @@ plot( plt )
 El siguiente algoritmo es de especial interés para determinar la densidad de probabilidad $f_S$ del
 total de reclamos $S$. Se asume que el conteo de siniestro $N$ viene dado por alguna de las 
 distribuciones en la familia $(a,b,0)$ y los reclamos individuales son $\{X_i\}$ son i.i.d y 
-también independientes de $N$. En ese contexto podemos observar que:
+también independientes de $N$. En ese contexto podemos observar que para cualquier $s > 0$, tenemos:
 \begin{eqnarray*}
 f_S( s ) 
 & = & \sum\limits_{n=1}^{+\infty} p_n f_X^{\star n}( s ) \\
@@ -1047,6 +1047,8 @@ f_S( s )
 & = & p_1 f_X( s ) + \int\limits_0^s \left( a + \frac{b y}{s} \right) f_X( y ) f_S( s - y )\ dy
 \end{eqnarray*}
 
+cuando $s = 0$, la probabilidad se concentra en $0$, y por tanto $f_S( 0 ) = p_0$
+
 Como consecuencia del análisis anterior resulta la relación recurrente, la cual es precisamente
 explotada de forma numérica por el algoritmo de Panjer.
 \begin{equation}
@@ -1054,15 +1056,39 @@ f_S( s ) = p_1 f_X( s ) + \int\limits_0^s \left( a + \frac{b y}{s} \right) f_X( 
 \qquad \forall s > 0
 \end{equation}
 
+Si se toma una discretización $0 = s_0 < s_1 < \cdots < s_n$ para aproximar la integral anterior
+\begin{equation}
+f_S\left( s_k \right) 
+= p_1 f_X\left( s_k \right) + \sum\limits_{i=0}^{k-1} \left( a + \frac{b s_i}{s_k} \right) 
+f_X\left( s_i \right) f_S\left( s_{k-i} \right) \left( s_{i+1} - s_i \right)
+\end{equation}
 
+Al tomar un división uniforme para la malla utilizada para aproximar la integral, por ejemplo 
+$s_k = k h$, tenemos que: 
+\begin{equation}
+f_S\left( s_k \right) 
+= p_1 f_X\left( s_k \right) + h \sum\limits_{i=0}^{k-1} \left( a + \frac{b i}{k} \right) 
+f_X\left( s_i \right) f_S\left( s_{k-i} \right)
+\end{equation}
+de donde resulta una forma bien conocida para el algoritmo de Panjer. sin embargo, es importante
+tener en cuenta que una malla de paso no constante puede ser mejor adaptada para realizar la 
+integral.
+
+::: {.example #l5ex7}
+Consideremos el caso para un reclamo total $S$ donde el conteo de los siniestros 
+$N \rightsquigarrow NBin( \alpha, p )$ y las severidades $\{X_i\}$ son i.i.d con distribución 
+$LN( \mu, \sigma )$. Utilizaremos el algoritmo de Panjer para aproximar la densidad de probabilidad
+de $f_S$ de $S$.
 ```{r l5c11}
 n <- 8e4
-a <- 0
-b <- 3
-p0 <- exp( -b )
+p <- 0.3
+alpha <- 3
+a <- 1 - p
+b <- ( 1 - p ) * ( alpha - 1 )
+p0 <- p^alpha
 u <- 5
-s <- 1
-xmax <- 6e3
+s <- 0.3
+xmax <- 5e3
 dist <- dlnorm
 
 pardist <- list( meanlog = u, sdlog = s )
@@ -1080,19 +1106,21 @@ for ( k in 2:n ) {
 }
 
 m <- 3e4
-N <- rpois( n = m, lambda = b )
+N <- rnbinom( n = m, size = alpha, prob = p )
 X <- lapply( N, FUN = function( n ) rlnorm( n, meanlog = u, sdlog = s ) )
 S <- sapply( X, FUN = function( x ) sum( x, na.rm = TRUE ) )
 ```
 
+El algoritmo de Panjer suele tener el problema de ajustarse en los primero valores de la 
+densidad $f_S$, tal como lo muestra el gráfico a continuación.
 ```{r l5g6, out.width='80%', out.height='500px', fig.align='center', class.source = 'fold-hide'}
 fmax <- 0.03 * max( fS, na.rm = TRUE )
 
 plt <- ggplot( ) +
   geom_histogram( aes( S, after_stat( density ) ), fill = 'dodgerblue4', colour = 'white', alpha = 0.6, bins = 50 ) +
   geom_line( aes( x = x, y = fS ), colour = 'purple3', linewidth = 1 ) +
-  scale_x_continuous( breaks = seq( 0, xmax, length = 11 ),
-                      labels = formatC( seq( 0, xmax, length = 11 ), digits = 2, format = 'f' ), 
+  scale_x_continuous( breaks = seq( 0, xmax, length = 7 ),
+                      labels = formatC( seq( 0, xmax, length = 7 ), digits = 2, format = 'f' ), 
                       limits = c( 0, xmax ), 
                       expand = c( 0, 0 ) ) +
   scale_y_continuous( breaks = seq( 0, fmax, length = 11 ),
@@ -1105,6 +1133,7 @@ plt <- ggplot( ) +
   theme( legend.position = "none" )
 plot( plt )
 ```
+:::
 
 <!------------------------------------------------------------------------------------------------->
 ## Estimación usando la transformada de Fourier
