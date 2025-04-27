@@ -952,10 +952,11 @@ que se tenga un deducible aplicado de forma uniforme a todas las pólizas.
 3. Se genera para cada $i \in \{1,\ldots,m\}$ una muestra de tamaño $N_i$ de variables aleatorias 
 $X_{i,1}, \ldots X_{i,N_i}$ con ley $f_X$,
 
-4. Se estable ce el deducible a aplicar $D : \R \longrightarrow \R$
+4. Se establece la función deducible $D : \R \longrightarrow \R_+$ y los parámetros y condiciones
+necesarias para su definición,
 
 5. Se calcula los reclamos totales utilizando el deducible $S_1, \ldots, S_m$ para cada simulación 
-$i = \{1, \ldots, m\}$, mediante la siguiente suma $S_i = \sum\limits_{j=1}^{N_i} D\left( X_{i,j} \right)$.
+$i = \{1, \ldots, m\}$, mediante la siguiente suma $S_i = \sum\limits_{j=1}^{N_i} D\left( X_{i,j} \right)$,
 
 6. Para la determinación de varios estadísticos se puede utilizar la simulación generada $\{S_i\}$
 y generar la distribución de probabilidad empírica $F_m$.
@@ -1028,40 +1029,75 @@ plot( plt )
 
 <!------------------------------------------------------------------------------------------------->
 ## Algoritmo de Panjer
-```{r l5c11}
-n <- 5000
-a <- 0
-b <- 2
-p0 <- 0.01
-epsilon <- 1e-10
-alpha <- 3
-theta <- 2
-xmax <- 5e2
-dist <- dgamma
 
-pardist <- list( shape = alpha, scale = theta )
+El siguiente algoritmo es de especial interés para determinar la densidad de probabilidad $f_S$ del
+total de reclamos $S$. Se asume que el conteo de siniestro $N$ viene dado por alguna de las 
+distribuciones en la familia $(a,b,0)$ y los reclamos individuales son $\{X_i\}$ son i.i.d y 
+también independientes de $N$. En ese contexto podemos observar que:
+\begin{eqnarray*}
+f_S( s ) 
+& = & \sum\limits_{n=1}^{+\infty} p_n f_X^{\star n}( s ) \\
+& = & p_1 f_X( s ) + \sum\limits_{n=2}^{+\infty} p_n f_X^{\star n}( s ) \\
+& = & p_1 f_X( s ) + \sum\limits_{n=1}^{+\infty} p_{n+1} f_X^{\star n + 1}( s ) \\
+& = & p_1 f_X( s ) + \sum\limits_{n=1}^{+\infty} \left( a + \frac{b}{n+1} \right) p_{n} f_X^{\star n + 1}( s ) \\
+& = & p_1 f_X( s ) 
++ \sum\limits_{n=1}^{+\infty} p_{n} \int\limits_0^s \left( a + \frac{b y}{s} \right) f_X( y ) f_X^{\star n}( s - y )\ dy \\
+& = & p_1 f_X( s ) 
++ \int\limits_0^s \left( a + \frac{b y}{s} \right) f_X( y ) \sum\limits_{n=1}^{+\infty} p_{n} f_X^{\star n}( s - y )\ dy \\
+& = & p_1 f_X( s ) + \int\limits_0^s \left( a + \frac{b y}{s} \right) f_X( y ) f_S( s - y )\ dy
+\end{eqnarray*}
+
+Como consecuencia del análisis anterior resulta la relación recurrente, la cual es precisamente
+explotada de forma numérica por el algoritmo de Panjer.
+\begin{equation}
+f_S( s ) = p_1 f_X( s ) + \int\limits_0^s \left( a + \frac{b y}{s} \right) f_X( y ) f_S( s - y )\ dy,
+\qquad \forall s > 0
+\end{equation}
+
+
+```{r l5c11}
+n <- 8e3
+a <- 0
+b <- 3
+p0 <- exp( -b )
+u <- 5
+s <- 1
+xmax <- 6e3
+dist <- dlnorm
+
+pardist <- list( meanlog = u, sdlog = s )
 x <- seq( 0, xmax, length = n )
 N <- n - 1
 dx <- diff( x )
-fX <- sapply( x[1:N], FUN = function( y ) do.call( dist, c( y, pardist ) ) )
+fX <- sapply( x[-N], FUN = function( y ) do.call( dist, c( y, pardist ) ) )
 
 fS <- p0
-A <- 1 / ( 1 - a * fX[ 1 ] )
+K <- 1
+p1 <- ( a + b ) * p0
 for ( k in 2:n ) {
-  fS <- c( fS, A * sum( ( a + b * x[1:(k-1)] / x[ k ] ) * fX[1:(k-1)] * fS[(k-1):1] ) )
+  fS <- c( fS, p1 * fX[ k ] + sum( ( a + b * x[ K ] / x[ k ] ) * fX[ K ] * fS[ rev( K ) ] * dx[ K ] ) )
+  K <- c( K, k )
 }
+
+m <- 3e4
+N <- rpois( n = m, lambda = b )
+X <- lapply( N, FUN = function( n ) rlnorm( n, meanlog = u, sdlog = s ) )
+S <- sapply( X, FUN = function( x ) sum( x, na.rm = TRUE ) )
 ```
 
 ```{r l5g6, out.width='80%', out.height='500px', fig.align='center', class.source = 'fold-hide'}
+fmax <- 0.03 * max( fS, na.rm = TRUE )
+
 plt <- ggplot( ) +
-  geom_step( aes( x = x, y = fS, colour = 'purple3' ), linewidth = 1 ) +
+  geom_histogram( aes( S, after_stat( density ) ), fill = 'dodgerblue4', colour = 'white', alpha = 0.6, bins = 50 ) +
+  geom_line( aes( x = x, y = fS ), colour = 'purple3', linewidth = 1 ) +
   scale_x_continuous( breaks = seq( 0, xmax, length = 11 ),
                       labels = formatC( seq( 0, xmax, length = 11 ), digits = 2, format = 'f' ), 
                       limits = c( 0, xmax ), 
                       expand = c( 0, 0 ) ) +
-  scale_y_continuous( breaks = seq( 0, 4e3, length = 11 ),
-                      labels = formatC( seq( 0, 4e3, length = 11 ), digits = 2, format = 'f' ), 
-                      limits = c( 0, 4e3 ), 
+  scale_y_continuous( breaks = seq( 0, fmax, length = 11 ),
+                      labels = formatC( seq( 0, fmax, length = 11 ), digits = 4, format = 'f' ),
+                      limits = c( 0, fmax ),
                       expand = c( 0, 0 ) ) +
   xlab( TeX( "$s$" ) ) + 
   ylab( TeX( "$f_S$" ) ) + 
