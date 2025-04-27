@@ -1056,7 +1056,7 @@ f_S( s ) = p_1 f_X( s ) + \int\limits_0^s \left( a + \frac{b y}{s} \right) f_X( 
 
 
 ```{r l5c11}
-n <- 8e3
+n <- 8e4
 a <- 0
 b <- 3
 p0 <- exp( -b )
