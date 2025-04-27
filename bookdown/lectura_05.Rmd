@@ -1080,7 +1080,7 @@ $N \rightsquigarrow NBin( \alpha, p )$ y las severidades $\{X_i\}$ son i.i.d con
 $LN( \mu, \sigma )$. Utilizaremos el algoritmo de Panjer para aproximar la densidad de probabilidad
 de $f_S$ de $S$.
 ```{r l5c11}
-n <- 8e4
+n <- 9e4
 p <- 0.3
 alpha <- 3
 a <- 1 - p
@@ -1105,6 +1105,7 @@ for ( k in 2:n ) {
   K <- c( K, k )
 }
 
+set.seed( 32141223 )
 m <- 3e4
 N <- rnbinom( n = m, size = alpha, prob = p )
 X <- lapply( N, FUN = function( n ) rlnorm( n, meanlog = u, sdlog = s ) )
@@ -1112,7 +1113,8 @@ S <- sapply( X, FUN = function( x ) sum( x, na.rm = TRUE ) )
 ```
 
 El algoritmo de Panjer suele tener el problema de ajustarse en los primero valores de la 
-densidad $f_S$, tal como lo muestra el gráfico a continuación.
+densidad $f_S$, tal como lo muestra el gráfico a continuación. Incluso este efecto no se resuelve
+por completo al aumentar el refinamiento de la malla para aproximar la integral.
 ```{r l5g6, out.width='80%', out.height='500px', fig.align='center', class.source = 'fold-hide'}
 fmax <- 0.03 * max( fS, na.rm = TRUE )
 
@@ -1138,60 +1140,95 @@ plot( plt )
 <!------------------------------------------------------------------------------------------------->
 ## Estimación usando la transformada de Fourier
 
-Para el caso del modelo individual de riesgos podemos hacer uso de la siguiente estimación de la
-densidad de probabilidad de los reclamos totales $S$, utilizando la transformada de Fourier. En la 
-implementación numérica se utiliza la transformada de Fourier rápida (FFT).
+Se puede utilizar la transformada de Fourier para determinar la densidad de la suma 
+$S_n = \sum\limits_{i=1}^n X_i$ de varias variables aleatorias 
+$X_1 \rightsquigarrow f_{X_1}, \ldots, X_n \rightsquigarrow f_{X_n}$ que son independientes, pero 
+que podrían ser o no idénticamente distribuidas. Claramente, la densidad de probabilidad de $S$
+está dada por la convolución de las densidades de probabilidad de cada una de las variables 
+aleatorias $X_1, \ldots, X_n$.
 $$
-\Fo\left( f_S \right)
-= \Fo\left( f^{\star n}_X \right)
-= \Fo\left( f_X \right)^{n}
+f_S = f_{X_1} \star \cdots \star f_{X_n}
+$$
+sin embargo esta convolución implica el realizar una interacción en $n$-dimensiones.
+
+Si las las variables aleatorias $\{X_i\}$ son independientes sabemos además que 
+$$
+\Fo\left( f_S \right) = \prod\limits_{i=1}^n \Fo\left( f_{X_i} \right)
 $$
 
-Por tanto de esta relación como la transformada de Fourier es invertible, existe $\Fo^{-1}$. 
-Resulta el siguiente método para calcular la densidad de $S$
+Por otra parte, con lo anterior sabemos que es posible aproximar numéricamente cada $\Fo\left( f_{X_i} \right)$ 
+con una serie $\{\hat{f}_{i,j}\}$ dada por la discretización de la transformada de Fourier y su aplicación 
+sobre la discretización de la densidad de probabilidad $f_{i,k} = f_{X_i}( s_k )$. Por tanto, para cada 
+de las densidades con $i \in \{1, \ldots, n\}$ y $\omega_j = \frac{j}{b-a}$ con $j \in \{0,\ldots, N-1\}$, 
+se puede calcular de forma separada las aproximaciones a cada una de las transformadas
 $$
-f_S = \Fo^{-1}\left( \Fo\left( f_S \right) \right)
-= \Fo^{-1}\left(\Fo\left( f_X \right)^{n} \right)
-$$
-
-En conclusión para determinar la densidad de probabilidad de $S$ basta conocer la transformada de
-Fourier de la distribución de los reclamos individuales, multiplicarla por si misma $n$ veces y 
-tomar la transformada de Fourier inversa.
-$$
-\begin{eqnarray*}
-\Fo\left( f_S \right)
-& = & \Fo\left( \sum\limits_{n=0}^{+\infty} p_n f_X^{\star n} \right) \\
-& = & \sum\limits_{n=0}^{+\infty} p_n \Fo\left( f_X^{\star n} \right) \\
-& = & \sum\limits_{n=0}^{+\infty} p_n \Fo\left( f_X \right)^{n}
-\end{eqnarray*}
-$$
-como consecuencia
-$$
-\begin{eqnarray*}
-f_S 
-& = & \Fo^{-1}\left( \Fo\left( f_S \right) \right)\\
-& = & \Fo^{-1}\left( \sum\limits_{n=0}^{+\infty} p_n \Fo\left( f_X \right)^{n} \right)\quad
-\text{Una sola inversión} \\
-& = & \sum\limits_{n=0}^{+\infty} p_n \Fo^{-1}\left( \Fo\left( f_X \right)^{n} \right)\quad
-\text{Una inversión por cada término en la suma}
-\end{eqnarray*}
+\Fo( f_{X_i} )\left( \omega_j \right)  
+\approx \hat{f}_{i,j} 
+= h \exp\left( -2\pi i \omega_j a \right) \left( \DFT\left[ \{f_{i,k}\} \right]  \right)_j
 $$
 
+con lo anterior, también, se puede realizar una aproximación a la trasformada de Fourier 
+$\Fo\left( f_S \right)$ de la densidad de probabilidad que buscamos $f_S$, como el producto de sus 
+transformadas de Fourier.
 $$
-W_n = \frac{S_n}{n}
+\Fo( f_{S} )\left( \omega_j \right)  
+= \prod\limits_{i=1}^n \Fo\left( f_{X_i} \right)\left( \omega_j \right)
+\approx \prod\limits_{i=1}^n \hat{f}_{i,j}
 $$
 
+utilizando la inversión de la transformada de Fourier discreta podemos calcular una serie que 
+precisamente aproxima a la densidad $f_S$
 $$
-\E\left[ W_n \right]
-= \E\left[ \frac{S_n}{n} \right] 
-= \frac{1}{n} \E\left[ S_n \right]
+\{ f_{S}( s_k ) \}
+\approx \Re\left( \DFT^{-1}\left[ \left\{ \frac{1}{h} \exp\left( 2\pi i \omega_j a \right) 
+\prod\limits_{i=1}^n \hat{f}_{i,j} \right\} \right] \right)
 $$
 
-$$
-\V\left[ W_n \right]
-= \V\left[ \frac{S_n}{n} \right]
-= \frac{1}{n^2} \V\left[ S_n \right]
-$$
+```{r l3c9}
+N <- 10000
+set.seed(94312)
+alpha <- sample( x = seq( 1, 20, length = 40 ), size = 50, replace = TRUE )
+theta <- 3
+b <- sum( sapply( alpha, FUN = function( a ) qgamma( 0.9999, shape = a, scale = theta ) ) )
+a <- 0
+h <- ( b - a ) / N
+n <- 0:N
+s <- a + n * h
+w <- n / ( b - a )
+eta <- h * exp( -2 * pi * 1i * w * a )
+f <- lapply( alpha, function( a ) sapply( s, FUN = function( sk ) dgamma( sk, shape = a, scale = theta ) ) )
+Ff <- lapply( f, FUN = function( fi ) eta * fft( fi ) )
+FS <- rep( 1, N + 1 )
+for ( i in 1:length( f ) ) {
+  FS <- FS * Ff[[ i ]]
+}
+IFfS <- fft( eta^(-1) * FS, inverse = TRUE ) / ( N + 1 )
+fS <- Re( IFfS )
+fSx <- sapply( s, FUN = function( sk ) dgamma( sk, shape = sum( alpha ), scale = theta ) )
+```
+
+```{r l3g2, out.width='80%', out.height='400px', fig.align='center', class.source = 'fold-hide'}
+e <- fS - fSx
+eb <- max( abs( e ) )
+
+plt <- ggplot() +
+  geom_line( aes( x = s, y = fSx ), colour = 'darkred', size = 1 ) + 
+  geom_point( aes( x = s, y = fS ), colour = 'olivedrab3', size = 0.25 ) + 
+  xlab( TeX( "$x$" ) ) + 
+  ylab( TeX( "$f_{S}(x)$" ) ) + 
+  theme_bw()
+plot( plt )
+
+plt <- ggplot() +
+  geom_histogram( aes( x = e, y = after_stat( density ) ), bins = 50, fill = 'grey50', colour = 'dodgerblue3' ) + 
+  scale_x_continuous( breaks = seq( -eb, eb, length = 10 ), 
+                      labels = label_scientific( digits = 2 ),
+                      limits = c( -eb, eb ) ) +
+  scale_y_continuous( labels = label_scientific( digits = 2 ) ) +
+  ylab( TeX( "$e$" ) ) + 
+  theme_bw()
+plot( plt )
+```
 
 ```{r l5end, echo = FALSE}
 rm( list = ls()[ ls() != 'def.chunk.hook' ] )
