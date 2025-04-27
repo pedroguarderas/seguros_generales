@@ -1280,7 +1280,7 @@ probabilidad empírica <span class="math inline">\(F_m\)</span> que aproxima la 
 <p>El siguiente algoritmo es de especial interés para determinar la densidad de probabilidad <span class="math inline">\(f_S\)</span> del
 total de reclamos <span class="math inline">\(S\)</span>. Se asume que el conteo de siniestro <span class="math inline">\(N\)</span> viene dado por alguna de las
 distribuciones en la familia <span class="math inline">\((a,b,0)\)</span> y los reclamos individuales son <span class="math inline">\(\{X_i\}\)</span> son i.i.d y
-también independientes de <span class="math inline">\(N\)</span>. En ese contexto podemos observar que:
+también independientes de <span class="math inline">\(N\)</span>. En ese contexto podemos observar que para cualquier <span class="math inline">\(s &gt; 0\)</span>, tenemos:
 <span class="math display">\[\begin{eqnarray*}
 f_S( s )
 &amp; = &amp; \sum\limits_{n=1}^{+\infty} p_n f_X^{\star n}( s ) \\
@@ -1293,11 +1293,24 @@ f_S( s )
 + \int\limits_0^s \left( a + \frac{b y}{s} \right) f_X( y ) \sum\limits_{n=1}^{+\infty} p_{n} f_X^{\star n}( s - y )\ dy \\
 &amp; = &amp; p_1 f_X( s ) + \int\limits_0^s \left( a + \frac{b y}{s} \right) f_X( y ) f_S( s - y )\ dy
 \end{eqnarray*}\]</span></p>
+<p>cuando <span class="math inline">\(s = 0\)</span>, la probabilidad se concentra en <span class="math inline">\(0\)</span>, y por tanto <span class="math inline">\(f_S( 0 ) = p_0\)</span></p>
 <p>Como consecuencia del análisis anterior resulta la relación recurrente, la cual es precisamente
 explotada de forma numérica por el algoritmo de Panjer.
 <span class="math display">\[\begin{equation}
 f_S( s ) = p_1 f_X( s ) + \int\limits_0^s \left( a + \frac{b y}{s} \right) f_X( y ) f_S( s - y )\ dy,
 \qquad \forall s &gt; 0
+\end{equation}\]</span></p>
+<p>Si se toma una discretización <span class="math inline">\(0 = s_0 &lt; s_1 &lt; \cdots &lt; s_n\)</span> para aproximar la integral anterior
+<span class="math display">\[\begin{equation}
+f_S\left( s_k \right)
+= p_1 f_X\left( s_k \right) + \sum\limits_{i=0}^{k-1} \left( a + \frac{b s_i}{s_k} \right)
+f_X\left( s_i \right) f_S\left( s_{k-i} \right) \left( s_{i+1} - s_i \right)
+\end{equation}\]</span></p>
+<p>Al tomar un división uniforme, constante para la malla <span class="math inline">\(s_k = k h\)</span>, tenemos que
+<span class="math display">\[\begin{equation}
+f_S\left( s_k \right)
+= p_1 f_X\left( s_k \right) + h \sum\limits_{i=0}^{k-1} \left( a + \frac{b i}{k} \right)
+f_X\left( s_i \right) f_S\left( s_{k-i} \right)
 \end{equation}\]</span></p>
 <p></p>
 <details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
@@ -1332,7 +1345,7 @@ f_S( s ) = p_1 f_X( s ) + \int\limits_0^s \left( a + \frac{b y}{s} \right) f_X( 
 <p></p>
 <p></p>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb54"><pre class="sourceCode r fold-hide"><code class="sourceCode r"><span id="cb54-1"><a href="modelos-de-pérdida-agregada.html#cb54-1" tabindex="-1"></a>fmax <span class="ot">&lt;-</span> <span class="fl">0.03</span> <span class="sc">*</span> <span class="fu">max</span>( fS, <span class="at">na.rm =</span> <span class="cn">TRUE</span> )</span>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r fold-hide"><code class="sourceCode r"><span id="cb54-1"><a href="modelos-de-pérdida-agregada.html#cb54-1" tabindex="-1"></a>fmax <span class="ot">&lt;-</span> <span class="fl">0.02</span> <span class="sc">*</span> <span class="fu">max</span>( fS, <span class="at">na.rm =</span> <span class="cn">TRUE</span> )</span>
 <span id="cb54-2"><a href="modelos-de-pérdida-agregada.html#cb54-2" tabindex="-1"></a></span>
 <span id="cb54-3"><a href="modelos-de-pérdida-agregada.html#cb54-3" tabindex="-1"></a>plt <span class="ot">&lt;-</span> <span class="fu">ggplot</span>( ) <span class="sc">+</span></span>
 <span id="cb54-4"><a href="modelos-de-pérdida-agregada.html#cb54-4" tabindex="-1"></a>  <span class="fu">geom_histogram</span>( <span class="fu">aes</span>( S, <span class="fu">after_stat</span>( density ) ), <span class="at">fill =</span> <span class="st">&#39;dodgerblue4&#39;</span>, <span class="at">colour =</span> <span class="st">&#39;white&#39;</span>, <span class="at">alpha =</span> <span class="fl">0.6</span>, <span class="at">bins =</span> <span class="dv">50</span> ) <span class="sc">+</span></span>
