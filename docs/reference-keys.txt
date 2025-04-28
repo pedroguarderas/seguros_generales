@@ -16,6 +16,8 @@ def:defmixdis
 def:defcov
 def:dsum
 def:dexceso
+def:dcondexp
+def:dlawtotvar
 thm:twln
 thm:tlc
 thm:tdinver
@@ -23,12 +25,12 @@ prp:chebdes
 thm:bein
 thm:ddkw
 tab:l3t1
+exm:l3ex1
 thm:dchernoff
 thm:dpaleyzyg
 def:dfouriertrans
 def:dfouriertransd
 def:deffact
-exm:l5ex7
 def:dbinom
 def:dpois
 def:dnbinom
@@ -54,6 +56,7 @@ exm:l5ex2
 exm:l5ex3
 exm:l5ex4
 exm:l5ex6
+exm:l5ex7
 exm:l5ex5
 def:dVaR
 prp:varinv
