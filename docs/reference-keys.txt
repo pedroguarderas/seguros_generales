@@ -78,6 +78,7 @@ thm:tvalext1
 thm:tvalext2
 introducción
 materia
+personal-docente
 resultados-de-aprendizaje
 contenidos-propuestos
 referencias-bibliográficas
