@@ -620,7 +620,23 @@ F_u( y ) = P\left( X - u \leq y \mid X > u \right)
 $$
 :::
 
-
+::: {.definition #dcondexp name="Esperanza condicional"}
+Si consideramos un evento cualquiera $A \in \mathcal{F}$, $X$ una variable aleatoria a valores 
+reales y $x \in \R$, consideremos la probabilidad condicionada del siguiente evento
+$$
+P\left( X \leq x \middle| A \right) 
+= \frac{P(X \leq x \land A )}{P(A)}
+= \frac{P( \{X \leq x \} \cap A )}{P(A)}
+$$
+:::
+::: {.definition #dlawtotvar name="Ley de la varianza total"}
+Consideremos dos variables aleatorias $X, Y$, ambas a valores reales, entonces se satisface la 
+siguiente igualdad:
+$$
+\V[ Y ] = \E\left[ \V\left[ Y \middle| X \right] \right] + 
+\V\left[ \E\left[ Y \middle| X \right] \right]
+$$
+:::
 
 <!------------------------------------------------------------------------------------------------->
 ## Resultados de convergencia
@@ -774,6 +790,67 @@ dt %>%
   kable_classic( font_size = 14, full_width = FALSE, html_font = "Cambria", position = 'center' ) %>%
   scroll_box( width = "100%", height = "500px" )
 ```
+
+::: {.example #l3ex1}
+En este caso en particular estudiaremos la velocidad de convergencia del método resultante del 
+teorema del límite central \@ref(thm:tlc). Generaremos una simulación aleatoria de la suma
+agregada $S_n$ y mostrar
+```{r l3c10}
+m <- 600
+n <- 6000
+u <- 4
+s <- 2
+
+set.seed( 5143829 )
+X <- lapply( 1:m, FUN = function( j ) rlnorm( n, meanlog = u, sdlog = s ) )
+S <- lapply( X, FUN = function( x ) cumsum( x ) )
+ES <- sapply( 1:n, FUN = function( i ) mean( sapply( 1:m, FUN = function( j ) S[[ j ]][ i ] ) ) )
+VS <- sapply( 1:n, FUN = function( i ) var( sapply( 1:m, FUN = function( j ) S[[ j ]][ i ] ) ) )
+NS <- lapply( S, FUN = function( s ) ( s - ES ) / sqrt( abs( VS ) ) )
+
+z <- seq( -5, 5, length.out = 200 )
+FSn <- lapply( 1:n, FUN = function( i ) ecdf( sapply( 1:m, FUN = function( j ) NS[[ j ]][ i ] ) )( z ) )
+phi <- pnorm( z )
+D <- sapply( FSn, FUN = function( Fn ) max( abs( Fn - phi ) ) )
+```
+
+```{r l3g1, out.width='80%', out.height='400px', fig.align='center', class.source = 'fold-hide'}
+plt <- ggplot() +
+  geom_line( aes( x = 1:n, y = D ), colour = 'darkred', linewidth = 0.5 ) + 
+  scale_x_continuous( breaks = seq( 0, n, 500 ), limits = c( 1, n ), expand = c( 0, 0 ) ) +
+  scale_y_continuous( breaks = seq( 0, 0.5, length = 11 ), limits = c( 0, 0.5 ), expand = c( 0, 0 ) ) +
+  xlab( TeX( "$n$" ) ) + 
+  ylab( TeX( "$D_n$" ) ) + 
+  theme_bw()
+plot( plt )
+```
+
+```{r l3g2, out.width='80%', out.height='400px', fig.align='center', class.source = 'fold-hide'}
+dat <- NULL
+for ( k in 1:n ) {
+  dat <- rbindlist( list( dat, data.table( z = z, n = as.factor( k ), FSn = FSn[[ k ]] ) ) )
+}
+cols <- wes_palette( n, name = "BottleRocket2", type = "continuous" )
+
+plt <- ggplot( ) +
+  geom_step( data = dat, aes( x = z, y = FSn, group = n, colour = n ), linewidth = 0.07 ) +
+  geom_line( aes( x = z, y = phi, colour = 'olivedrab3' ), linewidth = 1 ) +
+  scale_color_manual( values = c( cols, 'olivedrab3' ) ) +
+  scale_x_continuous( breaks = seq( -5, 5, 1 ),
+                      labels = formatC( seq( -5, 5, 1 ), digits = 1, format = 'f' ),
+                      limits = c( -5, 5 ), 
+                      expand = c( 0, 0 ) ) +
+  scale_y_continuous( breaks = seq( 0, 1, length = 11 ), 
+                      labels = formatC( seq( 0, 1, length = 11 ), digits = 2, format = 'f' ), 
+                      limits = c( 0, 1 ), 
+                      expand = c( 0, 0 ) ) +
+  xlab( TeX( "$z$" ) ) + 
+  ylab( TeX( "$F_n$" ) ) + 
+  theme_bw() +
+  theme( legend.position = "none" )
+plot( plt )
+```
+:::
 
 <!------------------------------------------------------------------------------------------------->
 ::: {.theorem #dchernoff name="Desigualdad de Chernoff"}
@@ -949,7 +1026,7 @@ $$
 
 Como se puede observar se superponen cada una de las distribuciones la discretización $f_k$ y la 
 calculada con inversión de la transformada de Fourier discreta.
-```{r l3g1, out.width='80%', out.height='400px', fig.align='center', class.source = 'fold-hide'}
+```{r l3g3, out.width='80%', out.height='400px', fig.align='center', class.source = 'fold-hide'}
 e <- f - IFf
 eb <- max( abs( e ) )
 
@@ -1072,51 +1149,6 @@ $$
 -\sum\limits_{t_k > t} v( t, t_k ) c( t_k )
 $$
 algunas veces se considera la parte prospectiva con el signo menos.
-
-::: {.example #l5ex7}
-En este caso en particular estudiaremos la velocidad de convergencia del método resultante del 
-teorema del límite central \@ref(thm:tlc). Generaremos una simulación aleatoria de la suma
-agregada $S_n$ y mostrar
-```{r l3c10}
-m <- 500
-n <- 1000
-u <- 4
-s <- 2
-X <- lapply( 1:m, FUN = function( j ) rlnorm( n, meanlog = u, sdlog = s ) )
-EX <- exp( u + 0.5 * s^2 )
-SDX <- sqrt( ( exp( s^2 ) - 1 ) * exp( 2 * u + s^2 ) )
-S <- lapply( X, FUN = function( x ) cumsum( x ) )
-ES <- sapply( 1:n, FUN = function( i ) mean( sapply( 1:m, FUN = function( j ) S[[ j ]][ i ] ) ) )
-VS <- sapply( 1:n, FUN = function( i ) var( sapply( 1:m, FUN = function( j ) S[[ j ]][ i ] ) ) )
-NS <- lapply( S, FUN = function( s ) ( s - ES ) / sqrt( abs( VS ) ) )
-z <- seq( -4, 4, length.out = 100 )
-FSn <- lapply( 1:n, FUN = function( i ) ecdf( sapply( 1:m, FUN = function( j ) NS[[ j ]][ i ] ) )( z ) )
-D <- sapply( FSn, FUN = function( Fn ) max( abs( Fn - pnorm( z ) ) ) )
-
-C <- 0.015
-# C <- 1 / sqrt( 2 * pi )
-rho <- exp( 3 * u + 3^2 * s^2 / 2 )
-Bn <- C * rho / ( SDX^3 * sqrt( 1:n ) )
-
-plot( 1:n, D, pch = 16, cex = 0.5, type = 'l', lwd = 2, lty = 1, ylim = c( 0, 0.5 ), col = 'royalblue4' )
-points( 1:n, Bn, type = 'l', lty = 1, col = 'red' )
-```
-:::
-
-
-```{r l3c11}
-l <- 3
-n <- 300
-dt <- rexp( n = n, rate = 1 / l )
-t <- c( 0, cumsum( dt ) )
-dN <- sapply( dt, FUN = function( w ) rpois( 1, lambda = l * w ) )
-N <- c( 0, cumsum( dN ) )
-sh <- 3
-rt <- 2
-X <- lapply( dN, FUN = function( n ) rgamma( n, shape = sh, rate = rt ) )
-dS <- sapply( X, FUN = function( x ) sum( x ) )
-S <- c( 0, cumsum( dS ) )
-```
 
 ```{r l3end, echo = FALSE}
 rm( list = ls()[ ls() != 'def.chunk.hook' ] )
