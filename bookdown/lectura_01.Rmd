@@ -13,9 +13,9 @@ Las presentes notas han sido creadas con la motivación de facilitar el aprendiz
 estudiantes, las mismas conjugan la parte teórica del curso con ejemplos prácticos implementados 
 utilizando el lenguaje R.
 
-Estas notas han sido creadas en colaboración entre Leonardo Vélez y Pedro Guarderas. La motivación
-y objetivo para haber creado estas notas es llegar a generar un buen material de aprendizaje y 
-referencia. En el estado actual, no son aún definitivas, están sujetas a mejoras y correcciones.
+Estas trabajo se ha realizado en colaboración entre Leonardo Vélez y Pedro Guarderas. La motivación
+y objetivo para haber creado las presentes notas es llegar a generar un buen material de aprendizaje 
+y referencia. En el estado actual, no son aún definitivas, están sujetas a mejoras y correcciones.
 Sin embargo, será un placer para nosotros que las lean, critiquen y en especial nos hagan llegar
 sus observaciones y posibles mejoras.
 
