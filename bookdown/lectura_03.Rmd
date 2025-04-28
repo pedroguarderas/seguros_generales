@@ -1037,7 +1037,9 @@ plt <- ggplot() +
   ylab( TeX( "$f(x)$" ) ) + 
   theme_bw()
 plot( plt )
+```
 
+```{r l3g4, out.width='80%', out.height='400px', fig.align='center', class.source = 'fold-hide'}
 plt <- ggplot() +
   geom_histogram( aes( x = e, y = after_stat( density ) ), bins = 50, fill = 'grey50', colour = 'dodgerblue3' ) + 
   geom_density() +
