@@ -692,6 +692,7 @@ El siguiente algoritmo es de especial interés para determinar la densidad de pr
 total de reclamos $S$. Se asume que el conteo de siniestro $N$ viene dado por alguna de las 
 distribuciones en la familia $(a,b,0)$ y los reclamos individuales son $\{X_i\}$ son i.i.d y 
 también independientes de $N$. En ese contexto podemos observar que para cualquier $s > 0$, tenemos:
+$$
 \begin{eqnarray*}
 f_S( s ) 
 & = & \sum\limits_{n=1}^{+\infty} p_n f_X^{\star n}( s ) \\
@@ -704,30 +705,30 @@ f_S( s )
 + \int\limits_0^s \left( a + \frac{b y}{s} \right) f_X( y ) \sum\limits_{n=1}^{+\infty} p_{n} f_X^{\star n}( s - y )\ dy \\
 & = & p_1 f_X( s ) + \int\limits_0^s \left( a + \frac{b y}{s} \right) f_X( y ) f_S( s - y )\ dy
 \end{eqnarray*}
-
+$$
 cuando $s = 0$, la probabilidad se concentra en $0$, y por tanto $f_S( 0 ) = p_0$
 
 Como consecuencia del análisis anterior resulta la relación recurrente, la cual es precisamente
 explotada de forma numérica por el algoritmo de Panjer.
-\begin{equation}
+$$
 f_S( s ) = p_1 f_X( s ) + \int\limits_0^s \left( a + \frac{b y}{s} \right) f_X( y ) f_S( s - y )\ dy,
 \qquad \forall s > 0
-\end{equation}
+$$
 
 Si se toma una discretización $0 = s_0 < s_1 < \cdots < s_n$ para aproximar la integral anterior
-\begin{equation}
+$$
 f_S\left( s_k \right) 
 = p_1 f_X\left( s_k \right) + \sum\limits_{i=0}^{k-1} \left( a + \frac{b s_i}{s_k} \right) 
 f_X\left( s_i \right) f_S\left( s_{k-i} \right) \left( s_{i+1} - s_i \right)
-\end{equation}
+$$
 
 Al tomar un división uniforme para la malla utilizada para aproximar la integral, por ejemplo 
 $s_k = k h$, tenemos que: 
-\begin{equation}
+$$
 f_S\left( s_k \right) 
 = p_1 f_X\left( s_k \right) + h \sum\limits_{i=0}^{k-1} \left( a + \frac{b i}{k} \right) 
 f_X\left( s_i \right) f_S\left( s_{k-i} \right)
-\end{equation}
+$$
 de donde resulta una forma bien conocida para el algoritmo de Panjer. sin embargo, es importante
 tener en cuenta que una malla de paso no constante puede ser mejor adaptada para realizar la 
 integral.
