@@ -771,7 +771,7 @@ X <- lapply( N, FUN = function( n ) rlnorm( n, meanlog = u, sdlog = s ) )
 S <- sapply( X, FUN = function( x ) sum( x, na.rm = TRUE ) )
 ```
 
-El algoritmo de Panjer suele tener el problema de ajustarse en los primero valores de la 
+El algoritmo de Panjer suele tener problemas para ajustarse en los primeros valores de la 
 densidad $f_S$, tal como lo muestra el gráfico a continuación. Incluso este efecto no se resuelve
 por completo al aumentar el refinamiento de la malla para aproximar la integral.
 ```{r l5g6, out.width='80%', out.height='500px', fig.align='center', class.source = 'fold-hide'}
