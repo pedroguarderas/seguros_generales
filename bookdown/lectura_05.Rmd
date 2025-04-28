@@ -663,7 +663,7 @@ s <- seq( 0, max( S ), length = 100 )
 Fes <- sapply( s, FUN = FeS )
 ```
 
-```{r l5g5, out.width='80%', out.height='500px', fig.align='center', class.source = 'fold-hide'}
+```{r l5g2, out.width='80%', out.height='500px', fig.align='center', class.source = 'fold-hide'}
 Smax <- max( S )
 
 plt <- ggplot( ) +
@@ -774,7 +774,7 @@ S <- sapply( X, FUN = function( x ) sum( x, na.rm = TRUE ) )
 El algoritmo de Panjer suele tener problemas para ajustarse en los primeros valores de la 
 densidad $f_S$, tal como lo muestra el gráfico a continuación. Incluso este efecto no se resuelve
 por completo al aumentar el refinamiento de la malla para aproximar la integral.
-```{r l5g6, out.width='80%', out.height='500px', fig.align='center', class.source = 'fold-hide'}
+```{r l5g3, out.width='80%', out.height='500px', fig.align='center', class.source = 'fold-hide'}
 fmax <- 0.03 * max( fS, na.rm = TRUE )
 
 plt <- ggplot( ) +
@@ -866,7 +866,7 @@ fS <- Re( IFfS )
 fSx <- sapply( s, FUN = function( sk ) dgamma( sk, shape = sum( alpha ), scale = theta ) )
 ```
 
-```{r l3g2, out.width='80%', out.height='400px', fig.align='center', class.source = 'fold-hide'}
+```{r l5g4, out.width='80%', out.height='400px', fig.align='center', class.source = 'fold-hide'}
 e <- fS - fSx
 eb <- max( abs( e ) )
 
@@ -1144,7 +1144,7 @@ EeS <- sapply( 1:p, FUN = function( l ) mean( sapply( 1:m, function( i ) S[[ i ]
 
 En el gráfico a continuación presentamos todos los procesos de conteo $N_{i}$ simulados, como es de
 esperarse son funciones de escalera, siempre crecientes, que toma solo valores positivos.
-```{r l5g2, out.width='80%', out.height='500px', fig.align='center', class.source = 'fold-hide'}
+```{r l5g5, out.width='80%', out.height='500px', fig.align='center', class.source = 'fold-hide'}
 Ndat <- NULL
 for ( j in 1:m ) {
   Ndat <- rbindlist( list( Ndat, data.table( t = t, m = as.factor( j ), N = N[[ j ]], S = S[[ j ]] ) ) )
@@ -1174,7 +1174,7 @@ plot( plt )
 El gráfico a continuación presenta la simulación de los procesos correspondientes al total de 
 reclamos, conforme avanza el tiempo. De igual manera los procesos $S_i$ son funciones de escalera,
 siempre crecientes, con saltos correspondientes a los reclamos individuales.
-```{r l5g3, out.width='80%', out.height='500px', fig.align='center', class.source = 'fold-hide'}
+```{r l5g6, out.width='80%', out.height='500px', fig.align='center', class.source = 'fold-hide'}
 Sqmax <- quantile( sapply( S, FUN = function( Si ) last( Si ) ), probs = 0.99 )
 
 plt <- ggplot( ) +
@@ -1207,7 +1207,7 @@ Fes <- lapply( FeS, FUN = function( FeSl ) sapply( s, FUN = FeSl ) )
 La figura a continuación muestra cada una de las distribuciones de probabilidad empíricas estimadas 
 $F_{m,l}$. Se puede observar que conforme avanza el tiempo, aumenta la probabilidad de observar 
 valores mayores del proceso $S$ correspondiente al total de reclamos.
-```{r l5g4, out.width='80%', out.height='500px', fig.align='center', class.source = 'fold-hide'}
+```{r l5g7, out.width='80%', out.height='500px', fig.align='center', class.source = 'fold-hide'}
 FeSdat <- NULL
 for ( j in 1:p ) {
   FeSdat <- rbindlist( list( FeSdat, data.table( s = s, m = as.factor( j ), Fes = Fes[[ j ]] ) ) )
