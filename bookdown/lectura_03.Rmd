@@ -253,7 +253,7 @@ $X_1, \ldots, X_n$ las cuales muchas de las veces se consideraran que son
 conjunta tiene la siguiente forma:
 $$
 F( x_1, \ldots, x_n ) 
-P( X_1 \leq x_1 \land \cdots \land X_n \leq x_n )
+= P( X_1 \leq x_1 \land \cdots \land X_n \leq x_n )
 = \prod\limits_{i=1}^n P( X_i \leq x_i )
 = \prod\limits_{i=1}^n F( x_i )
 $$
@@ -267,6 +267,16 @@ La **función indicatriz** de un conjunto $A \subset \Omega$, es la función
 $\mathbf{1}_A : \Omega \longrightarrow \{0,1\}$, que toma los valores 
 $\mathbf{1}_A( \omega ) = 0$, si $\omega \notin A$ y $\mathbf{1}_A( \omega ) = 1$, si 
 $\omega \in A$.
+
+Además esta función indicatriz tiene las siguientes propiedades
+
+1. Si $A, B \subset \Omega$, entonces $\mathbf{1}_{A \cap B} = \mathbf{1}_A \mathbf{1}_B$
+
+2. Si $A \subset \Omega$, entonces $\mathbf{1}_{A^c} = 1 - \mathbf{1}_A$
+
+3. Si $A, B \subset \Omega$, entonces $\mathbf{1}_{A\cup B} = \mathbf{1}_A + \mathbf{1}_B - \mathbf{1}_A \mathbf{1}_B$
+
+4. $\mathbf{1}_\Omega = 1$
 :::
 
 Hay un caso atípico que suele ser útil, esto sucede cuando la variable aleatoria 
@@ -546,6 +556,34 @@ $$
 F_Z( z ) = F_X( z ) + \mathbf{1}_{[a,+\infty)}( z ) - \mathbf{1}_{[a,+\infty)}( z ) F_X( z )
 = \mathbf{1}_{(-\infty,a)}( z ) F_X( z ) + \mathbf{1}_{[a,+\infty)}( z )
 $$
+Esta función tiene las siguientes propiedades.
+
+1. si $z > a$, entonces $F_Z( z ) = 1$
+
+2. si $z < a$, entonces $F_Z( z ) = F_X( z )$
+
+3. si $z = a$, entonces $F_Z( a ) = 1$
+
+4. la función $F$ es discontinua en $a$
+$$
+\underset{z \nearrow a}{\lim} F_Z( z ) = \underset{z \nearrow a}{\lim} F_X( z ) = F_X( a )
+$$
+por otra parte
+$$
+\underset{z \searrow a}{\lim} F_Z( z ) = \underset{z \searrow a}{\lim} \mathbf{1}_{[a,+\infty)}( z )
+= \underset{z \searrow a}{\lim} 1 = 1
+$$
+donde no necesariamente $F_X( a )$ es igual $1$.
+
+5. el evento puntual $\{Z = a\}$ no tiene necesariamente probabilidad nula
+$$
+\begin{eqnarray*}
+P( Z = a ) 
+& = & P\left( \min( X, a ) = a \right) \\
+& = & P\left( X \geq a \right) \\
+& = & 1 - F_X( a )
+\end{eqnarray*}
+$$
 
 De forma similar nos podemos también interesar a la variable aleatoria que expresa el máximo 
 entre otras dos variables, i.e. $Z = \max( X, Y )$, por un razonamiento similar podemos obtener
@@ -582,6 +620,24 @@ F_u( y ) = P\left( X - u \leq y \mid X > u \right)
 $$
 :::
 
+::: {.definition #dcondexp name="Esperanza condicional"}
+Si consideramos un evento cualquiera $A \in \mathcal{F}$, $X$ una variable aleatoria a valores 
+reales y $x \in \R$, consideremos la probabilidad condicionada del siguiente evento
+$$
+P\left( X \leq x \middle| A \right) 
+= \frac{P(X \leq x \land A )}{P(A)}
+= \frac{P( \{X \leq x \} \cap A )}{P(A)}
+$$
+:::
+::: {.definition #dlawtotvar name="Ley de la varianza total"}
+Consideremos dos variables aleatorias $X, Y$, ambas a valores reales, entonces se satisface la 
+siguiente igualdad:
+$$
+\V[ Y ] = \E\left[ \V\left[ Y \middle| X \right] \right] + 
+\V\left[ \E\left[ Y \middle| X \right] \right]
+$$
+:::
+
 <!------------------------------------------------------------------------------------------------->
 ## Resultados de convergencia
 
@@ -609,7 +665,7 @@ $$
 $$
 esto quiere decir que para cualquier $\varepsilon > 0$ se satisface el siguiente límite
 $$
-\underset{n \rightarrow +\infty}{\lim} P\left( \left| \sum\limits_{i=1}^n X_i - \mu \right|\right) = 0
+\underset{n \rightarrow +\infty}{\lim} P\left( \left| \frac{1}{n}\sum\limits_{i=1}^n X_i - \mu \right|\right) = 0
 $$
 :::
 
@@ -639,6 +695,15 @@ al \@ref(thm:tlc) se debe considerar otros resultados asociados a desigualdades 
 
 El siguiente teorema es de gran ayuda para estimar la tasa de convergencia del resultado anterior
 \@ref(thm:tlc).
+
+::: {.theorem #tdinver name="Inversion"}
+Sea $\varphi$ la función característica de la distribución de probabilidad $F$ de una variable 
+aleatoria $X$. Si $x,y \in \R$ son dos puntos de continuidad de la distribución $F$, then
+$$
+F( y ) - F( x ) = \frac{1}{2\pi} \underset{c \rightarrow +\infty}{\lim} \int\limits_{-c}^c 
+\frac{\exp(-itx) - \exp(-ity)}{it} \varphi( t )\ dt
+$$
+:::
 
 <!------------------------------------------------------------------------------------------------->
 ## Desigualdades de concentración 
@@ -709,20 +774,83 @@ e <- unlist( lapply( seq( 1, 9, 1 ), FUN = function( n ) seq( 9, 1, -1 ) * 10^{-
 n <- ceiling( -log( delta / 2 ) / ( 2 * e^2 ) )
 ```
 
-```{r l3t1, echo = TRUE, results = 'asis'}
+```{r l3t1, echo = TRUE, results = 'asis', out.width='100%' }
 dt <- data.table( delta = delta, e, n, d = 8 * n / 1024^3 )
 dt %>%
   kable(
+    label = NA,
     caption = 'Error versus número de simulaciones',
     row.names = FALSE,
     col.names = c( "$\\delta$", "$\\varepsilon$", "$n$", "GB" ),
     align = 'llrr',
     digits = c( 10, 20, 0, 10 ),
     format.args = list( big.mark = ',', decimal.mark = '.', scientific = FALSE ),
-    escape = FALSE ) %>%
-  kable_classic( font_size = 14, full_width = FALSE, html_font = "Cambria" ) %>%
-  scroll_box( width = "1050px", height = "500px" )
+    escape = FALSE,
+    centering = TRUE ) %>%
+  kable_classic( font_size = 14, full_width = FALSE, html_font = "Cambria", position = 'center' ) %>%
+  scroll_box( width = "100%", height = "500px" )
 ```
+
+::: {.example #l3ex1}
+En este caso en particular estudiaremos la velocidad de convergencia del método resultante del 
+teorema del límite central \@ref(thm:tlc). Generaremos una simulación aleatoria de la suma
+agregada $S_n$ y mostrar
+```{r l3c10}
+m <- 600
+n <- 6000
+u <- 4
+s <- 2
+
+set.seed( 5143829 )
+X <- lapply( 1:m, FUN = function( j ) rlnorm( n, meanlog = u, sdlog = s ) )
+S <- lapply( X, FUN = function( x ) cumsum( x ) )
+ES <- sapply( 1:n, FUN = function( i ) mean( sapply( 1:m, FUN = function( j ) S[[ j ]][ i ] ) ) )
+VS <- sapply( 1:n, FUN = function( i ) var( sapply( 1:m, FUN = function( j ) S[[ j ]][ i ] ) ) )
+NS <- lapply( S, FUN = function( s ) ( s - ES ) / sqrt( abs( VS ) ) )
+
+z <- seq( -5, 5, length.out = 200 )
+FSn <- lapply( 1:n, FUN = function( i ) ecdf( sapply( 1:m, FUN = function( j ) NS[[ j ]][ i ] ) )( z ) )
+phi <- pnorm( z )
+D <- sapply( FSn, FUN = function( Fn ) max( abs( Fn - phi ) ) )
+```
+
+```{r l3g1, out.width='80%', out.height='400px', fig.align='center', class.source = 'fold-hide'}
+plt <- ggplot() +
+  geom_line( aes( x = 1:n, y = D ), colour = 'darkred', linewidth = 0.5 ) + 
+  scale_x_continuous( breaks = seq( 0, n, 500 ), limits = c( 1, n ), expand = c( 0, 0 ) ) +
+  scale_y_continuous( breaks = seq( 0, 0.5, length = 11 ), limits = c( 0, 0.5 ), expand = c( 0, 0 ) ) +
+  xlab( TeX( "$n$" ) ) + 
+  ylab( TeX( "$D_n$" ) ) + 
+  theme_bw()
+plot( plt )
+```
+
+```{r l3g2, out.width='80%', out.height='400px', fig.align='center', class.source = 'fold-hide'}
+dat <- NULL
+for ( k in 1:n ) {
+  dat <- rbindlist( list( dat, data.table( z = z, n = as.factor( k ), FSn = FSn[[ k ]] ) ) )
+}
+cols <- wes_palette( n, name = "BottleRocket2", type = "continuous" )
+
+plt <- ggplot( ) +
+  geom_step( data = dat, aes( x = z, y = FSn, group = n, colour = n ), linewidth = 0.07 ) +
+  geom_line( aes( x = z, y = phi, colour = 'olivedrab3' ), linewidth = 1 ) +
+  scale_color_manual( values = c( cols, 'olivedrab3' ) ) +
+  scale_x_continuous( breaks = seq( -5, 5, 1 ),
+                      labels = formatC( seq( -5, 5, 1 ), digits = 1, format = 'f' ),
+                      limits = c( -5, 5 ), 
+                      expand = c( 0, 0 ) ) +
+  scale_y_continuous( breaks = seq( 0, 1, length = 11 ), 
+                      labels = formatC( seq( 0, 1, length = 11 ), digits = 2, format = 'f' ), 
+                      limits = c( 0, 1 ), 
+                      expand = c( 0, 0 ) ) +
+  xlab( TeX( "$z$" ) ) + 
+  ylab( TeX( "$F_n$" ) ) + 
+  theme_bw() +
+  theme( legend.position = "none" )
+plot( plt )
+```
+:::
 
 <!------------------------------------------------------------------------------------------------->
 ::: {.theorem #dchernoff name="Desigualdad de Chernoff"}
@@ -898,7 +1026,7 @@ $$
 
 Como se puede observar se superponen cada una de las distribuciones la discretización $f_k$ y la 
 calculada con inversión de la transformada de Fourier discreta.
-```{r l3g1, out.width='80%', out.height='400px', fig.align='center', class.source = 'fold-hide'}
+```{r l3g3, out.width='80%', out.height='400px', fig.align='center', class.source = 'fold-hide'}
 e <- f - IFf
 eb <- max( abs( e ) )
 
@@ -909,103 +1037,12 @@ plt <- ggplot() +
   ylab( TeX( "$f(x)$" ) ) + 
   theme_bw()
 plot( plt )
+```
 
+```{r l3g4, out.width='80%', out.height='400px', fig.align='center', class.source = 'fold-hide'}
 plt <- ggplot() +
   geom_histogram( aes( x = e, y = after_stat( density ) ), bins = 50, fill = 'grey50', colour = 'dodgerblue3' ) + 
   geom_density() +
-  scale_x_continuous( breaks = seq( -eb, eb, length = 10 ), 
-                      labels = label_scientific( digits = 2 ),
-                      limits = c( -eb, eb ) ) +
-  scale_y_continuous( labels = label_scientific( digits = 2 ) ) +
-  ylab( TeX( "$e$" ) ) + 
-  theme_bw()
-plot( plt )
-```
-
-<!------------------------------------------------------------------------------------------------->
-### Uso de la transformada de Fourier
-
-Esta aproximación es realmente de utilidad cuando se tiene que determinar la densidad de la 
-suma $S_n = \sum\limits_{i=1}^n X_i$ de varias variables aleatorias 
-$X_1 \rightsquigarrow f_{X_1}, \ldots, X_n \rightsquigarrow f_{X_n}$ que son independientes, pero 
-que podrían ser o no idénticamente distribuidas. Claramente la densidad de probabilidad de $S$
-está dada por la convolución de las densidades de probabilidad de cada una de las variables 
-aleatorias $X_1, \ldots, X_n$.
-$$
-f_S = f_{X_1} \star \cdots \star f_{X_n}
-$$
-sin embargo esta convolución implica el realizar una interacción en $n$-dimensiones.
-
-Si las las variables aleatorias $\{X_i\}$ son independientes sabemos además que 
-$$
-\Fo\left( f_S \right) = \prod\limits_{i=1}^n \Fo\left( f_{X_i} \right)
-$$
-
-Por otra parte, con lo anterior sabemos que es posible aproximar numéricamente cada $\Fo\left( f_{X_i} \right)$ 
-con una serie $\{\hat{f}_{i,j}\}$ dada por la discretización de la transformada de Fourier y su aplicación 
-sobre la discretización de la densidad de probabilidad $f_{i,k} = f_{X_i}( s_k )$. Por tanto, para cada 
-de las densidades con $i \in \{1, \ldots, n\}$ y $\omega_j = \frac{b-a}{N}$, se puede calcular de 
-forma separada las aproximaciones a cada una de las transformadas
-$$
-\Fo( f_{X_i} )\left( \omega_j \right)  
-\approx \hat{f}_{i,j} 
-= h \exp\left( -2\pi i \omega_j a \right) \left( \DFT\left[ \{f_{i,k}\} \right]  \right)_j
-$$
-
-con lo anterior, también, se puede realizar una aproximación a la trasformada de Fourier 
-$\Fo\left( f_S \right)$ de la densidad de probabilidad que buscamos $f_S$, como el producto de sus 
-transformadas de Fourier.
-$$
-\Fo( f_{S} )\left( \omega_j \right)  
-= \prod\limits_{i=1}^n \Fo\left( f_{X_i} \right)\left( \omega_j \right)
-\approx \prod\limits_{i=1}^n \hat{f}_{i,j}
-$$
-
-utilizando la inversión de la transformada de Fourier discreta podemos calcular una serie que 
-precisamente aproxima a la densidad $f_S$
-$$
-\{ f_{S}( s_k ) \}
-\approx \Re\left( \DFT^{-1}\left[ \left\{ \frac{1}{h} \exp\left( 2\pi i \omega_j a \right) 
-\prod\limits_{i=1}^n \hat{f}_{i,j} \right\} \right] \right)
-$$
-
-```{r l3c9}
-N <- 10000
-set.seed(94312)
-alpha <- sample( x = seq( 1, 20, length = 40 ), size = 50, replace = TRUE )
-theta <- 3
-b <- sum( sapply( alpha, FUN = function( a ) qgamma( 0.9999, shape = a, scale = theta ) ) )
-a <- 0
-h <- ( b - a ) / N
-n <- 0:N
-s <- a + n * h
-w <- n / ( b - a )
-eta <- h * exp( -2 * pi * 1i * w * a )
-f <- lapply( alpha, function( a ) sapply( s, FUN = function( sk ) dgamma( sk, shape = a, scale = theta ) ) )
-Ff <- lapply( f, FUN = function( fi ) eta * fft( fi ) )
-FS <- rep( 1, N + 1 )
-for ( i in 1:length( f ) ) {
-  FS <- FS * Ff[[ i ]]
-}
-IFfS <- fft( eta^(-1) * FS, inverse = TRUE ) / ( N + 1 )
-fS <- Re( IFfS )
-fSx <- sapply( s, FUN = function( sk ) dgamma( sk, shape = sum( alpha ), scale = theta ) )
-```
-
-```{r l3g2, out.width='80%', out.height='400px', fig.align='center', class.source = 'fold-hide'}
-e <- fS - fSx
-eb <- max( abs( e ) )
-
-plt <- ggplot() +
-  geom_line( aes( x = s, y = fSx ), colour = 'darkred', size = 1 ) + 
-  geom_point( aes( x = s, y = fS ), colour = 'olivedrab3', size = 0.25 ) + 
-  xlab( TeX( "$x$" ) ) + 
-  ylab( TeX( "$f_{S}(x)$" ) ) + 
-  theme_bw()
-plot( plt )
-
-plt <- ggplot() +
-  geom_histogram( aes( x = e, y = after_stat( density ) ), bins = 50, fill = 'grey50', colour = 'dodgerblue3' ) + 
   scale_x_continuous( breaks = seq( -eb, eb, length = 10 ), 
                       labels = label_scientific( digits = 2 ),
                       limits = c( -eb, eb ) ) +

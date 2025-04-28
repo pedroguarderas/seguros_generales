@@ -13,7 +13,10 @@ Hemos creado estas notas con la motivación de brindar una referencia de la mate
 aprendizaje a los estudiantes, tratando de conjugar la parte teórica del curso con ejemplos prácticos 
 implementados utilizando el lenguaje R.
 
-En el estado actual, no son aún definitivas, están sujetas a mejoras y correcciones.
+Este trabajo se ha realizado en colaboración entre Leonardo Vélez y Pedro Guarderas. La motivación
+y objetivo para haber creado las presentes notas es llegar a generar un buen material de aprendizaje 
+y referencia. 
+
 Sin embargo, será un placer para nosotros que las lean, critiquen y en especial nos hagan llegar
 sus observaciones y posibles mejoras.
 

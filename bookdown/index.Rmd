@@ -30,6 +30,7 @@ csl: electronic-journal-of-statistics.csl
 ---
 
 <!------------------------------------------------------------------------------------------------->
+\newcommand{\C}{\mathbb{C}}
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\Z}{\mathbb{Z}}

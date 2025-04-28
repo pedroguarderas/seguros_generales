@@ -4,35 +4,42 @@
 <!------------------------------------------------------------------------------------------------->
 ## Notación matemática
 
-1. $\N$ el conjunto de los números naturales $\N = \{0,1,\ldots,\}$
+1. $\N$ el conjunto de los números naturales $\N = \{0,1,2,\ldots,\}$
 
-2. $\R$ el conjunto de los números reales
+2. $\N^*$ el conjunto de los números naturales positivos $\N^* = \N \setminus \{0\} = \{1,2,3,\ldots,\}$
 
-3. $\overline{\R} = \R \cup \{ +\infty \} \cup \{ -\infty \}$ el conjunto de los 
+3. $\Z$ el conjunto de los números enteros, $\Z = \{\ldots,-2,-1,0,1,2, \ldots \}$
+
+4. $\R$ el conjunto de los números reales
+
+5. $\R_+$ el conjunto de los números reales no negativos $\R_+ = \{ x \in \R \mid x \geq 0 \}$
+
+6. $\C$ el conjunto de los números complejos, $\C = \R \oplus i \R$
+
+7. $\overline{\R} = \R \cup \{ +\infty \} \cup \{ -\infty \}$ el conjunto de los 
 reales extendido incluyendo los infinitos
 
-4. $x \approx y$ indica que el valor $y$ es aproximado al valor $x$
+8. $x \approx y$ indica que el valor $y$ es aproximado al valor $x$
 
-5. $f: X \longrightarrow Y$ la función que toma valores en $X$ y entrega valores en $Y$
+9. $f: X \longrightarrow Y$ la función que toma valores en $X$ y entrega valores en $Y$
 
-6. $\sum\limits_{k=0}^n x_k$ es la suma de los elementos $x_0,\ldots,x_n$ de una lista
+10. $\sum\limits_{k=0}^n x_k$ es la suma de los elementos $x_0,\ldots,x_n$ de una lista
 
-7. $[ a, b ] = \left\{ x \in \R \mid x \geq a \land x \leq b \right\}$ intervalo cerrado para
+11. $[ a, b ] = \left\{ x \in \R \mid x \geq a \land x \leq b \right\}$ intervalo cerrado para
 cualquier $a,b \in \overline{\R}$
 
-8. $(a,b) = \left\{ x \in \R \mid x > a \land x < b \right\}$ intervalo abierto para 
+12. $(a,b) = \left\{ x \in \R \mid x > a \land x < b \right\}$ intervalo abierto para 
 cualquier $a,b \in \overline{\R}$
 
-9. $\{x_n\}_{n\in\N} = \left\{ x_n \in X \mid n \in \N \right\}$ secuencia en 
+13. $\{x_n\}_{n\in\N} = \left\{ x_n \in X \mid n \in \N \right\}$ secuencia en 
 el conjunto $X$, no es más que una función de $\N$ con valores en $X$
 
-10. $\underset{x \rightarrow y}{\lim} f(x) = a$ límite de la función $f(x)$ cuando $x$ tiende a $y$.
+14. $\underset{x \rightarrow y}{\lim} f(x) = a$ límite de la función $f(x)$ cuando $x$ tiende a $y$.
 
-11. $\inf A$ es la mayor de las cotas inferiores de $A$.
+15. $\inf A$ es la mayor de las cotas inferiores de $A$.
 
-12. $\sup A$ es la menor de las cotas superiores de $A$.
+16. $\sup A$ es la menor de las cotas superiores de $A$.
 
-13. $\Z$ el conjunto de los números enteros.
 
 <!------------------------------------------------------------------------------------------------->
 ## Consideraciones de programación en R

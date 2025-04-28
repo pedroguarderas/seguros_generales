@@ -59,7 +59,7 @@ F_S( s )
 & = & \sum\limits_{n=0}^{+\infty} P\left( \sum\limits_{i=1}^n X_i \leq s\ \middle|\ N = n \right) P( N = n )
 \qquad \text{propiedades de la probabilidad condicional} \\
 & = & \sum\limits_{n=0}^{+\infty} \int\limits_{\left\{\sum\limits_{i=1}^n x_i \leq s\right\}} dF_n( x_1, \ldots, x_n )\ p_n
-\qquad \text{$F_n$ es la distribución conjunta de $X_1, \ldots, X_n$}
+\qquad \text{$F_n$ es la distribución conjunta de $X_1, \ldots, X_n$ dado $N = n$} 
 \end{eqnarray*}
 $$
 la última expresión es importante de retener, nos dice que para comprender el comportamiento de 
@@ -74,13 +74,13 @@ asociados a la severidad presentan un verdadero reto estadístico y computaciona
 atrás se desarrolló unos nuevos algoritmos para calcular estos términos @aep_algo, @gaep_algo.
 
 <!------------------------------------------------------------------------------------------------->
-## Modelo individual
+## Modelo individual {#sec:modind}
 En el modelo de riesgos individuales consideramos que el número de siniestros que se producirán es
 conocido, por ejemplo puede ser a lo sumo el tamaño de la población asegurada, en tal caso la
 variable aleatoria $N$ pasa a ser una constante, que representaremos por $n$. De esta forma, la
 severidad total puede ser fácilmente representada por: 
 $$
-  S = \sum\limits_{i=1}^n X_i
+S = \sum\limits_{i=1}^n X_i
 $$
 
 La hipótesis más usual que sostiene a este modelo es la indenpendencia entre cada uno de los
@@ -170,10 +170,14 @@ $f_{X_1}, \ldots, f_{X_n}$ o distribuciones de probabilidad $F_{X_1}, \ldots, F_
 4. Para cada $i \in \{1, \ldots, m\}$ se calcula la severidad total para la muestra $i$, 
 $S_i = \sum\limits_{j=1}^n X_{i,j}$
 
-::: {.example #l3ex1}
+::: {.example #l5ex1}
 El siguiente código ejemplifica el algoritmo anterior, donde se asume que cada variable aleatoria de 
 severidad $X_i$ sigue una ley log-normal $LN( \mu_i, \sigma_i )$, de parámetros $\mu_i, \sigma_i$, 
-para $i \in \{1,\ldots, n\}$.
+para cada $i \in \{1,\ldots, n\}$. El reclamo total $S = \sum\limits_{i=1}^n X_i$ sigue una ley 
+de probabilidad que estará dada por la convolución de cada una de las leyes de probabilidad de 
+cada reclamo $X_i$, sin embargo estas leyes en este ejemplo son log-normales y no se conoce una 
+forma explícita, analítica para la convolución de log-normales. Por tal razón, debemos aproximar
+la distribución de probabilidad de $F_S$ a partir de la distribución empírica.
 ```{r l5c1}
 set.seed(94312)
 
@@ -192,19 +196,19 @@ X <- lapply( 1:m, FUN = function( i ) sapply( 1:n, FUN = function( j ) rlnorm( 1
 # 4. simulación de severidad total
 S <- sapply( X, FUN = function( x ) sum( x ) )
 ```
-:::
 
-En el ejemplo anterior es de notar que la densidad de probabilidad de la severidad $S$ resulta de la
+Con ya lo mencionamos en este ejemplo densidad de probabilidad de la severidad $S$ resulta de la
 convolución de las $n$ densidades individuales $f_S = f_{X_1} \star \cdots \star f_{X_n}$, la cual
 no presenta una forma analítica conocida. 
 
-De la imposibilidad anterior se se puede ver la utilidad de trabajar con la simulación aleatoria de 
-la variable $S$. Se puede estimar la distribución acumulada de probabilidad $F_S$ a partir 
-de la distribución empírica $F_m$ de la muestra, con:
+De la imposibilidad anterior, como ya mencionamos se puede ver la utilidad de trabajar con la 
+muestra aleatoria de la variable $S$. De esta manera poder estimar la distribución acumulada de 
+probabilidad $F_S$ a partir de la distribución empírica $F_m$ generada con la muestra $\{S_i\}$.
 $$
 F_S( s ) \approx F_m( s ) = \frac{1}{m} \sum\limits_{i=1}^m \mathbf {1}_{(-\infty,s]}( S_i )
 $$
-el resultado de acotación de \@ref(thm:ddkw) nos da un criterio de convergencia de $F_m$ a $F_S$
+el resultado de concentración \@ref(thm:ddkw) es más nos brinda un criterio de convergencia de 
+$F_m$ a $F_S$
 
 Para construir $F_m$ en R, se puede utilizar la función ya empaquetada `ecdf` (empirical cumulative
 distribution function).
@@ -256,17 +260,18 @@ $$
 \sum\limits_{i=1}^N s_{i} \left( F_m( s_{i+1} ) - F_m( s_{i} ) \right) & = & `r formatC( EmS, digits = 4, format = 'f' )`
 \end{eqnarray*}
 $$
+:::
 
 Lo bueno de poseer una buena aproximación a la distribución acumulada de una variable aleatoria, es 
 que podemos calcular algunos otros valores de importancia relacionados a la variable aleatoria y
 no tan solo utilizar medidas de tendencia central. Sin embargo, para que esta aproximación sea 
 útil se requiere reducir el error de probabilidad \@ref(thm:ddkw).
 
-::: {.example #l3ex2}
+::: {.example #l5ex2}
 Podemos considerar el caso sencillo donde el valor posible de severidad es determinista, es decir
 para cada póliza $i\in \{1,\ldots,n\}$, el valor de severidad probable es único $M > 0$ si en caso 
-se da un evento $A_i$, esto lo podemos expresar como $X_i = M \mathbf{1}_{A_i}$ es constante. Así, pérdida
-total está dada por:
+se da un evento $A_i$, esto lo podemos expresar como $X_i = M \mathbf{1}_{A_i}$ es constante. Así, 
+pérdida total está dada por:
 $$ 
 S = \sum\limits_{i=1}^n X_i = \sum\limits_{i=1}^n M \mathbf{1}_{A_i} 
 $$
@@ -287,7 +292,7 @@ $$
 :::
 
 <!------------------------------------------------------------------------------------------------->
-## Modelo colectivo
+## Modelo colectivo {#sec:modcol}
 
 El modelo colectivo de riesgo considera un número de reclamos descritos por una variable aleatoria 
 discreta $N$. Los reclamos corresponden a un número de pólizas en un periodo específico, el valor 
@@ -302,8 +307,8 @@ S =
 \end{array}
 \right.
 $$
-o de forma más compacta se tan solo utilizar la igualdad $S = \sum\limits_{i=1}^N X_i$, donde se 
-asume que la suma da $0$ si $N = 0$.
+o de forma más compacta se puede tan definir $S = \sum\limits_{i=1}^N X_i$, donde se asume que la 
+suma da $0$ si el número de elementos en la suma $N = 0$.
 
 El valor esperado del total de reclamos $S$, está dado por:
 $$
@@ -393,7 +398,7 @@ mediante la siguiente suma $S_i = \sum\limits_{j=1}^{N_i} X_{i,j}$.
 En el lenguaje de programación R, este método de simulación puede ser fácilmente implementado, 
 como ya lo hemos realizado, utilizando las funciones de aplicación vectorial `sapply` y `lapply`. 
 
-::: {.example #l3ex3}
+::: {.example #l5ex3}
 Consideramos el caso de un modelo colectivo para el cuál el conteo de siniestros 
 $N \rightsquigarrow Pois( \lambda )$ y la distribución de cada uno de los reclamos 
 $\{X_i\}_{i\in \N}$, está dada por la misma distribución de probabilidad 
@@ -463,7 +468,7 @@ $$
 \end{eqnarray*}
 $$
 
-::: {.example #l3ex3}
+::: {.example #l5ex4}
 Hacemos uso del algoritmo de simulación, pero bajo la consideración anterior donde el conteo 
 de siniestros $N \rightsquigarrow Bin( n, p )$, en algunos casos se puede considerar $n$ como el 
 número de pólizas vendidas, esto supone que solo se presenta un reclamo por póliza. Por su parte los
@@ -534,56 +539,101 @@ el perfil de riesgo de cada cliente. Para su selección se suele utilizar alguno
 económico, financiero, legal y estadístico.
 
 <!------------------------------------------------------------------------------------------------->
-## Proceso estocástico de reclamos totales
-
-Hasta el momento no hemos considerado que los reclamos se producen en el tiempo, que cada reclamo
-está bien vinculado al tiempo; es más podemos identificar algunos instantes en el tiempo que le 
-corresponde, tenemos así el tiempo cuando se suscita el siniestro o tiempo de ocurrencia, el tiempo 
-de aviso cuando se comunica al asegurador el siniestro y un tiempo de pago. Los dos últimos
-no son directos asociados al evento del siniestro sino están asociados a otras variables que pueden
-afectar la demora para comunicar un siniestro por parte del asegurado y la demora para cancelarlo
-por parte del asegurador.
-
-Así por tanto si tenemos una secuencia de siniestros $\{X_n\}_{n\in\N^*}$, estos los podemos 
-considerar ordenados en el tiempo conforme han venido presentándose en instantes 
-$T_1 \leq \cdots \leq T_n \leq \cdots$, es decir se le asocia a los reclamos $\{X_n\}$ la secuencia 
-de los **tiempos de arribo** $\{T_n\}_{n\in\N^*}$, donde $T_1 > 0$ y $T_{n+1} \geq T_n$, para 
-cualquier $n \in \N$. Ciertamente, es de esperar que los tiempos de arribo sean variables 
-aleatorias y están asociados a la frecuencia $N$ en un periodo dado, ya que $N$ cuenta los tiempos
-de arribo hasta un tiempo dado, transformamos así a $N$ en una variable aleatoria dependiente del 
-tiempo, en lo que se conoce como un **proceso estocástico**.
-$$
-N( t )
-= \#\left\{ k \in \N\ \middle|\ T_k \leq t \right\} 
-= \sum\limits_{k=0}^{+\infty} \mathbf{1}_{(-\infty,t]}\left( T_k \right)
-$$
-
-Inmediatamente de este razonamiento, resulta que los reclamos totales también se transforman en 
-proceso estocástico.
-$$
-S( t ) = \sum\limits_{i=1}^{N( t )} X_i
-$$
-
-Además, se pueden identificar las variables aleatorias de **tiempos entre arribos**
-$$
-W_n = T_n - T_{n-1},\quad \forall n \in \N
-$$
-tomando $T_0 = 0$.
-
-<!------------------------------------------------------------------------------------------------->
 ## Aplicación del deducible
 
 En muchas ocasiones según las condiciones de los contratos de seguro y el apetito de riesgo del 
-asegurador, se configura funciones deducibles sobre los reclamos.
+asegurador, se configura funciones deducibles sobre los reclamos. El objetivo de aplicar un 
+deducible es evitar valores de reclamo en determinados rangos que no están acorde a las 
+configuraciones y estructuración de productos de seguro. Por ejemplo: se puede colocar un deducible
+para evitar el pago de valores muy pequeños de reclamos, cuya atención incluso puede implicar
+costos operativos o administrativos mayores al valor mismo de los reclamos, ante esta situación 
+se coloca una cota mínima para que de esta forma el asegurado se haga cargo por su cuenta por 
+estos valores menores.
 
-```{r l5c7}
+Es usual colocar mínimos en las colas de la distribución de reclamos, evitando así valores muy 
+pequeños o valores muy grandes, pero no sería sustentable, ni financieramente o económicamente, el 
+colocar un deducible justo donde se presenta la mayor parte de los valores de reclamos. Desde
+la perspectiva de un asegurado, ¿De qué serviría adquirir una póliza que no cubre precisamente los
+siniestros más usuales?, esta no sería una póliza apetecible en el mercado y por otra parte un 
+producto difícil de comercializar.
+
+De forma algo más puntual, un **deducible** es una función $D : \R \longrightarrow \R_+$, tal que 
+para toda variable aleatoria $X$, se satisface la siguiente desigualdad $D( X ) \leq X$.
+
+1. Para evitar pérdidas pequeñas se suele configurar la función deducible $D( X ) = \max( X - d, 0 )$, 
+en este caso si $X \rightsquigarrow F_X$, entonces $Z = D( X ) \rightsquigarrow F_Z( z )$, donde 
+$F_Z( z ) = \mathbf{1}_{[d,+\infty)}( z ) F_X( z + d )$.
+
+2. Para prevenir los excesos de pérdida (stop loss) $D( X ) = \min( X, M )$, en este caso si 
+$X \rightsquigarrow F_X$, entonces $Z = D( X ) \rightsquigarrow F_Z( z )$, donde 
+$F_Z( z ) = \mathbf{1}_{(-\infty,M)}( z ) F_X( z ) + \mathbf{1}_{[M,+\infty)}( z )$.
+
+3. Caso mixto para evitar pérdidas pequeñas y exceso de pérdida $D( X ) = \min( \max( X - d, 0 ), M )$, 
+en este caso si $X \rightsquigarrow F_X$, entonces $Z = D( X ) \rightsquigarrow F_Z( z )$, donde 
+$F_Z( z ) = \mathbf{1}_{[a,M)}( z ) F_X( z + d ) + \mathbf{1}_{[M,+\infty)}( z )$.
+
+4. En otros casos más elaborados se segmenta el riesgo cubierto, al existir variables explicativas
+de la naturaleza del riesgo $Y_1, \ldots, Y_m$, las cuales pueden tomar valores en un conjunto $E$
+solo se toma un subconjunto de valores posibles $A\subset E$, para los cuales es válida la cobertura.
+Así si un reclamo $X$ se explica o caracteriza por las variables anteriores se configura el 
+deducibles $D( X ) = \mathbf{1}_{A}\left( Y_1, \ldots, Y_m \right) X$.
+
+Un ejemplo del anterior deducible se suele dar en el caso de seguros de salud, donde se cubre 
+ciertos tipos de enfermedades, usualmente se suele evitar las enfermedades de tipo catastrófico 
+que estén ya presentes, en otros productos se evita los gastos odontológicos, etc.
+
+Los deducibles, pueden ser configurados de forma genérica para todos los asegurados o incluso 
+de forma personalizada por asegurado, según los productos que estos han adquirido. En general, al 
+emplear deducibles para cada uno de los reclamos individuales, el reclamo total $S$ se ve modificado, 
+y toma la forma:
+$$
+S = \sum\limits_{i=1}^{N} D_i\left( X_i \right)
+$$
+Hay casos donde se aplica el deducible al grupo de siniestros que presenta una póliza o grupo de 
+pólizas. Esto precisamente se lo puede ver cuando se utiliza un modelo mixto de pérdida.
+$$
+S = \sum\limits_{i=1}^n D_i\left( \sum\limits_{n=1}^{N_i} X_{i,j} \right)
+$$
+
+Este caso se suele presentar en los productos que partir de una suma parcial de reclamos individuales,
+el deducible comienza a regir.
+
+<!------------------------------------------------------------------------------------------------->
+### Algoritmo de simulación
+Presentamos una adaptación sencilla de los algoritmos de simulación anterior, incluyendo el caso 
+que se tenga un deducible aplicado de forma uniforme a todas las pólizas. 
+
+1. Seleccionar el número de simulaciones $m$,
+
+2. Se genera una muestra de tamaño $m$ de variables $N_1, \ldots, N_m$ con ley $f_N$,
+
+3. Se genera para cada $i \in \{1,\ldots,m\}$ una muestra de tamaño $N_i$ de variables aleatorias 
+$X_{i,1}, \ldots X_{i,N_i}$ con ley $f_X$,
+
+4. Se establece la función deducible $D : \R \longrightarrow \R_+$ y los parámetros y condiciones
+necesarias para su definición,
+
+5. Se calcula los reclamos totales utilizando el deducible $S_1, \ldots, S_m$ para cada simulación 
+$i = \{1, \ldots, m\}$, mediante la siguiente suma $S_i = \sum\limits_{j=1}^{N_i} D\left( X_{i,j} \right)$,
+
+6. Para la determinación de varios estadísticos se puede utilizar la simulación generada $\{S_i\}$
+y generar la distribución de probabilidad empírica $F_m$.
+
+::: {.example #l5ex6}
+Consideremos el caso de un modelo colectivo de pérdida donde el proceso de conteo 
+$N \rightsquigarrow Pois( \lambda )$ y la sucesión $\{X_i\}$ de reclamos individuales se considera 
+conformada por variables i.i.d, con distribución de probabilidad $LN( \mu, \sigma )$. El deducible 
+a aplicar será una función mixta de la forma $D( X ) = \min( \max( X - d, 0 ), M )$.
+
+```{r l5c9}
+
 # 1. selección de simulaciones
 m <- 1e4
 
 # 2. especificación de los parámetros para las distribuciones
-u <- 5
-s <- 2
-l <- 3
+u <- 2
+s <- 3
+l <- 6
 
 # 3. se especifica la función deducible
 D <- function( x, d, M ) {
@@ -597,128 +647,589 @@ N <- rpois( n = m, lambda = l )
 X <- lapply( N, FUN = function( n ) rlnorm( n, meanlog = u, sdlog = s ) )
 
 # 6. se aplica el deducible a los reclamos
-DX <- lapply( X, FUN = function( x ) sapply( x, FUN = function( y ) D( y, 10, 1000 ) ) )
+d <- 100
+M <- 1000
+DX <- lapply( X, FUN = function( x ) sapply( x, FUN = function( y ) D( y, d, M ) ) )
 
 # 7. reclamo total, agregación por cada simulación
 S <- sapply( DX, FUN = function( x ) ifelse( length( x ) == 0, 0, sum( x, na.rm = TRUE ) ) )
 ```
 
-$S_1, \ldots, S_m \rightsquigarrow F_S$
-```{r l5c8}
-FS <- seq( 0, 1, 0.01 )
-Sq <- quantile( S, probs = FS )
-ES <- mean( S )
-plot( Sq, FS, type = 's', col = 'darkgreen' )
-abline( v = ES, col = 'red' )
+Como ya se lo mencionó, utilizando la simulación $\{S_i\}$ podemos determinar la distribución de 
+probabilidad empírica $F_m$ que aproxima la distribución de $F_S$.
+```{r l5c10}
+FeS <- ecdf( S )
+s <- seq( 0, max( S ), length = 100 )
+Fes <- sapply( s, FUN = FeS )
 ```
 
-::: {.example #l3ex4}
-En este caso en particular estudiaremos la velocidad de convergencia del método resultante del 
-teorema del límite central \@ref(thm:tlc). Generaremos una simulación aleatoria de la suma
-agregada $S_n$ y mostraresmo s
-```{r l5c9}
-m <- 500
-n <- 1000
-u <- 4
-s <- 2
-X <- lapply( 1:m, FUN = function( j ) rlnorm( n, meanlog = u, sdlog = s ) )
-EX <- exp( u + 0.5 * s^2 )
-SDX <- sqrt( ( exp( s^2 ) - 1 ) * exp( 2 * u + s^2 ) )
-S <- lapply( X, FUN = function( x ) cumsum( x ) )
-ES <- sapply( 1:n, FUN = function( i ) mean( sapply( 1:m, FUN = function( j ) S[[ j ]][ i ] ) ) )
-VS <- sapply( 1:n, FUN = function( i ) var( sapply( 1:m, FUN = function( j ) S[[ j ]][ i ] ) ) )
-NS <- lapply( S, FUN = function( s ) ( s - ES ) / sqrt( abs( VS ) ) )
-z <- seq( -4, 4, length.out = 100 )
-FSn <- lapply( 1:n, FUN = function( i ) ecdf( sapply( 1:m, FUN = function( j ) NS[[ j ]][ i ] ) )( z ) )
-D <- sapply( FSn, FUN = function( Fn ) max( abs( Fn - pnorm( z ) ) ) )
+```{r l5g2, out.width='80%', out.height='500px', fig.align='center', class.source = 'fold-hide'}
+Smax <- max( S )
 
-C <- 0.015
-# C <- 1 / sqrt( 2 * pi )
-rho <- exp( 3 * u + 3^2 * s^2 / 2 )
-Bn <- C * rho / ( SDX^3 * sqrt( 1:n ) )
-
-plot( 1:n, D, pch = 16, cex = 0.5, type = 'l', lwd = 2, lty = 1, ylim = c( 0, 0.5 ), col = 'royalblue4' )
-points( 1:n, Bn, type = 'l', lty = 1, col = 'red' )
+plt <- ggplot( ) +
+  geom_step( aes( x = s, y = Fes, group = m, colour = 'red' ), linewidth = 1 ) +
+  geom_vline( xintercept = c( d, M ), colour = 'olivedrab3' ) +
+  scale_x_continuous( breaks = seq( 0, Smax, length = 11 ),
+                      labels = formatC( seq( 0, Smax, length = 11 ), digits = 2, format = 'f' ), 
+                      limits = c( 0, Smax ), 
+                      expand = c( 0, 0 ) ) +
+  scale_y_continuous( breaks = seq( 0, 1, length = 11 ),
+                      labels = formatC( seq( 0, 1, length = 11 ), digits = 2, format = 'f' ), 
+                      limits = c( 0, 1 ), 
+                      expand = c( 0, 0 ) ) +
+  xlab( TeX( "$s$" ) ) + 
+  ylab( TeX( "$F_m( s )$" ) ) + 
+  theme_bw() +
+  theme( legend.position = "none" )
+plot( plt )
 ```
 :::
-
-
-```{r l5c10}
-l <- 3
-n <- 300
-dt <- rexp( n = n, rate = 1 / l )
-t <- c( 0, cumsum( dt ) )
-dN <- sapply( dt, FUN = function( w ) rpois( 1, lambda = l * w ) )
-N <- c( 0, cumsum( dN ) )
-sh <- 3
-rt <- 2
-X <- lapply( dN, FUN = function( n ) rgamma( n, shape = sh, rate = rt ) )
-dS <- sapply( X, FUN = function( x ) sum( x ) )
-S <- c( 0, cumsum( dS ) )
-plot( t, N, type = 's' )
-plot( t, S, type = 's' )
-```
 
 <!------------------------------------------------------------------------------------------------->
 ## Algoritmo de Panjer
 
+El siguiente algoritmo es de especial interés para determinar la densidad de probabilidad $f_S$ del
+total de reclamos $S$. Se asume que el conteo de siniestro $N$ viene dado por alguna de las 
+distribuciones en la familia $(a,b,0)$ y los reclamos individuales son $\{X_i\}$ son i.i.d y 
+también independientes de $N$. En ese contexto podemos observar que para cualquier $s > 0$, tenemos:
+$$
+\begin{eqnarray*}
+f_S( s ) 
+& = & \sum\limits_{n=1}^{+\infty} p_n f_X^{\star n}( s ) \\
+& = & p_1 f_X( s ) + \sum\limits_{n=2}^{+\infty} p_n f_X^{\star n}( s ) \\
+& = & p_1 f_X( s ) + \sum\limits_{n=1}^{+\infty} p_{n+1} f_X^{\star n + 1}( s ) \\
+& = & p_1 f_X( s ) + \sum\limits_{n=1}^{+\infty} \left( a + \frac{b}{n+1} \right) p_{n} f_X^{\star n + 1}( s ) \\
+& = & p_1 f_X( s ) 
++ \sum\limits_{n=1}^{+\infty} p_{n} \int\limits_0^s \left( a + \frac{b y}{s} \right) f_X( y ) f_X^{\star n}( s - y )\ dy \\
+& = & p_1 f_X( s ) 
++ \int\limits_0^s \left( a + \frac{b y}{s} \right) f_X( y ) \sum\limits_{n=1}^{+\infty} p_{n} f_X^{\star n}( s - y )\ dy \\
+& = & p_1 f_X( s ) + \int\limits_0^s \left( a + \frac{b y}{s} \right) f_X( y ) f_S( s - y )\ dy
+\end{eqnarray*}
+$$
+cuando $s = 0$, la probabilidad se concentra en $0$, y por tanto $f_S( 0 ) = p_0$
+
+Como consecuencia del análisis anterior resulta la relación recurrente, la cual es precisamente
+explotada de forma numérica por el algoritmo de Panjer.
+$$
+f_S( s ) = p_1 f_X( s ) + \int\limits_0^s \left( a + \frac{b y}{s} \right) f_X( y ) f_S( s - y )\ dy,
+\qquad \forall s > 0
+$$
+
+Si se toma una discretización $0 = s_0 < s_1 < \cdots < s_n$ para aproximar la integral anterior
+$$
+f_S\left( s_k \right) 
+= p_1 f_X\left( s_k \right) + \sum\limits_{i=0}^{k-1} \left( a + \frac{b s_i}{s_k} \right) 
+f_X\left( s_i \right) f_S\left( s_{k-i} \right) \left( s_{i+1} - s_i \right)
+$$
+
+Al tomar un división uniforme para la malla utilizada para aproximar la integral, por ejemplo 
+$s_k = k h$, tenemos que: 
+$$
+f_S\left( s_k \right) 
+= p_1 f_X\left( s_k \right) + h \sum\limits_{i=0}^{k-1} \left( a + \frac{b i}{k} \right) 
+f_X\left( s_i \right) f_S\left( s_{k-i} \right)
+$$
+de donde resulta una forma bien conocida para el algoritmo de Panjer. sin embargo, es importante
+tener en cuenta que una malla de paso no constante puede ser mejor adaptada para realizar la 
+integral.
+
+::: {.example #l5ex7}
+Consideremos el caso para un reclamo total $S$ donde el conteo de los siniestros 
+$N \rightsquigarrow NBin( \alpha, p )$ y las severidades $\{X_i\}$ son i.i.d con distribución 
+$LN( \mu, \sigma )$. Utilizaremos el algoritmo de Panjer para aproximar la densidad de probabilidad
+de $f_S$ de $S$.
+```{r l5c11}
+n <- 9e4
+p <- 0.3
+alpha <- 3
+a <- 1 - p
+b <- ( 1 - p ) * ( alpha - 1 )
+p0 <- p^alpha
+u <- 5
+s <- 0.3
+xmax <- 5e3
+dist <- dlnorm
+
+pardist <- list( meanlog = u, sdlog = s )
+x <- seq( 0, xmax, length = n )
+N <- n - 1
+dx <- diff( x )
+fX <- sapply( x[-N], FUN = function( y ) do.call( dist, c( y, pardist ) ) )
+
+fS <- p0
+K <- 1
+p1 <- ( a + b ) * p0
+for ( k in 2:n ) {
+  fS <- c( fS, p1 * fX[ k ] + sum( ( a + b * x[ K ] / x[ k ] ) * fX[ K ] * fS[ rev( K ) ] * dx[ K ] ) )
+  K <- c( K, k )
+}
+
+set.seed( 32141223 )
+m <- 3e4
+N <- rnbinom( n = m, size = alpha, prob = p )
+X <- lapply( N, FUN = function( n ) rlnorm( n, meanlog = u, sdlog = s ) )
+S <- sapply( X, FUN = function( x ) sum( x, na.rm = TRUE ) )
+```
+
+El algoritmo de Panjer suele tener problemas para ajustarse en los primeros valores de la 
+densidad $f_S$, tal como lo muestra el gráfico a continuación. Incluso este efecto no se resuelve
+por completo al aumentar el refinamiento de la malla para aproximar la integral.
+```{r l5g3, out.width='80%', out.height='500px', fig.align='center', class.source = 'fold-hide'}
+fmax <- 0.03 * max( fS, na.rm = TRUE )
+
+plt <- ggplot( ) +
+  geom_histogram( aes( S, after_stat( density ) ), fill = 'dodgerblue4', colour = 'white', alpha = 0.6, bins = 50 ) +
+  geom_line( aes( x = x, y = fS ), colour = 'purple3', linewidth = 1 ) +
+  scale_x_continuous( breaks = seq( 0, xmax, length = 7 ),
+                      labels = formatC( seq( 0, xmax, length = 7 ), digits = 2, format = 'f' ), 
+                      limits = c( 0, xmax ), 
+                      expand = c( 0, 0 ) ) +
+  scale_y_continuous( breaks = seq( 0, fmax, length = 11 ),
+                      labels = formatC( seq( 0, fmax, length = 11 ), digits = 4, format = 'f' ),
+                      limits = c( 0, fmax ),
+                      expand = c( 0, 0 ) ) +
+  xlab( TeX( "$s$" ) ) + 
+  ylab( TeX( "$f_S$" ) ) + 
+  theme_bw() +
+  theme( legend.position = "none" )
+plot( plt )
+```
+:::
+
 <!------------------------------------------------------------------------------------------------->
 ## Estimación usando la transformada de Fourier
 
-Para el caso del modelo individual de riesgos podemos hacer uso de la siguiente estimación de la
-densidad de probabilidad de los reclamos totales $S$, utilizando la transformada de Fourier. En la 
-implementación numérica se utiliza la transformada de Fourier rápida (FFT).
+Se puede utilizar la transformada de Fourier para determinar la densidad de la suma 
+$S_n = \sum\limits_{i=1}^n X_i$ de varias variables aleatorias 
+$X_1 \rightsquigarrow f_{X_1}, \ldots, X_n \rightsquigarrow f_{X_n}$ que son independientes, pero 
+que podrían ser o no idénticamente distribuidas. Claramente, la densidad de probabilidad de $S$
+está dada por la convolución de las densidades de probabilidad de cada una de las variables 
+aleatorias $X_1, \ldots, X_n$.
 $$
-\Fo\left( f_S \right)
-= \Fo\left( f^{\star n}_X \right)
-= \Fo\left( f_X \right)^{n}
+f_S = f_{X_1} \star \cdots \star f_{X_n}
+$$
+sin embargo esta convolución implica el realizar una interacción en $n$-dimensiones.
+
+Si las las variables aleatorias $\{X_i\}$ son independientes sabemos además que 
+$$
+\Fo\left( f_S \right) = \prod\limits_{i=1}^n \Fo\left( f_{X_i} \right)
 $$
 
-Por tanto de esta relación como la transformada de Fourier es invertible, existe $\Fo^{-1}$. 
-Resulta el siguiente método para calcular la densidad de $S$
+Por otra parte, con lo anterior sabemos que es posible aproximar numéricamente cada $\Fo\left( f_{X_i} \right)$ 
+con una serie $\{\hat{f}_{i,j}\}$ dada por la discretización de la transformada de Fourier y su aplicación 
+sobre la discretización de la densidad de probabilidad $f_{i,k} = f_{X_i}( s_k )$. Por tanto, para cada 
+de las densidades con $i \in \{1, \ldots, n\}$ y $\omega_j = \frac{j}{b-a}$ con $j \in \{0,\ldots, N-1\}$, 
+se puede calcular de forma separada las aproximaciones a cada una de las transformadas
 $$
-f_S = \Fo^{-1}\left( \Fo\left( f_S \right) \right)
-= \Fo^{-1}\left(\Fo\left( f_X \right)^{n} \right)
+\Fo( f_{X_i} )\left( \omega_j \right)  
+\approx \hat{f}_{i,j} 
+= h \exp\left( -2\pi i \omega_j a \right) \left( \DFT\left[ \{f_{i,k}\} \right]  \right)_j
 $$
 
-En conclusión para determinar la densidad de probabilidad de $S$ basta conocer la transformada de
-Fourier de la distribución de los reclamos individuales, multiplicarla por si misma $n$ veces y 
-tomar la transformada de Fourier inversa.
+con lo anterior, también, se puede realizar una aproximación a la trasformada de Fourier 
+$\Fo\left( f_S \right)$ de la densidad de probabilidad que buscamos $f_S$, como el producto de sus 
+transformadas de Fourier.
+$$
+\Fo( f_{S} )\left( \omega_j \right)  
+= \prod\limits_{i=1}^n \Fo\left( f_{X_i} \right)\left( \omega_j \right)
+\approx \prod\limits_{i=1}^n \hat{f}_{i,j}
+$$
+
+utilizando la inversión de la transformada de Fourier discreta podemos calcular una serie que 
+precisamente aproxima a la densidad $f_S$
+$$
+\{ f_{S}( s_k ) \}
+\approx \Re\left( \DFT^{-1}\left[ \left\{ \frac{1}{h} \exp\left( 2\pi i \omega_j a \right) 
+\prod\limits_{i=1}^n \hat{f}_{i,j} \right\} \right] \right)
+$$
+
+```{r l3c9}
+N <- 10000
+set.seed(94312)
+alpha <- sample( x = seq( 1, 20, length = 40 ), size = 50, replace = TRUE )
+theta <- 3
+b <- sum( sapply( alpha, FUN = function( a ) qgamma( 0.9999, shape = a, scale = theta ) ) )
+a <- 0
+h <- ( b - a ) / N
+n <- 0:N
+s <- a + n * h
+w <- n / ( b - a )
+eta <- h * exp( -2 * pi * 1i * w * a )
+f <- lapply( alpha, function( a ) sapply( s, FUN = function( sk ) dgamma( sk, shape = a, scale = theta ) ) )
+Ff <- lapply( f, FUN = function( fi ) eta * fft( fi ) )
+FS <- rep( 1, N + 1 )
+for ( i in 1:length( f ) ) {
+  FS <- FS * Ff[[ i ]]
+}
+IFfS <- fft( eta^(-1) * FS, inverse = TRUE ) / ( N + 1 )
+fS <- Re( IFfS )
+fSx <- sapply( s, FUN = function( sk ) dgamma( sk, shape = sum( alpha ), scale = theta ) )
+```
+
+```{r l5g4, out.width='80%', out.height='400px', fig.align='center', class.source = 'fold-hide'}
+e <- fS - fSx
+eb <- max( abs( e ) )
+
+plt <- ggplot() +
+  geom_line( aes( x = s, y = fSx ), colour = 'darkred', size = 1 ) + 
+  geom_point( aes( x = s, y = fS ), colour = 'olivedrab3', size = 0.25 ) + 
+  xlab( TeX( "$x$" ) ) + 
+  ylab( TeX( "$f_{S}(x)$" ) ) + 
+  theme_bw()
+plot( plt )
+
+plt <- ggplot() +
+  geom_histogram( aes( x = e, y = after_stat( density ) ), bins = 50, fill = 'grey50', colour = 'dodgerblue3' ) + 
+  scale_x_continuous( breaks = seq( -eb, eb, length = 10 ), 
+                      labels = label_scientific( digits = 2 ),
+                      limits = c( -eb, eb ) ) +
+  scale_y_continuous( labels = label_scientific( digits = 2 ) ) +
+  ylab( TeX( "$e$" ) ) + 
+  theme_bw()
+plot( plt )
+```
+
+<!------------------------------------------------------------------------------------------------->
+## Proceso estocástico de reclamos totales
+
+Hasta el momento no hemos considerado que los reclamos se producen en el tiempo, que cada reclamo
+está bien vinculado al tiempo; es más podemos identificar algunos instantes en el tiempo que le 
+corresponde, tenemos así el tiempo cuando se suscita el siniestro o tiempo de ocurrencia, el tiempo 
+de aviso cuando se comunica al asegurador el siniestro y un tiempo de pago. Los dos últimos
+no son directos asociados al evento del siniestro sino están asociados a otras variables que pueden
+afectar la demora para comunicar un siniestro por parte del asegurado y la demora para cancelarlo
+por parte del asegurador.
+
+Así por tanto si tenemos una secuencia de siniestros $\{X_n\}_{n\in\N^*}$, estos los podemos 
+considerar ordenados en el tiempo conforme han venido presentándose en instantes 
+$0= T_0 \leq T_1 \leq \cdots \leq T_n \leq \cdots$, es decir se le asocia a los reclamos $\{X_n\}$ la 
+secuencia de los **tiempos de arribo** $\{T_n\}_{n\in\N}$, donde $T_{n+1} \geq T_n$, para 
+cualquier $n \in \N$. Ciertamente, es de esperar que los tiempos de arribo sean variables 
+aleatorias y están asociados a la frecuencia $N$ en un periodo dado, ya que $N$ cuenta los tiempos
+de arribo hasta un instante dado $t \geq 0$, bajo esta perspectiva transformamos a $N$ en una 
+variable aleatoria dependiente del tiempo, en lo que se conoce como un **proceso estocástico**.
+$$
+N( t )
+= \#\left\{ n \in \N\ \middle|\ T_n \leq t \right\} 
+= \sum\limits_{n=0}^{+\infty} \mathbf{1}_{(-\infty,t]}\left( T_n \right)
+$$
+
+Inmediatamente de este razonamiento, resulta que los reclamos totales también se transforman en 
+proceso estocástico, conforme se van considerando los arribos de los reclamos.
+$$
+S( t ) = \sum\limits_{i=1}^{N( t )} X_i
+$$
+donde claramente, como hemos venido haciéndolo, si $N(t) = 0$, entonces la suma total de reclamos
+es cero, $S(t) = 0$.
+
+Además, junto con lo anterior, se pueden identificar las variables aleatorias de 
+**tiempos entre arribos**, dadas por las diferencias entre tiempos de arribo contiguos
+$$
+W_n = T_n - T_{n-1},\quad \forall n \in \N
+$$
+
+Un hipótesis bien común en el modelamiento de un proceso de pérdida agregada utilizando esta 
+aproximación es asumir que los tiempos entre arribo $\{W_n\}$ son independientes entre si, es decir,
+el momento que se producen cada uno de los siniestros es de forma independiente. También se suele
+suponer independencia entre los tiempos entre arribo $\{W_n\}$ y las variables que representan 
+la magnitud de cada uno de los reclamos $\{X_n\}$.
+
+Los resultados para el cálculo de la esperanza y la varianza se pueden obtener de forma similar
+a lo que realizamos en la sección \@ref(sec:modind).
 $$
 \begin{eqnarray*}
-\Fo\left( f_S \right)
-& = & \Fo\left( \sum\limits_{n=0}^{+\infty} p_n f_X^{\star n} \right) \\
-& = & \sum\limits_{n=0}^{+\infty} p_n \Fo\left( f_X^{\star n} \right) \\
-& = & \sum\limits_{n=0}^{+\infty} p_n \Fo\left( f_X \right)^{n}
+\E[S(t)]
+& = & \E\left[ \sum\limits_{i=1}^{N(t)} X_i \right] \\
+& = & \sum\limits_{n=0}^{+\infty} \E\left[ \sum\limits_{i=1}^n X_i\ \middle|\ N(t) = n \right]P( N(t) = n )
+\quad \text{utilizando la esperanza condicional} \\
+& = & 0 P( N(t) = 0 ) + \sum\limits_{n=1}^{+\infty} 
+\E\left[ \sum\limits_{i=1}^n X_i\ \middle|\ N(t) = n \right]P( N(t) = n ) \\
+& = & \sum\limits_{n=1}^{+\infty} \sum\limits_{i=1}^n \E\left[ X_i \mid N(t) = n \right]P( N(t) = n )
+\quad \text{linealidad de la esperanza} \\
+& = & \sum\limits_{n=0}^{+\infty} n \E\left[ X \mid N(t) = n \right]P( N(t) = n )
+\quad \text{si $\{X_i\}$ son idénticamente distribuidas} \\
+& = & \E\left[ X \right] \sum\limits_{n=0}^{+\infty} n P( N(t) = n )
+\quad \text{si $X$ y $N(t)$ son independientes} \\
+& = & \E[ N(t) ] \E[ X ] 
 \end{eqnarray*}
 $$
-como consecuencia
+
+el segundo momento de $S(t)$ se calcula de forma similar
 $$
 \begin{eqnarray*}
-f_S 
-& = & \Fo^{-1}\left( \Fo\left( f_S \right) \right)\\
-& = & \Fo^{-1}\left( \sum\limits_{n=0}^{+\infty} p_n \Fo\left( f_X \right)^{n} \right)\quad
-\text{Una sola inversión} \\
-& = & \sum\limits_{n=0}^{+\infty} p_n \Fo^{-1}\left( \Fo\left( f_X \right)^{n} \right)\quad
-\text{Una inversión por cada término en la suma}
+\E[S(t)^2]
+& = & \E\left[ \left( \sum\limits_{i=1}^{N(t)} X_i \right)^2 \right] \\
+& = & \sum\limits_{n=0}^\infty \E\left[ \sum\limits_{i, j=1}^n X_i X_j \middle| N(t) = n \right] P( N = n ) 
+\quad \text{propiedades de la esperanza condicional} \\
+& = & \sum\limits_{n=0}^\infty \sum\limits_{i, j=1}^n \E\left[ X_i X_j \right] P( N(t) = n ) 
+\quad \text{si $\{X_i\}$ y $N(t)$ son independientes} \\
+& = & \sum\limits_{n=0}^\infty \left( \sum\limits_{i=1}^n \E\left[ X_i^2 \right] 
++ \sum\limits_{i,j=1,i\neq j}^n \E\left[ X_i X_j \right] \right) P( N(t) = n ) \\
+& = & \sum\limits_{n=0}^\infty \left( n \E\left[ X^2 \right] + n(n-1) \E\left[ X \right]^2 \right) P( N(t) = n ) 
+\quad \text{si $\{X_i\}$ son i.i.d} \\
+& = & \E\left[N(t)\right] \E\left[X^2\right] + \E\left[N(t)^2\right] \E\left[X\right]^2 
+- \E\left[N(t)\right] \E\left[X\right]^2 \\
+& = & \E\left[N(t)\right] \V\left[X\right] + \E\left[N(t)^2\right] \E\left[X\right]^2
 \end{eqnarray*}
 $$
 
+y finalmente la varianza de $S(t)$
 $$
-W_n = \frac{S_n}{n}
+\begin{eqnarray*}
+\V\left[S(t)\right]
+& = & \E\left[S(t)^2\right] - \E\left[S(t)\right]^2 \\
+& = & \E\left[N(t)\right] \V\left[X\right] 
++ \E\left[N(t)^2\right] \E\left[X\right]^2 - \E\left[N(t)\right]^2 \E\left[X\right]^2 \\
+& = & \E\left[N(t)\right] \V\left[X\right] + \V\left[N(t)\right] \E\left[X\right]^2
+\end{eqnarray*}
+$$
+Si trabajamos bajo la hipótesis que los tiempos entre arribos $\{W_n\}$ son i.i.d, con distribución
+de probabilidad común $F_W$. Podemos comprender y estudiar de una forma un poco más sencilla el 
+proceso estocástico atado a la frecuencia de los siniestros $N$.
+
+Notemos primeramente que se tienen la siguiente igualdad entre los eventos 
+$$
+\{N(t) = n\}
+= \{T_n \leq \land T_{n+1} > t\}
+= \{T_n \leq t \} \cap \{ T_{n+1} \leq t\}^c
+= \{T_n \leq t \} \setminus \{ T_{n+1} \leq t\}
+$$
+además es de observar que $\{ T_{n+1} \leq t\} \subset \{ T_{n} \leq t\}$. Con todo esto en 
+consideración para cualquier $n > 0$.
+$$
+\begin{eqnarray*}
+P( N(t) = n )
+& = & P( T_n \leq t \land T_{n+1} > t ) \\
+& = & P( \{T_n \leq t \} \setminus \{ T_{n+1} \leq t\} ) \\
+& = & P( T_n \leq t ) - P( T_{n+1} \leq t ) \\
+& = & F_W^{\star n}( t ) - F_W^{\star n + 1}( t )
+\end{eqnarray*}
 $$
 
+el caso $n = 0$ también es sencillo
 $$
-\E\left[ W_n \right]
-= \E\left[ \frac{S_n}{n} \right] 
-= \frac{1}{n} \E\left[ S_n \right]
+\begin{eqnarray*}
+P( N(t) = 0 )
+& = & P( T_0 \leq t \land T_1 > t ) \\
+& = & P( \{T_0 \leq t \} \setminus \{ T_1 \leq t\} ) \\
+& = & P( T_0 \leq t ) - P( T_1 \leq t ) \\
+& = & 1 - F_W^{\star 1}( t ) \\
+& = & F_W^{\star 0}( t ) - F_W^{\star 1}( t )
+\end{eqnarray*}
 $$
 
+De lo anterior resulta que la esperanza de $N(t)$, está dada por la siguiente serie.
 $$
-\V\left[ W_n \right]
-= \V\left[ \frac{S_n}{n} \right]
-= \frac{1}{n^2} \V\left[ S_n \right]
+\begin{eqnarray*}
+\E[ N( t ) ]
+& = & \sum\limits_{n=0}^{+\infty} n P( N(t) = n ) \\
+& = & \sum\limits_{n=0}^{+\infty} n \left( F_W^{\star n}( t ) - F_W^{\star n + 1}( t ) \right) \\
+& = & 0\left( F_W^{\star 0}( t ) - F_W^{\star 1}( t ) \right) 
++ 1\left( F_W^{\star 1}( t ) - F_W^{\star 2}( t ) \right) 
++ 2\left( F_W^{\star 2}( t ) - F_W^{\star 3}( t ) \right) 
++ \cdots \\
+& = & \sum\limits_{n=1}^{+\infty} F_W^{\star n}( t )
+\end{eqnarray*}
 $$
+
+### Algoritmo de simulación
+
+1. Se selecciona el número adecuado de simulaciones $m \in \N^*$,
+
+2. Se selecciona el número de simulaciones de tiempos de arribo $M \in \N^*$,
+
+3. Dada la distribución de los tiempos entre arribos $F_W$ para cada simulación $i \in \{1, \ldots, m\}$
+se genera una muestra $W_{i,1}, \ldots, W_{i,M}$ de tamaño de $M$,
+
+4. Para cada simulación $i \in \{1, \ldots, m\}$ y cada $n \in \{0, \ldots, M\}$ calculamos los
+tiempos de arribo $T_{i,0},\ldots, T_{i,M}$
+$$
+T_{i,0} = 0,\qquad
+T_{i,n} = \sum\limits_{k=1}^n W_{i,k}
+$$
+
+5. Se toma una malla de discretización en el tiempo $0 = t_0 < t_1 < \cdots < t_p = T$ y calculamos
+para cada simulación $i \in \{1,\ldots,m\}$ y tiempo $t_l$, con $l \in \{0,\ldots,p\}$.
+$$
+N_{i,l} = \#\left\{ n \in \N\ \middle|\ T_{i,n} \leq t_l \right\}
+= \sum\limits_{n=0}^{M} \mathbf{1}_{(-\infty,t_l]}\left( T_n \right)
+$$
+precisamente para cada simulación $i$, el término $N_{i,l}$ es una aproximación al proceso 
+$N( t_l )$ evaluado en el tiempo $t_l$. Así se puede tener la aproximación de la media 
+$$
+\E\left[ N( t_l ) \right] \approx \frac{1}{m} \sum\limits_{i=1}^m N_{i,l}
+$$
+
+6. Con la simulación el proceso estocástico $N$ podemos ahora proceder a simular los reclamos totales. 
+Para cada simulación $i \in \{1,\ldots,m\}$, tomamos una muestra de forma independiente e igualmente
+distribuida de los reclamos individuales $X_{i,1}, \ldots, X_{i,N_{i,p}}$, la cual tiene tamaño 
+$N_{i,p}$, y son tomados de la distribución de probabilidad $F_X$
+
+7. Para cada simulación $i \in \{1,\ldots, m\}$ y cada tiempo $t_l$ con $l \in \{0,\ldots,p\}$, 
+calculamos la suma
+$$
+S_{i,l} = \sum\limits_{j=1}^{N_{i,l}} X_{i,j}
+$$
+cada $S_{i,l}$ es una aproximación al proceso del total de reclamos $S(t_l)$ precisamente en el 
+tiempo $t_l$. Así resulta la aproximación
+$$
+\E\left[ S( t_l ) \right] \approx \frac{1}{m} \sum\limits_{i=1}^m S_{i,l}
+$$
+
+8. Además, para cada instante $t_l$, se puede aproximar la función de distribución acumulada 
+$F_{S(t_l)}$ de la variable aleatoria $S( t_l )$ utilizando la distribución acumulada empírica
+generada con la muestra $S_{1,l},\ldots,S_{m,l}$. Para cualquier $s \in \R$, tenemos la aproximación
+$$
+F_{S(t_l)}( s ) \approx F_{m,l}( s ) 
+= \frac{1}{m} \sum\limits_{i=1}^m \mathbf{1}_{(-\infty,s]}\left( S_{i,l} \right)
+$$
+El algoritmo de simulación anterior tiene una falencia, no se sabe a priori que valor $M$ se debe
+escoger para simular de forma correcta los procesos $N$ y $S$ hasta un tiempo máximo $T$ dado. Esto
+implica que si $M$ no es del tamaño adecuado, las estimaciones que se realice utilizando la 
+simulación va a degradarse conforme avanza el tiempo.
+
+::: {.example #l5ex5}
+El siguiente ejemplo es de especial atención ya que es utilizado en muchas aplicaciones, podemos 
+considerar el caso donde el tiempo entre arribos $\{W_n\}$ es i.i.d y con distribución de 
+probabilidad común $F_W$ dada por una ley exponencial $Exp( \lambda )$. Un resultado clásico muestra 
+que la suma de $n$ exponenciales sigue una ley gamma $Gamma(n,\lambda)$, esto implica que 
+$T_n = W_1 + \cdots + W_n \rightsquigarrow Gamma( n, \lambda )$ o también $F_W^{\star n}$ es una 
+$Gamma( n, \lambda )$. Así por tanto, el proceso estocástico de conteo 
+$N(t) = \#\left\{ n \in \N\ \middle|\ T_n \leq t \right\}$ tiene las siguientes probabilidades
+$$
+\begin{eqnarray*}
+P( N( t ) = n )
+& = & F_W^{\star n}( t ) - F_W^{\star n + 1}( t ) \\
+& = & \exp( -\lambda t ) \sum\limits_{k=n}^{+\infty} \frac{(\lambda t)^k}{k!} 
+- \exp( -\lambda t ) \sum\limits_{k={n+1}}^{+\infty} \frac{(\lambda t)^k}{k!} \\
+& = & \exp( -\lambda t ) \frac{(\lambda t)^n}{n!}
+\end{eqnarray*}
+$$
+
+En conclusión $N(t)$ tiene como distribución una ley de Poisson $Pois( \lambda t )$, en particular
+se conoce a $N$ como un proceso de Poisson.
+:::
+
+```{r l5c7}
+m <- 1000
+lambda <- 10
+M <- 30
+p <- 365
+u <- 4
+s <- 2
+
+set.seed( 432147 )
+W <- lapply( 1:m, FUN = function( n ) rexp( M, rate = lambda ) )
+Tn <- lapply( W, FUN = cumsum )
+Tnmax <- max( sapply( Tn, FUN = max ) )
+t <- seq( 0, Tnmax, length = p )
+
+N <- lapply( Tn, FUN = function( Tk ) sapply( t, FUN = function( t ) sum( Tk <= t ) ) )
+Nmax <- max( sapply( N, FUN = function( Ni ) last( Ni ) ) )
+
+set.seed( 7324312 )
+X <- lapply( N, FUN = function( Ni ) rlnorm( last( Ni ), meanlog = u, sdlog = s ) )
+S <- lapply( 1:m, FUN = function( i ) {
+  Si <- cumsum( X[[ i ]] )
+  return( sapply( N[[ i ]], FUN = function( Nj ) ifelse( Nj == 0, 0, Si[ Nj ] ) ) )
+} )
+Smax <- max( sapply( S, FUN = function( Si ) last( Si ) ) )
+
+EN <- lambda * t
+EeN <- sapply( 1:p, FUN = function( l ) mean( sapply( 1:m, function( i ) N[[ i ]][ l ] ) ) )
+
+ES <- EN * exp( u + 0.5 * s^2 )
+EeS <- sapply( 1:p, FUN = function( l ) mean( sapply( 1:m, function( i ) S[[ i ]][ l ] ) ) )
+```
+
+En el gráfico a continuación presentamos todos los procesos de conteo $N_{i}$ simulados, como es de
+esperarse son funciones de escalera, siempre crecientes, que toma solo valores positivos.
+```{r l5g5, out.width='80%', out.height='500px', fig.align='center', class.source = 'fold-hide'}
+Ndat <- NULL
+for ( j in 1:m ) {
+  Ndat <- rbindlist( list( Ndat, data.table( t = t, m = as.factor( j ), N = N[[ j ]], S = S[[ j ]] ) ) )
+}
+cols <- wes_palette( m, name = "GrandBudapest2", type = "continuous")
+
+time <- t 
+
+plt <- ggplot( ) +
+  geom_step( data = Ndat, aes( x = t, y = N, group = m, colour = m ), size = 0.2 ) +
+  geom_line( aes( x = time, y = EN, colour = 'olivedrab2' ), size = 1 ) +
+  geom_line( aes( x = time, y = EeN, colour = 'red' ), size = 1 ) +
+  scale_color_manual( values = c( cols, 'olivedrab2', 'red' ) ) +
+  scale_x_continuous( breaks = seq( 0, Tnmax, length = 11 ),
+                      labels = formatC( seq( 0, Tnmax, length = 11 ), digits = 2, format = 'f' ), 
+                      limits = c( 0, Tnmax ), expand = c( 0, 0 ) ) +
+  scale_y_continuous( breaks = seq( 0, Nmax, length = 11 ), 
+                      labels = formatC( seq( 0, Nmax, length = 11 ), digits = 2, format = 'f' ), 
+                      limits = c( 0, Nmax ), expand = c( 0, 0 ) ) +
+  xlab( TeX( "$t$" ) ) + 
+  ylab( TeX( "$N(t)$" ) ) + 
+  theme_bw() +
+  theme( legend.position = "none" )
+plot( plt )
+```
+
+El gráfico a continuación presenta la simulación de los procesos correspondientes al total de 
+reclamos, conforme avanza el tiempo. De igual manera los procesos $S_i$ son funciones de escalera,
+siempre crecientes, con saltos correspondientes a los reclamos individuales.
+```{r l5g6, out.width='80%', out.height='500px', fig.align='center', class.source = 'fold-hide'}
+Sqmax <- quantile( sapply( S, FUN = function( Si ) last( Si ) ), probs = 0.99 )
+
+plt <- ggplot( ) +
+  geom_step( data = Ndat, aes( x = t, y = S, group = m, colour = m ), size = 0.2 ) +
+  geom_line( aes( x = time, y = ES, colour = 'olivedrab2' ), size = 1 ) +
+  geom_line( aes( x = time, y = EeS, colour = 'red' ), size = 1 ) +
+  scale_color_manual( values = c( cols, 'olivedrab2', 'red' ) ) +
+  scale_x_continuous( breaks = seq( 0, Tnmax, length = 11 ),
+                      labels = formatC( seq( 0, Tnmax, length = 11 ), digits = 2, format = 'f' ), 
+                      limits = c( 0, Tnmax ), expand = c( 0, 0 ) ) +
+  scale_y_continuous( breaks = seq( 0, Sqmax, length = 11 ),
+                      labels = formatC( seq( 0, Sqmax, length = 11 ), digits = 2, format = 'f' ), 
+                      limits = c( 0, Sqmax ), expand = c( 0, 0 ) ) +
+  xlab( TeX( "$t$" ) ) + 
+  ylab( TeX( "$S(t)$" ) ) + 
+  theme_bw() +
+  theme( legend.position = "none" )
+plot( plt )
+```
+
+Como se describe en el paso 8 del algoritmo de simulación, para cada tiempo $t_l$ se puede estimar
+la distribución de probabilidad de la variable aleatoria $S(t_l)$.
+```{r l5c8}
+FeS <- lapply( 1:p, FUN = function( l ) ecdf( sapply( S, FUN = function( Si ) Si[ l ] ) ) )
+ns <- 100
+s <- seq( 0, Smax, length = ns )
+Fes <- lapply( FeS, FUN = function( FeSl ) sapply( s, FUN = FeSl ) )
+```
+
+La figura a continuación muestra cada una de las distribuciones de probabilidad empíricas estimadas 
+$F_{m,l}$. Se puede observar que conforme avanza el tiempo, aumenta la probabilidad de observar 
+valores mayores del proceso $S$ correspondiente al total de reclamos.
+```{r l5g7, out.width='80%', out.height='500px', fig.align='center', class.source = 'fold-hide'}
+FeSdat <- NULL
+for ( j in 1:p ) {
+  FeSdat <- rbindlist( list( FeSdat, data.table( s = s, m = as.factor( j ), Fes = Fes[[ j ]] ) ) )
+}
+cols <- wes_palette( p, name = "GrandBudapest2", type = "continuous")
+
+plt <- ggplot( ) +
+  geom_step( data = FeSdat, aes( x = s, y = Fes, group = m, colour = m ), size = 0.1 ) +
+  scale_color_manual( values = c( cols ) ) +
+  scale_x_continuous( breaks = seq( 0, Smax, length = 5 ),
+                      labels = formatC( seq( 0, Smax, length = 5 ), digits = 2, format = 'f' ), 
+                      limits = c( 0, Smax ), expand = c( 0, 0 ) ) +
+  scale_y_continuous( breaks = seq( 0, 1, length = 11 ),
+                      labels = formatC( seq( 0, 1, length = 11 ), digits = 2, format = 'f' ), 
+                      limits = c( 0, 1 ), expand = c( 0, 0 ) ) +
+  xlab( TeX( "$S$" ) ) + 
+  ylab( TeX( "$F_{m,l}$" ) ) + 
+  theme_bw() +
+  theme( legend.position = "none" )
+
+plot( plt )
+```
 
 ```{r l5end, echo = FALSE}
 rm( list = ls()[ ls() != 'def.chunk.hook' ] )

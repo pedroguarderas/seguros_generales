@@ -27,7 +27,9 @@ Pk <- pbinom( q = k, size = n, prob = p ) # cálculo de probabilidad P( N <= k )
 
 p <- dbinom( x = 0:n, size = n, prob = p )
 v <- 1:n * p[ 2:(n + 1) ] / p[ 1:n ]
+```
 
+```{r l4g1, out.width='80%', out.height='500px', fig.align='center', class.source = 'fold-hide'}
 plt <- ggplot() +
   geom_point( aes( x = 1:n, y = v ), colour = 'darkred' ) + 
   xlab( TeX( "$k$" ) ) + 
@@ -57,7 +59,9 @@ Pk <- ppois( q = k, lambda = lambda ) # cálculo de probabilidad P( N <= k )
 n <- 50
 p <- dpois( x = 0:n, lambda = lambda )
 v <- 1:n * p[ 2:(n + 1) ] / p[ 1:n ]
+```
 
+```{r l4g2, out.width='80%', out.height='500px', fig.align='center', class.source = 'fold-hide'}
 plt <- ggplot() +
   geom_point( aes( x = 1:n, y = v ), colour = 'darkred' ) + 
   xlab( TeX( "$k$" ) ) + 
@@ -92,7 +96,9 @@ Pk <- pnbinom( q = k, size = alpha, prob = p ) # cálculo de probabilidad P( N <
 n <- 50
 p <- dnbinom( x = 0:n, size = alpha, prob = p )
 v <- 1:n * p[ 2:(n + 1) ] / p[ 1:n ]
+```
 
+```{r l4g3, out.width='80%', out.height='500px', fig.align='center', class.source = 'fold-hide'}
 plt <- ggplot() +
   geom_point( aes( x = 1:n, y = v ), colour = 'darkred' ) + 
   xlab( TeX( "$k$" ) ) + 
@@ -166,7 +172,7 @@ Para una demostración detallada de la proposición anterior se puede consultar 
 en https://nonlifemaths.github.io/.
 
 
-```{r l4t1, echo = TRUE, results = 'asis'}
+```{r l4t1, echo = TRUE, results = 'asis', out.width='100%', class.source = 'fold-hide'}
 # la librería CASdatasets fue previamente cargada
 data( beMTPL97 )
 beMTPL97 <- as.data.table( beMTPL97 )
@@ -178,19 +184,26 @@ conteo[ , jn := N * pns / pn ]
 
 conteo %>%
   kable(
+    label = NA,
     caption = 'Estimación conteos por sexo',
     row.names = FALSE,
     col.names = c( "sexo", "fuel", "$N$", "$f_k$", "$p_k$", "$p_{k+1}$", "$k \\frac{p_{k+1}}{p_k}$" ),
     align = 'llrrrrr',
     digits = c( 0, 0, 0, 0, 5, 5, 5 ),
     format.args = list( big.mark = ',', decimal.mark = '.', scientific = FALSE ),
-    escape = FALSE ) %>%
-  kable_classic( font_size = 14, full_width = FALSE, html_font = "Cambria" ) %>%
-  scroll_box( width = "750px", height = "500px" )
+    escape = FALSE,
+    centering = TRUE ) %>%
+  kable_classic( font_size = 14, full_width = FALSE, html_font = "Cambria", position = "center" ) %>%
+  scroll_box( width = "100%", height = "500px" )
 ```
 
-```{r l4c5}
-plot( conteo$N, conteo$jn )
+```{r l4g4, out.width='80%', out.height='500px', fig.align='center', class.source = 'fold-hide'}
+plt <- ggplot() +
+  geom_point( data = conteo, aes( x = N, y = jn ), colour = 'purple' ) + 
+  xlab( TeX( "$k$" ) ) + 
+  ylab( TeX( "$k \\frac{p_k}{p_{k-1}}$" ) ) + 
+  theme_bw()
+plot( plt )
 ```
 
 <!------------------------------------------------------------------------------------------------->
@@ -251,14 +264,20 @@ fx <- dexp( x = x, rate = lambda ) # cálculo de la densidad f(x)
 Fk <- pexp( q = x, rate = lambda ) # cálculo de probabilidad F(x)
 ```
 
-::: {.definition #dnorm name="Distribución gamma"}
+::: {.definition #dgamma name="Distribución gamma"}
 Una variable aleatoria $X$ a valores reales, sigue una distribución gamma 
 $X \rightsquigarrow Gamma( \alpha, \beta )$ de parámetros $\alpha > 0$, $\beta > 0$, si su 
 función de distribución acumulada es de la siguiente forma:
 $$
 F_X( x ) = \frac{\beta^\alpha}{\Gamma( \alpha )} \int\limits_{0}^{x} u^{\alpha-1} \exp(-\beta u)\ du
 $$
-la densidad de probabilidad automáticamente está dada por la función:
+si en caso $\alpha$ un entero positivo, i.e. $\alpha \in \N^*$, se puede calcular $F_X( x )$ con la siguiente serie
+$$
+F_X( x ) = 1 - \exp( -\lambda x ) \sum\limits_{n=0}^{\alpha-1} \frac{(\lambda x)^n}{n!}
+= \exp( -\lambda x ) \sum\limits_{n=\alpha}^{+\infty} \frac{(\lambda x)^n}{n!}
+$$
+
+por su parte, la densidad de probabilidad automáticamente está dada por la función:
 $$
 f_X( x ) = \mathbf{1}_{[0,+\infty}( x ) \frac{\beta^\alpha}{\Gamma( \alpha )} x^{\alpha-1} \exp(-\beta x)
 $$

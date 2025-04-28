@@ -84,7 +84,7 @@ nivel $u$ de los valores observados de reclamos $X_1, \ldots, X_n$, es decir tom
 todos los valores $\{ X_i \mid X_i \geq u \}$, a estos valores realizarles un test de ajuste
 a una distribución de Pareto generalizada $GPD( \nu, \beta, \varepsilon )$, si el test es aceptable
 y no se rechaza la hipótesis nula, entonces tenemos el resultado de aproximación anterior 
-\@ref(thm:tvalext2). Luego se puede simular los reclamos de forma condiciona.
+\@ref(thm:tvalext2). Luego se puede simular los reclamos de forma condicional.
 
 Es importante observar antes de continuar que para estudiar los valores extremos de reclamos estos
 no deben haber pasado por alguna deducción, después de aplicar alguna función deducible $D$, sino 
