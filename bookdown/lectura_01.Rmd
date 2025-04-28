@@ -4,20 +4,27 @@
 <!------------------------------------------------------------------------------------------------->
 ## Materia
 
-Las presentes notas de curso han sido creadas para el curso de **Matemática Actuarial de los 
-Seguros Generales** el cual es dictado en la Maestría de Ciencias Actuariales que realizan de forma 
+Las presentes notas de curso han sido creadas para la materia **Matemática Actuarial de los 
+Seguros Generales** la cual es dictada en la Maestría de Ciencias Actuariales que realizan de forma 
 conjunta la "Escuela Politécnica Nacional" (EPN) y la "Pontificia Universidad Católica del Ecuador" 
-(PUCE). La materia está a cargo del actuario **Leonardo Vélez Aguirre**. 
+(PUCE). 
 
-Las presentes notas han sido creadas con la motivación de facilitar el aprendizaje a los 
-estudiantes, las mismas conjugan la parte teórica del curso con ejemplos prácticos implementados 
-utilizando el lenguaje R.
+Hemos creado estas notas con la motivación de brindar una referencia de la materia y facilitar el 
+aprendizaje a los estudiantes, tratando de conjugar la parte teórica del curso con ejemplos prácticos 
+implementados utilizando el lenguaje R.
 
-Estas notas han sido creadas en colaboración entre Leonardo Vélez y Pedro Guarderas. La motivación
-y objetivo para haber creado estas notas es llegar a generar un buen material de aprendizaje y 
-referencia. En el estado actual, no son aún definitivas, están sujetas a mejoras y correcciones.
+En el estado actual, no son aún definitivas, están sujetas a mejoras y correcciones.
 Sin embargo, será un placer para nosotros que las lean, critiquen y en especial nos hagan llegar
 sus observaciones y posibles mejoras.
+
+<!------------------------------------------------------------------------------------------------->
+## Personal docente
+
+El profesor a cargo de la materia es el actuario **Leonardo Vélez Aguirre**.
+
+Como docente de apoyo, especialemnte en la parte informática, también colaborará el 
+matemático **Pedro Guarderas**.
+
 
 <!------------------------------------------------------------------------------------------------->
 ## Resultados de aprendizaje
@@ -28,10 +35,17 @@ aplicar las bases técnicas.
 - Aprender a obtener la distribución y momentos correspondientes de la siniestralidad total pagada
 por el asegurador y por el reasegurador en presencia de franquicias y reaseguro.
 
-- Identificar las modificaciones que pueden sufrir los contratos de seguros generales y valorar las
-consecuencias técnicas de dichas modificaciones.
+- Utilizar textos informativos y de divulgación científica para el desarrollo de trabajos académicos 
+y el desempeño profesional actuarial.
 
-- Calcular la función de distribución del coste total de una cartera de pólizas.
+- Aplicar adecuadamente las fases y procedimientos de la investigación científica a fin de encauzarla 
+de manera eficiente y tendiente a la excelencia.
+
+- Desarrollar la capacidad de trabajar en equipo y el sentido de responsabilidad en el cumplimiento 
+de sus responsabilidades.
+
+- Desarrollar un espíritu crítico y creativo, y respetuoso de su docente y compañeros.
+
 
 ## Contenidos propuestos
 
