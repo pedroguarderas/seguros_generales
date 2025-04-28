@@ -770,7 +770,7 @@ $N \rightsquigarrow NBin( \alpha, p )$ y las severidades $\{X_i\}$ son i.i.d con
 $LN( \mu, \sigma )$. Utilizaremos el algoritmo de Panjer para aproximar la densidad de probabilidad
 de $f_S$ de $S$.
 ```{r l5c8}
-n <- 9e4
+n <- 7e4
 p <- 0.3
 alpha <- 3
 a <- 1 - p
@@ -778,20 +778,19 @@ b <- ( 1 - p ) * ( alpha - 1 )
 p0 <- p^alpha
 u <- 5
 s <- 0.3
-xmax <- 5e3
+smax <- 5e3
 dist <- dlnorm
 
 pardist <- list( meanlog = u, sdlog = s )
-x <- seq( 0, xmax, length = n )
-N <- n - 1
-dx <- diff( x )
-fX <- sapply( x[-N], FUN = function( y ) do.call( dist, c( y, pardist ) ) )
+sg <- seq( 0, smax, length = n )
+ds <- diff( sg )
+fX <- sapply( sg, FUN = function( y ) do.call( dist, c( y, pardist ) ) )
 
 fS <- p0
 K <- 1
 p1 <- ( a + b ) * p0
 for ( k in 2:n ) {
-  fS <- c( fS, p1 * fX[ k ] + sum( ( a + b * x[ K ] / x[ k ] ) * fX[ K ] * fS[ rev( K ) ] * dx[ K ] ) )
+  fS <- c( fS, p1 * fX[ k ] + sum( ( a + b * sg[ K ] / sg[ k ] ) * fX[ K ] * fS[ rev( K ) ] * ds[ K ] ) )
   K <- c( K, k )
 }
 
@@ -803,17 +802,18 @@ S <- sapply( X, FUN = function( x ) sum( x, na.rm = TRUE ) )
 ```
 
 El algoritmo de Panjer suele tener problemas para ajustarse en los primeros valores de la 
-densidad $f_S$, tal como lo muestra el gráfico a continuación. Incluso este efecto no se resuelve
-por completo al aumentar el refinamiento de la malla para aproximar la integral.
+densidad $f_S$, tal como lo muestra el gráfico a continuación, usualmente hay una sobre estimación.
+Además, el algoritmo solo es válido cuando el conteo de siniestros pertenece a la familia
+de distribuciones $(a,b,0)$.
 ```{r l5g3, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
 fmax <- 0.0007
 
 plt <- ggplot( ) +
   geom_histogram( aes( S, after_stat( density ) ), fill = 'dodgerblue4', colour = 'white', alpha = 0.6, bins = nclass.FD( S ) ) +
-  geom_line( aes( x = x, y = fS ), colour = 'purple3', linewidth = 1 ) +
-  scale_x_continuous( breaks = seq( 0, xmax, length = 7 ),
-                      labels = formatC( seq( 0, xmax, length = 7 ), digits = 2, format = 'f' ), 
-                      limits = c( 0, xmax ), 
+  geom_line( aes( x = s, y = fS ), colour = 'purple3', linewidth = 1 ) +
+  scale_x_continuous( breaks = seq( 0, smax, length = 7 ),
+                      labels = formatC( seq( 0, smax, length = 7 ), digits = 2, format = 'f' ), 
+                      limits = c( 0, smax ), 
                       expand = c( 0, 0 ) ) +
   scale_y_continuous( breaks = seq( 0, fmax, length = 11 ),
                       labels = formatC( seq( 0, fmax, length = 11 ), digits = 4, format = 'f' ),
@@ -823,6 +823,19 @@ plt <- ggplot( ) +
   ylab( TeX( "$f_S$" ) ) + 
   theme_bw() +
   theme( legend.position = "none" )
+plot( plt )
+```
+
+```{r l5g4, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
+e <- cumsum( fS[ -1 ] * ds ) - ecdf( S )( sg[ -1 ] )
+
+eb <- max( abs( e ) )
+
+plt <- ggplot() +
+  geom_histogram( aes( x = e, y = after_stat( density ) ), fill = 'grey50', colour = 'dodgerblue3', bins = nclass.scott( e ) ) +
+  scale_y_continuous( labels = label_scientific( digits = 2 ) ) +
+  ylab( TeX( "$e$" ) ) +
+  theme_bw()
 plot( plt )
 ```
 :::
@@ -897,7 +910,7 @@ fS <- Re( fS )
 fs <- sapply( s, FUN = function( sk ) dgamma( sk, shape = sum( alpha ), scale = theta ) )
 ```
 
-```{r l5g4, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
+```{r l5g5, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
 plt <- ggplot() +
   geom_line( aes( x = s, y = fS ), colour = 'darkred', size = 1 ) + 
   geom_point( aes( x = s, y = fs ), colour = 'olivedrab3', size = 0.25 ) + 
@@ -907,15 +920,12 @@ plt <- ggplot() +
 plot( plt )
 ```
 
-```{r l5g5, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
+```{r l5g6, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
 e <- fS - fs
 eb <- max( abs( e ) )
 
 plt <- ggplot() +
   geom_histogram( aes( x = e, y = after_stat( density ) ), fill = 'grey50', colour = 'dodgerblue3', bins = nclass.scott( e ) ) + 
-  scale_x_continuous( breaks = seq( -eb, eb, length = 10 ), 
-                      labels = label_scientific( digits = 2 ),
-                      limits = c( -eb, eb ) ) +
   scale_y_continuous( labels = label_scientific( digits = 4 ) ) +
   ylab( TeX( "$e$" ) ) + 
   theme_bw()
@@ -938,7 +948,7 @@ para el caso cuando $s_o = 0$, tenemos que $f_S( s_0 ) = f_S( 0 ) = p_0$.
 
 ```{r l5c10}
 M <- 200
-N <- 2e5
+N <- 7e4
 
 p <- 0.3
 alpha <- 3
@@ -971,7 +981,7 @@ X <- lapply( N, FUN = function( n ) rlnorm( n, meanlog = u, sdlog = s ) )
 S <- sapply( X, FUN = function( x ) sum( x, na.rm = TRUE ) )
 ```
 
-```{r l5g6, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
+```{r l5g7, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
 fmax <- 0.0007
 smax <- 5e3
 
@@ -993,16 +1003,13 @@ plt <- ggplot() +
 plot( plt )
 ```
 
-```{r l5g7, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
-e <- cumsum( fS[ -1 ] * diff( sg ) ) - ecdf( S )( sg )
+```{r l5g8, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
+e <- cumsum( fS[ -1 ] * diff( sg ) ) - ecdf( S )( sg[-1] )
 
 eb <- max( abs( e ) )
 
 plt <- ggplot() +
   geom_histogram( aes( x = e, y = after_stat( density ) ), fill = 'grey50', colour = 'dodgerblue3', bins = nclass.FD( e ) ) +
-  scale_x_continuous( breaks = seq( -eb, eb, length = 10 ),
-                      labels = label_scientific( digits = 2 ),
-                      limits = c( -eb, eb ) ) +
   scale_y_continuous( labels = label_scientific( digits = 2 ) ) +
   ylab( TeX( "$e$" ) ) +
   theme_bw()
@@ -1264,7 +1271,7 @@ EeS <- sapply( 1:p, FUN = function( l ) mean( sapply( 1:m, function( i ) S[[ i ]
 
 En el gráfico a continuación presentamos todos los procesos de conteo $N_{i}$ simulados, como es de
 esperarse son funciones de escalera, siempre crecientes, que toma solo valores positivos.
-```{r l5g8, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
+```{r l5g9, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
 Ndat <- NULL
 for ( j in 1:m ) {
   Ndat <- rbindlist( list( Ndat, data.table( t = t, m = as.factor( j ), N = N[[ j ]], S = S[[ j ]] ) ) )
@@ -1294,7 +1301,7 @@ plot( plt )
 El gráfico a continuación presenta la simulación de los procesos correspondientes al total de 
 reclamos, conforme avanza el tiempo. De igual manera los procesos $S_i$ son funciones de escalera,
 siempre crecientes, con saltos correspondientes a los reclamos individuales.
-```{r l5g9, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
+```{r l5g10, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
 Sqmax <- quantile( sapply( S, FUN = function( Si ) last( Si ) ), probs = 0.99 )
 
 plt <- ggplot( ) +
@@ -1327,7 +1334,7 @@ Fes <- lapply( FeS, FUN = function( FeSl ) sapply( s, FUN = FeSl ) )
 La figura a continuación muestra cada una de las distribuciones de probabilidad empíricas estimadas 
 $F_{m,l}$. Se puede observar que conforme avanza el tiempo, aumenta la probabilidad de observar 
 valores mayores del proceso $S$ correspondiente al total de reclamos.
-```{r l5g10, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
+```{r l5g11, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
 FeSdat <- NULL
 for ( j in 1:p ) {
   FeSdat <- rbindlist( list( FeSdat, data.table( s = s, m = as.factor( j ), Fes = Fes[[ j ]] ) ) )
