@@ -938,8 +938,8 @@ número máximo $M \in \N$ de términos a ser considerados en la serie, $M$ lo s
 como para que la siguiente aproximación resulte adecuada.
 $$
 \{ f_{S}( s_k ) \}
-\approx  \Re\left( \sum\limits_{n=1}^{M} \DFT^{-1}\left[ \left\{ \frac{1}{h} \exp\left( 2\pi i \omega_j a \right) 
-\prod\limits_{i=1}^n \hat{f}_{i,j} \right\} \right]\ p_n\right),
+\approx  \Re\left( \DFT^{-1}\left[ \sum\limits_{n=1}^{M} \left\{ \frac{1}{h} \exp\left( 2\pi i \omega_j a \right) 
+\prod\limits_{i=1}^n \hat{f}_{i,j} \right\}\ p_n \right] \right),
 \qquad \forall s_k > 0
 $$
 
