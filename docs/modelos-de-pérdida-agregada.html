@@ -482,7 +482,7 @@ probabilidad <span class="math inline">\(F_S\)</span> a partir de la distribuci�
 <span class="math display">\[
 F_S( s ) \approx F_m( s ) = \frac{1}{m} \sum\limits_{i=1}^m \mathbf {1}_{(-\infty,s]}( S_i )
 \]</span>
-el resultado de concentración <a href="probabilidad-y-estadística.html#thm:ddkw">3.4</a> es más nos brinda un criterio de convergencia de
+el resultado de concentración <a href="probabilidad-y-estadística.html#thm:ddkw">3.5</a> es más nos brinda un criterio de convergencia de
 <span class="math inline">\(F_m\)</span> a <span class="math inline">\(F_S\)</span></p>
 <p>Para construir <span class="math inline">\(F_m\)</span> en R, se puede utilizar la función ya empaquetada <code>ecdf</code> (empirical cumulative
 distribution function).</p>
@@ -541,7 +541,7 @@ a la integral de Riemann-Stieltjes utilizando la distribución acumulada empíri
 <p>Lo bueno de poseer una buena aproximación a la distribución acumulada de una variable aleatoria, es
 que podemos calcular algunos otros valores de importancia relacionados a la variable aleatoria y
 no tan solo utilizar medidas de tendencia central. Sin embargo, para que esta aproximación sea
-útil se requiere reducir el error de probabilidad <a href="probabilidad-y-estadística.html#thm:ddkw">3.4</a>.</p>
+útil se requiere reducir el error de probabilidad <a href="probabilidad-y-estadística.html#thm:ddkw">3.5</a>.</p>
 <div class="example">
 <p><span id="exm:l5ex2" class="example"><strong>Ejemplo 5.2  </strong></span>Podemos considerar el caso sencillo donde el valor posible de severidad es determinista, es decir
 para cada póliza <span class="math inline">\(i\in \{1,\ldots,n\}\)</span>, el valor de severidad probable es único <span class="math inline">\(M &gt; 0\)</span> si en caso
@@ -947,7 +947,8 @@ probabilidad empírica <span class="math inline">\(F_m\)</span> que aproxima la 
 total de reclamos <span class="math inline">\(S\)</span>. Se asume que el conteo de siniestro <span class="math inline">\(N\)</span> viene dado por alguna de las
 distribuciones en la familia <span class="math inline">\((a,b,0)\)</span> y los reclamos individuales son <span class="math inline">\(\{X_i\}\)</span> son i.i.d y
 también independientes de <span class="math inline">\(N\)</span>. En ese contexto podemos observar que para cualquier <span class="math inline">\(s &gt; 0\)</span>, tenemos:
-<span class="math display">\[\begin{eqnarray*}
+<span class="math display">\[
+\begin{eqnarray*}
 f_S( s )
 &amp; = &amp; \sum\limits_{n=1}^{+\infty} p_n f_X^{\star n}( s ) \\
 &amp; = &amp; p_1 f_X( s ) + \sum\limits_{n=2}^{+\infty} p_n f_X^{\star n}( s ) \\
@@ -958,27 +959,28 @@ f_S( s )
 &amp; = &amp; p_1 f_X( s )
 + \int\limits_0^s \left( a + \frac{b y}{s} \right) f_X( y ) \sum\limits_{n=1}^{+\infty} p_{n} f_X^{\star n}( s - y )\ dy \\
 &amp; = &amp; p_1 f_X( s ) + \int\limits_0^s \left( a + \frac{b y}{s} \right) f_X( y ) f_S( s - y )\ dy
-\end{eqnarray*}\]</span></p>
-<p>cuando <span class="math inline">\(s = 0\)</span>, la probabilidad se concentra en <span class="math inline">\(0\)</span>, y por tanto <span class="math inline">\(f_S( 0 ) = p_0\)</span></p>
+\end{eqnarray*}
+\]</span>
+cuando <span class="math inline">\(s = 0\)</span>, la probabilidad se concentra en <span class="math inline">\(0\)</span>, y por tanto <span class="math inline">\(f_S( 0 ) = p_0\)</span></p>
 <p>Como consecuencia del análisis anterior resulta la relación recurrente, la cual es precisamente
 explotada de forma numérica por el algoritmo de Panjer.
-<span class="math display">\[\begin{equation}
+<span class="math display">\[
 f_S( s ) = p_1 f_X( s ) + \int\limits_0^s \left( a + \frac{b y}{s} \right) f_X( y ) f_S( s - y )\ dy,
 \qquad \forall s &gt; 0
-\end{equation}\]</span></p>
+\]</span></p>
 <p>Si se toma una discretización <span class="math inline">\(0 = s_0 &lt; s_1 &lt; \cdots &lt; s_n\)</span> para aproximar la integral anterior
-<span class="math display">\[\begin{equation}
+<span class="math display">\[
 f_S\left( s_k \right)
 = p_1 f_X\left( s_k \right) + \sum\limits_{i=0}^{k-1} \left( a + \frac{b s_i}{s_k} \right)
 f_X\left( s_i \right) f_S\left( s_{k-i} \right) \left( s_{i+1} - s_i \right)
-\end{equation}\]</span></p>
+\]</span></p>
 <p>Al tomar un división uniforme para la malla utilizada para aproximar la integral, por ejemplo
 <span class="math inline">\(s_k = k h\)</span>, tenemos que:
-<span class="math display">\[\begin{equation}
+<span class="math display">\[
 f_S\left( s_k \right)
 = p_1 f_X\left( s_k \right) + h \sum\limits_{i=0}^{k-1} \left( a + \frac{b i}{k} \right)
 f_X\left( s_i \right) f_S\left( s_{k-i} \right)
-\end{equation}\]</span>
+\]</span>
 de donde resulta una forma bien conocida para el algoritmo de Panjer. sin embargo, es importante
 tener en cuenta que una malla de paso no constante puede ser mejor adaptada para realizar la
 integral.</p>

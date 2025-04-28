@@ -879,6 +879,14 @@ seguros que tamaño debe tomar <span class="math inline">\(n\)</span> para que e
 al <a href="probabilidad-y-estadística.html#thm:tlc">3.2</a> se debe considerar otros resultados asociados a desigualdades de concentración.</p>
 <p>El siguiente teorema es de gran ayuda para estimar la tasa de convergencia del resultado anterior
 <a href="probabilidad-y-estadística.html#thm:tlc">3.2</a>.</p>
+<div class="theorem">
+<p><span id="thm:tdinver" class="theorem"><strong>Teorema 3.3  (Inversion) </strong></span>Sea <span class="math inline">\(\varphi\)</span> la función característica de la distribución de probabilidad <span class="math inline">\(F\)</span> de una variable
+aleatoria <span class="math inline">\(X\)</span>. Si <span class="math inline">\(x,y \in \mathbb{R}\)</span> son dos puntos de continuidad de la distribución <span class="math inline">\(F\)</span>, then
+<span class="math display">\[
+F( y ) - F( x ) = \frac{1}{2\pi} \underset{c \rightarrow +\infty}{\lim} \int\limits_{-c}^c
+\frac{\exp(-itx) - \exp(-ity)}{it} \varphi( t )\ dt
+\]</span></p>
+</div>
 <!------------------------------------------------------------------------------------------------->
 </div>
 <div id="desigualdades-de-concentración" class="section level2 hasAnchor" number="3.3">
@@ -896,7 +904,7 @@ P\left( \left| X - \mathbb{E}[X] \right| &gt; \varepsilon \right) &lt; \frac{1}{
 \]</span></p>
 </div>
 <div class="theorem">
-<p><span id="thm:bein" class="theorem"><strong>Teorema 3.3  (Desigualdad de Berry-Esséen) </strong></span>Sean <span class="math inline">\(X_1, \ldots X_n\)</span> variables aleatorias i.i.d., con media y varianza finitas, i.e
+<p><span id="thm:bein" class="theorem"><strong>Teorema 3.4  (Desigualdad de Berry-Esséen) </strong></span>Sean <span class="math inline">\(X_1, \ldots X_n\)</span> variables aleatorias i.i.d., con media y varianza finitas, i.e
 <span class="math inline">\(\mathbb{E}[X] &lt; +\infty\)</span> y <span class="math inline">\(\mathbb{V}[X] &lt; +\infty\)</span> y además con tercer momento absoluto finito
 <span class="math inline">\(\mathbb{E}\left[\left|X - \mathbb{E}[X]\right|^3\right] &lt; +\infty\)</span>. Entonces, la distribución
 acumulada <span class="math inline">\(F_{U_n}\)</span> de la variable aleatoria
@@ -911,7 +919,7 @@ acumulada de la ley normal <span class="math inline">\(\Phi\)</span>.
 \]</span></p>
 </div>
 <div class="theorem">
-<p><span id="thm:ddkw" class="theorem"><strong>Teorema 3.4  (Desigualdad Dvoretzky–Kiefer–Wolfowitz) </strong></span>Dada una serie de variables aleatorias a valores reales <span class="math inline">\(X_1, \ldots, X_n\)</span>, i.i.d., con
+<p><span id="thm:ddkw" class="theorem"><strong>Teorema 3.5  (Desigualdad Dvoretzky–Kiefer–Wolfowitz) </strong></span>Dada una serie de variables aleatorias a valores reales <span class="math inline">\(X_1, \ldots, X_n\)</span>, i.i.d., con
 distribución acumulada <span class="math inline">\(F\)</span>, tenemos la siguiente desigualdad asociada a la
 <strong>distribución acumulada empírica</strong>
 <span class="math display">\[
@@ -925,7 +933,7 @@ P\left( \underset{x \in \mathbb{R}}{\sup} \left| F_n( x ) - F( x ) \right| &gt; 
 </div>
 <p>Como podemos notar el orden de convergencia del teorema es <span class="math inline">\(\sqrt{n}\)</span> en el tamaño de observaciones,
 esto quiere decir que la convergencia es menos que el orden lineal.</p>
-<p>Acorde a la desigualdad <a href="probabilidad-y-estadística.html#thm:ddkw">3.4</a>, para tener un probabilidad baja de aproximación
+<p>Acorde a la desigualdad <a href="probabilidad-y-estadística.html#thm:ddkw">3.5</a>, para tener un probabilidad baja de aproximación
 <span class="math inline">\(\delta &gt; 0\)</span> en un error de discrepancia <span class="math inline">\(\varepsilon &gt;0\)</span>, necesitamos satisfacer la desigualdad.
 <span class="math display">\[
 \begin{eqnarray*}
@@ -2123,7 +2131,7 @@ GB
 <p></p>
 <!------------------------------------------------------------------------------------------------->
 <div class="theorem">
-<p><span id="thm:dchernoff" class="theorem"><strong>Teorema 3.5  (Desigualdad de Chernoff) </strong></span>Dada una variable aleatoria <span class="math inline">\(X\)</span> a valores reales, para la cual si existe y está bien definida
+<p><span id="thm:dchernoff" class="theorem"><strong>Teorema 3.6  (Desigualdad de Chernoff) </strong></span>Dada una variable aleatoria <span class="math inline">\(X\)</span> a valores reales, para la cual si existe y está bien definida
 su función generadora de momentos <span class="math inline">\(M\)</span>, entonces se satisface la siguientes desigualdades para
 cualquier <span class="math inline">\(\varepsilon \in \mathbb{R}\)</span>.
 <span class="math display">\[
@@ -2136,7 +2144,7 @@ P( X \leq \varepsilon ) \leq \underset{t &lt; 0}{\inf} \exp( -t \varepsilon ) M(
 </div>
 <!------------------------------------------------------------------------------------------------->
 <div class="theorem">
-<p><span id="thm:dpaleyzyg" class="theorem"><strong>Teorema 3.6  (Desigualdad de Paley-Zygmund) </strong></span>Dada una variable aleatoria <span class="math inline">\(X\)</span> a valores reales, que solo toma valores no negativos <span class="math inline">\(X \geq 0\)</span> y
+<p><span id="thm:dpaleyzyg" class="theorem"><strong>Teorema 3.7  (Desigualdad de Paley-Zygmund) </strong></span>Dada una variable aleatoria <span class="math inline">\(X\)</span> a valores reales, que solo toma valores no negativos <span class="math inline">\(X \geq 0\)</span> y
 que además tiene varianza finita <span class="math inline">\(\mathbb{V}[X] &lt; +\infty\)</span>, entonces si tomamos un valor
 <span class="math inline">\(\rho \in [0,1]\)</span>, se satisface la siguiente desigualdad:
 <span class="math display">\[

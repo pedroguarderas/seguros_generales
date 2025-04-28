@@ -18,6 +18,7 @@ def:dsum
 def:dexceso
 thm:twln
 thm:tlc
+thm:tdinver
 prp:chebdes
 thm:bein
 thm:ddkw
