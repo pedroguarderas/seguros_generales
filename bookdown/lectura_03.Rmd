@@ -620,6 +620,8 @@ F_u( y ) = P\left( X - u \leq y \mid X > u \right)
 $$
 :::
 
+
+
 <!------------------------------------------------------------------------------------------------->
 ## Resultados de convergencia
 
@@ -677,6 +679,15 @@ al \@ref(thm:tlc) se debe considerar otros resultados asociados a desigualdades 
 
 El siguiente teorema es de gran ayuda para estimar la tasa de convergencia del resultado anterior
 \@ref(thm:tlc).
+
+::: {.theorem #tdinver name="Inversion"}
+Sea $\varphi$ la función característica de la distribución de probabilidad $F$ de una variable 
+aleatoria $X$. Si $x,y \in \R$ son dos puntos de continuidad de la distribución $F$, then
+$$
+F( y ) - F( x ) = \frac{1}{2\pi} \underset{c \rightarrow +\infty}{\lim} \int\limits_{-c}^c 
+\frac{\exp(-itx) - \exp(-ity)}{it} \varphi( t )\ dt
+$$
+:::
 
 <!------------------------------------------------------------------------------------------------->
 ## Desigualdades de concentración 
