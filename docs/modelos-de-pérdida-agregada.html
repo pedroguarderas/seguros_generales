@@ -1193,8 +1193,8 @@ número máximo <span class="math inline">\(M \in \mathbb{N}\)</span> de términ
 como para que la siguiente aproximación resulte adecuada.
 <span class="math display">\[
 \{ f_{S}( s_k ) \}
-\approx  \operatorname{Re}\left( \sum\limits_{n=1}^{M} \operatorname{DFT}^{-1}\left[ \left\{ \frac{1}{h} \exp\left( 2\pi i \omega_j a \right)
-\prod\limits_{i=1}^n \hat{f}_{i,j} \right\} \right]\ p_n\right),
+\approx  \operatorname{Re}\left( \operatorname{DFT}^{-1}\left[ \sum\limits_{n=1}^{M} \left\{ \frac{1}{h} \exp\left( 2\pi i \omega_j a \right)
+\prod\limits_{i=1}^n \hat{f}_{i,j} \right\}\ p_n \right] \right),
 \qquad \forall s_k &gt; 0
 \]</span></p>
 <p>para el caso cuando <span class="math inline">\(s_o = 0\)</span>, tenemos que <span class="math inline">\(f_S( s_0 ) = f_S( 0 ) = p_0\)</span>.</p>
