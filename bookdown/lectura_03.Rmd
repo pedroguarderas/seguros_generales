@@ -814,7 +814,7 @@ phi <- pnorm( z )
 D <- sapply( FSn, FUN = function( Fn ) max( abs( Fn - phi ) ) )
 ```
 
-```{r l3g1, out.width='80%', out.height='400px', fig.align='center', class.source = 'fold-hide'}
+```{r l3g1, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
 plt <- ggplot() +
   geom_line( aes( x = 1:n, y = D ), colour = 'darkred', linewidth = 0.5 ) + 
   scale_x_continuous( breaks = seq( 0, n, 500 ), limits = c( 1, n ), expand = c( 0, 0 ) ) +
@@ -825,7 +825,7 @@ plt <- ggplot() +
 plot( plt )
 ```
 
-```{r l3g2, out.width='80%', out.height='400px', fig.align='center', class.source = 'fold-hide'}
+```{r l3g2, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
 dat <- NULL
 for ( k in 1:n ) {
   dat <- rbindlist( list( dat, data.table( z = z, n = as.factor( k ), FSn = FSn[[ k ]] ) ) )
@@ -1026,7 +1026,7 @@ $$
 
 Como se puede observar se superponen cada una de las distribuciones la discretización $f_k$ y la 
 calculada con inversión de la transformada de Fourier discreta.
-```{r l3g3, out.width='80%', out.height='400px', fig.align='center', class.source = 'fold-hide'}
+```{r l3g3, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
 e <- f - IFf
 eb <- max( abs( e ) )
 
@@ -1039,14 +1039,14 @@ plt <- ggplot() +
 plot( plt )
 ```
 
-```{r l3g4, out.width='80%', out.height='400px', fig.align='center', class.source = 'fold-hide'}
+```{r l3g4, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
 plt <- ggplot() +
-  geom_histogram( aes( x = e, y = after_stat( density ) ), bins = 50, fill = 'grey50', colour = 'dodgerblue3' ) + 
+  geom_histogram( aes( x = e, y = after_stat( density ) ), fill = 'grey50', colour = 'dodgerblue3', bins = nclass.scott( e ) ) + 
   geom_density() +
   scale_x_continuous( breaks = seq( -eb, eb, length = 10 ), 
                       labels = label_scientific( digits = 2 ),
                       limits = c( -eb, eb ) ) +
-  scale_y_continuous( labels = label_scientific( digits = 2 ) ) +
+  scale_y_continuous( labels = label_scientific( digits = 4 ) ) +
   ylab( TeX( "$e$" ) ) + 
   theme_bw()
 plot( plt )
