@@ -368,7 +368,7 @@ F_S( s )
 & = & P\left( \sum\limits_{i=1}^N X_i \leq s \right) \\
 & = & \sum\limits_{n=0}^{+\infty} P\left( \sum\limits_{i=1}^n X_i \leq s \middle| N = n \right) P( N = n )\quad \text{utilizando la probabilidad condicional} \\
 & = & \sum\limits_{n=0}^{+\infty} P\left( \sum\limits_{i=1}^n X_i \leq s \right) p_n\quad \text{si $X_i$ y $N$ son independientes} \\
-& = & \sum\limits_{n=0}^{+\infty} F_{X_1} \star \cdots \star F_{X_n}( s ) p_n\quad \text{distribución de la suma de variables aleatorias} \\
+& = & \sum\limits_{n=0}^{+\infty} F_{X_1} \star \cdots \star F_{X_n}( s ) p_n\quad \text{si $\{X_i\} son independientes} \\
 & = & \sum\limits_{n=0}^{+\infty} F^{\star n}_{X}( s ) p_n\quad \text{si $\{X_i\}$ son idénticamente distribuidas}
 \end{eqnarray*}
 $$
@@ -1270,7 +1270,7 @@ EeS <- sapply( 1:p, FUN = function( l ) mean( sapply( 1:m, function( i ) S[[ i ]
 ```
 
 En el gráfico a continuación presentamos todos los procesos de conteo $N_{i}$ simulados, como es de
-esperarse son funciones de escalera, siempre crecientes, que toma solo valores positivos.
+esperarse son funciones de escalera, siempre crecientes, que toman solo valores positivos.
 ```{r l5g9, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
 Ndat <- NULL
 for ( j in 1:m ) {
