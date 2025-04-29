@@ -23,7 +23,7 @@
 <meta name="author" content="" />
 
 
-<meta name="date" content="2025-04-28" />
+<meta name="date" content="2025-04-29" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -245,8 +245,8 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="6" data-path="tarificación.html"><a href="tarificación.html"><i class="fa fa-check"></i><b>6</b> Tarificación</a>
 <ul>
-<li class="chapter" data-level="6.1" data-path="tarificación.html"><a href="tarificación.html#tarificación-en-grandes-términos"><i class="fa fa-check"></i><b>6.1</b> Tarificación en grandes términos</a></li>
-<li class="chapter" data-level="6.2" data-path="tarificación.html"><a href="tarificación.html#medidas-de-riesgo"><i class="fa fa-check"></i><b>6.2</b> Medidas de riesgo</a></li>
+<li class="chapter" data-level="6.1" data-path="tarificación.html"><a href="tarificación.html#medidas-de-riesgo"><i class="fa fa-check"></i><b>6.1</b> Medidas de riesgo</a></li>
+<li class="chapter" data-level="6.2" data-path="tarificación.html"><a href="tarificación.html#tarificación-en-grandes-términos"><i class="fa fa-check"></i><b>6.2</b> Tarificación en grandes términos</a></li>
 <li class="chapter" data-level="6.3" data-path="tarificación.html"><a href="tarificación.html#prima"><i class="fa fa-check"></i><b>6.3</b> Prima</a></li>
 <li class="chapter" data-level="6.4" data-path="tarificación.html"><a href="tarificación.html#segmentación"><i class="fa fa-check"></i><b>6.4</b> Segmentación</a></li>
 </ul></li>
@@ -295,120 +295,27 @@ div.csl-indent {
 comportamiento futuro de los reclamos totales <span class="math inline">\(S\)</span>, es necesario también tomar en cuenta el capital
 <span class="math inline">\(K\)</span> destinado para hacer frente al riesgo subscrito y los costos generales <span class="math inline">\(G\)</span></p>
 <!------------------------------------------------------------------------------------------------->
-<div id="tarificación-en-grandes-términos" class="section level2 hasAnchor" number="6.1">
-<h2><span class="header-section-number">6.1</span> Tarificación en grandes términos<a href="tarificación.html#tarificación-en-grandes-términos" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>La tarificación que conlleva a la selección de la prima <span class="math inline">\(\Pi\)</span> debe tomar en cuenta como se manejan y
-equilibran los activos y pasivos en el negocio asegurador.</p>
-<p><strong>Pasivos</strong></p>
-<ol style="list-style-type: decimal">
-<li><p>Capitales propios</p></li>
-<li><p>Reservas técnicas</p></li>
-<li><p>Reservas para otros riesgos</p></li>
-<li><p>Deudas o depósitos en dinero recibidos por cesiones</p></li>
-<li><p>Otras deudas por pagar</p></li>
-</ol>
-<p><strong>Activos</strong></p>
-<ol style="list-style-type: decimal">
-<li><p>Capital suscrito no desembolsado</p></li>
-<li><p>Activos no materiales</p></li>
-<li><p>Inversiones</p></li>
-<li><p>Parte de reaseguros en reservas técnicas</p></li>
-<li><p>Deudas por cobrar</p></li>
-<li><p>Otros activos</p></li>
-</ol>
-<p>En el proceso de tarificación no es pertinente incluir todos los activos de la empresa, ya que
-muchos de estos no tienen la liquidez necesaria como para ser considerados un tipo de activo
-viable para la tarificación. Tampoco se toma en cuenta el dinero recibido por la cesión de primas
-en un ramo en particular, ya que esto constituye un nivel más arriba propio del negocio
-reasegurador.</p>
-<p>En términos generales se busca equilibrar el resultado operativo del ramo de negocio <span class="math inline">\(R\)</span> a lo largo
-de la vida del ramo. El resultado <span class="math inline">\(R\)</span> a su vez está dado por la siguiente relación:
-<span class="math display">\[
-R = \Pi + I - S - G - K
-\]</span>
-donde las variables a considerarse en principio son:</p>
-<ol style="list-style-type: decimal">
-<li><p><span class="math inline">\(\Pi\)</span> Ingreso por primas</p></li>
-<li><p><span class="math inline">\(I\)</span> Ingreso por inversiones</p></li>
-<li><p><span class="math inline">\(S\)</span> Pago de siniestros</p></li>
-<li><p><span class="math inline">\(G\)</span> Gastos de subscripción</p></li>
-<li><p><span class="math inline">\(K\)</span> Coste de capital</p></li>
-</ol>
-<p>En varias ocasiones el ciclo del negocio puede ser corto y no permite considerar un ingreso por
-inversiones <span class="math inline">\(I = 0\)</span>.
-<span class="math display">\[
-R = \Pi - S - G - K
-\]</span></p>
-<p>Sería ideal que a lo largo de la vida del ramo el resultado mantenga <span class="math inline">\(R &gt; 0\)</span>, pero al tratarse de
-un negocio que depende de la aleatoriedad de los reclamos, es bastante complicado encontrar un
-costo de capital <span class="math inline">\(K\)</span> y una prima <span class="math inline">\(\Pi\)</span> que siempre asegure ante todo escenario que se mantenga
-la positividad. Ante este riesgo continuo se busca minimizar la probabilidad de ruina <span class="math inline">\(R &lt; 0\)</span>
-a un nivel <span class="math inline">\(\alpha &gt; 0\)</span> adecuado
-<span class="math display">\[
-P( R &lt; 0 ) &lt; \alpha
-\]</span></p>
-<p>Muchas de las veces se parte del principio de equilibrio financiero <a href="probabilidad-y-estadística.html#sec:equifin">3.5.4</a>, donde
-se busca la igualdad <span class="math inline">\(\mathbb{E}[R] = 0\)</span>, la misma implica la siguiente relación:
-<span class="math display">\[
-\begin{eqnarray*}
-0 &amp; = &amp; \mathbb{E}[R] \\
-0 &amp; = &amp; \mathbb{E}[R\mid R \geq 0]P( R \geq 0 ) + \mathbb{E}[R\mid R &lt; 0]P( R &lt; 0 ) \\
-\mathbb{E}[R\mid R \geq 0]P( R \geq 0 ) &amp; = &amp; -\mathbb{E}[R\mid R &lt; 0]P( R &lt; 0 ) \\
-\frac{P( R &lt; 0 )}{P( R \geq 0 ) } &amp; = &amp; -\frac{\mathbb{E}[R\mid R \geq 0]}{\mathbb{E}[R\mid R &lt; 0]}
-\end{eqnarray*}
-\]</span>
-en el equilibrio financiero, la proporción de la probabilidad de ruina respecto de la probabilidad
-de no estar en ruina es igual a la proporción entre la esperanza condicional del resultado cuando
-no se produce la ruina respecto de la esperanza condicional cuando si se produce la ruina.</p>
-<p>Un modelo puede estar equilibrado financieramente <span class="math inline">\(\mathbb{E}[R] = 0\)</span>, pero se desconoce la
-probabilidad de ruina <span class="math inline">\(P( R &lt; 0)\)</span>, esta podría ser muy grande. La razón anterior permite estimar
-la relevancia de la probabilidad de ruina en un modelo equilibrado, con el uso de las esperanzas
-condicionales.</p>
-<p>Es usual asumir que la única parte aleatoria de <span class="math inline">\(R\)</span> viene dada por el valor de los reclamos totales,
-en razón de esto se tiene:
-<span class="math display">\[
-\mathbb{E}[ R ] = \Pi - \mathbb{E}[S] - G - K
-\]</span></p>
-<p>El <strong>coste de capital</strong> <span class="math inline">\(K\)</span> es el dinero que se requiere adicional para estar cubiertos a un nivel
-de solvencia adecuado en caso se presenten mayores variaciones en el valor observado del reclamo
-total <span class="math inline">\(S\)</span> y el esperado <span class="math inline">\(\mathbb{E}[S]\)</span>. Para ello se suele utilizar una <strong>medida de riesgo</strong>
-<span class="math inline">\(\zeta\)</span> que permita controlar la probabilidad de ruina <span class="math inline">\(P( R &lt; 0)\)</span> al nivel de <span class="math inline">\(\alpha &gt; 0\)</span>, así se
-suele tomar
-<span class="math display">\[
-K = \zeta( S ) - \mathbb{E}[S]
-\]</span>
-de tal forma que
-<span class="math display">\[
-P( \Pi - S - G - K &lt; 0 ) = P( \Pi - G - \zeta(S) - ( S - \mathbb{E}[S] ) &lt; 0 ) &lt; \alpha.
-\]</span></p>
-<p>De la relación anterior se observa que una vez seleccionado el nivel de cobertura <span class="math inline">\(\alpha\)</span> y la
-medida de riesgo <span class="math inline">\(\zeta\)</span>, las variables correspondientes a la prima <span class="math inline">\(\Pi\)</span> y a los gastos <span class="math inline">\(G\)</span> quedan
-libres, de ahí resulta un margen que permite seleccionar la prima más óptima para un producto de
-seguro, así como también optimizar los gastos <span class="math inline">\(G\)</span>. Este proceso de selección es precisamente lo que
-llamamos <strong>tarificación</strong> (pricing).</p>
-<!------------------------------------------------------------------------------------------------->
-</div>
-<div id="medidas-de-riesgo" class="section level2 hasAnchor" number="6.2">
-<h2><span class="header-section-number">6.2</span> Medidas de riesgo<a href="tarificación.html#medidas-de-riesgo" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="medidas-de-riesgo" class="section level2 hasAnchor" number="6.1">
+<h2><span class="header-section-number">6.1</span> Medidas de riesgo<a href="tarificación.html#medidas-de-riesgo" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div class="definition">
-<p><span id="def:spv" class="definition"><strong>Definición 3.7  (Medida de riesgo coherente) </strong></span>Una <strong>medida de riesgo coeherente</strong> es una función <span class="math inline">\(\zeta: \mathbb{R}\longrightarrow \mathbb{R}\)</span>,
+<p><span id="def:spv" class="definition"><strong>Definición 3.7  (Medida de riesgo coherente) </strong></span>Una <strong>medida de riesgo coeherente</strong> es una función <span class="math inline">\(\rho: \mathbb{R}\longrightarrow \mathbb{R}\)</span>,
 que satisface la siguientes propiedades:</p>
 <ol style="list-style-type: decimal">
 <li><p><strong>Homogenidad positiva</strong>, para cualquier <span class="math inline">\(a &gt; 0\)</span>
 <span class="math display">\[
-\zeta( a X ) = a \zeta( X )
+\rho( a X ) = a \rho( X )
 \]</span></p></li>
 <li><p><strong>Invarianza ante las traslaciones</strong>, para cualquier <span class="math inline">\(a &gt; 0\)</span>
 <span class="math display">\[
-\zeta( \alpha X + a ) = \zeta( \alpha X ) + a
+\rho( \alpha X + a ) = \rho( \alpha X ) + a
 \]</span></p></li>
 <li><p><strong>Monotonicidad</strong>, Si <span class="math inline">\(X \leq Y\)</span>
 <span class="math display">\[
-\zeta( X ) \leq \zeta( Y )
+\rho( X ) \leq \rho( Y )
 \]</span></p></li>
 <li><p><strong>Sub-aditividad</strong>
 <span class="math display">\[
-\zeta( X + Y ) \leq \zeta( X ) + \zeta( Y )
+\rho( X + Y ) \leq \rho( X ) + \rho( Y )
 \]</span></p></li>
 </ol>
 </div>
@@ -485,21 +392,170 @@ idénticamente distribuidos (i.i.d), en este caso con distribución <span class=
 <span id="cb60-3"><a href="tarificación.html#cb60-3"></a>s <span class="ot">&lt;-</span> <span class="fl">0.5</span></span>
 <span id="cb60-4"><a href="tarificación.html#cb60-4"></a>n <span class="ot">&lt;-</span> <span class="fl">1e4</span></span>
 <span id="cb60-5"><a href="tarificación.html#cb60-5"></a>X <span class="ot">&lt;-</span> <span class="fu">rlnorm</span>( n, <span class="at">meanlog =</span> u, <span class="at">sdlog =</span> s )</span>
-<span id="cb60-6"><a href="tarificación.html#cb60-6"></a>k <span class="ot">&lt;-</span> <span class="fu">seq</span>( <span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.2</span> ) </span>
-<span id="cb60-7"><a href="tarificación.html#cb60-7"></a>VaRX <span class="ot">&lt;-</span> <span class="fu">quantile</span>( X, <span class="at">probs =</span> k, <span class="at">names =</span> <span class="cn">FALSE</span> )</span>
+<span id="cb60-6"><a href="tarificación.html#cb60-6"></a>alpha <span class="ot">&lt;-</span> <span class="fu">seq</span>( <span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.01</span> ) </span>
+<span id="cb60-7"><a href="tarificación.html#cb60-7"></a>VaRX <span class="ot">&lt;-</span> <span class="fu">quantile</span>( X, <span class="at">probs =</span> alpha, <span class="at">names =</span> <span class="cn">FALSE</span> )</span>
 <span id="cb60-8"><a href="tarificación.html#cb60-8"></a>TVaRX <span class="ot">&lt;-</span> <span class="fu">sapply</span>( </span>
 <span id="cb60-9"><a href="tarificación.html#cb60-9"></a>  <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>( VaRX ), </span>
-<span id="cb60-10"><a href="tarificación.html#cb60-10"></a>  <span class="at">FUN =</span> <span class="cf">function</span>( i ) <span class="fu">ifelse</span>( k[ i ] <span class="sc">&lt;</span> <span class="dv">1</span>, ( <span class="dv">1</span> <span class="sc">/</span> ( <span class="dv">1</span> <span class="sc">-</span> k[ i ] ) ) <span class="sc">*</span> <span class="fu">mean</span>( X <span class="sc">*</span> ( X <span class="sc">&gt;</span> VaRX[ i ] ) ), <span class="fu">max</span>( X ) ) )</span></code></pre></div>
+<span id="cb60-10"><a href="tarificación.html#cb60-10"></a>  <span class="at">FUN =</span> <span class="cf">function</span>( i ) <span class="fu">ifelse</span>( alpha[ i ] <span class="sc">&lt;</span> <span class="dv">1</span>, ( <span class="dv">1</span> <span class="sc">/</span> ( <span class="dv">1</span> <span class="sc">-</span> alpha[ i ] ) ) <span class="sc">*</span> <span class="fu">mean</span>( X <span class="sc">*</span> ( X <span class="sc">&gt;</span> VaRX[ i ] ) ), <span class="fu">max</span>( X ) ) )</span></code></pre></div>
 </details>
 <p></p>
 <p></p>
-<details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb61"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb61-1"><a href="tarificación.html#cb61-1"></a><span class="fu">plot</span>( k, VaRX, <span class="at">ylim =</span> <span class="fu">c</span>( <span class="dv">0</span>, <span class="fl">1e3</span> ) )</span>
-<span id="cb61-2"><a href="tarificación.html#cb61-2"></a><span class="fu">points</span>( k, TVaRX, <span class="at">col =</span> <span class="st">&#39;red&#39;</span> )</span></code></pre></div>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r fold-hide"><code class="sourceCode r"><span id="cb61-1"><a href="tarificación.html#cb61-1" tabindex="-1"></a>plt <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb61-2"><a href="tarificación.html#cb61-2" tabindex="-1"></a>  <span class="fu">geom_point</span>( <span class="fu">aes</span>( <span class="at">x =</span> alpha, <span class="at">y =</span> VaRX ), <span class="at">colour =</span> <span class="st">&#39;darkred&#39;</span> ) <span class="sc">+</span> </span>
+<span id="cb61-3"><a href="tarificación.html#cb61-3" tabindex="-1"></a>  <span class="fu">geom_point</span>( <span class="fu">aes</span>( <span class="at">x =</span> alpha, <span class="at">y =</span> TVaRX ), <span class="at">colour =</span> <span class="st">&#39;orange&#39;</span> ) <span class="sc">+</span> </span>
+<span id="cb61-4"><a href="tarificación.html#cb61-4" tabindex="-1"></a>  <span class="fu">xlab</span>( <span class="fu">TeX</span>( <span class="st">&quot;$</span><span class="sc">\\</span><span class="st">alpha$&quot;</span> ) ) <span class="sc">+</span> </span>
+<span id="cb61-5"><a href="tarificación.html#cb61-5" tabindex="-1"></a>  <span class="fu">ylab</span>( <span class="fu">TeX</span>( <span class="st">&quot;$VaR,TVaR$&quot;</span> ) ) <span class="sc">+</span> </span>
+<span id="cb61-6"><a href="tarificación.html#cb61-6" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span>
+<span id="cb61-7"><a href="tarificación.html#cb61-7" tabindex="-1"></a><span class="fu">plot</span>( plt )</span></code></pre></div>
 </details>
-<p><img src="seguros_generales_files/figure-html/l6c2-1.png" width="700" /></p>
+<p><img src="seguros_generales_files/figure-html/l6g1-1.png" width="80%" height="450px" style="display: block; margin: auto;" /></p>
 <p></p>
 </div>
+<!------------------------------------------------------------------------------------------------->
+</div>
+<div id="tarificación-en-grandes-términos" class="section level2 hasAnchor" number="6.2">
+<h2><span class="header-section-number">6.2</span> Tarificación en grandes términos<a href="tarificación.html#tarificación-en-grandes-términos" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>La tarificación que conlleva a la selección de la prima <span class="math inline">\(\Pi\)</span> debe tomar en cuenta como se manejan y
+equilibran los activos y pasivos en el negocio asegurador.</p>
+<p><strong>Pasivos</strong></p>
+<ol style="list-style-type: decimal">
+<li><p>Capitales propios</p></li>
+<li><p>Reservas técnicas</p></li>
+<li><p>Reservas para otros riesgos</p></li>
+<li><p>Deudas o depósitos en dinero recibidos por cesiones</p></li>
+<li><p>Otras deudas por pagar</p></li>
+</ol>
+<p><strong>Activos</strong></p>
+<ol style="list-style-type: decimal">
+<li><p>Capital suscrito no desembolsado</p></li>
+<li><p>Activos no materiales</p></li>
+<li><p>Inversiones</p></li>
+<li><p>Parte de reaseguros en reservas técnicas</p></li>
+<li><p>Deudas por cobrar</p></li>
+<li><p>Otros activos</p></li>
+</ol>
+<p>En el proceso de tarificación no es pertinente incluir todos los activos de la empresa, ya que
+muchos de estos no tienen la liquidez necesaria como para ser considerados un tipo de activo
+viable para la tarificación. Tampoco se toma en cuenta el dinero recibido por la cesión de primas
+en un ramo en particular, ya que esto constituye un nivel más arriba propio del negocio
+reasegurador.</p>
+<p>En términos generales se busca equilibrar el resultado operativo del ramo de negocio <span class="math inline">\(R\)</span> a lo largo
+de la vida del ramo. El resultado <span class="math inline">\(R\)</span> a su vez está dado por la siguiente relación:
+<span class="math display">\[
+R = \Pi + I - S - G - K
+\]</span>
+donde las variables a considerarse en principio son:</p>
+<ol style="list-style-type: decimal">
+<li><p><span class="math inline">\(\Pi\)</span> Ingreso por primas</p></li>
+<li><p><span class="math inline">\(I\)</span> Ingreso por inversiones</p></li>
+<li><p><span class="math inline">\(S\)</span> Pago de siniestros</p></li>
+<li><p><span class="math inline">\(G\)</span> Gastos agregados, incluyendo gastos de emisión, operativos, gastos por reclamos</p></li>
+<li><p><span class="math inline">\(K\)</span> Coste de capital, esencialmente el retorno mínimo esperado por los inversores sobre el
+capital invertido.</p></li>
+</ol>
+<p>En varias ocasiones el ciclo del negocio puede ser corto y no permite considerar un ingreso por
+inversiones <span class="math inline">\(I = 0\)</span>.
+<span class="math display">\[
+R = \Pi - S - G - K
+\]</span></p>
+<p>Sería ideal que a lo largo de la vida del ramo el resultado mantenga <span class="math inline">\(R &gt; 0\)</span>, pero al tratarse de
+un negocio que depende de la aleatoriedad de los reclamos, es bastante complicado encontrar un
+costo de capital <span class="math inline">\(K\)</span> y una prima <span class="math inline">\(\Pi\)</span> que siempre asegure ante todo escenario que se mantenga
+la positividad. Ante este riesgo continuo se busca minimizar la <strong>probabilidad de ruina</strong> <span class="math inline">\(R &lt; 0\)</span>
+a un nivel <span class="math inline">\(\alpha &gt; 0\)</span> adecuado
+<span class="math display">\[
+P( R &lt; 0 ) &lt; \alpha
+\]</span></p>
+<p>Muchas de las veces se parte del principio de equilibrio financiero <a href="probabilidad-y-estadística.html#sec:equifin">3.5.4</a>, donde
+se busca la igualdad <span class="math inline">\(\mathbb{E}[R] = 0\)</span>, la misma implica la siguiente relación:
+<span class="math display">\[
+\begin{eqnarray*}
+0 &amp; = &amp; \mathbb{E}[R] \\
+0 &amp; = &amp; \mathbb{E}[R\mid R \geq 0]P( R \geq 0 ) + \mathbb{E}[R\mid R &lt; 0]P( R &lt; 0 ) \\
+\mathbb{E}[R\mid R \geq 0]P( R \geq 0 ) &amp; = &amp; -\mathbb{E}[R\mid R &lt; 0]P( R &lt; 0 ) \\
+\frac{P( R &lt; 0 )}{P( R \geq 0 ) } &amp; = &amp; -\frac{\mathbb{E}[R\mid R \geq 0]}{\mathbb{E}[R\mid R &lt; 0]}
+\end{eqnarray*}
+\]</span>
+en el equilibrio financiero, la proporción de la probabilidad de ruina respecto de la probabilidad
+de no estar en ruina es igual a la proporción entre la esperanza condicional del resultado cuando
+no se produce la ruina respecto de la esperanza condicional cuando si se produce la ruina.</p>
+<p>Un modelo puede estar equilibrado financieramente <span class="math inline">\(\mathbb{E}[R] = 0\)</span>, pero se desconoce la
+probabilidad de ruina <span class="math inline">\(P( R &lt; 0)\)</span>, esta podría ser muy grande. La razón anterior permite estimar
+la relevancia de la probabilidad de ruina en un modelo equilibrado, con el uso de las esperanzas
+condicionales.</p>
+<p>Es usual asumir que la única parte aleatoria de <span class="math inline">\(R\)</span> viene dada por el valor de los reclamos totales,
+en razón de esto se tiene:
+<span class="math display">\[
+\mathbb{E}[ R ]
+= \mathbb{E}[ \Pi - S - G - K ]
+= \Pi - \mathbb{E}[S] - G - K
+\]</span></p>
+<p>El <strong>coste de capital</strong> <span class="math inline">\(K\)</span> como ya lo mencionamos es el retorno mínimo esperado por los inversores
+sobre el capital invertido. Usualmente este capital puede ser visto como un porcentaje
+<span class="math inline">\(r &gt; 0\)</span> que se toma sobre el capital colocado para mantener un nivel de solvencia adecuado
+sobre el valor esperado <span class="math inline">\(\mathbb{E}[S]\)</span> del total de reclamos <span class="math inline">\(S\)</span>. Para ello se suele utilizar precisamente
+una medida de <strong>medida de riesgo</strong> <span class="math inline">\(\rho\)</span> que permita mantener el nivel de solvencia.
+<span class="math display">\[
+K = r\left( \rho( S ) - \mathbb{E}[S] \right)
+\]</span>
+con esta perspectiva
+<span class="math display">\[
+\mathbb{E}[ R ]
+= \mathbb{E}\left[ \Pi - S - G - r\left( \rho( S ) - \mathbb{E}[S] \right) \right]
+= \Pi - \mathbb{E}[S] - G - r \left( \rho(S) - \mathbb{E}[S] \right)
+\]</span>
+Lo que se busca es evitar la ruina y por tanto se busca cubrirse ante el evento <span class="math inline">\(R &lt; 0\)</span>, desde una
+perspectiva probabilista esto se puede realizar seleccionando un nivel de conbertura <span class="math inline">\(\alpha &gt; 0\)</span>,
+que acote la probabilidad del evento de ruina.
+<span class="math display">\[
+P( R &lt; 0 )
+= P( \Pi - S - G - K &lt; 0 )
+= P\left( \Pi - S - G - r\left( \rho(S) - \mathbb{E}[S] \right) &lt; 0 \right) &lt; \alpha.
+\]</span></p>
+<p>De la relación anterior se observa que una vez seleccionado el nivel de cobertura <span class="math inline">\(\alpha\)</span> y la
+medida de riesgo <span class="math inline">\(\rho\)</span>, las variables correspondientes a la prima <span class="math inline">\(\Pi\)</span> y a los gastos <span class="math inline">\(G\)</span> quedan
+libres, de ahí resulta un margen que permite seleccionar la prima más óptima para un producto de
+seguro, así como también optimizar los gastos <span class="math inline">\(G\)</span>. Este proceso de selección es precisamente lo que
+llamamos en este contexto como <strong>tarificación</strong> (pricing).</p>
+<p>Razonando un poco más al respecto, si asumimos que se dispone de la distribución acumulada <span class="math inline">\(F_S\)</span>
+de <span class="math inline">\(S\)</span>, se puede obtener las siguientes expresiones:
+<span class="math display">\[
+\begin{eqnarray*}
+P\left( \Pi - S - G - K &lt; 0 \right) &amp; &lt; &amp; \alpha \\
+P\left( S &gt; \Pi - G - K \right) &amp; &lt; &amp; \alpha  \\
+1 - P\left( S \leq \Pi - G - K \right) &amp; &lt; &amp; \alpha \\
+P\left( S \leq \Pi - G - K \right) &amp; &gt; &amp; 1 - \alpha \\
+F_S\left( \Pi - G - K \right) &amp; &gt; &amp; 1 - \alpha \\
+F_S\left( \Pi - G - K \right) &amp; \in &amp; \left( 1 - \alpha, +\infty \right), \qquad
+\text{la desigualdad anterior es equivalente a la inclusión}\\
+\Pi - G - K &amp; \in &amp; F_S^{-1}\left( \left( 1 - \alpha, +\infty \right) \right),\qquad
+\text{por propiedades de la inversión de funciones}\\
+\Pi &amp; \geq &amp; G + K + F_S^{-1}\left( 1 - \alpha \right), \qquad
+\text{com $F_S$ es creciente, mínimo se debe satisfacer la desigualdad}
+\end{eqnarray*}
+\]</span>
+En especial cuando <span class="math inline">\(K = r\left( \rho(S) - \mathbb{E}[S] \right)\)</span>, la última desigualdad toma la forma
+<span class="math display">\[
+\Pi \geq G + r\left( \rho(S) - \mathbb{E}[S] \right) + F_S^{-1}\left( 1 - \alpha \right)
+\]</span></p>
+<p>Así, en el caso anterior si se utiliza como medida de riesgo al mismo nivel de confianza <span class="math inline">\(1 - \alpha\)</span>,
+esto es <span class="math inline">\(\rho( S ) = \operatorname{VaR}_{1-\alpha}( S ) = F_S^{-1}( 1 - \alpha )\)</span>, la última igualdad se cumple si <span class="math inline">\(S\)</span>
+es una variable aleatoria continua.
+<span class="math display">\[
+\Pi \geq G + (1 + r) F_S^{-1}\left( 1 - \alpha \right) - r \mathbb{E}[S]
+\]</span></p>
+<p>Si en caso los gastos <span class="math inline">\(G\)</span> son proporcionales a la prima <span class="math inline">\(G = \gamma \Pi\)</span>, para una constante
+<span class="math inline">\(\gamma &gt; 0\)</span>, y seguramente <span class="math inline">\(\gamma &lt; 1\)</span> ya que es de esperar gastos no mayores a la misma prima,
+sino esto estaría en una situación insostenible donde los gastos son mayores a la cobertura del
+riesgo. Las desigualdades anteriores toman la forma:
+<span class="math display">\[
+\begin{eqnarray*}
+\Pi &amp; \geq &amp; \frac{r}{1 - \gamma} K + \frac{1}{1 - \gamma} F_S^{-1}\left( 1 - \alpha \right) \\
+\Pi &amp; \geq &amp; \frac{r}{1 - \gamma} \left( \rho(S) - \mathbb{E}[S] \right) + \frac{1}{1 - \gamma} F_S^{-1}\left( 1 - \alpha \right) \\
+\Pi &amp; \geq &amp;  \frac{1 + r}{1 - \gamma} F_S^{-1}\left( 1 - \alpha \right) -  \frac{r}{1 - \gamma} \mathbb{E}[S]
+\end{eqnarray*}
+\]</span></p>
 <!------------------------------------------------------------------------------------------------->
 </div>
 <div id="prima" class="section level2 hasAnchor" number="6.3">

@@ -23,7 +23,7 @@
 <meta name="author" content="" />
 
 
-<meta name="date" content="2025-04-28" />
+<meta name="date" content="2025-04-29" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -245,8 +245,8 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="6" data-path="tarificación.html"><a href="tarificación.html"><i class="fa fa-check"></i><b>6</b> Tarificación</a>
 <ul>
-<li class="chapter" data-level="6.1" data-path="tarificación.html"><a href="tarificación.html#tarificación-en-grandes-términos"><i class="fa fa-check"></i><b>6.1</b> Tarificación en grandes términos</a></li>
-<li class="chapter" data-level="6.2" data-path="tarificación.html"><a href="tarificación.html#medidas-de-riesgo"><i class="fa fa-check"></i><b>6.2</b> Medidas de riesgo</a></li>
+<li class="chapter" data-level="6.1" data-path="tarificación.html"><a href="tarificación.html#medidas-de-riesgo"><i class="fa fa-check"></i><b>6.1</b> Medidas de riesgo</a></li>
+<li class="chapter" data-level="6.2" data-path="tarificación.html"><a href="tarificación.html#tarificación-en-grandes-términos"><i class="fa fa-check"></i><b>6.2</b> Tarificación en grandes términos</a></li>
 <li class="chapter" data-level="6.3" data-path="tarificación.html"><a href="tarificación.html#prima"><i class="fa fa-check"></i><b>6.3</b> Prima</a></li>
 <li class="chapter" data-level="6.4" data-path="tarificación.html"><a href="tarificación.html#segmentación"><i class="fa fa-check"></i><b>6.4</b> Segmentación</a></li>
 </ul></li>
@@ -639,7 +639,7 @@ F_S( s )
 &amp; = &amp; P\left( \sum\limits_{i=1}^N X_i \leq s \right) \\
 &amp; = &amp; \sum\limits_{n=0}^{+\infty} P\left( \sum\limits_{i=1}^n X_i \leq s \middle| N = n \right) P( N = n )\quad \text{utilizando la probabilidad condicional} \\
 &amp; = &amp; \sum\limits_{n=0}^{+\infty} P\left( \sum\limits_{i=1}^n X_i \leq s \right) p_n\quad \text{si $X_i$ y $N$ son independientes} \\
-&amp; = &amp; \sum\limits_{n=0}^{+\infty} F_{X_1} \star \cdots \star F_{X_n}( s ) p_n\quad \text{distribución de la suma de variables aleatorias} \\
+&amp; = &amp; \sum\limits_{n=0}^{+\infty} F_{X_1} \star \cdots \star F_{X_n}( s ) p_n\quad \text{si $\{X_i\} son independientes} \\
 &amp; = &amp; \sum\limits_{n=0}^{+\infty} F^{\star n}_{X}( s ) p_n\quad \text{si $\{X_i\}$ son idénticamente distribuidas}
 \end{eqnarray*}
 \]</span>
@@ -1510,7 +1510,7 @@ se conoce a <span class="math inline">\(N\)</span> como un proceso de Poisson.</
 </details>
 <p></p>
 <p>En el gráfico a continuación presentamos todos los procesos de conteo <span class="math inline">\(N_{i}\)</span> simulados, como es de
-esperarse son funciones de escalera, siempre crecientes, que toma solo valores positivos.</p>
+esperarse son funciones de escalera, siempre crecientes, que toman solo valores positivos.</p>
 <p></p>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb56"><pre class="sourceCode r fold-hide"><code class="sourceCode r"><span id="cb56-1"><a href="modelos-de-pérdida-agregada.html#cb56-1" tabindex="-1"></a>Ndat <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>

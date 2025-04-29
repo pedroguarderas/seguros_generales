@@ -121,8 +121,8 @@ estimación-usando-la-transformada-de-fourier
 proceso-estocástico-de-reclamos-totales
 algoritmo-de-simulación-3
 tarificación
-tarificación-en-grandes-términos
 medidas-de-riesgo
+tarificación-en-grandes-términos
 prima
 segmentación
 reservas-técnicas
