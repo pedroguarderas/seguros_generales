@@ -315,8 +315,7 @@ $$
 \begin{eqnarray*}
 \E[S]
 & = & \E\left[ \sum\limits_{i=1}^N X_i \right] \\
-& = & \sum\limits_{n=0}^{+\infty} \E\left[ 
-\sum\limits_{i=1}^n X_i\ \middle|\ N = n \right]P( N = n )
+& = & \sum\limits_{n=0}^{+\infty} \E\left[ \sum\limits_{i=1}^n X_i\ \middle|\ N = n \right]P( N = n )
 \quad \text{utilizando la esperanza condicional} \\
 & = & 0 P( N = 0 ) + \sum\limits_{n=1}^{+\infty} \E\left[ \sum\limits_{i=1}^n X_i\ \middle|\ N = n \right]P( N = n ) \\
 & = & \sum\limits_{n=1}^{+\infty} \sum\limits_{i=1}^n \E\left[ X_i \mid N = n \right]P( N = n )
@@ -366,10 +365,14 @@ $$
 F_S( s ) 
 & = & P( S \leq s ) \\
 & = & P\left( \sum\limits_{i=1}^N X_i \leq s \right) \\
-& = & \sum\limits_{n=0}^{+\infty} P\left( \sum\limits_{i=1}^n X_i \leq s \middle| N = n \right) P( N = n )\quad \text{utilizando la probabilidad condicional} \\
-& = & \sum\limits_{n=0}^{+\infty} P\left( \sum\limits_{i=1}^n X_i \leq s \right) p_n\quad \text{si $X_i$ y $N$ son independientes} \\
-& = & \sum\limits_{n=0}^{+\infty} F_{X_1} \star \cdots \star F_{X_n}( s ) p_n\quad \text{si $\{X_i\} son independientes} \\
-& = & \sum\limits_{n=0}^{+\infty} F^{\star n}_{X}( s ) p_n\quad \text{si $\{X_i\}$ son idénticamente distribuidas}
+& = & \sum\limits_{n=0}^{+\infty} P\left( \sum\limits_{i=1}^n X_i \leq s \middle| N = n \right) P( N = n )\quad 
+\text{utilizando la probabilidad condicional} \\
+& = & \sum\limits_{n=0}^{+\infty} P\left( \sum\limits_{i=1}^n X_i \leq s \right) p_n\quad 
+\text{si $X_i$ y $N$ son independientes} \\
+& = & \sum\limits_{n=0}^{+\infty} F_{X_1} \star \cdots \star F_{X_n}( s ) p_n\quad 
+\text{si $\{X_i\}$ son independientes} \\
+& = & \sum\limits_{n=0}^{+\infty} F^{\star n}_{X}( s ) p_n\quad 
+\text{si $\{X_i\}$ son idénticamente distribuidas}
 \end{eqnarray*}
 $$
 tomando $F^{\star 0}_{X}( s ) = 1$. 
@@ -1220,8 +1223,8 @@ El siguiente ejemplo es de especial atención ya que es utilizado en muchas apli
 considerar el caso donde el tiempo entre arribos $\{W_n\}$ es i.i.d y con distribución de 
 probabilidad común $F_W$ dada por una ley exponencial $Exp( \lambda )$. Un resultado clásico muestra 
 que la suma de $n$ exponenciales sigue una ley gamma $Gamma(n,\lambda)$, esto implica que 
-$T_n = W_1 + \cdots + W_n \rightsquigarrow Gamma( n, \lambda )$ o también $F_W^{\star n}$ es una 
-$Gamma( n, \lambda )$. Así por tanto, el proceso estocástico de conteo 
+$T_n = W_1 + \cdots + W_n \rightsquigarrow Gamma( n, \lambda )$ lo que quiere decir que la convolución 
+$F_W^{\star n}$ es una $Gamma( n, \lambda )$. Así por tanto, el proceso estocástico de conteo 
 $N(t) = \#\left\{ n \in \N\ \middle|\ T_n \leq t \right\}$ tiene las siguientes probabilidades
 $$
 \begin{eqnarray*}
