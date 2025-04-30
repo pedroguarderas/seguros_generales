@@ -805,7 +805,7 @@ P( S = 0 )
 & = & P\left( \bigcup\limits_{n=0}^{+\infty} \left\{ D( X_1 ) + \cdots + D( X_N ) = 0 \land N = n \right\} \right) \\
 & = & P\left( \bigcup\limits_{n=0}^{+\infty} \left\{ X_1 \leq d \land \cdots \land X_N \leq d \land N = n \right\} \right) \\
 & = & \sum\limits_{n=0}^{+\infty} P\left( X_1 \leq d \land \cdots \land X_N \leq d \land N = n \right) \\
-& = & \sum\limits_{n=0}^{+\infty} P\left( X_1 \leq d \land \cdots \land X_N \leq d \middle| N = n \right)P( N = n ) \\
+& = & \sum\limits_{n=0}^{+\infty} P\left( X_1 \leq d \land \cdots \land X_n \leq d \middle| N = n \right)P( N = n ) \\
 & = & \sum\limits_{n=0}^{+\infty} P\left( X_1 \leq d \land \cdots \land X_n \leq d \right) P( N = n ) \\
 & = & \sum\limits_{n=0}^{+\infty} P\left( X \leq d \right)^n p_n \\
 & = & \E\left[ P\left( X \leq d \right)^N \right] \\
@@ -833,7 +833,7 @@ P( S\ \text{es máximo} )
 & = & P\left( \bigcup\limits_{n=0}^{+\infty} \left\{ X_1 - d > M \land \cdots \land X_N - d  \geq M \land N = n \right\} \right) \\
 & = & P\left( \bigcup\limits_{n=0}^{+\infty} \left\{ X_1 > M + d \land \cdots \land X_N \geq M + d \land N = n \right\} \right) \\
 & = & \sum\limits_{n=0}^{+\infty} P\left( X_1 > M + d \land \cdots \land X_N > M + d \land N = n \right) \\
-& = & \sum\limits_{n=0}^{+\infty} P\left( X_1 > M + d \land \cdots \land X_N > M + d \middle| N = n \right) P( N = n ) \\
+& = & \sum\limits_{n=0}^{+\infty} P\left( X_1 > M + d \land \cdots \land X_n > M + d \middle| N = n \right) P( N = n ) \\
 & = & \sum\limits_{n=0}^{+\infty} P\left( X_1 > M + d \land \cdots \land X_n > M + d \right) P( N = n ) \\
 & = & \sum\limits_{n=0}^{+\infty} P\left( X > M + d \right)^n p_n \\
 & = & \E\left[ P\left( X > M + d \right)^N \right] \\
