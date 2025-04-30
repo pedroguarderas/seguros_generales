@@ -597,14 +597,114 @@ para toda variable aleatoria $X$, se satisface la siguiente desigualdad $D( X ) 
 1. Para evitar pérdidas pequeñas se suele configurar la función deducible $D( X ) = \max( X - d, 0 )$, 
 en este caso si $X \rightsquigarrow F_X$, entonces $Z = D( X ) \rightsquigarrow F_Z( z )$, donde 
 $F_Z( z ) = \mathbf{1}_{[d,+\infty)}( z ) F_X( z + d )$.
+```{r l5g2, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
+D <- function( x, d ) return( max( x - d, 0 ) )
+d <- 50
+alpha <- 2
+gamma <- 4
+tau <- 5
+theta <- 80
+n <- 1e3
+
+xmax <- 5e2
+x <- seq( 0, xmax, length = n )
+FX <- sapply( x, FUN = function( x ) ptrbeta( x, shape1 = alpha, shape2 = gamma, shape3 = tau, scale = theta ) )
+FDX <- sapply( x, FUN = function( x ) ifelse( x >= d, 1, 0 ) * ptrbeta( x + d, shape1 = alpha, shape2 = gamma, shape3 = tau, scale = theta ) )
+
+plt <- ggplot( ) +
+  geom_line( aes( x = x, y = FX, colour = 'a' ), linewidth = 2 ) +
+  geom_line( aes( x = x, y = FDX, colour = 'b' ), linewidth = 1 ) +
+  scale_colour_manual( breaks = c( 'a', 'b' ), 
+                       values = c( 'dodgerblue3', 'red3' ) ) +
+  scale_x_continuous( breaks = seq( 0, xmax, length = 11 ),
+                      labels = formatC( seq( 0, xmax, length = 11 ), digits = 2, format = 'f' ), 
+                      limits = c( 0, xmax ), 
+                      expand = c( 0, 0 ) ) +
+  scale_y_continuous( breaks = seq( 0, 1, length = 11 ),
+                      labels = formatC( seq( 0, 1, length = 11 ), digits = 2, format = 'f' ), 
+                      limits = c( -0.01, 1.01 ), 
+                      expand = c( 0, 0 ) ) +
+  xlab( TeX( "$x$" ) ) + 
+  ylab( TeX( "$F_X, F_{D(X)}$" ) ) + 
+  theme_bw() +
+  theme( legend.position = "none" )
+plot( plt )
+```
 
 2. Para prevenir los excesos de pérdida (stop loss) $D( X ) = \min( X, M )$, en este caso si 
 $X \rightsquigarrow F_X$, entonces $Z = D( X ) \rightsquigarrow F_Z( z )$, donde 
 $F_Z( z ) = \mathbf{1}_{(-\infty,M)}( z ) F_X( z ) + \mathbf{1}_{[M,+\infty)}( z )$.
+```{r l5g3, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
+D <- function( x, M ) return( min( x, M ) )
+M <- 150
+alpha <- 2
+gamma <- 4
+tau <- 5
+theta <- 80
+n <- 1e3
+
+xmax <- 5e2
+x <- seq( 0, xmax, length = n )
+FX <- sapply( x, FUN = function( x ) ptrbeta( x, shape1 = alpha, shape2 = gamma, shape3 = tau, scale = theta ) )
+FDX <- sapply( x, FUN = function( x ) ifelse( x < M, 1, 0 ) * ptrbeta( x, shape1 = alpha, shape2 = gamma, shape3 = tau, scale = theta ) +  ifelse( x >= M, 1, 0 ) )
+
+plt <- ggplot( ) +
+  geom_line( aes( x = x, y = FX, colour = 'a' ), linewidth = 2 ) +
+  geom_line( aes( x = x, y = FDX, colour = 'b' ), linewidth = 1 ) +
+  scale_colour_manual( breaks = c( 'a', 'b' ), 
+                       values = c( 'dodgerblue3', 'red3' ) ) +
+  scale_x_continuous( breaks = seq( 0, xmax, length = 11 ),
+                      labels = formatC( seq( 0, xmax, length = 11 ), digits = 2, format = 'f' ), 
+                      limits = c( 0, xmax ), 
+                      expand = c( 0, 0 ) ) +
+  scale_y_continuous( breaks = seq( 0, 1, length = 11 ),
+                      labels = formatC( seq( 0, 1, length = 11 ), digits = 2, format = 'f' ), 
+                      limits = c( -0.01, 1.01 ), 
+                      expand = c( 0, 0 ) ) +
+  xlab( TeX( "$x$" ) ) + 
+  ylab( TeX( "$F_X, F_{D(X)}$" ) ) + 
+  theme_bw() +
+  theme( legend.position = "none" )
+plot( plt )
+```
 
 3. Caso mixto para evitar pérdidas pequeñas y exceso de pérdida $D( X ) = \min( \max( X - d, 0 ), M )$, 
 en este caso si $X \rightsquigarrow F_X$, entonces $Z = D( X ) \rightsquigarrow F_Z( z )$, donde 
 $F_Z( z ) = \mathbf{1}_{[a,M)}( z ) F_X( z + d ) + \mathbf{1}_{[M,+\infty)}( z )$.
+```{r l5g4, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
+D <- function( x, M ) return( min( max( x - d ), M ) )
+d <- 50
+M <- 150
+alpha <- 2
+gamma <- 4
+tau <- 5
+theta <- 80
+n <- 1e3
+
+xmax <- 5e2
+x <- seq( 0, xmax, length = n )
+FX <- sapply( x, FUN = function( x ) ptrbeta( x, shape1 = alpha, shape2 = gamma, shape3 = tau, scale = theta ) )
+FDX <- sapply( x, FUN = function( x ) ifelse( x < M & x >= d, 1, 0 ) * ptrbeta( x + d, shape1 = alpha, shape2 = gamma, shape3 = tau, scale = theta ) +  ifelse( x >= M, 1, 0 ) )
+
+plt <- ggplot( ) +
+  geom_line( aes( x = x, y = FX, colour = 'a' ), linewidth = 2 ) +
+  geom_line( aes( x = x, y = FDX, colour = 'b' ), linewidth = 1 ) +
+  scale_colour_manual( breaks = c( 'a', 'b' ), 
+                       values = c( 'dodgerblue3', 'red3' ) ) +
+  scale_x_continuous( breaks = seq( 0, xmax, length = 11 ),
+                      labels = formatC( seq( 0, xmax, length = 11 ), digits = 2, format = 'f' ), 
+                      limits = c( 0, xmax ), 
+                      expand = c( 0, 0 ) ) +
+  scale_y_continuous( breaks = seq( 0, 1, length = 11 ),
+                      labels = formatC( seq( 0, 1, length = 11 ), digits = 2, format = 'f' ), 
+                      limits = c( -0.01, 1.01 ), 
+                      expand = c( 0, 0 ) ) +
+  xlab( TeX( "$x$" ) ) + 
+  ylab( TeX( "$F_X, F_{D(X)}$" ) ) + 
+  theme_bw() +
+  theme( legend.position = "none" )
+plot( plt )
+```
 
 4. En otros casos más elaborados se segmenta el riesgo cubierto, al existir variables explicativas
 de la naturaleza del riesgo $Y_1, \ldots, Y_m$, las cuales pueden tomar valores en un conjunto $E$
@@ -697,7 +797,7 @@ s <- seq( 0, max( S ), length = 100 )
 Fes <- sapply( s, FUN = FeS )
 ```
 
-```{r l5g2, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
+```{r l5g5, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
 Smax <- max( S )
 
 plt <- ggplot( ) +
@@ -808,7 +908,7 @@ El algoritmo de Panjer suele tener problemas para ajustarse en los primeros valo
 densidad $f_S$, tal como lo muestra el gráfico a continuación, usualmente hay una sobre estimación.
 Además, el algoritmo solo es válido cuando el conteo de siniestros pertenece a la familia
 de distribuciones $(a,b,0)$.
-```{r l5g3, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
+```{r l5g6, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
 fmax <- 0.0007
 
 plt <- ggplot( ) +
@@ -829,7 +929,7 @@ plt <- ggplot( ) +
 plot( plt )
 ```
 
-```{r l5g4, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
+```{r l5g7, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
 e <- cumsum( fS[ -1 ] * ds ) - ecdf( S )( sg[ -1 ] )
 
 eb <- max( abs( e ) )
@@ -913,7 +1013,7 @@ fS <- Re( fS )
 fs <- sapply( s, FUN = function( sk ) dgamma( sk, shape = sum( alpha ), scale = theta ) )
 ```
 
-```{r l5g5, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
+```{r l5g8, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
 plt <- ggplot() +
   geom_line( aes( x = s, y = fS ), colour = 'darkred', size = 1 ) + 
   geom_point( aes( x = s, y = fs ), colour = 'olivedrab3', size = 0.25 ) + 
@@ -923,7 +1023,7 @@ plt <- ggplot() +
 plot( plt )
 ```
 
-```{r l5g6, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
+```{r l5g9, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
 e <- fS - fs
 eb <- max( abs( e ) )
 
@@ -984,7 +1084,7 @@ X <- lapply( N, FUN = function( n ) rlnorm( n, meanlog = u, sdlog = s ) )
 S <- sapply( X, FUN = function( x ) sum( x, na.rm = TRUE ) )
 ```
 
-```{r l5g7, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
+```{r l5g10, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
 fmax <- 0.0007
 smax <- 5e3
 
@@ -1006,7 +1106,7 @@ plt <- ggplot() +
 plot( plt )
 ```
 
-```{r l5g8, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
+```{r l5g11, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
 e <- cumsum( fS[ -1 ] * diff( sg ) ) - ecdf( S )( sg[-1] )
 
 eb <- max( abs( e ) )
@@ -1274,7 +1374,7 @@ EeS <- sapply( 1:p, FUN = function( l ) mean( sapply( 1:m, function( i ) S[[ i ]
 
 En el gráfico a continuación presentamos todos los procesos de conteo $N_{i}$ simulados, como es de
 esperarse son funciones de escalera, siempre crecientes, que toman solo valores positivos.
-```{r l5g9, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
+```{r l5g12, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
 Ndat <- NULL
 for ( j in 1:m ) {
   Ndat <- rbindlist( list( Ndat, data.table( t = t, m = as.factor( j ), N = N[[ j ]], S = S[[ j ]] ) ) )
@@ -1304,7 +1404,7 @@ plot( plt )
 El gráfico a continuación presenta la simulación de los procesos correspondientes al total de 
 reclamos, conforme avanza el tiempo. De igual manera los procesos $S_i$ son funciones de escalera,
 siempre crecientes, con saltos correspondientes a los reclamos individuales.
-```{r l5g10, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
+```{r l5g13, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
 Sqmax <- quantile( sapply( S, FUN = function( Si ) last( Si ) ), probs = 0.99 )
 
 plt <- ggplot( ) +
@@ -1337,7 +1437,7 @@ Fes <- lapply( FeS, FUN = function( FeSl ) sapply( s, FUN = FeSl ) )
 La figura a continuación muestra cada una de las distribuciones de probabilidad empíricas estimadas 
 $F_{m,l}$. Se puede observar que conforme avanza el tiempo, aumenta la probabilidad de observar 
 valores mayores del proceso $S$ correspondiente al total de reclamos.
-```{r l5g11, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
+```{r l5g14, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
 FeSdat <- NULL
 for ( j in 1:p ) {
   FeSdat <- rbindlist( list( FeSdat, data.table( s = s, m = as.factor( j ), Fes = Fes[[ j ]] ) ) )
