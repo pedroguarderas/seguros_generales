@@ -770,12 +770,12 @@ a aplicar será una función mixta de la forma $D( X ) = \min( \max( X - d, 0 ),
 
 ```{r l5c6}
 # 1. selección de simulaciones
-m <- 1e4
+m <- 1e5
 
 # 2. especificación de los parámetros para las distribuciones
 u <- 2
 s <- 3
-l <- 6
+lambda <- 6
 
 # 3. se especifica la función deducible
 D <- function( x, d, M ) {
@@ -783,7 +783,7 @@ D <- function( x, d, M ) {
 }
 
 # 4. simulación del conteo de siniestros
-N <- rpois( n = m, lambda = l )
+N <- rpois( n = m, lambda = lambda )
 
 # 5. simulación de la severidad de los reclamos
 X <- lapply( N, FUN = function( n ) rlnorm( n, meanlog = u, sdlog = s ) )
@@ -809,26 +809,83 @@ P( S = 0 )
 & = & \sum\limits_{n=0}^{+\infty} P\left( X_1 \leq d \land \cdots \land X_n \leq d \right) P( N = n ) \\
 & = & \sum\limits_{n=0}^{+\infty} P\left( X \leq d \right)^n p_n \\
 & = & \E\left[ P\left( X \leq d \right)^N \right] \\
-& \approx & \sum\limits_{n=0}^{M} P( X \leq d )^n p_n,\quad 
-\text{para un valor $M$ suficientemente grande}
+& \approx & \sum\limits_{n=0}^{n'} P( X \leq d )^n p_n,\quad 
+\text{para un valor $n'$ suficientemente grande}
 \end{eqnarray*}
 $$
 ```{r l5c7}
-M <- 1e3
-PS0 <- sum( ( plnorm( d, meanlog = u, sdlog = s )^(0:M) ) * dpois( 0:M, lambda = l ) )
+np <- 1e3
+ns <- 0:np
+PS0 <- sum( ( plnorm( d, meanlog = u, sdlog = s )^ns ) * dpois( ns, lambda = lambda ) )
 ```
+$$
+P( S = 0 ) = `r formatC( PS0, digits = 6, format = 'f' )`
+$$
 
+Así mismo, se puede estudiar el evento extremo, caso en el cual se paga el valor máximo que admite 
+el deducible, en este caso en particular es $M$ por cada siniestro y si se producen $n$, entonces
+como máximo se pagara $n M$. Por tanto, nos interesa la probabilidad del evento 
+$\{ S\ \text{es máximo} \}$, el cual lo podemos calcular como:
+$$
+\begin{eqnarray*}
+P( S\ \text{es máximo} )
+& = & P\left( \bigcup\limits_{n=0}^{+\infty} \left\{ D( X_1 ) + \cdots + D( X_N ) = n M \land N = n \right\} \right) \\
+& = & P\left( \bigcup\limits_{n=0}^{+\infty} \left\{ X_1 - d > M \land \cdots \land X_N - d  \geq M \land N = n \right\} \right) \\
+& = & P\left( \bigcup\limits_{n=0}^{+\infty} \left\{ X_1 > M + d \land \cdots \land X_N \geq M + d \land N = n \right\} \right) \\
+& = & \sum\limits_{n=0}^{+\infty} P\left( X_1 > M + d \land \cdots \land X_N > M + d \land N = n \right) \\
+& = & \sum\limits_{n=0}^{+\infty} P\left( X_1 > M + d \land \cdots \land X_N > M + d \middle| N = n \right) P( N = n ) \\
+& = & \sum\limits_{n=0}^{+\infty} P\left( X_1 > M + d \land \cdots \land X_n > M + d \right) P( N = n ) \\
+& = & \sum\limits_{n=0}^{+\infty} P\left( X > M + d \right)^n p_n \\
+& = & \E\left[ P\left( X > M + d \right)^N \right] \\
+& \approx & \sum\limits_{n=0}^{N'} P( X > M + d )^n p_n,\quad 
+\text{para un valor $N'$ suficientemente grande}
+\end{eqnarray*}
+$$
+
+```{r l5c8}
+PSmax <- sum( ( ( 1 - plnorm( M + d, meanlog = u, sdlog = s ) )^ns ) * dpois( ns, lambda = lambda ) )
+```
+$$
+P( S\ \text{es máximo} ) = `r formatC( PSmax, digits = 6, format = 'f' )`
+$$
+Además, podemos calcular el valor máximo esperado de $S$.
+$$
+\begin{eqnarray*}
+\E\left[ S \middle| S\ \text{es máximo} \right]
+& = & \E\left[ S \middle| \left\{ S = NM \middle| N \in \N \right\} \right] \\
+& = & \E\left[ S \middle| \bigcup\limits_{n=0}^{+\infty} \left\{ S = NM \land N = n \right\} \right] \\
+& = & \E\left[ NM \middle| \bigcup\limits_{n=0}^{+\infty} \left\{ N = n \right\} \right] \\
+& = & \sum\limits_{n=0}^{+\infty} \E\left[ n M \middle| N = n \right] P( N = n ) \\
+& = & \sum\limits_{n=0}^{+\infty} n M P( N = n ) \\
+& = & M \sum\limits_{n=0}^{+\infty} n P( N = n ) \\
+& = & M \E\left[ N \right] \\
+\end{eqnarray*}
+$$
+```{r l5c9}
+ESmax <- M * sum( ns * dpois( ns, lambda = lambda ) )
+```
+$$
+\E\left[ S \middle| S\ \text{es máximo} \right] = `r formatC( ESmax, digits = 2, format = 'f' )`
+$$
+
+De este razonamiento se puede evidenciar que al aplicar un deducible con cota superior, se corta 
+la cola de la distribución y por tal razón no se puede esperar valores extremos por parte de la 
+severidad, sino tan solo por un aumento de frecuencia, e incluso el valor máximo esperado es 
+proporcional a la cota superior $M$ veces la frecuencia esperada. De ahí que, al aplicar un 
+deducible con cota superior no se puede esperar un encarecimiento de primas por aumento de 
+severidad, ya que los reclamos están acotados, así como el máximo esperado; lo único que puede
+encarecer la prima es un aumento de frecuencia.
 
 Como ya se lo mencionó, utilizando la simulación $\{S_i\}$ podemos determinar la distribución de 
 probabilidad empírica $F_m$ que aproxima la distribución de $F_S$.
-```{r l5c8}
+```{r l5c10}
 FeS <- ecdf( S )
-s <- seq( 0, max( S ), length = 100 )
+s <- seq( 0, ESmax, length = 1000 )
 Fes <- sapply( s, FUN = FeS )
 ```
 
 ```{r l5g5, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
-Smax <- max( S )
+Smax <- ESmax
 
 plt <- ggplot( ) +
   geom_step( aes( x = s, y = Fes, colour = 'a' ), linewidth = 1 ) +
@@ -836,8 +893,8 @@ plt <- ggplot( ) +
   geom_point( aes( 0, PS0 ), colour = 'red', size = 3 ) +
   scale_colour_manual( breaks = c( 'a' ),
                        values = c( 'dodgerblue3' ) ) +
-  scale_x_continuous( breaks = seq( 0, Smax, length = 11 ),
-                      labels = formatC( seq( 0, Smax, length = 11 ), digits = 2, format = 'f' ), 
+  scale_x_continuous( breaks = seq( 0, Smax, length = 7 ),
+                      labels = formatC( seq( 0, Smax, length = 7 ), digits = 2, format = 'f' ), 
                       limits = c( 0, Smax ), 
                       expand = c( 0.005, 0.005 ) ) +
   scale_y_continuous( breaks = seq( 0, 1, length = 11 ),
@@ -905,7 +962,7 @@ Consideremos el caso para un reclamo total $S$ donde el conteo de los siniestros
 $N \rightsquigarrow NBin( \alpha, p )$ y las severidades $\{X_i\}$ son i.i.d con distribución 
 $LN( \mu, \sigma )$. Utilizaremos el algoritmo de Panjer para aproximar la densidad de probabilidad
 de $f_S$ de $S$.
-```{r l5c9}
+```{r l5c11}
 n <- 7e4
 p <- 0.3
 alpha <- 3
@@ -1023,7 +1080,7 @@ $$
 \prod\limits_{i=1}^n \hat{f}_{i,j} \right\} \right] \right)
 $$
 
-```{r l5c10}
+```{r l5c12}
 N <- 10000
 set.seed(94312)
 alpha <- sample( x = seq( 1, 20, length = 40 ), size = 50, replace = TRUE )
@@ -1082,7 +1139,7 @@ $$
 
 para el caso cuando $s_o = 0$, tenemos que $f_S( s_0 ) = f_S( 0 ) = p_0$.
 
-```{r l5c11}
+```{r l5c13}
 M <- 200
 N <- 7e4
 
@@ -1373,7 +1430,7 @@ En conclusión $N(t)$ tiene como distribución una ley de Poisson $Pois( \lambda
 se conoce a $N$ como un proceso de Poisson.
 :::
 
-```{r l5c12}
+```{r l5c14}
 m <- 1000
 lambda <- 10
 M <- 30
@@ -1464,7 +1521,7 @@ plot( plt )
 
 Como se describe en el paso 8 del algoritmo de simulación, para cada tiempo $t_l$ se puede estimar
 la distribución de probabilidad de la variable aleatoria $S(t_l)$.
-```{r l5c13}
+```{r l5c15}
 FeS <- lapply( 1:p, FUN = function( l ) ecdf( sapply( S, FUN = function( Si ) Si[ l ] ) ) )
 ns <- 100
 s <- seq( 0, Smax, length = ns )
