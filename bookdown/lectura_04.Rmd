@@ -807,8 +807,9 @@ Así, la familia de medidas de probabilidad $\{ P_{\tau,\theta} \}_{\theta \in \
 tiene esperanza nula para cualquier esperanza tomada bajo la medida $P_{\tau, \theta}$, entonces la 
 función $h$ es nula en casi todas partes para toda medida $P_\theta$. De forma más compacta.
 $$
-\E_{P_{\tau,\theta}}\left[ h\left( \tau\left( X_1,\ldots, X_n \right) \right) \right] = 0 
-\Longrightarrow P_\theta\left( h\left( \tau\left( X_1,\ldots, X_n \right) \right) = 0 \right) = 1
+\forall P_{\tau,\theta}, \E_{P_{\tau,\theta}}\left[ h\left( \tau\left( X_1,\ldots, X_n \right) \right) \right] = 0 
+\Longrightarrow 
+\forall P_\theta, P_\theta\left( h\left( \tau\left( X_1,\ldots, X_n \right) \right) = 0 \right) = 1
 $$
 Por extensión si sucede esta implicación, se dice que $\tau$ es un **estimador completo** respecto 
 de la familia $\{ P_\theta \}_{\theta \in \Theta}$.
