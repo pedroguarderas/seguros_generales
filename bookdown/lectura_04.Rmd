@@ -675,23 +675,167 @@ $f$ que la describe. Como ya hemos mencionado, conociendo la distribución se pu
 propiedades sobre la variable. De ahí surge la necesidad de buscar la mejor distribución $F$ posible
 a partir de la muestra. 
 
+La estimación usualmente consiste en tratar de determinar la probabilidad $P_X$ asociada a $X$, o 
+en su defecto su función de distribución acumulada. Bajo la consideración, usualmente, de alguna
+información adicional, se considera que para la medida de de probabilidad $P_X$ que caracteriza a la 
+variable aleatoria $X$ está dentro de una familia probabilidades que dependen de un parámetro 
+$\theta$ el cual pertenece a un conjunto $\Theta$, precisamente parametriza a la familia, es 
+decir, para cada $\theta \in \Theta$, $P_{\theta}$ es una medida de probabilidad y para algún 
+$\theta \in \Theta, P_X = P_{\theta}$. 
+
+Ya en la práctica se tiene una muestra, por lo regular finita, $X_1, \ldots, X_n$ de la variable
+aleatoria $X$ que se desea comprender. Es a partir de la muestra que se intenta crear un estimador 
+$\tau$ el cual sea precisamente el "mejor" bajo un cierto criterio que aproxime a la probabilidad
+$P_X$, en términos algo más matemáticos $P_X \approx P_{\tau}$. Por lo regular, se propone un 
+estimador $\tau$ como función de la muestra y su tamaño $\tau_n( X_1, \ldots, X_n ) = \tau( n, X_1, \ldots, X_n )$,
+en muchos casos se considera construir una función medible, que precisamente genere eventos 
+observables. Es de notar que el estimador $\tau_n$ al depender de una muestra, la cual 
+está constituida por variables aleatorias, como función de variables aleatorias se convierte también 
+en una variable aleatoria al ser evaluada en estas.
+
+Hay algunas propiedades deseables para una familia de estimadores $\mathcal{E}$, estas son:
+
+1. Consistencia
+
+2. Insesgamiento
+
+3. Eficiencia
+
+4. Suficiencia
+
+Para, cada adjuntamos sus respectivas definiciones
+
+::: {.definition #destconsis  name="Estimadores consistentes"}
+Consideramos una variable aleatoria $X$, cuya medida de probabilidad asociada $P_X$ pertenece a una 
+familia de distribuciones de probabilidad $\{P_\theta\}_{\theta \in \Theta}$, esto quiere decir que
+$P_X$ está determinada por algún $\theta \in \Theta$, i.e. $P_X = P_{\theta}$. Entonces,
+la familia de estimadores $\mathcal{E} = \{ \tau_n \}_n$ es **consistente** para la familia de 
+probabilidades $\{P_\theta\}_{\theta \in \Theta}$ si para cualquier $n \in \N$ y muestra 
+$X_1, \ldots, X_n$ de $X$ el estimador $\tau_n( X_1,\ldots,X_n)$ converge en probabilidad a 
+$\theta$. Para todo $\varepsilon > 0$
+$$
+\underset{n \rightarrow +\infty}{\lim} P_{\theta}\left( \left| \tau_n( X_1,\ldots,X_n) - \theta \right| > \varepsilon\right) = 0
+$$
+también se dice que la familia de estimadores es convergente.
+
+Decimos que **converge fuertemente** si la convergencia de la familia de estimadores 
+$\mathcal{E} = \{ \tau_n \}_n$ al parámetro $\theta$ se da **casi seguramente** o en 
+**casi todas partes**. Esto en término de límites implica que:
+$$
+P_{\theta}\left( \underset{n \rightarrow +\infty}{\lim} 
+\tau_n\left( X_1, \ldots, X_n \right) = \theta \right) = 1
+$$
+En otras palabras, la probabilidad de que el límite del estimador $\tau_n( X_1, \ldots, X_n )$ 
+sea igual a $\theta$ es $1$, salvo un conjunto de medida nula para $P_{\theta}$. De ahí resulta 
+la terminología de convergencia casi segura o convergencia en casi todas partes.
+:::
+
+::: {.definition #destinsesg  name="Estimadores insesgados"}
+Bajo el mismo contexto de la definición anterior. Decimos que el estimador $\tau_n$ es 
+insesgado si precisamente su esperanza es igual al parámetro a estimar $\theta \in \Theta$.
+$$
+\E\left[ \tau_n( X_1,\ldots,X_n) \right] = \theta
+$$
+La familia de estimadores $\mathcal{E} = \{ \tau_n \}_n$ será insesgada si para cada $n$ se 
+satisface lo anterior.
+:::
+
+El siguiente teorema es de importancia para caracterizar una familia de estimadores consistentes.
+
+::: {.theorem #sufestconsis }
+Una familia de estimadores $\{ \tau_n \}_n$ para la cual se cumplen los siguientes límites
+
+1. $\E\left[ \tau_n( X_1,\ldots,X_n) \right] \rightarrow \theta$, conforme $n \rightarrow +\infty$,
+
+2. $\V\left[ \tau_n( X_1,\ldots,X_n) \right] \rightarrow 0$, conforme $n \rightarrow +\infty$.
+
+Entonces, la familia $\{ \tau_n \}_n$ es consistente como estimadores de $\theta$.
+:::
+
+::: {.definition #destinsesg  name="Estimador más eficiente"}
+De igual forma en el contexto anterior. En una familia de estimadores consistentes para estimar
+un parámetro, si entre estos estimadores existe uno para el cual su varianza sea mínima, entonces
+si existe tal estimador se dice que este es el **estimador más eficiente**. Sin $\mathcal{E}$ es la
+familia de estimadores y $\xi$ es el estimador más eficiente, entonces para cualquier otro 
+estimador $\tau \in \mathcal{E}$, se tiene la siguiente desigualdad
+$$
+\V\left[ \xi \right] \leq \V\left[ \tau \right]
+$$
+la **eficiencia** $E$ de los estimadores en la familia $\mathcal{E}$ está dada por
+$$
+0 \leq E( \tau ) = \frac{\V\left[ \xi \right]}{\V\left[ \tau \right]} \leq 1
+$$
+Si además el estimador más eficiente $\xi$ es insesgado se dirá que este es un
+**estimador de varianza mínima insesgado**, o de forma corta **MVUE** por el término en inglés 
+(minimum variance unbiased estimator).
+:::
+
+::: {.theorem #thmvueunicity }
+Si en una familia de estimadores $\mathcal{E}$ tenemos dos estimadores MVUE para el mismo parámetro
+$\theta \in \Theta$, entonces estos dos estimadores son iguales en casi todas partes o lo que 
+es lo mismo solo son diferentes en un conjunto de medida nula.
+:::
+
+::: {.definition #destsufic  name="Estimador suficiente"}
+Dada una muestra $X_1, \ldots, X_n$ de la variable aleatoria $X$. Un estimador 
+$\tau\left( X_1, \ldots, X_n \right)$ se dice un **estimador suficiente** para el parámetro 
+$\theta \in \Theta$, si la distribución condicionada de la muestra $X_1, \ldots X_n$ dado el 
+estimador $\tau$ es independiente del parámetro $\theta$.
+:::
+
+::: {.theorem #thfactorsufic name="Teorema de factorización" }
+Un estimador $\tau$ es suficiente para el parámetro $\theta$ si y solo si la densidad conjunta
+de la muestra $X_1, \ldots, X_n$ puede ser expresada en la forma.
+$$
+f\left( x_1, \ldots, x_n \right) 
+= g\left( \theta, \tau\left( x_1, \ldots, x_n \right) \right) h\left( x_1, \ldots, x_n \right)
+$$
+:::
+
+
+::: {.definition #dfamicomp  name="Familia completa"}
+Data un estimador $\tau$ que depende de una muestra aleatoria $X_1, \ldots, X_n$ y una familia de 
+medidas de probabilidad $\{ P_\theta \}_{\theta \in \Theta}$, para cada $\theta \in \Theta$, se 
+puede construir la medida $P_{\tau,\theta}$ asociada a la variable aleatoria $\tau(X_1, \ldots,X_n)$
+y al parámetro $\theta$ que determina la medida $P_\theta$. Para cualquier evento $A \in \F$.
+$$
+P_{\tau,\theta}( A ) = P_\theta\left( \tau\left(X_1, \ldots,X_n\right)^{-1}( A ) \right)
+$$
+
+Así, la familia de medidas de probabilidad $\{ P_{\tau,\theta} \}_{\theta \in \Theta}$ se dice 
+**completa** si se satisface la siguiente implicación. Si una función $h : \R \longrightarrow \R$, 
+tiene esperanza nula para cualquier esperanza tomada bajo la medida $P_{\tau, \theta}$, entonces la 
+función $h$ es nula en casi todas partes para toda medida $P_\theta$. De forma más compacta.
+$$
+\E_{P_{\tau,\theta}}\left[ h\left( \tau\left( X_1,\ldots, X_n \right) \right) \right] = 0 
+\Longrightarrow P_\theta\left( h\left( \tau\left( X_1,\ldots, X_n \right) \right) = 0 \right) = 1
+$$
+Por extensión si sucede esta implicación, se dice que $\tau$ es un **estimador completo** respecto 
+de la familia $\{ P_\theta \}_{\theta \in \Theta}$.
+:::
+
 Para ello se ha formulado diferentes aproximaciones, entre las cuales citamos las siguientes:
 
-1. Método de sustitución
+1. Método de sustitución,
 
-2. Método de los momentos
+2. Método de los momentos,
 
-3. Método de la distancia mínima
+3. Método de la distancia mínima,
 
-4. Método de maximización de la verosimilitud
+    3.1 Método de mínimos cuadrados,
+  
+    3.2 Método de mínimo Chi-cuadrado,
+  
+    3.3 Método de varianza mínima,
+  
+    3.4 Método de minimización de la divergencia de Kullback–Leibler (máxima verosimilitud).
+
+4. Método de máxima verosimilitud,
+
+5. Método de Stein.
 
 <!------------------------------------------------------------------------------------------------->
 ### Método de sustitución
-
-Se considera que para la medida de de probabilidad $P_X$ que caracteriza a la variable aleatoria 
-$X$ está dentro de una familia de funciones que dependen de un parámetro $\theta \in \Theta$, es 
-decir para cada $\theta$, $P_{\theta}$ es una medida de probabilidad y para algún 
-$\theta \in \Theta, P_X = P_{\theta}$. 
 
 Entonces, se parte de suponer que existe funcional $G$ actuando sobre el conjunto de medidas de 
 probabilidad $\mathcal{P}$ que contiene al conjunto
@@ -722,28 +866,6 @@ muestra $X_1, \ldots, X_n$ y su tamaño $n$, i.e. una función $\theta_n( X_1, \
 puede considerar el caso anterior como un caso en particular de este tipo de funciones, ya que 
 se puede definir $\theta_n( X_1, \ldots, X_n ) = G( P_n )$, pero hay que tener cuidado que $G$ es 
 un funcional y como tal puede resultar una función que no es medible.
-
-::: {.definition #estsus  name="Estimadores convergentes"}
-En el mismo contexto anterior. Si la variable aleatoria $X$ está caracterizada por la medida 
-$P_X = P_{\theta}$, para algún $\theta \in \Theta$. Decimos que una familia de estimadores 
-$\{\theta_n\}$ es **convergente** si al generar cada vez una muestra más grande el estimador
-$\theta_n( X_1, \ldots, X_n )$ converge en probabilidad a $\theta$. Esto quiere decir que 
-para cualquier $\varepsilon > 0$
-$$
-\underset{n \rightarrow +\infty}{\lim} 
-P_{\theta}\left( \left| \theta_n( X_1, \ldots, X_n ) - \theta \right| \geq \varepsilon \right) = 0
-$$
-
-Decimos que **converge fuertemente** si la convergencia de la familia de estimadores 
-$\theta_n( X_1, \ldots, X_n )$ a $\theta$ se da **casi seguramente** o **casi todas partes**. Esto 
-en término de límites implica que:
-$$
-P_{\theta}\left( \underset{n \rightarrow +\infty}{\lim} \theta_n( X_1, \ldots, X_n ) = \theta \right) = 1
-$$
-En otras palabras, la probabilidad de que el límite del estimador $\theta_n( X_1, \ldots, X_n )$ 
-sea igual a $\theta$ es $1$, salvo un conjunto de medida nula para $P_{\theta}$. De ahí resulta 
-la terminología de convergencia casi segura o convergencia en casi todas partes.
-:::
 
 <!------------------------------------------------------------------------------------------------->
 ### Método de momentos
@@ -876,23 +998,7 @@ $$
 <!------------------------------------------------------------------------------------------------->
 ### Calidad de estimadores
 
-::: {.definition #bestinses  name="Estimador insesgado"}
-Se dice que un estimador $\theta_1$ se dice **insesgado** para estimar el parámetro $\theta$, si se 
-cumple que:
-$$
-\E\left[ \theta_1 \right] = \theta
-$$
-caso contrario se dirá que el estimador es **sesgado** o que presenta un **error sistemático**.
-:::
 
-::: {.definition #bestcuadmean  name="Mejor estimador en media cuadrática"}
-Se dice que un estimador $\theta_1$ es mejor estimador en media cuadrática que el estimador 
-$\theta_2$, respecto del parámetro $\theta$, si se cumple la siguiente desigualdad
-$$
-\E\left[ \left( \theta_1 - \theta \right)^2 \right]
-< \E\left[ \left( \theta_2 - \theta \right)^2 \right]
-$$
-:::
 
 ```{r l4end, echo = FALSE}
 rm( list = ls()[ ls() != 'def.chunk.hook' ] )
