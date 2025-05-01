@@ -1532,20 +1532,142 @@ muestra de la misma <span class="math inline">\(X_1, \ldots, X_n\)</span>. Pero,
 <span class="math inline">\(f\)</span> que la describe. Como ya hemos mencionado, conociendo la distribución se puede inferir algunas
 propiedades sobre la variable. De ahí surge la necesidad de buscar la mejor distribución <span class="math inline">\(F\)</span> posible
 a partir de la muestra.</p>
+<p>La estimación usualmente consiste en tratar de determinar la probabilidad <span class="math inline">\(P_X\)</span> asociada a <span class="math inline">\(X\)</span>, o
+en su defecto su función de distribución acumulada. Bajo la consideración, usualmente, de alguna
+información adicional, se considera que para la medida de de probabilidad <span class="math inline">\(P_X\)</span> que caracteriza a la
+variable aleatoria <span class="math inline">\(X\)</span> está dentro de una familia probabilidades que dependen de un parámetro
+<span class="math inline">\(\theta\)</span> el cual pertenece a un conjunto <span class="math inline">\(\Theta\)</span>, precisamente parametriza a la familia, es
+decir, para cada <span class="math inline">\(\theta \in \Theta\)</span>, <span class="math inline">\(P_{\theta}\)</span> es una medida de probabilidad y para algún
+<span class="math inline">\(\theta \in \Theta, P_X = P_{\theta}\)</span>.</p>
+<p>Ya en la práctica se tiene una muestra, por lo regular finita, <span class="math inline">\(X_1, \ldots, X_n\)</span> de la variable
+aleatoria <span class="math inline">\(X\)</span> que se desea comprender. Es a partir de la muestra que se intenta crear un estimador
+<span class="math inline">\(\tau\)</span> el cual sea precisamente el “mejor” bajo un cierto criterio que aproxime a la probabilidad
+<span class="math inline">\(P_X\)</span>, en términos algo más matemáticos <span class="math inline">\(P_X \approx P_{\tau}\)</span>. Por lo regular, se propone un
+estimador <span class="math inline">\(\tau\)</span> como función de la muestra y su tamaño <span class="math inline">\(\tau_n( X_1, \ldots, X_n ) = \tau( n, X_1, \ldots, X_n )\)</span>,
+en muchos casos se considera construir una función medible, que precisamente genere eventos
+observables. Es de notar que el estimador <span class="math inline">\(\tau_n\)</span> al depender de una muestra, la cual
+está constituida por variables aleatorias, como función de variables aleatorias se convierte también
+en una variable aleatoria al ser evaluada en estas.</p>
+<p>Hay algunas propiedades deseables para una familia de estimadores <span class="math inline">\(\mathcal{E}\)</span>, estas son:</p>
+<ol style="list-style-type: decimal">
+<li><p>Consistencia</p></li>
+<li><p>Insesgamiento</p></li>
+<li><p>Eficiencia</p></li>
+<li><p>Suficiencia</p></li>
+</ol>
+<p>Para, cada adjuntamos sus respectivas definiciones</p>
+<div class="definition">
+<p><span id="def:destconsis" class="definition"><strong>Definición 4.16  (Estimadores consistentes) </strong></span>Consideramos una variable aleatoria <span class="math inline">\(X\)</span>, cuya medida de probabilidad asociada <span class="math inline">\(P_X\)</span> pertenece a una
+familia de distribuciones de probabilidad <span class="math inline">\(\{P_\theta\}_{\theta \in \Theta}\)</span>, esto quiere decir que
+<span class="math inline">\(P_X\)</span> está determinada por algún <span class="math inline">\(\theta \in \Theta\)</span>, i.e. <span class="math inline">\(P_X = P_{\theta}\)</span>. Entonces,
+la familia de estimadores <span class="math inline">\(\mathcal{E} = \{ \tau_n \}_n\)</span> es <strong>consistente</strong> para la familia de
+probabilidades <span class="math inline">\(\{P_\theta\}_{\theta \in \Theta}\)</span> si para cualquier <span class="math inline">\(n \in \mathbb{N}\)</span> y muestra
+<span class="math inline">\(X_1, \ldots, X_n\)</span> de <span class="math inline">\(X\)</span> el estimador <span class="math inline">\(\tau_n( X_1,\ldots,X_n)\)</span> converge en probabilidad a
+<span class="math inline">\(\theta\)</span>. Para todo <span class="math inline">\(\varepsilon &gt; 0\)</span>
+<span class="math display">\[
+\underset{n \rightarrow +\infty}{\lim} P_{\theta}\left( \left| \tau_n( X_1,\ldots,X_n) - \theta \right| &gt; \varepsilon\right) = 0
+\]</span>
+también se dice que la familia de estimadores es convergente.</p>
+<p>Decimos que <strong>converge fuertemente</strong> si la convergencia de la familia de estimadores
+<span class="math inline">\(\mathcal{E} = \{ \tau_n \}_n\)</span> al parámetro <span class="math inline">\(\theta\)</span> se da <strong>casi seguramente</strong> o en
+<strong>casi todas partes</strong>. Esto en término de límites implica que:
+<span class="math display">\[
+P_{\theta}\left( \underset{n \rightarrow +\infty}{\lim}
+\tau_n\left( X_1, \ldots, X_n \right) = \theta \right) = 1
+\]</span>
+En otras palabras, la probabilidad de que el límite del estimador <span class="math inline">\(\tau_n( X_1, \ldots, X_n )\)</span>
+sea igual a <span class="math inline">\(\theta\)</span> es <span class="math inline">\(1\)</span>, salvo un conjunto de medida nula para <span class="math inline">\(P_{\theta}\)</span>. De ahí resulta
+la terminología de convergencia casi segura o convergencia en casi todas partes.</p>
+</div>
+<div class="definition">
+<p><span id="def:destinsesg" class="definition"><strong>Definición 4.17  (Estimadores insesgados) </strong></span>Bajo el mismo contexto de la definición anterior. Decimos que el estimador <span class="math inline">\(\tau_n\)</span> es
+insesgado si precisamente su esperanza es igual al parámetro a estimar <span class="math inline">\(\theta \in \Theta\)</span>.
+<span class="math display">\[
+\mathbb{E}\left[ \tau_n( X_1,\ldots,X_n) \right] = \theta
+\]</span>
+La familia de estimadores <span class="math inline">\(\mathcal{E} = \{ \tau_n \}_n\)</span> será insesgada si para cada <span class="math inline">\(n\)</span> se
+satisface lo anterior.</p>
+</div>
+<p>El siguiente teorema es de importancia para caracterizar una familia de estimadores consistentes.</p>
+<div class="theorem">
+<p><span id="thm:sufestconsis" class="theorem"><strong>Teorema 4.1  </strong></span>Una familia de estimadores <span class="math inline">\(\{ \tau_n \}_n\)</span> para la cual se cumplen los siguientes límites</p>
+<ol style="list-style-type: decimal">
+<li><p><span class="math inline">\(\mathbb{E}\left[ \tau_n( X_1,\ldots,X_n) \right] \rightarrow \theta\)</span>, conforme <span class="math inline">\(n \rightarrow +\infty\)</span>,</p></li>
+<li><p><span class="math inline">\(\mathbb{V}\left[ \tau_n( X_1,\ldots,X_n) \right] \rightarrow 0\)</span>, conforme <span class="math inline">\(n \rightarrow +\infty\)</span>.</p></li>
+</ol>
+<p>Entonces, la familia <span class="math inline">\(\{ \tau_n \}_n\)</span> es consistente como estimadores de <span class="math inline">\(\theta\)</span>.</p>
+</div>
+<div class="definition">
+<p><span id="def:destinsesg" class="definition"><strong>Definición 4.17  (Estimador más eficiente) </strong></span>De igual forma en el contexto anterior. En una familia de estimadores consistentes para estimar
+un parámetro, si entre estos estimadores existe uno para el cual su varianza sea mínima, entonces
+si existe tal estimador se dice que este es el <strong>estimador más eficiente</strong>. Sin <span class="math inline">\(\mathcal{E}\)</span> es la
+familia de estimadores y <span class="math inline">\(\xi\)</span> es el estimador más eficiente, entonces para cualquier otro
+estimador <span class="math inline">\(\tau \in \mathcal{E}\)</span>, se tiene la siguiente desigualdad
+<span class="math display">\[
+\mathbb{V}\left[ \xi \right] \leq \mathbb{V}\left[ \tau \right]
+\]</span>
+la <strong>eficiencia</strong> <span class="math inline">\(E\)</span> de los estimadores en la familia <span class="math inline">\(\mathcal{E}\)</span> está dada por
+<span class="math display">\[
+0 \leq E( \tau ) = \frac{\mathbb{V}\left[ \xi \right]}{\mathbb{V}\left[ \tau \right]} \leq 1
+\]</span>
+Si además el estimador más eficiente <span class="math inline">\(\xi\)</span> es insesgado se dirá que este es un
+<strong>estimador de varianza mínima insesgado</strong>, o de forma corta <strong>MVUE</strong> por el término en inglés
+(minimum variance unbiased estimator).</p>
+</div>
+<div class="theorem">
+<p><span id="thm:thmvueunicity" class="theorem"><strong>Teorema 4.2  </strong></span>Si en una familia de estimadores <span class="math inline">\(\mathcal{E}\)</span> tenemos dos estimadores MVUE para el mismo parámetro
+<span class="math inline">\(\theta \in \Theta\)</span>, entonces estos dos estimadores son iguales en casi todas partes o lo que
+es lo mismo solo son diferentes en un conjunto de medida nula.</p>
+</div>
+<div class="definition">
+<p><span id="def:destsufic" class="definition"><strong>Definición 4.18  (Estimador suficiente) </strong></span>Dada una muestra <span class="math inline">\(X_1, \ldots, X_n\)</span> de la variable aleatoria <span class="math inline">\(X\)</span>. Un estimador
+<span class="math inline">\(\tau\left( X_1, \ldots, X_n \right)\)</span> se dice un <strong>estimador suficiente</strong> para el parámetro
+<span class="math inline">\(\theta \in \Theta\)</span>, si la distribución condicionada de la muestra <span class="math inline">\(X_1, \ldots X_n\)</span> dado el
+estimador <span class="math inline">\(\tau\)</span> es independiente del parámetro <span class="math inline">\(\theta\)</span>.</p>
+</div>
+<div class="theorem">
+<p><span id="thm:thfactorsufic" class="theorem"><strong>Teorema 4.3  (Teorema de factorización) </strong></span>Un estimador <span class="math inline">\(\tau\)</span> es suficiente para el parámetro <span class="math inline">\(\theta\)</span> si y solo si la densidad conjunta
+de la muestra <span class="math inline">\(X_1, \ldots, X_n\)</span> puede ser expresada en la forma.
+<span class="math display">\[
+f\left( x_1, \ldots, x_n \right)
+= g\left( \theta, \tau\left( x_1, \ldots, x_n \right) \right) h\left( x_1, \ldots, x_n \right)
+\]</span></p>
+</div>
+<div class="definition">
+<p><span id="def:dfamicomp" class="definition"><strong>Definición 4.19  (Familia completa) </strong></span>Data un estimador <span class="math inline">\(\tau\)</span> que depende de una muestra aleatoria <span class="math inline">\(X_1, \ldots, X_n\)</span> y una familia de
+medidas de probabilidad <span class="math inline">\(\{ P_\theta \}_{\theta \in \Theta}\)</span>, para cada <span class="math inline">\(\theta \in \Theta\)</span>, se
+puede construir la medida <span class="math inline">\(P_{\tau,\theta}\)</span> asociada a la variable aleatoria <span class="math inline">\(\tau(X_1, \ldots,X_n)\)</span>
+y al parámetro <span class="math inline">\(\theta\)</span> que determina la medida <span class="math inline">\(P_\theta\)</span>. Para cualquier evento <span class="math inline">\(A \in \mathcal{F}\)</span>.
+<span class="math display">\[
+P_{\tau,\theta}( A ) = P_\theta\left( \tau\left(X_1, \ldots,X_n\right)^{-1}( A ) \right)
+\]</span></p>
+<p>Así, la familia de medidas de probabilidad <span class="math inline">\(\{ P_{\tau,\theta} \}_{\theta \in \Theta}\)</span> se dice
+<strong>completa</strong> si se satisface la siguiente implicación. Si una función <span class="math inline">\(h : \mathbb{R}\longrightarrow \mathbb{R}\)</span>,
+tiene esperanza nula para cualquier esperanza tomada bajo la medida <span class="math inline">\(P_{\tau, \theta}\)</span>, entonces la
+función <span class="math inline">\(h\)</span> es nula en casi todas partes para toda medida <span class="math inline">\(P_\theta\)</span>. De forma más compacta.
+<span class="math display">\[
+\forall P_{\tau,\theta}, \mathbb{E}_{P_{\tau,\theta}}\left[ h\left( \tau\left( X_1,\ldots, X_n \right) \right) \right] = 0
+\Longrightarrow
+\forall P_\theta, P_\theta\left( h\left( \tau\left( X_1,\ldots, X_n \right) \right) = 0 \right) = 1
+\]</span>
+Por extensión si sucede esta implicación, se dice que <span class="math inline">\(\tau\)</span> es un <strong>estimador completo</strong> respecto
+de la familia <span class="math inline">\(\{ P_\theta \}_{\theta \in \Theta}\)</span>.</p>
+</div>
 <p>Para ello se ha formulado diferentes aproximaciones, entre las cuales citamos las siguientes:</p>
 <ol style="list-style-type: decimal">
-<li><p>Método de sustitución</p></li>
-<li><p>Método de los momentos</p></li>
-<li><p>Método de la distancia mínima</p></li>
-<li><p>Método de maximización de la verosimilitud</p></li>
+<li><p>Método de sustitución,</p></li>
+<li><p>Método de los momentos,</p></li>
+<li><p>Método de la distancia mínima,</p>
+<p>3.1 Método de mínimos cuadrados,</p>
+<p>3.2 Método de mínimo Chi-cuadrado,</p>
+<p>3.3 Método de varianza mínima,</p>
+<p>3.4 Método de minimización de la divergencia de Kullback–Leibler (máxima verosimilitud).</p></li>
+<li><p>Método de máxima verosimilitud,</p></li>
+<li><p>Método de Stein.</p></li>
 </ol>
 <!------------------------------------------------------------------------------------------------->
 <div id="método-de-sustitución" class="section level3 hasAnchor" number="4.4.1">
 <h3><span class="header-section-number">4.4.1</span> Método de sustitución<a href="distribuciones.html#método-de-sustitución" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Se considera que para la medida de de probabilidad <span class="math inline">\(P_X\)</span> que caracteriza a la variable aleatoria
-<span class="math inline">\(X\)</span> está dentro de una familia de funciones que dependen de un parámetro <span class="math inline">\(\theta \in \Theta\)</span>, es
-decir para cada <span class="math inline">\(\theta\)</span>, <span class="math inline">\(P_{\theta}\)</span> es una medida de probabilidad y para algún
-<span class="math inline">\(\theta \in \Theta, P_X = P_{\theta}\)</span>.</p>
 <p>Entonces, se parte de suponer que existe funcional <span class="math inline">\(G\)</span> actuando sobre el conjunto de medidas de
 probabilidad <span class="math inline">\(\mathcal{P}\)</span> que contiene al conjunto
 <span class="math inline">\(P( \Theta ) = \{ P_{\theta} \mid \theta \in \Theta\} \subset \mathcal{P}\)</span> y que toma valores
@@ -1571,26 +1693,6 @@ muestra <span class="math inline">\(X_1, \ldots, X_n\)</span> y su tamaño <span
 puede considerar el caso anterior como un caso en particular de este tipo de funciones, ya que
 se puede definir <span class="math inline">\(\theta_n( X_1, \ldots, X_n ) = G( P_n )\)</span>, pero hay que tener cuidado que <span class="math inline">\(G\)</span> es
 un funcional y como tal puede resultar una función que no es medible.</p>
-<div class="definition">
-<p><span id="def:estsus" class="definition"><strong>Definición 4.16  (Estimadores convergentes) </strong></span>En el mismo contexto anterior. Si la variable aleatoria <span class="math inline">\(X\)</span> está caracterizada por la medida
-<span class="math inline">\(P_X = P_{\theta}\)</span>, para algún <span class="math inline">\(\theta \in \Theta\)</span>. Decimos que una familia de estimadores
-<span class="math inline">\(\{\theta_n\}\)</span> es <strong>convergente</strong> si al generar cada vez una muestra más grande el estimador
-<span class="math inline">\(\theta_n( X_1, \ldots, X_n )\)</span> converge en probabilidad a <span class="math inline">\(\theta\)</span>. Esto quiere decir que
-para cualquier <span class="math inline">\(\varepsilon &gt; 0\)</span>
-<span class="math display">\[
-\underset{n \rightarrow +\infty}{\lim}
-P_{\theta}\left( \left| \theta_n( X_1, \ldots, X_n ) - \theta \right| \geq \varepsilon \right) = 0
-\]</span></p>
-<p>Decimos que <strong>converge fuertemente</strong> si la convergencia de la familia de estimadores
-<span class="math inline">\(\theta_n( X_1, \ldots, X_n )\)</span> a <span class="math inline">\(\theta\)</span> se da <strong>casi seguramente</strong> o <strong>casi todas partes</strong>. Esto
-en término de límites implica que:
-<span class="math display">\[
-P_{\theta}\left( \underset{n \rightarrow +\infty}{\lim} \theta_n( X_1, \ldots, X_n ) = \theta \right) = 1
-\]</span>
-En otras palabras, la probabilidad de que el límite del estimador <span class="math inline">\(\theta_n( X_1, \ldots, X_n )\)</span>
-sea igual a <span class="math inline">\(\theta\)</span> es <span class="math inline">\(1\)</span>, salvo un conjunto de medida nula para <span class="math inline">\(P_{\theta}\)</span>. De ahí resulta
-la terminología de convergencia casi segura o convergencia en casi todas partes.</p>
-</div>
 <!------------------------------------------------------------------------------------------------->
 </div>
 <div id="método-de-momentos" class="section level3 hasAnchor" number="4.4.2">
@@ -1710,22 +1812,6 @@ P\left( N_1 = n_1 \land \cdots \land N_m = n_m \right)
 </div>
 <div id="calidad-de-estimadores" class="section level3 hasAnchor" number="4.4.5">
 <h3><span class="header-section-number">4.4.5</span> Calidad de estimadores<a href="distribuciones.html#calidad-de-estimadores" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="definition">
-<p><span id="def:bestinses" class="definition"><strong>Definición 4.17  (Estimador insesgado) </strong></span>Se dice que un estimador <span class="math inline">\(\theta_1\)</span> se dice <strong>insesgado</strong> para estimar el parámetro <span class="math inline">\(\theta\)</span>, si se
-cumple que:
-<span class="math display">\[
-\mathbb{E}\left[ \theta_1 \right] = \theta
-\]</span>
-caso contrario se dirá que el estimador es <strong>sesgado</strong> o que presenta un <strong>error sistemático</strong>.</p>
-</div>
-<div class="definition">
-<p><span id="def:bestcuadmean" class="definition"><strong>Definición 4.18  (Mejor estimador en media cuadrática) </strong></span>Se dice que un estimador <span class="math inline">\(\theta_1\)</span> es mejor estimador en media cuadrática que el estimador
-<span class="math inline">\(\theta_2\)</span>, respecto del parámetro <span class="math inline">\(\theta\)</span>, si se cumple la siguiente desigualdad
-<span class="math display">\[
-\mathbb{E}\left[ \left( \theta_1 - \theta \right)^2 \right]
-&lt; \mathbb{E}\left[ \left( \theta_2 - \theta \right)^2 \right]
-\]</span></p>
-</div>
 <p></p>
 <p></p>
 

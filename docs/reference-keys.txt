@@ -50,9 +50,13 @@ def:dgev
 def:dtst
 def:dgammatra
 def:dbetra
-def:estsus
-def:bestinses
-def:bestcuadmean
+def:destconsis
+def:destinsesg
+thm:sufestconsis
+thm:thmvueunicity
+def:destsufic
+thm:thfactorsufic
+def:dfamicomp
 exm:l5ex1
 exm:l5ex2
 exm:l5ex3
