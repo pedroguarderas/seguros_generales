@@ -164,6 +164,7 @@ F\left( x_1, \ldots, x_n \right)
 = P\left( X_1 \leq x_1 \land \cdots \land X_n \leq x_n \right)
 = P\left( \bigcap_{i=1}^n X_i^{-1}\left( (-\infty, x_i ] \right) \right)
 $$
+
 <!------------------------------------------------------------------------------------------------->
 ::: {.definition #spv name="Función supervivencia"}
 La función de **supervivencia** $S : \R \longrightarrow \R$ está asociada a una 
@@ -413,6 +414,7 @@ M_Y( t )
 & = & \left( M_X( t ) \right)^n
 \end{eqnarray*}
 $$
+<!------------------------------------------------------------------------------------------------->
 ::: {.definition #dfc name="Función característica"}
 La **función característica** de una variable aleatoria a valores reales $X$, es la función:
 $$
