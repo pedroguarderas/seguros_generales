@@ -414,6 +414,7 @@ M_Y( t )
 & = & \left( M_X( t ) \right)^n
 \end{eqnarray*}
 $$
+
 <!------------------------------------------------------------------------------------------------->
 ::: {.definition #dfc name="Función característica"}
 La **función característica** de una variable aleatoria a valores reales $X$, es la función:
@@ -708,7 +709,7 @@ $$
 F( n, x ) 
 & = & P( N = n \land X \leq x ) \\
 & = & P( X \leq x \mid N = n  ) P( N = n )\qquad \text{propiedades de la probabilidad condicional} \\
-& = & F_n( x ) p_n\qquad \text{simplificando notación} \\
+& = & F( x \mid n ) p_n\qquad \text{simplificando notación} \\
 \end{eqnarray*}
 $$
 
@@ -725,7 +726,7 @@ F_X( x )
 & = & \sum\limits_{n \in \mathbb{N}} P\left( X \leq x \land N \in \{n\} \right) \\
 & = & \sum\limits_{n \in \mathbb{N}} P\left( X \leq x \land N = n \right) \\
 & = & \sum\limits_{n \in \mathbb{N}} P\left( X \leq x\ \middle|\ N = n \right) P( N = n ) \\
-& = & \sum\limits_{n \in \mathbb{N}} F_n( x ) p_n 
+& = & \sum\limits_{n \in \mathbb{N}} F( x \mid n ) p_n 
 \end{eqnarray*}
 $$
 la distribución de $F_X$ de $X$ no es más que una mixtura de las distribuciones condicionales de $X$
