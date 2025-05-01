@@ -858,7 +858,7 @@ $$
 $$
 esto quiere decir que para cualquier $\varepsilon > 0$ se satisface el siguiente límite
 $$
-\underset{n \rightarrow +\infty}{\lim} P\left( \left| \frac{1}{n}\sum\limits_{i=1}^n X_i - \mu \right|\right) = 0
+\underset{n \rightarrow +\infty}{\lim} P\left( \left| \frac{1}{n}\sum\limits_{i=1}^n X_i - \mu \right| > \varepsilon\right) = 0
 $$
 :::
 
