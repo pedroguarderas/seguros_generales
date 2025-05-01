@@ -4,6 +4,9 @@
 <!------------------------------------------------------------------------------------------------->
 ## Distribuciones discretas
 
+<!------------------------------------------------------------------------------------------------->
+### Distribución binomial
+
 ::: {.definition #dbinom name="Distribución binomial"}
 Una variable aleatoria $N$ que toma valores en $\N$ se dice que sigue una distribución 
 o ley de binomial $N \rightsquigarrow Bin( n, p )$, con parámetros $n \in \N$ y 
@@ -38,6 +41,9 @@ plt <- ggplot() +
 plot( plt )
 ```
 
+<!------------------------------------------------------------------------------------------------->
+### Distribución de Poisson
+
 ::: {.definition #dpois name="Distribución de Poisson"}
 Una variable aleatoria $N$ que toma valores en $\N$ se dice que sigue una distribución 
 o ley de Poisson $N \rightsquigarrow Pois( n, p )$, con parámetro $\lambda \in \R$, si:
@@ -69,6 +75,9 @@ plt <- ggplot() +
   theme_bw()
 plot( plt )
 ```
+
+<!------------------------------------------------------------------------------------------------->
+### Distribución binomial negativa
 
 ::: {.definition #dnbinom name="Distribución binomial negativa"}
 Una variable aleatoria $N$ que toma valores en $\N$ se dice que sigue una distribución 
@@ -209,6 +218,9 @@ plot( plt )
 <!------------------------------------------------------------------------------------------------->
 ## Distribuciones continuas
 
+<!------------------------------------------------------------------------------------------------->
+### Distribución uniforme
+
 ::: {.definition #dunif name="Distribución uniforme"}
 Una variable aleatoria $X$ a valores reales, sigue una distribución uniforme 
 $X \rightsquigarrow Unif( a, b )$ de parámetros $a, b \in \R$, si su función de distribución
@@ -237,6 +249,9 @@ fx <- dunif( x = x, min = a, max = b ) # cálculo de la densidad f(x)
 Fk <- punif( q = x, min = a, max = b ) # cálculo de probabilidad F(x)
 ```
 
+<!------------------------------------------------------------------------------------------------->
+### Distribución exponencial
+
 ::: {.definition #dexp name="Distribución exponencial"}
 Una variable aleatoria $X$ a valores reales, sigue una distribución exponencial 
 $X \rightsquigarrow Exp( \lambda )$ de parámetros $\lambda > 0$, si su función de distribución
@@ -263,6 +278,9 @@ X <- rexp( n = m, rate = lambda ) # simular una muestra de tamaño m
 fx <- dexp( x = x, rate = lambda ) # cálculo de la densidad f(x)
 Fk <- pexp( q = x, rate = lambda ) # cálculo de probabilidad F(x)
 ```
+
+<!------------------------------------------------------------------------------------------------->
+### Distribución gamma
 
 ::: {.definition #dgamma name="Distribución gamma"}
 Una variable aleatoria $X$ a valores reales, sigue una distribución gamma 
@@ -299,6 +317,9 @@ fx <- dgamma( x = x, shape = alpha, scale = beta ) # cálculo de la densidad f(x
 Fk <- pgamma( q = x, shape = alpha, scale = beta ) # cálculo de probabilidad F(x)
 ```
 
+<!------------------------------------------------------------------------------------------------->
+### Distribución normal
+
 ::: {.definition #dnorm name="Distribución normal"}
 Una variable aleatoria $X$ a valores reales, sigue una distribución normal 
 $X \rightsquigarrow N( \mu, \sigma )$ de parámetros $\mu \in \R$, $\sigma > 0$, si su 
@@ -326,6 +347,9 @@ X <- rnorm( n = m, mean = mu, sd = sigma ) # simular una muestra de tamaño m
 fx <- dnorm( x = x, mean = mu, sd = sigma ) # cálculo de la densidad f(x)
 Fk <- pnorm( q = x, mean = mu, sd = sigma ) # cálculo de probabilidad F(x)
 ```
+
+<!------------------------------------------------------------------------------------------------->
+### Distribución log-normal
 
 ::: {.definition #dlnorm name="Distribución log-normal"}
 Una variable aleatoria $X$ a valores reales, sigue una distribución log-normal 
@@ -356,6 +380,9 @@ Fk <- plnorm( q = x, meanlog = mu, sdlog = sigma ) # cálculo de probabilidad F(
 En pocas, una variable aleatoria $X \rightsquigarrow LN( \mu, \sigma )$ sigue una distribución 
 log-normal si y solamente si la variable aleatoria dada por su logaritmo $\ln( X ) \rightsquigarrow N( \mu, \sigma )$ 
 sigue una distribución normal.
+
+<!------------------------------------------------------------------------------------------------->
+### Distribución de Pareto generalizada
 
 ::: {.definition #dgpd name="Distribución de Pareto generalizada"}
 Una variable aleatoria $X$ a valores reales, sigue una distribución de Pareto generalizada
@@ -395,6 +422,9 @@ X <- rgpd( n = m, xi = xi, mu = mu, beta = sigma ) # simular una muestra de tama
 fx <- dgpd( x = x, xi = xi, mu = mu, beta = sigma ) # cálculo de la densidad f(x)
 Fk <- pgpd( q = x, xi = xi, mu = mu, beta = sigma ) # cálculo de probabilidad F(x)
 ```
+
+<!------------------------------------------------------------------------------------------------->
+### Distribución de valores extremos generalizada
 
 ::: {.definition #dgev  name="Distribución de valores extremos generalizada"}
 Una variable aleatoria $X$ a valores reales, sigue una distribución generalizada de valores extremos
@@ -436,6 +466,9 @@ X <- rgev( n = m, xi = xi, mu = mu, beta = sigma ) # simular una muestra de tama
 fx <- dgev( x = x, xi = xi, mu = mu, beta = sigma ) # cálculo de la densidad f(x)
 Fk <- pgev( q = x, xi = xi, mu = mu, beta = sigma ) # cálculo de probabilidad F(x)
 ```
+
+<!------------------------------------------------------------------------------------------------->
+### Distribución t de Student
 
 ::: {.definition #dtst  name="Distribución t de Student"}
 Una variable aleatoria $X$ a valores reales, sigue una distribución t de Student
@@ -499,6 +532,9 @@ fx <- dt( x = x, df = nu ) # cálculo de la densidad f(x)
 Fk <- pt( q = x, df = nu ) # cálculo de probabilidad F(x)
 ```
 
+<!------------------------------------------------------------------------------------------------->
+### Distribución gamma transformada
+
 ::: {.definition #dgammatra  name="Distribución gamma transformada"}
 Una variable aleatoria $X$ a valores reales, sigue una distribución gamma transformada
 $X \rightsquigarrow GT( \alpha, \tau, \theta )$ de parámetros $\alpha > 0, \tau > 0, \theta > 0$, 
@@ -560,6 +596,9 @@ En la familia gamma se incluyen las siguientes distribuciones:
 6. La distribución exponencial
 
 7. La distribución inversa exponencial
+
+<!------------------------------------------------------------------------------------------------->
+### Distribución beta transformada
 
 ::: {.definition #dbetra  name="Distribución beta transformada"}
 Una variable aleatoria $X$ a valores reales, sigue una distribución beta transformada
