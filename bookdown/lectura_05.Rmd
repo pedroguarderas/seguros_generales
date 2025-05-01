@@ -880,8 +880,8 @@ P( S\ \text{es máximo} )
 & = & \sum\limits_{n=0}^{+\infty} P\left( X_1 > M + d \land \cdots \land X_n > M + d \right) P( N = n ) \\
 & = & \sum\limits_{n=0}^{+\infty} P\left( X > M + d \right)^n p_n \\
 & = & \E\left[ P\left( X > M + d \right)^N \right] \\
-& \approx & \sum\limits_{n=0}^{N'} P( X > M + d )^n p_n,\quad 
-\text{para un valor $N'$ suficientemente grande}
+& \approx & \sum\limits_{n=0}^{n'} P( X > M + d )^n p_n,\quad 
+\text{para un valor $n'$ suficientemente grande}
 \end{eqnarray*}
 $$
 
