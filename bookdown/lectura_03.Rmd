@@ -263,7 +263,6 @@ $F$ de $X$, tiene la siguiente forma particular.
 $$
 F( x ) = P( X \leq x ) = \mathbf{1}_{[a, +\infty)}( x )
 $$
-
 ::: {.proposition #pindconst}
 Las constantes o variables aleatorias constantes son independientes de cualquier otra variable
 aleatoria.
@@ -287,8 +286,9 @@ $$
 \begin{eqnarray*}
 P\left( X \in A \land Y \in B \right)
 & = & P\left( X^{-1}(A) \cap Y^{-1}(B) \right) \\
-& = & P\left( \{ \omega \in \Omega \mid X( \omega ) \in A \} \cap \{ \omega \in \Omega \mid Y( \omega ) \in B \} \right) \\
-& = & P\left( \emptyset \cap \{ \omega \in \Omega \mid Y( \omega ) \in B \} \right) \\
+& = & P\left( \left\{ \omega \in \Omega \middle| X( \omega ) \in A \right\} \cap 
+\left\{ \omega \in \Omega \middle| Y( \omega ) \in B \right\} \right) \\
+& = & P\left( \emptyset \cap \left\{ \omega \in \Omega \middle| Y( \omega ) \in B \right\} \right) \\
 & = & P( \emptyset ) \\
 & = & 0
 \end{eqnarray*}
@@ -299,8 +299,9 @@ $$
 \begin{eqnarray*}
 P\left( X \in A \land Y \in B \right)
 & = & P\left( X^{-1}(A) \cap Y^{-1}(B) \right) \\
-& = & P\left( \{ \omega \in \Omega \mid X( \omega ) \in A \} \cap \{ \omega \in \Omega \mid Y( \omega ) \in B \} \right) \\
-& = & P\left( \Omega \cap \{ \omega \in \Omega \mid Y( \omega ) \in B \} \right) \\
+& = & P\left( \left\{ \omega \in \Omega \middle| X( \omega ) \in A \right\} \cap 
+\left\{ \omega \in \Omega \middle| Y( \omega ) \in B \right\} \right) \\
+& = & P\left( \Omega \cap \left\{ \omega \in \Omega \middle| Y( \omega ) \in B \right\} \right) \\
 & = & P( Y \in B )
 \end{eqnarray*}
 $$
@@ -347,14 +348,17 @@ $$
 = \sum\limits_{i=0}^{\infty} k_i p_i
 $$
 
-Para el caso de una variable aleatoria continua $X : \Omega \longrightarrow \R$ a valores 
-reales, la esperanza matemática está dada por
+Para el caso de una variable aleatoria a valores reales, es decir una función medible 
+$X : \Omega \longrightarrow \R$, la esperanza matemática está dada por
 $$
 \E[ X ]
 = \E_P[ K ] 
 = \int\limits_{\mathbb{\Omega}} X( \omega )\ dP( \omega )
 = \int\limits_{\R} x\ dF( x )
 $$
+donde la última integral de tipo Riemann-Stieltjes tiene sentido, ya que $F$ es una función de 
+variación acotada.
+
 Cuando la función de densidad de probabilidad está bien definida es posible expresar y calcular 
 la esperanza matemática como la siguiente expresión:
 $$
@@ -391,6 +395,13 @@ $$
 = \int\limits_\Omega \mathbf{1}_A( \omega )\ dP( \omega )
 = \int\limits_A dP( \omega )
 = P( A )
+$$
+Con esta propiedad, podemos obtener la siguiente representación para la función de distribución 
+acumulada de una variable aleatoria a valores reales $X$.
+$$
+F( X \leq x ) 
+= P( X \leq x )
+= \E\left[ \mathbf{1}_{(-\infty,x]}( X ) \right]
 $$
 
 <!------------------------------------------------------------------------------------------------->
@@ -571,7 +582,7 @@ $$
 Para cualquier par de eventos $A, B \in \F$, la **probabilidad condicional** de $A$ dado 
 $B$, está dada por:
 $$
-P( A \mid B ) = \frac{P( A \cap B)}{P(B)}
+P\left( A \middle| B \right) = \frac{P( A \cap B)}{P(B)}
 $$
 :::
 
@@ -587,7 +598,7 @@ P\left( X \leq x \middle| A \right)
 $$
 Esto precisamente da paso a la definición de la **distribución acumulada de** $X$ **condicionada a** $A$
 $$
-F( x \mid A ) = P\left( X \leq x \middle| A \right)
+F( x | A ) = P\left( X \leq x \middle| A \right)
 $$
 Se satisface algunas propiedades:
 
@@ -623,20 +634,57 @@ F\left( x \middle| \Omega \right)
 \end{eqnarray*}
 $$
 3. Para cualquier $A \in \F$, el evento $\{ X \leq x \} \cap A \subset A$ y por tanto 
-$P\left( X \leq x \middle| \Omega \right) \leq P( A )$, entonces $0 \leq F(x\mid A) \leq 1$,
+$P\left( X \leq x \middle| \Omega \right) \leq P( A )$, entonces $0 \leq F(x | A) \leq 1$,
 
-4. Para cualquier $A \in \F$, la función de distribución acumulada condicionada $F( \cdot \mid A )$ es no decreciente,
+4. Para cualquier $A \in \F$, la función de distribución acumulada condicionada $F( \cdot | A )$ es no decreciente,
 
-5. Para cualquier $A \in \F$, la función de distribución acumulada condicionada $F( \cdot \mid A )$ es continua por derecha,
+5. Para cualquier $A \in \F$, la función de distribución acumulada condicionada $F( \cdot | A )$ es continua por derecha,
 
 En algunos casos la distribución acumulada de la variable aleatoria $X$ se nota por $F_X$ y la 
-distribución acumulada de $X$ condicionada por el evento $A$, se nota por $F_{X\mid A}$.
+distribución acumulada de $X$ condicionada por el evento $A$, se nota por $F_{X|A}$.
 :::
 
 Como hemos visto la función de distribución acumulada satisface todas las propiedades de una 
 función de distribución acumulada y por tal razón se puede calcular una esperanza, la cual vendrá 
 condicionada.
 
+Gracias a las propiedades 1 y 2 antes señaladas, tenemos fácilmente la siguiente igualdad para 
+cualquier evento $A \in \F$.
+$$
+F( x )
+= F\left( x \middle| \Omega \right)
+= F\left( x \middle| A \cup A^c \right)
+= F\left( x \middle| A \right) P( A ) + F\left( x \middle| A^c \right) P( A^c )
+$$
+de donde surge la idea de generalizar la interpretación de la distribución acumulada de $X$ 
+condicionada por un evento $A$. No solo puede ser interpretada como una función, sino como una 
+variable aleatoria. Para ello, observemos que la distribución acumulada condicionada admite también 
+la siguiente representación con el uso de la esperanza y las funciones indicatrices.
+$$
+F\left( x \middle| A \right)
+= \frac{P( X \leq x \land A )}{P( A )}
+= \frac{\E\left[ \mathbf{1}_{(-\infty,x]}( X ) \mathbf{1}_{A} \right]}{\E\left[ \mathbf{1}_{A} \right]}
+$$
+Esto sugiere la siguiente extensión de la distribución acumulada condicional a ser una variable 
+aleatoria, ya no tan solo condicionada por eventos sino condicionada por variables aleatorias, en 
+este primer caso por variables aleatorias de la forma $\mathbf{1}_A$. Así damos sentido a la 
+variable aleatoria $F\left( x \middle| \mathbf{1}_A \right) : \Omega \longrightarrow \R_+$, para 
+cualquier $\omega \in \Omega$, definimos
+$$
+F\left( x \middle| \mathbf{1}_A( \omega ) \right) 
+=
+\left\{
+\begin{array}{ll}
+F\left( x \middle| A \right) & \text{si}\ \mathbf{1}_A( \omega ) = 1 \\
+F\left( x \middle| A^c \right) & \text{si}\ \mathbf{1}_A( \omega ) = 0
+\end{array}
+\right.
+$$
+de la definición anterior se sigue de forma inmediata la igualdad
+$$
+F( x )
+= \E\left[ F\left( x \middle| \mathbf{1}_A \right) \right]
+$$
 Las variables aleatorias también generan eventos, ya que son medibles, por tal razón si tomamos 
 en cuenta la definición anterior, podemos ciertamente extender la definición anterior de 
 **distribución acumulada condicionada**, pero considerando variables aleatorias en su 
@@ -645,7 +693,7 @@ condicionamiento.
 Así si consideramos dos variables aleatorias $X$ y $Y$ a valores reales, a partir de la definición 
 podemos tranquilamente considerar la distribución acumulada de $X$ condicionada al evento $Y \leq y$
 $$
-F( x \mid Y \leq y ) 
+F\left( x \middle| Y \leq y \right) 
 = \frac{P( X \leq x \land Y \leq y )}{P(Y \leq y)}
 = \frac{F_{X,Y}( x, y )}{F_Y( y )}
 $$
@@ -659,19 +707,46 @@ $$
 \E\left[ X \middle| A \right] 
 = \E_{P|A}\left[ X \right] 
 = \E_P\left[ X \middle| A \right] 
-= \int\limits_{A} X( \omega )\ dP( \omega \mid A )
-= \int\limits_{\R} x\ dF( x \mid A )
+= \int\limits_{A} X( \omega )\ dP \left( \omega \middle| A \right)
+= \int\limits_{\R} x\ dF\left( x \middle| A \right)
 $$
-cuando $F(x\mid A)$ es derivable, con densidad de probabilidad $f(x|\mid A)$, la esperanza 
+cuando $F(x | A)$ es derivable, con densidad de probabilidad $f(x|A)$, la esperanza 
 condicionada también se puede escribir como:
 $$
 \E\left[ X \middle| A \right] 
-= \int\limits_{\R} x\ f( x \mid A )\ dx
+= \int\limits_{\R} x\ f( x | A )\ dx
 $$
 La distribución acumulada condicionada satisface las mismas propiedades de una distribución acumulada,
 y por tanto la esperanza que resulta de esta también satisface las mismas propiedades que cualquier
 esperanza.
+
+Al igual que lo realizamos con la distribución acumulada condicionada, podemos reinterpretar a la 
+esperanza condicionada como una variable aleatoria.
+$$
+\E\left[ X \middle| \mathbf{1}_A \right] 
+= \int\limits_{\R} x\ dF\left( x \middle| \mathbf{1}_A \right)
+$$
 :::
+
+Por otra parte, para cualquier evento $A \in \F$, las distribuciones $F( \cdot ), F( \cdot |  A )$ 
+y $F( x | A^c)$ son funciones de variación acotada y por tanto sus integrales de Riemann-Stieltjes
+están bien definidas, de donde resulta la siguiente igualdad.
+$$
+\begin{eqnarray*}
+\E\left[ X \right]
+& = & \int\limits_{\R} x dF( x ) \\
+& = & \int\limits_{\R} x dF( x | A ) P( A ) + \int\limits_{\R} x dF( x | A^c ) P( A^c ) \\
+& = & \E\left[ X \middle| A \right] P( A ) + \E\left[ X \middle| A^c \right] P( A^c ) \\
+& = & \E\left[ \E\left[ X \middle| \mathbf{1}_A \right] \right]
+\end{eqnarray*}
+$$
+por abuso de notación se suele utilizar la misma notación $\E\left[ X \middle| A \right]$ para 
+indicar también la variable aleatoria $\E\left[ X \middle| \mathbf{1}_A \right]$. Así la siguiente 
+expresión tienen sentido.
+$$
+\E\left[ \E\left[ X \middle| A \right] \right]
+= \E\left[ \E\left[ X \middle| \mathbf{1}_A \right] \right]
+$$
 
 La siguiente definición de distribución de exceso condicionada es útil para el estudio de los 
 valores extremos que se pueden presentar en el estudio de los valores de siniestros que se presentan
@@ -682,7 +757,7 @@ en un seguro.
 La **distribución de exceso condicionada** asociada a una variable aleatoria $X$ con distribución 
 de probabilidad acumulada $F$ y a un umbral de condicionamiento $u > 0$, está dada por:
 $$
-F_u( y ) = P\left( X - u \leq y \mid X > u \right) 
+F_u( y ) = P\left( X - u \leq y \middle| X > u \right) 
 = \frac{P\left( u < X \leq y + u\right)}{P(X > u)}
 = \frac{F( u + y ) - F( u )}{ 1 - F( u )}
 $$
@@ -692,8 +767,21 @@ $$
 Consideremos dos variables aleatorias $X, Y$, ambas a valores reales, entonces se satisface la 
 siguiente igualdad:
 $$
-\V[ Y ] = \E\left[ \V\left[ Y \middle| X \right] \right] + 
-\V\left[ \E\left[ Y \middle| X \right] \right]
+\V[ Y ] = \E\left[ \V[ Y| X ] \right] + \V\left[ \E[ Y | X ] \right]
+$$
+:::
+
+:::{.proof}
+$$
+\begin{eqnarray*}
+\E\left[ \V[ Y| X ] \right] 
+& = & \E\left[ \E[ Y^2 | X ] - \E[ Y | X ]^2 \right] \\
+& = & \E\left[ \E[ Y^2 | X ] \right] - \E\left[ \E[ Y | X ]^2 \right] \\
+& = & \E\left[ Y^2 \right] - \E\left[ \E[ Y | X ]^2 \right] + \E\left[ \E[ Y | X ] \right]^2 
+- \E\left[ \E[ Y | X ] \right]^2 \\
+& = & \E\left[ Y^2 \right] - \V\left[ \E[ Y | X ] \right] - \E\left[ Y \right]^2 \\
+& = & \V[ Y ] - \V\left[ \E[ Y | X ] \right]
+\end{eqnarray*}
 $$
 :::
 
@@ -708,8 +796,8 @@ $$
 \begin{eqnarray*}
 F( n, x ) 
 & = & P( N = n \land X \leq x ) \\
-& = & P( X \leq x \mid N = n  ) P( N = n )\qquad \text{propiedades de la probabilidad condicional} \\
-& = & F( x \mid n ) p_n\qquad \text{simplificando notación} \\
+& = & P\left( X \leq x \middle| N = n \right) P( N = n )\qquad \text{propiedades de la probabilidad condicional} \\
+& = & F( x | n ) p_n\qquad \text{simplificando notación} \\
 \end{eqnarray*}
 $$
 
@@ -726,7 +814,7 @@ F_X( x )
 & = & \sum\limits_{n \in \mathbb{N}} P\left( X \leq x \land N \in \{n\} \right) \\
 & = & \sum\limits_{n \in \mathbb{N}} P\left( X \leq x \land N = n \right) \\
 & = & \sum\limits_{n \in \mathbb{N}} P\left( X \leq x\ \middle|\ N = n \right) P( N = n ) \\
-& = & \sum\limits_{n \in \mathbb{N}} F( x \mid n ) p_n 
+& = & \sum\limits_{n \in \mathbb{N}} F( x | n ) p_n 
 \end{eqnarray*}
 $$
 la distribución de $F_X$ de $X$ no es más que una mixtura de las distribuciones condicionales de $X$
