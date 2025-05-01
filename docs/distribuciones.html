@@ -208,9 +208,26 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="4" data-path="distribuciones.html"><a href="distribuciones.html"><i class="fa fa-check"></i><b>4</b> Distribuciones</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="distribuciones.html"><a href="distribuciones.html#distribuciones-discretas"><i class="fa fa-check"></i><b>4.1</b> Distribuciones discretas</a></li>
+<li class="chapter" data-level="4.1" data-path="distribuciones.html"><a href="distribuciones.html#distribuciones-discretas"><i class="fa fa-check"></i><b>4.1</b> Distribuciones discretas</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="distribuciones.html"><a href="distribuciones.html#distribución-binomial"><i class="fa fa-check"></i><b>4.1.1</b> Distribución binomial</a></li>
+<li class="chapter" data-level="4.1.2" data-path="distribuciones.html"><a href="distribuciones.html#distribución-de-poisson"><i class="fa fa-check"></i><b>4.1.2</b> Distribución de Poisson</a></li>
+<li class="chapter" data-level="4.1.3" data-path="distribuciones.html"><a href="distribuciones.html#distribución-binomial-negativa"><i class="fa fa-check"></i><b>4.1.3</b> Distribución binomial negativa</a></li>
+</ul></li>
 <li class="chapter" data-level="4.2" data-path="distribuciones.html"><a href="distribuciones.html#familia-de-panjer"><i class="fa fa-check"></i><b>4.2</b> Familia de Panjer</a></li>
-<li class="chapter" data-level="4.3" data-path="distribuciones.html"><a href="distribuciones.html#distribuciones-continuas"><i class="fa fa-check"></i><b>4.3</b> Distribuciones continuas</a></li>
+<li class="chapter" data-level="4.3" data-path="distribuciones.html"><a href="distribuciones.html#distribuciones-continuas"><i class="fa fa-check"></i><b>4.3</b> Distribuciones continuas</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="distribuciones.html"><a href="distribuciones.html#distribución-uniforme"><i class="fa fa-check"></i><b>4.3.1</b> Distribución uniforme</a></li>
+<li class="chapter" data-level="4.3.2" data-path="distribuciones.html"><a href="distribuciones.html#distribución-exponencial"><i class="fa fa-check"></i><b>4.3.2</b> Distribución exponencial</a></li>
+<li class="chapter" data-level="4.3.3" data-path="distribuciones.html"><a href="distribuciones.html#distribución-gamma"><i class="fa fa-check"></i><b>4.3.3</b> Distribución gamma</a></li>
+<li class="chapter" data-level="4.3.4" data-path="distribuciones.html"><a href="distribuciones.html#distribución-normal"><i class="fa fa-check"></i><b>4.3.4</b> Distribución normal</a></li>
+<li class="chapter" data-level="4.3.5" data-path="distribuciones.html"><a href="distribuciones.html#distribución-log-normal"><i class="fa fa-check"></i><b>4.3.5</b> Distribución log-normal</a></li>
+<li class="chapter" data-level="4.3.6" data-path="distribuciones.html"><a href="distribuciones.html#distribución-de-pareto-generalizada"><i class="fa fa-check"></i><b>4.3.6</b> Distribución de Pareto generalizada</a></li>
+<li class="chapter" data-level="4.3.7" data-path="distribuciones.html"><a href="distribuciones.html#distribución-de-valores-extremos-generalizada"><i class="fa fa-check"></i><b>4.3.7</b> Distribución de valores extremos generalizada</a></li>
+<li class="chapter" data-level="4.3.8" data-path="distribuciones.html"><a href="distribuciones.html#distribución-t-de-student"><i class="fa fa-check"></i><b>4.3.8</b> Distribución t de Student</a></li>
+<li class="chapter" data-level="4.3.9" data-path="distribuciones.html"><a href="distribuciones.html#distribución-gamma-transformada"><i class="fa fa-check"></i><b>4.3.9</b> Distribución gamma transformada</a></li>
+<li class="chapter" data-level="4.3.10" data-path="distribuciones.html"><a href="distribuciones.html#distribución-beta-transformada"><i class="fa fa-check"></i><b>4.3.10</b> Distribución beta transformada</a></li>
+</ul></li>
 <li class="chapter" data-level="4.4" data-path="distribuciones.html"><a href="distribuciones.html#estimación"><i class="fa fa-check"></i><b>4.4</b> Estimación</a>
 <ul>
 <li class="chapter" data-level="4.4.1" data-path="distribuciones.html"><a href="distribuciones.html#método-de-sustitución"><i class="fa fa-check"></i><b>4.4.1</b> Método de sustitución</a></li>
@@ -295,6 +312,9 @@ div.csl-indent {
 <!------------------------------------------------------------------------------------------------->
 <div id="distribuciones-discretas" class="section level2 hasAnchor" number="4.1">
 <h2><span class="header-section-number">4.1</span> Distribuciones discretas<a href="distribuciones.html#distribuciones-discretas" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<!------------------------------------------------------------------------------------------------->
+<div id="distribución-binomial" class="section level3 hasAnchor" number="4.1.1">
+<h3><span class="header-section-number">4.1.1</span> Distribución binomial<a href="distribuciones.html#distribución-binomial" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="definition">
 <p><span id="def:dbinom" class="definition"><strong>Definición 4.1  (Distribución binomial) </strong></span>Una variable aleatoria <span class="math inline">\(N\)</span> que toma valores en <span class="math inline">\(\mathbb{N}\)</span> se dice que sigue una distribución
 o ley de binomial <span class="math inline">\(N \rightsquigarrow Bin( n, p )\)</span>, con parámetros <span class="math inline">\(n \in \mathbb{N}\)</span> y
@@ -332,6 +352,10 @@ conforme cambia <span class="math inline">\(k \in \mathbb{N}\)</span></p>
 </details>
 <p><img src="seguros_generales_files/figure-html/l4g1-1.png" width="80%" height="450px" style="display: block; margin: auto;" /></p>
 <p></p>
+<!------------------------------------------------------------------------------------------------->
+</div>
+<div id="distribución-de-poisson" class="section level3 hasAnchor" number="4.1.2">
+<h3><span class="header-section-number">4.1.2</span> Distribución de Poisson<a href="distribuciones.html#distribución-de-poisson" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="definition">
 <p><span id="def:dpois" class="definition"><strong>Definición 4.2  (Distribución de Poisson) </strong></span>Una variable aleatoria <span class="math inline">\(N\)</span> que toma valores en <span class="math inline">\(\mathbb{N}\)</span> se dice que sigue una distribución
 o ley de Poisson <span class="math inline">\(N \rightsquigarrow Pois( n, p )\)</span>, con parámetro <span class="math inline">\(\lambda \in \mathbb{R}\)</span>, si:
@@ -367,6 +391,10 @@ conforme cambia <span class="math inline">\(k \in \mathbb{N}\)</span></p>
 </details>
 <p><img src="seguros_generales_files/figure-html/l4g2-1.png" width="80%" height="450px" style="display: block; margin: auto;" /></p>
 <p></p>
+<!------------------------------------------------------------------------------------------------->
+</div>
+<div id="distribución-binomial-negativa" class="section level3 hasAnchor" number="4.1.3">
+<h3><span class="header-section-number">4.1.3</span> Distribución binomial negativa<a href="distribuciones.html#distribución-binomial-negativa" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="definition">
 <p><span id="def:dnbinom" class="definition"><strong>Definición 4.3  (Distribución binomial negativa) </strong></span>Una variable aleatoria <span class="math inline">\(N\)</span> que toma valores en <span class="math inline">\(\mathbb{N}\)</span> se dice que sigue una distribución
 o ley de binomial negativa <span class="math inline">\(N \rightsquigarrow NBin( \alpha, p )\)</span>, con parámetro <span class="math inline">\(\alpha &gt; 0\)</span> y
@@ -429,6 +457,7 @@ con <span class="math inline">\(\alpha = 1\)</span>.</p>
 <p>Asociado a estas distribuciones discretas existe un resultado de caracterización, el cual permite
 seleccionar la distribución de conteo.</p>
 <!------------------------------------------------------------------------------------------------->
+</div>
 </div>
 <div id="familia-de-panjer" class="section level2 hasAnchor" number="4.2">
 <h2><span class="header-section-number">4.2</span> Familia de Panjer<a href="distribuciones.html#familia-de-panjer" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -1046,6 +1075,9 @@ diesel
 </div>
 <div id="distribuciones-continuas" class="section level2 hasAnchor" number="4.3">
 <h2><span class="header-section-number">4.3</span> Distribuciones continuas<a href="distribuciones.html#distribuciones-continuas" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<!------------------------------------------------------------------------------------------------->
+<div id="distribución-uniforme" class="section level3 hasAnchor" number="4.3.1">
+<h3><span class="header-section-number">4.3.1</span> Distribución uniforme<a href="distribuciones.html#distribución-uniforme" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="definition">
 <p><span id="def:dunif" class="definition"><strong>Definición 4.6  (Distribución uniforme) </strong></span>Una variable aleatoria <span class="math inline">\(X\)</span> a valores reales, sigue una distribución uniforme
 <span class="math inline">\(X \rightsquigarrow Unif( a, b )\)</span> de parámetros <span class="math inline">\(a, b \in \mathbb{R}\)</span>, si su función de distribución
@@ -1075,6 +1107,10 @@ M_X( t ) = \frac{\exp(bt)-\exp(at)}{t(b-a)}
 <span id="cb27-7"><a href="distribuciones.html#cb27-7"></a>Fk <span class="ot">&lt;-</span> <span class="fu">punif</span>( <span class="at">q =</span> x, <span class="at">min =</span> a, <span class="at">max =</span> b ) <span class="co"># cálculo de probabilidad F(x)</span></span></code></pre></div>
 </details>
 <p></p>
+<!------------------------------------------------------------------------------------------------->
+</div>
+<div id="distribución-exponencial" class="section level3 hasAnchor" number="4.3.2">
+<h3><span class="header-section-number">4.3.2</span> Distribución exponencial<a href="distribuciones.html#distribución-exponencial" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="definition">
 <p><span id="def:dexp" class="definition"><strong>Definición 4.7  (Distribución exponencial) </strong></span>Una variable aleatoria <span class="math inline">\(X\)</span> a valores reales, sigue una distribución exponencial
 <span class="math inline">\(X \rightsquigarrow Exp( \lambda )\)</span> de parámetros <span class="math inline">\(\lambda &gt; 0\)</span>, si su función de distribución
@@ -1103,6 +1139,10 @@ M_X( t ) = \frac{\lambda}{\lambda - t}
 <span id="cb28-6"><a href="distribuciones.html#cb28-6"></a>Fk <span class="ot">&lt;-</span> <span class="fu">pexp</span>( <span class="at">q =</span> x, <span class="at">rate =</span> lambda ) <span class="co"># cálculo de probabilidad F(x)</span></span></code></pre></div>
 </details>
 <p></p>
+<!------------------------------------------------------------------------------------------------->
+</div>
+<div id="distribución-gamma" class="section level3 hasAnchor" number="4.3.3">
+<h3><span class="header-section-number">4.3.3</span> Distribución gamma<a href="distribuciones.html#distribución-gamma" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="definition">
 <p><span id="def:dgamma" class="definition"><strong>Definición 4.8  (Distribución gamma) </strong></span>Una variable aleatoria <span class="math inline">\(X\)</span> a valores reales, sigue una distribución gamma
 <span class="math inline">\(X \rightsquigarrow Gamma( \alpha, \beta )\)</span> de parámetros <span class="math inline">\(\alpha &gt; 0\)</span>, <span class="math inline">\(\beta &gt; 0\)</span>, si su
@@ -1138,6 +1178,10 @@ M_X( t ) = \left( \frac{\beta}{\beta - t} \right)^\alpha,\qquad \text{si}\ t &lt
 <span id="cb29-7"><a href="distribuciones.html#cb29-7"></a>Fk <span class="ot">&lt;-</span> <span class="fu">pgamma</span>( <span class="at">q =</span> x, <span class="at">shape =</span> alpha, <span class="at">scale =</span> beta ) <span class="co"># cálculo de probabilidad F(x)</span></span></code></pre></div>
 </details>
 <p></p>
+<!------------------------------------------------------------------------------------------------->
+</div>
+<div id="distribución-normal" class="section level3 hasAnchor" number="4.3.4">
+<h3><span class="header-section-number">4.3.4</span> Distribución normal<a href="distribuciones.html#distribución-normal" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="definition">
 <p><span id="def:dnorm" class="definition"><strong>Definición 4.9  (Distribución normal) </strong></span>Una variable aleatoria <span class="math inline">\(X\)</span> a valores reales, sigue una distribución normal
 <span class="math inline">\(X \rightsquigarrow N( \mu, \sigma )\)</span> de parámetros <span class="math inline">\(\mu \in \mathbb{R}\)</span>, <span class="math inline">\(\sigma &gt; 0\)</span>, si su
@@ -1167,6 +1211,10 @@ M_X( t ) = \exp\left( t \mu + \frac{1}{2} t^2 \sigma^2 \right)
 <span id="cb30-7"><a href="distribuciones.html#cb30-7"></a>Fk <span class="ot">&lt;-</span> <span class="fu">pnorm</span>( <span class="at">q =</span> x, <span class="at">mean =</span> mu, <span class="at">sd =</span> sigma ) <span class="co"># cálculo de probabilidad F(x)</span></span></code></pre></div>
 </details>
 <p></p>
+<!------------------------------------------------------------------------------------------------->
+</div>
+<div id="distribución-log-normal" class="section level3 hasAnchor" number="4.3.5">
+<h3><span class="header-section-number">4.3.5</span> Distribución log-normal<a href="distribuciones.html#distribución-log-normal" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="definition">
 <p><span id="def:dlnorm" class="definition"><strong>Definición 4.10  (Distribución log-normal) </strong></span>Una variable aleatoria <span class="math inline">\(X\)</span> a valores reales, sigue una distribución log-normal
 <span class="math inline">\(X \rightsquigarrow LN( \mu, \sigma )\)</span> de parámetros <span class="math inline">\(\mu &gt; 0\)</span>, <span class="math inline">\(\sigma &gt; 0\)</span>, si su
@@ -1198,6 +1246,10 @@ No hay forma analítica para <span class="math inline">\(M_X\)</span>
 En pocas, una variable aleatoria <span class="math inline">\(X \rightsquigarrow LN( \mu, \sigma )\)</span> sigue una distribución
 log-normal si y solamente si la variable aleatoria dada por su logaritmo <span class="math inline">\(\ln( X ) \rightsquigarrow N( \mu, \sigma )\)</span>
 sigue una distribución normal.</p>
+<!------------------------------------------------------------------------------------------------->
+</div>
+<div id="distribución-de-pareto-generalizada" class="section level3 hasAnchor" number="4.3.6">
+<h3><span class="header-section-number">4.3.6</span> Distribución de Pareto generalizada<a href="distribuciones.html#distribución-de-pareto-generalizada" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="definition">
 <p><span id="def:dgpd" class="definition"><strong>Definición 4.11  (Distribución de Pareto generalizada) </strong></span>Una variable aleatoria <span class="math inline">\(X\)</span> a valores reales, sigue una distribución de Pareto generalizada
 <span class="math inline">\(X \rightsquigarrow GPD( \mu, \sigma, \xi )\)</span> de parámetros <span class="math inline">\(\mu \in \mathbb{R}, \sigma &gt; 0, \xi \in \mathbb{R}\)</span>,
@@ -1238,6 +1290,10 @@ M_X( t ) = \exp(\theta \mu) \sum\limits_{j=0}^{+\infty} \frac{\theta^j \sigma^j}
 <span id="cb32-8"><a href="distribuciones.html#cb32-8"></a>Fk <span class="ot">&lt;-</span> <span class="fu">pgpd</span>( <span class="at">q =</span> x, <span class="at">xi =</span> xi, <span class="at">mu =</span> mu, <span class="at">beta =</span> sigma ) <span class="co"># cálculo de probabilidad F(x)</span></span></code></pre></div>
 </details>
 <p></p>
+<!------------------------------------------------------------------------------------------------->
+</div>
+<div id="distribución-de-valores-extremos-generalizada" class="section level3 hasAnchor" number="4.3.7">
+<h3><span class="header-section-number">4.3.7</span> Distribución de valores extremos generalizada<a href="distribuciones.html#distribución-de-valores-extremos-generalizada" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="definition">
 <p><span id="def:dgev" class="definition"><strong>Definición 4.12  (Distribución de valores extremos generalizada) </strong></span>Una variable aleatoria <span class="math inline">\(X\)</span> a valores reales, sigue una distribución generalizada de valores extremos
 <span class="math inline">\(X \rightsquigarrow GEV( \mu, \sigma, \xi )\)</span> de parámetros <span class="math inline">\(\mu \in \mathbb{R}, \sigma &gt; 0, \xi \in \mathbb{R}\)</span>,
@@ -1280,6 +1336,10 @@ f_X( x )
 <span id="cb33-8"><a href="distribuciones.html#cb33-8"></a>Fk <span class="ot">&lt;-</span> <span class="fu">pgev</span>( <span class="at">q =</span> x, <span class="at">xi =</span> xi, <span class="at">mu =</span> mu, <span class="at">beta =</span> sigma ) <span class="co"># cálculo de probabilidad F(x)</span></span></code></pre></div>
 </details>
 <p></p>
+<!------------------------------------------------------------------------------------------------->
+</div>
+<div id="distribución-t-de-student" class="section level3 hasAnchor" number="4.3.8">
+<h3><span class="header-section-number">4.3.8</span> Distribución t de Student<a href="distribuciones.html#distribución-t-de-student" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="definition">
 <p><span id="def:dtst" class="definition"><strong>Definición 4.13  (Distribución t de Student) </strong></span>Una variable aleatoria <span class="math inline">\(X\)</span> a valores reales, sigue una distribución t de Student
 <span class="math inline">\(X \rightsquigarrow t( \nu )\)</span> de parámetros <span class="math inline">\(\nu &gt; 0\)</span>,
@@ -1342,6 +1402,10 @@ La función generadora de momentos <span class="math inline">\(M_X( t )\)</span>
 <span id="cb34-6"><a href="distribuciones.html#cb34-6"></a>Fk <span class="ot">&lt;-</span> <span class="fu">pt</span>( <span class="at">q =</span> x, <span class="at">df =</span> nu ) <span class="co"># cálculo de probabilidad F(x)</span></span></code></pre></div>
 </details>
 <p></p>
+<!------------------------------------------------------------------------------------------------->
+</div>
+<div id="distribución-gamma-transformada" class="section level3 hasAnchor" number="4.3.9">
+<h3><span class="header-section-number">4.3.9</span> Distribución gamma transformada<a href="distribuciones.html#distribución-gamma-transformada" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="definition">
 <p><span id="def:dgammatra" class="definition"><strong>Definición 4.14  (Distribución gamma transformada) </strong></span>Una variable aleatoria <span class="math inline">\(X\)</span> a valores reales, sigue una distribución gamma transformada
 <span class="math inline">\(X \rightsquigarrow GT( \alpha, \tau, \theta )\)</span> de parámetros <span class="math inline">\(\alpha &gt; 0, \tau &gt; 0, \theta &gt; 0\)</span>,
@@ -1398,6 +1462,10 @@ f_X( x )
 <li><p>La distribución exponencial</p></li>
 <li><p>La distribución inversa exponencial</p></li>
 </ol>
+<!------------------------------------------------------------------------------------------------->
+</div>
+<div id="distribución-beta-transformada" class="section level3 hasAnchor" number="4.3.10">
+<h3><span class="header-section-number">4.3.10</span> Distribución beta transformada<a href="distribuciones.html#distribución-beta-transformada" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="definition">
 <p><span id="def:dbetra" class="definition"><strong>Definición 4.15  (Distribución beta transformada) </strong></span>Una variable aleatoria <span class="math inline">\(X\)</span> a valores reales, sigue una distribución beta transformada
 <span class="math inline">\(X \rightsquigarrow BT( \alpha, \gamma, \tau, \theta )\)</span> de parámetros <span class="math inline">\(\alpha &gt; 0, \gamma &gt; 0, \tau &gt; 0, \theta &gt; 0\)</span>,
@@ -1455,6 +1523,7 @@ f_X( x )
 <span class="math inline">\(\theta \rightarrow +\infty, \alpha \rightarrow +\infty\)</span> y
 <span class="math inline">\(\theta \alpha^{-\frac{1}{\gamma}} \rightarrow \xi\)</span></p>
 <!------------------------------------------------------------------------------------------------->
+</div>
 </div>
 <div id="estimación" class="section level2 hasAnchor" number="4.4">
 <h2><span class="header-section-number">4.4</span> Estimación<a href="distribuciones.html#estimación" class="anchor-section" aria-label="Anchor link to header"></a></h2>
