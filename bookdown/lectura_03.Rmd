@@ -763,6 +763,16 @@ F_u( y ) = P\left( X - u \leq y \middle| X > u \right)
 $$
 :::
 
+<!------------------------------------------------------------------------------------------------->
+::: {.definition #dexpcond name="Varianza condicionada"}
+La varianza condicionada se puede definir de forma directa a partir de los anterior. Para una 
+variable aleatoria a valores reales $X$ y un evento $A \in \F$.
+$$
+\V[X|A] = \E[Y^2|A] - \E[Y|A]^2
+$$
+:::
+
+<!------------------------------------------------------------------------------------------------->
 ::: {.definition #dlawtotvar name="Ley de la varianza total"}
 Consideremos dos variables aleatorias $X, Y$, ambas a valores reales, entonces se satisface la 
 siguiente igualdad:
@@ -801,7 +811,7 @@ F( n, x )
 \end{eqnarray*}
 $$
 
-$F_n( x )$ es la ley condicionada de $X$ dado que $N = n$ y $p_n = P( N = n )$
+$F( x | n )$ es la ley condicionada de $X$ dado que $N = n$ y $p_n = P( N = n )$
 
 Además, es de notar que:
 $$
