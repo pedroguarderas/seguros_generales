@@ -4,7 +4,6 @@ def:probmed
 def:va
 def:vad
 def:cd
-def:spv
 def:lp
 def:ind
 def:indicatriz
@@ -12,15 +11,17 @@ prp:pindconst
 def:probemp
 def:em
 def:mgf
-def:defmixdis
 def:defcov
 def:dsum
+thm:tdinver
+def:dprobcond
+def:ddistcond
+def:dexpcond
 def:dexceso
-def:dcondexp
 def:dlawtotvar
+def:defmixdis
 thm:twln
 thm:tlc
-thm:tdinver
 prp:chebdes
 thm:bein
 thm:ddkw
@@ -58,6 +59,7 @@ exm:l5ex4
 exm:l5ex6
 exm:l5ex7
 exm:l5ex5
+def:spv
 def:dVaR
 prp:varinv
 def:dTVaR
@@ -87,6 +89,7 @@ notación-matemática
 consideraciones-de-programación-en-r
 probabilidad-y-estadística
 probabilidad-y-conceptos-asociados
+probabilidad-condicional
 resultados-de-convergencia
 desigualdades-de-concentración
 transformada-de-fourier-contínua-y-discreta

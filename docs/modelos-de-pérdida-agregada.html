@@ -191,18 +191,19 @@ div.csl-indent {
 <li class="chapter" data-level="3" data-path="probabilidad-y-estadística.html"><a href="probabilidad-y-estadística.html"><i class="fa fa-check"></i><b>3</b> Probabilidad y Estadística</a>
 <ul>
 <li class="chapter" data-level="3.1" data-path="probabilidad-y-estadística.html"><a href="probabilidad-y-estadística.html#probabilidad-y-conceptos-asociados"><i class="fa fa-check"></i><b>3.1</b> Probabilidad y conceptos asociados</a></li>
-<li class="chapter" data-level="3.2" data-path="probabilidad-y-estadística.html"><a href="probabilidad-y-estadística.html#resultados-de-convergencia"><i class="fa fa-check"></i><b>3.2</b> Resultados de convergencia</a></li>
-<li class="chapter" data-level="3.3" data-path="probabilidad-y-estadística.html"><a href="probabilidad-y-estadística.html#desigualdades-de-concentración"><i class="fa fa-check"></i><b>3.3</b> Desigualdades de concentración</a></li>
-<li class="chapter" data-level="3.4" data-path="probabilidad-y-estadística.html"><a href="probabilidad-y-estadística.html#transformada-de-fourier-contínua-y-discreta"><i class="fa fa-check"></i><b>3.4</b> Transformada de Fourier, contínua y discreta</a>
+<li class="chapter" data-level="3.2" data-path="probabilidad-y-estadística.html"><a href="probabilidad-y-estadística.html#probabilidad-condicional"><i class="fa fa-check"></i><b>3.2</b> Probabilidad condicional</a></li>
+<li class="chapter" data-level="3.3" data-path="probabilidad-y-estadística.html"><a href="probabilidad-y-estadística.html#resultados-de-convergencia"><i class="fa fa-check"></i><b>3.3</b> Resultados de convergencia</a></li>
+<li class="chapter" data-level="3.4" data-path="probabilidad-y-estadística.html"><a href="probabilidad-y-estadística.html#desigualdades-de-concentración"><i class="fa fa-check"></i><b>3.4</b> Desigualdades de concentración</a></li>
+<li class="chapter" data-level="3.5" data-path="probabilidad-y-estadística.html"><a href="probabilidad-y-estadística.html#transformada-de-fourier-contínua-y-discreta"><i class="fa fa-check"></i><b>3.5</b> Transformada de Fourier, contínua y discreta</a>
 <ul>
-<li class="chapter" data-level="3.4.1" data-path="probabilidad-y-estadística.html"><a href="probabilidad-y-estadística.html#aproximación-numérica-en-una-dimensión"><i class="fa fa-check"></i><b>3.4.1</b> Aproximación numérica en una dimensión</a></li>
+<li class="chapter" data-level="3.5.1" data-path="probabilidad-y-estadística.html"><a href="probabilidad-y-estadística.html#aproximación-numérica-en-una-dimensión"><i class="fa fa-check"></i><b>3.5.1</b> Aproximación numérica en una dimensión</a></li>
 </ul></li>
-<li class="chapter" data-level="3.5" data-path="probabilidad-y-estadística.html"><a href="probabilidad-y-estadística.html#consideraciones-financieras"><i class="fa fa-check"></i><b>3.5</b> Consideraciones financieras</a>
+<li class="chapter" data-level="3.6" data-path="probabilidad-y-estadística.html"><a href="probabilidad-y-estadística.html#consideraciones-financieras"><i class="fa fa-check"></i><b>3.6</b> Consideraciones financieras</a>
 <ul>
-<li class="chapter" data-level="3.5.1" data-path="probabilidad-y-estadística.html"><a href="probabilidad-y-estadística.html#función-de-actualización-o-descuento"><i class="fa fa-check"></i><b>3.5.1</b> Función de actualización o descuento</a></li>
-<li class="chapter" data-level="3.5.2" data-path="probabilidad-y-estadística.html"><a href="probabilidad-y-estadística.html#flujos-financieros"><i class="fa fa-check"></i><b>3.5.2</b> Flujos financieros</a></li>
-<li class="chapter" data-level="3.5.3" data-path="probabilidad-y-estadística.html"><a href="probabilidad-y-estadística.html#flujos-financieros-probables"><i class="fa fa-check"></i><b>3.5.3</b> Flujos financieros probables</a></li>
-<li class="chapter" data-level="3.5.4" data-path="probabilidad-y-estadística.html"><a href="probabilidad-y-estadística.html#sec:equifin"><i class="fa fa-check"></i><b>3.5.4</b> Equilibrio financiero</a></li>
+<li class="chapter" data-level="3.6.1" data-path="probabilidad-y-estadística.html"><a href="probabilidad-y-estadística.html#función-de-actualización-o-descuento"><i class="fa fa-check"></i><b>3.6.1</b> Función de actualización o descuento</a></li>
+<li class="chapter" data-level="3.6.2" data-path="probabilidad-y-estadística.html"><a href="probabilidad-y-estadística.html#flujos-financieros"><i class="fa fa-check"></i><b>3.6.2</b> Flujos financieros</a></li>
+<li class="chapter" data-level="3.6.3" data-path="probabilidad-y-estadística.html"><a href="probabilidad-y-estadística.html#flujos-financieros-probables"><i class="fa fa-check"></i><b>3.6.3</b> Flujos financieros probables</a></li>
+<li class="chapter" data-level="3.6.4" data-path="probabilidad-y-estadística.html"><a href="probabilidad-y-estadística.html#sec:equifin"><i class="fa fa-check"></i><b>3.6.4</b> Equilibrio financiero</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="distribuciones.html"><a href="distribuciones.html"><i class="fa fa-check"></i><b>4</b> Distribuciones</a>
@@ -432,6 +433,21 @@ f_S
 &amp; = &amp; \mathscr{F}^{-1}\left( \mathscr{F}\left( f_{X} \right)^n \right)
 \quad \text{si $\{X_i\}$ sin son idénticamente distribuidas }
 \end{eqnarray*}
+\]</span>
+Por otra parte, la función característica de la variable aleatoria <span class="math inline">\(S\)</span>, está dada para todo
+<span class="math inline">\(t \in \mathbb{R}\)</span>:
+<span class="math display">\[
+\begin{eqnarray*}
+\varphi_S( t )
+&amp; = &amp; \mathbb{E}\left[ \exp\left( it S \right) \right] \\
+&amp; = &amp; \mathbb{E}\left[ \exp\left( it \sum\limits_{i=1}^n X_i \right) \right] \\
+&amp; = &amp; \mathbb{E}\left[ \prod\limits_{i=1}^n \exp\left( it X_i \right) \right] \\
+&amp; = &amp; \prod\limits_{i=1}^n \mathbb{E}\left[ \exp\left( it X_i \right) \right],\quad
+\text{si $\{X_i\}$ son independientes} \\
+&amp; = &amp; \prod\limits_{i=1}^n \varphi_{X_i}\left( t \right) \\
+&amp; = &amp; \varphi_{X}\left( t \right)^n,\quad
+\text{si $\{X\}$ son identicamente distribuidas} \\
+\end{eqnarray*}
 \]</span></p>
 <!------------------------------------------------------------------------------------------------->
 <div id="algoritmo-de-simulación" class="section level3 hasAnchor" number="5.2.1">
@@ -566,7 +582,7 @@ S = \sum\limits_{i=1}^n X_i = \sum\limits_{i=1}^n M \mathbf{1}_{A_i}
 = \sum\limits_{i=1}^n \mathbb{E}\left[ M \mathbf{1}_{A_i} \right]
 = M \sum\limits_{i=1}^n P( A_i )
 \]</span>
-la última igualdad resulta de las propiedades de la función indicatriz <a href="probabilidad-y-estadística.html#def:indicatriz">3.10</a>.</p>
+la última igualdad resulta de las propiedades de la función indicatriz <a href="probabilidad-y-estadística.html#def:indicatriz">3.9</a>.</p>
 <p>Si en caso todos los <span class="math inline">\(P(A_i) = p\)</span> tienen la misma probabilidad, el valor total esperado de reclamos
 toma la siguiente forma:
 <span class="math display">\[
@@ -688,6 +704,29 @@ f_S
 <p>En la práctica es imposible realizar la suma hasta infinito, de donde se puede utilizar una
 aproximación escogiendo un número máximo <span class="math inline">\(M \in \mathbb{N}\)</span> de términos en la suma. Así, tenemos las
 aproximaciones.</p>
+<p>Por otra parte, la función característica de la variable aleatoria <span class="math inline">\(S\)</span>, está dada para todo
+<span class="math inline">\(t \in \mathbb{R}\)</span>:
+<span class="math display">\[
+\begin{eqnarray*}
+\varphi_S( t )
+&amp; = &amp; \mathbb{E}\left[ \exp\left( it S \right) \right] \\
+&amp; = &amp; \mathbb{E}\left[ \exp\left( it \sum\limits_{i=1}^N X_i \right) \right] \\
+&amp; = &amp; \sum\limits_{n=0}^{+\infty}
+\mathbb{E}\left[ \exp\left( it \sum\limits_{i=1}^n X_i \right) \middle| N = n \right] P( N = n ) \\
+&amp; = &amp; \sum\limits_{n=0}^{+\infty}
+\mathbb{E}\left[ \prod\limits_{i=1}^n \exp\left( it X_i \right) \middle| N = n \right] p_n \\
+&amp; = &amp; \sum\limits_{n=0}^{+\infty} \prod\limits_{i=1}^n
+\mathbb{E}\left[ \exp\left( it X_i \right) \middle| N = n \right] p_n,\quad
+\text{si $\{X_i\}$ son independientes} \\
+&amp; = &amp; \sum\limits_{n=0}^{+\infty} \prod\limits_{i=1}^n \varphi_{X_i}\left( t \right) p_n,\quad
+\text{si $\{X_i\}$ y $N$ son independientes} \\
+&amp; = &amp; \sum\limits_{n=0}^{+\infty} \varphi_{X}\left( t \right)^n p_n,\quad
+\text{si $\{X\}$ son identicamente distribuidas} \\
+&amp; = &amp; \mathbb{E}\left[ \varphi_{X}\left( t \right)^N \right] \\
+&amp; = &amp; \mathbb{E}\left[ \exp\left( N \log\left( \varphi_{X}\left( t \right) \right) \right) \right] \\
+&amp; = &amp; \varphi_N\left( -i\log\left( \varphi_{X}\left( t \right) \right) \right) \\
+\end{eqnarray*}
+\]</span></p>
 <!------------------------------------------------------------------------------------------------->
 <div id="algoritmo-de-simulación-1" class="section level3 hasAnchor" number="5.3.1">
 <h3><span class="header-section-number">5.3.1</span> Algoritmo de simulación<a href="modelos-de-pérdida-agregada.html#algoritmo-de-simulación-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
