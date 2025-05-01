@@ -428,18 +428,18 @@ para valores reales <span class="math inline">\(x = ( x_1, \ldots, x_n ) \in \ma
 F\left( x_1, \ldots, x_n \right)
 = P\left( X_1 \leq x_1 \land \cdots \land X_n \leq x_n \right)
 = P\left( \bigcap_{i=1}^n X_i^{-1}\left( (-\infty, x_i ] \right) \right)
-\]</span>
+\]</span></p>
 <!------------------------------------------------------------------------------------------------->
-::: {.definition #spv name=“Función supervivencia”}
-La función de <strong>supervivencia</strong> <span class="math inline">\(S : \mathbb{R}\longrightarrow \mathbb{R}\)</span> está asociada a una
+<div class="definition">
+<p><span id="def:spv" class="definition"><strong>Definición 3.7  (Función supervivencia) </strong></span>La función de <strong>supervivencia</strong> <span class="math inline">\(S : \mathbb{R}\longrightarrow \mathbb{R}\)</span> está asociada a una
 variable aleatoria <span class="math inline">\(X\)</span>, está dada por la siguiente:
 <span class="math display">\[
 S( x ) = 1 - F( x ) = 1 - P( X \leq x ) = P( X &gt; x )
-\]</span>
-:::</p>
+\]</span></p>
+</div>
 <!------------------------------------------------------------------------------------------------->
 <div class="definition">
-<p><span id="def:lp" class="definition"><strong>Definición 3.7  (Función de densidad de probabilidad) </strong></span>La <strong>densidad de probabilidad</strong> o también la <strong>ley de probabilidad</strong> de una variable aleatoria
+<p><span id="def:lp" class="definition"><strong>Definición 3.8  (Función de densidad de probabilidad) </strong></span>La <strong>densidad de probabilidad</strong> o también la <strong>ley de probabilidad</strong> de una variable aleatoria
 a valores reales <span class="math inline">\(X\)</span>, es una función <span class="math inline">\(f: \mathbb{R}\longrightarrow \mathbb{R}\)</span>, tal que
 <span class="math display">\[
 P( a \leq X \leq b ) = F( b ) - F( a ) = \int\limits_a^b f( x )\ dx
@@ -455,7 +455,7 @@ definida siempre y cuando la derivada de <span class="math inline">\(F\)</span> 
 </div>
 <!------------------------------------------------------------------------------------------------->
 <div class="definition">
-<p><span id="def:ind" class="definition"><strong>Definición 3.8  (Independencia de variables aleatorias) </strong></span>Dos variables aleatorias a valores reales <span class="math inline">\(X\)</span> y <span class="math inline">\(Y\)</span>, se dicen independientes si para cualquier par
+<p><span id="def:ind" class="definition"><strong>Definición 3.9  (Independencia de variables aleatorias) </strong></span>Dos variables aleatorias a valores reales <span class="math inline">\(X\)</span> y <span class="math inline">\(Y\)</span>, se dicen independientes si para cualquier par
 de eventos <span class="math inline">\(A\)</span> y <span class="math inline">\(B\)</span>, sucede la siguiente factorización de probabilidades
 <span class="math display">\[
 P( X \in A \land Y \in B ) = P( X \in A ) P( Y \in B)
@@ -494,7 +494,7 @@ F( x_1, \ldots, x_n )
 <p>La siguiente función es utilidad para comprender algunos resultados en teoría de probabilidades.
 También, es bastante útil para realizar de forma más clara y rápida algunos cálculos.</p>
 <div class="definition">
-<p><span id="def:indicatriz" class="definition"><strong>Definición 3.9  (Función indicatriz) </strong></span>La <strong>función indicatriz</strong> de un conjunto <span class="math inline">\(A \subset \Omega\)</span>, es la función
+<p><span id="def:indicatriz" class="definition"><strong>Definición 3.10  (Función indicatriz) </strong></span>La <strong>función indicatriz</strong> de un conjunto <span class="math inline">\(A \subset \Omega\)</span>, es la función
 <span class="math inline">\(\mathbf{1}_A : \Omega \longrightarrow \{0,1\}\)</span>, que toma los valores
 <span class="math inline">\(\mathbf{1}_A( \omega ) = 0\)</span>, si <span class="math inline">\(\omega \notin A\)</span> y <span class="math inline">\(\mathbf{1}_A( \omega ) = 1\)</span>, si
 <span class="math inline">\(\omega \in A\)</span>.</p>
@@ -558,7 +558,7 @@ por tanto <span class="math inline">\(X\)</span> y <span class="math inline">\(Y
 </div>
 <!------------------------------------------------------------------------------------------------->
 <div class="definition">
-<p><span id="def:probemp" class="definition"><strong>Definición 3.10  (Medida de probabilidad empírica) </strong></span>A partir de una muestra de <span class="math inline">\(X_1, \ldots, X_n\)</span> de una variable aleatoria <span class="math inline">\(X\)</span>, podemos definir
+<p><span id="def:probemp" class="definition"><strong>Definición 3.11  (Medida de probabilidad empírica) </strong></span>A partir de una muestra de <span class="math inline">\(X_1, \ldots, X_n\)</span> de una variable aleatoria <span class="math inline">\(X\)</span>, podemos definir
 también la <strong>medida de probabilidad empírica</strong> asociada a la muestra <span class="math inline">\(X_1, \ldots, X_n\)</span>. Así
 para cualquier evento del espacio muestral <span class="math inline">\(\Omega\)</span>, <span class="math inline">\(A \subset \Omega\)</span>
 <span class="math display">\[
@@ -577,7 +577,7 @@ P_n( (-\infty,x])
 son de utilidad.</p>
 <!------------------------------------------------------------------------------------------------->
 <div class="definition">
-<p><span id="def:em" class="definition"><strong>Definición 3.11  (Esperanza de una variable aleatoria) </strong></span>Considerando una variable aleatoria discreta <span class="math inline">\(K : \Omega \longrightarrow D \subset \mathbb{R}\)</span>,
+<p><span id="def:em" class="definition"><strong>Definición 3.12  (Esperanza de una variable aleatoria) </strong></span>Considerando una variable aleatoria discreta <span class="math inline">\(K : \Omega \longrightarrow D \subset \mathbb{R}\)</span>,
 donde <span class="math inline">\(D\)</span> es un conjunto discreto, es decir sus elementos se pueden contar y poner en
 correspondencia con <span class="math inline">\(\mathbb{N}\)</span>. Entonces, la <strong>esperanza</strong> se define como:
 <span class="math display">\[
@@ -629,7 +629,7 @@ esperanza es precisamente la probabilidad del evento <span class="math inline">\
 \]</span></p>
 <!------------------------------------------------------------------------------------------------->
 <div class="definition">
-<p><span id="def:mgf" class="definition"><strong>Definición 3.12  (Función generadora de momentos) </strong></span>La <strong>función generadora de momentos</strong> de una variable aleatoria a valores reales <span class="math inline">\(X\)</span>, es la función:
+<p><span id="def:mgf" class="definition"><strong>Definición 3.13  (Función generadora de momentos) </strong></span>La <strong>función generadora de momentos</strong> de una variable aleatoria a valores reales <span class="math inline">\(X\)</span>, es la función:
 <span class="math display">\[
 M_X( t ) = \mathbb{E}\left[ \exp( t X ) \right]
 \]</span></p>
@@ -647,6 +647,7 @@ M_Y( t )
 &amp; = &amp; \left( M_X( t ) \right)^n
 \end{eqnarray*}
 \]</span>
+<!------------------------------------------------------------------------------------------------->
 ::: {.definition #dfc name=“Función característica”}
 La <strong>función característica</strong> de una variable aleatoria a valores reales <span class="math inline">\(X\)</span>, es la función:
 <span class="math display">\[
@@ -655,7 +656,7 @@ La <strong>función característica</strong> de una variable aleatoria a valores
 :::</p>
 <!------------------------------------------------------------------------------------------------->
 <div class="definition">
-<p><span id="def:em" class="definition"><strong>Definición 3.11  (Varianza de una variable aleatoria) </strong></span>Así mismo su <strong>varianza</strong> es la dada por:
+<p><span id="def:em" class="definition"><strong>Definición 3.12  (Varianza de una variable aleatoria) </strong></span>Así mismo su <strong>varianza</strong> es la dada por:
 <span class="math display">\[
 \mathbb{V}[ X ]
 = \mathbb{E}\left[ \left( X - \mathbb{E}[ X ] \right)^2 \right]
@@ -664,7 +665,7 @@ La <strong>función característica</strong> de una variable aleatoria a valores
 </div>
 <!------------------------------------------------------------------------------------------------->
 <div class="definition">
-<p><span id="def:defcov" class="definition"><strong>Definición 3.13  (Covarianza) </strong></span>La <strong>covarianza</strong> de dos variables aleatorias, está dada por la siguiente expresión:
+<p><span id="def:defcov" class="definition"><strong>Definición 3.14  (Covarianza) </strong></span>La <strong>covarianza</strong> de dos variables aleatorias, está dada por la siguiente expresión:
 <span class="math display">\[
 \mathbb{C}[ X, Y ]
 = \mathbb{E}\left[ \left( X - \mathbb{E}[ X ] \right)\left( Y - \mathbb{E}[ Y ] \right) \right]
@@ -684,7 +685,7 @@ La <strong>función característica</strong> de una variable aleatoria a valores
 </div>
 <!------------------------------------------------------------------------------------------------->
 <div class="definition">
-<p><span id="def:dsum" class="definition"><strong>Definición 3.14  (Distribución de la suma de variables aleatorias) </strong></span>Dadas dos variables aleatorias a valores reales <span class="math inline">\(X\)</span> y <span class="math inline">\(Y\)</span>, con funciones de distribución acumulada
+<p><span id="def:dsum" class="definition"><strong>Definición 3.15  (Distribución de la suma de variables aleatorias) </strong></span>Dadas dos variables aleatorias a valores reales <span class="math inline">\(X\)</span> y <span class="math inline">\(Y\)</span>, con funciones de distribución acumulada
 <span class="math inline">\(F_X\)</span> y <span class="math inline">\(F_Y\)</span> respectivamente, la distribución acumulada <span class="math inline">\(F_Z\)</span> de la variable aleatoria <span class="math inline">\(Z = X + Y\)</span>
 está dada por la siguiente expresión:
 <span class="math display">\[
@@ -783,7 +784,7 @@ F( y ) - F( x ) = \frac{1}{2\pi} \underset{c \rightarrow +\infty}{\lim} \int\lim
 <h2><span class="header-section-number">3.2</span> Probabilidad condicional<a href="probabilidad-y-estadística.html#probabilidad-condicional" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <!------------------------------------------------------------------------------------------------->
 <div class="definition">
-<p><span id="def:dprobcond" class="definition"><strong>Definición 3.15  (Probabilidad condicional) </strong></span>Para cualquier par de eventos <span class="math inline">\(A, B \in \mathcal{F}\)</span>, la <strong>probabilidad condicional</strong> de <span class="math inline">\(A\)</span> dado
+<p><span id="def:dprobcond" class="definition"><strong>Definición 3.16  (Probabilidad condicional) </strong></span>Para cualquier par de eventos <span class="math inline">\(A, B \in \mathcal{F}\)</span>, la <strong>probabilidad condicional</strong> de <span class="math inline">\(A\)</span> dado
 <span class="math inline">\(B\)</span>, está dada por:
 <span class="math display">\[
 P( A \mid B ) = \frac{P( A \cap B)}{P(B)}
@@ -791,7 +792,7 @@ P( A \mid B ) = \frac{P( A \cap B)}{P(B)}
 </div>
 <!------------------------------------------------------------------------------------------------->
 <div class="definition">
-<p><span id="def:ddistcond" class="definition"><strong>Definición 3.16  (Distribución acumulada condicionada) </strong></span>Si consideramos un evento cualquiera <span class="math inline">\(A \in \mathcal{F}\)</span>, <span class="math inline">\(X\)</span> una variable aleatoria a valores
+<p><span id="def:ddistcond" class="definition"><strong>Definición 3.17  (Distribución acumulada condicionada) </strong></span>Si consideramos un evento cualquiera <span class="math inline">\(A \in \mathcal{F}\)</span>, <span class="math inline">\(X\)</span> una variable aleatoria a valores
 reales y <span class="math inline">\(x \in \mathbb{R}\)</span>. Surge el interés de estudiar la distribución acumulada de <span class="math inline">\(X\)</span> pero
 considerando dado que se produce el evento <span class="math inline">\(A\)</span>, esto resulta en estudiar:
 <span class="math display">\[
@@ -861,7 +862,7 @@ F( x \mid Y \leq y )
 está bien definida para <span class="math inline">\(F_Y( y ) \neq 0\)</span></p>
 <!------------------------------------------------------------------------------------------------->
 <div class="definition">
-<p><span id="def:dexpcond" class="definition"><strong>Definición 3.17  (Esperanza condicionada) </strong></span>Para una variable aleatoria <span class="math inline">\(X\)</span> y un evento cualquiera <span class="math inline">\(A \in \mathcal{F}\)</span>, se define la
+<p><span id="def:dexpcond" class="definition"><strong>Definición 3.18  (Esperanza condicionada) </strong></span>Para una variable aleatoria <span class="math inline">\(X\)</span> y un evento cualquiera <span class="math inline">\(A \in \mathcal{F}\)</span>, se define la
 <strong>esperanza condicionada</strong> respecto del evento <span class="math inline">\(A\)</span>, como:
 <span class="math display">\[
 \mathbb{E}\left[ X \middle| A \right]
@@ -885,7 +886,7 @@ valores extremos que se pueden presentar en el estudio de los valores de siniest
 en un seguro.</p>
 <!------------------------------------------------------------------------------------------------->
 <div class="definition">
-<p><span id="def:dexceso" class="definition"><strong>Definición 3.18  (Distribución de exceso condicionada) </strong></span>La <strong>distribución de exceso condicionada</strong> asociada a una variable aleatoria <span class="math inline">\(X\)</span> con distribución
+<p><span id="def:dexceso" class="definition"><strong>Definición 3.19  (Distribución de exceso condicionada) </strong></span>La <strong>distribución de exceso condicionada</strong> asociada a una variable aleatoria <span class="math inline">\(X\)</span> con distribución
 de probabilidad acumulada <span class="math inline">\(F\)</span> y a un umbral de condicionamiento <span class="math inline">\(u &gt; 0\)</span>, está dada por:
 <span class="math display">\[
 F_u( y ) = P\left( X - u \leq y \mid X &gt; u \right)
@@ -894,7 +895,7 @@ F_u( y ) = P\left( X - u \leq y \mid X &gt; u \right)
 \]</span></p>
 </div>
 <div class="definition">
-<p><span id="def:dlawtotvar" class="definition"><strong>Definición 3.19  (Ley de la varianza total) </strong></span>Consideremos dos variables aleatorias <span class="math inline">\(X, Y\)</span>, ambas a valores reales, entonces se satisface la
+<p><span id="def:dlawtotvar" class="definition"><strong>Definición 3.20  (Ley de la varianza total) </strong></span>Consideremos dos variables aleatorias <span class="math inline">\(X, Y\)</span>, ambas a valores reales, entonces se satisface la
 siguiente igualdad:
 <span class="math display">\[
 \mathbb{V}[ Y ] = \mathbb{E}\left[ \mathbb{V}\left[ Y \middle| X \right] \right] +
@@ -903,7 +904,7 @@ siguiente igualdad:
 </div>
 <!------------------------------------------------------------------------------------------------->
 <div class="definition">
-<p><span id="def:defmixdis" class="definition"><strong>Definición 3.20  (Mixtura de distribuciones) </strong></span>Un caso de especial interés para estudiar algunos problemas actuariales se da cuando se dispone
+<p><span id="def:defmixdis" class="definition"><strong>Definición 3.21  (Mixtura de distribuciones) </strong></span>Un caso de especial interés para estudiar algunos problemas actuariales se da cuando se dispone
 de dos variables aleatorias, <span class="math inline">\(N\)</span> que toma solo valores discretos (numerables) los cuales pueden
 ser finitos como infinitos, por ejemplo: <span class="math inline">\(N\)</span> toma valores <span class="math inline">\(\mathbb{N}\)</span> y otra variable aleatoria
 <span class="math inline">\(X\)</span> que toma valores continuos reales en <span class="math inline">\(\mathbb{R}\)</span>. La distribución conjunta puede generarse
@@ -2321,7 +2322,7 @@ P( X \geq \rho \mathbb{E}[ X ] ) \geq ( 1 - \rho )^2 \frac{\mathbb{E}[ X ]^2}{\m
 <h2><span class="header-section-number">3.5</span> Transformada de Fourier, contínua y discreta<a href="probabilidad-y-estadística.html#transformada-de-fourier-contínua-y-discreta" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <!------------------------------------------------------------------------------------------------->
 <div class="definition">
-<p><span id="def:dfouriertrans" class="definition"><strong>Definición 3.21  (Tansformada de Fourier) </strong></span>La <strong>transformada de Fourier</strong> para una función integrable <span class="math inline">\(f : \mathbb{R}^n \longrightarrow \mathbb{R}\)</span>,
+<p><span id="def:dfouriertrans" class="definition"><strong>Definición 3.22  (Tansformada de Fourier) </strong></span>La <strong>transformada de Fourier</strong> para una función integrable <span class="math inline">\(f : \mathbb{R}^n \longrightarrow \mathbb{R}\)</span>,
 está definida como un funcional que toma funciones acotadas y general una función usualmente
 integrable a valores complejos en general. De forma más formal, se puede definir la transformada
 de Fourier como una función
@@ -2357,7 +2358,7 @@ Fourier.
 </ol>
 </div>
 <div class="definition">
-<p><span id="def:dfouriertransd" class="definition"><strong>Definición 3.22  (Tansformada de Fourier discreta) </strong></span>Dada una secuencia finita de números <span class="math inline">\(x_0, \ldots, x_{N-1}\)</span>, también notada por
+<p><span id="def:dfouriertransd" class="definition"><strong>Definición 3.23  (Tansformada de Fourier discreta) </strong></span>Dada una secuencia finita de números <span class="math inline">\(x_0, \ldots, x_{N-1}\)</span>, también notada por
 <span class="math inline">\(\{x_k\}_{k \in \{0,\ldots,N-1\}}\)</span> o simplemente <span class="math inline">\(\{x_k\}\)</span> cuando quede entendida su dimensión,
 claramente <span class="math inline">\(\{x_k\}\)</span> puede ser interpretada como un vector en <span class="math inline">\(\mathbb{R}^n\)</span>, indexado desde <span class="math inline">\(0\)</span>.
 Entonces, la <strong>transformada de Fourier discreta</strong> de la secuencia <span class="math inline">\(\{x_k\}\)</span> es la función
@@ -2494,7 +2495,7 @@ financieras como las siguientes:</p>
 <div id="función-de-actualización-o-descuento" class="section level3 hasAnchor" number="3.6.1">
 <h3><span class="header-section-number">3.6.1</span> Función de actualización o descuento<a href="probabilidad-y-estadística.html#función-de-actualización-o-descuento" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="definition">
-<p><span id="def:deffact" class="definition"><strong>Definición 3.23  (Funciones de atualización y capitalización) </strong></span>La <strong>función de actualización</strong> de flujos <span class="math inline">\(v: \mathbb{R}\times \mathbb{R}\longrightarrow [0,1]\)</span>, al
+<p><span id="def:deffact" class="definition"><strong>Definición 3.24  (Funciones de atualización y capitalización) </strong></span>La <strong>función de actualización</strong> de flujos <span class="math inline">\(v: \mathbb{R}\times \mathbb{R}\longrightarrow [0,1]\)</span>, al
 evaluar en <span class="math inline">\(s, t \in \mathbb{R}, s\leq t, v(s,t)\)</span>, diremos que actualizamos los flujos que se
 producen en el tiempo <span class="math inline">\(t\)</span>, valorados desde el tiempo <span class="math inline">\(s\)</span>. Además la función de actualización tiene
 las siguientes propiedades:</p>

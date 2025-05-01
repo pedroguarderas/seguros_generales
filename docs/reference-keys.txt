@@ -4,6 +4,7 @@ def:probmed
 def:va
 def:vad
 def:cd
+def:spv
 def:lp
 def:ind
 def:indicatriz
@@ -59,7 +60,6 @@ exm:l5ex4
 exm:l5ex6
 exm:l5ex7
 exm:l5ex5
-def:spv
 def:dVaR
 prp:varinv
 def:dTVaR
