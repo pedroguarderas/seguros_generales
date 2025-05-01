@@ -673,7 +673,7 @@ En la práctica se observa la realización de una variable aleatoria $X$, es dec
 muestra de la misma $X_1, \ldots, X_n$. Pero, no se dispone de la distribución $F$ o de la densidad 
 $f$ que la describe. Como ya hemos mencionado, conociendo la distribución se puede inferir algunas
 propiedades sobre la variable. De ahí surge la necesidad de buscar la mejor distribución $F$ posible
-a partir de la muestra. 
+a partir de la muestra @est_math_bor, @KNight, @mathstat1, @funmathstat. 
 
 La estimación usualmente consiste en tratar de determinar la probabilidad $P_X$ asociada a $X$, o 
 en su defecto su función de distribución acumulada. Bajo la consideración, usualmente, de alguna
