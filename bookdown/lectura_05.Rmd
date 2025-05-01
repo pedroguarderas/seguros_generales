@@ -1148,7 +1148,7 @@ fs <- sapply( s, FUN = function( sk ) dgamma( sk, shape = sum( alpha ), scale = 
 
 ```{r l5g8, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
 plt <- ggplot() +
-  geom_line( aes( x = s, y = fS ), colour = 'darkred', size = 1 ) + 
+  geom_line( aes( x = s, y = fS ), colour = 'darkred', linewidth = 1 ) + 
   geom_point( aes( x = s, y = fs ), colour = 'olivedrab3', size = 0.25 ) + 
   xlab( TeX( "$x$" ) ) + 
   ylab( TeX( "$f_{S}(x)$" ) ) + 
