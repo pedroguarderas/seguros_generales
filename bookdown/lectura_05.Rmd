@@ -154,6 +154,21 @@ f_S
 \quad \text{si $\{X_i\}$ sin son idénticamente distribuidas } 
 \end{eqnarray*}
 $$
+Por otra parte, la función característica de la variable aleatoria $S$, está dada para todo 
+$t \in \R$:
+$$
+\begin{eqnarray*}
+\varphi_S( t ) 
+& = & \E\left[ \exp\left( it S \right) \right] \\
+& = & \E\left[ \exp\left( it \sum\limits_{i=1}^n X_i \right) \right] \\
+& = & \E\left[ \prod\limits_{i=1}^n \exp\left( it X_i \right) \right] \\
+& = & \prod\limits_{i=1}^n \E\left[ \exp\left( it X_i \right) \right],\quad
+\text{si $\{X_i\}$ son independientes} \\
+& = & \prod\limits_{i=1}^n \varphi_{X_i}\left( t \right) \\
+& = & \varphi_{X}\left( t \right)^n,\quad
+\text{si $\{X\}$ son identicamente distribuidas} \\
+\end{eqnarray*}
+$$
 
 <!------------------------------------------------------------------------------------------------->
 ### Algoritmo de simulación
@@ -421,6 +436,30 @@ $$
 En la práctica es imposible realizar la suma hasta infinito, de donde se puede utilizar una 
 aproximación escogiendo un número máximo $M \in \N$ de términos en la suma. Así, tenemos las 
 aproximaciones.
+
+Por otra parte, la función característica de la variable aleatoria $S$, está dada para todo 
+$t \in \R$:
+$$
+\begin{eqnarray*}
+\varphi_S( t ) 
+& = & \E\left[ \exp\left( it S \right) \right] \\
+& = & \E\left[ \exp\left( it \sum\limits_{i=1}^N X_i \right) \right] \\
+& = & \sum\limits_{n=0}^{+\infty}
+\E\left[ \exp\left( it \sum\limits_{i=1}^n X_i \right) \middle| N = n \right] P( N = n ) \\
+& = & \sum\limits_{n=0}^{+\infty}
+\E\left[ \prod\limits_{i=1}^n \exp\left( it X_i \right) \middle| N = n \right] p_n \\
+& = & \sum\limits_{n=0}^{+\infty} \prod\limits_{i=1}^n 
+\E\left[ \exp\left( it X_i \right) \middle| N = n \right] p_n,\quad
+\text{si $\{X_i\}$ son independientes} \\
+& = & \sum\limits_{n=0}^{+\infty} \prod\limits_{i=1}^n \varphi_{X_i}\left( t \right) p_n,\quad
+\text{si $\{X_i\}$ y $N$ son independientes} \\
+& = & \sum\limits_{n=0}^{+\infty} \varphi_{X}\left( t \right)^n p_n,\quad
+\text{si $\{X\}$ son identicamente distribuidas} \\
+& = & \E\left[ \varphi_{X}\left( t \right)^N \right] \\
+& = & \E\left[ \exp\left( N \log\left( \varphi_{X}\left( t \right) \right) \right) \right] \\
+& = & \varphi_N\left( -i\log\left( \varphi_{X}\left( t \right) \right) \right) \\
+\end{eqnarray*}
+$$
 
 <!------------------------------------------------------------------------------------------------->
 ### Algoritmo de simulación
