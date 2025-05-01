@@ -38,6 +38,7 @@ csl: electronic-journal-of-statistics.csl
 \newcommand{\E}{\mathbb{E}}
 \newcommand{\V}{\mathbb{V}}
 \newcommand{\D}{\partial}
+\newcommand{\F}{\mathcal{F}}
 \newcommand{\arginf}{\operatorname{arginf}}
 \newcommand{\argsup}{\operatorname{argsup}}
 \newcommand{\DFT}{\operatorname{DFT}}

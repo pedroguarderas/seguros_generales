@@ -37,20 +37,20 @@ No todos los subconjuntos de $\Omega$ necesariamente son un evento, usualmente h
 no pueden resultar de un experimento. Así, si agrupamos todos los eventos usualmente tenemos un 
 conjunto menor a las partes $\mathcal{P}(\Omega)$ de $\Omega$. El conjunto de todos los eventos se 
 conoce como una ***álgebra de eventos***, ***$\sigma$-álgebra*** o ***tribu***. Usualmente se la 
-nota por $\mathcal{F}$, es claro que $\mathcal{F} \subset \mathcal{P}(\Omega)$.
+nota por $\F$, es claro que $\F \subset \mathcal{P}(\Omega)$.
 
 El álgebra de eventos, se denomina así, ya que usualmente es cerrada para algunas operaciones de 
 conjuntos. Tiene las siguientes propiedades:
 
-1. Todos los resultados de espacio muestral están en $\mathcal{F}$, es decir $\Omega \in \mathcal{F}$
+1. Todos los resultados de espacio muestral están en $\F$, es decir $\Omega \in \F$
 
-2. El complemento de un evento también es parte de $\mathcal{F}$, es decir si $A \in \mathcal{F}$, 
-entonces $A^c = \Omega \setminus A \in \mathcal{F}$.
+2. El complemento de un evento también es parte de $\F$, es decir si $A \in \F$, 
+entonces $A^c = \Omega \setminus A \in \F$.
 
-3. La unión de eventos es un evento, si $A, B \in \mathcal{F}$, entonces $A \cup B \in \mathcal{F}$,
+3. La unión de eventos es un evento, si $A, B \in \F$, entonces $A \cup B \in \F$,
 
-4. Aunque redunde, la intersección de eventos es un evento, si $A, B \in \mathcal{F}$, entonces 
-$A \cap B \in \mathcal{F}$.
+4. Aunque redunde, la intersección de eventos es un evento, si $A, B \in \F$, entonces 
+$A \cap B \in \F$.
 :::
 
 <!------------------------------------------------------------------------------------------------->
@@ -59,28 +59,22 @@ La ***probabilidad*** es una medida de las posibilidades de que ocurra un evento
 toma valores en $[0,1]$. Formalmente, la probabilidad se la define como una **medida**, esto es una 
 función de conjuntos
 $$
-P: \mathcal{F} \longrightarrow [0,1]
+P: \F \longrightarrow [0,1]
 $$
-sobre los eventos $\mathcal{F} \subset \mathcal{P}( \Omega )$ del espacio muestral $\Omega$.
+sobre los eventos $\F \subset \mathcal{P}( \Omega )$ del espacio muestral $\Omega$.
 
-1. Si $A, B \in \mathcal{F}$ son disjuntos $A \cap B = \emptyset$, entonces 
+1. Si $A, B \in \F$ son disjuntos $A \cap B = \emptyset$, entonces 
 $P( A \cup B ) = P( A ) + P( B )$
 
 2. $P( \Omega ) = 1$
 
 3. $P( \emptyset ) = 0$
 
-Para cualquier par de eventos $A, B \in \mathcal{F}$, la **probabilidad condicional** de $A$ dado 
-$B$, está dada por:
-$$
-P( A \mid B ) = \frac{P( A \cap B)}{P(B)}
-$$
-
 Una **propiedad** sobre sobre $\Omega$ viene caracterizada por una función de verificación 
-$V : \Omega \longrightarrow \{0,1\}$ de tal forma, se dice que un evento $A \in \mathcal{F}$ 
+$V : \Omega \longrightarrow \{0,1\}$ de tal forma, se dice que un evento $A \in \F$ 
 satisface la propiedad dada por $V$ si $V(\omega) = 1$, para todo $\omega \in A$. Entonces decimos 
 que se satisface la propiedad en $V$ en **casi en todas partes** o **casi seguramente** si para todo 
-evento $N \in \mathcal{F}$ que no satisfaga $V$ mantiene una medida nula, es decir $P( N ) = 0$ y 
+evento $N \in \F$ que no satisfaga $V$ mantiene una medida nula, es decir $P( N ) = 0$ y 
 para cualquier $\omega \in \Omega \setminus N$ se satisface $V$, $V( \omega ) = 1$. En otras 
 palabras en ciertos experimentos hay resultados que se pueden presentar, están dentro de las 
 opciones, sin embargo en caso de presentarse no hay forma que se pueda medirlos.
@@ -98,8 +92,8 @@ Una variable aleatoria $X: \Omega \longrightarrow D$ que parte del espacio muest
 valores en el conjunto de los números reales  $\R$. Como la variable aleatoria es el 
 resultado de un experimento, el cual debe ser medible, es natural esperar que todo intervalo 
 observado sea el resultado de un evento en el espacio muestra $\Omega$. De forma más clara, la 
-imagen recíproca de un cualquier intervalo $A \subset \R$ es un evento en $\mathcal{F}$, 
-i.e. $X^{-1}( A ) \in \mathcal{F}$ esto precisamente se designa como una **función medible**.
+imagen recíproca de un cualquier intervalo $A \subset \R$ es un evento en $\F$, 
+i.e. $X^{-1}( A ) \in \F$ esto precisamente se designa como una **función medible**.
 
 De $X$ se puede construir o heredar otra medida a partir de $P$, esta se representa $P_X$ y tan
 solo mide los eventos que son imagen de $X$. Es decir para cualquier intervalo $A \in \R$
@@ -170,24 +164,6 @@ F\left( x_1, \ldots, x_n \right)
 = P\left( X_1 \leq x_1 \land \cdots \land X_n \leq x_n \right)
 = P\left( \bigcap_{i=1}^n X_i^{-1}\left( (-\infty, x_i ] \right) \right)
 $$
-
-También se puede tener una interpretación de una función de **distribución acumulada condicionada**.
-Consideremos el caso más sencillo con dos variables aleatorias $X$ y $Y$ a valores reales, que 
-tienen distribución conjunta acumulada $F_{X,Y}$. Es de observar que para cualesquier $x,y \in \R$ 
-$$
-\begin{eqnarray*}
-F_{X,Y}( x, y )
-& = & P( X \leq x \land Y \leq y ) \\
-& = & P( X \leq x \mid Y \leq y ) P( Y \leq y ) \\
-& = & F_{X|Y}( x \mid Y \leq y ) F_Y( y )
-\end{eqnarray*}
-$$
-de estas igualdades surge la **distribución acumulada condicionada** de $X$ dado que $Y \leq y$, 
-$$
-F_{X|Y}( x \mid Y \leq y ) = \frac{F_{X,Y}( x, y )}{F_Y( y )}
-$$
-está bien definida para $F_Y( y ) \neq 0$
-
 <!------------------------------------------------------------------------------------------------->
 ::: {.definition #spv name="Función supervivencia"}
 La función de **supervivencia** $S : \R \longrightarrow \R$ está asociada a una 
@@ -294,7 +270,7 @@ aleatoria.
 
 :::{.proof}
 Consideremos $X$ una constante o variable aleatoria constante, tal que existe un $a \in \R$, tal 
-que $X( \omega ) = a$ para cualquier $\omega \in Omega$ y $Y$ una variable aleatoria cualquiera 
+que $X( \omega ) = a$ para cualquier $\omega \in \Omega$ y $Y$ una variable aleatoria cualquiera 
 a valores reales. Para cualesquier intervalos $A, B \subset \R$. Entonces tenemos dos casos, 
 primero $X \notin A$, entonces $\emptyset = \{ \omega \in \Omega \mid X( \omega ) \in A \}$, 
 por otra parte si $y \in A$, entonces $\Omega = \{ \omega \in \Omega \mid X( \omega ) \in A \}$,
@@ -359,10 +335,10 @@ Para muchos resultados asociados a la estimación de estadística la variantes e
 son de utilidad.
 
 <!------------------------------------------------------------------------------------------------->
-::: {.definition #em name="Esperanza matemática"}
+::: {.definition #em name="Esperanza de una variable aleatoria"}
 Considerando una variable aleatoria discreta $K : \Omega \longrightarrow D \subset \R$, 
 donde $D$ es un conjunto discreto, es decir sus elementos se pueden contar y poner en 
-correspondencia con $\mathbb{N}$. Entonces, la **esperanza matemática** se define como:
+correspondencia con $\mathbb{N}$. Entonces, la **esperanza** se define como:
 $$
 \E[ K ] 
 = \E_P[ K ] 
@@ -418,7 +394,7 @@ $$
 
 <!------------------------------------------------------------------------------------------------->
 ::: {.definition #mgf name="Función generadora de momentos"}
-La **función generadora de momentos** de la variable aleatoria a valores reales $X$, es la función:
+La **función generadora de momentos** de una variable aleatoria a valores reales $X$, es la función:
 $$
 M_X( t ) = \E\left[ \exp( t X ) \right]
 $$
@@ -437,51 +413,21 @@ M_Y( t )
 & = & \left( M_X( t ) \right)^n
 \end{eqnarray*}
 $$
+::: {.definition #dfc name="Función característica"}
+La **función característica** de una variable aleatoria a valores reales $X$, es la función:
+$$
+\varphi_X( t ) = M_X( it ) = \E\left[ \exp( i t X ) \right]
+$$
+:::
 
 <!------------------------------------------------------------------------------------------------->
-::: {.definition #em name="Varianza"}
+::: {.definition #em name="Varianza de una variable aleatoria"}
 Así mismo su **varianza** es la dada por:
 $$
 \V[ X ] 
 = \E\left[ \left( X - \E[ X ] \right)^2 \right]
 = \E\left[ X^2 \right] - \E\left[ X \right]^2
 $$
-:::
-
-<!------------------------------------------------------------------------------------------------->
-::: {.definition #defmixdis name="Mixtura de distribuciones"}
-Un caso de especial interés para estudiar algunos problemas actuariales se da cuando se dispone
-de dos variables aleatorias, $N$ que toma solo valores discretos (numerables) los cuales pueden
-ser finitos como infinitos, por ejemplo: $N$ toma valores $\mathbb{N}$ y otra variable aleatoria
-$X$ que toma valores continuos reales en $\R$. La distribución conjunta puede generarse 
-de la siguiente forma
-$$
-\begin{eqnarray*}
-F( n, x ) 
-& = & P( N = n \land X \leq x ) \\
-& = & P( X \leq x \mid N = n  ) P( N = n )\qquad \text{propiedades de la probabilidad condicional} \\
-& = & F_n( x ) p_n\qquad \text{simplificando notación} \\
-\end{eqnarray*}
-$$
-
-$F_n( x )$ es la ley condicionada de $X$ dado que $N = n$ y $p_n = P( N = n )$
-
-Además, es de notar que:
-$$
-\begin{eqnarray*}
-F_X( x )
-& = & P( X \leq x ) \\
-& = & P( X \leq x \land N \in \mathbb{N} ) \\
-& = & P\left( X \leq x \land N \in \bigcup_{n \in \mathbb{N}} \{n\} \right) \\
-& = & P\left( \bigcup_{n \in \mathbb{N}} \left\{ X \leq x \land N \in \{n\} \right\} \right) \\
-& = & \sum\limits_{n \in \mathbb{N}} P\left( X \leq x \land N \in \{n\} \right) \\
-& = & \sum\limits_{n \in \mathbb{N}} P\left( X \leq x \land N = n \right) \\
-& = & \sum\limits_{n \in \mathbb{N}} P\left( X \leq x\ \middle|\ N = n \right) P( N = n ) \\
-& = & \sum\limits_{n \in \mathbb{N}} F_n( x ) p_n 
-\end{eqnarray*}
-$$
-la distribución de $F_X$ de $X$ no es más que una mixtura de las distribuciones condicionales de $X$
-para cada $n \in \mathbb{N}$.
 :::
 
 <!------------------------------------------------------------------------------------------------->
@@ -605,11 +551,130 @@ $$
 F_Z( z ) = \mathbf{1}_{[a,+\infty)}( z ) F_X( z )
 $$
 
+::: {.theorem #tdinver name="Inversión"}
+Sea $\varphi$ la función característica de la distribución de probabilidad $F$ de una variable 
+aleatoria $X$. Si $x,y \in \R$ son dos puntos de continuidad de la distribución $F$, then
+$$
+F( y ) - F( x ) = \frac{1}{2\pi} \underset{c \rightarrow +\infty}{\lim} \int\limits_{-c}^c 
+\frac{\exp(-itx) - \exp(-ity)}{it} \varphi( t )\ dt
+$$
+:::
+
 <!------------------------------------------------------------------------------------------------->
+## Probabilidad condicional
+
+<!------------------------------------------------------------------------------------------------->
+::: {.definition #dprobcond name="Probabilidad condicional"}
+Para cualquier par de eventos $A, B \in \F$, la **probabilidad condicional** de $A$ dado 
+$B$, está dada por:
+$$
+P( A \mid B ) = \frac{P( A \cap B)}{P(B)}
+$$
+:::
+
+<!------------------------------------------------------------------------------------------------->
+::: {.definition #ddistcond name="Distribución acumulada condicionada"}
+Si consideramos un evento cualquiera $A \in \F$, $X$ una variable aleatoria a valores 
+reales y $x \in \R$. Surge el interés de estudiar la distribución acumulada de $X$ pero 
+considerando dado que se produce el evento $A$, esto resulta en estudiar:
+$$
+P\left( X \leq x \middle| A \right)
+= \frac{P(X \leq x \land A )}{P(A)}
+= \frac{P( \{X \leq x \} \cap A )}{P(A)}
+$$
+Esto precisamente da paso a la definición de la **distribución acumulada de** $X$ **condicionada a** $A$
+$$
+F( x \mid A ) = P\left( X \leq x \middle| A \right)
+$$
+Se satisface algunas propiedades:
+
+1. Si $A, B \in \F$ son dos eventos disjuntos, entonces:
+
+$$
+\begin{eqnarray*}
+F\left( x \middle| A \cup B \right)
+& = & P\left( X \leq x \middle| A \right) \\
+& = & \frac{P\left( X \leq x \cap ( A \cup B ) \right)}{P\left( A \cup B \right)} \\
+& = & \frac{P\left( X \leq x \cap A \right) + P\left( X \leq x \cap B \right)}{P\left( A \cup B \right)} \\
+& = & \frac{P\left( X \leq x \cap A \right)P( A )}{P(A)P\left( A \cup B \right)}
++ \frac{P\left( X \leq x \cap B \right)P( B )}{P( B )P\left( A \cup B \right)} \\
+& = & P\left( X \leq x \middle| A \right) \frac{P( A )}{P\left( A \cup B \right)}
++ P\left( X \leq x \middle| B \right) \frac{P( B )}{P\left( A \cup B \right)} \\
+& = & P\left( X \leq x \middle| A \right) P\left( A \middle| A \cup B \right) 
++ P\left( X \leq x \middle| B \right) P\left( B \middle| A \cup B \right) \\
+& = & F\left( x \middle| A \right) P\left( A \middle| A \cup B \right) 
++ F\left( x \middle| B \right) P\left( B \middle| A \cup B \right)
+\end{eqnarray*}
+$$
+2. La distribución acumulada condicionada con respecto a todo el espacio muestral $\Omega$, es la 
+distribución acumulada.
+
+$$
+\begin{eqnarray*}
+F\left( x \middle| \Omega \right)
+& = & P\left( X \leq x \middle| \Omega \right) \\
+& = & \frac{P\left( X \leq x \cap \Omega \right)}{P(\Omega)} \\
+& = & \frac{P\left( X \leq x \right)}{P(\Omega)} \\
+& = & P\left( X \leq x \right) \\
+& = & F( x )
+\end{eqnarray*}
+$$
+3. Para cualquier $A \in \F$, el evento $\{ X \leq x \} \cap A \subset A$ y por tanto 
+$P\left( X \leq x \middle| \Omega \right) \leq P( A )$, entonces $0 \leq F(x\mid A) \leq 1$,
+
+4. Para cualquier $A \in \F$, la función de distribución acumulada condicionada $F( \cdot \mid A )$ es no decreciente,
+
+5. Para cualquier $A \in \F$, la función de distribución acumulada condicionada $F( \cdot \mid A )$ es continua por derecha,
+
+En algunos casos la distribución acumulada de la variable aleatoria $X$ se nota por $F_X$ y la 
+distribución acumulada de $X$ condicionada por el evento $A$, se nota por $F_{X\mid A}$.
+:::
+
+Como hemos visto la función de distribución acumulada satisface todas las propiedades de una 
+función de distribución acumulada y por tal razón se puede calcular una esperanza, la cual vendrá 
+condicionada.
+
+Las variables aleatorias también generan eventos, ya que son medibles, por tal razón si tomamos 
+en cuenta la definición anterior, podemos ciertamente extender la definición anterior de 
+**distribución acumulada condicionada**, pero considerando variables aleatorias en su 
+condicionamiento.
+
+Así si consideramos dos variables aleatorias $X$ y $Y$ a valores reales, a partir de la definición 
+podemos tranquilamente considerar la distribución acumulada de $X$ condicionada al evento $Y \leq y$
+$$
+F( x \mid Y \leq y ) 
+= \frac{P( X \leq x \land Y \leq y )}{P(Y \leq y)}
+= \frac{F_{X,Y}( x, y )}{F_Y( y )}
+$$
+está bien definida para $F_Y( y ) \neq 0$
+
+<!------------------------------------------------------------------------------------------------->
+::: {.definition #dexpcond name="Esperanza condicionada"}
+Para una variable aleatoria $X$ y un evento cualquiera $A \in \F$, se define la 
+**esperanza condicionada** respecto del evento $A$, como:
+$$
+\E\left[ X \middle| A \right] 
+= \E_{P|A}\left[ X \right] 
+= \E_P\left[ X \middle| A \right] 
+= \int\limits_{A} X( \omega )\ dP( \omega \mid A )
+= \int\limits_{\R} x\ dF( x \mid A )
+$$
+cuando $F(x\mid A)$ es derivable, con densidad de probabilidad $f(x|\mid A)$, la esperanza 
+condicionada también se puede escribir como:
+$$
+\E\left[ X \middle| A \right] 
+= \int\limits_{\R} x\ f( x \mid A )\ dx
+$$
+La distribución acumulada condicionada satisface las mismas propiedades de una distribución acumulada,
+y por tanto la esperanza que resulta de esta también satisface las mismas propiedades que cualquier
+esperanza.
+:::
+
 La siguiente definición de distribución de exceso condicionada es útil para el estudio de los 
 valores extremos que se pueden presentar en el estudio de los valores de siniestros que se presentan
 en un seguro.
 
+<!------------------------------------------------------------------------------------------------->
 ::: {.definition #dexceso name="Distribución de exceso condicionada"}
 La **distribución de exceso condicionada** asociada a una variable aleatoria $X$ con distribución 
 de probabilidad acumulada $F$ y a un umbral de condicionamiento $u > 0$, está dada por:
@@ -620,15 +685,6 @@ F_u( y ) = P\left( X - u \leq y \mid X > u \right)
 $$
 :::
 
-::: {.definition #dcondexp name="Esperanza condicional"}
-Si consideramos un evento cualquiera $A \in \mathcal{F}$, $X$ una variable aleatoria a valores 
-reales y $x \in \R$, consideremos la probabilidad condicionada del siguiente evento
-$$
-P\left( X \leq x \middle| A \right) 
-= \frac{P(X \leq x \land A )}{P(A)}
-= \frac{P( \{X \leq x \} \cap A )}{P(A)}
-$$
-:::
 ::: {.definition #dlawtotvar name="Ley de la varianza total"}
 Consideremos dos variables aleatorias $X, Y$, ambas a valores reales, entonces se satisface la 
 siguiente igualdad:
@@ -636,6 +692,42 @@ $$
 \V[ Y ] = \E\left[ \V\left[ Y \middle| X \right] \right] + 
 \V\left[ \E\left[ Y \middle| X \right] \right]
 $$
+:::
+
+<!------------------------------------------------------------------------------------------------->
+::: {.definition #defmixdis name="Mixtura de distribuciones"}
+Un caso de especial interés para estudiar algunos problemas actuariales se da cuando se dispone
+de dos variables aleatorias, $N$ que toma solo valores discretos (numerables) los cuales pueden
+ser finitos como infinitos, por ejemplo: $N$ toma valores $\mathbb{N}$ y otra variable aleatoria
+$X$ que toma valores continuos reales en $\R$. La distribución conjunta puede generarse 
+de la siguiente forma
+$$
+\begin{eqnarray*}
+F( n, x ) 
+& = & P( N = n \land X \leq x ) \\
+& = & P( X \leq x \mid N = n  ) P( N = n )\qquad \text{propiedades de la probabilidad condicional} \\
+& = & F_n( x ) p_n\qquad \text{simplificando notación} \\
+\end{eqnarray*}
+$$
+
+$F_n( x )$ es la ley condicionada de $X$ dado que $N = n$ y $p_n = P( N = n )$
+
+Además, es de notar que:
+$$
+\begin{eqnarray*}
+F_X( x )
+& = & P( X \leq x ) \\
+& = & P( X \leq x \land N \in \mathbb{N} ) \\
+& = & P\left( X \leq x \land N \in \bigcup_{n \in \mathbb{N}} \{n\} \right) \\
+& = & P\left( \bigcup_{n \in \mathbb{N}} \left\{ X \leq x \land N \in \{n\} \right\} \right) \\
+& = & \sum\limits_{n \in \mathbb{N}} P\left( X \leq x \land N \in \{n\} \right) \\
+& = & \sum\limits_{n \in \mathbb{N}} P\left( X \leq x \land N = n \right) \\
+& = & \sum\limits_{n \in \mathbb{N}} P\left( X \leq x\ \middle|\ N = n \right) P( N = n ) \\
+& = & \sum\limits_{n \in \mathbb{N}} F_n( x ) p_n 
+\end{eqnarray*}
+$$
+la distribución de $F_X$ de $X$ no es más que una mixtura de las distribuciones condicionales de $X$
+para cada $n \in \mathbb{N}$.
 :::
 
 <!------------------------------------------------------------------------------------------------->
@@ -695,15 +787,6 @@ al \@ref(thm:tlc) se debe considerar otros resultados asociados a desigualdades 
 
 El siguiente teorema es de gran ayuda para estimar la tasa de convergencia del resultado anterior
 \@ref(thm:tlc).
-
-::: {.theorem #tdinver name="Inversion"}
-Sea $\varphi$ la función característica de la distribución de probabilidad $F$ de una variable 
-aleatoria $X$. Si $x,y \in \R$ son dos puntos de continuidad de la distribución $F$, then
-$$
-F( y ) - F( x ) = \frac{1}{2\pi} \underset{c \rightarrow +\infty}{\lim} \int\limits_{-c}^c 
-\frac{\exp(-itx) - \exp(-ity)}{it} \varphi( t )\ dt
-$$
-:::
 
 <!------------------------------------------------------------------------------------------------->
 ## Desigualdades de concentración 
