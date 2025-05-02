@@ -836,6 +836,29 @@ DX <- lapply( X, FUN = function( x ) sapply( x, FUN = function( y ) D( y, d, M )
 S <- sapply( DX, FUN = function( x ) ifelse( length( x ) == 0, 0, sum( x, na.rm = TRUE ) ) )
 ```
 
+El efecto del deducible sobre la distribución del reclamo es evidente, produciendo así una 
+densidad multimodal, como se observa en el gráfico a continuación.
+```{r l5g5, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
+smax <- lambda * M
+fmax <- 0.0025
+
+plt <- ggplot( ) +
+  geom_histogram( aes( S, after_stat( density ) ), fill = 'dodgerblue4', colour = 'white', alpha = 0.6, bins = nclass.FD( S ) ) +
+  scale_x_continuous( breaks = seq( 0, smax, length = 7 ),
+                      labels = formatC( seq( 0, smax, length = 7 ), digits = 2, format = 'f' ), 
+                      limits = c( 0, smax ), 
+                      expand = c( 0, 0 ) ) +
+  scale_y_continuous( breaks = seq( 0, fmax, length = 11 ),
+                      labels = formatC( seq( 0, fmax, length = 11 ), digits = 4, format = 'f' ),
+                      limits = c( 0, fmax ),
+                      expand = c( 0, 0 ) ) +
+  xlab( TeX( "$s$" ) ) + 
+  ylab( TeX( "$f_S$" ) ) + 
+  theme_bw() +
+  theme( legend.position = "none" )
+plot( plt )
+```
+
 Es de notar que la probabilidad del evento $\{S=0\}$ no es nula y se debe a la aplicación del 
 deducible.
 $$
@@ -927,7 +950,7 @@ s <- seq( 0, ESmax, length = 1000 )
 Fes <- sapply( s, FUN = FeS )
 ```
 
-```{r l5g5, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
+```{r l5g6, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
 Smax <- ESmax
 
 plt <- ggplot( ) +
@@ -1041,7 +1064,7 @@ El algoritmo de Panjer suele tener problemas para ajustarse en los primeros valo
 densidad $f_S$, tal como lo muestra el gráfico a continuación, usualmente hay una sobre estimación.
 Además, el algoritmo solo es válido cuando el conteo de siniestros pertenece a la familia
 de distribuciones $(a,b,0)$.
-```{r l5g6, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
+```{r l5g7, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
 fmax <- 0.0007
 
 plt <- ggplot( ) +
@@ -1062,7 +1085,7 @@ plt <- ggplot( ) +
 plot( plt )
 ```
 
-```{r l5g7, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
+```{r l5g8, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
 e <- cumsum( fS[ -1 ] * ds ) - ecdf( S )( sg[ -1 ] )
 
 eb <- max( abs( e ) )
@@ -1146,7 +1169,7 @@ fS <- Re( fS )
 fs <- sapply( s, FUN = function( sk ) dgamma( sk, shape = sum( alpha ), scale = theta ) )
 ```
 
-```{r l5g8, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
+```{r l5g9, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
 plt <- ggplot() +
   geom_line( aes( x = s, y = fS ), colour = 'darkred', linewidth = 1 ) + 
   geom_point( aes( x = s, y = fs ), colour = 'olivedrab3', size = 0.25 ) + 
@@ -1156,7 +1179,7 @@ plt <- ggplot() +
 plot( plt )
 ```
 
-```{r l5g9, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
+```{r l5g10, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
 e <- fS - fs
 eb <- max( abs( e ) )
 
@@ -1217,7 +1240,7 @@ X <- lapply( N, FUN = function( n ) rlnorm( n, meanlog = u, sdlog = s ) )
 S <- sapply( X, FUN = function( x ) sum( x, na.rm = TRUE ) )
 ```
 
-```{r l5g10, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
+```{r l5g11, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
 fmax <- 0.0007
 smax <- 5e3
 
@@ -1239,7 +1262,7 @@ plt <- ggplot() +
 plot( plt )
 ```
 
-```{r l5g11, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
+```{r l5g12, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
 e <- cumsum( fS[ -1 ] * diff( sg ) ) - ecdf( S )( sg[-1] )
 
 eb <- max( abs( e ) )
@@ -1507,7 +1530,7 @@ EeS <- sapply( 1:p, FUN = function( l ) mean( sapply( 1:m, function( i ) S[[ i ]
 
 En el gráfico a continuación presentamos todos los procesos de conteo $N_{i}$ simulados, como es de
 esperarse son funciones de escalera, siempre crecientes, que toman solo valores positivos.
-```{r l5g12, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
+```{r l5g13, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
 Ndat <- NULL
 for ( j in 1:m ) {
   Ndat <- rbindlist( list( Ndat, data.table( t = t, m = as.factor( j ), N = N[[ j ]], S = S[[ j ]] ) ) )
@@ -1540,7 +1563,7 @@ plot( plt )
 El gráfico a continuación presenta la simulación de los procesos correspondientes al total de 
 reclamos, conforme avanza el tiempo. De igual manera los procesos $S_i$ son funciones de escalera,
 siempre crecientes, con saltos correspondientes a los reclamos individuales.
-```{r l5g13, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
+```{r l5g14, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
 Sqmax <- quantile( sapply( S, FUN = function( Si ) last( Si ) ), probs = 0.99 )
 
 plt <- ggplot( ) +
@@ -1574,7 +1597,7 @@ Fes <- lapply( FeS, FUN = function( FeSl ) sapply( s, FUN = FeSl ) )
 La figura a continuación muestra cada una de las distribuciones de probabilidad empíricas estimadas 
 $F_{m,l}$. Se puede observar que conforme avanza el tiempo, aumenta la probabilidad de observar 
 valores mayores del proceso $S$ correspondiente al total de reclamos.
-```{r l5g14, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
+```{r l5g15, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
 FeSdat <- NULL
 for ( j in 1:p ) {
   FeSdat <- rbindlist( list( FeSdat, data.table( s = s, m = as.factor( j ), Fes = Fes[[ j ]] ) ) )
