@@ -783,6 +783,9 @@ $\theta \in \Theta$, si la distribución condicionada de la muestra $X_1, \ldots
 estimador $\tau$ es independiente del parámetro $\theta$.
 :::
 
+El resultado a continuación es una caracterización del criterio de suficiencia, para una demostración
+se puede consultar @stat_theo_infer, @funmathstat.
+
 ::: {.theorem #thfactorsufic name="Teorema de factorización" }
 Un estimador $\tau$ es suficiente para el parámetro $\theta$ si y solo si la densidad conjunta
 de la muestra $X_1, \ldots, X_n$ puede ser expresada en la forma.
