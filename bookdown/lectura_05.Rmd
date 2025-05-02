@@ -245,8 +245,8 @@ Fms <- sapply( s, FUN = Fm )
 smax <- 2.0e5
 
 plt <- ggplot() +
-  geom_step( aes( x = s, y = Fms ), colour = 'purple3', linewidth = 1 ) + 
-  geom_vline( xintercept = c( EeS, ES ), colour = c( 'dodgerblue3', 'orange' ), linewidth = 1 ) +
+  geom_step( aes( x = s, y = Fms ), colour = 'dodgerblue4', linewidth = 1 ) + 
+  geom_vline( xintercept = c( EeS, ES ), colour = c( 'olivedrab3', 'gold3' ), linewidth = 1 ) +
   scale_x_continuous( breaks = seq( 0, smax, length = 11 ),
                       labels = formatC( seq( 0, smax, length = 11 ), digits = 2, format = 'f' ), 
                       limits = c( 0, smax ), 
@@ -951,30 +951,41 @@ encarecer la prima es un aumento de frecuencia.
 Como ya se lo mencionó, utilizando la simulación $\{S_i\}$ podemos determinar la distribución de 
 probabilidad empírica $F_m$ que aproxima la distribución de $F_S$.
 ```{r l5c10}
-FeS <- ecdf( DS )
+FeS <- ecdf( S )
+FeDS <- ecdf( DS )
 s <- seq( 0, ESmax, length = 1000 )
 Fes <- sapply( s, FUN = FeS )
+FeDs <- sapply( s, FUN = FeDS )
 ```
 
 ```{r l5g6, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
 Smax <- ESmax
 
+xbrk <- sort( unique( c( d, M, seq( 0, Smax, length = 7 ) ) ) )
+xlbl <- formatC( xbrk, digits = 0, format = 'f' )
+xlim <- c( 0, Smax )
+
+ybrk <- seq( 0, 1, length = 11 )
+ylbl <- formatC( ybrk, digits = 2, format = 'f' )
+ylim <- c( 0, 1 )
+
 plt <- ggplot( ) +
   geom_step( aes( x = s, y = Fes, colour = 'a' ), linewidth = 1 ) +
-  geom_vline( xintercept = c( d, M ), colour = 'purple3' ) +
-  geom_point( aes( 0, PS0 ), colour = 'red', size = 3 ) +
-  scale_colour_manual( breaks = c( 'a' ),
-                       values = c( 'dodgerblue3' ) ) +
-  scale_x_continuous( breaks = seq( 0, Smax, length = 7 ),
-                      labels = formatC( seq( 0, Smax, length = 7 ), digits = 2, format = 'f' ), 
-                      limits = c( 0, Smax ), 
-                      expand = c( 0.005, 0.005 ) ) +
-  scale_y_continuous( breaks = seq( 0, 1, length = 11 ),
-                      labels = formatC( seq( 0, 1, length = 11 ), digits = 2, format = 'f' ), 
-                      limits = c( 0, 1 ), 
+  geom_step( aes( x = s, y = FeDs, colour = 'b' ), linewidth = 1 ) +
+  geom_vline( xintercept = c( d, M ), colour = 'orange', linewidth = 0.7 ) +
+  geom_point( aes( 0, PS0 ), colour = 'red3', size = 3 ) +
+  scale_colour_manual( breaks = c( 'a', 'b' ),
+                       values = c( 'olivedrab4', 'dodgerblue4' ) ) +
+  scale_x_continuous( breaks = xbrk,
+                      labels = xlbl, 
+                      limits = xlim, 
+                      expand = c( 0.008, 0.008 ) ) +
+  scale_y_continuous( breaks = ybrk,
+                      labels = ylbl, 
+                      limits = ylim, 
                       expand = c( 0.005, 0.005 ) ) +
   xlab( TeX( "$s$" ) ) + 
-  ylab( TeX( "$F_m( s )$" ) ) + 
+  ylab( TeX( "$F_{S,m},F_{S^D,m}$" ) ) + 
   theme_bw() +
   theme( legend.position = "none" )
 plot( plt )
@@ -1233,7 +1244,7 @@ f <- sapply( sg, FUN = function( sk ) dlnorm( sk, meanlog = u, sdlog = s ) )
 Fof <- eta * fft( f )
 FoS <- rep( 0, N + 1 )
 for ( n in 1:M ) {
-    FoS <- FoS + pn[ n + 1 ] * Fof^n
+  FoS <- FoS + pn[ n + 1 ] * Fof^n
 }
 fS <- fft( eta^(-1) * FoS, inverse = TRUE ) / ( N + 1 )
 fS <- Re( fS )
@@ -1317,7 +1328,7 @@ es cero, $S(t) = 0$.
 Además, junto con lo anterior, se pueden identificar las variables aleatorias de 
 **tiempos entre arribos**, dadas por las diferencias entre tiempos de arribo contiguos
 $$
-W_n = T_n - T_{n-1},\quad \forall n \in \N
+W_n = T_n - T_{n-1},\quad \forall n \in \N^*
 $$
 
 Un hipótesis bien común en el modelamiento de un proceso de pérdida agregada utilizando esta 
