@@ -809,7 +809,7 @@ a aplicar será una función mixta de la forma $D( X ) = \min( \max( X - d, 0 ),
 
 ```{r l5c6}
 # 1. selección de simulaciones
-m <- 1e5
+m <- 5e4
 
 # 2. especificación de los parámetros para las distribuciones
 u <- 2
@@ -820,6 +820,8 @@ lambda <- 6
 D <- function( x, d, M ) {
   return( min( max( x - d, 0 ), M ) )
 }
+
+set.seed( 312341 )
 
 # 4. simulación del conteo de siniestros
 N <- rpois( n = m, lambda = lambda )
@@ -833,20 +835,24 @@ M <- 1000
 DX <- lapply( X, FUN = function( x ) sapply( x, FUN = function( y ) D( y, d, M ) ) )
 
 # 7. reclamo total, agregación por cada simulación
-S <- sapply( DX, FUN = function( x ) ifelse( length( x ) == 0, 0, sum( x, na.rm = TRUE ) ) )
+S <- sapply( X, FUN = function( x ) ifelse( length( x ) == 0, 0, sum( x, na.rm = TRUE ) ) )
+DS <- sapply( DX, FUN = function( x ) ifelse( length( x ) == 0, 0, sum( x, na.rm = TRUE ) ) )
 ```
 
 El efecto del deducible sobre la distribución del reclamo es evidente, produciendo así una 
-densidad multimodal, como se observa en el gráfico a continuación.
+densidad multimodal, como se observa en el gráfico a continuación, en el mismo incluimos dos 
+histogramas, uno correspondiente a los reclamos totales sin aplicar el deducible y el otro 
+el histograma de los reclamos totales aplicados el deducible..
 ```{r l5g5, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
 smax <- lambda * M
-fmax <- 0.0025
+fmax <- 0.002
 
 plt <- ggplot( ) +
-  geom_histogram( aes( S, after_stat( density ) ), fill = 'dodgerblue4', colour = 'white', alpha = 0.6, bins = nclass.FD( S ) ) +
+  geom_histogram( aes( S, after_stat( density ) ), fill = 'olivedrab3', colour = 'olivedrab4', alpha = 0.3, bins = nclass.FD( DS ) ) +
+  geom_histogram( aes( DS, after_stat( density ) ), fill = 'dodgerblue3', colour = 'dodgerblue4', alpha = 0.6, bins = nclass.FD( DS ) ) +
   scale_x_continuous( breaks = seq( 0, smax, length = 7 ),
-                      labels = formatC( seq( 0, smax, length = 7 ), digits = 2, format = 'f' ), 
-                      limits = c( 0, smax ), 
+                      labels = formatC( seq( 0, smax, length = 7 ), digits = 2, format = 'f' ),
+                      limits = c( 0, smax ),
                       expand = c( 0, 0 ) ) +
   scale_y_continuous( breaks = seq( 0, fmax, length = 11 ),
                       labels = formatC( seq( 0, fmax, length = 11 ), digits = 4, format = 'f' ),
@@ -945,7 +951,7 @@ encarecer la prima es un aumento de frecuencia.
 Como ya se lo mencionó, utilizando la simulación $\{S_i\}$ podemos determinar la distribución de 
 probabilidad empírica $F_m$ que aproxima la distribución de $F_S$.
 ```{r l5c10}
-FeS <- ecdf( S )
+FeS <- ecdf( DS )
 s <- seq( 0, ESmax, length = 1000 )
 Fes <- sapply( s, FUN = FeS )
 ```
