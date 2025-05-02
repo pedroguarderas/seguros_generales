@@ -8,6 +8,7 @@ def:spv
 def:lp
 def:ind
 def:indicatriz
+prp:pindconst
 def:probemp
 def:em
 def:mgf
