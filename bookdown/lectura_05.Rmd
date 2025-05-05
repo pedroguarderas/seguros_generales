@@ -1548,11 +1548,12 @@ EeS <- sapply( 1:p, FUN = function( l ) mean( sapply( 1:m, function( i ) S[[ i ]
 En el gráfico a continuación presentamos todos los procesos de conteo $N_{i}$ simulados, como es de
 esperarse son funciones de escalera, siempre crecientes, que toman solo valores positivos.
 ```{r l5g13, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
+Sord <- order( sapply( 1:m, FUN = function( j ) last( S[[j]] ) ) )
 Ndat <- NULL
 for ( j in 1:m ) {
-  Ndat <- rbindlist( list( Ndat, data.table( t = t, m = as.factor( j ), N = N[[ j ]], S = S[[ j ]] ) ) )
+  Ndat <- rbindlist( list( Ndat, data.table( t = t, m = as.factor( Sord[ j ] ), N = N[[ j ]], S = S[[ j ]] ) ) )
 }
-cols <- wes_palette( m, name = "GrandBudapest2", type = "continuous")
+cols <- wes_palette( m, name = "FantasticFox1", type = "continuous")
 
 time <- t 
 
@@ -1561,7 +1562,7 @@ plt <- ggplot( ) +
   geom_line( aes( x = time, y = EN, colour = 'a' ), linewidth = 1.5 ) +
   geom_line( aes( x = time, y = EeN, colour = 'b' ), linewidth = 1 ) +
   scale_color_manual( breaks = c( as.factor( 1:m ), 'a', 'b' ), 
-                      values = c( cols, 'dodgerblue3', 'red3' ) ) +
+                      values = c( cols, 'dodgerblue3', 'olivedrab3' ) ) +
   scale_x_continuous( breaks = seq( 0, Tnmax, length = 11 ),
                       labels = formatC( seq( 0, Tnmax, length = 11 ), digits = 2, format = 'f' ), 
                       limits = c( 0, Tnmax ), 
@@ -1588,7 +1589,7 @@ plt <- ggplot( ) +
   geom_line( aes( x = time, y = ES, colour = 'a' ), linewidth = 1.5 ) +
   geom_line( aes( x = time, y = EeS, colour = 'b' ), linewidth = 1 ) +
   scale_color_manual( breaks = c( as.factor( 1:m ), 'a', 'b' ), 
-                      values = c( cols, 'dodgerblue3', 'red3' ) ) +
+                      values = c( cols, 'dodgerblue3', 'olivedrab3' ) ) +
   scale_x_continuous( breaks = seq( 0, Tnmax, length = 11 ),
                       labels = formatC( seq( 0, Tnmax, length = 11 ), digits = 2, format = 'f' ), 
                       limits = c( 0, Tnmax ), expand = c( 0, 0 ) ) +
@@ -1606,7 +1607,7 @@ Como se describe en el paso 8 del algoritmo de simulación, para cada tiempo $t_
 la distribución de probabilidad de la variable aleatoria $S(t_l)$.
 ```{r l5c15}
 FeS <- lapply( 1:p, FUN = function( l ) ecdf( sapply( S, FUN = function( Si ) Si[ l ] ) ) )
-ns <- 100
+ns <- 1e3
 s <- seq( 0, Smax, length = ns )
 Fes <- lapply( FeS, FUN = function( FeSl ) sapply( s, FUN = FeSl ) )
 ```
@@ -1619,7 +1620,7 @@ FeSdat <- NULL
 for ( j in 1:p ) {
   FeSdat <- rbindlist( list( FeSdat, data.table( s = s, m = as.factor( j ), Fes = Fes[[ j ]] ) ) )
 }
-cols <- wes_palette( p, name = "GrandBudapest2", type = "continuous")
+cols <- wes_palette( p, name = "FantasticFox1", type = "continuous")
 
 plt <- ggplot( ) +
   geom_step( data = FeSdat, aes( x = s, y = Fes, group = m, colour = m ), linewidth = 0.1 ) +
