@@ -802,7 +802,7 @@ medidas de probabilidad $\{ P_\theta \}_{\theta \in \Theta}$, para cada $\theta 
 puede construir la medida $P_{\tau,\theta}$ asociada a la variable aleatoria $\tau(X_1, \ldots,X_n)$
 y al parámetro $\theta$ que determina la medida $P_\theta$. Para cualquier evento $A \in \F$.
 $$
-P_{\tau,\theta}( A ) = P_\theta\left( \tau\left(X_1, \ldots,X_n\right)^{-1}( A ) \right)
+P_{\tau,\theta}( A ) = P_\theta\left( \tau\left(X_1, \ldots,X_n\right) \in A \right)
 $$
 
 Así, la familia de medidas de probabilidad $\{ P_{\tau,\theta} \}_{\theta \in \Theta}$ se dice 
@@ -874,7 +874,7 @@ un funcional y como tal puede resultar una función que no es medible.
 <!------------------------------------------------------------------------------------------------->
 ### Método de momentos
 
-Un estimador de momento se contruye a partir de una relación función entre la media de una función
+Un estimador de momento se construye a partir de una relación función entre la media de una función
 medible $g$ y el parámetro $\theta \in \Theta$ que caracteriza a la distribución o medida de 
 probabilidad de la variable aleatoria $X$. Es decir, existen funciones $g$ y $m$ a valores reales
 de tal forma que
