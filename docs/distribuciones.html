@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Capítulo 4 Distribuciones | Matemática Actuarial de los Seguros Generales</title>
   <meta name="description" content="Capítulo 4 Distribuciones | Matemática Actuarial de los Seguros Generales" />
-  <meta name="generator" content="bookdown 0.42 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Capítulo 4 Distribuciones | Matemática Actuarial de los Seguros Generales" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="" />
 
 
-<meta name="date" content="2025-05-04" />
+<meta name="date" content="2025-05-07" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -234,7 +234,7 @@ div.csl-indent {
 <li class="chapter" data-level="4.4.2" data-path="distribuciones.html"><a href="distribuciones.html#método-de-momentos"><i class="fa fa-check"></i><b>4.4.2</b> Método de momentos</a></li>
 <li class="chapter" data-level="4.4.3" data-path="distribuciones.html"><a href="distribuciones.html#método-de-la-distancia-mínima"><i class="fa fa-check"></i><b>4.4.3</b> Método de la distancia mínima</a></li>
 <li class="chapter" data-level="4.4.4" data-path="distribuciones.html"><a href="distribuciones.html#método-de-maximización-de-la-verosimilitud"><i class="fa fa-check"></i><b>4.4.4</b> Método de maximización de la verosimilitud</a></li>
-<li class="chapter" data-level="4.4.5" data-path="distribuciones.html"><a href="distribuciones.html#calidad-de-estimadores"><i class="fa fa-check"></i><b>4.4.5</b> Calidad de estimadores</a></li>
+<li class="chapter" data-level="4.4.5" data-path="distribuciones.html"><a href="distribuciones.html#pruebas-de-hipótesis"><i class="fa fa-check"></i><b>4.4.5</b> Pruebas de hipótesis</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html"><i class="fa fa-check"></i><b>5</b> Modelos de pérdida agregada</a>
@@ -1806,14 +1806,37 @@ que toma la variable aleatoria <span class="math inline">\(X\)</span>. Es decir,
 suponer que <span class="math inline">\(N\)</span> pertenece a la familia de distribuciones discretas en la clase <span class="math inline">\((0,a,b)\)</span> y por tanto
 <span class="math inline">\(P( N = 0 ) = p_0\)</span> es un parámetro inicial <span class="math inline">\(p_n = ( a + b/n) p_{n-1}\)</span>, para cualquier
 <span class="math inline">\(n &gt; 1\)</span>.
-<span class="math display">\[
-P\left( N_1 = n_1 \land \cdots \land N_m = n_m \right)
-= \prod\limits_{i=1}^m p_i^{n_i}
-\]</span></p>
+$$
+P( N_1 = n_1 N_m = n_m )
+= _{i=1}^m p_i^{n_i}</p>
+<p>$$</p>
 <!------------------------------------------------------------------------------------------------->
 </div>
-<div id="calidad-de-estimadores" class="section level3 hasAnchor" number="4.4.5">
-<h3><span class="header-section-number">4.4.5</span> Calidad de estimadores<a href="distribuciones.html#calidad-de-estimadores" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="pruebas-de-hipótesis" class="section level3 hasAnchor" number="4.4.5">
+<h3><span class="header-section-number">4.4.5</span> Pruebas de hipótesis<a href="distribuciones.html#pruebas-de-hipótesis" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Usualmente sobre un variable aleatoria <span class="math inline">\(X\)</span> a valores en <span class="math inline">\(\mathbb{R}^n\)</span>, se suele establecer una decisión
+basada en el valores que toma la variable aleatoria, la selección se realiza entre diferentes
+hipótesis. De manera más formal, esta decisión puede ser representada por una función
+<span class="math inline">\(\delta : \mathbb{R}^n \longrightarrow D\)</span>, donde <span class="math inline">\(D = \{d_1,\ldots,d_n\}\)</span> es un conjunto discreto que
+representa la hipótesis. Se conoce a <span class="math inline">\(\delta\)</span> como un <strong>test estadístico de elección</strong>.</p>
+<p>En muchos casos uno nos interesa encontrar el test estadístico <span class="math inline">\(\delta\)</span> que tenga el menor error
+de cometer una selección errada, así para cada decisión en <span class="math inline">\(d \in D\)</span>, el test <span class="math inline">\(\delta\)</span> tendrá
+probabilidades <span class="math inline">\(P( \delta( X ) \neq d )\)</span>, es decir, para cualquier otro test <span class="math inline">\(\eta\)</span>, se debe
+tener que
+<span class="math display">\[
+P( \delta( X ) \neq d ) \leq P( \eta( X ) \neq d ),\qquad \forall d \in D
+\]</span>
+En muchos casos uno no se interesa en cualquier tipo de test estadístico, sino en un cierto tipo
+de tests, más interesados en un subconjunto <span class="math inline">\(K \subset \{ \delta : \mathbb{R}^n \longrightarrow D \}\)</span>,
+a este se lo conoce como una <strong>clase</strong>. Así se dice que un test <span class="math inline">\(\delta \in K\)</span> es el
+<strong>test más potente</strong> en la clase <span class="math inline">\(K\)</span> para la hipótesis <span class="math inline">\(d \in D\)</span> si para cualquier otro test
+<span class="math inline">\(\eta \in K\)</span>, se tiene la desigualdad.
+<span class="math display">\[
+P( \delta( X ) \neq d ) \leq P( \eta( X ) \neq d )
+\]</span></p>
+<div class="theorem">
+<p><span id="thm:thnpl" class="theorem"><strong>Teorema 4.4  (Lema de Neyman-Pearson) </strong></span>d</p>
+</div>
 <p></p>
 <p></p>
 

@@ -58,6 +58,7 @@ thm:thmvueunicity
 def:destsufic
 thm:thfactorsufic
 def:dfamicomp
+thm:thnpl
 exm:l5ex1
 exm:l5ex2
 exm:l5ex3
@@ -126,7 +127,7 @@ método-de-sustitución
 método-de-momentos
 método-de-la-distancia-mínima
 método-de-maximización-de-la-verosimilitud
-calidad-de-estimadores
+pruebas-de-hipótesis
 modelos-de-pérdida-agregada
 mutualización-del-riesgo
 sec:modind
