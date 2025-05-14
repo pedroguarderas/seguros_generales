@@ -570,7 +570,8 @@ $$
 $$
 donde no necesariamente $F_X( a )$ es igual $1$.
 
-5. el evento puntual $\{Z = a\}$ no tiene necesariamente probabilidad nula
+5. el evento puntual $\{Z = a\}$ no tiene necesariamente probabilidad nula, hay un fenómeno de 
+concentración de la probabilidad en el punto $a$.
 $$
 \begin{eqnarray*}
 P( Z = a ) 
@@ -717,8 +718,15 @@ F\left( x \middle| A^c \right) & \text{si}\ \mathbf{1}_A( \omega ) = 0
 $$
 de la definición anterior se sigue de forma inmediata la igualdad
 $$
-F( x )
-= \E\left[ F\left( x \middle| \mathbf{1}_A \right) \right]
+\begin{eqnarray*}
+\E\left[ F\left( x \middle| \mathbf{1}_A \right) \right] 
+& = & F\left( x \middle| A \right) P( A ) + F\left( x \middle| A^c \right) P( A^c ) \\
+& = & \frac{P\left( X \leq x \land A \right)}{P(A)} P( A ) 
++ \frac{P\left( X \leq x \land A^c \right)}{P(A^c)} P( A^c ) \\
+& = & P\left( X \leq x \land A \right) + P\left( X \leq x \land A^c \right) \\
+& = & P\left( X \leq x \right) \\
+& = & F( x )
+\end{eqnarray*}
 $$
 Las variables aleatorias también generan eventos, ya que son medibles, por tal razón si tomamos 
 en cuenta la definición anterior, podemos ciertamente extender la definición anterior de 
@@ -828,15 +836,17 @@ $$
 & = & \V[ Y ] - \V\left[ \E[ Y | X ] \right]
 \end{eqnarray*}
 $$
+Basta con ordenar los términos y se tiene la igualdad que buscamos.
 :::
+
 
 <!------------------------------------------------------------------------------------------------->
 ::: {.definition #defmixdis name="Mixtura de distribuciones"}
 Un caso de especial interés para estudiar algunos problemas actuariales se da cuando se dispone
 de dos variables aleatorias, $N$ que toma solo valores discretos (numerables) los cuales pueden
-ser finitos como infinitos, por ejemplo: $N$ toma valores $\mathbb{N}$ y otra variable aleatoria
-$X$ que toma valores continuos reales en $\R$. La distribución conjunta puede generarse 
-de la siguiente forma
+ser finitos como infinitos, por ejemplo: $N$ toma valores en los números naturales $\mathbb{N}$ y 
+otra variable aleatoria $X$ que toma valores continuos reales en $\R$. La distribución conjunta 
+puede generarse de la siguiente forma
 $$
 \begin{eqnarray*}
 F( n, x ) 
@@ -1016,7 +1026,7 @@ teorema del límite central \@ref(thm:tlc). Generaremos una simulación aleatori
 agregada $S_n$ y mostrar
 ```{r l3c10}
 m <- 600
-n <- 6000
+n <- 3000
 u <- 4
 s <- 2
 
@@ -1246,9 +1256,25 @@ $$
 Como se puede observar se superponen cada una de las distribuciones la discretización $f_k$ y la 
 calculada con inversión de la transformada de Fourier discreta.
 ```{r l3g4, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
+xbrk <- seq( 0, 40, length = 9 )
+xlbl <- formatC( xbrk, digits = 0, format = 'f' )
+xlim <- c( 0, 40 )
+
+ybrk <- seq( 0, 0.125, length = 10 )
+ylbl <- formatC( ybrk, digits = 3, format = 'f' )
+ylim <- c( 0, 0.125 )
+
 plt <- ggplot() +
-  geom_line( aes( x = x, y = f ), colour = 'darkred', size = 1 ) + 
+  geom_line( aes( x = x, y = f ), colour = 'darkred', linewidth = 1 ) + 
   geom_point( aes( x = x, y = IFf ), colour = 'olivedrab3', size = 0.25 ) + 
+  scale_x_continuous( breaks = xbrk,
+                      labels = xlbl, 
+                      limits = xlim, 
+                      expand = c( 0, 0 ) ) +
+  scale_y_continuous( breaks = ybrk, 
+                      labels = ylbl, 
+                      limits = ylim, 
+                      expand = c( 0, 0 ) ) +
   xlab( TeX( "$x$" ) ) + 
   ylab( TeX( "$f(x)$" ) ) + 
   theme_bw()
@@ -1257,13 +1283,22 @@ plot( plt )
 
 ```{r l3g5, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
 e <- f - IFf
-eb <- max( abs( e ) )
+
+xmax <- max( abs( e ) )
+xbrk <- seq( -xmax, xmax, length = 9 )
+xlbl <- formatC( xbrk, digits = 2, format = 'e' )
+xlim <- c( -xmax, xmax )
 
 plt <- ggplot() +
   geom_histogram( aes( x = e, y = after_stat( density ) ), fill = 'grey50', colour = 'dodgerblue3', bins = nclass.scott( e ) ) + 
   geom_density() +
+    scale_x_continuous( breaks = xbrk,
+                      labels = xlbl, 
+                      limits = xlim, 
+                      expand = c( 0, 0 ) ) +
   scale_y_continuous( labels = label_scientific( digits = 4 ) ) +
-  ylab( TeX( "$e$" ) ) + 
+  ylab( TeX( "distribución del error" ) ) + 
+  xlab( TeX( "error" ) ) + 
   theme_bw()
 plot( plt )
 ```
