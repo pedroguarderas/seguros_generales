@@ -44,17 +44,17 @@ el conjunto $X$, no es más que una función de $\N$ con valores en $X$
 <!------------------------------------------------------------------------------------------------->
 ## Consideraciones de programación en R
 
-### Opciones usuales {-}
+### Opciones usuales
 
-```{r l2c0, warning = FALSE}
+```{r l2c1, warning = FALSE}
 options( scipen = 9999 )
 options( stringsAsFactors = FALSE )
 ```
 
 <!------------------------------------------------------------------------------------------------->
-### Paquetes usuales {-}
+### Paquetes usuales
 
-```{r l2c1, include = FALSE}
+```{r l2c2, include = FALSE}
 options( width = 120 )
 
 knitr::opts_chunk$set(size = 'footnotesize', dpi = 100, warning = FALSE, echo = TRUE, class.source = "numberLines lineAnchors")
@@ -76,7 +76,7 @@ local({
 })
 ```
 
-```{r l2c2, warning = FALSE}
+```{r l2c3, warning = FALSE}
 library( actuar )
 library( data.table )
 library( fExtremes )
@@ -95,30 +95,30 @@ library( wesanderson )
 ```
 
 <!------------------------------------------------------------------------------------------------->
-### Estructuras básicas {-}
+### Estructuras básicas
 
 Para definir una variable utilizamos el operador de asignación `<-`, también se puede utilizar `=`.
 
 Un **vector** se define con la función de concatenación `c`
-```{r l2c3}
+```{r l2c4}
 x <- c( 1, 2, 3 )
 print( x )
 ```
 
 Una **función** se define con la sentencia `function`
-```{r l2c4}
+```{r l2c5}
 f <- function( t ) {
   return( t^2 )
 }
 ```
 
 Si buscamos aplicar una función sobre un vector, podemos utilizar `sapply`
-```{r l2c5}
+```{r l2c6}
 y <- sapply( x, FUN = f )
 print( y )
 ```
 
-```{r l2c6}
+```{r l2c7}
 z <- lapply( x, FUN = f )
 print( z )
 ```
