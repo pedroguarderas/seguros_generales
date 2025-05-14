@@ -58,7 +58,6 @@ thm:thmvueunicity
 def:destsufic
 thm:thfactorsufic
 def:dfamicomp
-thm:thnpl
 exm:l5ex1
 exm:l5ex2
 exm:l5ex3
@@ -93,6 +92,9 @@ referencias-bibliográficas
 preliminares
 notación-matemática
 consideraciones-de-programación-en-r
+opciones-usuales
+paquetes-usuales
+estructuras-básicas
 probabilidad-y-estadística
 probabilidad-y-conceptos-asociados
 probabilidad-condicional
