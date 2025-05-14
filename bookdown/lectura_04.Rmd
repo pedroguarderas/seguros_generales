@@ -997,10 +997,37 @@ $n > 1$.
 $$
 P\left( N_1 = n_1 \land \cdots \land N_m = n_m \right)
 = \prod\limits_{i=1}^m p_i^{n_i}
+
 $$
 
 <!------------------------------------------------------------------------------------------------->
-### Calidad de estimadores
+### Pruebas de hipótesis
+
+Usualmente sobre un variable aleatoria $X$ a valores en $\R^n$, se suele establecer una decisión 
+basada en el valores que toma la variable aleatoria, la selección se realiza entre diferentes 
+hipótesis. De manera más formal, esta decisión puede ser representada por una función 
+$\delta : \R^n \longrightarrow D$, donde $D = \{d_1,\ldots,d_n\}$ es un conjunto discreto que 
+representa las hipótesis. Se conoce a $\delta$ como un **test estadístico de elección**.
+
+En muchos casos uno nos interesa encontrar el test estadístico $\delta$ que tenga el menor error
+de cometer una selección errada, así para cada decisión en $d \in D$, el test $\delta$ tendrá
+probabilidades $P( \delta( X ) \neq d )$, es decir, para cualquier otro test $\eta$, se debe 
+tener que
+$$
+P( \delta( X ) \neq d ) \leq P( \eta( X ) \neq d ),\qquad \forall d \in D
+$$
+En muchos casos uno no se interesa en cualquier tipo de test estadístico, sino en un cierto tipo 
+de pruebas, más interesados en un subconjunto $K \subset \{ \delta : \R^n \longrightarrow D \}$, 
+a este se lo conoce como una **clase**. Así se dice que un test $\delta \in K$ es el 
+**test más potente** en la clase $K$ para la hipótesis $d \in D$ si para cualquier otro test 
+$\eta \in K$, se tiene la desigualdad.
+$$
+P( \delta( X ) \neq d ) \leq P( \eta( X ) \neq d )
+$$
+
+::: {.theorem #thnpl name="Lema de Neyman-Pearson"}
+d
+:::
 
 
 

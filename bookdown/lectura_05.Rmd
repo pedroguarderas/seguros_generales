@@ -520,9 +520,10 @@ $$
 S = \sum\limits_{k=0}^{N} X_k
 = \sum\limits_{k=0}^n B_k X_k
 $$
-donde $B_k \rightsquigarrow Ber( p )$ y es independientes de $X_k$. Así el modelo colectivo se 
-transforma en un modelo individual con $n$ constante y valores de reclamos individuales dados por 
-la variable aleatoria $Y_k = B_k X_k$.
+donde las variables aleatorias $B_k \rightsquigarrow Ber( p )$ son independientes de las variables 
+aleatorias $X_k$ de cada uno de los reclamos. Así el modelo colectivo se transforma en un modelo 
+individual con $n$ constante y valores de reclamos individuales dados por la variable aleatoria 
+$Y_k = B_k X_k$.
 
 Para este caso en particular
 $$
