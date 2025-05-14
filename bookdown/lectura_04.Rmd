@@ -989,16 +989,6 @@ $$
 En la práctica los eventos que se observa $B_i$ son puntuales y son precisamente los valores 
 que toma la variable aleatoria $X$. Es decir, se observa una muestra $X_1, \ldots, X_n$.
 
-Podemos tener una variable aleatoria discreta $N$, de la cual hemos observado una muestra de 
-$N_1, \ldots, N_m$ asumiendo independencia entre cada una de las observaciones. Podemos ademas 
-suponer que $N$ pertenece a la familia de distribuciones discretas en la clase $(0,a,b)$ y por tanto
-$P( N = 0 ) = p_0$ es un parámetro inicial $p_n = ( a + b/n) p_{n-1}$, para cualquier
-$n > 1$.
-$$
-P\left( N_1 = n_1 \land \cdots \land N_m = n_m \right)
-= \prod\limits_{i=1}^m p_i^{n_i}
-
-$$
 
 <!------------------------------------------------------------------------------------------------->
 ### Pruebas de hipótesis
@@ -1024,11 +1014,6 @@ $\eta \in K$, se tiene la desigualdad.
 $$
 P( \delta( X ) \neq d ) \leq P( \eta( X ) \neq d )
 $$
-
-::: {.theorem #thnpl name="Lema de Neyman-Pearson"}
-d
-:::
-
 
 
 ```{r l4end, echo = FALSE}
