@@ -1047,7 +1047,7 @@ $N \rightsquigarrow NBin( \alpha, p )$ y las severidades $\{X_i\}$ son i.i.d con
 $LN( \mu, \sigma )$. Utilizaremos el algoritmo de Panjer para aproximar la densidad de probabilidad
 de $f_S$ de $S$.
 ```{r l5c11}
-n <- 7e4
+n <- 7e3
 p <- 0.3
 alpha <- 3
 a <- 1 - p

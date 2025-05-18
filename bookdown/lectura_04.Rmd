@@ -975,20 +975,95 @@ $$
 \underset{\theta \in \Theta}{\sup} \prod\limits_{i=1}^n P_{\theta}\left( B_i \right)
 $$
 
-o de forma equivalente, si se toma logaritmos:
+o de forma equivalente, se puede utilizar una transformación con un logaritmo y tratar de maximizar
+lo que conocemos como **función de verosimilitud logarítmica** 
 $$
-\underset{\theta \in \Theta}{\sup} \sum\limits_{i=1}^n \log P_{\theta} \left( B_i \right)
+\ell = \sum\limits_{i=1}^n \log P_{\theta} \left( B_i \right)
 $$
 
-Así, el estimador por verosimilitud, es el dado por:
+el problema de estimación se reduce a la siguiente optimización
+$$
+\underset{\theta \in \Theta}{\sup} \ell( \theta )
+$$
+
+Precisamente, el estimador de verosimilitud $\widehat{\theta}$, es el que resuelve el problema de 
+optimización donde $\ell$ es la función objetivo y $\Theta$ representa el conjunto de restricciones.
 $$
 \widehat{\theta} 
-= \underset{\theta \in \Theta}{\argsup} \sum\limits_{i=1}^n \log P_{\theta} \left( B_i \right)
+= \underset{\theta \in \Theta}{\argsup} \ell( \theta )
 $$
 
 En la práctica los eventos que se observa $B_i$ son puntuales y son precisamente los valores 
-que toma la variable aleatoria $X$. Es decir, se observa una muestra $X_1, \ldots, X_n$.
+que toma la variable aleatoria $X$ para diferentes valores en el espacio muestra $\Omega$. Es decir, 
+se observa una muestra $x_1 = X( \omega_1 ), \ldots, x_n = X( \omega_n )$. 
 
+Una forma de atacar el problema de estimación, cuando las observaciones son puntuales es trabar de 
+encerrar cada una de las observaciones en intervalos lo suficientemente pequeños. Se puede tomar 
+un valor $h > 0$, y los eventos 
+$B_i = \left\{ \omega \in \Omega \middle| x_i - h \leq X( \omega ) \leq x_i + h \right\}$ y una 
+aproximación de la función de verosimilitud en función de $h$, con la siguiente forma:
+$$
+\begin{eqnarray*}
+\ell_h( \theta )
+& = & \sum\limits_{i=1}^n \log P_{\theta} \left( B_i \right) \\
+& = & \sum\limits_{i=1}^n \log P_{\theta} \left( x_i - h \leq X \leq x_i + h \right) \\
+& = & \sum\limits_{i=1}^n \log \left( F\left( x_i + h, \theta \right) - F\left( x_i - h, \theta \right) \right) \\
+\end{eqnarray*}
+$$
+
+Sabemos de los diferentes resultados de análisis para funciones de variación acotada, como es el 
+caso de las distribuciones de probabilidad, que tienen diferenciales en casi todo punto, es decir 
+que las singularidades de estas son conjuntos con medida nula. Además la cantidad de singularidades,
+de saltos que puede presentar una función de variación acotada es a lo sumo numerable. Entonces, 
+cada valor observado $x_i \in \Dif F$ es un punto de continuidad donde la función de distribución 
+$F$ es diferenciable o es un punto de singularidad, así los valores observados en la muestra se pueden 
+clasificar en estos dos tipos @KolmoFunAnalysis. De ello se puede dividir la suma anterior.
+$$
+\begin{eqnarray*}
+\ell_h( \theta )
+& = & \sum\limits_{x_i \in \Dif F} \log \left( F\left( x_i + h, \theta \right) - F\left( x_i - h, \theta \right) \right) 
++ \sum\limits_{x_i \notin \Dif F} \log \left( F\left( x_i + h, \theta \right) - F\left( x_i - h, \theta \right) \right) \\
+\end{eqnarray*}
+$$
+maximizar $\ell_h$ es equivalente a maiximizar la siguiente función equivalente
+$$
+\begin{eqnarray*}
+\ell_h( \theta )
+& = & \frac{1}{h} \sum\limits_{x_i \in \Dif F} \log \left( F\left( x_i + h, \theta \right) - F\left( x_i - h, \theta \right) \right) 
++ \sum\limits_{x_i \notin \Dif F} \log \left( F\left( x_i + h, \theta \right) - F\left( x_i - h, \theta \right) \right) \\
+\end{eqnarray*}
+$$
+donde $h$ es constante. Tomando al límite, un valor $h$ cada vez más pequeño, para encerrar aún más
+en un intervalo los valores observados, tenemos lo siguiente:
+$$
+\begin{eqnarray*}
+\underset{h \searrow 0}{\lim} \ell_h( \theta )
+& = & \underset{h \searrow 0}{\lim} \frac{1}{h} \sum\limits_{x_i \in \Dif F} \log \left( F\left( x_i + h, \theta \right) - F\left( x_i - h, \theta \right) \right) 
++ \underset{h \searrow 0}{\lim} \sum\limits_{x_i \notin \Dif F} \log \left( F\left( x_i + h, \theta \right) - F\left( x_i - h, \theta \right) \right) \\
+& = & \sum\limits_{x_i \in \Dif F} \log \left( f(x_i,\theta) \right) 
++ \sum\limits_{x_i \notin \Dif F} \log \left( F\left( x_i, \theta \right) - F\left( x_i-, \theta \right) \right),\quad
+\text{si existe el límite por izquierda de $F$}
+\end{eqnarray*}
+$$
+
+siendo $F\left( x_i-, \theta \right)$ el límite por izquierda de la función de distribución $F$ en 
+el punto $x_i$. Recordamos que toda función de distribución es continua por derecha.
+
+Para el caso puntual esta es precisamente la expresión de la función de verosimilitud logarítmica, 
+la cual podemos utilizar para estimar el mejor parámetro $\theta \in \Theta$ que maximice el valor 
+de verosimilitud.
+$$
+\ell( \theta ) = 
+\sum\limits_{x_i \in \Dif F} \log \left( f(x_i,\theta) \right) 
++ \sum\limits_{x_i \notin \Dif F} \log \left( F\left( x_i, \theta \right) - F\left( x_i-, \theta \right) \right)
+$$
+
+En los casos más sencillos de estimación por verosimilitud se suele cumplir una de las siguientes
+hipótesis: todos los puntos $x_i$ sobre los cuales se calcula son puntos de continuidad, o la 
+función de distribución acumulada $F$ no tiene puntos singulares, siendo este último caso el más 
+usual. Pero, en la práctica esto no sucede y la suma adicional a la derecha en la expresión anterior
+es precisamente necesaria, sino la estimación por verosimilitud del mejor parámetro $\theta$ no 
+es la correcta.
 
 <!------------------------------------------------------------------------------------------------->
 ### Pruebas de hipótesis

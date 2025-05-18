@@ -154,6 +154,13 @@ $$
 \underset{x \rightarrow -\infty}{\lim} F( x ) = 0\qquad
 \underset{x \rightarrow +\infty}{\lim} F( x ) = 1
 $$
+  5. La función $F$ es a variación acotada. Esto quiere decir que existe un real $C > 0$, para 
+  cualquier partición $\{x_i\}_{i\in\Z}$, tal que:
+  
+$$
+\sum\limits_{i\in\Z} \left| F( x_{i+1} ) - F( x_i ) \right| < C
+$$
+
 :::
 
 Cuando se trata de un variable aleatoria con varias componentes reales $X = ( X_1, \ldots, X_n )$ 
@@ -669,8 +676,9 @@ F\left( x \middle| \Omega \right)
 & = & F( x )
 \end{eqnarray*}
 $$
+
 3. Para cualquier $A \in \F$, el evento $\{ X \leq x \} \cap A \subset A$ y por tanto 
-$P\left( X \leq x \middle| \Omega \right) \leq P( A )$, entonces $0 \leq F(x | A) \leq 1$,
+$P\left( X \leq x \middle| A \right) \leq P( A )$, entonces $0 \leq F(x | A) \leq 1$,
 
 4. Para cualquier $A \in \F$, la función de distribución acumulada condicionada $F( \cdot | A )$ es no decreciente,
 
