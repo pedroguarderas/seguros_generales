@@ -1062,8 +1062,9 @@ En los casos más sencillos de estimación por verosimilitud se suele cumplir un
 hipótesis: todos los puntos $x_i$ sobre los cuales se calcula son puntos de continuidad, o la 
 función de distribución acumulada $F$ no tiene puntos singulares, siendo este último caso el más 
 usual. Pero, en la práctica esto no sucede y la suma adicional a la derecha en la expresión anterior
-es precisamente necesaria, sino la estimación por verosimilitud del mejor parámetro $\theta$ no 
-es la correcta.
+es precisamente necesaria, ya que la distribución $F$ si puede tener singularidades. Al utilizar 
+solo el primer término la estimación por verosimilitud del mejor parámetro $\theta$ no será la 
+correcta.
 
 <!------------------------------------------------------------------------------------------------->
 ### Pruebas de hipótesis
