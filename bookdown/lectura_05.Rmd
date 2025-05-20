@@ -1307,7 +1307,10 @@ y $M$ como el monto máximo de cobertura.
 load( '../RData/production_claims_health.RData' )
 ```
 
-Los la producción de pólizas tienen la siguiente estructura
+El objeto con la producción de pólizas tienen la siguiente estructura. Es un objeto con una forma 
+usual que uno puede encontrar en las bases de producción de un asegurador. Se incluye en particular
+campos de especial interés como la fecha de nacimiento `bdate`, el inicio de vigencia de la 
+cobertura `start` y el final de vigencia de la cobertura `end`.
 ```{r l5t1, echo = TRUE, results = 'asis', out.width='100%', class.source = 'fold-hide'}
 production[ 1:100 ] %>%
   kable(
@@ -1489,10 +1492,7 @@ estim_frec %>%
 $$
 S_k = \sum\limits_{i=1}^n \sum\limits_{j=1}^{N_i} D\left( X_{i,j} \right)
 $$
-
-
 :::
-
 
 <!------------------------------------------------------------------------------------------------->
 ## Proceso estocástico de reclamos totales
