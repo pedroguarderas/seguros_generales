@@ -23,7 +23,7 @@
 <meta name="author" content="" />
 
 
-<meta name="date" content="2025-05-14" />
+<meta name="date" content="2025-05-20" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -380,34 +380,69 @@ el conjunto <span class="math inline">\(X\)</span>, no es más que una función 
 </details>
 <pre><code>## [1] 1 2 3</code></pre>
 <p></p>
-<p>Una <strong>función</strong> se define con la sentencia <code>function</code></p>
+<p>También, se puede guardar los elementos en una <strong>lista</strong></p>
 <p></p>
 <details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb5-1"><a href="preliminares.html#cb5-1"></a>f <span class="ot">&lt;-</span> <span class="cf">function</span>( t ) {</span>
-<span id="cb5-2"><a href="preliminares.html#cb5-2"></a>  <span class="fu">return</span>( t<span class="sc">^</span><span class="dv">2</span> )</span>
-<span id="cb5-3"><a href="preliminares.html#cb5-3"></a>}</span></code></pre></div>
-</details>
-<p></p>
-<p>Si buscamos aplicar una función sobre un vector, podemos utilizar <code>sapply</code></p>
-<p></p>
-<details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb6-1"><a href="preliminares.html#cb6-1"></a>y <span class="ot">&lt;-</span> <span class="fu">sapply</span>( x, <span class="at">FUN =</span> f )</span>
-<span id="cb6-2"><a href="preliminares.html#cb6-2"></a><span class="fu">print</span>( y )</span></code></pre></div>
-</details>
-<pre><code>## [1] 1 4 9</code></pre>
-<p></p>
-<p></p>
-<details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb8-1"><a href="preliminares.html#cb8-1"></a>z <span class="ot">&lt;-</span> <span class="fu">lapply</span>( x, <span class="at">FUN =</span> f )</span>
-<span id="cb8-2"><a href="preliminares.html#cb8-2"></a><span class="fu">print</span>( z )</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb5-1"><a href="preliminares.html#cb5-1"></a>x <span class="ot">&lt;-</span> <span class="fu">list</span>( <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span> )</span>
+<span id="cb5-2"><a href="preliminares.html#cb5-2"></a><span class="fu">print</span>( x )</span></code></pre></div>
 </details>
 <pre><code>## [[1]]
 ## [1] 1
 ## 
 ## [[2]]
-## [1] 4
+## [1] 2
 ## 
 ## [[3]]
+## [1] 3</code></pre>
+<p></p>
+<p>Los elementos de las listas se pueden guardar con nombres.</p>
+<p></p>
+<details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
+<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb7-1"><a href="preliminares.html#cb7-1"></a>x <span class="ot">&lt;-</span> <span class="fu">list</span>( <span class="st">&#39;a&#39;</span> <span class="ot">=</span> <span class="dv">1</span>, <span class="st">&#39;b&#39;</span> <span class="ot">=</span> <span class="dv">2</span>, <span class="st">&#39;c&#39;</span> <span class="ot">=</span> <span class="dv">3</span> )</span>
+<span id="cb7-2"><a href="preliminares.html#cb7-2"></a><span class="fu">print</span>( x )</span></code></pre></div>
+</details>
+<pre><code>## $a
+## [1] 1
+## 
+## $b
+## [1] 2
+## 
+## $c
+## [1] 3</code></pre>
+<details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
+<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb9-1"><a href="preliminares.html#cb9-1"></a>x[[ <span class="st">&#39;b&#39;</span> ]]</span></code></pre></div>
+</details>
+<pre><code>## [1] 2</code></pre>
+<p></p>
+<p>Una <strong>función</strong> se define con la sentencia <code>function</code></p>
+<p></p>
+<details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
+<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb11-1"><a href="preliminares.html#cb11-1"></a>f <span class="ot">&lt;-</span> <span class="cf">function</span>( t ) {</span>
+<span id="cb11-2"><a href="preliminares.html#cb11-2"></a>  <span class="fu">return</span>( t<span class="sc">^</span><span class="dv">2</span> )</span>
+<span id="cb11-3"><a href="preliminares.html#cb11-3"></a>}</span></code></pre></div>
+</details>
+<p></p>
+<p>Si buscamos aplicar una función sobre un vector, podemos utilizar <code>sapply</code></p>
+<p></p>
+<details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
+<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb12-1"><a href="preliminares.html#cb12-1"></a>y <span class="ot">&lt;-</span> <span class="fu">sapply</span>( x, <span class="at">FUN =</span> f )</span>
+<span id="cb12-2"><a href="preliminares.html#cb12-2"></a><span class="fu">print</span>( y )</span></code></pre></div>
+</details>
+<pre><code>## a b c 
+## 1 4 9</code></pre>
+<p></p>
+<p></p>
+<details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
+<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb14-1"><a href="preliminares.html#cb14-1"></a>z <span class="ot">&lt;-</span> <span class="fu">lapply</span>( x, <span class="at">FUN =</span> f )</span>
+<span id="cb14-2"><a href="preliminares.html#cb14-2"></a><span class="fu">print</span>( z )</span></code></pre></div>
+</details>
+<pre><code>## $a
+## [1] 1
+## 
+## $b
+## [1] 4
+## 
+## $c
 ## [1] 9</code></pre>
 <p></p>
 <p>Para muchas tareas que están relacionadas con el manejo de datos, podemos utilizar las

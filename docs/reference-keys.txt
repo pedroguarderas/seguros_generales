@@ -64,6 +64,10 @@ exm:l5ex3
 exm:l5ex4
 exm:l5ex6
 exm:l5ex7
+exm:l5ex8
+tab:l5t1
+tab:l5t2
+tab:l5t3
 exm:l5ex5
 def:dVaR
 prp:varinv
