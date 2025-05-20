@@ -66,6 +66,7 @@ if ( !require( 'CASdatasets' ) ) {
 
 options( scipen = 999 )
 options( stringsAsFactors = FALSE )
+options( datatable.optimize = 1L )
 
 # Parámetros ---------------------------------------------------------------------------------------
 wd <- paste0( getActiveProject(), '/' )
