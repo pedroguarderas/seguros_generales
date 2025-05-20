@@ -1047,7 +1047,7 @@ $N \rightsquigarrow NBin( \alpha, p )$ y las severidades $\{X_i\}$ son i.i.d con
 $LN( \mu, \sigma )$. Utilizaremos el algoritmo de Panjer para aproximar la densidad de probabilidad
 de $f_S$ de $S$.
 ```{r l5c11}
-n <- 7e4
+n <- 7e3
 p <- 0.3
 alpha <- 3
 a <- 1 - p
@@ -1293,6 +1293,207 @@ plt <- ggplot() +
 plot( plt )
 ```
 
+::: {.example #l5ex8}
+Ahora bien, pongamos en aplicación todo lo aprendido hasta el momento. Para ello, trabajaremos
+con la siguiente información que obtenemos a continuación. La cual corresponde a la producción 
+de pólizas y reclamos de varios productos asociados al ramo de salud.
+
+La información corresponde a un seguro de salud el cual tiene pólizas individuales y colectivas, 
+para cada una de sus contratos se especifica un deducible de la forma 
+$D( X ) = \min( \max( X - d, 0 ), M )$, donde precisamente $d$ es lo que se conoce como el deducible
+y $M$ como el monto máximo de cobertura. 
+
+```{r l5c14}
+load( '../RData/production_claims_health.RData' )
+```
+
+Los la producción de pólizas tienen la siguiente estructura
+```{r l5t1, echo = TRUE, results = 'asis', out.width='100%', class.source = 'fold-hide'}
+production[ 1:100 ] %>%
+  kable(
+    label = NA,
+    caption = 'Pólizas',
+    row.names = FALSE,
+    align = 'llllrrrrrrrl',
+    digits = c( 0, 0, 0, 0, 0, 2, 2, 2, 0, 0, 0, 0 ),
+    format.args = list( big.mark = ',', decimal.mark = '.', scientific = FALSE ),
+    escape = FALSE,
+    centering = TRUE ) %>%
+  kable_classic( font_size = 14, full_width = FALSE, html_font = "Cambria", position = "center" ) %>%
+  scroll_box( width = "100%", height = "500px" )
+```
+
+Los reclamos se detallan en la tabla a continuación. En la información no se dispone del valor 
+original del reclamo, sino tan solo del valor pagado, después de aplicar la función deducible $D$.
+En la misma información se incluye el deducible $d$ y el monto de máximo de cobertura.
+```{r l5t2, echo = TRUE, results = 'asis', out.width='100%', class.source = 'fold-hide'}
+claims[ 1:100 ] %>%
+  kable(
+    label = NA,
+    caption = 'Reclamos',
+    row.names = FALSE,
+    align = 'lllllrrrll',
+    digits = c( 0, 0, 0, 0, 0, 0, 2, 0, 0, 0 ),
+    format.args = list( big.mark = ',', decimal.mark = '.', scientific = FALSE ),
+    escape = FALSE,
+    centering = TRUE ) %>%
+  kable_classic( font_size = 14, full_width = FALSE, html_font = "Cambria", position = "center" ) %>%
+  scroll_box( width = "100%", height = "500px" )
+```
+
+Ahora calculemos la duración de cada una de las pólizas, esto es el tiempo de exposición al riesgo
+por cada persona asegurada.
+```{r l5c15}
+idate <- ymd( '2018-01-01' )
+edate <- ymd( '2021-01-01' )
+dates <- data.table( di = idate, de = edate )
+dates[ , tid := 1 ]
+
+production[ , tid := 1 ]
+estim <- merge.data.table( dates, production, by = 'tid', all.x = TRUE, allow.cartesian = TRUE )
+estim[ , tid := NULL ]
+estim <- estim[ start < de & end >= di ]
+estim[ , fi := pmax( start, di ) ]
+estim[ , fe := pmin( end, de ) ]
+estim[ , fm := fi + ( fe - fi ) / 2 ]
+estim[ , x := pmax( round( interval( bdate, fm ) / dyears( 1 ), 0 ), 0 ) ]
+xgs <- c( 0, 20, 40, 60, Inf )
+estim[ , xg := cut( x = x, breaks = xgs, include.lowest = TRUE, ordered_result = TRUE, right = FALSE ) ]
+estim[ , ER := interval( fi, fe ) / dyears( 1 ) ]
+estimp <- unique( estim[ , list( policy, id, sex, xg, bdate, di, de, N = 0, S = 0 ) ] )
+estimp <- estimp[ , list( policy, id, sex, xg, bdate, di, de, N, S ) ]
+estim <- estim[ , list( ER = sum( ER, na.rm = TRUE ) ), by = list( sex, xg, di, de ) ]
+setorder( estim, sex, xg, di )
+```
+
+```{r l5c16}
+claims_prep <- claims[ , list( DX = sum( claim ) ), by = list( policy, id, idc, type, sex, bdate, cdate, service ) ]
+claims_prep <- claims[ , list( DX = sum( claim ) ), by = list( policy, id, idc, type, sex, bdate, cdate ) ]
+claims_prep[ , x := round( interval( bdate, cdate ) / dyears( 1 ), 0 ) ]
+claims_prep[ , xg := cut( x = x, breaks = xgs, include.lowest = TRUE, ordered_result = TRUE, right = FALSE ) ]
+claims_prep[ , tid := 1 ]
+claims_prep <- merge.data.table( dates, claims_prep, by = c( 'tid' ), all.x = TRUE, allow.cartesian = TRUE )
+claims_prep <- claims_prep[ cdate >= di & cdate < de ]
+claims_prep <- claims_prep[ , list( N = .N, S = sum( DX ) ), by = list( policy, id, sex, xg, bdate, di, de ) ]
+claims_prep <- rbind( claims_prep, estimp )
+claims_prep <- claims_prep[ , list( N = sum( N ), S = sum( S ) ), by = list( policy, id, sex, xg, bdate, di, de ) ]
+
+count <- copy( claims_prep )
+count <- count[ , list( fn = .N, S = sum( S ) ), by = list( sex, xg, di, de, N ) ]
+
+expand <- count[ , list( N = max( N ) ), by = list( sex, xg, di, de ) ]
+expand <- expand[ , list( N = seq( 0, N, 1 ) ), by = list( sex, xg, di, de ) ]
+
+count <- merge.data.table( expand, count, by = c( 'sex', 'xg', 'de', 'di', 'N' ), all.x = TRUE )
+count[ is.na( fn ), fn := 0 ]
+count[ is.na( S ), S := 0 ]
+setorder( count, sex, xg, di, N )
+count[ , pn := fn / sum( fn ), by = list( sex, xg, di, de ) ]
+count[ , vn := shift( pn, fill = 0 ), by = list( sex, xg, di, de ) ]
+count[ vn != 0, vn := N * pn / vn ]
+count[ vn == 0, vn := 0 ]
+
+grpcl <- unique( count[ , list( sex, xg ) ] )
+grpcl[ , grp := paste0( sex, ' ', xg ) ]
+setorder( grpcl, sex, xg )
+
+count[ , grp := factor( paste0( sex, ' ', xg ), labels = grpcl$grp, ordered = TRUE ) ]
+claims_prep[ , grp := factor( paste0( sex, ' ', xg ), labels = grpcl$grp, ordered = TRUE ) ]
+```
+
+El gráfico a continuación muestra el comportamiento del indicador $v_n = n \frac{p_n}{p_{n-1}}$, 
+para cada uno de los grupos $g$ de riesgo.
+```{r l5g13, out.width='90%', out.height='700px', fig.align='center', class.source = 'fold-hide'}
+plt <- ggplot( ) +
+  geom_point( data = count, aes( x = N, y = vn ), colour = 'red3', size = 0.5 ) +
+  facet_wrap( vars( grp ), ncol = 4 ) +
+  xlab( TeX( "$n$" ) ) + 
+  ylab( TeX( "$v_n$" ) ) + 
+  theme_bw() +
+  theme( legend.position = "none" )
+plot( plt )
+```
+
+Como hemos evidenciado, para todos los casos en consideración el indicador $v_n$ 
+en consideración tiene un tendencia creciente y se evidencia un crecimiento lineal, esto sugiere que 
+la distribución discreta más adecuada para explicar la frecuencia de los reclamos para cada grupo
+es una binomial negativa $N \rightsquigarrow NBin$. Así, con el uso la función `fitdist` podemos 
+realizar ajustar la distribución del número de reclamos utilizando máximización de verosimilitud. 
+La función de verosimilitud logarítmica tiene la siguiente forma para cada grupo $g$.
+$$
+\begin{eqnarray*}
+\ell_g( \alpha, p ) 
+& = & \sum\limits_{i=1}^{n_g} 
+\left\{ \log\left( \Gamma( \alpha + N_i ) \right)
+- \log\left( \Gamma(N_i + 1) \right) 
+- \log\left( \Gamma(\alpha) \right) 
++ \alpha \log(p) 
++ N_i \log( 1 - p ) \right\} \\
+& = & \sum\limits_{i=1}^{n_g} 
+\left\{ \log\left( \Gamma( \alpha + N_i ) \right)
+- \log\left( \Gamma(N_i + 1) \right) \right\}
+- n_g \log\left( \Gamma(\alpha) \right)
++ n_g \alpha \log(p) 
++ n \log( 1 - p )
+\end{eqnarray*}
+$$
+
+```{r l5c17}
+fit_count <- list()
+
+for ( g in grpcl$grp ) {
+  
+  fit_count[[ g ]] <- fitdistrplus::fitdist( 
+    claims_prep[ grp == g ]$N, 
+    distr = dnbinom, 
+    method = 'mle', 
+    keepdata = TRUE, 
+    discrete = TRUE )
+  
+}
+```
+
+```{r l5t3, echo = TRUE, results = 'asis', out.width='100%', class.source = 'fold-hide'}
+# Preparamos una tabla con los resultados
+estim_frec <- NULL
+for ( g in names( fit_count ) ) {
+  
+  estim_frec <- rbind(
+    estim_frec,
+    data.table( grp = g, 
+                a = fit_count[[ g ]]$estimate[1], 
+                u = fit_count[[ g ]]$estimate[2], 
+                loglik = fit_count[[ g ]]$loglik,
+                aic = fit_count[[ g ]]$aic,
+                bic = fit_count[[ g ]]$bic )
+  )
+  
+}
+estim_frec <- estim_frec[ , list( grp, a, u, p = a / ( a + u ), loglik, aic, bic )]
+
+estim_frec %>%
+  kable(
+    label = NA,
+    caption = 'Estimación de frecuencia',
+    row.names = FALSE,
+    col.names = c( '$g$', '$\\alpha$', '$\\mu$', '$p$', '$\\ell( n, \\mu )$', '$AIC$', '$BIC$' ),
+    align = 'lrrrrrr',
+    digits = c( 0, 5, 5,5,  2, 2, 2 ),
+    format.args = list( big.mark = ',', decimal.mark = '.', scientific = FALSE ),
+    escape = FALSE,
+    centering = TRUE ) %>%
+  kable_classic( font_size = 14, full_width = FALSE, html_font = "Cambria", position = "center" ) %>%
+  scroll_box( width = "100%", height = "500px" )
+```
+
+$$
+S_k = \sum\limits_{i=1}^n \sum\limits_{j=1}^{N_i} D\left( X_{i,j} \right)
+$$
+
+
+:::
+
+
 <!------------------------------------------------------------------------------------------------->
 ## Proceso estocástico de reclamos totales
 
@@ -1514,7 +1715,7 @@ En conclusión $N(t)$ tiene como distribución una ley de Poisson $Pois( \lambda
 se conoce a $N$ como un proceso de Poisson.
 :::
 
-```{r l5c14}
+```{r l5c18}
 m <- 1000
 lambda <- 10
 M <- 30
@@ -1548,7 +1749,7 @@ EeS <- sapply( 1:p, FUN = function( l ) mean( sapply( 1:m, function( i ) S[[ i ]
 
 En el gráfico a continuación presentamos todos los procesos de conteo $N_{i}$ simulados, como es de
 esperarse son funciones de escalera, siempre crecientes, que toman solo valores positivos.
-```{r l5g13, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
+```{r l5g14, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
 Sord <- order( sapply( 1:m, FUN = function( j ) last( S[[j]] ) ) )
 Ndat <- NULL
 for ( j in 1:m ) {
@@ -1582,7 +1783,7 @@ plot( plt )
 El gráfico a continuación presenta la simulación de los procesos correspondientes al total de 
 reclamos, conforme avanza el tiempo. De igual manera los procesos $S_i$ son funciones de escalera,
 siempre crecientes, con saltos correspondientes a los reclamos individuales.
-```{r l5g14, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
+```{r l5g15, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
 Sqmax <- quantile( sapply( S, FUN = function( Si ) last( Si ) ), probs = 0.99 )
 
 plt <- ggplot( ) +
@@ -1606,7 +1807,7 @@ plot( plt )
 
 Como se describe en el paso 8 del algoritmo de simulación, para cada tiempo $t_l$ se puede estimar
 la distribución de probabilidad de la variable aleatoria $S(t_l)$.
-```{r l5c15}
+```{r l5c19}
 FeS <- lapply( 1:p, FUN = function( l ) ecdf( sapply( S, FUN = function( Si ) Si[ l ] ) ) )
 ns <- 1e3
 s <- seq( 0, Smax, length = ns )
@@ -1616,7 +1817,7 @@ Fes <- lapply( FeS, FUN = function( FeSl ) sapply( s, FUN = FeSl ) )
 La figura a continuación muestra cada una de las distribuciones de probabilidad empíricas estimadas 
 $F_{m,l}$. Se puede observar que conforme avanza el tiempo, aumenta la probabilidad de observar 
 valores mayores del proceso $S$ correspondiente al total de reclamos.
-```{r l5g15, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
+```{r l5g16, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
 FeSdat <- NULL
 for ( j in 1:p ) {
   FeSdat <- rbindlist( list( FeSdat, data.table( s = s, m = as.factor( j ), Fes = Fes[[ j ]] ) ) )
