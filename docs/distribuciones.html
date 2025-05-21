@@ -1860,10 +1860,11 @@ el punto <span class="math inline">\(x_i\)</span>. Recordamos que toda función 
 <p>Para el caso puntual esta es precisamente la expresión de la función de verosimilitud logarítmica,
 la cual podemos utilizar para estimar el mejor parámetro <span class="math inline">\(\theta \in \Theta\)</span> que maximice el valor
 de verosimilitud.
-<span class="math display">\[
+<span class="math display" id="eq:loglik">\[
 \ell( \theta ) =
 \sum\limits_{x_i \in \operatorname{Dif}F} \log \left( f(x_i,\theta) \right)
 + \sum\limits_{x_i \notin \operatorname{Dif}F} \log \left( F\left( x_i, \theta \right) - F\left( x_i-, \theta \right) \right)
+\tag{4.1}
 \]</span></p>
 <p>En los casos más sencillos de estimación por verosimilitud se suele cumplir una de las siguientes
 hipótesis: todos los puntos <span class="math inline">\(x_i\)</span> sobre los cuales se calcula son puntos de continuidad, o la
