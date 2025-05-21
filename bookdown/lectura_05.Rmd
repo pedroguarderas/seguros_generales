@@ -1328,7 +1328,7 @@ production[ 1:100 ] %>%
 
 Los reclamos se detallan en la tabla a continuación. En la información no se dispone del valor 
 original del reclamo, sino tan solo del valor pagado, después de aplicar la función deducible $D$.
-En la misma información se incluye el deducible $d$ y el monto de máximo de cobertura.
+En la misma información se incluye el deducible $d$ y el monto de máximo de cobertura $M$.
 ```{r l5t2, echo = TRUE, results = 'asis', out.width='100%', class.source = 'fold-hide'}
 claims[ 1:100 ] %>%
   kable(
@@ -1355,6 +1355,7 @@ idate <- ymd( '2018-01-01' )
 edate <- ymd( '2021-01-01' )
 dates <- data.table( di = idate, de = edate )
 dates[ , tid := 1 ]
+xgs <- c( 0, 20, 40, 60, Inf )
 
 production[ , tid := 1 ]
 prod_prep <- merge.data.table( dates, production, by = 'tid', all.x = TRUE, allow.cartesian = TRUE )
@@ -1364,7 +1365,6 @@ prod_prep[ , fi := pmax( start, di ) ]
 prod_prep[ , fe := pmin( end, de ) ]
 prod_prep[ , fm := fi + ( fe - fi ) / 2 ]
 prod_prep[ , x := pmax( round( interval( bdate, fm ) / dyears( 1 ), 0 ), 0 ) ]
-xgs <- c( 0, 20, 40, 60, Inf )
 prod_prep[ , xg := cut( x = x, breaks = xgs, include.lowest = TRUE, ordered_result = TRUE, right = FALSE ) ]
 
 noclaims_prep <- unique( prod_prep[ , list( policy, id, sex, xg, bdate, di, de, N = 0, S = 0 ) ] )
@@ -1488,23 +1488,23 @@ for ( g in names( fit_count ) ) {
     estim_frec,
     data.table( grp = g, 
                 a = fit_count[[ g ]]$estimate[1], 
-                u = fit_count[[ g ]]$estimate[2], 
+                EN = fit_count[[ g ]]$estimate[2], 
                 loglik = fit_count[[ g ]]$loglik,
                 aic = fit_count[[ g ]]$aic,
                 bic = fit_count[[ g ]]$bic )
   )
   
 }
-estim_frec <- estim_frec[ , list( grp, a, u, p = a / ( a + u ), loglik, aic, bic )]
+estim_frec <- estim_frec[ , list( grp, a, p = a / ( a + EN ), EN, loglik, aic, bic )]
 
 estim_frec %>%
   kable(
     label = NA,
     caption = 'Estimación de frecuencia',
     row.names = FALSE,
-    col.names = c( '$g$', '$\\alpha$', '$\\mu$', '$p$', '$\\ell( n, \\mu )$', '$AIC$', '$BIC$' ),
+    col.names = c( '$g$', '$\\alpha$', '$p$', '$\\E[ N ]$', '$\\ell( n, \\mu )$', '$AIC$', '$BIC$' ),
     align = 'lrrrrrr',
-    digits = c( 0, 5, 5,5,  2, 2, 2 ),
+    digits = c( 0, 5, 5, 5, 2, 2, 2 ),
     format.args = list( big.mark = ',', decimal.mark = '.', scientific = FALSE ),
     escape = FALSE,
     centering = TRUE ) %>%
@@ -1521,13 +1521,66 @@ debemos hacer uso de la forma extendida \@ref(eq:loglik).
 # prod_prep[ , ER := interval( fi, fe ) / dyears( 1 ) ]
 # prod_prep <- prod_prep[ , list( ER = sum( ER, na.rm = TRUE ) ), by = list( sex, xg, di, de ) ]
 # setorder( prod_prep, sex, xg, di )
-sev_claims <- claims[ , list( DX = sum( claim ) ), by = list( policy, id, idc, type, sex, bdate, cdate ) ]
+sev_claims <- claims[ , list( policy, id, idc, type, sex, bdate, cdate, deductible, amount, claim ) ]
 sev_claims[ , x := round( interval( bdate, cdate ) / dyears( 1 ), 0 ) ]
 sev_claims[ , xg := cut( x = x, breaks = xgs, include.lowest = TRUE, ordered_result = TRUE, right = FALSE ) ]
 sev_claims[ , tid := 1 ]
 sev_claims <- merge.data.table( dates, sev_claims, by = c( 'tid' ), all.x = TRUE, allow.cartesian = TRUE )
 sev_claims <- sev_claims[ cdate >= di & cdate < de ]
 sev_claims[ , tid := NULL ]
+sev_claims[ , grp := factor( paste0( sex, ' ', xg ), labels = grpcl$grp, ordered = TRUE ) ]
+```
+
+Preparamos la función de verosimilitud, en este caso debemos definirla explícitamente, sin la ayuda
+de alguna función en un paquete, esto se debe a que el deducible $d$ y el monto máximo de cobertura 
+$M$ varían entre pólizas.
+```{r l5c19}
+Fd <- plnorm
+fd <- dlnorm
+
+theta0 <- c( 2, 3 )
+loglik_max <- list()
+estim_sev <- NULL
+
+for ( g in grpcl$grp ) {
+  
+  datsev <- sev_claims[ grp == g ]
+  
+  lglk <- function( theta ) {
+
+    # suma en puntos de continuidad
+    l <- sum( sapply( datsev[ claim != amount ]$claim,
+                      FUN = function( x ) log( fd( x, meanlog = theta[1], sdlog = theta[2] ) ) ) )
+
+    # suma en las discontinuidades
+    sg <- datsev[ claim == amount ]$claim
+
+    l <- l + ifelse( length( sg ) > 0,
+                     sum( sapply( sg, FUN = function( x ) log( 1 - Fd( x, meanlog = theta[1], sdlog = theta[2] ) ) ) ),
+                     0 )
+
+    return( -l )
+  }
+
+  # Maximización de la verosimilitud
+  loglik_max[[ g ]] <- optim(
+    par = theta0,
+    fn = lglk,
+    method = 'BFGS',
+    control = list( maxit = 1000, temp = 500, trace = TRUE, REPORT = 100 ) )
+
+  estim_sev <- rbind( 
+    estim_sev, 
+    data.table( grp = g, 
+                meanlog = loglik_max[[ g ]]$par[1], 
+                sdlog = loglik_max[[ g ]]$par[ 2 ],
+                loglik = -loglik_max[[ g ]]$value )
+  )
+  
+}
+
+estim_sev[ , EX := exp( meanlog + 0.5 * sdlog^2 ) ]
+estim_sev[ , SDX := sqrt( ( exp( sdlog^2 ) - 1 ) * exp( 2 * meanlog + sdlog^2 ) ) ]
 ```
 :::
 
@@ -1752,7 +1805,7 @@ En conclusión $N(t)$ tiene como distribución una ley de Poisson $Pois( \lambda
 se conoce a $N$ como un proceso de Poisson.
 :::
 
-```{r l5c19}
+```{r l5c20}
 m <- 1000
 lambda <- 10
 M <- 30
@@ -1844,7 +1897,7 @@ plot( plt )
 
 Como se describe en el paso 8 del algoritmo de simulación, para cada tiempo $t_l$ se puede estimar
 la distribución de probabilidad de la variable aleatoria $S(t_l)$.
-```{r l5c20}
+```{r l5c21}
 FeS <- lapply( 1:p, FUN = function( l ) ecdf( sapply( S, FUN = function( Si ) Si[ l ] ) ) )
 ns <- 1e3
 s <- seq( 0, Smax, length = ns )
