@@ -1025,7 +1025,8 @@ $$
 + \sum\limits_{x_i \notin \Dif F} \log \left( F\left( x_i + h, \theta \right) - F\left( x_i - h, \theta \right) \right) \\
 \end{eqnarray*}
 $$
-maximizar $\ell_h$ es equivalente a maiximizar la siguiente función equivalente
+maximizar $\ell_h$ es equivalente a maximizar la siguiente función equivalente que notaremos con el
+mismo nombre
 $$
 \begin{eqnarray*}
 \ell_h( \theta )
@@ -1033,8 +1034,11 @@ $$
 + \sum\limits_{x_i \notin \Dif F} \log \left( F\left( x_i + h, \theta \right) - F\left( x_i - h, \theta \right) \right) \\
 \end{eqnarray*}
 $$
-donde $h$ es constante. Tomando al límite, un valor $h$ cada vez más pequeño, para encerrar aún más
-en un intervalo los valores observados, tenemos lo siguiente:
+la multiplicación de la primera suma por la constante $\frac{1}{h}$ tan solo escala la función, pero
+no cambia sus puntos críticos.
+
+Tomando al límite, un valor $h$ cada vez más pequeño, para encerrar aún más en un intervalo los 
+valores observados $\{x_i\}$, tenemos lo siguiente:
 $$
 \begin{eqnarray*}
 \underset{h \searrow 0}{\lim} \ell_h( \theta )
@@ -1047,7 +1051,8 @@ $$
 $$
 
 siendo $F\left( x_i-, \theta \right)$ el límite por izquierda de la función de distribución $F$ en 
-el punto $x_i$. Recordamos que toda función de distribución es continua por derecha.
+el punto $x_i$. Además, recordamos que toda función de distribución es continua por derecha, esto 
+implica que $F\left( x_i, \theta \right) = F\left( x_i+, \theta \right)$.
 
 Para el caso puntual esta es precisamente la expresión de la función de verosimilitud logarítmica, 
 la cual podemos utilizar para estimar el mejor parámetro $\theta \in \Theta$ que maximice el valor 
@@ -1064,8 +1069,8 @@ hipótesis: todos los puntos $x_i$ sobre los cuales se calcula son puntos de con
 función de distribución acumulada $F$ no tiene puntos singulares, siendo este último caso el más 
 usual. Pero, en la práctica esto no sucede y la suma adicional a la derecha en la expresión anterior
 es precisamente necesaria, ya que la distribución $F$ si puede tener singularidades. Al utilizar 
-solo el primer término la estimación por verosimilitud del mejor parámetro $\theta$ no será la 
-correcta.
+solo la primera suma sobre los puntos donde hay diferenciabilidad, la estimación por verosimilitud 
+para el parámetro $\theta$ no será la correcta.
 
 <!------------------------------------------------------------------------------------------------->
 ### Pruebas de hipótesis
