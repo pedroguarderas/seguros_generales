@@ -1056,6 +1056,7 @@ $$
 \ell( \theta ) = 
 \sum\limits_{x_i \in \Dif F} \log \left( f(x_i,\theta) \right) 
 + \sum\limits_{x_i \notin \Dif F} \log \left( F\left( x_i, \theta \right) - F\left( x_i-, \theta \right) \right)
+(\#eq:loglik)
 $$
 
 En los casos más sencillos de estimación por verosimilitud se suele cumplir una de las siguientes

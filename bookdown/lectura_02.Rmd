@@ -40,6 +40,8 @@ el conjunto $X$, no es más que una función de $\N$ con valores en $X$
 
 16. $\sup A$ es la menor de las cotas superiores de $A$.
 
+17. $\Dif f$ conjunto de puntos donde la función es diferenciable.
+
 
 <!------------------------------------------------------------------------------------------------->
 ## Consideraciones de programación en R

@@ -1344,6 +1344,10 @@ claims[ 1:100 ] %>%
   scroll_box( width = "100%", height = "500px" )
 ```
 
+$$
+S_k = \sum\limits_{i=1}^n \sum\limits_{j=1}^{N_i} D\left( X_{i,j} \right)
+$$
+
 Ahora calculemos la duración de cada una de las pólizas, esto es el tiempo de exposición al riesgo
 por cada persona asegurada.
 ```{r l5c15}
@@ -1353,32 +1357,30 @@ dates <- data.table( di = idate, de = edate )
 dates[ , tid := 1 ]
 
 production[ , tid := 1 ]
-estim <- merge.data.table( dates, production, by = 'tid', all.x = TRUE, allow.cartesian = TRUE )
-estim[ , tid := NULL ]
-estim <- estim[ start < de & end >= di ]
-estim[ , fi := pmax( start, di ) ]
-estim[ , fe := pmin( end, de ) ]
-estim[ , fm := fi + ( fe - fi ) / 2 ]
-estim[ , x := pmax( round( interval( bdate, fm ) / dyears( 1 ), 0 ), 0 ) ]
+prod_prep <- merge.data.table( dates, production, by = 'tid', all.x = TRUE, allow.cartesian = TRUE )
+prod_prep[ , tid := NULL ]
+prod_prep <- prod_prep[ start < de & end >= di ]
+prod_prep[ , fi := pmax( start, di ) ]
+prod_prep[ , fe := pmin( end, de ) ]
+prod_prep[ , fm := fi + ( fe - fi ) / 2 ]
+prod_prep[ , x := pmax( round( interval( bdate, fm ) / dyears( 1 ), 0 ), 0 ) ]
 xgs <- c( 0, 20, 40, 60, Inf )
-estim[ , xg := cut( x = x, breaks = xgs, include.lowest = TRUE, ordered_result = TRUE, right = FALSE ) ]
-estim[ , ER := interval( fi, fe ) / dyears( 1 ) ]
-estimp <- unique( estim[ , list( policy, id, sex, xg, bdate, di, de, N = 0, S = 0 ) ] )
-estimp <- estimp[ , list( policy, id, sex, xg, bdate, di, de, N, S ) ]
-estim <- estim[ , list( ER = sum( ER, na.rm = TRUE ) ), by = list( sex, xg, di, de ) ]
-setorder( estim, sex, xg, di )
+prod_prep[ , xg := cut( x = x, breaks = xgs, include.lowest = TRUE, ordered_result = TRUE, right = FALSE ) ]
+
+noclaims_prep <- unique( prod_prep[ , list( policy, id, sex, xg, bdate, di, de, N = 0, S = 0 ) ] )
+noclaims_prep <- noclaims_prep[ , list( policy, id, sex, xg, bdate, di, de, N, S ) ]
 ```
 
 ```{r l5c16}
-claims_prep <- claims[ , list( DX = sum( claim ) ), by = list( policy, id, idc, type, sex, bdate, cdate, service ) ]
 claims_prep <- claims[ , list( DX = sum( claim ) ), by = list( policy, id, idc, type, sex, bdate, cdate ) ]
 claims_prep[ , x := round( interval( bdate, cdate ) / dyears( 1 ), 0 ) ]
 claims_prep[ , xg := cut( x = x, breaks = xgs, include.lowest = TRUE, ordered_result = TRUE, right = FALSE ) ]
 claims_prep[ , tid := 1 ]
 claims_prep <- merge.data.table( dates, claims_prep, by = c( 'tid' ), all.x = TRUE, allow.cartesian = TRUE )
+claims_prep[ , tid := NULL ]
 claims_prep <- claims_prep[ cdate >= di & cdate < de ]
 claims_prep <- claims_prep[ , list( N = .N, S = sum( DX ) ), by = list( policy, id, sex, xg, bdate, di, de ) ]
-claims_prep <- rbind( claims_prep, estimp )
+claims_prep <- rbind( claims_prep, noclaims_prep )
 claims_prep <- claims_prep[ , list( N = sum( N ), S = sum( S ) ), by = list( policy, id, sex, xg, bdate, di, de ) ]
 
 count <- copy( claims_prep )
@@ -1402,6 +1404,24 @@ setorder( grpcl, sex, xg )
 
 count[ , grp := factor( paste0( sex, ' ', xg ), labels = grpcl$grp, ordered = TRUE ) ]
 claims_prep[ , grp := factor( paste0( sex, ' ', xg ), labels = grpcl$grp, ordered = TRUE ) ]
+```
+
+Los grupos de riesgo que hemos seleccionado para estudiar la frecuencia y severidad de los reclamos
+son los siguientes:
+```{r l5t3, echo = TRUE, results = 'asis', out.width='100%', class.source = 'fold-hide'}
+grpcl %>%
+  kable(
+    label = NA,
+    caption = 'Grupos de clasificación del riesgo',
+    row.names = FALSE,
+    col.names = c( 'sex', '$x_g$', 'grupo' ),
+    align = 'lll',
+    digits = c( 0, 0, 0 ),
+    format.args = list( big.mark = ',', decimal.mark = '.', scientific = FALSE ),
+    escape = FALSE,
+    centering = TRUE ) %>%
+  kable_classic( font_size = 14, full_width = FALSE, html_font = "Cambria", position = "center" ) %>%
+  scroll_box( width = "100%", height = "500px" )
 ```
 
 El gráfico a continuación muestra el comportamiento del indicador $v_n = n \frac{p_n}{p_{n-1}}$, 
@@ -1456,7 +1476,10 @@ for ( g in grpcl$grp ) {
 }
 ```
 
-```{r l5t3, echo = TRUE, results = 'asis', out.width='100%', class.source = 'fold-hide'}
+En la lista que hemos creado `fit_count` hemos almacenado cada una de las estimaciones por 
+maximización de verosimilitud para cada uno de los grupos. Ahora creamos un objeto que sumariza 
+los valores estimados.
+```{r l5t4, echo = TRUE, results = 'asis', out.width='100%', class.source = 'fold-hide'}
 # Preparamos una tabla con los resultados
 estim_frec <- NULL
 for ( g in names( fit_count ) ) {
@@ -1489,9 +1512,23 @@ estim_frec %>%
   scroll_box( width = "100%", height = "500px" )
 ```
 
-$$
-S_k = \sum\limits_{i=1}^n \sum\limits_{j=1}^{N_i} D\left( X_{i,j} \right)
-$$
+Ahora nos enfocamos en estudiar la severidad de los reclamos. Desde un inicio sabemos que los 
+valores de los reclamos ya viene censurados, por la función deducible $D$, por tal razón es 
+de esperar que la función de distribución acumulada de los reclamos deducidos tenga singularidades.
+Si buscamos utilizar el método de máxima verosimilitud para la estimación de la mejor distribución
+debemos hacer uso de la forma extendida \@ref(eq:loglik).
+```{r l5c18}
+# prod_prep[ , ER := interval( fi, fe ) / dyears( 1 ) ]
+# prod_prep <- prod_prep[ , list( ER = sum( ER, na.rm = TRUE ) ), by = list( sex, xg, di, de ) ]
+# setorder( prod_prep, sex, xg, di )
+sev_claims <- claims[ , list( DX = sum( claim ) ), by = list( policy, id, idc, type, sex, bdate, cdate ) ]
+sev_claims[ , x := round( interval( bdate, cdate ) / dyears( 1 ), 0 ) ]
+sev_claims[ , xg := cut( x = x, breaks = xgs, include.lowest = TRUE, ordered_result = TRUE, right = FALSE ) ]
+sev_claims[ , tid := 1 ]
+sev_claims <- merge.data.table( dates, sev_claims, by = c( 'tid' ), all.x = TRUE, allow.cartesian = TRUE )
+sev_claims <- sev_claims[ cdate >= di & cdate < de ]
+sev_claims[ , tid := NULL ]
+```
 :::
 
 <!------------------------------------------------------------------------------------------------->
@@ -1715,7 +1752,7 @@ En conclusión $N(t)$ tiene como distribución una ley de Poisson $Pois( \lambda
 se conoce a $N$ como un proceso de Poisson.
 :::
 
-```{r l5c18}
+```{r l5c19}
 m <- 1000
 lambda <- 10
 M <- 30
@@ -1807,7 +1844,7 @@ plot( plt )
 
 Como se describe en el paso 8 del algoritmo de simulación, para cada tiempo $t_l$ se puede estimar
 la distribución de probabilidad de la variable aleatoria $S(t_l)$.
-```{r l5c19}
+```{r l5c20}
 FeS <- lapply( 1:p, FUN = function( l ) ecdf( sapply( S, FUN = function( Si ) Si[ l ] ) ) )
 ns <- 1e3
 s <- seq( 0, Smax, length = ns )
