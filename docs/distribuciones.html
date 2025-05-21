@@ -1835,7 +1835,8 @@ clasificar en estos dos tipos <span class="citation">[<a href="bibliografía.htm
 + \sum\limits_{x_i \notin \operatorname{Dif}F} \log \left( F\left( x_i + h, \theta \right) - F\left( x_i - h, \theta \right) \right) \\
 \end{eqnarray*}
 \]</span>
-maximizar <span class="math inline">\(\ell_h\)</span> es equivalente a maiximizar la siguiente función equivalente
+maximizar <span class="math inline">\(\ell_h\)</span> es equivalente a maximizar la siguiente función equivalente que notaremos con el
+mismo nombre
 <span class="math display">\[
 \begin{eqnarray*}
 \ell_h( \theta )
@@ -1843,8 +1844,10 @@ maximizar <span class="math inline">\(\ell_h\)</span> es equivalente a maiximiza
 + \sum\limits_{x_i \notin \operatorname{Dif}F} \log \left( F\left( x_i + h, \theta \right) - F\left( x_i - h, \theta \right) \right) \\
 \end{eqnarray*}
 \]</span>
-donde <span class="math inline">\(h\)</span> es constante. Tomando al límite, un valor <span class="math inline">\(h\)</span> cada vez más pequeño, para encerrar aún más
-en un intervalo los valores observados, tenemos lo siguiente:
+la multiplicación de la primera suma por la constante <span class="math inline">\(\frac{1}{h}\)</span> tan solo escala la función, pero
+no cambia sus puntos críticos.</p>
+<p>Tomando al límite, un valor <span class="math inline">\(h\)</span> cada vez más pequeño, para encerrar aún más en un intervalo los
+valores observados <span class="math inline">\(\{x_i\}\)</span>, tenemos lo siguiente:
 <span class="math display">\[
 \begin{eqnarray*}
 \underset{h \searrow 0}{\lim} \ell_h( \theta )
@@ -1856,7 +1859,8 @@ en un intervalo los valores observados, tenemos lo siguiente:
 \end{eqnarray*}
 \]</span></p>
 <p>siendo <span class="math inline">\(F\left( x_i-, \theta \right)\)</span> el límite por izquierda de la función de distribución <span class="math inline">\(F\)</span> en
-el punto <span class="math inline">\(x_i\)</span>. Recordamos que toda función de distribución es continua por derecha.</p>
+el punto <span class="math inline">\(x_i\)</span>. Además, recordamos que toda función de distribución es continua por derecha, esto
+implica que <span class="math inline">\(F\left( x_i, \theta \right) = F\left( x_i+, \theta \right)\)</span>.</p>
 <p>Para el caso puntual esta es precisamente la expresión de la función de verosimilitud logarítmica,
 la cual podemos utilizar para estimar el mejor parámetro <span class="math inline">\(\theta \in \Theta\)</span> que maximice el valor
 de verosimilitud.
@@ -1871,8 +1875,8 @@ hipótesis: todos los puntos <span class="math inline">\(x_i\)</span> sobre los 
 función de distribución acumulada <span class="math inline">\(F\)</span> no tiene puntos singulares, siendo este último caso el más
 usual. Pero, en la práctica esto no sucede y la suma adicional a la derecha en la expresión anterior
 es precisamente necesaria, ya que la distribución <span class="math inline">\(F\)</span> si puede tener singularidades. Al utilizar
-solo el primer término la estimación por verosimilitud del mejor parámetro <span class="math inline">\(\theta\)</span> no será la
-correcta.</p>
+solo la primera suma sobre los puntos donde hay diferenciabilidad, la estimación por verosimilitud
+para el parámetro <span class="math inline">\(\theta\)</span> no será la correcta.</p>
 <!------------------------------------------------------------------------------------------------->
 </div>
 <div id="pruebas-de-hipótesis" class="section level3 hasAnchor" number="4.4.5">
