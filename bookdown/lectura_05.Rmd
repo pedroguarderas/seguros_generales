@@ -1576,7 +1576,6 @@ for ( g in grpcl$grp ) {
                 sdlog = loglik_max[[ g ]]$par[ 2 ],
                 loglik = -loglik_max[[ g ]]$value )
   )
-  
 }
 
 estim_sev[ , EX := exp( meanlog + 0.5 * sdlog^2 ) ]
@@ -1597,6 +1596,22 @@ estim_sev %>%
     centering = TRUE ) %>%
   kable_classic( font_size = 14, full_width = FALSE, html_font = "Cambria", position = "center" ) %>%
   scroll_box( width = "100%", height = "500px" )
+```
+
+```{r l5g14, out.width='90%', out.height='700px', fig.align='center', class.source = 'fold-hide'}
+xlim <- c( 0, 4e4 )
+xbrk <- seq( xlim[1], xlim[2], length = 11 )
+xlbl <- xbrk
+
+plt <- ggplot( ) +
+  geom_histogram( data = sev_claims, aes( claim, after_stat( density ) ), 
+                  fill = 'olivedrab3', colour = 'olivedrab4', alpha = 0.3, bins = 30 ) +
+  facet_grid( sex ~ xg, scales = "free" ) +
+  xlab( TeX( "$D(X)$" ) ) + 
+  ylab( TeX( "$f_{D(X)}$" ) ) + 
+  theme_bw() +
+  theme( legend.position = "none" )
+plot( plt )
 ```
 :::
 
@@ -1855,7 +1870,7 @@ EeS <- sapply( 1:p, FUN = function( l ) mean( sapply( 1:m, function( i ) S[[ i ]
 
 En el gráfico a continuación presentamos todos los procesos de conteo $N_{i}$ simulados, como es de
 esperarse son funciones de escalera, siempre crecientes, que toman solo valores positivos.
-```{r l5g14, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
+```{r l5g15, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
 Sord <- order( sapply( 1:m, FUN = function( j ) last( S[[j]] ) ) )
 Ndat <- NULL
 for ( j in 1:m ) {
@@ -1889,7 +1904,7 @@ plot( plt )
 El gráfico a continuación presenta la simulación de los procesos correspondientes al total de 
 reclamos, conforme avanza el tiempo. De igual manera los procesos $S_i$ son funciones de escalera,
 siempre crecientes, con saltos correspondientes a los reclamos individuales.
-```{r l5g15, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
+```{r l5g16, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
 Sqmax <- quantile( sapply( S, FUN = function( Si ) last( Si ) ), probs = 0.99 )
 
 plt <- ggplot( ) +
@@ -1923,7 +1938,7 @@ Fes <- lapply( FeS, FUN = function( FeSl ) sapply( s, FUN = FeSl ) )
 La figura a continuación muestra cada una de las distribuciones de probabilidad empíricas estimadas 
 $F_{m,l}$. Se puede observar que conforme avanza el tiempo, aumenta la probabilidad de observar 
 valores mayores del proceso $S$ correspondiente al total de reclamos.
-```{r l5g16, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
+```{r l5g17, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
 FeSdat <- NULL
 for ( j in 1:p ) {
   FeSdat <- rbindlist( list( FeSdat, data.table( s = s, m = as.factor( j ), Fes = Fes[[ j ]] ) ) )
