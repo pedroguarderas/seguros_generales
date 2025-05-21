@@ -1623,7 +1623,7 @@ reclamos, lo sumarizamos en la tabla a continuación.
 estim_sev %>%
   kable(
     label = NA,
-    caption = 'Estimación de frecuencia',
+    caption = 'Estimación de severidad de los reclamos',
     row.names = FALSE,
     col.names = c( '$g$', '$n$', '$\\mu$', '$\\sigma$', '$\\ell( \\mu, \\sigma )$', '$\\E[ X ]$', 
                    '$\\sqrt{\\V[ X ]}$', '$AIC$', '$BIC$' ),
