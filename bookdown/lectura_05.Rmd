@@ -645,7 +645,7 @@ para toda variable aleatoria $X$, se satisface la siguiente desigualdad $D( X ) 
 
 1. Para evitar pérdidas pequeñas se suele configurar la función deducible $D( X ) = \max( X - d, 0 )$, 
 en este caso si $X \rightsquigarrow F_X$, entonces $Z = D( X ) \rightsquigarrow F_Z( z )$, donde 
-$F_Z( z ) = \mathbf{1}_{[d,+\infty)}( z ) F_X( z + d )$.
+$F_Z( z ) = \mathbf{1}_{[0,+\infty)}( z ) F_X( z + d )$.
 ```{r l5g2, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
 D <- function( x, d ) return( max( x - d, 0 ) )
 d <- 50
@@ -719,7 +719,7 @@ plot( plt )
 
 3. Caso mixto para evitar pérdidas pequeñas y exceso de pérdida $D( X ) = \min( \max( X - d, 0 ), M )$, 
 en este caso si $X \rightsquigarrow F_X$, entonces $Z = D( X ) \rightsquigarrow F_Z( z )$, donde 
-$F_Z( z ) = \mathbf{1}_{[a,M)}( z ) F_X( z + d ) + \mathbf{1}_{[M,+\infty)}( z )$.
+$F_Z( z ) = \mathbf{1}_{[0,M)}( z ) F_X( z + d ) + \mathbf{1}_{[M,+\infty)}( z )$.
 ```{r l5g4, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
 D <- function( x, M ) return( min( max( x - d ), M ) )
 d <- 50
@@ -1463,6 +1463,7 @@ $$
 
 ```{r l5c17}
 fit_count <- list()
+estim_frec <- NULL
 
 for ( g in grpcl$grp ) {
   
@@ -1473,16 +1474,6 @@ for ( g in grpcl$grp ) {
     keepdata = TRUE, 
     discrete = TRUE )
   
-}
-```
-
-En la lista que hemos creado `fit_count` hemos almacenado cada una de las estimaciones por 
-maximización de verosimilitud para cada uno de los grupos. Ahora creamos un objeto que sumariza 
-los valores estimados.
-```{r l5t4, echo = TRUE, results = 'asis', out.width='100%', class.source = 'fold-hide'}
-# Preparamos una tabla con los resultados
-estim_frec <- NULL
-for ( g in names( fit_count ) ) {
   
   estim_frec <- rbind(
     estim_frec,
@@ -1493,16 +1484,20 @@ for ( g in names( fit_count ) ) {
                 aic = fit_count[[ g ]]$aic,
                 bic = fit_count[[ g ]]$bic )
   )
-  
 }
 estim_frec <- estim_frec[ , list( grp, a, p = a / ( a + EN ), EN, loglik, aic, bic )]
+```
 
+En la lista que hemos creado `fit_count` hemos almacenado cada una de las estimaciones de la 
+frecuencia por maximización de verosimilitud para cada uno de los grupos. A continuación, 
+presentamos los resultados de la estimación.
+```{r l5t4, echo = TRUE, results = 'asis', out.width='100%', class.source = 'fold-hide'}
 estim_frec %>%
   kable(
     label = NA,
     caption = 'Estimación de frecuencia',
     row.names = FALSE,
-    col.names = c( '$g$', '$\\alpha$', '$p$', '$\\E[ N ]$', '$\\ell( n, \\mu )$', '$AIC$', '$BIC$' ),
+    col.names = c( '$g$', '$\\alpha$', '$p$', '$\\E[ N ]$', '$\\ell( n, p )$', '$AIC$', '$BIC$' ),
     align = 'lrrrrrr',
     digits = c( 0, 5, 5, 5, 5, 2, 2 ),
     format.args = list( big.mark = ',', decimal.mark = '.', scientific = FALSE ),
@@ -1513,14 +1508,33 @@ estim_frec %>%
 ```
 
 Ahora nos enfocamos en estudiar la severidad de los reclamos. Desde un inicio sabemos que los 
-valores de los reclamos ya viene censurados, por la función deducible $D$, por tal razón es 
-de esperar que la función de distribución acumulada de los reclamos deducidos tenga singularidades.
-Si buscamos utilizar el método de máxima verosimilitud para la estimación de la mejor distribución
-debemos hacer uso de la forma extendida \@ref(eq:loglik).
+valores de los reclamos ya vienen censurados, a causa de la aplicación de la función deducible $D$, 
+por tal razón es de esperar que la función de distribución acumulada de los reclamos deducidos tenga 
+singularidades. Si buscamos utilizar el método de máxima verosimilitud para la estimación de la 
+mejor distribución, debemos hacer uso de la forma extendida \@ref(eq:loglik). La función de 
+verosimilitud logarítmica toma la siguiente forma:
+$$
+\begin{eqnarray*}
+\ell( \mu, \sigma )
+& = & \sum\limits_{x_i \in \Dif F} \log \left( f(x_i,\mu, \sigma) \right) 
++ \sum\limits_{x_i \notin \Dif F} \log \left( F\left( x_i, \mu, \sigma \right) - F\left( x_i-, \mu, \sigma \right) \right) \\
+& = & \sum\limits_{x_i \notin\{0,M_i\}} \log \left( f(x_i,\mu, \sigma) \right) 
++ \sum\limits_{x_i \in\{0,M_i\}} \log \left( F\left( x_i, \mu, \sigma \right) - F\left( x_i-, \mu, \sigma \right) \right) \\
+& = & \sum\limits_{x_i \notin \{0,M_i\}} 
+\log \left( \frac{1}{x_i\sqrt{2\pi} \sigma}  \exp\left( -\frac{(\ln(x_i) - \mu)^2}{\sigma^2} \right) \right) 
++ \sum\limits_{x_i = M_i} \log \left( 1 - F\left( M_i-, \mu, \sigma \right) \right) 
++ \sum\limits_{x_i = 0} \log \left( F\left( 0, \mu, \sigma \right) - 0 \right) \\
+& = & -\sum\limits_{x_i \notin\{0,M_i\}} \left\{
+\frac{(\ln(x_i) - \mu)^2}{\sigma^2}
++\log \left( x_i \right) 
++\log \left( \sqrt{2\pi} \sigma \right) \right\}
++ \sum\limits_{x_i = M_i} \log \left( 1 - \frac{1}{\sqrt{2\pi} \sigma} \int\limits_{0}^{M_i + d_i} \frac{1}{y} \exp\left( -\frac{(\ln(y) - \mu)^2}{\sigma^2} \right)\ dy \right) \\ 
+& & + \sum\limits_{x_i = 0} \log \left( \frac{1}{\sqrt{2\pi} \sigma} \int\limits_{0}^{d_i} \frac{1}{y} \exp\left( -\frac{(\ln(y) - \mu)^2}{\sigma^2} \right)\ dy \right) \\
+\end{eqnarray*}
+$$
+
+
 ```{r l5c18}
-# prod_prep[ , ER := interval( fi, fe ) / dyears( 1 ) ]
-# prod_prep <- prod_prep[ , list( ER = sum( ER, na.rm = TRUE ) ), by = list( sex, xg, di, de ) ]
-# setorder( prod_prep, sex, xg, di )
 sev_claims <- claims[ , list( policy, id, idc, type, sex, bdate, cdate, deductible, amount, claim ) ]
 sev_claims[ , x := round( interval( bdate, cdate ) / dyears( 1 ), 0 ) ]
 sev_claims[ , xg := cut( x = x, breaks = xgs, include.lowest = TRUE, ordered_result = TRUE, right = FALSE ) ]
@@ -1547,28 +1561,37 @@ for ( g in grpcl$grp ) {
   datsev <- sev_claims[ grp == g ]
   
   lglk <- function( theta ) {
-
+    
     # suma en puntos de continuidad
     l <- sum( sapply( datsev[ claim != amount ]$claim,
                       FUN = function( x ) log( fd( x, meanlog = theta[1], sdlog = theta[2] ) ) ) )
-
+    
     # suma en las discontinuidades
-    sg <- datsev[ claim == amount ]$claim
-
-    l <- l + ifelse( length( sg ) > 0,
-                     sum( sapply( sg, FUN = function( x ) log( 1 - Fd( x, meanlog = theta[1], sdlog = theta[2] ) ) ) ),
-                     0 )
-
-    return( -l )
+    # singularidad en la parte superior, hacia el máximo monto
+    sg <- datsev[ claim == amount, list( x = amount + deductible ) ]
+    sg <- sg$x
+    
+    if ( length( sg ) > 0 ) {
+      l <- l + sum( sapply( sg, FUN = function( x ) log( 1 - Fd( x, meanlog = theta[1], sdlog = theta[2] ) ) ) )  
+    }
+    
+    # singularidad en la parte inferior, hacia el deducible
+    sg <- datsev[ claim == 0, list( x = deductible ) ]
+    sg <- sg$x
+    if ( length( sg ) > 0 ) {
+      l <- l + sum( sapply( sg, FUN = function( x ) log( Fd( x, meanlog = theta[1], sdlog = theta[2] ) ) ) )  
+    }
+    
+    return( -l ) # con menos ya que el optimizador minimiza
   }
-
+  
   # Maximización de la verosimilitud
   loglik_max[[ g ]] <- optim(
     par = theta0,
     fn = lglk,
     method = 'BFGS',
     control = list( maxit = 1000, temp = 500, trace = TRUE, REPORT = 100 ) )
-
+  
   estim_sev <- rbind( 
     estim_sev, 
     data.table( grp = g, 
