@@ -1485,7 +1485,9 @@ for ( g in grpcl$grp ) {
                 bic = fit_count[[ g ]]$bic )
   )
 }
-estim_frec <- estim_frec[ , list( grp, a, p = a / ( a + EN ), EN, loglik, aic, bic )]
+estim_frec[ , p := a / ( a + EN ) ]
+estim_frec[ , SDN := sqrt( a * ( 1 - p ) / p^2 ) ]
+estim_frec <- estim_frec[ , list( grp, a, p, EN, SDN, loglik, aic, bic )]
 ```
 
 En la lista que hemos creado `fit_count` hemos almacenado cada una de las estimaciones de la 
@@ -1497,9 +1499,9 @@ estim_frec %>%
     label = NA,
     caption = 'Estimación de frecuencia',
     row.names = FALSE,
-    col.names = c( '$g$', '$\\alpha$', '$p$', '$\\E[ N ]$', '$\\ell( n, p )$', '$AIC$', '$BIC$' ),
-    align = 'lrrrrrr',
-    digits = c( 0, 5, 5, 5, 5, 2, 2 ),
+    col.names = c( '$g$', '$\\alpha$', '$p$', '$\\E[ N ]$', '$\\sqrt{\\V[ N ]}$', '$\\ell( n, p )$', '$AIC$', '$BIC$' ),
+    align = 'lrrrrrrr',
+    digits = c( 0, 5, 5, 5, 5,  5, 2, 2 ),
     format.args = list( big.mark = ',', decimal.mark = '.', scientific = FALSE ),
     escape = FALSE,
     centering = TRUE ) %>%
@@ -1606,6 +1608,7 @@ for ( g in grpcl$grp ) {
   estim_sev <- rbind( 
     estim_sev, 
     data.table( grp = g, 
+                n = nrow( datsev ),
                 meanlog = loglik_max[[ g ]]$par[1], 
                 sdlog = loglik_max[[ g ]]$par[ 2 ],
                 loglik = -loglik_max[[ g ]]$value )
@@ -1614,17 +1617,22 @@ for ( g in grpcl$grp ) {
 
 estim_sev[ , EX := exp( meanlog + 0.5 * sdlog^2 ) ]
 estim_sev[ , SDX := sqrt( ( exp( sdlog^2 ) - 1 ) * exp( 2 * meanlog + sdlog^2 ) ) ]
+estim_sev[ , aic := 2 * 2 - 2 * loglik ]
+estim_sev[ , bic := 2 * log( n ) - 2 * loglik ]
 ```
 
+Los resultados de la estimación mediante maximización de verosimilitud para la severidad de los 
+reclamos, lo sumarizamos en la tabla a continuación.
 ```{r l5t5, echo = TRUE, results = 'asis', out.width='100%', class.source = 'fold-hide'}
 estim_sev %>%
   kable(
     label = NA,
     caption = 'Estimación de frecuencia',
     row.names = FALSE,
-    col.names = c( '$g$', '$\\mu$', '$\\sigma$', '$\\ell( \\mu, \\sigma )$', '$\\E[ X ]$', '$\\sqrt{\\V[ X ]}$' ),
-    align = 'lrrrrrr',
-    digits = c( 0, 5, 5, 5, 2, 2 ),
+    col.names = c( '$g$', '$n$', '$\\mu$', '$\\sigma$', '$\\ell( \\mu, \\sigma )$', '$\\E[ X ]$', 
+                   '$\\sqrt{\\V[ X ]}$', '$AIC$', '$BIC$' ),
+    align = 'lrrrrrrrr',
+    digits = c( 0, 0, 5, 5, 5, 2, 2, 2, 2 ),
     format.args = list( big.mark = ',', decimal.mark = '.', scientific = FALSE ),
     escape = FALSE,
     centering = TRUE ) %>%
