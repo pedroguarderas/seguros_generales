@@ -1504,7 +1504,7 @@ estim_frec %>%
     row.names = FALSE,
     col.names = c( '$g$', '$\\alpha$', '$p$', '$\\E[ N ]$', '$\\ell( n, \\mu )$', '$AIC$', '$BIC$' ),
     align = 'lrrrrrr',
-    digits = c( 0, 5, 5, 5, 2, 2, 2 ),
+    digits = c( 0, 5, 5, 5, 5, 2, 2 ),
     format.args = list( big.mark = ',', decimal.mark = '.', scientific = FALSE ),
     escape = FALSE,
     centering = TRUE ) %>%
@@ -1581,6 +1581,22 @@ for ( g in grpcl$grp ) {
 
 estim_sev[ , EX := exp( meanlog + 0.5 * sdlog^2 ) ]
 estim_sev[ , SDX := sqrt( ( exp( sdlog^2 ) - 1 ) * exp( 2 * meanlog + sdlog^2 ) ) ]
+```
+
+```{r l5t5, echo = TRUE, results = 'asis', out.width='100%', class.source = 'fold-hide'}
+estim_sev %>%
+  kable(
+    label = NA,
+    caption = 'Estimación de frecuencia',
+    row.names = FALSE,
+    col.names = c( '$g$', '$\\mu$', '$\\sigma$', '$\\ell( \\mu, \\sigma )$', '$\\E[ X ]$', '$\\sqrt{\\V[ X ]}$' ),
+    align = 'lrrrrrr',
+    digits = c( 0, 5, 5, 5, 2, 2 ),
+    format.args = list( big.mark = ',', decimal.mark = '.', scientific = FALSE ),
+    escape = FALSE,
+    centering = TRUE ) %>%
+  kable_classic( font_size = 14, full_width = FALSE, html_font = "Cambria", position = "center" ) %>%
+  scroll_box( width = "100%", height = "500px" )
 ```
 :::
 
