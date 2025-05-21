@@ -1490,7 +1490,7 @@ estim_frec <- estim_frec[ , list( grp, a, p = a / ( a + EN ), EN, loglik, aic, b
 
 En la lista que hemos creado `fit_count` hemos almacenado cada una de las estimaciones de la 
 frecuencia por maximización de verosimilitud para cada uno de los grupos. A continuación, 
-presentamos los resultados de la estimación.
+presentamos los resultados de la estimación para la frecuencia.
 ```{r l5t4, echo = TRUE, results = 'asis', out.width='100%', class.source = 'fold-hide'}
 estim_frec %>%
   kable(
@@ -1511,8 +1511,30 @@ Ahora nos enfocamos en estudiar la severidad de los reclamos. Desde un inicio sa
 valores de los reclamos ya vienen censurados, a causa de la aplicación de la función deducible $D$, 
 por tal razón es de esperar que la función de distribución acumulada de los reclamos deducidos tenga 
 singularidades. Si buscamos utilizar el método de máxima verosimilitud para la estimación de la 
-mejor distribución, debemos hacer uso de la forma extendida \@ref(eq:loglik). La función de 
-verosimilitud logarítmica toma la siguiente forma:
+mejor distribución, debemos hacer uso de la expresión completa que presentamos en \@ref(eq:loglik). 
+```{r l5c18}
+sev_claims <- claims[ , list( policy, id, idc, type, sex, bdate, cdate, deductible, amount, claim ) ]
+sev_claims[ , x := round( interval( bdate, cdate ) / dyears( 1 ), 0 ) ]
+sev_claims[ , xg := cut( x = x, breaks = xgs, include.lowest = TRUE, ordered_result = TRUE, right = FALSE ) ]
+sev_claims[ , tid := 1 ]
+sev_claims <- merge.data.table( dates, sev_claims, by = c( 'tid' ), all.x = TRUE, allow.cartesian = TRUE )
+sev_claims <- sev_claims[ cdate >= di & cdate < de ]
+sev_claims[ , tid := NULL ]
+sev_claims[ , grp := factor( paste0( sex, ' ', xg ), labels = grpcl$grp, ordered = TRUE ) ]
+```
+
+Por no incrementar la complejidad del ejemplo, asumiremos que los reclamos $X$ por cada grupo son 
+i.i.d. y estos siguen como distribución alguna de la familia log-normal, es decir 
+$X \rightsquigarrow LN( \mu, \sigma )$. Además, es de notar que el razonamiento es válido para 
+cualquier otra distribución. Para cada reclamo $i$-ésimo sabemos que se aplicaron un deducible 
+$d_i$ y un monto máximo asegurado $M_i$ determinado por la póliza de la cobertura y por la forma del 
+deducible $D$, la distribución de probabilidad para los valores aleatorios ya deducidos $Z = D(X)$, 
+tiene la forma:
+$$
+F( z ) = \mathbf{1}_{[0,M_i)}( z ) F_X( z + d_i ) + \mathbf{1}_{[M_i,+\infty)}( z )
+$$
+
+Entonces, en este caso en particular la función de verosimilitud logarítmica toma la siguiente forma:
 $$
 \begin{eqnarray*}
 \ell( \mu, \sigma )
@@ -1533,18 +1555,6 @@ $$
 \end{eqnarray*}
 $$
 
-
-```{r l5c18}
-sev_claims <- claims[ , list( policy, id, idc, type, sex, bdate, cdate, deductible, amount, claim ) ]
-sev_claims[ , x := round( interval( bdate, cdate ) / dyears( 1 ), 0 ) ]
-sev_claims[ , xg := cut( x = x, breaks = xgs, include.lowest = TRUE, ordered_result = TRUE, right = FALSE ) ]
-sev_claims[ , tid := 1 ]
-sev_claims <- merge.data.table( dates, sev_claims, by = c( 'tid' ), all.x = TRUE, allow.cartesian = TRUE )
-sev_claims <- sev_claims[ cdate >= di & cdate < de ]
-sev_claims[ , tid := NULL ]
-sev_claims[ , grp := factor( paste0( sex, ' ', xg ), labels = grpcl$grp, ordered = TRUE ) ]
-```
-
 Preparamos la función de verosimilitud, en este caso debemos definirla explícitamente, sin la ayuda
 de alguna función en un paquete, esto se debe a que el deducible $d$ y el monto máximo de cobertura 
 $M$ varían entre pólizas.
@@ -1560,10 +1570,11 @@ for ( g in grpcl$grp ) {
   
   datsev <- sev_claims[ grp == g ]
   
+  # Definimos la función de verosimilitud logarítmica para cada grupo
   lglk <- function( theta ) {
     
     # suma en puntos de continuidad
-    l <- sum( sapply( datsev[ claim != amount ]$claim,
+    l <- sum( sapply( datsev[ claim > 0 & claim < amount ]$claim,
                       FUN = function( x ) log( fd( x, meanlog = theta[1], sdlog = theta[2] ) ) ) )
     
     # suma en las discontinuidades
