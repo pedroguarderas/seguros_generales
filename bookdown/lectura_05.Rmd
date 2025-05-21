@@ -1599,14 +1599,21 @@ estim_sev %>%
 ```
 
 ```{r l5g14, out.width='90%', out.height='700px', fig.align='center', class.source = 'fold-hide'}
-xlim <- c( 0, 4e4 )
+xlim <- c( 0, 1e3 )
 xbrk <- seq( xlim[1], xlim[2], length = 11 )
 xlbl <- xbrk
 
+bins <- sev_claims[ , list( bins = nclass.scott( claim ) ), by = list( grp ) ]
+
 plt <- ggplot( ) +
   geom_histogram( data = sev_claims, aes( claim, after_stat( density ) ), 
-                  fill = 'olivedrab3', colour = 'olivedrab4', alpha = 0.3, bins = 30 ) +
-  facet_grid( sex ~ xg, scales = "free" ) +
+                  fill = 'dodgerblue3', colour = 'dodgerblue4', alpha = 0.3, 
+                  bins = min( bins$bins ) ) +
+  facet_wrap( vars( grp ), scale = 'free_x', ncol = 4 ) +
+  scale_x_continuous( breaks = xbrk,
+                      labels = xlbl,
+                      limits = xlim,
+                      expand = c( 0, 0 ) ) +
   xlab( TeX( "$D(X)$" ) ) + 
   ylab( TeX( "$f_{D(X)}$" ) ) + 
   theme_bw() +
