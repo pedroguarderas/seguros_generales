@@ -1344,10 +1344,6 @@ claims[ 1:100 ] %>%
   scroll_box( width = "100%", height = "500px" )
 ```
 
-$$
-S_k = \sum\limits_{i=1}^n \sum\limits_{j=1}^{N_i} D\left( X_{i,j} \right)
-$$
-
 Ahora calculemos la duración de cada una de las pólizas, esto es el tiempo de exposición al riesgo
 por cada persona asegurada.
 ```{r l5c15}
@@ -1577,7 +1573,7 @@ for ( g in grpcl$grp ) {
     
     # suma en puntos de continuidad
     l <- sum( sapply( datsev[ claim > 0 & claim < amount ]$claim,
-                      FUN = function( x ) log( fd( x, meanlog = theta[1], sdlog = theta[2] ) ) ) )
+                      FUN = function( x ) log( fd( x, meanlog = theta[ 1 ], sdlog = theta[ 2 ] ) ) ) )
     
     # suma en las discontinuidades
     # singularidad en la parte superior, hacia el máximo monto
@@ -1585,14 +1581,14 @@ for ( g in grpcl$grp ) {
     sg <- sg$x
     
     if ( length( sg ) > 0 ) {
-      l <- l + sum( sapply( sg, FUN = function( x ) log( 1 - Fd( x, meanlog = theta[1], sdlog = theta[2] ) ) ) )  
+      l <- l + sum( sapply( sg, FUN = function( x ) log( 1 - Fd( x, meanlog = theta[ 1 ], sdlog = theta[ 2 ] ) ) ) )  
     }
     
     # singularidad en la parte inferior, hacia el deducible
     sg <- datsev[ claim == 0, list( x = deductible ) ]
     sg <- sg$x
     if ( length( sg ) > 0 ) {
-      l <- l + sum( sapply( sg, FUN = function( x ) log( Fd( x, meanlog = theta[1], sdlog = theta[2] ) ) ) )  
+      l <- l + sum( sapply( sg, FUN = function( x ) log( Fd( x, meanlog = theta[ 1 ], sdlog = theta[ 2 ] ) ) ) )  
     }
     
     return( -l ) # con menos ya que el optimizador minimiza
@@ -1609,7 +1605,7 @@ for ( g in grpcl$grp ) {
     estim_sev, 
     data.table( grp = g, 
                 n = nrow( datsev ),
-                meanlog = loglik_max[[ g ]]$par[1], 
+                meanlog = loglik_max[[ g ]]$par[ 1 ], 
                 sdlog = loglik_max[[ g ]]$par[ 2 ],
                 loglik = -loglik_max[[ g ]]$value )
   )
@@ -1647,6 +1643,10 @@ xlbl <- xbrk
 
 bins <- sev_claims[ , list( bins = nclass.scott( claim ) ), by = list( grp ) ]
 
+x <- seq( xlim[1], xlim[2], length = 500 )
+fx <- sapply( x, fd, meanlog = estim_sev$meanlog[ 1 ], sdlog = estim_sev$sdlog[ 2 ] )
+dfx <- estim_sev[ , list( x = x, fx = sapply( x, fd, meanlog = meanlog, sdlog = sdlog ) ), by = list( grp ) ]
+
 plt <- ggplot( ) +
   geom_histogram( data = sev_claims, aes( claim, after_stat( density ) ), 
                   fill = 'dodgerblue3', colour = 'dodgerblue4', alpha = 0.3, 
@@ -1662,6 +1662,28 @@ plt <- ggplot( ) +
   theme( legend.position = "none" )
 plot( plt )
 ```
+
+
+$$
+S_g = \sum\limits_{i=1}^{n_g} \sum\limits_{j=1}^{N_g} D_{g,i}\left( X_{g,i,j} \right)
+$$
+
+$$
+S = \sum\limits_{g \in G} S_g
+= \sum\limits_{g \in G} \sum\limits_{i=1}^{n_g} \sum\limits_{j=1}^{N_g} D_{g,i}\left( X_{g,i,j} \right)
+$$
+$$
+\E\left[ S_g \right] = n_g \E\left[ N_g \right] \E\left[ X_g \right]
+= `r formatC( 0, digits = 4, format = 'f' )`
+$$
+$$
+\E\left[ S \right]
+= \sum\limits_{g \in G} \E\left[ S_g \right] 
+= \sum\limits_{g \in G} n_g \E\left[ N_g \right] \E\left[ X_g \right]
+= `r formatC( 0, digits = 4, format = 'f' )`
+$$
+
+
 :::
 
 <!------------------------------------------------------------------------------------------------->
