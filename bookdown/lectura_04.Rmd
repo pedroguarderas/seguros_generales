@@ -1072,6 +1072,37 @@ es precisamente necesaria, ya que la distribución $F$ si puede tener singularid
 solo la primera suma sobre los puntos donde hay diferenciabilidad, la estimación por verosimilitud 
 para el parámetro $\theta$ no será la correcta.
 
+Los estimadores que resulta de la maximización de verosimilitud satisfacen algunas propiedades
+deseables.
+
+::: {.theorem #mleconsistent}
+Los estimadores por maximización de verosimilitud son consistentes.
+:::
+
+::: {.theorem #mleefficient}
+Los estimadores por máximización de verosimilitud, si en caso de existir, estos son eficientes.
+:::
+
+::: {.theorem #mlesufficient}
+Si en caso existe un estimador suficiente, este es función del estimador de máxima verosimilitud.
+:::
+
+Un estimador de máxima verosimilitud no necesariamente es insesgado.
+
+::: {.theorem #mlenormality}
+Un estimador por maximización de verosimilitud se comporta normalmente de forma asintótica
+alrededor del verdadero parámetro $\theta \in \Theta$. Más claramente, si $\tau_n$ es el estimador
+por maximización de verosimilitud, se tiene que $\tau_n( X_1, \ldots, X_n ) \rightsquigarrow F_n$, 
+entonces en el límite $n \rightarrow +\infty$, se tiene la convergencia en distribución
+$F_n \rightarrow N\left( \theta, I( \theta )^{-1} \right)$.
+
+Donde $I(\theta)$, es un criterio de información, dado por la matriz
+$$
+\left[ I(\theta) \right]_{i,j}
+= \left[ \E\left[ -\frac{\D^2}{\D \theta_i \D \theta_j}\log f( X, \theta )\, \middle|\, \theta \right] \right]_{i,j}
+$$
+:::
+
 <!------------------------------------------------------------------------------------------------->
 ### Pruebas de hipótesis
 
