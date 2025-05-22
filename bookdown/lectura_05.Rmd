@@ -622,7 +622,7 @@ el perfil de riesgo de cada cliente. Para su selección se suele utilizar alguno
 económico, financiero, legal y estadístico.
 
 <!------------------------------------------------------------------------------------------------->
-## Aplicación del deducible
+## Aplicación del deducible {#deducibles}
 
 En muchas ocasiones según las condiciones de los contratos de seguro y el apetito de riesgo del 
 asegurador, se configura funciones deducibles sobre los reclamos. El objetivo de aplicar un 
@@ -1295,8 +1295,8 @@ plot( plt )
 
 ::: {.example #l5ex8}
 Ahora bien, pongamos en aplicación todo lo aprendido hasta el momento. Para ello, trabajaremos
-con la siguiente información que obtenemos a continuación. La cual corresponde a la producción 
-de pólizas y reclamos de varios productos asociados al ramo de salud.
+con información de pólizas de un seguro de salud. La información está compuesta de dos objetos,
+uno la producción de pólizas y dos los reclamos de varios productos asociados al ramo.
 
 La información corresponde a un seguro de salud el cual tiene pólizas individuales y colectivas, 
 para cada una de sus contratos se especifica un deducible de la forma 
@@ -1328,7 +1328,8 @@ production[ 1:100 ] %>%
 
 Los reclamos se detallan en la tabla a continuación. En la información no se dispone del valor 
 original del reclamo, sino tan solo del valor pagado, después de aplicar la función deducible $D$.
-En la misma información se incluye el deducible $d$ y el monto de máximo de cobertura $M$.
+En la misma información se incluye el deducible $d$ y el monto de máximo de cobertura $M$ que se 
+utilizó para aplicar la deducción.
 ```{r l5t2, echo = TRUE, results = 'asis', out.width='100%', class.source = 'fold-hide'}
 claims[ 1:100 ] %>%
   kable(
@@ -1344,15 +1345,28 @@ claims[ 1:100 ] %>%
   scroll_box( width = "100%", height = "500px" )
 ```
 
-Ahora calculemos la duración de cada una de las pólizas, esto es el tiempo de exposición al riesgo
-por cada persona asegurada.
+Primero definimos algunos parámetros que consideramos serán útiles en el desarrollo del ejemplo.
+Lo primero es definir las fechas que marcan el periodo para el cual estamos interesados en estudiar,
+con ello seleccionamos la periodicidad con la cual vamos a medir la frecuencia de los reclamos, 
+en este caso de forma anual `year`. También, seleccionamos de antemano unas edades para formar 
+grupos de riesgo por edad. 
 ```{r l5c15}
 idate <- ymd( '2018-01-01' )
 edate <- ymd( '2021-01-01' )
-dates <- data.table( di = idate, de = edate )
+sdate <- seq( idate, edate, by = 'year' )
+dates <- data.table( di = sdate[ -length( sdate ) ], de = sdate[ -1 ] )
 dates[ , tid := 1 ]
 xgs <- c( 0, 20, 40, 60, Inf )
+```
 
+Para generar un modelo de pérdida, asumiremos que la frecuencia de los siniestros $N$ es 
+independiente de los reclamos $\{X_i\}$. Con ellos estaremos en la capacidad de formular un 
+modelo colectivo de riesgo.
+
+Ahora tratamos la información correspondiente a la producción de las pólizas, en particular 
+extrayendo las pólizas que intersectan con los periodo de observación y creando los grupos de 
+edades `xg`.
+```{r l5c16}
 production[ , tid := 1 ]
 prod_prep <- merge.data.table( dates, production, by = 'tid', all.x = TRUE, allow.cartesian = TRUE )
 prod_prep[ , tid := NULL ]
@@ -1367,7 +1381,18 @@ noclaims_prep <- unique( prod_prep[ , list( policy, id, sex, xg, bdate, di, de, 
 noclaims_prep <- noclaims_prep[ , list( policy, id, sex, xg, bdate, di, de, N, S ) ]
 ```
 
-```{r l5c16}
+Así mismo, trabajamos con la información correspondiente a los reclamos. Primeramente los agregados
+por código único de siniestro `idc`, fecha de siniestro `cdate` y periodo de observación `di` a 
+`de`, esto para agrupar los reclamos que corresponden a un solo siniestros por periodo. Luego, 
+filtramos los siniestros que solo se presentan en el periodo de observación. También, se cuenta 
+cuantos siniestros presenta cada asegurado según por su código único de identificación `id` y 
+también la póliza a la que pertenecen `policy`.
+
+Finalmente, se hace una estadística de frecuencia por cada grupo de riesgo dados por el sexo 
+`sex` y el grupo de edad `xg`. En particular se calcula el indicador para la familia de Panjer, 
+esto con la finalidad de caracterizar el tipo de distribución que determina la frecuencia 
+de los reclamos.
+```{r l5c17}
 claims_prep <- claims[ , list( DX = sum( claim ) ), by = list( policy, id, idc, type, sex, bdate, cdate ) ]
 claims_prep[ , x := round( interval( bdate, cdate ) / dyears( 1 ), 0 ) ]
 claims_prep[ , xg := cut( x = x, breaks = xgs, include.lowest = TRUE, ordered_result = TRUE, right = FALSE ) ]
@@ -1380,17 +1405,17 @@ claims_prep <- rbind( claims_prep, noclaims_prep )
 claims_prep <- claims_prep[ , list( N = sum( N ), S = sum( S ) ), by = list( policy, id, sex, xg, bdate, di, de ) ]
 
 count <- copy( claims_prep )
-count <- count[ , list( fn = .N, S = sum( S ) ), by = list( sex, xg, di, de, N ) ]
+count <- count[ , list( fn = .N, S = sum( S ) ), by = list( sex, xg, N ) ]
 
-expand <- count[ , list( N = max( N ) ), by = list( sex, xg, di, de ) ]
-expand <- expand[ , list( N = seq( 0, N, 1 ) ), by = list( sex, xg, di, de ) ]
+expand <- count[ , list( N = max( N ) ), by = list( sex, xg ) ]
+expand <- expand[ , list( N = seq( 0, N, 1 ) ), by = list( sex, xg ) ]
 
-count <- merge.data.table( expand, count, by = c( 'sex', 'xg', 'de', 'di', 'N' ), all.x = TRUE )
+count <- merge.data.table( expand, count, by = c( 'sex', 'xg', 'N' ), all.x = TRUE )
 count[ is.na( fn ), fn := 0 ]
 count[ is.na( S ), S := 0 ]
-setorder( count, sex, xg, di, N )
-count[ , pn := fn / sum( fn ), by = list( sex, xg, di, de ) ]
-count[ , vn := shift( pn, fill = 0 ), by = list( sex, xg, di, de ) ]
+setorder( count, sex, xg, N )
+count[ , pn := fn / sum( fn ), by = list( sex, xg ) ]
+count[ , vn := shift( pn, fill = 0 ), by = list( sex, xg ) ]
 count[ vn != 0, vn := N * pn / vn ]
 count[ vn == 0, vn := 0 ]
 
@@ -1402,8 +1427,8 @@ count[ , grp := factor( paste0( sex, ' ', xg ), labels = grpcl$grp, ordered = TR
 claims_prep[ , grp := factor( paste0( sex, ' ', xg ), labels = grpcl$grp, ordered = TRUE ) ]
 ```
 
-Los grupos de riesgo que hemos seleccionado para estudiar la frecuencia y severidad de los reclamos
-son los siguientes:
+Los grupos de riesgo, que designaremos con un índice $g$, los hemos seleccionado para estudiar la 
+frecuencia y severidad de los reclamos, estos son los siguientes:
 ```{r l5t3, echo = TRUE, results = 'asis', out.width='100%', class.source = 'fold-hide'}
 grpcl %>%
   kable(
@@ -1433,12 +1458,15 @@ plt <- ggplot( ) +
 plot( plt )
 ```
 
-Como hemos evidenciado, para todos los casos en consideración el indicador $v_n$ 
-en consideración tiene un tendencia creciente y se evidencia un crecimiento lineal, esto sugiere que 
-la distribución discreta más adecuada para explicar la frecuencia de los reclamos para cada grupo
-es una binomial negativa $N \rightsquigarrow NBin$. Así, con el uso la función `fitdist` podemos 
-realizar ajustar la distribución del número de reclamos utilizando máximización de verosimilitud. 
-La función de verosimilitud logarítmica tiene la siguiente forma para cada grupo $g$.
+Como hemos evidenciado, para todos los casos en consideración el indicador $v_n$ tiene un tendencia 
+creciente y se evidencia un crecimiento con orden lineal, esto sugiere que la distribución discreta 
+más adecuada para explicar la frecuencia de los reclamos para cada grupo es una binomial negativa 
+$N \rightsquigarrow NBin( \alpha, p )$. Para la estimación por maximización de verosimilitud, 
+hacemos uso de la función `fitdist` con la cual estimaremos los parámetros dentro de una familia 
+de distribuciones binomiales negativas.
+
+Por su parte, la función de verosimilitud logarítmica para la frecuencia tiene la siguiente forma 
+para cada grupo $g$.
 $$
 \begin{eqnarray*}
 \ell_g( \alpha, p ) 
@@ -1456,8 +1484,9 @@ $$
 + n \log( 1 - p )
 \end{eqnarray*}
 $$
-
-```{r l5c17}
+Como ya lo mencionamos, para cada grupo $g$ podemos maximizar la verosimilitud logarítmica de la 
+frecuencia utilizando la función `fitdist` del paquete `fitdistrplus`.
+```{r l5c18}
 fit_count <- list()
 estim_frec <- NULL
 
@@ -1486,9 +1515,9 @@ estim_frec[ , SDN := sqrt( a * ( 1 - p ) / p^2 ) ]
 estim_frec <- estim_frec[ , list( grp, a, p, EN, SDN, loglik, aic, bic )]
 ```
 
-En la lista que hemos creado `fit_count` hemos almacenado cada una de las estimaciones de la 
-frecuencia por maximización de verosimilitud para cada uno de los grupos. A continuación, 
-presentamos los resultados de la estimación para la frecuencia.
+En la lista que hemos creado `fit_count` hemos almacenado cada una de los objetos con las 
+estimaciones de la frecuencia para cada uno de los grupos. A continuación, presentamos los 
+resultados de la estimación para la frecuencia.
 ```{r l5t4, echo = TRUE, results = 'asis', out.width='100%', class.source = 'fold-hide'}
 estim_frec %>%
   kable(
@@ -1505,12 +1534,13 @@ estim_frec %>%
   scroll_box( width = "100%", height = "500px" )
 ```
 
-Ahora nos enfocamos en estudiar la severidad de los reclamos. Desde un inicio sabemos que los 
-valores de los reclamos ya vienen censurados, a causa de la aplicación de la función deducible $D$, 
-por tal razón es de esperar que la función de distribución acumulada de los reclamos deducidos tenga 
+Ahora, nos enfocamos en estudiar la severidad de los reclamos. Desde un inicio sabemos que los 
+valores de los reclamos ya vienen censurados, a causa de la aplicación de la función deducible $D$,
+como consecuencia tenemos pérdida de información que no podemos recuperar, por tal razón es de 
+esperar que la función de distribución acumulada de los reclamos deducidos $D(X)$ tenga 
 singularidades. Si buscamos utilizar el método de máxima verosimilitud para la estimación de la 
 mejor distribución, debemos hacer uso de la expresión completa que presentamos en \@ref(eq:loglik). 
-```{r l5c18}
+```{r l5c19}
 sev_claims <- claims[ , list( policy, id, idc, type, sex, bdate, cdate, deductible, amount, claim ) ]
 sev_claims[ , x := round( interval( bdate, cdate ) / dyears( 1 ), 0 ) ]
 sev_claims[ , xg := cut( x = x, breaks = xgs, include.lowest = TRUE, ordered_result = TRUE, right = FALSE ) ]
@@ -1521,18 +1551,46 @@ sev_claims[ , tid := NULL ]
 sev_claims[ , grp := factor( paste0( sex, ' ', xg ), labels = grpcl$grp, ordered = TRUE ) ]
 ```
 
-Por no incrementar la complejidad del ejemplo, asumiremos que los reclamos $X$ por cada grupo son 
-i.i.d. y estos siguen como distribución alguna de la familia log-normal, es decir 
-$X \rightsquigarrow LN( \mu, \sigma )$. Además, es de notar que el razonamiento es válido para 
-cualquier otra distribución. Para cada reclamo $i$-ésimo sabemos que se aplicaron un deducible 
-$d_i$ y un monto máximo asegurado $M_i$ determinado por la póliza de la cobertura y por la forma del 
-deducible $D$, la distribución de probabilidad para los valores aleatorios ya deducidos $Z = D(X)$, 
-tiene la forma:
+Los histogramas a continuación muestran como se distribuyen los reclamos ya censurados por cada 
+grupos de riesgo.
+```{r l5g14, out.width='90%', out.height='700px', fig.align='center', class.source = 'fold-hide'}
+xlim <- c( 0, 1e3 )
+xbrk <- seq( xlim[1], xlim[2], length = 5 )
+xlbl <- xbrk
+
+bins <- sev_claims[ , list( bins = nclass.scott( claim ) ), by = list( grp ) ]
+
+plt <- ggplot( ) +
+  geom_histogram( data = sev_claims, aes( claim, after_stat( density ) ), 
+                  fill = 'dodgerblue3', colour = 'dodgerblue4', alpha = 0.3, 
+                  bins = min( bins$bins ) ) +
+  facet_wrap( vars( grp ), scale = 'free_x', ncol = 4 ) +
+  scale_x_continuous( breaks = xbrk,
+                      labels = xlbl,
+                      limits = xlim,
+                      expand = c( 0, 0 ) ) +
+  xlab( TeX( "$D(X)$" ) ) + 
+  ylab( TeX( "$f_{D(X)}$" ) ) + 
+  theme_bw() +
+  theme( legend.position = "none" )
+plot( plt )
+```
+
+Por no incrementar la complejidad del ejemplo, asumiremos que los reclamos $X$ por cada grupo de
+riesgo son i.i.d. y estos siguen como distribución alguna presente en la familia log-normal, es 
+decir $X \rightsquigarrow LN( \mu, \sigma )$. Además, es de notar que el razonamiento es válido para 
+cualquier otra distribución. Más aún, sabemos que para cada reclamo $i$-ésimo se aplicó un deducible 
+$d_i$ y un monto máximo asegurado $M_i$ determinado por la cobertura de la póliza y estos valores a
+su vez determinan el deducible $D_i$, la distribución de probabilidad para los valores aleatorios ya 
+deducidos $Z = D_i(X)$, según lo ya estudiado en \@ref(deducibles), tiene la forma:
 $$
 F( z ) = \mathbf{1}_{[0,M_i)}( z ) F_X( z + d_i ) + \mathbf{1}_{[M_i,+\infty)}( z )
 $$
 
-Entonces, en este caso en particular la función de verosimilitud logarítmica toma la siguiente forma:
+Entonces, tomando en cuenta la forma general que hemos desarrollado en \@ref(eq:loglik) y la 
+forma anterior para la distribución acumulada de probabilidad, podemos determinar una expresión más 
+precisa para la función de verosimilitud logarítmica, donde debemos tomar en cuenta las 
+singularidades que producen los deducibles para cada póliza.
 $$
 \begin{eqnarray*}
 \ell( \mu, \sigma )
@@ -1553,10 +1611,13 @@ $$
 \end{eqnarray*}
 $$
 
-Preparamos la función de verosimilitud, en este caso debemos definirla explícitamente, sin la ayuda
-de alguna función en un paquete, esto se debe a que el deducible $d$ y el monto máximo de cobertura 
-$M$ varían entre pólizas.
-```{r l5c19}
+Preparamos la función de verosimilitud en R, en este caso debemos construirla explícitamente, sin la 
+ayuda de alguna función en un paquete, esto se debe a que el deducible $d$ y el monto máximo de 
+cobertura $M$ varían entre pólizas. Esta construcción debe ser realizada para cada grupo de riesgo y
+a su vez debemos maximizar cada una de las verosimilitudes logarítmicas, esto lo podemos realizar
+de forma integrada utilizando un bucle de programación `for` y el método usual de optimización 
+`optim`.
+```{r l5c20}
 Fd <- plnorm
 fd <- dlnorm
 
@@ -1617,8 +1678,15 @@ estim_sev[ , aic := 2 * 2 - 2 * loglik ]
 estim_sev[ , bic := 2 * log( n ) - 2 * loglik ]
 ```
 
+En este caso tenemos un problema donde existe convergencia para cada una de las 
+optimizaciones por verosimilitud sin embargo, en la práctica un bucle de esta naturaleza puede 
+implicar un costo computacional significativo en memoría y tiempo. Dependiendo de la dimensión
+del problema, se recomienda usar algunas técnicas que utilicen cálculo en paralelo o manejo óptimo 
+de memoria, en algunas otras circunstancias puede ser conveniente utilizar un método de 
+descomposición por *batchs* de información.
+
 Los resultados de la estimación mediante maximización de verosimilitud para la severidad de los 
-reclamos, lo sumarizamos en la tabla a continuación.
+reclamos, los presentamos en la tabla a continuación.
 ```{r l5t5, echo = TRUE, results = 'asis', out.width='100%', class.source = 'fold-hide'}
 estim_sev %>%
   kable(
@@ -1636,54 +1704,45 @@ estim_sev %>%
   scroll_box( width = "100%", height = "500px" )
 ```
 
-```{r l5g14, out.width='90%', out.height='700px', fig.align='center', class.source = 'fold-hide'}
-xlim <- c( 0, 1e3 )
-xbrk <- seq( xlim[1], xlim[2], length = 5 )
-xlbl <- xbrk
+Sumarizando, hemos determinado para cada grupo de riesgo $g$ una distribución para la variable 
+aleatoria correspondiente al número de reclamos $N_g \rightsquigarrow NBinom( \alpha_g, p_g )$, de 
+igual forma hemos estimado una distribución para la severidad de los reclamos 
+$X \rightsquigarrow LN( \mu_g, \sigma_g )$. 
 
-bins <- sev_claims[ , list( bins = nclass.scott( claim ) ), by = list( grp ) ]
+Es de notar que la estimación de la variable $N_g$ del número de siniestro se lo realizó por 
+individuo y por cada periodo de observación `di` a `de`, esto nos permite estimar una frecuencia 
+anualizada, debido a los anchos de los intervalos de observación. Pero si se considera pólizas con
+periodos de cobertura diferentes, hay que realizar el respectivo ajuste por la exposición al riesgo.
 
-x <- seq( xlim[1], xlim[2], length = 500 )
-fx <- sapply( x, fd, meanlog = estim_sev$meanlog[ 1 ], sdlog = estim_sev$sdlog[ 2 ] )
-dfx <- estim_sev[ , list( x = x, fx = sapply( x, fd, meanlog = meanlog, sdlog = sdlog ) ), by = list( grp ) ]
-
-plt <- ggplot( ) +
-  geom_histogram( data = sev_claims, aes( claim, after_stat( density ) ), 
-                  fill = 'dodgerblue3', colour = 'dodgerblue4', alpha = 0.3, 
-                  bins = min( bins$bins ) ) +
-  facet_wrap( vars( grp ), scale = 'free_x', ncol = 4 ) +
-  scale_x_continuous( breaks = xbrk,
-                      labels = xlbl,
-                      limits = xlim,
-                      expand = c( 0, 0 ) ) +
-  xlab( TeX( "$D(X)$" ) ) + 
-  ylab( TeX( "$f_{D(X)}$" ) ) + 
-  theme_bw() +
-  theme( legend.position = "none" )
-plot( plt )
-```
-
-
+El modelo de colectivo para este caso en particular debe tomar en cuenta el número de 
+individuos asegurados $n_g$ en el total de pólizas por cada grupo de riesgo $g$. Esto bajo el 
+supuesto que todas las pólizas de las $n_g$ tiene la misma exposición al riesgo de un año, si no es
+el caso habrá que realizar ajustes en la variable $N_g$ que cuenta el número de reclamos.
 $$
 S_g = \sum\limits_{i=1}^{n_g} \sum\limits_{j=1}^{N_g} D_{g,i}\left( X_{g,i,j} \right)
 $$
 
+La perdida total que sumariza cada grupo de riesgo $g$, es la dada por la expresión:
 $$
 S = \sum\limits_{g \in G} S_g
 = \sum\limits_{g \in G} \sum\limits_{i=1}^{n_g} \sum\limits_{j=1}^{N_g} D_{g,i}\left( X_{g,i,j} \right)
 $$
+```{r l5c21}
+estim <- merge.data.table( estim_frec[ , list( grp, EN, SDN ) ], 
+                           estim_sev[ , list( grp, EX, SDX ) ], by = 'grp' )
+```
+El valor esperados del reclamo total por cada grupo $g$ está dado por
 $$
 \E\left[ S_g \right] = n_g \E\left[ N_g \right] \E\left[ X_g \right]
 = `r formatC( 0, digits = 4, format = 'f' )`
 $$
+Bajo el mismo razonamiento, el valor esperado del reclamo total
 $$
 \E\left[ S \right]
 = \sum\limits_{g \in G} \E\left[ S_g \right] 
 = \sum\limits_{g \in G} n_g \E\left[ N_g \right] \E\left[ X_g \right]
 = `r formatC( 0, digits = 4, format = 'f' )`
 $$
-
-
 :::
 
 <!------------------------------------------------------------------------------------------------->
@@ -1907,7 +1966,7 @@ En conclusión $N(t)$ tiene como distribución una ley de Poisson $Pois( \lambda
 se conoce a $N$ como un proceso de Poisson.
 :::
 
-```{r l5c20}
+```{r l5c22}
 m <- 1000
 lambda <- 10
 M <- 30
@@ -1999,7 +2058,7 @@ plot( plt )
 
 Como se describe en el paso 8 del algoritmo de simulación, para cada tiempo $t_l$ se puede estimar
 la distribución de probabilidad de la variable aleatoria $S(t_l)$.
-```{r l5c21}
+```{r l5c23}
 FeS <- lapply( 1:p, FUN = function( l ) ecdf( sapply( S, FUN = function( Si ) Si[ l ] ) ) )
 ns <- 1e3
 s <- seq( 0, Smax, length = ns )
