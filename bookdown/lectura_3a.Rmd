@@ -1,0 +1,135 @@
+<!------------------------------------------------------------------------------------------------->
+# Introducción a las operaciones de seguros
+
+<!------------------------------------------------------------------------------------------------->
+## El sistema financiero
+
+En todos lo paises del mundo existe un sistema financiero con el objetivo de ofrecer facilidades 
+para poner en práctica las decisiones financieras de:
+
+  - Personas
+  - Empresas
+  - Gobierno.
+  
+En general en un sistema financiero encontramos: 
+
+- Mercados de activos financieros
+  - Deuda, Derivados, Títulos…
+- Intermediarios (públicos y privados)
+  - Bancos
+  - Empresas de seguros
+  - Fondos de pensiones
+- Empresas de servicios
+  - Difusión de información
+  - Tarjetas de crédito, brokers…
+  
+Por medio de las instituciones del sistema, se espera facilitar algunas operaciones:
+
+- Transferencia de recursos
+  - A través del tiempo, regiones, entre, industrias,…
+- Administración del riesgo
+  - Medios para administrar el riesgo
+- Compensación y establecimiento de pagos
+  - Facilitar el intercambio de bienes,servicios, activos…
+- Concentración de recursos
+  - Financiamiento de grandes empresas y proyectos
+- Suministro de información
+  - Toma de decisiones en iguales condiciones
+
+<!------------------------------------------------------------------------------------------------->
+## Riesgos financieros
+
+Los riegos financieros son aquellos riesgos relacionados con las posibles pérdidas económicas que
+pueden enfrentar los actires del sistema (personas, empresas, gobierno), causadas por hechos 
+contingentes que afectan sus operaciones en el mercado financiero, sus actividades de negocio o
+sus pertenencias (activos financieros).
+
+De manera natural los individuos presentan un comportamiento que traduce su "miedo" a las pérdidas 
+cuando enfrentan situaciones de riesgo: la **aversión al riesgo**. 
+
+La aversión al riesgo se produce hacia la parte negativa del riesgo, esto es ante la posibilidad de 
+pérdidas financieras.
+
+Ante estas situaciones es necesario administrar el riesgo, para lo cual co-existen cuatro formas 
+principales:
+
+1. Evitar el riesgo (no siempre posible)
+2. Prevenir y controlar el riesgo
+3. Aceptar el riesgo
+4. Transferir el riesgo
+
+Vale recordar que históricamente los grandes avances de la humanidad han sido posibles gracias a
+a la aceptación y correcta gestión de de riesgos muy importantes. 
+
+Por lo tanto, en lugar de evitar los riesgos debemos tratar de conocerlos profundamente para 
+aceptarlos y poder aprovechar las oportunidades que brinda su correcta gestión.
+
+> "El riesgo existe gracias a nuestra humana
+incapacidad de conocer el futuro, a nuestras
+limitaciones para identificar sus verdaderas
+causas. Y mientras así sea, debemos
+esforzarnos por comprenderlo, aceptarlo y
+gestionarlo inteligentemente y con humildad."
+>
+> --- L. Vélez, 2003
+
+<!------------------------------------------------------------------------------------------------->
+### La transferencia de riesgos financieros
+
+Consiste en trasladar el riesgo a otros a un costo razonable. Esto es posible en un sistema 
+financiero gracias a mecanismos como:
+
+- **Protección:** reducir una pérdida potencial a costa de renunciar a una ganancia.
+- **Aseguramiento:**  pagar una prima para compensar una pérdida potencial mayor.
+- **Diversificación:** distribuir una pérdida potencial en varias pérdidas menores con distintas 
+exposiciones al riesgo.
+
+<!------------------------------------------------------------------------------------------------->
+# Fundamentos técnicos de los seguros
+
+En sus inicios el seguro era considerado como un juego de apuestas.
+
+El gran desarrollo científico de los fundamentos del seguro comienza a fines del siglo XIX con:
+
+- Desarrollo del cálculo de probabilidades
+- Ley de los grandes números
+
+El seguro comienza entonces a fundamentarse en las leyes estadísticas y nace el cálculo actuarial
+que demanda el análisis de la información histórica para medir los riesgos y determonar los niveles 
+de primas que permiten financiar las oparaciones de seguros.
+
+Sin embargo en algunos casos existen ciertas limitaciones técnicas:
+
+- Existen seguros que no se basan en análisis de información histórica, porque no existe o es limitada
+  - Seguros “especiales” o “exóticos”
+  - Seguro de satélites
+  - Seguro de las piernas de futbolistas, bailarinas…
+  - SPPAT (antiguo SOAT) al inicio!
+
+En estos casos el fundamento técnico resulta subjetivo basado en análisis de grupos de expertos que
+estudian los riesgos potenciales o experiencias relacionadas que permiten determinar primas.
+En estos casos es imprescindible el proceso de monitoreo de la evolución del riesgo.
+
+## La mutualización de riesgos
+
+La base de los seguros es **la compensación o mutualización de riesgos**: pagar los “pocos” 
+siniestros por medio de las primas recolectadas de muchos asegurados a un mismo riesgo.
+
+Para que la compensación de riesgos funciones es necesario:
+
+- Dispersión de riesgos
+- Ley de los grandes números
+- Riesgos independientes
+
+Por lo tanto, no funciona con pocos asegurados porque no aplica la ley de los grandes números.
+
+Tampoco funciona frente a riesgos catastróficos que presentan una baja dispersión y alta concentración
+del riesgo.
+
+En estos casos aparecen como soluición el Coaseguro o el Reaseguro que permiten compensar los riesgos
+gracias a la dispersión, incluso a escala mundial
+
+**NEGOCIO**
+<!------------------------------------------------------------------------------------------------->
+## Probabilidad y conceptos asociados
+
