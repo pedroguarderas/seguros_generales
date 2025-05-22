@@ -58,6 +58,7 @@ thm:thmvueunicity
 def:destsufic
 thm:thfactorsufic
 def:dfamicomp
+eq:loglik
 exm:l5ex1
 exm:l5ex2
 exm:l5ex3
@@ -68,6 +69,8 @@ exm:l5ex8
 tab:l5t1
 tab:l5t2
 tab:l5t3
+tab:l5t4
+tab:l5t5
 exm:l5ex5
 def:dVaR
 prp:varinv

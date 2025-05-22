@@ -23,7 +23,7 @@
 <meta name="author" content="" />
 
 
-<meta name="date" content="2025-05-20" />
+<meta name="date" content="2025-05-21" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -470,24 +470,24 @@ P( N = n ) = \exp(-g( \beta x ) ER( x )) \frac{g( \beta x )^n ER( x )^n}{n!}
 \]</span></p>
 <p></p>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb88"><pre class="sourceCode r fold-hide"><code class="sourceCode r"><span id="cb88-1"><a href="modelos-lineales-generalizados-glm.html#cb88-1" tabindex="-1"></a><span class="co"># la librería CASdatasets fue previamente cargada</span></span>
-<span id="cb88-2"><a href="modelos-lineales-generalizados-glm.html#cb88-2" tabindex="-1"></a><span class="fu">data</span>( beMTPL97 )</span>
-<span id="cb88-3"><a href="modelos-lineales-generalizados-glm.html#cb88-3" tabindex="-1"></a>beMTPL97 <span class="ot">&lt;-</span> <span class="fu">as.data.table</span>( beMTPL97 )</span>
-<span id="cb88-4"><a href="modelos-lineales-generalizados-glm.html#cb88-4" tabindex="-1"></a></span>
-<span id="cb88-5"><a href="modelos-lineales-generalizados-glm.html#cb88-5" tabindex="-1"></a><span class="co"># Impresión de las primeras filas de la tabla</span></span>
-<span id="cb88-6"><a href="modelos-lineales-generalizados-glm.html#cb88-6" tabindex="-1"></a>beMTPL97[ <span class="dv">1</span><span class="sc">:</span><span class="dv">100</span> ] <span class="sc">%&gt;%</span></span>
-<span id="cb88-7"><a href="modelos-lineales-generalizados-glm.html#cb88-7" tabindex="-1"></a>  <span class="fu">kable</span>(</span>
-<span id="cb88-8"><a href="modelos-lineales-generalizados-glm.html#cb88-8" tabindex="-1"></a>    <span class="at">label =</span> <span class="cn">NA</span>,</span>
-<span id="cb88-9"><a href="modelos-lineales-generalizados-glm.html#cb88-9" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">&quot;Pólizas y reclamos de automóviles en Bélgica&quot;</span>,</span>
-<span id="cb88-10"><a href="modelos-lineales-generalizados-glm.html#cb88-10" tabindex="-1"></a>    <span class="at">row.names =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb88-11"><a href="modelos-lineales-generalizados-glm.html#cb88-11" tabindex="-1"></a>    <span class="at">col.names =</span> <span class="fu">names</span>( beMTPL97 ),</span>
-<span id="cb88-12"><a href="modelos-lineales-generalizados-glm.html#cb88-12" tabindex="-1"></a>    <span class="at">align =</span> <span class="fu">paste0</span>( <span class="fu">rep</span>( <span class="st">&quot;r&quot;</span>, <span class="fu">ncol</span>( beMTPL97 ) ), <span class="at">collapse =</span> <span class="st">&quot;&quot;</span> ),</span>
-<span id="cb88-13"><a href="modelos-lineales-generalizados-glm.html#cb88-13" tabindex="-1"></a>    <span class="at">digits =</span> <span class="fu">c</span>( <span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">4</span>, <span class="dv">4</span> ),</span>
-<span id="cb88-14"><a href="modelos-lineales-generalizados-glm.html#cb88-14" tabindex="-1"></a>    <span class="at">format.args =</span> <span class="fu">list</span>( <span class="at">big.mark =</span> <span class="st">&#39;,&#39;</span>, <span class="at">decimal.mark =</span> <span class="st">&#39;.&#39;</span>, <span class="at">scientific =</span> <span class="cn">FALSE</span> ),</span>
-<span id="cb88-15"><a href="modelos-lineales-generalizados-glm.html#cb88-15" tabindex="-1"></a>    <span class="at">escape =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb88-16"><a href="modelos-lineales-generalizados-glm.html#cb88-16" tabindex="-1"></a>    <span class="at">centering =</span> <span class="cn">TRUE</span> ) <span class="sc">%&gt;%</span></span>
-<span id="cb88-17"><a href="modelos-lineales-generalizados-glm.html#cb88-17" tabindex="-1"></a>  <span class="fu">kable_classic</span>( <span class="at">font_size =</span> <span class="dv">14</span>, <span class="at">full_width =</span> <span class="cn">FALSE</span>, <span class="at">html_font =</span> <span class="st">&quot;Cambria&quot;</span>, <span class="at">position =</span> <span class="st">&quot;center&quot;</span> ) <span class="sc">%&gt;%</span></span>
-<span id="cb88-18"><a href="modelos-lineales-generalizados-glm.html#cb88-18" tabindex="-1"></a>  <span class="fu">scroll_box</span>( <span class="at">width =</span> <span class="st">&quot;100%&quot;</span>, <span class="at">height =</span> <span class="st">&quot;500px&quot;</span> )</span></code></pre></div>
+<div class="sourceCode" id="cb103"><pre class="sourceCode r fold-hide"><code class="sourceCode r"><span id="cb103-1"><a href="modelos-lineales-generalizados-glm.html#cb103-1" tabindex="-1"></a><span class="co"># la librería CASdatasets fue previamente cargada</span></span>
+<span id="cb103-2"><a href="modelos-lineales-generalizados-glm.html#cb103-2" tabindex="-1"></a><span class="fu">data</span>( beMTPL97 )</span>
+<span id="cb103-3"><a href="modelos-lineales-generalizados-glm.html#cb103-3" tabindex="-1"></a>beMTPL97 <span class="ot">&lt;-</span> <span class="fu">as.data.table</span>( beMTPL97 )</span>
+<span id="cb103-4"><a href="modelos-lineales-generalizados-glm.html#cb103-4" tabindex="-1"></a></span>
+<span id="cb103-5"><a href="modelos-lineales-generalizados-glm.html#cb103-5" tabindex="-1"></a><span class="co"># Impresión de las primeras filas de la tabla</span></span>
+<span id="cb103-6"><a href="modelos-lineales-generalizados-glm.html#cb103-6" tabindex="-1"></a>beMTPL97[ <span class="dv">1</span><span class="sc">:</span><span class="dv">100</span> ] <span class="sc">%&gt;%</span></span>
+<span id="cb103-7"><a href="modelos-lineales-generalizados-glm.html#cb103-7" tabindex="-1"></a>  <span class="fu">kable</span>(</span>
+<span id="cb103-8"><a href="modelos-lineales-generalizados-glm.html#cb103-8" tabindex="-1"></a>    <span class="at">label =</span> <span class="cn">NA</span>,</span>
+<span id="cb103-9"><a href="modelos-lineales-generalizados-glm.html#cb103-9" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">&quot;Pólizas y reclamos de automóviles en Bélgica&quot;</span>,</span>
+<span id="cb103-10"><a href="modelos-lineales-generalizados-glm.html#cb103-10" tabindex="-1"></a>    <span class="at">row.names =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb103-11"><a href="modelos-lineales-generalizados-glm.html#cb103-11" tabindex="-1"></a>    <span class="at">col.names =</span> <span class="fu">names</span>( beMTPL97 ),</span>
+<span id="cb103-12"><a href="modelos-lineales-generalizados-glm.html#cb103-12" tabindex="-1"></a>    <span class="at">align =</span> <span class="fu">paste0</span>( <span class="fu">rep</span>( <span class="st">&quot;r&quot;</span>, <span class="fu">ncol</span>( beMTPL97 ) ), <span class="at">collapse =</span> <span class="st">&quot;&quot;</span> ),</span>
+<span id="cb103-13"><a href="modelos-lineales-generalizados-glm.html#cb103-13" tabindex="-1"></a>    <span class="at">digits =</span> <span class="fu">c</span>( <span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">4</span>, <span class="dv">4</span> ),</span>
+<span id="cb103-14"><a href="modelos-lineales-generalizados-glm.html#cb103-14" tabindex="-1"></a>    <span class="at">format.args =</span> <span class="fu">list</span>( <span class="at">big.mark =</span> <span class="st">&#39;,&#39;</span>, <span class="at">decimal.mark =</span> <span class="st">&#39;.&#39;</span>, <span class="at">scientific =</span> <span class="cn">FALSE</span> ),</span>
+<span id="cb103-15"><a href="modelos-lineales-generalizados-glm.html#cb103-15" tabindex="-1"></a>    <span class="at">escape =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb103-16"><a href="modelos-lineales-generalizados-glm.html#cb103-16" tabindex="-1"></a>    <span class="at">centering =</span> <span class="cn">TRUE</span> ) <span class="sc">%&gt;%</span></span>
+<span id="cb103-17"><a href="modelos-lineales-generalizados-glm.html#cb103-17" tabindex="-1"></a>  <span class="fu">kable_classic</span>( <span class="at">font_size =</span> <span class="dv">14</span>, <span class="at">full_width =</span> <span class="cn">FALSE</span>, <span class="at">html_font =</span> <span class="st">&quot;Cambria&quot;</span>, <span class="at">position =</span> <span class="st">&quot;center&quot;</span> ) <span class="sc">%&gt;%</span></span>
+<span id="cb103-18"><a href="modelos-lineales-generalizados-glm.html#cb103-18" tabindex="-1"></a>  <span class="fu">scroll_box</span>( <span class="at">width =</span> <span class="st">&quot;100%&quot;</span>, <span class="at">height =</span> <span class="st">&quot;500px&quot;</span> )</span></code></pre></div>
 </details>
 <div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:500px; overflow-x: scroll; width:100%; ">
 <table class=" lightable-classic" style="font-size: 14px; color: black; font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
@@ -6159,27 +6159,27 @@ private
 <p></p>
 <p></p>
 <details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb89"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb89-1"><a href="modelos-lineales-generalizados-glm.html#cb89-1"></a>model_N <span class="ot">&lt;-</span> <span class="fu">glm</span>( <span class="at">formula =</span> nclaims <span class="sc">~</span> ageph <span class="sc">+</span> sex <span class="sc">+</span> power <span class="sc">+</span> fuel <span class="sc">+</span> <span class="fu">offset</span>( <span class="fu">log</span>( expo ) ) <span class="sc">+</span> <span class="dv">0</span>, </span>
-<span id="cb89-2"><a href="modelos-lineales-generalizados-glm.html#cb89-2"></a>                <span class="at">family =</span> <span class="fu">poisson</span>( <span class="at">link =</span> <span class="st">&#39;log&#39;</span> ), </span>
-<span id="cb89-3"><a href="modelos-lineales-generalizados-glm.html#cb89-3"></a>                <span class="at">data =</span> beMTPL97 )</span></code></pre></div>
+<div class="sourceCode" id="cb104"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb104-1"><a href="modelos-lineales-generalizados-glm.html#cb104-1"></a>model_N <span class="ot">&lt;-</span> <span class="fu">glm</span>( <span class="at">formula =</span> nclaims <span class="sc">~</span> ageph <span class="sc">+</span> sex <span class="sc">+</span> power <span class="sc">+</span> fuel <span class="sc">+</span> <span class="fu">offset</span>( <span class="fu">log</span>( expo ) ) <span class="sc">+</span> <span class="dv">0</span>, </span>
+<span id="cb104-2"><a href="modelos-lineales-generalizados-glm.html#cb104-2"></a>                <span class="at">family =</span> <span class="fu">poisson</span>( <span class="at">link =</span> <span class="st">&#39;log&#39;</span> ), </span>
+<span id="cb104-3"><a href="modelos-lineales-generalizados-glm.html#cb104-3"></a>                <span class="at">data =</span> beMTPL97 )</span></code></pre></div>
 </details>
 <p></p>
 <p></p>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb90"><pre class="sourceCode r fold-hide"><code class="sourceCode r"><span id="cb90-1"><a href="modelos-lineales-generalizados-glm.html#cb90-1" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">tidy</span>( model_N )</span>
-<span id="cb90-2"><a href="modelos-lineales-generalizados-glm.html#cb90-2" tabindex="-1"></a>dat <span class="sc">%&gt;%</span></span>
-<span id="cb90-3"><a href="modelos-lineales-generalizados-glm.html#cb90-3" tabindex="-1"></a>  <span class="fu">kable</span>(</span>
-<span id="cb90-4"><a href="modelos-lineales-generalizados-glm.html#cb90-4" tabindex="-1"></a>    <span class="at">label =</span> <span class="cn">NA</span>,</span>
-<span id="cb90-5"><a href="modelos-lineales-generalizados-glm.html#cb90-5" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">&quot;Resultados del modelo GLM&quot;</span>,</span>
-<span id="cb90-6"><a href="modelos-lineales-generalizados-glm.html#cb90-6" tabindex="-1"></a>    <span class="at">row.names =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb90-7"><a href="modelos-lineales-generalizados-glm.html#cb90-7" tabindex="-1"></a>    <span class="at">col.names =</span> <span class="fu">names</span>( dat ),</span>
-<span id="cb90-8"><a href="modelos-lineales-generalizados-glm.html#cb90-8" tabindex="-1"></a>    <span class="at">align =</span> <span class="st">&#39;lrrrr&#39;</span>,</span>
-<span id="cb90-9"><a href="modelos-lineales-generalizados-glm.html#cb90-9" tabindex="-1"></a>    <span class="at">digits =</span> <span class="fu">c</span>( <span class="dv">0</span>, <span class="dv">6</span>, <span class="dv">6</span>, <span class="dv">6</span>, <span class="dv">6</span> ),</span>
-<span id="cb90-10"><a href="modelos-lineales-generalizados-glm.html#cb90-10" tabindex="-1"></a>    <span class="at">format.args =</span> <span class="fu">list</span>( <span class="at">big.mark =</span> <span class="st">&#39;,&#39;</span>, <span class="at">decimal.mark =</span> <span class="st">&#39;.&#39;</span>, <span class="at">scientific =</span> <span class="cn">FALSE</span> ),</span>
-<span id="cb90-11"><a href="modelos-lineales-generalizados-glm.html#cb90-11" tabindex="-1"></a>    <span class="at">escape =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb90-12"><a href="modelos-lineales-generalizados-glm.html#cb90-12" tabindex="-1"></a>    <span class="at">centering =</span> <span class="cn">TRUE</span> ) <span class="sc">%&gt;%</span></span>
-<span id="cb90-13"><a href="modelos-lineales-generalizados-glm.html#cb90-13" tabindex="-1"></a>  <span class="fu">kable_classic</span>( <span class="at">font_size =</span> <span class="dv">14</span>, <span class="at">full_width =</span> <span class="cn">FALSE</span>, <span class="at">html_font =</span> <span class="st">&quot;Cambria&quot;</span>, <span class="at">position =</span> <span class="st">&quot;center&quot;</span> ) <span class="sc">%&gt;%</span></span>
-<span id="cb90-14"><a href="modelos-lineales-generalizados-glm.html#cb90-14" tabindex="-1"></a>  <span class="fu">scroll_box</span>( <span class="at">width =</span> <span class="st">&quot;100%&quot;</span>, <span class="at">height =</span> <span class="st">&quot;300px&quot;</span> )</span></code></pre></div>
+<div class="sourceCode" id="cb105"><pre class="sourceCode r fold-hide"><code class="sourceCode r"><span id="cb105-1"><a href="modelos-lineales-generalizados-glm.html#cb105-1" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">tidy</span>( model_N )</span>
+<span id="cb105-2"><a href="modelos-lineales-generalizados-glm.html#cb105-2" tabindex="-1"></a>dat <span class="sc">%&gt;%</span></span>
+<span id="cb105-3"><a href="modelos-lineales-generalizados-glm.html#cb105-3" tabindex="-1"></a>  <span class="fu">kable</span>(</span>
+<span id="cb105-4"><a href="modelos-lineales-generalizados-glm.html#cb105-4" tabindex="-1"></a>    <span class="at">label =</span> <span class="cn">NA</span>,</span>
+<span id="cb105-5"><a href="modelos-lineales-generalizados-glm.html#cb105-5" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">&quot;Resultados del modelo GLM&quot;</span>,</span>
+<span id="cb105-6"><a href="modelos-lineales-generalizados-glm.html#cb105-6" tabindex="-1"></a>    <span class="at">row.names =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb105-7"><a href="modelos-lineales-generalizados-glm.html#cb105-7" tabindex="-1"></a>    <span class="at">col.names =</span> <span class="fu">names</span>( dat ),</span>
+<span id="cb105-8"><a href="modelos-lineales-generalizados-glm.html#cb105-8" tabindex="-1"></a>    <span class="at">align =</span> <span class="st">&#39;lrrrr&#39;</span>,</span>
+<span id="cb105-9"><a href="modelos-lineales-generalizados-glm.html#cb105-9" tabindex="-1"></a>    <span class="at">digits =</span> <span class="fu">c</span>( <span class="dv">0</span>, <span class="dv">6</span>, <span class="dv">6</span>, <span class="dv">6</span>, <span class="dv">6</span> ),</span>
+<span id="cb105-10"><a href="modelos-lineales-generalizados-glm.html#cb105-10" tabindex="-1"></a>    <span class="at">format.args =</span> <span class="fu">list</span>( <span class="at">big.mark =</span> <span class="st">&#39;,&#39;</span>, <span class="at">decimal.mark =</span> <span class="st">&#39;.&#39;</span>, <span class="at">scientific =</span> <span class="cn">FALSE</span> ),</span>
+<span id="cb105-11"><a href="modelos-lineales-generalizados-glm.html#cb105-11" tabindex="-1"></a>    <span class="at">escape =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb105-12"><a href="modelos-lineales-generalizados-glm.html#cb105-12" tabindex="-1"></a>    <span class="at">centering =</span> <span class="cn">TRUE</span> ) <span class="sc">%&gt;%</span></span>
+<span id="cb105-13"><a href="modelos-lineales-generalizados-glm.html#cb105-13" tabindex="-1"></a>  <span class="fu">kable_classic</span>( <span class="at">font_size =</span> <span class="dv">14</span>, <span class="at">full_width =</span> <span class="cn">FALSE</span>, <span class="at">html_font =</span> <span class="st">&quot;Cambria&quot;</span>, <span class="at">position =</span> <span class="st">&quot;center&quot;</span> ) <span class="sc">%&gt;%</span></span>
+<span id="cb105-14"><a href="modelos-lineales-generalizados-glm.html#cb105-14" tabindex="-1"></a>  <span class="fu">scroll_box</span>( <span class="at">width =</span> <span class="st">&quot;100%&quot;</span>, <span class="at">height =</span> <span class="st">&quot;300px&quot;</span> )</span></code></pre></div>
 </details>
 <div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:300px; overflow-x: scroll; width:100%; ">
 <table class=" lightable-classic" style="font-size: 14px; color: black; font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
@@ -6297,20 +6297,20 @@ fueldiesel
 <p></p>
 <p></p>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb91"><pre class="sourceCode r fold-hide"><code class="sourceCode r"><span id="cb91-1"><a href="modelos-lineales-generalizados-glm.html#cb91-1" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">glance</span>( model_N )</span>
-<span id="cb91-2"><a href="modelos-lineales-generalizados-glm.html#cb91-2" tabindex="-1"></a>dat <span class="sc">%&gt;%</span></span>
-<span id="cb91-3"><a href="modelos-lineales-generalizados-glm.html#cb91-3" tabindex="-1"></a>  <span class="fu">kable</span>(</span>
-<span id="cb91-4"><a href="modelos-lineales-generalizados-glm.html#cb91-4" tabindex="-1"></a>    <span class="at">label =</span> <span class="cn">NA</span>,</span>
-<span id="cb91-5"><a href="modelos-lineales-generalizados-glm.html#cb91-5" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">&quot;Resultados del modelo GLM&quot;</span>,</span>
-<span id="cb91-6"><a href="modelos-lineales-generalizados-glm.html#cb91-6" tabindex="-1"></a>    <span class="at">row.names =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb91-7"><a href="modelos-lineales-generalizados-glm.html#cb91-7" tabindex="-1"></a>    <span class="at">col.names =</span> <span class="fu">names</span>( dat ),</span>
-<span id="cb91-8"><a href="modelos-lineales-generalizados-glm.html#cb91-8" tabindex="-1"></a>    <span class="at">align =</span> <span class="fu">paste0</span>( <span class="fu">rep</span>( <span class="st">&quot;r&quot;</span>, <span class="fu">ncol</span>( dat ) ), <span class="at">collapse =</span> <span class="st">&quot;&quot;</span> ),</span>
-<span id="cb91-9"><a href="modelos-lineales-generalizados-glm.html#cb91-9" tabindex="-1"></a>    <span class="at">digits =</span> <span class="fu">c</span>( <span class="dv">4</span>, <span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">0</span> ),</span>
-<span id="cb91-10"><a href="modelos-lineales-generalizados-glm.html#cb91-10" tabindex="-1"></a>    <span class="at">format.args =</span> <span class="fu">list</span>( <span class="at">big.mark =</span> <span class="st">&#39;,&#39;</span>, <span class="at">decimal.mark =</span> <span class="st">&#39;.&#39;</span>, <span class="at">scientific =</span> <span class="cn">FALSE</span> ),</span>
-<span id="cb91-11"><a href="modelos-lineales-generalizados-glm.html#cb91-11" tabindex="-1"></a>    <span class="at">escape =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb91-12"><a href="modelos-lineales-generalizados-glm.html#cb91-12" tabindex="-1"></a>    <span class="at">centering =</span> <span class="cn">TRUE</span> ) <span class="sc">%&gt;%</span></span>
-<span id="cb91-13"><a href="modelos-lineales-generalizados-glm.html#cb91-13" tabindex="-1"></a>  <span class="fu">kable_classic</span>( <span class="at">font_size =</span> <span class="dv">14</span>, <span class="at">full_width =</span> <span class="cn">FALSE</span>, <span class="at">html_font =</span> <span class="st">&quot;Cambria&quot;</span>, <span class="at">position =</span> <span class="st">&quot;center&quot;</span> ) <span class="sc">%&gt;%</span></span>
-<span id="cb91-14"><a href="modelos-lineales-generalizados-glm.html#cb91-14" tabindex="-1"></a>  <span class="fu">scroll_box</span>( <span class="at">width =</span> <span class="st">&quot;100%&quot;</span>, <span class="at">height =</span> <span class="st">&quot;200px&quot;</span> )</span></code></pre></div>
+<div class="sourceCode" id="cb106"><pre class="sourceCode r fold-hide"><code class="sourceCode r"><span id="cb106-1"><a href="modelos-lineales-generalizados-glm.html#cb106-1" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">glance</span>( model_N )</span>
+<span id="cb106-2"><a href="modelos-lineales-generalizados-glm.html#cb106-2" tabindex="-1"></a>dat <span class="sc">%&gt;%</span></span>
+<span id="cb106-3"><a href="modelos-lineales-generalizados-glm.html#cb106-3" tabindex="-1"></a>  <span class="fu">kable</span>(</span>
+<span id="cb106-4"><a href="modelos-lineales-generalizados-glm.html#cb106-4" tabindex="-1"></a>    <span class="at">label =</span> <span class="cn">NA</span>,</span>
+<span id="cb106-5"><a href="modelos-lineales-generalizados-glm.html#cb106-5" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">&quot;Resultados del modelo GLM&quot;</span>,</span>
+<span id="cb106-6"><a href="modelos-lineales-generalizados-glm.html#cb106-6" tabindex="-1"></a>    <span class="at">row.names =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb106-7"><a href="modelos-lineales-generalizados-glm.html#cb106-7" tabindex="-1"></a>    <span class="at">col.names =</span> <span class="fu">names</span>( dat ),</span>
+<span id="cb106-8"><a href="modelos-lineales-generalizados-glm.html#cb106-8" tabindex="-1"></a>    <span class="at">align =</span> <span class="fu">paste0</span>( <span class="fu">rep</span>( <span class="st">&quot;r&quot;</span>, <span class="fu">ncol</span>( dat ) ), <span class="at">collapse =</span> <span class="st">&quot;&quot;</span> ),</span>
+<span id="cb106-9"><a href="modelos-lineales-generalizados-glm.html#cb106-9" tabindex="-1"></a>    <span class="at">digits =</span> <span class="fu">c</span>( <span class="dv">4</span>, <span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">0</span> ),</span>
+<span id="cb106-10"><a href="modelos-lineales-generalizados-glm.html#cb106-10" tabindex="-1"></a>    <span class="at">format.args =</span> <span class="fu">list</span>( <span class="at">big.mark =</span> <span class="st">&#39;,&#39;</span>, <span class="at">decimal.mark =</span> <span class="st">&#39;.&#39;</span>, <span class="at">scientific =</span> <span class="cn">FALSE</span> ),</span>
+<span id="cb106-11"><a href="modelos-lineales-generalizados-glm.html#cb106-11" tabindex="-1"></a>    <span class="at">escape =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb106-12"><a href="modelos-lineales-generalizados-glm.html#cb106-12" tabindex="-1"></a>    <span class="at">centering =</span> <span class="cn">TRUE</span> ) <span class="sc">%&gt;%</span></span>
+<span id="cb106-13"><a href="modelos-lineales-generalizados-glm.html#cb106-13" tabindex="-1"></a>  <span class="fu">kable_classic</span>( <span class="at">font_size =</span> <span class="dv">14</span>, <span class="at">full_width =</span> <span class="cn">FALSE</span>, <span class="at">html_font =</span> <span class="st">&quot;Cambria&quot;</span>, <span class="at">position =</span> <span class="st">&quot;center&quot;</span> ) <span class="sc">%&gt;%</span></span>
+<span id="cb106-14"><a href="modelos-lineales-generalizados-glm.html#cb106-14" tabindex="-1"></a>  <span class="fu">scroll_box</span>( <span class="at">width =</span> <span class="st">&quot;100%&quot;</span>, <span class="at">height =</span> <span class="st">&quot;200px&quot;</span> )</span></code></pre></div>
 </details>
 <div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:200px; overflow-x: scroll; width:100%; ">
 <table class=" lightable-classic" style="font-size: 14px; color: black; font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
@@ -6378,13 +6378,13 @@ nobs
 <p></p>
 <p></p>
 <details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb92"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb92-1"><a href="modelos-lineales-generalizados-glm.html#cb92-1"></a>pob <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>( <span class="at">ageph =</span> <span class="fu">seq</span>( <span class="dv">18</span>, <span class="dv">90</span>, <span class="dv">1</span> ), </span>
-<span id="cb92-2"><a href="modelos-lineales-generalizados-glm.html#cb92-2"></a>                    <span class="at">sex =</span> <span class="fu">c</span>( <span class="st">&#39;male&#39;</span>, <span class="st">&#39;female&#39;</span> ),</span>
-<span id="cb92-3"><a href="modelos-lineales-generalizados-glm.html#cb92-3"></a>                    <span class="at">power =</span> <span class="fu">seq</span>( <span class="dv">10</span>, <span class="dv">250</span> ),</span>
-<span id="cb92-4"><a href="modelos-lineales-generalizados-glm.html#cb92-4"></a>                    <span class="at">fuel =</span> <span class="fu">c</span>( <span class="st">&#39;gasoline&#39;</span>, <span class="st">&#39;diesel&#39;</span> ),</span>
-<span id="cb92-5"><a href="modelos-lineales-generalizados-glm.html#cb92-5"></a>                    <span class="at">expo =</span> <span class="dv">1</span> )</span>
-<span id="cb92-6"><a href="modelos-lineales-generalizados-glm.html#cb92-6"></a>pob <span class="ot">&lt;-</span> <span class="fu">as.data.table</span>( pob )</span>
-<span id="cb92-7"><a href="modelos-lineales-generalizados-glm.html#cb92-7"></a>pob[ , EN <span class="sc">:=</span> <span class="fu">predict</span>( model_N, <span class="at">newdata =</span> pob, <span class="at">type =</span> <span class="st">&#39;response&#39;</span> ) ]</span></code></pre></div>
+<div class="sourceCode" id="cb107"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb107-1"><a href="modelos-lineales-generalizados-glm.html#cb107-1"></a>pob <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>( <span class="at">ageph =</span> <span class="fu">seq</span>( <span class="dv">18</span>, <span class="dv">90</span>, <span class="dv">1</span> ), </span>
+<span id="cb107-2"><a href="modelos-lineales-generalizados-glm.html#cb107-2"></a>                    <span class="at">sex =</span> <span class="fu">c</span>( <span class="st">&#39;male&#39;</span>, <span class="st">&#39;female&#39;</span> ),</span>
+<span id="cb107-3"><a href="modelos-lineales-generalizados-glm.html#cb107-3"></a>                    <span class="at">power =</span> <span class="fu">seq</span>( <span class="dv">10</span>, <span class="dv">250</span> ),</span>
+<span id="cb107-4"><a href="modelos-lineales-generalizados-glm.html#cb107-4"></a>                    <span class="at">fuel =</span> <span class="fu">c</span>( <span class="st">&#39;gasoline&#39;</span>, <span class="st">&#39;diesel&#39;</span> ),</span>
+<span id="cb107-5"><a href="modelos-lineales-generalizados-glm.html#cb107-5"></a>                    <span class="at">expo =</span> <span class="dv">1</span> )</span>
+<span id="cb107-6"><a href="modelos-lineales-generalizados-glm.html#cb107-6"></a>pob <span class="ot">&lt;-</span> <span class="fu">as.data.table</span>( pob )</span>
+<span id="cb107-7"><a href="modelos-lineales-generalizados-glm.html#cb107-7"></a>pob[ , EN <span class="sc">:=</span> <span class="fu">predict</span>( model_N, <span class="at">newdata =</span> pob, <span class="at">type =</span> <span class="st">&#39;response&#39;</span> ) ]</span></code></pre></div>
 </details>
 <p></p>
 </div>
