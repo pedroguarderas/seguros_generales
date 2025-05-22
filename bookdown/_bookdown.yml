@@ -4,6 +4,7 @@ rmd_file:
   - lectura_01.Rmd
   - lectura_02.Rmd
   - lectura_03.Rmd
+  - lectura_03a.Rmd
   - lectura_04.Rmd
   - lectura_05.Rmd
   - lectura_06.Rmd
