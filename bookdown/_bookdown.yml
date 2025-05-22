@@ -1,17 +1,17 @@
 book_filename: seguros_generales
 rmd_file: 
   - index.Rmd
-  - lectura_01.Rmd
-  - lectura_02.Rmd
-  - lectura_03.Rmd
-  - lectura_03a.Rmd
-  - lectura_04.Rmd
-  - lectura_05.Rmd
-  - lectura_06.Rmd
-  - lectura_07.Rmd
-  - lectura_08.Rmd
-  - lectura_09.Rmd
-  - lectura_10.Rmd
+  - lectura_010.Rmd
+  - lectura_020.Rmd
+  - lectura_030.Rmd
+  - lectura_035.Rmd
+  - lectura_040.Rmd
+  - lectura_050.Rmd
+  - lectura_060.Rmd
+  - lectura_070.Rmd
+  - lectura_080.Rmd
+  - lectura_090.Rmd
+  - lectura_100.Rmd
 delete_merged_file: true
 new_session: no
 output_dir: "docs"

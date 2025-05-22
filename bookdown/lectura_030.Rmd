@@ -4,7 +4,7 @@
 <!------------------------------------------------------------------------------------------------->
 ## El sistema financiero
 
-En todos lo paises del mundo existe un sistema financiero con el objetivo de ofrecer facilidades 
+En todos lo países del mundo existe un sistema financiero con el objetivo de ofrecer facilidades 
 para poner en práctica las decisiones financieras de:
 
   - Personas
@@ -28,7 +28,7 @@ Por medio de las instituciones del sistema, se espera facilitar algunas operacio
 - Transferencia de recursos
   - A través del tiempo, regiones, entre, industrias,…
 - Administración del riesgo
-  - Medios para administrar el riesgo
+  - Medios para administrar el riesgo financiero
 - Compensación y establecimiento de pagos
   - Facilitar el intercambio de bienes,servicios, activos…
 - Concentración de recursos
@@ -40,7 +40,7 @@ Por medio de las instituciones del sistema, se espera facilitar algunas operacio
 ## Riesgos financieros
 
 Los riegos financieros son aquellos riesgos relacionados con las posibles pérdidas económicas que
-pueden enfrentar los actires del sistema (personas, empresas, gobierno), causadas por hechos 
+pueden enfrentar los actores del sistema (personas, empresas, gobierno), causadas por hechos 
 contingentes que afectan sus operaciones en el mercado financiero, sus actividades de negocio o
 sus pertenencias (activos financieros).
 
@@ -50,7 +50,7 @@ cuando enfrentan situaciones de riesgo: la **aversión al riesgo**.
 La aversión al riesgo se produce hacia la parte negativa del riesgo, esto es ante la posibilidad de 
 pérdidas financieras.
 
-Ante estas situaciones es necesario administrar el riesgo, para lo cual co-existen cuatro formas 
+En estas situaciones es necesario administrar el riesgo, para lo cual co-existen cuatro formas 
 principales:
 
 1. Evitar el riesgo (no siempre posible)
@@ -74,18 +74,18 @@ gestionarlo inteligentemente y con humildad."
 > --- L. Vélez, 2003
 
 <!------------------------------------------------------------------------------------------------->
-### La transferencia de riesgos financieros
+## La transferencia de riesgos financieros
 
 Consiste en trasladar el riesgo a otros a un costo razonable. Esto es posible en un sistema 
 financiero gracias a mecanismos como:
 
 - **Protección:** reducir una pérdida potencial a costa de renunciar a una ganancia.
-- **Aseguramiento:**  pagar una prima para compensar una pérdida potencial mayor.
 - **Diversificación:** distribuir una pérdida potencial en varias pérdidas menores con distintas 
 exposiciones al riesgo.
+- **Aseguramiento:**  pagar una prima para compensar una pérdida potencial mayor.
 
 <!------------------------------------------------------------------------------------------------->
-# Fundamentos técnicos de los seguros
+## Fundamentos técnicos de los seguros
 
 En sus inicios el seguro era considerado como un juego de apuestas.
 
@@ -94,17 +94,17 @@ El gran desarrollo científico de los fundamentos del seguro comienza a fines de
 - Desarrollo del cálculo de probabilidades
 - Ley de los grandes números
 
-El seguro comienza entonces a fundamentarse en las leyes estadísticas y nace el cálculo actuarial
-que demanda el análisis de la información histórica para medir los riesgos y determonar los niveles 
-de primas que permiten financiar las oparaciones de seguros.
+El seguro comienza entonces a fundamentarse en las leyes estadísticas y nace el *cálculo actuarial*
+que demanda el análisis de la información histórica para medir los riesgos y determinar los niveles 
+de primas que permiten financiar las operaciones de seguros.
 
-Sin embargo en algunos casos existen ciertas limitaciones técnicas:
-
-- Existen seguros que no se basan en análisis de información histórica, porque no existe o es limitada
-  - Seguros “especiales” o “exóticos”
-  - Seguro de satélites
+Sin embargo en algunos casos existen ciertas limitaciones técnicas, pues existen seguros que no se 
+basan en análisis de información histórica, porque no existe o es limitada:
+- Seguros “especiales” o “exóticos”
   - Seguro de las piernas de futbolistas, bailarinas…
-  - SPPAT (antiguo SOAT) al inicio!
+  - Seguro de satélites
+- Seguros nuevos
+  -SPPAT (antiguo SOAT) al inicio!
 
 En estos casos el fundamento técnico resulta subjetivo basado en análisis de grupos de expertos que
 estudian los riesgos potenciales o experiencias relacionadas que permiten determinar primas.
@@ -126,10 +126,76 @@ Por lo tanto, no funciona con pocos asegurados porque no aplica la ley de los gr
 Tampoco funciona frente a riesgos catastróficos que presentan una baja dispersión y alta concentración
 del riesgo.
 
-En estos casos aparecen como soluición el Coaseguro o el Reaseguro que permiten compensar los riesgos
-gracias a la dispersión, incluso a escala mundial
+En estos casos aparecen como solución el Coaseguro o el Reaseguro que permiten compensar los riesgos
+gracias a la dispersión, incluso a escala mundial.
 
-**NEGOCIO**
+
 <!------------------------------------------------------------------------------------------------->
-## Probabilidad y conceptos asociados
+## Ley de los grandes números
+
+Es una de las leyes más importantes en el campo de la *teoría de probabilidades*:
+
+````
+***Las frecuencias relativas (% de ocurrencia) del resultado de un experimento aleatorio
+tienden a estabilizarse en un valor:
+
+-La probabilidad de ese resultado***
+````
+
+<!------------------------------------------------------------------------------------------------->
+## Microeconomía del negocio de seguros
+
+El seguro es un **negocio** con fines de lucro.
+
+### Ciclo de producción 
+
+En el negocio del seguro se produce el fenómeno conocido como ** *inversión del ciclo de 
+producción* **
+
+- El asegurador fija el precio antes de conocer el costo del producto y asume obligaciones frente a 
+los asegurados.
+
+Como consecuencias las compañías de seguros captan dinero del público y por esta razón:
+
+-Deben conformar reservas técnicas
+-Son controladas por un organismo de control estatal: SCVS
+
+### Reservas técnicas
+
+El asegurador no puede disponer inmediatamente de las primas que recibe.
+
+Debe constituir reservas o provisiones técnicas con la finalidad de mantener niveles mínimos de
+solvencia al cierre de cada ejercicio y garantizar el cumplimiento de las obligaciones financieras
+que deberá honrar en el futuro por la cobertura de siniestros.
+
+- Ver norma de reservas técnicas
+
+Las reservas representan las obligaciones del asegurador con los asegurados y se registran en el 
+pasivo del balance:
+
+- Contablemente las primas se registran en el pasivo y conforme se devengan pasan a constituir los
+ingresos financieros.
+
+El principal riesgo del asegurador está en su pasivo.
+
+### Control estatal
+
+El riesgo del beneficiario de un seguro:
+
+Que el asegurador no pueda cumplir con sus obligaciones de cubrir los siniestros:
+
+-Riesgo de insolvencia del asegurador
+
+Esto justifica la necesidad del “control”:
+
+- Superintendencia de Compañías, Valores y Seguros (SCVS)
+  - Leyes y normas de solvencia
+  - Ejempl: Resoluciones de la SCVS, Solvencia I y II
+
+- Otras instituciones de control
+  - Junta de Política y Regulación Financiera (JPRF)
+
+- Objetivo: garantizar la solvencia del mercado asegurador en el largo plazo
+
+
 

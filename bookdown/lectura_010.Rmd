@@ -1,8 +1,8 @@
 <!------------------------------------------------------------------------------------------------->
-# Introducción
+<!-- # Presentación {-} -->
 
 <!------------------------------------------------------------------------------------------------->
-## Materia
+# Materia {-}
 
 Las presentes notas de curso han sido creadas para la materia **Matemática Actuarial de los 
 Seguros Generales** la cual es dictada en la Maestría de Ciencias Actuariales que realizan de forma 
@@ -21,7 +21,7 @@ Sin embargo, será un placer para nosotros que las lean, critiquen y en especial
 sus observaciones y posibles mejoras.
 
 <!------------------------------------------------------------------------------------------------->
-## Personal docente
+# Personal docente {-}
 
 El profesor a cargo de la materia es el actuario **Leonardo Vélez Aguirre**.
 
@@ -30,7 +30,7 @@ matemático **Pedro Guarderas**.
 
 
 <!------------------------------------------------------------------------------------------------->
-## Resultados de aprendizaje
+# Resultados de aprendizaje {-}
 
 - Contrastar los criterios de valoración actuarial en los seguros generales, así como elaborar y 
 aplicar las bases técnicas.
@@ -50,7 +50,7 @@ de sus responsabilidades.
 - Desarrollar un espíritu crítico y creativo, y respetuoso de su docente y compañeros.
 
 <!------------------------------------------------------------------------------------------------->
-## Contenidos propuestos
+# Contenidos propuestos {-}
 
 1. **Distribuciones compuestas**
 
@@ -70,7 +70,7 @@ siniestralidad agregada**
 8. **Teoría de la Ruina**
 
 <!------------------------------------------------------------------------------------------------->
-## Referencias bibliográficas
+# Referencias bibliográficas {-}
 
 ### Principales libros guía {-}
 
@@ -81,7 +81,7 @@ siniestralidad agregada**
 @MathAssuNV2, 
 https://nonlifemaths.github.io/. 
 
-### Otras referencias de soporte {-}
+## Otras referencias de soporte {-}
 
 De utilidad para quien desee profundizar con más detalle en algunos conceptos
 
@@ -95,7 +95,7 @@ De utilidad para quien desee profundizar con más detalle en algunos conceptos
 
 GIL FANA: Elementos de Matemáticas para las Ciencias del Seguro. Fundación Mapfre Estudios. 1991
 
-### Requerimientos informáticos {-}
+# Requerimientos informáticos {-}
 
 1. Lenguaje R
 2. Editor de código: RStudio, VScode, ...
