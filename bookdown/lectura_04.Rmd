@@ -1080,7 +1080,7 @@ Los estimadores por maximización de verosimilitud son consistentes.
 :::
 
 ::: {.theorem #mleefficient}
-Los estimadores por máximización de verosimilitud, si en caso de existir, estos son eficientes.
+Los estimadores por máximización de verosimilitud, si en caso de existen, estos son eficientes.
 :::
 
 ::: {.theorem #mlesufficient}
