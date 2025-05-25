@@ -5,7 +5,7 @@
 ## Mutualización del riesgo
 La idea de mantener un seguro está basada en la mutualización de los riesgos. La mutualización 
 como tal nace del mismo mecanismo bajo el cual funciona un seguro, cada asegurado transfiera 
-su riesgo individual a la compañia de seguros por su parte, la suma total de estos riesgos $S$ es 
+su riesgo individual a la compañía de seguros por su parte, la suma total de estos riesgos $S$ es 
 el riesgo total que asume el asegurador.
 
 Los riesgos de cada uno de los $n \in \N$ asegurados, pueden ser representados por variables 
@@ -1621,7 +1621,7 @@ de forma integrada utilizando un bucle de programación `for` y el método usual
 Fd <- plnorm
 fd <- dlnorm
 
-theta0 <- c( 2, 3 )
+theta0 <- c( 1, 1 )
 loglik_max <- list()
 estim_sev <- NULL
 
@@ -1648,6 +1648,7 @@ for ( g in grpcl$grp ) {
     # singularidad en la parte inferior, hacia el deducible
     sg <- datsev[ claim == 0, list( x = deductible ) ]
     sg <- sg$x
+    
     if ( length( sg ) > 0 ) {
       l <- l + sum( sapply( sg, FUN = function( x ) log( Fd( x, meanlog = theta[ 1 ], sdlog = theta[ 2 ] ) ) ) )  
     }
@@ -1727,23 +1728,99 @@ $$
 S = \sum\limits_{g \in G} S_g
 = \sum\limits_{g \in G} \sum\limits_{i=1}^{n_g} \sum\limits_{j=1}^{N_g} D_{g,i}\left( X_{g,i,j} \right)
 $$
+Para realizar el cálculo de los valores deducidos se puede examinar la expresión del deducible, 
+con ello llegamos al siguiente resultado.
+$$
+\begin{eqnarray*}
+\E\left[D(X)\right]
+& = & \int\limits_0^{+\infty} D( x ) dF( x ) \\
+& = & \int\limits_0^{+\infty} \min\left( \max( x - d, 0 ), M \right) dF( x ) \\
+& = & \int\limits_d^{M+d} ( x - d ) dF( x ) + \int\limits_{M+d}^{+\infty} M dF( x ) \\
+& = & \int\limits_d^{M+d} x dF( x ) - d P\left( d \leq X \leq M + d \right) + M P\left( X > M + d \right) \\
+& = & \int\limits_d^{M+d} x dF( x ) - d \left( F( M + d ) - F( d ) \right) + M \left( 1 - F( M + d ) \right) \\
+& = & \int\limits_d^{M+d} x dF( x ) + M + d\ F( d ) - ( M + d ) F( M + d )
+\end{eqnarray*}
+$$
+
+La integral a la izquierda pude ser calculada con el uso de una aproximación numérica a la integral.
+Por su parte, los términos asociados a la probabilidad pueden ser calculados utilizando la 
+función de distribución acumulada de la variable aleatoria de los reclamos $X$.
 ```{r l5c21}
 estim <- merge.data.table( estim_frec[ , list( grp, EN, SDN ) ], 
-                           estim_sev[ , list( grp, EX, SDX ) ], by = 'grp' )
+                           estim_sev[ , list( grp, EX, SDX, meanlog, sdlog ) ], by = 'grp' )
 ```
-El valor esperados del reclamo total por cada grupo $g$ está dado por
+
+Ahora configuramos un posible portafolio, el cual ya en la práctica debe considerar los objetivos
+comerciales para la venta de diferentes productos de seguro. Para cada grupo de riesgo $g$ se puede
+considerar un número de póliza de un determinado producto, caracterizados por su deducible $d$
+y monto máximo asegurado $M$. Así, para grupo de riesgo $g$ y producto $r$
 $$
-\E\left[ S_g \right] = n_g \E\left[ N_g \right] \E\left[ X_g \right]
-= `r formatC( 0, digits = 4, format = 'f' )`
+S_{g,r} = \sum\limits_{i=1}^{n_{g,r}} \sum\limits_{j=1}^{N_g} D\left( X_{i,j} \right)
 $$
-Bajo el mismo razonamiento, el valor esperado del reclamo total
+El valor esperado y varianza de cada uno de estos reclamos totales por grupo de riesgo $g$ y 
+producto $r$, están dados por:
 $$
-\E\left[ S \right]
-= \sum\limits_{g \in G} \E\left[ S_g \right] 
-= \sum\limits_{g \in G} n_g \E\left[ N_g \right] \E\left[ X_g \right]
-= `r formatC( 0, digits = 4, format = 'f' )`
+\E\left[ S_{g,r} \right] 
+= n_{g,r} \E\left[ N_g \right] \E\left[ D( X_g ) \right],
+\qquad
+\V\left[ S_{g,r} \right] 
+= n_{g,r} \left( \E\left[ N_g \right] \V\left[ D( X_g ) \right] + \V\left[ N_g \right] \E\left[ D( X_g ) \right]^2 \right),
 $$
-:::
+El reclamo total por grupo de riesgo $g$, tan solo resulta de la suma de los reclamos totales por 
+cada producto.
+$$
+S_g = \sum\limits_{r=1}^{R} S_{g,r}
+$$
+de igual forma su valor esperado y varianza están dados por:
+$$
+\E\left[ S_g \right] = \sum\limits_{r=1}^R \E\left[ S_{g,r} \right]
+= \sum\limits_{r=1}^R n_{g,r} \E\left[ N_g \right] \E\left[ D( X_g ) \right],
+\qquad
+\V\left[ S_{g} \right] = \sum\limits_{r=1}^R \V\left[ S_{g,r} \right]
+= \sum\limits_{r=1}^R n_{g,r} \left( \E\left[ N_g \right] \V\left[ D( X_g ) \right] + \V\left[ N_g \right] \E\left[ D( X_g ) \right]^2 \right),
+$$
+
+```{r l5c22}
+prods <- data.table( ngr = c( 20, 40, 60, 80, 100 ), 
+                     d = c( 20, 20, 20, 20, 20 ), 
+                     M = c( 2e4, 2e4, 2.5e4, 3e4, 4e4 ) )
+prods[ , id := 1 ]
+grpcl[ , id := 1 ]
+prods <- merge.data.table( prods, grpcl, by = 'id', allow.cartesian = TRUE )
+grpcl[ , id := NULL ]
+prods[ , id := NULL ]
+
+prods <- merge.data.table( prods, estim, by = 'grp', allow.cartesian = TRUE )
+setorder( prods, sex, xg, -d )
+prods[ , r := 1 ]
+prods[ , r := cumsum( r ), by = list( sex, xg ) ]
+intf <- function( meanlog, sdlog, d, M, k ) integrate( function( x ) ( x - d )^k * fd( x, meanlog = meanlog, sdlog = sdlog ), lower = d, upper = M, abs.tol = 1e-15 )$value
+
+prods[ , EDX := mapply( FUN = intf, meanlog, sdlog, d, M, 1 ) + M * ( 1 - Fd( M + d ) )]
+prods[ , EDX2 := mapply( FUN = intf, meanlog, sdlog, d, M, 2 ) + M^2 * ( 1 - Fd( M + d ) ) ]
+prods[ , SDDX := sqrt( EDX2 - EDX^2 ) ]
+
+prods[ , ES := ngr * EN * EDX ]
+prods[ , SDS := sqrt( ngr * ( EN * SDDX^2 + SDN^2 * EDX^2 ) ) ]
+```
+
+```{r l5t6, echo = TRUE, results = 'asis', out.width='100%', class.source = 'fold-hide'}
+prods[ , list( sex, xg, r, ngr, d, M, EN, SDN, EX, SDX, EDX, SDDX, ES, SDS ) ] %>%
+  kable(
+    label = NA,
+    caption = 'Estimación de los reclamos totales',
+    row.names = FALSE,
+    col.names = c( 'sex', '$x_g$', '$r$', '$n_{g,r}$', '$d$', '$M$', '$\\E[ N ]$', '$\\sqrt{\\V[ N ]}$',
+                   '$\\E[ X ]$', '$\\sqrt{\\V[ X ]}$', '$\\E[ D(X) ]$', '$\\sqrt{\\V[ D(X) ]}$',
+                   '$\\E[ S ]$', '$\\sqrt{\\V[ S ]}$' ),
+    align = 'llrrrrrrrrrrr',
+    digits = c( 0, 0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2 ),
+    format.args = list( big.mark = ',', decimal.mark = '.', scientific = FALSE ),
+    escape = FALSE,
+    centering = TRUE ) %>%
+  kable_classic( font_size = 14, full_width = FALSE, html_font = "Cambria", position = "center" ) %>%
+  scroll_box( width = "100%", height = "500px" )
+```
 
 <!------------------------------------------------------------------------------------------------->
 ## Proceso estocástico de reclamos totales
@@ -1966,7 +2043,7 @@ En conclusión $N(t)$ tiene como distribución una ley de Poisson $Pois( \lambda
 se conoce a $N$ como un proceso de Poisson.
 :::
 
-```{r l5c22}
+```{r l5c23}
 m <- 1000
 lambda <- 10
 M <- 30
@@ -2058,7 +2135,7 @@ plot( plt )
 
 Como se describe en el paso 8 del algoritmo de simulación, para cada tiempo $t_l$ se puede estimar
 la distribución de probabilidad de la variable aleatoria $S(t_l)$.
-```{r l5c23}
+```{r l5c24}
 FeS <- lapply( 1:p, FUN = function( l ) ecdf( sapply( S, FUN = function( Si ) Si[ l ] ) ) )
 ns <- 1e3
 s <- seq( 0, Smax, length = ns )
