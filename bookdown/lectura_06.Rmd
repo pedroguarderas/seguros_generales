@@ -1486,7 +1486,7 @@ $$
 $$
 Como ya lo mencionamos, para cada grupo $g$ podemos maximizar la verosimilitud logarítmica de la 
 frecuencia utilizando la función `fitdist` del paquete `fitdistrplus`.
-```{r l6c18}
+```{r l6c18, warning=FALSE}
 fit_count <- list()
 estim_frec <- NULL
 
@@ -1617,7 +1617,7 @@ cobertura $M$ varían entre pólizas. Esta construcción debe ser realizada para
 a su vez debemos maximizar cada una de las verosimilitudes logarítmicas, esto lo podemos realizar
 de forma integrada utilizando un bucle de programación `for` y el método usual de optimización 
 `optim`.
-```{r l6c20}
+```{r l6c20, warning=FALSE}
 Fd <- plnorm
 fd <- dlnorm
 
