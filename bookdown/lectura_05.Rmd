@@ -18,7 +18,7 @@ $$
 esta distribución discreta se caracteriza por presentar el valor $k \frac{p_k}{p_{k-1}}$ decreciente
 conforme cambia $k \in \N$
 :::
-```{r l4c1}
+```{r l5c1}
 set.seed(94312)
 n <- 50
 p <- 0.3
@@ -32,7 +32,7 @@ p <- dbinom( x = 0:n, size = n, prob = p )
 v <- 1:n * p[ 2:(n + 1) ] / p[ 1:n ]
 ```
 
-```{r l4g1, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
+```{r l5g1, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
 plt <- ggplot() +
   geom_point( aes( x = 1:n, y = v ), colour = 'darkred' ) + 
   xlab( TeX( "$k$" ) ) + 
@@ -54,7 +54,7 @@ $$
 esta distribución discreta se caracteriza por presentar el valor $k \frac{p_k}{p_{k-1}}$ constante
 conforme cambia $k \in \N$
 :::
-```{r l4c2}
+```{r l5c2}
 lambda <- 2
 k <- 2
 m <- 100
@@ -67,7 +67,7 @@ p <- dpois( x = 0:n, lambda = lambda )
 v <- 1:n * p[ 2:(n + 1) ] / p[ 1:n ]
 ```
 
-```{r l4g2, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
+```{r l5g2, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
 plt <- ggplot() +
   geom_point( aes( x = 1:n, y = v ), colour = 'darkred' ) + 
   xlab( TeX( "$k$" ) ) + 
@@ -93,7 +93,7 @@ donde $\Gamma( \alpha ) = \int\limits_0^{+\infty} x^{\alpha - 1} \exp(-x)\ dx$, 
 Esta distribución discreta se caracteriza por presentar el valor $k \frac{p_k}{p_{k-1}}$ creciente
 conforme cambia $k \in \N$
 :::
-```{r l4c3}
+```{r l5c3}
 alpha <- 2.5
 p <- 0.3
 k <- 2
@@ -107,7 +107,7 @@ p <- dnbinom( x = 0:n, size = alpha, prob = p )
 v <- 1:n * p[ 2:(n + 1) ] / p[ 1:n ]
 ```
 
-```{r l4g3, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
+```{r l5g3, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
 plt <- ggplot() +
   geom_point( aes( x = 1:n, y = v ), colour = 'darkred' ) + 
   xlab( TeX( "$k$" ) ) + 
@@ -124,7 +124,7 @@ P( N = k ) = ( 1 - p )^k p, \qquad
 \forall k \in \N
 $$
 :::
-```{r l4c4}
+```{r l5c4}
 p <- 0.3
 k <- 2
 m <- 100
@@ -181,7 +181,7 @@ Para una demostración detallada de la proposición anterior se puede consultar 
 en https://nonlifemaths.github.io/.
 
 
-```{r l4t1, echo = TRUE, results = 'asis', out.width='100%', class.source = 'fold-hide'}
+```{r l5t1, echo = TRUE, results = 'asis', out.width='100%', class.source = 'fold-hide'}
 # la librería CASdatasets fue previamente cargada
 data( beMTPL97 )
 beMTPL97 <- as.data.table( beMTPL97 )
@@ -206,7 +206,7 @@ conteo %>%
   scroll_box( width = "100%", height = "500px" )
 ```
 
-```{r l4g4, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
+```{r l5g4, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
 plt <- ggplot() +
   geom_point( data = conteo, aes( x = N, y = jn ), colour = 'purple' ) + 
   xlab( TeX( "$k$" ) ) + 
@@ -239,7 +239,7 @@ $$
 \E[X] = \frac{a + b}{2},\qquad \V[X] = \frac{(b - a)^2}{12}
 $$
 :::
-```{r l4c6}
+```{r l5c6}
 a <- 1
 b <- 2
 x <- 1.5
@@ -270,7 +270,7 @@ $$
 \E[X] = \frac{1}{\lambda},\qquad \V[X] = \frac{1}{\lambda^2}
 $$
 :::
-```{r l4c7}
+```{r l5c7}
 lambda <- 2
 x <- 1.5
 m <- 100
@@ -307,7 +307,7 @@ $$
 \V[X] = \frac{\alpha}{\beta^2}
 $$
 :::
-```{r l4c8}
+```{r l5c8}
 alpha <- 2
 beta <- 1
 x <- 3
@@ -338,7 +338,7 @@ $$
 \E[X] = \mu,\qquad \V[X] = \sigma^2
 $$
 :::
-```{r l4c9}
+```{r l5c9}
 mu <- 2
 sigma <- 1
 x <- 3
@@ -368,7 +368,7 @@ $$
 \V[X] = \exp\left( 2 \mu + \sigma^2 \right) \left( \exp( \sigma^2 ) - 1 \right)
 $$
 :::
-```{r l4c10}
+```{r l5c10}
 mu <- 2
 sigma <- 1
 x <- 3
@@ -412,7 +412,7 @@ M_X( t ) = \exp(\theta \mu) \sum\limits_{j=0}^{+\infty} \frac{\theta^j \sigma^j}
 {\prod\limits_{k=0}^j ( 1 - k \xi )}
 $$
 :::
-```{r l4c11}
+```{r l5c11}
 xi <- 1
 mu <- 2
 sigma <- 1
@@ -456,7 +456,7 @@ f_X( x )
 \right.
 $$
 :::
-```{r l4c12}
+```{r l5c12}
 xi <- -1
 mu <- 2
 sigma <- 1
@@ -523,7 +523,7 @@ $$
 \right.
 $$
 :::
-```{r l4c13}
+```{r l5c13}
 nu <- 3
 x <- 4
 m <- 100
@@ -570,7 +570,7 @@ $$
 \end{eqnarray*}
 $$
 :::
-```{r l4c14}
+```{r l5c14}
 alpha <- 1
 tau <- 1
 theta <- 1
@@ -631,7 +631,7 @@ $$
 \end{eqnarray*}
 $$
 :::
-```{r l4c15}
+```{r l5c15}
 alpha <- 1
 gamma <- 1
 tau <- 1
