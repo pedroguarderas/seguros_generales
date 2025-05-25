@@ -1225,7 +1225,7 @@ para el caso cuando $s_o = 0$, tenemos que $f_S( s_0 ) = f_S( 0 ) = p_0$.
 
 ```{r l5c13}
 M <- 200
-N <- 7e4
+N <- 7e3
 
 p <- 0.3
 alpha <- 3
