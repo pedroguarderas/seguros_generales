@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Capítulo 2 Introducción a las operaciones de seguros | Matemática Actuarial de los Seguros Generales</title>
+  <meta name="description" content="Capítulo 2 Introducción a las operaciones de seguros | Matemática Actuarial de los Seguros Generales" />
+  <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Capítulo 2 Introducción a las operaciones de seguros | Matemática Actuarial de los Seguros Generales" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Capítulo 2 Introducción a las operaciones de seguros | Matemática Actuarial de los Seguros Generales" />
+  
+  
+  
+
+<meta name="author" content="" />
+
+
+<meta name="date" content="2025-05-25" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="preliminares.html"/>
+<link rel="next" href="probabilidad-y-estadística.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/codefolding-lua-1.1/codefolding-lua.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<script type="text/javascript"
+   src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="materia.html"><a href="materia.html"><i class="fa fa-check"></i>Materia</a>
+<ul>
+<li class="chapter" data-level="" data-path="materia.html"><a href="materia.html#personal-docente"><i class="fa fa-check"></i>Personal docente</a></li>
+<li class="chapter" data-level="" data-path="materia.html"><a href="materia.html#resultados-de-aprendizaje"><i class="fa fa-check"></i>Resultados de aprendizaje</a></li>
+<li class="chapter" data-level="" data-path="materia.html"><a href="materia.html#contenidos-propuestos"><i class="fa fa-check"></i>Contenidos propuestos</a></li>
+<li class="chapter" data-level="" data-path="materia.html"><a href="materia.html#referencias-bibliográficas"><i class="fa fa-check"></i>Referencias bibliográficas</a>
+<ul>
+<li class="chapter" data-level="" data-path="materia.html"><a href="materia.html#principales-libros-guía"><i class="fa fa-check"></i>Principales libros guía</a></li>
+<li class="chapter" data-level="" data-path="materia.html"><a href="materia.html#otras-referencias-de-soporte"><i class="fa fa-check"></i>Otras referencias de soporte</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="materia.html"><a href="materia.html#requerimientos-informáticos"><i class="fa fa-check"></i>Requerimientos informáticos</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="preliminares.html"><a href="preliminares.html"><i class="fa fa-check"></i><b>1</b> Preliminares</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="preliminares.html"><a href="preliminares.html#notación-matemática"><i class="fa fa-check"></i><b>1.1</b> Notación matemática</a></li>
+<li class="chapter" data-level="1.2" data-path="preliminares.html"><a href="preliminares.html#consideraciones-de-programación-en-r"><i class="fa fa-check"></i><b>1.2</b> Consideraciones de programación en R</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="preliminares.html"><a href="preliminares.html#opciones-usuales"><i class="fa fa-check"></i><b>1.2.1</b> Opciones usuales</a></li>
+<li class="chapter" data-level="1.2.2" data-path="preliminares.html"><a href="preliminares.html#paquetes-usuales"><i class="fa fa-check"></i><b>1.2.2</b> Paquetes usuales</a></li>
+<li class="chapter" data-level="1.2.3" data-path="preliminares.html"><a href="preliminares.html#estructuras-básicas"><i class="fa fa-check"></i><b>1.2.3</b> Estructuras básicas</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="introducción-a-las-operaciones-de-seguros.html"><a href="introducción-a-las-operaciones-de-seguros.html"><i class="fa fa-check"></i><b>2</b> Introducción a las operaciones de seguros</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="introducción-a-las-operaciones-de-seguros.html"><a href="introducción-a-las-operaciones-de-seguros.html#el-sistema-financiero"><i class="fa fa-check"></i><b>2.1</b> El sistema financiero</a></li>
+<li class="chapter" data-level="2.2" data-path="introducción-a-las-operaciones-de-seguros.html"><a href="introducción-a-las-operaciones-de-seguros.html#riesgos-financieros"><i class="fa fa-check"></i><b>2.2</b> Riesgos financieros</a></li>
+<li class="chapter" data-level="2.3" data-path="introducción-a-las-operaciones-de-seguros.html"><a href="introducción-a-las-operaciones-de-seguros.html#la-transferencia-de-riesgos-financieros"><i class="fa fa-check"></i><b>2.3</b> La transferencia de riesgos financieros</a></li>
+<li class="chapter" data-level="2.4" data-path="introducción-a-las-operaciones-de-seguros.html"><a href="introducción-a-las-operaciones-de-seguros.html#fundamentos-técnicos-de-los-seguros"><i class="fa fa-check"></i><b>2.4</b> Fundamentos técnicos de los seguros</a></li>
+<li class="chapter" data-level="2.5" data-path="introducción-a-las-operaciones-de-seguros.html"><a href="introducción-a-las-operaciones-de-seguros.html#la-mutualización-de-riesgos"><i class="fa fa-check"></i><b>2.5</b> La mutualización de riesgos</a></li>
+<li class="chapter" data-level="2.6" data-path="introducción-a-las-operaciones-de-seguros.html"><a href="introducción-a-las-operaciones-de-seguros.html#ley-de-los-grandes-números"><i class="fa fa-check"></i><b>2.6</b> Ley de los grandes números</a></li>
+<li class="chapter" data-level="2.7" data-path="introducción-a-las-operaciones-de-seguros.html"><a href="introducción-a-las-operaciones-de-seguros.html#microeconomía-del-negocio-de-seguros"><i class="fa fa-check"></i><b>2.7</b> Microeconomía del negocio de seguros</a>
+<ul>
+<li class="chapter" data-level="2.7.1" data-path="introducción-a-las-operaciones-de-seguros.html"><a href="introducción-a-las-operaciones-de-seguros.html#ciclo-de-producción"><i class="fa fa-check"></i><b>2.7.1</b> Ciclo de producción</a></li>
+<li class="chapter" data-level="2.7.2" data-path="introducción-a-las-operaciones-de-seguros.html"><a href="introducción-a-las-operaciones-de-seguros.html#reservas-técnicas"><i class="fa fa-check"></i><b>2.7.2</b> Reservas técnicas</a></li>
+<li class="chapter" data-level="2.7.3" data-path="introducción-a-las-operaciones-de-seguros.html"><a href="introducción-a-las-operaciones-de-seguros.html#control-estatal"><i class="fa fa-check"></i><b>2.7.3</b> Control estatal</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="probabilidad-y-estadística.html"><a href="probabilidad-y-estadística.html"><i class="fa fa-check"></i><b>3</b> Probabilidad y Estadística</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="probabilidad-y-estadística.html"><a href="probabilidad-y-estadística.html#probabilidad-y-conceptos-asociados"><i class="fa fa-check"></i><b>3.1</b> Probabilidad y conceptos asociados</a></li>
+<li class="chapter" data-level="3.2" data-path="probabilidad-y-estadística.html"><a href="probabilidad-y-estadística.html#probabilidad-condicional"><i class="fa fa-check"></i><b>3.2</b> Probabilidad condicional</a></li>
+<li class="chapter" data-level="3.3" data-path="probabilidad-y-estadística.html"><a href="probabilidad-y-estadística.html#resultados-de-convergencia"><i class="fa fa-check"></i><b>3.3</b> Resultados de convergencia</a></li>
+<li class="chapter" data-level="3.4" data-path="probabilidad-y-estadística.html"><a href="probabilidad-y-estadística.html#desigualdades-de-concentración"><i class="fa fa-check"></i><b>3.4</b> Desigualdades de concentración</a></li>
+<li class="chapter" data-level="3.5" data-path="probabilidad-y-estadística.html"><a href="probabilidad-y-estadística.html#transformada-de-fourier-contínua-y-discreta"><i class="fa fa-check"></i><b>3.5</b> Transformada de Fourier, contínua y discreta</a>
+<ul>
+<li class="chapter" data-level="3.5.1" data-path="probabilidad-y-estadística.html"><a href="probabilidad-y-estadística.html#aproximación-numérica-en-una-dimensión"><i class="fa fa-check"></i><b>3.5.1</b> Aproximación numérica en una dimensión</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="probabilidad-y-estadística.html"><a href="probabilidad-y-estadística.html#consideraciones-financieras"><i class="fa fa-check"></i><b>3.6</b> Consideraciones financieras</a>
+<ul>
+<li class="chapter" data-level="3.6.1" data-path="probabilidad-y-estadística.html"><a href="probabilidad-y-estadística.html#función-de-actualización-o-descuento"><i class="fa fa-check"></i><b>3.6.1</b> Función de actualización o descuento</a></li>
+<li class="chapter" data-level="3.6.2" data-path="probabilidad-y-estadística.html"><a href="probabilidad-y-estadística.html#flujos-financieros"><i class="fa fa-check"></i><b>3.6.2</b> Flujos financieros</a></li>
+<li class="chapter" data-level="3.6.3" data-path="probabilidad-y-estadística.html"><a href="probabilidad-y-estadística.html#flujos-financieros-probables"><i class="fa fa-check"></i><b>3.6.3</b> Flujos financieros probables</a></li>
+<li class="chapter" data-level="3.6.4" data-path="probabilidad-y-estadística.html"><a href="probabilidad-y-estadística.html#sec:equifin"><i class="fa fa-check"></i><b>3.6.4</b> Equilibrio financiero</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="distribuciones.html"><a href="distribuciones.html"><i class="fa fa-check"></i><b>4</b> Distribuciones</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="distribuciones.html"><a href="distribuciones.html#distribuciones-discretas"><i class="fa fa-check"></i><b>4.1</b> Distribuciones discretas</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="distribuciones.html"><a href="distribuciones.html#distribución-binomial"><i class="fa fa-check"></i><b>4.1.1</b> Distribución binomial</a></li>
+<li class="chapter" data-level="4.1.2" data-path="distribuciones.html"><a href="distribuciones.html#distribución-de-poisson"><i class="fa fa-check"></i><b>4.1.2</b> Distribución de Poisson</a></li>
+<li class="chapter" data-level="4.1.3" data-path="distribuciones.html"><a href="distribuciones.html#distribución-binomial-negativa"><i class="fa fa-check"></i><b>4.1.3</b> Distribución binomial negativa</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="distribuciones.html"><a href="distribuciones.html#familia-de-panjer"><i class="fa fa-check"></i><b>4.2</b> Familia de Panjer</a></li>
+<li class="chapter" data-level="4.3" data-path="distribuciones.html"><a href="distribuciones.html#distribuciones-continuas"><i class="fa fa-check"></i><b>4.3</b> Distribuciones continuas</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="distribuciones.html"><a href="distribuciones.html#distribución-uniforme"><i class="fa fa-check"></i><b>4.3.1</b> Distribución uniforme</a></li>
+<li class="chapter" data-level="4.3.2" data-path="distribuciones.html"><a href="distribuciones.html#distribución-exponencial"><i class="fa fa-check"></i><b>4.3.2</b> Distribución exponencial</a></li>
+<li class="chapter" data-level="4.3.3" data-path="distribuciones.html"><a href="distribuciones.html#distribución-gamma"><i class="fa fa-check"></i><b>4.3.3</b> Distribución gamma</a></li>
+<li class="chapter" data-level="4.3.4" data-path="distribuciones.html"><a href="distribuciones.html#distribución-normal"><i class="fa fa-check"></i><b>4.3.4</b> Distribución normal</a></li>
+<li class="chapter" data-level="4.3.5" data-path="distribuciones.html"><a href="distribuciones.html#distribución-log-normal"><i class="fa fa-check"></i><b>4.3.5</b> Distribución log-normal</a></li>
+<li class="chapter" data-level="4.3.6" data-path="distribuciones.html"><a href="distribuciones.html#distribución-de-pareto-generalizada"><i class="fa fa-check"></i><b>4.3.6</b> Distribución de Pareto generalizada</a></li>
+<li class="chapter" data-level="4.3.7" data-path="distribuciones.html"><a href="distribuciones.html#distribución-de-valores-extremos-generalizada"><i class="fa fa-check"></i><b>4.3.7</b> Distribución de valores extremos generalizada</a></li>
+<li class="chapter" data-level="4.3.8" data-path="distribuciones.html"><a href="distribuciones.html#distribución-t-de-student"><i class="fa fa-check"></i><b>4.3.8</b> Distribución t de Student</a></li>
+<li class="chapter" data-level="4.3.9" data-path="distribuciones.html"><a href="distribuciones.html#distribución-gamma-transformada"><i class="fa fa-check"></i><b>4.3.9</b> Distribución gamma transformada</a></li>
+<li class="chapter" data-level="4.3.10" data-path="distribuciones.html"><a href="distribuciones.html#distribución-beta-transformada"><i class="fa fa-check"></i><b>4.3.10</b> Distribución beta transformada</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="distribuciones.html"><a href="distribuciones.html#estimación"><i class="fa fa-check"></i><b>4.4</b> Estimación</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="distribuciones.html"><a href="distribuciones.html#método-de-sustitución"><i class="fa fa-check"></i><b>4.4.1</b> Método de sustitución</a></li>
+<li class="chapter" data-level="4.4.2" data-path="distribuciones.html"><a href="distribuciones.html#método-de-momentos"><i class="fa fa-check"></i><b>4.4.2</b> Método de momentos</a></li>
+<li class="chapter" data-level="4.4.3" data-path="distribuciones.html"><a href="distribuciones.html#método-de-la-distancia-mínima"><i class="fa fa-check"></i><b>4.4.3</b> Método de la distancia mínima</a></li>
+<li class="chapter" data-level="4.4.4" data-path="distribuciones.html"><a href="distribuciones.html#método-de-maximización-de-la-verosimilitud"><i class="fa fa-check"></i><b>4.4.4</b> Método de maximización de la verosimilitud</a></li>
+<li class="chapter" data-level="4.4.5" data-path="distribuciones.html"><a href="distribuciones.html#pruebas-de-hipótesis"><i class="fa fa-check"></i><b>4.4.5</b> Pruebas de hipótesis</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html"><i class="fa fa-check"></i><b>5</b> Modelos de pérdida agregada</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html#mutualización-del-riesgo"><i class="fa fa-check"></i><b>5.1</b> Mutualización del riesgo</a></li>
+<li class="chapter" data-level="5.2" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html#sec:modind"><i class="fa fa-check"></i><b>5.2</b> Modelo individual</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html#algoritmo-de-simulación"><i class="fa fa-check"></i><b>5.2.1</b> Algoritmo de simulación</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html#sec:modcol"><i class="fa fa-check"></i><b>5.3</b> Modelo colectivo</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html#algoritmo-de-simulación-1"><i class="fa fa-check"></i><b>5.3.1</b> Algoritmo de simulación</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html#modelos-mixtos"><i class="fa fa-check"></i><b>5.4</b> Modelos mixtos</a></li>
+<li class="chapter" data-level="5.5" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html#modelos-con-variables-explicativas"><i class="fa fa-check"></i><b>5.5</b> Modelos con variables explicativas</a></li>
+<li class="chapter" data-level="5.6" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html#deducibles"><i class="fa fa-check"></i><b>5.6</b> Aplicación del deducible</a>
+<ul>
+<li class="chapter" data-level="5.6.1" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html#algoritmo-de-simulación-2"><i class="fa fa-check"></i><b>5.6.1</b> Algoritmo de simulación</a></li>
+</ul></li>
+<li class="chapter" data-level="5.7" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html#algoritmo-de-panjer"><i class="fa fa-check"></i><b>5.7</b> Algoritmo de Panjer</a></li>
+<li class="chapter" data-level="5.8" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html#estimación-usando-la-transformada-de-fourier"><i class="fa fa-check"></i><b>5.8</b> Estimación usando la transformada de Fourier</a></li>
+<li class="chapter" data-level="5.9" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html#proceso-estocástico-de-reclamos-totales"><i class="fa fa-check"></i><b>5.9</b> Proceso estocástico de reclamos totales</a>
+<ul>
+<li class="chapter" data-level="5.9.1" data-path="modelos-de-pérdida-agregada.html"><a href="modelos-de-pérdida-agregada.html#algoritmo-de-simulación-3"><i class="fa fa-check"></i><b>5.9.1</b> Algoritmo de simulación</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="tarificación.html"><a href="tarificación.html"><i class="fa fa-check"></i><b>6</b> Tarificación</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="tarificación.html"><a href="tarificación.html#medidas-de-riesgo"><i class="fa fa-check"></i><b>6.1</b> Medidas de riesgo</a></li>
+<li class="chapter" data-level="6.2" data-path="tarificación.html"><a href="tarificación.html#tarificación-en-grandes-términos"><i class="fa fa-check"></i><b>6.2</b> Tarificación en grandes términos</a></li>
+<li class="chapter" data-level="6.3" data-path="tarificación.html"><a href="tarificación.html#prima"><i class="fa fa-check"></i><b>6.3</b> Prima</a></li>
+<li class="chapter" data-level="6.4" data-path="tarificación.html"><a href="tarificación.html#segmentación"><i class="fa fa-check"></i><b>6.4</b> Segmentación</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="reservas-técnicas-1.html"><a href="reservas-técnicas-1.html"><i class="fa fa-check"></i><b>7</b> Reservas técnicas</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="reservas-técnicas-1.html"><a href="reservas-técnicas-1.html#reservas-para-primas-no-adquiridas"><i class="fa fa-check"></i><b>7.1</b> Reservas para primas no adquiridas</a></li>
+<li class="chapter" data-level="7.2" data-path="reservas-técnicas-1.html"><a href="reservas-técnicas-1.html#reservas-de-riesgos-en-curso"><i class="fa fa-check"></i><b>7.2</b> Reservas de riesgos en curso</a></li>
+<li class="chapter" data-level="7.3" data-path="reservas-técnicas-1.html"><a href="reservas-técnicas-1.html#reservas-de-siniestros-a-pagar"><i class="fa fa-check"></i><b>7.3</b> Reservas de siniestros a pagar</a>
+<ul>
+<li class="chapter" data-level="7.3.1" data-path="reservas-técnicas-1.html"><a href="reservas-técnicas-1.html#siniestros-sucedidos-reportados-resueltos-no-pagados"><i class="fa fa-check"></i><b>7.3.1</b> Siniestros sucedidos, reportados, resueltos, no pagados</a></li>
+<li class="chapter" data-level="7.3.2" data-path="reservas-técnicas-1.html"><a href="reservas-técnicas-1.html#siniestros-sucedidos-reportados-no-resueltos-no-pagados"><i class="fa fa-check"></i><b>7.3.2</b> Siniestros sucedidos, reportados, no resueltos, no pagados</a></li>
+<li class="chapter" data-level="7.3.3" data-path="reservas-técnicas-1.html"><a href="reservas-técnicas-1.html#siniestros-sucedidos-no-reportados-no-resueltos-no-pagados"><i class="fa fa-check"></i><b>7.3.3</b> Siniestros sucedidos, no reportados, no resueltos, no pagados</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="modelos-lineales-generalizados-glm.html"><a href="modelos-lineales-generalizados-glm.html"><i class="fa fa-check"></i><b>8</b> Modelos lineales generalizados (GLM)</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="modelos-lineales-generalizados-glm.html"><a href="modelos-lineales-generalizados-glm.html#familia-exponencial"><i class="fa fa-check"></i><b>8.1</b> Familia exponencial</a></li>
+<li class="chapter" data-level="8.2" data-path="modelos-lineales-generalizados-glm.html"><a href="modelos-lineales-generalizados-glm.html#modelo-lineal-generalizado-glm"><i class="fa fa-check"></i><b>8.2</b> Modelo lineal generalizado (GLM)</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="estimación-de-valores-extremos.html"><a href="estimación-de-valores-extremos.html"><i class="fa fa-check"></i><b>9</b> Estimación de valores extremos</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="estimación-de-valores-extremos.html"><a href="estimación-de-valores-extremos.html#estimación-con-valores-extremos"><i class="fa fa-check"></i><b>9.1</b> Estimación con valores extremos</a></li>
+<li class="chapter" data-level="9.2" data-path="estimación-de-valores-extremos.html"><a href="estimación-de-valores-extremos.html#simulación-con-valores-extremos"><i class="fa fa-check"></i><b>9.2</b> Simulación con valores extremos</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="bibliografía.html"><a href="bibliografía.html"><i class="fa fa-check"></i><b>10</b> Bibliografía</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Matemática Actuarial de los Seguros Generales</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="introducción-a-las-operaciones-de-seguros" class="section level1 hasAnchor" number="2">
+<h1><span class="header-section-number">Capítulo 2</span> Introducción a las operaciones de seguros<a href="introducción-a-las-operaciones-de-seguros.html#introducción-a-las-operaciones-de-seguros" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<!------------------------------------------------------------------------------------------------->
+<div id="el-sistema-financiero" class="section level2 hasAnchor" number="2.1">
+<h2><span class="header-section-number">2.1</span> El sistema financiero<a href="introducción-a-las-operaciones-de-seguros.html#el-sistema-financiero" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>En todos lo países del mundo existe un sistema financiero con el objetivo de ofrecer facilidades
+para poner en práctica las decisiones financieras de:</p>
+<ul>
+<li>Personas</li>
+<li>Empresas</li>
+<li>Gobierno.</li>
+</ul>
+<p>En general en un sistema financiero encontramos:</p>
+<ul>
+<li>Mercados de activos financieros
+<ul>
+<li>Deuda, Derivados, Títulos…</li>
+</ul></li>
+<li>Intermediarios (públicos y privados)
+<ul>
+<li>Bancos</li>
+<li>Empresas de seguros</li>
+<li>Fondos de pensiones</li>
+</ul></li>
+<li>Empresas de servicios
+<ul>
+<li>Difusión de información</li>
+<li>Tarjetas de crédito, brokers…</li>
+</ul></li>
+</ul>
+<p>Por medio de las instituciones del sistema, se espera facilitar algunas operaciones:</p>
+<ul>
+<li>Transferencia de recursos
+<ul>
+<li>A través del tiempo, regiones, entre, industrias,…</li>
+</ul></li>
+<li>Administración del riesgo
+<ul>
+<li>Medios para administrar el riesgo financiero</li>
+</ul></li>
+<li>Compensación y establecimiento de pagos
+<ul>
+<li>Facilitar el intercambio de bienes,servicios, activos…</li>
+</ul></li>
+<li>Concentración de recursos
+<ul>
+<li>Financiamiento de grandes empresas y proyectos</li>
+</ul></li>
+<li>Suministro de información
+<ul>
+<li>Toma de decisiones en iguales condiciones</li>
+</ul></li>
+</ul>
+<!------------------------------------------------------------------------------------------------->
+</div>
+<div id="riesgos-financieros" class="section level2 hasAnchor" number="2.2">
+<h2><span class="header-section-number">2.2</span> Riesgos financieros<a href="introducción-a-las-operaciones-de-seguros.html#riesgos-financieros" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Los riegos financieros son aquellos riesgos relacionados con las posibles pérdidas económicas que
+pueden enfrentar los actores del sistema (personas, empresas, gobierno), causadas por hechos
+contingentes que afectan sus operaciones en el mercado financiero, sus actividades de negocio o
+sus pertenencias (activos financieros).</p>
+<p>De manera natural los individuos presentan un comportamiento que traduce su “miedo” a las pérdidas
+cuando enfrentan situaciones de riesgo: la <strong>aversión al riesgo</strong>.</p>
+<p>La aversión al riesgo se produce hacia la parte negativa del riesgo, esto es ante la posibilidad de
+pérdidas financieras.</p>
+<p>En estas situaciones es necesario administrar el riesgo, para lo cual co-existen cuatro formas
+principales:</p>
+<ol style="list-style-type: decimal">
+<li>Evitar el riesgo (no siempre posible)</li>
+<li>Prevenir y controlar el riesgo</li>
+<li>Aceptar el riesgo</li>
+<li>Transferir el riesgo</li>
+</ol>
+<p>Vale recordar que históricamente los grandes avances de la humanidad han sido posibles gracias a
+a la aceptación y correcta gestión de de riesgos muy importantes.</p>
+<p>Por lo tanto, en lugar de evitar los riesgos debemos tratar de conocerlos profundamente para
+aceptarlos y poder aprovechar las oportunidades que brinda su correcta gestión.</p>
+<blockquote>
+<p>“El riesgo existe gracias a nuestra humana
+incapacidad de conocer el futuro, a nuestras
+limitaciones para identificar sus verdaderas
+causas. Y mientras así sea, debemos
+esforzarnos por comprenderlo, aceptarlo y
+gestionarlo inteligentemente y con humildad.”</p>
+<p>— L. Vélez, 2003</p>
+</blockquote>
+<!------------------------------------------------------------------------------------------------->
+</div>
+<div id="la-transferencia-de-riesgos-financieros" class="section level2 hasAnchor" number="2.3">
+<h2><span class="header-section-number">2.3</span> La transferencia de riesgos financieros<a href="introducción-a-las-operaciones-de-seguros.html#la-transferencia-de-riesgos-financieros" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Consiste en trasladar el riesgo a otros a un costo razonable. Esto es posible en un sistema
+financiero gracias a mecanismos como:</p>
+<ul>
+<li><strong>Protección:</strong> reducir una pérdida potencial a costa de renunciar a una ganancia.</li>
+<li><strong>Diversificación:</strong> distribuir una pérdida potencial en varias pérdidas menores con distintas
+exposiciones al riesgo.</li>
+<li><strong>Aseguramiento:</strong> pagar una prima para compensar una pérdida potencial mayor.</li>
+</ul>
+<!------------------------------------------------------------------------------------------------->
+</div>
+<div id="fundamentos-técnicos-de-los-seguros" class="section level2 hasAnchor" number="2.4">
+<h2><span class="header-section-number">2.4</span> Fundamentos técnicos de los seguros<a href="introducción-a-las-operaciones-de-seguros.html#fundamentos-técnicos-de-los-seguros" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>En sus inicios el seguro era considerado como un juego de apuestas.</p>
+<p>El gran desarrollo científico de los fundamentos del seguro comienza a fines del siglo XIX con:</p>
+<ul>
+<li>Desarrollo del cálculo de probabilidades</li>
+<li>Ley de los grandes números</li>
+</ul>
+<p>El seguro comienza entonces a fundamentarse en las leyes estadísticas y nace el <em>cálculo actuarial</em>
+que demanda el análisis de la información histórica para medir los riesgos y determinar los niveles
+de primas que permiten financiar las operaciones de seguros.</p>
+<p>Sin embargo en algunos casos existen ciertas limitaciones técnicas, pues existen seguros que no se
+basan en análisis de información histórica, porque no existe o es limitada:
+- Seguros “especiales” o “exóticos”
+- Seguro de las piernas de futbolistas, bailarinas…
+- Seguro de satélites
+- Seguros nuevos
+-SPPAT (antiguo SOAT) al inicio!</p>
+<p>En estos casos el fundamento técnico resulta subjetivo basado en análisis de grupos de expertos que
+estudian los riesgos potenciales o experiencias relacionadas que permiten determinar primas.
+En estos casos es imprescindible el proceso de monitoreo de la evolución del riesgo.</p>
+</div>
+<div id="la-mutualización-de-riesgos" class="section level2 hasAnchor" number="2.5">
+<h2><span class="header-section-number">2.5</span> La mutualización de riesgos<a href="introducción-a-las-operaciones-de-seguros.html#la-mutualización-de-riesgos" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>La base de los seguros es <strong>la compensación o mutualización de riesgos</strong>: pagar los “pocos”
+siniestros por medio de las primas recolectadas de muchos asegurados a un mismo riesgo.</p>
+<p>Para que la compensación de riesgos funciones es necesario:</p>
+<ul>
+<li>Dispersión de riesgos</li>
+<li>Ley de los grandes números</li>
+<li>Riesgos independientes</li>
+</ul>
+<p>Por lo tanto, no funciona con pocos asegurados porque no aplica la ley de los grandes números.</p>
+<p>Tampoco funciona frente a riesgos catastróficos que presentan una baja dispersión y alta concentración
+del riesgo.</p>
+<p>En estos casos aparecen como solución el Coaseguro o el Reaseguro que permiten compensar los riesgos
+gracias a la dispersión, incluso a escala mundial.</p>
+<!------------------------------------------------------------------------------------------------->
+</div>
+<div id="ley-de-los-grandes-números" class="section level2 hasAnchor" number="2.6">
+<h2><span class="header-section-number">2.6</span> Ley de los grandes números<a href="introducción-a-las-operaciones-de-seguros.html#ley-de-los-grandes-números" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Es una de las leyes más importantes en el campo de la <em>teoría de probabilidades</em>:</p>
+<pre><code>***Las frecuencias relativas (% de ocurrencia) del resultado de un experimento aleatorio
+tienden a estabilizarse en un valor:
+
+-La probabilidad de ese resultado***</code></pre>
+<!------------------------------------------------------------------------------------------------->
+</div>
+<div id="microeconomía-del-negocio-de-seguros" class="section level2 hasAnchor" number="2.7">
+<h2><span class="header-section-number">2.7</span> Microeconomía del negocio de seguros<a href="introducción-a-las-operaciones-de-seguros.html#microeconomía-del-negocio-de-seguros" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>El seguro es un <strong>negocio</strong> con fines de lucro.</p>
+<div id="ciclo-de-producción" class="section level3 hasAnchor" number="2.7.1">
+<h3><span class="header-section-number">2.7.1</span> Ciclo de producción<a href="introducción-a-las-operaciones-de-seguros.html#ciclo-de-producción" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>En el negocio del seguro se produce el fenómeno conocido como ** <em>inversión del ciclo de
+producción</em> **</p>
+<ul>
+<li>El asegurador fija el precio antes de conocer el costo del producto y asume obligaciones frente a
+los asegurados.</li>
+</ul>
+<p>Como consecuencias las compañías de seguros captan dinero del público y por esta razón:</p>
+<p>-Deben conformar reservas técnicas
+-Son controladas por un organismo de control estatal: SCVS</p>
+</div>
+<div id="reservas-técnicas" class="section level3 hasAnchor" number="2.7.2">
+<h3><span class="header-section-number">2.7.2</span> Reservas técnicas<a href="introducción-a-las-operaciones-de-seguros.html#reservas-técnicas" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>El asegurador no puede disponer inmediatamente de las primas que recibe.</p>
+<p>Debe constituir reservas o provisiones técnicas con la finalidad de mantener niveles mínimos de
+solvencia al cierre de cada ejercicio y garantizar el cumplimiento de las obligaciones financieras
+que deberá honrar en el futuro por la cobertura de siniestros.</p>
+<ul>
+<li>Ver norma de reservas técnicas</li>
+</ul>
+<p>Las reservas representan las obligaciones del asegurador con los asegurados y se registran en el
+pasivo del balance:</p>
+<ul>
+<li>Contablemente las primas se registran en el pasivo y conforme se devengan pasan a constituir los
+ingresos financieros.</li>
+</ul>
+<p>El principal riesgo del asegurador está en su pasivo.</p>
+</div>
+<div id="control-estatal" class="section level3 hasAnchor" number="2.7.3">
+<h3><span class="header-section-number">2.7.3</span> Control estatal<a href="introducción-a-las-operaciones-de-seguros.html#control-estatal" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>El riesgo del beneficiario de un seguro:</p>
+<p>Que el asegurador no pueda cumplir con sus obligaciones de cubrir los siniestros:</p>
+<p>-Riesgo de insolvencia del asegurador</p>
+<p>Esto justifica la necesidad del “control”:</p>
+<ul>
+<li>Superintendencia de Compañías, Valores y Seguros (SCVS)
+<ul>
+<li>Leyes y normas de solvencia</li>
+<li>Ejempl: Resoluciones de la SCVS, Solvencia I y II</li>
+</ul></li>
+<li>Otras instituciones de control
+<ul>
+<li>Junta de Política y Regulación Financiera (JPRF)</li>
+</ul></li>
+<li>Objetivo: garantizar la solvencia del mercado asegurador en el largo plazo</li>
+</ul>
+
+<!------------------------------------------------------------------------------------------------->
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="preliminares.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="probabilidad-y-estadística.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": false,
+    "facebook": true,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": null,
+    "text": null
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": ["seguros_generales.pdf", "seguros_generales.epub"],
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "section"
+  },
+  "split_by": "chapter"
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

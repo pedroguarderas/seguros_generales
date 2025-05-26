@@ -200,7 +200,7 @@ Esto implica que $f$ es la derivada de $F$, i.e. $\frac{dF}{dx} = f$, por tal ra
 definida siempre y cuando la derivada de $F$ esté bien definida.
 :::
 
-```{r l3g1, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
+```{r l4g1, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
 n <- 1e3
 x <- seq( -6, 6, length = n )
 
@@ -1005,13 +1005,13 @@ así se observa que para tener una aproximación de orden $\delta$ y con un erro
 $\varepsilon$, se requiere como mínimo realizar un número de simulaciones $n$ de orden 
 logarítmico en $\delta$ y cuadrático en $\varepsilon$.
 
-```{r l3c7}
+```{r l4c7}
 delta <- 0.01
 e <- unlist( lapply( seq( 1, 9, 1 ), FUN = function( n ) seq( 9, 1, -1 ) * 10^{-n} ) )
 n <- ceiling( -log( delta / 2 ) / ( 2 * e^2 ) )
 ```
 
-```{r l3t1, echo = TRUE, results = 'asis', out.width='100%' }
+```{r l4t1, echo = TRUE, results = 'asis', out.width='100%' }
 dt <- data.table( delta = delta, e, n, d = 8 * n / 1024^3 )
 dt %>%
   kable(
@@ -1032,7 +1032,7 @@ dt %>%
 En este caso en particular estudiaremos la velocidad de convergencia del método resultante del 
 teorema del límite central \@ref(thm:tlc). Generaremos una simulación aleatoria de la suma
 agregada $S_n$ y mostrar
-```{r l3c10}
+```{r l4c10}
 m <- 600
 n <- 3000
 u <- 4
@@ -1051,7 +1051,7 @@ phi <- pnorm( z )
 D <- sapply( FSn, FUN = function( Fn ) max( abs( Fn - phi ) ) )
 ```
 
-```{r l3g2, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
+```{r l4g2, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
 plt <- ggplot() +
   geom_line( aes( x = 1:n, y = D ), colour = 'darkred', linewidth = 0.5 ) + 
   scale_x_continuous( breaks = seq( 0, n, 500 ), limits = c( 1, n ), expand = c( 0, 0 ) ) +
@@ -1062,7 +1062,7 @@ plt <- ggplot() +
 plot( plt )
 ```
 
-```{r l3g3, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
+```{r l4g3, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
 dat <- NULL
 for ( k in 1:n ) {
   dat <- rbindlist( list( dat, data.table( z = z, n = as.factor( k ), FSn = FSn[[ k ]] ) ) )
@@ -1236,7 +1236,7 @@ $$
 \hat{f}_j \right\} \right] \right)
 $$
 
-```{r l3c8}
+```{r l4c8}
 N <- 3000
 alpha <- 2
 theta <- 3
@@ -1263,7 +1263,7 @@ $$
 
 Como se puede observar se superponen cada una de las distribuciones la discretización $f_k$ y la 
 calculada con inversión de la transformada de Fourier discreta.
-```{r l3g4, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
+```{r l4g4, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
 xbrk <- seq( 0, 40, length = 9 )
 xlbl <- formatC( xbrk, digits = 0, format = 'f' )
 xlim <- c( 0, 40 )
@@ -1289,7 +1289,7 @@ plt <- ggplot() +
 plot( plt )
 ```
 
-```{r l3g5, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
+```{r l4g5, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
 e <- f - IFf
 
 xmax <- max( abs( e ) )
