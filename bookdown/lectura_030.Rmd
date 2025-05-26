@@ -473,9 +473,13 @@ Con el objetivo de incentivar la prevención el mercado propone algunas estrateg
 
 $$ P_{com} = \frac{P}{1-GA-GB-U} $$
 $P$: prima pura
+
 $PP_{com}$: prima comercial
+
 $GA$: porcentaje de gastos de administración
+
 $GB$: porcentaje de gastos de adquisición (comisiones de *brokers*)
+
 $U$: porcentaje de utilidad esperada por los accionistas 
 
 
