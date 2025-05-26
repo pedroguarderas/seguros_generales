@@ -5,7 +5,7 @@
 ## Mutualización del riesgo
 La idea de mantener un seguro está basada en la mutualización de los riesgos. La mutualización 
 como tal nace del mismo mecanismo bajo el cual funciona un seguro, cada asegurado transfiera 
-su riesgo individual a la compañia de seguros por su parte, la suma total de estos riesgos $S$ es 
+su riesgo individual a la compañía de seguros por su parte, la suma total de estos riesgos $S$ es 
 el riesgo total que asume el asegurador.
 
 Los riesgos de cada uno de los $n \in \N$ asegurados, pueden ser representados por variables 
@@ -193,7 +193,7 @@ de probabilidad que estará dada por la convolución de cada una de las leyes de
 cada reclamo $X_i$, sin embargo estas leyes en este ejemplo son log-normales y no se conoce una 
 forma explícita, analítica para la convolución de log-normales. Por tal razón, debemos aproximar
 la distribución de probabilidad de $F_S$ a partir de la distribución empírica.
-```{r l5c1}
+```{r l6c1}
 set.seed(94312)
 
 # 1. número de distribuciones
@@ -227,7 +227,7 @@ $F_m$ a $F_S$
 
 Para construir $F_m$ en R, se puede utilizar la función ya empaquetada `ecdf` (empirical cumulative
 distribution function).
-```{r l5c2}
+```{r l6c2}
 # estimación distribución acumulada empírica de S
 Fm <- ecdf( S )
 
@@ -241,7 +241,7 @@ s <- sort( unique( S ) )
 Fms <- sapply( s, FUN = Fm )
 ```
 
-```{r l5g1, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
+```{r l6g1, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
 smax <- 2.0e5
 
 plt <- ggplot() +
@@ -270,7 +270,7 @@ $$
 $$
 
 Esta aproximación en R puede ser implementada de la siguiente forma:
-```{r l5c3}
+```{r l6c3}
 N <- 1e5
 s <- seq( min( S ), max( S ), length.out = N )
 EmS <- sum( s[-N] * diff( sapply( s, FUN = Fm ) ) )
@@ -486,7 +486,7 @@ $N \rightsquigarrow Pois( \lambda )$ y la distribución de cada uno de los recla
 $\{X_i\}_{i\in \N}$, está dada por la misma distribución de probabilidad 
 $X \rightsquigarrow LN( \mu, \sigma )$, siendo además cada uno de los reclamos indepencientes entre
 si.
-```{r l5c4}
+```{r l6c4}
 # 1. selección de simulaciones
 m <- 1e4
 
@@ -558,7 +558,7 @@ número de pólizas vendidas, esto supone que solo se presenta un reclamo por p�
 reclamos consideraremos  $X_i \rightsquigarrow LN( \mu, \sigma )$, para todo $i \in \{1,\ldots,n\}$. 
 Si consideramos generar la simulación como un modelo individual, generamos variables aleatorias
 $B_i \rightsquigarrow Ber(p)$, para todo $i \in \{1,\ldots,n\}$.
-```{r l5c5}
+```{r l6c5}
 m <- 1e4
 n <- 1000
 p <- 0.2
@@ -646,7 +646,7 @@ para toda variable aleatoria $X$, se satisface la siguiente desigualdad $D( X ) 
 1. Para evitar pérdidas pequeñas se suele configurar la función deducible $D( X ) = \max( X - d, 0 )$, 
 en este caso si $X \rightsquigarrow F_X$, entonces $Z = D( X ) \rightsquigarrow F_Z( z )$, donde 
 $F_Z( z ) = \mathbf{1}_{[0,+\infty)}( z ) F_X( z + d )$.
-```{r l5g2, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
+```{r l6g2, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
 D <- function( x, d ) return( max( x - d, 0 ) )
 d <- 50
 alpha <- 2
@@ -683,7 +683,7 @@ plot( plt )
 2. Para prevenir los excesos de pérdida (stop loss) $D( X ) = \min( X, M )$, en este caso si 
 $X \rightsquigarrow F_X$, entonces $Z = D( X ) \rightsquigarrow F_Z( z )$, donde 
 $F_Z( z ) = \mathbf{1}_{(-\infty,M)}( z ) F_X( z ) + \mathbf{1}_{[M,+\infty)}( z )$.
-```{r l5g3, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
+```{r l6g3, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
 D <- function( x, M ) return( min( x, M ) )
 M <- 150
 alpha <- 2
@@ -720,7 +720,7 @@ plot( plt )
 3. Caso mixto para evitar pérdidas pequeñas y exceso de pérdida $D( X ) = \min( \max( X - d, 0 ), M )$, 
 en este caso si $X \rightsquigarrow F_X$, entonces $Z = D( X ) \rightsquigarrow F_Z( z )$, donde 
 $F_Z( z ) = \mathbf{1}_{[0,M)}( z ) F_X( z + d ) + \mathbf{1}_{[M,+\infty)}( z )$.
-```{r l5g4, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
+```{r l6g4, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
 D <- function( x, M ) return( min( max( x - d ), M ) )
 d <- 50
 M <- 150
@@ -808,7 +808,7 @@ $N \rightsquigarrow Pois( \lambda )$ y la sucesión $\{X_i\}$ de reclamos indivi
 conformada por variables i.i.d, con distribución de probabilidad $LN( \mu, \sigma )$. El deducible 
 a aplicar será una función mixta de la forma $D( X ) = \min( \max( X - d, 0 ), M )$.
 
-```{r l5c6}
+```{r l6c6}
 # 1. selección de simulaciones
 m <- 5e4
 
@@ -844,7 +844,7 @@ El efecto del deducible sobre la distribución del reclamo es evidente, producie
 densidad multimodal, como se observa en el gráfico a continuación, en el mismo incluimos dos 
 histogramas, uno correspondiente a los reclamos totales sin aplicar el deducible y el otro 
 el histograma de los reclamos totales aplicados el deducible..
-```{r l5g5, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
+```{r l6g5, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
 smax <- lambda * M
 fmax <- 0.002
 
@@ -884,7 +884,7 @@ P( S = 0 )
 \text{para un valor $n'$ suficientemente grande}
 \end{eqnarray*}
 $$
-```{r l5c7}
+```{r l6c7}
 np <- 1e3
 ns <- 0:np
 PS0 <- sum( ( plnorm( d, meanlog = u, sdlog = s )^ns ) * dpois( ns, lambda = lambda ) )
@@ -915,7 +915,7 @@ P( S\ \text{es máximo} )
 \end{eqnarray*}
 $$
 
-```{r l5c8}
+```{r l6c8}
 PSmax <- sum( ( ( 1 - plnorm( M + d, meanlog = u, sdlog = s ) )^ns ) * dpois( ns, lambda = lambda ) )
 ```
 $$
@@ -934,7 +934,7 @@ $$
 & = & M \E\left[ N \right] \\
 \end{eqnarray*}
 $$
-```{r l5c9}
+```{r l6c9}
 ESmax <- M * sum( ns * dpois( ns, lambda = lambda ) )
 ```
 $$
@@ -951,7 +951,7 @@ encarecer la prima es un aumento de frecuencia.
 
 Como ya se lo mencionó, utilizando la simulación $\{S_i\}$ podemos determinar la distribución de 
 probabilidad empírica $F_m$ que aproxima la distribución de $F_S$.
-```{r l5c10}
+```{r l6c10}
 FeS <- ecdf( S )
 FeDS <- ecdf( DS )
 s <- seq( 0, ESmax, length = 1000 )
@@ -959,7 +959,7 @@ Fes <- sapply( s, FUN = FeS )
 FeDs <- sapply( s, FUN = FeDS )
 ```
 
-```{r l5g6, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
+```{r l6g6, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
 Smax <- ESmax
 
 xbrk <- sort( unique( c( d, M, seq( 0, Smax, length = 7 ) ) ) )
@@ -1046,7 +1046,7 @@ Consideremos el caso para un reclamo total $S$ donde el conteo de los siniestros
 $N \rightsquigarrow NBin( \alpha, p )$ y las severidades $\{X_i\}$ son i.i.d con distribución 
 $LN( \mu, \sigma )$. Utilizaremos el algoritmo de Panjer para aproximar la densidad de probabilidad
 de $f_S$ de $S$.
-```{r l5c11}
+```{r l6c11}
 n <- 7e4
 p <- 0.3
 alpha <- 3
@@ -1082,7 +1082,7 @@ El algoritmo de Panjer suele tener problemas para ajustarse en los primeros valo
 densidad $f_S$, tal como lo muestra el gráfico a continuación, usualmente hay una sobre estimación.
 Además, el algoritmo solo es válido cuando el conteo de siniestros pertenece a la familia
 de distribuciones $(a,b,0)$.
-```{r l5g7, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
+```{r l6g7, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
 fmax <- 0.0007
 
 plt <- ggplot( ) +
@@ -1103,7 +1103,7 @@ plt <- ggplot( ) +
 plot( plt )
 ```
 
-```{r l5g8, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
+```{r l6g8, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
 e <- cumsum( fS[ -1 ] * ds ) - ecdf( S )( sg[ -1 ] )
 
 eb <- max( abs( e ) )
@@ -1164,7 +1164,7 @@ $$
 \prod\limits_{i=1}^n \hat{f}_{i,j} \right\} \right] \right)
 $$
 
-```{r l5c12}
+```{r l6c12}
 N <- 10000
 set.seed(94312)
 alpha <- sample( x = seq( 1, 20, length = 40 ), size = 50, replace = TRUE )
@@ -1187,7 +1187,7 @@ fS <- Re( fS )
 fs <- sapply( s, FUN = function( sk ) dgamma( sk, shape = sum( alpha ), scale = theta ) )
 ```
 
-```{r l5g9, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
+```{r l6g9, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
 plt <- ggplot() +
   geom_line( aes( x = s, y = fS ), colour = 'darkred', linewidth = 1 ) + 
   geom_point( aes( x = s, y = fs ), colour = 'olivedrab3', size = 0.25 ) + 
@@ -1197,7 +1197,7 @@ plt <- ggplot() +
 plot( plt )
 ```
 
-```{r l5g10, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
+```{r l6g10, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
 e <- fS - fs
 eb <- max( abs( e ) )
 
@@ -1223,7 +1223,7 @@ $$
 
 para el caso cuando $s_o = 0$, tenemos que $f_S( s_0 ) = f_S( 0 ) = p_0$.
 
-```{r l5c13}
+```{r l6c13}
 M <- 200
 N <- 7e4
 
@@ -1258,7 +1258,7 @@ X <- lapply( N, FUN = function( n ) rlnorm( n, meanlog = u, sdlog = s ) )
 S <- sapply( X, FUN = function( x ) sum( x, na.rm = TRUE ) )
 ```
 
-```{r l5g11, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
+```{r l6g11, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
 fmax <- 0.0007
 smax <- 5e3
 
@@ -1280,7 +1280,7 @@ plt <- ggplot() +
 plot( plt )
 ```
 
-```{r l5g12, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
+```{r l6g12, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
 e <- cumsum( fS[ -1 ] * diff( sg ) ) - ecdf( S )( sg[-1] )
 
 eb <- max( abs( e ) )
@@ -1303,7 +1303,7 @@ para cada una de sus contratos se especifica un deducible de la forma
 $D( X ) = \min( \max( X - d, 0 ), M )$, donde precisamente $d$ es lo que se conoce como el deducible
 y $M$ como el monto máximo de cobertura. 
 
-```{r l5c14}
+```{r l6c14}
 load( '../RData/production_claims_health.RData' )
 ```
 
@@ -1311,7 +1311,7 @@ El objeto con la producción de pólizas tienen la siguiente estructura. Es un o
 usual que uno puede encontrar en las bases de producción de un asegurador. Se incluye en particular
 campos de especial interés como la fecha de nacimiento `bdate`, el inicio de vigencia de la 
 cobertura `start` y el final de vigencia de la cobertura `end`.
-```{r l5t1, echo = TRUE, results = 'asis', out.width='100%', class.source = 'fold-hide'}
+```{r l6t1, echo = TRUE, results = 'asis', out.width='100%', class.source = 'fold-hide'}
 production[ 1:100 ] %>%
   kable(
     label = NA,
@@ -1330,7 +1330,7 @@ Los reclamos se detallan en la tabla a continuación. En la información no se d
 original del reclamo, sino tan solo del valor pagado, después de aplicar la función deducible $D$.
 En la misma información se incluye el deducible $d$ y el monto de máximo de cobertura $M$ que se 
 utilizó para aplicar la deducción.
-```{r l5t2, echo = TRUE, results = 'asis', out.width='100%', class.source = 'fold-hide'}
+```{r l6t2, echo = TRUE, results = 'asis', out.width='100%', class.source = 'fold-hide'}
 claims[ 1:100 ] %>%
   kable(
     label = NA,
@@ -1350,7 +1350,7 @@ Lo primero es definir las fechas que marcan el periodo para el cual estamos inte
 con ello seleccionamos la periodicidad con la cual vamos a medir la frecuencia de los reclamos, 
 en este caso de forma anual `year`. También, seleccionamos de antemano unas edades para formar 
 grupos de riesgo por edad. 
-```{r l5c15}
+```{r l6c15}
 idate <- ymd( '2018-01-01' )
 edate <- ymd( '2021-01-01' )
 sdate <- seq( idate, edate, by = 'year' )
@@ -1366,7 +1366,7 @@ modelo colectivo de riesgo.
 Ahora tratamos la información correspondiente a la producción de las pólizas, en particular 
 extrayendo las pólizas que intersectan con los periodo de observación y creando los grupos de 
 edades `xg`.
-```{r l5c16}
+```{r l6c16}
 production[ , tid := 1 ]
 prod_prep <- merge.data.table( dates, production, by = 'tid', all.x = TRUE, allow.cartesian = TRUE )
 prod_prep[ , tid := NULL ]
@@ -1392,7 +1392,7 @@ Finalmente, se hace una estadística de frecuencia por cada grupo de riesgo dado
 `sex` y el grupo de edad `xg`. En particular se calcula el indicador para la familia de Panjer, 
 esto con la finalidad de caracterizar el tipo de distribución que determina la frecuencia 
 de los reclamos.
-```{r l5c17}
+```{r l6c17}
 claims_prep <- claims[ , list( DX = sum( claim ) ), by = list( policy, id, idc, type, sex, bdate, cdate ) ]
 claims_prep[ , x := round( interval( bdate, cdate ) / dyears( 1 ), 0 ) ]
 claims_prep[ , xg := cut( x = x, breaks = xgs, include.lowest = TRUE, ordered_result = TRUE, right = FALSE ) ]
@@ -1429,7 +1429,7 @@ claims_prep[ , grp := factor( paste0( sex, ' ', xg ), labels = grpcl$grp, ordere
 
 Los grupos de riesgo, que designaremos con un índice $g$, los hemos seleccionado para estudiar la 
 frecuencia y severidad de los reclamos, estos son los siguientes:
-```{r l5t3, echo = TRUE, results = 'asis', out.width='100%', class.source = 'fold-hide'}
+```{r l6t3, echo = TRUE, results = 'asis', out.width='100%', class.source = 'fold-hide'}
 grpcl %>%
   kable(
     label = NA,
@@ -1447,7 +1447,7 @@ grpcl %>%
 
 El gráfico a continuación muestra el comportamiento del indicador $v_n = n \frac{p_n}{p_{n-1}}$, 
 para cada uno de los grupos $g$ de riesgo.
-```{r l5g13, out.width='90%', out.height='700px', fig.align='center', class.source = 'fold-hide'}
+```{r l6g13, out.width='90%', out.height='700px', fig.align='center', class.source = 'fold-hide'}
 plt <- ggplot( ) +
   geom_point( data = count, aes( x = N, y = vn ), colour = 'red3', size = 0.5 ) +
   facet_wrap( vars( grp ), ncol = 4 ) +
@@ -1486,7 +1486,7 @@ $$
 $$
 Como ya lo mencionamos, para cada grupo $g$ podemos maximizar la verosimilitud logarítmica de la 
 frecuencia utilizando la función `fitdist` del paquete `fitdistrplus`.
-```{r l5c18}
+```{r l6c18, warning=FALSE}
 fit_count <- list()
 estim_frec <- NULL
 
@@ -1518,7 +1518,7 @@ estim_frec <- estim_frec[ , list( grp, a, p, EN, SDN, loglik, aic, bic )]
 En la lista que hemos creado `fit_count` hemos almacenado cada una de los objetos con las 
 estimaciones de la frecuencia para cada uno de los grupos. A continuación, presentamos los 
 resultados de la estimación para la frecuencia.
-```{r l5t4, echo = TRUE, results = 'asis', out.width='100%', class.source = 'fold-hide'}
+```{r l6t4, echo = TRUE, results = 'asis', out.width='100%', class.source = 'fold-hide'}
 estim_frec %>%
   kable(
     label = NA,
@@ -1540,7 +1540,7 @@ como consecuencia tenemos pérdida de información que no podemos recuperar, por
 esperar que la función de distribución acumulada de los reclamos deducidos $D(X)$ tenga 
 singularidades. Si buscamos utilizar el método de máxima verosimilitud para la estimación de la 
 mejor distribución, debemos hacer uso de la expresión completa que presentamos en \@ref(eq:loglik). 
-```{r l5c19}
+```{r l6c19}
 sev_claims <- claims[ , list( policy, id, idc, type, sex, bdate, cdate, deductible, amount, claim ) ]
 sev_claims[ , x := round( interval( bdate, cdate ) / dyears( 1 ), 0 ) ]
 sev_claims[ , xg := cut( x = x, breaks = xgs, include.lowest = TRUE, ordered_result = TRUE, right = FALSE ) ]
@@ -1553,7 +1553,7 @@ sev_claims[ , grp := factor( paste0( sex, ' ', xg ), labels = grpcl$grp, ordered
 
 Los histogramas a continuación muestran como se distribuyen los reclamos ya censurados por cada 
 grupos de riesgo.
-```{r l5g14, out.width='90%', out.height='700px', fig.align='center', class.source = 'fold-hide'}
+```{r l6g14, out.width='90%', out.height='700px', fig.align='center', class.source = 'fold-hide'}
 xlim <- c( 0, 1e3 )
 xbrk <- seq( xlim[1], xlim[2], length = 5 )
 xlbl <- xbrk
@@ -1617,11 +1617,11 @@ cobertura $M$ varían entre pólizas. Esta construcción debe ser realizada para
 a su vez debemos maximizar cada una de las verosimilitudes logarítmicas, esto lo podemos realizar
 de forma integrada utilizando un bucle de programación `for` y el método usual de optimización 
 `optim`.
-```{r l5c20}
+```{r l6c20, warning=FALSE}
 Fd <- plnorm
 fd <- dlnorm
 
-theta0 <- c( 2, 3 )
+theta0 <- c( 1, 1 )
 loglik_max <- list()
 estim_sev <- NULL
 
@@ -1648,6 +1648,7 @@ for ( g in grpcl$grp ) {
     # singularidad en la parte inferior, hacia el deducible
     sg <- datsev[ claim == 0, list( x = deductible ) ]
     sg <- sg$x
+    
     if ( length( sg ) > 0 ) {
       l <- l + sum( sapply( sg, FUN = function( x ) log( Fd( x, meanlog = theta[ 1 ], sdlog = theta[ 2 ] ) ) ) )  
     }
@@ -1655,20 +1656,27 @@ for ( g in grpcl$grp ) {
     return( -l ) # con menos ya que el optimizador minimiza
   }
   
+  dlglk <- function( x ) nl.grad( x, lglk )
+  
   # Maximización de la verosimilitud
-  loglik_max[[ g ]] <- optim(
-    par = theta0,
-    fn = lglk,
-    method = 'BFGS',
-    control = list( maxit = 1000, temp = 500, trace = TRUE, REPORT = 100 ) )
+  loglik_max[[ g ]] <- nloptr(
+    x0 = theta0,
+    eval_f = lglk,
+    eval_grad_f = dlglk,
+    lb = c( 0, 0 ),
+    ub = c( Inf, Inf ),
+    opts = list( maxeval = 1e4, 
+                 ftol_abs = 1e-15,
+                 xtol_abs = c( 1e-12, 1e-12 ),
+                 algorithm = 'NLOPT_LD_LBFGS' ) )
   
   estim_sev <- rbind( 
     estim_sev, 
     data.table( grp = g, 
                 n = nrow( datsev ),
-                meanlog = loglik_max[[ g ]]$par[ 1 ], 
-                sdlog = loglik_max[[ g ]]$par[ 2 ],
-                loglik = -loglik_max[[ g ]]$value )
+                meanlog = loglik_max[[ g ]]$solution[ 1 ], 
+                sdlog = loglik_max[[ g ]]$solution[ 2 ],
+                loglik = -loglik_max[[ g ]]$objective )
   )
 }
 
@@ -1687,7 +1695,7 @@ descomposición por *batchs* de información.
 
 Los resultados de la estimación mediante maximización de verosimilitud para la severidad de los 
 reclamos, los presentamos en la tabla a continuación.
-```{r l5t5, echo = TRUE, results = 'asis', out.width='100%', class.source = 'fold-hide'}
+```{r l6t5, echo = TRUE, results = 'asis', out.width='100%', class.source = 'fold-hide'}
 estim_sev %>%
   kable(
     label = NA,
@@ -1727,22 +1735,99 @@ $$
 S = \sum\limits_{g \in G} S_g
 = \sum\limits_{g \in G} \sum\limits_{i=1}^{n_g} \sum\limits_{j=1}^{N_g} D_{g,i}\left( X_{g,i,j} \right)
 $$
-```{r l5c21}
+Para realizar el cálculo de los valores deducidos se puede examinar la expresión del deducible, 
+con ello llegamos al siguiente resultado.
+$$
+\begin{eqnarray*}
+\E\left[D(X)\right]
+& = & \int\limits_0^{+\infty} D( x ) dF( x ) \\
+& = & \int\limits_0^{+\infty} \min\left( \max( x - d, 0 ), M \right) dF( x ) \\
+& = & \int\limits_d^{M+d} ( x - d ) dF( x ) + \int\limits_{M+d}^{+\infty} M dF( x ) \\
+& = & \int\limits_d^{M+d} x dF( x ) - d P\left( d \leq X \leq M + d \right) + M P\left( X > M + d \right) \\
+& = & \int\limits_d^{M+d} x dF( x ) - d \left( F( M + d ) - F( d ) \right) + M \left( 1 - F( M + d ) \right) \\
+& = & \int\limits_d^{M+d} x dF( x ) + M + d\ F( d ) - ( M + d ) F( M + d )
+\end{eqnarray*}
+$$
+
+La integral a la izquierda pude ser calculada con el uso de una aproximación numérica a la integral.
+Por su parte, los términos asociados a la probabilidad pueden ser calculados utilizando la 
+función de distribución acumulada de la variable aleatoria de los reclamos $X$.
+```{r l6c21}
 estim <- merge.data.table( estim_frec[ , list( grp, EN, SDN ) ], 
-                           estim_sev[ , list( grp, EX, SDX ) ], by = 'grp' )
+                           estim_sev[ , list( grp, EX, SDX, meanlog, sdlog ) ], by = 'grp' )
 ```
-El valor esperados del reclamo total por cada grupo $g$ está dado por
+
+Ahora configuramos un posible portafolio, el cual ya en la práctica debe considerar los objetivos
+comerciales para la venta de diferentes productos de seguro. Para cada grupo de riesgo $g$ se puede
+considerar un número de póliza de un determinado producto, caracterizados por su deducible $d$
+y monto máximo asegurado $M$. Así, para grupo de riesgo $g$ y producto $r$
 $$
-\E\left[ S_g \right] = n_g \E\left[ N_g \right] \E\left[ X_g \right]
-= `r formatC( 0, digits = 4, format = 'f' )`
+S_{g,r} = \sum\limits_{i=1}^{n_{g,r}} \sum\limits_{j=1}^{N_g} D\left( X_{i,j} \right)
 $$
-Bajo el mismo razonamiento, el valor esperado del reclamo total
+El valor esperado y varianza de cada uno de estos reclamos totales por grupo de riesgo $g$ y 
+producto $r$, están dados por:
 $$
-\E\left[ S \right]
-= \sum\limits_{g \in G} \E\left[ S_g \right] 
-= \sum\limits_{g \in G} n_g \E\left[ N_g \right] \E\left[ X_g \right]
-= `r formatC( 0, digits = 4, format = 'f' )`
+\E\left[ S_{g,r} \right] 
+= n_{g,r} \E\left[ N_g \right] \E\left[ D( X_g ) \right],
+\qquad
+\V\left[ S_{g,r} \right] 
+= n_{g,r} \left( \E\left[ N_g \right] \V\left[ D( X_g ) \right] + \V\left[ N_g \right] \E\left[ D( X_g ) \right]^2 \right),
 $$
+El reclamo total por grupo de riesgo $g$, tan solo resulta de la suma de los reclamos totales por 
+cada producto.
+$$
+S_g = \sum\limits_{r=1}^{R} S_{g,r}
+$$
+de igual forma su valor esperado y varianza están dados por:
+$$
+\E\left[ S_g \right] = \sum\limits_{r=1}^R \E\left[ S_{g,r} \right]
+= \sum\limits_{r=1}^R n_{g,r} \E\left[ N_g \right] \E\left[ D( X_g ) \right],
+\qquad
+\V\left[ S_{g} \right] = \sum\limits_{r=1}^R \V\left[ S_{g,r} \right]
+= \sum\limits_{r=1}^R n_{g,r} \left( \E\left[ N_g \right] \V\left[ D( X_g ) \right] + \V\left[ N_g \right] \E\left[ D( X_g ) \right]^2 \right),
+$$
+
+```{r l6c22}
+prods <- data.table( ngr = c( 20, 40, 60, 80, 100 ), 
+                     d = c( 20, 20, 20, 20, 20 ), 
+                     M = c( 2e4, 2e4, 2.5e4, 3e4, 4e4 ) )
+prods[ , id := 1 ]
+grpcl[ , id := 1 ]
+prods <- merge.data.table( prods, grpcl, by = 'id', allow.cartesian = TRUE )
+grpcl[ , id := NULL ]
+prods[ , id := NULL ]
+
+prods <- merge.data.table( prods, estim, by = 'grp', allow.cartesian = TRUE )
+setorder( prods, sex, xg, -d )
+prods[ , r := 1 ]
+prods[ , r := cumsum( r ), by = list( sex, xg ) ]
+intf <- function( meanlog, sdlog, d, M, k ) integrate( function( x ) ( x - d )^k * fd( x, meanlog = meanlog, sdlog = sdlog ), lower = d, upper = M, abs.tol = 1e-15 )$value
+
+prods[ , EDX := mapply( FUN = intf, meanlog, sdlog, d, M, 1 ) + M * ( 1 - Fd( M + d ) )]
+prods[ , EDX2 := mapply( FUN = intf, meanlog, sdlog, d, M, 2 ) + M^2 * ( 1 - Fd( M + d ) ) ]
+prods[ , SDDX := sqrt( EDX2 - EDX^2 ) ]
+
+prods[ , ES := ngr * EN * EDX ]
+prods[ , SDS := sqrt( ngr * ( EN * SDDX^2 + SDN^2 * EDX^2 ) ) ]
+```
+
+```{r l6t6, echo = TRUE, results = 'asis', out.width='100%', class.source = 'fold-hide'}
+prods[ , list( sex, xg, r, ngr, d, M, EN, SDN, EX, SDX, EDX, SDDX, ES, SDS ) ] %>%
+  kable(
+    label = NA,
+    caption = 'Estimación de los reclamos totales',
+    row.names = FALSE,
+    col.names = c( 'sex', '$x_g$', '$r$', '$n_{g,r}$', '$d$', '$M$', '$\\E[ N ]$', '$\\sqrt{\\V[ N ]}$',
+                   '$\\E[ X ]$', '$\\sqrt{\\V[ X ]}$', '$\\E[ D(X) ]$', '$\\sqrt{\\V[ D(X) ]}$',
+                   '$\\E[ S ]$', '$\\sqrt{\\V[ S ]}$' ),
+    align = 'llrrrrrrrrrrr',
+    digits = c( 0, 0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2 ),
+    format.args = list( big.mark = ',', decimal.mark = '.', scientific = FALSE ),
+    escape = FALSE,
+    centering = TRUE ) %>%
+  kable_classic( font_size = 14, full_width = FALSE, html_font = "Cambria", position = "center" ) %>%
+  scroll_box( width = "100%", height = "500px" )
+```
 :::
 
 <!------------------------------------------------------------------------------------------------->
@@ -1966,7 +2051,7 @@ En conclusión $N(t)$ tiene como distribución una ley de Poisson $Pois( \lambda
 se conoce a $N$ como un proceso de Poisson.
 :::
 
-```{r l5c22}
+```{r l6c23}
 m <- 1000
 lambda <- 10
 M <- 30
@@ -2000,7 +2085,7 @@ EeS <- sapply( 1:p, FUN = function( l ) mean( sapply( 1:m, function( i ) S[[ i ]
 
 En el gráfico a continuación presentamos todos los procesos de conteo $N_{i}$ simulados, como es de
 esperarse son funciones de escalera, siempre crecientes, que toman solo valores positivos.
-```{r l5g15, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
+```{r l6g15, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
 Sord <- order( sapply( 1:m, FUN = function( j ) last( S[[j]] ) ) )
 Ndat <- NULL
 for ( j in 1:m ) {
@@ -2034,7 +2119,7 @@ plot( plt )
 El gráfico a continuación presenta la simulación de los procesos correspondientes al total de 
 reclamos, conforme avanza el tiempo. De igual manera los procesos $S_i$ son funciones de escalera,
 siempre crecientes, con saltos correspondientes a los reclamos individuales.
-```{r l5g16, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
+```{r l6g16, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
 Sqmax <- quantile( sapply( S, FUN = function( Si ) last( Si ) ), probs = 0.99 )
 
 plt <- ggplot( ) +
@@ -2058,7 +2143,7 @@ plot( plt )
 
 Como se describe en el paso 8 del algoritmo de simulación, para cada tiempo $t_l$ se puede estimar
 la distribución de probabilidad de la variable aleatoria $S(t_l)$.
-```{r l5c23}
+```{r l6c24}
 FeS <- lapply( 1:p, FUN = function( l ) ecdf( sapply( S, FUN = function( Si ) Si[ l ] ) ) )
 ns <- 1e3
 s <- seq( 0, Smax, length = ns )
@@ -2068,7 +2153,7 @@ Fes <- lapply( FeS, FUN = function( FeSl ) sapply( s, FUN = FeSl ) )
 La figura a continuación muestra cada una de las distribuciones de probabilidad empíricas estimadas 
 $F_{m,l}$. Se puede observar que conforme avanza el tiempo, aumenta la probabilidad de observar 
 valores mayores del proceso $S$ correspondiente al total de reclamos.
-```{r l5g17, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
+```{r l6g17, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
 FeSdat <- NULL
 for ( j in 1:p ) {
   FeSdat <- rbindlist( list( FeSdat, data.table( s = s, m = as.factor( j ), Fes = Fes[[ j ]] ) ) )
