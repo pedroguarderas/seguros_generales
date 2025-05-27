@@ -1427,8 +1427,8 @@ introducido con anterioridad, tenemos la siguiente modificación.
     $$
 
 En los tres casos anteriores, hemos desarrollado una metodología para la estimación de la 
-distribución de frecuencia de los reclamos, esto tomando en cuenta la exposición al riesgo de cada 
-una de las pólizas a las cuales estos reclamos corresponde.
+distribución de frecuencia de los reclamos, tomando en cuenta la exposición al riesgo de cada 
+una de las pólizas a las cuales estos reclamos corresponden.
 
 ::: {.example #l5ex8}
 Ahora bien, pongamos en aplicación todo lo aprendido hasta el momento. Para ello, trabajaremos

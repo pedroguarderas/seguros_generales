@@ -1681,19 +1681,19 @@ además se puede ajustar la distribución de probabilidad que se desee estimar e
 parámetro <span class="math inline">\(\lambda\)</span>, es así que para las distribuciones de probabilidad discretas que hemos
 introducido con anterioridad, tenemos la siguiente modificación.</p>
 <ol style="list-style-type: decimal">
-<li>Para la distribución de Poisson, tenemos la ley de probabilidad
+<li><p>Para la distribución de Poisson, tenemos la ley de probabilidad
 <span class="math display">\[
 P( N = k ) = \exp\left( -\lambda ER \right) \frac{( \lambda ER )^k}{k!}, \qquad
 \forall k \in \mathbb{N}
 \]</span>
-entonces <span class="math inline">\(N \rightsquigarrow Pois( \lambda ER )\)</span></li>
-</ol>
+entonces <span class="math inline">\(N \rightsquigarrow Pois( \lambda ER )\)</span>.</p>
 <p>En caso de disponer de una muestra de <span class="math inline">\(N_1, \ldots, N_m\)</span> de variables aleatorias independientes,
 y por otra parte exposiciones al riesgo <span class="math inline">\(ER_1, \ldots, ER_m\)</span> asociadas a cada una de las variables
 aleatorias, de tal forma que <span class="math inline">\(N_i \rightsquigarrow Pois( \lambda ER_i )\)</span>, entonces la función
 de verosimilitud logarítmica toma la forma:
 <span class="math display">\[
-\ell( \lambda ) = - \lambda \sum\limits_{i=1}^m ER_i
+\ell( \lambda )
+= - \lambda \sum\limits_{i=1}^m ER_i
 + \sum\limits_{i=1}^m N_i \log\left( ER_i \right)
 + \sum\limits_{i=1}^m N_i \log\left( \lambda \right)
 - \sum\limits_{i=1}^m \log\left( N_i! \right)
@@ -1702,9 +1702,8 @@ en este caso el estimador por maximización de verosimilitud es bien sencillo de
 dado por:
 <span class="math display">\[
 \lambda = \frac{\sum\limits_{i=1}^m N_i}{\sum\limits_{i=1}^m ER_i }
-\]</span></p>
-<ol start="2" style="list-style-type: decimal">
-<li>Para la distribución binomial begativa, tenemos que si
+\]</span></p></li>
+<li><p>Para la distribución binomial begativa, tenemos que si
 <span class="math display">\[
 \lambda ER = \alpha \frac{1-p}{p} \Rightarrow p = \frac{\alpha}{\lambda ER + \alpha}
 \]</span>
@@ -1715,8 +1714,7 @@ P( N = k )
 \left( \frac{\alpha}{\lambda ER + \alpha} \right)^\alpha \left( \frac{\lambda ER}{\lambda ER + \alpha} \right)^k, \qquad
 \forall k \in \mathbb{N}
 \]</span>
-entonces <span class="math inline">\(N \rightsquigarrow NBinom\left( \alpha, \frac{\alpha}{\lambda ER + \alpha} \right)\)</span>.</li>
-</ol>
+entonces <span class="math inline">\(N \rightsquigarrow NBinom\left( \alpha, \frac{\alpha}{\lambda ER + \alpha} \right)\)</span>.</p>
 <p>Similar que antes, si disponemos de una muestra de <span class="math inline">\(N_1, \ldots, N_m\)</span> de variables aleatorias
 independientes y también exposiciones al riesgo <span class="math inline">\(ER_1, \ldots, ER_m\)</span> asociadas a cada una de las
 variables aleatorias, de tal forma que
@@ -1734,9 +1732,8 @@ la función de verosimilitud logarítmica toma la forma:
 + m \alpha \log\left( \alpha \right) \\
 &amp; &amp; - \alpha \sum\limits_{i=1}^m \log\left( \lambda ER_i + \alpha \right)
 \end{eqnarray*}
-\]</span></p>
-<ol start="3" style="list-style-type: decimal">
-<li>Para la distribución binomial, tenemos que si
+\]</span></p></li>
+<li><p>Para la distribución binomial, tenemos que si
 <span class="math display">\[
 \lambda ER = np \Rightarrow p = \frac{\lambda ER}{n}
 \]</span>
@@ -1745,8 +1742,7 @@ de donde la ley de probabilidad queda modificada como
 P( N = k ) = \binom{n}{k} \left( \frac{\lambda ER}{n} \right)^k \left( 1 - \frac{\lambda ER}{n} \right)^{n-k},
 \qquad \forall k \in \{0,\ldots, n\}
 \]</span>
-entonces <span class="math inline">\(N \rightsquigarrow Binom\left( n, \frac{\lambda ER}{n} \right)\)</span></li>
-</ol>
+entonces <span class="math inline">\(N \rightsquigarrow Binom\left( n, \frac{\lambda ER}{n} \right)\)</span></p>
 <p>Mismo razonamiento, si disponemos de una muestra de <span class="math inline">\(N_1, \ldots, N_m\)</span> de variables aleatorias
 independientes y también exposiciones al riesgo <span class="math inline">\(ER_1, \ldots, ER_m\)</span> asociadas a cada una de las
 variables aleatorias, de tal forma que
@@ -1764,8 +1760,9 @@ verosimilitud logarítmica toma la forma:
 &amp; &amp; + n \sum\limits_{i=1}^m \log\left( 1 - \frac{\lambda ER_i}{n} \right)
 - \sum\limits_{i=1}^m N_i \log\left( 1 - \frac{\lambda ER_i}{n} \right)
 \end{eqnarray*}
-\]</span>
-En los tres casos anteriores, hemos realizado un ajuste a las distribuciones de la frecuencia
+\]</span></p></li>
+</ol>
+<p>En los tres casos anteriores, hemos realizado un ajuste a las distribuciones de la frecuencia
 de los reclamos, tomando en cuenta la exposición al riesgo de cada una de las pólizas a las que
 corresponde.</p>
 <div class="example">
