@@ -1340,93 +1340,95 @@ además se puede ajustar la distribución de probabilidad que se desee estimar e
 parámetro $\lambda$, es así que para las distribuciones de probabilidad discretas que hemos 
 introducido con anterioridad, tenemos la siguiente modificación.
 
-1. Para la distribución de Poisson, tenemos la ley de probabilidad
-$$
-P( N = k ) = \exp\left( -\lambda ER \right) \frac{( \lambda ER )^k}{k!}, \qquad
-\forall k \in \N
-$$
-entonces $N \rightsquigarrow Pois( \lambda ER )$
+1.  Para la distribución de Poisson, tenemos la ley de probabilidad
+    $$
+    P( N = k ) = \exp\left( -\lambda ER \right) \frac{( \lambda ER )^k}{k!}, \qquad
+    \forall k \in \N
+    $$
+    entonces $N \rightsquigarrow Pois( \lambda ER )$.
+    
+    En caso de disponer de una muestra de $N_1, \ldots, N_m$ de variables aleatorias independientes, 
+    y por otra parte exposiciones al riesgo $ER_1, \ldots, ER_m$ asociadas a cada una de las variables
+    aleatorias, de tal forma que $N_i \rightsquigarrow Pois( \lambda ER_i )$, entonces la función
+    de verosimilitud logarítmica toma la forma:
+    $$
+    \ell( \lambda ) 
+    = - \lambda \sum\limits_{i=1}^m ER_i 
+    + \sum\limits_{i=1}^m N_i \log\left( ER_i \right) 
+    + \sum\limits_{i=1}^m N_i \log\left( \lambda \right) 
+    - \sum\limits_{i=1}^m \log\left( N_i! \right)
+    $$
+    en este caso el estimador por maximización de verosimilitud es bien sencillo de determinar y está 
+    dado por:
+    $$
+    \lambda = \frac{\sum\limits_{i=1}^m N_i}{\sum\limits_{i=1}^m ER_i }
+    $$
 
-En caso de disponer de una muestra de $N_1, \ldots, N_m$ de variables aleatorias independientes, 
-y por otra parte exposiciones al riesgo $ER_1, \ldots, ER_m$ asociadas a cada una de las variables
-aleatorias, de tal forma que $N_i \rightsquigarrow Pois( \lambda ER_i )$, entonces la función
-de verosimilitud logarítmica toma la forma:
-$$
-\ell( \lambda ) = - \lambda \sum\limits_{i=1}^m ER_i 
-+ \sum\limits_{i=1}^m N_i \log\left( ER_i \right) 
-+ \sum\limits_{i=1}^m N_i \log\left( \lambda \right) 
-- \sum\limits_{i=1}^m \log\left( N_i! \right)
-$$
-en este caso el estimador por maximización de verosimilitud es bien sencillo de determinar y está 
-dado por:
-$$
-\lambda = \frac{\sum\limits_{i=1}^m N_i}{\sum\limits_{i=1}^m ER_i }
-$$
+2.  Para la distribución binomial begativa, tenemos que si
+    $$
+    \lambda ER = \alpha \frac{1-p}{p} \Rightarrow p = \frac{\alpha}{\lambda ER + \alpha}
+    $$
+    de donde la ley de probabilidad queda modificada como 
+    $$
+    P( N = k ) 
+    = \frac{\Gamma( \alpha + k )}{\Gamma(k+1) \Gamma(\alpha)} 
+    \left( \frac{\alpha}{\lambda ER + \alpha} \right)^\alpha \left( \frac{\lambda ER}{\lambda ER + \alpha} \right)^k, \qquad
+    \forall k \in \N
+    $$
+    entonces $N \rightsquigarrow NBinom\left( \alpha, \frac{\alpha}{\lambda ER + \alpha} \right)$.
+    
+    Similar que antes, si disponemos de una muestra de $N_1, \ldots, N_m$ de variables aleatorias 
+    independientes y también exposiciones al riesgo $ER_1, \ldots, ER_m$ asociadas a cada una de las 
+    variables aleatorias, de tal forma que 
+    $N_i \rightsquigarrow NBinom\left( \alpha, \frac{\alpha}{\lambda ER_i + \alpha} \right)$, entonces 
+    la función de verosimilitud logarítmica toma la forma:
+    $$
+    \begin{eqnarray*}
+    \ell( \alpha, \lambda )
+    & = & \sum\limits_{i=1}^m \log \Gamma( \alpha + N_i ) 
+    - \sum\limits_{i=1}^m \log \Gamma( N_i + 1 ) 
+    - m \log \Gamma( \alpha ) \\
+    & & + \sum\limits_{i=1}^m N_i \log\left( \lambda \right) 
+    + \sum\limits_{i=1}^m N_i \log\left( ER_i \right) 
+    - \sum\limits_{i=1}^m N_i \log\left( \lambda ER_i + \alpha \right) 
+    + m \alpha \log\left( \alpha \right) \\
+    & & - \alpha \sum\limits_{i=1}^m \log\left( \lambda ER_i + \alpha \right)
+    \end{eqnarray*}
+    $$
 
-2. Para la distribución binomial begativa, tenemos que si
-$$
-\lambda ER = \alpha \frac{1-p}{p} \Rightarrow p = \frac{\alpha}{\lambda ER + \alpha}
-$$
-de donde la ley de probabilidad queda modificada como 
-$$
-P( N = k ) 
-= \frac{\Gamma( \alpha + k )}{\Gamma(k+1) \Gamma(\alpha)} 
-\left( \frac{\alpha}{\lambda ER + \alpha} \right)^\alpha \left( \frac{\lambda ER}{\lambda ER + \alpha} \right)^k, \qquad
-\forall k \in \N
-$$
-entonces $N \rightsquigarrow NBinom\left( \alpha, \frac{\alpha}{\lambda ER + \alpha} \right)$.
+3.  Para la distribución binomial, tenemos que si
+    $$
+    \lambda ER = np \Rightarrow p = \frac{\lambda ER}{n}
+    $$
+    de donde la ley de probabilidad queda modificada como
+    $$
+    P( N = k ) = \binom{n}{k} \left( \frac{\lambda ER}{n} \right)^k \left( 1 - \frac{\lambda ER}{n} \right)^{n-k}, 
+    \qquad \forall k \in \{0,\ldots, n\}
+    $$
+    entonces $N \rightsquigarrow Binom\left( n, \frac{\lambda ER}{n} \right)$
+    
+    Mismo razonamiento, si disponemos de una muestra de $N_1, \ldots, N_m$ de variables aleatorias 
+    independientes y también exposiciones al riesgo $ER_1, \ldots, ER_m$ asociadas a cada una de las 
+    variables aleatorias, de tal forma que 
+    $N_i \rightsquigarrow  Binom\left( n, \frac{\lambda ER_i}{n} \right)$, entonces la función de 
+    verosimilitud logarítmica toma la forma:
+    $$
+    \begin{eqnarray*}
+    \ell( n, \lambda )
+    & = & m \log( n! )
+    - \sum\limits_{i=1}^m \log( N_i! ) 
+    - \sum\limits_{i=1}^m \log( (n - N_i)! ) \\
+    & & + \sum\limits_{i=1}^m N_i \log \lambda 
+    + \sum\limits_{i=1}^m N_i \log ER_i
+    - n \sum\limits_{i=1}^m N_i \\
+    & & + n \sum\limits_{i=1}^m \log\left( 1 - \frac{\lambda ER_i}{n} \right) 
+    - \sum\limits_{i=1}^m N_i \log\left( 1 - \frac{\lambda ER_i}{n} \right) 
+    \end{eqnarray*}
+    $$
 
-Similar que antes, si disponemos de una muestra de $N_1, \ldots, N_m$ de variables aleatorias 
-independientes y también exposiciones al riesgo $ER_1, \ldots, ER_m$ asociadas a cada una de las 
-variables aleatorias, de tal forma que 
-$N_i \rightsquigarrow NBinom\left( \alpha, \frac{\alpha}{\lambda ER_i + \alpha} \right)$, entonces 
-la función de verosimilitud logarítmica toma la forma:
-$$
-\begin{eqnarray*}
-\ell( \alpha, \lambda )
-& = & \sum\limits_{i=1}^m \log \Gamma( \alpha + N_i ) 
-- \sum\limits_{i=1}^m \log \Gamma( N_i + 1 ) 
-- m \log \Gamma( \alpha ) \\
-& & + \sum\limits_{i=1}^m N_i \log\left( \lambda \right) 
-+ \sum\limits_{i=1}^m N_i \log\left( ER_i \right) 
-- \sum\limits_{i=1}^m N_i \log\left( \lambda ER_i + \alpha \right) 
-+ m \alpha \log\left( \alpha \right) \\
-& & - \alpha \sum\limits_{i=1}^m \log\left( \lambda ER_i + \alpha \right)
-\end{eqnarray*}
-$$
-
-3. Para la distribución binomial, tenemos que si
-$$
-\lambda ER = np \Rightarrow p = \frac{\lambda ER}{n}
-$$
-de donde la ley de probabilidad queda modificada como
-$$
-P( N = k ) = \binom{n}{k} \left( \frac{\lambda ER}{n} \right)^k \left( 1 - \frac{\lambda ER}{n} \right)^{n-k}, 
-\qquad \forall k \in \{0,\ldots, n\}
-$$
-entonces $N \rightsquigarrow Binom\left( n, \frac{\lambda ER}{n} \right)$
-
-Mismo razonamiento, si disponemos de una muestra de $N_1, \ldots, N_m$ de variables aleatorias 
-independientes y también exposiciones al riesgo $ER_1, \ldots, ER_m$ asociadas a cada una de las 
-variables aleatorias, de tal forma que 
-$N_i \rightsquigarrow  Binom\left( n, \frac{\lambda ER_i}{n} \right)$, entonces la función de 
-verosimilitud logarítmica toma la forma:
-$$
-\begin{eqnarray*}
-\ell( n, \lambda )
-& = & m \log( n! )
-- \sum\limits_{i=1}^m \log( N_i! ) 
-- \sum\limits_{i=1}^m \log( (n - N_i)! ) \\
-& & + \sum\limits_{i=1}^m N_i \log \lambda 
-+ \sum\limits_{i=1}^m N_i \log ER_i
-- n \sum\limits_{i=1}^m N_i \\
-& & + n \sum\limits_{i=1}^m \log\left( 1 - \frac{\lambda ER_i}{n} \right) 
-- \sum\limits_{i=1}^m N_i \log\left( 1 - \frac{\lambda ER_i}{n} \right) 
-\end{eqnarray*}
-$$
-En los tres casos anteriores, hemos realizado un ajuste a las distribuciones de la frecuencia 
-de los reclamos, tomando en cuenta la exposición al riesgo de cada una de las pólizas a las que 
-corresponde.
+En los tres casos anteriores, hemos desarrollado una metodología para la estimación de la 
+distribución de frecuencia de los reclamos, esto tomando en cuenta la exposición al riesgo de cada 
+una de las pólizas a las cuales estos reclamos corresponde.
 
 ::: {.example #l5ex8}
 Ahora bien, pongamos en aplicación todo lo aprendido hasta el momento. Para ello, trabajaremos
