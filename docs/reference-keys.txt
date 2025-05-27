@@ -180,6 +180,7 @@ deducibles
 algoritmo-de-simulación-2
 algoritmo-de-panjer
 estimación-usando-la-transformada-de-fourier
+temporalidad-y-ajustes-de-los-reclamos-totales
 proceso-estocástico-de-reclamos-totales
 algoritmo-de-simulación-3
 tarificación
