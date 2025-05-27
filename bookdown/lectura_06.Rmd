@@ -1293,6 +1293,141 @@ plt <- ggplot() +
 plot( plt )
 ```
 
+<!------------------------------------------------------------------------------------------------->
+## Temporalidad y ajustes de los reclamos totales
+
+Hasta el momento no hemos tomado en cuenta cierta componente de temporalidad que muestra la 
+frecuencia de los reclamos. Debemos ser muy consientes que los reclamos se producen en el tiempo
+y que el número de estos dependerá del periodo de exposición de cada uno de los asegurados, en otras
+palabras en la estimación de la frecuencia se debe tomar en cuenta que las pólizas tienen un periodo
+de cobertura, una fecha inicial y una fecha final. 
+
+Más puntualmente, para una inferencia sencilla si estimamos reclamos de pólizas que duran 2 años
+entonces la frecuencia del número de reclamos $N$ será bianual. Si por el contrario se quiere 
+utilizar esta frecuencia para estimar el número de reclamos para pólizas con cobertura anual 
+entonces, es necesario realizar un ajuste acorde.
+
+Dando algo más de sentido matemático a este razonamiento, a cada póliza podemos asociar su 
+respectiva **exposición al riesgo**, que no es más que el ancho de intervalo dado por la fecha 
+inicial de la póliza, menos la fecha final de la póliza. Usualmente la unidad que su utiliza para 
+medir este intervalo es en años, pero puede cambiársela, siempre y cuando la formulación del modelo 
+sea clara y el uso de estas unidades sea consistente para cálculos futuros. Así si tenemos $n$ 
+pólizas para cada una de ellas hay un tiempo de inicio $s_i$ y un tiempo $e_i$ final, para todo 
+$i \in \{1, \ldots, n\}$, así la exposición al riesgo $ER_i$ está dada por una distancia $d$
+$$
+ER_i = d( s_i, e_i )
+$$
+por ejemplo, una buena distancia puede ser
+$$
+d( s, e ) = \frac{\# \left\{ \text{días entre $s$ y $e$} \right\}}{365.25}
+$$
+En la librería `lubridate` de R, tenemos una implementación que puede utilizarse fácilmente para
+calcular la distancia en años entre dos fechas dadas.
+```{r l6c14}
+s <- ymd( '1951-04-09' )
+e <- ymd( '2025-04-09' )
+d1 <- interval( s, e ) / dyears( 1 )
+d2 <- length( seq( s, e, by = 'day') ) / 365.25
+```
+
+La idea es ajustar la estimación de la frecuencia de forma proporcional a la exposición al riesgo, 
+esto se puede realizar postulando que la variable aleatoria del conteo de siniestros, tienen una 
+esperanza proporcional a la exposición al riesgo.
+$$
+\E\left[ N \right] = \lambda ER
+$$
+además se puede ajustar la distribución de probabilidad que se desee estimar en función del 
+parámetro $\lambda$, es así que para las distribuciones de probabilidad discretas que hemos 
+introducido con anterioridad, tenemos la siguiente modificación.
+
+1. Para la distribución de Poisson, tenemos la ley de probabilidad
+$$
+P( N = k ) = \exp\left( -\lambda ER \right) \frac{( \lambda ER )^k}{k!}, \qquad
+\forall k \in \N
+$$
+entonces $N \rightsquigarrow Pois( \lambda ER )$
+
+En caso de disponer de una muestra de $N_1, \ldots, N_m$ de variables aleatorias independientes, 
+y por otra parte exposiciones al riesgo $ER_1, \ldots, ER_m$ asociadas a cada una de las variables
+aleatorias, de tal forma que $N_i \rightsquigarrow Pois( \lambda ER_i )$, entonces la función
+de verosimilitud logarítmica toma la forma:
+$$
+\ell( \lambda ) = - \lambda \sum\limits_{i=1}^m ER_i 
++ \sum\limits_{i=1}^m N_i \log\left( ER_i \right) 
++ \sum\limits_{i=1}^m N_i \log\left( \lambda \right) 
+- \sum\limits_{i=1}^m \log\left( N_i! \right)
+$$
+en este caso el estimador por maximización de verosimilitud es bien sencillo de determinar y está 
+dado por:
+$$
+\lambda = \frac{\sum\limits_{i=1}^m N_i}{\sum\limits_{i=1}^m ER_i }
+$$
+
+2. Para la distribución binomial begativa, tenemos que si
+$$
+\lambda ER = \alpha \frac{1-p}{p} \Rightarrow p = \frac{\alpha}{\lambda ER + \alpha}
+$$
+de donde la ley de probabilidad queda modificada como 
+$$
+P( N = k ) 
+= \frac{\Gamma( \alpha + k )}{\Gamma(k+1) \Gamma(\alpha)} 
+\left( \frac{\alpha}{\lambda ER + \alpha} \right)^\alpha \left( \frac{\lambda ER}{\lambda ER + \alpha} \right)^k, \qquad
+\forall k \in \N
+$$
+entonces $N \rightsquigarrow NBinom\left( \alpha, \frac{\alpha}{\lambda ER + \alpha} \right)$.
+
+Similar que antes, si disponemos de una muestra de $N_1, \ldots, N_m$ de variables aleatorias 
+independientes y también exposiciones al riesgo $ER_1, \ldots, ER_m$ asociadas a cada una de las 
+variables aleatorias, de tal forma que 
+$N_i \rightsquigarrow NBinom\left( \alpha, \frac{\alpha}{\lambda ER_i + \alpha} \right)$, entonces 
+la función de verosimilitud logarítmica toma la forma:
+$$
+\begin{eqnarray*}
+\ell( \alpha, \lambda )
+& = & \sum\limits_{i=1}^m \log \Gamma( \alpha + N_i ) 
+- \sum\limits_{i=1}^m \log \Gamma( N_i + 1 ) 
+- m \log \Gamma( \alpha ) \\
+& & + \sum\limits_{i=1}^m N_i \log\left( \lambda \right) 
++ \sum\limits_{i=1}^m N_i \log\left( ER_i \right) 
+- \sum\limits_{i=1}^m N_i \log\left( \lambda ER_i + \alpha \right) 
++ m \alpha \log\left( \alpha \right) \\
+& & - \alpha \sum\limits_{i=1}^m \log\left( \lambda ER_i + \alpha \right)
+\end{eqnarray*}
+$$
+
+3. Para la distribución binomial, tenemos que si
+$$
+\lambda ER = np \Rightarrow p = \frac{\lambda ER}{n}
+$$
+de donde la ley de probabilidad queda modificada como
+$$
+P( N = k ) = \binom{n}{k} \left( \frac{\lambda ER}{n} \right)^k \left( 1 - \frac{\lambda ER}{n} \right)^{n-k}, 
+\qquad \forall k \in \{0,\ldots, n\}
+$$
+entonces $N \rightsquigarrow Binom\left( n, \frac{\lambda ER}{n} \right)$
+
+Mismo razonamiento, si disponemos de una muestra de $N_1, \ldots, N_m$ de variables aleatorias 
+independientes y también exposiciones al riesgo $ER_1, \ldots, ER_m$ asociadas a cada una de las 
+variables aleatorias, de tal forma que 
+$N_i \rightsquigarrow  Binom\left( n, \frac{\lambda ER_i}{n} \right)$, entonces la función de 
+verosimilitud logarítmica toma la forma:
+$$
+\begin{eqnarray*}
+\ell( n, \lambda )
+& = & m \log( n! )
+- \sum\limits_{i=1}^m \log( N_i! ) 
+- \sum\limits_{i=1}^m \log( (n - N_i)! ) \\
+& & + \sum\limits_{i=1}^m N_i \log \lambda 
++ \sum\limits_{i=1}^m N_i \log ER_i
+- n \sum\limits_{i=1}^m N_i \\
+& & + n \sum\limits_{i=1}^m \log\left( 1 - \frac{\lambda ER_i}{n} \right) 
+- \sum\limits_{i=1}^m N_i \log\left( 1 - \frac{\lambda ER_i}{n} \right) 
+\end{eqnarray*}
+$$
+En los tres casos anteriores, hemos realizado un ajuste a las distribuciones de la frecuencia 
+de los reclamos, tomando en cuenta la exposición al riesgo de cada una de las pólizas a las que 
+corresponde.
+
 ::: {.example #l5ex8}
 Ahora bien, pongamos en aplicación todo lo aprendido hasta el momento. Para ello, trabajaremos
 con información de pólizas de un seguro de salud. La información está compuesta de dos objetos,
@@ -1303,7 +1438,7 @@ para cada una de sus contratos se especifica un deducible de la forma
 $D( X ) = \min( \max( X - d, 0 ), M )$, donde precisamente $d$ es lo que se conoce como el deducible
 y $M$ como el monto máximo de cobertura. 
 
-```{r l6c14}
+```{r l6c15}
 load( '../RData/production_claims_health.RData' )
 ```
 
@@ -1350,7 +1485,7 @@ Lo primero es definir las fechas que marcan el periodo para el cual estamos inte
 con ello seleccionamos la periodicidad con la cual vamos a medir la frecuencia de los reclamos, 
 en este caso de forma anual `year`. También, seleccionamos de antemano unas edades para formar 
 grupos de riesgo por edad. 
-```{r l6c15}
+```{r l6c16}
 idate <- ymd( '2018-01-01' )
 edate <- ymd( '2021-01-01' )
 sdate <- seq( idate, edate, by = 'year' )
@@ -1366,7 +1501,7 @@ modelo colectivo de riesgo.
 Ahora tratamos la información correspondiente a la producción de las pólizas, en particular 
 extrayendo las pólizas que intersectan con los periodo de observación y creando los grupos de 
 edades `xg`.
-```{r l6c16}
+```{r l6c17}
 production[ , tid := 1 ]
 prod_prep <- merge.data.table( dates, production, by = 'tid', all.x = TRUE, allow.cartesian = TRUE )
 prod_prep[ , tid := NULL ]
@@ -1392,7 +1527,7 @@ Finalmente, se hace una estadística de frecuencia por cada grupo de riesgo dado
 `sex` y el grupo de edad `xg`. En particular se calcula el indicador para la familia de Panjer, 
 esto con la finalidad de caracterizar el tipo de distribución que determina la frecuencia 
 de los reclamos.
-```{r l6c17}
+```{r l6c18}
 claims_prep <- claims[ , list( DX = sum( claim ) ), by = list( policy, id, idc, type, sex, bdate, cdate ) ]
 claims_prep[ , x := round( interval( bdate, cdate ) / dyears( 1 ), 0 ) ]
 claims_prep[ , xg := cut( x = x, breaks = xgs, include.lowest = TRUE, ordered_result = TRUE, right = FALSE ) ]
@@ -1486,7 +1621,7 @@ $$
 $$
 Como ya lo mencionamos, para cada grupo $g$ podemos maximizar la verosimilitud logarítmica de la 
 frecuencia utilizando la función `fitdist` del paquete `fitdistrplus`.
-```{r l6c18, warning=FALSE}
+```{r l6c19, warning=FALSE}
 fit_count <- list()
 estim_frec <- NULL
 
@@ -1540,7 +1675,7 @@ como consecuencia tenemos pérdida de información que no podemos recuperar, por
 esperar que la función de distribución acumulada de los reclamos deducidos $D(X)$ tenga 
 singularidades. Si buscamos utilizar el método de máxima verosimilitud para la estimación de la 
 mejor distribución, debemos hacer uso de la expresión completa que presentamos en \@ref(eq:loglik). 
-```{r l6c19}
+```{r l6c20}
 sev_claims <- claims[ , list( policy, id, idc, type, sex, bdate, cdate, deductible, amount, claim ) ]
 sev_claims[ , x := round( interval( bdate, cdate ) / dyears( 1 ), 0 ) ]
 sev_claims[ , xg := cut( x = x, breaks = xgs, include.lowest = TRUE, ordered_result = TRUE, right = FALSE ) ]
@@ -1617,7 +1752,7 @@ cobertura $M$ varían entre pólizas. Esta construcción debe ser realizada para
 a su vez debemos maximizar cada una de las verosimilitudes logarítmicas, esto lo podemos realizar
 de forma integrada utilizando un bucle de programación `for` y el método usual de optimización 
 `optim`.
-```{r l6c20, warning=FALSE}
+```{r l6c21, warning=FALSE}
 Fd <- plnorm
 fd <- dlnorm
 
@@ -1752,7 +1887,7 @@ $$
 La integral a la izquierda pude ser calculada con el uso de una aproximación numérica a la integral.
 Por su parte, los términos asociados a la probabilidad pueden ser calculados utilizando la 
 función de distribución acumulada de la variable aleatoria de los reclamos $X$.
-```{r l6c21}
+```{r l6c22}
 estim <- merge.data.table( estim_frec[ , list( grp, EN, SDN ) ], 
                            estim_sev[ , list( grp, EX, SDX, meanlog, sdlog ) ], by = 'grp' )
 ```
@@ -1787,8 +1922,8 @@ $$
 = \sum\limits_{r=1}^R n_{g,r} \left( \E\left[ N_g \right] \V\left[ D( X_g ) \right] + \V\left[ N_g \right] \E\left[ D( X_g ) \right]^2 \right),
 $$
 
-```{r l6c22}
-prods <- data.table( ngr = c( 20, 40, 60, 80, 100 ), 
+```{r l6c23}
+prods <- data.table( ngr = c( 1000, 800, 600, 400, 200 ), 
                      d = c( 20, 20, 20, 20, 20 ), 
                      M = c( 2e4, 2e4, 2.5e4, 3e4, 4e4 ) )
 prods[ , id := 1 ]
@@ -2051,7 +2186,7 @@ En conclusión $N(t)$ tiene como distribución una ley de Poisson $Pois( \lambda
 se conoce a $N$ como un proceso de Poisson.
 :::
 
-```{r l6c23}
+```{r l6c24}
 m <- 1000
 lambda <- 10
 M <- 30
@@ -2143,7 +2278,7 @@ plot( plt )
 
 Como se describe en el paso 8 del algoritmo de simulación, para cada tiempo $t_l$ se puede estimar
 la distribución de probabilidad de la variable aleatoria $S(t_l)$.
-```{r l6c24}
+```{r l6c25}
 FeS <- lapply( 1:p, FUN = function( l ) ecdf( sapply( S, FUN = function( Si ) Si[ l ] ) ) )
 ns <- 1e3
 s <- seq( 0, Smax, length = ns )
