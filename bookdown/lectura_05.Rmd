@@ -215,6 +215,23 @@ plt <- ggplot() +
 plot( plt )
 ```
 
+Además, una forma sencilla de estimar si una variable sigue una distribución de las tres antes 
+descritas es estudiando su coeficiente de variación $\VC( N ) = \frac{\V[N]}{\E[N]}$.
+
+1. Si $N$ sigue una ley de Poisson $Pois(\lambda)$, entonces:
+$$
+\VC( N ) = \frac{\V[N]}{\E[N]} = \frac{\lambda}{\lambda} = 1
+$$
+2.  Si $N$ sigue una ley de binomial negativa $NBinom( \alpha, p )$, entonces:
+$$
+\VC( N ) = \frac{\V[N]}{\E[N]} = \frac{\alpha\frac{1-p}{p^2}}{\alpha\frac{1-p}{p}} = \frac{1}{p} > 1
+$$
+
+3.  Si $N$ sigue una ley de binomial $Binom( n, p )$, entonces:
+$$
+\VC( N ) = \frac{\V[N]}{\E[N]} = \frac{np(1-p)}{np} = 1 - p < 1
+$$
+
 <!------------------------------------------------------------------------------------------------->
 ## Distribuciones continuas
 
