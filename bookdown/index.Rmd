@@ -50,3 +50,4 @@ csl: springer-basic-brackets-no-et-al-alphabetical.csl
 \newcommand{\ES}{\operatorname{ES}}
 \newcommand{\Re}{\operatorname{Re}}
 \newcommand{\Dif}{\operatorname{Dif}}
+\newcommand{\VC}{\operatorname{VC}}
