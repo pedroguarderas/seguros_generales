@@ -64,15 +64,18 @@ a la aceptación y correcta gestión de de riesgos muy importantes.
 Por lo tanto, en lugar de evitar los riesgos debemos tratar de conocerlos profundamente para 
 aceptarlos y poder aprovechar las oportunidades que brinda su correcta gestión.
 
-> "El riesgo existe gracias a nuestra humana
+:::: {.ideabox data-latex=""}
+**Para pensar:**
+
+*El riesgo existe gracias a nuestra humana
 incapacidad de conocer el futuro, a nuestras
 limitaciones para identificar sus verdaderas
 causas. Y mientras así sea, debemos
 esforzarnos por comprenderlo, aceptarlo y
-gestionarlo inteligentemente y con humildad."
->
-> --- L. Vélez, 2003
+gestionarlo inteligentemente y con humildad.*
 
+-- L. Vélez, 2003
+::::
 <!------------------------------------------------------------------------------------------------->
 ## La transferencia de riesgos financieros
 
@@ -135,30 +138,30 @@ gracias a la dispersión, incluso a escala mundial.
 
 Es una de las leyes más importantes en el campo de la *teoría de probabilidades*:
 
-````
-***Las frecuencias relativas (% de ocurrencia) del resultado de un experimento aleatorio
-tienden a estabilizarse en un valor:
+:::: {.ideabox data-latex=""}
+**Ley de los grandes números**
 
--La probabilidad de ese resultado***
-````
+Las frecuencias relativas (% de ocurrencia) del resultado de un experimento aleatorio, tienden a 
+estabilizarse en un valor cuando el número de experimentos es grande. Ese número es una aproximación 
+de la *probabilidad de ese resultado*.
+:::::
 
 <!------------------------------------------------------------------------------------------------->
 ## Microeconomía del negocio de seguros
 
-El seguro es un **negocio** con fines de lucro.
+El seguro es un **negocio** con fines de lucro y de libre competencia.
 
 ### Ciclo de producción 
 
-En el negocio del seguro se produce el fenómeno conocido como ** *inversión del ciclo de 
-producción* **
+En el negocio del seguro se produce el fenómeno conocido como **inversión del ciclo de 
+producción**:
 
-- El asegurador fija el precio antes de conocer el costo del producto y asume obligaciones frente a 
-los asegurados.
+- El asegurador fija el precio antes de conocer el costo del producto y por lo tanto asume 
+obligaciones frente a los asegurados.
 
-Como consecuencias las compañías de seguros captan dinero del público y por esta razón:
-
--Deben conformar reservas técnicas
--Son controladas por un organismo de control estatal: SCVS
+- Como consecuencias las compañías de seguros captan dinero del público y por esta razón:
+  - Deben conformar reservas técnicas
+  - Son controladas por organismos de control estatal.
 
 ### Reservas técnicas
 
@@ -180,22 +183,304 @@ El principal riesgo del asegurador está en su pasivo.
 
 ### Control estatal
 
-El riesgo del beneficiario de un seguro:
-
-Que el asegurador no pueda cumplir con sus obligaciones de cubrir los siniestros:
+La inversión del ciclo de producción implica que los asegurados corran el riesgo de que el asegurador 
+no pueda cumplir con sus obligaciones de cubrir los siniestros en el futuro:
 
 -Riesgo de insolvencia del asegurador
 
-Esto justifica la necesidad del “control”:
+Por esta razón se justifica la existencia de entidades de control cuyo objetivo es proteger a los 
+asegurados garantizando la solvencia del mercado asegurador en el largo plazo:
 
 - Superintendencia de Compañías, Valores y Seguros (SCVS)
   - Leyes y normas de solvencia
-  - Ejempl: Resoluciones de la SCVS, Solvencia I y II
-
+  - Ej.: resoluciones de la SCVS, Solvencia I y II
 - Otras instituciones de control
   - Junta de Política y Regulación Financiera (JPRF)
 
-- Objetivo: garantizar la solvencia del mercado asegurador en el largo plazo
+
+
+<!------------------------------------------------------------------------------------------------->
+## El seguro privado
+
+El seguro (privado) es un contrato mediante el cual una de las partes, el asegurador, se obliga, a 
+cambio del pago de una prima, a indemnizar a la otra parte, dentro de los límites convenidos, de una 
+pérdida o un daño producido por un acontecimiento incierto; o a pagar un capital o una renta, si 
+ocurre la eventualidad prevista en el contrato.
+
+--Art. 1, Decreto Supremo 1147 del 29/Nov/1963
+
+## Actores
+
+- EL asegurado
+  - El tomador del seguro
+  - El portador del riesgo
+- La empresa de seguros
+- La empresa de reaseguros y retrocesiones
+
+## Clasificación según la materia asegurada
+
+1. Seguros de personas
+
+  - Destinados a asegurar los riesgos que afecten la vida, la integridad física o la situación 
+  familiar de las personas.
+  
+2. Seguros generales o de daños
+
+  - Destinados a cubrir los riesgos que pueden amenazar al patrimonio de las personas o instituciones.
+
+-- Decreto 1147
+
+
+### Seguros de personas
+
+- Seguros de vida
+
+- Seguros de salud o asistencia médica
+
+- Seguros de accidentes
+
+- Seguros de natalidad
+
+### Seguros generales o de daños
+
+- Seguro de cosas
+  - El objeto amenazado es un bien del patrimonio del asegurado
+  - Ej: incendio, robo, inundación,…
+
+- Seguro de responsabilidad
+  - El objeto amenazado es el patrimonio global del asegurado
+  - Ej: responsabilidad civil, responsabilidad médica
+  
+
+## Clasificación según el beneficio
+
+1. Seguros de compensación o de sumas fijas
+
+  - El beneficio es fijado de antemano sin referencia a la magnitud del siniestro
+    - Ej: 50 USD diarios por hospitalización
+    - Ej: 20,000 USD en caso de muerte.
+
+2. Seguros de indemnización
+
+  - Cubren el perjuicio real del siniestro, según las condiciones del contrato
+    - Ej: incendio de un inmueble.
 
 
 
+## Clasificación según la regulación
+
+1. Seguros de vida
+  - Cubren los riesgos de las personas o garantizan a éstas, dentro o al término de un plazo, 
+  un capital o una renta periódica
+
+2. Seguros generales (de daños)
+  -Cubren los riesgos causados por afecciones, pérdidas o daños de la salud, de los bienes o del
+  patrimonio y fianzas o garantías.
+
+-- Art. 3, Ley General de Seguros.
+
+
+## Visita web de la SCVS y JPRF
+
+
+## Principios básicos del seguro
+
+1. Buena fe
+2. Interés asegurable
+3. Indemnización
+4. Subrogación
+
+
+### Principio de buena fe
+
+Tanto el asegurador como el asegurado deben actuar con máxima honestidad,
+moral y buena fe.
+
+El asegurado debe declarar todas las características del riesgo que se asegura.
+
+El asegurador debe explicar con claridad y detalle las condiciones de la cobertura que ofrece.
+
+
+### Principio del interés asegurable
+
+El asegurado debe sufrir una pérdida económica si el riesgo asegurado se realiza.
+
+No se puede asegurar legalmente nada que no tenga interés asegurable.
+
+El interés debe ser lícito.
+
+- En seguros de personas, toda persona tiene interés asegurable:
+  - En su propia vida;
+  - En la de las personas a quienes pueda reclamar alimentos, y
+  - En la de aquellas cuya muerte pueda aparejarle un perjuicio económico.
+  - En los amparos accesorios de gastos que tengan carácter de daño patrimonial, como gastos 
+  médicos, clínicos, quirúrgicos o farmacéuticos
+    - Son susceptibles de indemnización y se regulan por las normas relativas a los seguros de daños.
+
+- En seguros de daños puede ser objeto de contrato de seguro todo interés económico en que una
+persona tenga en que no se produzca un siniestro.
+
+-- Decreto 1147
+
+### Principio de indemnización
+
+La indemnización no puede exceder el valor real del interés asegurado ni el monto efectivo del 
+prejuicio patrimonial ni el límite de la suma asegurada.
+
+El seguro no puede constituir fuente de enriquecimiento del asegurado.
+
+A opción del asegurador la indemnización es pagadera en dinero mediante la reposición, reparación o
+reconstrucción de la cosa asegurada.
+
+
+En los seguros de personas el valor del interés asegurable no tiene otro límite que el que 
+libremente le asignen las partes contratantes.
+
+-- Decreto 1147
+
+### Principio de subrogación
+
+- El asegurador sustituye al asegurado en el ejercicio de las acciones o derechos que tendría este, 
+a fin de recuperar la indemnización.
+-- Diccionario MAPFRE de seguros
+
+- El asegurador que haya pagado una indemnización de seguro se subroga, por Ministerio de la Ley, 
+hasta el monto de dicha indemnización, en los derechos del asegurado contra terceros responsables
+del siniestro.
+-- Decreto 1147
+
+- Consecuencia
+
+Bienes recuperables pasan a ser propiedad de la compañía 
+Ej. Carros robados y recuperados.
+
+
+## Seguro o apuesta?
+
+knitr::kable(
+  as.data.frame(
+    matrix( 
+      c(
+      'Seguro',                               'Apuesta',
+      'Respaldo legal estricto',              'Puede ser ilegal',
+      'Interés asegurable indispensable',     'Carece de interés asegurable',
+      'Máxima buena fe',                      'No necesariamente de buena fe',
+      'Nunca es fuente de enriquecimiento',   'Puede ser fuente de enriquecimiento' 
+      ),
+      nrow = 5, ncol = 2, byrow = TRUE )
+  ),
+  booktabs = TRUE,
+  caption = 'Seguros vs apuestas'
+)
+
+
+## Fuentes del riesgo en seguros
+
+- Número de reclamos: frecuencia
+- Costo de los reclamos: severidad
+- Período de cobertura
+- Período de pago de primas
+- Período de pago de siniestros
+  - Desde la fecha del reclamo hasta el cierre legal.
+  
+## Problemas que enfrentan los seguros
+
+Identificamos tres problemas principales:
+- Asegurabilidad de riesgos
+- Selección adversa (anti-selección)
+- Azar moral
+
+### Asegurabilidad de riesgos
+
+Recordemos que el seguro se fundamenta en la compensación o mutualización de riesgos.
+
+- Existen riesgos difícilmente asegurables 
+  - Riesgos únicos en su especie
+  - No existe información histórica
+  - Límites de asegurabilidad subjetivos que dependen de capacidad financiera y aversión al riesgo 
+  de la compañía.
+  
+- Riesgos asegurables (deseables)
+  - Riesgos comparables y de naturaleza homogénea
+  - Es necesario que se puedan mutualizar 
+    - Para que se cumpla la ley de los grandes números
+  - Riesgos medibles que 
+    - responden a una ley de probabilidad
+    - permitan estimar la pérdida máxima
+  - Riesgos no potestativos: que no dependen de la voluntad del asegurado
+  - Riesgos inciertos
+    - Que no hayan ocurrido o que su ocurrencia sea desconocida
+    
+    
+### Selección adversa
+
+Es un fenómeno causado porque la información del asegurador es incompleta y asimétrica:
+  - El asegurado es quien conoce mejor el riesgo
+
+Entonces el seguro atrae más a quienes tienen mayor exposición al riesgo y el portafolio puede 
+resultar desequilibrado, asegurando demasiados “malos riesgos” que causan un desequilibrio 
+financiero
+
+### Medidas contra la selección adversa {-}
+
+Con la finalidad de equilibrar el portafolio el mercado a puesto en práctica algunas medidas:
+
+- Personalización de la prima para asegurados siniestrosos 
+  - Ej. bonus malus
+- Proceso de selección de asegurados en base a declaración del riesgo
+  - Potestad de la compañía para rechazar un seguro
+  - Obligación de asegurar?
+- Período de carencia
+- Límites de cobertura
+  - Copago, franquicia, deducible, suma máxima asegurada
+
+
+### Azar moral
+
+Es el riesgo de que el asegurado se desinterese de prevenir la ocurrencia de siniestros:
+- Ej. Seguro automotriz
+
+O se interese en que ocurra el riesgo:
+- Ej. Por publicidad
+
+O Incremente la frecuencia de reclamos
+- Ej. Seguro de salud
+
+### Medidas contra el azar moral {-}
+
+Con el objetivo de incentivar la prevención el mercado propone algunas estrategias:
+
+- Copago y/o Deducible
+- Obligaciones de prevención previstas en el contrato
+- Cobertura máxima
+  - Por siniestro
+  - Por período
+- Bono *no-claims*
+
+## Primas de seguro: Art. 53 RLGS
+
+- Prima pura o prima de riesgo: es el costo del riesgo
+- Prima neta: prima pura más un recargo de seguridad
+- Prima de tarifa: prima neta más recargos de operación
+  - costo del riesgo
+  - gastos de adquisición, 
+  - gastos de administración,
+  - utilidad razonable
+  - otros gastos justificados
+- Prima comercial: prima de tarifa más impuestos, contribuciones, etc.
+
+### Relación fundamental {-}
+
+$$ P_{com} = \frac{P}{1-GA-GB-U} $$
+$P$: prima pura
+
+$PP_{com}$: prima comercial
+
+$GA$: porcentaje de gastos de administración
+
+$GB$: porcentaje de gastos de adquisición (comisiones de *brokers*)
+
+$U$: porcentaje de utilidad esperada por los accionistas 
+
+
+## Caso Nessie
