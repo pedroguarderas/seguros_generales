@@ -1956,7 +1956,7 @@ prods[ , list( sex, xg, r, ngr, d, M, EN, SDN, EX, SDX, EDX, SDDX, ES, SDS ) ] %
     row.names = FALSE,
     col.names = c( 'sex', '$x_g$', '$r$', '$n_{g,r}$', '$d$', '$M$', '$\\E[ N ]$', '$\\sqrt{\\V[ N ]}$',
                    '$\\E[ X ]$', '$\\sqrt{\\V[ X ]}$', '$\\E[ D(X) ]$', '$\\sqrt{\\V[ D(X) ]}$',
-                   '$\\E[ S ]$', '$\\sqrt{\\V[ S ]}$' ),
+                   '$\\E[ S_{g,r} ]$', '$\\sqrt{\\V[ S_{g,r} ]}$' ),
     align = 'llrrrrrrrrrrr',
     digits = c( 0, 0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2 ),
     format.args = list( big.mark = ',', decimal.mark = '.', scientific = FALSE ),
