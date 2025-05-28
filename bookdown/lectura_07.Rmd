@@ -6,7 +6,7 @@ comportamiento futuro de los reclamos totales $S$, es necesario también tomar e
 $K$ destinado para hacer frente al riesgo subscrito y los costos generales $G$
 
 <!------------------------------------------------------------------------------------------------->
-## Medidas de riesgo
+## Medidas de riesgo {#medidas_riesgo}
 
 ::: {.definition #spv name="Medida de riesgo coherente"}
 Una **medida de riesgo coeherente** es una función $\rho: \R \longrightarrow \R$, 
@@ -136,7 +136,7 @@ plot( plt )
 :::
 
 <!------------------------------------------------------------------------------------------------->
-## Tarificación en grandes términos
+## Tarificación en grandes términos {#tarificacion_grandes_terminos}
 
 La tarificación que conlleva a la selección de la prima $\Pi$ debe tomar en cuenta como se manejan y 
 equilibran los activos y pasivos en el negocio asegurador.
@@ -189,11 +189,11 @@ donde las variables a considerarse en principio son:
 
 4. $G$ Gastos agregados, incluyendo gastos de emisión, operativos, gastos por reclamos
 
-5. $K$ Coste de capital, esencialmente el retorno mínimo esperado por los inversores sobre el 
-capital invertido.
+5. $K$ Coste de capital, esencialmente es el retorno que se espera sobre el capital invertido por 
+los inversores para mantener el nivel de solvencia del ramo.
 
-En varias ocasiones el ciclo del negocio puede ser corto y no permite considerar un ingreso por
-inversiones $I = 0$.
+En varias ocasiones el ciclo del negocio puede ser corto plazo y no permite considerar un ingreso 
+por inversiones $I = 0$.
 $$
 R = \Pi - S - G - K
 $$
@@ -201,8 +201,8 @@ $$
 Sería ideal que a lo largo de la vida del ramo el resultado mantenga $R > 0$, pero al tratarse de 
 un negocio que depende de la aleatoriedad de los reclamos, es bastante complicado encontrar un 
 costo de capital $K$ y una prima $\Pi$ que siempre asegure ante todo escenario que se mantenga 
-la positividad. Ante este riesgo continuo se busca minimizar la **probabilidad de ruina** $R < 0$ 
-a un nivel $\alpha > 0$ adecuado
+la positividad. Ante este riesgo continuo se busca minimizar la **probabilidad de ruina**, es decir,
+acotar la probabilidad del evento $R < 0$ a un nivel de confianza $\alpha > 0$ adecuado
 $$
 P( R < 0 ) < \alpha
 $$
@@ -249,7 +249,7 @@ $$
 = \Pi - \E[S] - G - r \left( \rho(S) - \E[S] \right)
 $$
 Lo que se busca es evitar la ruina y por tanto se busca cubrirse ante el evento $R < 0$, desde una 
-perspectiva probabilista esto se puede realizar seleccionando un nivel de conbertura $\alpha > 0$, 
+perspectiva probabilista esto se puede realizar seleccionando un nivel de cobertura $\alpha > 0$, 
 que acote la probabilidad del evento de ruina.
 $$
 P( R < 0 ) 
@@ -304,8 +304,11 @@ $$
 \end{eqnarray*}
 $$
 
+De lo anterior se observa, que un buen inicio para estimar la prima de riesgo es ciertamente 
+usar la medida $\VaR_{1-\alpha}$ al nivel adecuado de confianza $\alpha$.
+
 <!------------------------------------------------------------------------------------------------->
-## Prima
+## Prima {#prima}
 La prima es la cantidad de dinero que un individuo o entidad pagan por una póliza de seguro, la cual
 está diseñada para cubrir ciertos riesgos personales o comerciales.
 
@@ -317,7 +320,7 @@ satisfaga, algunas propiedades importantes.
 Sin consideramos dos riesgos a cubrir $S_1$ y $S_2$, entonces la función que estima $\rho$ las primas 
 sería aconsejable satisfaga las siguientes propiedades.
 
-1. Si se decide cobrir por compleo dos riesgos $S_1$ y $S_2$ en un mismo producto, el valor de la 
+1. Si se decide cubrir por completo dos riesgos $S_1$ y $S_2$ en un mismo producto, el valor de la 
 prima deberá ser menor o igual al valor que se resultaría de cubrir cada uno de los riesgos con 
 productos separados.
 $$
@@ -338,7 +341,6 @@ $$
 $$
 Esto se traduce a que ningún asegurado estará interesado en adquirir una póliza para cubrir un 
 riesgo por encima del valor total asegurado.
-
 
 Es así que hay algunos principios para la estimación de primas, aquí citamos algunos de los más 
 conocidos:
