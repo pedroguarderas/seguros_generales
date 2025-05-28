@@ -403,7 +403,7 @@ $i$-ésimo reclamo tiene como parámetro un diferente factor $\alpha_i$, pero el
 $\theta$. 
 
 Ya que cada $X_i \rightsquigarrow Gamma( \alpha_i, \theta )$, podemos calcular de forma determinista
-las experanzas de $\E[X_i]$, para cada $i \in \{1,\ldots,n\}$ y de igual forma podemos 
+las esperanzas de $\E[X_i]$, para cada $i \in \{1,\ldots,n\}$ y de igual forma podemos 
 calcular la esperanza del reclamo total $\E[S] = \sum\limits_{i=1}^n \E[X_i]$. 
 Además como asumimos independencia entre los $X_i$, la varianza de $S$ también puede ser calculada
 fácilmente como $\V[S] = \sum\limits_{i=1}^n \V[X_i]$.
