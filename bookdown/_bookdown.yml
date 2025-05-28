@@ -1,6 +1,6 @@
 book_filename: seguros_generales
 rmd_file: 
-  - index.Rmd
+  - lectura_00.Rmd
   - lectura_01.Rmd
   - lectura_02.Rmd
   - lectura_03.Rmd
