@@ -1,6 +1,8 @@
 <!------------------------------------------------------------------------------------------------->
 # Preliminares
-  
+
+
+
 <!------------------------------------------------------------------------------------------------->
 ## Notación matemática
 
@@ -40,7 +42,7 @@ el conjunto $X$, no es más que una función de $\N$ con valores en $X$
 
 16. $\sup A$ es la menor de las cotas superiores de $A$.
 
-17. $\Dif f$ conjunto de puntos donde la función es diferenciable.
+17. $\Dif f$ conjunto de puntos donde la función $f$ es diferenciable.
 
 
 <!------------------------------------------------------------------------------------------------->
@@ -60,6 +62,7 @@ options( stringsAsFactors = FALSE )
 options( width = 120 )
 
 knitr::opts_chunk$set(size = 'footnotesize', dpi = 100, warning = FALSE, echo = TRUE, class.source = "numberLines lineAnchors")
+
 def.chunk.hook  <- knitr::knit_hooks$get("chunk")
 knitr::knit_hooks$set(chunk = function(x, options) {
   x <- def.chunk.hook(x, options)

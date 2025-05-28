@@ -1,5 +1,5 @@
 <!------------------------------------------------------------------------------------------------->
-# Probabilidad y Estadística
+# Probabilidad y Estadística {#probabilidad_estadistica}
 
 Antes de introducir algunos conceptos necesarios para nuestro estudio, necesitamos de algunos 
 conceptos de base.

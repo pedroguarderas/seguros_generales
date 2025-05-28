@@ -1,5 +1,5 @@
 <!------------------------------------------------------------------------------------------------->
-# Tarificación
+# Tarificación {#tarificacion}
 
 Para realizar la tarificación de un producto de seguro, además de estudiar y estimar el 
 comportamiento futuro de los reclamos totales $S$, es necesario también tomar en cuenta el capital 

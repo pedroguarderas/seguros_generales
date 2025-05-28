@@ -1,5 +1,5 @@
 <!------------------------------------------------------------------------------------------------->
-# Introducción a las operaciones de seguros
+# Introducción a las operaciones de seguros {#introduccion_operaciones_seguros}
 
 <!------------------------------------------------------------------------------------------------->
 ## El sistema financiero
@@ -7,34 +7,34 @@
 En todos lo países del mundo existe un sistema financiero con el objetivo de ofrecer facilidades 
 para poner en práctica las decisiones financieras de:
 
-  - Personas
-  - Empresas
-  - Gobierno.
-  
+- Personas
+- Empresas
+- Gobierno.
+
 En general en un sistema financiero encontramos: 
 
 - Mercados de activos financieros
-  - Deuda, Derivados, Títulos…
+- Deuda, Derivados, Títulos…
 - Intermediarios (públicos y privados)
-  - Bancos
-  - Empresas de seguros
-  - Fondos de pensiones
+- Bancos
+- Empresas de seguros
+- Fondos de pensiones
 - Empresas de servicios
-  - Difusión de información
-  - Tarjetas de crédito, brokers…
-  
+- Difusión de información
+- Tarjetas de crédito, brokers…
+
 Por medio de las instituciones del sistema, se espera facilitar algunas operaciones:
 
 - Transferencia de recursos
-  - A través del tiempo, regiones, entre, industrias,…
+- A través del tiempo, regiones, entre, industrias,…
 - Administración del riesgo
-  - Medios para administrar el riesgo financiero
+- Medios para administrar el riesgo financiero
 - Compensación y establecimiento de pagos
-  - Facilitar el intercambio de bienes,servicios, activos…
+- Facilitar el intercambio de bienes,servicios, activos…
 - Concentración de recursos
-  - Financiamiento de grandes empresas y proyectos
+- Financiamiento de grandes empresas y proyectos
 - Suministro de información
-  - Toma de decisiones en iguales condiciones
+- Toma de decisiones en iguales condiciones
 
 <!------------------------------------------------------------------------------------------------->
 ## Riesgos financieros
@@ -76,6 +76,7 @@ gestionarlo inteligentemente y con humildad.*
 
 -- L. Vélez, 2003
 ::::
+
 <!------------------------------------------------------------------------------------------------->
 ## La transferencia de riesgos financieros
 
@@ -104,10 +105,10 @@ de primas que permiten financiar las operaciones de seguros.
 Sin embargo en algunos casos existen ciertas limitaciones técnicas, pues existen seguros que no se 
 basan en análisis de información histórica, porque no existe o es limitada:
 - Seguros “especiales” o “exóticos”
-  - Seguro de las piernas de futbolistas, bailarinas…
-  - Seguro de satélites
+- Seguro de las piernas de futbolistas, bailarinas…
+- Seguro de satélites
 - Seguros nuevos
-  -SPPAT (antiguo SOAT) al inicio!
+- SPPAT (antiguo SOAT) al inicio!
 
 En estos casos el fundamento técnico resulta subjetivo basado en análisis de grupos de expertos que
 estudian los riesgos potenciales o experiencias relacionadas que permiten determinar primas.
@@ -160,8 +161,8 @@ producción**:
 obligaciones frente a los asegurados.
 
 - Como consecuencias las compañías de seguros captan dinero del público y por esta razón:
-  - Deben conformar reservas técnicas
-  - Son controladas por organismos de control estatal.
+- Deben conformar reservas técnicas
+- Son controladas por organismos de control estatal.
 
 ### Reservas técnicas
 
@@ -192,10 +193,10 @@ Por esta razón se justifica la existencia de entidades de control cuyo objetivo
 asegurados garantizando la solvencia del mercado asegurador en el largo plazo:
 
 - Superintendencia de Compañías, Valores y Seguros (SCVS)
-  - Leyes y normas de solvencia
-  - Ej.: resoluciones de la SCVS, Solvencia I y II
+- Leyes y normas de solvencia
+- Ej.: resoluciones de la SCVS, Solvencia I y II
 - Otras instituciones de control
-  - Junta de Política y Regulación Financiera (JPRF)
+- Junta de Política y Regulación Financiera (JPRF)
 
 <!------------------------------------------------------------------------------------------------->
 ## El seguro privado
@@ -210,8 +211,8 @@ ocurre la eventualidad prevista en el contrato.
 ## Actores
 
 - EL asegurado
-  - El tomador del seguro
-  - El portador del riesgo
+- El tomador del seguro
+- El portador del riesgo
 - La empresa de seguros
 - La empresa de reaseguros y retrocesiones
 
@@ -219,12 +220,12 @@ ocurre la eventualidad prevista en el contrato.
 
 1. Seguros de personas
 
-  - Destinados a asegurar los riesgos que afecten la vida, la integridad física o la situación 
-  familiar de las personas.
-  
+- Destinados a asegurar los riesgos que afecten la vida, la integridad física o la situación 
+familiar de las personas.
+
 2. Seguros generales o de daños
 
-  - Destinados a cubrir los riesgos que pueden amenazar al patrimonio de las personas o instituciones.
+- Destinados a cubrir los riesgos que pueden amenazar al patrimonio de las personas o instituciones.
 
 -- Decreto 1147
 
@@ -242,38 +243,38 @@ ocurre la eventualidad prevista en el contrato.
 ### Seguros generales o de daños
 
 - Seguro de cosas
-  - El objeto amenazado es un bien del patrimonio del asegurado
-  - Ej: incendio, robo, inundación,…
+- El objeto amenazado es un bien del patrimonio del asegurado
+- Ej: incendio, robo, inundación,…
 
 - Seguro de responsabilidad
-  - El objeto amenazado es el patrimonio global del asegurado
-  - Ej: responsabilidad civil, responsabilidad médica
-  
+- El objeto amenazado es el patrimonio global del asegurado
+- Ej: responsabilidad civil, responsabilidad médica
+
 
 ## Clasificación según el beneficio
 
 1. Seguros de compensación o de sumas fijas
 
-  - El beneficio es fijado de antemano sin referencia a la magnitud del siniestro
-    - Ej: 50 USD diarios por hospitalización
-    - Ej: 20,000 USD en caso de muerte.
+- El beneficio es fijado de antemano sin referencia a la magnitud del siniestro
+- Ej: 50 USD diarios por hospitalización
+- Ej: 20,000 USD en caso de muerte.
 
 2. Seguros de indemnización
 
-  - Cubren el perjuicio real del siniestro, según las condiciones del contrato
-    - Ej: incendio de un inmueble.
+- Cubren el perjuicio real del siniestro, según las condiciones del contrato
+- Ej: incendio de un inmueble.
 
 
 
 ## Clasificación según la regulación
 
 1. Seguros de vida
-  - Cubren los riesgos de las personas o garantizan a éstas, dentro o al término de un plazo, 
-  un capital o una renta periódica
+- Cubren los riesgos de las personas o garantizan a éstas, dentro o al término de un plazo, 
+un capital o una renta periódica
 
 2. Seguros generales (de daños)
-  -Cubren los riesgos causados por afecciones, pérdidas o daños de la salud, de los bienes o del
-  patrimonio y fianzas o garantías.
+-Cubren los riesgos causados por afecciones, pérdidas o daños de la salud, de los bienes o del
+patrimonio y fianzas o garantías.
 
 -- Art. 3, Ley General de Seguros.
 
@@ -308,12 +309,12 @@ No se puede asegurar legalmente nada que no tenga interés asegurable.
 El interés debe ser lícito.
 
 - En seguros de personas, toda persona tiene interés asegurable:
-  - En su propia vida;
-  - En la de las personas a quienes pueda reclamar alimentos, y
-  - En la de aquellas cuya muerte pueda aparejarle un perjuicio económico.
-  - En los amparos accesorios de gastos que tengan carácter de daño patrimonial, como gastos 
-  médicos, clínicos, quirúrgicos o farmacéuticos
-    - Son susceptibles de indemnización y se regulan por las normas relativas a los seguros de daños.
+- En su propia vida;
+- En la de las personas a quienes pueda reclamar alimentos, y
+- En la de aquellas cuya muerte pueda aparejarle un perjuicio económico.
+- En los amparos accesorios de gastos que tengan carácter de daño patrimonial, como gastos 
+médicos, clínicos, quirúrgicos o farmacéuticos
+- Son susceptibles de indemnización y se regulan por las normas relativas a los seguros de daños.
 
 - En seguros de daños puede ser objeto de contrato de seguro todo interés económico en que una
 persona tenga en que no se produzca un siniestro.
@@ -356,19 +357,19 @@ Ej. Carros robados y recuperados.
 ## Seguro o apuesta?
 
 knitr::kable(
-  as.data.frame(
-    matrix( 
-      c(
-      'Seguro',                               'Apuesta',
-      'Respaldo legal estricto',              'Puede ser ilegal',
-      'Interés asegurable indispensable',     'Carece de interés asegurable',
-      'Máxima buena fe',                      'No necesariamente de buena fe',
-      'Nunca es fuente de enriquecimiento',   'Puede ser fuente de enriquecimiento' 
-      ),
-      nrow = 5, ncol = 2, byrow = TRUE )
+as.data.frame(
+matrix( 
+  c(
+    'Seguro',                               'Apuesta',
+    'Respaldo legal estricto',              'Puede ser ilegal',
+    'Interés asegurable indispensable',     'Carece de interés asegurable',
+    'Máxima buena fe',                      'No necesariamente de buena fe',
+    'Nunca es fuente de enriquecimiento',   'Puede ser fuente de enriquecimiento' 
   ),
-  booktabs = TRUE,
-  caption = 'Seguros vs apuestas'
+  nrow = 5, ncol = 2, byrow = TRUE )
+),
+booktabs = TRUE,
+caption = 'Seguros vs apuestas'
 )
 
 
@@ -379,8 +380,8 @@ knitr::kable(
 - Período de cobertura
 - Período de pago de primas
 - Período de pago de siniestros
-  - Desde la fecha del reclamo hasta el cierre legal.
-  
+- Desde la fecha del reclamo hasta el cierre legal.
+
 ## Problemas que enfrentan los seguros
 
 Identificamos tres problemas principales:
@@ -393,27 +394,27 @@ Identificamos tres problemas principales:
 Recordemos que el seguro se fundamenta en la compensación o mutualización de riesgos.
 
 - Existen riesgos difícilmente asegurables 
-  - Riesgos únicos en su especie
-  - No existe información histórica
-  - Límites de asegurabilidad subjetivos que dependen de capacidad financiera y aversión al riesgo 
-  de la compañía.
-  
+- Riesgos únicos en su especie
+- No existe información histórica
+- Límites de asegurabilidad subjetivos que dependen de capacidad financiera y aversión al riesgo 
+de la compañía.
+
 - Riesgos asegurables (deseables)
-  - Riesgos comparables y de naturaleza homogénea
-  - Es necesario que se puedan mutualizar 
-    - Para que se cumpla la ley de los grandes números
-  - Riesgos medibles que 
-    - responden a una ley de probabilidad
-    - permitan estimar la pérdida máxima
-  - Riesgos no potestativos: que no dependen de la voluntad del asegurado
-  - Riesgos inciertos
-    - Que no hayan ocurrido o que su ocurrencia sea desconocida
-    
-    
+- Riesgos comparables y de naturaleza homogénea
+- Es necesario que se puedan mutualizar 
+- Para que se cumpla la ley de los grandes números
+- Riesgos medibles que 
+- responden a una ley de probabilidad
+- permitan estimar la pérdida máxima
+- Riesgos no potestativos: que no dependen de la voluntad del asegurado
+- Riesgos inciertos
+- Que no hayan ocurrido o que su ocurrencia sea desconocida
+
+
 ### Selección adversa
 
 Es un fenómeno causado porque la información del asegurador es incompleta y asimétrica:
-  - El asegurado es quien conoce mejor el riesgo
+- El asegurado es quien conoce mejor el riesgo
 
 Entonces el seguro atrae más a quienes tienen mayor exposición al riesgo y el portafolio puede 
 resultar desequilibrado, asegurando demasiados “malos riesgos” que causan un desequilibrio 
@@ -424,13 +425,13 @@ financiero
 Con la finalidad de equilibrar el portafolio el mercado a puesto en práctica algunas medidas:
 
 - Personalización de la prima para asegurados siniestrosos 
-  - Ej. bonus malus
+- Ej. bonus malus
 - Proceso de selección de asegurados en base a declaración del riesgo
-  - Potestad de la compañía para rechazar un seguro
-  - Obligación de asegurar?
+- Potestad de la compañía para rechazar un seguro
+- Obligación de asegurar?
 - Período de carencia
 - Límites de cobertura
-  - Copago, franquicia, deducible, suma máxima asegurada
+- Copago, franquicia, deducible, suma máxima asegurada
 
 
 ### Azar moral
@@ -451,8 +452,8 @@ Con el objetivo de incentivar la prevención el mercado propone algunas estrateg
 - Copago y/o Deducible
 - Obligaciones de prevención previstas en el contrato
 - Cobertura máxima
-  - Por siniestro
-  - Por período
+- Por siniestro
+- Por período
 - Bono *no-claims*
 
 ## Primas de seguro: Art. 53 RLGS
@@ -460,11 +461,11 @@ Con el objetivo de incentivar la prevención el mercado propone algunas estrateg
 - Prima pura o prima de riesgo: es el costo del riesgo
 - Prima neta: prima pura más un recargo de seguridad
 - Prima de tarifa: prima neta más recargos de operación
-  - costo del riesgo
-  - gastos de adquisición, 
-  - gastos de administración,
-  - utilidad razonable
-  - otros gastos justificados
+- costo del riesgo
+- gastos de adquisición, 
+- gastos de administración,
+- utilidad razonable
+- otros gastos justificados
 - Prima comercial: prima de tarifa más impuestos, contribuciones, etc.
 
 ### Relación fundamental {-}
@@ -482,3 +483,4 @@ $U$: porcentaje de utilidad esperada por los accionistas
 
 
 ## Caso Nessie
+
