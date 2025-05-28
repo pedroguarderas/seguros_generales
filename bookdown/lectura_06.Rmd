@@ -74,7 +74,7 @@ asociados a la severidad presentan un verdadero reto estadístico y computaciona
 atrás se desarrolló unos nuevos algoritmos para calcular estos términos @aep_algo, @gaep_algo.
 
 <!------------------------------------------------------------------------------------------------->
-## Modelo individual {#sec:modind}
+## Modelo individual {#modelo_individual}
 En el modelo de riesgos individuales consideramos que el número de siniestros que se producirán es
 conocido, por ejemplo puede ser a lo sumo el tamaño de la población asegurada, en tal caso la
 variable aleatoria $N$ pasa a ser una constante, que representaremos por $n$. De esta forma, la
@@ -316,7 +316,7 @@ $$
 :::
 
 <!------------------------------------------------------------------------------------------------->
-## Modelo colectivo {#sec:modcol}
+## Modelo colectivo {#modelo_colectivo}
 
 El modelo colectivo de riesgo considera un número de reclamos descritos por una variable aleatoria 
 discreta $N$. Los reclamos corresponden a un número de pólizas en un periodo específico, el valor 
@@ -589,7 +589,7 @@ Por otra parte, es de notar que en el cálculo hay un gasto innecesario de valor
 reclamos $X_i$ ya que algunos se multiplicaran por $B_i$, la cual solo toma valores $\{0,1\}$.
 
 <!------------------------------------------------------------------------------------------------->
-## Modelos mixtos
+## Modelos mixtos {#modelos_mixtos}
 En algunos casos en particular se considera un modelo de agregación que es una mixtura entre el
 modelo individual y el modelo colectivo. Se parte de considerar un número $n$ de unidades aseguradas
 donde para cada unidad $i \in \{1, \ldots, n\}$, se considera que puede presentar una cantidad 
@@ -602,7 +602,7 @@ S
 $$
 
 <!------------------------------------------------------------------------------------------------->
-## Modelos con variables explicativas
+## Modelos con variables explicativas {#modelos_variables_explicativas}
 En algunos casos más generales, donde la población presenta heterogeneidad respecto del riesgo al
 cual están expuestos, como también de las dimensiones de sus reclamos, se considera que existen 
 variables aleatorias adicionales $Y_1, \ldots, Y_n$ que determinan el número de reclamos $N$ y 
@@ -643,9 +643,15 @@ producto difícil de comercializar.
 De forma algo más puntual, un **deducible** es una función $D : \R \longrightarrow \R_+$, tal que 
 para toda variable aleatoria $X$, se satisface la siguiente desigualdad $D( X ) \leq X$.
 
-1. Para evitar pérdidas pequeñas se suele configurar la función deducible $D( X ) = \max( X - d, 0 )$, 
-en este caso si $X \rightsquigarrow F_X$, entonces $Z = D( X ) \rightsquigarrow F_Z( z )$, donde 
-$F_Z( z ) = \mathbf{1}_{[0,+\infty)}( z ) F_X( z + d )$.
+1. Para evitar pérdidas pequeñas se suele configurar la función deducible 
+$$
+D( X ) = \max( X - d, 0 )
+$$
+que se aplicará sobre las variables aleatorias de los reclamos $X \rightsquigarrow F_X$. Así, 
+el valor ya deducido $Z = D( X ) \rightsquigarrow F_Z( z )$, donde 
+$$
+F_Z( z ) = \mathbf{1}_{[0,+\infty)}( z ) F_X( z + d )
+$$
 ```{r l6g2, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
 D <- function( x, d ) return( max( x - d, 0 ) )
 d <- 50
@@ -680,9 +686,18 @@ plt <- ggplot( ) +
 plot( plt )
 ```
 
-2. Para prevenir los excesos de pérdida (stop loss) $D( X ) = \min( X, M )$, en este caso si 
-$X \rightsquigarrow F_X$, entonces $Z = D( X ) \rightsquigarrow F_Z( z )$, donde 
-$F_Z( z ) = \mathbf{1}_{(-\infty,M)}( z ) F_X( z ) + \mathbf{1}_{[M,+\infty)}( z )$.
+2. Para prevenir los excesos de pérdida (stop loss) se propone el deducible con un tope máximo
+dado por una constante $M > 0$, el cual se aplica a las variables aleatorias de los reclamos
+$X \rightsquigarrow F_X$.
+$$
+D( X ) = \min( X, M )
+$$, 
+
+en este caso, si la variable aleatoria del pago correspondiente al reclamo ya deducido 
+$Z = D( X ) \rightsquigarrow F_Z( z )$, donde 
+$$
+F_Z( z ) = \mathbf{1}_{(-\infty,M)}( z ) F_X( z ) + \mathbf{1}_{[M,+\infty)}( z )
+$$
 ```{r l6g3, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
 D <- function( x, M ) return( min( x, M ) )
 M <- 150
@@ -717,9 +732,16 @@ plt <- ggplot( ) +
 plot( plt )
 ```
 
-3. Caso mixto para evitar pérdidas pequeñas y exceso de pérdida $D( X ) = \min( \max( X - d, 0 ), M )$, 
-en este caso si $X \rightsquigarrow F_X$, entonces $Z = D( X ) \rightsquigarrow F_Z( z )$, donde 
-$F_Z( z ) = \mathbf{1}_{[0,M)}( z ) F_X( z + d ) + \mathbf{1}_{[M,+\infty)}( z )$.
+3. Caso mixto para evitar pérdidas pequeñas y exceso de pérdida, se propone la siguiente composición
+de deducibles que se aplicará sobre las variables aleatorias de los reclamos $X \rightsquigarrow F_X$
+$$
+D( X ) = \min( \max( X - d, 0 ), M )
+$$
+en este caso, si la variable aleatoria del pago correspondiente al reclamo ya deducido 
+$Z = D( X ) \rightsquigarrow F_Z( z )$, tenemos que $Z \rightsquigarrow F_Z$, con:
+$$
+F_Z( z ) = \mathbf{1}_{[0,M)}( z ) F_X( z + d ) + \mathbf{1}_{[M,+\infty)}( z )
+$$
 ```{r l6g4, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
 D <- function( x, M ) return( min( max( x - d ), M ) )
 d <- 50
@@ -755,11 +777,26 @@ plt <- ggplot( ) +
 plot( plt )
 ```
 
-4. En otros casos más elaborados se segmenta el riesgo cubierto, al existir variables explicativas
+4. Otro tipo de deducible acota el número de pagos de reclamos a un número fijo máximo de reclamos
+es decir, se establece un deducible en función para la frecuencia. Usualmente, esto se realiza 
+cuando se considera un modelo donde se dispone de la frecuencia de reclamos por póliza.
+$$
+D(N) = \min( N, W )
+$$
+con la constante $W \in \N$. Para el reclamo total, si se considera un portafolio con $n$
+pólizas tenemos las siguiente variación del modelo.
+$$
+S = \sum\limits_{i=1}^n \sum\limits_{j=1}^{D(N_i)} X_{i,j}
+$$
+
+5. En otros casos más elaborados se segmenta el riesgo cubierto, al existir variables explicativas
 de la naturaleza del riesgo $Y_1, \ldots, Y_m$, las cuales pueden tomar valores en un conjunto $E$
 solo se toma un subconjunto de valores posibles $A\subset E$, para los cuales es válida la cobertura.
 Así si un reclamo $X$ se explica o caracteriza por las variables anteriores se configura el 
-deducibles $D( X ) = \mathbf{1}_{A}\left( Y_1, \ldots, Y_m \right) X$.
+deducibles 
+$$
+D( X ) = \mathbf{1}_{A}\left( Y_1, \ldots, Y_m \right) X
+$$
 
 Un ejemplo del anterior deducible se suele dar en el caso de seguros de salud, donde se cubre 
 ciertos tipos de enfermedades, usualmente se suele evitar las enfermedades de tipo catastrófico 
@@ -780,6 +817,10 @@ $$
 
 Este caso se suele presentar en los productos que partir de una suma parcial de reclamos individuales,
 el deducible comienza a regir.
+
+Es de notar además que la distribución acumulada de la variable aleatoria correspondiente a los 
+reclamos ya deducidos comienza a presentar singularidades, esto complica el estudio del 
+comportamiento de los reclamos totales.
 
 <!------------------------------------------------------------------------------------------------->
 ### Algoritmo de simulación
@@ -994,7 +1035,7 @@ plot( plt )
 :::
 
 <!------------------------------------------------------------------------------------------------->
-## Algoritmo de Panjer
+## Algoritmo de Panjer {#algoritmo_panjer}
 
 El siguiente algoritmo es de especial interés para determinar la densidad de probabilidad $f_S$ del
 total de reclamos $S$. Se asume que el conteo de siniestro $N$ viene dado por alguna de las 
@@ -1118,7 +1159,7 @@ plot( plt )
 :::
 
 <!------------------------------------------------------------------------------------------------->
-## Estimación usando la transformada de Fourier
+## Estimación usando la transformada de Fourier {#estimacion_transformada_fourier}
 
 Se puede utilizar la transformada de Fourier para determinar la densidad de la suma 
 $S_n = \sum\limits_{i=1}^n X_i$ de varias variables aleatorias 
@@ -1294,7 +1335,7 @@ plot( plt )
 ```
 
 <!------------------------------------------------------------------------------------------------->
-## Temporalidad y ajustes de los reclamos totales
+## Temporalidad y ajustes del número de reclamos {#temporalidad_numero_reclamos}
 
 Hasta el momento no hemos tomado en cuenta cierta componente de temporalidad que muestra la 
 frecuencia de los reclamos. Debemos ser muy consientes que los reclamos se producen en el tiempo
@@ -1968,7 +2009,7 @@ prods[ , list( sex, xg, r, ngr, d, M, EN, SDN, EX, SDX, EDX, SDDX, ES, SDS ) ] %
 :::
 
 <!------------------------------------------------------------------------------------------------->
-## Proceso estocástico de reclamos totales
+## Proceso estocástico de reclamos totales {#proceso_estocastico_reclamos}
 
 Hasta el momento no hemos considerado que los reclamos se producen en el tiempo, que cada reclamo
 está bien vinculado al tiempo; es más podemos identificar algunos instantes en el tiempo que le 
