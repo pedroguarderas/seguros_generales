@@ -114,7 +114,7 @@ file.copy( '~/Development/bibliography/Bibtex/bibliografia_articulos.bib', 'book
 setwd( wd )
 setwd( 'bookdown' )
 outdir <- paste0( wd, 'docs' )
-render_book( input = "index.Rmd", output_format = "bookdown::gitbook", output_dir = outdir,
+render_book( input = "lectura_00.Rmd", output_format = "bookdown::gitbook", output_dir = outdir,
              encoding = "UTF-8", config_file = "_bookdown.yml" )
 
 # render_book( input = "index.Rmd", output_format = "bookdown::pdf_book", output_dir = outdir,
