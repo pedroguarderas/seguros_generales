@@ -50,6 +50,112 @@ $\VaR_{\alpha}( X ) = F_X^{-1}( \alpha )$.
 
 Por otra parte, $\VaR_{\alpha}$ para cualquier $\alpha$ no es una medida de riesgo sub-aditiva.
 
+El método directo para el calcular el $\VaR_\alpha$ es directamente atacando el problema de 
+encontrar el ínfimo, esto es un problema de optimizaión que puede tener sus complicaciones, ya
+que muchas de las veces la distribución acumulada no es conocida $F$ o fácilmente computable. 
+Incluso en el caso cuando la función de distribución $F$ es continua, resta el problema de poder
+invertir esta función. 
+
+Otra forma es acudir a los métodos de simulación estocástica, partiendo de una muestra 
+$X_1, \ldots, X_n$ y calculando de forma aproximada
+$$
+\VaR_{\alpha}( X ) \approx F_n^{-1}( \alpha )
+$$
+En principio no sabemos si esta aproximación será consistente conforme se aumenta el tamaño de la 
+muestra, sin embargo para ello tenemos la siguiente proposición, la cual nos da una certeza al 
+respecto.
+
+::: {.proposition #appoxvar}
+Si consideramos una familia de variables aleatorias $\{X_n\}_{n\in \N}$ i.i.d con distribución común
+$F$ no neceariamente continua, entonces el percentil empírico de orden $\alpha$, 
+$\xi_{n,\alpha} = F_n^{-1}( \alpha )$, que se puede extraer a partir de las $n$ primeras variables 
+en la muestra converge en probabilidad al valor $\xi_{\alpha} = \VaR_{\alpha}( X )$, correspondiente
+al valor en riesgo.
+:::
+
+:::{.proof}
+Utilizando la versión unilateral de la desigualdad \@ref(thm:ddkw), podemos establecer las siguientes 
+acotaciones
+$$
+\begin{eqnarray*}
+P\left( \xi_{n,\alpha}- \xi_{\alpha} > \varepsilon \right)
+& = & P\left( \xi_{n,\alpha} >  \xi_{\alpha} + \varepsilon \right) \\
+& = & P\left( F_n( \xi_{n,\alpha} ) >  F_n( \xi_{\alpha} + \varepsilon ) \right) \\
+& = & P\left( F( \xi_{\alpha} + \varepsilon ) + \alpha > F( \xi_{\alpha} + \varepsilon ) + F_n( \xi_{\alpha} + \varepsilon ) \right) \\
+& = & P\left( F( \xi_{\alpha} + \varepsilon ) - F_n( \xi_{\alpha} + \varepsilon ) > F( \xi_{\alpha} + \varepsilon ) - \alpha \right) \\
+& \leq & P\left( \underset{x \in \R}{\sup} \left( F - F_n \right) > F( \xi_{\alpha} + \varepsilon ) - \alpha \right) \\
+& \leq & e^{-2n \left( F( \xi_{\alpha} + \varepsilon ) - \alpha \right) ^2 }
+\end{eqnarray*}
+$$
+
+$$
+\begin{eqnarray*}
+P\left( \xi_{n,\alpha} - \xi_{\alpha} < -\varepsilon \right)
+& = & P\left( \xi_{n,\alpha} <  \xi_{\alpha} - \varepsilon \right) \\
+& = & P\left( F_n( \xi_{n,\alpha} ) <  F_n( \xi_{\alpha} - \varepsilon ) \right) \\
+& = & P\left( F( \xi_{\alpha} - \varepsilon ) + \alpha < F( \xi_{\alpha} - \varepsilon ) + F_n( \xi_{\alpha} - \varepsilon ) \right) \\
+& = & P\left( F_n( \xi_{\alpha} - \varepsilon ) - F( \xi_{\alpha} - \varepsilon ) > \alpha - F( \xi_{\alpha} - \varepsilon ) \right) \\
+& \leq & P\left( \underset{x \in \R}{\sup} \left( F - F_n \right) > \alpha - F( \xi_{\alpha} - \varepsilon ) \right) \\
+& \leq & e^{-2n \left( \alpha - F( \xi_{\alpha} - \varepsilon ) \right) ^2 }
+\end{eqnarray*}
+$$
+Uniendo ambos resultados concluimos
+$$
+P\left( \left| \xi_{n,\alpha}- \xi_{\alpha} \right| > \varepsilon \right)
+\leq 2 e^{-2n \min\left( F( \xi_{\alpha} + \varepsilon ) - \alpha, \alpha - F( \xi_{\alpha} - \varepsilon ) \right) ^2 }
+$$
+
+
+Además, es de observar que asociado a los percentlies están los estadísticos de orden y en 
+particular la variable aleatoria $F( \xi_{n,\alpha} )$ sigue una distribución Beta, i.e. 
+$F( \xi_{n,\alpha} ) \rightsquigarrow Beta( u_n, v_n )$, donde los parámetros 
+$u_n = \lfloor \alpha n \rfloor$ y $v_n = n + 1 - \lfloor \alpha n \rfloor$. Por otra parte, 
+existe el siguiente resultado de acotación para toda función beta
+$$
+B( \alpha, \beta ) \geq \frac{4 - \alpha \beta}{4\alpha \beta}
+$$
+
+Otra forma de establecer, una acotación para la probabilidad del evento 
+$\left| \xi_{n,\alpha} - \xi_{\alpha} \right| > \varepsilon$ es consierando precisamente la 
+distribución de $F( \xi_{n,\alpha} )$.
+$$
+\begin{eqnarray*}
+P\left( \left| \xi_{n,\alpha} - \xi_{\alpha} \right| > \varepsilon \right)
+& = & P\left( \xi_{n,\alpha} > \xi_{\alpha } + \varepsilon \lor 
+\xi_{n,\alpha} < \xi_{\alpha } - \varepsilon \right) \\
+& = & P\left( F( \xi_{n,\alpha} ) > F( \xi_{\alpha } + \varepsilon ) \lor 
+F( \xi_{n,\alpha} ) < F( \xi_{\alpha } - \varepsilon ) \right) \\
+& = & \frac{1}{B( u_n, v_n )} \left[
+\int\limits_{F( \xi_{\alpha } + \varepsilon )}^{1} t^{u_n-1} ( 1 - t )^{v_n-1}\ dt 
++ \int\limits_{0}^{F( \xi_{\alpha } - \varepsilon)} t^{u_n-1} ( 1 - t )^{v_n-1}\ dt 
+\right]\\
+& \leq & \frac{1}{B( u_n, v_n )} \left[
+\int\limits_{F( \xi_{\alpha } + \varepsilon )}^{1} t^{u_n-1} dt 
++ \int\limits_{0}^{F( \xi_{\alpha } - \varepsilon)} t^{u_n-1} dt 
+\right]\\
+& \leq & \frac{4u_n v_n}{4 - u_n v_n} \left[
+\frac{1 - F( \xi_{\alpha } + \varepsilon)^{u_n}}{u_n}
++ \frac{F( \xi_{\alpha } - \varepsilon)^{u_n}}{u_n}
+\right]\\
+\end{eqnarray*}
+$$
+
+Se satisfacen los siguientes límites asociados a la expresión anterior
+$$
+\underset{n \rightarrow +\infty}{\lim} \frac{1}{u_n} = 0, \quad
+\underset{n \rightarrow +\infty}{\lim} \frac{4u_n v_n}{4 - u_n v_n} = 4, \quad
+\underset{n \rightarrow +\infty}{\lim} \frac{F( \xi_{\alpha } + \varepsilon)^{u_n}}{u_n} = 0,\quad
+\underset{n \rightarrow +\infty}{\lim} \frac{F( \xi_{\alpha } - \varepsilon)^{u_n}}{u_n} = 0
+$$
+como consecuencia, para ambos casos
+$$
+\underset{n \rightarrow +\infty}{\lim} P\left( \left| \xi_{n,\alpha} - \xi_{\alpha} \right| > \varepsilon \right)
+= 0
+$$
+Podemos concluir con toda confianza que el percentil $\xi_{n,\alpha}$ que se obtiene de la 
+distribución empírica se aproxima en probabilidad al percentil $\xi_{\alpha} = \VaR$ 
+:::
+
 ::: {.definition #dTVaR name="Valor en riesgo en la cola"}
 Dada una variable aleatoria a valores reales $X$, el **valor en riesgo en la colas** 
 (tail value at risk) de $X$ al nivel de probabilidad $\alpha \in (0,1)$ está dado por
