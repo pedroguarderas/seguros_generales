@@ -2054,7 +2054,7 @@ suponer independencia entre los tiempos entre arribo $\{W_n\}$ y las variables q
 la magnitud de cada uno de los reclamos $\{X_n\}$.
 
 Los resultados para el cálculo de la esperanza y la varianza se pueden obtener de forma similar
-a lo que realizamos en la sección \@ref(sec:modind).
+a lo que realizamos en la sección \@ref(modelo_individual).
 $$
 \begin{eqnarray*}
 \E[S(t)]

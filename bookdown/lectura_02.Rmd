@@ -61,7 +61,7 @@ options( stringsAsFactors = FALSE )
 ```{r l2c2, include = FALSE}
 options( width = 120 )
 
-knitr::opts_chunk$set(size = 'footnotesize', dpi = 100, warning = FALSE, echo = TRUE, class.source = "numberLines lineAnchors")
+knitr::opts_chunk$set(size = 'footnotesize', dpi = 100, warning = FALSE, echo = TRUE, cache = TRUE, class.source = "numberLines lineAnchors")
 
 def.chunk.hook  <- knitr::knit_hooks$get("chunk")
 knitr::knit_hooks$set(chunk = function(x, options) {
