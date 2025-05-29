@@ -24,6 +24,7 @@ def:dlawtotvar
 def:defmixdis
 thm:twln
 thm:tlc
+thm:tglican
 prp:chebdes
 thm:bein
 thm:ddkw
@@ -79,6 +80,7 @@ tab:l6t6
 exm:l5ex5
 def:dVaR
 prp:varinv
+prp:appoxvar
 def:dTVaR
 prp:TVaRcohe
 def:dCTE
@@ -158,6 +160,7 @@ distribución-exponencial
 distribución-gamma
 distribución-normal
 distribución-log-normal
+distribución-de-beta
 distribución-de-pareto-generalizada
 distribución-de-valores-extremos-generalizada
 distribución-t-de-student

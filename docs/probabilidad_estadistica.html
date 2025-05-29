@@ -23,7 +23,7 @@
 <meta name="author" content="" />
 
 
-<meta name="date" content="2025-05-28" />
+<meta name="date" content="2025-05-29" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -268,11 +268,12 @@ div.csl-indent {
 <li class="chapter" data-level="5.3.3" data-path="lectura_04.html"><a href="#distribuci%C3%B3n-gamma"><i class="fa fa-check"></i><b>5.3.3</b> Distribución gamma</a></li>
 <li class="chapter" data-level="5.3.4" data-path="lectura_04.html"><a href="#distribuci%C3%B3n-normal"><i class="fa fa-check"></i><b>5.3.4</b> Distribución normal</a></li>
 <li class="chapter" data-level="5.3.5" data-path="lectura_04.html"><a href="#distribuci%C3%B3n-log-normal"><i class="fa fa-check"></i><b>5.3.5</b> Distribución log-normal</a></li>
-<li class="chapter" data-level="5.3.6" data-path="lectura_04.html"><a href="#distribuci%C3%B3n-de-pareto-generalizada"><i class="fa fa-check"></i><b>5.3.6</b> Distribución de Pareto generalizada</a></li>
-<li class="chapter" data-level="5.3.7" data-path="lectura_04.html"><a href="#distribuci%C3%B3n-de-valores-extremos-generalizada"><i class="fa fa-check"></i><b>5.3.7</b> Distribución de valores extremos generalizada</a></li>
-<li class="chapter" data-level="5.3.8" data-path="lectura_04.html"><a href="#distribuci%C3%B3n-t-de-student"><i class="fa fa-check"></i><b>5.3.8</b> Distribución t de Student</a></li>
-<li class="chapter" data-level="5.3.9" data-path="lectura_04.html"><a href="#distribuci%C3%B3n-gamma-transformada"><i class="fa fa-check"></i><b>5.3.9</b> Distribución gamma transformada</a></li>
-<li class="chapter" data-level="5.3.10" data-path="lectura_04.html"><a href="#distribuci%C3%B3n-beta-transformada"><i class="fa fa-check"></i><b>5.3.10</b> Distribución beta transformada</a></li>
+<li class="chapter" data-level="5.3.6" data-path="lectura_04.html"><a href="#distribuci%C3%B3n-de-beta"><i class="fa fa-check"></i><b>5.3.6</b> Distribución de beta</a></li>
+<li class="chapter" data-level="5.3.7" data-path="lectura_04.html"><a href="#distribuci%C3%B3n-de-pareto-generalizada"><i class="fa fa-check"></i><b>5.3.7</b> Distribución de Pareto generalizada</a></li>
+<li class="chapter" data-level="5.3.8" data-path="lectura_04.html"><a href="#distribuci%C3%B3n-de-valores-extremos-generalizada"><i class="fa fa-check"></i><b>5.3.8</b> Distribución de valores extremos generalizada</a></li>
+<li class="chapter" data-level="5.3.9" data-path="lectura_04.html"><a href="#distribuci%C3%B3n-t-de-student"><i class="fa fa-check"></i><b>5.3.9</b> Distribución t de Student</a></li>
+<li class="chapter" data-level="5.3.10" data-path="lectura_04.html"><a href="#distribuci%C3%B3n-gamma-transformada"><i class="fa fa-check"></i><b>5.3.10</b> Distribución gamma transformada</a></li>
+<li class="chapter" data-level="5.3.11" data-path="lectura_04.html"><a href="#distribuci%C3%B3n-beta-transformada"><i class="fa fa-check"></i><b>5.3.11</b> Distribución beta transformada</a></li>
 </ul></li>
 <li class="chapter" data-level="5.4" data-path="lectura_04.html"><a href="#estimaci%C3%B3n"><i class="fa fa-check"></i><b>5.4</b> Estimación</a>
 <ul>
@@ -1194,6 +1195,17 @@ seguros que tamaño debe tomar <span class="math inline">\(n\)</span> para que e
 al <a href="probabilidad_estadistica.html#thm:tlc">4.3</a> se debe considerar otros resultados asociados a desigualdades de concentración.</p>
 <p>El siguiente teorema es de gran ayuda para estimar la tasa de convergencia del resultado anterior
 <a href="probabilidad_estadistica.html#thm:tlc">4.3</a>.</p>
+<div class="theorem">
+<p><span id="thm:tglican" class="theorem"><strong>Teorema 4.4  (Teorema de Glivenko-Cantelli) </strong></span>Consideramos las variables aleatorias <span class="math inline">\(\{X_n\}_{n\in\mathbb{N}}\)</span> i.i.d., con función de distribución acumulada
+<span class="math inline">\(F\)</span>. Entonces, la distribución acumula empírica <span class="math inline">\(F_n\)</span> generada a partir de las variables
+<span class="math inline">\(\{X_n\}_{n\in\mathbb{N}}\)</span>, converge en casi todo punto de forma uniforme a la distribución <span class="math inline">\(F\)</span>, más
+precisamente, para la norma de la convergencia uniforme
+<span class="math inline">\(\left\| F_n - F \right\| = \underset{x \in \mathbb{R}}{\sup} \left| F_n( x ) - F( x ) \right|\)</span> tenemos la
+siguiente igualdad que precisamente expresa la convergencia en casi todo punto.
+<span class="math display">\[
+P\left( \underset{n \rightarrow +\infty}{\lim} \left\| F_n - F \right\| = 0 \right) = 1
+\]</span></p>
+</div>
 <!------------------------------------------------------------------------------------------------->
 </div>
 <div id="desigualdades-de-concentración" class="section level2 hasAnchor" number="4.4">
@@ -1211,7 +1223,7 @@ P\left( \left| X - \mathbb{E}[X] \right| &gt; \varepsilon \right) &lt; \frac{1}{
 \]</span></p>
 </div>
 <div class="theorem">
-<p><span id="thm:bein" class="theorem"><strong>Teorema 4.4  (Desigualdad de Berry-Esséen) </strong></span>Sean <span class="math inline">\(X_1, \ldots X_n\)</span> variables aleatorias i.i.d., con media y varianza finitas, i.e
+<p><span id="thm:bein" class="theorem"><strong>Teorema 4.5  (Desigualdad de Berry-Esséen) </strong></span>Sean <span class="math inline">\(X_1, \ldots X_n\)</span> variables aleatorias i.i.d., con media y varianza finitas, i.e
 <span class="math inline">\(\mathbb{E}[X] &lt; +\infty\)</span> y <span class="math inline">\(\mathbb{V}[X] &lt; +\infty\)</span> y además con tercer momento absoluto finito
 <span class="math inline">\(\mathbb{E}\left[\left|X - \mathbb{E}[X]\right|^3\right] &lt; +\infty\)</span>. Entonces, la distribución
 acumulada <span class="math inline">\(F_{U_n}\)</span> de la variable aleatoria
@@ -1226,7 +1238,7 @@ acumulada de la ley normal <span class="math inline">\(\Phi\)</span>.
 \]</span></p>
 </div>
 <div class="theorem">
-<p><span id="thm:ddkw" class="theorem"><strong>Teorema 4.5  (Desigualdad Dvoretzky–Kiefer–Wolfowitz) </strong></span>Dada una serie de variables aleatorias a valores reales <span class="math inline">\(X_1, \ldots, X_n\)</span>, i.i.d., con
+<p><span id="thm:ddkw" class="theorem"><strong>Teorema 4.6  (Desigualdad Dvoretzky–Kiefer–Wolfowitz) </strong></span>Dada una serie de variables aleatorias a valores reales <span class="math inline">\(X_1, \ldots, X_n\)</span>, i.i.d., con
 distribución acumulada <span class="math inline">\(F\)</span>, tenemos la siguiente desigualdad asociada a la
 <strong>distribución acumulada empírica</strong>
 <span class="math display">\[
@@ -1234,13 +1246,14 @@ F_n( x ) = \frac{1}{n}\sum\limits_{i=1}^n \mathbf{1}_{(-\infty,x]}( X_i )
 \]</span>
 y su aproximación a <span class="math inline">\(F\)</span>.
 <span class="math display">\[
-P\left( \underset{x \in \mathbb{R}}{\sup} \left| F_n( x ) - F( x ) \right| &gt; \varepsilon \right)
+P\left( \left\| F_n( x ) - F( x ) \right\|_{\infty} &gt; \varepsilon \right)
+= P\left( \underset{x \in \mathbb{R}}{\sup} \left| F_n( x ) - F( x ) \right| &gt; \varepsilon \right)
 \leq 2 e^{-2n \varepsilon^2 }\qquad \forall \varepsilon &gt; 0
 \]</span></p>
 </div>
 <p>Como podemos notar el orden de convergencia del teorema es <span class="math inline">\(\sqrt{n}\)</span> en el tamaño de observaciones,
 esto quiere decir que la convergencia es menos que el orden lineal.</p>
-<p>Acorde a la desigualdad <a href="probabilidad_estadistica.html#thm:ddkw">4.5</a>, para tener un probabilidad baja de aproximación
+<p>Acorde a la desigualdad <a href="probabilidad_estadistica.html#thm:ddkw">4.6</a>, para tener un probabilidad baja de aproximación
 <span class="math inline">\(\delta &gt; 0\)</span> en un error de discrepancia <span class="math inline">\(\varepsilon &gt;0\)</span>, necesitamos satisfacer la desigualdad.
 <span class="math display">\[
 \begin{eqnarray*}
@@ -2504,7 +2517,7 @@ agregada <span class="math inline">\(S_n\)</span> y mostrar</p>
 </div>
 <!------------------------------------------------------------------------------------------------->
 <div class="theorem">
-<p><span id="thm:dchernoff" class="theorem"><strong>Teorema 4.6  (Desigualdad de Chernoff) </strong></span>Dada una variable aleatoria <span class="math inline">\(X\)</span> a valores reales, para la cual si existe y está bien definida
+<p><span id="thm:dchernoff" class="theorem"><strong>Teorema 4.7  (Desigualdad de Chernoff) </strong></span>Dada una variable aleatoria <span class="math inline">\(X\)</span> a valores reales, para la cual si existe y está bien definida
 su función generadora de momentos <span class="math inline">\(M\)</span>, entonces se satisface la siguientes desigualdades para
 cualquier <span class="math inline">\(\varepsilon \in \mathbb{R}\)</span>.
 <span class="math display">\[
@@ -2517,7 +2530,7 @@ P( X \leq \varepsilon ) \leq \underset{t &lt; 0}{\inf} \exp( -t \varepsilon ) M(
 </div>
 <!------------------------------------------------------------------------------------------------->
 <div class="theorem">
-<p><span id="thm:dpaleyzyg" class="theorem"><strong>Teorema 4.7  (Desigualdad de Paley-Zygmund) </strong></span>Dada una variable aleatoria <span class="math inline">\(X\)</span> a valores reales, que solo toma valores no negativos <span class="math inline">\(X \geq 0\)</span> y
+<p><span id="thm:dpaleyzyg" class="theorem"><strong>Teorema 4.8  (Desigualdad de Paley-Zygmund) </strong></span>Dada una variable aleatoria <span class="math inline">\(X\)</span> a valores reales, que solo toma valores no negativos <span class="math inline">\(X \geq 0\)</span> y
 que además tiene varianza finita <span class="math inline">\(\mathbb{V}[X] &lt; +\infty\)</span>, entonces si tomamos un valor
 <span class="math inline">\(\rho \in [0,1]\)</span>, se satisface la siguiente desigualdad:
 <span class="math display">\[
