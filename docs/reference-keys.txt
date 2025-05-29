@@ -185,8 +185,8 @@ temporalidad_numero_reclamos
 proceso_estocastico_reclamos
 algoritmo-de-simulación-3
 tarificacion
-medidas-de-riesgo
-tarificación-en-grandes-términos
+medidas_riesgo
+tarificacion_grandes_terminos
 prima
 segmentación
 reserva_tecnicas

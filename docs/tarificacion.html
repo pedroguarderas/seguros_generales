@@ -310,8 +310,8 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="7" data-path="tarificacion.html"><a href="tarificacion.html"><i class="fa fa-check"></i><b>7</b> Tarificación</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="tarificacion.html"><a href="tarificacion.html#medidas-de-riesgo"><i class="fa fa-check"></i><b>7.1</b> Medidas de riesgo</a></li>
-<li class="chapter" data-level="7.2" data-path="lectura_07.html"><a href="#tarificaci%C3%B3n-en-grandes-t%C3%A9rminos"><i class="fa fa-check"></i><b>7.2</b> Tarificación en grandes términos</a></li>
+<li class="chapter" data-level="7.1" data-path="tarificacion.html"><a href="tarificacion.html#medidas_riesgo"><i class="fa fa-check"></i><b>7.1</b> Medidas de riesgo</a></li>
+<li class="chapter" data-level="7.2" data-path="tarificacion.html"><a href="tarificacion.html#tarificacion_grandes_terminos"><i class="fa fa-check"></i><b>7.2</b> Tarificación en grandes términos</a></li>
 <li class="chapter" data-level="7.3" data-path="tarificacion.html"><a href="tarificacion.html#prima"><i class="fa fa-check"></i><b>7.3</b> Prima</a></li>
 <li class="chapter" data-level="7.4" data-path="lectura_07.html"><a href="#segmentaci%C3%B3n"><i class="fa fa-check"></i><b>7.4</b> Segmentación</a></li>
 </ul></li>
@@ -360,8 +360,8 @@ div.csl-indent {
 comportamiento futuro de los reclamos totales <span class="math inline">\(S\)</span>, es necesario también tomar en cuenta el capital
 <span class="math inline">\(K\)</span> destinado para hacer frente al riesgo subscrito y los costos generales <span class="math inline">\(G\)</span></p>
 <!------------------------------------------------------------------------------------------------->
-<div id="medidas-de-riesgo" class="section level2 hasAnchor" number="7.1">
-<h2><span class="header-section-number">7.1</span> Medidas de riesgo<a href="tarificacion.html#medidas-de-riesgo" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="medidas_riesgo" class="section level2 hasAnchor" number="7.1">
+<h2><span class="header-section-number">7.1</span> Medidas de riesgo<a href="tarificacion.html#medidas_riesgo" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div class="definition">
 <p><span id="def:spv" class="definition"><strong>Definición 4.7  (Medida de riesgo coherente) </strong></span>Una <strong>medida de riesgo coeherente</strong> es una función <span class="math inline">\(\rho: \mathbb{R}\longrightarrow \mathbb{R}\)</span>,
 que satisface la siguientes propiedades:</p>
@@ -479,8 +479,8 @@ idénticamente distribuidos (i.i.d), en este caso con distribución <span class=
 </div>
 <!------------------------------------------------------------------------------------------------->
 </div>
-<div id="tarificación-en-grandes-términos" class="section level2 hasAnchor" number="7.2">
-<h2><span class="header-section-number">7.2</span> Tarificación en grandes términos<a href="#tarificaci%C3%B3n-en-grandes-t%C3%A9rminos" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="tarificacion_grandes_terminos" class="section level2 hasAnchor" number="7.2">
+<h2><span class="header-section-number">7.2</span> Tarificación en grandes términos<a href="tarificacion.html#tarificacion_grandes_terminos" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>La tarificación que conlleva a la selección de la prima <span class="math inline">\(\Pi\)</span> debe tomar en cuenta como se manejan y
 equilibran los activos y pasivos en el negocio asegurador.</p>
 <p><strong>Pasivos</strong></p>
@@ -516,19 +516,19 @@ donde las variables a considerarse en principio son:</p>
 <li><p><span class="math inline">\(I\)</span> Ingreso por inversiones</p></li>
 <li><p><span class="math inline">\(S\)</span> Pago de siniestros</p></li>
 <li><p><span class="math inline">\(G\)</span> Gastos agregados, incluyendo gastos de emisión, operativos, gastos por reclamos</p></li>
-<li><p><span class="math inline">\(K\)</span> Coste de capital, esencialmente el retorno mínimo esperado por los inversores sobre el
-capital invertido.</p></li>
+<li><p><span class="math inline">\(K\)</span> Coste de capital, esencialmente es el retorno que se espera sobre el capital invertido por
+los inversores para mantener el nivel de solvencia del ramo.</p></li>
 </ol>
-<p>En varias ocasiones el ciclo del negocio puede ser corto y no permite considerar un ingreso por
-inversiones <span class="math inline">\(I = 0\)</span>.
+<p>En varias ocasiones el ciclo del negocio puede ser corto plazo y no permite considerar un ingreso
+por inversiones <span class="math inline">\(I = 0\)</span>.
 <span class="math display">\[
 R = \Pi - S - G - K
 \]</span></p>
 <p>Sería ideal que a lo largo de la vida del ramo el resultado mantenga <span class="math inline">\(R &gt; 0\)</span>, pero al tratarse de
 un negocio que depende de la aleatoriedad de los reclamos, es bastante complicado encontrar un
 costo de capital <span class="math inline">\(K\)</span> y una prima <span class="math inline">\(\Pi\)</span> que siempre asegure ante todo escenario que se mantenga
-la positividad. Ante este riesgo continuo se busca minimizar la <strong>probabilidad de ruina</strong> <span class="math inline">\(R &lt; 0\)</span>
-a un nivel <span class="math inline">\(\alpha &gt; 0\)</span> adecuado
+la positividad. Ante este riesgo continuo se busca minimizar la <strong>probabilidad de ruina</strong>, es decir,
+acotar la probabilidad del evento <span class="math inline">\(R &lt; 0\)</span> a un nivel de confianza <span class="math inline">\(\alpha &gt; 0\)</span> adecuado
 <span class="math display">\[
 P( R &lt; 0 ) &lt; \alpha
 \]</span></p>
@@ -571,7 +571,7 @@ con esta perspectiva
 = \Pi - \mathbb{E}[S] - G - r \left( \rho(S) - \mathbb{E}[S] \right)
 \]</span>
 Lo que se busca es evitar la ruina y por tanto se busca cubrirse ante el evento <span class="math inline">\(R &lt; 0\)</span>, desde una
-perspectiva probabilista esto se puede realizar seleccionando un nivel de conbertura <span class="math inline">\(\alpha &gt; 0\)</span>,
+perspectiva probabilista esto se puede realizar seleccionando un nivel de cobertura <span class="math inline">\(\alpha &gt; 0\)</span>,
 que acote la probabilidad del evento de ruina.
 <span class="math display">\[
 P( R &lt; 0 )
@@ -621,6 +621,8 @@ riesgo. Las desigualdades anteriores toman la forma:
 \Pi &amp; \geq &amp;  \frac{1 + r}{1 - \gamma} F_S^{-1}\left( 1 - \alpha \right) -  \frac{r}{1 - \gamma} \mathbb{E}[S]
 \end{eqnarray*}
 \]</span></p>
+<p>De lo anterior se observa, que un buen inicio para estimar la prima de riesgo es ciertamente
+usar la medida <span class="math inline">\(\operatorname{VaR}_{1-\alpha}\)</span> al nivel adecuado de confianza <span class="math inline">\(\alpha\)</span>.</p>
 <!------------------------------------------------------------------------------------------------->
 </div>
 <div id="prima" class="section level2 hasAnchor" number="7.3">
@@ -634,7 +636,7 @@ satisfaga, algunas propiedades importantes.</p>
 <p>Sin consideramos dos riesgos a cubrir <span class="math inline">\(S_1\)</span> y <span class="math inline">\(S_2\)</span>, entonces la función que estima <span class="math inline">\(\rho\)</span> las primas
 sería aconsejable satisfaga las siguientes propiedades.</p>
 <ol style="list-style-type: decimal">
-<li><p>Si se decide cobrir por compleo dos riesgos <span class="math inline">\(S_1\)</span> y <span class="math inline">\(S_2\)</span> en un mismo producto, el valor de la
+<li><p>Si se decide cubrir por completo dos riesgos <span class="math inline">\(S_1\)</span> y <span class="math inline">\(S_2\)</span> en un mismo producto, el valor de la
 prima deberá ser menor o igual al valor que se resultaría de cubrir cada uno de los riesgos con
 productos separados.
 <span class="math display">\[
@@ -706,7 +708,7 @@ también sigue una ley <span class="math inline">\(Gamma\)</span>. En este caso 
 <span class="math inline">\(i\)</span>-ésimo reclamo tiene como parámetro un diferente factor <span class="math inline">\(\alpha_i\)</span>, pero el mismo factor
 <span class="math inline">\(\theta\)</span>.</p>
 <p>Ya que cada <span class="math inline">\(X_i \rightsquigarrow Gamma( \alpha_i, \theta )\)</span>, podemos calcular de forma determinista
-las experanzas de <span class="math inline">\(\mathbb{E}[X_i]\)</span>, para cada <span class="math inline">\(i \in \{1,\ldots,n\}\)</span> y de igual forma podemos
+las esperanzas de <span class="math inline">\(\mathbb{E}[X_i]\)</span>, para cada <span class="math inline">\(i \in \{1,\ldots,n\}\)</span> y de igual forma podemos
 calcular la esperanza del reclamo total <span class="math inline">\(\mathbb{E}[S] = \sum\limits_{i=1}^n \mathbb{E}[X_i]\)</span>.
 Además como asumimos independencia entre los <span class="math inline">\(X_i\)</span>, la varianza de <span class="math inline">\(S\)</span> también puede ser calculada
 fácilmente como <span class="math inline">\(\mathbb{V}[S] = \sum\limits_{i=1}^n \mathbb{V}[X_i]\)</span>.</p>
