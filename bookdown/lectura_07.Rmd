@@ -184,7 +184,7 @@ $\delta$ que se presente errores de aproximación superiores a $\varepsilon$.
 
 6. Generar una muestra de tamaño $n$ de la variable aleatoria, i.e. $X_1, \ldots, X_n$
 
-7. Calcular el percentil de la $\alpha$ de la muestra $X_{n,\alpha} F_n^{-1}( \alpha )$
+7. Calcular el percentil de la $\alpha$ de la muestra $\xi_{n,\alpha} = F_n^{-1}( \alpha )$
 
 Esta simulación solo genera una sola estimación del $\VaR_{\alpha}(X)$, se puede repetir algunas
 veces esta algoritmo para tener más valores y sacar la media de estos como estimador.
