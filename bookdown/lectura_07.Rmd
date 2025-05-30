@@ -169,6 +169,26 @@ $$
 Como se observa se tendrá que realizar muchas simulaciones más para llegar a tener en probabilidad
 un error de aproximación adecuado.
 
+Entonces los pasos del pseudo-algoritmo de simulación estarán dados por:
+
+1. Fijar el nivel de confianza al que se desea calcular $0 < \alpha < 1$
+
+2. Fijar el nivel probabilidad para los errores de aproximación $\delta > 0$
+
+3. Fijar el nivel erro $\hat{\varepsilon} > 0$
+
+4. Estimar el posible error de estimación $\varepsilon > 0$
+
+5. Buscar el número de simulaciones adecuadas $n \in \N$ que aseguren con una probabilidad menor a 
+$\delta$ que se presente errores de aproximación superiores a $\varepsilon$.
+
+6. Generar una muestra de tamaño $n$ de la variable aleatoria, i.e. $X_1, \ldots, X_n$
+
+7. Calcular el percentil de la $\alpha$ de la muestra $X_{n,\alpha} F_n^{-1}( \alpha )$
+
+Esta simulación solo genera una sola estimación del $\VaR_{\alpha}(X)$, se puede repetir algunas
+veces esta algoritmo para tener más valores y sacar la media de estos como estimador.
+
 ::: {.definition #dTVaR name="Valor en riesgo en la cola"}
 Dada una variable aleatoria a valores reales $X$, el **valor en riesgo en la colas** 
 (tail value at risk) de $X$ al nivel de probabilidad $\alpha \in (0,1)$ está dado por
