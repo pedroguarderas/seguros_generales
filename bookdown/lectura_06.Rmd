@@ -1206,39 +1206,56 @@ $$
 $$
 
 ```{r l6c12}
-N <- 10000
+N <- 50000
 set.seed(94312)
 alpha <- sample( x = seq( 1, 20, length = 40 ), size = 50, replace = TRUE )
 theta <- 3
-b <- sum( sapply( alpha, FUN = function( a ) qgamma( 0.9999, shape = a, scale = theta ) ) )
+b <- sum( sapply( alpha, FUN = function( a ) qgamma( 0.99, shape = a, scale = theta ) ) )
 a <- 0
 h <- ( b - a ) / N
 n <- 0:N
 s <- a + n * h
 w <- n / ( b - a )
 eta <- h * exp( -2 * pi * 1i * w * a )
-f <- lapply( alpha, function( a ) sapply( s, FUN = function( sk ) dgamma( sk, shape = a, scale = theta ) ) )
-Fof <- lapply( f, FUN = function( fi ) eta * fft( fi ) )
-FoS <- rep( 1, N + 1 )
-for ( i in 1:length( f ) ) {
+fX <- lapply( alpha, function( a ) sapply( s, FUN = function( sk ) dgamma( sk, shape = a, scale = theta ) ) )
+Fof <- lapply( fX, FUN = function( fi ) eta * fft( fi ) )
+FoS <- Fof[[ 1 ]]
+for ( i in 2:length( fX ) ) {
   FoS <- FoS * Fof[[ i ]]
 }
 fS <- fft( eta^(-1) * FoS, inverse = TRUE ) / ( N + 1 )
 fS <- Re( fS )
+FS <- cumsum( fS ) * h
 fs <- sapply( s, FUN = function( sk ) dgamma( sk, shape = sum( alpha ), scale = theta ) )
+Fs <- sapply( s, FUN = function( sk ) pgamma( sk, shape = sum( alpha ), scale = theta ) )
 ```
 
 ```{r l6g9, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
 plt <- ggplot() +
-  geom_line( aes( x = s, y = fS ), colour = 'darkred', linewidth = 1 ) + 
-  geom_point( aes( x = s, y = fs ), colour = 'olivedrab3', size = 0.25 ) + 
+  geom_line( aes( x = s, y = fs ), colour = 'darkred', linewidth = 1 ) + 
+  geom_point( aes( x = s, y = fS ), colour = 'olivedrab3', size = 0.2 ) + 
   xlab( TeX( "$x$" ) ) + 
   ylab( TeX( "$f_{S}(x)$" ) ) + 
   theme_bw()
 plot( plt )
 ```
 
+A pesar que la aproximación a la densidad de probabilidad parece ser buena, la condición de 
+normalización, no es satisfecha, como muestra el siguiente ejemplo. Ello sugiere que al 
+algoritmo de estimación de la densidad hay que realizarle algún ajuste o en su defecto incrementar 
+la precisión numérica.
 ```{r l6g10, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
+plt <- ggplot() +
+  geom_line( aes( x = s, y = Fs ), colour = 'darkred', linewidth = 1 ) + 
+  geom_point( aes( x = s, y = FS ), colour = 'olivedrab3', size = 0.2 ) + 
+  geom_hline( yintercept = 1, color = 'dodgerblue2', linewidth = 0.1 ) +
+  xlab( TeX( "$x$" ) ) + 
+  ylab( TeX( "$F_{S}(x)$" ) ) + 
+  theme_bw()
+plot( plt )
+```
+
+```{r l6g11, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
 e <- fS - fs
 eb <- max( abs( e ) )
 
@@ -1299,7 +1316,7 @@ X <- lapply( N, FUN = function( n ) rlnorm( n, meanlog = u, sdlog = s ) )
 S <- sapply( X, FUN = function( x ) sum( x, na.rm = TRUE ) )
 ```
 
-```{r l6g11, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
+```{r l6g12, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
 fmax <- 0.0007
 smax <- 5e3
 
@@ -1321,7 +1338,7 @@ plt <- ggplot() +
 plot( plt )
 ```
 
-```{r l6g12, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
+```{r l6g13, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
 e <- cumsum( fS[ -1 ] * diff( sg ) ) - ecdf( S )( sg[-1] )
 
 eb <- max( abs( e ) )
@@ -1625,7 +1642,7 @@ grpcl %>%
 
 El gráfico a continuación muestra el comportamiento del indicador $v_n = n \frac{p_n}{p_{n-1}}$, 
 para cada uno de los grupos $g$ de riesgo.
-```{r l6g13, out.width='90%', out.height='700px', fig.align='center', class.source = 'fold-hide'}
+```{r l6g14, out.width='90%', out.height='700px', fig.align='center', class.source = 'fold-hide'}
 plt <- ggplot( ) +
   geom_point( data = count, aes( x = N, y = vn ), colour = 'red3', size = 0.5 ) +
   facet_wrap( vars( grp ), ncol = 4 ) +
@@ -1731,7 +1748,7 @@ sev_claims[ , grp := factor( paste0( sex, ' ', xg ), labels = grpcl$grp, ordered
 
 Los histogramas a continuación muestran como se distribuyen los reclamos ya censurados por cada 
 grupos de riesgo.
-```{r l6g14, out.width='90%', out.height='700px', fig.align='center', class.source = 'fold-hide'}
+```{r l6g15, out.width='90%', out.height='700px', fig.align='center', class.source = 'fold-hide'}
 xlim <- c( 0, 1e3 )
 xbrk <- seq( xlim[1], xlim[2], length = 5 )
 xlbl <- xbrk
@@ -2263,7 +2280,7 @@ EeS <- sapply( 1:p, FUN = function( l ) mean( sapply( 1:m, function( i ) S[[ i ]
 
 En el gráfico a continuación presentamos todos los procesos de conteo $N_{i}$ simulados, como es de
 esperarse son funciones de escalera, siempre crecientes, que toman solo valores positivos.
-```{r l6g15, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
+```{r l6g16, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
 Sord <- order( sapply( 1:m, FUN = function( j ) last( S[[j]] ) ) )
 Ndat <- NULL
 for ( j in 1:m ) {
@@ -2297,7 +2314,7 @@ plot( plt )
 El gráfico a continuación presenta la simulación de los procesos correspondientes al total de 
 reclamos, conforme avanza el tiempo. De igual manera los procesos $S_i$ son funciones de escalera,
 siempre crecientes, con saltos correspondientes a los reclamos individuales.
-```{r l6g16, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
+```{r l6g17, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
 Sqmax <- quantile( sapply( S, FUN = function( Si ) last( Si ) ), probs = 0.99 )
 
 plt <- ggplot( ) +
@@ -2331,7 +2348,7 @@ Fes <- lapply( FeS, FUN = function( FeSl ) sapply( s, FUN = FeSl ) )
 La figura a continuación muestra cada una de las distribuciones de probabilidad empíricas estimadas 
 $F_{m,l}$. Se puede observar que conforme avanza el tiempo, aumenta la probabilidad de observar 
 valores mayores del proceso $S$ correspondiente al total de reclamos.
-```{r l6g17, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
+```{r l6g18, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
 FeSdat <- NULL
 for ( j in 1:p ) {
   FeSdat <- rbindlist( list( FeSdat, data.table( s = s, m = as.factor( j ), Fes = Fes[[ j ]] ) ) )
