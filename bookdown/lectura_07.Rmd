@@ -153,7 +153,7 @@ $$
 = 0
 $$
 Podemos concluir con toda confianza que el percentil $\xi_{n,\alpha}$ que se obtiene de la 
-distribución empírica se aproxima en probabilidad al percentil $\xi_{\alpha} = \VaR$ 
+distribución empírica se aproxima en probabilidad al percentil $\xi_{\alpha} = \VaR_{\alpha}( X )$ 
 :::
 
 ::: {.definition #dTVaR name="Valor en riesgo en la cola"}
