@@ -67,15 +67,15 @@ respecto.
 
 ::: {.proposition #appoxvar}
 Si consideramos una familia de variables aleatorias $\{X_n\}_{n\in \N}$ i.i.d con distribución común
-$F$ no neceariamente continua, entonces el percentil empírico de orden $\alpha$, 
+$F$ no necesariamente continua, entonces el percentil empírico de orden $\alpha$, 
 $\xi_{n,\alpha} = F_n^{-1}( \alpha )$, que se puede extraer a partir de las $n$ primeras variables 
 en la muestra converge en probabilidad al valor $\xi_{\alpha} = \VaR_{\alpha}( X )$, correspondiente
 al valor en riesgo.
 :::
 
 :::{.proof}
-Utilizando la versión unilateral de la desigualdad \@ref(thm:ddkw), podemos establecer las siguientes 
-acotaciones
+Utilizando la versión unilateral de la desigualdad \@ref(thm:ddkw), podemos establecer las 
+siguientes acotaciones
 $$
 \begin{eqnarray*}
 P\left( \xi_{n,\alpha}- \xi_{\alpha} > \varepsilon \right)
