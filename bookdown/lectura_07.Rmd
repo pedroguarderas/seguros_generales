@@ -134,7 +134,7 @@ $\min\left( F( \xi_{\alpha} + \varepsilon ) - \alpha, \alpha - F( \xi_{\alpha} -
 alrededor del percentile $\alpha$. Lo cual no es un resultado muy alentador.
 
 Si se establece un valor $\widetilde{\varepsilon} > 0$ para el término 
-$\widetilde{\varepsilon} \leq s\min\left( F( \xi_{\alpha} + \varepsilon ) - \alpha, \alpha - F( \xi_{\alpha} - \varepsilon ) \right)$, la expresión anterior se modifica a la siguiente
+$\widetilde{\varepsilon} \leq \min\left( F( \xi_{\alpha} + \varepsilon ) - \alpha, \alpha - F( \xi_{\alpha} - \varepsilon ) \right)$, la expresión anterior se modifica a la siguiente
 $$
 n \geq -\frac{\log( \delta )-\log(2)-\log(C)}{2 \widetilde{\varepsilon}^2}
 $$
