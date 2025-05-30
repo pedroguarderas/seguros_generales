@@ -139,7 +139,7 @@ $$
 n \geq -\frac{\log( \delta )-\log(2)-\log(C)}{2 \widetilde{\varepsilon}^2}
 $$
 Claramente la cantidad de simulaciones que se debe realizar para lograr una aproximación de orden
-$\widetilde{\varepsilon}$, se requiere un orden de simulaciones cuadrático inverso a este valor.
+$\varepsilon$, se requiere un orden de simulaciones cuadrático inverso a este valor.
 El ejemplo numérico a continuación es aleccionador al respecto de la dificultad numérica de 
 aproximar un cálculo de $VaR_\alpha$.
 ```{r l7c1}
