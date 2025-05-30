@@ -514,6 +514,19 @@ P\left( \left| \xi_{n,\alpha}- \xi_{\alpha} \right| &gt; \varepsilon \right) =
 \]</span>
 Como se observa se tendrá que realizar muchas simulaciones más para llegar a tener en probabilidad
 un error de aproximación adecuado.</p>
+<p>Entonces los pasos del pseudo-algoritmo de simulación estarán dados por:</p>
+<ol style="list-style-type: decimal">
+<li><p>Fijar el nivel de confianza al que se desea calcular <span class="math inline">\(0 &lt; \alpha &lt; 1\)</span></p></li>
+<li><p>Fijar el nivel probabilidad para los errores de aproximación <span class="math inline">\(\delta &gt; 0\)</span></p></li>
+<li><p>Fijar el nivel erro <span class="math inline">\(\hat{\varepsilon} &gt; 0\)</span></p></li>
+<li><p>Estimar el posible error de estimación <span class="math inline">\(\varepsilon &gt; 0\)</span></p></li>
+<li><p>Buscar el número de simulaciones adecuadas <span class="math inline">\(n \in \mathbb{N}\)</span> que aseguren con una probabilidad menor a
+<span class="math inline">\(\delta\)</span> que se presente errores de aproximación superiores a <span class="math inline">\(\varepsilon\)</span>.</p></li>
+<li><p>Generar una muestra de tamaño <span class="math inline">\(n\)</span> de la variable aleatoria, i.e. <span class="math inline">\(X_1, \ldots, X_n\)</span></p></li>
+<li><p>Calcular el percentil de la <span class="math inline">\(\alpha\)</span> de la muestra <span class="math inline">\(X_{n,\alpha} F_n^{-1}( \alpha )\)</span></p></li>
+</ol>
+<p>Esta simulación solo genera una sola estimación del <span class="math inline">\(\operatorname{VaR}_{\alpha}(X)\)</span>, se puede repetir algunas
+veces esta algoritmo para tener más valores y sacar la media de estos como estimador.</p>
 <div class="definition">
 <p><span id="def:dTVaR" class="definition"><strong>Definición 7.2  (Valor en riesgo en la cola) </strong></span>Dada una variable aleatoria a valores reales <span class="math inline">\(X\)</span>, el <strong>valor en riesgo en la colas</strong>
 (tail value at risk) de <span class="math inline">\(X\)</span> al nivel de probabilidad <span class="math inline">\(\alpha \in (0,1)\)</span> está dado por
