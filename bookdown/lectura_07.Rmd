@@ -175,7 +175,7 @@ Entonces los pasos del pseudo-algoritmo de simulación estarán dados por:
 
 2. Fijar el nivel probabilidad para los errores de aproximación $\delta > 0$
 
-3. Fijar el nivel erro $\hat{\varepsilon} > 0$
+3. Fijar el nivel erro $\widetilde{\varepsilon} > 0$
 
 4. Estimar el posible error de estimación $\varepsilon > 0$
 
