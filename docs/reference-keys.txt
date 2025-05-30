@@ -189,7 +189,6 @@ proceso_estocastico_reclamos
 algoritmo-de-simulación-3
 tarificacion
 medidas_riesgo
-algoritmo-de-simulación-4
 tarificacion_grandes_terminos
 prima
 segmentación

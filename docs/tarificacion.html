@@ -311,10 +311,7 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="7" data-path="tarificacion.html"><a href="tarificacion.html"><i class="fa fa-check"></i><b>7</b> Tarificación</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="tarificacion.html"><a href="tarificacion.html#medidas_riesgo"><i class="fa fa-check"></i><b>7.1</b> Medidas de riesgo</a>
-<ul>
-<li class="chapter" data-level="7.1.1" data-path="lectura_07.html"><a href="#algoritmo-de-simulaci%C3%B3n-4"><i class="fa fa-check"></i><b>7.1.1</b> Algoritmo de simulación</a></li>
-</ul></li>
+<li class="chapter" data-level="7.1" data-path="tarificacion.html"><a href="tarificacion.html#medidas_riesgo"><i class="fa fa-check"></i><b>7.1</b> Medidas de riesgo</a></li>
 <li class="chapter" data-level="7.2" data-path="tarificacion.html"><a href="tarificacion.html#tarificacion_grandes_terminos"><i class="fa fa-check"></i><b>7.2</b> Tarificación en grandes términos</a></li>
 <li class="chapter" data-level="7.3" data-path="tarificacion.html"><a href="tarificacion.html#prima"><i class="fa fa-check"></i><b>7.3</b> Prima</a></li>
 <li class="chapter" data-level="7.4" data-path="lectura_07.html"><a href="#segmentaci%C3%B3n"><i class="fa fa-check"></i><b>7.4</b> Segmentación</a></li>
@@ -455,8 +452,7 @@ Podemos concluir con toda confianza que el percentil <span class="math inline">\
 distribución empírica se aproxima en probabilidad al percentil <span class="math inline">\(\xi_{\alpha} = \operatorname{VaR}_{\alpha}( X )\)</span></p>
 </div>
 <!------------------------------------------------------------------------------------------------->
-<div id="algoritmo-de-simulación-4" class="section level3 hasAnchor" number="7.1.1">
-<h3><span class="header-section-number">7.1.1</span> Algoritmo de simulación<a href="#algoritmo-de-simulaci%C3%B3n-4" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><strong>Algoritmo de simulación</strong></p>
 <p>Con lo anterior se puede crear un algoritmo de simulación estocástico que precisamente contemple
 el respectivo nivel de convergencia, de ahí que la demostración de la proposición anterior no es
 inútil, ya que de la misma resulta un criterio para determinar el número de simulaciones que se
@@ -518,22 +514,37 @@ un error de aproximación adecuado.</p>
 <ol style="list-style-type: decimal">
 <li><p>Fijar el nivel de confianza al que se desea calcular <span class="math inline">\(0 &lt; \alpha &lt; 1\)</span></p></li>
 <li><p>Fijar el nivel probabilidad para los errores de aproximación <span class="math inline">\(\delta &gt; 0\)</span></p></li>
-<li><p>Fijar el nivel erro <span class="math inline">\(\hat{\varepsilon} &gt; 0\)</span></p></li>
+<li><p>Fijar el nivel erro <span class="math inline">\(\widetilde{\varepsilon} &gt; 0\)</span></p></li>
 <li><p>Estimar el posible error de estimación <span class="math inline">\(\varepsilon &gt; 0\)</span></p></li>
 <li><p>Buscar el número de simulaciones adecuadas <span class="math inline">\(n \in \mathbb{N}\)</span> que aseguren con una probabilidad menor a
 <span class="math inline">\(\delta\)</span> que se presente errores de aproximación superiores a <span class="math inline">\(\varepsilon\)</span>.</p></li>
 <li><p>Generar una muestra de tamaño <span class="math inline">\(n\)</span> de la variable aleatoria, i.e. <span class="math inline">\(X_1, \ldots, X_n\)</span></p></li>
-<li><p>Calcular el percentil de la <span class="math inline">\(\alpha\)</span> de la muestra <span class="math inline">\(X_{n,\alpha} F_n^{-1}( \alpha )\)</span></p></li>
+<li><p>Calcular el percentil de la <span class="math inline">\(\alpha\)</span> de la muestra <span class="math inline">\(\xi_{n,\alpha} = F_n^{-1}( \alpha )\)</span></p></li>
 </ol>
 <p>Esta simulación solo genera una sola estimación del <span class="math inline">\(\operatorname{VaR}_{\alpha}(X)\)</span>, se puede repetir algunas
 veces esta algoritmo para tener más valores y sacar la media de estos como estimador.</p>
 <div class="definition">
-<p><span id="def:dTVaR" class="definition"><strong>Definición 7.2  (Valor en riesgo en la cola) </strong></span>Dada una variable aleatoria a valores reales <span class="math inline">\(X\)</span>, el <strong>valor en riesgo en la colas</strong>
+<p><span id="def:dTVaR" class="definition"><strong>Definición 7.2  (Valor en riesgo en la cola) </strong></span>Dada una variable aleatoria a valores reales <span class="math inline">\(X\)</span>, el <strong>valor en riesgo en la cola</strong>
 (tail value at risk) de <span class="math inline">\(X\)</span> al nivel de probabilidad <span class="math inline">\(\alpha \in (0,1)\)</span> está dado por
 <span class="math display">\[
 \operatorname{TVaR}_{\alpha}( X ) = \frac{1}{1-\alpha} \int\limits_{\alpha}^1 \operatorname{VaR}_u( X )\ du
 \]</span></p>
 </div>
+<p>Es de notar que si se toma una variable aleatoria uniforme <span class="math inline">\(U \rightsquigarrow U(\alpha,1)\)</span>, tenemos
+que el valor en riesgo en la cola, puede ser expresado como la esperanza.
+<span class="math display">\[
+\operatorname{TVaR}_{\alpha}( X ) = \mathbb{E}\left[ \operatorname{VaR}_U( X ) \right]
+\]</span>
+De ahí que se una forma de calcular el valor en riesgo en la cola es utilizando una simulación
+estocástica que aproveche el <a href="probabilidad_estadistica.html#thm:twln">4.2</a>. Así se puede generar una muestra <span class="math inline">\(U_1, \ldots, U_m\)</span> de
+la distribución uniforme <span class="math inline">\(U(\alpha,1)\)</span> y para cada uno de estos valores se calcula por simulación el
+<span class="math inline">\(\xi_{n,U_1} \approx \operatorname{VaR}_{U_1}( X ), \ldots, \xi_{n,U_n} \approx  \operatorname{VaR}_{U_n}( X )\)</span>, luego aproximar
+utilizando la media empírica
+<span class="math display">\[
+\operatorname{TVaR}_{\alpha}( X ) \approx \frac{1}{m} \sum\limits_{i=1}^m \xi_{n,U_i}
+\]</span>
+Pero como ya se mencionó, esta aproximación puede ser realmente costosa en términos
+computacionales; por tal razón, se requiere utilizar métodos numéricos más eficientes.</p>
 <div class="proposition">
 <p><span id="prp:TVaRcohe" class="proposition"><strong>Proposición 7.3  (Coherencia de la medida TVaR) </strong></span>La medida de riesgo <span class="math inline">\(\operatorname{TVaR}_{\alpha}\)</span> es una medida de riesgo coherente si la variable aleatoria
 sobre la cual se mide es una variable aleatoria continua.</p>
@@ -608,7 +619,6 @@ idénticamente distribuidos (i.i.d), en este caso con distribución <span class=
 <p></p>
 </div>
 <!------------------------------------------------------------------------------------------------->
-</div>
 </div>
 <div id="tarificacion_grandes_terminos" class="section level2 hasAnchor" number="7.2">
 <h2><span class="header-section-number">7.2</span> Tarificación en grandes términos<a href="tarificacion.html#tarificacion_grandes_terminos" class="anchor-section" aria-label="Anchor link to header"></a></h2>
