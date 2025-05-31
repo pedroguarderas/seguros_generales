@@ -1,5 +1,5 @@
 <!------------------------------------------------------------------------------------------------->
-# Estimación de valores extremos
+# Estimación de valores extremos {#estimacion_valores_extremos}
 
 ::: {.definition #dmaxstab  name="Distribución con cola pesada"}
 Una variable aleatoria a valores reales $X$ se dice que tiene su distribución $F$  es de 

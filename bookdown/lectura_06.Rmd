@@ -1,5 +1,5 @@
 <!------------------------------------------------------------------------------------------------->
-# Modelos de pérdida agregada
+# Modelos de pérdida agregada {#modelos_perdida}
 
 <!------------------------------------------------------------------------------------------------->
 ## Mutualización del riesgo
@@ -74,7 +74,7 @@ asociados a la severidad presentan un verdadero reto estadístico y computaciona
 atrás se desarrolló unos nuevos algoritmos para calcular estos términos @aep_algo, @gaep_algo.
 
 <!------------------------------------------------------------------------------------------------->
-## Modelo individual {#sec:modind}
+## Modelo individual {#modelo_individual}
 En el modelo de riesgos individuales consideramos que el número de siniestros que se producirán es
 conocido, por ejemplo puede ser a lo sumo el tamaño de la población asegurada, en tal caso la
 variable aleatoria $N$ pasa a ser una constante, que representaremos por $n$. De esta forma, la
@@ -316,7 +316,7 @@ $$
 :::
 
 <!------------------------------------------------------------------------------------------------->
-## Modelo colectivo {#sec:modcol}
+## Modelo colectivo {#modelo_colectivo}
 
 El modelo colectivo de riesgo considera un número de reclamos descritos por una variable aleatoria 
 discreta $N$. Los reclamos corresponden a un número de pólizas en un periodo específico, el valor 
@@ -589,7 +589,7 @@ Por otra parte, es de notar que en el cálculo hay un gasto innecesario de valor
 reclamos $X_i$ ya que algunos se multiplicaran por $B_i$, la cual solo toma valores $\{0,1\}$.
 
 <!------------------------------------------------------------------------------------------------->
-## Modelos mixtos
+## Modelos mixtos {#modelos_mixtos}
 En algunos casos en particular se considera un modelo de agregación que es una mixtura entre el
 modelo individual y el modelo colectivo. Se parte de considerar un número $n$ de unidades aseguradas
 donde para cada unidad $i \in \{1, \ldots, n\}$, se considera que puede presentar una cantidad 
@@ -602,7 +602,7 @@ S
 $$
 
 <!------------------------------------------------------------------------------------------------->
-## Modelos con variables explicativas
+## Modelos con variables explicativas {#modelos_variables_explicativas}
 En algunos casos más generales, donde la población presenta heterogeneidad respecto del riesgo al
 cual están expuestos, como también de las dimensiones de sus reclamos, se considera que existen 
 variables aleatorias adicionales $Y_1, \ldots, Y_n$ que determinan el número de reclamos $N$ y 
@@ -643,9 +643,15 @@ producto difícil de comercializar.
 De forma algo más puntual, un **deducible** es una función $D : \R \longrightarrow \R_+$, tal que 
 para toda variable aleatoria $X$, se satisface la siguiente desigualdad $D( X ) \leq X$.
 
-1. Para evitar pérdidas pequeñas se suele configurar la función deducible $D( X ) = \max( X - d, 0 )$, 
-en este caso si $X \rightsquigarrow F_X$, entonces $Z = D( X ) \rightsquigarrow F_Z( z )$, donde 
-$F_Z( z ) = \mathbf{1}_{[0,+\infty)}( z ) F_X( z + d )$.
+1. Para evitar pérdidas pequeñas se suele configurar la función deducible 
+$$
+D( X ) = \max( X - d, 0 )
+$$
+que se aplicará sobre las variables aleatorias de los reclamos $X \rightsquigarrow F_X$. Así, 
+el valor ya deducido $Z = D( X ) \rightsquigarrow F_Z( z )$, donde 
+$$
+F_Z( z ) = \mathbf{1}_{[0,+\infty)}( z ) F_X( z + d )
+$$
 ```{r l6g2, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
 D <- function( x, d ) return( max( x - d, 0 ) )
 d <- 50
@@ -680,9 +686,18 @@ plt <- ggplot( ) +
 plot( plt )
 ```
 
-2. Para prevenir los excesos de pérdida (stop loss) $D( X ) = \min( X, M )$, en este caso si 
-$X \rightsquigarrow F_X$, entonces $Z = D( X ) \rightsquigarrow F_Z( z )$, donde 
-$F_Z( z ) = \mathbf{1}_{(-\infty,M)}( z ) F_X( z ) + \mathbf{1}_{[M,+\infty)}( z )$.
+2. Para prevenir los excesos de pérdida (stop loss) se propone el deducible con un tope máximo
+dado por una constante $M > 0$, el cual se aplica a las variables aleatorias de los reclamos
+$X \rightsquigarrow F_X$.
+$$
+D( X ) = \min( X, M )
+$$, 
+
+en este caso, si la variable aleatoria del pago correspondiente al reclamo ya deducido 
+$Z = D( X ) \rightsquigarrow F_Z( z )$, donde 
+$$
+F_Z( z ) = \mathbf{1}_{(-\infty,M)}( z ) F_X( z ) + \mathbf{1}_{[M,+\infty)}( z )
+$$
 ```{r l6g3, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
 D <- function( x, M ) return( min( x, M ) )
 M <- 150
@@ -717,9 +732,16 @@ plt <- ggplot( ) +
 plot( plt )
 ```
 
-3. Caso mixto para evitar pérdidas pequeñas y exceso de pérdida $D( X ) = \min( \max( X - d, 0 ), M )$, 
-en este caso si $X \rightsquigarrow F_X$, entonces $Z = D( X ) \rightsquigarrow F_Z( z )$, donde 
-$F_Z( z ) = \mathbf{1}_{[0,M)}( z ) F_X( z + d ) + \mathbf{1}_{[M,+\infty)}( z )$.
+3. Caso mixto para evitar pérdidas pequeñas y exceso de pérdida, se propone la siguiente composición
+de deducibles que se aplicará sobre las variables aleatorias de los reclamos $X \rightsquigarrow F_X$
+$$
+D( X ) = \min( \max( X - d, 0 ), M )
+$$
+en este caso, si la variable aleatoria del pago correspondiente al reclamo ya deducido 
+$Z = D( X ) \rightsquigarrow F_Z( z )$, tenemos que $Z \rightsquigarrow F_Z$, con:
+$$
+F_Z( z ) = \mathbf{1}_{[0,M)}( z ) F_X( z + d ) + \mathbf{1}_{[M,+\infty)}( z )
+$$
 ```{r l6g4, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
 D <- function( x, M ) return( min( max( x - d ), M ) )
 d <- 50
@@ -755,11 +777,26 @@ plt <- ggplot( ) +
 plot( plt )
 ```
 
-4. En otros casos más elaborados se segmenta el riesgo cubierto, al existir variables explicativas
+4. Otro tipo de deducible acota el número de pagos de reclamos a un número fijo máximo de reclamos
+es decir, se establece un deducible en función para la frecuencia. Usualmente, esto se realiza 
+cuando se considera un modelo donde se dispone de la frecuencia de reclamos por póliza.
+$$
+D(N) = \min( N, W )
+$$
+con la constante $W \in \N$. Para el reclamo total, si se considera un portafolio con $n$
+pólizas tenemos las siguiente variación del modelo.
+$$
+S = \sum\limits_{i=1}^n \sum\limits_{j=1}^{D(N_i)} X_{i,j}
+$$
+
+5. En otros casos más elaborados se segmenta el riesgo cubierto, al existir variables explicativas
 de la naturaleza del riesgo $Y_1, \ldots, Y_m$, las cuales pueden tomar valores en un conjunto $E$
 solo se toma un subconjunto de valores posibles $A\subset E$, para los cuales es válida la cobertura.
 Así si un reclamo $X$ se explica o caracteriza por las variables anteriores se configura el 
-deducibles $D( X ) = \mathbf{1}_{A}\left( Y_1, \ldots, Y_m \right) X$.
+deducibles 
+$$
+D( X ) = \mathbf{1}_{A}\left( Y_1, \ldots, Y_m \right) X
+$$
 
 Un ejemplo del anterior deducible se suele dar en el caso de seguros de salud, donde se cubre 
 ciertos tipos de enfermedades, usualmente se suele evitar las enfermedades de tipo catastrófico 
@@ -780,6 +817,10 @@ $$
 
 Este caso se suele presentar en los productos que partir de una suma parcial de reclamos individuales,
 el deducible comienza a regir.
+
+Es de notar además que la distribución acumulada de la variable aleatoria correspondiente a los 
+reclamos ya deducidos comienza a presentar singularidades, esto complica el estudio del 
+comportamiento de los reclamos totales.
 
 <!------------------------------------------------------------------------------------------------->
 ### Algoritmo de simulación
@@ -994,7 +1035,7 @@ plot( plt )
 :::
 
 <!------------------------------------------------------------------------------------------------->
-## Algoritmo de Panjer
+## Algoritmo de Panjer {#algoritmo_panjer}
 
 El siguiente algoritmo es de especial interés para determinar la densidad de probabilidad $f_S$ del
 total de reclamos $S$. Se asume que el conteo de siniestro $N$ viene dado por alguna de las 
@@ -1118,7 +1159,7 @@ plot( plt )
 :::
 
 <!------------------------------------------------------------------------------------------------->
-## Estimación usando la transformada de Fourier
+## Estimación usando la transformada de Fourier {#estimacion_transformada_fourier}
 
 Se puede utilizar la transformada de Fourier para determinar la densidad de la suma 
 $S_n = \sum\limits_{i=1}^n X_i$ de varias variables aleatorias 
@@ -1165,39 +1206,56 @@ $$
 $$
 
 ```{r l6c12}
-N <- 10000
+N <- 50000
 set.seed(94312)
 alpha <- sample( x = seq( 1, 20, length = 40 ), size = 50, replace = TRUE )
 theta <- 3
-b <- sum( sapply( alpha, FUN = function( a ) qgamma( 0.9999, shape = a, scale = theta ) ) )
+b <- sum( sapply( alpha, FUN = function( a ) qgamma( 0.99, shape = a, scale = theta ) ) )
 a <- 0
 h <- ( b - a ) / N
 n <- 0:N
 s <- a + n * h
 w <- n / ( b - a )
 eta <- h * exp( -2 * pi * 1i * w * a )
-f <- lapply( alpha, function( a ) sapply( s, FUN = function( sk ) dgamma( sk, shape = a, scale = theta ) ) )
-Fof <- lapply( f, FUN = function( fi ) eta * fft( fi ) )
-FoS <- rep( 1, N + 1 )
-for ( i in 1:length( f ) ) {
+fX <- lapply( alpha, function( a ) sapply( s, FUN = function( sk ) dgamma( sk, shape = a, scale = theta ) ) )
+Fof <- lapply( fX, FUN = function( fi ) eta * fft( fi ) )
+FoS <- Fof[[ 1 ]]
+for ( i in 2:length( fX ) ) {
   FoS <- FoS * Fof[[ i ]]
 }
 fS <- fft( eta^(-1) * FoS, inverse = TRUE ) / ( N + 1 )
 fS <- Re( fS )
+FS <- cumsum( fS ) * h
 fs <- sapply( s, FUN = function( sk ) dgamma( sk, shape = sum( alpha ), scale = theta ) )
+Fs <- sapply( s, FUN = function( sk ) pgamma( sk, shape = sum( alpha ), scale = theta ) )
 ```
 
 ```{r l6g9, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
 plt <- ggplot() +
-  geom_line( aes( x = s, y = fS ), colour = 'darkred', linewidth = 1 ) + 
-  geom_point( aes( x = s, y = fs ), colour = 'olivedrab3', size = 0.25 ) + 
+  geom_line( aes( x = s, y = fs ), colour = 'darkred', linewidth = 1 ) + 
+  geom_point( aes( x = s, y = fS ), colour = 'olivedrab3', size = 0.2 ) + 
   xlab( TeX( "$x$" ) ) + 
   ylab( TeX( "$f_{S}(x)$" ) ) + 
   theme_bw()
 plot( plt )
 ```
 
+A pesar que la aproximación a la densidad de probabilidad parece ser buena, la condición de 
+normalización, no es satisfecha, como muestra el siguiente ejemplo. Ello sugiere que al 
+algoritmo de estimación de la densidad hay que realizarle algún ajuste o en su defecto incrementar 
+la precisión numérica.
 ```{r l6g10, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
+plt <- ggplot() +
+  geom_line( aes( x = s, y = Fs ), colour = 'darkred', linewidth = 1 ) + 
+  geom_point( aes( x = s, y = FS ), colour = 'olivedrab3', size = 0.2 ) + 
+  geom_hline( yintercept = 1, color = 'dodgerblue2', linewidth = 0.1 ) +
+  xlab( TeX( "$x$" ) ) + 
+  ylab( TeX( "$F_{S}(x)$" ) ) + 
+  theme_bw()
+plot( plt )
+```
+
+```{r l6g11, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
 e <- fS - fs
 eb <- max( abs( e ) )
 
@@ -1258,7 +1316,7 @@ X <- lapply( N, FUN = function( n ) rlnorm( n, meanlog = u, sdlog = s ) )
 S <- sapply( X, FUN = function( x ) sum( x, na.rm = TRUE ) )
 ```
 
-```{r l6g11, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
+```{r l6g12, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
 fmax <- 0.0007
 smax <- 5e3
 
@@ -1280,7 +1338,7 @@ plt <- ggplot() +
 plot( plt )
 ```
 
-```{r l6g12, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
+```{r l6g13, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
 e <- cumsum( fS[ -1 ] * diff( sg ) ) - ecdf( S )( sg[-1] )
 
 eb <- max( abs( e ) )
@@ -1293,6 +1351,143 @@ plt <- ggplot() +
 plot( plt )
 ```
 
+<!------------------------------------------------------------------------------------------------->
+## Temporalidad y ajustes del número de reclamos {#temporalidad_numero_reclamos}
+
+Hasta el momento no hemos tomado en cuenta cierta componente de temporalidad que muestra la 
+frecuencia de los reclamos. Debemos ser muy consientes que los reclamos se producen en el tiempo
+y que el número de estos dependerá del periodo de exposición de cada uno de los asegurados, en otras
+palabras en la estimación de la frecuencia se debe tomar en cuenta que las pólizas tienen un periodo
+de cobertura, una fecha inicial y una fecha final. 
+
+Más puntualmente, para una inferencia sencilla si estimamos reclamos de pólizas que duran 2 años
+entonces la frecuencia del número de reclamos $N$ será bianual. Si por el contrario se quiere 
+utilizar esta frecuencia para estimar el número de reclamos para pólizas con cobertura anual 
+entonces, es necesario realizar un ajuste acorde.
+
+Dando algo más de sentido matemático a este razonamiento, a cada póliza podemos asociar su 
+respectiva **exposición al riesgo**, que no es más que el ancho de intervalo dado por la fecha 
+inicial de la póliza, menos la fecha final de la póliza. Usualmente la unidad que su utiliza para 
+medir este intervalo es en años, pero puede cambiársela, siempre y cuando la formulación del modelo 
+sea clara y el uso de estas unidades sea consistente para cálculos futuros. Así si tenemos $n$ 
+pólizas para cada una de ellas hay un tiempo de inicio $s_i$ y un tiempo $e_i$ final, para todo 
+$i \in \{1, \ldots, n\}$, así la exposición al riesgo $ER_i$ está dada por una distancia $d$
+$$
+ER_i = d( s_i, e_i )
+$$
+por ejemplo, una buena distancia puede ser
+$$
+d( s, e ) = \frac{\# \left\{ \text{días entre $s$ y $e$} \right\}}{365.25}
+$$
+En la librería `lubridate` de R, tenemos una implementación que puede utilizarse fácilmente para
+calcular la distancia en años entre dos fechas dadas.
+```{r l6c14}
+s <- ymd( '1951-04-09' )
+e <- ymd( '2025-04-09' )
+d1 <- interval( s, e ) / dyears( 1 )
+d2 <- length( seq( s, e, by = 'day') ) / 365.25
+```
+
+La idea es ajustar la estimación de la frecuencia de forma proporcional a la exposición al riesgo, 
+esto se puede realizar postulando que la variable aleatoria del conteo de siniestros, tienen una 
+esperanza proporcional a la exposición al riesgo.
+$$
+\E\left[ N \right] = \lambda ER
+$$
+además se puede ajustar la distribución de probabilidad que se desee estimar en función del 
+parámetro $\lambda$, es así que para las distribuciones de probabilidad discretas que hemos 
+introducido con anterioridad, tenemos la siguiente modificación.
+
+1.  Para la distribución de Poisson, tenemos la ley de probabilidad
+    $$
+    P( N = k ) = \exp\left( -\lambda ER \right) \frac{( \lambda ER )^k}{k!}, \qquad
+    \forall k \in \N
+    $$
+    entonces $N \rightsquigarrow Pois( \lambda ER )$.
+    
+    En caso de disponer de una muestra de $N_1, \ldots, N_m$ de variables aleatorias independientes, 
+    y por otra parte exposiciones al riesgo $ER_1, \ldots, ER_m$ asociadas a cada una de las variables
+    aleatorias, de tal forma que $N_i \rightsquigarrow Pois( \lambda ER_i )$, entonces la función
+    de verosimilitud logarítmica toma la forma:
+    $$
+    \ell( \lambda ) 
+    = - \lambda \sum\limits_{i=1}^m ER_i 
+    + \sum\limits_{i=1}^m N_i \log\left( ER_i \right) 
+    + \sum\limits_{i=1}^m N_i \log\left( \lambda \right) 
+    - \sum\limits_{i=1}^m \log\left( N_i! \right)
+    $$
+    en este caso el estimador por maximización de verosimilitud es bien sencillo de determinar y está 
+    dado por:
+    $$
+    \lambda = \frac{\sum\limits_{i=1}^m N_i}{\sum\limits_{i=1}^m ER_i }
+    $$
+
+2.  Para la distribución binomial begativa, tenemos que si
+    $$
+    \lambda ER = \alpha \frac{1-p}{p} \Rightarrow p = \frac{\alpha}{\lambda ER + \alpha}
+    $$
+    de donde la ley de probabilidad queda modificada como 
+    $$
+    P( N = k ) 
+    = \frac{\Gamma( \alpha + k )}{\Gamma(k+1) \Gamma(\alpha)} 
+    \left( \frac{\alpha}{\lambda ER + \alpha} \right)^\alpha \left( \frac{\lambda ER}{\lambda ER + \alpha} \right)^k, \qquad
+    \forall k \in \N
+    $$
+    entonces $N \rightsquigarrow NBinom\left( \alpha, \frac{\alpha}{\lambda ER + \alpha} \right)$.
+    
+    Similar que antes, si disponemos de una muestra de $N_1, \ldots, N_m$ de variables aleatorias 
+    independientes y también exposiciones al riesgo $ER_1, \ldots, ER_m$ asociadas a cada una de las 
+    variables aleatorias, de tal forma que 
+    $N_i \rightsquigarrow NBinom\left( \alpha, \frac{\alpha}{\lambda ER_i + \alpha} \right)$, entonces 
+    la función de verosimilitud logarítmica toma la forma:
+    $$
+    \begin{eqnarray*}
+    \ell( \alpha, \lambda )
+    & = & \sum\limits_{i=1}^m \log \Gamma( \alpha + N_i ) 
+    - \sum\limits_{i=1}^m \log \Gamma( N_i + 1 ) 
+    - m \log \Gamma( \alpha ) \\
+    & & + \sum\limits_{i=1}^m N_i \log\left( \lambda \right) 
+    + \sum\limits_{i=1}^m N_i \log\left( ER_i \right) 
+    - \sum\limits_{i=1}^m N_i \log\left( \lambda ER_i + \alpha \right) 
+    + m \alpha \log\left( \alpha \right) \\
+    & & - \alpha \sum\limits_{i=1}^m \log\left( \lambda ER_i + \alpha \right)
+    \end{eqnarray*}
+    $$
+
+3.  Para la distribución binomial, tenemos que si
+    $$
+    \lambda ER = np \Rightarrow p = \frac{\lambda ER}{n}
+    $$
+    de donde la ley de probabilidad queda modificada como
+    $$
+    P( N = k ) = \binom{n}{k} \left( \frac{\lambda ER}{n} \right)^k \left( 1 - \frac{\lambda ER}{n} \right)^{n-k}, 
+    \qquad \forall k \in \{0,\ldots, n\}
+    $$
+    entonces $N \rightsquigarrow Binom\left( n, \frac{\lambda ER}{n} \right)$
+    
+    Mismo razonamiento, si disponemos de una muestra de $N_1, \ldots, N_m$ de variables aleatorias 
+    independientes y también exposiciones al riesgo $ER_1, \ldots, ER_m$ asociadas a cada una de las 
+    variables aleatorias, de tal forma que 
+    $N_i \rightsquigarrow  Binom\left( n, \frac{\lambda ER_i}{n} \right)$, entonces la función de 
+    verosimilitud logarítmica toma la forma:
+    $$
+    \begin{eqnarray*}
+    \ell( n, \lambda )
+    & = & m \log( n! )
+    - \sum\limits_{i=1}^m \log( N_i! ) 
+    - \sum\limits_{i=1}^m \log( (n - N_i)! ) \\
+    & & + \sum\limits_{i=1}^m N_i \log \lambda 
+    + \sum\limits_{i=1}^m N_i \log ER_i
+    - n \sum\limits_{i=1}^m N_i \\
+    & & + n \sum\limits_{i=1}^m \log\left( 1 - \frac{\lambda ER_i}{n} \right) 
+    - \sum\limits_{i=1}^m N_i \log\left( 1 - \frac{\lambda ER_i}{n} \right) 
+    \end{eqnarray*}
+    $$
+
+En los tres casos anteriores, hemos desarrollado una metodología para la estimación de la 
+distribución de frecuencia de los reclamos, tomando en cuenta la exposición al riesgo de cada 
+una de las pólizas a las cuales estos reclamos corresponden.
+
 ::: {.example #l5ex8}
 Ahora bien, pongamos en aplicación todo lo aprendido hasta el momento. Para ello, trabajaremos
 con información de pólizas de un seguro de salud. La información está compuesta de dos objetos,
@@ -1303,7 +1498,7 @@ para cada una de sus contratos se especifica un deducible de la forma
 $D( X ) = \min( \max( X - d, 0 ), M )$, donde precisamente $d$ es lo que se conoce como el deducible
 y $M$ como el monto máximo de cobertura. 
 
-```{r l6c14}
+```{r l6c15}
 load( '../RData/production_claims_health.RData' )
 ```
 
@@ -1350,7 +1545,7 @@ Lo primero es definir las fechas que marcan el periodo para el cual estamos inte
 con ello seleccionamos la periodicidad con la cual vamos a medir la frecuencia de los reclamos, 
 en este caso de forma anual `year`. También, seleccionamos de antemano unas edades para formar 
 grupos de riesgo por edad. 
-```{r l6c15}
+```{r l6c16}
 idate <- ymd( '2018-01-01' )
 edate <- ymd( '2021-01-01' )
 sdate <- seq( idate, edate, by = 'year' )
@@ -1366,7 +1561,7 @@ modelo colectivo de riesgo.
 Ahora tratamos la información correspondiente a la producción de las pólizas, en particular 
 extrayendo las pólizas que intersectan con los periodo de observación y creando los grupos de 
 edades `xg`.
-```{r l6c16}
+```{r l6c17}
 production[ , tid := 1 ]
 prod_prep <- merge.data.table( dates, production, by = 'tid', all.x = TRUE, allow.cartesian = TRUE )
 prod_prep[ , tid := NULL ]
@@ -1392,7 +1587,7 @@ Finalmente, se hace una estadística de frecuencia por cada grupo de riesgo dado
 `sex` y el grupo de edad `xg`. En particular se calcula el indicador para la familia de Panjer, 
 esto con la finalidad de caracterizar el tipo de distribución que determina la frecuencia 
 de los reclamos.
-```{r l6c17}
+```{r l6c18}
 claims_prep <- claims[ , list( DX = sum( claim ) ), by = list( policy, id, idc, type, sex, bdate, cdate ) ]
 claims_prep[ , x := round( interval( bdate, cdate ) / dyears( 1 ), 0 ) ]
 claims_prep[ , xg := cut( x = x, breaks = xgs, include.lowest = TRUE, ordered_result = TRUE, right = FALSE ) ]
@@ -1447,7 +1642,7 @@ grpcl %>%
 
 El gráfico a continuación muestra el comportamiento del indicador $v_n = n \frac{p_n}{p_{n-1}}$, 
 para cada uno de los grupos $g$ de riesgo.
-```{r l6g13, out.width='90%', out.height='700px', fig.align='center', class.source = 'fold-hide'}
+```{r l6g14, out.width='90%', out.height='700px', fig.align='center', class.source = 'fold-hide'}
 plt <- ggplot( ) +
   geom_point( data = count, aes( x = N, y = vn ), colour = 'red3', size = 0.5 ) +
   facet_wrap( vars( grp ), ncol = 4 ) +
@@ -1486,7 +1681,7 @@ $$
 $$
 Como ya lo mencionamos, para cada grupo $g$ podemos maximizar la verosimilitud logarítmica de la 
 frecuencia utilizando la función `fitdist` del paquete `fitdistrplus`.
-```{r l6c18, warning=FALSE}
+```{r l6c19, warning=FALSE}
 fit_count <- list()
 estim_frec <- NULL
 
@@ -1540,7 +1735,7 @@ como consecuencia tenemos pérdida de información que no podemos recuperar, por
 esperar que la función de distribución acumulada de los reclamos deducidos $D(X)$ tenga 
 singularidades. Si buscamos utilizar el método de máxima verosimilitud para la estimación de la 
 mejor distribución, debemos hacer uso de la expresión completa que presentamos en \@ref(eq:loglik). 
-```{r l6c19}
+```{r l6c20}
 sev_claims <- claims[ , list( policy, id, idc, type, sex, bdate, cdate, deductible, amount, claim ) ]
 sev_claims[ , x := round( interval( bdate, cdate ) / dyears( 1 ), 0 ) ]
 sev_claims[ , xg := cut( x = x, breaks = xgs, include.lowest = TRUE, ordered_result = TRUE, right = FALSE ) ]
@@ -1553,7 +1748,7 @@ sev_claims[ , grp := factor( paste0( sex, ' ', xg ), labels = grpcl$grp, ordered
 
 Los histogramas a continuación muestran como se distribuyen los reclamos ya censurados por cada 
 grupos de riesgo.
-```{r l6g14, out.width='90%', out.height='700px', fig.align='center', class.source = 'fold-hide'}
+```{r l6g15, out.width='90%', out.height='700px', fig.align='center', class.source = 'fold-hide'}
 xlim <- c( 0, 1e3 )
 xbrk <- seq( xlim[1], xlim[2], length = 5 )
 xlbl <- xbrk
@@ -1617,7 +1812,7 @@ cobertura $M$ varían entre pólizas. Esta construcción debe ser realizada para
 a su vez debemos maximizar cada una de las verosimilitudes logarítmicas, esto lo podemos realizar
 de forma integrada utilizando un bucle de programación `for` y el método usual de optimización 
 `optim`.
-```{r l6c20, warning=FALSE}
+```{r l6c21, warning=FALSE}
 Fd <- plnorm
 fd <- dlnorm
 
@@ -1752,7 +1947,7 @@ $$
 La integral a la izquierda pude ser calculada con el uso de una aproximación numérica a la integral.
 Por su parte, los términos asociados a la probabilidad pueden ser calculados utilizando la 
 función de distribución acumulada de la variable aleatoria de los reclamos $X$.
-```{r l6c21}
+```{r l6c22}
 estim <- merge.data.table( estim_frec[ , list( grp, EN, SDN ) ], 
                            estim_sev[ , list( grp, EX, SDX, meanlog, sdlog ) ], by = 'grp' )
 ```
@@ -1787,8 +1982,8 @@ $$
 = \sum\limits_{r=1}^R n_{g,r} \left( \E\left[ N_g \right] \V\left[ D( X_g ) \right] + \V\left[ N_g \right] \E\left[ D( X_g ) \right]^2 \right),
 $$
 
-```{r l6c22}
-prods <- data.table( ngr = c( 20, 40, 60, 80, 100 ), 
+```{r l6c23}
+prods <- data.table( ngr = c( 1000, 800, 600, 400, 200 ), 
                      d = c( 20, 20, 20, 20, 20 ), 
                      M = c( 2e4, 2e4, 2.5e4, 3e4, 4e4 ) )
 prods[ , id := 1 ]
@@ -1819,7 +2014,7 @@ prods[ , list( sex, xg, r, ngr, d, M, EN, SDN, EX, SDX, EDX, SDDX, ES, SDS ) ] %
     row.names = FALSE,
     col.names = c( 'sex', '$x_g$', '$r$', '$n_{g,r}$', '$d$', '$M$', '$\\E[ N ]$', '$\\sqrt{\\V[ N ]}$',
                    '$\\E[ X ]$', '$\\sqrt{\\V[ X ]}$', '$\\E[ D(X) ]$', '$\\sqrt{\\V[ D(X) ]}$',
-                   '$\\E[ S ]$', '$\\sqrt{\\V[ S ]}$' ),
+                   '$\\E[ S_{g,r} ]$', '$\\sqrt{\\V[ S_{g,r} ]}$' ),
     align = 'llrrrrrrrrrrr',
     digits = c( 0, 0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2 ),
     format.args = list( big.mark = ',', decimal.mark = '.', scientific = FALSE ),
@@ -1831,7 +2026,7 @@ prods[ , list( sex, xg, r, ngr, d, M, EN, SDN, EX, SDX, EDX, SDDX, ES, SDS ) ] %
 :::
 
 <!------------------------------------------------------------------------------------------------->
-## Proceso estocástico de reclamos totales
+## Proceso estocástico de reclamos totales {#proceso_estocastico_reclamos}
 
 Hasta el momento no hemos considerado que los reclamos se producen en el tiempo, que cada reclamo
 está bien vinculado al tiempo; es más podemos identificar algunos instantes en el tiempo que le 
@@ -1876,7 +2071,7 @@ suponer independencia entre los tiempos entre arribo $\{W_n\}$ y las variables q
 la magnitud de cada uno de los reclamos $\{X_n\}$.
 
 Los resultados para el cálculo de la esperanza y la varianza se pueden obtener de forma similar
-a lo que realizamos en la sección \@ref(sec:modind).
+a lo que realizamos en la sección \@ref(modelo_individual).
 $$
 \begin{eqnarray*}
 \E[S(t)]
@@ -2051,7 +2246,7 @@ En conclusión $N(t)$ tiene como distribución una ley de Poisson $Pois( \lambda
 se conoce a $N$ como un proceso de Poisson.
 :::
 
-```{r l6c23}
+```{r l6c24}
 m <- 1000
 lambda <- 10
 M <- 30
@@ -2085,7 +2280,7 @@ EeS <- sapply( 1:p, FUN = function( l ) mean( sapply( 1:m, function( i ) S[[ i ]
 
 En el gráfico a continuación presentamos todos los procesos de conteo $N_{i}$ simulados, como es de
 esperarse son funciones de escalera, siempre crecientes, que toman solo valores positivos.
-```{r l6g15, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
+```{r l6g16, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
 Sord <- order( sapply( 1:m, FUN = function( j ) last( S[[j]] ) ) )
 Ndat <- NULL
 for ( j in 1:m ) {
@@ -2119,7 +2314,7 @@ plot( plt )
 El gráfico a continuación presenta la simulación de los procesos correspondientes al total de 
 reclamos, conforme avanza el tiempo. De igual manera los procesos $S_i$ son funciones de escalera,
 siempre crecientes, con saltos correspondientes a los reclamos individuales.
-```{r l6g16, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
+```{r l6g17, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
 Sqmax <- quantile( sapply( S, FUN = function( Si ) last( Si ) ), probs = 0.99 )
 
 plt <- ggplot( ) +
@@ -2143,7 +2338,7 @@ plot( plt )
 
 Como se describe en el paso 8 del algoritmo de simulación, para cada tiempo $t_l$ se puede estimar
 la distribución de probabilidad de la variable aleatoria $S(t_l)$.
-```{r l6c24}
+```{r l6c25}
 FeS <- lapply( 1:p, FUN = function( l ) ecdf( sapply( S, FUN = function( Si ) Si[ l ] ) ) )
 ns <- 1e3
 s <- seq( 0, Smax, length = ns )
@@ -2153,7 +2348,7 @@ Fes <- lapply( FeS, FUN = function( FeSl ) sapply( s, FUN = FeSl ) )
 La figura a continuación muestra cada una de las distribuciones de probabilidad empíricas estimadas 
 $F_{m,l}$. Se puede observar que conforme avanza el tiempo, aumenta la probabilidad de observar 
 valores mayores del proceso $S$ correspondiente al total de reclamos.
-```{r l6g17, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
+```{r l6g18, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
 FeSdat <- NULL
 for ( j in 1:p ) {
   FeSdat <- rbindlist( list( FeSdat, data.table( s = s, m = as.factor( j ), Fes = Fes[[ j ]] ) ) )

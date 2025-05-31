@@ -1,5 +1,5 @@
 <!------------------------------------------------------------------------------------------------->
-# Distribuciones
+# Distribuciones {#distribuciones}
 
 <!------------------------------------------------------------------------------------------------->
 ## Distribuciones discretas
@@ -215,6 +215,23 @@ plt <- ggplot() +
 plot( plt )
 ```
 
+Además, una forma sencilla de estimar si una variable sigue una distribución de las tres antes 
+descritas es estudiando su coeficiente de variación $\VC( N ) = \frac{\V[N]}{\E[N]}$.
+
+1. Si $N$ sigue una ley de Poisson $Pois(\lambda)$, entonces:
+$$
+\VC( N ) = \frac{\V[N]}{\E[N]} = \frac{\lambda}{\lambda} = 1
+$$
+2.  Si $N$ sigue una ley de binomial negativa $NBinom( \alpha, p )$, entonces:
+$$
+\VC( N ) = \frac{\V[N]}{\E[N]} = \frac{\alpha\frac{1-p}{p^2}}{\alpha\frac{1-p}{p}} = \frac{1}{p} > 1
+$$
+
+3.  Si $N$ sigue una ley de binomial $Binom( n, p )$, entonces:
+$$
+\VC( N ) = \frac{\V[N]}{\E[N]} = \frac{np(1-p)}{np} = 1 - p < 1
+$$
+
 <!------------------------------------------------------------------------------------------------->
 ## Distribuciones continuas
 
@@ -382,6 +399,35 @@ log-normal si y solamente si la variable aleatoria dada por su logaritmo $\ln( X
 sigue una distribución normal.
 
 <!------------------------------------------------------------------------------------------------->
+### Distribución de beta
+Una variable aleatoria $X \in [0,1]$ a valores reales, sigue una distribución beta 
+$X \rightsquigarrow Beta( \alpha, \beta )$ de parámetros $\alpha > 0$, $\beta > 0$, si su 
+función de distribución acumulada es de la siguiente forma:
+$$
+F_X( x ) = \frac{1}{B(\alpha,\beta)} \int\limits_{0}^x t^{\alpha-1} ( 1 - t )^{\beta - 1}\ dt
+$$
+la densidad de probabilidad automáticamente está dada por la función:
+$$
+f_X( x ) = \frac{x^{\alpha-1} ( 1 - x )^{\beta - 1}}{B(\alpha,\beta)} 
+$$
+$$
+M_X( t ) = 1 + \sum\limits_{k=1}^{+\infty} \left( \prod\limits_{l=0}^{k-1} \frac{\alpha + l}{\alpha + \beta + l} \right) \frac{t^k}{k!}
+$$
+$$
+\E[X] = \frac{\alpha}{\alpha + \beta},\qquad
+\V[X] = \frac{\alpha\beta}{(\alpha + \beta)^2(\alpha + \beta + 1)}
+$$
+```{r l5c11}
+alpha <- 1
+beta <- 2
+x <- 0.5
+m <- 100
+X <- rbeta( n = m, shape1 = alpha, shape2 = beta ) # simular una muestra de tamaño m
+fx <- dbeta( x = x, shape1 = alpha, shape2 = beta ) # cálculo de la densidad f(x)
+Fk <- pbeta( q = x, shape1 = alpha, shape2 = beta ) # cálculo de probabilidad F(x)
+```
+
+<!------------------------------------------------------------------------------------------------->
 ### Distribución de Pareto generalizada
 
 ::: {.definition #dgpd name="Distribución de Pareto generalizada"}
@@ -412,7 +458,7 @@ M_X( t ) = \exp(\theta \mu) \sum\limits_{j=0}^{+\infty} \frac{\theta^j \sigma^j}
 {\prod\limits_{k=0}^j ( 1 - k \xi )}
 $$
 :::
-```{r l5c11}
+```{r l5c12}
 xi <- 1
 mu <- 2
 sigma <- 1
@@ -456,7 +502,7 @@ f_X( x )
 \right.
 $$
 :::
-```{r l5c12}
+```{r l5c13}
 xi <- -1
 mu <- 2
 sigma <- 1
@@ -523,7 +569,7 @@ $$
 \right.
 $$
 :::
-```{r l5c13}
+```{r l5c14}
 nu <- 3
 x <- 4
 m <- 100
@@ -570,7 +616,7 @@ $$
 \end{eqnarray*}
 $$
 :::
-```{r l5c14}
+```{r l5c15}
 alpha <- 1
 tau <- 1
 theta <- 1
@@ -631,7 +677,7 @@ $$
 \end{eqnarray*}
 $$
 :::
-```{r l5c15}
+```{r l5c16}
 alpha <- 1
 gamma <- 1
 tau <- 1

@@ -1,5 +1,5 @@
 <!------------------------------------------------------------------------------------------------->
-# Probabilidad y Estadística
+# Probabilidad y Estadística {#probabilidad_estadistica}
 
 Antes de introducir algunos conceptos necesarios para nuestro estudio, necesitamos de algunos 
 conceptos de base.
@@ -942,6 +942,18 @@ al \@ref(thm:tlc) se debe considerar otros resultados asociados a desigualdades 
 El siguiente teorema es de gran ayuda para estimar la tasa de convergencia del resultado anterior
 \@ref(thm:tlc).
 
+::: {.theorem #tglican name="Teorema de Glivenko-Cantelli"}
+Consideramos las variables aleatorias $\{X_n\}_{n\in\N}$ i.i.d., con función de distribución acumulada
+$F$. Entonces, la distribución acumula empírica $F_n$ generada a partir de las variables 
+$\{X_n\}_{n\in\N}$, converge en casi todo punto de forma uniforme a la distribución $F$, más 
+precisamente, para la norma de la convergencia uniforme 
+$\left\| F_n - F \right\| = \underset{x \in \R}{\sup} \left| F_n( x ) - F( x ) \right|$ tenemos la
+siguiente igualdad que precisamente expresa la convergencia en casi todo punto.
+$$
+P\left( \underset{n \rightarrow +\infty}{\lim} \left\| F_n - F \right\| = 0 \right) = 1
+$$
+:::
+
 <!------------------------------------------------------------------------------------------------->
 ## Desigualdades de concentración 
 
@@ -984,7 +996,8 @@ F_n( x ) = \frac{1}{n}\sum\limits_{i=1}^n \mathbf{1}_{(-\infty,x]}( X_i )
 $$
 y su aproximación a $F$.
 $$
-P\left( \underset{x \in \R}{\sup} \left| F_n( x ) - F( x ) \right| > \varepsilon \right) 
+P\left( \left\| F_n( x ) - F( x ) \right\|_{\infty} > \varepsilon \right) 
+= P\left( \underset{x \in \R}{\sup} \left| F_n( x ) - F( x ) \right| > \varepsilon \right) 
 \leq 2 e^{-2n \varepsilon^2 }\qquad \forall \varepsilon > 0
 $$
 :::

@@ -1,8 +1,61 @@
-<!------------------------------------------------------------------------------------------------->
-<!-- # Presentación {-} -->
+---
+title: "Matemática Actuarial de los Seguros Generales"
+author: ""
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+documentclass: book
+link-citations: yes
+# github-repo: rstudio/bookdown-demo
+description: ""
+output: 
+  bookdown::gitbook:
+    css: style.css
+    code_folding: show
+    split_bib: FALSE
+    includes:
+      in_header: mathjax_includes.html
+    config:
+      split_by: chapter
+      toc:
+        collapse: section
+      download: ["pdf", "epub"]
+  bookdown::pdf_book:
+#    includes:
+#      in_header: preamble.tex
+    latex_engine: xelatex
+    citation_package: biblatex
+    keep_tex: yes
+bibliography: [bibliografia_libros.bib, bibliografia_paquetes.bib, bibliografia_articulos.bib]
+csl: springer-basic-brackets-no-et-al-alphabetical.csl
+---
 
 <!------------------------------------------------------------------------------------------------->
-# Materia {-}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Fo}{\mathscr{F}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\V}{\mathbb{V}}
+\newcommand{\D}{\partial}
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\arginf}{\operatorname{arginf}}
+\newcommand{\argsup}{\operatorname{argsup}}
+\newcommand{\DFT}{\operatorname{DFT}}
+\newcommand{\VaR}{\operatorname{VaR}}
+\newcommand{\CVaR}{\operatorname{CVaR}}
+\newcommand{\TVaR}{\operatorname{TVaR}}
+\newcommand{\EVaR}{\operatorname{EVaR}}
+\newcommand{\CTE}{\operatorname{CTE}}
+\newcommand{\ES}{\operatorname{ES}}
+\newcommand{\Re}{\operatorname{Re}}
+\newcommand{\Dif}{\operatorname{Dif}}
+\newcommand{\VC}{\operatorname{VC}}
+
+
+<!------------------------------------------------------------------------------------------------->
+# Materia {#materia}
+
 
 Las presentes notas de curso han sido creadas para la materia **Matemática Actuarial de los 
 Seguros Generales** la cual es dictada en la Maestría de Ciencias Actuariales que realizan de forma 
@@ -27,7 +80,6 @@ El profesor a cargo de la materia es el actuario **Leonardo Vélez Aguirre**.
 
 Como docente de apoyo, especialemnte en la parte informática, también colaborará el 
 matemático **Pedro Guarderas**.
-
 
 <!------------------------------------------------------------------------------------------------->
 ## Resultados de aprendizaje {-}
@@ -81,6 +133,7 @@ siniestralidad agregada**
 @MathAssuNV2, 
 https://nonlifemaths.github.io/. 
 
+<!------------------------------------------------------------------------------------------------->
 ### Otras referencias de soporte {-}
 
 De utilidad para quien desee profundizar con más detalle en algunos conceptos
@@ -92,11 +145,13 @@ De utilidad para quien desee profundizar con más detalle en algunos conceptos
 @mathstat1, 
 @mathstat2. 
 
-
 GIL FANA: Elementos de Matemáticas para las Ciencias del Seguro. Fundación Mapfre Estudios. 1991
 
+<!------------------------------------------------------------------------------------------------->
 ## Requerimientos informáticos {-}
 
 1. Lenguaje R
+
 2. Editor de código: RStudio, VScode, ...
+
 3. Paquete R *actuar* @actuar.
