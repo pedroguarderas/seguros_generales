@@ -79,7 +79,15 @@ $P( A \cup B ) = P( A ) + P( B )$
 2. $P( \Omega ) = 1$
 
 3. $P( \emptyset ) = 0$
+:::
+::::
 
+Muchas propiedades en la teoría de probabilidades se cumplen en un sentido más débil, bajo 
+la consideración de la medida de probabilidad $P$ salvo cualquier conjunto de medida nula. Esto se
+debe que a que existen eventos en un experimento que tienen probabilidad nula de presentarse.
+
+:::: {.thmbox data-latex=""}
+::: {.definition #dctp name="Casi en todas partes"}
 Una **propiedad** sobre sobre $\Omega$ viene caracterizada por una función de verificación 
 $V : \Omega \longrightarrow \{0,1\}$ de tal forma, se dice que un evento $A \in \F$ 
 satisface la propiedad dada por $V$ si $V(\omega) = 1$, para todo $\omega \in A$. Entonces decimos 
@@ -180,14 +188,18 @@ $$
 :::
 ::::
 
-Cuando se trata de un variable aleatoria con varias componentes reales $X = ( X_1, \ldots, X_n )$ 
-toma valores en $\R^n$. Se extiende la definición de distribución acumulada por 
-para valores reales $x = ( x_1, \ldots, x_n ) \in \R^n$
+Cuando se trata de un variable aleatoria con varias componentes reales $X = ( X_1, \ldots, X_n )$, 
+o lo que es lo mismo una secuencia finita de varias variables aleatorias a valores reales. Se 
+puede extender la definición de distribución acumulada para la variable $X$, si consideramos valores 
+reales $x = ( x_1, \ldots, x_n ) \in \R^n$, así definimos la forma más general de la distribución
+acumulada a varias variables.
 $$
 F\left( x_1, \ldots, x_n \right) 
 = P\left( X_1 \leq x_1 \land \cdots \land X_n \leq x_n \right)
 = P\left( \bigcap_{i=1}^n X_i^{-1}\left( (-\infty, x_i ] \right) \right)
 $$
+Es decir, $F$ es tan solo la probabilidad de la intersección de los eventos de la forma
+$X_i^{-1}\left( (-\infty, x_i ] \right)$.
 
 <!------------------------------------------------------------------------------------------------->
 :::: {.thmbox data-latex=""}
@@ -199,6 +211,10 @@ S( x ) = 1 - F( x ) = 1 - P( X \leq x ) = P( X > x )
 $$
 :::
 ::::
+
+Hay un caso bastante conocido, el mismo es el más presentado en el curso introductorio de teoría
+de probabilidades, precisamente se hace uso del teorema fundamental del cálculo para poder 
+establecer la siguiente definición.
 
 <!------------------------------------------------------------------------------------------------->
 :::: {.thmbox data-latex=""}
@@ -293,10 +309,13 @@ $X_1, \ldots, X_n$ las cuales muchas de las veces se consideraran que son
 **i.i.d.**. Esta situación si las $X_1, \ldots, X_n$ siguen la misma distribución, su distribución 
 conjunta tiene la siguiente forma:
 $$
+\begin{eqnarray*}
 F( x_1, \ldots, x_n ) 
-= P( X_1 \leq x_1 \land \cdots \land X_n \leq x_n )
-= \prod\limits_{i=1}^n P( X_i \leq x_i )
-= \prod\limits_{i=1}^n F( x_i )
+& = & P( X_1 \leq x_1 \land \cdots \land X_n \leq x_n ), \qquad \text{por definición} \\
+& = & \prod\limits_{i=1}^n P( X_i \leq x_i ),\qquad \text{si las variables $X_i$ son independientes} \\
+& = & \prod\limits_{i=1}^n F_{X_i}( x_i ) \\
+& = & \prod\limits_{i=1}^n F_{X}( x_i ), \qquad \text{si las variables $X_i$ son idénticamente distribuidas}
+\end{eqnarray*}
 $$
 
 <!------------------------------------------------------------------------------------------------->
@@ -511,6 +530,29 @@ $$
 :::
 ::::
 
+Precisamente se conoce a $\varphi_X$ como función característica de una variable aleatoria $X$, 
+debido al siguiente resultado.
+
+:::: {.thmbox data-latex=""}
+::: {.theorem #tdinver name="Inversión"}
+Sea $\varphi$ la función característica de la distribución de probabilidad $F$ de una variable 
+aleatoria $X$. Si $x,y \in \R$ son dos puntos de continuidad de la distribución $F$, entonces:
+$$
+F( y ) - F( x ) = \frac{1}{2\pi} \underset{c \rightarrow +\infty}{\lim} \int\limits_{-c}^c 
+\frac{\exp(-itx) - \exp(-ity)}{it} \varphi( t )\ dt
+$$
+:::
+::::
+
+Con el resultado anterior sabemos que si conocemos de alguna manera la función característica 
+$\varphi_X$ de una variable aleatoria $X$, entonces podemos aproximar su distribución acumulada
+con una evaluación numérica de la integral anterior.
+
+Para el estudio de los variaciones que puede presentar una variable aleatoria $X$ se puede 
+considerar otra medida de tendencia la cual precisamente está enfocada a medir cuanto se aleja de 
+la media una variable aleatoria $X$. Esta medida, en las aplicaciones financieras está fuertemente 
+asociada a lo que se conoce como **volatilidad**.
+
 <!------------------------------------------------------------------------------------------------->
 :::: {.thmbox data-latex=""}
 ::: {.definition #em name="Varianza de una variable aleatoria"}
@@ -547,6 +589,10 @@ $$
 No está por demás notar que $\mathbb{C}[ X, X ] = \V[ X ]$
 :::
 ::::
+
+En más de una ocasión se tendrá la necesidad de agregar variables aleatorias, sumarlas entre si, 
+en este caso se tiene la necesidad de determinar su distribución acumulada en función de las 
+distribuciones acumuladas que se consideraron en la suma.
 
 <!------------------------------------------------------------------------------------------------->
 :::: {.thmbox data-latex=""}
@@ -648,17 +694,6 @@ de probabilidad para $Z$.
 $$
 F_Z( z ) = \mathbf{1}_{[a,+\infty)}( z ) F_X( z )
 $$
-
-:::: {.thmbox data-latex=""}
-::: {.theorem #tdinver name="Inversión"}
-Sea $\varphi$ la función característica de la distribución de probabilidad $F$ de una variable 
-aleatoria $X$. Si $x,y \in \R$ son dos puntos de continuidad de la distribución $F$, then
-$$
-F( y ) - F( x ) = \frac{1}{2\pi} \underset{c \rightarrow +\infty}{\lim} \int\limits_{-c}^c 
-\frac{\exp(-itx) - \exp(-ity)}{it} \varphi( t )\ dt
-$$
-:::
-::::
 
 <!------------------------------------------------------------------------------------------------->
 ## Probabilidad condicional

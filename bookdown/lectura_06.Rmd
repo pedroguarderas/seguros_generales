@@ -599,17 +599,38 @@ reclamos $X_i$ ya que algunos se multiplicaran por $B_i$, la cual solo toma valo
 
 <!------------------------------------------------------------------------------------------------->
 ## Modelos mixtos {#modelos_mixtos}
+
+:::: {.thmbox data-latex=""}
+::: {.definition #dmodmix name="Modelo mixto"}
 En algunos casos en particular se considera un modelo de agregación que es una mixtura entre el
 modelo individual y el modelo colectivo. Se parte de considerar un número $n$ de unidades aseguradas
 donde para cada unidad $i \in \{1, \ldots, n\}$, se considera que puede presentar una cantidad 
-de reclamos dados por una variable aleatoria discreta $N_i$, y así para cada presentar un número
-de reclamos $X_{i,1}, \ldots, X_{i,N_i}$. Así el reclamo total viene dado por la expresión
+de reclamos dados por una variable aleatoria discreta $N_i$, cada uno de las $i$ unidades puede 
+presentar un número de reclamos $X_{i,1}, \ldots, X_{i,N_i}$. De agregar el total de reclamos, 
+se tiene la expresión
 $$
 S 
-= \sum\limits_{i=1}^n X_i
 = \sum\limits_{i=1}^n \sum\limits_{j=1}^{N_i} X_{i,j}
 $$
+:::
+::::
 
+Si en caso todos los reclamos $X_{i,j}$ son idénticamente distribuidos entre unidades aseguradas 
+y reclamos, entonces el reclamos total anterior puede ser visto como un modelo colectivo de pérdida.
+$$
+S 
+= \sum\limits_{j=1}^{N} X_j
+$$
+tomando el conteo de siniestros como la variable aleatoria $N = \sum\limits_{i=1}^n N_i$.
+
+El mismo modelo mixto, también puede ser interpretado como un modelo individual de pérdida, con 
+una suma constante de siniestros.
+$$
+S 
+= \sum\limits_{i=1}^n Y_i
+$$
+
+donde cada variable aleatoria $Y_i = \sum\limits_{j=1}^{N_i} X_{i,j}$.
 
 <!------------------------------------------------------------------------------------------------->
 ## Aplicación del deducible {#deducibles}
@@ -630,8 +651,16 @@ la perspectiva de un asegurado, ¿De qué serviría adquirir una póliza que no 
 siniestros más usuales?, esta no sería una póliza apetecible en el mercado y por otra parte un 
 producto difícil de comercializar.
 
-De forma algo más puntual, un **deducible** es una función $D : \R \longrightarrow \R_+$, tal que 
-para toda variable aleatoria $X$, se satisface la siguiente desigualdad $D( X ) \leq X$.
+:::: {.thmbox data-latex=""}
+::: {.definition #ddeducible name="Deducible"}
+De forma algo más formal, un **deducible** es una función $D : \R \longrightarrow \R$ a valores 
+reales, tal que para todo valore real $x \in \R$, se satisface la siguiente desigualdad 
+$D( x ) \leq x$.
+:::
+::::
+
+A continuación presentamos un lista de funciones deducibles, de algunos de los tipos de deducibles
+más comunes que se presenta en el mercado.
 
 1. Para evitar pérdidas pequeñas se suele configurar la función deducible 
 $$
