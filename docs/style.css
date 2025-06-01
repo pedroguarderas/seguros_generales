@@ -39,7 +39,15 @@
 .ideabox {
   color: white;
   padding: 1em;
-  background: gray;
+  background: #0092ca;
   border-left-style: 10px solid blue;
+  border-radius: 10px;
+}
+
+.thmbox {
+  color: black;
+  padding: 1em;
+  background: #effcee;
+  border-left-style: 10px solid #effcee;
   border-radius: 10px;
 }
