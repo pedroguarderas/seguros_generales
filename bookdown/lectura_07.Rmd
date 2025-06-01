@@ -1,9 +1,19 @@
 <!------------------------------------------------------------------------------------------------->
 # Tarificación {#tarificacion}
 
-Para realizar la tarificación de un producto de seguro, además de estudiar y estimar el 
-comportamiento futuro de los reclamos totales $S$, es necesario también tomar en cuenta el capital 
-$K$ destinado para hacer frente al riesgo subscrito y los costos generales $G$
+Una vez estimado los reclamos totales se trata de establecer una forma optima para estimar el 
+valor que deberá pagar el asegurado, la **prima**, para que la compañia de seguros se haga cargo de
+riesgo. En esto debe incluirse algunas consideraciones adicionales, además de la estimación 
+de la frecuencia y severidad de los reclamos, es también relevante tener en consideración otros 
+valores asociados a diferentes costo, el retorno esperado por el inversionista y finalmente el
+rendimiento de inversiones. Todo lo anterior debe ser conjugado para obtener una adecuada 
+estimación de la prima.
+
+Adicionalmente, se debe tener en cuenta que el riesgo cubierto está sujeto a variaciones propias
+de la aleatoriedad del fenómeno y que puede presentar variaciones significativas respecto de la 
+media, es decir, que la volatilidad del riesgo cubierto puede influenciar significativamente el
+pago total de los reclamos. Ante ello surge un concepto de vital importancia, el cual lo 
+desarrollamos a continuación y se lo conoce como medidas de riesgo.
 
 <!------------------------------------------------------------------------------------------------->
 ## Medidas de riesgo {#medidas_riesgo}
@@ -142,6 +152,26 @@ Claramente la cantidad de simulaciones que se debe realizar para lograr una apro
 $\varepsilon$, se requiere un orden de simulaciones cuadrático inverso a este valor.
 El ejemplo numérico a continuación es aleccionador al respecto de la dificultad numérica de 
 aproximar un cálculo de $VaR_\alpha$.
+
+Entonces los pasos del pseudo-algoritmo de simulación estarán dados por:
+
+1. Fijar el nivel de confianza al que se desea calcular $0 < \alpha < 1$
+
+2. Fijar el nivel probabilidad para los errores de aproximación $\delta > 0$
+
+3. Fijar el nivel erro $\widetilde{\varepsilon} > 0$
+
+4. Estimar el posible error de estimación $\varepsilon > 0$
+
+5. Buscar el número de simulaciones adecuadas $n \in \N$ que aseguren con una probabilidad menor a 
+$\delta$ que se presente errores de aproximación superiores a $\varepsilon$.
+
+6. Generar una muestra de tamaño $n$ de la variable aleatoria, i.e. $X_1, \ldots, X_n$
+
+7. Calcular el percentil de la $\alpha$ de la muestra $\xi_{n,\alpha} = F_n^{-1}( \alpha )$
+
+Esta simulación solo genera una sola estimación del $\VaR_{\alpha}(X)$, se puede repetir algunas
+veces esta algoritmo para tener más valores y sacar la media de estos como estimador.
 ```{r l7c1}
 u <- 7
 s <- 4
@@ -168,26 +198,6 @@ P\left( \left| \xi_{n,\alpha}- \xi_{\alpha} \right| > \varepsilon \right) =
 $$
 Como se observa se tendrá que realizar muchas simulaciones más para llegar a tener en probabilidad
 un error de aproximación adecuado.
-
-Entonces los pasos del pseudo-algoritmo de simulación estarán dados por:
-
-1. Fijar el nivel de confianza al que se desea calcular $0 < \alpha < 1$
-
-2. Fijar el nivel probabilidad para los errores de aproximación $\delta > 0$
-
-3. Fijar el nivel erro $\widetilde{\varepsilon} > 0$
-
-4. Estimar el posible error de estimación $\varepsilon > 0$
-
-5. Buscar el número de simulaciones adecuadas $n \in \N$ que aseguren con una probabilidad menor a 
-$\delta$ que se presente errores de aproximación superiores a $\varepsilon$.
-
-6. Generar una muestra de tamaño $n$ de la variable aleatoria, i.e. $X_1, \ldots, X_n$
-
-7. Calcular el percentil de la $\alpha$ de la muestra $\xi_{n,\alpha} = F_n^{-1}( \alpha )$
-
-Esta simulación solo genera una sola estimación del $\VaR_{\alpha}(X)$, se puede repetir algunas
-veces esta algoritmo para tener más valores y sacar la media de estos como estimador.
 
 ::: {.definition #dTVaR name="Valor en riesgo en la cola"}
 Dada una variable aleatoria a valores reales $X$, el **valor en riesgo en la cola** 
