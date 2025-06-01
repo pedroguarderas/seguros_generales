@@ -1,6 +1,7 @@
 def:defconcep
 def:defevent
 def:probmed
+def:dctp
 def:va
 def:vad
 def:cd
@@ -13,9 +14,9 @@ def:probemp
 def:em
 def:mgf
 def:dfc
+thm:tdinver
 def:defcov
 def:dsum
-thm:tdinver
 def:dprobcond
 def:ddistcond
 def:dexpcond
@@ -70,6 +71,8 @@ exm:l5ex2
 def:dmodcol
 exm:l5ex3
 exm:l5ex4
+def:dmodmix
+def:ddeducible
 exm:l5ex6
 exm:l5ex7
 def:der

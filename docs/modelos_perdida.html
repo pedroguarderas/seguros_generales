@@ -654,7 +654,7 @@ S = \sum\limits_{i=1}^n X_i = \sum\limits_{i=1}^n M \mathbf{1}_{A_i}
 = \sum\limits_{i=1}^n \mathbb{E}\left[ M \mathbf{1}_{A_i} \right]
 = M \sum\limits_{i=1}^n P( A_i )
 \]</span>
-la última igualdad resulta de las propiedades de la función indicatriz <a href="probabilidad_estadistica.html#def:indicatriz">4.10</a>.</p>
+la última igualdad resulta de las propiedades de la función indicatriz <a href="probabilidad_estadistica.html#def:indicatriz">4.11</a>.</p>
 <p>Si en caso todos los <span class="math inline">\(P(A_i) = p\)</span> tienen la misma probabilidad, el valor total esperado de reclamos
 toma la siguiente forma:
 <span class="math display">\[
@@ -927,16 +927,34 @@ reclamos <span class="math inline">\(X_i\)</span> ya que algunos se multiplicara
 </div>
 <div id="modelos_mixtos" class="section level2 hasAnchor" number="6.4">
 <h2><span class="header-section-number">6.4</span> Modelos mixtos<a href="modelos_perdida.html#modelos_mixtos" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>En algunos casos en particular se considera un modelo de agregación que es una mixtura entre el
+<div class="thmbox">
+<div class="definition">
+<p><span id="def:dmodmix" class="definition"><strong>Definición 6.3  (Modelo mixto) </strong></span>En algunos casos en particular se considera un modelo de agregación que es una mixtura entre el
 modelo individual y el modelo colectivo. Se parte de considerar un número <span class="math inline">\(n\)</span> de unidades aseguradas
 donde para cada unidad <span class="math inline">\(i \in \{1, \ldots, n\}\)</span>, se considera que puede presentar una cantidad
-de reclamos dados por una variable aleatoria discreta <span class="math inline">\(N_i\)</span>, y así para cada presentar un número
-de reclamos <span class="math inline">\(X_{i,1}, \ldots, X_{i,N_i}\)</span>. Así el reclamo total viene dado por la expresión
+de reclamos dados por una variable aleatoria discreta <span class="math inline">\(N_i\)</span>, cada uno de las <span class="math inline">\(i\)</span> unidades puede
+presentar un número de reclamos <span class="math inline">\(X_{i,1}, \ldots, X_{i,N_i}\)</span>. De agregar el total de reclamos,
+se tiene la expresión
 <span class="math display">\[
 S
-= \sum\limits_{i=1}^n X_i
 = \sum\limits_{i=1}^n \sum\limits_{j=1}^{N_i} X_{i,j}
 \]</span></p>
+</div>
+</div>
+<p>Si en caso todos los reclamos <span class="math inline">\(X_{i,j}\)</span> son idénticamente distribuidos entre unidades aseguradas
+y reclamos, entonces el reclamos total anterior puede ser visto como un modelo colectivo de pérdida.
+<span class="math display">\[
+S
+= \sum\limits_{j=1}^{N} X_j
+\]</span>
+tomando el conteo de siniestros como la variable aleatoria <span class="math inline">\(N = \sum\limits_{i=1}^n N_i\)</span>.</p>
+<p>El mismo modelo mixto, también puede ser interpretado como un modelo individual de pérdida, con
+una suma constante de siniestros.
+<span class="math display">\[
+S
+= \sum\limits_{i=1}^n Y_i
+\]</span></p>
+<p>donde cada variable aleatoria <span class="math inline">\(Y_i = \sum\limits_{j=1}^{N_i} X_{i,j}\)</span>.</p>
 <!------------------------------------------------------------------------------------------------->
 </div>
 <div id="deducibles" class="section level2 hasAnchor" number="6.5">
@@ -955,8 +973,15 @@ colocar un deducible justo donde se presenta la mayor parte de los valores de re
 la perspectiva de un asegurado, ¿De qué serviría adquirir una póliza que no cubre precisamente los
 siniestros más usuales?, esta no sería una póliza apetecible en el mercado y por otra parte un
 producto difícil de comercializar.</p>
-<p>De forma algo más puntual, un <strong>deducible</strong> es una función <span class="math inline">\(D : \mathbb{R}\longrightarrow \mathbb{R}_+\)</span>, tal que
-para toda variable aleatoria <span class="math inline">\(X\)</span>, se satisface la siguiente desigualdad <span class="math inline">\(D( X ) \leq X\)</span>.</p>
+<div class="thmbox">
+<div class="definition">
+<p><span id="def:ddeducible" class="definition"><strong>Definición 6.4  (Deducible) </strong></span>De forma algo más formal, un <strong>deducible</strong> es una función <span class="math inline">\(D : \mathbb{R}\longrightarrow \mathbb{R}\)</span> a valores
+reales, tal que para todo valore real <span class="math inline">\(x \in \mathbb{R}\)</span>, se satisface la siguiente desigualdad
+<span class="math inline">\(D( x ) \leq x\)</span>.</p>
+</div>
+</div>
+<p>A continuación presentamos un lista de funciones deducibles, de algunos de los tipos de deducibles
+más comunes que se presenta en el mercado.</p>
 <ol style="list-style-type: decimal">
 <li>Para evitar pérdidas pequeñas se suele configurar la función deducible
 <span class="math display">\[
@@ -1698,7 +1723,7 @@ utilizar esta frecuencia para estimar el número de reclamos para pólizas con c
 entonces, es necesario realizar un ajuste acorde.</p>
 <div class="thmbox">
 <div class="definition">
-<p><span id="def:der" class="definition"><strong>Definición 6.3  (Exposición al riesgo) </strong></span>Dando algo más de sentido matemático a este razonamiento, a cada póliza podemos asociar su
+<p><span id="def:der" class="definition"><strong>Definición 6.5  (Exposición al riesgo) </strong></span>Dando algo más de sentido matemático a este razonamiento, a cada póliza podemos asociar su
 respectiva <strong>exposición al riesgo</strong>, que no es más que el ancho de intervalo dado por la fecha
 inicial de la póliza, menos la fecha final de la póliza. Usualmente la unidad que su utiliza para
 medir este intervalo es en años, pero puede cambiársela, siempre y cuando la formulación del modelo
