@@ -302,6 +302,7 @@ $$
 <!------------------------------------------------------------------------------------------------->
 La siguiente función es utilidad para comprender algunos resultados en teoría de probabilidades. 
 También, es bastante útil para realizar de forma más clara y rápida algunos cálculos.
+
 :::: {.thmbox data-latex=""}
 ::: {.definition #indicatriz name="Función indicatriz"}
 La **función indicatriz** de un conjunto $A \subset \Omega$, es la función 
@@ -328,6 +329,7 @@ $F$ de $X$, tiene la siguiente forma particular.
 $$
 F( x ) = P( X \leq x ) = \mathbf{1}_{[a, +\infty)}( x )
 $$
+
 :::: {.thmbox data-latex=""}
 ::: {.proposition #pindconst}
 Las constantes o variables aleatorias constantes son independientes de cualquier otra variable
