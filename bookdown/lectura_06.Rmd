@@ -16,7 +16,7 @@ S = \sum\limits_{i=1}^n X_i
 $$
 El conocer la distribución del costo total $S$ es una tarea crucial para el asegurador.
 
-El valore esperado de de los reclamos totales, puede ser calculado fácilmente utilizando las
+El valor esperado de de los reclamos totales, puede ser calculado fácilmente utilizando las
 propiedades de linealidad de la esperanza matemática $\E$
 $$
 \E[ S ]
@@ -75,7 +75,10 @@ atrás se desarrolló unos nuevos algoritmos para calcular estos términos @aep_
 
 <!------------------------------------------------------------------------------------------------->
 ## Modelo individual {#modelo_individual}
-En el modelo de riesgos individuales consideramos que el número de siniestros que se producirán es
+
+:::: {.thmbox data-latex=""}
+::: {.definition #dmodind name="Modelo individual"}
+En el **modelo individual** de pérdida consideramos que el número de siniestros que se producirán es
 conocido, por ejemplo puede ser a lo sumo el tamaño de la población asegurada, en tal caso la
 variable aleatoria $N$ pasa a ser una constante, que representaremos por $n$. De esta forma, la
 severidad total puede ser fácilmente representada por: 
@@ -85,6 +88,8 @@ $$
 
 La hipótesis más usual que sostiene a este modelo es la indenpendencia entre cada uno de los
 reclamos $X_i$ y $X_j$ son independientes para cualquier $1 \leq i \neq j \leq n$.
+:::
+::::
 
 El valor esperado de la severidad total $S$ es:
 $$
@@ -318,7 +323,9 @@ $$
 <!------------------------------------------------------------------------------------------------->
 ## Modelo colectivo {#modelo_colectivo}
 
-El modelo colectivo de riesgo considera un número de reclamos descritos por una variable aleatoria 
+:::: {.thmbox data-latex=""}
+::: {.definition #dmodcol name="Modelo colectivo"}
+El **modelo colectivo** de riesgo considera un número de reclamos descritos por una variable aleatoria 
 discreta $N$. Los reclamos corresponden a un número de pólizas en un periodo específico, el valor 
 de cada reclamo $i \in \{1,\ldots,N\}$ está representado por las variables aleatorias $X_i$. 
 Usualmente, se considera que cada uno de los reclamos $X_i$ están idénticamente distribuidos.
@@ -333,6 +340,8 @@ S =
 $$
 o de forma más compacta se puede tan definir $S = \sum\limits_{i=1}^N X_i$, donde se asume que la 
 suma da $0$ si el número de elementos en la suma $N = 0$.
+:::
+::::
 
 El valor esperado del total de reclamos $S$, está dado por:
 $$
@@ -601,25 +610,6 @@ S
 = \sum\limits_{i=1}^n \sum\limits_{j=1}^{N_i} X_{i,j}
 $$
 
-<!------------------------------------------------------------------------------------------------->
-## Modelos con variables explicativas {#modelos_variables_explicativas}
-En algunos casos más generales, donde la población presenta heterogeneidad respecto del riesgo al
-cual están expuestos, como también de las dimensiones de sus reclamos, se considera que existen 
-variables aleatorias adicionales $Y_1, \ldots, Y_n$ que determinan el número de reclamos $N$ y 
-el valor de los siniestros $\{X_i\}$. Es decir no hay independencia entre $\{Y_j\}$ y $N$ así 
-como tampoco entre $\{Y_j\}$ y $\{X_i\}$. Es así que un modelo colectivo $S = \sum\limits_{i=1}^N X_i$
-su estudio, estimación y tarificación debe ser realizada de forma condicional respecto de las 
-variables aleatorias explicativas $\{Y_j\}$,
-$$
-\E[ S ] 
-= \E\left[ \E\left[ S \middle| Y_1, \ldots, Y_n \right] \right]
-$$
-de donde es necesario estimar cada una de las esperanzas condicionadas 
-$\E\left[ S \middle| Y_1, \ldots, Y_n \right]$.
-
-En la práctica las variables explicativas $\{ Y_j \}$ suelen ser seleccionadas para caracterizar 
-el perfil de riesgo de cada cliente. Para su selección se suele utilizar algunos criterios de tipo 
-económico, financiero, legal y estadístico.
 
 <!------------------------------------------------------------------------------------------------->
 ## Aplicación del deducible {#deducibles}
@@ -1365,6 +1355,8 @@ entonces la frecuencia del número de reclamos $N$ será bianual. Si por el cont
 utilizar esta frecuencia para estimar el número de reclamos para pólizas con cobertura anual 
 entonces, es necesario realizar un ajuste acorde.
 
+:::: {.thmbox data-latex=""}
+::: {.definition #der name="Exposición al riesgo"}
 Dando algo más de sentido matemático a este razonamiento, a cada póliza podemos asociar su 
 respectiva **exposición al riesgo**, que no es más que el ancho de intervalo dado por la fecha 
 inicial de la póliza, menos la fecha final de la póliza. Usualmente la unidad que su utiliza para 
@@ -1375,7 +1367,10 @@ $i \in \{1, \ldots, n\}$, así la exposición al riesgo $ER_i$ está dada por un
 $$
 ER_i = d( s_i, e_i )
 $$
-por ejemplo, una buena distancia puede ser
+:::
+::::
+
+Por ejemplo, una buena distancia puede ser
 $$
 d( s, e ) = \frac{\# \left\{ \text{días entre $s$ y $e$} \right\}}{365.25}
 $$
@@ -2024,6 +2019,26 @@ prods[ , list( sex, xg, r, ngr, d, M, EN, SDN, EX, SDX, EDX, SDDX, ES, SDS ) ] %
   scroll_box( width = "100%", height = "500px" )
 ```
 :::
+
+<!------------------------------------------------------------------------------------------------->
+## Modelos con variables explicativas {#modelos_variables_explicativas}
+En algunos casos más generales, donde la población presenta heterogeneidad respecto del riesgo al
+cual están expuestos, como también de las dimensiones de sus reclamos, se considera que existen 
+variables aleatorias adicionales $Y_1, \ldots, Y_n$ que determinan el número de reclamos $N$ y 
+el valor de los siniestros $\{X_i\}$. Es decir no hay independencia entre $\{Y_j\}$ y $N$ así 
+como tampoco entre $\{Y_j\}$ y $\{X_i\}$. Es así que un modelo colectivo $S = \sum\limits_{i=1}^N X_i$
+su estudio, estimación y tarificación debe ser realizada de forma condicional respecto de las 
+variables aleatorias explicativas $\{Y_j\}$,
+$$
+\E[ S ] 
+= \E\left[ \E\left[ S \middle| Y_1, \ldots, Y_n \right] \right]
+$$
+de donde es necesario estimar cada una de las esperanzas condicionadas 
+$\E\left[ S \middle| Y_1, \ldots, Y_n \right]$.
+
+En la práctica las variables explicativas $\{ Y_j \}$ suelen ser seleccionadas para caracterizar 
+el perfil de riesgo de cada cliente. Para su selección se suele utilizar algunos criterios de tipo 
+económico, financiero, legal y estadístico.
 
 <!------------------------------------------------------------------------------------------------->
 ## Proceso estocástico de reclamos totales {#proceso_estocastico_reclamos}

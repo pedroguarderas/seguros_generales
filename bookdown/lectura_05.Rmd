@@ -7,6 +7,7 @@
 <!------------------------------------------------------------------------------------------------->
 ### Distribución binomial
 
+:::: {.thmbox data-latex=""}
 ::: {.definition #dbinom name="Distribución binomial"}
 Una variable aleatoria $N$ que toma valores en $\N$ se dice que sigue una distribución 
 o ley de binomial $N \rightsquigarrow Bin( n, p )$, con parámetros $n \in \N$ y 
@@ -18,6 +19,7 @@ $$
 esta distribución discreta se caracteriza por presentar el valor $k \frac{p_k}{p_{k-1}}$ decreciente
 conforme cambia $k \in \N$
 :::
+::::
 ```{r l5c1}
 set.seed(94312)
 n <- 50
@@ -43,7 +45,7 @@ plot( plt )
 
 <!------------------------------------------------------------------------------------------------->
 ### Distribución de Poisson
-
+:::: {.thmbox data-latex=""}
 ::: {.definition #dpois name="Distribución de Poisson"}
 Una variable aleatoria $N$ que toma valores en $\N$ se dice que sigue una distribución 
 o ley de Poisson $N \rightsquigarrow Pois( n, p )$, con parámetro $\lambda \in \R$, si:
@@ -54,6 +56,7 @@ $$
 esta distribución discreta se caracteriza por presentar el valor $k \frac{p_k}{p_{k-1}}$ constante
 conforme cambia $k \in \N$
 :::
+::::
 ```{r l5c2}
 lambda <- 2
 k <- 2
@@ -78,7 +81,7 @@ plot( plt )
 
 <!------------------------------------------------------------------------------------------------->
 ### Distribución binomial negativa
-
+:::: {.thmbox data-latex=""}
 ::: {.definition #dnbinom name="Distribución binomial negativa"}
 Una variable aleatoria $N$ que toma valores en $\N$ se dice que sigue una distribución 
 o ley de  binomial negativa $N \rightsquigarrow NBin( \alpha, p )$, con parámetro $\alpha > 0$ y 
@@ -93,6 +96,7 @@ donde $\Gamma( \alpha ) = \int\limits_0^{+\infty} x^{\alpha - 1} \exp(-x)\ dx$, 
 Esta distribución discreta se caracteriza por presentar el valor $k \frac{p_k}{p_{k-1}}$ creciente
 conforme cambia $k \in \N$
 :::
+::::
 ```{r l5c3}
 alpha <- 2.5
 p <- 0.3
@@ -116,6 +120,7 @@ plt <- ggplot() +
 plot( plt )
 ```
 
+:::: {.thmbox data-latex=""}
 ::: {.definition #dgeo name="Distribución geométrica"}
 Una variable aleatoria $N$ que toma valores en $\N$ se dice que sigue una distribución 
 o ley geométrica $N \rightsquigarrow Geo( p )$, con parámetro $p \in (0,1]$, si:
@@ -124,6 +129,7 @@ P( N = k ) = ( 1 - p )^k p, \qquad
 \forall k \in \N
 $$
 :::
+::::
 ```{r l5c4}
 p <- 0.3
 k <- 2
@@ -145,6 +151,7 @@ El criterio anterior para identificar el tipo de distribución, mediante la obse
 comportamiento de la variable $k \frac{p_k}{p_{k-1}}$, se formaliza precisamente en la definición
 de la familia de Panjer.
 
+:::: {.thmbox data-latex=""}
 ::: {.definition #fampanjer name="Familia de Panjer"}
 Una variable aleatoria discreta $N$, que toma valores enteros positivos $N \in \N$, se dice
 que pertenece a la **familia de Panjer**, si sus probabilidades $p_k = P( N = k )$ para cada 
@@ -153,10 +160,12 @@ $$
 p_k = \left( a + \frac{b}{k} \right)p_{k-1},\qquad \forall k \in \N \setminus \{0\} 
 $$
 :::
+::::
 
 Además tenemos la siguiente proposición que caracteriza a la distribución de las variables 
 aleatorias en la familia de Panjer.
 
+:::: {.thmbox data-latex=""}
 ::: {.proposition #chfampanjer name="Caracterización familia de Panjer"}
 Las únicas leyes de probabilidad que satisfacen la relación de recurrencia anterior son:
 
@@ -176,6 +185,7 @@ $$
 k \frac{p_k}{p_{k-1}} = a( k - m - 1 ) < 0, \quad \text{decreciente en $k$}
 $$
 :::
+::::
 
 Para una demostración detallada de la proposición anterior se puede consultar @MathAssuNV1 o 
 en https://nonlifemaths.github.io/.
@@ -238,6 +248,7 @@ $$
 <!------------------------------------------------------------------------------------------------->
 ### Distribución uniforme
 
+:::: {.thmbox data-latex=""}
 ::: {.definition #dunif name="Distribución uniforme"}
 Una variable aleatoria $X$ a valores reales, sigue una distribución uniforme 
 $X \rightsquigarrow Unif( a, b )$ de parámetros $a, b \in \R$, si su función de distribución
@@ -256,6 +267,7 @@ $$
 \E[X] = \frac{a + b}{2},\qquad \V[X] = \frac{(b - a)^2}{12}
 $$
 :::
+::::
 ```{r l5c6}
 a <- 1
 b <- 2
@@ -268,7 +280,7 @@ Fk <- punif( q = x, min = a, max = b ) # cálculo de probabilidad F(x)
 
 <!------------------------------------------------------------------------------------------------->
 ### Distribución exponencial
-
+:::: {.thmbox data-latex=""}
 ::: {.definition #dexp name="Distribución exponencial"}
 Una variable aleatoria $X$ a valores reales, sigue una distribución exponencial 
 $X \rightsquigarrow Exp( \lambda )$ de parámetros $\lambda > 0$, si su función de distribución
@@ -287,6 +299,7 @@ $$
 \E[X] = \frac{1}{\lambda},\qquad \V[X] = \frac{1}{\lambda^2}
 $$
 :::
+::::
 ```{r l5c7}
 lambda <- 2
 x <- 1.5
@@ -299,6 +312,7 @@ Fk <- pexp( q = x, rate = lambda ) # cálculo de probabilidad F(x)
 <!------------------------------------------------------------------------------------------------->
 ### Distribución gamma
 
+:::: {.thmbox data-latex=""}
 ::: {.definition #dgamma name="Distribución gamma"}
 Una variable aleatoria $X$ a valores reales, sigue una distribución gamma 
 $X \rightsquigarrow Gamma( \alpha, \beta )$ de parámetros $\alpha > 0$, $\beta > 0$, si su 
@@ -324,6 +338,7 @@ $$
 \V[X] = \frac{\alpha}{\beta^2}
 $$
 :::
+::::
 ```{r l5c8}
 alpha <- 2
 beta <- 1
@@ -337,6 +352,7 @@ Fk <- pgamma( q = x, shape = alpha, scale = beta ) # cálculo de probabilidad F(
 <!------------------------------------------------------------------------------------------------->
 ### Distribución normal
 
+:::: {.thmbox data-latex=""}
 ::: {.definition #dnorm name="Distribución normal"}
 Una variable aleatoria $X$ a valores reales, sigue una distribución normal 
 $X \rightsquigarrow N( \mu, \sigma )$ de parámetros $\mu \in \R$, $\sigma > 0$, si su 
@@ -355,6 +371,7 @@ $$
 \E[X] = \mu,\qquad \V[X] = \sigma^2
 $$
 :::
+::::
 ```{r l5c9}
 mu <- 2
 sigma <- 1
@@ -368,6 +385,7 @@ Fk <- pnorm( q = x, mean = mu, sd = sigma ) # cálculo de probabilidad F(x)
 <!------------------------------------------------------------------------------------------------->
 ### Distribución log-normal
 
+:::: {.thmbox data-latex=""}
 ::: {.definition #dlnorm name="Distribución log-normal"}
 Una variable aleatoria $X$ a valores reales, sigue una distribución log-normal 
 $X \rightsquigarrow LN( \mu, \sigma )$ de parámetros $\mu > 0$, $\sigma > 0$, si su 
@@ -385,6 +403,7 @@ $$
 \V[X] = \exp\left( 2 \mu + \sigma^2 \right) \left( \exp( \sigma^2 ) - 1 \right)
 $$
 :::
+::::
 ```{r l5c10}
 mu <- 2
 sigma <- 1
@@ -430,6 +449,7 @@ Fk <- pbeta( q = x, shape1 = alpha, shape2 = beta ) # cálculo de probabilidad F
 <!------------------------------------------------------------------------------------------------->
 ### Distribución de Pareto generalizada
 
+:::: {.thmbox data-latex=""}
 ::: {.definition #dgpd name="Distribución de Pareto generalizada"}
 Una variable aleatoria $X$ a valores reales, sigue una distribución de Pareto generalizada
 $X \rightsquigarrow GPD( \mu, \sigma, \xi )$ de parámetros $\mu \in \R, \sigma > 0, \xi \in \R$, 
@@ -458,6 +478,7 @@ M_X( t ) = \exp(\theta \mu) \sum\limits_{j=0}^{+\infty} \frac{\theta^j \sigma^j}
 {\prod\limits_{k=0}^j ( 1 - k \xi )}
 $$
 :::
+::::
 ```{r l5c12}
 xi <- 1
 mu <- 2
@@ -472,6 +493,7 @@ Fk <- pgpd( q = x, xi = xi, mu = mu, beta = sigma ) # cálculo de probabilidad F
 <!------------------------------------------------------------------------------------------------->
 ### Distribución de valores extremos generalizada
 
+:::: {.thmbox data-latex=""}
 ::: {.definition #dgev  name="Distribución de valores extremos generalizada"}
 Una variable aleatoria $X$ a valores reales, sigue una distribución generalizada de valores extremos
 $X \rightsquigarrow GEV( \mu, \sigma, \xi )$ de parámetros $\mu \in \R, \sigma > 0, \xi \in \R$, 
@@ -502,6 +524,7 @@ f_X( x )
 \right.
 $$
 :::
+::::
 ```{r l5c13}
 xi <- -1
 mu <- 2
@@ -516,6 +539,7 @@ Fk <- pgev( q = x, xi = xi, mu = mu, beta = sigma ) # cálculo de probabilidad F
 <!------------------------------------------------------------------------------------------------->
 ### Distribución t de Student
 
+:::: {.thmbox data-latex=""}
 ::: {.definition #dtst  name="Distribución t de Student"}
 Una variable aleatoria $X$ a valores reales, sigue una distribución t de Student
 $X \rightsquigarrow t( \nu )$ de parámetros $\nu > 0$, 
@@ -569,6 +593,7 @@ $$
 \right.
 $$
 :::
+::::
 ```{r l5c14}
 nu <- 3
 x <- 4
@@ -581,6 +606,7 @@ Fk <- pt( q = x, df = nu ) # cálculo de probabilidad F(x)
 <!------------------------------------------------------------------------------------------------->
 ### Distribución gamma transformada
 
+:::: {.thmbox data-latex=""}
 ::: {.definition #dgammatra  name="Distribución gamma transformada"}
 Una variable aleatoria $X$ a valores reales, sigue una distribución gamma transformada
 $X \rightsquigarrow GT( \alpha, \tau, \theta )$ de parámetros $\alpha > 0, \tau > 0, \theta > 0$, 
@@ -616,6 +642,7 @@ $$
 \end{eqnarray*}
 $$
 :::
+::::
 ```{r l5c15}
 alpha <- 1
 tau <- 1
@@ -646,6 +673,7 @@ En la familia gamma se incluyen las siguientes distribuciones:
 <!------------------------------------------------------------------------------------------------->
 ### Distribución beta transformada
 
+:::: {.thmbox data-latex=""}
 ::: {.definition #dbetra  name="Distribución beta transformada"}
 Una variable aleatoria $X$ a valores reales, sigue una distribución beta transformada
 $X \rightsquigarrow BT( \alpha, \gamma, \tau, \theta )$ de parámetros $\alpha > 0, \gamma > 0, \tau > 0, \theta > 0$, 
@@ -677,6 +705,7 @@ $$
 \end{eqnarray*}
 $$
 :::
+::::
 ```{r l5c16}
 alpha <- 1
 gamma <- 1
@@ -751,6 +780,7 @@ Hay algunas propiedades deseables para una familia de estimadores $\mathcal{E}$,
 
 Para, cada adjuntamos sus respectivas definiciones
 
+:::: {.thmbox data-latex=""}
 ::: {.definition #destconsis  name="Estimadores consistentes"}
 Consideramos una variable aleatoria $X$, cuya medida de probabilidad asociada $P_X$ pertenece a una 
 familia de distribuciones de probabilidad $\{P_\theta\}_{\theta \in \Theta}$, esto quiere decir que
@@ -775,7 +805,9 @@ En otras palabras, la probabilidad de que el límite del estimador $\tau_n( X_1,
 sea igual a $\theta$ es $1$, salvo un conjunto de medida nula para $P_{\theta}$. De ahí resulta 
 la terminología de convergencia casi segura o convergencia en casi todas partes.
 :::
+::::
 
+:::: {.thmbox data-latex=""}
 ::: {.definition #destinsesg  name="Estimadores insesgados"}
 Bajo el mismo contexto de la definición anterior. Decimos que el estimador $\tau_n$ es 
 insesgado si precisamente su esperanza es igual al parámetro a estimar $\theta \in \Theta$.
@@ -785,9 +817,11 @@ $$
 La familia de estimadores $\mathcal{E} = \{ \tau_n \}_n$ será insesgada si para cada $n$ se 
 satisface lo anterior.
 :::
+::::
 
 El siguiente teorema es de importancia para caracterizar una familia de estimadores consistentes.
 
+:::: {.thmbox data-latex=""}
 ::: {.theorem #sufestconsis }
 Una familia de estimadores $\{ \tau_n \}_n$ para la cual se cumplen los siguientes límites
 
@@ -797,7 +831,9 @@ Una familia de estimadores $\{ \tau_n \}_n$ para la cual se cumplen los siguient
 
 Entonces, la familia $\{ \tau_n \}_n$ es consistente como estimadores de $\theta$.
 :::
+::::
 
+:::: {.thmbox data-latex=""}
 ::: {.definition #destinsesg  name="Estimador más eficiente"}
 De igual forma en el contexto anterior. En una familia de estimadores consistentes para estimar
 un parámetro, si entre estos estimadores existe uno para el cual su varianza sea mínima, entonces
@@ -815,23 +851,29 @@ Si además el estimador más eficiente $\xi$ es insesgado se dirá que este es u
 **estimador de varianza mínima insesgado**, o de forma corta **MVUE** por el término en inglés 
 (minimum variance unbiased estimator).
 :::
+::::
 
+:::: {.thmbox data-latex=""}
 ::: {.theorem #thmvueunicity }
 Si en una familia de estimadores $\mathcal{E}$ tenemos dos estimadores MVUE para el mismo parámetro
 $\theta \in \Theta$, entonces estos dos estimadores son iguales en casi todas partes o lo que 
 es lo mismo solo son diferentes en un conjunto de medida nula.
 :::
+::::
 
+:::: {.thmbox data-latex=""}
 ::: {.definition #destsufic  name="Estimador suficiente"}
 Dada una muestra $X_1, \ldots, X_n$ de la variable aleatoria $X$. Un estimador 
 $\tau\left( X_1, \ldots, X_n \right)$ se dice un **estimador suficiente** para el parámetro 
 $\theta \in \Theta$, si la distribución condicionada de la muestra $X_1, \ldots X_n$ dado el 
 estimador $\tau$ es independiente del parámetro $\theta$.
 :::
+::::
 
 El resultado a continuación es una caracterización del criterio de suficiencia, para una demostración
 se puede consultar @stat_theo_infer, @funmathstat.
 
+:::: {.thmbox data-latex=""}
 ::: {.theorem #thfactorsufic name="Teorema de factorización" }
 Un estimador $\tau$ es suficiente para el parámetro $\theta$ si y solo si la densidad conjunta
 de la muestra $X_1, \ldots, X_n$ puede ser expresada en la forma.
@@ -840,8 +882,9 @@ f\left( x_1, \ldots, x_n \right)
 = g\left( \theta, \tau\left( x_1, \ldots, x_n \right) \right) h\left( x_1, \ldots, x_n \right)
 $$
 :::
+::::
 
-
+:::: {.thmbox data-latex=""}
 ::: {.definition #dfamicomp  name="Familia completa"}
 Data un estimador $\tau$ que depende de una muestra aleatoria $X_1, \ldots, X_n$ y una familia de 
 medidas de probabilidad $\{ P_\theta \}_{\theta \in \Theta}$, para cada $\theta \in \Theta$, se 
@@ -863,6 +906,7 @@ $$
 Por extensión si sucede esta implicación, se dice que $\tau$ es un **estimador completo** respecto 
 de la familia $\{ P_\theta \}_{\theta \in \Theta}$.
 :::
+::::
 
 Para ello se ha formulado diferentes aproximaciones, entre las cuales citamos las siguientes:
 
@@ -1121,20 +1165,27 @@ para el parámetro $\theta$ no será la correcta.
 Los estimadores que resulta de la maximización de verosimilitud satisfacen algunas propiedades
 deseables.
 
+:::: {.thmbox data-latex=""}
 ::: {.theorem #mleconsistent}
 Los estimadores por maximización de verosimilitud son consistentes.
 :::
+::::
 
+:::: {.thmbox data-latex=""}
 ::: {.theorem #mleefficient}
 Los estimadores por máximización de verosimilitud, si en caso de existen, estos son eficientes.
 :::
+::::
 
+:::: {.thmbox data-latex=""}
 ::: {.theorem #mlesufficient}
 Si en caso existe un estimador suficiente, este es función del estimador de máxima verosimilitud.
 :::
+::::
 
 Un estimador de máxima verosimilitud no necesariamente es insesgado.
 
+:::: {.thmbox data-latex=""}
 ::: {.theorem #mlenormality}
 Un estimador por maximización de verosimilitud se comporta normalmente de forma asintótica
 alrededor del verdadero parámetro $\theta \in \Theta$. Más claramente, si $\tau_n$ es el estimador
@@ -1148,6 +1199,7 @@ $$
 = \left[ \E\left[ -\frac{\D^2}{\D \theta_i \D \theta_j}\log f( X, \theta )\, \middle|\, \theta \right] \right]_{i,j}
 $$
 :::
+::::
 
 <!------------------------------------------------------------------------------------------------->
 ### Pruebas de hipótesis
