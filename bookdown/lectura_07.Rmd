@@ -478,7 +478,7 @@ F_S\left( \Pi - G - K \right) & \in \left( 1 - \alpha, +\infty \right), \qquad
 \Pi - G - K & \in F_S^{-1}\left( \left( 1 - \alpha, +\infty \right) \right),\qquad
 \text{por propiedades de la inversión de funciones}\\
 \Pi & \geq G + K + F_S^{-1}\left( 1 - \alpha \right), \qquad 
-\text{com $F_S$ es creciente, mínimo se debe satisfacer la desigualdad}
+\text{como $F_S$ es creciente, mínimo se debe satisfacer la desigualdad}
 \end{split}
 $$
 En especial cuando $K = r\left( \rho(S) - \E[S] \right)$, la última desigualdad toma la forma
