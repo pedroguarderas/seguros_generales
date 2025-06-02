@@ -1,12 +1,20 @@
 bookdown::gitbook:
-config:
-  toc:
-download: ["pdf", "epub"]
+  css: style.css
+  code_folding: show
+  split_bib: FALSE
+  includes:
+    in_header: mathjax_includes.html
+  config:
+    split_by: chapter
+    toc:
+      collapse: section
+    download: ["pdf"]
 bookdown::pdf_book:
   includes:
-  in_header: preamble.tex
-latex_engine: xelatex
-citation_package: natbib
-keep_tex: yes
-bookdown::epub_book: default
+    in_header: preamble.tex
+  toc: true
+  toc_depth: 2
+  latex_engine: pdflatex
+  citation_package: biblatex
+  keep_tex: yes
 
