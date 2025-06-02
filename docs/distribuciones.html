@@ -2010,13 +2010,15 @@ el punto <span class="math inline">\(x_i\)</span>. Además, recordamos que toda 
 implica que <span class="math inline">\(F\left( x_i, \theta \right) = F\left( x_i+, \theta \right)\)</span>.</p>
 <p>Para el caso puntual esta es precisamente la expresión de la función de verosimilitud logarítmica,
 la cual podemos utilizar para estimar el mejor parámetro <span class="math inline">\(\theta \in \Theta\)</span> que maximice el valor
-de verosimilitud.
-<span class="math display" id="eq:loglik">\[
+de verosimilitud.</p>
+<div class="thmbox">
+<p><span class="math display" id="eq:loglik">\[
 \ell( \theta ) =
 \sum\limits_{x_i \in \operatorname{Dif}F} \log \left( f(x_i,\theta) \right)
 + \sum\limits_{x_i \notin \operatorname{Dif}F} \log \left( F\left( x_i, \theta \right) - F\left( x_i-, \theta \right) \right)
 \tag{5.1}
 \]</span></p>
+</div>
 <p>En los casos más sencillos de estimación por verosimilitud se suele cumplir una de las siguientes
 hipótesis: todos los puntos <span class="math inline">\(x_i\)</span> sobre los cuales se calcula son puntos de continuidad, o la
 función de distribución acumulada <span class="math inline">\(F\)</span> no tiene puntos singulares, siendo este último caso el más
@@ -2071,8 +2073,10 @@ probabilidades <span class="math inline">\(P( \delta( X ) \neq d )\)</span>, es 
 tener que
 <span class="math display">\[
 P( \delta( X ) \neq d ) \leq P( \eta( X ) \neq d ),\qquad \forall d \in D
-\]</span>
-En muchos casos uno no se interesa en cualquier tipo de test estadístico, sino en un cierto tipo
+\]</span></p>
+<div class="thmbox">
+<div class="definition">
+<p><span id="def:dpowertest" class="definition"><strong>Definición 5.20  (Test más potente) </strong></span>En muchos casos uno no se interesa en cualquier tipo de test estadístico, sino en un cierto tipo
 de pruebas, más interesados en un subconjunto <span class="math inline">\(K \subset \{ \delta : \mathbb{R}^n \longrightarrow D \}\)</span>,
 a este se lo conoce como una <strong>clase</strong>. Así se dice que un test <span class="math inline">\(\delta \in K\)</span> es el
 <strong>test más potente</strong> en la clase <span class="math inline">\(K\)</span> para la hipótesis <span class="math inline">\(d \in D\)</span> si para cualquier otro test
@@ -2080,6 +2084,8 @@ a este se lo conoce como una <strong>clase</strong>. Así se dice que un test <s
 <span class="math display">\[
 P( \delta( X ) \neq d ) \leq P( \eta( X ) \neq d )
 \]</span></p>
+</div>
+</div>
 <p></p>
 <p></p>
 

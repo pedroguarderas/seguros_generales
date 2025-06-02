@@ -66,6 +66,7 @@ thm:mleconsistent
 thm:mleefficient
 thm:mlesufficient
 thm:mlenormality
+def:dpowertest
 def:dmodind
 exm:l5ex1
 exm:l5ex2
