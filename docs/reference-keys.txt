@@ -7,6 +7,7 @@ def:vad
 def:cd
 def:spv
 def:lp
+exm:l3ex1
 def:ind
 def:indicatriz
 prp:pindconst
@@ -21,7 +22,7 @@ def:dprobcond
 def:ddistcond
 def:dexpcond
 def:dexceso
-def:dlawtotvar
+prp:dlawtotvar
 def:defmixdis
 thm:twln
 thm:tlc
@@ -30,10 +31,10 @@ prp:chebdes
 thm:bein
 thm:ddkw
 tab:l4t1
-exm:l3ex1
 thm:dchernoff
 thm:dpaleyzyg
 def:dfouriertrans
+def:dsecuencia
 def:dfouriertransd
 def:deffact
 def:dbinom
@@ -98,6 +99,8 @@ prp:EVaRcohe
 exm:l6ex2
 def:dpruin
 def:dpricing
+tab:l7t1
+tab:l7t2
 def:dfamexp
 def:dglm
 exm:l6ex1

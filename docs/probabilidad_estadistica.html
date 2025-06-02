@@ -23,7 +23,7 @@
 <meta name="author" content="" />
 
 
-<meta name="date" content="2025-06-01" />
+<meta name="date" content="2025-06-02" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -510,8 +510,8 @@ F( x )
 \underset{x \rightarrow -\infty}{\lim} F( x ) = 0\qquad
 \underset{x \rightarrow +\infty}{\lim} F( x ) = 1
 \]</span>
-5. La función <span class="math inline">\(F\)</span> es a variación acotada. Esto quiere decir que existe un real <span class="math inline">\(C &gt; 0\)</span>, para
-cualquier partición <span class="math inline">\(\{x_i\}_{i\in\mathbb{Z}}\)</span>, tal que:</p>
+5. La función <span class="math inline">\(F\)</span> es a variación acotada <span class="citation">[<a href="bibliografia.html#ref-KolmoFunAnalysis">13</a>]</span>. Esto quiere decir que existe un real
+<span class="math inline">\(C &gt; 0\)</span>, para cualquier partición <span class="math inline">\(\{x_i\}_{i\in\mathbb{Z}}\)</span>, tal que:</p>
 <p><span class="math display">\[
 \sum\limits_{i\in\mathbb{Z}} \left| F( x_{i+1} ) - F( x_i ) \right| &lt; C
 \]</span></p>
@@ -560,6 +560,12 @@ F( x )
 definida siempre y cuando la derivada de <span class="math inline">\(F\)</span> esté bien definida.</p>
 </div>
 </div>
+<div class="example">
+<p><span id="exm:l3ex1" class="example"><strong>Ejemplo 4.1  </strong></span>El siguiente ejemplo muestra una forma típica de una distribución acumulada continua. En este caso
+la distribución acumulada de la normal estándar, la cual no admite una forma analítica.
+<span class="math display">\[
+\Phi( x ) = \frac{1}{\sqrt{2\pi}} \int\limits_{-\infty}^x \exp\left( -\frac{u^2}{2} \right)\ du
+\]</span></p>
 <p></p>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r fold-hide"><code class="sourceCode r"><span id="cb16-1"><a href="probabilidad_estadistica.html#cb16-1" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fl">1e3</span></span>
@@ -589,13 +595,14 @@ definida siempre y cuando la derivada de <span class="math inline">\(F\)</span> 
 <span id="cb16-25"><a href="probabilidad_estadistica.html#cb16-25" tabindex="-1"></a>                      <span class="at">limits =</span> ylim, </span>
 <span id="cb16-26"><a href="probabilidad_estadistica.html#cb16-26" tabindex="-1"></a>                      <span class="at">expand =</span> <span class="fu">c</span>( <span class="fl">0.005</span>, <span class="fl">0.005</span> ) ) <span class="sc">+</span></span>
 <span id="cb16-27"><a href="probabilidad_estadistica.html#cb16-27" tabindex="-1"></a>  <span class="fu">xlab</span>( <span class="fu">TeX</span>( <span class="st">&quot;$x$&quot;</span> ) ) <span class="sc">+</span> </span>
-<span id="cb16-28"><a href="probabilidad_estadistica.html#cb16-28" tabindex="-1"></a>  <span class="fu">ylab</span>( <span class="fu">TeX</span>( <span class="st">&quot;$F$&quot;</span> ) ) <span class="sc">+</span> </span>
+<span id="cb16-28"><a href="probabilidad_estadistica.html#cb16-28" tabindex="-1"></a>  <span class="fu">ylab</span>( <span class="fu">TeX</span>( <span class="st">&quot;$</span><span class="sc">\\</span><span class="st">Phi$&quot;</span> ) ) <span class="sc">+</span> </span>
 <span id="cb16-29"><a href="probabilidad_estadistica.html#cb16-29" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
 <span id="cb16-30"><a href="probabilidad_estadistica.html#cb16-30" tabindex="-1"></a>  <span class="fu">theme</span>( <span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span> )</span>
 <span id="cb16-31"><a href="probabilidad_estadistica.html#cb16-31" tabindex="-1"></a><span class="fu">plot</span>( plt )</span></code></pre></div>
 </details>
 <p><img src="seguros_generales_files/figure-html/l4g1-1.png" width="80%" height="450px" style="display: block; margin: auto;" /></p>
 <p></p>
+</div>
 <!------------------------------------------------------------------------------------------------->
 <div class="thmbox">
 <div class="definition">
@@ -658,7 +665,7 @@ También, es bastante útil para realizar de forma más clara y rápida algunos 
 </div>
 <p>Hay un caso atípico que suele ser útil, esto sucede cuando la variable aleatoria
 <span class="math inline">\(X : \Omega \longrightarrow \mathbb{R}\)</span>, es constante, quiere decir que tenemos un <span class="math inline">\(a \in \mathbb{R}\)</span>, tal que
-<span class="math inline">\(X( \omega ) = a\)</span> para todo <span class="math inline">\(\omega \in \mathbb{R}\)</span>. En este caso la distribución de probabilidad acumulada
+<span class="math inline">\(X( \omega ) = a\)</span> para todo <span class="math inline">\(\omega \in \Omega\)</span>. En este caso la distribución de probabilidad acumulada
 <span class="math inline">\(F\)</span> de <span class="math inline">\(X\)</span>, tiene la siguiente forma particular.
 <span class="math display">\[
 F( x ) = P( X \leq x ) = \mathbf{1}_{[a, +\infty)}( x )
@@ -719,18 +726,17 @@ para cualquier evento del espacio muestral <span class="math inline">\(\Omega\)<
 <span class="math display">\[
 P_n( B ) = \frac{1}{n} \sum\limits_{i=1}^n \mathbf{1}_{B}\left( X_i \right)
 \]</span></p>
-</div>
-</div>
-<p>A partir de la medida empírica de probabilidad, podemos extraer la de para la distribución acumulada
-empírica <span class="math inline">\(F_n\)</span>, la cual la hemos definido con anterioridad, para ello consideremos
-<span class="math inline">\(P_n( (-\infty,x])\)</span> para cualquier <span class="math inline">\(x \in \mathbb{R}\)</span>
+<p>A partir de la medida empírica de probabilidad, podemos extraer la de para la
+<strong>distribución acumulada empírica</strong> <span class="math inline">\(F_n\)</span>, para ello consideremos eventos de la forma
+<span class="math inline">\((-\infty,x]\)</span> para cualquier <span class="math inline">\(x \in \mathbb{R}\)</span>.
 <span class="math display">\[
-P_n( (-\infty,x])
+F_n( x ) = P_n( (-\infty,x])
 = \frac{1}{n} \sum\limits_{i=1}^n \mathbf{1}_{(-\infty,x]}\left( X_i \right)
-= F_n( x )
 \]</span></p>
+</div>
+</div>
 <p>Para muchos resultados asociados a la estimación de estadística la variantes empíricas <span class="math inline">\(P_n\)</span> y <span class="math inline">\(F_n\)</span>
-son de utilidad.</p>
+serán de mucha de utilidad.</p>
 <!------------------------------------------------------------------------------------------------->
 <div class="thmbox">
 <div class="definition">
@@ -752,7 +758,7 @@ correspondencia con <span class="math inline">\(\mathbb{N}\)</span>. Entonces, l
 = \int\limits_{\mathbb{R}} x\ dF( x )
 \]</span>
 donde la última integral de tipo Riemann-Stieltjes tiene sentido, ya que <span class="math inline">\(F\)</span> es una función de
-variación acotada.</p>
+variación acotada <span class="citation">[<a href="bibliografia.html#ref-KolmoFunAnalysis">13</a>]</span>.</p>
 <p>Cuando la función de densidad de probabilidad está bien definida es posible expresar y calcular
 la esperanza matemática como la siguiente expresión:
 <span class="math display">\[
@@ -974,16 +980,24 @@ F_Z( z ) = \mathbf{1}_{[a,+\infty)}( z ) F_X( z )
 </div>
 <div id="probabilidad-condicional" class="section level2 hasAnchor" number="4.2">
 <h2><span class="header-section-number">4.2</span> Probabilidad condicional<a href="probabilidad_estadistica.html#probabilidad-condicional" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>En varias situaciones nos interesa estudiar la probabilidad de ciertos eventos dado que otro evento
+<span class="math inline">\(A \in \mathcal{F}\)</span> ya se ha dado. Esto nos permite convertir al evento <span class="math inline">\(A\)</span> en el nuevo espacio muestral y
+todos los experimentos se restringen al mismo.</p>
 <!------------------------------------------------------------------------------------------------->
 <div class="thmbox">
 <div class="definition">
 <p><span id="def:dprobcond" class="definition"><strong>Definición 4.18  (Probabilidad condicional) </strong></span>Para cualquier par de eventos <span class="math inline">\(A, B \in \mathcal{F}\)</span>, la <strong>probabilidad condicional</strong> de <span class="math inline">\(A\)</span> dado
 <span class="math inline">\(B\)</span>, está dada por:
 <span class="math display">\[
-P\left( A \middle| B \right) = \frac{P( A \cap B)}{P(B)}
+P\left( B \middle| A \right) = \frac{P( A \cap B)}{P(A)}
 \]</span></p>
 </div>
 </div>
+<p>La medida condicionada <span class="math inline">\(P( \cdot | A )\)</span> satisface todas las condiciones de una medida de
+probabilidad, y mide sobre los eventos de la forma <span class="math inline">\(A \cap B\)</span>, con <span class="math inline">\(B \in \mathcal{F}\)</span>. Es de notar que
+si <span class="math inline">\(A \cap B = \emptyset\)</span>, <span class="math inline">\(P( B | A ) = 0\)</span>.</p>
+<p>Esta idea de probabilidad condicional se puede extender fácilmente a las funciones de distribución
+acumulada.</p>
 <!------------------------------------------------------------------------------------------------->
 <div class="thmbox">
 <div class="definition">
@@ -1131,7 +1145,7 @@ esperanza condicionada como una variable aleatoria.
 </div>
 <p>Por otra parte, para cualquier evento <span class="math inline">\(A \in \mathcal{F}\)</span>, las distribuciones <span class="math inline">\(F( \cdot ), F( \cdot |  A )\)</span>
 y <span class="math inline">\(F( x | A^c)\)</span> son funciones de variación acotada y por tanto sus integrales de Riemann-Stieltjes
-están bien definidas, de donde resulta la siguiente igualdad.
+están bien definidas <span class="citation">[<a href="bibliografia.html#ref-KolmoFunAnalysis">13</a>]</span>, de donde resulta la siguiente igualdad.
 <span class="math display">\[
 \begin{eqnarray*}
 \mathbb{E}\left[ X \right]
@@ -1175,8 +1189,8 @@ variable aleatoria a valores reales <span class="math inline">\(X\)</span> y un 
 </div>
 <!------------------------------------------------------------------------------------------------->
 <div class="thmbox">
-<div class="definition">
-<p><span id="def:dlawtotvar" class="definition"><strong>Definición 4.22  (Ley de la varianza total) </strong></span>Consideremos dos variables aleatorias <span class="math inline">\(X, Y\)</span>, ambas a valores reales, entonces se satisface la
+<div class="proposition">
+<p><span id="prp:dlawtotvar" class="proposition"><strong>Proposición 4.2  (Ley de la varianza total) </strong></span>Consideremos dos variables aleatorias <span class="math inline">\(X, Y\)</span>, ambas a valores reales, entonces se satisface la
 siguiente igualdad:
 <span class="math display">\[
 \mathbb{V}[ Y ] = \mathbb{E}\left[ \mathbb{V}[ Y| X ] \right] + \mathbb{V}\left[ \mathbb{E}[ Y | X ] \right]
@@ -1200,7 +1214,7 @@ Basta con ordenar los términos y se tiene la igualdad que buscamos.</p>
 <!------------------------------------------------------------------------------------------------->
 <div class="thmbox">
 <div class="definition">
-<p><span id="def:defmixdis" class="definition"><strong>Definición 4.23  (Mixtura de distribuciones) </strong></span>Un caso de especial interés para estudiar algunos problemas actuariales se da cuando se dispone
+<p><span id="def:defmixdis" class="definition"><strong>Definición 4.22  (Mixtura de distribuciones) </strong></span>Un caso de especial interés para estudiar algunos problemas actuariales se da cuando se dispone
 de dos variables aleatorias, <span class="math inline">\(N\)</span> que toma solo valores discretos (numerables) los cuales pueden
 ser finitos como infinitos, por ejemplo: <span class="math inline">\(N\)</span> toma valores en los números naturales <span class="math inline">\(\mathbb{N}\)</span> y
 otra variable aleatoria <span class="math inline">\(X\)</span> que toma valores continuos reales en <span class="math inline">\(\mathbb{R}\)</span>. La distribución conjunta
@@ -1262,6 +1276,10 @@ esto quiere decir que para cualquier <span class="math inline">\(\varepsilon &gt
 \]</span></p>
 </div>
 </div>
+<p>El comportamiento de la suma de variables aleatorias, que posean además los dos primeros momentos
+finitos. Al estandarizar esta suma, la misma tiende a comportarse en el límite, conforme se incluye
+más términos, como una variable aleatoria con distribución normal. En muchos casos este método
+puede proveer una primera aproximación.</p>
 <div class="thmbox">
 <div class="theorem">
 <p><span id="thm:tlc" class="theorem"><strong>Teorema 4.3  (Teorema del límite central) </strong></span>Consideramos las variables aleatorias <span class="math inline">\(X_1,\ldots,X_n\)</span> i.i.d. con media común finita
@@ -1285,8 +1303,8 @@ la variable aleatoria <span class="math inline">\(\frac{S_n - \mathbb{E}[S_n]}{\
 comportamiento de una variable aleatoria normal estándar conforme aumenta <span class="math inline">\(n\)</span>, pero no estamos
 seguros que tamaño debe tomar <span class="math inline">\(n\)</span> para que esto se cumpla con una alta certeza. Para ello adicional
 al <a href="probabilidad_estadistica.html#thm:tlc">4.3</a> se debe considerar otros resultados asociados a desigualdades de concentración.</p>
-<p>El siguiente teorema es de gran ayuda para estimar la tasa de convergencia del resultado anterior
-<a href="probabilidad_estadistica.html#thm:tlc">4.3</a>.</p>
+<p>El siguiente teorema también es gran ayuda y nos asegura la convergencia de la distribución
+acumulada empírica a la distribución acumulada teórica.</p>
 <div class="thmbox">
 <div class="theorem">
 <p><span id="thm:tglican" class="theorem"><strong>Teorema 4.4  (Teorema de Glivenko-Cantelli) </strong></span>Consideramos las variables aleatorias <span class="math inline">\(\{X_n\}_{n\in\mathbb{N}}\)</span> i.i.d., con función de distribución acumulada
@@ -1309,15 +1327,20 @@ concentrados los valores de una distribución de probabilidad, para ello existen
 que caracterizan precisamente ello, estos se conocen como desigualdades de concentración.</p>
 <div class="thmbox">
 <div class="proposition">
-<p><span id="prp:chebdes" class="proposition"><strong>Proposición 4.2  (Desigualdad de Chebyshev (Чебышёв)) </strong></span>Dada una variable aleatoria <span class="math inline">\(X\)</span> con esperanza y varianza finitas <span class="math inline">\(\mathbb{E}[X] &lt;+ \infty\)</span> y
+<p><span id="prp:chebdes" class="proposition"><strong>Proposición 4.3  (Desigualdad de Chebyshev (Чебышёв)) </strong></span>Dada una variable aleatoria <span class="math inline">\(X\)</span> con esperanza y varianza finitas <span class="math inline">\(\mathbb{E}[X] &lt; +\infty\)</span> y
 <span class="math inline">\(\mathbb{V}[X] &lt; +\infty\)</span>, tenemos que se satisface la siguiente desigualdad para cualquier
-<span class="math inline">\(varepsilon &gt; 0\)</span>
+<span class="math inline">\(\varepsilon &gt; 0\)</span>
 <span class="math display">\[
-P\left( \left| X - \mathbb{E}[X] \right| &gt; \varepsilon \right) &lt; \frac{1}{\varepsilon^2}
-\mathbb{V}[ X ]
+P\left( \left| X - \mathbb{E}[X] \right| &gt; \varepsilon \sqrt{\mathbb{V}[ X ]} \right) &lt; \frac{1}{\varepsilon^2}
 \]</span></p>
 </div>
 </div>
+<p>En la práctica la desigualdad de Chebyshev nos asegura que sin importar la variable aleatoria
+a valores reales, si tienen sus dos primeros momentos finitos, la probabilidad que la variable
+aleatoria <span class="math inline">\(X\)</span> se aleje de su esperanza <span class="math inline">\(\mathbb{E}[X]\)</span> en más de <span class="math inline">\(\varepsilon\)</span> veces la desviación
+típica <span class="math inline">\(\sqrt{\mathbb{V}[ X ]}\)</span> viene acotada por el término <span class="math inline">\(\frac{1}{\varepsilon^2}\)</span> que decrece
+cuadráticamente en <span class="math inline">\(\varepsilon\)</span>. Entonces, por más pesada que sea la cola de la distribución
+de la variable aleatoria <span class="math inline">\(X\)</span>, a lo mucho decrecerá cuadráticamente.</p>
 <div class="thmbox">
 <div class="theorem">
 <p><span id="thm:bein" class="theorem"><strong>Teorema 4.5  (Desigualdad de Berry-Esséen) </strong></span>Sean <span class="math inline">\(X_1, \ldots X_n\)</span> variables aleatorias i.i.d., con media y varianza finitas, i.e
@@ -1335,6 +1358,9 @@ acumulada de la ley normal <span class="math inline">\(\Phi\)</span>.
 \]</span></p>
 </div>
 </div>
+<p>El teorema <a href="probabilidad_estadistica.html#thm:tglican">4.4</a> asegura un convergencia, sin embargo no da un estimativo de la
+rapidez de dicha convergencia conforme aumenta el valor <span class="math inline">\(n\)</span>, el siguiente resultado es más claro
+al respecto y proporciona un criterio de convergencia.</p>
 <div class="thmbox">
 <div class="theorem">
 <p><span id="thm:ddkw" class="theorem"><strong>Teorema 4.6  (Desigualdad Dvoretzky–Kiefer–Wolfowitz) </strong></span>Dada una serie de variables aleatorias a valores reales <span class="math inline">\(X_1, \ldots, X_n\)</span>, i.i.d., con
@@ -2648,7 +2674,7 @@ P( X \geq \rho \mathbb{E}[ X ] ) \geq ( 1 - \rho )^2 \frac{\mathbb{E}[ X ]^2}{\m
 <!------------------------------------------------------------------------------------------------->
 <div class="thmbox">
 <div class="definition">
-<p><span id="def:dfouriertrans" class="definition"><strong>Definición 4.24  (Tansformada de Fourier) </strong></span>La <strong>transformada de Fourier</strong> para una función integrable <span class="math inline">\(f : \mathbb{R}^n \longrightarrow \mathbb{R}\)</span>,
+<p><span id="def:dfouriertrans" class="definition"><strong>Definición 4.23  (Tansformada de Fourier) </strong></span>La <strong>transformada de Fourier</strong> para una función integrable <span class="math inline">\(f : \mathbb{R}^n \longrightarrow \mathbb{R}\)</span>,
 está definida como un funcional que toma funciones acotadas y general una función usualmente
 integrable a valores complejos en general. De forma más formal, se puede definir la transformada
 de Fourier como una función
@@ -2684,13 +2710,33 @@ Fourier.
 </ol>
 </div>
 </div>
+<p>Para realizar algunas aproximaciones numéricas, se hace de una discretización de la transformada de
+Fourier, la misma se evalúa sobre un número finito de valores. Para ello necesitas considerar
+secuencias de números finitas.</p>
 <div class="thmbox">
 <div class="definition">
-<p><span id="def:dfouriertransd" class="definition"><strong>Definición 4.25  (Tansformada de Fourier discreta) </strong></span>Dada una secuencia finita de números <span class="math inline">\(x_0, \ldots, x_{N-1}\)</span>, también notada por
-<span class="math inline">\(\{x_k\}_{k \in \{0,\ldots,N-1\}}\)</span> o simplemente <span class="math inline">\(\{x_k\}\)</span> cuando quede entendida su dimensión,
-claramente <span class="math inline">\(\{x_k\}\)</span> puede ser interpretada como un vector en <span class="math inline">\(\mathbb{R}^n\)</span>, indexado desde <span class="math inline">\(0\)</span>.
-Entonces, la <strong>transformada de Fourier discreta</strong> de la secuencia <span class="math inline">\(\{x_k\}\)</span> es la función
-<span class="math inline">\(\operatorname{DFT}: \mathbb{R}^n \longrightarrow \mathbb{R}^n\)</span>, definida por:
+<p><span id="def:dsecuencia" class="definition"><strong>Definición 4.24  (Familia de secuencias finitas) </strong></span>En lo que sigue trabajaremos con <strong>secuencias finitas</strong> a valores reales
+<span class="math inline">\(x = \{x_k\} = (x_0, \ldots, x_{N-1}) \in \mathbb{R}^{N}\)</span>, tan solo iniciamos los índices desde <span class="math inline">\(0\)</span>.
+Toda el álgebra lineal del espacio <span class="math inline">\(\mathbb{R}^N\)</span> se puede utilizar en la secuencias. Además, podemos
+medir la distancia entre una secuencia <span class="math inline">\(x = \{x_k\}\)</span> y otra <span class="math inline">\(y = \{y_k\}\)</span>, ambas de igual dimensión,
+tan solo utilizando la norma cuadrática.
+<span class="math display">\[
+\left\| x - y \right\|_2
+= \left( \sum\limits_{k=0}^{N-1} \left| x_k - y_k \right|^2 \right)^{\frac{1}{2}}
+\]</span>
+Las secuencias se pueden igual considerar a valores complejos en <span class="math inline">\(\mathbb{C}^N\)</span>, tan solo en la definición
+anterior se reemplaza el valor absoluto por la norma compleja de cada coordenada. También hay que
+tomar en cuenta que las secuencias de números reales <span class="math inline">\(\mathbb{R}^N\)</span> pueden ser vistas como un subconjunto
+de <span class="math inline">\(\mathbb{C}^N\)</span>.</p>
+</div>
+</div>
+<p>Con la definición anterior estamos en la capacidad de definir la transformada de Fourier discreta
+que actúa sobre la secuencias de números.</p>
+<div class="thmbox">
+<div class="definition">
+<p><span id="def:dfouriertransd" class="definition"><strong>Definición 4.25  (Tansformada de Fourier discreta) </strong></span>Dada una secuencia finita de números <span class="math inline">\(x = \{x_k\} = (x_0, \ldots, x_{N-1})\)</span>. Entonces, la
+<strong>transformada de Fourier discreta</strong> de la secuencia <span class="math inline">\(\{x_k\}\)</span> es la función
+<span class="math inline">\(\operatorname{DFT}: \mathbb{C}^n \longrightarrow \mathbb{C}^n\)</span>, definida por:
 <span class="math display">\[
 \operatorname{DFT}\left[ \{x_k\} \right]
 = \left\{ \sum\limits_{k=0}^{N-1} x_k \exp\left( -2\pi i \frac{jk}{N} \right) \right\}_j
@@ -2703,12 +2749,6 @@ con <span class="math inline">\(j \in \{0, \ldots, N-1 \}\)</span>.</p>
 \]</span></p>
 </div>
 </div>
-<p>En lo que sigue trabajaremos con series <span class="math inline">\(\{x_k\}\)</span>. Para medir la distancia entre una serie
-<span class="math inline">\(\{x_k\}\)</span> y otra serie <span class="math inline">\(\{y_k\}\)</span>, ambas de igual dimensión; podemos utilizar la norma cuadrática.
-<span class="math display">\[
-\left\| \{x_k\} - \{y_k\} \right\|_2
-= \left( \sum\limits_{k=0}^{N-1} \left( x_k - y_k \right)^2 \right)^{\frac{1}{2}}
-\]</span></p>
 <!------------------------------------------------------------------------------------------------->
 <div id="aproximación-numérica-en-una-dimensión" class="section level3 hasAnchor" number="4.5.1">
 <h3><span class="header-section-number">4.5.1</span> Aproximación numérica en una dimensión<a href="#aproximaci%C3%B3n-num%C3%A9rica-en-una-dimensi%C3%B3n" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -2736,9 +2776,9 @@ puede considerar <span class="math inline">\(\omega_j = \frac{j}{b-a}\)</span>, 
 <span class="math display">\[
 \begin{eqnarray*}
 \mathscr{F}( f )\left( \omega_j \right)
-&amp; = &amp; h \exp\left( -2\pi i \frac{j}{b-a} a \right)
+&amp; \approx &amp; h \exp\left( -2\pi i \frac{j}{b-a} a \right)
 \sum\limits_{k=0}^{N-1} f_k \exp\left( -2\pi i \frac{jk}{N} \right) \\
-\hat{f}_j &amp; = &amp; h \exp\left( -2\pi i \frac{j}{b-a} a \right) \left( \operatorname{DFT}\left[ \{f_k\} \right] \right)_j
+\hat{f}_j &amp; \approx &amp; h \exp\left( -2\pi i \frac{j}{b-a} a \right) \left( \operatorname{DFT}\left[ \{f_k\} \right] \right)_j
 \quad \text{por definición de la $\operatorname{DFT}$}
 \end{eqnarray*}
 \]</span>

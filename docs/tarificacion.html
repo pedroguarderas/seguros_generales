@@ -23,7 +23,7 @@
 <meta name="author" content="" />
 
 
-<meta name="date" content="2025-06-01" />
+<meta name="date" content="2025-06-02" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -969,9 +969,164 @@ i.e. <span class="math inline">\(S_1,\ldots,S_m\)</span> de la distribución <s
 <div id="segmentación" class="section level2 hasAnchor" number="7.4">
 <h2><span class="header-section-number">7.4</span> Segmentación<a href="#segmentaci%C3%B3n" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>En muchas ocasiones es necesario tener en cuenta algunas características asociadas al riesgo
-de asegurado, de tal forma que la prima sea lo más eficiente y adecuado según el riesgo cubierto y
+asegurado, de tal forma que la prima sea lo más eficiente y adecuada según el riesgo cubierto y
 las características del mismo. La idea de segmentar la población es obtener grupos homogéneos
 con riesgos similares.</p>
+<p>Sin segmentación de la población, este el caso más sencillo para la tarificación, el asegurado</p>
+<p></p>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
+<div class="sourceCode" id="cb101"><pre class="sourceCode r fold-hide"><code class="sourceCode r"><span id="cb101-1"><a href="tarificacion.html#cb101-1" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">data.table</span>( <span class="at">nom =</span> <span class="fu">c</span>( <span class="st">&#39;Pago&#39;</span>, <span class="st">&#39;Pago esperado&#39;</span>, <span class="st">&#39;Varianza&#39;</span> ),</span>
+<span id="cb101-2"><a href="tarificacion.html#cb101-2" tabindex="-1"></a>                   <span class="at">cl =</span> <span class="fu">c</span>( <span class="st">&quot;$</span><span class="sc">\\</span><span class="st">E[S]$&quot;</span>, <span class="st">&quot;$</span><span class="sc">\\</span><span class="st">E[S]$&quot;</span>, <span class="st">&quot;$0$&quot;</span> ), </span>
+<span id="cb101-3"><a href="tarificacion.html#cb101-3" tabindex="-1"></a>                   <span class="at">as =</span> <span class="fu">c</span>( <span class="st">&quot;$S - </span><span class="sc">\\</span><span class="st">E[S]$&quot;</span>, <span class="st">&quot;$0$&quot;</span>, <span class="st">&quot;$</span><span class="sc">\\</span><span class="st">V[S]$&quot;</span> ) )</span>
+<span id="cb101-4"><a href="tarificacion.html#cb101-4" tabindex="-1"></a>dat <span class="sc">%&gt;%</span></span>
+<span id="cb101-5"><a href="tarificacion.html#cb101-5" tabindex="-1"></a>  <span class="fu">kable</span>(</span>
+<span id="cb101-6"><a href="tarificacion.html#cb101-6" tabindex="-1"></a>    <span class="at">label =</span> <span class="cn">NA</span>,</span>
+<span id="cb101-7"><a href="tarificacion.html#cb101-7" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">&#39;Transferencia de riesgo sin segmentación&#39;</span>,</span>
+<span id="cb101-8"><a href="tarificacion.html#cb101-8" tabindex="-1"></a>    <span class="at">row.names =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb101-9"><a href="tarificacion.html#cb101-9" tabindex="-1"></a>    <span class="at">col.names =</span> <span class="fu">c</span>( <span class="st">&#39;&#39;</span>, <span class="st">&#39;Asegurado&#39;</span>, <span class="st">&#39;Asegurador&#39;</span> ),</span>
+<span id="cb101-10"><a href="tarificacion.html#cb101-10" tabindex="-1"></a>    <span class="at">align =</span> <span class="st">&#39;lrr&#39;</span>,</span>
+<span id="cb101-11"><a href="tarificacion.html#cb101-11" tabindex="-1"></a>    <span class="at">digits =</span> <span class="fu">c</span>( <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span> ),</span>
+<span id="cb101-12"><a href="tarificacion.html#cb101-12" tabindex="-1"></a>    <span class="at">format.args =</span> <span class="fu">list</span>( <span class="at">big.mark =</span> <span class="st">&#39;,&#39;</span>, <span class="at">decimal.mark =</span> <span class="st">&#39;.&#39;</span>, <span class="at">scientific =</span> <span class="cn">FALSE</span> ),</span>
+<span id="cb101-13"><a href="tarificacion.html#cb101-13" tabindex="-1"></a>    <span class="at">escape =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb101-14"><a href="tarificacion.html#cb101-14" tabindex="-1"></a>    <span class="at">centering =</span> <span class="cn">TRUE</span> ) <span class="sc">%&gt;%</span></span>
+<span id="cb101-15"><a href="tarificacion.html#cb101-15" tabindex="-1"></a>  <span class="fu">kable_classic</span>( <span class="at">font_size =</span> <span class="dv">14</span>, <span class="at">full_width =</span> <span class="cn">FALSE</span>, <span class="at">html_font =</span> <span class="st">&quot;Cambria&quot;</span>, <span class="at">position =</span> <span class="st">&quot;center&quot;</span> ) <span class="sc">%&gt;%</span></span>
+<span id="cb101-16"><a href="tarificacion.html#cb101-16" tabindex="-1"></a>  <span class="fu">scroll_box</span>( <span class="at">width =</span> <span class="st">&quot;100%&quot;</span>, <span class="at">height =</span> <span class="st">&quot;250px&quot;</span> )</span></code></pre></div>
+</details>
+<div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:250px; overflow-x: scroll; width:100%; ">
+<table class=" lightable-classic" style="font-size: 14px; color: black; font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
+<caption style="font-size: initial !important;">
+<span id="tab:l7t1">Tabla 7.1: </span>Transferencia de riesgo sin segmentación
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+Asegurado
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+Asegurador
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Pago
+</td>
+<td style="text-align:right;">
+<span class="math inline">\(\mathbb{E}[S]\)</span>
+</td>
+<td style="text-align:right;">
+<span class="math inline">\(S - \mathbb{E}[S]\)</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Pago esperado
+</td>
+<td style="text-align:right;">
+<span class="math inline">\(\mathbb{E}[S]\)</span>
+</td>
+<td style="text-align:right;">
+<span class="math inline">\(0\)</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Varianza
+</td>
+<td style="text-align:right;">
+<span class="math inline">\(0\)</span>
+</td>
+<td style="text-align:right;">
+<span class="math inline">\(\mathbb{V}[S]\)</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p></p>
+<p>Para el caso cuando se puede caracterizar la severidad total a partir de otra variable explicativa
+<span class="math inline">\(Y\)</span>, condicionando así cada una de las estimaciones según los valores que va tomando la variable
+explicativa. Esto permite estables primas de forma más adecuada según las diferentes características
+del riesgo cubierto.</p>
+<p></p>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r fold-hide"><code class="sourceCode r"><span id="cb102-1"><a href="tarificacion.html#cb102-1" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">data.table</span>( <span class="at">nom =</span> <span class="fu">c</span>( <span class="st">&#39;Pago&#39;</span>, <span class="st">&#39;Pago esperado&#39;</span>, <span class="st">&#39;Varianza&#39;</span> ),</span>
+<span id="cb102-2"><a href="tarificacion.html#cb102-2" tabindex="-1"></a>                   <span class="at">cl =</span> <span class="fu">c</span>( <span class="st">&quot;$</span><span class="sc">\\</span><span class="st">E[S </span><span class="sc">\\</span><span class="st">mid Y]$&quot;</span>, <span class="st">&quot;$</span><span class="sc">\\</span><span class="st">E[S]$&quot;</span>, <span class="st">&quot;$</span><span class="sc">\\</span><span class="st">V[</span><span class="sc">\\</span><span class="st">E[S </span><span class="sc">\\</span><span class="st">mid Y]]$&quot;</span> ), </span>
+<span id="cb102-3"><a href="tarificacion.html#cb102-3" tabindex="-1"></a>                   <span class="at">as =</span> <span class="fu">c</span>( <span class="st">&quot;$S - </span><span class="sc">\\</span><span class="st">E[S </span><span class="sc">\\</span><span class="st">mid Y]$&quot;</span>, <span class="st">&quot;$0$&quot;</span>, <span class="st">&quot;$</span><span class="sc">\\</span><span class="st">V[S-</span><span class="sc">\\</span><span class="st">E[S </span><span class="sc">\\</span><span class="st">mid Y]]$&quot;</span> ) )</span>
+<span id="cb102-4"><a href="tarificacion.html#cb102-4" tabindex="-1"></a>dat <span class="sc">%&gt;%</span></span>
+<span id="cb102-5"><a href="tarificacion.html#cb102-5" tabindex="-1"></a>  <span class="fu">kable</span>(</span>
+<span id="cb102-6"><a href="tarificacion.html#cb102-6" tabindex="-1"></a>    <span class="at">label =</span> <span class="cn">NA</span>,</span>
+<span id="cb102-7"><a href="tarificacion.html#cb102-7" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">&#39;Transferencia de riesgo con segmentación&#39;</span>,</span>
+<span id="cb102-8"><a href="tarificacion.html#cb102-8" tabindex="-1"></a>    <span class="at">row.names =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb102-9"><a href="tarificacion.html#cb102-9" tabindex="-1"></a>    <span class="at">col.names =</span> <span class="fu">c</span>( <span class="st">&#39;&#39;</span>, <span class="st">&#39;Asegurado&#39;</span>, <span class="st">&#39;Asegurador&#39;</span> ),</span>
+<span id="cb102-10"><a href="tarificacion.html#cb102-10" tabindex="-1"></a>    <span class="at">align =</span> <span class="st">&#39;lrr&#39;</span>,</span>
+<span id="cb102-11"><a href="tarificacion.html#cb102-11" tabindex="-1"></a>    <span class="at">digits =</span> <span class="fu">c</span>( <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span> ),</span>
+<span id="cb102-12"><a href="tarificacion.html#cb102-12" tabindex="-1"></a>    <span class="at">format.args =</span> <span class="fu">list</span>( <span class="at">big.mark =</span> <span class="st">&#39;,&#39;</span>, <span class="at">decimal.mark =</span> <span class="st">&#39;.&#39;</span>, <span class="at">scientific =</span> <span class="cn">FALSE</span> ),</span>
+<span id="cb102-13"><a href="tarificacion.html#cb102-13" tabindex="-1"></a>    <span class="at">escape =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb102-14"><a href="tarificacion.html#cb102-14" tabindex="-1"></a>    <span class="at">centering =</span> <span class="cn">TRUE</span> ) <span class="sc">%&gt;%</span></span>
+<span id="cb102-15"><a href="tarificacion.html#cb102-15" tabindex="-1"></a>  <span class="fu">kable_classic</span>( <span class="at">font_size =</span> <span class="dv">14</span>, <span class="at">full_width =</span> <span class="cn">FALSE</span>, <span class="at">html_font =</span> <span class="st">&quot;Cambria&quot;</span>, <span class="at">position =</span> <span class="st">&quot;center&quot;</span> ) <span class="sc">%&gt;%</span></span>
+<span id="cb102-16"><a href="tarificacion.html#cb102-16" tabindex="-1"></a>  <span class="fu">scroll_box</span>( <span class="at">width =</span> <span class="st">&quot;100%&quot;</span>, <span class="at">height =</span> <span class="st">&quot;250px&quot;</span> )</span></code></pre></div>
+</details>
+<div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:250px; overflow-x: scroll; width:100%; ">
+<table class=" lightable-classic" style="font-size: 14px; color: black; font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
+<caption style="font-size: initial !important;">
+<span id="tab:l7t2">Tabla 7.2: </span>Transferencia de riesgo con segmentación
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+Asegurado
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+Asegurador
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Pago
+</td>
+<td style="text-align:right;">
+<span class="math inline">\(\mathbb{E}[S \mid Y]\)</span>
+</td>
+<td style="text-align:right;">
+<span class="math inline">\(S - \mathbb{E}[S \mid Y]\)</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Pago esperado
+</td>
+<td style="text-align:right;">
+<span class="math inline">\(\mathbb{E}[S]\)</span>
+</td>
+<td style="text-align:right;">
+<span class="math inline">\(0\)</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Varianza
+</td>
+<td style="text-align:right;">
+<span class="math inline">\(\mathbb{V}[\mathbb{E}[S \mid Y]]\)</span>
+</td>
+<td style="text-align:right;">
+<span class="math inline">\(\mathbb{V}[S-\mathbb{E}[S \mid Y]]\)</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p></p>
+<p>La varianza <span class="math inline">\(\mathbb{V}[S-\mathbb{E}[S \mid Y]]\)</span> es atribuible a la heterogeneidad del portafolio de asegurados,
+y la misma se atribuye a cada asegurado y más no es absorbida por el asegurador.</p>
 <p></p>
 <p></p>
 
