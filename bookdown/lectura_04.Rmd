@@ -178,8 +178,8 @@ $$
 \underset{x \rightarrow -\infty}{\lim} F( x ) = 0\qquad
 \underset{x \rightarrow +\infty}{\lim} F( x ) = 1
 $$
-  5. La función $F$ es a variación acotada. Esto quiere decir que existe un real $C > 0$, para 
-  cualquier partición $\{x_i\}_{i\in\Z}$, tal que:
+  5. La función $F$ es a variación acotada @KolmoFunAnalysis. Esto quiere decir que existe un real 
+  $C > 0$, para cualquier partición $\{x_i\}_{i\in\Z}$, tal que:
   
 $$
 \sum\limits_{i\in\Z} \left| F( x_{i+1} ) - F( x_i ) \right| < C
@@ -237,6 +237,12 @@ definida siempre y cuando la derivada de $F$ esté bien definida.
 :::
 ::::
 
+::: {.example #l3ex1}
+El siguiente ejemplo muestra una forma típica de una distribución acumulada continua. En este caso
+la distribución acumulada de la normal estándar, la cual no admite una forma analítica.
+$$
+\Phi( x ) = \frac{1}{\sqrt{2\pi}} \int\limits_{-\infty}^x \exp\left( -\frac{u^2}{2} \right)\ du
+$$
 ```{r l4g1, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
 n <- 1e3
 x <- seq( -6, 6, length = n )
@@ -265,11 +271,12 @@ plt <- ggplot( ) +
                       limits = ylim, 
                       expand = c( 0.005, 0.005 ) ) +
   xlab( TeX( "$x$" ) ) + 
-  ylab( TeX( "$F$" ) ) + 
+  ylab( TeX( "$\\Phi$" ) ) + 
   theme_bw() +
   theme( legend.position = "none" )
 plot( plt )
 ```
+:::
 
 <!------------------------------------------------------------------------------------------------->
 :::: {.thmbox data-latex=""}
@@ -343,7 +350,7 @@ Además esta función indicatriz tiene las siguientes propiedades
 
 Hay un caso atípico que suele ser útil, esto sucede cuando la variable aleatoria 
 $X : \Omega \longrightarrow \R$, es constante, quiere decir que tenemos un $a \in \R$, tal que
-$X( \omega ) = a$ para todo $\omega \in \R$. En este caso la distribución de probabilidad acumulada 
+$X( \omega ) = a$ para todo $\omega \in \Omega$. En este caso la distribución de probabilidad acumulada 
 $F$ de $X$, tiene la siguiente forma particular.
 $$
 F( x ) = P( X \leq x ) = \mathbf{1}_{[a, +\infty)}( x )
@@ -411,20 +418,21 @@ para cualquier evento del espacio muestral $\Omega$, $A \subset \Omega$
 $$
 P_n( B ) = \frac{1}{n} \sum\limits_{i=1}^n \mathbf{1}_{B}\left( X_i \right)
 $$
+
+A partir de la medida empírica de probabilidad, podemos extraer la de para la 
+**distribución acumulada empírica** $F_n$, para ello consideremos eventos de la forma
+$(-\infty,x]$ para cualquier $x \in \R$.
+$$
+F_n( x ) = P_n( (-\infty,x])
+= \frac{1}{n} \sum\limits_{i=1}^n \mathbf{1}_{(-\infty,x]}\left( X_i \right) 
+$$
 :::
 ::::
 
-A partir de la medida empírica de probabilidad, podemos extraer la de para la distribución acumulada
-empírica $F_n$, la cual la hemos definido con anterioridad, para ello consideremos 
-$P_n( (-\infty,x])$ para cualquier $x \in \R$
-$$
-P_n( (-\infty,x])
-= \frac{1}{n} \sum\limits_{i=1}^n \mathbf{1}_{(-\infty,x]}\left( X_i \right) 
-= F_n( x )
-$$
+
 
 Para muchos resultados asociados a la estimación de estadística la variantes empíricas $P_n$ y $F_n$
-son de utilidad.
+serán de mucha de utilidad.
 
 <!------------------------------------------------------------------------------------------------->
 :::: {.thmbox data-latex=""}
@@ -448,7 +456,7 @@ $$
 = \int\limits_{\R} x\ dF( x )
 $$
 donde la última integral de tipo Riemann-Stieltjes tiene sentido, ya que $F$ es una función de 
-variación acotada.
+variación acotada @KolmoFunAnalysis.
 
 Cuando la función de densidad de probabilidad está bien definida es posible expresar y calcular 
 la esperanza matemática como la siguiente expresión:
@@ -698,16 +706,27 @@ $$
 <!------------------------------------------------------------------------------------------------->
 ## Probabilidad condicional
 
+En varias situaciones nos interesa estudiar la probabilidad de ciertos eventos dado que otro evento
+$A \in \F$ ya se ha dado. Esto nos permite convertir al evento $A$ en el nuevo espacio muestral y 
+todos los experimentos se restringen al mismo.
+
 <!------------------------------------------------------------------------------------------------->
 :::: {.thmbox data-latex=""}
 ::: {.definition #dprobcond name="Probabilidad condicional"}
 Para cualquier par de eventos $A, B \in \F$, la **probabilidad condicional** de $A$ dado 
 $B$, está dada por:
 $$
-P\left( A \middle| B \right) = \frac{P( A \cap B)}{P(B)}
+P\left( B \middle| A \right) = \frac{P( A \cap B)}{P(A)}
 $$
 :::
 ::::
+
+La medida condicionada $P( \cdot | A )$ satisface todas las condiciones de una medida de 
+probabilidad, y mide sobre los eventos de la forma $A \cap B$, con $B \in \F$. Es de notar que 
+si $A \cap B = \emptyset$, $P( B | A ) = 0$.
+
+Esta idea de probabilidad condicional se puede extender fácilmente a las funciones de distribución
+acumulada.
 
 <!------------------------------------------------------------------------------------------------->
 :::: {.thmbox data-latex=""}
@@ -865,7 +884,7 @@ $$
 
 Por otra parte, para cualquier evento $A \in \F$, las distribuciones $F( \cdot ), F( \cdot |  A )$ 
 y $F( x | A^c)$ son funciones de variación acotada y por tanto sus integrales de Riemann-Stieltjes
-están bien definidas, de donde resulta la siguiente igualdad.
+están bien definidas @KolmoFunAnalysis, de donde resulta la siguiente igualdad.
 $$
 \begin{eqnarray*}
 \E\left[ X \right]
@@ -913,7 +932,7 @@ $$
 
 <!------------------------------------------------------------------------------------------------->
 :::: {.thmbox data-latex=""}
-::: {.definition #dlawtotvar name="Ley de la varianza total"}
+::: {.proposition #dlawtotvar name="Ley de la varianza total"}
 Consideremos dos variables aleatorias $X, Y$, ambas a valores reales, entonces se satisface la 
 siguiente igualdad:
 $$
@@ -1010,6 +1029,11 @@ $$
 :::
 ::::
 
+El comportamiento de la suma de variables aleatorias, que posean además los dos primeros momentos 
+finitos. Al estandarizar esta suma, la misma tiende a comportarse en el límite, conforme se incluye
+más términos, como una variable aleatoria con distribución normal. En muchos casos este método
+puede proveer una primera aproximación.
+
 :::: {.thmbox data-latex=""}
 ::: {.theorem #tlc name="Teorema del límite central"}
 Consideramos las variables aleatorias $X_1,\ldots,X_n$ i.i.d. con media común finita 
@@ -1036,8 +1060,8 @@ comportamiento de una variable aleatoria normal estándar conforme aumenta $n$, 
 seguros que tamaño debe tomar $n$ para que esto se cumpla con una alta certeza. Para ello adicional
 al \@ref(thm:tlc) se debe considerar otros resultados asociados a desigualdades de concentración.
 
-El siguiente teorema es de gran ayuda para estimar la tasa de convergencia del resultado anterior
-\@ref(thm:tlc).
+El siguiente teorema también es gran ayuda y nos asegura la convergencia de la distribución
+acumulada empírica a la distribución acumulada teórica.
 
 :::: {.thmbox data-latex=""}
 ::: {.theorem #tglican name="Teorema de Glivenko-Cantelli"}
@@ -1062,15 +1086,21 @@ que caracterizan precisamente ello, estos se conocen como desigualdades de conce
 
 :::: {.thmbox data-latex=""}
 ::: {.proposition #chebdes name="Desigualdad de Chebyshev (Чебышёв)"}
-Dada una variable aleatoria $X$ con esperanza y varianza finitas $\E[X] <+ \infty$ y 
+Dada una variable aleatoria $X$ con esperanza y varianza finitas $\E[X] < +\infty$ y 
 $\V[X] < +\infty$, tenemos que se satisface la siguiente desigualdad para cualquier 
-$varepsilon > 0$
+$\varepsilon > 0$
 $$
-P\left( \left| X - \E[X] \right| > \varepsilon \right) < \frac{1}{\varepsilon^2}
-\V[ X ]
+P\left( \left| X - \E[X] \right| > \varepsilon \sqrt{\V[ X ]} \right) < \frac{1}{\varepsilon^2}
 $$
 :::
 ::::
+
+En la práctica la desigualdad de Chebyshev nos asegura que sin importar la variable aleatoria 
+a valores reales, si tienen sus dos primeros momentos finitos, la probabilidad que la variable 
+aleatoria $X$ se aleje de su esperanza $\E[X]$ en más de $\varepsilon$ veces la desviación 
+típica $\sqrt{\V[ X ]}$ viene acotada por el término $\frac{1}{\varepsilon^2}$ que decrece 
+cuadráticamente en $\varepsilon$. Entonces, por más pesada que sea la cola de la distribución
+de la variable aleatoria $X$, a lo mucho decrecerá cuadráticamente.
 
 :::: {.thmbox data-latex=""}
 ::: {.theorem #bein name="Desigualdad de Berry-Esséen"}
@@ -1089,6 +1119,10 @@ $$
 $$
 :::
 ::::
+
+El teorema \@ref(thm:tglican) asegura un convergencia, sin embargo no da un estimativo de la 
+rapidez de dicha convergencia conforme aumenta el valor $n$, el siguiente resultado es más claro 
+al respecto y proporciona un criterio de convergencia.
 
 :::: {.thmbox data-latex=""}
 ::: {.theorem #ddkw name="Desigualdad Dvoretzky–Kiefer–Wolfowitz"}
@@ -1282,13 +1316,36 @@ $$
 :::
 ::::
 
+Para realizar algunas aproximaciones numéricas, se hace de una discretización de la transformada de
+Fourier, la misma se evalúa sobre un número finito de valores. Para ello necesitas considerar 
+secuencias de números finitas.
+
+:::: {.thmbox data-latex=""}
+::: {.definition #dsecuencia name="Familia de secuencias finitas"}
+En lo que sigue trabajaremos con **secuencias finitas** a valores reales 
+$x = \{x_k\} = (x_0, \ldots, x_{N-1}) \in \R^{N}$, tan solo iniciamos los índices desde $0$. 
+Toda el álgebra lineal del espacio $\R^N$ se puede utilizar en la secuencias. Además, podemos 
+medir la distancia entre una secuencia $x = \{x_k\}$ y otra $y = \{y_k\}$, ambas de igual dimensión,
+tan solo utilizando la norma cuadrática.
+$$
+\left\| x - y \right\|_2
+= \left( \sum\limits_{k=0}^{N-1} \left| x_k - y_k \right|^2 \right)^{\frac{1}{2}}
+$$
+Las secuencias se pueden igual considerar a valores complejos en $\C^N$, tan solo en la definición
+anterior se reemplaza el valor absoluto por la norma compleja de cada coordenada. También hay que 
+tomar en cuenta que las secuencias de números reales $\R^N$ pueden ser vistas como un subconjunto
+de $\C^N$.
+:::
+::::
+
+Con la definición anterior estamos en la capacidad de definir la transformada de Fourier discreta
+que actúa sobre la secuencias de números.
+
 :::: {.thmbox data-latex=""}
 ::: {.definition #dfouriertransd name="Tansformada de Fourier discreta"}
-Dada una secuencia finita de números $x_0, \ldots, x_{N-1}$, también notada por 
-$\{x_k\}_{k \in \{0,\ldots,N-1\}}$ o simplemente $\{x_k\}$ cuando quede entendida su dimensión,
-claramente $\{x_k\}$ puede ser interpretada como un vector en $\R^n$, indexado desde $0$. 
-Entonces, la **transformada de Fourier discreta** de la secuencia $\{x_k\}$ es la función 
-$\DFT : \R^n \longrightarrow \R^n$, definida por:
+Dada una secuencia finita de números $x = \{x_k\} = (x_0, \ldots, x_{N-1})$. Entonces, la 
+**transformada de Fourier discreta** de la secuencia $\{x_k\}$ es la función 
+$\DFT : \C^n \longrightarrow \C^n$, definida por:
 $$
 \DFT\left[ \{x_k\} \right] 
 = \left\{ \sum\limits_{k=0}^{N-1} x_k \exp\left( -2\pi i \frac{jk}{N} \right) \right\}_j
@@ -1303,12 +1360,7 @@ $$
 :::
 ::::
 
-En lo que sigue trabajaremos con series $\{x_k\}$. Para medir la distancia entre una serie
-$\{x_k\}$ y otra serie $\{y_k\}$, ambas de igual dimensión; podemos utilizar la norma cuadrática.
-$$
-\left\| \{x_k\} - \{y_k\} \right\|_2
-= \left( \sum\limits_{k=0}^{N-1} \left( x_k - y_k \right)^2 \right)^{\frac{1}{2}}
-$$
+
 
 <!------------------------------------------------------------------------------------------------->
 ### Aproximación numérica en una dimensión
@@ -1338,9 +1390,9 @@ puede considerar $\omega_j = \frac{j}{b-a}$, para $j \in \{0,\ldots,N-1\}$
 $$
 \begin{eqnarray*}
 \Fo( f )\left( \omega_j \right) 
-& = & h \exp\left( -2\pi i \frac{j}{b-a} a \right) 
+& \approx & h \exp\left( -2\pi i \frac{j}{b-a} a \right) 
 \sum\limits_{k=0}^{N-1} f_k \exp\left( -2\pi i \frac{jk}{N} \right) \\
-\hat{f}_j & = & h \exp\left( -2\pi i \frac{j}{b-a} a \right) \left( \DFT\left[ \{f_k\} \right] \right)_j
+\hat{f}_j & \approx & h \exp\left( -2\pi i \frac{j}{b-a} a \right) \left( \DFT\left[ \{f_k\} \right] \right)_j
 \quad \text{por definición de la $\DFT$}
 \end{eqnarray*}
 $$
@@ -1539,6 +1591,6 @@ $$
 $$
 algunas veces se considera la parte prospectiva con el signo menos.
 
-```{r l3end, echo = FALSE}
+```{r l4end, echo = FALSE}
 rm( list = ls()[ ls() != 'def.chunk.hook' ] )
 ```

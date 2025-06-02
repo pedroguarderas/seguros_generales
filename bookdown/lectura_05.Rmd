@@ -1227,6 +1227,6 @@ P( \delta( X ) \neq d ) \leq P( \eta( X ) \neq d )
 $$
 
 
-```{r l4end, echo = FALSE}
+```{r l5end, echo = FALSE}
 rm( list = ls()[ ls() != 'def.chunk.hook' ] )
 ```

@@ -2418,7 +2418,7 @@ plt <- ggplot( ) +
 plot( plt )
 ```
 
-```{r l5end, echo = FALSE}
+```{r l6end, echo = FALSE}
 rm( list = ls()[ ls() != 'def.chunk.hook' ] )
 ```
 

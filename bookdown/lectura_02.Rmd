@@ -147,3 +147,6 @@ el paquete `lubridate`. Para trabajar con distribuciones de probabilidad que se 
 modelar valores extremos utilizamos `fExtremes`. Para varias funcionalidades asociadas a la 
 estimación de modelos de pérdida utilizamos `actuar`.
 
+```{r l2end, echo = FALSE}
+rm( list = ls()[ ls() != 'def.chunk.hook' ] )
+```

@@ -107,3 +107,8 @@ reserva $IBNR$, para más detalle se puede consultar @reserv_Wuthrich o @non_lif
 $$
 IBNR
 $$
+
+```{r l9end, echo = FALSE}
+rm( list = ls()[ ls() != 'def.chunk.hook' ] )
+```
+

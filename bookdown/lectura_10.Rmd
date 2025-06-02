@@ -151,3 +151,8 @@ valores serán valores extremos, si $m$ no es lo suficientemente grande puede qu
 extremos simulados sean cero en cantidad y habrá sido inútil el haber realizado una estimación más 
 compleja con  valores extremos, ya que no se la está utilizando en las simulaciones. En tales 
 circunstancias es mucho mejor utilizar algún algoritmo determinista que supere este problema.
+
+```{r l10end, echo = FALSE}
+rm( list = ls()[ ls() != 'def.chunk.hook' ] )
+```
+
