@@ -721,7 +721,7 @@ dat %>%
   scroll_box( width = "100%", height = "250px" )
 ```
 
-La varianza $\V[S-\E[S \mid Y]]$ es atribuible a la heterogeneidad del portafolio de asegurados, 
+La varianza $\V[\E[S \mid Y]]$ es atribuible a la heterogeneidad del portafolio de asegurados, 
 y la misma se asigna a cada asegurado, más no es absorbida por el asegurador.
 
 ```{r l7end, echo = FALSE}
