@@ -1,16 +1,62 @@
 ---
 title: "Matemática Actuarial de los Seguros Generales"
-author: ""
-date: "`r Sys.Date()`"
+author: "Leonardo Vélez and Pedro Guarderas"
+date: "`r format( Sys.time(), '%Y-%m-%d')`"
 site: bookdown::bookdown_site
 documentclass: book
 link-citations: yes
+colorlinks: yes
+graphics: yes
 description: ""
 bibliography: [bibliografia_libros.bib, bibliografia_paquetes.bib, bibliografia_articulos.bib]
 csl: springer-basic-brackets-no-et-al-alphabetical.csl
+cover-image: ""
 ---
 
 <!------------------------------------------------------------------------------------------------->
+```{r l1c1, include = FALSE}
+options( width = 120 )
+
+knitr::opts_chunk$set(
+  size = 'footnotesize', dpi = 100, warning = TRUE, echo = TRUE, cache = TRUE, 
+  class.source = "numberLines lineAnchors")
+
+def.chunk.hook  <- knitr::knit_hooks$get("chunk")
+knitr::knit_hooks$set(chunk = function(x, options) {
+  x <- def.chunk.hook(x, options)
+  ifelse( options$size != "normalsize", paste0("\n \\", options$size,"\n\n", x, "\n\n \\normalsize"), x)
+})
+
+local({
+  hook_output <- knitr::knit_hooks$get('output')
+  knitr::knit_hooks$set(output = function(x, options) {
+    if (!is.null(options$max.height)) options$attr.output <- c(
+      options$attr.output,
+      sprintf('style="max-height: %s;"', options$max.height)
+    )
+    hook_output(x, options)
+  })
+})
+
+library( actuar )
+library( data.table )
+library( fExtremes )
+library( fitdistrplus )
+library( ggplot2 )
+library( googledrive )
+library( kableExtra )
+library( knitr )
+library( latex2exp )
+library( lubridate )
+library( openxlsx )
+library( readxl )
+library( rmarkdown )
+library( shiny )
+library( wesanderson )
+```
+
+<!------------------------------------------------------------------------------------------------->
+```{asis l1c2, echo=!knitr::is_latex_output()}
 \newcommand{\C}{\mathbb{C}}
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\N}{\mathbb{N}}
@@ -29,14 +75,29 @@ csl: springer-basic-brackets-no-et-al-alphabetical.csl
 \newcommand{\EVaR}{\operatorname{EVaR}}
 \newcommand{\CTE}{\operatorname{CTE}}
 \newcommand{\ES}{\operatorname{ES}}
-<!-- \newcommand{\Re}{\operatorname{Re}} -->
+\newcommand{\Re}{\operatorname{Re}}
 \newcommand{\Dif}{\operatorname{Dif}}
 \newcommand{\VC}{\operatorname{VC}}
+```
+  
+```{asis l1c3, echo=knitr::is_latex_output()}
+\mainmatter
+```
 
+```{r l1c4, include=FALSE}
+if ( !knitr::is_latex_output() ){
+  
+  options( knitr.table.format = "html" )
+  
+} else {
+  
+  options( knitr.table.format = "latex" )
+  
+}
+```
 
 <!------------------------------------------------------------------------------------------------->
 # Materia {#materia}
-
 
 Las presentes notas de curso han sido creadas para la materia **Matemática Actuarial de los 
 Seguros Generales** la cual es dictada en la Maestría de Ciencias Actuariales que realizan de forma 
@@ -136,3 +197,7 @@ GIL FANA: Elementos de Matemáticas para las Ciencias del Seguro. Fundación Map
 2. Editor de código: RStudio, VScode, ...
 
 3. Paquete R *actuar* @actuar.
+
+```{r l1end, echo = FALSE}
+rm( list = ls()[ ls() != 'def.chunk.hook' ] )
+```
