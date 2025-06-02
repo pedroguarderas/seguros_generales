@@ -674,11 +674,58 @@ P_TVaR <- mean( S * I ) / mean( I )
 ## Segmentación
 
 En muchas ocasiones es necesario tener en cuenta algunas características asociadas al riesgo 
-de asegurado, de tal forma que la prima sea lo más eficiente y adecuado según el riesgo cubierto y
+asegurado, de tal forma que la prima sea lo más eficiente y adecuada según el riesgo cubierto y
 las características del mismo. La idea de segmentar la población es obtener grupos homogéneos 
 con riesgos similares.
 
+Sin segmentación de la población, este el caso más sencillo para la tarificación, el asegurado
 
-```{r l6end, echo = FALSE}
+```{r l7t1, echo = TRUE, results = 'asis', out.width='100%', class.source = 'fold-hide'}
+dat <- data.table( nom = c( 'Pago', 'Pago esperado', 'Varianza' ),
+                   cl = c( "$\\E[S]$", "$\\E[S]$", "$0$" ), 
+                   as = c( "$S - \\E[S]$", "$0$", "$\\V[S]$" ) )
+dat %>%
+  kable(
+    label = NA,
+    caption = 'Transferencia de riesgo sin segmentación',
+    row.names = FALSE,
+    col.names = c( '', 'Asegurado', 'Asegurador' ),
+    align = 'lrr',
+    digits = c( 0, 0, 0 ),
+    format.args = list( big.mark = ',', decimal.mark = '.', scientific = FALSE ),
+    escape = FALSE,
+    centering = TRUE ) %>%
+  kable_classic( font_size = 14, full_width = FALSE, html_font = "Cambria", position = "center" ) %>%
+  scroll_box( width = "100%", height = "250px" )
+```
+
+Para el caso cuando se puede caracterizar la severidad total a partir de otra variable explicativa 
+$Y$, condicionando así cada una de las estimaciones según los valores que va tomando la variable 
+explicativa. Esto permite estables primas de forma más adecuada según las diferentes características
+del riesgo cubierto.
+
+```{r l7t2, echo = TRUE, results = 'asis', out.width='100%', class.source = 'fold-hide'}
+dat <- data.table( nom = c( 'Pago', 'Pago esperado', 'Varianza' ),
+                   cl = c( "$\\E[S \\mid Y]$", "$\\E[S]$", "$\\V[\\E[S \\mid Y]]$" ), 
+                   as = c( "$S - \\E[S \\mid Y]$", "$0$", "$\\V[S-\\E[S \\mid Y]]$" ) )
+dat %>%
+  kable(
+    label = NA,
+    caption = 'Transferencia de riesgo con segmentación',
+    row.names = FALSE,
+    col.names = c( '', 'Asegurado', 'Asegurador' ),
+    align = 'lrr',
+    digits = c( 0, 0, 0 ),
+    format.args = list( big.mark = ',', decimal.mark = '.', scientific = FALSE ),
+    escape = FALSE,
+    centering = TRUE ) %>%
+  kable_classic( font_size = 14, full_width = FALSE, html_font = "Cambria", position = "center" ) %>%
+  scroll_box( width = "100%", height = "250px" )
+```
+
+La varianza $\V[S-\E[S \mid Y]]$ es atribuible a la heterogeneidad del portafolio de asegurados, 
+y la misma se asigna a cada asegurado, más no es absorbida por el asegurador.
+
+```{r l7end, echo = FALSE}
 rm( list = ls()[ ls() != 'def.chunk.hook' ] )
 ```
