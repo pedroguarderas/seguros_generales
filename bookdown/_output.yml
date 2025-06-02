@@ -8,8 +8,9 @@ bookdown::gitbook:
     split_by: chapter
     toc:
       collapse: section
-    download: ["pdf"]
+    download: [ "pdf" ]
 bookdown::pdf_book:
+  fontsize: 12pt
   includes:
     in_header: preamble.tex
   toc: true
@@ -17,4 +18,6 @@ bookdown::pdf_book:
   latex_engine: pdflatex
   citation_package: biblatex
   keep_tex: yes
-
+  fig_width: 7
+  fig_height: 6
+  fig_caption: true
