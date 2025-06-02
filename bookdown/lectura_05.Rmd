@@ -1147,12 +1147,15 @@ implica que $F\left( x_i, \theta \right) = F\left( x_i+, \theta \right)$.
 Para el caso puntual esta es precisamente la expresión de la función de verosimilitud logarítmica, 
 la cual podemos utilizar para estimar el mejor parámetro $\theta \in \Theta$ que maximice el valor 
 de verosimilitud.
+
+:::: {.thmbox data-latex=""}
 $$
 \ell( \theta ) = 
 \sum\limits_{x_i \in \Dif F} \log \left( f(x_i,\theta) \right) 
 + \sum\limits_{x_i \notin \Dif F} \log \left( F\left( x_i, \theta \right) - F\left( x_i-, \theta \right) \right)
 (\#eq:loglik)
 $$
+::::
 
 En los casos más sencillos de estimación por verosimilitud se suele cumplir una de las siguientes
 hipótesis: todos los puntos $x_i$ sobre los cuales se calcula son puntos de continuidad, o la 
@@ -1217,6 +1220,9 @@ tener que
 $$
 P( \delta( X ) \neq d ) \leq P( \eta( X ) \neq d ),\qquad \forall d \in D
 $$
+
+:::: {.thmbox data-latex=""}
+::: {.definition #dpowertest name="Test más potente"}
 En muchos casos uno no se interesa en cualquier tipo de test estadístico, sino en un cierto tipo 
 de pruebas, más interesados en un subconjunto $K \subset \{ \delta : \R^n \longrightarrow D \}$, 
 a este se lo conoce como una **clase**. Así se dice que un test $\delta \in K$ es el 
@@ -1225,6 +1231,8 @@ $\eta \in K$, se tiene la desigualdad.
 $$
 P( \delta( X ) \neq d ) \leq P( \eta( X ) \neq d )
 $$
+:::
+::::  
 
 
 ```{r l5end, echo = FALSE}
