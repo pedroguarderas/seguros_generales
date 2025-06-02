@@ -457,12 +457,12 @@ i.e. <span class="math inline">\(X^{-1}( A ) \in \mathcal{F}\)</span> esto prec
 <p>De <span class="math inline">\(X\)</span> se puede construir o heredar otra medida a partir de <span class="math inline">\(P\)</span>, esta se representa <span class="math inline">\(P_X\)</span> y tan
 solo mide los eventos que son imagen de <span class="math inline">\(X\)</span>. Es decir para cualquier intervalo <span class="math inline">\(A \in \mathbb{R}\)</span>
 <span class="math display">\[
-\begin{eqnarray*}
+\begin{split}
 P_X( A )
-&amp; = &amp; P( X^{-1}( A ) )\qquad \text{definición de la notación} \\
-&amp; = &amp; P(\{ \omega \in \Omega \mid X( \omega ) \in A \})\qquad \text{definición de imagen recíproca} \\
-&amp; = &amp; \int\limits_{X^{-1}( A )} dP( \omega )\qquad \text{representación en forma integral}
-\end{eqnarray*}
+&amp; = P( X^{-1}( A ) )\qquad \text{definición de la notación} \\
+&amp; = P(\{ \omega \in \Omega \mid X( \omega ) \in A \})\qquad \text{definición de imagen recíproca} \\
+&amp; = \int\limits_{X^{-1}( A )} dP( \omega )\qquad \text{representación en forma integral}
+\end{split}
 \]</span>
 a partir de la medida <span class="math inline">\(P_X\)</span> precisamente se puede determinar algunas funciones que se conocen como
 distribuciones o densidades de probabilidad.</p>
@@ -637,13 +637,13 @@ f_{X,Y}( x, y ) = f_X( x ) f_Y( y )
 <strong>i.i.d.</strong>. Esta situación si las <span class="math inline">\(X_1, \ldots, X_n\)</span> siguen la misma distribución, su distribución
 conjunta tiene la siguiente forma:
 <span class="math display">\[
-\begin{eqnarray*}
+\begin{split}
 F( x_1, \ldots, x_n )
-&amp; = &amp; P( X_1 \leq x_1 \land \cdots \land X_n \leq x_n ), \qquad \text{por definición} \\
-&amp; = &amp; \prod\limits_{i=1}^n P( X_i \leq x_i ),\qquad \text{si las variables $X_i$ son independientes} \\
-&amp; = &amp; \prod\limits_{i=1}^n F_{X_i}( x_i ) \\
-&amp; = &amp; \prod\limits_{i=1}^n F_{X}( x_i ), \qquad \text{si las variables $X_i$ son idénticamente distribuidas}
-\end{eqnarray*}
+&amp; = P( X_1 \leq x_1 \land \cdots \land X_n \leq x_n ), \qquad \text{por definición} \\
+&amp; = \prod\limits_{i=1}^n P( X_i \leq x_i ),\qquad \text{si las variables $X_i$ son independientes} \\
+&amp; = \prod\limits_{i=1}^n F_{X_i}( x_i ) \\
+&amp; = \prod\limits_{i=1}^n F_{X}( x_i ), \qquad \text{si las variables $X_i$ son idénticamente distribuidas}
+\end{split}
 \]</span></p>
 <!------------------------------------------------------------------------------------------------->
 <p>La siguiente función es utilidad para comprender algunos resultados en teoría de probabilidades.
@@ -690,26 +690,26 @@ P( X \in A ) = P\left( X^{-1}(A) \right)
 \]</span></p>
 <p>Ahora consideramos los casos anteriores para la probabilidad conjunta, primero el caso <span class="math inline">\(X \notin A\)</span>
 <span class="math display">\[
-\begin{eqnarray*}
+\begin{split}
 P\left( X \in A \land Y \in B \right)
-&amp; = &amp; P\left( X^{-1}(A) \cap Y^{-1}(B) \right) \\
-&amp; = &amp; P\left( \left\{ \omega \in \Omega \middle| X( \omega ) \in A \right\} \cap
+&amp; = P\left( X^{-1}(A) \cap Y^{-1}(B) \right) \\
+&amp; = P\left( \left\{ \omega \in \Omega \middle| X( \omega ) \in A \right\} \cap
 \left\{ \omega \in \Omega \middle| Y( \omega ) \in B \right\} \right) \\
-&amp; = &amp; P\left( \emptyset \cap \left\{ \omega \in \Omega \middle| Y( \omega ) \in B \right\} \right) \\
-&amp; = &amp; P( \emptyset ) \\
-&amp; = &amp; 0
-\end{eqnarray*}
+&amp; = P\left( \emptyset \cap \left\{ \omega \in \Omega \middle| Y( \omega ) \in B \right\} \right) \\
+&amp; = P( \emptyset ) \\
+&amp; = 0
+\end{split}
 \]</span></p>
 <p>El segundo caso <span class="math inline">\(X \in A\)</span>
 <span class="math display">\[
-\begin{eqnarray*}
+\begin{split}
 P\left( X \in A \land Y \in B \right)
-&amp; = &amp; P\left( X^{-1}(A) \cap Y^{-1}(B) \right) \\
-&amp; = &amp; P\left( \left\{ \omega \in \Omega \middle| X( \omega ) \in A \right\} \cap
+&amp; = P\left( X^{-1}(A) \cap Y^{-1}(B) \right) \\
+&amp; = P\left( \left\{ \omega \in \Omega \middle| X( \omega ) \in A \right\} \cap
 \left\{ \omega \in \Omega \middle| Y( \omega ) \in B \right\} \right) \\
-&amp; = &amp; P\left( \Omega \cap \left\{ \omega \in \Omega \middle| Y( \omega ) \in B \right\} \right) \\
-&amp; = &amp; P( Y \in B )
-\end{eqnarray*}
+&amp; = P\left( \Omega \cap \left\{ \omega \in \Omega \middle| Y( \omega ) \in B \right\} \right) \\
+&amp; = P( Y \in B )
+\end{split}
 \]</span></p>
 <p>Esto quiere decir en conclusión que
 <span class="math display">\[
@@ -811,16 +811,16 @@ M_X( t ) = \mathbb{E}\left[ \exp( t X ) \right]
 </div>
 <p>Si <span class="math inline">\(X_1, \ldots, X_n\)</span> son variables aleatorias y <span class="math inline">\(Y = X_1 + \cdots + X_n\)</span>, entonces
 <span class="math display">\[
-\begin{eqnarray*}
+\begin{split}
 M_Y( t )
-&amp; = &amp; \mathbb{E}\left[ \exp\left( t Y \right) \right] \\
-&amp; = &amp; \mathbb{E}\left[ \exp\left( t \sum\limits_{i=1}^n X_i \right) \right] \\
-&amp; = &amp; \prod\limits_{i=1}^n \mathbb{E}\left[ \exp\left( t X_i \right) \right],\qquad
+&amp; = \mathbb{E}\left[ \exp\left( t Y \right) \right] \\
+&amp; = \mathbb{E}\left[ \exp\left( t \sum\limits_{i=1}^n X_i \right) \right] \\
+&amp; = \prod\limits_{i=1}^n \mathbb{E}\left[ \exp\left( t X_i \right) \right],\qquad
 \text{si las variables $X_i$ son independientes} \\
-&amp; = &amp; \left( \mathbb{E}\left[ \exp\left( t X \right) \right] \right)^n,\qquad
+&amp; = \left( \mathbb{E}\left[ \exp\left( t X \right) \right] \right)^n,\qquad
 \text{si las variables $X_i$ son identicamente distribuidas} \\
-&amp; = &amp; \left( M_X( t ) \right)^n
-\end{eqnarray*}
+&amp; = \left( M_X( t ) \right)^n
+\end{split}
 \]</span></p>
 <!------------------------------------------------------------------------------------------------->
 <div class="thmbox">
@@ -872,13 +872,13 @@ asociada a lo que se conoce como <strong>volatilidad</strong>.</p>
 \]</span></p>
 <p>De forma integral esta se la puede expresar como:
 <span class="math display">\[
-\begin{eqnarray*}
+\begin{split}
 \mathbb{C}[ X, Y ]
-&amp; = &amp; \int\limits_{\mathbb{R}^2} xy\ dP( x, y )
+&amp; = \int\limits_{\mathbb{R}^2} xy\ dP( x, y )
 - \int\limits_{\mathbb{R}^2} x\ dP( x, y )\int\limits_{\mathbb{R}^2} y\ dP( x, y ) \\
-&amp; = &amp; \int\limits_{\mathbb{R}^2} xy f_{X,Y}( x, y )\ dx dy
+&amp; = \int\limits_{\mathbb{R}^2} xy f_{X,Y}( x, y )\ dx dy
 - \int\limits_{\mathbb{R}^2} x f_{X,Y}( x, y )\ dx dy\int\limits_{\mathbb{R}^2} y f_{X,Y}( x, y )\ dx dy
-\end{eqnarray*}
+\end{split}
 \]</span></p>
 <p>No está por demás notar que <span class="math inline">\(\mathbb{C}[ X, X ] = \mathbb{V}[ X ]\)</span></p>
 </div>
@@ -915,16 +915,16 @@ a trabajar con la variable aleatoria dada por el mínimo entre estas variables, 
 De ello surge la necesidad de determinar la distribución de probabilidad acumulada <span class="math inline">\(F_Z\)</span> de <span class="math inline">\(Z\)</span>, a
 partir de las distribuciones de <span class="math inline">\(F_X\)</span> de <span class="math inline">\(X\)</span> y <span class="math inline">\(F_Y\)</span> de <span class="math inline">\(Y\)</span>.
 <span class="math display">\[
-\begin{eqnarray*}
+\begin{split}
 F_Z( z )
-&amp; = &amp; P( Z \leq z ) \\
-&amp; = &amp; 1 - P( Z &gt; z ) \\
-&amp; = &amp; 1 - P( \min(X,Y) &gt; z ) \\
-&amp; = &amp; 1 - P( X &gt; z \land Y &gt; z ) \\
-&amp; = &amp; 1 - P( X &gt; z ) P( Y &gt; z ) \\
-&amp; = &amp; 1 - \left( 1 - F_X( z ) \right) \left( 1 - F_Y( z ) \right) \\
-&amp; = &amp; F_X( z ) + F_Y( z ) - F_X( z ) F_Y( z )
-\end{eqnarray*}
+&amp; = P( Z \leq z ) \\
+&amp; = 1 - P( Z &gt; z ) \\
+&amp; = 1 - P( \min(X,Y) &gt; z ) \\
+&amp; = 1 - P( X &gt; z \land Y &gt; z ) \\
+&amp; = 1 - P( X &gt; z ) P( Y &gt; z ) \\
+&amp; = 1 - \left( 1 - F_X( z ) \right) \left( 1 - F_Y( z ) \right) \\
+&amp; = F_X( z ) + F_Y( z ) - F_X( z ) F_Y( z )
+\end{split}
 \]</span></p>
 <p>En particular cuando <span class="math inline">\(Y = a\)</span> es constante tenemos la siguiente distribución de probabilidad para
 <span class="math inline">\(Z = \min( X, Y ) = \min( X, a )\)</span>
@@ -950,26 +950,26 @@ donde no necesariamente <span class="math inline">\(F_X( a )\)</span> es igual <
 <li><p>el evento puntual <span class="math inline">\(\{Z = a\}\)</span> no tiene necesariamente probabilidad nula, hay un fenómeno de
 concentración de la probabilidad en el punto <span class="math inline">\(a\)</span>.
 <span class="math display">\[
-\begin{eqnarray*}
+\begin{split}
 P( Z = a )
-&amp; = &amp; P\left( \min( X, a ) = a \right) \\
-&amp; = &amp; P\left( X \geq a \right) \\
-&amp; = &amp; 1 - F_X( a )
-\end{eqnarray*}
+&amp; = P\left( \min( X, a ) = a \right) \\
+&amp; = P\left( X \geq a \right) \\
+&amp; = 1 - F_X( a )
+\end{split}
 \]</span></p></li>
 </ol>
 <p>De forma similar nos podemos también interesar a la variable aleatoria que expresa el máximo
 entre otras dos variables, i.e. <span class="math inline">\(Z = \max( X, Y )\)</span>, por un razonamiento similar podemos obtener
 la distribución de probabilidad <span class="math inline">\(F_Z\)</span> de <span class="math inline">\(Z\)</span>.
 <span class="math display">\[
-\begin{eqnarray*}
+\begin{split}
 F_Z( z )
-&amp; = &amp; P( Z \leq z ) \\
-&amp; = &amp; P( \max(X,Y) \leq z ) \\
-&amp; = &amp; P( X \leq z \land Y \leq z ) \\
-&amp; = &amp; P( X \leq z ) P( Y \leq z ) \\
-&amp; = &amp; F_X( z ) F_Y( z )
-\end{eqnarray*}
+&amp; = P( Z \leq z ) \\
+&amp; = P( \max(X,Y) \leq z ) \\
+&amp; = P( X \leq z \land Y \leq z ) \\
+&amp; = P( X \leq z ) P( Y \leq z ) \\
+&amp; = F_X( z ) F_Y( z )
+\end{split}
 \]</span></p>
 <p>De forma análoga el caso cuando <span class="math inline">\(Y = a\)</span> es una constante se reduce a la siguiente distribución
 de probabilidad para <span class="math inline">\(Z\)</span>.
@@ -1018,32 +1018,32 @@ Se satisface algunas propiedades:</p>
 <li>Si <span class="math inline">\(A, B \in \mathcal{F}\)</span> son dos eventos disjuntos, entonces:</li>
 </ol>
 <p><span class="math display">\[
-\begin{eqnarray*}
+\begin{split}
 F\left( x \middle| A \cup B \right)
-&amp; = &amp; P\left( X \leq x \middle| A \right) \\
-&amp; = &amp; \frac{P\left( X \leq x \cap ( A \cup B ) \right)}{P\left( A \cup B \right)} \\
-&amp; = &amp; \frac{P\left( X \leq x \cap A \right) + P\left( X \leq x \cap B \right)}{P\left( A \cup B \right)} \\
-&amp; = &amp; \frac{P\left( X \leq x \cap A \right)P( A )}{P(A)P\left( A \cup B \right)}
+&amp; = P\left( X \leq x \middle| A \right) \\
+&amp; = \frac{P\left( X \leq x \cap ( A \cup B ) \right)}{P\left( A \cup B \right)} \\
+&amp; = \frac{P\left( X \leq x \cap A \right) + P\left( X \leq x \cap B \right)}{P\left( A \cup B \right)} \\
+&amp; = \frac{P\left( X \leq x \cap A \right)P( A )}{P(A)P\left( A \cup B \right)}
 + \frac{P\left( X \leq x \cap B \right)P( B )}{P( B )P\left( A \cup B \right)} \\
-&amp; = &amp; P\left( X \leq x \middle| A \right) \frac{P( A )}{P\left( A \cup B \right)}
+&amp; = P\left( X \leq x \middle| A \right) \frac{P( A )}{P\left( A \cup B \right)}
 + P\left( X \leq x \middle| B \right) \frac{P( B )}{P\left( A \cup B \right)} \\
-&amp; = &amp; P\left( X \leq x \middle| A \right) P\left( A \middle| A \cup B \right)
+&amp; = P\left( X \leq x \middle| A \right) P\left( A \middle| A \cup B \right)
 + P\left( X \leq x \middle| B \right) P\left( B \middle| A \cup B \right) \\
-&amp; = &amp; F\left( x \middle| A \right) P\left( A \middle| A \cup B \right)
+&amp; = F\left( x \middle| A \right) P\left( A \middle| A \cup B \right)
 + F\left( x \middle| B \right) P\left( B \middle| A \cup B \right)
-\end{eqnarray*}
+\end{split}
 \]</span>
 2. La distribución acumulada condicionada con respecto a todo el espacio muestral <span class="math inline">\(\Omega\)</span>, es la
 distribución acumulada.</p>
 <p><span class="math display">\[
-\begin{eqnarray*}
+\begin{split}
 F\left( x \middle| \Omega \right)
-&amp; = &amp; P\left( X \leq x \middle| \Omega \right) \\
-&amp; = &amp; \frac{P\left( X \leq x \cap \Omega \right)}{P(\Omega)} \\
-&amp; = &amp; \frac{P\left( X \leq x \right)}{P(\Omega)} \\
-&amp; = &amp; P\left( X \leq x \right) \\
-&amp; = &amp; F( x )
-\end{eqnarray*}
+&amp; = P\left( X \leq x \middle| \Omega \right) \\
+&amp; = \frac{P\left( X \leq x \cap \Omega \right)}{P(\Omega)} \\
+&amp; = \frac{P\left( X \leq x \right)}{P(\Omega)} \\
+&amp; = P\left( X \leq x \right) \\
+&amp; = F( x )
+\end{split}
 \]</span></p>
 <ol start="3" style="list-style-type: decimal">
 <li><p>Para cualquier <span class="math inline">\(A \in \mathcal{F}\)</span>, el evento <span class="math inline">\(\{ X \leq x \} \cap A \subset A\)</span> y por tanto
@@ -1092,15 +1092,15 @@ F\left( x \middle| A^c \right) &amp; \text{si}\ \mathbf{1}_A( \omega ) = 0
 \]</span>
 de la definición anterior se sigue de forma inmediata la igualdad
 <span class="math display">\[
-\begin{eqnarray*}
+\begin{split}
 \mathbb{E}\left[ F\left( x \middle| \mathbf{1}_A \right) \right]
-&amp; = &amp; F\left( x \middle| A \right) P( A ) + F\left( x \middle| A^c \right) P( A^c ) \\
-&amp; = &amp; \frac{P\left( X \leq x \land A \right)}{P(A)} P( A )
+&amp; = F\left( x \middle| A \right) P( A ) + F\left( x \middle| A^c \right) P( A^c ) \\
+&amp; = \frac{P\left( X \leq x \land A \right)}{P(A)} P( A )
 + \frac{P\left( X \leq x \land A^c \right)}{P(A^c)} P( A^c ) \\
-&amp; = &amp; P\left( X \leq x \land A \right) + P\left( X \leq x \land A^c \right) \\
-&amp; = &amp; P\left( X \leq x \right) \\
-&amp; = &amp; F( x )
-\end{eqnarray*}
+&amp; = P\left( X \leq x \land A \right) + P\left( X \leq x \land A^c \right) \\
+&amp; = P\left( X \leq x \right) \\
+&amp; = F( x )
+\end{split}
 \]</span>
 Las variables aleatorias también generan eventos, ya que son medibles, por tal razón si tomamos
 en cuenta la definición anterior, podemos ciertamente extender la definición anterior de
@@ -1147,13 +1147,13 @@ esperanza condicionada como una variable aleatoria.
 y <span class="math inline">\(F( x | A^c)\)</span> son funciones de variación acotada y por tanto sus integrales de Riemann-Stieltjes
 están bien definidas <span class="citation">[<a href="bibliografia.html#ref-KolmoFunAnalysis">13</a>]</span>, de donde resulta la siguiente igualdad.
 <span class="math display">\[
-\begin{eqnarray*}
+\begin{split}
 \mathbb{E}\left[ X \right]
-&amp; = &amp; \int\limits_{\mathbb{R}} x dF( x ) \\
-&amp; = &amp; \int\limits_{\mathbb{R}} x dF( x | A ) P( A ) + \int\limits_{\mathbb{R}} x dF( x | A^c ) P( A^c ) \\
-&amp; = &amp; \mathbb{E}\left[ X \middle| A \right] P( A ) + \mathbb{E}\left[ X \middle| A^c \right] P( A^c ) \\
-&amp; = &amp; \mathbb{E}\left[ \mathbb{E}\left[ X \middle| \mathbf{1}_A \right] \right]
-\end{eqnarray*}
+&amp; = \int\limits_{\mathbb{R}} x dF( x ) \\
+&amp; = \int\limits_{\mathbb{R}} x dF( x | A ) P( A ) + \int\limits_{\mathbb{R}} x dF( x | A^c ) P( A^c ) \\
+&amp; = \mathbb{E}\left[ X \middle| A \right] P( A ) + \mathbb{E}\left[ X \middle| A^c \right] P( A^c ) \\
+&amp; = \mathbb{E}\left[ \mathbb{E}\left[ X \middle| \mathbf{1}_A \right] \right]
+\end{split}
 \]</span>
 por abuso de notación se suele utilizar la misma notación <span class="math inline">\(\mathbb{E}\left[ X \middle| A \right]\)</span> para
 indicar también la variable aleatoria <span class="math inline">\(\mathbb{E}\left[ X \middle| \mathbf{1}_A \right]\)</span>. Así la siguiente
@@ -1199,15 +1199,15 @@ siguiente igualdad:
 </div>
 <div class="proof">
 <p><span id="unlabeled-div-2" class="proof"><em>Demostración</em>. </span><span class="math display">\[
-\begin{eqnarray*}
+\begin{split}
 \mathbb{E}\left[ \mathbb{V}[ Y| X ] \right]
-&amp; = &amp; \mathbb{E}\left[ \mathbb{E}[ Y^2 | X ] - \mathbb{E}[ Y | X ]^2 \right] \\
-&amp; = &amp; \mathbb{E}\left[ \mathbb{E}[ Y^2 | X ] \right] - \mathbb{E}\left[ \mathbb{E}[ Y | X ]^2 \right] \\
-&amp; = &amp; \mathbb{E}\left[ Y^2 \right] - \mathbb{E}\left[ \mathbb{E}[ Y | X ]^2 \right] + \mathbb{E}\left[ \mathbb{E}[ Y | X ] \right]^2
+&amp; = \mathbb{E}\left[ \mathbb{E}[ Y^2 | X ] - \mathbb{E}[ Y | X ]^2 \right] \\
+&amp; = \mathbb{E}\left[ \mathbb{E}[ Y^2 | X ] \right] - \mathbb{E}\left[ \mathbb{E}[ Y | X ]^2 \right] \\
+&amp; = \mathbb{E}\left[ Y^2 \right] - \mathbb{E}\left[ \mathbb{E}[ Y | X ]^2 \right] + \mathbb{E}\left[ \mathbb{E}[ Y | X ] \right]^2
 - \mathbb{E}\left[ \mathbb{E}[ Y | X ] \right]^2 \\
-&amp; = &amp; \mathbb{E}\left[ Y^2 \right] - \mathbb{V}\left[ \mathbb{E}[ Y | X ] \right] - \mathbb{E}\left[ Y \right]^2 \\
-&amp; = &amp; \mathbb{V}[ Y ] - \mathbb{V}\left[ \mathbb{E}[ Y | X ] \right]
-\end{eqnarray*}
+&amp; = \mathbb{E}\left[ Y^2 \right] - \mathbb{V}\left[ \mathbb{E}[ Y | X ] \right] - \mathbb{E}\left[ Y \right]^2 \\
+&amp; = \mathbb{V}[ Y ] - \mathbb{V}\left[ \mathbb{E}[ Y | X ] \right]
+\end{split}
 \]</span>
 Basta con ordenar los términos y se tiene la igualdad que buscamos.</p>
 </div>
@@ -1220,29 +1220,29 @@ ser finitos como infinitos, por ejemplo: <span class="math inline">\(N\)</span> 
 otra variable aleatoria <span class="math inline">\(X\)</span> que toma valores continuos reales en <span class="math inline">\(\mathbb{R}\)</span>. La distribución conjunta
 puede generarse de la siguiente forma
 <span class="math display">\[
-\begin{eqnarray*}
+\begin{split}
 F( n, x )
-&amp; = &amp; P( N = n \land X \leq x ) \\
-&amp; = &amp; P\left( X \leq x \middle| N = n \right) P( N = n )\qquad \text{propiedades de la probabilidad condicional} \\
-&amp; = &amp; F( x | n ) p_n\qquad \text{simplificando notación} \\
-\end{eqnarray*}
+&amp; = P( N = n \land X \leq x ) \\
+&amp; = P\left( X \leq x \middle| N = n \right) P( N = n )\qquad \text{propiedades de la probabilidad condicional} \\
+&amp; = F( x | n ) p_n\qquad \text{simplificando notación} \\
+\end{split}
 \]</span></p>
 <p><span class="math inline">\(F( x | n )\)</span> es la ley condicionada de <span class="math inline">\(X\)</span> dado que <span class="math inline">\(N = n\)</span> y <span class="math inline">\(p_n = P( N = n )\)</span></p>
 </div>
 </div>
 <p>Además, es de notar que:
 <span class="math display">\[
-\begin{eqnarray*}
+\begin{split}
 F_X( x )
-&amp; = &amp; P( X \leq x ) \\
-&amp; = &amp; P( X \leq x \land N \in \mathbb{N} ) \\
-&amp; = &amp; P\left( X \leq x \land N \in \bigcup_{n \in \mathbb{N}} \{n\} \right) \\
-&amp; = &amp; P\left( \bigcup_{n \in \mathbb{N}} \left\{ X \leq x \land N \in \{n\} \right\} \right) \\
-&amp; = &amp; \sum\limits_{n \in \mathbb{N}} P\left( X \leq x \land N \in \{n\} \right) \\
-&amp; = &amp; \sum\limits_{n \in \mathbb{N}} P\left( X \leq x \land N = n \right) \\
-&amp; = &amp; \sum\limits_{n \in \mathbb{N}} P\left( X \leq x\ \middle|\ N = n \right) P( N = n ) \\
-&amp; = &amp; \sum\limits_{n \in \mathbb{N}} F( x | n ) p_n
-\end{eqnarray*}
+&amp; = P( X \leq x ) \\
+&amp; = P( X \leq x \land N \in \mathbb{N} ) \\
+&amp; = P\left( X \leq x \land N \in \bigcup_{n \in \mathbb{N}} \{n\} \right) \\
+&amp; = P\left( \bigcup_{n \in \mathbb{N}} \left\{ X \leq x \land N \in \{n\} \right\} \right) \\
+&amp; = \sum\limits_{n \in \mathbb{N}} P\left( X \leq x \land N \in \{n\} \right) \\
+&amp; = \sum\limits_{n \in \mathbb{N}} P\left( X \leq x \land N = n \right) \\
+&amp; = \sum\limits_{n \in \mathbb{N}} P\left( X \leq x\ \middle|\ N = n \right) P( N = n ) \\
+&amp; = \sum\limits_{n \in \mathbb{N}} F( x | n ) p_n
+\end{split}
 \]</span>
 la distribución de <span class="math inline">\(F_X\)</span> de <span class="math inline">\(X\)</span> no es más que una mixtura de las distribuciones condicionales de <span class="math inline">\(X\)</span>
 para cada <span class="math inline">\(n \in \mathbb{N}\)</span>.</p>
@@ -1327,7 +1327,7 @@ concentrados los valores de una distribución de probabilidad, para ello existen
 que caracterizan precisamente ello, estos se conocen como desigualdades de concentración.</p>
 <div class="thmbox">
 <div class="proposition">
-<p><span id="prp:chebdes" class="proposition"><strong>Proposición 4.3  (Desigualdad de Chebyshev (Чебышёв)) </strong></span>Dada una variable aleatoria <span class="math inline">\(X\)</span> con esperanza y varianza finitas <span class="math inline">\(\mathbb{E}[X] &lt; +\infty\)</span> y
+<p><span id="prp:chebdes" class="proposition"><strong>Proposición 4.3  (Desigualdad de Chebyshev) </strong></span>Dada una variable aleatoria <span class="math inline">\(X\)</span> con esperanza y varianza finitas <span class="math inline">\(\mathbb{E}[X] &lt; +\infty\)</span> y
 <span class="math inline">\(\mathbb{V}[X] &lt; +\infty\)</span>, tenemos que se satisface la siguiente desigualdad para cualquier
 <span class="math inline">\(\varepsilon &gt; 0\)</span>
 <span class="math display">\[
@@ -1382,11 +1382,13 @@ esto quiere decir que la convergencia es menos que el orden lineal.</p>
 <p>Acorde a la desigualdad <a href="probabilidad_estadistica.html#thm:ddkw">4.6</a>, para tener un probabilidad baja de aproximación
 <span class="math inline">\(\delta &gt; 0\)</span> en un error de discrepancia <span class="math inline">\(\varepsilon &gt;0\)</span>, necesitamos satisfacer la desigualdad.
 <span class="math display">\[
-\begin{eqnarray*}
-2 e^{-2n \varepsilon^2 } &amp; \leq &amp; \delta \\
-2n \varepsilon^2 &amp; \geq &amp; -\ln\left( \frac{\delta}{2} \right) \\
-n &amp; \geq &amp; \left\lceil -\frac{1}{2\varepsilon^2} \ln\left( \frac{\delta}{2} \right) \right\rceil
-\end{eqnarray*}
+\begin{split}
+2 e^{-2n \varepsilon^2 }
+&amp; \leq \delta \\
+2n \varepsilon^2
+&amp; \geq -\ln\left( \frac{\delta}{2} \right) \\
+n &amp; \geq \left\lceil -\frac{1}{2\varepsilon^2} \ln\left( \frac{\delta}{2} \right) \right\rceil
+\end{split}
 \]</span>
 así se observa que para tener una aproximación de orden <span class="math inline">\(\delta\)</span> y con un error de discrepancia
 <span class="math inline">\(\varepsilon\)</span>, se requiere como mínimo realizar un número de simulaciones <span class="math inline">\(n\)</span> de orden
@@ -2759,28 +2761,28 @@ discretización uniforme del intervalo <span class="math inline">\([a,b]\)</span
 una secuencia de valores discretos <span class="math inline">\(x_k = a + k h\)</span>, con <span class="math inline">\(h = \frac{b-a}{N}\)</span> y <span class="math inline">\(k \in \{0, \ldots, N\}\)</span>.
 Así, tenemos la siguiente aproximación a la transformada de Fourier.
 <span class="math display">\[
-\begin{eqnarray*}
+\begin{split}
 \mathscr{F}( f )( \omega )
-&amp; = &amp; \int\limits_{\mathbb{R}} f( x ) \exp( -2\pi i \omega x )\ dx \\
-&amp; \approx &amp; \int\limits_{a}^b f( x ) \exp( -2\pi i \omega x )\ dx
+&amp; = \int\limits_{\mathbb{R}} f( x ) \exp( -2\pi i \omega x )\ dx \\
+&amp; \approx \int\limits_{a}^b f( x ) \exp( -2\pi i \omega x )\ dx
 \quad \text{dominio finito $[ a, b ]$ que concentra la integral} \\
-&amp; \approx &amp; \sum\limits_{k=0}^{N-1} f( x_k ) \exp( -2 \pi i \omega x_k ) h
+&amp; \approx \sum\limits_{k=0}^{N-1} f( x_k ) \exp( -2 \pi i \omega x_k ) h
 \quad \text{discretización de la integral} \\
-&amp; = &amp; h \sum\limits_{k=0}^{N-1} f( x_k ) \exp( -2\pi i \omega ( a + k h ) ) \\
-&amp; = &amp; h \exp( -i 2\pi \omega a ) \sum\limits_{k=0}^{N-1} f( x_k ) \exp\left( -2\pi i \omega k \frac{b - a}{N} \right)
-\end{eqnarray*}
+&amp; = h \sum\limits_{k=0}^{N-1} f( x_k ) \exp( -2\pi i \omega ( a + k h ) ) \\
+&amp; = h \exp( -i 2\pi \omega a ) \sum\limits_{k=0}^{N-1} f( x_k ) \exp\left( -2\pi i \omega k \frac{b - a}{N} \right)
+\end{split}
 \]</span></p>
 <p>donde <span class="math inline">\(\{f_k\}\)</span> es la secuencia finita de números <span class="math inline">\(f_k = f( x_k )\)</span> y <span class="math inline">\(\operatorname{DFT}\)</span> es la transformada de
 Fourier Discreta. La anterior relación es una aproximación para todo <span class="math inline">\(\omega\)</span>. En particular se
 puede considerar <span class="math inline">\(\omega_j = \frac{j}{b-a}\)</span>, para <span class="math inline">\(j \in \{0,\ldots,N-1\}\)</span>
 <span class="math display">\[
-\begin{eqnarray*}
+\begin{split}
 \mathscr{F}( f )\left( \omega_j \right)
-&amp; \approx &amp; h \exp\left( -2\pi i \frac{j}{b-a} a \right)
+&amp; \approx h \exp\left( -2\pi i \frac{j}{b-a} a \right)
 \sum\limits_{k=0}^{N-1} f_k \exp\left( -2\pi i \frac{jk}{N} \right) \\
-\hat{f}_j &amp; \approx &amp; h \exp\left( -2\pi i \frac{j}{b-a} a \right) \left( \operatorname{DFT}\left[ \{f_k\} \right] \right)_j
+\hat{f}_j &amp; \approx h \exp\left( -2\pi i \frac{j}{b-a} a \right) \left( \operatorname{DFT}\left[ \{f_k\} \right] \right)_j
 \quad \text{por definición de la $\operatorname{DFT}$}
-\end{eqnarray*}
+\end{split}
 \]</span>
 entonces, lo anterior implica que podemos recuperar los valores aproximados a <span class="math inline">\(f(x_k)\)</span> utilizando
 la transformada de Fourier discreta y su inversión.
@@ -2795,7 +2797,7 @@ puede tener parte compleja muy pequeña, cercana a <span class="math inline">\(0
 tomamos solo la parte real.
 <span class="math display">\[
 \{f( x_k )\}
-\approx \operatorname{Re}\left( \operatorname{DFT}^{-1}\left[ \left\{ \frac{1}{h} \exp\left( 2\pi i \frac{j}{b-a} a \right)
+\approx \Re\left( \operatorname{DFT}^{-1}\left[ \left\{ \frac{1}{h} \exp\left( 2\pi i \frac{j}{b-a} a \right)
 \hat{f}_j \right\} \right] \right)
 \]</span></p>
 <p></p>
@@ -2951,16 +2953,16 @@ VP_0( c ) = \sum\limits_{k=0}^{n} v( 0, t_k ) c( t_k ) =  0
 <p>El equilibrio financiero se mantiene en el tiempo, basta observar que para cualquier instante
 <span class="math inline">\(t \geq 0\)</span>
 <span class="math display">\[
-\begin{eqnarray*}
-0 &amp; = &amp; u( 0, t ) VP_0( c ) \\
-&amp; = &amp; u( 0, t ) \sum\limits_{k=0}^{n} v( 0, t_k ) c( t_k ) \\
-&amp; = &amp; \sum\limits_{t_k \leq t} u( 0, t ) v( 0, t_k ) c( t_k )
+\begin{split}
+0 &amp; = u( 0, t ) VP_0( c ) \\
+&amp; = u( 0, t ) \sum\limits_{k=0}^{n} v( 0, t_k ) c( t_k ) \\
+&amp; = \sum\limits_{t_k \leq t} u( 0, t ) v( 0, t_k ) c( t_k )
 + \sum\limits_{t_k &gt; t} u( 0, t ) v( 0, t_k ) c( t_k ) \\
-&amp; = &amp; \sum\limits_{t_k \leq t} u( 0, t_k ) u( t_k, t ) v( 0, t_k ) c( t_k )
+&amp; = \sum\limits_{t_k \leq t} u( 0, t_k ) u( t_k, t ) v( 0, t_k ) c( t_k )
 + \sum\limits_{t_k &gt; t} u( 0, t ) v( 0, t ) v( t, t_k ) c( t_k ) \\
-&amp; = &amp; \sum\limits_{t_k \leq t} u( t_k, t ) c( t_k )
+&amp; = \sum\limits_{t_k \leq t} u( t_k, t ) c( t_k )
 + \sum\limits_{t_k &gt; t} v( t, t_k ) c( t_k ) \\
-\end{eqnarray*}
+\end{split}
 \]</span></p>
 <p>Esto implica que el valor actualizado a cualquier instante <span class="math inline">\(t\)</span> de un flujo financiero <span class="math inline">\(c\)</span> que
 está en equilibrio en un inicio, se mantiene también en equilibrio; siempre y cuando se preserve
@@ -3030,7 +3032,7 @@ gitbook.start({
     "link": null,
     "text": null
   },
-  "download": ["seguros_generales.pdf", "seguros_generales.epub"],
+  "download": ["seguros_generales.pdf"],
   "search": {
     "engine": "fuse",
     "options": null

@@ -446,26 +446,26 @@ al valor en riesgo.</p>
 <p><span id="unlabeled-div-3" class="proof"><em>Demostración</em>. </span>Utilizando la versión unilateral de la desigualdad <a href="probabilidad_estadistica.html#thm:ddkw">4.6</a>, podemos establecer las
 siguientes acotaciones
 <span class="math display">\[
-\begin{eqnarray*}
+\begin{split}
 P\left( \xi_{n,\alpha}- \xi_{\alpha} &gt; \varepsilon \right)
-&amp; = &amp; P\left( \xi_{n,\alpha} &gt;  \xi_{\alpha} + \varepsilon \right) \\
-&amp; = &amp; P\left( F_n( \xi_{n,\alpha} ) &gt;  F_n( \xi_{\alpha} + \varepsilon ) \right) \\
-&amp; = &amp; P\left( F( \xi_{\alpha} + \varepsilon ) + \alpha &gt; F( \xi_{\alpha} + \varepsilon ) + F_n( \xi_{\alpha} + \varepsilon ) \right) \\
-&amp; = &amp; P\left( F( \xi_{\alpha} + \varepsilon ) - F_n( \xi_{\alpha} + \varepsilon ) &gt; F( \xi_{\alpha} + \varepsilon ) - \alpha \right) \\
-&amp; \leq &amp; P\left( \underset{x \in \mathbb{R}}{\sup} \left( F - F_n \right) &gt; F( \xi_{\alpha} + \varepsilon ) - \alpha \right) \\
-&amp; \leq &amp; Ce^{-2n \left( F( \xi_{\alpha} + \varepsilon ) - \alpha \right) ^2 }
-\end{eqnarray*}
+&amp; = P\left( \xi_{n,\alpha} &gt;  \xi_{\alpha} + \varepsilon \right) \\
+&amp; = P\left( F_n( \xi_{n,\alpha} ) &gt;  F_n( \xi_{\alpha} + \varepsilon ) \right) \\
+&amp; = P\left( F( \xi_{\alpha} + \varepsilon ) + \alpha &gt; F( \xi_{\alpha} + \varepsilon ) + F_n( \xi_{\alpha} + \varepsilon ) \right) \\
+&amp; = P\left( F( \xi_{\alpha} + \varepsilon ) - F_n( \xi_{\alpha} + \varepsilon ) &gt; F( \xi_{\alpha} + \varepsilon ) - \alpha \right) \\
+&amp; \leq P\left( \underset{x \in \mathbb{R}}{\sup} \left( F - F_n \right) &gt; F( \xi_{\alpha} + \varepsilon ) - \alpha \right) \\
+&amp; \leq Ce^{-2n \left( F( \xi_{\alpha} + \varepsilon ) - \alpha \right) ^2 }
+\end{split}
 \]</span></p>
 <p><span class="math display">\[
-\begin{eqnarray*}
+\begin{split}
 P\left( \xi_{n,\alpha} - \xi_{\alpha} &lt; -\varepsilon \right)
-&amp; = &amp; P\left( \xi_{n,\alpha} &lt;  \xi_{\alpha} - \varepsilon \right) \\
-&amp; = &amp; P\left( F_n( \xi_{n,\alpha} ) &lt;  F_n( \xi_{\alpha} - \varepsilon ) \right) \\
-&amp; = &amp; P\left( F( \xi_{\alpha} - \varepsilon ) + \alpha &lt; F( \xi_{\alpha} - \varepsilon ) + F_n( \xi_{\alpha} - \varepsilon ) \right) \\
-&amp; = &amp; P\left( F_n( \xi_{\alpha} - \varepsilon ) - F( \xi_{\alpha} - \varepsilon ) &gt; \alpha - F( \xi_{\alpha} - \varepsilon ) \right) \\
-&amp; \leq &amp; P\left( \underset{x \in \mathbb{R}}{\sup} \left( F - F_n \right) &gt; \alpha - F( \xi_{\alpha} - \varepsilon ) \right) \\
-&amp; \leq &amp; Ce^{-2n \left( \alpha - F( \xi_{\alpha} - \varepsilon ) \right) ^2 }
-\end{eqnarray*}
+&amp; = P\left( \xi_{n,\alpha} &lt;  \xi_{\alpha} - \varepsilon \right) \\
+&amp; = P\left( F_n( \xi_{n,\alpha} ) &lt;  F_n( \xi_{\alpha} - \varepsilon ) \right) \\
+&amp; = P\left( F( \xi_{\alpha} - \varepsilon ) + \alpha &lt; F( \xi_{\alpha} - \varepsilon ) + F_n( \xi_{\alpha} - \varepsilon ) \right) \\
+&amp; = P\left( F_n( \xi_{\alpha} - \varepsilon ) - F( \xi_{\alpha} - \varepsilon ) &gt; \alpha - F( \xi_{\alpha} - \varepsilon ) \right) \\
+&amp; \leq P\left( \underset{x \in \mathbb{R}}{\sup} \left( F - F_n \right) &gt; \alpha - F( \xi_{\alpha} - \varepsilon ) \right) \\
+&amp; \leq Ce^{-2n \left( \alpha - F( \xi_{\alpha} - \varepsilon ) \right) ^2 }
+\end{split}
 \]</span>
 Uniendo ambos resultados concluimos
 <span class="math display">\[
@@ -485,14 +485,12 @@ desea calcular.</p>
 aproximación, i.e. <span class="math inline">\(P\left( \left| \xi_{n,\alpha} - \xi_{\alpha} \right| &gt; \varepsilon \right) \leq \delta\)</span>
 y tomando en cuenta la desigualdad en <a href="tarificacion.html#prp:appoxvar">7.2</a>.
 <span class="math display">\[
-\begin{eqnarray*}
-2 C e^{-2n \min\left( F( \xi_{\alpha} + \varepsilon ) - \alpha, \alpha - F( \xi_{\alpha} - \varepsilon ) \right)^2 } &amp; \leq &amp; \delta \\
+\begin{split}
+2 C e^{-2n \min\left( F( \xi_{\alpha} + \varepsilon ) - \alpha, \alpha - F( \xi_{\alpha} - \varepsilon ) \right)^2 } &amp; \leq \delta \\
 -2n \min\left( F( \xi_{\alpha} + \varepsilon ) - \alpha, \alpha - F( \xi_{\alpha} - \varepsilon ) \right)^2
-&amp; \leq &amp; \log( \delta )-\log(2) - \log( C ) \\
-n
-&amp; \geq &amp; -\frac{\log( \delta )-\log(2)-\log( C )}{2
-\min\left( F( \xi_{\alpha} + \varepsilon ) - \alpha, \alpha - F( \xi_{\alpha} - \varepsilon ) \right)^2}
-\end{eqnarray*}
+&amp; \leq \log( \delta )-\log(2) - \log( C ) \\
+n &amp; \geq -\frac{\log( \delta )-\log(2)-\log( C )}{2 \min\left( F( \xi_{\alpha} + \varepsilon ) - \alpha, \alpha - F( \xi_{\alpha} - \varepsilon ) \right)^2}
+\end{split}
 \]</span>
 Como se evidencia <span class="math inline">\(n\)</span> crece en orden cuadrático proporcional a la aproximación dada por
 <span class="math inline">\(\min\left( F( \xi_{\alpha} + \varepsilon ) - \alpha, \alpha - F( \xi_{\alpha} - \varepsilon ) \right)\)</span>
@@ -720,12 +718,12 @@ P( R &lt; 0 ) &lt; \alpha
 <p>Muchas de las veces se parte del principio de equilibrio financiero <a href="probabilidad_estadistica.html#sec:equifin">4.6.4</a>, donde
 se busca la igualdad <span class="math inline">\(\mathbb{E}[R] = 0\)</span>, la misma implica la siguiente relación:
 <span class="math display">\[
-\begin{eqnarray*}
-0 &amp; = &amp; \mathbb{E}[R] \\
-0 &amp; = &amp; \mathbb{E}[R\mid R \geq 0]P( R \geq 0 ) + \mathbb{E}[R\mid R &lt; 0]P( R &lt; 0 ) \\
-\mathbb{E}[R\mid R \geq 0]P( R \geq 0 ) &amp; = &amp; -\mathbb{E}[R\mid R &lt; 0]P( R &lt; 0 ) \\
-\frac{P( R &lt; 0 )}{P( R \geq 0 ) } &amp; = &amp; -\frac{\mathbb{E}[R\mid R \geq 0]}{\mathbb{E}[R\mid R &lt; 0]}
-\end{eqnarray*}
+\begin{split}
+0 &amp; = \mathbb{E}[R] \\
+0 &amp; = \mathbb{E}[R\mid R \geq 0]P( R \geq 0 ) + \mathbb{E}[R\mid R &lt; 0]P( R &lt; 0 ) \\
+\mathbb{E}[R\mid R \geq 0]P( R \geq 0 ) &amp; = -\mathbb{E}[R\mid R &lt; 0]P( R &lt; 0 ) \\
+\frac{P( R &lt; 0 )}{P( R \geq 0 ) } &amp; = -\frac{\mathbb{E}[R\mid R \geq 0]}{\mathbb{E}[R\mid R &lt; 0]}
+\end{split}
 \]</span>
 en el equilibrio financiero, la proporción de la probabilidad de ruina respecto de la probabilidad
 de no estar en ruina es igual a la proporción entre la esperanza condicional del resultado cuando
@@ -775,19 +773,19 @@ llamamos en este contexto como <strong>tarificación</strong> (pricing).</p>
 <p>Razonando un poco más al respecto, si asumimos que se dispone de la distribución acumulada <span class="math inline">\(F_S\)</span>
 de <span class="math inline">\(S\)</span>, se puede obtener las siguientes expresiones:
 <span class="math display">\[
-\begin{eqnarray*}
-P\left( \Pi - S - G - K &lt; 0 \right) &amp; &lt; &amp; \alpha \\
-P\left( S &gt; \Pi - G - K \right) &amp; &lt; &amp; \alpha  \\
-1 - P\left( S \leq \Pi - G - K \right) &amp; &lt; &amp; \alpha \\
-P\left( S \leq \Pi - G - K \right) &amp; &gt; &amp; 1 - \alpha \\
-F_S\left( \Pi - G - K \right) &amp; &gt; &amp; 1 - \alpha \\
-F_S\left( \Pi - G - K \right) &amp; \in &amp; \left( 1 - \alpha, +\infty \right), \qquad
+\begin{split}
+P\left( \Pi - S - G - K &lt; 0 \right) &amp; &lt; \alpha \\
+P\left( S &gt; \Pi - G - K \right) &amp; &lt; \alpha  \\
+1 - P\left( S \leq \Pi - G - K \right) &amp; &lt; \alpha \\
+P\left( S \leq \Pi - G - K \right) &amp; &gt; 1 - \alpha \\
+F_S\left( \Pi - G - K \right) &amp; &gt; 1 - \alpha \\
+F_S\left( \Pi - G - K \right) &amp; \in \left( 1 - \alpha, +\infty \right), \qquad
 \text{la desigualdad anterior es equivalente a la inclusión}\\
-\Pi - G - K &amp; \in &amp; F_S^{-1}\left( \left( 1 - \alpha, +\infty \right) \right),\qquad
+\Pi - G - K &amp; \in F_S^{-1}\left( \left( 1 - \alpha, +\infty \right) \right),\qquad
 \text{por propiedades de la inversión de funciones}\\
-\Pi &amp; \geq &amp; G + K + F_S^{-1}\left( 1 - \alpha \right), \qquad
+\Pi &amp; \geq G + K + F_S^{-1}\left( 1 - \alpha \right), \qquad
 \text{com $F_S$ es creciente, mínimo se debe satisfacer la desigualdad}
-\end{eqnarray*}
+\end{split}
 \]</span>
 En especial cuando <span class="math inline">\(K = r\left( \rho(S) - \mathbb{E}[S] \right)\)</span>, la última desigualdad toma la forma
 <span class="math display">\[
@@ -804,11 +802,11 @@ es una variable aleatoria continua.
 sino esto estaría en una situación insostenible donde los gastos son mayores a la cobertura del
 riesgo. Las desigualdades anteriores toman la forma:
 <span class="math display">\[
-\begin{eqnarray*}
-\Pi &amp; \geq &amp; \frac{r}{1 - \gamma} K + \frac{1}{1 - \gamma} F_S^{-1}\left( 1 - \alpha \right) \\
-\Pi &amp; \geq &amp; \frac{r}{1 - \gamma} \left( \rho(S) - \mathbb{E}[S] \right) + \frac{1}{1 - \gamma} F_S^{-1}\left( 1 - \alpha \right) \\
-\Pi &amp; \geq &amp;  \frac{1 + r}{1 - \gamma} F_S^{-1}\left( 1 - \alpha \right) -  \frac{r}{1 - \gamma} \mathbb{E}[S]
-\end{eqnarray*}
+\begin{split}
+\Pi &amp; \geq \frac{r}{1 - \gamma} K + \frac{1}{1 - \gamma} F_S^{-1}\left( 1 - \alpha \right) \\
+\Pi &amp; \geq \frac{r}{1 - \gamma} \left( \rho(S) - \mathbb{E}[S] \right) + \frac{1}{1 - \gamma} F_S^{-1}\left( 1 - \alpha \right) \\
+\Pi &amp; \geq \frac{1 + r}{1 - \gamma} F_S^{-1}\left( 1 - \alpha \right) -  \frac{r}{1 - \gamma} \mathbb{E}[S]
+\end{split}
 \]</span></p>
 <p>De lo anterior se observa, que un buen inicio para estimar la prima de riesgo es ciertamente
 usar la medida <span class="math inline">\(\operatorname{VaR}_{1-\alpha}\)</span> al nivel adecuado de confianza <span class="math inline">\(\alpha\)</span>.</p>
@@ -1181,7 +1179,7 @@ gitbook.start({
     "link": null,
     "text": null
   },
-  "download": ["seguros_generales.pdf", "seguros_generales.epub"],
+  "download": ["seguros_generales.pdf"],
   "search": {
     "engine": "fuse",
     "options": null

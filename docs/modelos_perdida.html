@@ -383,14 +383,14 @@ propiedades de linealidad de la esperanza matemática <span class="math inline">
 \]</span>
 por su parte, la varianza de la variable aleatoria del costo total <span class="math inline">\(S\)</span>, está dada por:
 <span class="math display">\[
-\begin{eqnarray*}
+\begin{split}
 \mathbb{V}\left[ S \right]
-&amp; = &amp; \mathbb{V}\left[ \sum\limits_{i=1}^n X_i \right] \\
-&amp; = &amp; \sum\limits_{i=1}^n \mathbb{V}\left[ X_i \right]
+&amp; = \mathbb{V}\left[ \sum\limits_{i=1}^n X_i \right] \\
+&amp; = \sum\limits_{i=1}^n \mathbb{V}\left[ X_i \right]
 + \sum\limits_{i=1}^n \sum\limits_{j=1,j\neq i}^n \mathbb{C}\left[ X_i, X_j \right] \\
-&amp; = &amp; \sum\limits_{i=1}^n \mathbb{V}\left[ X_i \right]
+&amp; = \sum\limits_{i=1}^n \mathbb{V}\left[ X_i \right]
 + 2\sum\limits_{i=1}^{n-1} \sum\limits_{j=i+1}^n \mathbb{C}\left[ X_i, X_j \right]
-\end{eqnarray*}
+\end{split}
 \]</span></p>
 <p>Muchas de las veces el número total de reclamos <span class="math inline">\(n\)</span> es incierto y por tal razón es mejor considerar
 que el número de siniestros vendrá dado por otra variable aleatoria discreta <span class="math inline">\(N\)</span> que solo tomará
@@ -403,19 +403,19 @@ decir en inglés “loss models” <span class="citation">[<a href="bibliografia
 <p>De forma preliminar estudiemos la forma general que podría tener la distribución de <span class="math inline">\(S\)</span>, sin realizar
 alguna hipótesis (previa sobre el comportamiento de las variables aleatorias <span class="math inline">\(X_1, \ldots, X_n\)</span> y <span class="math inline">\(N\)</span>.
 <span class="math display">\[
-\begin{eqnarray*}
+\begin{split}
 F_S( s )
-&amp; = &amp; P( S \leq s ) \\
-&amp; = &amp; P\left( \sum\limits_{i=1}^N X_i \leq s \right) \\
-&amp; = &amp; P\left( \sum\limits_{i=1}^N X_i \leq s \land N \in \mathbb{N}\right) \\
-&amp; = &amp; P\left( \bigcup\limits_{n\in \mathbb{N}} \left\{ \sum\limits_{i=1}^N X_i \leq s \land N \in \{n\} \right\}\right) \\
-&amp; = &amp; \sum\limits_{n=0}^{+\infty} P\left( \sum\limits_{i=1}^n X_i \leq s \land N = n \right)
+&amp; = P( S \leq s ) \\
+&amp; = P\left( \sum\limits_{i=1}^N X_i \leq s \right) \\
+&amp; = P\left( \sum\limits_{i=1}^N X_i \leq s \land N \in \mathbb{N}\right) \\
+&amp; = P\left( \bigcup\limits_{n\in \mathbb{N}} \left\{ \sum\limits_{i=1}^N X_i \leq s \land N \in \{n\} \right\}\right) \\
+&amp; = \sum\limits_{n=0}^{+\infty} P\left( \sum\limits_{i=1}^n X_i \leq s \land N = n \right)
 \qquad \text{probabilidad de eventos disjuntos} \\
-&amp; = &amp; \sum\limits_{n=0}^{+\infty} P\left( \sum\limits_{i=1}^n X_i \leq s\ \middle|\ N = n \right) P( N = n )
+&amp; = \sum\limits_{n=0}^{+\infty} P\left( \sum\limits_{i=1}^n X_i \leq s\ \middle|\ N = n \right) P( N = n )
 \qquad \text{propiedades de la probabilidad condicional} \\
-&amp; = &amp; \sum\limits_{n=0}^{+\infty} \int\limits_{\left\{\sum\limits_{i=1}^n x_i \leq s\right\}} dF_n( x_1, \ldots, x_n )\ p_n
+&amp; = \sum\limits_{n=0}^{+\infty} \int\limits_{\left\{\sum\limits_{i=1}^n x_i \leq s\right\}} dF_n( x_1, \ldots, x_n )\ p_n
 \qquad \text{$F_n$ es la distribución conjunta de $X_1, \ldots, X_n$ dado $N = n$}
-\end{eqnarray*}
+\end{split}
 \]</span>
 la última expresión es importante de retener, nos dice que para comprender el comportamiento de
 los reclamos totales <span class="math inline">\(S\)</span>, debemos estudiar y estimar la frecuencia de los reclamos <span class="math inline">\(N\)</span>, y también
@@ -445,81 +445,81 @@ reclamos <span class="math inline">\(X_i\)</span> y <span class="math inline">\(
 </div>
 <p>El valor esperado de la severidad total <span class="math inline">\(S\)</span> es:
 <span class="math display">\[
-\begin{eqnarray*}
+\begin{split}
 \mathbb{E}[S]
-&amp; = &amp; \mathbb{E}\left[ \sum\limits_{i=1}^n X_i \right] \\
-&amp; = &amp; \sum\limits_{i=1}^n \mathbb{E}\left[ X_i \right] \\
-&amp; = &amp; n \mathbb{E}[X] \quad \text{si $\{X_i\}$ son idénticamente distribuidas}
-\end{eqnarray*}
+&amp; = \mathbb{E}\left[ \sum\limits_{i=1}^n X_i \right] \\
+&amp; = \sum\limits_{i=1}^n \mathbb{E}\left[ X_i \right] \\
+&amp; = n \mathbb{E}[X] \quad \text{si $\{X_i\}$ son idénticamente distribuidas}
+\end{split}
 \]</span></p>
 <p>Así mismo con la varianza de <span class="math inline">\(S\)</span>.
 <span class="math display">\[
-\begin{eqnarray*}
+\begin{split}
 \mathbb{V}\left[ S \right]
-&amp; = &amp; \mathbb{V}\left[ \sum\limits_{i=1}^n X_i \right] \\
-&amp; = &amp; \sum\limits_{i=1}^n \mathbb{V}\left[ X_i \right]
+&amp; = \mathbb{V}\left[ \sum\limits_{i=1}^n X_i \right] \\
+&amp; = \sum\limits_{i=1}^n \mathbb{V}\left[ X_i \right]
 + \sum\limits_{i=1}^n \sum\limits_{j=1,j\neq i}^n \mathbb{C}\left[ X_i, X_j \right] \\
-&amp; = &amp; \sum\limits_{i=1}^n \mathbb{V}\left[ X_i \right]\quad \text{si $\{X_i\}$ sin son independientes entre si} \\
-&amp; = &amp; n \mathbb{V}\left[ X \right]\quad \text{si $\{X_i\}$ sin son idénticamente distribuidas}
-\end{eqnarray*}
+&amp; = \sum\limits_{i=1}^n \mathbb{V}\left[ X_i \right]\quad \text{si $\{X_i\}$ sin son independientes entre si} \\
+&amp; = n \mathbb{V}\left[ X \right]\quad \text{si $\{X_i\}$ sin son idénticamente distribuidas}
+\end{split}
 \]</span></p>
 <p>Al tener un número determinado de reclamos <span class="math inline">\(n \in \mathbb{N}\)</span>, la distribución de probabilidad del
 total de reclamos <span class="math inline">\(S\)</span> puede ser calculada de una forma maś sencilla.
 <span class="math display">\[
-\begin{eqnarray*}
+\begin{split}
 F_S( x )
-&amp; = &amp; F_{X_1} \star \cdots \star F_{X_n} ( s )\quad \text{sin $\{X_i\}$ son independientes} \\
-&amp; = &amp; F_{X}^{\star n}( s )\quad \text{si $\{X_i\}$ son idénticamente distribuidas}
-\end{eqnarray*}
+&amp; = F_{X_1} \star \cdots \star F_{X_n} ( s )\quad \text{sin $\{X_i\}$ son independientes} \\
+&amp; = F_{X}^{\star n}( s )\quad \text{si $\{X_i\}$ son idénticamente distribuidas}
+\end{split}
 \]</span></p>
 <p>así mismo, si las densidades de probabilidad están bien definidas, entonces
 <span class="math display">\[
-\begin{eqnarray*}
+\begin{split}
 f_S( s )
-&amp; = &amp; f_{X_1} \star \cdots \star f_{X_n} ( s )\quad \text{sin $\{X_i\}$ son independientes} \\
-&amp; = &amp; f_{X}^{\star n}( s )\quad \text{si $\{X_i\}$ son idénticamente distribuidas}
-\end{eqnarray*}
+&amp; = f_{X_1} \star \cdots \star f_{X_n} ( s )\quad \text{sin $\{X_i\}$ son independientes} \\
+&amp; = f_{X}^{\star n}( s )\quad \text{si $\{X_i\}$ son idénticamente distribuidas}
+\end{split}
 \]</span></p>
 <p>Una posible estrategia para estimar <span class="math inline">\(F_S\)</span> o <span class="math inline">\(f_S\)</span> es utilizar la transformada de Fourier
 <span class="math inline">\(\mathscr{F}\)</span>, la cual convierte las convoluciones en productos y luego invertir de nuevo la
 transformada de Fourier.
 <span class="math display">\[
-\begin{eqnarray*}
+\begin{split}
 F_S
-&amp; = &amp; \mathscr{F}^{-1}\left( \mathscr{F}\left( F_S \right) \right) \\
-&amp; = &amp; \mathscr{F}^{-1}\left( \mathscr{F}\left( F_{X_1} \star \cdots \star F_{X_n} \right) \right)
+&amp; = \mathscr{F}^{-1}\left( \mathscr{F}\left( F_S \right) \right) \\
+&amp; = \mathscr{F}^{-1}\left( \mathscr{F}\left( F_{X_1} \star \cdots \star F_{X_n} \right) \right)
 \quad \text{sin $\{X_i\}$ son independientes} \\
-&amp; = &amp; \mathscr{F}^{-1}\left( \prod\limits_{i=1}^n \mathscr{F}\left( F_{X_i} \right) \right) \\
-&amp; = &amp; \mathscr{F}^{-1}\left( \mathscr{F}\left( F_{X} \right)^n \right)
+&amp; = \mathscr{F}^{-1}\left( \prod\limits_{i=1}^n \mathscr{F}\left( F_{X_i} \right) \right) \\
+&amp; = \mathscr{F}^{-1}\left( \mathscr{F}\left( F_{X} \right)^n \right)
 \quad \text{si $\{X_i\}$ sin son idénticamente distribuidas }
-\end{eqnarray*}
+\end{split}
 \]</span></p>
 <p>o de forma equivalente para la densidad <span class="math inline">\(f_S\)</span>
 <span class="math display">\[
-\begin{eqnarray*}
+\begin{split}
 f_S
-&amp; = &amp; \mathscr{F}^{-1}\left( \mathscr{F}\left( f_S \right) \right) \\
-&amp; = &amp; \mathscr{F}^{-1}\left( \mathscr{F}\left( f_{X_1} \star \cdots \star f_{X_n} \right) \right)
+&amp; = \mathscr{F}^{-1}\left( \mathscr{F}\left( f_S \right) \right) \\
+&amp; = \mathscr{F}^{-1}\left( \mathscr{F}\left( f_{X_1} \star \cdots \star f_{X_n} \right) \right)
 \quad \text{sin $\{X_i\}$ son independientes} \\
-&amp; = &amp; \mathscr{F}^{-1}\left( \prod\limits_{i=1}^n \mathscr{F}\left( f_{X_i} \right) \right) \\
-&amp; = &amp; \mathscr{F}^{-1}\left( \mathscr{F}\left( f_{X} \right)^n \right)
+&amp; = \mathscr{F}^{-1}\left( \prod\limits_{i=1}^n \mathscr{F}\left( f_{X_i} \right) \right) \\
+&amp; = \mathscr{F}^{-1}\left( \mathscr{F}\left( f_{X} \right)^n \right)
 \quad \text{si $\{X_i\}$ sin son idénticamente distribuidas }
-\end{eqnarray*}
+\end{split}
 \]</span>
 Por otra parte, la función característica de la variable aleatoria <span class="math inline">\(S\)</span>, está dada para todo
 <span class="math inline">\(t \in \mathbb{R}\)</span>:
 <span class="math display">\[
-\begin{eqnarray*}
+\begin{split}
 \varphi_S( t )
-&amp; = &amp; \mathbb{E}\left[ \exp\left( it S \right) \right] \\
-&amp; = &amp; \mathbb{E}\left[ \exp\left( it \sum\limits_{i=1}^n X_i \right) \right] \\
-&amp; = &amp; \mathbb{E}\left[ \prod\limits_{i=1}^n \exp\left( it X_i \right) \right] \\
-&amp; = &amp; \prod\limits_{i=1}^n \mathbb{E}\left[ \exp\left( it X_i \right) \right],\quad
+&amp; = \mathbb{E}\left[ \exp\left( it S \right) \right] \\
+&amp; = \mathbb{E}\left[ \exp\left( it \sum\limits_{i=1}^n X_i \right) \right] \\
+&amp; = \mathbb{E}\left[ \prod\limits_{i=1}^n \exp\left( it X_i \right) \right] \\
+&amp; = \prod\limits_{i=1}^n \mathbb{E}\left[ \exp\left( it X_i \right) \right],\quad
 \text{si $\{X_i\}$ son independientes} \\
-&amp; = &amp; \prod\limits_{i=1}^n \varphi_{X_i}\left( t \right) \\
-&amp; = &amp; \varphi_{X}\left( t \right)^n,\quad
+&amp; = \prod\limits_{i=1}^n \varphi_{X_i}\left( t \right) \\
+&amp; = \varphi_{X}\left( t \right)^n,\quad
 \text{si $\{X\}$ son identicamente distribuidas} \\
-\end{eqnarray*}
+\end{split}
 \]</span></p>
 <!------------------------------------------------------------------------------------------------->
 <div id="algoritmo-de-simulación" class="section level3 hasAnchor" number="6.2.1">
@@ -629,11 +629,11 @@ a la integral de Riemann-Stieltjes utilizando la distribución acumulada empíri
 <p></p>
 <p>De ello tenemos los siguientes resultados de cálculo para el valor esperado de la severidad total
 <span class="math display">\[
-\begin{eqnarray*}
-\mathbb{E}[S] = \sum\limits_{i=1}^n e^{ \mu_i + \frac{1}{2} \sigma_i^2 } &amp; = &amp; 34562.7208, \\
-\overline{S} = \frac{1}{m} \sum\limits_{i=1}^m S_i &amp; = &amp; 33515.9195, \\
-\sum\limits_{i=1}^N s_{i} \left( F_m( s_{i+1} ) - F_m( s_{i} ) \right) &amp; = &amp; 33494.1981
-\end{eqnarray*}
+\begin{split}
+\mathbb{E}[S] = \sum\limits_{i=1}^n e^{ \mu_i + \frac{1}{2} \sigma_i^2 } &amp; = 34562.7208, \\
+\overline{S} = \frac{1}{m} \sum\limits_{i=1}^m S_i &amp; = 33515.9195, \\
+\sum\limits_{i=1}^N s_{i} \left( F_m( s_{i+1} ) - F_m( s_{i} ) \right) &amp; = 33494.1981
+\end{split}
 \]</span></p>
 </div>
 <p>Lo bueno de poseer una buena aproximación a la distribución acumulada de una variable aleatoria, es
@@ -687,65 +687,65 @@ suma da <span class="math inline">\(0\)</span> si el número de elementos en la 
 </div>
 <p>El valor esperado del total de reclamos <span class="math inline">\(S\)</span>, está dado por:
 <span class="math display">\[
-\begin{eqnarray*}
+\begin{split}
 \mathbb{E}[S]
-&amp; = &amp; \mathbb{E}\left[ \sum\limits_{i=1}^N X_i \right] \\
-&amp; = &amp; \sum\limits_{n=0}^{+\infty} \mathbb{E}\left[ \sum\limits_{i=1}^n X_i\ \middle|\ N = n \right]P( N = n )
+&amp; = \mathbb{E}\left[ \sum\limits_{i=1}^N X_i \right] \\
+&amp; = \sum\limits_{n=0}^{+\infty} \mathbb{E}\left[ \sum\limits_{i=1}^n X_i\ \middle|\ N = n \right]P( N = n )
 \quad \text{utilizando la esperanza condicional} \\
-&amp; = &amp; 0 P( N = 0 ) + \sum\limits_{n=1}^{+\infty} \mathbb{E}\left[ \sum\limits_{i=1}^n X_i\ \middle|\ N = n \right]P( N = n ) \\
-&amp; = &amp; \sum\limits_{n=1}^{+\infty} \sum\limits_{i=1}^n \mathbb{E}\left[ X_i \mid N = n \right]P( N = n )
+&amp; = 0 P( N = 0 ) + \sum\limits_{n=1}^{+\infty} \mathbb{E}\left[ \sum\limits_{i=1}^n X_i\ \middle|\ N = n \right]P( N = n ) \\
+&amp; = \sum\limits_{n=1}^{+\infty} \sum\limits_{i=1}^n \mathbb{E}\left[ X_i \mid N = n \right]P( N = n )
 \quad \text{linealidad de la esperanza} \\
-&amp; = &amp; \sum\limits_{n=0}^{+\infty} n \mathbb{E}\left[ X \mid N = n \right]P( N = n )
+&amp; = \sum\limits_{n=0}^{+\infty} n \mathbb{E}\left[ X \mid N = n \right]P( N = n )
 \quad \text{si $\{X_i\}$ son idénticamente distribuidas} \\
-&amp; = &amp; \mathbb{E}\left[ X \right] \sum\limits_{n=0}^{+\infty} n P( N = n )
+&amp; = \mathbb{E}\left[ X \right] \sum\limits_{n=0}^{+\infty} n P( N = n )
 \quad \text{si $X$ y $N$ son independientes} \\
-&amp; = &amp; \mathbb{E}[ N ] \mathbb{E}[ X ]
-\end{eqnarray*}
+&amp; = \mathbb{E}[ N ] \mathbb{E}[ X ]
+\end{split}
 \]</span></p>
 <p>También podemos calcular la varianza de los reclamos totales <span class="math inline">\(S\)</span>, para ello necesitamos primeramente
 calcular su segundo momento.
 <span class="math display">\[
-\begin{eqnarray*}
+\begin{split}
 \mathbb{E}[S^2]
-&amp; = &amp; \mathbb{E}\left[ \left( \sum\limits_{i=1}^N X_i \right)^2 \right] \\
-&amp; = &amp; \sum\limits_{n=0}^\infty \mathbb{E}\left[ \sum\limits_{i, j=1}^n X_i X_j \middle| N = n \right] P( N = n )
+&amp; = \mathbb{E}\left[ \left( \sum\limits_{i=1}^N X_i \right)^2 \right] \\
+&amp; = \sum\limits_{n=0}^\infty \mathbb{E}\left[ \sum\limits_{i, j=1}^n X_i X_j \middle| N = n \right] P( N = n )
 \quad \text{propiedades de la esperanza condicional} \\
-&amp; = &amp; \sum\limits_{n=0}^\infty \sum\limits_{i, j=1}^n \mathbb{E}\left[ X_i X_j \right] P( N = n )
+&amp; = \sum\limits_{n=0}^\infty \sum\limits_{i, j=1}^n \mathbb{E}\left[ X_i X_j \right] P( N = n )
 \quad \text{si $\{X_i\}$ y $N$ son independientes} \\
-&amp; = &amp; \sum\limits_{n=0}^\infty \left( \sum\limits_{i=1}^n \mathbb{E}\left[ X_i^2 \right]
+&amp; = \sum\limits_{n=0}^\infty \left( \sum\limits_{i=1}^n \mathbb{E}\left[ X_i^2 \right]
 + \sum\limits_{i,j=1,i\neq j}^n \mathbb{E}\left[ X_i X_j \right] \right) P( N = n ) \\
-&amp; = &amp; \sum\limits_{n=0}^\infty \left( n \mathbb{E}\left[ X^2 \right] + n(n-1) \mathbb{E}\left[ X \right]^2 \right) P( N = n )
+&amp; = \sum\limits_{n=0}^\infty \left( n \mathbb{E}\left[ X^2 \right] + n(n-1) \mathbb{E}\left[ X \right]^2 \right) P( N = n )
 \quad \text{si $\{X_i\}$ son i.i.d} \\
-&amp; = &amp; \mathbb{E}\left[N\right] \mathbb{E}\left[X^2\right] + \mathbb{E}\left[N^2\right] \mathbb{E}\left[X\right]^2
+&amp; = \mathbb{E}\left[N\right] \mathbb{E}\left[X^2\right] + \mathbb{E}\left[N^2\right] \mathbb{E}\left[X\right]^2
 - \mathbb{E}\left[N\right] \mathbb{E}\left[X\right]^2 \\
-&amp; = &amp; \mathbb{E}\left[N\right] \mathbb{V}\left[X\right] + \mathbb{E}\left[N^2\right] \mathbb{E}\left[X\right]^2
-\end{eqnarray*}
+&amp; = \mathbb{E}\left[N\right] \mathbb{V}\left[X\right] + \mathbb{E}\left[N^2\right] \mathbb{E}\left[X\right]^2
+\end{split}
 \]</span></p>
 <p>finalmente la varianza de <span class="math inline">\(S\)</span> tiene la siguiente expresión
 <span class="math display">\[
-\begin{eqnarray*}
+\begin{split}
 \mathbb{V}\left[S\right]
-&amp; = &amp; \mathbb{E}\left[S^2\right] - \mathbb{E}\left[S\right]^2 \\
-&amp; = &amp; \mathbb{E}\left[N\right] \mathbb{V}\left[X\right]
+&amp; = \mathbb{E}\left[S^2\right] - \mathbb{E}\left[S\right]^2 \\
+&amp; = \mathbb{E}\left[N\right] \mathbb{V}\left[X\right]
 + \mathbb{E}\left[N^2\right] \mathbb{E}\left[X\right]^2 - \mathbb{E}\left[N\right]^2 \mathbb{E}\left[X\right]^2 \\
-&amp; = &amp; \mathbb{E}\left[N\right] \mathbb{V}\left[X\right] + \mathbb{V}\left[N\right] \mathbb{E}\left[X\right]^2
-\end{eqnarray*}
+&amp; = \mathbb{E}\left[N\right] \mathbb{V}\left[X\right] + \mathbb{V}\left[N\right] \mathbb{E}\left[X\right]^2
+\end{split}
 \]</span></p>
 <p>La distribución acumulada del reclamo total <span class="math inline">\(S\)</span> tiene la forma:
 <span class="math display">\[
-\begin{eqnarray*}
+\begin{split}
 F_S( s )
-&amp; = &amp; P( S \leq s ) \\
-&amp; = &amp; P\left( \sum\limits_{i=1}^N X_i \leq s \right) \\
-&amp; = &amp; \sum\limits_{n=0}^{+\infty} P\left( \sum\limits_{i=1}^n X_i \leq s \middle| N = n \right) P( N = n )\quad
+&amp; = P( S \leq s ) \\
+&amp; = P\left( \sum\limits_{i=1}^N X_i \leq s \right) \\
+&amp; = \sum\limits_{n=0}^{+\infty} P\left( \sum\limits_{i=1}^n X_i \leq s \middle| N = n \right) P( N = n )\quad
 \text{utilizando la probabilidad condicional} \\
-&amp; = &amp; \sum\limits_{n=0}^{+\infty} P\left( \sum\limits_{i=1}^n X_i \leq s \right) p_n\quad
+&amp; = \sum\limits_{n=0}^{+\infty} P\left( \sum\limits_{i=1}^n X_i \leq s \right) p_n\quad
 \text{si $X_i$ y $N$ son independientes} \\
-&amp; = &amp; \sum\limits_{n=0}^{+\infty} F_{X_1} \star \cdots \star F_{X_n}( s ) p_n\quad
+&amp; = \sum\limits_{n=0}^{+\infty} F_{X_1} \star \cdots \star F_{X_n}( s ) p_n\quad
 \text{si $\{X_i\}$ son independientes} \\
-&amp; = &amp; \sum\limits_{n=0}^{+\infty} F^{\star n}_{X}( s ) p_n\quad
+&amp; = \sum\limits_{n=0}^{+\infty} F^{\star n}_{X}( s ) p_n\quad
 \text{si $\{X_i\}$ son idénticamente distribuidas}
-\end{eqnarray*}
+\end{split}
 \]</span>
 tomando <span class="math inline">\(F^{\star 0}_{X}( s ) = 1\)</span>.</p>
 <p>Este último resultado muestra que la distribución de probabilidad de <span class="math inline">\(S\)</span> no es más que una mixtura
@@ -755,27 +755,27 @@ de los reclamos.</p>
 <p>Al igual que lo realizamos para el modelo individual, podemos estimar <span class="math inline">\(F_S\)</span> o <span class="math inline">\(f_S\)</span> utilizando la
 transformada de Fourier <span class="math inline">\(\mathscr{F}\)</span>
 <span class="math display">\[
-\begin{eqnarray*}
+\begin{split}
 F_S
-&amp; = &amp; \mathscr{F}^{-1}\left( \mathscr{F}\left( F_S \right) \right) \\
-&amp; = &amp; \mathscr{F}^{-1}\left( \mathscr{F}\left( \sum\limits_{n=0}^{+\infty} F_{X_1} \star \cdots \star F_{X_n}( s ) p_n \right) \right)
+&amp; = \mathscr{F}^{-1}\left( \mathscr{F}\left( F_S \right) \right) \\
+&amp; = \mathscr{F}^{-1}\left( \mathscr{F}\left( \sum\limits_{n=0}^{+\infty} F_{X_1} \star \cdots \star F_{X_n}( s ) p_n \right) \right)
 \quad \text{sin $\{X_i\}$ son independientes} \\
-&amp; = &amp; \mathscr{F}^{-1}\left( \sum\limits_{n=0}^{+\infty} \prod\limits_{i=1}^n \mathscr{F}\left( F_{X_i} \right) p_n \right) \\
-&amp; = &amp; \mathscr{F}^{-1}\left( \sum\limits_{n=0}^{+\infty} \mathscr{F}\left( F_{X} \right)^n p_n \right)
+&amp; = \mathscr{F}^{-1}\left( \sum\limits_{n=0}^{+\infty} \prod\limits_{i=1}^n \mathscr{F}\left( F_{X_i} \right) p_n \right) \\
+&amp; = \mathscr{F}^{-1}\left( \sum\limits_{n=0}^{+\infty} \mathscr{F}\left( F_{X} \right)^n p_n \right)
 \quad \text{si $\{X_i\}$ sin son idénticamente distribuidas }
-\end{eqnarray*}
+\end{split}
 \]</span></p>
 <p>o de forma equivalente para la densidad <span class="math inline">\(f_S\)</span>
 <span class="math display">\[
-\begin{eqnarray*}
+\begin{split}
 f_S
-&amp; = &amp; \mathscr{F}^{-1}\left( \mathscr{F}\left( f_S \right) \right) \\
-&amp; = &amp; \mathscr{F}^{-1}\left( \mathscr{F}\left( \sum\limits_{n=0}^{+\infty} f_{X_1} \star \cdots \star f_{X_n}( s ) p_n \right) \right)
+&amp; = \mathscr{F}^{-1}\left( \mathscr{F}\left( f_S \right) \right) \\
+&amp; = \mathscr{F}^{-1}\left( \mathscr{F}\left( \sum\limits_{n=0}^{+\infty} f_{X_1} \star \cdots \star f_{X_n}( s ) p_n \right) \right)
 \quad \text{sin $\{X_i\}$ son independientes} \\
-&amp; = &amp; \mathscr{F}^{-1}\left( \sum\limits_{n=0}^{+\infty} \prod\limits_{i=1}^n \mathscr{F}\left( f_{X_i} \right) p_n \right) \\
-&amp; = &amp; \mathscr{F}^{-1}\left( \sum\limits_{n=0}^{+\infty} \mathscr{F}\left( f_{X} \right)^n p_n \right)
+&amp; = \mathscr{F}^{-1}\left( \sum\limits_{n=0}^{+\infty} \prod\limits_{i=1}^n \mathscr{F}\left( f_{X_i} \right) p_n \right) \\
+&amp; = \mathscr{F}^{-1}\left( \sum\limits_{n=0}^{+\infty} \mathscr{F}\left( f_{X} \right)^n p_n \right)
 \quad \text{si $\{X_i\}$ sin son idénticamente distribuidas }
-\end{eqnarray*}
+\end{split}
 \]</span></p>
 <p>En la práctica es imposible realizar la suma hasta infinito, de donde se puede utilizar una
 aproximación escogiendo un número máximo <span class="math inline">\(M \in \mathbb{N}\)</span> de términos en la suma. Así, tenemos las
@@ -783,25 +783,25 @@ aproximaciones.</p>
 <p>Por otra parte, la función característica de la variable aleatoria <span class="math inline">\(S\)</span>, está dada para todo
 <span class="math inline">\(t \in \mathbb{R}\)</span>:
 <span class="math display">\[
-\begin{eqnarray*}
+\begin{split}
 \varphi_S( t )
-&amp; = &amp; \mathbb{E}\left[ \exp\left( it S \right) \right] \\
-&amp; = &amp; \mathbb{E}\left[ \exp\left( it \sum\limits_{i=1}^N X_i \right) \right] \\
-&amp; = &amp; \sum\limits_{n=0}^{+\infty}
+&amp; = \mathbb{E}\left[ \exp\left( it S \right) \right] \\
+&amp; = \mathbb{E}\left[ \exp\left( it \sum\limits_{i=1}^N X_i \right) \right] \\
+&amp; = \sum\limits_{n=0}^{+\infty}
 \mathbb{E}\left[ \exp\left( it \sum\limits_{i=1}^n X_i \right) \middle| N = n \right] P( N = n ) \\
-&amp; = &amp; \sum\limits_{n=0}^{+\infty}
+&amp; = \sum\limits_{n=0}^{+\infty}
 \mathbb{E}\left[ \prod\limits_{i=1}^n \exp\left( it X_i \right) \middle| N = n \right] p_n \\
-&amp; = &amp; \sum\limits_{n=0}^{+\infty} \prod\limits_{i=1}^n
+&amp; = \sum\limits_{n=0}^{+\infty} \prod\limits_{i=1}^n
 \mathbb{E}\left[ \exp\left( it X_i \right) \middle| N = n \right] p_n,\quad
 \text{si $\{X_i\}$ son independientes} \\
-&amp; = &amp; \sum\limits_{n=0}^{+\infty} \prod\limits_{i=1}^n \varphi_{X_i}\left( t \right) p_n,\quad
+&amp; = \sum\limits_{n=0}^{+\infty} \prod\limits_{i=1}^n \varphi_{X_i}\left( t \right) p_n,\quad
 \text{si $\{X_i\}$ y $N$ son independientes} \\
-&amp; = &amp; \sum\limits_{n=0}^{+\infty} \varphi_{X}\left( t \right)^n p_n,\quad
+&amp; = \sum\limits_{n=0}^{+\infty} \varphi_{X}\left( t \right)^n p_n,\quad
 \text{si $\{X\}$ son identicamente distribuidas} \\
-&amp; = &amp; \mathbb{E}\left[ \varphi_{X}\left( t \right)^N \right] \\
-&amp; = &amp; \mathbb{E}\left[ \exp\left( N \log\left( \varphi_{X}\left( t \right) \right) \right) \right] \\
-&amp; = &amp; \varphi_N\left( -i\log\left( \varphi_{X}\left( t \right) \right) \right) \\
-\end{eqnarray*}
+&amp; = \mathbb{E}\left[ \varphi_{X}\left( t \right)^N \right] \\
+&amp; = \mathbb{E}\left[ \exp\left( N \log\left( \varphi_{X}\left( t \right) \right) \right) \right] \\
+&amp; = \varphi_N\left( -i\log\left( \varphi_{X}\left( t \right) \right) \right) \\
+\end{split}
 \]</span></p>
 <!------------------------------------------------------------------------------------------------->
 <div id="algoritmo-de-simulación-1" class="section level3 hasAnchor" number="6.3.1">
@@ -865,27 +865,27 @@ individual con <span class="math inline">\(n\)</span> constante y valores de rec
 <span class="math inline">\(Y_k = B_k X_k\)</span>.</p>
 <p>Para este caso en particular
 <span class="math display">\[
-\begin{eqnarray*}
+\begin{split}
 \mathbb{E}[ S ]
-&amp; = &amp; \mathbb{E}\left[ \sum\limits_{k=0}^{n} B_k X_k \right] \\
-&amp; = &amp; \sum\limits_{k=0}^{n} \mathbb{E}\left[ B_k X_k \right] \\
-&amp; = &amp; n \mathbb{E}[ B X ] \\
-&amp; = &amp; n \mathbb{E}[ B ] \mathbb{E}[ X ] \\
-&amp; = &amp; n p \mathbb{E}[ X ]
-\end{eqnarray*}
+&amp; = \mathbb{E}\left[ \sum\limits_{k=0}^{n} B_k X_k \right] \\
+&amp; = \sum\limits_{k=0}^{n} \mathbb{E}\left[ B_k X_k \right] \\
+&amp; = n \mathbb{E}[ B X ] \\
+&amp; = n \mathbb{E}[ B ] \mathbb{E}[ X ] \\
+&amp; = n p \mathbb{E}[ X ]
+\end{split}
 \]</span></p>
 <p>así mismo,
 <span class="math display">\[
-\begin{eqnarray*}
+\begin{split}
 \mathbb{V}[ S ]
-&amp; = &amp; n \mathbb{V}[ B X ] \\
-&amp; = &amp; n \left( \mathbb{E}[ B^2 X^2 ] - \mathbb{E}[ B X ]^2 \right) \\
-&amp; = &amp; n \left( \mathbb{E}[ B^2 ] \mathbb{E}[ X^2 ] - \mathbb{E}[ B ]^2 \mathbb{E}[ X ]^2 \right) \\
-&amp; = &amp; n \left( p \mathbb{E}[ X^2 ] - p^2 \mathbb{E}[ X ]^2 \right) \\
-&amp; = &amp; n \left( p \mathbb{E}[ X^2 ] - p \mathbb{E}[ X ]^2 + p \mathbb{E}[ X ]^2  - p^2 \mathbb{E}[ X ]^2 \right) \\
-&amp; = &amp; n \left( p \mathbb{V}[ X ] + p ( 1 - p ) \mathbb{E}[ X ]^2 \right) \\
-&amp; = &amp; n \left( \mathbb{E}[B] \mathbb{V}[ X ] + \mathbb{V}[B] \mathbb{E}[ X ]^2 \right)
-\end{eqnarray*}
+&amp; = n \mathbb{V}[ B X ] \\
+&amp; = n \left( \mathbb{E}[ B^2 X^2 ] - \mathbb{E}[ B X ]^2 \right) \\
+&amp; = n \left( \mathbb{E}[ B^2 ] \mathbb{E}[ X^2 ] - \mathbb{E}[ B ]^2 \mathbb{E}[ X ]^2 \right) \\
+&amp; = n \left( p \mathbb{E}[ X^2 ] - p^2 \mathbb{E}[ X ]^2 \right) \\
+&amp; = n \left( p \mathbb{E}[ X^2 ] - p \mathbb{E}[ X ]^2 + p \mathbb{E}[ X ]^2  - p^2 \mathbb{E}[ X ]^2 \right) \\
+&amp; = n \left( p \mathbb{V}[ X ] + p ( 1 - p ) \mathbb{E}[ X ]^2 \right) \\
+&amp; = n \left( \mathbb{E}[B] \mathbb{V}[ X ] + \mathbb{V}[B] \mathbb{E}[ X ]^2 \right)
+\end{split}
 \]</span></p>
 <div class="example">
 <p><span id="exm:l5ex4" class="example"><strong>Ejemplo 6.4  </strong></span>Hacemos uso del algoritmo de simulación, pero bajo la consideración anterior donde el conteo
@@ -910,10 +910,10 @@ Si consideramos generar la simulación como un modelo individual, generamos vari
 </details>
 <p></p>
 <p><span class="math display">\[
-\begin{eqnarray*}
-\mathbb{E}[S] = n p e^{ \mu + \frac{1}{2} \sigma^2 } &amp; = &amp; 219326.6317, \\
-\overline{S} = \frac{1}{m} \sum\limits_{i=1}^m S_i &amp; = &amp; 219346.3972,
-\end{eqnarray*}
+\begin{split}
+\mathbb{E}[S] = n p e^{ \mu + \frac{1}{2} \sigma^2 } &amp; = 219326.6317, \\
+\overline{S} = \frac{1}{m} \sum\limits_{i=1}^m S_i &amp; = 219346.3972,
+\end{split}
 \]</span></p>
 </div>
 <p>Es importante observar que si la frecuencia de reclamos es superior a <span class="math inline">\(1\)</span>, sea este por póliza,
@@ -1254,20 +1254,20 @@ el histograma de los reclamos totales aplicados el deducible..</p>
 <p>Es de notar que la probabilidad del evento <span class="math inline">\(\{S=0\}\)</span> no es nula y se debe a la aplicación del
 deducible.
 <span class="math display">\[
-\begin{eqnarray*}
+\begin{split}
 P( S = 0 )
-&amp; = &amp; P\left( \left\{ S = 0 \middle| N \in \mathbb{N}\right\} \right) \\
-&amp; = &amp; P\left( \bigcup\limits_{n=0}^{+\infty} \left\{ S = 0 \land N = n \right\} \right) \\
-&amp; = &amp; P\left( \bigcup\limits_{n=0}^{+\infty} \left\{ D( X_1 ) + \cdots + D( X_N ) = 0 \land N = n \right\} \right) \\
-&amp; = &amp; P\left( \bigcup\limits_{n=0}^{+\infty} \left\{ X_1 \leq d \land \cdots \land X_N \leq d \land N = n \right\} \right) \\
-&amp; = &amp; \sum\limits_{n=0}^{+\infty} P\left( X_1 \leq d \land \cdots \land X_N \leq d \land N = n \right) \\
-&amp; = &amp; \sum\limits_{n=0}^{+\infty} P\left( X_1 \leq d \land \cdots \land X_n \leq d \middle| N = n \right)P( N = n ) \\
-&amp; = &amp; \sum\limits_{n=0}^{+\infty} P\left( X_1 \leq d \land \cdots \land X_n \leq d \right) P( N = n ) \\
-&amp; = &amp; \sum\limits_{n=0}^{+\infty} P\left( X \leq d \right)^n p_n \\
-&amp; = &amp; \mathbb{E}\left[ P\left( X \leq d \right)^N \right] \\
-&amp; \approx &amp; \sum\limits_{n=0}^{n&#39;} P( X \leq d )^n p_n,\quad
+&amp; = P\left( \left\{ S = 0 \middle| N \in \mathbb{N}\right\} \right) \\
+&amp; = P\left( \bigcup\limits_{n=0}^{+\infty} \left\{ S = 0 \land N = n \right\} \right) \\
+&amp; = P\left( \bigcup\limits_{n=0}^{+\infty} \left\{ D( X_1 ) + \cdots + D( X_N ) = 0 \land N = n \right\} \right) \\
+&amp; = P\left( \bigcup\limits_{n=0}^{+\infty} \left\{ X_1 \leq d \land \cdots \land X_N \leq d \land N = n \right\} \right) \\
+&amp; = \sum\limits_{n=0}^{+\infty} P\left( X_1 \leq d \land \cdots \land X_N \leq d \land N = n \right) \\
+&amp; = \sum\limits_{n=0}^{+\infty} P\left( X_1 \leq d \land \cdots \land X_n \leq d \middle| N = n \right)P( N = n ) \\
+&amp; = \sum\limits_{n=0}^{+\infty} P\left( X_1 \leq d \land \cdots \land X_n \leq d \right) P( N = n ) \\
+&amp; = \sum\limits_{n=0}^{+\infty} P\left( X \leq d \right)^n p_n \\
+&amp; = \mathbb{E}\left[ P\left( X \leq d \right)^N \right] \\
+&amp; \approx \sum\limits_{n=0}^{n&#39;} P( X \leq d )^n p_n,\quad
 \text{para un valor $n&#39;$ suficientemente grande}
-\end{eqnarray*}
+\end{split}
 \]</span></p>
 <p></p>
 <details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
@@ -1284,21 +1284,21 @@ el deducible, en este caso en particular es <span class="math inline">\(M\)</spa
 como máximo se pagara <span class="math inline">\(n M\)</span>. Por tanto, nos interesa la probabilidad del evento
 <span class="math inline">\(\{ S\ \text{es máximo} \}\)</span>, el cual lo podemos calcular como:
 <span class="math display">\[
-\begin{eqnarray*}
+\begin{split}
 P( S\ \text{es máximo} )
-&amp; = &amp; P\left( \left\{ S = NM \middle| N \in \mathbb{N}\right\} \right) \\
-&amp; = &amp; P\left( \bigcup\limits_{n=0}^{+\infty} \left\{ S = N M \land N = n \right\} \right) \\
-&amp; = &amp; P\left( \bigcup\limits_{n=0}^{+\infty} \left\{ D( X_1 ) + \cdots + D( X_N ) = N M \land N = n \right\} \right) \\
-&amp; = &amp; P\left( \bigcup\limits_{n=0}^{+\infty} \left\{ X_1 - d &gt; M \land \cdots \land X_N - d  \geq M \land N = n \right\} \right) \\
-&amp; = &amp; P\left( \bigcup\limits_{n=0}^{+\infty} \left\{ X_1 &gt; M + d \land \cdots \land X_N \geq M + d \land N = n \right\} \right) \\
-&amp; = &amp; \sum\limits_{n=0}^{+\infty} P\left( X_1 &gt; M + d \land \cdots \land X_N &gt; M + d \land N = n \right) \\
-&amp; = &amp; \sum\limits_{n=0}^{+\infty} P\left( X_1 &gt; M + d \land \cdots \land X_n &gt; M + d \middle| N = n \right) P( N = n ) \\
-&amp; = &amp; \sum\limits_{n=0}^{+\infty} P\left( X_1 &gt; M + d \land \cdots \land X_n &gt; M + d \right) P( N = n ) \\
-&amp; = &amp; \sum\limits_{n=0}^{+\infty} P\left( X &gt; M + d \right)^n p_n \\
-&amp; = &amp; \mathbb{E}\left[ P\left( X &gt; M + d \right)^N \right] \\
-&amp; \approx &amp; \sum\limits_{n=0}^{n&#39;} P( X &gt; M + d )^n p_n,\quad
+&amp; = P\left( \left\{ S = NM \middle| N \in \mathbb{N}\right\} \right) \\
+&amp; = P\left( \bigcup\limits_{n=0}^{+\infty} \left\{ S = N M \land N = n \right\} \right) \\
+&amp; = P\left( \bigcup\limits_{n=0}^{+\infty} \left\{ D( X_1 ) + \cdots + D( X_N ) = N M \land N = n \right\} \right) \\
+&amp; = P\left( \bigcup\limits_{n=0}^{+\infty} \left\{ X_1 - d &gt; M \land \cdots \land X_N - d  \geq M \land N = n \right\} \right) \\
+&amp; = P\left( \bigcup\limits_{n=0}^{+\infty} \left\{ X_1 &gt; M + d \land \cdots \land X_N \geq M + d \land N = n \right\} \right) \\
+&amp; = \sum\limits_{n=0}^{+\infty} P\left( X_1 &gt; M + d \land \cdots \land X_N &gt; M + d \land N = n \right) \\
+&amp; = \sum\limits_{n=0}^{+\infty} P\left( X_1 &gt; M + d \land \cdots \land X_n &gt; M + d \middle| N = n \right) P( N = n ) \\
+&amp; = \sum\limits_{n=0}^{+\infty} P\left( X_1 &gt; M + d \land \cdots \land X_n &gt; M + d \right) P( N = n ) \\
+&amp; = \sum\limits_{n=0}^{+\infty} P\left( X &gt; M + d \right)^n p_n \\
+&amp; = \mathbb{E}\left[ P\left( X &gt; M + d \right)^N \right] \\
+&amp; \approx \sum\limits_{n=0}^{n&#39;} P( X &gt; M + d )^n p_n,\quad
 \text{para un valor $n&#39;$ suficientemente grande}
-\end{eqnarray*}
+\end{split}
 \]</span></p>
 <p></p>
 <details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
@@ -1310,16 +1310,16 @@ P( S\ \text{es máximo} ) = 0.003299886
 \]</span>
 Además, podemos calcular el valor máximo esperado de <span class="math inline">\(S\)</span>.
 <span class="math display">\[
-\begin{eqnarray*}
+\begin{split}
 \mathbb{E}\left[ S \middle| S\ \text{es máximo} \right]
-&amp; = &amp; \mathbb{E}\left[ S \middle| \left\{ S = NM \middle| N \in \mathbb{N}\right\} \right] \\
-&amp; = &amp; \mathbb{E}\left[ S \middle| \bigcup\limits_{n=0}^{+\infty} \left\{ S = NM \land N = n \right\} \right] \\
-&amp; = &amp; \mathbb{E}\left[ NM \middle| \bigcup\limits_{n=0}^{+\infty} \left\{ N = n \right\} \right] \\
-&amp; = &amp; \sum\limits_{n=0}^{+\infty} \mathbb{E}\left[ n M \middle| N = n \right] P( N = n ) \\
-&amp; = &amp; \sum\limits_{n=0}^{+\infty} n M P( N = n ) \\
-&amp; = &amp; M \sum\limits_{n=0}^{+\infty} n P( N = n ) \\
-&amp; = &amp; M \mathbb{E}\left[ N \right] \\
-\end{eqnarray*}
+&amp; = \mathbb{E}\left[ S \middle| \left\{ S = NM \middle| N \in \mathbb{N}\right\} \right] \\
+&amp; = \mathbb{E}\left[ S \middle| \bigcup\limits_{n=0}^{+\infty} \left\{ S = NM \land N = n \right\} \right] \\
+&amp; = \mathbb{E}\left[ NM \middle| \bigcup\limits_{n=0}^{+\infty} \left\{ N = n \right\} \right] \\
+&amp; = \sum\limits_{n=0}^{+\infty} \mathbb{E}\left[ n M \middle| N = n \right] P( N = n ) \\
+&amp; = \sum\limits_{n=0}^{+\infty} n M P( N = n ) \\
+&amp; = M \sum\limits_{n=0}^{+\infty} n P( N = n ) \\
+&amp; = M \mathbb{E}\left[ N \right] \\
+\end{split}
 \]</span></p>
 <p></p>
 <details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
@@ -1393,18 +1393,18 @@ total de reclamos <span class="math inline">\(S\)</span>. Se asume que el conteo
 distribuciones en la familia <span class="math inline">\((a,b,0)\)</span> y los reclamos individuales son <span class="math inline">\(\{X_i\}\)</span> son i.i.d y
 también independientes de <span class="math inline">\(N\)</span>. En ese contexto podemos observar que para cualquier <span class="math inline">\(s &gt; 0\)</span>, tenemos:
 <span class="math display">\[
-\begin{eqnarray*}
+\begin{split}
 f_S( s )
-&amp; = &amp; \sum\limits_{n=1}^{+\infty} p_n f_X^{\star n}( s ) \\
-&amp; = &amp; p_1 f_X( s ) + \sum\limits_{n=2}^{+\infty} p_n f_X^{\star n}( s ) \\
-&amp; = &amp; p_1 f_X( s ) + \sum\limits_{n=1}^{+\infty} p_{n+1} f_X^{\star n + 1}( s ) \\
-&amp; = &amp; p_1 f_X( s ) + \sum\limits_{n=1}^{+\infty} \left( a + \frac{b}{n+1} \right) p_{n} f_X^{\star n + 1}( s ) \\
-&amp; = &amp; p_1 f_X( s )
+&amp; = \sum\limits_{n=1}^{+\infty} p_n f_X^{\star n}( s ) \\
+&amp; = p_1 f_X( s ) + \sum\limits_{n=2}^{+\infty} p_n f_X^{\star n}( s ) \\
+&amp; = p_1 f_X( s ) + \sum\limits_{n=1}^{+\infty} p_{n+1} f_X^{\star n + 1}( s ) \\
+&amp; = p_1 f_X( s ) + \sum\limits_{n=1}^{+\infty} \left( a + \frac{b}{n+1} \right) p_{n} f_X^{\star n + 1}( s ) \\
+&amp; = p_1 f_X( s )
 + \sum\limits_{n=1}^{+\infty} p_{n} \int\limits_0^s \left( a + \frac{b y}{s} \right) f_X( y ) f_X^{\star n}( s - y )\ dy \\
-&amp; = &amp; p_1 f_X( s )
+&amp; = p_1 f_X( s )
 + \int\limits_0^s \left( a + \frac{b y}{s} \right) f_X( y ) \sum\limits_{n=1}^{+\infty} p_{n} f_X^{\star n}( s - y )\ dy \\
-&amp; = &amp; p_1 f_X( s ) + \int\limits_0^s \left( a + \frac{b y}{s} \right) f_X( y ) f_S( s - y )\ dy
-\end{eqnarray*}
+&amp; = p_1 f_X( s ) + \int\limits_0^s \left( a + \frac{b y}{s} \right) f_X( y ) f_S( s - y )\ dy
+\end{split}
 \]</span>
 cuando <span class="math inline">\(s = 0\)</span>, la probabilidad se concentra en <span class="math inline">\(0\)</span>, y por tanto <span class="math inline">\(f_S( 0 ) = p_0\)</span></p>
 <p>Como consecuencia del análisis anterior resulta la relación recurrente, la cual es precisamente
@@ -1550,7 +1550,7 @@ transformadas de Fourier.
 precisamente aproxima a la densidad <span class="math inline">\(f_S\)</span>
 <span class="math display">\[
 \{ f_{S}( s_k ) \}
-\approx \operatorname{Re}\left( \operatorname{DFT}^{-1}\left[ \left\{ \frac{1}{h} \exp\left( 2\pi i \omega_j a \right)
+\approx \Re\left( \operatorname{DFT}^{-1}\left[ \left\{ \frac{1}{h} \exp\left( 2\pi i \omega_j a \right)
 \prod\limits_{i=1}^n \hat{f}_{i,j} \right\} \right] \right)
 \]</span></p>
 <p></p>
@@ -1628,7 +1628,7 @@ número máximo <span class="math inline">\(M \in \mathbb{N}\)</span> de términ
 como para que la siguiente aproximación resulte adecuada.
 <span class="math display">\[
 \{ f_{S}( s_k ) \}
-\approx  \operatorname{Re}\left( \operatorname{DFT}^{-1}\left[ \sum\limits_{n=1}^{M} \left\{ \frac{1}{h} \exp\left( 2\pi i \omega_j a \right)
+\approx  \Re\left( \operatorname{DFT}^{-1}\left[ \sum\limits_{n=1}^{M} \left\{ \frac{1}{h} \exp\left( 2\pi i \omega_j a \right)
 \prod\limits_{i=1}^n \hat{f}_{i,j} \right\}\ p_n \right] \right),
 \qquad \forall s_k &gt; 0
 \]</span></p>
@@ -1799,17 +1799,17 @@ variables aleatorias, de tal forma que
 <span class="math inline">\(N_i \rightsquigarrow NBinom\left( \alpha, \frac{\alpha}{\lambda ER_i + \alpha} \right)\)</span>, entonces
 la función de verosimilitud logarítmica toma la forma:
 <span class="math display">\[
-\begin{eqnarray*}
+\begin{split}
 \ell( \alpha, \lambda )
-&amp; = &amp; \sum\limits_{i=1}^m \log \Gamma( \alpha + N_i )
+&amp; = \sum\limits_{i=1}^m \log \Gamma( \alpha + N_i )
 - \sum\limits_{i=1}^m \log \Gamma( N_i + 1 )
 - m \log \Gamma( \alpha ) \\
-&amp; &amp; + \sum\limits_{i=1}^m N_i \log\left( \lambda \right)
+&amp; + \sum\limits_{i=1}^m N_i \log\left( \lambda \right)
 + \sum\limits_{i=1}^m N_i \log\left( ER_i \right)
 - \sum\limits_{i=1}^m N_i \log\left( \lambda ER_i + \alpha \right)
 + m \alpha \log\left( \alpha \right) \\
-&amp; &amp; - \alpha \sum\limits_{i=1}^m \log\left( \lambda ER_i + \alpha \right)
-\end{eqnarray*}
+&amp; - \alpha \sum\limits_{i=1}^m \log\left( \lambda ER_i + \alpha \right)
+\end{split}
 \]</span></p></li>
 <li><p>Para la distribución binomial, tenemos que si
 <span class="math display">\[
@@ -1827,17 +1827,17 @@ variables aleatorias, de tal forma que
 <span class="math inline">\(N_i \rightsquigarrow  Binom\left( n, \frac{\lambda ER_i}{n} \right)\)</span>, entonces la función de
 verosimilitud logarítmica toma la forma:
 <span class="math display">\[
-\begin{eqnarray*}
+\begin{split}
 \ell( n, \lambda )
-&amp; = &amp; m \log( n! )
+&amp; = m \log( n! )
 - \sum\limits_{i=1}^m \log( N_i! )
 - \sum\limits_{i=1}^m \log( (n - N_i)! ) \\
-&amp; &amp; + \sum\limits_{i=1}^m N_i \log \lambda
+&amp; + \sum\limits_{i=1}^m N_i \log \lambda
 + \sum\limits_{i=1}^m N_i \log ER_i
 - n \sum\limits_{i=1}^m N_i \\
-&amp; &amp; + n \sum\limits_{i=1}^m \log\left( 1 - \frac{\lambda ER_i}{n} \right)
+&amp; + n \sum\limits_{i=1}^m \log\left( 1 - \frac{\lambda ER_i}{n} \right)
 - \sum\limits_{i=1}^m N_i \log\left( 1 - \frac{\lambda ER_i}{n} \right)
-\end{eqnarray*}
+\end{split}
 \]</span></p></li>
 </ol>
 <p>En los tres casos anteriores, hemos desarrollado una metodología para la estimación de la
@@ -10739,21 +10739,21 @@ de distribuciones binomiales negativas.</p>
 <p>Por su parte, la función de verosimilitud logarítmica para la frecuencia tiene la siguiente forma
 para cada grupo <span class="math inline">\(g\)</span>.
 <span class="math display">\[
-\begin{eqnarray*}
+\begin{split}
 \ell_g( \alpha, p )
-&amp; = &amp; \sum\limits_{i=1}^{n_g}
+&amp; = \sum\limits_{i=1}^{n_g}
 \left\{ \log\left( \Gamma( \alpha + N_i ) \right)
 - \log\left( \Gamma(N_i + 1) \right)
 - \log\left( \Gamma(\alpha) \right)
 + \alpha \log(p)
 + N_i \log( 1 - p ) \right\} \\
-&amp; = &amp; \sum\limits_{i=1}^{n_g}
+&amp; = \sum\limits_{i=1}^{n_g}
 \left\{ \log\left( \Gamma( \alpha + N_i ) \right)
 - \log\left( \Gamma(N_i + 1) \right) \right\}
 - n_g \log\left( \Gamma(\alpha) \right)
 + n_g \alpha \log(p)
 + n \log( 1 - p )
-\end{eqnarray*}
+\end{split}
 \]</span>
 Como ya lo mencionamos, para cada grupo <span class="math inline">\(g\)</span> podemos maximizar la verosimilitud logarítmica de la
 frecuencia utilizando la función <code>fitdist</code> del paquete <code>fitdistrplus</code>.</p>
@@ -11112,23 +11112,23 @@ forma anterior para la distribución acumulada de probabilidad, podemos determin
 precisa para la función de verosimilitud logarítmica, donde debemos tomar en cuenta las
 singularidades que producen los deducibles para cada póliza.
 <span class="math display">\[
-\begin{eqnarray*}
+\begin{split}
 \ell( \mu, \sigma )
-&amp; = &amp; \sum\limits_{x_i \in \operatorname{Dif}F} \log \left( f(x_i,\mu, \sigma) \right)
+&amp; = \sum\limits_{x_i \in \operatorname{Dif}F} \log \left( f(x_i,\mu, \sigma) \right)
 + \sum\limits_{x_i \notin \operatorname{Dif}F} \log \left( F\left( x_i, \mu, \sigma \right) - F\left( x_i-, \mu, \sigma \right) \right) \\
-&amp; = &amp; \sum\limits_{x_i \notin\{0,M_i\}} \log \left( f(x_i,\mu, \sigma) \right)
+&amp; = \sum\limits_{x_i \notin\{0,M_i\}} \log \left( f(x_i,\mu, \sigma) \right)
 + \sum\limits_{x_i \in\{0,M_i\}} \log \left( F\left( x_i, \mu, \sigma \right) - F\left( x_i-, \mu, \sigma \right) \right) \\
-&amp; = &amp; \sum\limits_{x_i \notin \{0,M_i\}}
+&amp; = \sum\limits_{x_i \notin \{0,M_i\}}
 \log \left( \frac{1}{x_i\sqrt{2\pi} \sigma}  \exp\left( -\frac{(\ln(x_i) - \mu)^2}{\sigma^2} \right) \right)
 + \sum\limits_{x_i = M_i} \log \left( 1 - F\left( M_i-, \mu, \sigma \right) \right)
 + \sum\limits_{x_i = 0} \log \left( F\left( 0, \mu, \sigma \right) - 0 \right) \\
-&amp; = &amp; -\sum\limits_{x_i \notin\{0,M_i\}} \left\{
+&amp; = -\sum\limits_{x_i \notin\{0,M_i\}} \left\{
 \frac{(\ln(x_i) - \mu)^2}{\sigma^2}
 +\log \left( x_i \right)
 +\log \left( \sqrt{2\pi} \sigma \right) \right\}
 + \sum\limits_{x_i = M_i} \log \left( 1 - \frac{1}{\sqrt{2\pi} \sigma} \int\limits_{0}^{M_i + d_i} \frac{1}{y} \exp\left( -\frac{(\ln(y) - \mu)^2}{\sigma^2} \right)\ dy \right) \\
-&amp; &amp; + \sum\limits_{x_i = 0} \log \left( \frac{1}{\sqrt{2\pi} \sigma} \int\limits_{0}^{d_i} \frac{1}{y} \exp\left( -\frac{(\ln(y) - \mu)^2}{\sigma^2} \right)\ dy \right) \\
-\end{eqnarray*}
+&amp; + \sum\limits_{x_i = 0} \log \left( \frac{1}{\sqrt{2\pi} \sigma} \int\limits_{0}^{d_i} \frac{1}{y} \exp\left( -\frac{(\ln(y) - \mu)^2}{\sigma^2} \right)\ dy \right) \\
+\end{split}
 \]</span></p>
 <p>Preparamos la función de verosimilitud en R, en este caso debemos construirla explícitamente, sin la
 ayuda de alguna función en un paquete, esto se debe a que el deducible <span class="math inline">\(d\)</span> y el monto máximo de
@@ -11527,15 +11527,15 @@ S = \sum\limits_{g \in G} S_g
 Para realizar el cálculo de los valores deducidos se puede examinar la expresión del deducible,
 con ello llegamos al siguiente resultado.
 <span class="math display">\[
-\begin{eqnarray*}
+\begin{split}
 \mathbb{E}\left[D(X)\right]
-&amp; = &amp; \int\limits_0^{+\infty} D( x ) dF( x ) \\
-&amp; = &amp; \int\limits_0^{+\infty} \min\left( \max( x - d, 0 ), M \right) dF( x ) \\
-&amp; = &amp; \int\limits_d^{M+d} ( x - d ) dF( x ) + \int\limits_{M+d}^{+\infty} M dF( x ) \\
-&amp; = &amp; \int\limits_d^{M+d} x dF( x ) - d P\left( d \leq X \leq M + d \right) + M P\left( X &gt; M + d \right) \\
-&amp; = &amp; \int\limits_d^{M+d} x dF( x ) - d \left( F( M + d ) - F( d ) \right) + M \left( 1 - F( M + d ) \right) \\
-&amp; = &amp; \int\limits_d^{M+d} x dF( x ) + M + d\ F( d ) - ( M + d ) F( M + d )
-\end{eqnarray*}
+&amp; = \int\limits_0^{+\infty} D( x ) dF( x ) \\
+&amp; = \int\limits_0^{+\infty} \min\left( \max( x - d, 0 ), M \right) dF( x ) \\
+&amp; = \int\limits_d^{M+d} ( x - d ) dF( x ) + \int\limits_{M+d}^{+\infty} M dF( x ) \\
+&amp; = \int\limits_d^{M+d} x dF( x ) - d P\left( d \leq X \leq M + d \right) + M P\left( X &gt; M + d \right) \\
+&amp; = \int\limits_d^{M+d} x dF( x ) - d \left( F( M + d ) - F( d ) \right) + M \left( 1 - F( M + d ) \right) \\
+&amp; = \int\limits_d^{M+d} x dF( x ) + M + d\ F( d ) - ( M + d ) F( M + d )
+\end{split}
 \]</span></p>
 <p>La integral a la izquierda pude ser calculada con el uso de una aproximación numérica a la integral.
 Por su parte, los términos asociados a la probabilidad pueden ser calculados utilizando la
@@ -13499,49 +13499,49 @@ la magnitud de cada uno de los reclamos <span class="math inline">\(\{X_n\}\)</s
 <p>Los resultados para el cálculo de la esperanza y la varianza se pueden obtener de forma similar
 a lo que realizamos en la sección @ref(modelo_individual).
 <span class="math display">\[
-\begin{eqnarray*}
+\begin{split}
 \mathbb{E}[S(t)]
-&amp; = &amp; \mathbb{E}\left[ \sum\limits_{i=1}^{N(t)} X_i \right] \\
-&amp; = &amp; \sum\limits_{n=0}^{+\infty} \mathbb{E}\left[ \sum\limits_{i=1}^n X_i\ \middle|\ N(t) = n \right]P( N(t) = n )
+&amp; = \mathbb{E}\left[ \sum\limits_{i=1}^{N(t)} X_i \right] \\
+&amp; = \sum\limits_{n=0}^{+\infty} \mathbb{E}\left[ \sum\limits_{i=1}^n X_i\ \middle|\ N(t) = n \right]P( N(t) = n )
 \quad \text{utilizando la esperanza condicional} \\
-&amp; = &amp; 0 P( N(t) = 0 ) + \sum\limits_{n=1}^{+\infty}
+&amp; = 0 P( N(t) = 0 ) + \sum\limits_{n=1}^{+\infty}
 \mathbb{E}\left[ \sum\limits_{i=1}^n X_i\ \middle|\ N(t) = n \right]P( N(t) = n ) \\
-&amp; = &amp; \sum\limits_{n=1}^{+\infty} \sum\limits_{i=1}^n \mathbb{E}\left[ X_i \mid N(t) = n \right]P( N(t) = n )
+&amp; = \sum\limits_{n=1}^{+\infty} \sum\limits_{i=1}^n \mathbb{E}\left[ X_i \mid N(t) = n \right]P( N(t) = n )
 \quad \text{linealidad de la esperanza} \\
-&amp; = &amp; \sum\limits_{n=0}^{+\infty} n \mathbb{E}\left[ X \mid N(t) = n \right]P( N(t) = n )
+&amp; = \sum\limits_{n=0}^{+\infty} n \mathbb{E}\left[ X \mid N(t) = n \right]P( N(t) = n )
 \quad \text{si $\{X_i\}$ son idénticamente distribuidas} \\
-&amp; = &amp; \mathbb{E}\left[ X \right] \sum\limits_{n=0}^{+\infty} n P( N(t) = n )
+&amp; = \mathbb{E}\left[ X \right] \sum\limits_{n=0}^{+\infty} n P( N(t) = n )
 \quad \text{si $X$ y $N(t)$ son independientes} \\
-&amp; = &amp; \mathbb{E}[ N(t) ] \mathbb{E}[ X ]
-\end{eqnarray*}
+&amp; = \mathbb{E}[ N(t) ] \mathbb{E}[ X ]
+\end{split}
 \]</span></p>
 <p>el segundo momento de <span class="math inline">\(S(t)\)</span> se calcula de forma similar
 <span class="math display">\[
-\begin{eqnarray*}
+\begin{split}
 \mathbb{E}[S(t)^2]
-&amp; = &amp; \mathbb{E}\left[ \left( \sum\limits_{i=1}^{N(t)} X_i \right)^2 \right] \\
-&amp; = &amp; \sum\limits_{n=0}^\infty \mathbb{E}\left[ \sum\limits_{i, j=1}^n X_i X_j \middle| N(t) = n \right] P( N = n )
+&amp; = \mathbb{E}\left[ \left( \sum\limits_{i=1}^{N(t)} X_i \right)^2 \right] \\
+&amp; = \sum\limits_{n=0}^\infty \mathbb{E}\left[ \sum\limits_{i, j=1}^n X_i X_j \middle| N(t) = n \right] P( N = n )
 \quad \text{propiedades de la esperanza condicional} \\
-&amp; = &amp; \sum\limits_{n=0}^\infty \sum\limits_{i, j=1}^n \mathbb{E}\left[ X_i X_j \right] P( N(t) = n )
+&amp; = \sum\limits_{n=0}^\infty \sum\limits_{i, j=1}^n \mathbb{E}\left[ X_i X_j \right] P( N(t) = n )
 \quad \text{si $\{X_i\}$ y $N(t)$ son independientes} \\
-&amp; = &amp; \sum\limits_{n=0}^\infty \left( \sum\limits_{i=1}^n \mathbb{E}\left[ X_i^2 \right]
+&amp; = \sum\limits_{n=0}^\infty \left( \sum\limits_{i=1}^n \mathbb{E}\left[ X_i^2 \right]
 + \sum\limits_{i,j=1,i\neq j}^n \mathbb{E}\left[ X_i X_j \right] \right) P( N(t) = n ) \\
-&amp; = &amp; \sum\limits_{n=0}^\infty \left( n \mathbb{E}\left[ X^2 \right] + n(n-1) \mathbb{E}\left[ X \right]^2 \right) P( N(t) = n )
+&amp; = \sum\limits_{n=0}^\infty \left( n \mathbb{E}\left[ X^2 \right] + n(n-1) \mathbb{E}\left[ X \right]^2 \right) P( N(t) = n )
 \quad \text{si $\{X_i\}$ son i.i.d} \\
-&amp; = &amp; \mathbb{E}\left[N(t)\right] \mathbb{E}\left[X^2\right] + \mathbb{E}\left[N(t)^2\right] \mathbb{E}\left[X\right]^2
+&amp; = \mathbb{E}\left[N(t)\right] \mathbb{E}\left[X^2\right] + \mathbb{E}\left[N(t)^2\right] \mathbb{E}\left[X\right]^2
 - \mathbb{E}\left[N(t)\right] \mathbb{E}\left[X\right]^2 \\
-&amp; = &amp; \mathbb{E}\left[N(t)\right] \mathbb{V}\left[X\right] + \mathbb{E}\left[N(t)^2\right] \mathbb{E}\left[X\right]^2
-\end{eqnarray*}
+&amp; = \mathbb{E}\left[N(t)\right] \mathbb{V}\left[X\right] + \mathbb{E}\left[N(t)^2\right] \mathbb{E}\left[X\right]^2
+\end{split}
 \]</span></p>
 <p>y finalmente la varianza de <span class="math inline">\(S(t)\)</span>
 <span class="math display">\[
-\begin{eqnarray*}
+\begin{split}
 \mathbb{V}\left[S(t)\right]
-&amp; = &amp; \mathbb{E}\left[S(t)^2\right] - \mathbb{E}\left[S(t)\right]^2 \\
-&amp; = &amp; \mathbb{E}\left[N(t)\right] \mathbb{V}\left[X\right]
+&amp; = \mathbb{E}\left[S(t)^2\right] - \mathbb{E}\left[S(t)\right]^2 \\
+&amp; = \mathbb{E}\left[N(t)\right] \mathbb{V}\left[X\right]
 + \mathbb{E}\left[N(t)^2\right] \mathbb{E}\left[X\right]^2 - \mathbb{E}\left[N(t)\right]^2 \mathbb{E}\left[X\right]^2 \\
-&amp; = &amp; \mathbb{E}\left[N(t)\right] \mathbb{V}\left[X\right] + \mathbb{V}\left[N(t)\right] \mathbb{E}\left[X\right]^2
-\end{eqnarray*}
+&amp; = \mathbb{E}\left[N(t)\right] \mathbb{V}\left[X\right] + \mathbb{V}\left[N(t)\right] \mathbb{E}\left[X\right]^2
+\end{split}
 \]</span>
 Si trabajamos bajo la hipótesis que los tiempos entre arribos <span class="math inline">\(\{W_n\}\)</span> son i.i.d, con distribución
 de probabilidad común <span class="math inline">\(F_W\)</span>. Podemos comprender y estudiar de una forma un poco más sencilla el
@@ -13556,37 +13556,37 @@ proceso estocástico atado a la frecuencia de los siniestros <span class="math i
 además es de observar que <span class="math inline">\(\{ T_{n+1} \leq t\} \subset \{ T_{n} \leq t\}\)</span>. Con todo esto en
 consideración para cualquier <span class="math inline">\(n &gt; 0\)</span>.
 <span class="math display">\[
-\begin{eqnarray*}
+\begin{split}
 P( N(t) = n )
-&amp; = &amp; P( T_n \leq t \land T_{n+1} &gt; t ) \\
-&amp; = &amp; P( \{T_n \leq t \} \setminus \{ T_{n+1} \leq t\} ) \\
-&amp; = &amp; P( T_n \leq t ) - P( T_{n+1} \leq t ) \\
-&amp; = &amp; F_W^{\star n}( t ) - F_W^{\star n + 1}( t )
-\end{eqnarray*}
+&amp; = P( T_n \leq t \land T_{n+1} &gt; t ) \\
+&amp; = P( \{T_n \leq t \} \setminus \{ T_{n+1} \leq t\} ) \\
+&amp; = P( T_n \leq t ) - P( T_{n+1} \leq t ) \\
+&amp; = F_W^{\star n}( t ) - F_W^{\star n + 1}( t )
+\end{split}
 \]</span></p>
 <p>el caso <span class="math inline">\(n = 0\)</span> también es sencillo
 <span class="math display">\[
-\begin{eqnarray*}
+\begin{split}
 P( N(t) = 0 )
-&amp; = &amp; P( T_0 \leq t \land T_1 &gt; t ) \\
-&amp; = &amp; P( \{T_0 \leq t \} \setminus \{ T_1 \leq t\} ) \\
-&amp; = &amp; P( T_0 \leq t ) - P( T_1 \leq t ) \\
-&amp; = &amp; 1 - F_W^{\star 1}( t ) \\
-&amp; = &amp; F_W^{\star 0}( t ) - F_W^{\star 1}( t )
-\end{eqnarray*}
+&amp; = P( T_0 \leq t \land T_1 &gt; t ) \\
+&amp; = P( \{T_0 \leq t \} \setminus \{ T_1 \leq t\} ) \\
+&amp; = P( T_0 \leq t ) - P( T_1 \leq t ) \\
+&amp; = 1 - F_W^{\star 1}( t ) \\
+&amp; = F_W^{\star 0}( t ) - F_W^{\star 1}( t )
+\end{split}
 \]</span></p>
 <p>De lo anterior resulta que la esperanza de <span class="math inline">\(N(t)\)</span>, está dada por la siguiente serie.
 <span class="math display">\[
-\begin{eqnarray*}
+\begin{split}
 \mathbb{E}[ N( t ) ]
-&amp; = &amp; \sum\limits_{n=0}^{+\infty} n P( N(t) = n ) \\
-&amp; = &amp; \sum\limits_{n=0}^{+\infty} n \left( F_W^{\star n}( t ) - F_W^{\star n + 1}( t ) \right) \\
-&amp; = &amp; 0\left( F_W^{\star 0}( t ) - F_W^{\star 1}( t ) \right)
+&amp; = \sum\limits_{n=0}^{+\infty} n P( N(t) = n ) \\
+&amp; = \sum\limits_{n=0}^{+\infty} n \left( F_W^{\star n}( t ) - F_W^{\star n + 1}( t ) \right) \\
+&amp; = 0\left( F_W^{\star 0}( t ) - F_W^{\star 1}( t ) \right)
 + 1\left( F_W^{\star 1}( t ) - F_W^{\star 2}( t ) \right)
 + 2\left( F_W^{\star 2}( t ) - F_W^{\star 3}( t ) \right)
 + \cdots \\
-&amp; = &amp; \sum\limits_{n=1}^{+\infty} F_W^{\star n}( t )
-\end{eqnarray*}
+&amp; = \sum\limits_{n=1}^{+\infty} F_W^{\star n}( t )
+\end{split}
 \]</span></p>
 <div id="algoritmo-de-simulación-3" class="section level3 hasAnchor" number="6.10.1">
 <h3><span class="header-section-number">6.10.1</span> Algoritmo de simulación<a href="#algoritmo-de-simulaci%C3%B3n-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -13647,13 +13647,13 @@ que la suma de <span class="math inline">\(n\)</span> exponenciales sigue una le
 <span class="math inline">\(F_W^{\star n}\)</span> es una <span class="math inline">\(Gamma( n, \lambda )\)</span>. Así por tanto, el proceso estocástico de conteo
 <span class="math inline">\(N(t) = \#\left\{ n \in \mathbb{N}\ \middle|\ T_n \leq t \right\}\)</span> tiene las siguientes probabilidades
 <span class="math display">\[
-\begin{eqnarray*}
+\begin{split}
 P( N( t ) = n )
-&amp; = &amp; F_W^{\star n}( t ) - F_W^{\star n + 1}( t ) \\
-&amp; = &amp; \exp( -\lambda t ) \sum\limits_{k=n}^{+\infty} \frac{(\lambda t)^k}{k!}
+&amp; = F_W^{\star n}( t ) - F_W^{\star n + 1}( t ) \\
+&amp; = \exp( -\lambda t ) \sum\limits_{k=n}^{+\infty} \frac{(\lambda t)^k}{k!}
 - \exp( -\lambda t ) \sum\limits_{k={n+1}}^{+\infty} \frac{(\lambda t)^k}{k!} \\
-&amp; = &amp; \exp( -\lambda t ) \frac{(\lambda t)^n}{n!}
-\end{eqnarray*}
+&amp; = \exp( -\lambda t ) \frac{(\lambda t)^n}{n!}
+\end{split}
 \]</span></p>
 <p>En conclusión <span class="math inline">\(N(t)\)</span> tiene como distribución una ley de Poisson <span class="math inline">\(Pois( \lambda t )\)</span>, en particular
 se conoce a <span class="math inline">\(N\)</span> como un proceso de Poisson.</p>
@@ -13849,7 +13849,7 @@ gitbook.start({
     "link": null,
     "text": null
   },
-  "download": ["seguros_generales.pdf", "seguros_generales.epub"],
+  "download": ["seguros_generales.pdf"],
   "search": {
     "engine": "fuse",
     "options": null
