@@ -629,17 +629,17 @@ f_X( x )
 \right.
 $$
 $$
-\begin{eqnarray*}
+\begin{split}
 \E[X^k] 
-& = & \frac{\theta^k \Gamma\left( \alpha + \frac{k}{\tau}\right)}{\Gamma( \alpha )},
+& = \frac{\theta^k \Gamma\left( \alpha + \frac{k}{\tau}\right)}{\Gamma( \alpha )},
 \quad \text{si}\ k > -\alpha \tau \\
 \E[X]
-& = & \frac{\theta \Gamma\left( \alpha + \frac{1}{\tau}\right)}{\Gamma( \alpha )},
+& = \frac{\theta \Gamma\left( \alpha + \frac{1}{\tau}\right)}{\Gamma( \alpha )},
 \quad \text{si}\ 1 > -\alpha \tau \\
 \V[X] 
-& = & \frac{\theta^2 \Gamma\left( \alpha + \frac{2}{\tau}\right)}{\Gamma( \alpha )}
+& = \frac{\theta^2 \Gamma\left( \alpha + \frac{2}{\tau}\right)}{\Gamma( \alpha )}
 - \frac{\theta^2 \Gamma\left( \alpha + \frac{1}{\tau}\right)^2}{\Gamma( \alpha )^2}
-\end{eqnarray*}
+\end{split}
 $$
 :::
 ::::
@@ -693,16 +693,16 @@ f_X( x )
 $$
 
 $$
-\begin{eqnarray*}
+\begin{split}
 \E[X^k] 
-& = & \frac{\theta^k \Gamma\left( \tau + \frac{k}{\gamma}\right) \Gamma\left( \tau - \frac{k}{\gamma}\right)}{\Gamma( \alpha ) \Gamma( \tau )},
+& = \frac{\theta^k \Gamma\left( \tau + \frac{k}{\gamma}\right) \Gamma\left( \tau - \frac{k}{\gamma}\right)}{\Gamma( \alpha ) \Gamma( \tau )},
 \quad \text{si}\ -\tau \gamma < k < \tau \gamma \\
 \E[X]
-& = & \frac{\theta \Gamma\left( \tau + \frac{1}{\gamma}\right) \Gamma\left( \tau - \frac{1}{\gamma}\right)}{\Gamma( \alpha ) \Gamma( \tau )} \\
+& = \frac{\theta \Gamma\left( \tau + \frac{1}{\gamma}\right) \Gamma\left( \tau - \frac{1}{\gamma}\right)}{\Gamma( \alpha ) \Gamma( \tau )} \\
 \V[X] 
-& = & \frac{\theta^2 \Gamma\left( \tau + \frac{2}{\gamma}\right) \Gamma\left( \tau - \frac{2}{\gamma}\right)}{\Gamma( \alpha ) \Gamma( \tau )}
+& = \frac{\theta^2 \Gamma\left( \tau + \frac{2}{\gamma}\right) \Gamma\left( \tau - \frac{2}{\gamma}\right)}{\Gamma( \alpha ) \Gamma( \tau )}
 - \frac{\theta^2 \Gamma\left( \tau + \frac{1}{\gamma}\right)^2 \Gamma\left( \tau - \frac{1}{\gamma}\right)^2}{\Gamma( \alpha )^2 \Gamma( \tau )^2}
-\end{eqnarray*}
+\end{split}
 $$
 :::
 ::::
@@ -1093,12 +1093,12 @@ un valor $h > 0$, y los eventos
 $B_i = \left\{ \omega \in \Omega \middle| x_i - h \leq X( \omega ) \leq x_i + h \right\}$ y una 
 aproximación de la función de verosimilitud en función de $h$, con la siguiente forma:
 $$
-\begin{eqnarray*}
+\begin{split}
 \ell_h( \theta )
-& = & \sum\limits_{i=1}^n \log P_{\theta} \left( B_i \right) \\
-& = & \sum\limits_{i=1}^n \log P_{\theta} \left( x_i - h \leq X \leq x_i + h \right) \\
-& = & \sum\limits_{i=1}^n \log \left( F\left( x_i + h, \theta \right) - F\left( x_i - h, \theta \right) \right) \\
-\end{eqnarray*}
+& = \sum\limits_{i=1}^n \log P_{\theta} \left( B_i \right) \\
+& = \sum\limits_{i=1}^n \log P_{\theta} \left( x_i - h \leq X \leq x_i + h \right) \\
+& = \sum\limits_{i=1}^n \log \left( F\left( x_i + h, \theta \right) - F\left( x_i - h, \theta \right) \right) \\
+\end{split}
 $$
 
 Sabemos de los diferentes resultados de análisis para funciones de variación acotada, como es el 
@@ -1109,20 +1109,20 @@ cada valor observado $x_i \in \Dif F$ es un punto de continuidad donde la funci�
 $F$ es diferenciable o es un punto de singularidad, así los valores observados en la muestra se pueden 
 clasificar en estos dos tipos @KolmoFunAnalysis. De ello se puede dividir la suma anterior.
 $$
-\begin{eqnarray*}
+\begin{split}
 \ell_h( \theta )
-& = & \sum\limits_{x_i \in \Dif F} \log \left( F\left( x_i + h, \theta \right) - F\left( x_i - h, \theta \right) \right) 
+& = \sum\limits_{x_i \in \Dif F} \log \left( F\left( x_i + h, \theta \right) - F\left( x_i - h, \theta \right) \right) 
 + \sum\limits_{x_i \notin \Dif F} \log \left( F\left( x_i + h, \theta \right) - F\left( x_i - h, \theta \right) \right) \\
-\end{eqnarray*}
+\end{split}
 $$
 maximizar $\ell_h$ es equivalente a maximizar la siguiente función equivalente que notaremos con el
 mismo nombre
 $$
-\begin{eqnarray*}
+\begin{split}
 \ell_h( \theta )
-& = & \frac{1}{h} \sum\limits_{x_i \in \Dif F} \log \left( F\left( x_i + h, \theta \right) - F\left( x_i - h, \theta \right) \right) 
+& = \frac{1}{h} \sum\limits_{x_i \in \Dif F} \log \left( F\left( x_i + h, \theta \right) - F\left( x_i - h, \theta \right) \right) 
 + \sum\limits_{x_i \notin \Dif F} \log \left( F\left( x_i + h, \theta \right) - F\left( x_i - h, \theta \right) \right) \\
-\end{eqnarray*}
+\end{split}
 $$
 la multiplicación de la primera suma por la constante $\frac{1}{h}$ tan solo escala la función, pero
 no cambia sus puntos críticos.
@@ -1130,14 +1130,14 @@ no cambia sus puntos críticos.
 Tomando al límite, un valor $h$ cada vez más pequeño, para encerrar aún más en un intervalo los 
 valores observados $\{x_i\}$, tenemos lo siguiente:
 $$
-\begin{eqnarray*}
+\begin{split}
 \underset{h \searrow 0}{\lim} \ell_h( \theta )
-& = & \underset{h \searrow 0}{\lim} \frac{1}{h} \sum\limits_{x_i \in \Dif F} \log \left( F\left( x_i + h, \theta \right) - F\left( x_i - h, \theta \right) \right) 
+& = \underset{h \searrow 0}{\lim} \frac{1}{h} \sum\limits_{x_i \in \Dif F} \log \left( F\left( x_i + h, \theta \right) - F\left( x_i - h, \theta \right) \right) 
 + \underset{h \searrow 0}{\lim} \sum\limits_{x_i \notin \Dif F} \log \left( F\left( x_i + h, \theta \right) - F\left( x_i - h, \theta \right) \right) \\
-& = & \sum\limits_{x_i \in \Dif F} \log \left( f(x_i,\theta) \right) 
+& = \sum\limits_{x_i \in \Dif F} \log \left( f(x_i,\theta) \right) 
 + \sum\limits_{x_i \notin \Dif F} \log \left( F\left( x_i, \theta \right) - F\left( x_i-, \theta \right) \right),\quad
 \text{si existe el límite por izquierda de $F$}
-\end{eqnarray*}
+\end{split}
 $$
 
 siendo $F\left( x_i-, \theta \right)$ el límite por izquierda de la función de distribución $F$ en 

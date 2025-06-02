@@ -38,12 +38,12 @@ $$
 La función de verosimilitud logarítmica, "log-likelihood", toma una forma específica, la cual puede
 ser trabajada con comodidad para la maximización de verosimilitud.
 $$
-\begin{eqnarray*}
+\begin{split}
 \ell( \theta )
-& = & \log f_{X_1,\ldots,X_N}( x_1, \ldots, x_N \mid \theta ) \\
-& = & \sum\limits_{i=1}^N \log f_{X_i}( x_i \mid \theta ) \\
-& = & \sum\limits_{i=1}^N \left( \log h( x_i ) + \eta( \theta ) \cdot T( x_i ) - A( \theta )  \right)
-\end{eqnarray*}
+& = \log f_{X_1,\ldots,X_N}( x_1, \ldots, x_N \mid \theta ) \\
+& = \sum\limits_{i=1}^N \log f_{X_i}( x_i \mid \theta ) \\
+& = \sum\limits_{i=1}^N \left( \log h( x_i ) + \eta( \theta ) \cdot T( x_i ) - A( \theta )  \right)
+\end{split}
 $$
 lo que podemos observar es que existe una casi linealidad respecto de la variable $\theta$. Esta 
 propiedad permite obtener un problema de maximización de verosimilitud que puede ser atacado con 
@@ -73,14 +73,14 @@ con número $n$ conocido, Wishart, categórica*.
 
 Por la condición de normalización de la densidad de probabilidad $f_X$, se satisface la igualdad:
 $$
-\begin{eqnarray*}
-1 & = & \int\limits f_X( x \mid \theta )\ dx \\
-1 & = & \int\limits h( x ) \exp\left( \eta( \theta ) \cdot T( x ) - A( \theta ) \right)\ dx \\
-1 & = & \int\limits h( x ) \exp\left( \eta( \theta ) \cdot T( x ) \right) \exp\left( - A( \theta ) \right)\ dx \\
-1 & = &  \exp\left( - A( \theta ) \right) \int\limits h( x ) \exp\left( \eta( \theta ) \cdot T( x ) \right)\ dx \\
-\exp\left( A( \theta ) \right) & = & \int\limits h( x ) \exp\left( \eta( \theta ) \cdot T( x ) \right)\ dx \\
-A( \theta ) & = & \log\left( \int\limits h( x ) \exp\left( \eta( \theta ) \cdot T( x ) \right)\ dx \right)
-\end{eqnarray*}
+\begin{split}
+1 & = \int\limits f_X( x \mid \theta )\ dx \\
+1 & = \int\limits h( x ) \exp\left( \eta( \theta ) \cdot T( x ) - A( \theta ) \right)\ dx \\
+1 & = \int\limits h( x ) \exp\left( \eta( \theta ) \cdot T( x ) \right) \exp\left( - A( \theta ) \right)\ dx \\
+1 & = \exp\left( - A( \theta ) \right) \int\limits h( x ) \exp\left( \eta( \theta ) \cdot T( x ) \right)\ dx \\
+\exp\left( A( \theta ) \right) & = \int\limits h( x ) \exp\left( \eta( \theta ) \cdot T( x ) \right)\ dx \\
+A( \theta ) & = \log\left( \int\limits h( x ) \exp\left( \eta( \theta ) \cdot T( x ) \right)\ dx \right)
+\end{split}
 $$
 de donde se determina precisamente la forma que tiene la función $A$ y su el papel como factor 
 de normalización para la distribución de la variable aleatoria $X$.
@@ -88,19 +88,19 @@ de normalización para la distribución de la variable aleatoria $X$.
 Así mismo, podemos establecer una cierta relación para la espera de los valores observados 
 de $T(X)$ en función de $A$
 $$
-\begin{eqnarray*}
-0 & = & \frac{\D}{\D \theta_i} 1 \\
-0 & = & \frac{\D}{\D \theta_i} \int\limits f_X( x \mid \theta )\ dx \\
-0 & = & \int\limits h( x ) \frac{\D}{\D \theta_i} \exp\left( \eta( \theta ) \cdot T( x ) - A( \theta ) \right)\ dx \\
-0 & = & \int\limits h( x ) \exp\left( \eta( \theta ) \cdot T( x ) - A( \theta ) \right) 
+\begin{split}
+0 & = \frac{\D}{\D \theta_i} 1 \\
+0 & = \frac{\D}{\D \theta_i} \int\limits f_X( x \mid \theta )\ dx \\
+0 & = \int\limits h( x ) \frac{\D}{\D \theta_i} \exp\left( \eta( \theta ) \cdot T( x ) - A( \theta ) \right)\ dx \\
+0 & = \int\limits h( x ) \exp\left( \eta( \theta ) \cdot T( x ) - A( \theta ) \right) 
 \left( \frac{\D \eta}{\D \theta_i}( \theta )  \cdot T( x ) -  \frac{\D A}{\D \theta_i}( \theta ) \right)\ dx \\ 
-0 & = & \int\limits h( x ) \exp\left( \eta( \theta ) \cdot T( x ) - A( \theta ) \right) 
+0 & = \int\limits h( x ) \exp\left( \eta( \theta ) \cdot T( x ) - A( \theta ) \right) 
 \frac{\D \eta}{\D \theta_i}( \theta )  \cdot T( x )\ dx \\
-& & - \frac{\D A}{\D \theta_i} ( \theta )
+& - \frac{\D A}{\D \theta_i} ( \theta )
 \int\limits h( x ) \exp\left( \eta( \theta ) \cdot T( x ) - A( \theta ) \right)\ dx \\
-0 & = & \int \limits \frac{\D \eta}{\D \theta_i}( \theta )  \cdot T( x ) f_X( x \mid \theta )\ dx
+0 & = \int \limits \frac{\D \eta}{\D \theta_i}( \theta )  \cdot T( x ) f_X( x \mid \theta )\ dx
 - \frac{\D A}{\D \theta_i}( \theta ) \int \limits f_X( x \mid \theta )\ dx
-\end{eqnarray*}
+\end{split}
 $$
 estamos en la capacidad de concluir que:
 $$
