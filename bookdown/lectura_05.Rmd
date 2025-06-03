@@ -211,8 +211,9 @@ conteo %>%
     digits = c( 0, 0, 0, 0, 5, 5, 5 ),
     format.args = list( big.mark = ',', decimal.mark = '.', scientific = FALSE ),
     escape = FALSE,
-    centering = TRUE ) %>%
-  kable_classic( font_size = 14, full_width = FALSE, html_font = "Cambria", position = "center" ) %>%
+    centering = TRUE, 
+    booktabs = TRUE ) %>%
+  kable_classic( full_width = FALSE, html_font = "Cambria", position = "center" ) %>%
   scroll_box( width = "100%", height = "500px" )
 ```
 
