@@ -84,9 +84,9 @@ for ( dr in dirs ) {
 rm( dr, dirs )
 
 # Copiando bibliografía ----------------------------------------------------------------------------
-file.copy( '~/Development/bibliography/Bibtex/bibliografia_libros.bib', 'bookdown/bib/bibliografia_libros.bib', overwrite = TRUE )
-file.copy( '~/Development/bibliography/Bibtex/bibliografia_paquetes.bib', 'bookdown/bib/bibliografia_paquetes.bib', overwrite = TRUE )
-file.copy( '~/Development/bibliography/Bibtex/bibliografia_articulos.bib', 'bookdown/bib/ibliografia_articulos.bib', overwrite = TRUE )
+file.copy( '~/Development/bibliography/Bibtex/bibliografia_libros.bib', 'bookdown/bib/biblibros.bib', overwrite = TRUE )
+file.copy( '~/Development/bibliography/Bibtex/bibliografia_paquetes.bib', 'bookdown/bib/bibpaquetes.bib', overwrite = TRUE )
+file.copy( '~/Development/bibliography/Bibtex/bibliografia_articulos.bib', 'bookdown/bib/bibarticulos.bib', overwrite = TRUE )
 
 # Descarga datos e información ---------------------------------------------------------------------
 # Descarga información si en caso está presente en la fuente de origen en Google Drive
@@ -94,16 +94,6 @@ file.copy( '~/Development/bibliography/Bibtex/bibliografia_articulos.bib', 'book
 # if ( !file.exists( fl ) ) {
 #   
 #   file_src <- as_id( 'https://drive.google.com/file/d/17E273IkxW_C4Y9Q7JqtqiDIiHnsEIXO3/view?usp=drive_link' )
-#   drive_deauth()
-#   drive_user()
-#   drive_download( file = file_src, path = fl, type = 'RData', overwrite = TRUE )
-#   
-# }
-# 
-# fl <- 'RData/INEC_cens_pob_aggregated.RData'
-# if ( !file.exists( fl ) ) {
-#   
-#   file_src <- as_id( 'https://drive.google.com/file/d/1VBDoz8n9MszL1BDIqbLKrlS7HRTlNuGo/view?usp=drive_link' )
 #   drive_deauth()
 #   drive_user()
 #   drive_download( file = file_src, path = fl, type = 'RData', overwrite = TRUE )
@@ -121,7 +111,7 @@ render_book( input = "lectura_01.Rmd", output_format = "bookdown::gitbook", outp
 #              encoding = "UTF-8", config_file = "_bookdown.yml" )
 
 # render_book( input = "lectura_01.Rmd", output_format = "all", output_dir = outdir,
-#              encoding = "UTF-8", config_file = "_bookdown.yml" )
+#              encoding = "UTF-8", config_file = "_bookdown.yml", clean = FALSE )
 
 wd <- paste0( getActiveProject(), '/' )
 setwd( wd )
