@@ -22,12 +22,15 @@ bookdown::pdf_book:
   dev: "cairo_pdf"
   latex_engine: pdflatex
   citation_package: biblatex
+  biblatexoptions: [bibencoding=utf8, style=numeric-verb, citestyle=numeric, labelnumber=true,
+    backend=biber, natbib=false, maxnames=10, sorting=nty, maxcitenames=2, hyperref=true]
+  template: null
+  pandoc_args: --top-level-division=chapter
   toc: true
   toc_depth: 3
   toc_unnumbered: true
   toc_appendix: true
   quote_footer: ["\\VA{", "}{}"]
-  template: null
   fig_caption: true
   fig_width: 7
   fig_height: 6
