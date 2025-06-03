@@ -8,10 +8,7 @@ link-citations: yes
 colorlinks: yes
 graphics: yes
 description: ""
-bibliography: [ 
-  "bib/bibliografia_libros.bib", 
-  "bib/bibliografia_paquetes.bib", 
-  "bib/bibliografia_articulos.bib" ]
+bibliography: [ "bib/bibliografia_libros.bib", "bib/bibliografia_paquetes.bib", "bib/bibliografia_articulos.bib" ]
 csl: "springer-basic-brackets-no-et-al-alphabetical.csl"
 cover-image: ""
 ---
@@ -100,6 +97,7 @@ if ( !knitr::is_latex_output() ){
 ```
 
 <!------------------------------------------------------------------------------------------------->
+```{asis l1c5, echo=!knitr::is_latex_output()}
 # Materia {#materia}
 
 Las presentes notas de curso han sido creadas para la materia **Matemática Actuarial de los 
@@ -200,6 +198,7 @@ GIL FANA: Elementos de Matemáticas para las Ciencias del Seguro. Fundación Map
 2. Editor de código: RStudio, VScode, ...
 
 3. Paquete R *actuar* @actuar.
+```
 
 ```{r l1end, echo = FALSE}
 rm( list = ls()[ ls() != 'def.chunk.hook' ] )
