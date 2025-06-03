@@ -1,2 +1,6 @@
 <!------------------------------------------------------------------------------------------------->
 # Bibliografía {#bibliografia}
+
+```{asis l11c1, echo=knitr::is_latex_output()}
+\printbibliography[heading = none]
+```
