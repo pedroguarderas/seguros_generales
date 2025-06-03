@@ -23,7 +23,7 @@
 <meta name="author" content="Leonardo Vélez y Pedro Guarderas" />
 
 
-<meta name="date" content="2025-06-02" />
+<meta name="date" content="2025-06-03" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -825,21 +825,84 @@ del siniestro.</p></li>
 </div>
 <div id="seguro-o-apuesta" class="section level2 hasAnchor" number="3.14">
 <h2><span class="header-section-number">3.14</span> Seguro o apuesta?<a href="introduccion_operaciones_seguros.html#seguro-o-apuesta" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>knitr::kable(
-as.data.frame(
-matrix(
-c(
-‘Seguro’, ‘Apuesta’,
-‘Respaldo legal estricto’, ‘Puede ser ilegal’,
-‘Interés asegurable indispensable’, ‘Carece de interés asegurable’,
-‘Máxima buena fe’, ‘No necesariamente de buena fe’,
-‘Nunca es fuente de enriquecimiento’, ‘Puede ser fuente de enriquecimiento’
-),
-nrow = 5, ncol = 2, byrow = TRUE )
-),
-booktabs = TRUE,
-caption = ‘Seguros vs apuestas’
-)</p>
+<p></p>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r fold-hide"><code class="sourceCode r"><span id="cb16-1"><a href="introduccion_operaciones_seguros.html#cb16-1" tabindex="-1"></a>tbd <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(</span>
+<span id="cb16-2"><a href="introduccion_operaciones_seguros.html#cb16-2" tabindex="-1"></a><span class="fu">matrix</span>( <span class="fu">c</span>(</span>
+<span id="cb16-3"><a href="introduccion_operaciones_seguros.html#cb16-3" tabindex="-1"></a>    <span class="st">&#39;Respaldo legal estricto&#39;</span>,              <span class="st">&#39;Puede ser ilegal&#39;</span>,</span>
+<span id="cb16-4"><a href="introduccion_operaciones_seguros.html#cb16-4" tabindex="-1"></a>    <span class="st">&#39;Interés asegurable indispensable&#39;</span>,     <span class="st">&#39;Carece de interés asegurable&#39;</span>,</span>
+<span id="cb16-5"><a href="introduccion_operaciones_seguros.html#cb16-5" tabindex="-1"></a>    <span class="st">&#39;Máxima buena fe&#39;</span>,                      <span class="st">&#39;No necesariamente de buena fe&#39;</span>,</span>
+<span id="cb16-6"><a href="introduccion_operaciones_seguros.html#cb16-6" tabindex="-1"></a>    <span class="st">&#39;Nunca es fuente de enriquecimiento&#39;</span>,   <span class="st">&#39;Puede ser fuente de enriquecimiento&#39;</span> </span>
+<span id="cb16-7"><a href="introduccion_operaciones_seguros.html#cb16-7" tabindex="-1"></a>  ),</span>
+<span id="cb16-8"><a href="introduccion_operaciones_seguros.html#cb16-8" tabindex="-1"></a>  <span class="at">nrow =</span> <span class="dv">4</span>, <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span> )</span>
+<span id="cb16-9"><a href="introduccion_operaciones_seguros.html#cb16-9" tabindex="-1"></a>)</span>
+<span id="cb16-10"><a href="introduccion_operaciones_seguros.html#cb16-10" tabindex="-1"></a>tbd <span class="sc">%&gt;%</span></span>
+<span id="cb16-11"><a href="introduccion_operaciones_seguros.html#cb16-11" tabindex="-1"></a>  <span class="fu">kable</span>(</span>
+<span id="cb16-12"><a href="introduccion_operaciones_seguros.html#cb16-12" tabindex="-1"></a>    <span class="at">label =</span> <span class="cn">NA</span>,</span>
+<span id="cb16-13"><a href="introduccion_operaciones_seguros.html#cb16-13" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">&#39;Seguros vs Apuestas&#39;</span>,</span>
+<span id="cb16-14"><a href="introduccion_operaciones_seguros.html#cb16-14" tabindex="-1"></a>    <span class="at">row.names =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb16-15"><a href="introduccion_operaciones_seguros.html#cb16-15" tabindex="-1"></a>    <span class="at">col.names =</span> <span class="fu">c</span>( <span class="st">&#39;Seguros&#39;</span>, <span class="st">&#39;Apuestas&#39;</span> ),</span>
+<span id="cb16-16"><a href="introduccion_operaciones_seguros.html#cb16-16" tabindex="-1"></a>    <span class="at">align =</span> <span class="st">&#39;ll&#39;</span>,</span>
+<span id="cb16-17"><a href="introduccion_operaciones_seguros.html#cb16-17" tabindex="-1"></a>    <span class="at">digits =</span> <span class="fu">c</span>( <span class="dv">0</span>, <span class="dv">0</span> ),</span>
+<span id="cb16-18"><a href="introduccion_operaciones_seguros.html#cb16-18" tabindex="-1"></a>    <span class="at">format.args =</span> <span class="fu">list</span>( <span class="at">big.mark =</span> <span class="st">&#39;,&#39;</span>, <span class="at">decimal.mark =</span> <span class="st">&#39;.&#39;</span>, <span class="at">scientific =</span> <span class="cn">FALSE</span> ),</span>
+<span id="cb16-19"><a href="introduccion_operaciones_seguros.html#cb16-19" tabindex="-1"></a>    <span class="at">escape =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb16-20"><a href="introduccion_operaciones_seguros.html#cb16-20" tabindex="-1"></a>    <span class="at">centering =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb16-21"><a href="introduccion_operaciones_seguros.html#cb16-21" tabindex="-1"></a>    <span class="at">booktabs =</span> <span class="cn">TRUE</span> ) <span class="sc">%&gt;%</span></span>
+<span id="cb16-22"><a href="introduccion_operaciones_seguros.html#cb16-22" tabindex="-1"></a>  <span class="fu">kable_classic</span>( <span class="at">full_width =</span> <span class="cn">FALSE</span>, <span class="at">html_font =</span> <span class="st">&quot;Cambria&quot;</span>, <span class="at">position =</span> <span class="st">&quot;center&quot;</span> ) <span class="sc">%&gt;%</span></span>
+<span id="cb16-23"><a href="introduccion_operaciones_seguros.html#cb16-23" tabindex="-1"></a>  <span class="fu">scroll_box</span>( <span class="at">width =</span> <span class="st">&quot;100%&quot;</span>, <span class="at">height =</span> <span class="st">&quot;300px&quot;</span> )</span></code></pre></div>
+</details>
+<div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:300px; overflow-x: scroll; width:100%; ">
+<table class=" lightable-classic" style="color: black; font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:l3t1">Tabla 3.1: </span>Seguros vs Apuestas
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Seguros
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Apuestas
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Respaldo legal estricto
+</td>
+<td style="text-align:left;">
+Puede ser ilegal
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Interés asegurable indispensable
+</td>
+<td style="text-align:left;">
+Carece de interés asegurable
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Máxima buena fe
+</td>
+<td style="text-align:left;">
+No necesariamente de buena fe
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Nunca es fuente de enriquecimiento
+</td>
+<td style="text-align:left;">
+Puede ser fuente de enriquecimiento
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p></p>
 <p>Estas características permiten distinguir claramente las operaciones de seguro de las apuestas
 o la especulación financiera.</p>
 </div>
