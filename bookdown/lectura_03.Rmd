@@ -498,8 +498,7 @@ tbd %>%
     escape = FALSE,
     centering = TRUE, 
     booktabs = TRUE ) %>%
-  kable_classic( full_width = FALSE, html_font = "Cambria", position = "center" ) %>%
-  scroll_box( width = "100%", height = "300px" )
+  kable_classic( full_width = FALSE, html_font = "Cambria", position = "center" )
 ```
 
 Estas características permiten distinguir claramente las operaciones de seguro de las apuestas 
