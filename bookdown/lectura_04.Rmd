@@ -743,7 +743,10 @@ Esto precisamente da paso a la definición de la **distribución acumulada de** 
 $$
 F( x | A ) = P\left( X \leq x \middle| A \right)
 $$
-Se satisface algunas propiedades:
+:::
+::::
+
+Además, la distribución acumulada condicionada satisface algunas propiedades:
 
 1. Si $A, B \in \F$ son dos eventos disjuntos, entonces:
 
@@ -786,8 +789,6 @@ $P\left( X \leq x \middle| A \right) \leq P( A )$, entonces $0 \leq F(x | A) \le
 
 En algunos casos la distribución acumulada de la variable aleatoria $X$ se nota por $F_X$ y la 
 distribución acumulada de $X$ condicionada por el evento $A$, se nota por $F_{X|A}$.
-:::
-::::
 
 Como hemos visto la función de distribución acumulada satisface todas las propiedades de una 
 función de distribución acumulada y por tal razón se puede calcular una esperanza, la cual vendrá 
@@ -1301,6 +1302,8 @@ se satisface la siguiente igualdad
 $$
 \Fo^{-1}\left( \Fo( f ) \right) = f
 $$
+:::
+::::
 
 Además, la transformada de Fourier satisface las siguientes propiedades:
 
@@ -1316,8 +1319,6 @@ Fourier.
 $$
 \Fo\left( f \star g \right) = \Fo( f ) \Fo( g )
 $$
-:::
-::::
 
 Para realizar algunas aproximaciones numéricas, se hace de una discretización de la transformada de
 Fourier, la misma se evalúa sobre un número finito de valores. Para ello necesitas considerar 

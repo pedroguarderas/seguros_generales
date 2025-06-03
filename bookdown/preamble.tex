@@ -68,12 +68,14 @@
 \newcommand{\VC}{\operatorname{VC}}
 \renewcommand{\Re}{\operatorname{Re}}
 
+\tcbuselibrary{skins,breakable}
+
 \newenvironment{ideabox}
-{\begin{tcolorbox}[width=\textwidth,colback=thmboxcol,colframe=thmboxcol]}
+{\begin{tcolorbox}[enhanced,breakable,width=\textwidth,colback=thmboxcol,colframe=thmboxcol]}
 {\end{tcolorbox}}
 
 \newenvironment{thmbox}
-{\begin{tcolorbox}[width=\textwidth,colback=thmboxcol,colframe=thmboxcol]}
+{\begin{tcolorbox}[enhanced,breakable,width=\textwidth,colback=thmboxcol,colframe=thmboxcol]}
 {\end{tcolorbox}}
 
 \renewcommand{\baselinestretch}{1.5}
