@@ -34,7 +34,7 @@ p <- dbinom( x = 0:n, size = n, prob = p )
 v <- 1:n * p[ 2:(n + 1) ] / p[ 1:n ]
 ```
 
-```{r l5g1, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
+```{r l5g1, out.width='80%', fig.align='center', class.source = 'fold-hide'}
 plt <- ggplot() +
   geom_point( aes( x = 1:n, y = v ), colour = 'darkred' ) + 
   xlab( TeX( "$k$" ) ) + 
@@ -70,7 +70,7 @@ p <- dpois( x = 0:n, lambda = lambda )
 v <- 1:n * p[ 2:(n + 1) ] / p[ 1:n ]
 ```
 
-```{r l5g2, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
+```{r l5g2, out.width='80%', fig.align='center', class.source = 'fold-hide'}
 plt <- ggplot() +
   geom_point( aes( x = 1:n, y = v ), colour = 'darkred' ) + 
   xlab( TeX( "$k$" ) ) + 
@@ -111,7 +111,7 @@ p <- dnbinom( x = 0:n, size = alpha, prob = p )
 v <- 1:n * p[ 2:(n + 1) ] / p[ 1:n ]
 ```
 
-```{r l5g3, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
+```{r l5g3, out.width='80%', fig.align='center', class.source = 'fold-hide'}
 plt <- ggplot() +
   geom_point( aes( x = 1:n, y = v ), colour = 'darkred' ) + 
   xlab( TeX( "$k$" ) ) + 
@@ -216,7 +216,7 @@ conteo %>%
   scroll_box( width = "100%", height = "500px" )
 ```
 
-```{r l5g4, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
+```{r l5g4, out.width='80%', fig.align='center', class.source = 'fold-hide'}
 plt <- ggplot() +
   geom_point( data = conteo, aes( x = N, y = jn ), colour = 'purple' ) + 
   xlab( TeX( "$k$" ) ) + 

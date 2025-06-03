@@ -316,7 +316,7 @@ TVaRX <- sapply(
   FUN = function( i ) ifelse( alpha[ i ] < 1, ( 1 / ( 1 - alpha[ i ] ) ) * mean( X * ( X > VaRX[ i ] ) ), max( X ) ) )
 ```
 
-```{r l7g1, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
+```{r l7g1, out.width='80%', fig.align='center', class.source = 'fold-hide'}
 plt <- ggplot() +
   geom_point( aes( x = alpha, y = VaRX ), colour = 'darkred' ) + 
   geom_point( aes( x = alpha, y = TVaRX ), colour = 'orange' ) + 
