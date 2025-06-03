@@ -14,11 +14,11 @@ para poner en práctica las decisiones financieras de:
 En general en un sistema financiero encontramos: 
 
 - Mercados de activos financieros
-- Deuda, Derivados, Títulos…
+  - Deuda, Derivados, Títulos…
 - Intermediarios (públicos y privados)
-- Bancos
-- Empresas de seguros
-- Fondos de pensiones
+  - Bancos
+  - Empresas de seguros
+  - Fondos de pensiones
 - Empresas de servicios
   - Difusión de información
   - Tarjetas de crédito, *brokers*…
@@ -175,61 +175,66 @@ manera más eficiente y personalizada y con costos más bajos.
 ## Fundamentos técnicos de los seguros
 
 Desde su concepción, la idea de la mutualización de riesgos que fundementa el seguro, despertó la 
-necesidad de **medir** ¿cuántos y cuánto costarán los '*pocos siniestros*' que deberá pagar un seguro?, 
-y por ende, cuantificar '*cuál es el monto de la prima*' que debo recolectar de la cartera de asegurados.
+necesidad de **medir** ¿cuántos son y cuánto costarán los '*pocos siniestros*' que deberá pagar un seguro?, 
+y por ende, cuantificar '*cuál es el monto de la prima*' que debería recolectar de la cartera de asegurados.
 
-Existen dos disciplinas que se ocupan de estos problemas: la *estadística* y la *teoría de probabilidades*. 
+Existen dos disciplinas que se ocupan del estudio de estos problemas: la *estadística* y la 
+*teoría de probabilidades*. 
+
 Ambas ramas estudian la forma de medir o cuantificar la incertidumbre, en base de una nueva magnitud:
-la **probabilidad** que es un número que expresa, *a priori*, el nivel de las posibilidades de que 
+la **probabilidad**, que es un número que expresa, *a priori*, el nivel de las posibilidades de que 
 un hecho ocurra.
-
-En la actualidad, el negocio de los seguros solo puede comprenderse a la luz de estas dos ramas, 
-cuyos orígenes se remontan a la correspondencia entre Blaise Pascal y Chevalier de Méré, antes de ser 
-formalizadas por la escuela rusa liderada por Kolmogorov durante la Segunda Guerra Mundial.
 
 La estadística busca asignar una medida de probabilidad a los eventos aleatorios sobre la base de la 
 observación o experimentación de esos eventos.
 
 En cambio, la teoría de probabilidades supone que la medida de la probabilidad asociada a los eventos 
-aleatorios o es conocida o se pueden calcular de forma deductiva por medio del razonamiento lógico.
+aleatorios o es conocida o se puede calcular de forma deductiva por medio del razonamiento lógico.
 
 El objetivo principal del cálculo de probabilidades es proporcionar un método científico para 
 cuantificar la probabilidad de que ocurran ciertos eventos. En este contexto, surge de forma natural 
-el concepto de variable aleatoria. Para el actuario, esta puede representar el coste de un siniestro 
-o el número de siniestros. 
+el concepto de *variable aleatoria*, que para el actuario principalmente puede representar:
+
+- el coste de un siniestro: *severidad*
+- o el número de siniestros: *frecuencia*. 
 
 Las variables aleatorias constituyen la herramienta esencial para modelar la transferencia y 
 mutualización de riesgos entre asegurados y aseguradoras. 
 
 
+### Un poco de historia...
 
 
+El sustento científico de los fundamentos del seguro comenzó con los grandes desarrollos de la 
+estadística y cálculo de probabilidades:
 
+- Correspondencia entre Pascal, Caballero de Méré y Fermat sobre problemas de apuestas
+  - se consideran los documentos que desencadenaron el desarrollo de la estadística y la teoría de 
+  probabilidades
+- Ley de los grandes números (Teorema de Bernoulli, s.XVIII y Poisson s.XIX) y
+- Desarrollo del cálculo de probabilidades (Kolmogorov, s.XX).
 
+El seguro comienza entonces a fundamentarse en las probabilidades y leyes estadísticas (en sus 
+inicios el seguro fue confundido con un juego de apuestas) que posteriormente dieron nacimiento a 
+una nueva disciplina: el *cálculo actuarial*, que demanda el **análisis de información histórica** 
+para medir los riesgos y determinar los niveles de primas que permiten financiar las operaciones de 
+seguros, considerando todos los aspectos del negocio: leyes, contabilidad, finanzas, demografía, etc.
 
-
-En sus inicios el seguro era considerado como un juego de apuestas.
-
-El gran desarrollo científico de los fundamentos del seguro comienza a fines del siglo XIX con:
-
-- Ley de los grandes números y
-- Desarrollo del cálculo de probabilidades.
-
-El seguro comienza entonces a fundamentarse en las leyes estadísticas y nace el *cálculo actuarial*
-que demanda el análisis de la información histórica para medir los riesgos y determinar los niveles 
-de primas que permiten financiar las operaciones de seguros.
-
-Sin embargo en algunos casos existen ciertas limitaciones técnicas, pues existen seguros que no se 
-basan en análisis de información histórica, porque esta no existe o es limitada:
+Retomando el tema de los límites de la mutualización de riesgos, en la actualidad, las compañías de
+seguros ofrecen coberturas que presentan ciertas limitaciones técnicas, pues no se basan en análisis 
+de información histórica, porque ésta no existe o es limitada:
 
 - Seguros “especiales” o “exóticos”
-- Seguro de las piernas de futbolistas, bailarinas…
-- Seguro de satélites
+  - Seguro de las piernas de futbolistas, bailarinas…
+  - Seguro de satélites
 - Seguros nuevos
-- SPPAT (antiguo SOAT) al inicio!
+  - Ej. SPPAT (antiguo SOAT) al inicio!
 
-En estos casos el fundamento técnico resulta subjetivo basado en análisis de grupos de expertos que
-estudian los riesgos potenciales o experiencias relacionadas que permiten determinar primas.
+En estos casos el fundamento técnico resulta subjetivo, basado en análisis de grupos de expertos que
+estudian los riesgos potenciales o experiencias relacionadas que permiten determinar primas: todo
+depende del nivel de la aversión al riesgo de los accionistas para aceptar los riesgos y de la 
+capacidad económica de la empresa para aceptar esos negocios.
+
 En estos casos es imprescindible el proceso de monitoreo de la evolución del riesgo.
 
 
@@ -324,14 +329,14 @@ ocurre la eventualidad prevista en el contrato.
 
 -- Ref. Art. 1, Decreto Supremo 1147 del 29/Nov/1963
 
-## Actores
+### Actores {-}
 
 - El asegurado
   - El tomador del seguro
   - El portador del riesgo
   - El beneficiario
 - La empresa de seguros
-- La empresa de reaseguros y retrocesiones
+- Las empresas de reaseguros o retrocesiones
 
 ## Clasificación según la materia asegurada
 
@@ -347,7 +352,7 @@ familiar de las personas.
 -- Ref. Decreto 1147
 
 
-### Seguros de personas
+### Seguros de personas {-}
 
 - Seguros de vida
 
@@ -357,7 +362,7 @@ familiar de las personas.
 
 - Seguros de natalidad
 
-### Seguros generales o de daños
+### Seguros generales o de daños {-}
 
 - Seguro de cosas
 - El objeto amenazado es un bien del patrimonio del asegurado
@@ -389,7 +394,7 @@ familiar de las personas.
 un capital o una renta periódica
 
 2. Seguros generales (de daños)
--Cubren los riesgos causados por afecciones, pérdidas o daños de la salud, de los bienes o del
+- Cubren los riesgos causados por afecciones, pérdidas o daños de la salud, de los bienes o del
 patrimonio y fianzas o garantías.
 
 -- Ref. Art. 3, Ley General de Seguros.
@@ -406,7 +411,7 @@ patrimonio y fianzas o garantías.
 4. Subrogación
 
 
-### Principio de buena fe
+### Principio de buena fe {-}
 
 Tanto el asegurador como el asegurado deben actuar con máxima honestidad,
 moral y buena fe.
@@ -416,7 +421,7 @@ El asegurado debe declarar todas las características del riesgo que se asegura.
 El asegurador debe explicar con claridad y detalle las condiciones de la cobertura que ofrece.
 
 
-### Principio del interés asegurable
+### Principio del interés asegurable {-}
 
 El asegurado debe sufrir una pérdida económica si el riesgo asegurado se realiza.
 
@@ -437,7 +442,7 @@ persona tenga en que no se produzca un siniestro.
 
 -- Ref. Decreto 1147
 
-### Principio de indemnización
+### Principio de indemnización {-}
 
 La indemnización no puede exceder el valor real del interés asegurado ni el monto efectivo del 
 prejuicio patrimonial ni el límite de la suma asegurada.
@@ -453,7 +458,7 @@ libremente le asignen las partes contratantes.
 
 -- Ref. Decreto 1147
 
-### Principio de subrogación
+### Principio de subrogación {-}
 
 - El asegurador sustituye al asegurado en el ejercicio de las acciones o derechos que tendría este, 
 a fin de recuperar la indemnización.
@@ -466,9 +471,8 @@ del siniestro.
 -- Ref. Decreto 1147
 
 - Consecuencia
-
-Bienes recuperables pasan a ser propiedad de la compañía 
-Ej. Carros robados y recuperados.
+  -Bienes recuperables pasan a ser propiedad de la compañía 
+  -Ej. carros robados y recuperados.
 
 
 ## Seguro o apuesta?
@@ -511,15 +515,13 @@ Identificamos tres problemas principales:
 
 ### Asegurabilidad de riesgos
 
-Recordemos que el seguro se fundamenta en la compensación o mutualización de riesgos.
+Recordemos que el seguro se fundamenta en la compensación o mutualización de riesgos que no siempre
+es posible aplicar, y además, el seguro enfrenta algunas limitaciones técnicas. Por lo tanto existen
+riesgos que no son siempre asegurables y su transferencia dependerá de la capacidad financiera y 
+aversión al riesgo de la compañía de seguros.
 
-- Existen riesgos difícilmente asegurables 
-- Riesgos únicos en su especie
-- No existe información histórica
-- Límites de asegurabilidad subjetivos que dependen de capacidad financiera y aversión al riesgo 
-de la compañía.
+### Riesgos asegurables (deseables) {-}
 
-- Riesgos asegurables (deseables)
   - Riesgos comparables y de naturaleza homogénea
   - Es necesario que se puedan mutualizar 
     - Para que se cumpla la ley de los grandes números
@@ -546,7 +548,7 @@ financiero
 Con la finalidad de equilibrar el portafolio el mercado a puesto en práctica algunas medidas:
 
 - Personalización de la prima para asegurados siniestrosos 
-- Ej. bonus malus
+  - Ej. bonus malus
 - Proceso de selección de asegurados en base a declaración del riesgo
 - Potestad de la compañía para rechazar un seguro
 - Obligación de asegurar?
@@ -586,12 +588,11 @@ Con el objetivo de incentivar la prevención, el mercado ha desarrollado algunas
 
 - Prima pura o prima de riesgo: es el costo del riesgo
 - Prima neta: prima pura más un recargo de seguridad
-- Prima de tarifa: prima neta más recargos de operación
-- costo del riesgo
-- gastos de adquisición, 
-- gastos de administración,
-- utilidad razonable
-- otros gastos justificados
+- Prima de tarifa: prima neta más recargos de operación:
+  - gastos de adquisición, 
+  - gastos de administración,
+  - utilidad razonable
+  - otros gastos justificados (legales, inspección, ...)
 - Prima comercial: prima de tarifa más impuestos, contribuciones, etc.
 
 ### Relación fundamental {-}
@@ -614,4 +615,4 @@ Los porcentajes se calculan sobre la prima de tarifa.
 
 - Estudio de caso.
 
-<!- ver web ->
+<!-- ver web -->
