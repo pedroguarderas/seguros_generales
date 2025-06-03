@@ -556,14 +556,15 @@ P( N = n ) = \exp(-g( \beta x ) ER( x )) \frac{g( \beta x )^n ER( x )^n}{n!}
 <span id="cb119-13"><a href="modelos_glm.html#cb119-13" tabindex="-1"></a>    <span class="at">digits =</span> <span class="fu">c</span>( <span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">4</span>, <span class="dv">4</span> ),</span>
 <span id="cb119-14"><a href="modelos_glm.html#cb119-14" tabindex="-1"></a>    <span class="at">format.args =</span> <span class="fu">list</span>( <span class="at">big.mark =</span> <span class="st">&#39;,&#39;</span>, <span class="at">decimal.mark =</span> <span class="st">&#39;.&#39;</span>, <span class="at">scientific =</span> <span class="cn">FALSE</span> ),</span>
 <span id="cb119-15"><a href="modelos_glm.html#cb119-15" tabindex="-1"></a>    <span class="at">escape =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb119-16"><a href="modelos_glm.html#cb119-16" tabindex="-1"></a>    <span class="at">centering =</span> <span class="cn">TRUE</span> ) <span class="sc">%&gt;%</span></span>
-<span id="cb119-17"><a href="modelos_glm.html#cb119-17" tabindex="-1"></a>  <span class="fu">kable_classic</span>( <span class="at">font_size =</span> <span class="dv">14</span>, <span class="at">full_width =</span> <span class="cn">FALSE</span>, <span class="at">html_font =</span> <span class="st">&quot;Cambria&quot;</span>, <span class="at">position =</span> <span class="st">&quot;center&quot;</span> ) <span class="sc">%&gt;%</span></span>
-<span id="cb119-18"><a href="modelos_glm.html#cb119-18" tabindex="-1"></a>  <span class="fu">scroll_box</span>( <span class="at">width =</span> <span class="st">&quot;100%&quot;</span>, <span class="at">height =</span> <span class="st">&quot;500px&quot;</span> )</span></code></pre></div>
+<span id="cb119-16"><a href="modelos_glm.html#cb119-16" tabindex="-1"></a>    <span class="at">centering =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb119-17"><a href="modelos_glm.html#cb119-17" tabindex="-1"></a>    <span class="at">booktabs =</span> <span class="cn">TRUE</span> ) <span class="sc">%&gt;%</span></span>
+<span id="cb119-18"><a href="modelos_glm.html#cb119-18" tabindex="-1"></a>  <span class="fu">kable_classic</span>( <span class="at">full_width =</span> <span class="cn">FALSE</span>, <span class="at">html_font =</span> <span class="st">&quot;Cambria&quot;</span>, <span class="at">position =</span> <span class="st">&quot;center&quot;</span> ) <span class="sc">%&gt;%</span></span>
+<span id="cb119-19"><a href="modelos_glm.html#cb119-19" tabindex="-1"></a>  <span class="fu">scroll_box</span>( <span class="at">width =</span> <span class="st">&quot;100%&quot;</span>, <span class="at">height =</span> <span class="st">&quot;500px&quot;</span> )</span></code></pre></div>
 </details>
 <div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:500px; overflow-x: scroll; width:100%; ">
-<table class=" lightable-classic" style="font-size: 14px; color: black; font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
-<caption style="font-size: initial !important;">
-Pólizas y reclamos de automóviles en Bélgica
+<table class=" lightable-classic" style="color: black; font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:l9t1">Tabla 8.1: </span>Pólizas y reclamos de automóviles en Bélgica
 </caption>
 <thead>
 <tr>
@@ -6248,14 +6249,15 @@ private
 <span id="cb121-9"><a href="modelos_glm.html#cb121-9" tabindex="-1"></a>    <span class="at">digits =</span> <span class="fu">c</span>( <span class="dv">0</span>, <span class="dv">6</span>, <span class="dv">6</span>, <span class="dv">6</span>, <span class="dv">6</span> ),</span>
 <span id="cb121-10"><a href="modelos_glm.html#cb121-10" tabindex="-1"></a>    <span class="at">format.args =</span> <span class="fu">list</span>( <span class="at">big.mark =</span> <span class="st">&#39;,&#39;</span>, <span class="at">decimal.mark =</span> <span class="st">&#39;.&#39;</span>, <span class="at">scientific =</span> <span class="cn">FALSE</span> ),</span>
 <span id="cb121-11"><a href="modelos_glm.html#cb121-11" tabindex="-1"></a>    <span class="at">escape =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb121-12"><a href="modelos_glm.html#cb121-12" tabindex="-1"></a>    <span class="at">centering =</span> <span class="cn">TRUE</span> ) <span class="sc">%&gt;%</span></span>
-<span id="cb121-13"><a href="modelos_glm.html#cb121-13" tabindex="-1"></a>  <span class="fu">kable_classic</span>( <span class="at">font_size =</span> <span class="dv">14</span>, <span class="at">full_width =</span> <span class="cn">FALSE</span>, <span class="at">html_font =</span> <span class="st">&quot;Cambria&quot;</span>, <span class="at">position =</span> <span class="st">&quot;center&quot;</span> ) <span class="sc">%&gt;%</span></span>
-<span id="cb121-14"><a href="modelos_glm.html#cb121-14" tabindex="-1"></a>  <span class="fu">scroll_box</span>( <span class="at">width =</span> <span class="st">&quot;100%&quot;</span>, <span class="at">height =</span> <span class="st">&quot;300px&quot;</span> )</span></code></pre></div>
+<span id="cb121-12"><a href="modelos_glm.html#cb121-12" tabindex="-1"></a>    <span class="at">centering =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb121-13"><a href="modelos_glm.html#cb121-13" tabindex="-1"></a>    <span class="at">booktabs =</span> <span class="cn">TRUE</span> ) <span class="sc">%&gt;%</span></span>
+<span id="cb121-14"><a href="modelos_glm.html#cb121-14" tabindex="-1"></a>  <span class="fu">kable_classic</span>( <span class="at">full_width =</span> <span class="cn">FALSE</span>, <span class="at">html_font =</span> <span class="st">&quot;Cambria&quot;</span>, <span class="at">position =</span> <span class="st">&quot;center&quot;</span> ) <span class="sc">%&gt;%</span></span>
+<span id="cb121-15"><a href="modelos_glm.html#cb121-15" tabindex="-1"></a>  <span class="fu">scroll_box</span>( <span class="at">width =</span> <span class="st">&quot;100%&quot;</span>, <span class="at">height =</span> <span class="st">&quot;300px&quot;</span> )</span></code></pre></div>
 </details>
 <div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:300px; overflow-x: scroll; width:100%; ">
-<table class=" lightable-classic" style="font-size: 14px; color: black; font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
-<caption style="font-size: initial !important;">
-Resultados del modelo GLM
+<table class=" lightable-classic" style="color: black; font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:l9t2">Tabla 8.2: </span>Resultados del modelo GLM
 </caption>
 <thead>
 <tr>
@@ -6379,14 +6381,15 @@ fueldiesel
 <span id="cb122-9"><a href="modelos_glm.html#cb122-9" tabindex="-1"></a>    <span class="at">digits =</span> <span class="fu">c</span>( <span class="dv">4</span>, <span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">0</span> ),</span>
 <span id="cb122-10"><a href="modelos_glm.html#cb122-10" tabindex="-1"></a>    <span class="at">format.args =</span> <span class="fu">list</span>( <span class="at">big.mark =</span> <span class="st">&#39;,&#39;</span>, <span class="at">decimal.mark =</span> <span class="st">&#39;.&#39;</span>, <span class="at">scientific =</span> <span class="cn">FALSE</span> ),</span>
 <span id="cb122-11"><a href="modelos_glm.html#cb122-11" tabindex="-1"></a>    <span class="at">escape =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb122-12"><a href="modelos_glm.html#cb122-12" tabindex="-1"></a>    <span class="at">centering =</span> <span class="cn">TRUE</span> ) <span class="sc">%&gt;%</span></span>
-<span id="cb122-13"><a href="modelos_glm.html#cb122-13" tabindex="-1"></a>  <span class="fu">kable_classic</span>( <span class="at">font_size =</span> <span class="dv">14</span>, <span class="at">full_width =</span> <span class="cn">FALSE</span>, <span class="at">html_font =</span> <span class="st">&quot;Cambria&quot;</span>, <span class="at">position =</span> <span class="st">&quot;center&quot;</span> ) <span class="sc">%&gt;%</span></span>
-<span id="cb122-14"><a href="modelos_glm.html#cb122-14" tabindex="-1"></a>  <span class="fu">scroll_box</span>( <span class="at">width =</span> <span class="st">&quot;100%&quot;</span>, <span class="at">height =</span> <span class="st">&quot;200px&quot;</span> )</span></code></pre></div>
+<span id="cb122-12"><a href="modelos_glm.html#cb122-12" tabindex="-1"></a>    <span class="at">centering =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb122-13"><a href="modelos_glm.html#cb122-13" tabindex="-1"></a>    <span class="at">booktabs =</span> <span class="cn">TRUE</span> ) <span class="sc">%&gt;%</span></span>
+<span id="cb122-14"><a href="modelos_glm.html#cb122-14" tabindex="-1"></a>  <span class="fu">kable_classic</span>( <span class="at">full_width =</span> <span class="cn">FALSE</span>, <span class="at">html_font =</span> <span class="st">&quot;Cambria&quot;</span>, <span class="at">position =</span> <span class="st">&quot;center&quot;</span> ) <span class="sc">%&gt;%</span></span>
+<span id="cb122-15"><a href="modelos_glm.html#cb122-15" tabindex="-1"></a>  <span class="fu">scroll_box</span>( <span class="at">width =</span> <span class="st">&quot;100%&quot;</span>, <span class="at">height =</span> <span class="st">&quot;200px&quot;</span> )</span></code></pre></div>
 </details>
 <div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:200px; overflow-x: scroll; width:100%; ">
-<table class=" lightable-classic" style="font-size: 14px; color: black; font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
-<caption style="font-size: initial !important;">
-Resultados del modelo GLM
+<table class=" lightable-classic" style="color: black; font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:l9t3">Tabla 8.3: </span>Resultados del modelo GLM
 </caption>
 <thead>
 <tr>
