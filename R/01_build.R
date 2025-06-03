@@ -84,9 +84,9 @@ for ( dr in dirs ) {
 rm( dr, dirs )
 
 # Copiando bibliografía ----------------------------------------------------------------------------
-file.copy( '~/Development/bibliography/Bibtex/bibliografia_libros.bib', 'bookdown/bibliografia_libros.bib', overwrite = TRUE )
-file.copy( '~/Development/bibliography/Bibtex/bibliografia_paquetes.bib', 'bookdown/bibliografia_paquetes.bib', overwrite = TRUE )
-file.copy( '~/Development/bibliography/Bibtex/bibliografia_articulos.bib', 'bookdown/bibliografia_articulos.bib', overwrite = TRUE )
+file.copy( '~/Development/bibliography/Bibtex/bibliografia_libros.bib', 'bookdown/bib/bibliografia_libros.bib', overwrite = TRUE )
+file.copy( '~/Development/bibliography/Bibtex/bibliografia_paquetes.bib', 'bookdown/bib/bibliografia_paquetes.bib', overwrite = TRUE )
+file.copy( '~/Development/bibliography/Bibtex/bibliografia_articulos.bib', 'bookdown/bib/ibliografia_articulos.bib', overwrite = TRUE )
 
 # Descarga datos e información ---------------------------------------------------------------------
 # Descarga información si en caso está presente en la fuente de origen en Google Drive
@@ -118,6 +118,9 @@ render_book( input = "lectura_01.Rmd", output_format = "bookdown::gitbook", outp
              encoding = "UTF-8", config_file = "_bookdown.yml" )
 
 # render_book( input = "lectura_01.Rmd", output_format = "bookdown::pdf_book", output_dir = outdir,
+#              encoding = "UTF-8", config_file = "_bookdown.yml" )
+
+# render_book( input = "lectura_01.Rmd", output_format = "all", output_dir = outdir,
 #              encoding = "UTF-8", config_file = "_bookdown.yml" )
 
 wd <- paste0( getActiveProject(), '/' )
