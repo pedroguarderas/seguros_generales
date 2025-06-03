@@ -8,8 +8,11 @@ link-citations: yes
 colorlinks: yes
 graphics: yes
 description: ""
-bibliography: [bibliografia_libros.bib, bibliografia_paquetes.bib, bibliografia_articulos.bib]
-csl: springer-basic-brackets-no-et-al-alphabetical.csl
+bibliography: [ 
+  "bib/bibliografia_libros.bib", 
+  "bib/bibliografia_paquetes.bib", 
+  "bib/bibliografia_articulos.bib" ]
+csl: "springer-basic-brackets-no-et-al-alphabetical.csl"
 cover-image: ""
 ---
 
