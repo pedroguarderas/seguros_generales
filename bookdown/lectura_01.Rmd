@@ -1,6 +1,6 @@
 ---
 title: "Matemática Actuarial de los Seguros Generales"
-author: "Leonardo Vélez and Pedro Guarderas"
+author: "Leonardo Vélez y Pedro Guarderas"
 date: "`r format( Sys.time(), '%Y-%m-%d')`"
 site: bookdown::bookdown_site
 documentclass: book
