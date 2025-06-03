@@ -1531,7 +1531,7 @@ usual que uno puede encontrar en las bases de producción de un asegurador. Se i
 campos de especial interés como la fecha de nacimiento `bdate`, el inicio de vigencia de la 
 cobertura `start` y el final de vigencia de la cobertura `end`.
 ```{r l6t1, echo = TRUE, results = 'asis', out.width='100%', class.source = 'fold-hide'}
-production[ 1:100 ] %>%
+production[ 1:10 ] %>%
   kable(
     label = NA,
     caption = 'Pólizas',
@@ -1540,8 +1540,9 @@ production[ 1:100 ] %>%
     digits = c( 0, 0, 0, 0, 0, 2, 2, 2, 0, 0, 0, 0 ),
     format.args = list( big.mark = ',', decimal.mark = '.', scientific = FALSE ),
     escape = FALSE,
-    centering = TRUE ) %>%
-  kable_classic( font_size = 14, full_width = FALSE, html_font = "Cambria", position = "center" ) %>%
+    centering = TRUE,
+    booktabs = TRUE ) %>%
+  kable_classic( full_width = FALSE, html_font = "Cambria", position = "center" ) %>%
   scroll_box( width = "100%", height = "500px" )
 ```
 
@@ -1550,7 +1551,7 @@ original del reclamo, sino tan solo del valor pagado, después de aplicar la fun
 En la misma información se incluye el deducible $d$ y el monto de máximo de cobertura $M$ que se 
 utilizó para aplicar la deducción.
 ```{r l6t2, echo = TRUE, results = 'asis', out.width='100%', class.source = 'fold-hide'}
-claims[ 1:100 ] %>%
+claims[ 1:10 ] %>%
   kable(
     label = NA,
     caption = 'Reclamos',
@@ -1559,8 +1560,9 @@ claims[ 1:100 ] %>%
     digits = c( 0, 0, 0, 0, 0, 0, 2, 0, 0, 0 ),
     format.args = list( big.mark = ',', decimal.mark = '.', scientific = FALSE ),
     escape = FALSE,
-    centering = TRUE ) %>%
-  kable_classic( font_size = 14, full_width = FALSE, html_font = "Cambria", position = "center" ) %>%
+    centering = TRUE,
+    booktabs = TRUE ) %>%
+  kable_classic( full_width = FALSE, html_font = "Cambria", position = "center" ) %>%
   scroll_box( width = "100%", height = "500px" )
 ```
 
@@ -1659,8 +1661,9 @@ grpcl %>%
     digits = c( 0, 0, 0 ),
     format.args = list( big.mark = ',', decimal.mark = '.', scientific = FALSE ),
     escape = FALSE,
-    centering = TRUE ) %>%
-  kable_classic( font_size = 14, full_width = FALSE, html_font = "Cambria", position = "center" ) %>%
+    centering = TRUE,
+    booktabs = TRUE ) %>%
+  kable_classic( full_width = FALSE, html_font = "Cambria", position = "center" ) %>%
   scroll_box( width = "100%", height = "500px" )
 ```
 
@@ -1748,8 +1751,9 @@ estim_frec %>%
     digits = c( 0, 5, 5, 5, 5,  5, 2, 2 ),
     format.args = list( big.mark = ',', decimal.mark = '.', scientific = FALSE ),
     escape = FALSE,
-    centering = TRUE ) %>%
-  kable_classic( font_size = 14, full_width = FALSE, html_font = "Cambria", position = "center" ) %>%
+    centering = TRUE,
+    booktabs = TRUE ) %>%
+  kable_classic( full_width = FALSE, html_font = "Cambria", position = "center" ) %>%
   scroll_box( width = "100%", height = "500px" )
 ```
 
@@ -1926,8 +1930,9 @@ estim_sev %>%
     digits = c( 0, 0, 5, 5, 5, 2, 2, 2, 2 ),
     format.args = list( big.mark = ',', decimal.mark = '.', scientific = FALSE ),
     escape = FALSE,
-    centering = TRUE ) %>%
-  kable_classic( font_size = 14, full_width = FALSE, html_font = "Cambria", position = "center" ) %>%
+    centering = TRUE,
+    booktabs = TRUE ) %>%
+  kable_classic( full_width = FALSE, html_font = "Cambria", position = "center" ) %>%
   scroll_box( width = "100%", height = "500px" )
 ```
 
@@ -2043,8 +2048,9 @@ prods[ , list( sex, xg, r, ngr, d, M, EN, SDN, EX, SDX, EDX, SDDX, ES, SDS ) ] %
     digits = c( 0, 0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2 ),
     format.args = list( big.mark = ',', decimal.mark = '.', scientific = FALSE ),
     escape = FALSE,
-    centering = TRUE ) %>%
-  kable_classic( font_size = 14, full_width = FALSE, html_font = "Cambria", position = "center" ) %>%
+    centering = TRUE,
+    booktabs = TRUE ) %>%
+  kable_classic( full_width = FALSE, html_font = "Cambria", position = "center" ) %>%
   scroll_box( width = "100%", height = "500px" )
 ```
 :::
