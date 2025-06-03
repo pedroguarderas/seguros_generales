@@ -30,7 +30,6 @@ thm:tglican
 prp:chebdes
 thm:bein
 thm:ddkw
-tab:l4t1
 thm:dchernoff
 thm:dpaleyzyg
 def:dfouriertrans
@@ -43,7 +42,6 @@ def:dnbinom
 def:dgeo
 def:fampanjer
 prp:chfampanjer
-tab:l5t1
 def:dunif
 def:dexp
 def:dgamma
@@ -79,12 +77,6 @@ exm:l5ex6
 exm:l5ex7
 def:der
 exm:l5ex8
-tab:l6t1
-tab:l6t2
-tab:l6t3
-tab:l6t4
-tab:l6t5
-tab:l6t6
 exm:l5ex5
 def:dVaR
 prp:varinv
@@ -100,14 +92,9 @@ prp:EVaRcohe
 exm:l6ex2
 def:dpruin
 def:dpricing
-tab:l7t1
-tab:l7t2
 def:dfamexp
 def:dglm
 exm:l6ex1
-tab:l9t1
-tab:l9t2
-tab:l9t3
 def:dmaxstab
 thm:tvalext1
 thm:tvalext2
