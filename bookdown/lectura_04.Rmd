@@ -237,7 +237,7 @@ definida siempre y cuando la derivada de $F$ esté bien definida.
 :::
 ::::
 
-::: {.example #l3ex1}
+::: {.example #l4ex1}
 El siguiente ejemplo muestra una forma típica de una distribución acumulada continua. En este caso
 la distribución acumulada de la normal estándar, la cual no admite una forma analítica.
 $$
@@ -436,7 +436,7 @@ serán de mucha de utilidad.
 
 <!------------------------------------------------------------------------------------------------->
 :::: {.thmbox data-latex=""}
-::: {.definition #em name="Esperanza de una variable aleatoria"}
+::: {.definition #despva name="Esperanza de una variable aleatoria"}
 Considerando una variable aleatoria discreta $K : \Omega \longrightarrow D \subset \R$, 
 donde $D$ es un conjunto discreto, es decir sus elementos se pueden contar y poner en 
 correspondencia con $\mathbb{N}$. Entonces, la **esperanza** se define como:
@@ -563,7 +563,7 @@ asociada a lo que se conoce como **volatilidad**.
 
 <!------------------------------------------------------------------------------------------------->
 :::: {.thmbox data-latex=""}
-::: {.definition #em name="Varianza de una variable aleatoria"}
+::: {.definition #dvarva name="Varianza de una variable aleatoria"}
 Así mismo su **varianza** es la dada por:
 $$
 \V[ X ] 
@@ -853,7 +853,7 @@ está bien definida para $F_Y( y ) \neq 0$
 
 <!------------------------------------------------------------------------------------------------->
 :::: {.thmbox data-latex=""}
-::: {.definition #dexpcond name="Esperanza condicionada"}
+::: {.definition #despcond name="Esperanza condicionada"}
 Para una variable aleatoria $X$ y un evento cualquiera $A \in \F$, se define la 
 **esperanza condicionada** respecto del evento $A$, como:
 $$
@@ -921,7 +921,7 @@ $$
 
 <!------------------------------------------------------------------------------------------------->
 :::: {.thmbox data-latex=""}
-::: {.definition #dexpcond name="Varianza condicionada"}
+::: {.definition #dvarcond name="Varianza condicionada"}
 La varianza condicionada se puede definir de forma directa a partir de los anterior. Para una 
 variable aleatoria a valores reales $X$ y un evento $A \in \F$.
 $$
@@ -1182,7 +1182,7 @@ dt %>%
   scroll_box( width = "100%", height = "500px" )
 ```
 
-::: {.example #l3ex1}
+::: {.example #l4ex2}
 En este caso en particular estudiaremos la velocidad de convergencia del método resultante del 
 teorema del límite central \@ref(thm:tlc). Generaremos una simulación aleatoria de la suma
 agregada $S_n$ y mostrar

@@ -190,7 +190,7 @@ $f_{X_1}, \ldots, f_{X_n}$ o distribuciones de probabilidad $F_{X_1}, \ldots, F_
 4. Para cada $i \in \{1, \ldots, m\}$ se calcula la severidad total para la muestra $i$, 
 $S_i = \sum\limits_{j=1}^n X_{i,j}$
 
-::: {.example #l5ex1}
+::: {.example #l6ex1}
 El siguiente código ejemplifica el algoritmo anterior, donde se asume que cada variable aleatoria de 
 severidad $X_i$ sigue una ley log-normal $LN( \mu_i, \sigma_i )$, de parámetros $\mu_i, \sigma_i$, 
 para cada $i \in \{1,\ldots, n\}$. El reclamo total $S = \sum\limits_{i=1}^n X_i$ sigue una ley 
@@ -296,7 +296,7 @@ que podemos calcular algunos otros valores de importancia relacionados a la vari
 no tan solo utilizar medidas de tendencia central. Sin embargo, para que esta aproximación sea 
 útil se requiere reducir el error de probabilidad \@ref(thm:ddkw).
 
-::: {.example #l5ex2}
+::: {.example #l6ex2}
 Podemos considerar el caso sencillo donde el valor posible de severidad es determinista, es decir
 para cada póliza $i\in \{1,\ldots,n\}$, el valor de severidad probable es único $M > 0$ si en caso 
 se da un evento $A_i$, esto lo podemos expresar como $X_i = M \mathbf{1}_{A_i}$ es constante. Así, 
@@ -489,7 +489,7 @@ mediante la siguiente suma $S_i = \sum\limits_{j=1}^{N_i} X_{i,j}$.
 En el lenguaje de programación R, este método de simulación puede ser fácilmente implementado, 
 como ya lo hemos realizado, utilizando las funciones de aplicación vectorial `sapply` y `lapply`. 
 
-::: {.example #l5ex3}
+::: {.example #l6ex3}
 Consideramos el caso de un modelo colectivo para el cuál el conteo de siniestros 
 $N \rightsquigarrow Pois( \lambda )$ y la distribución de cada uno de los reclamos 
 $\{X_i\}_{i\in \N}$, está dada por la misma distribución de probabilidad 
@@ -560,7 +560,7 @@ $$
 \end{split}
 $$
 
-::: {.example #l5ex4}
+::: {.example #l6ex4}
 Hacemos uso del algoritmo de simulación, pero bajo la consideración anterior donde el conteo 
 de siniestros $N \rightsquigarrow Bin( n, p )$, en algunos casos se puede considerar $n$ como el 
 número de pólizas vendidas, esto supone que solo se presenta un reclamo por póliza. Por su parte los
@@ -862,7 +862,7 @@ $i = \{1, \ldots, m\}$, mediante la siguiente suma $S_i = \sum\limits_{j=1}^{N_i
 6. Para la determinación de varios estadísticos se puede utilizar la simulación generada $\{S_i\}$
 y generar la distribución de probabilidad empírica $F_m$.
 
-::: {.example #l5ex6}
+::: {.example #l6ex5}
 Consideremos el caso de un modelo colectivo de pérdida donde el proceso de conteo 
 $N \rightsquigarrow Pois( \lambda )$ y la sucesión $\{X_i\}$ de reclamos individuales se considera 
 conformada por variables i.i.d, con distribución de probabilidad $LN( \mu, \sigma )$. El deducible 
@@ -1101,7 +1101,7 @@ de donde resulta una forma bien conocida para el algoritmo de Panjer. sin embarg
 tener en cuenta que una malla de paso no constante puede ser mejor adaptada para realizar la 
 integral.
 
-::: {.example #l5ex7}
+::: {.example #l6ex6}
 Consideremos el caso para un reclamo total $S$ donde el conteo de los siniestros 
 $N \rightsquigarrow NBin( \alpha, p )$ y las severidades $\{X_i\}$ son i.i.d con distribución 
 $LN( \mu, \sigma )$. Utilizaremos el algoritmo de Panjer para aproximar la densidad de probabilidad
@@ -1512,7 +1512,7 @@ En los tres casos anteriores, hemos desarrollado una metodología para la estima
 distribución de frecuencia de los reclamos, tomando en cuenta la exposición al riesgo de cada 
 una de las pólizas a las cuales estos reclamos corresponden.
 
-::: {.example #l5ex8}
+::: {.example #l6ex7}
 Ahora bien, pongamos en aplicación todo lo aprendido hasta el momento. Para ello, trabajaremos
 con información de pólizas de un seguro de salud. La información está compuesta de dos objetos,
 uno la producción de pólizas y dos los reclamos de varios productos asociados al ramo.
@@ -2268,7 +2268,7 @@ escoger para simular de forma correcta los procesos $N$ y $S$ hasta un tiempo m�
 implica que si $M$ no es del tamaño adecuado, las estimaciones que se realice utilizando la 
 simulación va a degradarse conforme avanza el tiempo.
 
-::: {.example #l5ex5}
+::: {.example #l6ex8}
 El siguiente ejemplo es de especial atención ya que es utilizado en muchas aplicaciones, podemos 
 considerar el caso donde el tiempo entre arribos $\{W_n\}$ es i.i.d y con distribución de 
 probabilidad común $F_W$ dada por una ley exponencial $Exp( \lambda )$. Un resultado clásico muestra 

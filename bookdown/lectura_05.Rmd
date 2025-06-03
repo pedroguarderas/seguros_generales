@@ -834,7 +834,7 @@ Entonces, la familia $\{ \tau_n \}_n$ es consistente como estimadores de $\theta
 ::::
 
 :::: {.thmbox data-latex=""}
-::: {.definition #destinsesg  name="Estimador más eficiente"}
+::: {.definition #destefi  name="Estimador más eficiente"}
 De igual forma en el contexto anterior. En una familia de estimadores consistentes para estimar
 un parámetro, si entre estos estimadores existe uno para el cual su varianza sea mínima, entonces
 si existe tal estimador se dice que este es el **estimador más eficiente**. Sin $\mathcal{E}$ es la

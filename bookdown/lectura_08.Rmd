@@ -176,7 +176,7 @@ $$
 \eta( g( \beta x_i ), \theta_2 ) \cdot T( y_i ) - A( g( \beta x_i ), \theta_2 ) \right)
 $$ 
 
-::: {.example #l6ex1 name="Regresión de Poisson"}
+::: {.example #l8ex1 name="Regresión de Poisson"}
 En este caso presentamos el modelo bastante utilizado conocido como regresión de Poisson. En donde 
 suponemos que $N \rightsquigarrow Pois( \lambda( x ) ER( x ) ) = Pois( g( \beta x ) ER( x ) )$
 donde $\lambda$ es el parámetro a estimar en función de las variables explicativas $x$.
