@@ -8,7 +8,7 @@ link-citations: yes
 colorlinks: yes
 graphics: yes
 description: ""
-bibliography: [ "bib/bibliografia_libros.bib", "bib/bibliografia_paquetes.bib", "bib/bibliografia_articulos.bib" ]
+bibliography: [ "bib/biblibros.bib", "bib/bibpaquetes.bib", "bib/bibarticulos.bib" ]
 csl: "springer-basic-brackets-no-et-al-alphabetical.csl"
 cover-image: ""
 ---
