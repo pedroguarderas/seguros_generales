@@ -1,18 +1,34 @@
 <!------------------------------------------------------------------------------------------------->
 # Tarificación {#tarificacion}
 
-Para realizar la tarificación de un producto de seguro, además de estudiar y estimar el 
-comportamiento futuro de los reclamos totales $S$, es necesario también tomar en cuenta el capital 
-$K$ destinado para hacer frente al riesgo subscrito y los costos generales $G$
+Una vez estimado los reclamos totales se trata de establecer una forma optima para estimar el 
+valor que deberá pagar el asegurado, la **prima**, para que la compañia de seguros se haga cargo de
+riesgo. En esto debe incluirse algunas consideraciones adicionales, además de la estimación 
+de la frecuencia y severidad de los reclamos, es también relevante tener en consideración otros 
+valores asociados a diferentes costo, el retorno esperado por el inversionista y finalmente el
+rendimiento de inversiones. Todo lo anterior debe ser conjugado para obtener una adecuada 
+estimación de la prima.
+
+Adicionalmente, se debe tener en cuenta que el riesgo cubierto está sujeto a variaciones propias
+de la aleatoriedad del fenómeno y que puede presentar variaciones significativas respecto de la 
+media, es decir, que la volatilidad del riesgo cubierto puede influenciar significativamente el
+pago total de los reclamos. Ante ello surge un concepto de vital importancia, el cual lo 
+desarrollamos a continuación y se lo conoce como medidas de riesgo.
 
 <!------------------------------------------------------------------------------------------------->
 ## Medidas de riesgo {#medidas_riesgo}
 
+:::: {.thmbox data-latex=""}
 ::: {.definition #spv name="Medida de riesgo coherente"}
 Una **medida de riesgo coeherente** es una función $\rho: \R \longrightarrow \R$, 
 que satisface la siguientes propiedades:
 
-1. **Homogenidad positiva**, para cualquier $a > 0$
+1. **Normalización**, el riesgo de nada es nada
+$$
+\rho( 0 ) = 0
+$$
+
+1. **Homogenidad positiva**, el riesgo crece con la escala, así para cualquier $a > 0$
 $$
 \rho( a X ) = a \rho( X )
 $$
@@ -27,14 +43,16 @@ $$
 \rho( X ) \leq \rho( Y )
 $$
 
-4. **Sub-aditividad**
+4. **Sub-aditividad**, el diversificar el riesgo es menor a la suma de los riesgos independientes
 $$
 \rho( X + Y ) \leq \rho( X ) + \rho( Y )
 $$
 :::
+::::
 
 En lo que continúa citamos algunas de las medidas de riesgo usualmente utilizadas.
 
+:::: {.thmbox data-latex=""}
 ::: {.definition #dVaR name="Valor en riesgo"}
 Dada una variable aleatoria a valores reales $X$, el **valor en riesgo** (value at risk) de $X$ al 
 nivel de probabilidad $\alpha \in (0,1)$ está dado por
@@ -42,19 +60,22 @@ $$
 \VaR_{\alpha}( X ) = \inf\left\{ x \in \R \middle| F_X( x ) > \alpha \right\}
 $$
 :::
+::::
 
+:::: {.thmbox data-latex=""}
 ::: {.proposition #varinv}
 Si la función de distribución acumulada $F_X$ es continua, entonces 
 $\VaR_{\alpha}( X ) = F_X^{-1}( \alpha )$.
 :::
+::::
 
 Por otra parte, $\VaR_{\alpha}$ para cualquier $\alpha$ no es una medida de riesgo sub-aditiva.
 
 El método directo para el calcular el $\VaR_\alpha$ es directamente atacando el problema de 
-encontrar el ínfimo, esto es un problema de optimizaión que puede tener sus complicaciones, ya
-que muchas de las veces la distribución acumulada no es conocida $F$ o fácilmente computable. 
+encontrar el ínfimo, esto es un problema de optimización que puede tener sus complicaciones, ya
+que muchas de las veces la distribución acumulada $F$ no es conocida o fácilmente computable. 
 Incluso en el caso cuando la función de distribución $F$ es continua, resta el problema de poder
-invertir esta función. 
+invertir esta función.
 
 Otra forma es acudir a los métodos de simulación estocástica, partiendo de una muestra 
 $X_1, \ldots, X_n$ y calculando de forma aproximada
@@ -65,6 +86,7 @@ En principio no sabemos si esta aproximación será consistente conforme se aume
 muestra, sin embargo para ello tenemos la siguiente proposición, la cual nos da una certeza al 
 respecto.
 
+:::: {.thmbox data-latex=""}
 ::: {.proposition #appoxvar}
 Si consideramos una familia de variables aleatorias $\{X_n\}_{n\in \N}$ i.i.d con distribución común
 $F$ no necesariamente continua, entonces el percentil empírico de orden $\alpha$, 
@@ -72,32 +94,33 @@ $\xi_{n,\alpha} = F_n^{-1}( \alpha )$, que se puede extraer a partir de las $n$ 
 en la muestra converge en probabilidad al valor $\xi_{\alpha} = \VaR_{\alpha}( X )$, correspondiente
 al valor en riesgo.
 :::
+::::
 
 :::{.proof}
 Utilizando la versión unilateral de la desigualdad \@ref(thm:ddkw), podemos establecer las 
 siguientes acotaciones
 $$
-\begin{eqnarray*}
+\begin{split}
 P\left( \xi_{n,\alpha}- \xi_{\alpha} > \varepsilon \right)
-& = & P\left( \xi_{n,\alpha} >  \xi_{\alpha} + \varepsilon \right) \\
-& = & P\left( F_n( \xi_{n,\alpha} ) >  F_n( \xi_{\alpha} + \varepsilon ) \right) \\
-& = & P\left( F( \xi_{\alpha} + \varepsilon ) + \alpha > F( \xi_{\alpha} + \varepsilon ) + F_n( \xi_{\alpha} + \varepsilon ) \right) \\
-& = & P\left( F( \xi_{\alpha} + \varepsilon ) - F_n( \xi_{\alpha} + \varepsilon ) > F( \xi_{\alpha} + \varepsilon ) - \alpha \right) \\
-& \leq & P\left( \underset{x \in \R}{\sup} \left( F - F_n \right) > F( \xi_{\alpha} + \varepsilon ) - \alpha \right) \\
-& \leq & Ce^{-2n \left( F( \xi_{\alpha} + \varepsilon ) - \alpha \right) ^2 }
-\end{eqnarray*}
+& = P\left( \xi_{n,\alpha} >  \xi_{\alpha} + \varepsilon \right) \\
+& = P\left( F_n( \xi_{n,\alpha} ) >  F_n( \xi_{\alpha} + \varepsilon ) \right) \\
+& = P\left( F( \xi_{\alpha} + \varepsilon ) + \alpha > F( \xi_{\alpha} + \varepsilon ) + F_n( \xi_{\alpha} + \varepsilon ) \right) \\
+& = P\left( F( \xi_{\alpha} + \varepsilon ) - F_n( \xi_{\alpha} + \varepsilon ) > F( \xi_{\alpha} + \varepsilon ) - \alpha \right) \\
+& \leq P\left( \underset{x \in \R}{\sup} \left( F - F_n \right) > F( \xi_{\alpha} + \varepsilon ) - \alpha \right) \\
+& \leq Ce^{-2n \left( F( \xi_{\alpha} + \varepsilon ) - \alpha \right) ^2 }
+\end{split}
 $$
 
 $$
-\begin{eqnarray*}
+\begin{split}
 P\left( \xi_{n,\alpha} - \xi_{\alpha} < -\varepsilon \right)
-& = & P\left( \xi_{n,\alpha} <  \xi_{\alpha} - \varepsilon \right) \\
-& = & P\left( F_n( \xi_{n,\alpha} ) <  F_n( \xi_{\alpha} - \varepsilon ) \right) \\
-& = & P\left( F( \xi_{\alpha} - \varepsilon ) + \alpha < F( \xi_{\alpha} - \varepsilon ) + F_n( \xi_{\alpha} - \varepsilon ) \right) \\
-& = & P\left( F_n( \xi_{\alpha} - \varepsilon ) - F( \xi_{\alpha} - \varepsilon ) > \alpha - F( \xi_{\alpha} - \varepsilon ) \right) \\
-& \leq & P\left( \underset{x \in \R}{\sup} \left( F - F_n \right) > \alpha - F( \xi_{\alpha} - \varepsilon ) \right) \\
-& \leq & Ce^{-2n \left( \alpha - F( \xi_{\alpha} - \varepsilon ) \right) ^2 }
-\end{eqnarray*}
+& = P\left( \xi_{n,\alpha} <  \xi_{\alpha} - \varepsilon \right) \\
+& = P\left( F_n( \xi_{n,\alpha} ) <  F_n( \xi_{\alpha} - \varepsilon ) \right) \\
+& = P\left( F( \xi_{\alpha} - \varepsilon ) + \alpha < F( \xi_{\alpha} - \varepsilon ) + F_n( \xi_{\alpha} - \varepsilon ) \right) \\
+& = P\left( F_n( \xi_{\alpha} - \varepsilon ) - F( \xi_{\alpha} - \varepsilon ) > \alpha - F( \xi_{\alpha} - \varepsilon ) \right) \\
+& \leq P\left( \underset{x \in \R}{\sup} \left( F - F_n \right) > \alpha - F( \xi_{\alpha} - \varepsilon ) \right) \\
+& \leq Ce^{-2n \left( \alpha - F( \xi_{\alpha} - \varepsilon ) \right) ^2 }
+\end{split}
 $$
 Uniendo ambos resultados concluimos
 $$
@@ -120,14 +143,12 @@ Fijamos un valor $\delta > 0$ el cual acota la probabilidad del evento que mide 
 aproximación, i.e. $P\left( \left| \xi_{n,\alpha} - \xi_{\alpha} \right| > \varepsilon \right) \leq \delta$ 
 y tomando en cuenta la desigualdad en \@ref(prp:appoxvar).
 $$
-\begin{eqnarray*}
-2 C e^{-2n \min\left( F( \xi_{\alpha} + \varepsilon ) - \alpha, \alpha - F( \xi_{\alpha} - \varepsilon ) \right)^2 } & \leq & \delta \\
+\begin{split}
+2 C e^{-2n \min\left( F( \xi_{\alpha} + \varepsilon ) - \alpha, \alpha - F( \xi_{\alpha} - \varepsilon ) \right)^2 } & \leq \delta \\
 -2n \min\left( F( \xi_{\alpha} + \varepsilon ) - \alpha, \alpha - F( \xi_{\alpha} - \varepsilon ) \right)^2 
-& \leq & \log( \delta )-\log(2) - \log( C ) \\
-n 
-& \geq & -\frac{\log( \delta )-\log(2)-\log( C )}{2 
-\min\left( F( \xi_{\alpha} + \varepsilon ) - \alpha, \alpha - F( \xi_{\alpha} - \varepsilon ) \right)^2}
-\end{eqnarray*}
+& \leq \log( \delta )-\log(2) - \log( C ) \\
+n & \geq -\frac{\log( \delta )-\log(2)-\log( C )}{2 \min\left( F( \xi_{\alpha} + \varepsilon ) - \alpha, \alpha - F( \xi_{\alpha} - \varepsilon ) \right)^2}
+\end{split}
 $$
 Como se evidencia $n$ crece en orden cuadrático proporcional a la aproximación dada por 
 $\min\left( F( \xi_{\alpha} + \varepsilon ) - \alpha, \alpha - F( \xi_{\alpha} - \varepsilon ) \right)$
@@ -142,6 +163,26 @@ Claramente la cantidad de simulaciones que se debe realizar para lograr una apro
 $\varepsilon$, se requiere un orden de simulaciones cuadrático inverso a este valor.
 El ejemplo numérico a continuación es aleccionador al respecto de la dificultad numérica de 
 aproximar un cálculo de $VaR_\alpha$.
+
+Entonces los pasos del pseudo-algoritmo de simulación estarán dados por:
+
+1. Fijar el nivel de confianza al que se desea calcular $0 < \alpha < 1$
+
+2. Fijar el nivel probabilidad para los errores de aproximación $\delta > 0$
+
+3. Fijar el nivel erro $\widetilde{\varepsilon} > 0$
+
+4. Estimar el posible error de estimación $\varepsilon > 0$
+
+5. Buscar el número de simulaciones adecuadas $n \in \N$ que aseguren con una probabilidad menor a 
+$\delta$ que se presente errores de aproximación superiores a $\varepsilon$.
+
+6. Generar una muestra de tamaño $n$ de la variable aleatoria, i.e. $X_1, \ldots, X_n$
+
+7. Calcular el percentil de la $\alpha$ de la muestra $\xi_{n,\alpha} = F_n^{-1}( \alpha )$
+
+Esta simulación solo genera una sola estimación del $\VaR_{\alpha}(X)$, se puede repetir algunas
+veces esta algoritmo para tener más valores y sacar la media de estos como estimador.
 ```{r l7c1}
 u <- 7
 s <- 4
@@ -169,26 +210,7 @@ $$
 Como se observa se tendrá que realizar muchas simulaciones más para llegar a tener en probabilidad
 un error de aproximación adecuado.
 
-Entonces los pasos del pseudo-algoritmo de simulación estarán dados por:
-
-1. Fijar el nivel de confianza al que se desea calcular $0 < \alpha < 1$
-
-2. Fijar el nivel probabilidad para los errores de aproximación $\delta > 0$
-
-3. Fijar el nivel erro $\widetilde{\varepsilon} > 0$
-
-4. Estimar el posible error de estimación $\varepsilon > 0$
-
-5. Buscar el número de simulaciones adecuadas $n \in \N$ que aseguren con una probabilidad menor a 
-$\delta$ que se presente errores de aproximación superiores a $\varepsilon$.
-
-6. Generar una muestra de tamaño $n$ de la variable aleatoria, i.e. $X_1, \ldots, X_n$
-
-7. Calcular el percentil de la $\alpha$ de la muestra $\xi_{n,\alpha} = F_n^{-1}( \alpha )$
-
-Esta simulación solo genera una sola estimación del $\VaR_{\alpha}(X)$, se puede repetir algunas
-veces esta algoritmo para tener más valores y sacar la media de estos como estimador.
-
+:::: {.thmbox data-latex=""}
 ::: {.definition #dTVaR name="Valor en riesgo en la cola"}
 Dada una variable aleatoria a valores reales $X$, el **valor en riesgo en la cola** 
 (tail value at risk) de $X$ al nivel de probabilidad $\alpha \in (0,1)$ está dado por
@@ -196,6 +218,7 @@ $$
 \TVaR_{\alpha}( X ) = \frac{1}{1-\alpha} \int\limits_{\alpha}^1 \VaR_u( X )\ du
 $$
 :::
+::::
 
 Es de notar que si se toma una variable aleatoria uniforme $U \rightsquigarrow U(\alpha,1)$, tenemos 
 que el valor en riesgo en la cola, puede ser expresado como la esperanza.
@@ -213,11 +236,14 @@ $$
 Pero como ya se mencionó, esta aproximación puede ser realmente costosa en términos 
 computacionales; por tal razón, se requiere utilizar métodos numéricos más eficientes.
 
+:::: {.thmbox data-latex=""}
 ::: {.proposition #TVaRcohe name="Coherencia de la medida TVaR"}
 La medida de riesgo $\TVaR_{\alpha}$ es una medida de riesgo coherente si la variable aleatoria
 sobre la cual se mide es una variable aleatoria continua.
 :::
+::::
 
+:::: {.thmbox data-latex=""}
 ::: {.definition #dCTE name="Esperanza condicional en la cola"} 
 Dada una variable aleatoria a valores reales $X$, la **esperanza condicional en la cola** 
 (conditional tail expectation) de $X$ al nivel de probabilidad $\alpha \in (0,1)$ está dado por
@@ -225,7 +251,9 @@ $$
 \CTE_{\alpha}( X ) = \E\left[ X \middle| X > \VaR_{\alpha}( X ) \right]
 $$
 :::
+::::
 
+:::: {.thmbox data-latex=""}
 ::: {.proposition #eqtvarcte}
 Si la función de distribución acumulada $F_X$ de la variable aleatoria $X$ es continua, entonces
 se tiene la siguiente igualdad
@@ -233,7 +261,9 @@ $$
 \CTE_{\alpha}( X ) = \TVaR_{\alpha}( X )
 $$
 :::
+::::
 
+:::: {.thmbox data-latex=""}
 ::: {.definition #dCVaR name="Valor en riesgo condicionado"}
 Dada una variable aleatoria a valores reales $X$, el **valor en riesgo condicionado** 
 (conditional value at risk) de $X$ al nivel de probabilidad $\alpha \in (0,1)$ está dado por
@@ -242,7 +272,9 @@ $$
 = \CTE_{\alpha}( X ) - \VaR_{\alpha}( X )
 $$
 :::
+::::
 
+:::: {.thmbox data-latex=""}
 ::: {.definition #dES name="Déficit esperado"}
 Dada una variable aleatoria a valores reales $X$, el **déficit esperado** (expected shortfall) de 
 $X$ al nivel de probabilidad $\alpha \in (0,1)$ está dado por
@@ -250,7 +282,9 @@ $$
 \ES_{\alpha}( X ) = \E\left[ \max\left( X - \VaR_{\alpha}( X ), 0 \right) \right]
 $$
 :::
+::::
 
+:::: {.thmbox data-latex=""}
 ::: {.definition #dEVaR name="Valor en riesgo entrópico"}
 Dada una variable aleatoria a valores reales $X$, el **valor en riesgo entrópico** 
 (entropic value at risk) de $X$ al nivel de probabilidad $\alpha \in (0,1)$ está dado por
@@ -258,10 +292,13 @@ $$
 \EVaR_{\alpha}( X ) = \inf\left\{ \frac{1}{t} \ln\left( \frac{M_X( t )}{1 - \alpha} \right) \middle| t > 0 \right\}
 $$
 :::
+::::
 
+:::: {.thmbox data-latex=""}
 ::: {.proposition #EVaRcohe name="Coherencia de la medida EVaR"}
 La medida de riesgo $\EVaR_{\alpha}$ es una medida de riesgo coherente.
 :::
+::::
 
 ::: {.example #l6ex2}
 Podemos considerar el caso particular donde todos los reclamos se suponen independientes e 
@@ -279,7 +316,7 @@ TVaRX <- sapply(
   FUN = function( i ) ifelse( alpha[ i ] < 1, ( 1 / ( 1 - alpha[ i ] ) ) * mean( X * ( X > VaRX[ i ] ) ), max( X ) ) )
 ```
 
-```{r l7g1, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
+```{r l7g1, out.width='80%', fig.align='center', class.source = 'fold-hide'}
 plt <- ggplot() +
   geom_point( aes( x = alpha, y = VaRX ), colour = 'darkred' ) + 
   geom_point( aes( x = alpha, y = TVaRX ), colour = 'orange' ) + 
@@ -329,6 +366,8 @@ viable para la tarificación. Tampoco se toma en cuenta el dinero recibido por l
 en un ramo en particular, ya que esto constituye un nivel más arriba propio del negocio 
 reasegurador.
 
+:::: {.thmbox data-latex=""}
+::: {.definition #dpruin name="Probabilidad de ruina"}
 En términos generales se busca equilibrar el resultado operativo del ramo de negocio $R$ a lo largo 
 de la vida del ramo. El resultado $R$ a su vez está dado por la siguiente relación:
 $$
@@ -361,16 +400,18 @@ acotar la probabilidad del evento $R < 0$ a un nivel de confianza $\alpha > 0$ a
 $$
 P( R < 0 ) < \alpha
 $$
+:::
+::::
 
 Muchas de las veces se parte del principio de equilibrio financiero \@ref(sec:equifin), donde 
 se busca la igualdad $\E[R] = 0$, la misma implica la siguiente relación:
 $$
-\begin{eqnarray*}
-0 & = & \E[R] \\
-0 & = & \E[R\mid R \geq 0]P( R \geq 0 ) + \E[R\mid R < 0]P( R < 0 ) \\
-\E[R\mid R \geq 0]P( R \geq 0 ) & = & -\E[R\mid R < 0]P( R < 0 ) \\
-\frac{P( R < 0 )}{P( R \geq 0 ) } & = & -\frac{\E[R\mid R \geq 0]}{\E[R\mid R < 0]}
-\end{eqnarray*}
+\begin{split}
+0 & = \E[R] \\
+0 & = \E[R\mid R \geq 0]P( R \geq 0 ) + \E[R\mid R < 0]P( R < 0 ) \\
+\E[R\mid R \geq 0]P( R \geq 0 ) & = -\E[R\mid R < 0]P( R < 0 ) \\
+\frac{P( R < 0 )}{P( R \geq 0 ) } & = -\frac{\E[R\mid R \geq 0]}{\E[R\mid R < 0]}
+\end{split}
 $$
 en el equilibrio financiero, la proporción de la probabilidad de ruina respecto de la probabilidad
 de no estar en ruina es igual a la proporción entre la esperanza condicional del resultado cuando 
@@ -403,6 +444,9 @@ $$
 = \E\left[ \Pi - S - G - r\left( \rho( S ) - \E[S] \right) \right] 
 = \Pi - \E[S] - G - r \left( \rho(S) - \E[S] \right)
 $$
+
+:::: {.thmbox data-latex=""}
+::: {.definition #dpricing name="Tarificación (Pricing)"}
 Lo que se busca es evitar la ruina y por tanto se busca cubrirse ante el evento $R < 0$, desde una 
 perspectiva probabilista esto se puede realizar seleccionando un nivel de cobertura $\alpha > 0$, 
 que acote la probabilidad del evento de ruina.
@@ -417,23 +461,25 @@ medida de riesgo $\rho$, las variables correspondientes a la prima $\Pi$ y a los
 libres, de ahí resulta un margen que permite seleccionar la prima más óptima para un producto de 
 seguro, así como también optimizar los gastos $G$. Este proceso de selección es precisamente lo que 
 llamamos en este contexto como **tarificación** (pricing).
+:::
+::::
 
 Razonando un poco más al respecto, si asumimos que se dispone de la distribución acumulada $F_S$
 de $S$, se puede obtener las siguientes expresiones:
 $$
-\begin{eqnarray*}
-P\left( \Pi - S - G - K < 0 \right) & < & \alpha \\
-P\left( S > \Pi - G - K \right) & < & \alpha  \\
-1 - P\left( S \leq \Pi - G - K \right) & < & \alpha \\
-P\left( S \leq \Pi - G - K \right) & > & 1 - \alpha \\
-F_S\left( \Pi - G - K \right) & > & 1 - \alpha \\
-F_S\left( \Pi - G - K \right) & \in & \left( 1 - \alpha, +\infty \right), \qquad
+\begin{split}
+P\left( \Pi - S - G - K < 0 \right) & < \alpha \\
+P\left( S > \Pi - G - K \right) & < \alpha  \\
+1 - P\left( S \leq \Pi - G - K \right) & < \alpha \\
+P\left( S \leq \Pi - G - K \right) & > 1 - \alpha \\
+F_S\left( \Pi - G - K \right) & > 1 - \alpha \\
+F_S\left( \Pi - G - K \right) & \in \left( 1 - \alpha, +\infty \right), \qquad
 \text{la desigualdad anterior es equivalente a la inclusión}\\
-\Pi - G - K & \in & F_S^{-1}\left( \left( 1 - \alpha, +\infty \right) \right),\qquad
+\Pi - G - K & \in F_S^{-1}\left( \left( 1 - \alpha, +\infty \right) \right),\qquad
 \text{por propiedades de la inversión de funciones}\\
-\Pi & \geq & G + K + F_S^{-1}\left( 1 - \alpha \right), \qquad 
-\text{com $F_S$ es creciente, mínimo se debe satisfacer la desigualdad}
-\end{eqnarray*}
+\Pi & \geq G + K + F_S^{-1}\left( 1 - \alpha \right), \qquad 
+\text{como $F_S$ es creciente, mínimo se debe satisfacer la desigualdad}
+\end{split}
 $$
 En especial cuando $K = r\left( \rho(S) - \E[S] \right)$, la última desigualdad toma la forma
 $$
@@ -452,11 +498,11 @@ $\gamma > 0$, y seguramente $\gamma < 1$ ya que es de esperar gastos no mayores 
 sino esto estaría en una situación insostenible donde los gastos son mayores a la cobertura del 
 riesgo. Las desigualdades anteriores toman la forma:
 $$
-\begin{eqnarray*}
-\Pi & \geq & \frac{r}{1 - \gamma} K + \frac{1}{1 - \gamma} F_S^{-1}\left( 1 - \alpha \right) \\
-\Pi & \geq & \frac{r}{1 - \gamma} \left( \rho(S) - \E[S] \right) + \frac{1}{1 - \gamma} F_S^{-1}\left( 1 - \alpha \right) \\
-\Pi & \geq &  \frac{1 + r}{1 - \gamma} F_S^{-1}\left( 1 - \alpha \right) -  \frac{r}{1 - \gamma} \E[S]
-\end{eqnarray*}
+\begin{split}
+\Pi & \geq \frac{r}{1 - \gamma} K + \frac{1}{1 - \gamma} F_S^{-1}\left( 1 - \alpha \right) \\
+\Pi & \geq \frac{r}{1 - \gamma} \left( \rho(S) - \E[S] \right) + \frac{1}{1 - \gamma} F_S^{-1}\left( 1 - \alpha \right) \\
+\Pi & \geq \frac{1 + r}{1 - \gamma} F_S^{-1}\left( 1 - \alpha \right) -  \frac{r}{1 - \gamma} \E[S]
+\end{split}
 $$
 
 De lo anterior se observa, que un buen inicio para estimar la prima de riesgo es ciertamente 
@@ -626,11 +672,58 @@ P_TVaR <- mean( S * I ) / mean( I )
 ## Segmentación
 
 En muchas ocasiones es necesario tener en cuenta algunas características asociadas al riesgo 
-de asegurado, de tal forma que la prima sea lo más eficiente y adecuado según el riesgo cubierto y
+asegurado, de tal forma que la prima sea lo más eficiente y adecuada según el riesgo cubierto y
 las características del mismo. La idea de segmentar la población es obtener grupos homogéneos 
 con riesgos similares.
 
+Sin segmentación de la población, este el caso más sencillo para la tarificación, el asegurado
 
-```{r l6end, echo = FALSE}
+```{r l7t1, echo = TRUE, results = 'asis', out.width='100%', class.source = 'fold-hide'}
+dat <- data.table( nom = c( 'Pago', 'Pago esperado', 'Varianza' ),
+                   cl = c( "$\\E[S]$", "$\\E[S]$", "$0$" ), 
+                   as = c( "$S - \\E[S]$", "$0$", "$\\V[S]$" ) )
+dat %>%
+  kable(
+    label = NA,
+    caption = 'Transferencia de riesgo sin segmentación',
+    row.names = FALSE,
+    col.names = c( '', 'Asegurado', 'Asegurador' ),
+    align = 'lrr',
+    digits = c( 0, 0, 0 ),
+    format.args = list( big.mark = ',', decimal.mark = '.', scientific = FALSE ),
+    escape = FALSE,
+    centering = TRUE ) %>%
+  kable_classic( font_size = 14, full_width = FALSE, html_font = "Cambria", position = "center" ) %>%
+  scroll_box( width = "100%", height = "250px" )
+```
+
+Para el caso cuando se puede caracterizar la severidad total a partir de otra variable explicativa 
+$Y$, condicionando así cada una de las estimaciones según los valores que va tomando la variable 
+explicativa. Esto permite estables primas de forma más adecuada según las diferentes características
+del riesgo cubierto.
+
+```{r l7t2, echo = TRUE, results = 'asis', out.width='100%', class.source = 'fold-hide'}
+dat <- data.table( nom = c( 'Pago', 'Pago esperado', 'Varianza' ),
+                   cl = c( "$\\E[S \\mid Y]$", "$\\E[S]$", "$\\V[\\E[S \\mid Y]]$" ), 
+                   as = c( "$S - \\E[S \\mid Y]$", "$0$", "$\\V[S-\\E[S \\mid Y]]$" ) )
+dat %>%
+  kable(
+    label = NA,
+    caption = 'Transferencia de riesgo con segmentación',
+    row.names = FALSE,
+    col.names = c( '', 'Asegurado', 'Asegurador' ),
+    align = 'lrr',
+    digits = c( 0, 0, 0 ),
+    format.args = list( big.mark = ',', decimal.mark = '.', scientific = FALSE ),
+    escape = FALSE,
+    centering = TRUE ) %>%
+  kable_classic( font_size = 14, full_width = FALSE, html_font = "Cambria", position = "center" ) %>%
+  scroll_box( width = "100%", height = "250px" )
+```
+
+La varianza $\V[\E[S \mid Y]]$ es atribuible a la heterogeneidad del portafolio de asegurados, 
+y la misma se asigna a cada asegurado, más no es absorbida por el asegurador.
+
+```{r l7end, echo = FALSE}
 rm( list = ls()[ ls() != 'def.chunk.hook' ] )
 ```

@@ -1,8 +1,6 @@
 <!------------------------------------------------------------------------------------------------->
 # Preliminares
 
-
-
 <!------------------------------------------------------------------------------------------------->
 ## Notación matemática
 
@@ -58,30 +56,7 @@ options( stringsAsFactors = FALSE )
 <!------------------------------------------------------------------------------------------------->
 ### Paquetes usuales
 
-```{r l2c2, include = FALSE}
-options( width = 120 )
-
-knitr::opts_chunk$set(size = 'footnotesize', dpi = 100, warning = FALSE, echo = TRUE, cache = TRUE, class.source = "numberLines lineAnchors")
-
-def.chunk.hook  <- knitr::knit_hooks$get("chunk")
-knitr::knit_hooks$set(chunk = function(x, options) {
-  x <- def.chunk.hook(x, options)
-  ifelse( options$size != "normalsize", paste0("\n \\", options$size,"\n\n", x, "\n\n \\normalsize"), x)
-})
-
-local({
-  hook_output <- knitr::knit_hooks$get('output')
-  knitr::knit_hooks$set(output = function(x, options) {
-    if (!is.null(options$max.height)) options$attr.output <- c(
-      options$attr.output,
-      sprintf('style="max-height: %s;"', options$max.height)
-    )
-    hook_output(x, options)
-  })
-})
-```
-
-```{r l2c3, warning = FALSE}
+```{r l2c2, warning = FALSE}
 library( actuar )
 library( data.table )
 library( fExtremes )
@@ -105,38 +80,38 @@ library( wesanderson )
 Para definir una variable utilizamos el operador de asignación `<-`, también se puede utilizar `=`.
 
 Un **vector** se define con la función de concatenación `c`
-```{r l2c4}
+```{r l2c3}
 x <- c( 1, 2, 3 )
 print( x )
 ```
 
 También, se puede guardar los elementos en una **lista**
-```{r l2c5}
+```{r l2c4}
 x <- list( 1, 2, 3 )
 print( x )
 ```
 
 Los elementos de las listas se pueden guardar con nombres.
-```{r l2c6}
+```{r l2c5}
 x <- list( 'a' = 1, 'b' = 2, 'c' = 3 )
 print( x )
 x[[ 'b' ]]
 ```
 
 Una **función** se define con la sentencia `function`
-```{r l2c7}
+```{r l2c6}
 f <- function( t ) {
   return( t^2 )
 }
 ```
 
 Si buscamos aplicar una función sobre un vector, podemos utilizar `sapply`
-```{r l2c8}
+```{r l2c7}
 y <- sapply( x, FUN = f )
 print( y )
 ```
 
-```{r l2c9}
+```{r l2c8}
 z <- lapply( x, FUN = f )
 print( z )
 ```
@@ -147,3 +122,6 @@ el paquete `lubridate`. Para trabajar con distribuciones de probabilidad que se 
 modelar valores extremos utilizamos `fExtremes`. Para varias funcionalidades asociadas a la 
 estimación de modelos de pérdida utilizamos `actuar`.
 
+```{r l2end, echo = FALSE}
+rm( list = ls()[ ls() != 'def.chunk.hook' ] )
+```

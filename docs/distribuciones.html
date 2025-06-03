@@ -1,0 +1,2180 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Capítulo 5 Distribuciones | Matemática Actuarial de los Seguros Generales</title>
+  <meta name="description" content="Capítulo 5 Distribuciones | Matemática Actuarial de los Seguros Generales" />
+  <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Capítulo 5 Distribuciones | Matemática Actuarial de los Seguros Generales" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Capítulo 5 Distribuciones | Matemática Actuarial de los Seguros Generales" />
+  
+  
+  
+
+<meta name="author" content="Leonardo Vélez and Pedro Guarderas" />
+
+
+<meta name="date" content="2025-06-02" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="probabilidad_estadistica.html"/>
+<link rel="next" href="modelos_perdida.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/codefolding-lua-1.1/codefolding-lua.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<script type="text/javascript"
+   src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Matemática Actuarial de los Seguros Generales</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="materia.html"><a href="materia.html"><i class="fa fa-check"></i><b>1</b> Materia</a>
+<ul>
+<li class="chapter" data-level="" data-path="materia.html"><a href="materia.html#personal-docente"><i class="fa fa-check"></i>Personal docente</a></li>
+<li class="chapter" data-level="" data-path="materia.html"><a href="materia.html#resultados-de-aprendizaje"><i class="fa fa-check"></i>Resultados de aprendizaje</a></li>
+<li class="chapter" data-level="" data-path="materia.html"><a href="materia.html#contenidos-propuestos"><i class="fa fa-check"></i>Contenidos propuestos</a></li>
+<li class="chapter" data-level="" data-path=""><a href="#referencias-bibliogr%C3%A1ficas"><i class="fa fa-check"></i>Referencias bibliográficas</a>
+<ul>
+<li class="chapter" data-level="" data-path=""><a href="#principales-libros-gu%C3%ADa"><i class="fa fa-check"></i>Principales libros guía</a></li>
+<li class="chapter" data-level="" data-path="materia.html"><a href="materia.html#otras-referencias-de-soporte"><i class="fa fa-check"></i>Otras referencias de soporte</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path=""><a href="#requerimientos-inform%C3%A1ticos"><i class="fa fa-check"></i>Requerimientos informáticos</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="preliminares.html"><a href="preliminares.html"><i class="fa fa-check"></i><b>2</b> Preliminares</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="lectura_05.html"><a href="#notaci%C3%B3n-matem%C3%A1tica"><i class="fa fa-check"></i><b>2.1</b> Notación matemática</a></li>
+<li class="chapter" data-level="2.2" data-path="lectura_05.html"><a href="#consideraciones-de-programaci%C3%B3n-en-r"><i class="fa fa-check"></i><b>2.2</b> Consideraciones de programación en R</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="preliminares.html"><a href="preliminares.html#opciones-usuales"><i class="fa fa-check"></i><b>2.2.1</b> Opciones usuales</a></li>
+<li class="chapter" data-level="2.2.2" data-path="preliminares.html"><a href="preliminares.html#paquetes-usuales"><i class="fa fa-check"></i><b>2.2.2</b> Paquetes usuales</a></li>
+<li class="chapter" data-level="2.2.3" data-path="lectura_05.html"><a href="#estructuras-b%C3%A1sicas"><i class="fa fa-check"></i><b>2.2.3</b> Estructuras básicas</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="introduccion_operaciones_seguros.html"><a href="introduccion_operaciones_seguros.html"><i class="fa fa-check"></i><b>3</b> Introducción a las operaciones de seguros</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="introduccion_operaciones_seguros.html"><a href="introduccion_operaciones_seguros.html#el-sistema-financiero"><i class="fa fa-check"></i><b>3.1</b> El sistema financiero</a></li>
+<li class="chapter" data-level="3.2" data-path="introduccion_operaciones_seguros.html"><a href="introduccion_operaciones_seguros.html#riesgos-financieros"><i class="fa fa-check"></i><b>3.2</b> Riesgos financieros</a></li>
+<li class="chapter" data-level="3.3" data-path="introduccion_operaciones_seguros.html"><a href="introduccion_operaciones_seguros.html#los-seguros-y-la-transferencia-de-riesgos-financieros"><i class="fa fa-check"></i><b>3.3</b> Los seguros y la transferencia de riesgos financieros</a></li>
+<li class="chapter" data-level="3.4" data-path="lectura_05.html"><a href="#la-mutualizaci%C3%B3n-de-riesgos"><i class="fa fa-check"></i><b>3.4</b> La mutualización de riesgos</a>
+<ul>
+<li class="chapter" data-level="" data-path="introduccion_operaciones_seguros.html"><a href="introduccion_operaciones_seguros.html#perspectivas"><i class="fa fa-check"></i>Perspectivas</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="lectura_05.html"><a href="#fundamentos-t%C3%A9cnicos-de-los-seguros"><i class="fa fa-check"></i><b>3.5</b> Fundamentos técnicos de los seguros</a></li>
+<li class="chapter" data-level="3.6" data-path="lectura_05.html"><a href="#ley-de-los-grandes-n%C3%BAmeros"><i class="fa fa-check"></i><b>3.6</b> Ley de los grandes números</a></li>
+<li class="chapter" data-level="3.7" data-path="lectura_05.html"><a href="#microeconom%C3%ADa-del-negocio-de-seguros"><i class="fa fa-check"></i><b>3.7</b> Microeconomía del negocio de seguros</a>
+<ul>
+<li class="chapter" data-level="3.7.1" data-path="lectura_05.html"><a href="#ciclo-de-producci%C3%B3n"><i class="fa fa-check"></i><b>3.7.1</b> Ciclo de producción</a></li>
+<li class="chapter" data-level="3.7.2" data-path="lectura_05.html"><a href="#reservas-t%C3%A9cnicas"><i class="fa fa-check"></i><b>3.7.2</b> Reservas técnicas</a></li>
+<li class="chapter" data-level="3.7.3" data-path="introduccion_operaciones_seguros.html"><a href="introduccion_operaciones_seguros.html#control-estatal"><i class="fa fa-check"></i><b>3.7.3</b> Control estatal</a></li>
+</ul></li>
+<li class="chapter" data-level="3.8" data-path="introduccion_operaciones_seguros.html"><a href="introduccion_operaciones_seguros.html#el-seguro-privado"><i class="fa fa-check"></i><b>3.8</b> El seguro privado</a></li>
+<li class="chapter" data-level="3.9" data-path="introduccion_operaciones_seguros.html"><a href="introduccion_operaciones_seguros.html#actores"><i class="fa fa-check"></i><b>3.9</b> Actores</a></li>
+<li class="chapter" data-level="3.10" data-path="lectura_05.html"><a href="#clasificaci%C3%B3n-seg%C3%BAn-la-materia-asegurada"><i class="fa fa-check"></i><b>3.10</b> Clasificación según la materia asegurada</a>
+<ul>
+<li class="chapter" data-level="3.10.1" data-path="introduccion_operaciones_seguros.html"><a href="introduccion_operaciones_seguros.html#seguros-de-personas"><i class="fa fa-check"></i><b>3.10.1</b> Seguros de personas</a></li>
+<li class="chapter" data-level="3.10.2" data-path="lectura_05.html"><a href="#seguros-generales-o-de-da%C3%B1os"><i class="fa fa-check"></i><b>3.10.2</b> Seguros generales o de daños</a></li>
+</ul></li>
+<li class="chapter" data-level="3.11" data-path="lectura_05.html"><a href="#clasificaci%C3%B3n-seg%C3%BAn-el-beneficio"><i class="fa fa-check"></i><b>3.11</b> Clasificación según el beneficio</a></li>
+<li class="chapter" data-level="3.12" data-path="lectura_05.html"><a href="#clasificaci%C3%B3n-seg%C3%BAn-la-regulaci%C3%B3n"><i class="fa fa-check"></i><b>3.12</b> Clasificación según la regulación</a></li>
+<li class="chapter" data-level="3.13" data-path="introduccion_operaciones_seguros.html"><a href="introduccion_operaciones_seguros.html#visita-web-de-la-scvs-y-jprf"><i class="fa fa-check"></i><b>3.13</b> Visita web de la SCVS y JPRF</a></li>
+<li class="chapter" data-level="3.14" data-path="lectura_05.html"><a href="#principios-b%C3%A1sicos-del-seguro"><i class="fa fa-check"></i><b>3.14</b> Principios básicos del seguro</a>
+<ul>
+<li class="chapter" data-level="3.14.1" data-path="introduccion_operaciones_seguros.html"><a href="introduccion_operaciones_seguros.html#principio-de-buena-fe"><i class="fa fa-check"></i><b>3.14.1</b> Principio de buena fe</a></li>
+<li class="chapter" data-level="3.14.2" data-path="lectura_05.html"><a href="#principio-del-inter%C3%A9s-asegurable"><i class="fa fa-check"></i><b>3.14.2</b> Principio del interés asegurable</a></li>
+<li class="chapter" data-level="3.14.3" data-path="lectura_05.html"><a href="#principio-de-indemnizaci%C3%B3n"><i class="fa fa-check"></i><b>3.14.3</b> Principio de indemnización</a></li>
+<li class="chapter" data-level="3.14.4" data-path="lectura_05.html"><a href="#principio-de-subrogaci%C3%B3n"><i class="fa fa-check"></i><b>3.14.4</b> Principio de subrogación</a></li>
+</ul></li>
+<li class="chapter" data-level="3.15" data-path="introduccion_operaciones_seguros.html"><a href="introduccion_operaciones_seguros.html#seguro-o-apuesta"><i class="fa fa-check"></i><b>3.15</b> Seguro o apuesta?</a></li>
+<li class="chapter" data-level="3.16" data-path="introduccion_operaciones_seguros.html"><a href="introduccion_operaciones_seguros.html#fuentes-del-riesgo-en-seguros"><i class="fa fa-check"></i><b>3.16</b> Fuentes del riesgo en seguros</a></li>
+<li class="chapter" data-level="3.17" data-path="introduccion_operaciones_seguros.html"><a href="introduccion_operaciones_seguros.html#problemas-que-enfrentan-los-seguros"><i class="fa fa-check"></i><b>3.17</b> Problemas que enfrentan los seguros</a>
+<ul>
+<li class="chapter" data-level="3.17.1" data-path="introduccion_operaciones_seguros.html"><a href="introduccion_operaciones_seguros.html#asegurabilidad-de-riesgos"><i class="fa fa-check"></i><b>3.17.1</b> Asegurabilidad de riesgos</a></li>
+<li class="chapter" data-level="3.17.2" data-path="lectura_05.html"><a href="#selecci%C3%B3n-adversa"><i class="fa fa-check"></i><b>3.17.2</b> Selección adversa</a></li>
+<li class="chapter" data-level="" data-path=""><a href="#medidas-contra-la-selecci%C3%B3n-adversa"><i class="fa fa-check"></i>Medidas contra la selección adversa</a></li>
+<li class="chapter" data-level="3.17.3" data-path="introduccion_operaciones_seguros.html"><a href="introduccion_operaciones_seguros.html#azar-moral"><i class="fa fa-check"></i><b>3.17.3</b> Azar moral</a></li>
+<li class="chapter" data-level="" data-path="introduccion_operaciones_seguros.html"><a href="introduccion_operaciones_seguros.html#medidas-contra-el-azar-moral"><i class="fa fa-check"></i>Medidas contra el azar moral</a></li>
+</ul></li>
+<li class="chapter" data-level="3.18" data-path="introduccion_operaciones_seguros.html"><a href="introduccion_operaciones_seguros.html#primas-de-seguro-art.-53-rlgs"><i class="fa fa-check"></i><b>3.18</b> Primas de seguro: Art. 53 RLGS</a>
+<ul>
+<li class="chapter" data-level="" data-path=""><a href="#relaci%C3%B3n-fundamental"><i class="fa fa-check"></i>Relación fundamental</a></li>
+</ul></li>
+<li class="chapter" data-level="3.19" data-path="introduccion_operaciones_seguros.html"><a href="introduccion_operaciones_seguros.html#caso-nessie"><i class="fa fa-check"></i><b>3.19</b> Caso Nessie</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="probabilidad_estadistica.html"><a href="probabilidad_estadistica.html"><i class="fa fa-check"></i><b>4</b> Probabilidad y Estadística</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="probabilidad_estadistica.html"><a href="probabilidad_estadistica.html#probabilidad-y-conceptos-asociados"><i class="fa fa-check"></i><b>4.1</b> Probabilidad y conceptos asociados</a></li>
+<li class="chapter" data-level="4.2" data-path="probabilidad_estadistica.html"><a href="probabilidad_estadistica.html#probabilidad-condicional"><i class="fa fa-check"></i><b>4.2</b> Probabilidad condicional</a></li>
+<li class="chapter" data-level="4.3" data-path="probabilidad_estadistica.html"><a href="probabilidad_estadistica.html#resultados-de-convergencia"><i class="fa fa-check"></i><b>4.3</b> Resultados de convergencia</a></li>
+<li class="chapter" data-level="4.4" data-path="lectura_05.html"><a href="#desigualdades-de-concentraci%C3%B3n"><i class="fa fa-check"></i><b>4.4</b> Desigualdades de concentración</a></li>
+<li class="chapter" data-level="4.5" data-path="lectura_05.html"><a href="#transformada-de-fourier-cont%C3%ADnua-y-discreta"><i class="fa fa-check"></i><b>4.5</b> Transformada de Fourier, contínua y discreta</a>
+<ul>
+<li class="chapter" data-level="4.5.1" data-path="lectura_05.html"><a href="#aproximaci%C3%B3n-num%C3%A9rica-en-una-dimensi%C3%B3n"><i class="fa fa-check"></i><b>4.5.1</b> Aproximación numérica en una dimensión</a></li>
+</ul></li>
+<li class="chapter" data-level="4.6" data-path="probabilidad_estadistica.html"><a href="probabilidad_estadistica.html#consideraciones-financieras"><i class="fa fa-check"></i><b>4.6</b> Consideraciones financieras</a>
+<ul>
+<li class="chapter" data-level="4.6.1" data-path="lectura_05.html"><a href="#funci%C3%B3n-de-actualizaci%C3%B3n-o-descuento"><i class="fa fa-check"></i><b>4.6.1</b> Función de actualización o descuento</a></li>
+<li class="chapter" data-level="4.6.2" data-path="probabilidad_estadistica.html"><a href="probabilidad_estadistica.html#flujos-financieros"><i class="fa fa-check"></i><b>4.6.2</b> Flujos financieros</a></li>
+<li class="chapter" data-level="4.6.3" data-path="probabilidad_estadistica.html"><a href="probabilidad_estadistica.html#flujos-financieros-probables"><i class="fa fa-check"></i><b>4.6.3</b> Flujos financieros probables</a></li>
+<li class="chapter" data-level="4.6.4" data-path="probabilidad_estadistica.html"><a href="probabilidad_estadistica.html#sec:equifin"><i class="fa fa-check"></i><b>4.6.4</b> Equilibrio financiero</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="distribuciones.html"><a href="distribuciones.html"><i class="fa fa-check"></i><b>5</b> Distribuciones</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="distribuciones.html"><a href="distribuciones.html#distribuciones-discretas"><i class="fa fa-check"></i><b>5.1</b> Distribuciones discretas</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="lectura_05.html"><a href="#distribuci%C3%B3n-binomial"><i class="fa fa-check"></i><b>5.1.1</b> Distribución binomial</a></li>
+<li class="chapter" data-level="5.1.2" data-path="lectura_05.html"><a href="#distribuci%C3%B3n-de-poisson"><i class="fa fa-check"></i><b>5.1.2</b> Distribución de Poisson</a></li>
+<li class="chapter" data-level="5.1.3" data-path="lectura_05.html"><a href="#distribuci%C3%B3n-binomial-negativa"><i class="fa fa-check"></i><b>5.1.3</b> Distribución binomial negativa</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="distribuciones.html"><a href="distribuciones.html#familia-de-panjer"><i class="fa fa-check"></i><b>5.2</b> Familia de Panjer</a></li>
+<li class="chapter" data-level="5.3" data-path="distribuciones.html"><a href="distribuciones.html#distribuciones-continuas"><i class="fa fa-check"></i><b>5.3</b> Distribuciones continuas</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="lectura_05.html"><a href="#distribuci%C3%B3n-uniforme"><i class="fa fa-check"></i><b>5.3.1</b> Distribución uniforme</a></li>
+<li class="chapter" data-level="5.3.2" data-path="lectura_05.html"><a href="#distribuci%C3%B3n-exponencial"><i class="fa fa-check"></i><b>5.3.2</b> Distribución exponencial</a></li>
+<li class="chapter" data-level="5.3.3" data-path="lectura_05.html"><a href="#distribuci%C3%B3n-gamma"><i class="fa fa-check"></i><b>5.3.3</b> Distribución gamma</a></li>
+<li class="chapter" data-level="5.3.4" data-path="lectura_05.html"><a href="#distribuci%C3%B3n-normal"><i class="fa fa-check"></i><b>5.3.4</b> Distribución normal</a></li>
+<li class="chapter" data-level="5.3.5" data-path="lectura_05.html"><a href="#distribuci%C3%B3n-log-normal"><i class="fa fa-check"></i><b>5.3.5</b> Distribución log-normal</a></li>
+<li class="chapter" data-level="5.3.6" data-path="lectura_05.html"><a href="#distribuci%C3%B3n-de-beta"><i class="fa fa-check"></i><b>5.3.6</b> Distribución de beta</a></li>
+<li class="chapter" data-level="5.3.7" data-path="lectura_05.html"><a href="#distribuci%C3%B3n-de-pareto-generalizada"><i class="fa fa-check"></i><b>5.3.7</b> Distribución de Pareto generalizada</a></li>
+<li class="chapter" data-level="5.3.8" data-path="lectura_05.html"><a href="#distribuci%C3%B3n-de-valores-extremos-generalizada"><i class="fa fa-check"></i><b>5.3.8</b> Distribución de valores extremos generalizada</a></li>
+<li class="chapter" data-level="5.3.9" data-path="lectura_05.html"><a href="#distribuci%C3%B3n-t-de-student"><i class="fa fa-check"></i><b>5.3.9</b> Distribución t de Student</a></li>
+<li class="chapter" data-level="5.3.10" data-path="lectura_05.html"><a href="#distribuci%C3%B3n-gamma-transformada"><i class="fa fa-check"></i><b>5.3.10</b> Distribución gamma transformada</a></li>
+<li class="chapter" data-level="5.3.11" data-path="lectura_05.html"><a href="#distribuci%C3%B3n-beta-transformada"><i class="fa fa-check"></i><b>5.3.11</b> Distribución beta transformada</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="lectura_05.html"><a href="#estimaci%C3%B3n"><i class="fa fa-check"></i><b>5.4</b> Estimación</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="lectura_05.html"><a href="#m%C3%A9todo-de-sustituci%C3%B3n"><i class="fa fa-check"></i><b>5.4.1</b> Método de sustitución</a></li>
+<li class="chapter" data-level="5.4.2" data-path="lectura_05.html"><a href="#m%C3%A9todo-de-momentos"><i class="fa fa-check"></i><b>5.4.2</b> Método de momentos</a></li>
+<li class="chapter" data-level="5.4.3" data-path="lectura_05.html"><a href="#m%C3%A9todo-de-la-distancia-m%C3%ADnima"><i class="fa fa-check"></i><b>5.4.3</b> Método de la distancia mínima</a></li>
+<li class="chapter" data-level="5.4.4" data-path="lectura_05.html"><a href="#m%C3%A9todo-de-maximizaci%C3%B3n-de-la-verosimilitud"><i class="fa fa-check"></i><b>5.4.4</b> Método de maximización de la verosimilitud</a></li>
+<li class="chapter" data-level="5.4.5" data-path="lectura_05.html"><a href="#pruebas-de-hip%C3%B3tesis"><i class="fa fa-check"></i><b>5.4.5</b> Pruebas de hipótesis</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="modelos_perdida.html"><a href="modelos_perdida.html"><i class="fa fa-check"></i><b>6</b> Modelos de pérdida agregada</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="lectura_05.html"><a href="#mutualizaci%C3%B3n-del-riesgo"><i class="fa fa-check"></i><b>6.1</b> Mutualización del riesgo</a></li>
+<li class="chapter" data-level="6.2" data-path="modelos_perdida.html"><a href="modelos_perdida.html#modelo_individual"><i class="fa fa-check"></i><b>6.2</b> Modelo individual</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="lectura_05.html"><a href="#algoritmo-de-simulaci%C3%B3n"><i class="fa fa-check"></i><b>6.2.1</b> Algoritmo de simulación</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="modelos_perdida.html"><a href="modelos_perdida.html#modelo_colectivo"><i class="fa fa-check"></i><b>6.3</b> Modelo colectivo</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="lectura_05.html"><a href="#algoritmo-de-simulaci%C3%B3n-1"><i class="fa fa-check"></i><b>6.3.1</b> Algoritmo de simulación</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="modelos_perdida.html"><a href="modelos_perdida.html#modelos_mixtos"><i class="fa fa-check"></i><b>6.4</b> Modelos mixtos</a></li>
+<li class="chapter" data-level="6.5" data-path="modelos_perdida.html"><a href="modelos_perdida.html#deducibles"><i class="fa fa-check"></i><b>6.5</b> Aplicación del deducible</a>
+<ul>
+<li class="chapter" data-level="6.5.1" data-path="lectura_05.html"><a href="#algoritmo-de-simulaci%C3%B3n-2"><i class="fa fa-check"></i><b>6.5.1</b> Algoritmo de simulación</a></li>
+</ul></li>
+<li class="chapter" data-level="6.6" data-path="modelos_perdida.html"><a href="modelos_perdida.html#algoritmo_panjer"><i class="fa fa-check"></i><b>6.6</b> Algoritmo de Panjer</a></li>
+<li class="chapter" data-level="6.7" data-path="modelos_perdida.html"><a href="modelos_perdida.html#estimacion_transformada_fourier"><i class="fa fa-check"></i><b>6.7</b> Estimación usando la transformada de Fourier</a></li>
+<li class="chapter" data-level="6.8" data-path="modelos_perdida.html"><a href="modelos_perdida.html#temporalidad_numero_reclamos"><i class="fa fa-check"></i><b>6.8</b> Temporalidad y ajustes del número de reclamos</a></li>
+<li class="chapter" data-level="6.9" data-path="modelos_perdida.html"><a href="modelos_perdida.html#modelos_variables_explicativas"><i class="fa fa-check"></i><b>6.9</b> Modelos con variables explicativas</a></li>
+<li class="chapter" data-level="6.10" data-path="modelos_perdida.html"><a href="modelos_perdida.html#proceso_estocastico_reclamos"><i class="fa fa-check"></i><b>6.10</b> Proceso estocástico de reclamos totales</a>
+<ul>
+<li class="chapter" data-level="6.10.1" data-path="lectura_05.html"><a href="#algoritmo-de-simulaci%C3%B3n-3"><i class="fa fa-check"></i><b>6.10.1</b> Algoritmo de simulación</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="tarificacion.html"><a href="tarificacion.html"><i class="fa fa-check"></i><b>7</b> Tarificación</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="tarificacion.html"><a href="tarificacion.html#medidas_riesgo"><i class="fa fa-check"></i><b>7.1</b> Medidas de riesgo</a></li>
+<li class="chapter" data-level="7.2" data-path="tarificacion.html"><a href="tarificacion.html#tarificacion_grandes_terminos"><i class="fa fa-check"></i><b>7.2</b> Tarificación en grandes términos</a></li>
+<li class="chapter" data-level="7.3" data-path="tarificacion.html"><a href="tarificacion.html#prima"><i class="fa fa-check"></i><b>7.3</b> Prima</a></li>
+<li class="chapter" data-level="7.4" data-path="lectura_05.html"><a href="#segmentaci%C3%B3n"><i class="fa fa-check"></i><b>7.4</b> Segmentación</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="modelos_glm.html"><a href="modelos_glm.html"><i class="fa fa-check"></i><b>8</b> Modelos lineales generalizados (GLM)</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="modelos_glm.html"><a href="modelos_glm.html#familia-exponencial"><i class="fa fa-check"></i><b>8.1</b> Familia exponencial</a></li>
+<li class="chapter" data-level="8.2" data-path="modelos_glm.html"><a href="modelos_glm.html#modelo-lineal-generalizado-glm"><i class="fa fa-check"></i><b>8.2</b> Modelo lineal generalizado (GLM)</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="reserva_tecnicas.html"><a href="reserva_tecnicas.html"><i class="fa fa-check"></i><b>9</b> Reservas técnicas</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="reserva_tecnicas.html"><a href="reserva_tecnicas.html#reservas-para-primas-no-adquiridas"><i class="fa fa-check"></i><b>9.1</b> Reservas para primas no adquiridas</a></li>
+<li class="chapter" data-level="9.2" data-path="reserva_tecnicas.html"><a href="reserva_tecnicas.html#reservas-de-riesgos-en-curso"><i class="fa fa-check"></i><b>9.2</b> Reservas de riesgos en curso</a></li>
+<li class="chapter" data-level="9.3" data-path="reserva_tecnicas.html"><a href="reserva_tecnicas.html#reservas-de-siniestros-a-pagar"><i class="fa fa-check"></i><b>9.3</b> Reservas de siniestros a pagar</a>
+<ul>
+<li class="chapter" data-level="9.3.1" data-path="reserva_tecnicas.html"><a href="reserva_tecnicas.html#siniestros-sucedidos-reportados-resueltos-no-pagados"><i class="fa fa-check"></i><b>9.3.1</b> Siniestros sucedidos, reportados, resueltos, no pagados</a></li>
+<li class="chapter" data-level="9.3.2" data-path="reserva_tecnicas.html"><a href="reserva_tecnicas.html#siniestros-sucedidos-reportados-no-resueltos-no-pagados"><i class="fa fa-check"></i><b>9.3.2</b> Siniestros sucedidos, reportados, no resueltos, no pagados</a></li>
+<li class="chapter" data-level="9.3.3" data-path="reserva_tecnicas.html"><a href="reserva_tecnicas.html#siniestros-sucedidos-no-reportados-no-resueltos-no-pagados"><i class="fa fa-check"></i><b>9.3.3</b> Siniestros sucedidos, no reportados, no resueltos, no pagados</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="estimacion_valores_extremos.html"><a href="estimacion_valores_extremos.html"><i class="fa fa-check"></i><b>10</b> Estimación de valores extremos</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="lectura_05.html"><a href="#estimaci%C3%B3n-con-valores-extremos"><i class="fa fa-check"></i><b>10.1</b> Estimación con valores extremos</a></li>
+<li class="chapter" data-level="10.2" data-path="lectura_05.html"><a href="#simulaci%C3%B3n-con-valores-extremos"><i class="fa fa-check"></i><b>10.2</b> Simulación con valores extremos</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="bibliografia.html"><a href="bibliografia.html"><i class="fa fa-check"></i><b>11</b> Bibliografía</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Matemática Actuarial de los Seguros Generales</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="distribuciones" class="section level1 hasAnchor" number="5">
+<h1><span class="header-section-number">Capítulo 5</span> Distribuciones<a href="distribuciones.html#distribuciones" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<!------------------------------------------------------------------------------------------------->
+<div id="distribuciones-discretas" class="section level2 hasAnchor" number="5.1">
+<h2><span class="header-section-number">5.1</span> Distribuciones discretas<a href="distribuciones.html#distribuciones-discretas" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<!------------------------------------------------------------------------------------------------->
+<div id="distribución-binomial" class="section level3 hasAnchor" number="5.1.1">
+<h3><span class="header-section-number">5.1.1</span> Distribución binomial<a href="#distribuci%C3%B3n-binomial" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="thmbox">
+<div class="definition">
+<p><span id="def:dbinom" class="definition"><strong>Definición 5.1  (Distribución binomial) </strong></span>Una variable aleatoria <span class="math inline">\(N\)</span> que toma valores en <span class="math inline">\(\mathbb{N}\)</span> se dice que sigue una distribución
+o ley de binomial <span class="math inline">\(N \rightsquigarrow Bin( n, p )\)</span>, con parámetros <span class="math inline">\(n \in \mathbb{N}\)</span> y
+<span class="math inline">\(p \in [0, 1]\)</span>, si:
+<span class="math display">\[
+P( N = k ) = \binom{n}{k} p^k ( 1 - p )^{n-k}, \qquad
+\forall k \in \{0,\ldots, n\}
+\]</span>
+esta distribución discreta se caracteriza por presentar el valor <span class="math inline">\(k \frac{p_k}{p_{k-1}}\)</span> decreciente
+conforme cambia <span class="math inline">\(k \in \mathbb{N}\)</span></p>
+</div>
+</div>
+<p></p>
+<details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
+<div class="sourceCode" id="cb27"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb27-1"><a href="distribuciones.html#cb27-1"></a><span class="fu">set.seed</span>(<span class="dv">94312</span>)</span>
+<span id="cb27-2"><a href="distribuciones.html#cb27-2"></a>n <span class="ot">&lt;-</span> <span class="dv">50</span></span>
+<span id="cb27-3"><a href="distribuciones.html#cb27-3"></a>p <span class="ot">&lt;-</span> <span class="fl">0.3</span></span>
+<span id="cb27-4"><a href="distribuciones.html#cb27-4"></a>k <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb27-5"><a href="distribuciones.html#cb27-5"></a>m <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb27-6"><a href="distribuciones.html#cb27-6"></a>N <span class="ot">&lt;-</span> <span class="fu">rbinom</span>( <span class="at">n =</span> m, <span class="at">size =</span> n, <span class="at">prob =</span> p ) <span class="co"># simular una muestra de tamaño m</span></span>
+<span id="cb27-7"><a href="distribuciones.html#cb27-7"></a>pk <span class="ot">&lt;-</span> <span class="fu">dbinom</span>( <span class="at">x =</span> k, <span class="at">size =</span> n, <span class="at">prob =</span> p ) <span class="co"># cálculo de probabilidad P( N = k )</span></span>
+<span id="cb27-8"><a href="distribuciones.html#cb27-8"></a>Pk <span class="ot">&lt;-</span> <span class="fu">pbinom</span>( <span class="at">q =</span> k, <span class="at">size =</span> n, <span class="at">prob =</span> p ) <span class="co"># cálculo de probabilidad P( N &lt;= k )</span></span>
+<span id="cb27-9"><a href="distribuciones.html#cb27-9"></a></span>
+<span id="cb27-10"><a href="distribuciones.html#cb27-10"></a>p <span class="ot">&lt;-</span> <span class="fu">dbinom</span>( <span class="at">x =</span> <span class="dv">0</span><span class="sc">:</span>n, <span class="at">size =</span> n, <span class="at">prob =</span> p )</span>
+<span id="cb27-11"><a href="distribuciones.html#cb27-11"></a>v <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span>n <span class="sc">*</span> p[ <span class="dv">2</span><span class="sc">:</span>(n <span class="sc">+</span> <span class="dv">1</span>) ] <span class="sc">/</span> p[ <span class="dv">1</span><span class="sc">:</span>n ]</span></code></pre></div>
+</details>
+<p></p>
+<p></p>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r fold-hide"><code class="sourceCode r"><span id="cb28-1"><a href="distribuciones.html#cb28-1" tabindex="-1"></a>plt <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb28-2"><a href="distribuciones.html#cb28-2" tabindex="-1"></a>  <span class="fu">geom_point</span>( <span class="fu">aes</span>( <span class="at">x =</span> <span class="dv">1</span><span class="sc">:</span>n, <span class="at">y =</span> v ), <span class="at">colour =</span> <span class="st">&#39;darkred&#39;</span> ) <span class="sc">+</span> </span>
+<span id="cb28-3"><a href="distribuciones.html#cb28-3" tabindex="-1"></a>  <span class="fu">xlab</span>( <span class="fu">TeX</span>( <span class="st">&quot;$k$&quot;</span> ) ) <span class="sc">+</span> </span>
+<span id="cb28-4"><a href="distribuciones.html#cb28-4" tabindex="-1"></a>  <span class="fu">ylab</span>( <span class="fu">TeX</span>( <span class="st">&quot;$k </span><span class="sc">\\</span><span class="st">frac{p_k}{p_{k-1}}$&quot;</span> ) ) <span class="sc">+</span> </span>
+<span id="cb28-5"><a href="distribuciones.html#cb28-5" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span>
+<span id="cb28-6"><a href="distribuciones.html#cb28-6" tabindex="-1"></a><span class="fu">plot</span>( plt )</span></code></pre></div>
+</details>
+<p><img src="seguros_generales_files/figure-html/l5g1-1.png" width="80%" style="display: block; margin: auto;" /></p>
+<p></p>
+<!------------------------------------------------------------------------------------------------->
+</div>
+<div id="distribución-de-poisson" class="section level3 hasAnchor" number="5.1.2">
+<h3><span class="header-section-number">5.1.2</span> Distribución de Poisson<a href="#distribuci%C3%B3n-de-poisson" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="thmbox">
+<div class="definition">
+<p><span id="def:dpois" class="definition"><strong>Definición 5.2  (Distribución de Poisson) </strong></span>Una variable aleatoria <span class="math inline">\(N\)</span> que toma valores en <span class="math inline">\(\mathbb{N}\)</span> se dice que sigue una distribución
+o ley de Poisson <span class="math inline">\(N \rightsquigarrow Pois( n, p )\)</span>, con parámetro <span class="math inline">\(\lambda \in \mathbb{R}\)</span>, si:
+<span class="math display">\[
+P( N = k ) = \exp\left( -\lambda \right) \frac{\lambda^k}{k!}, \qquad
+\forall k \in \mathbb{N}
+\]</span>
+esta distribución discreta se caracteriza por presentar el valor <span class="math inline">\(k \frac{p_k}{p_{k-1}}\)</span> constante
+conforme cambia <span class="math inline">\(k \in \mathbb{N}\)</span></p>
+</div>
+</div>
+<p></p>
+<details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
+<div class="sourceCode" id="cb29"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb29-1"><a href="distribuciones.html#cb29-1"></a>lambda <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb29-2"><a href="distribuciones.html#cb29-2"></a>k <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb29-3"><a href="distribuciones.html#cb29-3"></a>m <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb29-4"><a href="distribuciones.html#cb29-4"></a>N <span class="ot">&lt;-</span> <span class="fu">rpois</span>( <span class="at">n =</span> m, <span class="at">lambda =</span> lambda ) <span class="co"># simular una muestra de tamaño m</span></span>
+<span id="cb29-5"><a href="distribuciones.html#cb29-5"></a>pk <span class="ot">&lt;-</span> <span class="fu">dpois</span>( <span class="at">x =</span> k, <span class="at">lambda =</span> lambda ) <span class="co"># cálculo de probabilidad P( N = k )</span></span>
+<span id="cb29-6"><a href="distribuciones.html#cb29-6"></a>Pk <span class="ot">&lt;-</span> <span class="fu">ppois</span>( <span class="at">q =</span> k, <span class="at">lambda =</span> lambda ) <span class="co"># cálculo de probabilidad P( N &lt;= k )</span></span>
+<span id="cb29-7"><a href="distribuciones.html#cb29-7"></a></span>
+<span id="cb29-8"><a href="distribuciones.html#cb29-8"></a>n <span class="ot">&lt;-</span> <span class="dv">50</span></span>
+<span id="cb29-9"><a href="distribuciones.html#cb29-9"></a>p <span class="ot">&lt;-</span> <span class="fu">dpois</span>( <span class="at">x =</span> <span class="dv">0</span><span class="sc">:</span>n, <span class="at">lambda =</span> lambda )</span>
+<span id="cb29-10"><a href="distribuciones.html#cb29-10"></a>v <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span>n <span class="sc">*</span> p[ <span class="dv">2</span><span class="sc">:</span>(n <span class="sc">+</span> <span class="dv">1</span>) ] <span class="sc">/</span> p[ <span class="dv">1</span><span class="sc">:</span>n ]</span></code></pre></div>
+</details>
+<p></p>
+<p></p>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r fold-hide"><code class="sourceCode r"><span id="cb30-1"><a href="distribuciones.html#cb30-1" tabindex="-1"></a>plt <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb30-2"><a href="distribuciones.html#cb30-2" tabindex="-1"></a>  <span class="fu">geom_point</span>( <span class="fu">aes</span>( <span class="at">x =</span> <span class="dv">1</span><span class="sc">:</span>n, <span class="at">y =</span> v ), <span class="at">colour =</span> <span class="st">&#39;darkred&#39;</span> ) <span class="sc">+</span> </span>
+<span id="cb30-3"><a href="distribuciones.html#cb30-3" tabindex="-1"></a>  <span class="fu">xlab</span>( <span class="fu">TeX</span>( <span class="st">&quot;$k$&quot;</span> ) ) <span class="sc">+</span> </span>
+<span id="cb30-4"><a href="distribuciones.html#cb30-4" tabindex="-1"></a>  <span class="fu">ylab</span>( <span class="fu">TeX</span>( <span class="st">&quot;$k </span><span class="sc">\\</span><span class="st">frac{p_k}{p_{k-1}}$&quot;</span> ) ) <span class="sc">+</span> </span>
+<span id="cb30-5"><a href="distribuciones.html#cb30-5" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span>
+<span id="cb30-6"><a href="distribuciones.html#cb30-6" tabindex="-1"></a><span class="fu">plot</span>( plt )</span></code></pre></div>
+</details>
+<p><img src="seguros_generales_files/figure-html/l5g2-1.png" width="80%" style="display: block; margin: auto;" /></p>
+<p></p>
+<!------------------------------------------------------------------------------------------------->
+</div>
+<div id="distribución-binomial-negativa" class="section level3 hasAnchor" number="5.1.3">
+<h3><span class="header-section-number">5.1.3</span> Distribución binomial negativa<a href="#distribuci%C3%B3n-binomial-negativa" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="thmbox">
+<div class="definition">
+<p><span id="def:dnbinom" class="definition"><strong>Definición 5.3  (Distribución binomial negativa) </strong></span>Una variable aleatoria <span class="math inline">\(N\)</span> que toma valores en <span class="math inline">\(\mathbb{N}\)</span> se dice que sigue una distribución
+o ley de binomial negativa <span class="math inline">\(N \rightsquigarrow NBin( \alpha, p )\)</span>, con parámetro <span class="math inline">\(\alpha &gt; 0\)</span> y
+<span class="math inline">\(p \in (0,1)\)</span>, si:
+<span class="math display">\[
+P( N = k ) = \binom{\alpha + k - 1}{k} p^\alpha ( 1 - p )^k
+= \frac{\Gamma( \alpha + k )}{\Gamma(k+1) \Gamma(\alpha)}p^\alpha ( 1 - p )^k, \qquad
+\forall k \in \mathbb{N}
+\]</span>
+donde <span class="math inline">\(\Gamma( \alpha ) = \int\limits_0^{+\infty} x^{\alpha - 1} \exp(-x)\ dx\)</span>, <span class="math inline">\(\forall \alpha \geq 0\)</span>.</p>
+<p>Esta distribución discreta se caracteriza por presentar el valor <span class="math inline">\(k \frac{p_k}{p_{k-1}}\)</span> creciente
+conforme cambia <span class="math inline">\(k \in \mathbb{N}\)</span></p>
+</div>
+</div>
+<p></p>
+<details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
+<div class="sourceCode" id="cb31"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb31-1"><a href="distribuciones.html#cb31-1"></a>alpha <span class="ot">&lt;-</span> <span class="fl">2.5</span></span>
+<span id="cb31-2"><a href="distribuciones.html#cb31-2"></a>p <span class="ot">&lt;-</span> <span class="fl">0.3</span></span>
+<span id="cb31-3"><a href="distribuciones.html#cb31-3"></a>k <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb31-4"><a href="distribuciones.html#cb31-4"></a>m <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb31-5"><a href="distribuciones.html#cb31-5"></a>N <span class="ot">&lt;-</span> <span class="fu">rnbinom</span>( <span class="at">n =</span> m, <span class="at">size =</span> alpha, <span class="at">prob =</span> p  ) <span class="co"># simular una muestra de tamaño m</span></span>
+<span id="cb31-6"><a href="distribuciones.html#cb31-6"></a>pk <span class="ot">&lt;-</span> <span class="fu">dnbinom</span>( <span class="at">x =</span> k, <span class="at">size =</span> alpha, <span class="at">prob =</span> p ) <span class="co"># cálculo de probabilidad P( N = k )</span></span>
+<span id="cb31-7"><a href="distribuciones.html#cb31-7"></a>Pk <span class="ot">&lt;-</span> <span class="fu">pnbinom</span>( <span class="at">q =</span> k, <span class="at">size =</span> alpha, <span class="at">prob =</span> p ) <span class="co"># cálculo de probabilidad P( N &lt;= k )</span></span>
+<span id="cb31-8"><a href="distribuciones.html#cb31-8"></a></span>
+<span id="cb31-9"><a href="distribuciones.html#cb31-9"></a>n <span class="ot">&lt;-</span> <span class="dv">50</span></span>
+<span id="cb31-10"><a href="distribuciones.html#cb31-10"></a>p <span class="ot">&lt;-</span> <span class="fu">dnbinom</span>( <span class="at">x =</span> <span class="dv">0</span><span class="sc">:</span>n, <span class="at">size =</span> alpha, <span class="at">prob =</span> p )</span>
+<span id="cb31-11"><a href="distribuciones.html#cb31-11"></a>v <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span>n <span class="sc">*</span> p[ <span class="dv">2</span><span class="sc">:</span>(n <span class="sc">+</span> <span class="dv">1</span>) ] <span class="sc">/</span> p[ <span class="dv">1</span><span class="sc">:</span>n ]</span></code></pre></div>
+</details>
+<p></p>
+<p></p>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r fold-hide"><code class="sourceCode r"><span id="cb32-1"><a href="distribuciones.html#cb32-1" tabindex="-1"></a>plt <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb32-2"><a href="distribuciones.html#cb32-2" tabindex="-1"></a>  <span class="fu">geom_point</span>( <span class="fu">aes</span>( <span class="at">x =</span> <span class="dv">1</span><span class="sc">:</span>n, <span class="at">y =</span> v ), <span class="at">colour =</span> <span class="st">&#39;darkred&#39;</span> ) <span class="sc">+</span> </span>
+<span id="cb32-3"><a href="distribuciones.html#cb32-3" tabindex="-1"></a>  <span class="fu">xlab</span>( <span class="fu">TeX</span>( <span class="st">&quot;$k$&quot;</span> ) ) <span class="sc">+</span> </span>
+<span id="cb32-4"><a href="distribuciones.html#cb32-4" tabindex="-1"></a>  <span class="fu">ylab</span>( <span class="fu">TeX</span>( <span class="st">&quot;$k </span><span class="sc">\\</span><span class="st">frac{p_k}{p_{k-1}}$&quot;</span> ) ) <span class="sc">+</span> </span>
+<span id="cb32-5"><a href="distribuciones.html#cb32-5" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span>
+<span id="cb32-6"><a href="distribuciones.html#cb32-6" tabindex="-1"></a><span class="fu">plot</span>( plt )</span></code></pre></div>
+</details>
+<p><img src="seguros_generales_files/figure-html/l5g3-1.png" width="80%" style="display: block; margin: auto;" /></p>
+<p></p>
+<div class="thmbox">
+<div class="definition">
+<p><span id="def:dgeo" class="definition"><strong>Definición 5.4  (Distribución geométrica) </strong></span>Una variable aleatoria <span class="math inline">\(N\)</span> que toma valores en <span class="math inline">\(\mathbb{N}\)</span> se dice que sigue una distribución
+o ley geométrica <span class="math inline">\(N \rightsquigarrow Geo( p )\)</span>, con parámetro <span class="math inline">\(p \in (0,1]\)</span>, si:
+<span class="math display">\[
+P( N = k ) = ( 1 - p )^k p, \qquad
+\forall k \in \mathbb{N}
+\]</span></p>
+</div>
+</div>
+<p></p>
+<details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
+<div class="sourceCode" id="cb33"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb33-1"><a href="distribuciones.html#cb33-1"></a>p <span class="ot">&lt;-</span> <span class="fl">0.3</span></span>
+<span id="cb33-2"><a href="distribuciones.html#cb33-2"></a>k <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb33-3"><a href="distribuciones.html#cb33-3"></a>m <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb33-4"><a href="distribuciones.html#cb33-4"></a>N <span class="ot">&lt;-</span> <span class="fu">rgeom</span>( <span class="at">n =</span> m, <span class="at">prob =</span> p  ) <span class="co"># simular una muestra de tamaño m</span></span>
+<span id="cb33-5"><a href="distribuciones.html#cb33-5"></a>pk <span class="ot">&lt;-</span> <span class="fu">dgeom</span>( <span class="at">x =</span> k, <span class="at">prob =</span> p ) <span class="co"># cálculo de probabilidad P( N = k )</span></span>
+<span id="cb33-6"><a href="distribuciones.html#cb33-6"></a>Pk <span class="ot">&lt;-</span> <span class="fu">pgeom</span>( <span class="at">q =</span> k, <span class="at">prob =</span> p ) <span class="co"># cálculo de probabilidad P( N &lt;= k )</span></span></code></pre></div>
+</details>
+<p>
+Es fácil darse cuenta que la distribución geométrica <span class="math inline">\(Geo( p )\)</span> es una binomial negativa <span class="math inline">\(BN( 1, p )\)</span>,
+con <span class="math inline">\(\alpha = 1\)</span>.</p>
+<p>Asociado a estas distribuciones discretas existe un resultado de caracterización, el cual permite
+seleccionar la distribución de conteo.</p>
+<!------------------------------------------------------------------------------------------------->
+</div>
+</div>
+<div id="familia-de-panjer" class="section level2 hasAnchor" number="5.2">
+<h2><span class="header-section-number">5.2</span> Familia de Panjer<a href="distribuciones.html#familia-de-panjer" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>El criterio anterior para identificar el tipo de distribución, mediante la observación del
+comportamiento de la variable <span class="math inline">\(k \frac{p_k}{p_{k-1}}\)</span>, se formaliza precisamente en la definición
+de la familia de Panjer.</p>
+<div class="thmbox">
+<div class="definition">
+<p><span id="def:fampanjer" class="definition"><strong>Definición 5.5  (Familia de Panjer) </strong></span>Una variable aleatoria discreta <span class="math inline">\(N\)</span>, que toma valores enteros positivos <span class="math inline">\(N \in \mathbb{N}\)</span>, se dice
+que pertenece a la <strong>familia de Panjer</strong>, si sus probabilidades <span class="math inline">\(p_k = P( N = k )\)</span> para cada
+<span class="math inline">\(k \in \mathbb{N}\)</span>, satisfacen la siguiente relación de recurrencia.
+<span class="math display">\[
+p_k = \left( a + \frac{b}{k} \right)p_{k-1},\qquad \forall k \in \mathbb{N}\setminus \{0\}
+\]</span></p>
+</div>
+</div>
+<p>Además tenemos la siguiente proposición que caracteriza a la distribución de las variables
+aleatorias en la familia de Panjer.</p>
+<div class="thmbox">
+<div class="proposition">
+<p><span id="prp:chfampanjer" class="proposition"><strong>Proposición 5.1  (Caracterización familia de Panjer) </strong></span>Las únicas leyes de probabilidad que satisfacen la relación de recurrencia anterior son:</p>
+<ol style="list-style-type: decimal">
+<li><p>La ley de Poisson, la cual se obtiene para <span class="math inline">\(a = 0\)</span> y <span class="math inline">\(b &gt; 0\)</span>
+<span class="math display">\[
+k \frac{p_k}{p_{k-1}} = b &gt; 0,\quad \text{constante en $k$}
+\]</span></p></li>
+<li><p>La ley binomial negativa, la cual se obtiene para <span class="math inline">\(0 &lt; a &lt; 1\)</span> y <span class="math inline">\(a + b &gt; 0\)</span>
+<span class="math display">\[
+k \frac{p_k}{p_{k-1}} = a k + b &gt; 0,\quad \text{creciente en $k$}
+\]</span></p></li>
+<li><p>La ley binomial, la cual se obtenida para <span class="math inline">\(a &lt; 0\)</span> y <span class="math inline">\(b = -a(m + 1)\)</span>, para cierto <span class="math inline">\(m\)</span> entero y
+positivo.
+<span class="math display">\[
+k \frac{p_k}{p_{k-1}} = a( k - m - 1 ) &lt; 0, \quad \text{decreciente en $k$}
+\]</span></p></li>
+</ol>
+</div>
+</div>
+<p>Para una demostración detallada de la proposición anterior se puede consultar <span class="citation">[<a href="bibliografia.html#ref-MathAssuNV1">8</a>]</span> o
+en <a href="https://nonlifemaths.github.io/" class="uri">https://nonlifemaths.github.io/</a>.</p>
+<p></p>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r fold-hide"><code class="sourceCode r"><span id="cb34-1"><a href="distribuciones.html#cb34-1" tabindex="-1"></a><span class="co"># la librería CASdatasets fue previamente cargada</span></span>
+<span id="cb34-2"><a href="distribuciones.html#cb34-2" tabindex="-1"></a><span class="fu">data</span>( beMTPL97 )</span>
+<span id="cb34-3"><a href="distribuciones.html#cb34-3" tabindex="-1"></a>beMTPL97 <span class="ot">&lt;-</span> <span class="fu">as.data.table</span>( beMTPL97 )</span>
+<span id="cb34-4"><a href="distribuciones.html#cb34-4" tabindex="-1"></a>conteo <span class="ot">&lt;-</span> beMTPL97[ , <span class="fu">list</span>( <span class="at">fn =</span> .N ), by <span class="ot">=</span> <span class="fu">list</span>( sex, fuel, <span class="at">N =</span> nclaims ) ]</span>
+<span id="cb34-5"><a href="distribuciones.html#cb34-5" tabindex="-1"></a>conteo[ , pn <span class="sc">:=</span> fn <span class="sc">/</span> <span class="fu">sum</span>( fn ), by <span class="ot">=</span> <span class="fu">list</span>( sex, fuel ) ]</span>
+<span id="cb34-6"><a href="distribuciones.html#cb34-6" tabindex="-1"></a><span class="fu">setorder</span>( conteo, sex, fuel, N )</span>
+<span id="cb34-7"><a href="distribuciones.html#cb34-7" tabindex="-1"></a>conteo[ , pns <span class="sc">:=</span> <span class="fu">shift</span>( pn, <span class="at">type =</span> <span class="st">&#39;lag&#39;</span>, <span class="at">fill =</span> <span class="dv">0</span> ) ]</span>
+<span id="cb34-8"><a href="distribuciones.html#cb34-8" tabindex="-1"></a>conteo[ , jn <span class="sc">:=</span> N <span class="sc">*</span> pns <span class="sc">/</span> pn ]</span>
+<span id="cb34-9"><a href="distribuciones.html#cb34-9" tabindex="-1"></a></span>
+<span id="cb34-10"><a href="distribuciones.html#cb34-10" tabindex="-1"></a>conteo <span class="sc">%&gt;%</span></span>
+<span id="cb34-11"><a href="distribuciones.html#cb34-11" tabindex="-1"></a>  <span class="fu">kable</span>(</span>
+<span id="cb34-12"><a href="distribuciones.html#cb34-12" tabindex="-1"></a>    <span class="at">label =</span> <span class="cn">NA</span>,</span>
+<span id="cb34-13"><a href="distribuciones.html#cb34-13" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">&#39;Estimación conteos por sexo&#39;</span>,</span>
+<span id="cb34-14"><a href="distribuciones.html#cb34-14" tabindex="-1"></a>    <span class="at">row.names =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb34-15"><a href="distribuciones.html#cb34-15" tabindex="-1"></a>    <span class="at">col.names =</span> <span class="fu">c</span>( <span class="st">&quot;sexo&quot;</span>, <span class="st">&quot;fuel&quot;</span>, <span class="st">&quot;$N$&quot;</span>, <span class="st">&quot;$f_k$&quot;</span>, <span class="st">&quot;$p_k$&quot;</span>, <span class="st">&quot;$p_{k+1}$&quot;</span>, <span class="st">&quot;$k </span><span class="sc">\\</span><span class="st">frac{p_{k+1}}{p_k}$&quot;</span> ),</span>
+<span id="cb34-16"><a href="distribuciones.html#cb34-16" tabindex="-1"></a>    <span class="at">align =</span> <span class="st">&#39;llrrrrr&#39;</span>,</span>
+<span id="cb34-17"><a href="distribuciones.html#cb34-17" tabindex="-1"></a>    <span class="at">digits =</span> <span class="fu">c</span>( <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">5</span> ),</span>
+<span id="cb34-18"><a href="distribuciones.html#cb34-18" tabindex="-1"></a>    <span class="at">format.args =</span> <span class="fu">list</span>( <span class="at">big.mark =</span> <span class="st">&#39;,&#39;</span>, <span class="at">decimal.mark =</span> <span class="st">&#39;.&#39;</span>, <span class="at">scientific =</span> <span class="cn">FALSE</span> ),</span>
+<span id="cb34-19"><a href="distribuciones.html#cb34-19" tabindex="-1"></a>    <span class="at">escape =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb34-20"><a href="distribuciones.html#cb34-20" tabindex="-1"></a>    <span class="at">centering =</span> <span class="cn">TRUE</span> ) <span class="sc">%&gt;%</span></span>
+<span id="cb34-21"><a href="distribuciones.html#cb34-21" tabindex="-1"></a>  <span class="fu">kable_classic</span>( <span class="at">font_size =</span> <span class="dv">14</span>, <span class="at">full_width =</span> <span class="cn">FALSE</span>, <span class="at">html_font =</span> <span class="st">&quot;Cambria&quot;</span>, <span class="at">position =</span> <span class="st">&quot;center&quot;</span> ) <span class="sc">%&gt;%</span></span>
+<span id="cb34-22"><a href="distribuciones.html#cb34-22" tabindex="-1"></a>  <span class="fu">scroll_box</span>( <span class="at">width =</span> <span class="st">&quot;100%&quot;</span>, <span class="at">height =</span> <span class="st">&quot;500px&quot;</span> )</span></code></pre></div>
+</details>
+<div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:500px; overflow-x: scroll; width:100%; ">
+<table class=" lightable-classic" style="font-size: 14px; color: black; font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
+<caption style="font-size: initial !important;">
+Estimación conteos por sexo
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+sexo
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+fuel
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+<span class="math inline">\(N\)</span>
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+<span class="math inline">\(f_k\)</span>
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+<span class="math inline">\(p_k\)</span>
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+<span class="math inline">\(p_{k+1}\)</span>
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+<span class="math inline">\(k \frac{p_{k+1}}{p_k}\)</span>
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+female
+</td>
+<td style="text-align:left;">
+gasoline
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+29,533
+</td>
+<td style="text-align:right;">
+0.88741
+</td>
+<td style="text-align:right;">
+0.00000
+</td>
+<td style="text-align:right;">
+0.00000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+female
+</td>
+<td style="text-align:left;">
+gasoline
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+3,384
+</td>
+<td style="text-align:right;">
+0.10168
+</td>
+<td style="text-align:right;">
+0.88741
+</td>
+<td style="text-align:right;">
+8.72725
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+female
+</td>
+<td style="text-align:left;">
+gasoline
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+326
+</td>
+<td style="text-align:right;">
+0.00980
+</td>
+<td style="text-align:right;">
+0.10168
+</td>
+<td style="text-align:right;">
+20.76074
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+female
+</td>
+<td style="text-align:left;">
+gasoline
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+33
+</td>
+<td style="text-align:right;">
+0.00099
+</td>
+<td style="text-align:right;">
+0.00980
+</td>
+<td style="text-align:right;">
+29.63636
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+female
+</td>
+<td style="text-align:left;">
+gasoline
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+0.00009
+</td>
+<td style="text-align:right;">
+0.00099
+</td>
+<td style="text-align:right;">
+44.00000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+female
+</td>
+<td style="text-align:left;">
+gasoline
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.00003
+</td>
+<td style="text-align:right;">
+0.00009
+</td>
+<td style="text-align:right;">
+15.00000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+female
+</td>
+<td style="text-align:left;">
+diesel
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+8,557
+</td>
+<td style="text-align:right;">
+0.86539
+</td>
+<td style="text-align:right;">
+0.00003
+</td>
+<td style="text-align:right;">
+0.00000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+female
+</td>
+<td style="text-align:left;">
+diesel
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1,206
+</td>
+<td style="text-align:right;">
+0.12197
+</td>
+<td style="text-align:right;">
+0.86539
+</td>
+<td style="text-align:right;">
+7.09536
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+female
+</td>
+<td style="text-align:left;">
+diesel
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+109
+</td>
+<td style="text-align:right;">
+0.01102
+</td>
+<td style="text-align:right;">
+0.12197
+</td>
+<td style="text-align:right;">
+22.12844
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+female
+</td>
+<td style="text-align:left;">
+diesel
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+14
+</td>
+<td style="text-align:right;">
+0.00142
+</td>
+<td style="text-align:right;">
+0.01102
+</td>
+<td style="text-align:right;">
+23.35714
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+female
+</td>
+<td style="text-align:left;">
+diesel
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+0.00020
+</td>
+<td style="text-align:right;">
+0.00142
+</td>
+<td style="text-align:right;">
+28.00000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+male
+</td>
+<td style="text-align:left;">
+gasoline
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+71,357
+</td>
+<td style="text-align:right;">
+0.89714
+</td>
+<td style="text-align:right;">
+0.00020
+</td>
+<td style="text-align:right;">
+0.00000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+male
+</td>
+<td style="text-align:left;">
+gasoline
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+7,417
+</td>
+<td style="text-align:right;">
+0.09325
+</td>
+<td style="text-align:right;">
+0.89714
+</td>
+<td style="text-align:right;">
+9.62074
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+male
+</td>
+<td style="text-align:left;">
+gasoline
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+682
+</td>
+<td style="text-align:right;">
+0.00857
+</td>
+<td style="text-align:right;">
+0.09325
+</td>
+<td style="text-align:right;">
+21.75073
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+male
+</td>
+<td style="text-align:left;">
+gasoline
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+74
+</td>
+<td style="text-align:right;">
+0.00093
+</td>
+<td style="text-align:right;">
+0.00857
+</td>
+<td style="text-align:right;">
+27.64865
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+male
+</td>
+<td style="text-align:left;">
+gasoline
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:right;">
+0.00009
+</td>
+<td style="text-align:right;">
+0.00093
+</td>
+<td style="text-align:right;">
+42.28571
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+male
+</td>
+<td style="text-align:left;">
+gasoline
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.00001
+</td>
+<td style="text-align:right;">
+0.00009
+</td>
+<td style="text-align:right;">
+35.00000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+male
+</td>
+<td style="text-align:left;">
+diesel
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+35,489
+</td>
+<td style="text-align:right;">
+0.87614
+</td>
+<td style="text-align:right;">
+0.00001
+</td>
+<td style="text-align:right;">
+0.00000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+male
+</td>
+<td style="text-align:left;">
+diesel
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+4,532
+</td>
+<td style="text-align:right;">
+0.11188
+</td>
+<td style="text-align:right;">
+0.87614
+</td>
+<td style="text-align:right;">
+7.83076
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+male
+</td>
+<td style="text-align:left;">
+diesel
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+439
+</td>
+<td style="text-align:right;">
+0.01084
+</td>
+<td style="text-align:right;">
+0.11188
+</td>
+<td style="text-align:right;">
+20.64692
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+male
+</td>
+<td style="text-align:left;">
+diesel
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+41
+</td>
+<td style="text-align:right;">
+0.00101
+</td>
+<td style="text-align:right;">
+0.01084
+</td>
+<td style="text-align:right;">
+32.12195
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+male
+</td>
+<td style="text-align:left;">
+diesel
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+0.00012
+</td>
+<td style="text-align:right;">
+0.00101
+</td>
+<td style="text-align:right;">
+32.80000
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p></p>
+<p></p>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r fold-hide"><code class="sourceCode r"><span id="cb35-1"><a href="distribuciones.html#cb35-1" tabindex="-1"></a>plt <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb35-2"><a href="distribuciones.html#cb35-2" tabindex="-1"></a>  <span class="fu">geom_point</span>( <span class="at">data =</span> conteo, <span class="fu">aes</span>( <span class="at">x =</span> N, <span class="at">y =</span> jn ), <span class="at">colour =</span> <span class="st">&#39;purple&#39;</span> ) <span class="sc">+</span> </span>
+<span id="cb35-3"><a href="distribuciones.html#cb35-3" tabindex="-1"></a>  <span class="fu">xlab</span>( <span class="fu">TeX</span>( <span class="st">&quot;$k$&quot;</span> ) ) <span class="sc">+</span> </span>
+<span id="cb35-4"><a href="distribuciones.html#cb35-4" tabindex="-1"></a>  <span class="fu">ylab</span>( <span class="fu">TeX</span>( <span class="st">&quot;$k </span><span class="sc">\\</span><span class="st">frac{p_k}{p_{k-1}}$&quot;</span> ) ) <span class="sc">+</span> </span>
+<span id="cb35-5"><a href="distribuciones.html#cb35-5" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span>
+<span id="cb35-6"><a href="distribuciones.html#cb35-6" tabindex="-1"></a><span class="fu">plot</span>( plt )</span></code></pre></div>
+</details>
+<p><img src="seguros_generales_files/figure-html/l5g4-1.png" width="80%" style="display: block; margin: auto;" /></p>
+<p></p>
+<p>Además, una forma sencilla de estimar si una variable sigue una distribución de las tres antes
+descritas es estudiando su coeficiente de variación <span class="math inline">\(\operatorname{VC}( N ) = \frac{\mathbb{V}[N]}{\mathbb{E}[N]}\)</span>.</p>
+<ol style="list-style-type: decimal">
+<li><p>Si <span class="math inline">\(N\)</span> sigue una ley de Poisson <span class="math inline">\(Pois(\lambda)\)</span>, entonces:
+<span class="math display">\[
+\operatorname{VC}( N ) = \frac{\mathbb{V}[N]}{\mathbb{E}[N]} = \frac{\lambda}{\lambda} = 1
+\]</span></p></li>
+<li><p>Si <span class="math inline">\(N\)</span> sigue una ley de binomial negativa <span class="math inline">\(NBinom( \alpha, p )\)</span>, entonces:
+<span class="math display">\[
+\operatorname{VC}( N ) = \frac{\mathbb{V}[N]}{\mathbb{E}[N]} = \frac{\alpha\frac{1-p}{p^2}}{\alpha\frac{1-p}{p}} = \frac{1}{p} &gt; 1
+\]</span></p></li>
+<li><p>Si <span class="math inline">\(N\)</span> sigue una ley de binomial <span class="math inline">\(Binom( n, p )\)</span>, entonces:
+<span class="math display">\[
+\operatorname{VC}( N ) = \frac{\mathbb{V}[N]}{\mathbb{E}[N]} = \frac{np(1-p)}{np} = 1 - p &lt; 1
+\]</span></p></li>
+</ol>
+<!------------------------------------------------------------------------------------------------->
+</div>
+<div id="distribuciones-continuas" class="section level2 hasAnchor" number="5.3">
+<h2><span class="header-section-number">5.3</span> Distribuciones continuas<a href="distribuciones.html#distribuciones-continuas" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<!------------------------------------------------------------------------------------------------->
+<div id="distribución-uniforme" class="section level3 hasAnchor" number="5.3.1">
+<h3><span class="header-section-number">5.3.1</span> Distribución uniforme<a href="#distribuci%C3%B3n-uniforme" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="thmbox">
+<div class="definition">
+<p><span id="def:dunif" class="definition"><strong>Definición 5.6  (Distribución uniforme) </strong></span>Una variable aleatoria <span class="math inline">\(X\)</span> a valores reales, sigue una distribución uniforme
+<span class="math inline">\(X \rightsquigarrow Unif( a, b )\)</span> de parámetros <span class="math inline">\(a, b \in \mathbb{R}\)</span>, si su función de distribución
+acumulada es de la siguiente forma:
+<span class="math display">\[
+F_X( x ) = \frac{x-a}{b-a} \mathbf{1}_{[a,b)}( x ) + \mathbf{1}_{[b,+\infty)}( x )
+\]</span>
+sin mucho esfuerzo se puede verificar que su densidad de probabilidad está dada por la función
+<span class="math display">\[
+f_X( x ) = \frac{1}{b-a}\mathbf{1}_{[a,b]}( x )
+\]</span>
+<span class="math display">\[
+M_X( t ) = \frac{\exp(bt)-\exp(at)}{t(b-a)}
+\]</span>
+<span class="math display">\[
+\mathbb{E}[X] = \frac{a + b}{2},\qquad \mathbb{V}[X] = \frac{(b - a)^2}{12}
+\]</span></p>
+</div>
+</div>
+<p></p>
+<details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
+<div class="sourceCode" id="cb36"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb36-1"><a href="distribuciones.html#cb36-1"></a>a <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb36-2"><a href="distribuciones.html#cb36-2"></a>b <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb36-3"><a href="distribuciones.html#cb36-3"></a>x <span class="ot">&lt;-</span> <span class="fl">1.5</span></span>
+<span id="cb36-4"><a href="distribuciones.html#cb36-4"></a>m <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb36-5"><a href="distribuciones.html#cb36-5"></a>X <span class="ot">&lt;-</span> <span class="fu">runif</span>( <span class="at">n =</span> m, <span class="at">min =</span> a, <span class="at">max =</span> b ) <span class="co"># simular una muestra de tamaño m</span></span>
+<span id="cb36-6"><a href="distribuciones.html#cb36-6"></a>fx <span class="ot">&lt;-</span> <span class="fu">dunif</span>( <span class="at">x =</span> x, <span class="at">min =</span> a, <span class="at">max =</span> b ) <span class="co"># cálculo de la densidad f(x)</span></span>
+<span id="cb36-7"><a href="distribuciones.html#cb36-7"></a>Fk <span class="ot">&lt;-</span> <span class="fu">punif</span>( <span class="at">q =</span> x, <span class="at">min =</span> a, <span class="at">max =</span> b ) <span class="co"># cálculo de probabilidad F(x)</span></span></code></pre></div>
+</details>
+<p></p>
+<!------------------------------------------------------------------------------------------------->
+</div>
+<div id="distribución-exponencial" class="section level3 hasAnchor" number="5.3.2">
+<h3><span class="header-section-number">5.3.2</span> Distribución exponencial<a href="#distribuci%C3%B3n-exponencial" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="thmbox">
+<div class="definition">
+<p><span id="def:dexp" class="definition"><strong>Definición 5.7  (Distribución exponencial) </strong></span>Una variable aleatoria <span class="math inline">\(X\)</span> a valores reales, sigue una distribución exponencial
+<span class="math inline">\(X \rightsquigarrow Exp( \lambda )\)</span> de parámetros <span class="math inline">\(\lambda &gt; 0\)</span>, si su función de distribución
+acumulada es de la siguiente forma:
+<span class="math display">\[
+F_X( x ) = \mathbf{1}_{(0,+\infty)}( x ) \left( 1 - \exp\left( -\lambda x \right) \right)
+\]</span>
+sin mucho esfuerzo se puede verificar que su densidad de probabilidad está dada por la función
+<span class="math display">\[
+f_X( x ) = \mathbf{1}_{(0,+\infty)}( x ) \lambda \exp\left( -\lambda x \right)
+\]</span>
+<span class="math display">\[
+M_X( t ) = \frac{\lambda}{\lambda - t}
+\]</span>
+<span class="math display">\[
+\mathbb{E}[X] = \frac{1}{\lambda},\qquad \mathbb{V}[X] = \frac{1}{\lambda^2}
+\]</span></p>
+</div>
+</div>
+<p></p>
+<details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
+<div class="sourceCode" id="cb37"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb37-1"><a href="distribuciones.html#cb37-1"></a>lambda <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb37-2"><a href="distribuciones.html#cb37-2"></a>x <span class="ot">&lt;-</span> <span class="fl">1.5</span></span>
+<span id="cb37-3"><a href="distribuciones.html#cb37-3"></a>m <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb37-4"><a href="distribuciones.html#cb37-4"></a>X <span class="ot">&lt;-</span> <span class="fu">rexp</span>( <span class="at">n =</span> m, <span class="at">rate =</span> lambda ) <span class="co"># simular una muestra de tamaño m</span></span>
+<span id="cb37-5"><a href="distribuciones.html#cb37-5"></a>fx <span class="ot">&lt;-</span> <span class="fu">dexp</span>( <span class="at">x =</span> x, <span class="at">rate =</span> lambda ) <span class="co"># cálculo de la densidad f(x)</span></span>
+<span id="cb37-6"><a href="distribuciones.html#cb37-6"></a>Fk <span class="ot">&lt;-</span> <span class="fu">pexp</span>( <span class="at">q =</span> x, <span class="at">rate =</span> lambda ) <span class="co"># cálculo de probabilidad F(x)</span></span></code></pre></div>
+</details>
+<p></p>
+<!------------------------------------------------------------------------------------------------->
+</div>
+<div id="distribución-gamma" class="section level3 hasAnchor" number="5.3.3">
+<h3><span class="header-section-number">5.3.3</span> Distribución gamma<a href="#distribuci%C3%B3n-gamma" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="thmbox">
+<div class="definition">
+<p><span id="def:dgamma" class="definition"><strong>Definición 5.8  (Distribución gamma) </strong></span>Una variable aleatoria <span class="math inline">\(X\)</span> a valores reales, sigue una distribución gamma
+<span class="math inline">\(X \rightsquigarrow Gamma( \alpha, \beta )\)</span> de parámetros <span class="math inline">\(\alpha &gt; 0\)</span>, <span class="math inline">\(\beta &gt; 0\)</span>, si su
+función de distribución acumulada es de la siguiente forma:
+<span class="math display">\[
+F_X( x ) = \frac{\beta^\alpha}{\Gamma( \alpha )} \int\limits_{0}^{x} u^{\alpha-1} \exp(-\beta u)\ du
+\]</span>
+si en caso <span class="math inline">\(\alpha\)</span> un entero positivo, i.e. <span class="math inline">\(\alpha \in \mathbb{N}^*\)</span>, se puede calcular <span class="math inline">\(F_X( x )\)</span> con la siguiente serie
+<span class="math display">\[
+F_X( x ) = 1 - \exp( -\lambda x ) \sum\limits_{n=0}^{\alpha-1} \frac{(\lambda x)^n}{n!}
+= \exp( -\lambda x ) \sum\limits_{n=\alpha}^{+\infty} \frac{(\lambda x)^n}{n!}
+\]</span></p>
+<p>por su parte, la densidad de probabilidad automáticamente está dada por la función:
+<span class="math display">\[
+f_X( x ) = \mathbf{1}_{[0,+\infty}( x ) \frac{\beta^\alpha}{\Gamma( \alpha )} x^{\alpha-1} \exp(-\beta x)
+\]</span>
+<span class="math display">\[
+M_X( t ) = \left( \frac{\beta}{\beta - t} \right)^\alpha,\qquad \text{si}\ t &lt; \beta
+\]</span>
+<span class="math display">\[
+\mathbb{E}[X] = \frac{\alpha}{\beta},\qquad
+\mathbb{V}[X] = \frac{\alpha}{\beta^2}
+\]</span></p>
+</div>
+</div>
+<p></p>
+<details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
+<div class="sourceCode" id="cb38"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb38-1"><a href="distribuciones.html#cb38-1"></a>alpha <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb38-2"><a href="distribuciones.html#cb38-2"></a>beta <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb38-3"><a href="distribuciones.html#cb38-3"></a>x <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb38-4"><a href="distribuciones.html#cb38-4"></a>m <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb38-5"><a href="distribuciones.html#cb38-5"></a>X <span class="ot">&lt;-</span> <span class="fu">rgamma</span>( <span class="at">n =</span> m, <span class="at">shape =</span> alpha, <span class="at">scale =</span> beta ) <span class="co"># simular una muestra de tamaño m</span></span>
+<span id="cb38-6"><a href="distribuciones.html#cb38-6"></a>fx <span class="ot">&lt;-</span> <span class="fu">dgamma</span>( <span class="at">x =</span> x, <span class="at">shape =</span> alpha, <span class="at">scale =</span> beta ) <span class="co"># cálculo de la densidad f(x)</span></span>
+<span id="cb38-7"><a href="distribuciones.html#cb38-7"></a>Fk <span class="ot">&lt;-</span> <span class="fu">pgamma</span>( <span class="at">q =</span> x, <span class="at">shape =</span> alpha, <span class="at">scale =</span> beta ) <span class="co"># cálculo de probabilidad F(x)</span></span></code></pre></div>
+</details>
+<p></p>
+<!------------------------------------------------------------------------------------------------->
+</div>
+<div id="distribución-normal" class="section level3 hasAnchor" number="5.3.4">
+<h3><span class="header-section-number">5.3.4</span> Distribución normal<a href="#distribuci%C3%B3n-normal" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="thmbox">
+<div class="definition">
+<p><span id="def:dnorm" class="definition"><strong>Definición 5.9  (Distribución normal) </strong></span>Una variable aleatoria <span class="math inline">\(X\)</span> a valores reales, sigue una distribución normal
+<span class="math inline">\(X \rightsquigarrow N( \mu, \sigma )\)</span> de parámetros <span class="math inline">\(\mu \in \mathbb{R}\)</span>, <span class="math inline">\(\sigma &gt; 0\)</span>, si su
+función de distribución acumulada es de la siguiente forma:
+<span class="math display">\[
+F_X( x ) = \frac{1}{\sqrt{2\pi} \sigma} \int\limits_{-\infty}^x \exp\left( -\frac{(y - \mu)^2}{\sigma^2} \right)\ dy
+\]</span>
+la densidad de probabilidad automáticamente está dada por la función:
+<span class="math display">\[
+f_X( x ) = \frac{1}{\sqrt{2\pi}} \exp\left( -\frac{(x - \mu)^2}{\sigma^2} \right)
+\]</span>
+<span class="math display">\[
+M_X( t ) = \exp\left( t \mu + \frac{1}{2} t^2 \sigma^2 \right)
+\]</span>
+<span class="math display">\[
+\mathbb{E}[X] = \mu,\qquad \mathbb{V}[X] = \sigma^2
+\]</span></p>
+</div>
+</div>
+<p></p>
+<details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
+<div class="sourceCode" id="cb39"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb39-1"><a href="distribuciones.html#cb39-1"></a>mu <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb39-2"><a href="distribuciones.html#cb39-2"></a>sigma <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb39-3"><a href="distribuciones.html#cb39-3"></a>x <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb39-4"><a href="distribuciones.html#cb39-4"></a>m <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb39-5"><a href="distribuciones.html#cb39-5"></a>X <span class="ot">&lt;-</span> <span class="fu">rnorm</span>( <span class="at">n =</span> m, <span class="at">mean =</span> mu, <span class="at">sd =</span> sigma ) <span class="co"># simular una muestra de tamaño m</span></span>
+<span id="cb39-6"><a href="distribuciones.html#cb39-6"></a>fx <span class="ot">&lt;-</span> <span class="fu">dnorm</span>( <span class="at">x =</span> x, <span class="at">mean =</span> mu, <span class="at">sd =</span> sigma ) <span class="co"># cálculo de la densidad f(x)</span></span>
+<span id="cb39-7"><a href="distribuciones.html#cb39-7"></a>Fk <span class="ot">&lt;-</span> <span class="fu">pnorm</span>( <span class="at">q =</span> x, <span class="at">mean =</span> mu, <span class="at">sd =</span> sigma ) <span class="co"># cálculo de probabilidad F(x)</span></span></code></pre></div>
+</details>
+<p></p>
+<!------------------------------------------------------------------------------------------------->
+</div>
+<div id="distribución-log-normal" class="section level3 hasAnchor" number="5.3.5">
+<h3><span class="header-section-number">5.3.5</span> Distribución log-normal<a href="#distribuci%C3%B3n-log-normal" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="thmbox">
+<div class="definition">
+<p><span id="def:dlnorm" class="definition"><strong>Definición 5.10  (Distribución log-normal) </strong></span>Una variable aleatoria <span class="math inline">\(X\)</span> a valores reales, sigue una distribución log-normal
+<span class="math inline">\(X \rightsquigarrow LN( \mu, \sigma )\)</span> de parámetros <span class="math inline">\(\mu &gt; 0\)</span>, <span class="math inline">\(\sigma &gt; 0\)</span>, si su
+función de distribución acumulada es de la siguiente forma:
+<span class="math display">\[
+F_X( x ) = \frac{1}{\sqrt{2\pi} \sigma} \int\limits_{0}^{x} \frac{1}{y} \exp\left( -\frac{(\ln(y) - \mu)^2}{\sigma^2} \right)\ dy
+\]</span>
+la densidad de probabilidad automáticamente está dada por la función:
+<span class="math display">\[
+f_X( x ) = \frac{1}{x\sqrt{2\pi} \sigma}  \exp\left( -\frac{(\ln(x) - \mu)^2}{\sigma^2} \right)
+\]</span>
+No hay forma analítica para <span class="math inline">\(M_X\)</span>
+<span class="math display">\[
+\mathbb{E}[X] = \exp\left( \mu + \frac{1}{2}\sigma^2 \right),\qquad
+\mathbb{V}[X] = \exp\left( 2 \mu + \sigma^2 \right) \left( \exp( \sigma^2 ) - 1 \right)
+\]</span></p>
+</div>
+</div>
+<p></p>
+<details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
+<div class="sourceCode" id="cb40"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb40-1"><a href="distribuciones.html#cb40-1"></a>mu <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb40-2"><a href="distribuciones.html#cb40-2"></a>sigma <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb40-3"><a href="distribuciones.html#cb40-3"></a>x <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb40-4"><a href="distribuciones.html#cb40-4"></a>m <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb40-5"><a href="distribuciones.html#cb40-5"></a>X <span class="ot">&lt;-</span> <span class="fu">rlnorm</span>( <span class="at">n =</span> m, <span class="at">meanlog =</span> mu, <span class="at">sdlog =</span> sigma ) <span class="co"># simular una muestra de tamaño m</span></span>
+<span id="cb40-6"><a href="distribuciones.html#cb40-6"></a>fx <span class="ot">&lt;-</span> <span class="fu">dlnorm</span>( <span class="at">x =</span> x, <span class="at">meanlog =</span> mu, <span class="at">sdlog =</span> sigma ) <span class="co"># cálculo de la densidad f(x)</span></span>
+<span id="cb40-7"><a href="distribuciones.html#cb40-7"></a>Fk <span class="ot">&lt;-</span> <span class="fu">plnorm</span>( <span class="at">q =</span> x, <span class="at">meanlog =</span> mu, <span class="at">sdlog =</span> sigma ) <span class="co"># cálculo de probabilidad F(x)</span></span></code></pre></div>
+</details>
+<p>
+En pocas, una variable aleatoria <span class="math inline">\(X \rightsquigarrow LN( \mu, \sigma )\)</span> sigue una distribución
+log-normal si y solamente si la variable aleatoria dada por su logaritmo <span class="math inline">\(\ln( X ) \rightsquigarrow N( \mu, \sigma )\)</span>
+sigue una distribución normal.</p>
+<!------------------------------------------------------------------------------------------------->
+</div>
+<div id="distribución-de-beta" class="section level3 hasAnchor" number="5.3.6">
+<h3><span class="header-section-number">5.3.6</span> Distribución de beta<a href="#distribuci%C3%B3n-de-beta" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Una variable aleatoria <span class="math inline">\(X \in [0,1]\)</span> a valores reales, sigue una distribución beta
+<span class="math inline">\(X \rightsquigarrow Beta( \alpha, \beta )\)</span> de parámetros <span class="math inline">\(\alpha &gt; 0\)</span>, <span class="math inline">\(\beta &gt; 0\)</span>, si su
+función de distribución acumulada es de la siguiente forma:
+<span class="math display">\[
+F_X( x ) = \frac{1}{B(\alpha,\beta)} \int\limits_{0}^x t^{\alpha-1} ( 1 - t )^{\beta - 1}\ dt
+\]</span>
+la densidad de probabilidad automáticamente está dada por la función:
+<span class="math display">\[
+f_X( x ) = \frac{x^{\alpha-1} ( 1 - x )^{\beta - 1}}{B(\alpha,\beta)}
+\]</span>
+<span class="math display">\[
+M_X( t ) = 1 + \sum\limits_{k=1}^{+\infty} \left( \prod\limits_{l=0}^{k-1} \frac{\alpha + l}{\alpha + \beta + l} \right) \frac{t^k}{k!}
+\]</span>
+<span class="math display">\[
+\mathbb{E}[X] = \frac{\alpha}{\alpha + \beta},\qquad
+\mathbb{V}[X] = \frac{\alpha\beta}{(\alpha + \beta)^2(\alpha + \beta + 1)}
+\]</span></p>
+<p></p>
+<details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
+<div class="sourceCode" id="cb41"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb41-1"><a href="distribuciones.html#cb41-1"></a>alpha <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb41-2"><a href="distribuciones.html#cb41-2"></a>beta <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb41-3"><a href="distribuciones.html#cb41-3"></a>x <span class="ot">&lt;-</span> <span class="fl">0.5</span></span>
+<span id="cb41-4"><a href="distribuciones.html#cb41-4"></a>m <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb41-5"><a href="distribuciones.html#cb41-5"></a>X <span class="ot">&lt;-</span> <span class="fu">rbeta</span>( <span class="at">n =</span> m, <span class="at">shape1 =</span> alpha, <span class="at">shape2 =</span> beta ) <span class="co"># simular una muestra de tamaño m</span></span>
+<span id="cb41-6"><a href="distribuciones.html#cb41-6"></a>fx <span class="ot">&lt;-</span> <span class="fu">dbeta</span>( <span class="at">x =</span> x, <span class="at">shape1 =</span> alpha, <span class="at">shape2 =</span> beta ) <span class="co"># cálculo de la densidad f(x)</span></span>
+<span id="cb41-7"><a href="distribuciones.html#cb41-7"></a>Fk <span class="ot">&lt;-</span> <span class="fu">pbeta</span>( <span class="at">q =</span> x, <span class="at">shape1 =</span> alpha, <span class="at">shape2 =</span> beta ) <span class="co"># cálculo de probabilidad F(x)</span></span></code></pre></div>
+</details>
+<p></p>
+<!------------------------------------------------------------------------------------------------->
+</div>
+<div id="distribución-de-pareto-generalizada" class="section level3 hasAnchor" number="5.3.7">
+<h3><span class="header-section-number">5.3.7</span> Distribución de Pareto generalizada<a href="#distribuci%C3%B3n-de-pareto-generalizada" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="thmbox">
+<div class="definition">
+<p><span id="def:dgpd" class="definition"><strong>Definición 5.11  (Distribución de Pareto generalizada) </strong></span>Una variable aleatoria <span class="math inline">\(X\)</span> a valores reales, sigue una distribución de Pareto generalizada
+<span class="math inline">\(X \rightsquigarrow GPD( \mu, \sigma, \xi )\)</span> de parámetros <span class="math inline">\(\mu \in \mathbb{R}, \sigma &gt; 0, \xi \in \mathbb{R}\)</span>,
+si su función de distribución acumulada es de la siguiente forma:
+<span class="math display">\[
+F_X( x )
+= \left \{
+\begin{array}{ll}
+1 - \left( 1 + \xi \frac{x-\mu}{\sigma} \right)^{-\frac{1}{\xi}} &amp; \text{si}\ \xi \neq 0 \\
+1 - \exp\left( -\frac{x-\mu}{\sigma} \right) &amp; \text{si}\ \xi = 0
+\end{array}
+\right.
+\]</span>
+y su densidad de probabilidad está dada por la función
+<span class="math display">\[
+f_X( x )
+= \left \{
+\begin{array}{ll}
+\frac{1}{\sigma} \left( 1 + \xi \frac{x-\mu}{\sigma} \right)^{-1-\frac{1}{\xi}} &amp; \text{si}\ \xi \neq 0 \\
+\frac{1}{\sigma} \exp\left( -\frac{x-\mu}{\sigma} \right) &amp; \text{si}\ \xi = 0
+\end{array}
+\right.
+\]</span>
+<span class="math display">\[
+M_X( t ) = \exp(\theta \mu) \sum\limits_{j=0}^{+\infty} \frac{\theta^j \sigma^j}
+{\prod\limits_{k=0}^j ( 1 - k \xi )}
+\]</span></p>
+</div>
+</div>
+<p></p>
+<details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
+<div class="sourceCode" id="cb42"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb42-1"><a href="distribuciones.html#cb42-1"></a>xi <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb42-2"><a href="distribuciones.html#cb42-2"></a>mu <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb42-3"><a href="distribuciones.html#cb42-3"></a>sigma <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb42-4"><a href="distribuciones.html#cb42-4"></a>x <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb42-5"><a href="distribuciones.html#cb42-5"></a>m <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb42-6"><a href="distribuciones.html#cb42-6"></a>X <span class="ot">&lt;-</span> <span class="fu">rgpd</span>( <span class="at">n =</span> m, <span class="at">xi =</span> xi, <span class="at">mu =</span> mu, <span class="at">beta =</span> sigma ) <span class="co"># simular una muestra de tamaño m</span></span>
+<span id="cb42-7"><a href="distribuciones.html#cb42-7"></a>fx <span class="ot">&lt;-</span> <span class="fu">dgpd</span>( <span class="at">x =</span> x, <span class="at">xi =</span> xi, <span class="at">mu =</span> mu, <span class="at">beta =</span> sigma ) <span class="co"># cálculo de la densidad f(x)</span></span>
+<span id="cb42-8"><a href="distribuciones.html#cb42-8"></a>Fk <span class="ot">&lt;-</span> <span class="fu">pgpd</span>( <span class="at">q =</span> x, <span class="at">xi =</span> xi, <span class="at">mu =</span> mu, <span class="at">beta =</span> sigma ) <span class="co"># cálculo de probabilidad F(x)</span></span></code></pre></div>
+</details>
+<p></p>
+<!------------------------------------------------------------------------------------------------->
+</div>
+<div id="distribución-de-valores-extremos-generalizada" class="section level3 hasAnchor" number="5.3.8">
+<h3><span class="header-section-number">5.3.8</span> Distribución de valores extremos generalizada<a href="#distribuci%C3%B3n-de-valores-extremos-generalizada" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="thmbox">
+<div class="definition">
+<p><span id="def:dgev" class="definition"><strong>Definición 5.12  (Distribución de valores extremos generalizada) </strong></span>Una variable aleatoria <span class="math inline">\(X\)</span> a valores reales, sigue una distribución generalizada de valores extremos
+<span class="math inline">\(X \rightsquigarrow GEV( \mu, \sigma, \xi )\)</span> de parámetros <span class="math inline">\(\mu \in \mathbb{R}, \sigma &gt; 0, \xi \in \mathbb{R}\)</span>,
+si su función de distribución acumulada es de la siguiente forma:
+<span class="math display">\[
+F_X( x )
+= \left\{
+\begin{array}{ll}
+\exp\left( -\exp\left( -\frac{x-\mu}{\sigma} \right) \right)
+&amp; \text{si}\ \xi = 0 \\
+\exp\left( -\left( 1 + \xi \frac{x-\mu}{\sigma} \right)^{-\frac{1}{\xi}} \right)
+&amp; \text{si}\ \xi \neq 0, 1 + \xi\frac{x - \mu}{\sigma} &gt; 0
+\end{array}
+\right.
+\]</span>
+además se puede verificar que su densidad de probabilidad está dada por la función
+<span class="math display">\[
+f_X( x )
+= \left\{
+\begin{array}{ll}
+\exp\left(-\frac{x-\mu}{\sigma}\right)
+\exp\left(-\exp\left(-\frac{x-\mu}{\sigma}\right)\right)
+&amp; \text{si}\ \xi = 0 \\
+\left( 1 + \xi \frac{x - \mu}{\sigma}\right)^{-1-\frac{1}{\xi}}
+\exp\left( -\left( 1 + \xi \frac{x-\mu}{\sigma} \right)^{-\frac{1}{\xi}} \right)
+&amp; \text{si}\ \xi \neq 0, 1 + \xi\frac{x - \mu}{\sigma} &gt; 0
+\end{array}
+\right.
+\]</span></p>
+</div>
+</div>
+<p></p>
+<details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
+<div class="sourceCode" id="cb43"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb43-1"><a href="distribuciones.html#cb43-1"></a>xi <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">1</span></span>
+<span id="cb43-2"><a href="distribuciones.html#cb43-2"></a>mu <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb43-3"><a href="distribuciones.html#cb43-3"></a>sigma <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb43-4"><a href="distribuciones.html#cb43-4"></a>x <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb43-5"><a href="distribuciones.html#cb43-5"></a>m <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb43-6"><a href="distribuciones.html#cb43-6"></a>X <span class="ot">&lt;-</span> <span class="fu">rgev</span>( <span class="at">n =</span> m, <span class="at">xi =</span> xi, <span class="at">mu =</span> mu, <span class="at">beta =</span> sigma ) <span class="co"># simular una muestra de tamaño m</span></span>
+<span id="cb43-7"><a href="distribuciones.html#cb43-7"></a>fx <span class="ot">&lt;-</span> <span class="fu">dgev</span>( <span class="at">x =</span> x, <span class="at">xi =</span> xi, <span class="at">mu =</span> mu, <span class="at">beta =</span> sigma ) <span class="co"># cálculo de la densidad f(x)</span></span>
+<span id="cb43-8"><a href="distribuciones.html#cb43-8"></a>Fk <span class="ot">&lt;-</span> <span class="fu">pgev</span>( <span class="at">q =</span> x, <span class="at">xi =</span> xi, <span class="at">mu =</span> mu, <span class="at">beta =</span> sigma ) <span class="co"># cálculo de probabilidad F(x)</span></span></code></pre></div>
+</details>
+<p></p>
+<!------------------------------------------------------------------------------------------------->
+</div>
+<div id="distribución-t-de-student" class="section level3 hasAnchor" number="5.3.9">
+<h3><span class="header-section-number">5.3.9</span> Distribución t de Student<a href="#distribuci%C3%B3n-t-de-student" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="thmbox">
+<div class="definition">
+<p><span id="def:dtst" class="definition"><strong>Definición 5.13  (Distribución t de Student) </strong></span>Una variable aleatoria <span class="math inline">\(X\)</span> a valores reales, sigue una distribución t de Student
+<span class="math inline">\(X \rightsquigarrow t( \nu )\)</span> de parámetros <span class="math inline">\(\nu &gt; 0\)</span>,
+si su función de distribución acumulada es de la siguiente forma:
+<span class="math display">\[
+F_X( x )
+= \frac{1}{2} + \frac{x}{\sqrt{\pi \nu}}
+\frac{\Gamma\left( \frac{\nu + 1}{2} \right)}{\Gamma\left( \frac{\nu}{2} \right)}
+F\left( \frac{1}{2}, \frac{\nu+1}{2}, \frac{3}{2}, -\frac{x^2}{\nu} \right)
+\]</span>
+donde <span class="math inline">\(F\)</span> es la función hipergeométrica.
+<span class="math display">\[
+F( a, b, c, z ) = \sum\limits_{n=0}^{+\infty} \frac{(a)_n (b)_n}{(c)_n} \frac{z^n}{n!}
+\]</span>
+con
+<span class="math display">\[
+(a)_n
+= \left\{
+\begin{array}{ll}
+1 &amp; n = 0 \\
+a( a + 1 ) \cdots (a + n - 1) &amp; n &gt; 0
+\end{array}
+\right.
+\]</span>
+Además, se puede verificar que su densidad de probabilidad está dada por la función
+<span class="math display">\[
+f_X( x )
+= \frac{x}{\sqrt{\pi \nu}}
+\frac{\Gamma\left(\frac{\nu+1}{2}\right)}{\Gamma\left( \frac{\nu}{2} \right)}
+\left( 1 + \frac{x^2}{\nu} \right)^{-\frac{\nu+1}{2}}
+\]</span>
+La función generadora de momentos <span class="math inline">\(M_X( t )\)</span> no está definida
+<span class="math display">\[
+\mathbb{E}[X]
+= \left\{
+\begin{array}{ll}
+0 &amp; \text{si}\ \nu &gt; 0 \\
+\text{no definida} &amp; \text{si}\ \nu \leq 0
+\end{array}
+\right.
+\]</span></p>
+<p><span class="math display">\[
+\mathbb{V}[X]
+= \left\{
+\begin{array}{ll}
+\frac{\nu}{\nu-2} &amp; \text{si}\ \nu &gt; 2 \\
++\infty &amp; \text{si}\ 1 &lt; \nu \leq 2 \\
+\text{no definida} &amp; \text{si}\ \nu \leq 1
+\end{array}
+\right.
+\]</span></p>
+</div>
+</div>
+<p></p>
+<details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
+<div class="sourceCode" id="cb44"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb44-1"><a href="distribuciones.html#cb44-1"></a>nu <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb44-2"><a href="distribuciones.html#cb44-2"></a>x <span class="ot">&lt;-</span> <span class="dv">4</span></span>
+<span id="cb44-3"><a href="distribuciones.html#cb44-3"></a>m <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb44-4"><a href="distribuciones.html#cb44-4"></a>X <span class="ot">&lt;-</span> <span class="fu">rt</span>( <span class="at">n =</span> m, <span class="at">df =</span> nu ) <span class="co"># simular una muestra de tamaño m</span></span>
+<span id="cb44-5"><a href="distribuciones.html#cb44-5"></a>fx <span class="ot">&lt;-</span> <span class="fu">dt</span>( <span class="at">x =</span> x, <span class="at">df =</span> nu ) <span class="co"># cálculo de la densidad f(x)</span></span>
+<span id="cb44-6"><a href="distribuciones.html#cb44-6"></a>Fk <span class="ot">&lt;-</span> <span class="fu">pt</span>( <span class="at">q =</span> x, <span class="at">df =</span> nu ) <span class="co"># cálculo de probabilidad F(x)</span></span></code></pre></div>
+</details>
+<p></p>
+<!------------------------------------------------------------------------------------------------->
+</div>
+<div id="distribución-gamma-transformada" class="section level3 hasAnchor" number="5.3.10">
+<h3><span class="header-section-number">5.3.10</span> Distribución gamma transformada<a href="#distribuci%C3%B3n-gamma-transformada" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="thmbox">
+<div class="definition">
+<p><span id="def:dgammatra" class="definition"><strong>Definición 5.14  (Distribución gamma transformada) </strong></span>Una variable aleatoria <span class="math inline">\(X\)</span> a valores reales, sigue una distribución gamma transformada
+<span class="math inline">\(X \rightsquigarrow GT( \alpha, \tau, \theta )\)</span> de parámetros <span class="math inline">\(\alpha &gt; 0, \tau &gt; 0, \theta &gt; 0\)</span>,
+si su función de distribución acumulada es de la siguiente forma:
+<span class="math display">\[
+F_X( x ) = \frac{\tau}{\Gamma( \alpha )}
+\int\limits_{0}^x
+\frac{1}{u} \left( \frac{u}{\theta} \right)^{\alpha} \exp\left(-\left( \frac{u}{\theta} \right)^{\tau}\right)\ du
+\]</span></p>
+<p>además se puede verificar que su densidad de probabilidad está dada por la función:
+<span class="math display">\[
+f_X( x )
+=
+\left\{
+\begin{array}{ll}
+0 &amp; \text{si}\ x \leq 0 \\
+\frac{\tau}{x \Gamma( \alpha )} \left( \frac{x}{\theta} \right)^{\alpha} \exp\left(-\left( \frac{x}{\theta} \right)^{\tau}\right) &amp; \text{si}\ x &gt; 0
+\end{array}
+\right.
+\]</span>
+<span class="math display">\[
+\begin{split}
+\mathbb{E}[X^k]
+&amp; = \frac{\theta^k \Gamma\left( \alpha + \frac{k}{\tau}\right)}{\Gamma( \alpha )},
+\quad \text{si}\ k &gt; -\alpha \tau \\
+\mathbb{E}[X]
+&amp; = \frac{\theta \Gamma\left( \alpha + \frac{1}{\tau}\right)}{\Gamma( \alpha )},
+\quad \text{si}\ 1 &gt; -\alpha \tau \\
+\mathbb{V}[X]
+&amp; = \frac{\theta^2 \Gamma\left( \alpha + \frac{2}{\tau}\right)}{\Gamma( \alpha )}
+- \frac{\theta^2 \Gamma\left( \alpha + \frac{1}{\tau}\right)^2}{\Gamma( \alpha )^2}
+\end{split}
+\]</span></p>
+</div>
+</div>
+<p></p>
+<details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
+<div class="sourceCode" id="cb45"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb45-1"><a href="distribuciones.html#cb45-1"></a>alpha <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb45-2"><a href="distribuciones.html#cb45-2"></a>tau <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb45-3"><a href="distribuciones.html#cb45-3"></a>theta <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb45-4"><a href="distribuciones.html#cb45-4"></a>x <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb45-5"><a href="distribuciones.html#cb45-5"></a>m <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb45-6"><a href="distribuciones.html#cb45-6"></a>X <span class="ot">&lt;-</span> <span class="fu">rtrgamma</span>( <span class="at">n =</span> m, <span class="at">shape1 =</span> alpha, <span class="at">shape2 =</span> tau, <span class="at">scale =</span> theta ) <span class="co"># simular una muestra de tamaño m</span></span>
+<span id="cb45-7"><a href="distribuciones.html#cb45-7"></a>fx <span class="ot">&lt;-</span> <span class="fu">dtrgamma</span>( <span class="at">x =</span> x, <span class="at">shape1 =</span> alpha, <span class="at">shape2 =</span> tau, <span class="at">scale =</span> theta ) <span class="co"># cálculo de la densidad f(x)</span></span>
+<span id="cb45-8"><a href="distribuciones.html#cb45-8"></a>Fk <span class="ot">&lt;-</span> <span class="fu">ptrgamma</span>( <span class="at">q =</span> x, <span class="at">shape1 =</span> alpha, <span class="at">shape2 =</span> tau, <span class="at">scale =</span> theta ) <span class="co"># cálculo de probabilidad F(x)</span></span></code></pre></div>
+</details>
+<p></p>
+<p>En la familia gamma se incluyen las siguientes distribuciones:</p>
+<ol style="list-style-type: decimal">
+<li><p>La distribución inversa gamma transformada, es decir es una familia estable por inversión</p></li>
+<li><p>La distribución gamma para <span class="math inline">\(\alpha = n/2\)</span> y <span class="math inline">\(\theta = 2\)</span></p></li>
+<li><p>La distribución inversa gamma</p></li>
+<li><p>La distribución de Weibull</p></li>
+<li><p>La distribución inversa de Weibull</p></li>
+<li><p>La distribución exponencial</p></li>
+<li><p>La distribución inversa exponencial</p></li>
+</ol>
+<!------------------------------------------------------------------------------------------------->
+</div>
+<div id="distribución-beta-transformada" class="section level3 hasAnchor" number="5.3.11">
+<h3><span class="header-section-number">5.3.11</span> Distribución beta transformada<a href="#distribuci%C3%B3n-beta-transformada" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="thmbox">
+<div class="definition">
+<p><span id="def:dbetra" class="definition"><strong>Definición 5.15  (Distribución beta transformada) </strong></span>Una variable aleatoria <span class="math inline">\(X\)</span> a valores reales, sigue una distribución beta transformada
+<span class="math inline">\(X \rightsquigarrow BT( \alpha, \gamma, \tau, \theta )\)</span> de parámetros <span class="math inline">\(\alpha &gt; 0, \gamma &gt; 0, \tau &gt; 0, \theta &gt; 0\)</span>,
+si su función de distribución acumulada es de la siguiente forma:
+<span class="math display">\[
+F_X( x ) = \frac{\Gamma(\alpha + \tau)}{\Gamma( \alpha ) \Gamma( \tau )}
+\int\limits_0^x
+\frac{\gamma \left( \frac{u}{\theta} \right)^{\gamma \tau}}{u\left( 1 + \left( \frac{u}{\theta} \right)^{\gamma}\right)^{\alpha + \tau}}\ du
+\]</span></p>
+<p>además se puede verificar que su densidad de probabilidad está dada por la función:
+<span class="math display">\[
+f_X( x )
+= \mathbf{1}_{[0,+\infty)}( x )
+\frac{\Gamma(\alpha + \tau)}{\Gamma( \alpha ) \Gamma( \tau )}
+\frac{ \gamma \left( \frac{x}{\theta} \right)^{\gamma \tau}}{x\left( 1 + \left( \frac{x}{\theta} \right)^{\gamma}\right)^{\alpha + \tau}}
+\]</span></p>
+<p><span class="math display">\[
+\begin{split}
+\mathbb{E}[X^k]
+&amp; = \frac{\theta^k \Gamma\left( \tau + \frac{k}{\gamma}\right) \Gamma\left( \tau - \frac{k}{\gamma}\right)}{\Gamma( \alpha ) \Gamma( \tau )},
+\quad \text{si}\ -\tau \gamma &lt; k &lt; \tau \gamma \\
+\mathbb{E}[X]
+&amp; = \frac{\theta \Gamma\left( \tau + \frac{1}{\gamma}\right) \Gamma\left( \tau - \frac{1}{\gamma}\right)}{\Gamma( \alpha ) \Gamma( \tau )} \\
+\mathbb{V}[X]
+&amp; = \frac{\theta^2 \Gamma\left( \tau + \frac{2}{\gamma}\right) \Gamma\left( \tau - \frac{2}{\gamma}\right)}{\Gamma( \alpha ) \Gamma( \tau )}
+- \frac{\theta^2 \Gamma\left( \tau + \frac{1}{\gamma}\right)^2 \Gamma\left( \tau - \frac{1}{\gamma}\right)^2}{\Gamma( \alpha )^2 \Gamma( \tau )^2}
+\end{split}
+\]</span></p>
+</div>
+</div>
+<p></p>
+<details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
+<div class="sourceCode" id="cb46"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb46-1"><a href="distribuciones.html#cb46-1"></a>alpha <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb46-2"><a href="distribuciones.html#cb46-2"></a>gamma <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb46-3"><a href="distribuciones.html#cb46-3"></a>tau <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb46-4"><a href="distribuciones.html#cb46-4"></a>theta <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb46-5"><a href="distribuciones.html#cb46-5"></a>x <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb46-6"><a href="distribuciones.html#cb46-6"></a>m <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb46-7"><a href="distribuciones.html#cb46-7"></a>X <span class="ot">&lt;-</span> <span class="fu">rtrbeta</span>( <span class="at">n =</span> m, <span class="at">shape1 =</span> alpha, <span class="at">shape2 =</span> gamma, <span class="at">shape3 =</span> tau, <span class="at">scale =</span> theta ) <span class="co"># simular una muestra de tamaño m</span></span>
+<span id="cb46-8"><a href="distribuciones.html#cb46-8"></a>fx <span class="ot">&lt;-</span> <span class="fu">dtrbeta</span>( <span class="at">x =</span> x, <span class="at">shape1 =</span> alpha, <span class="at">shape2 =</span> gamma, <span class="at">shape3 =</span> tau, <span class="at">scale =</span> theta ) <span class="co"># cálculo de la densidad f(x)</span></span>
+<span id="cb46-9"><a href="distribuciones.html#cb46-9"></a>Fk <span class="ot">&lt;-</span> <span class="fu">ptrbeta</span>( <span class="at">q =</span> x, <span class="at">shape1 =</span> alpha, <span class="at">shape2 =</span> gamma, <span class="at">shape3 =</span> tau, <span class="at">scale =</span> theta ) <span class="co"># cálculo de probabilidad F(x)</span></span></code></pre></div>
+</details>
+<p></p>
+<p>Dentro de la familia beta transformada se cuenta algunas distribuciones de probabilidad:</p>
+<ol style="list-style-type: decimal">
+<li><p>La distribución de Burr para <span class="math inline">\(\tau = 1\)</span></p></li>
+<li><p>La distribución de log-logística para <span class="math inline">\(\alpha = \tau = 1\)</span></p></li>
+<li><p>La distribución de paralogística para <span class="math inline">\(\alpha = \gamma, \tau = 1\)</span></p></li>
+<li><p>La distribución de generalizada de Pareto para <span class="math inline">\(\gamma = 1\)</span></p></li>
+<li><p>La distribución de Pareto para <span class="math inline">\(\gamma = \tau = 1\)</span></p></li>
+<li><p>La distribución de inversa de Burr para <span class="math inline">\(\alpha = 1\)</span></p></li>
+<li><p>La distribución de inversa de Pareto para <span class="math inline">\(\alpha = \gamma = 1\)</span></p></li>
+<li><p>La distribución de inversa paralogística para <span class="math inline">\(\alpha = 1, \gamma = \tau\)</span></p></li>
+</ol>
+<p>La distribución transformada gamma es un caso límite de la distribución transformada beta, cuando
+<span class="math inline">\(\theta \rightarrow +\infty, \alpha \rightarrow +\infty\)</span> y
+<span class="math inline">\(\theta \alpha^{-\frac{1}{\gamma}} \rightarrow \xi\)</span></p>
+<!------------------------------------------------------------------------------------------------->
+</div>
+</div>
+<div id="estimación" class="section level2 hasAnchor" number="5.4">
+<h2><span class="header-section-number">5.4</span> Estimación<a href="#estimaci%C3%B3n" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>En la práctica se observa la realización de una variable aleatoria <span class="math inline">\(X\)</span>, es decir se tiene una
+muestra de la misma <span class="math inline">\(X_1, \ldots, X_n\)</span>. Pero, no se dispone de la distribución <span class="math inline">\(F\)</span> o de la densidad
+<span class="math inline">\(f\)</span> que la describe. Como ya hemos mencionado, conociendo la distribución se puede inferir algunas
+propiedades sobre la variable. De ahí surge la necesidad de buscar la mejor distribución <span class="math inline">\(F\)</span> posible
+a partir de la muestra <span class="citation">[<a href="bibliografia.html#ref-est_math_bor">7</a>]</span>, <span class="citation">[<a href="bibliografia.html#ref-KNight">12</a>]</span>, <span class="citation">[<a href="bibliografia.html#ref-mathstat1">5</a>]</span>, <span class="citation">[<a href="bibliografia.html#ref-funmathstat">11</a>]</span>.</p>
+<p>La estimación usualmente consiste en tratar de determinar la probabilidad <span class="math inline">\(P_X\)</span> asociada a <span class="math inline">\(X\)</span>, o
+en su defecto su función de distribución acumulada. Bajo la consideración, usualmente, de alguna
+información adicional, se considera que para la medida de de probabilidad <span class="math inline">\(P_X\)</span> que caracteriza a la
+variable aleatoria <span class="math inline">\(X\)</span> está dentro de una familia probabilidades que dependen de un parámetro
+<span class="math inline">\(\theta\)</span> el cual pertenece a un conjunto <span class="math inline">\(\Theta\)</span>, precisamente parametriza a la familia, es
+decir, para cada <span class="math inline">\(\theta \in \Theta\)</span>, <span class="math inline">\(P_{\theta}\)</span> es una medida de probabilidad y para algún
+<span class="math inline">\(\theta \in \Theta, P_X = P_{\theta}\)</span>.</p>
+<p>Ya en la práctica se tiene una muestra, por lo regular finita, <span class="math inline">\(X_1, \ldots, X_n\)</span> de la variable
+aleatoria <span class="math inline">\(X\)</span> que se desea comprender. Es a partir de la muestra que se intenta crear un estimador
+<span class="math inline">\(\tau\)</span> el cual sea precisamente el “mejor” bajo un cierto criterio que aproxime a la probabilidad
+<span class="math inline">\(P_X\)</span>, en términos algo más matemáticos <span class="math inline">\(P_X \approx P_{\tau}\)</span>. Por lo regular, se propone un
+estimador <span class="math inline">\(\tau\)</span> como función de la muestra y su tamaño <span class="math inline">\(\tau_n( X_1, \ldots, X_n ) = \tau( n, X_1, \ldots, X_n )\)</span>,
+en muchos casos se considera construir una función medible, que precisamente genere eventos
+observables. Es de notar que el estimador <span class="math inline">\(\tau_n\)</span> al depender de una muestra, la cual
+está constituida por variables aleatorias, como función de variables aleatorias se convierte también
+en una variable aleatoria al ser evaluada en estas.</p>
+<p>Hay algunas propiedades deseables para una familia de estimadores <span class="math inline">\(\mathcal{E}\)</span>, estas son:</p>
+<ol style="list-style-type: decimal">
+<li><p>Consistencia</p></li>
+<li><p>Insesgamiento</p></li>
+<li><p>Eficiencia</p></li>
+<li><p>Suficiencia</p></li>
+</ol>
+<p>Para, cada adjuntamos sus respectivas definiciones</p>
+<div class="thmbox">
+<div class="definition">
+<p><span id="def:destconsis" class="definition"><strong>Definición 5.16  (Estimadores consistentes) </strong></span>Consideramos una variable aleatoria <span class="math inline">\(X\)</span>, cuya medida de probabilidad asociada <span class="math inline">\(P_X\)</span> pertenece a una
+familia de distribuciones de probabilidad <span class="math inline">\(\{P_\theta\}_{\theta \in \Theta}\)</span>, esto quiere decir que
+<span class="math inline">\(P_X\)</span> está determinada por algún <span class="math inline">\(\theta \in \Theta\)</span>, i.e. <span class="math inline">\(P_X = P_{\theta}\)</span>. Entonces,
+la familia de estimadores <span class="math inline">\(\mathcal{E} = \{ \tau_n \}_n\)</span> es <strong>consistente</strong> para la familia de
+probabilidades <span class="math inline">\(\{P_\theta\}_{\theta \in \Theta}\)</span> si para cualquier <span class="math inline">\(n \in \mathbb{N}\)</span> y muestra
+<span class="math inline">\(X_1, \ldots, X_n\)</span> de <span class="math inline">\(X\)</span> el estimador <span class="math inline">\(\tau_n( X_1,\ldots,X_n)\)</span> converge en probabilidad a
+<span class="math inline">\(\theta\)</span>. Para todo <span class="math inline">\(\varepsilon &gt; 0\)</span>
+<span class="math display">\[
+\underset{n \rightarrow +\infty}{\lim} P_{\theta}\left( \left| \tau_n( X_1,\ldots,X_n) - \theta \right| &gt; \varepsilon\right) = 0
+\]</span>
+también se dice que la familia de estimadores es convergente.</p>
+<p>Decimos que <strong>converge fuertemente</strong> si la convergencia de la familia de estimadores
+<span class="math inline">\(\mathcal{E} = \{ \tau_n \}_n\)</span> al parámetro <span class="math inline">\(\theta\)</span> se da <strong>casi seguramente</strong> o en
+<strong>casi todas partes</strong>. Esto en término de límites implica que:
+<span class="math display">\[
+P_{\theta}\left( \underset{n \rightarrow +\infty}{\lim}
+\tau_n\left( X_1, \ldots, X_n \right) = \theta \right) = 1
+\]</span>
+En otras palabras, la probabilidad de que el límite del estimador <span class="math inline">\(\tau_n( X_1, \ldots, X_n )\)</span>
+sea igual a <span class="math inline">\(\theta\)</span> es <span class="math inline">\(1\)</span>, salvo un conjunto de medida nula para <span class="math inline">\(P_{\theta}\)</span>. De ahí resulta
+la terminología de convergencia casi segura o convergencia en casi todas partes.</p>
+</div>
+</div>
+<div class="thmbox">
+<div class="definition">
+<p><span id="def:destinsesg" class="definition"><strong>Definición 5.17  (Estimadores insesgados) </strong></span>Bajo el mismo contexto de la definición anterior. Decimos que el estimador <span class="math inline">\(\tau_n\)</span> es
+insesgado si precisamente su esperanza es igual al parámetro a estimar <span class="math inline">\(\theta \in \Theta\)</span>.
+<span class="math display">\[
+\mathbb{E}\left[ \tau_n( X_1,\ldots,X_n) \right] = \theta
+\]</span>
+La familia de estimadores <span class="math inline">\(\mathcal{E} = \{ \tau_n \}_n\)</span> será insesgada si para cada <span class="math inline">\(n\)</span> se
+satisface lo anterior.</p>
+</div>
+</div>
+<p>El siguiente teorema es de importancia para caracterizar una familia de estimadores consistentes.</p>
+<div class="thmbox">
+<div class="theorem">
+<p><span id="thm:sufestconsis" class="theorem"><strong>Teorema 5.1  </strong></span>Una familia de estimadores <span class="math inline">\(\{ \tau_n \}_n\)</span> para la cual se cumplen los siguientes límites</p>
+<ol style="list-style-type: decimal">
+<li><p><span class="math inline">\(\mathbb{E}\left[ \tau_n( X_1,\ldots,X_n) \right] \rightarrow \theta\)</span>, conforme <span class="math inline">\(n \rightarrow +\infty\)</span>,</p></li>
+<li><p><span class="math inline">\(\mathbb{V}\left[ \tau_n( X_1,\ldots,X_n) \right] \rightarrow 0\)</span>, conforme <span class="math inline">\(n \rightarrow +\infty\)</span>.</p></li>
+</ol>
+<p>Entonces, la familia <span class="math inline">\(\{ \tau_n \}_n\)</span> es consistente como estimadores de <span class="math inline">\(\theta\)</span>.</p>
+</div>
+</div>
+<div class="thmbox">
+<div class="definition">
+<p><span id="def:destinsesg" class="definition"><strong>Definición 5.17  (Estimador más eficiente) </strong></span>De igual forma en el contexto anterior. En una familia de estimadores consistentes para estimar
+un parámetro, si entre estos estimadores existe uno para el cual su varianza sea mínima, entonces
+si existe tal estimador se dice que este es el <strong>estimador más eficiente</strong>. Sin <span class="math inline">\(\mathcal{E}\)</span> es la
+familia de estimadores y <span class="math inline">\(\xi\)</span> es el estimador más eficiente, entonces para cualquier otro
+estimador <span class="math inline">\(\tau \in \mathcal{E}\)</span>, se tiene la siguiente desigualdad
+<span class="math display">\[
+\mathbb{V}\left[ \xi \right] \leq \mathbb{V}\left[ \tau \right]
+\]</span>
+la <strong>eficiencia</strong> <span class="math inline">\(E\)</span> de los estimadores en la familia <span class="math inline">\(\mathcal{E}\)</span> está dada por
+<span class="math display">\[
+0 \leq E( \tau ) = \frac{\mathbb{V}\left[ \xi \right]}{\mathbb{V}\left[ \tau \right]} \leq 1
+\]</span>
+Si además el estimador más eficiente <span class="math inline">\(\xi\)</span> es insesgado se dirá que este es un
+<strong>estimador de varianza mínima insesgado</strong>, o de forma corta <strong>MVUE</strong> por el término en inglés
+(minimum variance unbiased estimator).</p>
+</div>
+</div>
+<div class="thmbox">
+<div class="theorem">
+<p><span id="thm:thmvueunicity" class="theorem"><strong>Teorema 5.2  </strong></span>Si en una familia de estimadores <span class="math inline">\(\mathcal{E}\)</span> tenemos dos estimadores MVUE para el mismo parámetro
+<span class="math inline">\(\theta \in \Theta\)</span>, entonces estos dos estimadores son iguales en casi todas partes o lo que
+es lo mismo solo son diferentes en un conjunto de medida nula.</p>
+</div>
+</div>
+<div class="thmbox">
+<div class="definition">
+<p><span id="def:destsufic" class="definition"><strong>Definición 5.18  (Estimador suficiente) </strong></span>Dada una muestra <span class="math inline">\(X_1, \ldots, X_n\)</span> de la variable aleatoria <span class="math inline">\(X\)</span>. Un estimador
+<span class="math inline">\(\tau\left( X_1, \ldots, X_n \right)\)</span> se dice un <strong>estimador suficiente</strong> para el parámetro
+<span class="math inline">\(\theta \in \Theta\)</span>, si la distribución condicionada de la muestra <span class="math inline">\(X_1, \ldots X_n\)</span> dado el
+estimador <span class="math inline">\(\tau\)</span> es independiente del parámetro <span class="math inline">\(\theta\)</span>.</p>
+</div>
+</div>
+<p>El resultado a continuación es una caracterización del criterio de suficiencia, para una demostración
+se puede consultar <span class="citation">[<a href="bibliografia.html#ref-stat_theo_infer">18</a>]</span>, <span class="citation">[<a href="bibliografia.html#ref-funmathstat">11</a>]</span>.</p>
+<div class="thmbox">
+<div class="theorem">
+<p><span id="thm:thfactorsufic" class="theorem"><strong>Teorema 5.3  (Teorema de factorización) </strong></span>Un estimador <span class="math inline">\(\tau\)</span> es suficiente para el parámetro <span class="math inline">\(\theta\)</span> si y solo si la densidad conjunta
+de la muestra <span class="math inline">\(X_1, \ldots, X_n\)</span> puede ser expresada en la forma.
+<span class="math display">\[
+f\left( x_1, \ldots, x_n \right)
+= g\left( \theta, \tau\left( x_1, \ldots, x_n \right) \right) h\left( x_1, \ldots, x_n \right)
+\]</span></p>
+</div>
+</div>
+<div class="thmbox">
+<div class="definition">
+<p><span id="def:dfamicomp" class="definition"><strong>Definición 5.19  (Familia completa) </strong></span>Data un estimador <span class="math inline">\(\tau\)</span> que depende de una muestra aleatoria <span class="math inline">\(X_1, \ldots, X_n\)</span> y una familia de
+medidas de probabilidad <span class="math inline">\(\{ P_\theta \}_{\theta \in \Theta}\)</span>, para cada <span class="math inline">\(\theta \in \Theta\)</span>, se
+puede construir la medida <span class="math inline">\(P_{\tau,\theta}\)</span> asociada a la variable aleatoria <span class="math inline">\(\tau(X_1, \ldots,X_n)\)</span>
+y al parámetro <span class="math inline">\(\theta\)</span> que determina la medida <span class="math inline">\(P_\theta\)</span>. Para cualquier evento <span class="math inline">\(A \in \mathcal{F}\)</span>.
+<span class="math display">\[
+P_{\tau,\theta}( A ) = P_\theta\left( \tau\left(X_1, \ldots,X_n\right) \in A \right)
+\]</span></p>
+<p>Así, la familia de medidas de probabilidad <span class="math inline">\(\{ P_{\tau,\theta} \}_{\theta \in \Theta}\)</span> se dice
+<strong>completa</strong> si se satisface la siguiente implicación. Si una función <span class="math inline">\(h : \mathbb{R}\longrightarrow \mathbb{R}\)</span>,
+tiene esperanza nula para cualquier esperanza tomada bajo la medida <span class="math inline">\(P_{\tau, \theta}\)</span>, entonces la
+función <span class="math inline">\(h\)</span> es nula en casi todas partes para toda medida <span class="math inline">\(P_\theta\)</span>. De forma más compacta.
+<span class="math display">\[
+\forall P_{\tau,\theta}, \mathbb{E}_{P_{\tau,\theta}}\left[ h\left( \tau\left( X_1,\ldots, X_n \right) \right) \right] = 0
+\Longrightarrow
+\forall P_\theta, P_\theta\left( h\left( \tau\left( X_1,\ldots, X_n \right) \right) = 0 \right) = 1
+\]</span>
+Por extensión si sucede esta implicación, se dice que <span class="math inline">\(\tau\)</span> es un <strong>estimador completo</strong> respecto
+de la familia <span class="math inline">\(\{ P_\theta \}_{\theta \in \Theta}\)</span>.</p>
+</div>
+</div>
+<p>Para ello se ha formulado diferentes aproximaciones, entre las cuales citamos las siguientes:</p>
+<ol style="list-style-type: decimal">
+<li><p>Método de sustitución,</p></li>
+<li><p>Método de los momentos,</p></li>
+<li><p>Método de la distancia mínima,</p>
+<p>3.1 Método de mínimos cuadrados,</p>
+<p>3.2 Método de mínimo Chi-cuadrado,</p>
+<p>3.3 Método de varianza mínima,</p>
+<p>3.4 Método de minimización de la divergencia de Kullback–Leibler (máxima verosimilitud).</p></li>
+<li><p>Método de máxima verosimilitud,</p></li>
+<li><p>Método de Stein.</p></li>
+</ol>
+<!------------------------------------------------------------------------------------------------->
+<div id="método-de-sustitución" class="section level3 hasAnchor" number="5.4.1">
+<h3><span class="header-section-number">5.4.1</span> Método de sustitución<a href="#m%C3%A9todo-de-sustituci%C3%B3n" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Entonces, se parte de suponer que existe funcional <span class="math inline">\(G\)</span> actuando sobre el conjunto de medidas de
+probabilidad <span class="math inline">\(\mathcal{P}\)</span> que contiene al conjunto
+<span class="math inline">\(P( \Theta ) = \{ P_{\theta} \mid \theta \in \Theta\} \subset \mathcal{P}\)</span> y que toma valores
+en <span class="math inline">\(\Theta\)</span>, i.e. <span class="math inline">\(G: \mathcal{P} \longrightarrow \Theta\)</span>. De tal forma que <span class="math inline">\(P_{\theta}\)</span> es
+invariante, es decir:
+<span class="math display">\[
+G( P_{\theta} ) = \theta,\quad \forall \theta \in \Theta
+\]</span></p>
+<p>Así se construye un <strong>estimador por el método de sustitución</strong> si a partir de la medida de
+probabilidad empírica <span class="math inline">\(P_n\)</span> construida con una muestra <span class="math inline">\(X_1, \ldots, X_n\)</span> de la variable
+aleatoria <span class="math inline">\(X\)</span>, se toma como parámetro el dado por:
+<span class="math display">\[
+\widehat{\theta} = G\left( P_n \right)
+\]</span></p>
+<p>En otras palabras se sustituye el parámetro <span class="math inline">\(\theta\)</span> por <span class="math inline">\(\widehat{\theta}\)</span>. Esto implica que
+se aproxima la medida <span class="math inline">\(P_X\)</span> que caracteriza a <span class="math inline">\(X\)</span>, con la aproximación
+<span class="math inline">\(P_X \approx P_{\widehat{\theta}}\)</span>.</p>
+<p>Es de notar que a priori no se hace establece ninguna medida de la calidad de la aproximación,
+para ello hay que adjuntar algunos otros criterios que caracterizan un buen tipo de estimador.</p>
+<p>En otras ocasiones a partir de la muestra se define un estimador del parámetro <span class="math inline">\(\theta \in \Theta\)</span>
+a partir de una familia de funciones medibles que dependen directamente de la
+muestra <span class="math inline">\(X_1, \ldots, X_n\)</span> y su tamaño <span class="math inline">\(n\)</span>, i.e. una función <span class="math inline">\(\theta_n( X_1, \ldots, X_n )\)</span>. Se
+puede considerar el caso anterior como un caso en particular de este tipo de funciones, ya que
+se puede definir <span class="math inline">\(\theta_n( X_1, \ldots, X_n ) = G( P_n )\)</span>, pero hay que tener cuidado que <span class="math inline">\(G\)</span> es
+un funcional y como tal puede resultar una función que no es medible.</p>
+<!------------------------------------------------------------------------------------------------->
+</div>
+<div id="método-de-momentos" class="section level3 hasAnchor" number="5.4.2">
+<h3><span class="header-section-number">5.4.2</span> Método de momentos<a href="#m%C3%A9todo-de-momentos" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Un estimador de momento se construye a partir de una relación función entre la media de una función
+medible <span class="math inline">\(g\)</span> y el parámetro <span class="math inline">\(\theta \in \Theta\)</span> que caracteriza a la distribución o medida de
+probabilidad de la variable aleatoria <span class="math inline">\(X\)</span>. Es decir, existen funciones <span class="math inline">\(g\)</span> y <span class="math inline">\(m\)</span> a valores reales
+de tal forma que
+<span class="math display">\[
+m( \theta )
+= \mathbb{E}_{P_X} \left[ g( X ) \right]
+= \int\limits_{\mathbb{R}} g( x ) dP_X( x )
+= \int\limits_{\mathbb{R}} g( x ) dP_{\theta}( x )
+\]</span></p>
+<p>Si de alguna forma se puede invertir <span class="math inline">\(m\)</span>, de tal forma que se pueda determinar <span class="math inline">\(\theta\)</span>, en tal
+caso se pude utilizar un <strong>estimador por momentos</strong> a partir de una muestra de la variable aleatoria
+<span class="math inline">\(X_1, \ldots, X_n\)</span>
+<span class="math display">\[
+\widehat{\theta}
+= \theta_n\left( X_1, \ldots, X_n \right)
+= m^{-1}\left( \overline{g} \right)
+\]</span>
+donde
+<span class="math display">\[
+\overline{g}
+= \int\limits_{\mathbb{R}} g( x ) dP_n( x )
+= \frac{1}{n}\sum\limits_{i=1}^n g\left( X_i \right)
+\]</span></p>
+<p>Si en caso <span class="math inline">\(\overline{g}\)</span> está fuera de la imagen de <span class="math inline">\(m\)</span>, <span class="math inline">\(\overline{g} \notin m( \Theta )\)</span>, la
+inversión no sería posible. Para resolver este problema se puede recurrir a una distancia <span class="math inline">\(d\)</span> y
+buscar <span class="math inline">\(\hat{g}\)</span> tal que minimize la distancia a <span class="math inline">\(m( \Theta )\)</span>, i.e. 
+<span class="math inline">\(\hat{g} = \underset{h \in m( \Theta )}{\operatorname{arginf}}\ d( \overline{g}, h)\)</span>. Una vez determinado
+<span class="math inline">\(\hat{g}\)</span> se toma como estimador de momentos su inversa con <span class="math inline">\(m\)</span>, i.e. 
+<span class="math inline">\(\widehat{\theta} = m^{-1}( \hat{g} )\)</span>.</p>
+<p>Es de notar que en el caso anterior, la selección de la mejor distancia <span class="math inline">\(d\)</span> no es para nada
+evidente y puede ser un problema tanto o más difícil que la misma estimación del parámetro
+<span class="math inline">\(\theta\)</span> o la inversión de <span class="math inline">\(m\)</span>.</p>
+<p>La estimación por momentos en los casos más elaborados lleva a buscar la solución de problemas no
+lineales, que no suelen ser estables y que deben estar bien definidos para proveer una solución
+única.</p>
+<!------------------------------------------------------------------------------------------------->
+</div>
+<div id="método-de-la-distancia-mínima" class="section level3 hasAnchor" number="5.4.3">
+<h3><span class="header-section-number">5.4.3</span> Método de la distancia mínima<a href="#m%C3%A9todo-de-la-distancia-m%C3%ADnima" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Este método requiere de la definición de una distancia sobre el espacio de distribuciones de
+probabilidad <span class="math inline">\(\mathcal{P}\)</span>, i.e. una función <span class="math inline">\(d : \mathcal{P} \times \mathcal{P} \longrightarrow \mathbb{R}_+\)</span>
+que satisface las siguientes propiedades:</p>
+<ol style="list-style-type: decimal">
+<li><p>Propiedad de simetría, para cualquier <span class="math inline">\(P, Q \in \mathcal{P}\)</span>, <span class="math inline">\(d( P, Q ) = d( Q, P )\)</span>,</p></li>
+<li><p>Para cualquier <span class="math inline">\(P \in \mathcal{P}\)</span>, <span class="math inline">\(d( P, P ) = 0\)</span>.</p></li>
+<li><p>Desigualdad triangular, para cualquier <span class="math inline">\(P,Q,R \in \mathcal{P}\)</span>
+<span class="math display">\[
+d( P, Q ) \leq d( P, R ) + d( R, Q )
+\]</span></p></li>
+</ol>
+<p>A partir de la medida empírica de probabilidad <span class="math inline">\(P_n\)</span>, se busca una probabilidad <span class="math inline">\(P_{\theta}\)</span> que
+minimize la distancia medida con <span class="math inline">\(d\)</span>. Así resulta el estimador con el <strong>método de distancia mínima</strong>
+<span class="math display">\[
+\widehat{\theta} = \underset{\theta \in \Theta}{\operatorname{arginf}} d\left( P_{\theta}, P_n \right)
+\]</span></p>
+<p>Entra las distancias que se puede considerar tenemos las siguientes</p>
+<ul>
+<li><p>Distancia del supremo entre las distribuciones acumuladas correspondientes
+<span class="math display">\[
+d(P,Q) = \underset{x}{\sup} \left| F_P( x ) - F_Q( x ) \right|
+\]</span></p></li>
+<li><p>Distancia cuadrática entre las distribuciones acumuladas correspondientes
+<span class="math display">\[
+d( P, Q ) = \int\limits_{\mathbb{R}} \left( F_P( x ) - F_Q( x ) \right)^2\ dF_Q( x )
+\]</span></p></li>
+<li><p>Distancia de Wasserstein, para <span class="math inline">\(p &gt; 1\)</span>
+<span class="math display">\[
+d( P, Q )
+= W_p( P, Q )
+= \underset{(X,Y) \rightsquigarrow \mu \in \Gamma( P, Q )}{\inf} \mathbb{E}_{\mu}\left[ |X - Y|^p \right]^{\frac{1}{p}}
+\]</span>
+donde
+<span class="math display">\[
+\Gamma( P, Q ) = \left\{ \mu \middle| \text{$\mu$ es medida de probabilidad sobre $\Omega \times \Omega$,
+cuyas distribuciones marginales son $P$ y $Q$}\right\}
+\]</span></p></li>
+</ul>
+<!------------------------------------------------------------------------------------------------->
+</div>
+<div id="método-de-maximización-de-la-verosimilitud" class="section level3 hasAnchor" number="5.4.4">
+<h3><span class="header-section-number">5.4.4</span> Método de maximización de la verosimilitud<a href="#m%C3%A9todo-de-maximizaci%C3%B3n-de-la-verosimilitud" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>La estimación de verosimilitud parte de asumir que se observan una cierta cantidad de eventos
+independientes <span class="math inline">\(B_1, \ldots, B_n\)</span>, relacionados precisamente a la variable aleatoria en estudio <span class="math inline">\(X\)</span>.</p>
+<p>Se postula precisamente que la mejor medida de probabilidad es aquella que maximiza la probabilidad
+de observar estos eventos independientes. En el caso en particular de la estimación de una medida
+de probabilidad en una familia <span class="math inline">\(\{P_{\theta}\}\)</span> con <span class="math inline">\(\theta \in \Theta\)</span>, se busca maximizar la
+probabilidad:
+<span class="math display">\[
+\underset{\theta \in \Theta}{\sup} \prod\limits_{i=1}^n P_{\theta}\left( B_i \right)
+\]</span></p>
+<p>o de forma equivalente, se puede utilizar una transformación con un logaritmo y tratar de maximizar
+lo que conocemos como <strong>función de verosimilitud logarítmica</strong>
+<span class="math display">\[
+\ell = \sum\limits_{i=1}^n \log P_{\theta} \left( B_i \right)
+\]</span></p>
+<p>el problema de estimación se reduce a la siguiente optimización
+<span class="math display">\[
+\underset{\theta \in \Theta}{\sup} \ell( \theta )
+\]</span></p>
+<p>Precisamente, el estimador de verosimilitud <span class="math inline">\(\widehat{\theta}\)</span>, es el que resuelve el problema de
+optimización donde <span class="math inline">\(\ell\)</span> es la función objetivo y <span class="math inline">\(\Theta\)</span> representa el conjunto de restricciones.
+<span class="math display">\[
+\widehat{\theta}
+= \underset{\theta \in \Theta}{\operatorname{argsup}} \ell( \theta )
+\]</span></p>
+<p>En la práctica los eventos que se observa <span class="math inline">\(B_i\)</span> son puntuales y son precisamente los valores
+que toma la variable aleatoria <span class="math inline">\(X\)</span> para diferentes valores en el espacio muestra <span class="math inline">\(\Omega\)</span>. Es decir,
+se observa una muestra <span class="math inline">\(x_1 = X( \omega_1 ), \ldots, x_n = X( \omega_n )\)</span>.</p>
+<p>Una forma de atacar el problema de estimación, cuando las observaciones son puntuales es trabar de
+encerrar cada una de las observaciones en intervalos lo suficientemente pequeños. Se puede tomar
+un valor <span class="math inline">\(h &gt; 0\)</span>, y los eventos
+<span class="math inline">\(B_i = \left\{ \omega \in \Omega \middle| x_i - h \leq X( \omega ) \leq x_i + h \right\}\)</span> y una
+aproximación de la función de verosimilitud en función de <span class="math inline">\(h\)</span>, con la siguiente forma:
+<span class="math display">\[
+\begin{split}
+\ell_h( \theta )
+&amp; = \sum\limits_{i=1}^n \log P_{\theta} \left( B_i \right) \\
+&amp; = \sum\limits_{i=1}^n \log P_{\theta} \left( x_i - h \leq X \leq x_i + h \right) \\
+&amp; = \sum\limits_{i=1}^n \log \left( F\left( x_i + h, \theta \right) - F\left( x_i - h, \theta \right) \right) \\
+\end{split}
+\]</span></p>
+<p>Sabemos de los diferentes resultados de análisis para funciones de variación acotada, como es el
+caso de las distribuciones de probabilidad, que tienen diferenciales en casi todo punto, es decir
+que las singularidades de estas son conjuntos con medida nula. Además la cantidad de singularidades,
+de saltos que puede presentar una función de variación acotada es a lo sumo numerable. Entonces,
+cada valor observado <span class="math inline">\(x_i \in \operatorname{Dif}F\)</span> es un punto de continuidad donde la función de distribución
+<span class="math inline">\(F\)</span> es diferenciable o es un punto de singularidad, así los valores observados en la muestra se pueden
+clasificar en estos dos tipos <span class="citation">[<a href="bibliografia.html#ref-KolmoFunAnalysis">13</a>]</span>. De ello se puede dividir la suma anterior.
+<span class="math display">\[
+\begin{split}
+\ell_h( \theta )
+&amp; = \sum\limits_{x_i \in \operatorname{Dif}F} \log \left( F\left( x_i + h, \theta \right) - F\left( x_i - h, \theta \right) \right)
++ \sum\limits_{x_i \notin \operatorname{Dif}F} \log \left( F\left( x_i + h, \theta \right) - F\left( x_i - h, \theta \right) \right) \\
+\end{split}
+\]</span>
+maximizar <span class="math inline">\(\ell_h\)</span> es equivalente a maximizar la siguiente función equivalente que notaremos con el
+mismo nombre
+<span class="math display">\[
+\begin{split}
+\ell_h( \theta )
+&amp; = \frac{1}{h} \sum\limits_{x_i \in \operatorname{Dif}F} \log \left( F\left( x_i + h, \theta \right) - F\left( x_i - h, \theta \right) \right)
++ \sum\limits_{x_i \notin \operatorname{Dif}F} \log \left( F\left( x_i + h, \theta \right) - F\left( x_i - h, \theta \right) \right) \\
+\end{split}
+\]</span>
+la multiplicación de la primera suma por la constante <span class="math inline">\(\frac{1}{h}\)</span> tan solo escala la función, pero
+no cambia sus puntos críticos.</p>
+<p>Tomando al límite, un valor <span class="math inline">\(h\)</span> cada vez más pequeño, para encerrar aún más en un intervalo los
+valores observados <span class="math inline">\(\{x_i\}\)</span>, tenemos lo siguiente:
+<span class="math display">\[
+\begin{split}
+\underset{h \searrow 0}{\lim} \ell_h( \theta )
+&amp; = \underset{h \searrow 0}{\lim} \frac{1}{h} \sum\limits_{x_i \in \operatorname{Dif}F} \log \left( F\left( x_i + h, \theta \right) - F\left( x_i - h, \theta \right) \right)
++ \underset{h \searrow 0}{\lim} \sum\limits_{x_i \notin \operatorname{Dif}F} \log \left( F\left( x_i + h, \theta \right) - F\left( x_i - h, \theta \right) \right) \\
+&amp; = \sum\limits_{x_i \in \operatorname{Dif}F} \log \left( f(x_i,\theta) \right)
++ \sum\limits_{x_i \notin \operatorname{Dif}F} \log \left( F\left( x_i, \theta \right) - F\left( x_i-, \theta \right) \right),\quad
+\text{si existe el límite por izquierda de $F$}
+\end{split}
+\]</span></p>
+<p>siendo <span class="math inline">\(F\left( x_i-, \theta \right)\)</span> el límite por izquierda de la función de distribución <span class="math inline">\(F\)</span> en
+el punto <span class="math inline">\(x_i\)</span>. Además, recordamos que toda función de distribución es continua por derecha, esto
+implica que <span class="math inline">\(F\left( x_i, \theta \right) = F\left( x_i+, \theta \right)\)</span>.</p>
+<p>Para el caso puntual esta es precisamente la expresión de la función de verosimilitud logarítmica,
+la cual podemos utilizar para estimar el mejor parámetro <span class="math inline">\(\theta \in \Theta\)</span> que maximice el valor
+de verosimilitud.</p>
+<div class="thmbox">
+<p><span class="math display" id="eq:loglik">\[
+\ell( \theta ) =
+\sum\limits_{x_i \in \operatorname{Dif}F} \log \left( f(x_i,\theta) \right)
++ \sum\limits_{x_i \notin \operatorname{Dif}F} \log \left( F\left( x_i, \theta \right) - F\left( x_i-, \theta \right) \right)
+\tag{5.1}
+\]</span></p>
+</div>
+<p>En los casos más sencillos de estimación por verosimilitud se suele cumplir una de las siguientes
+hipótesis: todos los puntos <span class="math inline">\(x_i\)</span> sobre los cuales se calcula son puntos de continuidad, o la
+función de distribución acumulada <span class="math inline">\(F\)</span> no tiene puntos singulares, siendo este último caso el más
+usual. Pero, en la práctica esto no sucede y la suma adicional a la derecha en la expresión anterior
+es precisamente necesaria, ya que la distribución <span class="math inline">\(F\)</span> si puede tener singularidades. Al utilizar
+solo la primera suma sobre los puntos donde hay diferenciabilidad, la estimación por verosimilitud
+para el parámetro <span class="math inline">\(\theta\)</span> no será la correcta.</p>
+<p>Los estimadores que resulta de la maximización de verosimilitud satisfacen algunas propiedades
+deseables.</p>
+<div class="thmbox">
+<div class="theorem">
+<p><span id="thm:mleconsistent" class="theorem"><strong>Teorema 5.4  </strong></span>Los estimadores por maximización de verosimilitud son consistentes.</p>
+</div>
+</div>
+<div class="thmbox">
+<div class="theorem">
+<p><span id="thm:mleefficient" class="theorem"><strong>Teorema 5.5  </strong></span>Los estimadores por máximización de verosimilitud, si en caso de existen, estos son eficientes.</p>
+</div>
+</div>
+<div class="thmbox">
+<div class="theorem">
+<p><span id="thm:mlesufficient" class="theorem"><strong>Teorema 5.6  </strong></span>Si en caso existe un estimador suficiente, este es función del estimador de máxima verosimilitud.</p>
+</div>
+</div>
+<p>Un estimador de máxima verosimilitud no necesariamente es insesgado.</p>
+<div class="thmbox">
+<div class="theorem">
+<p><span id="thm:mlenormality" class="theorem"><strong>Teorema 5.7  </strong></span>Un estimador por maximización de verosimilitud se comporta normalmente de forma asintótica
+alrededor del verdadero parámetro <span class="math inline">\(\theta \in \Theta\)</span>. Más claramente, si <span class="math inline">\(\tau_n\)</span> es el estimador
+por maximización de verosimilitud, se tiene que <span class="math inline">\(\tau_n( X_1, \ldots, X_n ) \rightsquigarrow F_n\)</span>,
+entonces en el límite <span class="math inline">\(n \rightarrow +\infty\)</span>, se tiene la convergencia en distribución
+<span class="math inline">\(F_n \rightarrow N\left( \theta, I( \theta )^{-1} \right)\)</span>.</p>
+<p>Donde <span class="math inline">\(I(\theta)\)</span>, es un criterio de información, dado por la matriz
+<span class="math display">\[
+\left[ I(\theta) \right]_{i,j}
+= \left[ \mathbb{E}\left[ -\frac{\partial^2}{\partial\theta_i \partial\theta_j}\log f( X, \theta )\, \middle|\, \theta \right] \right]_{i,j}
+\]</span></p>
+</div>
+</div>
+<!------------------------------------------------------------------------------------------------->
+</div>
+<div id="pruebas-de-hipótesis" class="section level3 hasAnchor" number="5.4.5">
+<h3><span class="header-section-number">5.4.5</span> Pruebas de hipótesis<a href="#pruebas-de-hip%C3%B3tesis" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Usualmente sobre un variable aleatoria <span class="math inline">\(X\)</span> a valores en <span class="math inline">\(\mathbb{R}^n\)</span>, se suele establecer una decisión
+basada en el valores que toma la variable aleatoria, la selección se realiza entre diferentes
+hipótesis. De manera más formal, esta decisión puede ser representada por una función
+<span class="math inline">\(\delta : \mathbb{R}^n \longrightarrow D\)</span>, donde <span class="math inline">\(D = \{d_1,\ldots,d_n\}\)</span> es un conjunto discreto que
+representa las hipótesis. Se conoce a <span class="math inline">\(\delta\)</span> como un <strong>test estadístico de elección</strong>.</p>
+<p>En muchos casos uno nos interesa encontrar el test estadístico <span class="math inline">\(\delta\)</span> que tenga el menor error
+de cometer una selección errada, así para cada decisión en <span class="math inline">\(d \in D\)</span>, el test <span class="math inline">\(\delta\)</span> tendrá
+probabilidades <span class="math inline">\(P( \delta( X ) \neq d )\)</span>, es decir, para cualquier otro test <span class="math inline">\(\eta\)</span>, se debe
+tener que
+<span class="math display">\[
+P( \delta( X ) \neq d ) \leq P( \eta( X ) \neq d ),\qquad \forall d \in D
+\]</span></p>
+<div class="thmbox">
+<div class="definition">
+<p><span id="def:dpowertest" class="definition"><strong>Definición 5.20  (Test más potente) </strong></span>En muchos casos uno no se interesa en cualquier tipo de test estadístico, sino en un cierto tipo
+de pruebas, más interesados en un subconjunto <span class="math inline">\(K \subset \{ \delta : \mathbb{R}^n \longrightarrow D \}\)</span>,
+a este se lo conoce como una <strong>clase</strong>. Así se dice que un test <span class="math inline">\(\delta \in K\)</span> es el
+<strong>test más potente</strong> en la clase <span class="math inline">\(K\)</span> para la hipótesis <span class="math inline">\(d \in D\)</span> si para cualquier otro test
+<span class="math inline">\(\eta \in K\)</span>, se tiene la desigualdad.
+<span class="math display">\[
+P( \delta( X ) \neq d ) \leq P( \eta( X ) \neq d )
+\]</span></p>
+</div>
+</div>
+<p></p>
+<p></p>
+
+<!------------------------------------------------------------------------------------------------->
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="probabilidad_estadistica.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="modelos_perdida.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": false,
+    "facebook": true,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": null,
+    "text": null
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": ["seguros_generales.pdf"],
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "section",
+    "scroll_highlight": true
+  },
+  "split_by": "chapter"
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

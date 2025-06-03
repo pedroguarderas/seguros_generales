@@ -1,12 +1,33 @@
 bookdown::gitbook:
-config:
-  toc:
-download: ["pdf", "epub"]
+  css: style.css
+  code_folding: show
+  split_bib: FALSE
+  includes:
+    in_header: mathjax_includes.html
+  config:
+    split_by: chapter
+    toc:
+      collapse: section
+      scroll_highlight: true
+      before: |
+        <li><a href="./">Matemática Actuarial de los Seguros Generales</a></li>
+      after: |
+        <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+    download: [ "pdf" ]
 bookdown::pdf_book:
   includes:
-  in_header: preamble.tex
-latex_engine: xelatex
-citation_package: natbib
-keep_tex: yes
-bookdown::epub_book: default
-
+    in_header: preamble.tex
+  fontsize: 12pt
+  keep_tex: yes
+  dev: "cairo_pdf"
+  latex_engine: pdflatex
+  citation_package: biblatex
+  toc: true
+  toc_depth: 3
+  toc_unnumbered: true
+  toc_appendix: true
+  quote_footer: ["\\VA{", "}{}"]
+  template: null
+  fig_caption: true
+  fig_width: 7
+  fig_height: 6

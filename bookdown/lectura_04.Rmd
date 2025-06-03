@@ -7,7 +7,12 @@ conceptos de base.
 <!------------------------------------------------------------------------------------------------->
 ## Probabilidad y conceptos asociados
 
+Empezamos con algunas definiciones que serán de utilidad siempre a lo largo de toda esta exposición.
+Son ideas fundamentales que se utilizan continuamente en la elaboración de diferentes modelos 
+actuariales y en general estadísticos.
+
 <!------------------------------------------------------------------------------------------------->
+:::: {.thmbox data-latex=""}
 ::: {.definition #defconcep name="Conceptos base"}
 En breves términos, utilizaremos los siguientes conceptos
 
@@ -20,9 +25,12 @@ arrojar más de un resultado posible.
 
 4. Un ***resultado*** es la información obtenida de un experimento.
 :::
+::::
 
 En relación a lo anterior, también tenemos estas definiciones ya más formales.
 
+<!------------------------------------------------------------------------------------------------->
+:::: {.thmbox data-latex=""}
 :::  {.definition #defevent name="Espacio muestral y eventos"}
 El conjunto de todos los resultados lo denominamos ***espacio muestral*** y usualmente lo 
 notamos por $\Omega$.
@@ -52,8 +60,10 @@ entonces $A^c = \Omega \setminus A \in \F$.
 4. Aunque redunde, la intersección de eventos es un evento, si $A, B \in \F$, entonces 
 $A \cap B \in \F$.
 :::
+::::
 
 <!------------------------------------------------------------------------------------------------->
+:::: {.thmbox data-latex=""}
 ::: {.definition #probmed name="Medida de probabilidad"}
 La ***probabilidad*** es una medida de las posibilidades de que ocurra un evento contingente que 
 toma valores en $[0,1]$. Formalmente, la probabilidad se la define como una **medida**, esto es una 
@@ -69,7 +79,15 @@ $P( A \cup B ) = P( A ) + P( B )$
 2. $P( \Omega ) = 1$
 
 3. $P( \emptyset ) = 0$
+:::
+::::
 
+Muchas propiedades en la teoría de probabilidades se cumplen en un sentido más débil, bajo 
+la consideración de la medida de probabilidad $P$ salvo cualquier conjunto de medida nula. Esto se
+debe que a que existen eventos en un experimento que tienen probabilidad nula de presentarse.
+
+:::: {.thmbox data-latex=""}
+::: {.definition #dctp name="Casi en todas partes"}
 Una **propiedad** sobre sobre $\Omega$ viene caracterizada por una función de verificación 
 $V : \Omega \longrightarrow \{0,1\}$ de tal forma, se dice que un evento $A \in \F$ 
 satisface la propiedad dada por $V$ si $V(\omega) = 1$, para todo $\omega \in A$. Entonces decimos 
@@ -79,12 +97,14 @@ para cualquier $\omega \in \Omega \setminus N$ se satisface $V$, $V( \omega ) = 
 palabras en ciertos experimentos hay resultados que se pueden presentar, están dentro de las 
 opciones, sin embargo en caso de presentarse no hay forma que se pueda medirlos.
 :::
+::::
 
 En muchas ocasiones se observa los resultados a través de la realización de un experimento, y es 
 usual que a cada experimente se le asocie un único resultado. Esta noción permite la definición de 
 una variable aleatoria.
 
 <!------------------------------------------------------------------------------------------------->
+:::: {.thmbox data-latex=""}
 ::: {.definition #va name="Variable aleatoria"}
 Una ***variable aleatoria*** es una función que asigna un valor numérico a todo evento contingente.
 
@@ -98,22 +118,24 @@ i.e. $X^{-1}( A ) \in \F$ esto precisamente se designa como una **función medib
 De $X$ se puede construir o heredar otra medida a partir de $P$, esta se representa $P_X$ y tan
 solo mide los eventos que son imagen de $X$. Es decir para cualquier intervalo $A \in \R$
 $$
-\begin{eqnarray*}
+\begin{split}
 P_X( A )
-& = & P( X^{-1}( A ) )\qquad \text{definición de la notación} \\ 
-& = & P(\{ \omega \in \Omega \mid X( \omega ) \in A \})\qquad \text{definición de imagen recíproca} \\ 
-& = & \int\limits_{X^{-1}( A )} dP( \omega )\qquad \text{representación en forma integral}
-\end{eqnarray*}
+& = P( X^{-1}( A ) )\qquad \text{definición de la notación} \\ 
+& = P(\{ \omega \in \Omega \mid X( \omega ) \in A \})\qquad \text{definición de imagen recíproca} \\ 
+& = \int\limits_{X^{-1}( A )} dP( \omega )\qquad \text{representación en forma integral}
+\end{split}
 $$
 a partir de la medida $P_X$ precisamente se puede determinar algunas funciones que se conocen como 
 distribuciones o densidades de probabilidad.
 :::
+::::
 
 De la idea de variable aleatoria a valores reales se puede extender fácilmente al caso de varias 
 variables aleatorias, un vector aleatorio que toma valores en $\R^n$, i.e. una función
 medible $X : \Omega \longrightarrow \R^n$.
 
 <!------------------------------------------------------------------------------------------------->
+:::: {.thmbox data-latex=""}
 ::: {.definition #vad name="Variable aleatoria discreta"}
 Una variable aleatoria $K: \Omega \longrightarrow D$ que parte del espacio muestral $\Omega$ y toma 
 valores en un conjunto discreto $D = \left\{k_i \in \R | i \in \mathbb{N} \right\}$, sigue 
@@ -127,8 +149,10 @@ $$
 $$
 las probabilidades *¡Nunca son negativas!* y *!Suman siempre 1!*.
 :::
+::::
 
 <!------------------------------------------------------------------------------------------------->
+:::: {.thmbox data-latex=""}
 ::: {.definition #cd name="Función de distribución acumulada"}
 Consideramos una variable aleatoria a valores reales $X$, la **función de distribución acumulada**
 $F$ asociada a la variable aleatoria $X$, está dada por la siguiente relación:
@@ -154,25 +178,31 @@ $$
 \underset{x \rightarrow -\infty}{\lim} F( x ) = 0\qquad
 \underset{x \rightarrow +\infty}{\lim} F( x ) = 1
 $$
-  5. La función $F$ es a variación acotada. Esto quiere decir que existe un real $C > 0$, para 
-  cualquier partición $\{x_i\}_{i\in\Z}$, tal que:
+  5. La función $F$ es a variación acotada @KolmoFunAnalysis. Esto quiere decir que existe un real 
+  $C > 0$, para cualquier partición $\{x_i\}_{i\in\Z}$, tal que:
   
 $$
 \sum\limits_{i\in\Z} \left| F( x_{i+1} ) - F( x_i ) \right| < C
 $$
 
 :::
+::::
 
-Cuando se trata de un variable aleatoria con varias componentes reales $X = ( X_1, \ldots, X_n )$ 
-toma valores en $\R^n$. Se extiende la definición de distribución acumulada por 
-para valores reales $x = ( x_1, \ldots, x_n ) \in \R^n$
+Cuando se trata de un variable aleatoria con varias componentes reales $X = ( X_1, \ldots, X_n )$, 
+o lo que es lo mismo una secuencia finita de varias variables aleatorias a valores reales. Se 
+puede extender la definición de distribución acumulada para la variable $X$, si consideramos valores 
+reales $x = ( x_1, \ldots, x_n ) \in \R^n$, así definimos la forma más general de la distribución
+acumulada a varias variables.
 $$
 F\left( x_1, \ldots, x_n \right) 
 = P\left( X_1 \leq x_1 \land \cdots \land X_n \leq x_n \right)
 = P\left( \bigcap_{i=1}^n X_i^{-1}\left( (-\infty, x_i ] \right) \right)
 $$
+Es decir, $F$ es tan solo la probabilidad de la intersección de los eventos de la forma
+$X_i^{-1}\left( (-\infty, x_i ] \right)$.
 
 <!------------------------------------------------------------------------------------------------->
+:::: {.thmbox data-latex=""}
 ::: {.definition #spv name="Función supervivencia"}
 La función de **supervivencia** $S : \R \longrightarrow \R$ está asociada a una 
 variable aleatoria $X$, está dada por la siguiente:
@@ -180,8 +210,14 @@ $$
 S( x ) = 1 - F( x ) = 1 - P( X \leq x ) = P( X > x )
 $$
 :::
+::::
+
+Hay un caso bastante conocido, el mismo es el más presentado en el curso introductorio de teoría
+de probabilidades, precisamente se hace uso del teorema fundamental del cálculo para poder 
+establecer la siguiente definición.
 
 <!------------------------------------------------------------------------------------------------->
+:::: {.thmbox data-latex=""}
 ::: {.definition #lp name="Función de densidad de probabilidad"}
 La **densidad de probabilidad** o también la **ley de probabilidad** de una variable aleatoria 
 a valores reales $X$, es una función $f: \R \longrightarrow \R$, tal que
@@ -199,8 +235,15 @@ $$
 Esto implica que $f$ es la derivada de $F$, i.e. $\frac{dF}{dx} = f$, por tal razón $f$ estará bien 
 definida siempre y cuando la derivada de $F$ esté bien definida.
 :::
+::::
 
-```{r l4g1, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
+::: {.example #l3ex1}
+El siguiente ejemplo muestra una forma típica de una distribución acumulada continua. En este caso
+la distribución acumulada de la normal estándar, la cual no admite una forma analítica.
+$$
+\Phi( x ) = \frac{1}{\sqrt{2\pi}} \int\limits_{-\infty}^x \exp\left( -\frac{u^2}{2} \right)\ du
+$$
+```{r l4g1, out.width='80%', fig.align='center', class.source = 'fold-hide'}
 n <- 1e3
 x <- seq( -6, 6, length = n )
 
@@ -228,13 +271,15 @@ plt <- ggplot( ) +
                       limits = ylim, 
                       expand = c( 0.005, 0.005 ) ) +
   xlab( TeX( "$x$" ) ) + 
-  ylab( TeX( "$F$" ) ) + 
+  ylab( TeX( "$\\Phi$" ) ) + 
   theme_bw() +
   theme( legend.position = "none" )
 plot( plt )
 ```
+:::
 
 <!------------------------------------------------------------------------------------------------->
+:::: {.thmbox data-latex=""}
 ::: {.definition #ind name="Independencia de variables aleatorias"}
 Dos variables aleatorias a valores reales $X$ y $Y$, se dicen independientes si para cualquier par
 de eventos $A$ y $B$, sucede la siguiente factorización de probabilidades
@@ -250,6 +295,7 @@ F_{X,Y}( x, y ) = P( X \leq x \land Y \leq y )
 = F_{X}( x ) F_{Y}( y )
 $$
 :::
+::::
 
 Para cuando tratamos con dos variables aleatorias $X$ y $Y$, si en caso existe y está bien definida
 las derivadas hasta el segundo orden de la función de distribución acumulada conjunta $F_{X,Y}$. 
@@ -270,16 +316,20 @@ $X_1, \ldots, X_n$ las cuales muchas de las veces se consideraran que son
 **i.i.d.**. Esta situación si las $X_1, \ldots, X_n$ siguen la misma distribución, su distribución 
 conjunta tiene la siguiente forma:
 $$
+\begin{split}
 F( x_1, \ldots, x_n ) 
-= P( X_1 \leq x_1 \land \cdots \land X_n \leq x_n )
-= \prod\limits_{i=1}^n P( X_i \leq x_i )
-= \prod\limits_{i=1}^n F( x_i )
+& = P( X_1 \leq x_1 \land \cdots \land X_n \leq x_n ), \qquad \text{por definición} \\
+& = \prod\limits_{i=1}^n P( X_i \leq x_i ),\qquad \text{si las variables $X_i$ son independientes} \\
+& = \prod\limits_{i=1}^n F_{X_i}( x_i ) \\
+& = \prod\limits_{i=1}^n F_{X}( x_i ), \qquad \text{si las variables $X_i$ son idénticamente distribuidas}
+\end{split}
 $$
 
 <!------------------------------------------------------------------------------------------------->
 La siguiente función es utilidad para comprender algunos resultados en teoría de probabilidades. 
 También, es bastante útil para realizar de forma más clara y rápida algunos cálculos.
 
+:::: {.thmbox data-latex=""}
 ::: {.definition #indicatriz name="Función indicatriz"}
 La **función indicatriz** de un conjunto $A \subset \Omega$, es la función 
 $\mathbf{1}_A : \Omega \longrightarrow \{0,1\}$, que toma los valores 
@@ -296,19 +346,22 @@ Además esta función indicatriz tiene las siguientes propiedades
 
 4. $\mathbf{1}_\Omega = 1$
 :::
+::::
 
 Hay un caso atípico que suele ser útil, esto sucede cuando la variable aleatoria 
 $X : \Omega \longrightarrow \R$, es constante, quiere decir que tenemos un $a \in \R$, tal que
-$X( \omega ) = a$ para todo $\omega \in \R$. En este caso la distribución de probabilidad acumulada 
+$X( \omega ) = a$ para todo $\omega \in \Omega$. En este caso la distribución de probabilidad acumulada 
 $F$ de $X$, tiene la siguiente forma particular.
 $$
 F( x ) = P( X \leq x ) = \mathbf{1}_{[a, +\infty)}( x )
 $$
 
+:::: {.thmbox data-latex=""}
 ::: {.proposition #pindconst}
 Las constantes o variables aleatorias constantes son independientes de cualquier otra variable
 aleatoria.
 :::
+::::
 
 :::{.proof}
 Consideremos $X$ una constante o variable aleatoria constante, tal que existe un $a \in \R$, tal 
@@ -325,27 +378,27 @@ $$
 
 Ahora consideramos los casos anteriores para la probabilidad conjunta, primero el caso $X \notin A$
 $$
-\begin{eqnarray*}
+\begin{split}
 P\left( X \in A \land Y \in B \right)
-& = & P\left( X^{-1}(A) \cap Y^{-1}(B) \right) \\
-& = & P\left( \left\{ \omega \in \Omega \middle| X( \omega ) \in A \right\} \cap 
+& = P\left( X^{-1}(A) \cap Y^{-1}(B) \right) \\
+& = P\left( \left\{ \omega \in \Omega \middle| X( \omega ) \in A \right\} \cap 
 \left\{ \omega \in \Omega \middle| Y( \omega ) \in B \right\} \right) \\
-& = & P\left( \emptyset \cap \left\{ \omega \in \Omega \middle| Y( \omega ) \in B \right\} \right) \\
-& = & P( \emptyset ) \\
-& = & 0
-\end{eqnarray*}
+& = P\left( \emptyset \cap \left\{ \omega \in \Omega \middle| Y( \omega ) \in B \right\} \right) \\
+& = P( \emptyset ) \\
+& = 0
+\end{split}
 $$
 
 El segundo caso $X \in A$
 $$
-\begin{eqnarray*}
+\begin{split}
 P\left( X \in A \land Y \in B \right)
-& = & P\left( X^{-1}(A) \cap Y^{-1}(B) \right) \\
-& = & P\left( \left\{ \omega \in \Omega \middle| X( \omega ) \in A \right\} \cap 
+& = P\left( X^{-1}(A) \cap Y^{-1}(B) \right) \\
+& = P\left( \left\{ \omega \in \Omega \middle| X( \omega ) \in A \right\} \cap 
 \left\{ \omega \in \Omega \middle| Y( \omega ) \in B \right\} \right) \\
-& = & P\left( \Omega \cap \left\{ \omega \in \Omega \middle| Y( \omega ) \in B \right\} \right) \\
-& = & P( Y \in B )
-\end{eqnarray*}
+& = P\left( \Omega \cap \left\{ \omega \in \Omega \middle| Y( \omega ) \in B \right\} \right) \\
+& = P( Y \in B )
+\end{split}
 $$
 
 Esto quiere decir en conclusión que
@@ -357,6 +410,7 @@ por tanto $X$ y $Y$ son independientes
 
 
 <!------------------------------------------------------------------------------------------------->
+:::: {.thmbox data-latex=""}
 ::: {.definition #probemp name="Medida de probabilidad empírica"}
 A partir de una muestra de $X_1, \ldots, X_n$ de una variable aleatoria $X$, podemos definir
 también la **medida de probabilidad empírica** asociada a la muestra $X_1, \ldots, X_n$. Así 
@@ -364,21 +418,24 @@ para cualquier evento del espacio muestral $\Omega$, $A \subset \Omega$
 $$
 P_n( B ) = \frac{1}{n} \sum\limits_{i=1}^n \mathbf{1}_{B}\left( X_i \right)
 $$
-:::
 
-A partir de la medida empírica de probabilidad, podemos extraer la de para la distribución acumulada
-empírica $F_n$, la cual la hemos definido con anterioridad, para ello consideremos 
-$P_n( (-\infty,x])$ para cualquier $x \in \R$
+A partir de la medida empírica de probabilidad, podemos extraer la de para la 
+**distribución acumulada empírica** $F_n$, para ello consideremos eventos de la forma
+$(-\infty,x]$ para cualquier $x \in \R$.
 $$
-P_n( (-\infty,x])
+F_n( x ) = P_n( (-\infty,x])
 = \frac{1}{n} \sum\limits_{i=1}^n \mathbf{1}_{(-\infty,x]}\left( X_i \right) 
-= F_n( x )
 $$
+:::
+::::
+
+
 
 Para muchos resultados asociados a la estimación de estadística la variantes empíricas $P_n$ y $F_n$
-son de utilidad.
+serán de mucha de utilidad.
 
 <!------------------------------------------------------------------------------------------------->
+:::: {.thmbox data-latex=""}
 ::: {.definition #em name="Esperanza de una variable aleatoria"}
 Considerando una variable aleatoria discreta $K : \Omega \longrightarrow D \subset \R$, 
 donde $D$ es un conjunto discreto, es decir sus elementos se pueden contar y poner en 
@@ -399,7 +456,7 @@ $$
 = \int\limits_{\R} x\ dF( x )
 $$
 donde la última integral de tipo Riemann-Stieltjes tiene sentido, ya que $F$ es una función de 
-variación acotada.
+variación acotada @KolmoFunAnalysis.
 
 Cuando la función de densidad de probabilidad está bien definida es posible expresar y calcular 
 la esperanza matemática como la siguiente expresión:
@@ -425,6 +482,7 @@ $$
 \E[a] = \int\limits_{\R} a\ dF_X( x ) = a\int\limits_{\R} dF_X( x ) = a
 $$
 :::
+::::
 
 De esto resulta que la esperanza jamás puede ser mayor que cualquiera de los valores que toma 
 la variable aleatoria $X$.
@@ -447,36 +505,64 @@ F( X \leq x )
 $$
 
 <!------------------------------------------------------------------------------------------------->
+:::: {.thmbox data-latex=""}
 ::: {.definition #mgf name="Función generadora de momentos"}
 La **función generadora de momentos** de una variable aleatoria a valores reales $X$, es la función:
 $$
 M_X( t ) = \E\left[ \exp( t X ) \right]
 $$
 :::
+::::
 
 Si $X_1, \ldots, X_n$ son variables aleatorias y $Y = X_1 + \cdots + X_n$, entonces
 $$
-\begin{eqnarray*}
+\begin{split}
 M_Y( t ) 
-& = & \E\left[ \exp\left( t Y \right) \right] \\
-& = & \E\left[ \exp\left( t \sum\limits_{i=1}^n X_i \right) \right] \\
-& = & \prod\limits_{i=1}^n \E\left[ \exp\left( t X_i \right) \right],\qquad 
+& = \E\left[ \exp\left( t Y \right) \right] \\
+& = \E\left[ \exp\left( t \sum\limits_{i=1}^n X_i \right) \right] \\
+& = \prod\limits_{i=1}^n \E\left[ \exp\left( t X_i \right) \right],\qquad 
 \text{si las variables $X_i$ son independientes} \\
-& = & \left( \E\left[ \exp\left( t X \right) \right] \right)^n,\qquad 
+& = \left( \E\left[ \exp\left( t X \right) \right] \right)^n,\qquad 
 \text{si las variables $X_i$ son identicamente distribuidas} \\
-& = & \left( M_X( t ) \right)^n
-\end{eqnarray*}
+& = \left( M_X( t ) \right)^n
+\end{split}
 $$
 
 <!------------------------------------------------------------------------------------------------->
+:::: {.thmbox data-latex=""}
 ::: {.definition #dfc name="Función característica"}
 La **función característica** de una variable aleatoria a valores reales $X$, es la función:
 $$
 \varphi_X( t ) = M_X( it ) = \E\left[ \exp( i t X ) \right]
 $$
 :::
+::::
+
+Precisamente se conoce a $\varphi_X$ como función característica de una variable aleatoria $X$, 
+debido al siguiente resultado.
+
+:::: {.thmbox data-latex=""}
+::: {.theorem #tdinver name="Inversión"}
+Sea $\varphi$ la función característica de la distribución de probabilidad $F$ de una variable 
+aleatoria $X$. Si $x,y \in \R$ son dos puntos de continuidad de la distribución $F$, entonces:
+$$
+F( y ) - F( x ) = \frac{1}{2\pi} \underset{c \rightarrow +\infty}{\lim} \int\limits_{-c}^c 
+\frac{\exp(-itx) - \exp(-ity)}{it} \varphi( t )\ dt
+$$
+:::
+::::
+
+Con el resultado anterior sabemos que si conocemos de alguna manera la función característica 
+$\varphi_X$ de una variable aleatoria $X$, entonces podemos aproximar su distribución acumulada
+con una evaluación numérica de la integral anterior.
+
+Para el estudio de los variaciones que puede presentar una variable aleatoria $X$ se puede 
+considerar otra medida de tendencia la cual precisamente está enfocada a medir cuanto se aleja de 
+la media una variable aleatoria $X$. Esta medida, en las aplicaciones financieras está fuertemente 
+asociada a lo que se conoce como **volatilidad**.
 
 <!------------------------------------------------------------------------------------------------->
+:::: {.thmbox data-latex=""}
 ::: {.definition #em name="Varianza de una variable aleatoria"}
 Así mismo su **varianza** es la dada por:
 $$
@@ -485,8 +571,10 @@ $$
 = \E\left[ X^2 \right] - \E\left[ X \right]^2
 $$
 :::
+::::
 
 <!------------------------------------------------------------------------------------------------->
+:::: {.thmbox data-latex=""}
 ::: {.definition #defcov name="Covarianza"}
 La **covarianza** de dos variables aleatorias, está dada por la siguiente expresión:
 $$
@@ -497,19 +585,25 @@ $$
 
 De forma integral esta se la puede expresar como:
 $$
-\begin{eqnarray*}
+\begin{split}
 \mathbb{C}[ X, Y ] 
-& = & \int\limits_{\R^2} xy\ dP( x, y ) 
+& = \int\limits_{\R^2} xy\ dP( x, y ) 
 - \int\limits_{\R^2} x\ dP( x, y )\int\limits_{\R^2} y\ dP( x, y ) \\
-& = & \int\limits_{\R^2} xy f_{X,Y}( x, y )\ dx dy
+& = \int\limits_{\R^2} xy f_{X,Y}( x, y )\ dx dy
 - \int\limits_{\R^2} x f_{X,Y}( x, y )\ dx dy\int\limits_{\R^2} y f_{X,Y}( x, y )\ dx dy
-\end{eqnarray*}
+\end{split}
 $$
 
 No está por demás notar que $\mathbb{C}[ X, X ] = \V[ X ]$
 :::
+::::
+
+En más de una ocasión se tendrá la necesidad de agregar variables aleatorias, sumarlas entre si, 
+en este caso se tiene la necesidad de determinar su distribución acumulada en función de las 
+distribuciones acumuladas que se consideraron en la suma.
 
 <!------------------------------------------------------------------------------------------------->
+:::: {.thmbox data-latex=""}
 ::: {.definition #dsum name="Distribución de la suma de variables aleatorias"}
 Dadas dos variables aleatorias a valores reales $X$ y $Y$, con funciones de distribución acumulada
 $F_X$ y $F_Y$ respectivamente, la distribución acumulada $F_Z$ de la variable aleatoria $Z = X + Y$ 
@@ -530,6 +624,7 @@ $$
 
 El producto $\star$ se conoce como convolución de funciones, el mismo es simétrico.
 :::
+::::
 
 Para cuando se realiza la convolución de varias veces la misma función, se opta por una notación 
 más compacta $f^{\star k}$, para el producto de convolución $k$-veces la misma función 
@@ -540,16 +635,16 @@ a trabajar con la variable aleatoria dada por el mínimo entre estas variables, 
 De ello surge la necesidad de determinar la distribución de probabilidad acumulada $F_Z$ de $Z$, a 
 partir de las distribuciones de $F_X$ de $X$ y $F_Y$ de $Y$.
 $$
-\begin{eqnarray*}
+\begin{split}
 F_Z( z ) 
-& = & P( Z \leq z ) \\
-& = & 1 - P( Z > z ) \\
-& = & 1 - P( \min(X,Y) > z ) \\
-& = & 1 - P( X > z \land Y > z ) \\
-& = & 1 - P( X > z ) P( Y > z ) \\
-& = & 1 - \left( 1 - F_X( z ) \right) \left( 1 - F_Y( z ) \right) \\
-& = & F_X( z ) + F_Y( z ) - F_X( z ) F_Y( z )
-\end{eqnarray*}
+& = P( Z \leq z ) \\
+& = 1 - P( Z > z ) \\
+& = 1 - P( \min(X,Y) > z ) \\
+& = 1 - P( X > z \land Y > z ) \\
+& = 1 - P( X > z ) P( Y > z ) \\
+& = 1 - \left( 1 - F_X( z ) \right) \left( 1 - F_Y( z ) \right) \\
+& = F_X( z ) + F_Y( z ) - F_X( z ) F_Y( z )
+\end{split}
 $$
 
 En particular cuando $Y = a$ es constante tenemos la siguiente distribución de probabilidad para 
@@ -580,26 +675,26 @@ donde no necesariamente $F_X( a )$ es igual $1$.
 5. el evento puntual $\{Z = a\}$ no tiene necesariamente probabilidad nula, hay un fenómeno de 
 concentración de la probabilidad en el punto $a$.
 $$
-\begin{eqnarray*}
+\begin{split}
 P( Z = a ) 
-& = & P\left( \min( X, a ) = a \right) \\
-& = & P\left( X \geq a \right) \\
-& = & 1 - F_X( a )
-\end{eqnarray*}
+& = P\left( \min( X, a ) = a \right) \\
+& = P\left( X \geq a \right) \\
+& = 1 - F_X( a )
+\end{split}
 $$
 
 De forma similar nos podemos también interesar a la variable aleatoria que expresa el máximo 
 entre otras dos variables, i.e. $Z = \max( X, Y )$, por un razonamiento similar podemos obtener
 la distribución de probabilidad $F_Z$ de $Z$.
 $$
-\begin{eqnarray*}
+\begin{split}
 F_Z( z ) 
-& = & P( Z \leq z ) \\
-& = & P( \max(X,Y) \leq z ) \\
-& = & P( X \leq z \land Y \leq z ) \\
-& = & P( X \leq z ) P( Y \leq z ) \\
-& = & F_X( z ) F_Y( z )
-\end{eqnarray*}
+& = P( Z \leq z ) \\
+& = P( \max(X,Y) \leq z ) \\
+& = P( X \leq z \land Y \leq z ) \\
+& = P( X \leq z ) P( Y \leq z ) \\
+& = F_X( z ) F_Y( z )
+\end{split}
 $$
 
 De forma análoga el caso cuando $Y = a$ es una constante se reduce a la siguiente distribución
@@ -608,28 +703,33 @@ $$
 F_Z( z ) = \mathbf{1}_{[a,+\infty)}( z ) F_X( z )
 $$
 
-::: {.theorem #tdinver name="Inversión"}
-Sea $\varphi$ la función característica de la distribución de probabilidad $F$ de una variable 
-aleatoria $X$. Si $x,y \in \R$ son dos puntos de continuidad de la distribución $F$, then
-$$
-F( y ) - F( x ) = \frac{1}{2\pi} \underset{c \rightarrow +\infty}{\lim} \int\limits_{-c}^c 
-\frac{\exp(-itx) - \exp(-ity)}{it} \varphi( t )\ dt
-$$
-:::
-
 <!------------------------------------------------------------------------------------------------->
 ## Probabilidad condicional
 
+En varias situaciones nos interesa estudiar la probabilidad de ciertos eventos dado que otro evento
+$A \in \F$ ya se ha dado. Esto nos permite convertir al evento $A$ en el nuevo espacio muestral y 
+todos los experimentos se restringen al mismo.
+
 <!------------------------------------------------------------------------------------------------->
+:::: {.thmbox data-latex=""}
 ::: {.definition #dprobcond name="Probabilidad condicional"}
 Para cualquier par de eventos $A, B \in \F$, la **probabilidad condicional** de $A$ dado 
 $B$, está dada por:
 $$
-P\left( A \middle| B \right) = \frac{P( A \cap B)}{P(B)}
+P\left( B \middle| A \right) = \frac{P( A \cap B)}{P(A)}
 $$
 :::
+::::
+
+La medida condicionada $P( \cdot | A )$ satisface todas las condiciones de una medida de 
+probabilidad, y mide sobre los eventos de la forma $A \cap B$, con $B \in \F$. Es de notar que 
+si $A \cap B = \emptyset$, $P( B | A ) = 0$.
+
+Esta idea de probabilidad condicional se puede extender fácilmente a las funciones de distribución
+acumulada.
 
 <!------------------------------------------------------------------------------------------------->
+:::: {.thmbox data-latex=""}
 ::: {.definition #ddistcond name="Distribución acumulada condicionada"}
 Si consideramos un evento cualquiera $A \in \F$, $X$ una variable aleatoria a valores 
 reales y $x \in \R$. Surge el interés de estudiar la distribución acumulada de $X$ pero 
@@ -648,33 +748,33 @@ Se satisface algunas propiedades:
 1. Si $A, B \in \F$ son dos eventos disjuntos, entonces:
 
 $$
-\begin{eqnarray*}
+\begin{split}
 F\left( x \middle| A \cup B \right)
-& = & P\left( X \leq x \middle| A \right) \\
-& = & \frac{P\left( X \leq x \cap ( A \cup B ) \right)}{P\left( A \cup B \right)} \\
-& = & \frac{P\left( X \leq x \cap A \right) + P\left( X \leq x \cap B \right)}{P\left( A \cup B \right)} \\
-& = & \frac{P\left( X \leq x \cap A \right)P( A )}{P(A)P\left( A \cup B \right)}
+& = P\left( X \leq x \middle| A \right) \\
+& = \frac{P\left( X \leq x \cap ( A \cup B ) \right)}{P\left( A \cup B \right)} \\
+& = \frac{P\left( X \leq x \cap A \right) + P\left( X \leq x \cap B \right)}{P\left( A \cup B \right)} \\
+& = \frac{P\left( X \leq x \cap A \right)P( A )}{P(A)P\left( A \cup B \right)}
 + \frac{P\left( X \leq x \cap B \right)P( B )}{P( B )P\left( A \cup B \right)} \\
-& = & P\left( X \leq x \middle| A \right) \frac{P( A )}{P\left( A \cup B \right)}
+& = P\left( X \leq x \middle| A \right) \frac{P( A )}{P\left( A \cup B \right)}
 + P\left( X \leq x \middle| B \right) \frac{P( B )}{P\left( A \cup B \right)} \\
-& = & P\left( X \leq x \middle| A \right) P\left( A \middle| A \cup B \right) 
+& = P\left( X \leq x \middle| A \right) P\left( A \middle| A \cup B \right) 
 + P\left( X \leq x \middle| B \right) P\left( B \middle| A \cup B \right) \\
-& = & F\left( x \middle| A \right) P\left( A \middle| A \cup B \right) 
+& = F\left( x \middle| A \right) P\left( A \middle| A \cup B \right) 
 + F\left( x \middle| B \right) P\left( B \middle| A \cup B \right)
-\end{eqnarray*}
+\end{split}
 $$
 2. La distribución acumulada condicionada con respecto a todo el espacio muestral $\Omega$, es la 
 distribución acumulada.
 
 $$
-\begin{eqnarray*}
+\begin{split}
 F\left( x \middle| \Omega \right)
-& = & P\left( X \leq x \middle| \Omega \right) \\
-& = & \frac{P\left( X \leq x \cap \Omega \right)}{P(\Omega)} \\
-& = & \frac{P\left( X \leq x \right)}{P(\Omega)} \\
-& = & P\left( X \leq x \right) \\
-& = & F( x )
-\end{eqnarray*}
+& = P\left( X \leq x \middle| \Omega \right) \\
+& = \frac{P\left( X \leq x \cap \Omega \right)}{P(\Omega)} \\
+& = \frac{P\left( X \leq x \right)}{P(\Omega)} \\
+& = P\left( X \leq x \right) \\
+& = F( x )
+\end{split}
 $$
 
 3. Para cualquier $A \in \F$, el evento $\{ X \leq x \} \cap A \subset A$ y por tanto 
@@ -687,6 +787,7 @@ $P\left( X \leq x \middle| A \right) \leq P( A )$, entonces $0 \leq F(x | A) \le
 En algunos casos la distribución acumulada de la variable aleatoria $X$ se nota por $F_X$ y la 
 distribución acumulada de $X$ condicionada por el evento $A$, se nota por $F_{X|A}$.
 :::
+::::
 
 Como hemos visto la función de distribución acumulada satisface todas las propiedades de una 
 función de distribución acumulada y por tal razón se puede calcular una esperanza, la cual vendrá 
@@ -726,15 +827,15 @@ F\left( x \middle| A^c \right) & \text{si}\ \mathbf{1}_A( \omega ) = 0
 $$
 de la definición anterior se sigue de forma inmediata la igualdad
 $$
-\begin{eqnarray*}
+\begin{split}
 \E\left[ F\left( x \middle| \mathbf{1}_A \right) \right] 
-& = & F\left( x \middle| A \right) P( A ) + F\left( x \middle| A^c \right) P( A^c ) \\
-& = & \frac{P\left( X \leq x \land A \right)}{P(A)} P( A ) 
+& = F\left( x \middle| A \right) P( A ) + F\left( x \middle| A^c \right) P( A^c ) \\
+& = \frac{P\left( X \leq x \land A \right)}{P(A)} P( A ) 
 + \frac{P\left( X \leq x \land A^c \right)}{P(A^c)} P( A^c ) \\
-& = & P\left( X \leq x \land A \right) + P\left( X \leq x \land A^c \right) \\
-& = & P\left( X \leq x \right) \\
-& = & F( x )
-\end{eqnarray*}
+& = P\left( X \leq x \land A \right) + P\left( X \leq x \land A^c \right) \\
+& = P\left( X \leq x \right) \\
+& = F( x )
+\end{split}
 $$
 Las variables aleatorias también generan eventos, ya que son medibles, por tal razón si tomamos 
 en cuenta la definición anterior, podemos ciertamente extender la definición anterior de 
@@ -751,6 +852,7 @@ $$
 está bien definida para $F_Y( y ) \neq 0$
 
 <!------------------------------------------------------------------------------------------------->
+:::: {.thmbox data-latex=""}
 ::: {.definition #dexpcond name="Esperanza condicionada"}
 Para una variable aleatoria $X$ y un evento cualquiera $A \in \F$, se define la 
 **esperanza condicionada** respecto del evento $A$, como:
@@ -778,18 +880,19 @@ $$
 = \int\limits_{\R} x\ dF\left( x \middle| \mathbf{1}_A \right)
 $$
 :::
+::::
 
 Por otra parte, para cualquier evento $A \in \F$, las distribuciones $F( \cdot ), F( \cdot |  A )$ 
 y $F( x | A^c)$ son funciones de variación acotada y por tanto sus integrales de Riemann-Stieltjes
-están bien definidas, de donde resulta la siguiente igualdad.
+están bien definidas @KolmoFunAnalysis, de donde resulta la siguiente igualdad.
 $$
-\begin{eqnarray*}
+\begin{split}
 \E\left[ X \right]
-& = & \int\limits_{\R} x dF( x ) \\
-& = & \int\limits_{\R} x dF( x | A ) P( A ) + \int\limits_{\R} x dF( x | A^c ) P( A^c ) \\
-& = & \E\left[ X \middle| A \right] P( A ) + \E\left[ X \middle| A^c \right] P( A^c ) \\
-& = & \E\left[ \E\left[ X \middle| \mathbf{1}_A \right] \right]
-\end{eqnarray*}
+& = \int\limits_{\R} x dF( x ) \\
+& = \int\limits_{\R} x dF( x | A ) P( A ) + \int\limits_{\R} x dF( x | A^c ) P( A^c ) \\
+& = \E\left[ X \middle| A \right] P( A ) + \E\left[ X \middle| A^c \right] P( A^c ) \\
+& = \E\left[ \E\left[ X \middle| \mathbf{1}_A \right] \right]
+\end{split}
 $$
 por abuso de notación se suele utilizar la misma notación $\E\left[ X \middle| A \right]$ para 
 indicar también la variable aleatoria $\E\left[ X \middle| \mathbf{1}_A \right]$. Así la siguiente 
@@ -804,6 +907,7 @@ valores extremos que se pueden presentar en el estudio de los valores de siniest
 en un seguro.
 
 <!------------------------------------------------------------------------------------------------->
+:::: {.thmbox data-latex=""}
 ::: {.definition #dexceso name="Distribución de exceso condicionada"}
 La **distribución de exceso condicionada** asociada a una variable aleatoria $X$ con distribución 
 de probabilidad acumulada $F$ y a un umbral de condicionamiento $u > 0$, está dada por:
@@ -813,8 +917,10 @@ F_u( y ) = P\left( X - u \leq y \middle| X > u \right)
 = \frac{F( u + y ) - F( u )}{ 1 - F( u )}
 $$
 :::
+::::
 
 <!------------------------------------------------------------------------------------------------->
+:::: {.thmbox data-latex=""}
 ::: {.definition #dexpcond name="Varianza condicionada"}
 La varianza condicionada se puede definir de forma directa a partir de los anterior. Para una 
 variable aleatoria a valores reales $X$ y un evento $A \in \F$.
@@ -822,33 +928,37 @@ $$
 \V[X|A] = \E[Y^2|A] - \E[Y|A]^2
 $$
 :::
+::::
 
 <!------------------------------------------------------------------------------------------------->
-::: {.definition #dlawtotvar name="Ley de la varianza total"}
+:::: {.thmbox data-latex=""}
+::: {.proposition #dlawtotvar name="Ley de la varianza total"}
 Consideremos dos variables aleatorias $X, Y$, ambas a valores reales, entonces se satisface la 
 siguiente igualdad:
 $$
 \V[ Y ] = \E\left[ \V[ Y| X ] \right] + \V\left[ \E[ Y | X ] \right]
 $$
 :::
+::::
 
 :::{.proof}
 $$
-\begin{eqnarray*}
+\begin{split}
 \E\left[ \V[ Y| X ] \right] 
-& = & \E\left[ \E[ Y^2 | X ] - \E[ Y | X ]^2 \right] \\
-& = & \E\left[ \E[ Y^2 | X ] \right] - \E\left[ \E[ Y | X ]^2 \right] \\
-& = & \E\left[ Y^2 \right] - \E\left[ \E[ Y | X ]^2 \right] + \E\left[ \E[ Y | X ] \right]^2 
+& = \E\left[ \E[ Y^2 | X ] - \E[ Y | X ]^2 \right] \\
+& = \E\left[ \E[ Y^2 | X ] \right] - \E\left[ \E[ Y | X ]^2 \right] \\
+& = \E\left[ Y^2 \right] - \E\left[ \E[ Y | X ]^2 \right] + \E\left[ \E[ Y | X ] \right]^2 
 - \E\left[ \E[ Y | X ] \right]^2 \\
-& = & \E\left[ Y^2 \right] - \V\left[ \E[ Y | X ] \right] - \E\left[ Y \right]^2 \\
-& = & \V[ Y ] - \V\left[ \E[ Y | X ] \right]
-\end{eqnarray*}
+& = \E\left[ Y^2 \right] - \V\left[ \E[ Y | X ] \right] - \E\left[ Y \right]^2 \\
+& = \V[ Y ] - \V\left[ \E[ Y | X ] \right]
+\end{split}
 $$
 Basta con ordenar los términos y se tiene la igualdad que buscamos.
 :::
 
 
 <!------------------------------------------------------------------------------------------------->
+:::: {.thmbox data-latex=""}
 ::: {.definition #defmixdis name="Mixtura de distribuciones"}
 Un caso de especial interés para estudiar algunos problemas actuariales se da cuando se dispone
 de dos variables aleatorias, $N$ que toma solo valores discretos (numerables) los cuales pueden
@@ -856,33 +966,35 @@ ser finitos como infinitos, por ejemplo: $N$ toma valores en los números natura
 otra variable aleatoria $X$ que toma valores continuos reales en $\R$. La distribución conjunta 
 puede generarse de la siguiente forma
 $$
-\begin{eqnarray*}
+\begin{split}
 F( n, x ) 
-& = & P( N = n \land X \leq x ) \\
-& = & P\left( X \leq x \middle| N = n \right) P( N = n )\qquad \text{propiedades de la probabilidad condicional} \\
-& = & F( x | n ) p_n\qquad \text{simplificando notación} \\
-\end{eqnarray*}
+& = P( N = n \land X \leq x ) \\
+& = P\left( X \leq x \middle| N = n \right) P( N = n )\qquad \text{propiedades de la probabilidad condicional} \\
+& = F( x | n ) p_n\qquad \text{simplificando notación} \\
+\end{split}
 $$
 
 $F( x | n )$ es la ley condicionada de $X$ dado que $N = n$ y $p_n = P( N = n )$
+:::
+::::
 
 Además, es de notar que:
 $$
-\begin{eqnarray*}
+\begin{split}
 F_X( x )
-& = & P( X \leq x ) \\
-& = & P( X \leq x \land N \in \mathbb{N} ) \\
-& = & P\left( X \leq x \land N \in \bigcup_{n \in \mathbb{N}} \{n\} \right) \\
-& = & P\left( \bigcup_{n \in \mathbb{N}} \left\{ X \leq x \land N \in \{n\} \right\} \right) \\
-& = & \sum\limits_{n \in \mathbb{N}} P\left( X \leq x \land N \in \{n\} \right) \\
-& = & \sum\limits_{n \in \mathbb{N}} P\left( X \leq x \land N = n \right) \\
-& = & \sum\limits_{n \in \mathbb{N}} P\left( X \leq x\ \middle|\ N = n \right) P( N = n ) \\
-& = & \sum\limits_{n \in \mathbb{N}} F( x | n ) p_n 
-\end{eqnarray*}
+& = P( X \leq x ) \\
+& = P( X \leq x \land N \in \mathbb{N} ) \\
+& = P\left( X \leq x \land N \in \bigcup_{n \in \mathbb{N}} \{n\} \right) \\
+& = P\left( \bigcup_{n \in \mathbb{N}} \left\{ X \leq x \land N \in \{n\} \right\} \right) \\
+& = \sum\limits_{n \in \mathbb{N}} P\left( X \leq x \land N \in \{n\} \right) \\
+& = \sum\limits_{n \in \mathbb{N}} P\left( X \leq x \land N = n \right) \\
+& = \sum\limits_{n \in \mathbb{N}} P\left( X \leq x\ \middle|\ N = n \right) P( N = n ) \\
+& = \sum\limits_{n \in \mathbb{N}} F( x | n ) p_n 
+\end{split}
 $$
 la distribución de $F_X$ de $X$ no es más que una mixtura de las distribuciones condicionales de $X$
 para cada $n \in \mathbb{N}$.
-:::
+
 
 <!------------------------------------------------------------------------------------------------->
 ## Resultados de convergencia
@@ -902,6 +1014,7 @@ Muchos de las herramientas de las estadística se resumen en algunas recetas o a
 software, sin embargo, no se debe olvidar que en muchos casos estas herramientas hacen uso de 
 muchos métodos bastante avanzados y complejos en lo que respecta al conocimiento Matemático.
 
+:::: {.thmbox data-latex=""}
 ::: {.theorem #twln name="Ley débil de los grandes números"}
 Consideramos la secuencia de variables aleatorias $\{X_i\}_{i\in \mathbb{N}}$ las cuales 
 consideraremos que son i.i.d. y con media común finita $\E[X_i] = \mu < +\infty$. Entonces,
@@ -914,7 +1027,14 @@ $$
 \underset{n \rightarrow +\infty}{\lim} P\left( \left| \frac{1}{n}\sum\limits_{i=1}^n X_i - \mu \right| > \varepsilon\right) = 0
 $$
 :::
+::::
 
+El comportamiento de la suma de variables aleatorias, que posean además los dos primeros momentos 
+finitos. Al estandarizar esta suma, la misma tiende a comportarse en el límite, conforme se incluye
+más términos, como una variable aleatoria con distribución normal. En muchos casos este método
+puede proveer una primera aproximación.
+
+:::: {.thmbox data-latex=""}
 ::: {.theorem #tlc name="Teorema del límite central"}
 Consideramos las variables aleatorias $X_1,\ldots,X_n$ i.i.d. con media común finita 
 $\E[X_i] = \mu < +\infty$ y varianza común finita
@@ -932,6 +1052,7 @@ $$
 = \Phi( z )
 $$
 :::
+::::
 
 El teorema del límite central en su forma usual no proporciona una tasa de convergencia es decir,
 la variable aleatoria $\frac{S_n - \E[S_n]}{\V[ S_n ]}$ tiende a tener un 
@@ -939,20 +1060,22 @@ comportamiento de una variable aleatoria normal estándar conforme aumenta $n$, 
 seguros que tamaño debe tomar $n$ para que esto se cumpla con una alta certeza. Para ello adicional
 al \@ref(thm:tlc) se debe considerar otros resultados asociados a desigualdades de concentración.
 
-El siguiente teorema es de gran ayuda para estimar la tasa de convergencia del resultado anterior
-\@ref(thm:tlc).
+El siguiente teorema también es gran ayuda y nos asegura la convergencia de la distribución
+acumulada empírica a la distribución acumulada teórica.
 
+:::: {.thmbox data-latex=""}
 ::: {.theorem #tglican name="Teorema de Glivenko-Cantelli"}
 Consideramos las variables aleatorias $\{X_n\}_{n\in\N}$ i.i.d., con función de distribución acumulada
 $F$. Entonces, la distribución acumula empírica $F_n$ generada a partir de las variables 
 $\{X_n\}_{n\in\N}$, converge en casi todo punto de forma uniforme a la distribución $F$, más 
 precisamente, para la norma de la convergencia uniforme 
-$\left\| F_n - F \right\| = \underset{x \in \R}{\sup} \left| F_n( x ) - F( x ) \right|$ tenemos la
+$\left\| F_n - F \right\|_{\infty} = \underset{x \in \R}{\sup} \left| F_n( x ) - F( x ) \right|$ tenemos la
 siguiente igualdad que precisamente expresa la convergencia en casi todo punto.
 $$
-P\left( \underset{n \rightarrow +\infty}{\lim} \left\| F_n - F \right\| = 0 \right) = 1
+P\left( \underset{n \rightarrow +\infty}{\lim} \left\| F_n - F \right\|_{\infty} = 0 \right) = 1
 $$
 :::
+::::
 
 <!------------------------------------------------------------------------------------------------->
 ## Desigualdades de concentración 
@@ -961,16 +1084,25 @@ Para muchos fines prácticos es importante encontrar una buena estimación de do
 concentrados los valores de una distribución de probabilidad, para ello existen varios resultados
 que caracterizan precisamente ello, estos se conocen como desigualdades de concentración.
 
-::: {.proposition #chebdes name="Desigualdad de Chebyshev (Чебышёв)"}
-Dada una variable aleatoria $X$ con esperanza y varianza finitas $\E[X] <+ \infty$ y 
+:::: {.thmbox data-latex=""}
+::: {.proposition #chebdes name="Desigualdad de Chebyshev"}
+Dada una variable aleatoria $X$ con esperanza y varianza finitas $\E[X] < +\infty$ y 
 $\V[X] < +\infty$, tenemos que se satisface la siguiente desigualdad para cualquier 
-$varepsilon > 0$
+$\varepsilon > 0$
 $$
-P\left( \left| X - \E[X] \right| > \varepsilon \right) < \frac{1}{\varepsilon^2}
-\V[ X ]
+P\left( \left| X - \E[X] \right| > \varepsilon \sqrt{\V[ X ]} \right) < \frac{1}{\varepsilon^2}
 $$
 :::
+::::
 
+En la práctica la desigualdad de Chebyshev nos asegura que sin importar la variable aleatoria 
+a valores reales, si tienen sus dos primeros momentos finitos, la probabilidad que la variable 
+aleatoria $X$ se aleje de su esperanza $\E[X]$ en más de $\varepsilon$ veces la desviación 
+típica $\sqrt{\V[ X ]}$ viene acotada por el término $\frac{1}{\varepsilon^2}$ que decrece 
+cuadráticamente en $\varepsilon$. Entonces, por más pesada que sea la cola de la distribución
+de la variable aleatoria $X$, a lo mucho decrecerá cuadráticamente.
+
+:::: {.thmbox data-latex=""}
 ::: {.theorem #bein name="Desigualdad de Berry-Esséen"}
 Sean $X_1, \ldots X_n$ variables aleatorias i.i.d., con media y varianza finitas, i.e 
 $\E[X] < +\infty$ y $\V[X] < +\infty$ y además con tercer momento absoluto finito
@@ -986,7 +1118,13 @@ $$
 \frac{\E\left[\left|X - \E[X]\right|^3\right]}{\sqrt{\V[X]}^3}
 $$
 :::
+::::
 
+El teorema \@ref(thm:tglican) asegura un convergencia, sin embargo no da un estimativo de la 
+rapidez de dicha convergencia conforme aumenta el valor $n$, el siguiente resultado es más claro 
+al respecto y proporciona un criterio de convergencia.
+
+:::: {.thmbox data-latex=""}
 ::: {.theorem #ddkw name="Desigualdad Dvoretzky–Kiefer–Wolfowitz"}
 Dada una serie de variables aleatorias a valores reales $X_1, \ldots, X_n$, i.i.d., con 
 distribución acumulada $F$, tenemos la siguiente desigualdad asociada a la 
@@ -1001,6 +1139,7 @@ P\left( \left\| F_n( x ) - F( x ) \right\|_{\infty} > \varepsilon \right)
 \leq 2 e^{-2n \varepsilon^2 }\qquad \forall \varepsilon > 0
 $$
 :::
+::::
 
 Como podemos notar el orden de convergencia del teorema es $\sqrt{n}$ en el tamaño de observaciones,
 esto quiere decir que la convergencia es menos que el orden lineal.
@@ -1008,11 +1147,13 @@ esto quiere decir que la convergencia es menos que el orden lineal.
 Acorde a la desigualdad \@ref(thm:ddkw), para tener un probabilidad baja de aproximación 
 $\delta > 0$ en un error de discrepancia $\varepsilon >0$, necesitamos satisfacer la desigualdad.
 $$
-\begin{eqnarray*}
-2 e^{-2n \varepsilon^2 } & \leq & \delta \\
-2n \varepsilon^2 & \geq & -\ln\left( \frac{\delta}{2} \right) \\
-n & \geq & \left\lceil -\frac{1}{2\varepsilon^2} \ln\left( \frac{\delta}{2} \right) \right\rceil
-\end{eqnarray*}
+\begin{split}
+2 e^{-2n \varepsilon^2 } 
+& \leq \delta \\
+2n \varepsilon^2 
+& \geq -\ln\left( \frac{\delta}{2} \right) \\
+n & \geq \left\lceil -\frac{1}{2\varepsilon^2} \ln\left( \frac{\delta}{2} \right) \right\rceil
+\end{split}
 $$
 así se observa que para tener una aproximación de orden $\delta$ y con un error de discrepancia
 $\varepsilon$, se requiere como mínimo realizar un número de simulaciones $n$ de orden 
@@ -1064,7 +1205,7 @@ phi <- pnorm( z )
 D <- sapply( FSn, FUN = function( Fn ) max( abs( Fn - phi ) ) )
 ```
 
-```{r l4g2, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
+```{r l4g2, out.width='80%', fig.align='center', class.source = 'fold-hide'}
 plt <- ggplot() +
   geom_line( aes( x = 1:n, y = D ), colour = 'darkred', linewidth = 0.5 ) + 
   scale_x_continuous( breaks = seq( 0, n, 500 ), limits = c( 1, n ), expand = c( 0, 0 ) ) +
@@ -1075,7 +1216,7 @@ plt <- ggplot() +
 plot( plt )
 ```
 
-```{r l4g3, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
+```{r l4g3, out.width='80%', fig.align='center', class.source = 'fold-hide'}
 dat <- NULL
 for ( k in 1:n ) {
   dat <- rbindlist( list( dat, data.table( z = z, n = as.factor( k ), FSn = FSn[[ k ]] ) ) )
@@ -1103,6 +1244,7 @@ plot( plt )
 :::
 
 <!------------------------------------------------------------------------------------------------->
+:::: {.thmbox data-latex=""}
 ::: {.theorem #dchernoff name="Desigualdad de Chernoff"}
 Dada una variable aleatoria $X$ a valores reales, para la cual si existe y está bien definida
 su función generadora de momentos $M$, entonces se satisface la siguientes desigualdades para 
@@ -1115,8 +1257,10 @@ $$
 P( X \leq \varepsilon ) \leq \underset{t < 0}{\inf} \exp( -t \varepsilon ) M( t )
 $$
 :::
+::::
 
 <!------------------------------------------------------------------------------------------------->
+:::: {.thmbox data-latex=""}
 ::: {.theorem #dpaleyzyg name="Desigualdad de Paley-Zygmund"}
 Dada una variable aleatoria $X$ a valores reales, que solo toma valores no negativos $X \geq 0$ y 
 que además tiene varianza finita $\V[X] < +\infty$, entonces si tomamos un valor 
@@ -1125,11 +1269,13 @@ $$
 P( X \geq \rho \E[ X ] ) \geq ( 1 - \rho )^2 \frac{\E[ X ]^2}{\E[ X^2 ]}
 $$
 :::
+::::
 
 <!------------------------------------------------------------------------------------------------->
 ## Transformada de Fourier, contínua y discreta
 
 <!------------------------------------------------------------------------------------------------->
+:::: {.thmbox data-latex=""}
 ::: {.definition #dfouriertrans name="Tansformada de Fourier"}
 La **transformada de Fourier** para una función integrable $f : \R^n \longrightarrow \R$, 
 está definida como un funcional que toma funciones acotadas y general una función usualmente 
@@ -1170,13 +1316,38 @@ $$
 \Fo\left( f \star g \right) = \Fo( f ) \Fo( g )
 $$
 :::
+::::
 
+Para realizar algunas aproximaciones numéricas, se hace de una discretización de la transformada de
+Fourier, la misma se evalúa sobre un número finito de valores. Para ello necesitas considerar 
+secuencias de números finitas.
+
+:::: {.thmbox data-latex=""}
+::: {.definition #dsecuencia name="Familia de secuencias finitas"}
+En lo que sigue trabajaremos con **secuencias finitas** a valores reales 
+$x = \{x_k\} = (x_0, \ldots, x_{N-1}) \in \R^{N}$, tan solo iniciamos los índices desde $0$. 
+Toda el álgebra lineal del espacio $\R^N$ se puede utilizar en la secuencias. Además, podemos 
+medir la distancia entre una secuencia $x = \{x_k\}$ y otra $y = \{y_k\}$, ambas de igual dimensión,
+tan solo utilizando la norma cuadrática.
+$$
+\left\| x - y \right\|_2
+= \left( \sum\limits_{k=0}^{N-1} \left| x_k - y_k \right|^2 \right)^{\frac{1}{2}}
+$$
+Las secuencias se pueden igual considerar a valores complejos en $\C^N$, tan solo en la definición
+anterior se reemplaza el valor absoluto por la norma compleja de cada coordenada. También hay que 
+tomar en cuenta que las secuencias de números reales $\R^N$ pueden ser vistas como un subconjunto
+de $\C^N$.
+:::
+::::
+
+Con la definición anterior estamos en la capacidad de definir la transformada de Fourier discreta
+que actúa sobre la secuencias de números.
+
+:::: {.thmbox data-latex=""}
 ::: {.definition #dfouriertransd name="Tansformada de Fourier discreta"}
-Dada una secuencia finita de números $x_0, \ldots, x_{N-1}$, también notada por 
-$\{x_k\}_{k \in \{0,\ldots,N-1\}}$ o simplemente $\{x_k\}$ cuando quede entendida su dimensión,
-claramente $\{x_k\}$ puede ser interpretada como un vector en $\R^n$, indexado desde $0$. 
-Entonces, la **transformada de Fourier discreta** de la secuencia $\{x_k\}$ es la función 
-$\DFT : \R^n \longrightarrow \R^n$, definida por:
+Dada una secuencia finita de números $x = \{x_k\} = (x_0, \ldots, x_{N-1})$. Entonces, la 
+**transformada de Fourier discreta** de la secuencia $\{x_k\}$ es la función 
+$\DFT : \C^n \longrightarrow \C^n$, definida por:
 $$
 \DFT\left[ \{x_k\} \right] 
 = \left\{ \sum\limits_{k=0}^{N-1} x_k \exp\left( -2\pi i \frac{jk}{N} \right) \right\}_j
@@ -1189,13 +1360,9 @@ $$
 = \left\{ \frac{1}{N} \sum\limits_{k=0}^{N-1} x_k \exp\left( 2\pi i \frac{jk}{N} \right) \right\}_j
 $$
 :::
+::::
 
-En lo que sigue trabajaremos con series $\{x_k\}$. Para medir la distancia entre una serie
-$\{x_k\}$ y otra serie $\{y_k\}$, ambas de igual dimensión; podemos utilizar la norma cuadrática.
-$$
-\left\| \{x_k\} - \{y_k\} \right\|_2
-= \left( \sum\limits_{k=0}^{N-1} \left( x_k - y_k \right)^2 \right)^{\frac{1}{2}}
-$$
+
 
 <!------------------------------------------------------------------------------------------------->
 ### Aproximación numérica en una dimensión
@@ -1207,29 +1374,29 @@ discretización uniforme del intervalo $[a,b]$, seleccionando un tamaño $N \in 
 una secuencia de valores discretos $x_k = a + k h$, con $h = \frac{b-a}{N}$ y $k \in \{0, \ldots, N\}$. 
 Así, tenemos la siguiente aproximación a la transformada de Fourier.
 $$
-\begin{eqnarray*}
+\begin{split}
 \Fo( f )( \omega )
-& = & \int\limits_{\R} f( x ) \exp( -2\pi i \omega x )\ dx \\
-& \approx & \int\limits_{a}^b f( x ) \exp( -2\pi i \omega x )\ dx
+& = \int\limits_{\R} f( x ) \exp( -2\pi i \omega x )\ dx \\
+& \approx \int\limits_{a}^b f( x ) \exp( -2\pi i \omega x )\ dx
 \quad \text{dominio finito $[ a, b ]$ que concentra la integral} \\
-& \approx & \sum\limits_{k=0}^{N-1} f( x_k ) \exp( -2 \pi i \omega x_k ) h
+& \approx \sum\limits_{k=0}^{N-1} f( x_k ) \exp( -2 \pi i \omega x_k ) h
 \quad \text{discretización de la integral} \\
-& = & h \sum\limits_{k=0}^{N-1} f( x_k ) \exp( -2\pi i \omega ( a + k h ) ) \\
-& = & h \exp( -i 2\pi \omega a ) \sum\limits_{k=0}^{N-1} f( x_k ) \exp\left( -2\pi i \omega k \frac{b - a}{N} \right)
-\end{eqnarray*}
+& = h \sum\limits_{k=0}^{N-1} f( x_k ) \exp( -2\pi i \omega ( a + k h ) ) \\
+& = h \exp( -i 2\pi \omega a ) \sum\limits_{k=0}^{N-1} f( x_k ) \exp\left( -2\pi i \omega k \frac{b - a}{N} \right)
+\end{split}
 $$
 
 donde $\{f_k\}$ es la secuencia finita de números $f_k = f( x_k )$ y $\DFT$ es la transformada de 
 Fourier Discreta. La anterior relación es una aproximación para todo $\omega$. En particular se
 puede considerar $\omega_j = \frac{j}{b-a}$, para $j \in \{0,\ldots,N-1\}$
 $$
-\begin{eqnarray*}
+\begin{split}
 \Fo( f )\left( \omega_j \right) 
-& = & h \exp\left( -2\pi i \frac{j}{b-a} a \right) 
+& \approx h \exp\left( -2\pi i \frac{j}{b-a} a \right) 
 \sum\limits_{k=0}^{N-1} f_k \exp\left( -2\pi i \frac{jk}{N} \right) \\
-\hat{f}_j & = & h \exp\left( -2\pi i \frac{j}{b-a} a \right) \left( \DFT\left[ \{f_k\} \right] \right)_j
+\hat{f}_j & \approx h \exp\left( -2\pi i \frac{j}{b-a} a \right) \left( \DFT\left[ \{f_k\} \right] \right)_j
 \quad \text{por definición de la $\DFT$}
-\end{eqnarray*}
+\end{split}
 $$
 entonces, lo anterior implica que podemos recuperar los valores aproximados a $f(x_k)$ utilizando
 la transformada de Fourier discreta y su inversión.
@@ -1276,7 +1443,7 @@ $$
 
 Como se puede observar se superponen cada una de las distribuciones la discretización $f_k$ y la 
 calculada con inversión de la transformada de Fourier discreta.
-```{r l4g4, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
+```{r l4g4, out.width='80%', fig.align='center', class.source = 'fold-hide'}
 xbrk <- seq( 0, 40, length = 9 )
 xlbl <- formatC( xbrk, digits = 0, format = 'f' )
 xlim <- c( 0, 40 )
@@ -1302,7 +1469,7 @@ plt <- ggplot() +
 plot( plt )
 ```
 
-```{r l4g5, out.width='80%', out.height='450px', fig.align='center', class.source = 'fold-hide'}
+```{r l4g5, out.width='80%', fig.align='center', class.source = 'fold-hide'}
 e <- f - IFf
 
 xmax <- max( abs( e ) )
@@ -1332,6 +1499,7 @@ financieras como las siguientes:
 <!------------------------------------------------------------------------------------------------->
 ### Función de actualización o descuento
 
+:::: {.thmbox data-latex=""}
 ::: {.definition #deffact name="Funciones de atualización y capitalización"}
 La **función de actualización** de flujos $v: \R \times \R \longrightarrow [0,1]$, al
 evaluar en $s, t \in \R, s\leq t, v(s,t)$, diremos que actualizamos los flujos que se 
@@ -1347,6 +1515,7 @@ las siguientes propiedades:
 La **función de capitalización**, es la función $u: \R \times \R \longrightarrow [0,1]$,
 tal que $u( s, t ) v( s, t ) = 1$.
 :::
+::::
 
 El caso más particular y sencillo se presenta cuando la función de actualización es generada
 por una tasa constante $i \in \R$ en el tiempo, es decir, la función de actualización toma 
@@ -1397,16 +1566,16 @@ $$
 El equilibrio financiero se mantiene en el tiempo, basta observar que para cualquier instante 
 $t \geq 0$
 $$
-\begin{eqnarray*}
-0 & = & u( 0, t ) VP_0( c ) \\
-& = & u( 0, t ) \sum\limits_{k=0}^{n} v( 0, t_k ) c( t_k ) \\
-& = & \sum\limits_{t_k \leq t} u( 0, t ) v( 0, t_k ) c( t_k ) 
+\begin{split}
+0 & = u( 0, t ) VP_0( c ) \\
+& = u( 0, t ) \sum\limits_{k=0}^{n} v( 0, t_k ) c( t_k ) \\
+& = \sum\limits_{t_k \leq t} u( 0, t ) v( 0, t_k ) c( t_k ) 
 + \sum\limits_{t_k > t} u( 0, t ) v( 0, t_k ) c( t_k ) \\
-& = & \sum\limits_{t_k \leq t} u( 0, t_k ) u( t_k, t ) v( 0, t_k ) c( t_k ) 
+& = \sum\limits_{t_k \leq t} u( 0, t_k ) u( t_k, t ) v( 0, t_k ) c( t_k ) 
 + \sum\limits_{t_k > t} u( 0, t ) v( 0, t ) v( t, t_k ) c( t_k ) \\
-& = & \sum\limits_{t_k \leq t} u( t_k, t ) c( t_k ) 
+& = \sum\limits_{t_k \leq t} u( t_k, t ) c( t_k ) 
 + \sum\limits_{t_k > t} v( t, t_k ) c( t_k ) \\
-\end{eqnarray*}
+\end{split}
 $$
 
 Esto implica que el valor actualizado a cualquier instante $t$ de un flujo financiero $c$ que 
@@ -1424,6 +1593,6 @@ $$
 $$
 algunas veces se considera la parte prospectiva con el signo menos.
 
-```{r l3end, echo = FALSE}
+```{r l4end, echo = FALSE}
 rm( list = ls()[ ls() != 'def.chunk.hook' ] )
 ```

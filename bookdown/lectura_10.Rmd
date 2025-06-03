@@ -1,6 +1,7 @@
 <!------------------------------------------------------------------------------------------------->
 # Estimación de valores extremos {#estimacion_valores_extremos}
 
+:::: {.thmbox data-latex=""}
 ::: {.definition #dmaxstab  name="Distribución con cola pesada"}
 Una variable aleatoria a valores reales $X$ se dice que tiene su distribución $F$  es de 
 **cola pesada hacia la derecha** si el siguiente límite no es finito.
@@ -17,6 +18,7 @@ $$
 = + \infty, \qquad \forall t > 0
 $$
 :::
+::::
 
 Como consecuencia de la definición anterior, las variables aleatoria a valores reales que tiene
 cola pesada no poseen función generadora de momentos ya que la integral a continuación diverge 
@@ -26,6 +28,7 @@ $$
 $$
  
 <!------------------------------------------------------------------------------------------------->
+:::: {.thmbox data-latex=""}
 ::: {.theorem #tvalext1  name="Fisher-Tippett-Gnedenko"}
 Si consideramos una secuencia de variables aleatorias $\{X_i\}_{i\in \N}$ las mismas
 son i.i.d, con distribución acumulada $F$. Entonces, si existen dos sucesiones de valores reales 
@@ -42,7 +45,7 @@ decimos por tanto que la distribución $F$ pertenece al **máximo dominio de atr
 representamos por $F \in MDA( G )$.
 
 Además, las distribuciones $G$ vienen caracterizadas por ser alguna de las distribuciones 
-valores extremos generalizadas $GEV( \mu, \sigma, \xi )$. Las cuales engloban tres tipos 
+de valores extremos generalizadas $GEV( \mu, \sigma, \xi )$. Las cuales engloban tres tipos 
 relevantes:
 
 1. **Tipo I**, una distribución de Gumbel 
@@ -57,8 +60,10 @@ $x > \mu - \frac{\sigma}{\xi}$ y $\frac{1}{\xi} > 0$,
 $G( x ) = \exp\left( -\left(1 - |\xi|\frac{x-\mu}{\sigma}\right)^{\frac{1}{\xi}} \right)$, para 
 $x < \mu + \frac{\sigma}{|\xi|}$ y $\frac{1}{\xi} < 0$,
 :::
+::::
 
 <!------------------------------------------------------------------------------------------------->
+:::: {.thmbox data-latex=""}
 ::: {.theorem #tvalext2 name="Pickands-Balkema-De Haan"}
 Sea $F_u$ la distribución de exceso asociada a la variable aleatoria $X$ y con umbral de 
 condicionamiento $u > 0$. Entonces, para cualquier $\varepsilon \in \R$ tenemos que 
@@ -72,6 +77,7 @@ $$
 donde $x_F = \sup\{ x\in \R \mid F(x) < 1 \}$ y $\nu, \beta$ dependen de los parámetros 
 $\mu$, $\sigma$ y $u$.
 :::
+::::
 
 El teorema anterior \@ref(thm:tvalext2) en cierta forma sugiere que si en el límite la distribución de 
 exceso a partir de un valor de condicionamiento $u$ cada vez se comporta más como una distribución 
@@ -145,3 +151,8 @@ valores serán valores extremos, si $m$ no es lo suficientemente grande puede qu
 extremos simulados sean cero en cantidad y habrá sido inútil el haber realizado una estimación más 
 compleja con  valores extremos, ya que no se la está utilizando en las simulaciones. En tales 
 circunstancias es mucho mejor utilizar algún algoritmo determinista que supere este problema.
+
+```{r l10end, echo = FALSE}
+rm( list = ls()[ ls() != 'def.chunk.hook' ] )
+```
+
