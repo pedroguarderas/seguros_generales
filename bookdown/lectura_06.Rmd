@@ -682,7 +682,7 @@ El ejemplo a continuación muestra un claro uso del resultado anterior.
 
 ::: {.example #l6ex5}
 En este caso en particular consideramos un modelo individual con reclamos determinados por variables
-aleatorias que siguen una distribución $LN( \mu, \sigma )$ y un número de $n = 10000$ reclamos. 
+aleatorias que siguen una distribución $LN( \mu, \sigma )$ y un número de $n = 7000$ reclamos. 
 Además, como es usual asumimos que las variables aleatorias de los reclamos $X_1, \ldots, X_n$ son 
 i.i.d.
 ```{r l6c6}
