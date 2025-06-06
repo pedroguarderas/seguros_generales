@@ -700,13 +700,14 @@ C <- 0.7655 + 8 * ( 1 + exp(1) ) # constante universal del teorema
 f <- function( x ) ( abs( x - EX )^3 ) * dgamma( x, shape = sh, scale = sigma )
 tau <- integrate( f = f, lower = 0, upper = Inf )$value / sqrt( VX )^3
 
-s <- seq( 0, 24e6, length = 5000 )
+s <- seq( 0, 26e6, length = 5000 )
 Fms <- sapply( s, FUN = FS )
 
 u <- ( s - ES ) / sqrt( VS )
 r <- 1 + abs( u )^3
 Fmax <- pmin( pnorm( u ) + C * tau / ( sqrt( n ) * r ), 1 ) # cota superior
 Fmin <- pmax( pnorm( u ) - C * tau / ( sqrt( n ) * r ), 0 ) # cota inferior
+Phi <- sapply( s, FUN = function( s ) pnorm( ( s - ES ) / sqrt( VS ) ) )
 ```
 
 Como se puede ver en el gráfico a continuación la acotación funciona muy bien y al aumentar el 
@@ -714,17 +715,18 @@ número de siniestros $n$ se disminuye el rango de la acotación, proporcionando
 estimación de la distribución de los reclamos totales $S$.
 ```{r l6g2, out.width='80%', fig.align='center', class.source = 'fold-hide'}
 ylim <- c( 0, 1 )
-ybrk <- seq( ylim[1], ylim[2], 0.2 )
+ybrk <- seq( ylim[1], ylim[2], 0.1 )
 ylbl <- formatC( ybrk, digits = 2, format = 'f' )
 
-xlim <- c( 0, 24e6 )
+xlim <- c( min( s ), max( s ) )
 xbrk <- seq( xlim[1], xlim[2], length = 11 )
 xlbl <- paste0( formatC( xbrk / 1e6, digits = 1, format = 'f' ), 'M' )
 
 plt <- ggplot() +
-  geom_step( aes( x = s, y = Fms ), colour = 'dodgerblue3',  linewidth = 0.8 ) +
-  geom_line( aes( x = s, y = Fmax ), colour = 'olivedrab3', linewidth = 0.4 ) +
-  geom_line( aes( x = s, y = Fmin ), colour = 'olivedrab3', linewidth = 0.4 ) +
+  geom_line( aes( x = s, y = Phi ), colour = 'orange2', linewidth = 2 ) +
+  geom_step( aes( x = s, y = Fms ), colour = 'dodgerblue3',  linewidth = 1 ) +
+  geom_line( aes( x = s, y = Fmax ), colour = 'olivedrab3', linewidth = 0.5 ) +
+  geom_line( aes( x = s, y = Fmin ), colour = 'olivedrab3', linewidth = 0.5 ) +
   scale_x_continuous( breaks = xbrk,
                       labels = xlbl, 
                       limits = xlim, 
@@ -740,11 +742,28 @@ plt <- ggplot() +
 plt
 ```
 
+:::
+
 Es de notar que las variables aleatorias de los reclamos pueden seguir cualquier otra distribución, 
 el método no depende de la distribución en cuestión sino de que la variable que representa 
 los reclamos tenga esperanza finita, varianza finita y la variación de tercer orden 
 $\E\left[\left|X - \E[X]\right|^3 \right] < +\infty$, también sea finita.
-:::
+
+En la práctica se suele tomar lo que se conoce como una aproximación por el teorema de límite 
+central.
+$$
+P( S \leq s )
+\approx \Phi\left( \frac{s - \E[S]}{\sqrt{\V[S]}} \right)
+$$
+
+Esto es válido siempre y cuando el error de aproximación 
+$\frac{C}{\sqrt{n}\left( 1 + \left|\frac{s - \E[S]}{\sqrt{\V[S]}}\right|^3 \right)} \tau$, sea 
+lo suficientemente pequeño. Además, es de notar que se está trabajando con valores que solo están 
+entre $0$ y $1$, pequeñas variaciones pueden ser muy relevantes al nivel del ajuste de las 
+distribuciones acumuladas .
+
+Finalmente, debemos tomar en cuenta que las cotas, superior como inferior, no son funciones de 
+de distribución acumuladas en la variable $s$, no necesariamente son siempre crecientes.
 
 <!------------------------------------------------------------------------------------------------->
 ## Aplicación del deducible {#deducibles}
