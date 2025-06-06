@@ -1007,7 +1007,7 @@ Para simplificar la manipulación de las expresiones podemos tomar
 \Phi( u ) - \frac{C}{\sqrt{n}\left( 1 + |u|^3 \right)} \tau
 \leq P\left( S \leq \mathbb{E}[S] + \sqrt{\mathbb{V}[S]} u\right)
 \leq \Phi( u ) + \frac{C}{\sqrt{n}\left( 1 + |u|^3 \right)} \tau \\
-\max\left( \Phi\left( \frac{s - \mathbb{E}[S]}{\sqrt{\mathbb{V}[S]}} \right) - \frac{C}{\sqrt{n}\left( 1 + \left| \frac{s - \mathbb{E}[S]}{\sqrt{\mathbb{V}[S]}} \right|^3 \right)} \tau. 0 \right)
+\max\left( \Phi\left( \frac{s - \mathbb{E}[S]}{\sqrt{\mathbb{V}[S]}} \right) - \frac{C}{\sqrt{n}\left( 1 + \left| \frac{s - \mathbb{E}[S]}{\sqrt{\mathbb{V}[S]}} \right|^3 \right)} \tau, 0 \right)
 \leq P\left( S \leq s \right)
 \leq \min\left( \Phi\left( \frac{s - \mathbb{E}[S]}{\sqrt{\mathbb{V}[S]}} \right) + \frac{C}{\sqrt{n}\left( 1 + \left|\frac{s - \mathbb{E}[S]}{\sqrt{\mathbb{V}[S]}}\right|^3 \right)} \tau, 1 \right)
 \end{gather*}\]</span>
@@ -1035,51 +1035,68 @@ i.i.d.</p>
 <span id="cb55-12"><a href="modelos_perdida.html#cb55-12"></a>f <span class="ot">&lt;-</span> <span class="cf">function</span>( x ) ( <span class="fu">abs</span>( x <span class="sc">-</span> EX )<span class="sc">^</span><span class="dv">3</span> ) <span class="sc">*</span> <span class="fu">dgamma</span>( x, <span class="at">shape =</span> sh, <span class="at">scale =</span> sigma )</span>
 <span id="cb55-13"><a href="modelos_perdida.html#cb55-13"></a>tau <span class="ot">&lt;-</span> <span class="fu">integrate</span>( <span class="at">f =</span> f, <span class="at">lower =</span> <span class="dv">0</span>, <span class="at">upper =</span> <span class="cn">Inf</span> )<span class="sc">$</span>value <span class="sc">/</span> <span class="fu">sqrt</span>( VX )<span class="sc">^</span><span class="dv">3</span></span>
 <span id="cb55-14"><a href="modelos_perdida.html#cb55-14"></a></span>
-<span id="cb55-15"><a href="modelos_perdida.html#cb55-15"></a>s <span class="ot">&lt;-</span> <span class="fu">seq</span>( <span class="dv">0</span>, <span class="fl">24e6</span>, <span class="at">length =</span> <span class="dv">5000</span> )</span>
+<span id="cb55-15"><a href="modelos_perdida.html#cb55-15"></a>s <span class="ot">&lt;-</span> <span class="fu">seq</span>( <span class="dv">0</span>, <span class="fl">26e6</span>, <span class="at">length =</span> <span class="dv">5000</span> )</span>
 <span id="cb55-16"><a href="modelos_perdida.html#cb55-16"></a>Fms <span class="ot">&lt;-</span> <span class="fu">sapply</span>( s, <span class="at">FUN =</span> FS )</span>
 <span id="cb55-17"><a href="modelos_perdida.html#cb55-17"></a></span>
 <span id="cb55-18"><a href="modelos_perdida.html#cb55-18"></a>u <span class="ot">&lt;-</span> ( s <span class="sc">-</span> ES ) <span class="sc">/</span> <span class="fu">sqrt</span>( VS )</span>
 <span id="cb55-19"><a href="modelos_perdida.html#cb55-19"></a>r <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">+</span> <span class="fu">abs</span>( u )<span class="sc">^</span><span class="dv">3</span></span>
 <span id="cb55-20"><a href="modelos_perdida.html#cb55-20"></a>Fmax <span class="ot">&lt;-</span> <span class="fu">pmin</span>( <span class="fu">pnorm</span>( u ) <span class="sc">+</span> C <span class="sc">*</span> tau <span class="sc">/</span> ( <span class="fu">sqrt</span>( n ) <span class="sc">*</span> r ), <span class="dv">1</span> ) <span class="co"># cota superior</span></span>
-<span id="cb55-21"><a href="modelos_perdida.html#cb55-21"></a>Fmin <span class="ot">&lt;-</span> <span class="fu">pmax</span>( <span class="fu">pnorm</span>( u ) <span class="sc">-</span> C <span class="sc">*</span> tau <span class="sc">/</span> ( <span class="fu">sqrt</span>( n ) <span class="sc">*</span> r ), <span class="dv">0</span> ) <span class="co"># cota inferior</span></span></code></pre></div>
+<span id="cb55-21"><a href="modelos_perdida.html#cb55-21"></a>Fmin <span class="ot">&lt;-</span> <span class="fu">pmax</span>( <span class="fu">pnorm</span>( u ) <span class="sc">-</span> C <span class="sc">*</span> tau <span class="sc">/</span> ( <span class="fu">sqrt</span>( n ) <span class="sc">*</span> r ), <span class="dv">0</span> ) <span class="co"># cota inferior</span></span>
+<span id="cb55-22"><a href="modelos_perdida.html#cb55-22"></a>Phi <span class="ot">&lt;-</span> <span class="fu">sapply</span>( s, <span class="at">FUN =</span> <span class="cf">function</span>( s ) <span class="fu">pnorm</span>( ( s <span class="sc">-</span> ES ) <span class="sc">/</span> <span class="fu">sqrt</span>( VS ) ) )</span></code></pre></div>
 </details>
 <p></p>
 <p>Como se puede ver en el gráfico a continuación la acotación funciona muy bien y al aumentar el
-número de siniestros <span class="math inline">\(n\)</span> si disminuye el intervalo, proporcionando una mejor estimación de la
-distribución de los reclamos totales <span class="math inline">\(S\)</span>.</p>
+número de siniestros <span class="math inline">\(n\)</span> se disminuye el rango de la acotación, proporcionando así una mejor
+estimación de la distribución de los reclamos totales <span class="math inline">\(S\)</span>.</p>
 <p></p>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb56"><pre class="sourceCode r fold-hide"><code class="sourceCode r"><span id="cb56-1"><a href="modelos_perdida.html#cb56-1" tabindex="-1"></a>ylim <span class="ot">&lt;-</span> <span class="fu">c</span>( <span class="dv">0</span>, <span class="dv">1</span> )</span>
-<span id="cb56-2"><a href="modelos_perdida.html#cb56-2" tabindex="-1"></a>ybrk <span class="ot">&lt;-</span> <span class="fu">seq</span>( ylim[<span class="dv">1</span>], ylim[<span class="dv">2</span>], <span class="fl">0.2</span> )</span>
+<span id="cb56-2"><a href="modelos_perdida.html#cb56-2" tabindex="-1"></a>ybrk <span class="ot">&lt;-</span> <span class="fu">seq</span>( ylim[<span class="dv">1</span>], ylim[<span class="dv">2</span>], <span class="fl">0.1</span> )</span>
 <span id="cb56-3"><a href="modelos_perdida.html#cb56-3" tabindex="-1"></a>ylbl <span class="ot">&lt;-</span> <span class="fu">formatC</span>( ybrk, <span class="at">digits =</span> <span class="dv">2</span>, <span class="at">format =</span> <span class="st">&#39;f&#39;</span> )</span>
 <span id="cb56-4"><a href="modelos_perdida.html#cb56-4" tabindex="-1"></a></span>
-<span id="cb56-5"><a href="modelos_perdida.html#cb56-5" tabindex="-1"></a>xlim <span class="ot">&lt;-</span> <span class="fu">c</span>( <span class="dv">0</span>, <span class="fl">24e6</span> )</span>
+<span id="cb56-5"><a href="modelos_perdida.html#cb56-5" tabindex="-1"></a>xlim <span class="ot">&lt;-</span> <span class="fu">c</span>( <span class="fu">min</span>( s ), <span class="fu">max</span>( s ) )</span>
 <span id="cb56-6"><a href="modelos_perdida.html#cb56-6" tabindex="-1"></a>xbrk <span class="ot">&lt;-</span> <span class="fu">seq</span>( xlim[<span class="dv">1</span>], xlim[<span class="dv">2</span>], <span class="at">length =</span> <span class="dv">11</span> )</span>
 <span id="cb56-7"><a href="modelos_perdida.html#cb56-7" tabindex="-1"></a>xlbl <span class="ot">&lt;-</span> <span class="fu">paste0</span>( <span class="fu">formatC</span>( xbrk <span class="sc">/</span> <span class="fl">1e6</span>, <span class="at">digits =</span> <span class="dv">1</span>, <span class="at">format =</span> <span class="st">&#39;f&#39;</span> ), <span class="st">&#39;M&#39;</span> )</span>
 <span id="cb56-8"><a href="modelos_perdida.html#cb56-8" tabindex="-1"></a></span>
 <span id="cb56-9"><a href="modelos_perdida.html#cb56-9" tabindex="-1"></a>plt <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb56-10"><a href="modelos_perdida.html#cb56-10" tabindex="-1"></a>  <span class="fu">geom_step</span>( <span class="fu">aes</span>( <span class="at">x =</span> s, <span class="at">y =</span> Fms ), <span class="at">colour =</span> <span class="st">&#39;dodgerblue3&#39;</span>,  <span class="at">linewidth =</span> <span class="fl">0.8</span> ) <span class="sc">+</span></span>
-<span id="cb56-11"><a href="modelos_perdida.html#cb56-11" tabindex="-1"></a>  <span class="fu">geom_line</span>( <span class="fu">aes</span>( <span class="at">x =</span> s, <span class="at">y =</span> Fmax ), <span class="at">colour =</span> <span class="st">&#39;olivedrab3&#39;</span>, <span class="at">linewidth =</span> <span class="fl">0.4</span> ) <span class="sc">+</span></span>
-<span id="cb56-12"><a href="modelos_perdida.html#cb56-12" tabindex="-1"></a>  <span class="fu">geom_line</span>( <span class="fu">aes</span>( <span class="at">x =</span> s, <span class="at">y =</span> Fmin ), <span class="at">colour =</span> <span class="st">&#39;olivedrab3&#39;</span>, <span class="at">linewidth =</span> <span class="fl">0.4</span> ) <span class="sc">+</span></span>
-<span id="cb56-13"><a href="modelos_perdida.html#cb56-13" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>( <span class="at">breaks =</span> xbrk,</span>
-<span id="cb56-14"><a href="modelos_perdida.html#cb56-14" tabindex="-1"></a>                      <span class="at">labels =</span> xlbl, </span>
-<span id="cb56-15"><a href="modelos_perdida.html#cb56-15" tabindex="-1"></a>                      <span class="at">limits =</span> xlim, </span>
-<span id="cb56-16"><a href="modelos_perdida.html#cb56-16" tabindex="-1"></a>                      <span class="at">expand =</span> <span class="fu">c</span>( <span class="fl">0.01</span>, <span class="fl">0.01</span> ) ) <span class="sc">+</span></span>
-<span id="cb56-17"><a href="modelos_perdida.html#cb56-17" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>( <span class="at">breaks =</span> ybrk,</span>
-<span id="cb56-18"><a href="modelos_perdida.html#cb56-18" tabindex="-1"></a>                      <span class="at">labels =</span> ylbl, </span>
-<span id="cb56-19"><a href="modelos_perdida.html#cb56-19" tabindex="-1"></a>                      <span class="at">limits =</span> ylim, </span>
-<span id="cb56-20"><a href="modelos_perdida.html#cb56-20" tabindex="-1"></a>                      <span class="at">expand =</span> <span class="fu">c</span>( <span class="fl">0.01</span>, <span class="fl">0.01</span> ) ) <span class="sc">+</span></span>
-<span id="cb56-21"><a href="modelos_perdida.html#cb56-21" tabindex="-1"></a>  <span class="fu">xlab</span>( <span class="fu">TeX</span>( <span class="st">&quot;$S$&quot;</span> ) ) <span class="sc">+</span> </span>
-<span id="cb56-22"><a href="modelos_perdida.html#cb56-22" tabindex="-1"></a>  <span class="fu">ylab</span>( <span class="fu">TeX</span>( <span class="st">&quot;$F_S$&quot;</span> ) ) <span class="sc">+</span> </span>
-<span id="cb56-23"><a href="modelos_perdida.html#cb56-23" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb56-24"><a href="modelos_perdida.html#cb56-24" tabindex="-1"></a>  <span class="fu">theme</span>( <span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span> )</span>
-<span id="cb56-25"><a href="modelos_perdida.html#cb56-25" tabindex="-1"></a>plt</span></code></pre></div>
+<span id="cb56-10"><a href="modelos_perdida.html#cb56-10" tabindex="-1"></a>  <span class="fu">geom_line</span>( <span class="fu">aes</span>( <span class="at">x =</span> s, <span class="at">y =</span> Phi ), <span class="at">colour =</span> <span class="st">&#39;orange2&#39;</span>, <span class="at">linewidth =</span> <span class="dv">2</span> ) <span class="sc">+</span></span>
+<span id="cb56-11"><a href="modelos_perdida.html#cb56-11" tabindex="-1"></a>  <span class="fu">geom_step</span>( <span class="fu">aes</span>( <span class="at">x =</span> s, <span class="at">y =</span> Fms ), <span class="at">colour =</span> <span class="st">&#39;dodgerblue3&#39;</span>,  <span class="at">linewidth =</span> <span class="dv">1</span> ) <span class="sc">+</span></span>
+<span id="cb56-12"><a href="modelos_perdida.html#cb56-12" tabindex="-1"></a>  <span class="fu">geom_line</span>( <span class="fu">aes</span>( <span class="at">x =</span> s, <span class="at">y =</span> Fmax ), <span class="at">colour =</span> <span class="st">&#39;olivedrab3&#39;</span>, <span class="at">linewidth =</span> <span class="fl">0.5</span> ) <span class="sc">+</span></span>
+<span id="cb56-13"><a href="modelos_perdida.html#cb56-13" tabindex="-1"></a>  <span class="fu">geom_line</span>( <span class="fu">aes</span>( <span class="at">x =</span> s, <span class="at">y =</span> Fmin ), <span class="at">colour =</span> <span class="st">&#39;olivedrab3&#39;</span>, <span class="at">linewidth =</span> <span class="fl">0.5</span> ) <span class="sc">+</span></span>
+<span id="cb56-14"><a href="modelos_perdida.html#cb56-14" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>( <span class="at">breaks =</span> xbrk,</span>
+<span id="cb56-15"><a href="modelos_perdida.html#cb56-15" tabindex="-1"></a>                      <span class="at">labels =</span> xlbl, </span>
+<span id="cb56-16"><a href="modelos_perdida.html#cb56-16" tabindex="-1"></a>                      <span class="at">limits =</span> xlim, </span>
+<span id="cb56-17"><a href="modelos_perdida.html#cb56-17" tabindex="-1"></a>                      <span class="at">expand =</span> <span class="fu">c</span>( <span class="fl">0.01</span>, <span class="fl">0.01</span> ) ) <span class="sc">+</span></span>
+<span id="cb56-18"><a href="modelos_perdida.html#cb56-18" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>( <span class="at">breaks =</span> ybrk,</span>
+<span id="cb56-19"><a href="modelos_perdida.html#cb56-19" tabindex="-1"></a>                      <span class="at">labels =</span> ylbl, </span>
+<span id="cb56-20"><a href="modelos_perdida.html#cb56-20" tabindex="-1"></a>                      <span class="at">limits =</span> ylim, </span>
+<span id="cb56-21"><a href="modelos_perdida.html#cb56-21" tabindex="-1"></a>                      <span class="at">expand =</span> <span class="fu">c</span>( <span class="fl">0.01</span>, <span class="fl">0.01</span> ) ) <span class="sc">+</span></span>
+<span id="cb56-22"><a href="modelos_perdida.html#cb56-22" tabindex="-1"></a>  <span class="fu">xlab</span>( <span class="fu">TeX</span>( <span class="st">&quot;$S$&quot;</span> ) ) <span class="sc">+</span> </span>
+<span id="cb56-23"><a href="modelos_perdida.html#cb56-23" tabindex="-1"></a>  <span class="fu">ylab</span>( <span class="fu">TeX</span>( <span class="st">&quot;$F_S$&quot;</span> ) ) <span class="sc">+</span> </span>
+<span id="cb56-24"><a href="modelos_perdida.html#cb56-24" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb56-25"><a href="modelos_perdida.html#cb56-25" tabindex="-1"></a>  <span class="fu">theme</span>( <span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span> )</span>
+<span id="cb56-26"><a href="modelos_perdida.html#cb56-26" tabindex="-1"></a>plt</span></code></pre></div>
 </details>
 <p><img src="seguros_generales_files/figure-html/l6g2-1.png" width="80%" style="display: block; margin: auto;" /></p>
 <p></p>
-<p>Es de notar que las variables aleatorias de los reclamos pueden seguir cualquier otra distribución,
-la acotación igual sería válida.</p>
 </div>
+<p>Es de notar que las variables aleatorias de los reclamos pueden seguir cualquier otra distribución,
+el método no depende de la distribución en cuestión sino de que la variable que representa
+los reclamos tenga esperanza finita, varianza finita y la variación de tercer orden
+<span class="math inline">\(\mathbb{E}\left[\left|X - \mathbb{E}[X]\right|^3 \right] &lt; +\infty\)</span>, también sea finita.</p>
+<p>En la práctica se suele tomar lo que se conoce como una aproximación por el teorema de límite
+central.
+<span class="math display">\[
+P( S \leq s )
+\approx \Phi\left( \frac{s - \mathbb{E}[S]}{\sqrt{\mathbb{V}[S]}} \right)
+\]</span></p>
+<p>Esto es válido siempre y cuando el error de aproximación
+<span class="math inline">\(\frac{C}{\sqrt{n}\left( 1 + \left|\frac{s - \mathbb{E}[S]}{\sqrt{\mathbb{V}[S]}}\right|^3 \right)} \tau\)</span>, sea
+lo suficientemente pequeño. Además, es de notar que se está trabajando con valores que solo están
+entre <span class="math inline">\(0\)</span> y <span class="math inline">\(1\)</span>, pequeñas variaciones pueden ser muy relevantes al nivel del ajuste de las
+distribuciones acumuladas .</p>
+<p>Finalmente, debemos tomar en cuenta que las cotas, superior como inferior, no son funciones de
+de distribución acumuladas en la variable <span class="math inline">\(s\)</span>, no necesariamente son siempre crecientes.</p>
 <!------------------------------------------------------------------------------------------------->
 </div>
 <div id="deducibles" class="section level2 hasAnchor" number="6.6">
