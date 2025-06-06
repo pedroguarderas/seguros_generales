@@ -979,8 +979,8 @@ hemos visto no hay una forma explícita sencilla.</p>
 central <a href="probabilidad_estadistica.html#thm:tlc">4.3</a>, para ello se requiere un gran número de elementos en la suma determina
 los reclamos totales <span class="math inline">\(S\)</span>, como ya lo muestra la desigualdad <a href="probabilidad_estadistica.html#thm:beress">4.5</a>,
 la convergencia requiere un número de términos inversamente proporcional al cuadrado del error
-de aproximación. Sin embargo, si en caso el número de reclamos <span class="math inline">\(n\)</span> no es lo suficientemente como
-para un obtener un error de aproximación deseado, podemos hacer uso de un resultado más fuerte como
+de aproximación. Sin embargo, si en caso el número de reclamos <span class="math inline">\(n\)</span> no es lo suficientemente grande
+como para obtener un error de aproximación deseado, podemos hacer uso de un resultado más fuerte como
 la desigualdad de concentración de <a href="probabilidad_estadistica.html#thm:beress">4.5</a>, la misma no solo implica el teorema del límite
 central, sino que además proporciona una acotación y velocidad de convergencia conforme se aumenta
 <span class="math inline">\(n\)</span>. Esta desigualdad puede ser de gran utilidad para tener una acotación de la distribución de los
@@ -1069,8 +1069,11 @@ distribución de los reclamos totales <span class="math inline">\(S\)</span>.</p
 <span id="cb56-18"><a href="modelos_perdida.html#cb56-18" tabindex="-1"></a>                      <span class="at">labels =</span> ylbl, </span>
 <span id="cb56-19"><a href="modelos_perdida.html#cb56-19" tabindex="-1"></a>                      <span class="at">limits =</span> ylim, </span>
 <span id="cb56-20"><a href="modelos_perdida.html#cb56-20" tabindex="-1"></a>                      <span class="at">expand =</span> <span class="fu">c</span>( <span class="fl">0.01</span>, <span class="fl">0.01</span> ) ) <span class="sc">+</span></span>
-<span id="cb56-21"><a href="modelos_perdida.html#cb56-21" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span>
-<span id="cb56-22"><a href="modelos_perdida.html#cb56-22" tabindex="-1"></a>plt</span></code></pre></div>
+<span id="cb56-21"><a href="modelos_perdida.html#cb56-21" tabindex="-1"></a>  <span class="fu">xlab</span>( <span class="fu">TeX</span>( <span class="st">&quot;$S$&quot;</span> ) ) <span class="sc">+</span> </span>
+<span id="cb56-22"><a href="modelos_perdida.html#cb56-22" tabindex="-1"></a>  <span class="fu">ylab</span>( <span class="fu">TeX</span>( <span class="st">&quot;$F_S$&quot;</span> ) ) <span class="sc">+</span> </span>
+<span id="cb56-23"><a href="modelos_perdida.html#cb56-23" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb56-24"><a href="modelos_perdida.html#cb56-24" tabindex="-1"></a>  <span class="fu">theme</span>( <span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span> )</span>
+<span id="cb56-25"><a href="modelos_perdida.html#cb56-25" tabindex="-1"></a>plt</span></code></pre></div>
 </details>
 <p><img src="seguros_generales_files/figure-html/l6g2-1.png" width="80%" style="display: block; margin: auto;" /></p>
 <p></p>
