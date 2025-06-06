@@ -671,7 +671,7 @@ $\tau = \frac{\E\left[\left|X - \E[X]\right|^3\right]}{\sqrt{\V[X]}^3}$
 \Phi( u ) - \frac{C}{\sqrt{n}\left( 1 + |u|^3 \right)} \tau
 \leq P\left( S \leq \E[S] + \sqrt{\V[S]} u\right) 
 \leq \Phi( u ) + \frac{C}{\sqrt{n}\left( 1 + |u|^3 \right)} \tau \\
-\max\left( \Phi\left( \frac{s - \E[S]}{\sqrt{\V[S]}} \right) - \frac{C}{\sqrt{n}\left( 1 + \left| \frac{s - \E[S]}{\sqrt{\V[S]}} \right|^3 \right)} \tau. 0 \right)
+\max\left( \Phi\left( \frac{s - \E[S]}{\sqrt{\V[S]}} \right) - \frac{C}{\sqrt{n}\left( 1 + \left| \frac{s - \E[S]}{\sqrt{\V[S]}} \right|^3 \right)} \tau, 0 \right)
 \leq P\left( S \leq s \right) 
 \leq \min\left( \Phi\left( \frac{s - \E[S]}{\sqrt{\V[S]}} \right) + \frac{C}{\sqrt{n}\left( 1 + \left|\frac{s - \E[S]}{\sqrt{\V[S]}}\right|^3 \right)} \tau, 1 \right)
 \end{gather*}
@@ -710,8 +710,8 @@ Fmin <- pmax( pnorm( u ) - C * tau / ( sqrt( n ) * r ), 0 ) # cota inferior
 ```
 
 Como se puede ver en el gráfico a continuación la acotación funciona muy bien y al aumentar el 
-número de siniestros $n$ si disminuye el intervalo, proporcionando una mejor estimación de la 
-distribución de los reclamos totales $S$.
+número de siniestros $n$ se disminuye el rango de la acotación, proporcionando así una mejor 
+estimación de la distribución de los reclamos totales $S$.
 ```{r l6g2, out.width='80%', fig.align='center', class.source = 'fold-hide'}
 ylim <- c( 0, 1 )
 ybrk <- seq( ylim[1], ylim[2], 0.2 )
@@ -741,7 +741,9 @@ plt
 ```
 
 Es de notar que las variables aleatorias de los reclamos pueden seguir cualquier otra distribución, 
-la acotación igual sería válida.
+el método no depende de la distribución en cuestión sino de que la variable que representa 
+los reclamos tenga esperanza finita, varianza finita y la variación de tercer orden 
+$\E\left[\left|X - \E[X]\right|^3 \right] < +\infty$, también sea finita.
 :::
 
 <!------------------------------------------------------------------------------------------------->
