@@ -639,8 +639,8 @@ En varias situaciones es difícil determinar la distribución de los reclamos to
 hemos visto no hay una forma explícita sencilla. 
 
 Para tener una primera aproximación a la distribución, se puede utilizar el teorema del límite 
-central \@ref(thm:tlc), para ello se requiere un gran número de elementos en la suma que se 
-consideran en los reclamos totales $S$, como ya lo muestra la desigualdad \@ref(thm:beress), 
+central \@ref(thm:tlc), para ello se requiere un gran número de elementos en la suma determina 
+los reclamos totales $S$, como ya lo muestra la desigualdad \@ref(thm:beress), 
 la convergencia requiere un número de términos inversamente proporcional al cuadrado del error
 de aproximación. Sin embargo, si en caso el número de reclamos $n$ no es lo suficientemente como 
 para un obtener un error de aproximación deseado, podemos hacer uso de un resultado más fuerte como 
