@@ -694,9 +694,6 @@ VX <- sh * sigma^2
 ES <- n * EX
 VS <- n * VX
 
-# Simulación de reclamos totales
-m <- 1e3
-S <- sapply( 1:m, FUN = function( i ) sum( rgamma( n = n, shape = sh, scale = sigma ) ) )
 FS <- function( x ) pgamma( x, shape = n * sh, scale = sigma )
 
 C <- 0.7655 + 8 * ( 1 + exp(1) ) # constante universal del teorema
