@@ -682,25 +682,31 @@ El ejemplo a continuación muestra un claro uso del resultado anterior.
 
 ::: {.example #l6ex5}
 En este caso en particular consideramos un modelo individual con reclamos determinados por variables
-aleatorias que siguen una distribución $Gamma( \alpha, \sigma )$ y un número de $n = 5000$ reclamos. 
+aleatorias que siguen una distribución $LN( \mu, \sigma )$ y un número de $n = 10000$ reclamos. 
 Además, como es usual asumimos que las variables aleatorias de los reclamos $X_1, \ldots, X_n$ son 
 i.i.d.
 ```{r l6c6}
-n <- 5e3
-sh <- 1
-sigma <- 3000
-EX <- sh * sigma
-VX <- sh * sigma^2
+n <- 7e3
+mu <- 4.0
+sigma <- 2.0
+EX <- exp( mu + 0.5 * sigma^2 )
+VX <- ( exp( sigma^2 ) - 1 ) * exp( 2 * mu + sigma^2 )
 ES <- n * EX
 VS <- n * VX
 
-FS <- function( x ) pgamma( x, shape = n * sh, scale = sigma )
+m <- 5e3
+S <- sapply( 1:m, FUN = function( i ) sum( rlnorm( n, meanlog = mu, sdlog = sigma ) ) )
+
+# no hay forma analítica para la distribución de la suma de log-normales
+FS <- ecdf( S ) 
 
 C <- 0.7655 + 8 * ( 1 + exp(1) ) # constante universal del teorema
-f <- function( x ) ( abs( x - EX )^3 ) * dgamma( x, shape = sh, scale = sigma )
-tau <- integrate( f = f, lower = 0, upper = Inf )$value / sqrt( VX )^3
+f <- function( x ) ( abs( x - EX )^3 ) * dlnorm( x, meanlog = mu, sdlog = sigma )
 
-s <- seq( 0, 26e6, length = 5000 )
+# forzando este término, la distribución log-normal no tiene función generadora de momentos
+tau <- integrate( f = f, lower = 0, upper = 1e10, subdivisions = 1e4, rel.tol = 1e-10 )$value / sqrt( VX )^3
+
+s <- seq( 0, 6e6, length = 5000 )
 Fms <- sapply( s, FUN = FS )
 
 u <- ( s - ES ) / sqrt( VS )
@@ -732,8 +738,8 @@ plt <- ggplot() +
                       limits = xlim, 
                       expand = c( 0.01, 0.01 ) ) +
   scale_y_continuous( breaks = ybrk,
-                      labels = ylbl, 
-                      limits = ylim, 
+                      labels = ylbl,
+                      limits = ylim,
                       expand = c( 0.01, 0.01 ) ) +
   xlab( TeX( "$S$" ) ) + 
   ylab( TeX( "$F_S$" ) ) + 
