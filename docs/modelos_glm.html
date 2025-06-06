@@ -23,7 +23,7 @@
 <meta name="author" content="Leonardo Vélez y Pedro Guarderas" />
 
 
-<meta name="date" content="2025-06-03" />
+<meta name="date" content="2025-06-06" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -308,17 +308,18 @@ div.csl-indent {
 <li class="chapter" data-level="6.3.1" data-path="lectura_08.html"><a href="#algoritmo-de-simulaci%C3%B3n-1"><i class="fa fa-check"></i><b>6.3.1</b> Algoritmo de simulación</a></li>
 </ul></li>
 <li class="chapter" data-level="6.4" data-path="modelos_perdida.html"><a href="modelos_perdida.html#modelos_mixtos"><i class="fa fa-check"></i><b>6.4</b> Modelos mixtos</a></li>
-<li class="chapter" data-level="6.5" data-path="modelos_perdida.html"><a href="modelos_perdida.html#deducibles"><i class="fa fa-check"></i><b>6.5</b> Aplicación del deducible</a>
+<li class="chapter" data-level="6.5" data-path="modelos_perdida.html"><a href="modelos_perdida.html#uso_limite_central"><i class="fa fa-check"></i><b>6.5</b> Teorema del límite central y su uso</a></li>
+<li class="chapter" data-level="6.6" data-path="modelos_perdida.html"><a href="modelos_perdida.html#deducibles"><i class="fa fa-check"></i><b>6.6</b> Aplicación del deducible</a>
 <ul>
-<li class="chapter" data-level="6.5.1" data-path="lectura_08.html"><a href="#algoritmo-de-simulaci%C3%B3n-2"><i class="fa fa-check"></i><b>6.5.1</b> Algoritmo de simulación</a></li>
+<li class="chapter" data-level="6.6.1" data-path="lectura_08.html"><a href="#algoritmo-de-simulaci%C3%B3n-2"><i class="fa fa-check"></i><b>6.6.1</b> Algoritmo de simulación</a></li>
 </ul></li>
-<li class="chapter" data-level="6.6" data-path="modelos_perdida.html"><a href="modelos_perdida.html#algoritmo_panjer"><i class="fa fa-check"></i><b>6.6</b> Algoritmo de Panjer</a></li>
-<li class="chapter" data-level="6.7" data-path="modelos_perdida.html"><a href="modelos_perdida.html#estimacion_transformada_fourier"><i class="fa fa-check"></i><b>6.7</b> Estimación usando la transformada de Fourier</a></li>
-<li class="chapter" data-level="6.8" data-path="modelos_perdida.html"><a href="modelos_perdida.html#temporalidad_numero_reclamos"><i class="fa fa-check"></i><b>6.8</b> Temporalidad y ajustes del número de reclamos</a></li>
-<li class="chapter" data-level="6.9" data-path="modelos_perdida.html"><a href="modelos_perdida.html#modelos_variables_explicativas"><i class="fa fa-check"></i><b>6.9</b> Modelos con variables explicativas</a></li>
-<li class="chapter" data-level="6.10" data-path="modelos_perdida.html"><a href="modelos_perdida.html#proceso_estocastico_reclamos"><i class="fa fa-check"></i><b>6.10</b> Proceso estocástico de reclamos totales</a>
+<li class="chapter" data-level="6.7" data-path="modelos_perdida.html"><a href="modelos_perdida.html#algoritmo_panjer"><i class="fa fa-check"></i><b>6.7</b> Algoritmo de Panjer</a></li>
+<li class="chapter" data-level="6.8" data-path="modelos_perdida.html"><a href="modelos_perdida.html#estimacion_transformada_fourier"><i class="fa fa-check"></i><b>6.8</b> Estimación usando la transformada de Fourier</a></li>
+<li class="chapter" data-level="6.9" data-path="modelos_perdida.html"><a href="modelos_perdida.html#temporalidad_numero_reclamos"><i class="fa fa-check"></i><b>6.9</b> Temporalidad y ajustes del número de reclamos</a></li>
+<li class="chapter" data-level="6.10" data-path="modelos_perdida.html"><a href="modelos_perdida.html#modelos_variables_explicativas"><i class="fa fa-check"></i><b>6.10</b> Modelos con variables explicativas</a></li>
+<li class="chapter" data-level="6.11" data-path="modelos_perdida.html"><a href="modelos_perdida.html#proceso_estocastico_reclamos"><i class="fa fa-check"></i><b>6.11</b> Proceso estocástico de reclamos totales</a>
 <ul>
-<li class="chapter" data-level="6.10.1" data-path="lectura_08.html"><a href="#algoritmo-de-simulaci%C3%B3n-3"><i class="fa fa-check"></i><b>6.10.1</b> Algoritmo de simulación</a></li>
+<li class="chapter" data-level="6.11.1" data-path="lectura_08.html"><a href="#algoritmo-de-simulaci%C3%B3n-3"><i class="fa fa-check"></i><b>6.11.1</b> Algoritmo de simulación</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="tarificacion.html"><a href="tarificacion.html"><i class="fa fa-check"></i><b>7</b> Tarificación</a>
@@ -541,25 +542,25 @@ P( N = n ) = \exp(-g( \beta x ) ER( x )) \frac{g( \beta x )^n ER( x )^n}{n!}
 \]</span></p>
 <p></p>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb120"><pre class="sourceCode r fold-hide"><code class="sourceCode r"><span id="cb120-1"><a href="modelos_glm.html#cb120-1" tabindex="-1"></a><span class="co"># la librería CASdatasets fue previamente cargada</span></span>
-<span id="cb120-2"><a href="modelos_glm.html#cb120-2" tabindex="-1"></a><span class="fu">data</span>( beMTPL97 )</span>
-<span id="cb120-3"><a href="modelos_glm.html#cb120-3" tabindex="-1"></a>beMTPL97 <span class="ot">&lt;-</span> <span class="fu">as.data.table</span>( beMTPL97 )</span>
-<span id="cb120-4"><a href="modelos_glm.html#cb120-4" tabindex="-1"></a></span>
-<span id="cb120-5"><a href="modelos_glm.html#cb120-5" tabindex="-1"></a><span class="co"># Impresión de las primeras filas de la tabla</span></span>
-<span id="cb120-6"><a href="modelos_glm.html#cb120-6" tabindex="-1"></a>beMTPL97[ <span class="dv">1</span><span class="sc">:</span><span class="dv">100</span> ] <span class="sc">%&gt;%</span></span>
-<span id="cb120-7"><a href="modelos_glm.html#cb120-7" tabindex="-1"></a>  <span class="fu">kable</span>(</span>
-<span id="cb120-8"><a href="modelos_glm.html#cb120-8" tabindex="-1"></a>    <span class="at">label =</span> <span class="cn">NA</span>,</span>
-<span id="cb120-9"><a href="modelos_glm.html#cb120-9" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">&quot;Pólizas y reclamos de automóviles en Bélgica&quot;</span>,</span>
-<span id="cb120-10"><a href="modelos_glm.html#cb120-10" tabindex="-1"></a>    <span class="at">row.names =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb120-11"><a href="modelos_glm.html#cb120-11" tabindex="-1"></a>    <span class="at">col.names =</span> <span class="fu">names</span>( beMTPL97 ),</span>
-<span id="cb120-12"><a href="modelos_glm.html#cb120-12" tabindex="-1"></a>    <span class="at">align =</span> <span class="fu">paste0</span>( <span class="fu">rep</span>( <span class="st">&quot;r&quot;</span>, <span class="fu">ncol</span>( beMTPL97 ) ), <span class="at">collapse =</span> <span class="st">&quot;&quot;</span> ),</span>
-<span id="cb120-13"><a href="modelos_glm.html#cb120-13" tabindex="-1"></a>    <span class="at">digits =</span> <span class="fu">c</span>( <span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">4</span>, <span class="dv">4</span> ),</span>
-<span id="cb120-14"><a href="modelos_glm.html#cb120-14" tabindex="-1"></a>    <span class="at">format.args =</span> <span class="fu">list</span>( <span class="at">big.mark =</span> <span class="st">&#39;,&#39;</span>, <span class="at">decimal.mark =</span> <span class="st">&#39;.&#39;</span>, <span class="at">scientific =</span> <span class="cn">FALSE</span> ),</span>
-<span id="cb120-15"><a href="modelos_glm.html#cb120-15" tabindex="-1"></a>    <span class="at">escape =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb120-16"><a href="modelos_glm.html#cb120-16" tabindex="-1"></a>    <span class="at">centering =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb120-17"><a href="modelos_glm.html#cb120-17" tabindex="-1"></a>    <span class="at">booktabs =</span> <span class="cn">TRUE</span> ) <span class="sc">%&gt;%</span></span>
-<span id="cb120-18"><a href="modelos_glm.html#cb120-18" tabindex="-1"></a>  <span class="fu">kable_classic</span>( <span class="at">full_width =</span> <span class="cn">FALSE</span>, <span class="at">html_font =</span> <span class="st">&quot;Cambria&quot;</span>, <span class="at">position =</span> <span class="st">&quot;center&quot;</span> ) <span class="sc">%&gt;%</span></span>
-<span id="cb120-19"><a href="modelos_glm.html#cb120-19" tabindex="-1"></a>  <span class="fu">scroll_box</span>( <span class="at">width =</span> <span class="st">&quot;100%&quot;</span>, <span class="at">height =</span> <span class="st">&quot;500px&quot;</span> )</span></code></pre></div>
+<div class="sourceCode" id="cb122"><pre class="sourceCode r fold-hide"><code class="sourceCode r"><span id="cb122-1"><a href="modelos_glm.html#cb122-1" tabindex="-1"></a><span class="co"># la librería CASdatasets fue previamente cargada</span></span>
+<span id="cb122-2"><a href="modelos_glm.html#cb122-2" tabindex="-1"></a><span class="fu">data</span>( beMTPL97 )</span>
+<span id="cb122-3"><a href="modelos_glm.html#cb122-3" tabindex="-1"></a>beMTPL97 <span class="ot">&lt;-</span> <span class="fu">as.data.table</span>( beMTPL97 )</span>
+<span id="cb122-4"><a href="modelos_glm.html#cb122-4" tabindex="-1"></a></span>
+<span id="cb122-5"><a href="modelos_glm.html#cb122-5" tabindex="-1"></a><span class="co"># Impresión de las primeras filas de la tabla</span></span>
+<span id="cb122-6"><a href="modelos_glm.html#cb122-6" tabindex="-1"></a>beMTPL97[ <span class="dv">1</span><span class="sc">:</span><span class="dv">100</span> ] <span class="sc">%&gt;%</span></span>
+<span id="cb122-7"><a href="modelos_glm.html#cb122-7" tabindex="-1"></a>  <span class="fu">kable</span>(</span>
+<span id="cb122-8"><a href="modelos_glm.html#cb122-8" tabindex="-1"></a>    <span class="at">label =</span> <span class="cn">NA</span>,</span>
+<span id="cb122-9"><a href="modelos_glm.html#cb122-9" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">&quot;Pólizas y reclamos de automóviles en Bélgica&quot;</span>,</span>
+<span id="cb122-10"><a href="modelos_glm.html#cb122-10" tabindex="-1"></a>    <span class="at">row.names =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb122-11"><a href="modelos_glm.html#cb122-11" tabindex="-1"></a>    <span class="at">col.names =</span> <span class="fu">names</span>( beMTPL97 ),</span>
+<span id="cb122-12"><a href="modelos_glm.html#cb122-12" tabindex="-1"></a>    <span class="at">align =</span> <span class="fu">paste0</span>( <span class="fu">rep</span>( <span class="st">&quot;r&quot;</span>, <span class="fu">ncol</span>( beMTPL97 ) ), <span class="at">collapse =</span> <span class="st">&quot;&quot;</span> ),</span>
+<span id="cb122-13"><a href="modelos_glm.html#cb122-13" tabindex="-1"></a>    <span class="at">digits =</span> <span class="fu">c</span>( <span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">4</span>, <span class="dv">4</span> ),</span>
+<span id="cb122-14"><a href="modelos_glm.html#cb122-14" tabindex="-1"></a>    <span class="at">format.args =</span> <span class="fu">list</span>( <span class="at">big.mark =</span> <span class="st">&#39;,&#39;</span>, <span class="at">decimal.mark =</span> <span class="st">&#39;.&#39;</span>, <span class="at">scientific =</span> <span class="cn">FALSE</span> ),</span>
+<span id="cb122-15"><a href="modelos_glm.html#cb122-15" tabindex="-1"></a>    <span class="at">escape =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb122-16"><a href="modelos_glm.html#cb122-16" tabindex="-1"></a>    <span class="at">centering =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb122-17"><a href="modelos_glm.html#cb122-17" tabindex="-1"></a>    <span class="at">booktabs =</span> <span class="cn">TRUE</span> ) <span class="sc">%&gt;%</span></span>
+<span id="cb122-18"><a href="modelos_glm.html#cb122-18" tabindex="-1"></a>  <span class="fu">kable_classic</span>( <span class="at">full_width =</span> <span class="cn">FALSE</span>, <span class="at">html_font =</span> <span class="st">&quot;Cambria&quot;</span>, <span class="at">position =</span> <span class="st">&quot;center&quot;</span> ) <span class="sc">%&gt;%</span></span>
+<span id="cb122-19"><a href="modelos_glm.html#cb122-19" tabindex="-1"></a>  <span class="fu">scroll_box</span>( <span class="at">width =</span> <span class="st">&quot;100%&quot;</span>, <span class="at">height =</span> <span class="st">&quot;500px&quot;</span> )</span></code></pre></div>
 </details>
 <div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:500px; overflow-x: scroll; width:100%; ">
 <table class=" lightable-classic" style="color: black; font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
@@ -6231,28 +6232,28 @@ private
 <p></p>
 <p></p>
 <details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb121"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb121-1"><a href="modelos_glm.html#cb121-1"></a>model_N <span class="ot">&lt;-</span> <span class="fu">glm</span>( <span class="at">formula =</span> nclaims <span class="sc">~</span> ageph <span class="sc">+</span> sex <span class="sc">+</span> power <span class="sc">+</span> fuel <span class="sc">+</span> <span class="fu">offset</span>( <span class="fu">log</span>( expo ) ) <span class="sc">+</span> <span class="dv">0</span>, </span>
-<span id="cb121-2"><a href="modelos_glm.html#cb121-2"></a>                <span class="at">family =</span> <span class="fu">poisson</span>( <span class="at">link =</span> <span class="st">&#39;log&#39;</span> ), </span>
-<span id="cb121-3"><a href="modelos_glm.html#cb121-3"></a>                <span class="at">data =</span> beMTPL97 )</span></code></pre></div>
+<div class="sourceCode" id="cb123"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb123-1"><a href="modelos_glm.html#cb123-1"></a>model_N <span class="ot">&lt;-</span> <span class="fu">glm</span>( <span class="at">formula =</span> nclaims <span class="sc">~</span> ageph <span class="sc">+</span> sex <span class="sc">+</span> power <span class="sc">+</span> fuel <span class="sc">+</span> <span class="fu">offset</span>( <span class="fu">log</span>( expo ) ) <span class="sc">+</span> <span class="dv">0</span>, </span>
+<span id="cb123-2"><a href="modelos_glm.html#cb123-2"></a>                <span class="at">family =</span> <span class="fu">poisson</span>( <span class="at">link =</span> <span class="st">&#39;log&#39;</span> ), </span>
+<span id="cb123-3"><a href="modelos_glm.html#cb123-3"></a>                <span class="at">data =</span> beMTPL97 )</span></code></pre></div>
 </details>
 <p></p>
 <p></p>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb122"><pre class="sourceCode r fold-hide"><code class="sourceCode r"><span id="cb122-1"><a href="modelos_glm.html#cb122-1" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">tidy</span>( model_N )</span>
-<span id="cb122-2"><a href="modelos_glm.html#cb122-2" tabindex="-1"></a>dat <span class="sc">%&gt;%</span></span>
-<span id="cb122-3"><a href="modelos_glm.html#cb122-3" tabindex="-1"></a>  <span class="fu">kable</span>(</span>
-<span id="cb122-4"><a href="modelos_glm.html#cb122-4" tabindex="-1"></a>    <span class="at">label =</span> <span class="cn">NA</span>,</span>
-<span id="cb122-5"><a href="modelos_glm.html#cb122-5" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">&quot;Resultados del modelo GLM&quot;</span>,</span>
-<span id="cb122-6"><a href="modelos_glm.html#cb122-6" tabindex="-1"></a>    <span class="at">row.names =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb122-7"><a href="modelos_glm.html#cb122-7" tabindex="-1"></a>    <span class="at">col.names =</span> <span class="fu">names</span>( dat ),</span>
-<span id="cb122-8"><a href="modelos_glm.html#cb122-8" tabindex="-1"></a>    <span class="at">align =</span> <span class="st">&#39;lrrrr&#39;</span>,</span>
-<span id="cb122-9"><a href="modelos_glm.html#cb122-9" tabindex="-1"></a>    <span class="at">digits =</span> <span class="fu">c</span>( <span class="dv">0</span>, <span class="dv">6</span>, <span class="dv">6</span>, <span class="dv">6</span>, <span class="dv">6</span> ),</span>
-<span id="cb122-10"><a href="modelos_glm.html#cb122-10" tabindex="-1"></a>    <span class="at">format.args =</span> <span class="fu">list</span>( <span class="at">big.mark =</span> <span class="st">&#39;,&#39;</span>, <span class="at">decimal.mark =</span> <span class="st">&#39;.&#39;</span>, <span class="at">scientific =</span> <span class="cn">FALSE</span> ),</span>
-<span id="cb122-11"><a href="modelos_glm.html#cb122-11" tabindex="-1"></a>    <span class="at">escape =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb122-12"><a href="modelos_glm.html#cb122-12" tabindex="-1"></a>    <span class="at">centering =</span> <span class="cn">TRUE</span>, </span>
-<span id="cb122-13"><a href="modelos_glm.html#cb122-13" tabindex="-1"></a>    <span class="at">booktabs =</span> <span class="cn">TRUE</span> ) <span class="sc">%&gt;%</span></span>
-<span id="cb122-14"><a href="modelos_glm.html#cb122-14" tabindex="-1"></a>  <span class="fu">kable_classic</span>( <span class="at">full_width =</span> <span class="cn">FALSE</span>, <span class="at">html_font =</span> <span class="st">&quot;Cambria&quot;</span>, <span class="at">position =</span> <span class="st">&quot;center&quot;</span> ) <span class="sc">%&gt;%</span></span>
-<span id="cb122-15"><a href="modelos_glm.html#cb122-15" tabindex="-1"></a>  <span class="fu">scroll_box</span>( <span class="at">width =</span> <span class="st">&quot;100%&quot;</span>, <span class="at">height =</span> <span class="st">&quot;300px&quot;</span> )</span></code></pre></div>
+<div class="sourceCode" id="cb124"><pre class="sourceCode r fold-hide"><code class="sourceCode r"><span id="cb124-1"><a href="modelos_glm.html#cb124-1" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">tidy</span>( model_N )</span>
+<span id="cb124-2"><a href="modelos_glm.html#cb124-2" tabindex="-1"></a>dat <span class="sc">%&gt;%</span></span>
+<span id="cb124-3"><a href="modelos_glm.html#cb124-3" tabindex="-1"></a>  <span class="fu">kable</span>(</span>
+<span id="cb124-4"><a href="modelos_glm.html#cb124-4" tabindex="-1"></a>    <span class="at">label =</span> <span class="cn">NA</span>,</span>
+<span id="cb124-5"><a href="modelos_glm.html#cb124-5" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">&quot;Resultados del modelo GLM&quot;</span>,</span>
+<span id="cb124-6"><a href="modelos_glm.html#cb124-6" tabindex="-1"></a>    <span class="at">row.names =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb124-7"><a href="modelos_glm.html#cb124-7" tabindex="-1"></a>    <span class="at">col.names =</span> <span class="fu">names</span>( dat ),</span>
+<span id="cb124-8"><a href="modelos_glm.html#cb124-8" tabindex="-1"></a>    <span class="at">align =</span> <span class="st">&#39;lrrrr&#39;</span>,</span>
+<span id="cb124-9"><a href="modelos_glm.html#cb124-9" tabindex="-1"></a>    <span class="at">digits =</span> <span class="fu">c</span>( <span class="dv">0</span>, <span class="dv">6</span>, <span class="dv">6</span>, <span class="dv">6</span>, <span class="dv">6</span> ),</span>
+<span id="cb124-10"><a href="modelos_glm.html#cb124-10" tabindex="-1"></a>    <span class="at">format.args =</span> <span class="fu">list</span>( <span class="at">big.mark =</span> <span class="st">&#39;,&#39;</span>, <span class="at">decimal.mark =</span> <span class="st">&#39;.&#39;</span>, <span class="at">scientific =</span> <span class="cn">FALSE</span> ),</span>
+<span id="cb124-11"><a href="modelos_glm.html#cb124-11" tabindex="-1"></a>    <span class="at">escape =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb124-12"><a href="modelos_glm.html#cb124-12" tabindex="-1"></a>    <span class="at">centering =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb124-13"><a href="modelos_glm.html#cb124-13" tabindex="-1"></a>    <span class="at">booktabs =</span> <span class="cn">TRUE</span> ) <span class="sc">%&gt;%</span></span>
+<span id="cb124-14"><a href="modelos_glm.html#cb124-14" tabindex="-1"></a>  <span class="fu">kable_classic</span>( <span class="at">full_width =</span> <span class="cn">FALSE</span>, <span class="at">html_font =</span> <span class="st">&quot;Cambria&quot;</span>, <span class="at">position =</span> <span class="st">&quot;center&quot;</span> ) <span class="sc">%&gt;%</span></span>
+<span id="cb124-15"><a href="modelos_glm.html#cb124-15" tabindex="-1"></a>  <span class="fu">scroll_box</span>( <span class="at">width =</span> <span class="st">&quot;100%&quot;</span>, <span class="at">height =</span> <span class="st">&quot;300px&quot;</span> )</span></code></pre></div>
 </details>
 <div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:300px; overflow-x: scroll; width:100%; ">
 <table class=" lightable-classic" style="color: black; font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
@@ -6370,21 +6371,21 @@ fueldiesel
 <p></p>
 <p></p>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb123"><pre class="sourceCode r fold-hide"><code class="sourceCode r"><span id="cb123-1"><a href="modelos_glm.html#cb123-1" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">glance</span>( model_N )</span>
-<span id="cb123-2"><a href="modelos_glm.html#cb123-2" tabindex="-1"></a>dat <span class="sc">%&gt;%</span></span>
-<span id="cb123-3"><a href="modelos_glm.html#cb123-3" tabindex="-1"></a>  <span class="fu">kable</span>(</span>
-<span id="cb123-4"><a href="modelos_glm.html#cb123-4" tabindex="-1"></a>    <span class="at">label =</span> <span class="cn">NA</span>,</span>
-<span id="cb123-5"><a href="modelos_glm.html#cb123-5" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">&quot;Resultados del modelo GLM&quot;</span>,</span>
-<span id="cb123-6"><a href="modelos_glm.html#cb123-6" tabindex="-1"></a>    <span class="at">row.names =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb123-7"><a href="modelos_glm.html#cb123-7" tabindex="-1"></a>    <span class="at">col.names =</span> <span class="fu">names</span>( dat ),</span>
-<span id="cb123-8"><a href="modelos_glm.html#cb123-8" tabindex="-1"></a>    <span class="at">align =</span> <span class="fu">paste0</span>( <span class="fu">rep</span>( <span class="st">&quot;r&quot;</span>, <span class="fu">ncol</span>( dat ) ), <span class="at">collapse =</span> <span class="st">&quot;&quot;</span> ),</span>
-<span id="cb123-9"><a href="modelos_glm.html#cb123-9" tabindex="-1"></a>    <span class="at">digits =</span> <span class="fu">c</span>( <span class="dv">4</span>, <span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">0</span> ),</span>
-<span id="cb123-10"><a href="modelos_glm.html#cb123-10" tabindex="-1"></a>    <span class="at">format.args =</span> <span class="fu">list</span>( <span class="at">big.mark =</span> <span class="st">&#39;,&#39;</span>, <span class="at">decimal.mark =</span> <span class="st">&#39;.&#39;</span>, <span class="at">scientific =</span> <span class="cn">FALSE</span> ),</span>
-<span id="cb123-11"><a href="modelos_glm.html#cb123-11" tabindex="-1"></a>    <span class="at">escape =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb123-12"><a href="modelos_glm.html#cb123-12" tabindex="-1"></a>    <span class="at">centering =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb123-13"><a href="modelos_glm.html#cb123-13" tabindex="-1"></a>    <span class="at">booktabs =</span> <span class="cn">TRUE</span> ) <span class="sc">%&gt;%</span></span>
-<span id="cb123-14"><a href="modelos_glm.html#cb123-14" tabindex="-1"></a>  <span class="fu">kable_classic</span>( <span class="at">full_width =</span> <span class="cn">FALSE</span>, <span class="at">html_font =</span> <span class="st">&quot;Cambria&quot;</span>, <span class="at">position =</span> <span class="st">&quot;center&quot;</span> ) <span class="sc">%&gt;%</span></span>
-<span id="cb123-15"><a href="modelos_glm.html#cb123-15" tabindex="-1"></a>  <span class="fu">scroll_box</span>( <span class="at">width =</span> <span class="st">&quot;100%&quot;</span>, <span class="at">height =</span> <span class="st">&quot;200px&quot;</span> )</span></code></pre></div>
+<div class="sourceCode" id="cb125"><pre class="sourceCode r fold-hide"><code class="sourceCode r"><span id="cb125-1"><a href="modelos_glm.html#cb125-1" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">glance</span>( model_N )</span>
+<span id="cb125-2"><a href="modelos_glm.html#cb125-2" tabindex="-1"></a>dat <span class="sc">%&gt;%</span></span>
+<span id="cb125-3"><a href="modelos_glm.html#cb125-3" tabindex="-1"></a>  <span class="fu">kable</span>(</span>
+<span id="cb125-4"><a href="modelos_glm.html#cb125-4" tabindex="-1"></a>    <span class="at">label =</span> <span class="cn">NA</span>,</span>
+<span id="cb125-5"><a href="modelos_glm.html#cb125-5" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">&quot;Resultados del modelo GLM&quot;</span>,</span>
+<span id="cb125-6"><a href="modelos_glm.html#cb125-6" tabindex="-1"></a>    <span class="at">row.names =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb125-7"><a href="modelos_glm.html#cb125-7" tabindex="-1"></a>    <span class="at">col.names =</span> <span class="fu">names</span>( dat ),</span>
+<span id="cb125-8"><a href="modelos_glm.html#cb125-8" tabindex="-1"></a>    <span class="at">align =</span> <span class="fu">paste0</span>( <span class="fu">rep</span>( <span class="st">&quot;r&quot;</span>, <span class="fu">ncol</span>( dat ) ), <span class="at">collapse =</span> <span class="st">&quot;&quot;</span> ),</span>
+<span id="cb125-9"><a href="modelos_glm.html#cb125-9" tabindex="-1"></a>    <span class="at">digits =</span> <span class="fu">c</span>( <span class="dv">4</span>, <span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">0</span> ),</span>
+<span id="cb125-10"><a href="modelos_glm.html#cb125-10" tabindex="-1"></a>    <span class="at">format.args =</span> <span class="fu">list</span>( <span class="at">big.mark =</span> <span class="st">&#39;,&#39;</span>, <span class="at">decimal.mark =</span> <span class="st">&#39;.&#39;</span>, <span class="at">scientific =</span> <span class="cn">FALSE</span> ),</span>
+<span id="cb125-11"><a href="modelos_glm.html#cb125-11" tabindex="-1"></a>    <span class="at">escape =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb125-12"><a href="modelos_glm.html#cb125-12" tabindex="-1"></a>    <span class="at">centering =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb125-13"><a href="modelos_glm.html#cb125-13" tabindex="-1"></a>    <span class="at">booktabs =</span> <span class="cn">TRUE</span> ) <span class="sc">%&gt;%</span></span>
+<span id="cb125-14"><a href="modelos_glm.html#cb125-14" tabindex="-1"></a>  <span class="fu">kable_classic</span>( <span class="at">full_width =</span> <span class="cn">FALSE</span>, <span class="at">html_font =</span> <span class="st">&quot;Cambria&quot;</span>, <span class="at">position =</span> <span class="st">&quot;center&quot;</span> ) <span class="sc">%&gt;%</span></span>
+<span id="cb125-15"><a href="modelos_glm.html#cb125-15" tabindex="-1"></a>  <span class="fu">scroll_box</span>( <span class="at">width =</span> <span class="st">&quot;100%&quot;</span>, <span class="at">height =</span> <span class="st">&quot;200px&quot;</span> )</span></code></pre></div>
 </details>
 <div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:200px; overflow-x: scroll; width:100%; ">
 <table class=" lightable-classic" style="color: black; font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
@@ -6452,13 +6453,13 @@ nobs
 <p></p>
 <p></p>
 <details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb124"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb124-1"><a href="modelos_glm.html#cb124-1"></a>pob <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>( <span class="at">ageph =</span> <span class="fu">seq</span>( <span class="dv">18</span>, <span class="dv">90</span>, <span class="dv">1</span> ), </span>
-<span id="cb124-2"><a href="modelos_glm.html#cb124-2"></a>                    <span class="at">sex =</span> <span class="fu">c</span>( <span class="st">&#39;male&#39;</span>, <span class="st">&#39;female&#39;</span> ),</span>
-<span id="cb124-3"><a href="modelos_glm.html#cb124-3"></a>                    <span class="at">power =</span> <span class="fu">seq</span>( <span class="dv">10</span>, <span class="dv">250</span> ),</span>
-<span id="cb124-4"><a href="modelos_glm.html#cb124-4"></a>                    <span class="at">fuel =</span> <span class="fu">c</span>( <span class="st">&#39;gasoline&#39;</span>, <span class="st">&#39;diesel&#39;</span> ),</span>
-<span id="cb124-5"><a href="modelos_glm.html#cb124-5"></a>                    <span class="at">expo =</span> <span class="dv">1</span> )</span>
-<span id="cb124-6"><a href="modelos_glm.html#cb124-6"></a>pob <span class="ot">&lt;-</span> <span class="fu">as.data.table</span>( pob )</span>
-<span id="cb124-7"><a href="modelos_glm.html#cb124-7"></a>pob[ , EN <span class="sc">:=</span> <span class="fu">predict</span>( model_N, <span class="at">newdata =</span> pob, <span class="at">type =</span> <span class="st">&#39;response&#39;</span> ) ]</span></code></pre></div>
+<div class="sourceCode" id="cb126"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb126-1"><a href="modelos_glm.html#cb126-1"></a>pob <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>( <span class="at">ageph =</span> <span class="fu">seq</span>( <span class="dv">18</span>, <span class="dv">90</span>, <span class="dv">1</span> ), </span>
+<span id="cb126-2"><a href="modelos_glm.html#cb126-2"></a>                    <span class="at">sex =</span> <span class="fu">c</span>( <span class="st">&#39;male&#39;</span>, <span class="st">&#39;female&#39;</span> ),</span>
+<span id="cb126-3"><a href="modelos_glm.html#cb126-3"></a>                    <span class="at">power =</span> <span class="fu">seq</span>( <span class="dv">10</span>, <span class="dv">250</span> ),</span>
+<span id="cb126-4"><a href="modelos_glm.html#cb126-4"></a>                    <span class="at">fuel =</span> <span class="fu">c</span>( <span class="st">&#39;gasoline&#39;</span>, <span class="st">&#39;diesel&#39;</span> ),</span>
+<span id="cb126-5"><a href="modelos_glm.html#cb126-5"></a>                    <span class="at">expo =</span> <span class="dv">1</span> )</span>
+<span id="cb126-6"><a href="modelos_glm.html#cb126-6"></a>pob <span class="ot">&lt;-</span> <span class="fu">as.data.table</span>( pob )</span>
+<span id="cb126-7"><a href="modelos_glm.html#cb126-7"></a>pob[ , EN <span class="sc">:=</span> <span class="fu">predict</span>( model_N, <span class="at">newdata =</span> pob, <span class="at">type =</span> <span class="st">&#39;response&#39;</span> ) ]</span></code></pre></div>
 </details>
 <p></p>
 </div>

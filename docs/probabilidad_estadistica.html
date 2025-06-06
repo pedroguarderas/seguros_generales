@@ -23,7 +23,7 @@
 <meta name="author" content="Leonardo Vélez y Pedro Guarderas" />
 
 
-<meta name="date" content="2025-06-03" />
+<meta name="date" content="2025-06-06" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -308,17 +308,18 @@ div.csl-indent {
 <li class="chapter" data-level="6.3.1" data-path="lectura_04.html"><a href="#algoritmo-de-simulaci%C3%B3n-1"><i class="fa fa-check"></i><b>6.3.1</b> Algoritmo de simulación</a></li>
 </ul></li>
 <li class="chapter" data-level="6.4" data-path="modelos_perdida.html"><a href="modelos_perdida.html#modelos_mixtos"><i class="fa fa-check"></i><b>6.4</b> Modelos mixtos</a></li>
-<li class="chapter" data-level="6.5" data-path="modelos_perdida.html"><a href="modelos_perdida.html#deducibles"><i class="fa fa-check"></i><b>6.5</b> Aplicación del deducible</a>
+<li class="chapter" data-level="6.5" data-path="modelos_perdida.html"><a href="modelos_perdida.html#uso_limite_central"><i class="fa fa-check"></i><b>6.5</b> Teorema del límite central y su uso</a></li>
+<li class="chapter" data-level="6.6" data-path="modelos_perdida.html"><a href="modelos_perdida.html#deducibles"><i class="fa fa-check"></i><b>6.6</b> Aplicación del deducible</a>
 <ul>
-<li class="chapter" data-level="6.5.1" data-path="lectura_04.html"><a href="#algoritmo-de-simulaci%C3%B3n-2"><i class="fa fa-check"></i><b>6.5.1</b> Algoritmo de simulación</a></li>
+<li class="chapter" data-level="6.6.1" data-path="lectura_04.html"><a href="#algoritmo-de-simulaci%C3%B3n-2"><i class="fa fa-check"></i><b>6.6.1</b> Algoritmo de simulación</a></li>
 </ul></li>
-<li class="chapter" data-level="6.6" data-path="modelos_perdida.html"><a href="modelos_perdida.html#algoritmo_panjer"><i class="fa fa-check"></i><b>6.6</b> Algoritmo de Panjer</a></li>
-<li class="chapter" data-level="6.7" data-path="modelos_perdida.html"><a href="modelos_perdida.html#estimacion_transformada_fourier"><i class="fa fa-check"></i><b>6.7</b> Estimación usando la transformada de Fourier</a></li>
-<li class="chapter" data-level="6.8" data-path="modelos_perdida.html"><a href="modelos_perdida.html#temporalidad_numero_reclamos"><i class="fa fa-check"></i><b>6.8</b> Temporalidad y ajustes del número de reclamos</a></li>
-<li class="chapter" data-level="6.9" data-path="modelos_perdida.html"><a href="modelos_perdida.html#modelos_variables_explicativas"><i class="fa fa-check"></i><b>6.9</b> Modelos con variables explicativas</a></li>
-<li class="chapter" data-level="6.10" data-path="modelos_perdida.html"><a href="modelos_perdida.html#proceso_estocastico_reclamos"><i class="fa fa-check"></i><b>6.10</b> Proceso estocástico de reclamos totales</a>
+<li class="chapter" data-level="6.7" data-path="modelos_perdida.html"><a href="modelos_perdida.html#algoritmo_panjer"><i class="fa fa-check"></i><b>6.7</b> Algoritmo de Panjer</a></li>
+<li class="chapter" data-level="6.8" data-path="modelos_perdida.html"><a href="modelos_perdida.html#estimacion_transformada_fourier"><i class="fa fa-check"></i><b>6.8</b> Estimación usando la transformada de Fourier</a></li>
+<li class="chapter" data-level="6.9" data-path="modelos_perdida.html"><a href="modelos_perdida.html#temporalidad_numero_reclamos"><i class="fa fa-check"></i><b>6.9</b> Temporalidad y ajustes del número de reclamos</a></li>
+<li class="chapter" data-level="6.10" data-path="modelos_perdida.html"><a href="modelos_perdida.html#modelos_variables_explicativas"><i class="fa fa-check"></i><b>6.10</b> Modelos con variables explicativas</a></li>
+<li class="chapter" data-level="6.11" data-path="modelos_perdida.html"><a href="modelos_perdida.html#proceso_estocastico_reclamos"><i class="fa fa-check"></i><b>6.11</b> Proceso estocástico de reclamos totales</a>
 <ul>
-<li class="chapter" data-level="6.10.1" data-path="lectura_04.html"><a href="#algoritmo-de-simulaci%C3%B3n-3"><i class="fa fa-check"></i><b>6.10.1</b> Algoritmo de simulación</a></li>
+<li class="chapter" data-level="6.11.1" data-path="lectura_04.html"><a href="#algoritmo-de-simulaci%C3%B3n-3"><i class="fa fa-check"></i><b>6.11.1</b> Algoritmo de simulación</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="tarificacion.html"><a href="tarificacion.html"><i class="fa fa-check"></i><b>7</b> Tarificación</a>
@@ -1355,19 +1356,19 @@ cuadráticamente en <span class="math inline">\(\varepsilon\)</span>. Entonces, 
 de la variable aleatoria <span class="math inline">\(X\)</span>, a lo mucho decrecerá cuadráticamente.</p>
 <div class="thmbox">
 <div class="theorem">
-<p><span id="thm:bein" class="theorem"><strong>Teorema 4.5  (Desigualdad de Berry-Esséen) </strong></span>Sean <span class="math inline">\(X_1, \ldots X_n\)</span> variables aleatorias i.i.d., con media y varianza finitas, i.e
+<p><span id="thm:beress" class="theorem"><strong>Teorema 4.5  (Desigualdad de Berry-Esséen) </strong></span>Sean <span class="math inline">\(X_1, \ldots X_n\)</span> variables aleatorias i.i.d., con media y varianza finitas, i.e
 <span class="math inline">\(\mathbb{E}[X] &lt; +\infty\)</span> y <span class="math inline">\(\mathbb{V}[X] &lt; +\infty\)</span> y además con tercer momento absoluto finito
-<span class="math inline">\(\mathbb{E}\left[\left|X - \mathbb{E}[X]\right|^3\right] &lt; +\infty\)</span>. Entonces, la distribución
-acumulada <span class="math inline">\(F_{U_n}\)</span> de la variable aleatoria
+<span class="math inline">\(\mathbb{E}\left[\left|X - \mathbb{E}[X]\right|^3\right] &lt; +\infty\)</span>. Entonces, para la variable aleatoria
 <span class="math display">\[
-U_n = \frac{S_n - \mathbb{E}[ S_n ]}{\mathbb{V}[ S_n ]}
+U_n = \frac{S_n - \mathbb{E}[ S_n ]}{\sqrt{\mathbb{V}[ S_n ]}}
 \]</span>
-con <span class="math inline">\(S_n = \sum\limits_{i=1}^n X_i\)</span>. Satisface la siguiente desigualdad respecto de la distribución
-acumulada de la ley normal <span class="math inline">\(\Phi\)</span>.
+con <span class="math inline">\(S_n = \sum\limits_{i=1}^n X_i\)</span>. Se satisface la siguiente desigualdad de concentración
+con respecto a la distribución acumulada <span class="math inline">\(\Phi\)</span> de la ley normal estándar.
 <span class="math display">\[
-\underset{u}{\sup}\left| F_{U_n}( u ) - \Phi( u ) \right| \leq \frac{A}{\sqrt{n}}
-\frac{\mathbb{E}\left[\left|X - \mathbb{E}[X]\right|^3\right]}{\sqrt{\mathbb{V}[X]}^3}
-\]</span></p>
+\underset{u \in \mathbb{R}}{\sup}\left( 1 + |u|^3 \right)\left| P\left( U_n \leq u\right) - \Phi( u ) \right|
+\leq \frac{C}{\sqrt{n}} \frac{\mathbb{E}\left[\left|X - \mathbb{E}[X]\right|^3\right]}{\sqrt{\mathbb{V}[X]}^3}
+\]</span>
+Con <span class="math inline">\(C = 0.7655+8( 1 + e ) &gt; 0\)</span> una constante universal, independiente de <span class="math inline">\(N\)</span>, <span class="math inline">\(X\)</span> o <span class="math inline">\(S\)</span>.</p>
 </div>
 </div>
 <p>El teorema <a href="probabilidad_estadistica.html#thm:tglican">4.4</a> asegura un convergencia, sin embargo no da un estimativo de la
