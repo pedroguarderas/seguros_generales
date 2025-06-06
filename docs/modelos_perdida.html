@@ -1016,33 +1016,39 @@ probabilidad siempre está acotada en el rango de <span class="math inline">\(0\
 <p>El ejemplo a continuación muestra un claro uso del resultado anterior.</p>
 <div class="example">
 <p><span id="exm:l6ex5" class="example"><strong>Ejemplo 6.5  </strong></span>En este caso en particular consideramos un modelo individual con reclamos determinados por variables
-aleatorias que siguen una distribución <span class="math inline">\(Gamma( \alpha, \sigma )\)</span> y un número de <span class="math inline">\(n = 5000\)</span> reclamos.
+aleatorias que siguen una distribución <span class="math inline">\(LN( \mu, \sigma )\)</span> y un número de <span class="math inline">\(n = 10000\)</span> reclamos.
 Además, como es usual asumimos que las variables aleatorias de los reclamos <span class="math inline">\(X_1, \ldots, X_n\)</span> son
 i.i.d.</p>
 <p></p>
 <details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb55"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb55-1"><a href="modelos_perdida.html#cb55-1"></a>n <span class="ot">&lt;-</span> <span class="fl">5e3</span></span>
-<span id="cb55-2"><a href="modelos_perdida.html#cb55-2"></a>sh <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb55-3"><a href="modelos_perdida.html#cb55-3"></a>sigma <span class="ot">&lt;-</span> <span class="dv">3000</span></span>
-<span id="cb55-4"><a href="modelos_perdida.html#cb55-4"></a>EX <span class="ot">&lt;-</span> sh <span class="sc">*</span> sigma</span>
-<span id="cb55-5"><a href="modelos_perdida.html#cb55-5"></a>VX <span class="ot">&lt;-</span> sh <span class="sc">*</span> sigma<span class="sc">^</span><span class="dv">2</span></span>
+<div class="sourceCode" id="cb55"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb55-1"><a href="modelos_perdida.html#cb55-1"></a>n <span class="ot">&lt;-</span> <span class="fl">7e3</span></span>
+<span id="cb55-2"><a href="modelos_perdida.html#cb55-2"></a>mu <span class="ot">&lt;-</span> <span class="fl">4.0</span></span>
+<span id="cb55-3"><a href="modelos_perdida.html#cb55-3"></a>sigma <span class="ot">&lt;-</span> <span class="fl">2.0</span></span>
+<span id="cb55-4"><a href="modelos_perdida.html#cb55-4"></a>EX <span class="ot">&lt;-</span> <span class="fu">exp</span>( mu <span class="sc">+</span> <span class="fl">0.5</span> <span class="sc">*</span> sigma<span class="sc">^</span><span class="dv">2</span> )</span>
+<span id="cb55-5"><a href="modelos_perdida.html#cb55-5"></a>VX <span class="ot">&lt;-</span> ( <span class="fu">exp</span>( sigma<span class="sc">^</span><span class="dv">2</span> ) <span class="sc">-</span> <span class="dv">1</span> ) <span class="sc">*</span> <span class="fu">exp</span>( <span class="dv">2</span> <span class="sc">*</span> mu <span class="sc">+</span> sigma<span class="sc">^</span><span class="dv">2</span> )</span>
 <span id="cb55-6"><a href="modelos_perdida.html#cb55-6"></a>ES <span class="ot">&lt;-</span> n <span class="sc">*</span> EX</span>
 <span id="cb55-7"><a href="modelos_perdida.html#cb55-7"></a>VS <span class="ot">&lt;-</span> n <span class="sc">*</span> VX</span>
 <span id="cb55-8"><a href="modelos_perdida.html#cb55-8"></a></span>
-<span id="cb55-9"><a href="modelos_perdida.html#cb55-9"></a>FS <span class="ot">&lt;-</span> <span class="cf">function</span>( x ) <span class="fu">pgamma</span>( x, <span class="at">shape =</span> n <span class="sc">*</span> sh, <span class="at">scale =</span> sigma )</span>
-<span id="cb55-10"><a href="modelos_perdida.html#cb55-10"></a></span>
-<span id="cb55-11"><a href="modelos_perdida.html#cb55-11"></a>C <span class="ot">&lt;-</span> <span class="fl">0.7655</span> <span class="sc">+</span> <span class="dv">8</span> <span class="sc">*</span> ( <span class="dv">1</span> <span class="sc">+</span> <span class="fu">exp</span>(<span class="dv">1</span>) ) <span class="co"># constante universal del teorema</span></span>
-<span id="cb55-12"><a href="modelos_perdida.html#cb55-12"></a>f <span class="ot">&lt;-</span> <span class="cf">function</span>( x ) ( <span class="fu">abs</span>( x <span class="sc">-</span> EX )<span class="sc">^</span><span class="dv">3</span> ) <span class="sc">*</span> <span class="fu">dgamma</span>( x, <span class="at">shape =</span> sh, <span class="at">scale =</span> sigma )</span>
-<span id="cb55-13"><a href="modelos_perdida.html#cb55-13"></a>tau <span class="ot">&lt;-</span> <span class="fu">integrate</span>( <span class="at">f =</span> f, <span class="at">lower =</span> <span class="dv">0</span>, <span class="at">upper =</span> <span class="cn">Inf</span> )<span class="sc">$</span>value <span class="sc">/</span> <span class="fu">sqrt</span>( VX )<span class="sc">^</span><span class="dv">3</span></span>
+<span id="cb55-9"><a href="modelos_perdida.html#cb55-9"></a>m <span class="ot">&lt;-</span> <span class="fl">5e3</span></span>
+<span id="cb55-10"><a href="modelos_perdida.html#cb55-10"></a>S <span class="ot">&lt;-</span> <span class="fu">sapply</span>( <span class="dv">1</span><span class="sc">:</span>m, <span class="at">FUN =</span> <span class="cf">function</span>( i ) <span class="fu">sum</span>( <span class="fu">rlnorm</span>( n, <span class="at">meanlog =</span> mu, <span class="at">sdlog =</span> sigma ) ) )</span>
+<span id="cb55-11"><a href="modelos_perdida.html#cb55-11"></a></span>
+<span id="cb55-12"><a href="modelos_perdida.html#cb55-12"></a><span class="co"># no hay forma analítica para la distribución de la suma de log-normales</span></span>
+<span id="cb55-13"><a href="modelos_perdida.html#cb55-13"></a>FS <span class="ot">&lt;-</span> <span class="fu">ecdf</span>( S ) </span>
 <span id="cb55-14"><a href="modelos_perdida.html#cb55-14"></a></span>
-<span id="cb55-15"><a href="modelos_perdida.html#cb55-15"></a>s <span class="ot">&lt;-</span> <span class="fu">seq</span>( <span class="dv">0</span>, <span class="fl">26e6</span>, <span class="at">length =</span> <span class="dv">5000</span> )</span>
-<span id="cb55-16"><a href="modelos_perdida.html#cb55-16"></a>Fms <span class="ot">&lt;-</span> <span class="fu">sapply</span>( s, <span class="at">FUN =</span> FS )</span>
+<span id="cb55-15"><a href="modelos_perdida.html#cb55-15"></a>C <span class="ot">&lt;-</span> <span class="fl">0.7655</span> <span class="sc">+</span> <span class="dv">8</span> <span class="sc">*</span> ( <span class="dv">1</span> <span class="sc">+</span> <span class="fu">exp</span>(<span class="dv">1</span>) ) <span class="co"># constante universal del teorema</span></span>
+<span id="cb55-16"><a href="modelos_perdida.html#cb55-16"></a>f <span class="ot">&lt;-</span> <span class="cf">function</span>( x ) ( <span class="fu">abs</span>( x <span class="sc">-</span> EX )<span class="sc">^</span><span class="dv">3</span> ) <span class="sc">*</span> <span class="fu">dlnorm</span>( x, <span class="at">meanlog =</span> mu, <span class="at">sdlog =</span> sigma )</span>
 <span id="cb55-17"><a href="modelos_perdida.html#cb55-17"></a></span>
-<span id="cb55-18"><a href="modelos_perdida.html#cb55-18"></a>u <span class="ot">&lt;-</span> ( s <span class="sc">-</span> ES ) <span class="sc">/</span> <span class="fu">sqrt</span>( VS )</span>
-<span id="cb55-19"><a href="modelos_perdida.html#cb55-19"></a>r <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">+</span> <span class="fu">abs</span>( u )<span class="sc">^</span><span class="dv">3</span></span>
-<span id="cb55-20"><a href="modelos_perdida.html#cb55-20"></a>Fmax <span class="ot">&lt;-</span> <span class="fu">pmin</span>( <span class="fu">pnorm</span>( u ) <span class="sc">+</span> C <span class="sc">*</span> tau <span class="sc">/</span> ( <span class="fu">sqrt</span>( n ) <span class="sc">*</span> r ), <span class="dv">1</span> ) <span class="co"># cota superior</span></span>
-<span id="cb55-21"><a href="modelos_perdida.html#cb55-21"></a>Fmin <span class="ot">&lt;-</span> <span class="fu">pmax</span>( <span class="fu">pnorm</span>( u ) <span class="sc">-</span> C <span class="sc">*</span> tau <span class="sc">/</span> ( <span class="fu">sqrt</span>( n ) <span class="sc">*</span> r ), <span class="dv">0</span> ) <span class="co"># cota inferior</span></span>
-<span id="cb55-22"><a href="modelos_perdida.html#cb55-22"></a>Phi <span class="ot">&lt;-</span> <span class="fu">sapply</span>( s, <span class="at">FUN =</span> <span class="cf">function</span>( s ) <span class="fu">pnorm</span>( ( s <span class="sc">-</span> ES ) <span class="sc">/</span> <span class="fu">sqrt</span>( VS ) ) )</span></code></pre></div>
+<span id="cb55-18"><a href="modelos_perdida.html#cb55-18"></a><span class="co"># forzando este término, la distribución log-normal no tiene función generadora de momentos</span></span>
+<span id="cb55-19"><a href="modelos_perdida.html#cb55-19"></a>tau <span class="ot">&lt;-</span> <span class="fu">integrate</span>( <span class="at">f =</span> f, <span class="at">lower =</span> <span class="dv">0</span>, <span class="at">upper =</span> <span class="fl">1e10</span>, <span class="at">subdivisions =</span> <span class="fl">1e4</span>, <span class="at">rel.tol =</span> <span class="fl">1e-10</span> )<span class="sc">$</span>value <span class="sc">/</span> <span class="fu">sqrt</span>( VX )<span class="sc">^</span><span class="dv">3</span></span>
+<span id="cb55-20"><a href="modelos_perdida.html#cb55-20"></a></span>
+<span id="cb55-21"><a href="modelos_perdida.html#cb55-21"></a>s <span class="ot">&lt;-</span> <span class="fu">seq</span>( <span class="dv">0</span>, <span class="fl">6e6</span>, <span class="at">length =</span> <span class="dv">5000</span> )</span>
+<span id="cb55-22"><a href="modelos_perdida.html#cb55-22"></a>Fms <span class="ot">&lt;-</span> <span class="fu">sapply</span>( s, <span class="at">FUN =</span> FS )</span>
+<span id="cb55-23"><a href="modelos_perdida.html#cb55-23"></a></span>
+<span id="cb55-24"><a href="modelos_perdida.html#cb55-24"></a>u <span class="ot">&lt;-</span> ( s <span class="sc">-</span> ES ) <span class="sc">/</span> <span class="fu">sqrt</span>( VS )</span>
+<span id="cb55-25"><a href="modelos_perdida.html#cb55-25"></a>r <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">+</span> <span class="fu">abs</span>( u )<span class="sc">^</span><span class="dv">3</span></span>
+<span id="cb55-26"><a href="modelos_perdida.html#cb55-26"></a>Fmax <span class="ot">&lt;-</span> <span class="fu">pmin</span>( <span class="fu">pnorm</span>( u ) <span class="sc">+</span> C <span class="sc">*</span> tau <span class="sc">/</span> ( <span class="fu">sqrt</span>( n ) <span class="sc">*</span> r ), <span class="dv">1</span> ) <span class="co"># cota superior</span></span>
+<span id="cb55-27"><a href="modelos_perdida.html#cb55-27"></a>Fmin <span class="ot">&lt;-</span> <span class="fu">pmax</span>( <span class="fu">pnorm</span>( u ) <span class="sc">-</span> C <span class="sc">*</span> tau <span class="sc">/</span> ( <span class="fu">sqrt</span>( n ) <span class="sc">*</span> r ), <span class="dv">0</span> ) <span class="co"># cota inferior</span></span>
+<span id="cb55-28"><a href="modelos_perdida.html#cb55-28"></a>Phi <span class="ot">&lt;-</span> <span class="fu">sapply</span>( s, <span class="at">FUN =</span> <span class="cf">function</span>( s ) <span class="fu">pnorm</span>( ( s <span class="sc">-</span> ES ) <span class="sc">/</span> <span class="fu">sqrt</span>( VS ) ) )</span></code></pre></div>
 </details>
 <p></p>
 <p>Como se puede ver en el gráfico a continuación la acotación funciona muy bien y al aumentar el
@@ -1068,8 +1074,8 @@ estimación de la distribución de los reclamos totales <span class="math inline
 <span id="cb56-16"><a href="modelos_perdida.html#cb56-16" tabindex="-1"></a>                      <span class="at">limits =</span> xlim, </span>
 <span id="cb56-17"><a href="modelos_perdida.html#cb56-17" tabindex="-1"></a>                      <span class="at">expand =</span> <span class="fu">c</span>( <span class="fl">0.01</span>, <span class="fl">0.01</span> ) ) <span class="sc">+</span></span>
 <span id="cb56-18"><a href="modelos_perdida.html#cb56-18" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>( <span class="at">breaks =</span> ybrk,</span>
-<span id="cb56-19"><a href="modelos_perdida.html#cb56-19" tabindex="-1"></a>                      <span class="at">labels =</span> ylbl, </span>
-<span id="cb56-20"><a href="modelos_perdida.html#cb56-20" tabindex="-1"></a>                      <span class="at">limits =</span> ylim, </span>
+<span id="cb56-19"><a href="modelos_perdida.html#cb56-19" tabindex="-1"></a>                      <span class="at">labels =</span> ylbl,</span>
+<span id="cb56-20"><a href="modelos_perdida.html#cb56-20" tabindex="-1"></a>                      <span class="at">limits =</span> ylim,</span>
 <span id="cb56-21"><a href="modelos_perdida.html#cb56-21" tabindex="-1"></a>                      <span class="at">expand =</span> <span class="fu">c</span>( <span class="fl">0.01</span>, <span class="fl">0.01</span> ) ) <span class="sc">+</span></span>
 <span id="cb56-22"><a href="modelos_perdida.html#cb56-22" tabindex="-1"></a>  <span class="fu">xlab</span>( <span class="fu">TeX</span>( <span class="st">&quot;$S$&quot;</span> ) ) <span class="sc">+</span> </span>
 <span id="cb56-23"><a href="modelos_perdida.html#cb56-23" tabindex="-1"></a>  <span class="fu">ylab</span>( <span class="fu">TeX</span>( <span class="st">&quot;$F_S$&quot;</span> ) ) <span class="sc">+</span> </span>
