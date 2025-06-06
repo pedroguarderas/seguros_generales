@@ -1104,20 +1104,20 @@ cuadráticamente en $\varepsilon$. Entonces, por más pesada que sea la cola de 
 de la variable aleatoria $X$, a lo mucho decrecerá cuadráticamente.
 
 :::: {.thmbox data-latex=""}
-::: {.theorem #bein name="Desigualdad de Berry-Esséen"}
+::: {.theorem #beress name="Desigualdad de Berry-Esséen"}
 Sean $X_1, \ldots X_n$ variables aleatorias i.i.d., con media y varianza finitas, i.e 
 $\E[X] < +\infty$ y $\V[X] < +\infty$ y además con tercer momento absoluto finito
-$\E\left[\left|X - \E[X]\right|^3\right] < +\infty$. Entonces, la distribución 
-acumulada $F_{U_n}$ de la variable aleatoria
+$\E\left[\left|X - \E[X]\right|^3\right] < +\infty$. Entonces, para la variable aleatoria
 $$
-U_n = \frac{S_n - \E[ S_n ]}{\V[ S_n ]}
+U_n = \frac{S_n - \E[ S_n ]}{\sqrt{\V[ S_n ]}}
 $$
-con $S_n = \sum\limits_{i=1}^n X_i$. Satisface la siguiente desigualdad respecto de la distribución 
-acumulada de la ley normal $\Phi$.
+con $S_n = \sum\limits_{i=1}^n X_i$. Se satisface la siguiente desigualdad de concentración 
+con respecto a la distribución acumulada $\Phi$ de la ley normal estándar.
 $$
-\underset{u}{\sup}\left| F_{U_n}( u ) - \Phi( u ) \right| \leq \frac{A}{\sqrt{n}} 
-\frac{\E\left[\left|X - \E[X]\right|^3\right]}{\sqrt{\V[X]}^3}
+\underset{u \in \R}{\sup}\left( 1 + |u|^3 \right)\left| P\left( U_n \leq u\right) - \Phi( u ) \right| 
+\leq \frac{C}{\sqrt{n}} \frac{\E\left[\left|X - \E[X]\right|^3\right]}{\sqrt{\V[X]}^3}
 $$
+Con $C = 0.7655+8( 1 + e ) > 0$ una constante universal, independiente de $N$, $X$ o $S$.
 :::
 ::::
 
