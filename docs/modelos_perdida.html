@@ -1029,26 +1029,25 @@ i.i.d.</p>
 <span id="cb55-6"><a href="modelos_perdida.html#cb55-6"></a>ES <span class="ot">&lt;-</span> n <span class="sc">*</span> EX</span>
 <span id="cb55-7"><a href="modelos_perdida.html#cb55-7"></a>VS <span class="ot">&lt;-</span> n <span class="sc">*</span> VX</span>
 <span id="cb55-8"><a href="modelos_perdida.html#cb55-8"></a></span>
-<span id="cb55-9"><a href="modelos_perdida.html#cb55-9"></a>m <span class="ot">&lt;-</span> <span class="fl">5e3</span></span>
-<span id="cb55-10"><a href="modelos_perdida.html#cb55-10"></a>S <span class="ot">&lt;-</span> <span class="fu">sapply</span>( <span class="dv">1</span><span class="sc">:</span>m, <span class="at">FUN =</span> <span class="cf">function</span>( i ) <span class="fu">sum</span>( <span class="fu">rlnorm</span>( n, <span class="at">meanlog =</span> mu, <span class="at">sdlog =</span> sigma ) ) )</span>
-<span id="cb55-11"><a href="modelos_perdida.html#cb55-11"></a></span>
-<span id="cb55-12"><a href="modelos_perdida.html#cb55-12"></a><span class="co"># no hay forma analítica para la distribución de la suma de log-normales</span></span>
-<span id="cb55-13"><a href="modelos_perdida.html#cb55-13"></a>FS <span class="ot">&lt;-</span> <span class="fu">ecdf</span>( S ) </span>
-<span id="cb55-14"><a href="modelos_perdida.html#cb55-14"></a></span>
-<span id="cb55-15"><a href="modelos_perdida.html#cb55-15"></a>C <span class="ot">&lt;-</span> <span class="fl">0.7655</span> <span class="sc">+</span> <span class="dv">8</span> <span class="sc">*</span> ( <span class="dv">1</span> <span class="sc">+</span> <span class="fu">exp</span>(<span class="dv">1</span>) ) <span class="co"># constante universal del teorema</span></span>
-<span id="cb55-16"><a href="modelos_perdida.html#cb55-16"></a>f <span class="ot">&lt;-</span> <span class="cf">function</span>( x ) ( <span class="fu">abs</span>( x <span class="sc">-</span> EX )<span class="sc">^</span><span class="dv">3</span> ) <span class="sc">*</span> <span class="fu">dlnorm</span>( x, <span class="at">meanlog =</span> mu, <span class="at">sdlog =</span> sigma )</span>
-<span id="cb55-17"><a href="modelos_perdida.html#cb55-17"></a></span>
-<span id="cb55-18"><a href="modelos_perdida.html#cb55-18"></a><span class="co"># forzando este término, la distribución log-normal no tiene función generadora de momentos</span></span>
-<span id="cb55-19"><a href="modelos_perdida.html#cb55-19"></a>tau <span class="ot">&lt;-</span> <span class="fu">integrate</span>( <span class="at">f =</span> f, <span class="at">lower =</span> <span class="dv">0</span>, <span class="at">upper =</span> <span class="fl">1e10</span>, <span class="at">subdivisions =</span> <span class="fl">1e4</span>, <span class="at">rel.tol =</span> <span class="fl">1e-10</span> )<span class="sc">$</span>value <span class="sc">/</span> <span class="fu">sqrt</span>( VX )<span class="sc">^</span><span class="dv">3</span></span>
-<span id="cb55-20"><a href="modelos_perdida.html#cb55-20"></a></span>
-<span id="cb55-21"><a href="modelos_perdida.html#cb55-21"></a>s <span class="ot">&lt;-</span> <span class="fu">seq</span>( <span class="dv">0</span>, <span class="fl">6e6</span>, <span class="at">length =</span> <span class="dv">5000</span> )</span>
-<span id="cb55-22"><a href="modelos_perdida.html#cb55-22"></a>Fms <span class="ot">&lt;-</span> <span class="fu">sapply</span>( s, <span class="at">FUN =</span> FS )</span>
-<span id="cb55-23"><a href="modelos_perdida.html#cb55-23"></a></span>
-<span id="cb55-24"><a href="modelos_perdida.html#cb55-24"></a>u <span class="ot">&lt;-</span> ( s <span class="sc">-</span> ES ) <span class="sc">/</span> <span class="fu">sqrt</span>( VS )</span>
-<span id="cb55-25"><a href="modelos_perdida.html#cb55-25"></a>r <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">+</span> <span class="fu">abs</span>( u )<span class="sc">^</span><span class="dv">3</span></span>
-<span id="cb55-26"><a href="modelos_perdida.html#cb55-26"></a>Fmax <span class="ot">&lt;-</span> <span class="fu">pmin</span>( <span class="fu">pnorm</span>( u ) <span class="sc">+</span> C <span class="sc">*</span> tau <span class="sc">/</span> ( <span class="fu">sqrt</span>( n ) <span class="sc">*</span> r ), <span class="dv">1</span> ) <span class="co"># cota superior</span></span>
-<span id="cb55-27"><a href="modelos_perdida.html#cb55-27"></a>Fmin <span class="ot">&lt;-</span> <span class="fu">pmax</span>( <span class="fu">pnorm</span>( u ) <span class="sc">-</span> C <span class="sc">*</span> tau <span class="sc">/</span> ( <span class="fu">sqrt</span>( n ) <span class="sc">*</span> r ), <span class="dv">0</span> ) <span class="co"># cota inferior</span></span>
-<span id="cb55-28"><a href="modelos_perdida.html#cb55-28"></a>Phi <span class="ot">&lt;-</span> <span class="fu">sapply</span>( s, <span class="at">FUN =</span> <span class="cf">function</span>( s ) <span class="fu">pnorm</span>( ( s <span class="sc">-</span> ES ) <span class="sc">/</span> <span class="fu">sqrt</span>( VS ) ) )</span></code></pre></div>
+<span id="cb55-9"><a href="modelos_perdida.html#cb55-9"></a><span class="co"># utilizamos simulación, no hay forma analítica para la distribución de la suma de log-normales</span></span>
+<span id="cb55-10"><a href="modelos_perdida.html#cb55-10"></a>m <span class="ot">&lt;-</span> <span class="fl">5e3</span></span>
+<span id="cb55-11"><a href="modelos_perdida.html#cb55-11"></a>S <span class="ot">&lt;-</span> <span class="fu">sapply</span>( <span class="dv">1</span><span class="sc">:</span>m, <span class="at">FUN =</span> <span class="cf">function</span>( i ) <span class="fu">sum</span>( <span class="fu">rlnorm</span>( n, <span class="at">meanlog =</span> mu, <span class="at">sdlog =</span> sigma ) ) )</span>
+<span id="cb55-12"><a href="modelos_perdida.html#cb55-12"></a>FS <span class="ot">&lt;-</span> <span class="fu">ecdf</span>( S ) </span>
+<span id="cb55-13"><a href="modelos_perdida.html#cb55-13"></a></span>
+<span id="cb55-14"><a href="modelos_perdida.html#cb55-14"></a>C <span class="ot">&lt;-</span> <span class="fl">0.7655</span> <span class="sc">+</span> <span class="dv">8</span> <span class="sc">*</span> ( <span class="dv">1</span> <span class="sc">+</span> <span class="fu">exp</span>(<span class="dv">1</span>) ) <span class="co"># constante universal del teorema</span></span>
+<span id="cb55-15"><a href="modelos_perdida.html#cb55-15"></a>f <span class="ot">&lt;-</span> <span class="cf">function</span>( x ) ( <span class="fu">abs</span>( x <span class="sc">-</span> EX )<span class="sc">^</span><span class="dv">3</span> ) <span class="sc">*</span> <span class="fu">dlnorm</span>( x, <span class="at">meanlog =</span> mu, <span class="at">sdlog =</span> sigma )</span>
+<span id="cb55-16"><a href="modelos_perdida.html#cb55-16"></a></span>
+<span id="cb55-17"><a href="modelos_perdida.html#cb55-17"></a><span class="co"># forzando este término, la distribución log-normal no tiene función generadora de momentos</span></span>
+<span id="cb55-18"><a href="modelos_perdida.html#cb55-18"></a>tau <span class="ot">&lt;-</span> <span class="fu">integrate</span>( <span class="at">f =</span> f, <span class="at">lower =</span> <span class="dv">0</span>, <span class="at">upper =</span> <span class="fl">1e10</span>, <span class="at">subdivisions =</span> <span class="fl">1e4</span>, <span class="at">rel.tol =</span> <span class="fl">1e-10</span> )<span class="sc">$</span>value <span class="sc">/</span> <span class="fu">sqrt</span>( VX )<span class="sc">^</span><span class="dv">3</span></span>
+<span id="cb55-19"><a href="modelos_perdida.html#cb55-19"></a></span>
+<span id="cb55-20"><a href="modelos_perdida.html#cb55-20"></a>s <span class="ot">&lt;-</span> <span class="fu">seq</span>( <span class="dv">0</span>, <span class="fl">6e6</span>, <span class="at">length =</span> <span class="dv">5000</span> )</span>
+<span id="cb55-21"><a href="modelos_perdida.html#cb55-21"></a>Fms <span class="ot">&lt;-</span> <span class="fu">sapply</span>( s, <span class="at">FUN =</span> FS )</span>
+<span id="cb55-22"><a href="modelos_perdida.html#cb55-22"></a></span>
+<span id="cb55-23"><a href="modelos_perdida.html#cb55-23"></a>u <span class="ot">&lt;-</span> ( s <span class="sc">-</span> ES ) <span class="sc">/</span> <span class="fu">sqrt</span>( VS )</span>
+<span id="cb55-24"><a href="modelos_perdida.html#cb55-24"></a>r <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">+</span> <span class="fu">abs</span>( u )<span class="sc">^</span><span class="dv">3</span></span>
+<span id="cb55-25"><a href="modelos_perdida.html#cb55-25"></a>Fmax <span class="ot">&lt;-</span> <span class="fu">pmin</span>( <span class="fu">pnorm</span>( u ) <span class="sc">+</span> C <span class="sc">*</span> tau <span class="sc">/</span> ( <span class="fu">sqrt</span>( n ) <span class="sc">*</span> r ), <span class="dv">1</span> ) <span class="co"># cota superior</span></span>
+<span id="cb55-26"><a href="modelos_perdida.html#cb55-26"></a>Fmin <span class="ot">&lt;-</span> <span class="fu">pmax</span>( <span class="fu">pnorm</span>( u ) <span class="sc">-</span> C <span class="sc">*</span> tau <span class="sc">/</span> ( <span class="fu">sqrt</span>( n ) <span class="sc">*</span> r ), <span class="dv">0</span> ) <span class="co"># cota inferior</span></span>
+<span id="cb55-27"><a href="modelos_perdida.html#cb55-27"></a>Phi <span class="ot">&lt;-</span> <span class="fu">sapply</span>( s, <span class="at">FUN =</span> <span class="cf">function</span>( s ) <span class="fu">pnorm</span>( ( s <span class="sc">-</span> ES ) <span class="sc">/</span> <span class="fu">sqrt</span>( VS ) ) )</span></code></pre></div>
 </details>
 <p></p>
 <p>Como se puede ver en el gráfico a continuación la acotación funciona muy bien y al aumentar el
@@ -1091,12 +1090,14 @@ el método no depende de la distribución en cuestión sino de que la variable q
 los reclamos tenga esperanza finita, varianza finita y la variación de tercer orden
 <span class="math inline">\(\mathbb{E}\left[\left|X - \mathbb{E}[X]\right|^3 \right] &lt; +\infty\)</span>, también sea finita.</p>
 <p>En la práctica se suele tomar lo que se conoce como una aproximación por el teorema de límite
-central.
-<span class="math display">\[
+central.</p>
+<div class="thmbox">
+<p><span class="math display">\[
 P( S \leq s )
 \approx \Phi\left( \frac{s - \mathbb{E}[S]}{\sqrt{\mathbb{V}[S]}} \right)
 \]</span></p>
-<p>Esto es válido siempre y cuando el error de aproximación
+</div>
+<p>Esto es válido siempre y cuando la cota del error de aproximación
 <span class="math inline">\(\frac{C}{\sqrt{n}\left( 1 + \left|\frac{s - \mathbb{E}[S]}{\sqrt{\mathbb{V}[S]}}\right|^3 \right)} \tau\)</span>, sea
 lo suficientemente pequeño. Además, es de notar que se está trabajando con valores que solo están
 entre <span class="math inline">\(0\)</span> y <span class="math inline">\(1\)</span>, pequeñas variaciones pueden ser muy relevantes al nivel del ajuste de las
@@ -1916,12 +1917,13 @@ además se puede ajustar la distribución de probabilidad que se desee estimar e
 parámetro <span class="math inline">\(\lambda\)</span>, es así que para las distribuciones de probabilidad discretas que hemos
 introducido con anterioridad, tenemos la siguiente modificación.</p>
 <ol style="list-style-type: decimal">
-<li><p>Para la distribución de Poisson, tenemos la ley de probabilidad
+<li>Para la distribución de Poisson, tenemos la ley de probabilidad
 <span class="math display">\[
 P( N = k ) = \exp\left( -\lambda ER \right) \frac{( \lambda ER )^k}{k!}, \qquad
 \forall k \in \mathbb{N}
 \]</span>
-entonces <span class="math inline">\(N \rightsquigarrow Pois( \lambda ER )\)</span>.</p>
+entonces <span class="math inline">\(N \rightsquigarrow Pois( \lambda ER )\)</span>.</li>
+</ol>
 <p>En caso de disponer de una muestra de <span class="math inline">\(N_1, \ldots, N_m\)</span> de variables aleatorias independientes,
 y por otra parte exposiciones al riesgo <span class="math inline">\(ER_1, \ldots, ER_m\)</span> asociadas a cada una de las variables
 aleatorias, de tal forma que <span class="math inline">\(N_i \rightsquigarrow Pois( \lambda ER_i )\)</span>, entonces la función
@@ -1937,8 +1939,9 @@ en este caso el estimador por maximización de verosimilitud es bien sencillo de
 dado por:
 <span class="math display">\[
 \lambda = \frac{\sum\limits_{i=1}^m N_i}{\sum\limits_{i=1}^m ER_i }
-\]</span></p></li>
-<li><p>Para la distribución binomial begativa, tenemos que si
+\]</span></p>
+<ol start="2" style="list-style-type: decimal">
+<li>Para la distribución binomial begativa, tenemos que si
 <span class="math display">\[
 \lambda ER = \alpha \frac{1-p}{p} \Rightarrow p = \frac{\alpha}{\lambda ER + \alpha}
 \]</span>
@@ -1949,7 +1952,8 @@ P( N = k )
 \left( \frac{\alpha}{\lambda ER + \alpha} \right)^\alpha \left( \frac{\lambda ER}{\lambda ER + \alpha} \right)^k, \qquad
 \forall k \in \mathbb{N}
 \]</span>
-entonces <span class="math inline">\(N \rightsquigarrow NBinom\left( \alpha, \frac{\alpha}{\lambda ER + \alpha} \right)\)</span>.</p>
+entonces <span class="math inline">\(N \rightsquigarrow NBinom\left( \alpha, \frac{\alpha}{\lambda ER + \alpha} \right)\)</span>.</li>
+</ol>
 <p>Similar que antes, si disponemos de una muestra de <span class="math inline">\(N_1, \ldots, N_m\)</span> de variables aleatorias
 independientes y también exposiciones al riesgo <span class="math inline">\(ER_1, \ldots, ER_m\)</span> asociadas a cada una de las
 variables aleatorias, de tal forma que
@@ -1967,8 +1971,9 @@ la función de verosimilitud logarítmica toma la forma:
 + m \alpha \log\left( \alpha \right) \\
 &amp; - \alpha \sum\limits_{i=1}^m \log\left( \lambda ER_i + \alpha \right)
 \end{split}
-\]</span></p></li>
-<li><p>Para la distribución binomial, tenemos que si
+\]</span></p>
+<ol start="3" style="list-style-type: decimal">
+<li>Para la distribución binomial, tenemos que si
 <span class="math display">\[
 \lambda ER = np \Rightarrow p = \frac{\lambda ER}{n}
 \]</span>
@@ -1977,7 +1982,8 @@ de donde la ley de probabilidad queda modificada como
 P( N = k ) = \binom{n}{k} \left( \frac{\lambda ER}{n} \right)^k \left( 1 - \frac{\lambda ER}{n} \right)^{n-k},
 \qquad \forall k \in \{0,\ldots, n\}
 \]</span>
-entonces <span class="math inline">\(N \rightsquigarrow Binom\left( n, \frac{\lambda ER}{n} \right)\)</span></p>
+entonces <span class="math inline">\(N \rightsquigarrow Binom\left( n, \frac{\lambda ER}{n} \right)\)</span></li>
+</ol>
 <p>Mismo razonamiento, si disponemos de una muestra de <span class="math inline">\(N_1, \ldots, N_m\)</span> de variables aleatorias
 independientes y también exposiciones al riesgo <span class="math inline">\(ER_1, \ldots, ER_m\)</span> asociadas a cada una de las
 variables aleatorias, de tal forma que
@@ -1995,8 +2001,7 @@ verosimilitud logarítmica toma la forma:
 &amp; + n \sum\limits_{i=1}^m \log\left( 1 - \frac{\lambda ER_i}{n} \right)
 - \sum\limits_{i=1}^m N_i \log\left( 1 - \frac{\lambda ER_i}{n} \right)
 \end{split}
-\]</span></p></li>
-</ol>
+\]</span></p>
 <p>En los tres casos anteriores, hemos desarrollado una metodología para la estimación de la
 distribución de frecuencia de los reclamos, tomando en cuenta la exposición al riesgo de cada
 una de las pólizas a las cuales estos reclamos corresponden.</p>
@@ -2029,12 +2034,17 @@ cobertura <code>start</code> y el final de vigencia de la cobertura <code>end</c
 <span id="cb88-8"><a href="modelos_perdida.html#cb88-8" tabindex="-1"></a>    <span class="at">format.args =</span> <span class="fu">list</span>( <span class="at">big.mark =</span> <span class="st">&#39;,&#39;</span>, <span class="at">decimal.mark =</span> <span class="st">&#39;.&#39;</span>, <span class="at">scientific =</span> <span class="cn">FALSE</span> ),</span>
 <span id="cb88-9"><a href="modelos_perdida.html#cb88-9" tabindex="-1"></a>    <span class="at">escape =</span> <span class="cn">FALSE</span>,</span>
 <span id="cb88-10"><a href="modelos_perdida.html#cb88-10" tabindex="-1"></a>    <span class="at">centering =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb88-11"><a href="modelos_perdida.html#cb88-11" tabindex="-1"></a>    <span class="at">booktabs =</span> <span class="cn">TRUE</span> ) <span class="sc">%&gt;%</span></span>
-<span id="cb88-12"><a href="modelos_perdida.html#cb88-12" tabindex="-1"></a>  <span class="fu">kable_classic</span>( <span class="at">full_width =</span> <span class="cn">FALSE</span>, <span class="at">html_font =</span> <span class="st">&quot;Cambria&quot;</span>, <span class="at">position =</span> <span class="st">&quot;center&quot;</span> ) <span class="sc">%&gt;%</span></span>
-<span id="cb88-13"><a href="modelos_perdida.html#cb88-13" tabindex="-1"></a>  <span class="fu">scroll_box</span>( <span class="at">width =</span> <span class="st">&quot;100%&quot;</span>, <span class="at">height =</span> <span class="st">&quot;500px&quot;</span> )</span></code></pre></div>
+<span id="cb88-11"><a href="modelos_perdida.html#cb88-11" tabindex="-1"></a>    <span class="at">booktabs =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb88-12"><a href="modelos_perdida.html#cb88-12" tabindex="-1"></a>    <span class="at">longtable =</span> <span class="cn">TRUE</span> ) <span class="sc">%&gt;%</span></span>
+<span id="cb88-13"><a href="modelos_perdida.html#cb88-13" tabindex="-1"></a>  <span class="fu">kable_classic</span>( </span>
+<span id="cb88-14"><a href="modelos_perdida.html#cb88-14" tabindex="-1"></a>    <span class="at">full_width =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb88-15"><a href="modelos_perdida.html#cb88-15" tabindex="-1"></a>    <span class="at">html_font =</span> <span class="st">&quot;Cambria&quot;</span>, </span>
+<span id="cb88-16"><a href="modelos_perdida.html#cb88-16" tabindex="-1"></a>    <span class="at">position =</span> <span class="st">&#39;center&#39;</span>, </span>
+<span id="cb88-17"><a href="modelos_perdida.html#cb88-17" tabindex="-1"></a>    <span class="at">latex_options =</span> <span class="fu">c</span>( <span class="st">&#39;hold_position&#39;</span>, <span class="st">&#39;repeat_header&#39;</span>, <span class="st">&#39;scale_down&#39;</span> ) ) <span class="sc">%&gt;%</span></span>
+<span id="cb88-18"><a href="modelos_perdida.html#cb88-18" tabindex="-1"></a>  <span class="fu">scroll_box</span>( <span class="at">width =</span> <span class="st">&quot;100%&quot;</span>, <span class="at">height =</span> <span class="st">&quot;500px&quot;</span> )</span></code></pre></div>
 </details>
 <div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:500px; overflow-x: scroll; width:100%; ">
-<table class=" lightable-classic" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
+<table class=" lightable-classic" style="color: black; font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:l6t1">Tabla 6.1: </span>Pólizas
 </caption>
@@ -2479,12 +2489,17 @@ utilizó para aplicar la deducción.</p>
 <span id="cb89-8"><a href="modelos_perdida.html#cb89-8" tabindex="-1"></a>    <span class="at">format.args =</span> <span class="fu">list</span>( <span class="at">big.mark =</span> <span class="st">&#39;,&#39;</span>, <span class="at">decimal.mark =</span> <span class="st">&#39;.&#39;</span>, <span class="at">scientific =</span> <span class="cn">FALSE</span> ),</span>
 <span id="cb89-9"><a href="modelos_perdida.html#cb89-9" tabindex="-1"></a>    <span class="at">escape =</span> <span class="cn">FALSE</span>,</span>
 <span id="cb89-10"><a href="modelos_perdida.html#cb89-10" tabindex="-1"></a>    <span class="at">centering =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb89-11"><a href="modelos_perdida.html#cb89-11" tabindex="-1"></a>    <span class="at">booktabs =</span> <span class="cn">TRUE</span> ) <span class="sc">%&gt;%</span></span>
-<span id="cb89-12"><a href="modelos_perdida.html#cb89-12" tabindex="-1"></a>  <span class="fu">kable_classic</span>( <span class="at">full_width =</span> <span class="cn">FALSE</span>, <span class="at">html_font =</span> <span class="st">&quot;Cambria&quot;</span>, <span class="at">position =</span> <span class="st">&quot;center&quot;</span> ) <span class="sc">%&gt;%</span></span>
-<span id="cb89-13"><a href="modelos_perdida.html#cb89-13" tabindex="-1"></a>  <span class="fu">scroll_box</span>( <span class="at">width =</span> <span class="st">&quot;100%&quot;</span>, <span class="at">height =</span> <span class="st">&quot;500px&quot;</span> )</span></code></pre></div>
+<span id="cb89-11"><a href="modelos_perdida.html#cb89-11" tabindex="-1"></a>    <span class="at">booktabs =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb89-12"><a href="modelos_perdida.html#cb89-12" tabindex="-1"></a>    <span class="at">longtable =</span> <span class="cn">TRUE</span> ) <span class="sc">%&gt;%</span></span>
+<span id="cb89-13"><a href="modelos_perdida.html#cb89-13" tabindex="-1"></a>  <span class="fu">kable_classic</span>( </span>
+<span id="cb89-14"><a href="modelos_perdida.html#cb89-14" tabindex="-1"></a>    <span class="at">full_width =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb89-15"><a href="modelos_perdida.html#cb89-15" tabindex="-1"></a>    <span class="at">html_font =</span> <span class="st">&quot;Cambria&quot;</span>, </span>
+<span id="cb89-16"><a href="modelos_perdida.html#cb89-16" tabindex="-1"></a>    <span class="at">position =</span> <span class="st">&#39;center&#39;</span>, </span>
+<span id="cb89-17"><a href="modelos_perdida.html#cb89-17" tabindex="-1"></a>    <span class="at">latex_options =</span> <span class="fu">c</span>( <span class="st">&#39;hold_position&#39;</span>, <span class="st">&#39;repeat_header&#39;</span>, <span class="st">&#39;scale_down&#39;</span> ) ) <span class="sc">%&gt;%</span></span>
+<span id="cb89-18"><a href="modelos_perdida.html#cb89-18" tabindex="-1"></a>  <span class="fu">scroll_box</span>( <span class="at">width =</span> <span class="st">&quot;100%&quot;</span>, <span class="at">height =</span> <span class="st">&quot;500px&quot;</span> )</span></code></pre></div>
 </details>
 <div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:500px; overflow-x: scroll; width:100%; ">
-<table class=" lightable-classic" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
+<table class=" lightable-classic" style="color: black; font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:l6t2">Tabla 6.2: </span>Reclamos
 </caption>
@@ -4129,12 +4144,17 @@ de igual forma su valor esperado y varianza están dados por:
 <span id="cb105-11"><a href="modelos_perdida.html#cb105-11" tabindex="-1"></a>    <span class="at">format.args =</span> <span class="fu">list</span>( <span class="at">big.mark =</span> <span class="st">&#39;,&#39;</span>, <span class="at">decimal.mark =</span> <span class="st">&#39;.&#39;</span>, <span class="at">scientific =</span> <span class="cn">FALSE</span> ),</span>
 <span id="cb105-12"><a href="modelos_perdida.html#cb105-12" tabindex="-1"></a>    <span class="at">escape =</span> <span class="cn">FALSE</span>,</span>
 <span id="cb105-13"><a href="modelos_perdida.html#cb105-13" tabindex="-1"></a>    <span class="at">centering =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb105-14"><a href="modelos_perdida.html#cb105-14" tabindex="-1"></a>    <span class="at">booktabs =</span> <span class="cn">TRUE</span> ) <span class="sc">%&gt;%</span></span>
-<span id="cb105-15"><a href="modelos_perdida.html#cb105-15" tabindex="-1"></a>  <span class="fu">kable_classic</span>( <span class="at">full_width =</span> <span class="cn">FALSE</span>, <span class="at">html_font =</span> <span class="st">&quot;Cambria&quot;</span>, <span class="at">position =</span> <span class="st">&quot;center&quot;</span> ) <span class="sc">%&gt;%</span></span>
-<span id="cb105-16"><a href="modelos_perdida.html#cb105-16" tabindex="-1"></a>  <span class="fu">scroll_box</span>( <span class="at">width =</span> <span class="st">&quot;100%&quot;</span>, <span class="at">height =</span> <span class="st">&quot;500px&quot;</span> )</span></code></pre></div>
+<span id="cb105-14"><a href="modelos_perdida.html#cb105-14" tabindex="-1"></a>    <span class="at">booktabs =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb105-15"><a href="modelos_perdida.html#cb105-15" tabindex="-1"></a>    <span class="at">longtable =</span> <span class="cn">TRUE</span> ) <span class="sc">%&gt;%</span></span>
+<span id="cb105-16"><a href="modelos_perdida.html#cb105-16" tabindex="-1"></a>  <span class="fu">kable_classic</span>( </span>
+<span id="cb105-17"><a href="modelos_perdida.html#cb105-17" tabindex="-1"></a>    <span class="at">full_width =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb105-18"><a href="modelos_perdida.html#cb105-18" tabindex="-1"></a>    <span class="at">html_font =</span> <span class="st">&quot;Cambria&quot;</span>, </span>
+<span id="cb105-19"><a href="modelos_perdida.html#cb105-19" tabindex="-1"></a>    <span class="at">position =</span> <span class="st">&#39;center&#39;</span>, </span>
+<span id="cb105-20"><a href="modelos_perdida.html#cb105-20" tabindex="-1"></a>    <span class="at">latex_options =</span> <span class="fu">c</span>( <span class="st">&#39;hold_position&#39;</span>, <span class="st">&#39;repeat_header&#39;</span>, <span class="st">&#39;scale_down&#39;</span> ) ) <span class="sc">%&gt;%</span></span>
+<span id="cb105-21"><a href="modelos_perdida.html#cb105-21" tabindex="-1"></a>  <span class="fu">scroll_box</span>( <span class="at">width =</span> <span class="st">&quot;100%&quot;</span>, <span class="at">height =</span> <span class="st">&quot;500px&quot;</span> )</span></code></pre></div>
 </details>
 <div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:500px; overflow-x: scroll; width:100%; ">
-<table class=" lightable-classic" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
+<table class=" lightable-classic" style="color: black; font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:l6t6">Tabla 6.6: </span>Estimación de los reclamos totales
 </caption>

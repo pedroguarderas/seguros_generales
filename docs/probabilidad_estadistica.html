@@ -522,9 +522,11 @@ F( x )
 <p><span class="math display">\[
 \underset{x \rightarrow -\infty}{\lim} F( x ) = 0\qquad
 \underset{x \rightarrow +\infty}{\lim} F( x ) = 1
-\]</span>
-5. La función <span class="math inline">\(F\)</span> es a variación acotada <span class="citation">[<a href="bibliografia.html#ref-KolmoFunAnalysis">13</a>]</span>. Esto quiere decir que existe un real
-<span class="math inline">\(C &gt; 0\)</span>, para cualquier partición <span class="math inline">\(\{x_i\}_{i\in\mathbb{Z}}\)</span>, tal que:</p>
+\]</span></p>
+<ol start="5" style="list-style-type: decimal">
+<li>La función <span class="math inline">\(F\)</span> es a variación acotada <span class="citation">[<a href="bibliografia.html#ref-KolmoFunAnalysis">13</a>]</span>. Esto quiere decir que existe un real
+<span class="math inline">\(C &gt; 0\)</span>, para cualquier partición <span class="math inline">\(\{x_i\}_{i\in\mathbb{Z}}\)</span>, tal que:</li>
+</ol>
 <p><span class="math display">\[
 \sum\limits_{i\in\mathbb{Z}} \left| F( x_{i+1} ) - F( x_i ) \right| &lt; C
 \]</span></p>
@@ -1427,12 +1429,17 @@ logarítmico en <span class="math inline">\(\delta\)</span> y cuadrático en <sp
 <span id="cb19-10"><a href="probabilidad_estadistica.html#cb19-10"></a>    <span class="at">format.args =</span> <span class="fu">list</span>( <span class="at">big.mark =</span> <span class="st">&#39;,&#39;</span>, <span class="at">decimal.mark =</span> <span class="st">&#39;.&#39;</span>, <span class="at">scientific =</span> <span class="cn">FALSE</span> ),</span>
 <span id="cb19-11"><a href="probabilidad_estadistica.html#cb19-11"></a>    <span class="at">escape =</span> <span class="cn">FALSE</span>,</span>
 <span id="cb19-12"><a href="probabilidad_estadistica.html#cb19-12"></a>    <span class="at">centering =</span> <span class="cn">TRUE</span>, </span>
-<span id="cb19-13"><a href="probabilidad_estadistica.html#cb19-13"></a>    <span class="at">booktabs =</span> <span class="cn">TRUE</span> ) <span class="sc">%&gt;%</span></span>
-<span id="cb19-14"><a href="probabilidad_estadistica.html#cb19-14"></a>  <span class="fu">kable_classic</span>( <span class="at">full_width =</span> <span class="cn">FALSE</span>, <span class="at">html_font =</span> <span class="st">&quot;Cambria&quot;</span>, <span class="at">position =</span> <span class="st">&#39;center&#39;</span> ) <span class="sc">%&gt;%</span></span>
-<span id="cb19-15"><a href="probabilidad_estadistica.html#cb19-15"></a>  <span class="fu">scroll_box</span>( <span class="at">width =</span> <span class="st">&quot;100%&quot;</span>, <span class="at">height =</span> <span class="st">&quot;500px&quot;</span> )</span></code></pre></div>
+<span id="cb19-13"><a href="probabilidad_estadistica.html#cb19-13"></a>    <span class="at">booktabs =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb19-14"><a href="probabilidad_estadistica.html#cb19-14"></a>    <span class="at">longtable =</span> <span class="cn">TRUE</span> ) <span class="sc">%&gt;%</span></span>
+<span id="cb19-15"><a href="probabilidad_estadistica.html#cb19-15"></a>  <span class="fu">kable_classic</span>( </span>
+<span id="cb19-16"><a href="probabilidad_estadistica.html#cb19-16"></a>    <span class="at">full_width =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb19-17"><a href="probabilidad_estadistica.html#cb19-17"></a>    <span class="at">html_font =</span> <span class="st">&quot;Cambria&quot;</span>, </span>
+<span id="cb19-18"><a href="probabilidad_estadistica.html#cb19-18"></a>    <span class="at">position =</span> <span class="st">&#39;center&#39;</span>, </span>
+<span id="cb19-19"><a href="probabilidad_estadistica.html#cb19-19"></a>    <span class="at">latex_options =</span> <span class="fu">c</span>( <span class="st">&#39;hold_position&#39;</span>, <span class="st">&#39;repeat_header&#39;</span> ) ) <span class="sc">%&gt;%</span></span>
+<span id="cb19-20"><a href="probabilidad_estadistica.html#cb19-20"></a>  <span class="fu">scroll_box</span>( <span class="at">width =</span> <span class="st">&quot;100%&quot;</span>, <span class="at">height =</span> <span class="st">&quot;500px&quot;</span> )</span></code></pre></div>
 </details>
 <div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:500px; overflow-x: scroll; width:100%; ">
-<table class=" lightable-classic" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
+<table class=" lightable-classic" style="color: black; font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:l4t1">Tabla 4.1: </span>Error versus número de simulaciones
 </caption>
@@ -2883,7 +2890,7 @@ calculada con inversión de la transformada de Fourier discreta.</p>
 <span id="cb26-8"><a href="probabilidad_estadistica.html#cb26-8" tabindex="-1"></a>plt <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
 <span id="cb26-9"><a href="probabilidad_estadistica.html#cb26-9" tabindex="-1"></a>  <span class="fu">geom_histogram</span>( <span class="fu">aes</span>( <span class="at">x =</span> e, <span class="at">y =</span> <span class="fu">after_stat</span>( density ) ), <span class="at">fill =</span> <span class="st">&#39;grey50&#39;</span>, <span class="at">colour =</span> <span class="st">&#39;dodgerblue3&#39;</span>, <span class="at">bins =</span> <span class="fu">nclass.scott</span>( e ) ) <span class="sc">+</span> </span>
 <span id="cb26-10"><a href="probabilidad_estadistica.html#cb26-10" tabindex="-1"></a>  <span class="fu">geom_density</span>() <span class="sc">+</span></span>
-<span id="cb26-11"><a href="probabilidad_estadistica.html#cb26-11" tabindex="-1"></a>    <span class="fu">scale_x_continuous</span>( <span class="at">breaks =</span> xbrk,</span>
+<span id="cb26-11"><a href="probabilidad_estadistica.html#cb26-11" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>( <span class="at">breaks =</span> xbrk,</span>
 <span id="cb26-12"><a href="probabilidad_estadistica.html#cb26-12" tabindex="-1"></a>                      <span class="at">labels =</span> xlbl, </span>
 <span id="cb26-13"><a href="probabilidad_estadistica.html#cb26-13" tabindex="-1"></a>                      <span class="at">limits =</span> xlim, </span>
 <span id="cb26-14"><a href="probabilidad_estadistica.html#cb26-14" tabindex="-1"></a>                      <span class="at">expand =</span> <span class="fu">c</span>( <span class="dv">0</span>, <span class="dv">0</span> ) ) <span class="sc">+</span></span>
