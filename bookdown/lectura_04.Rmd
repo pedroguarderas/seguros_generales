@@ -166,25 +166,25 @@ $$
 
 La función de distribución acumulada, tiene las siguientes propiedades:
 
-1. Para cualquier $x \in \R$, $0 \leq F( x ) \leq 1$,
-
-2. La función $F$ es no decreciente,
-
-3. La función $F$ es continua por derecha,
-
-4. Se satisfacen los siguientes límites:
-
+  1. Para cualquier $x \in \R$, $0 \leq F( x ) \leq 1$,
+  
+  2. La función $F$ es no decreciente,
+  
+  3. La función $F$ es continua por derecha,
+  
+  4. Se satisfacen los siguientes límites:
+  
 $$
 \underset{x \rightarrow -\infty}{\lim} F( x ) = 0\qquad
 \underset{x \rightarrow +\infty}{\lim} F( x ) = 1
 $$
-5. La función $F$ es a variación acotada @KolmoFunAnalysis. Esto quiere decir que existe un real 
-$C > 0$, para cualquier partición $\{x_i\}_{i\in\Z}$, tal que:
-
+     
+  5. La función $F$ es a variación acotada @KolmoFunAnalysis. Esto quiere decir que existe un real 
+     $C > 0$, para cualquier partición $\{x_i\}_{i\in\Z}$, tal que:
+     
 $$
 \sum\limits_{i\in\Z} \left| F( x_{i+1} ) - F( x_i ) \right| < C
 $$
-
 :::
 ::::
 
