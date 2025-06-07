@@ -694,10 +694,9 @@ VX <- ( exp( sigma^2 ) - 1 ) * exp( 2 * mu + sigma^2 )
 ES <- n * EX
 VS <- n * VX
 
+# utilizamos simulación, no hay forma analítica para la distribución de la suma de log-normales
 m <- 5e3
 S <- sapply( 1:m, FUN = function( i ) sum( rlnorm( n, meanlog = mu, sdlog = sigma ) ) )
-
-# no hay forma analítica para la distribución de la suma de log-normales
 FS <- ecdf( S ) 
 
 C <- 0.7655 + 8 * ( 1 + exp(1) ) # constante universal del teorema
@@ -757,12 +756,15 @@ $\E\left[\left|X - \E[X]\right|^3 \right] < +\infty$, también sea finita.
 
 En la práctica se suele tomar lo que se conoce como una aproximación por el teorema de límite 
 central.
+
+:::: {.thmbox data-latex=""}
 $$
 P( S \leq s )
 \approx \Phi\left( \frac{s - \E[S]}{\sqrt{\V[S]}} \right)
 $$
+::::
 
-Esto es válido siempre y cuando el error de aproximación 
+Esto es válido siempre y cuando la cota del error de aproximación 
 $\frac{C}{\sqrt{n}\left( 1 + \left|\frac{s - \E[S]}{\sqrt{\V[S]}}\right|^3 \right)} \tau$, sea 
 lo suficientemente pequeño. Además, es de notar que se está trabajando con valores que solo están 
 entre $0$ y $1$, pequeñas variaciones pueden ser muy relevantes al nivel del ajuste de las 
@@ -1562,90 +1564,90 @@ parámetro $\lambda$, es así que para las distribuciones de probabilidad discre
 introducido con anterioridad, tenemos la siguiente modificación.
 
 1.  Para la distribución de Poisson, tenemos la ley de probabilidad
-    $$
-    P( N = k ) = \exp\left( -\lambda ER \right) \frac{( \lambda ER )^k}{k!}, \qquad
-    \forall k \in \N
-    $$
-    entonces $N \rightsquigarrow Pois( \lambda ER )$.
-    
-    En caso de disponer de una muestra de $N_1, \ldots, N_m$ de variables aleatorias independientes, 
-    y por otra parte exposiciones al riesgo $ER_1, \ldots, ER_m$ asociadas a cada una de las variables
-    aleatorias, de tal forma que $N_i \rightsquigarrow Pois( \lambda ER_i )$, entonces la función
-    de verosimilitud logarítmica toma la forma:
-    $$
-    \ell( \lambda ) 
-    = - \lambda \sum\limits_{i=1}^m ER_i 
-    + \sum\limits_{i=1}^m N_i \log\left( ER_i \right) 
-    + \sum\limits_{i=1}^m N_i \log\left( \lambda \right) 
-    - \sum\limits_{i=1}^m \log\left( N_i! \right)
-    $$
-    en este caso el estimador por maximización de verosimilitud es bien sencillo de determinar y está 
-    dado por:
-    $$
-    \lambda = \frac{\sum\limits_{i=1}^m N_i}{\sum\limits_{i=1}^m ER_i }
-    $$
+$$
+P( N = k ) = \exp\left( -\lambda ER \right) \frac{( \lambda ER )^k}{k!}, \qquad
+\forall k \in \N
+$$
+entonces $N \rightsquigarrow Pois( \lambda ER )$.
+
+En caso de disponer de una muestra de $N_1, \ldots, N_m$ de variables aleatorias independientes, 
+y por otra parte exposiciones al riesgo $ER_1, \ldots, ER_m$ asociadas a cada una de las variables
+aleatorias, de tal forma que $N_i \rightsquigarrow Pois( \lambda ER_i )$, entonces la función
+de verosimilitud logarítmica toma la forma:
+$$
+\ell( \lambda ) 
+= - \lambda \sum\limits_{i=1}^m ER_i 
++ \sum\limits_{i=1}^m N_i \log\left( ER_i \right) 
++ \sum\limits_{i=1}^m N_i \log\left( \lambda \right) 
+- \sum\limits_{i=1}^m \log\left( N_i! \right)
+$$
+en este caso el estimador por maximización de verosimilitud es bien sencillo de determinar y está 
+dado por:
+$$
+\lambda = \frac{\sum\limits_{i=1}^m N_i}{\sum\limits_{i=1}^m ER_i }
+$$
 
 2.  Para la distribución binomial begativa, tenemos que si
-    $$
-    \lambda ER = \alpha \frac{1-p}{p} \Rightarrow p = \frac{\alpha}{\lambda ER + \alpha}
-    $$
-    de donde la ley de probabilidad queda modificada como 
-    $$
-    P( N = k ) 
-    = \frac{\Gamma( \alpha + k )}{\Gamma(k+1) \Gamma(\alpha)} 
-    \left( \frac{\alpha}{\lambda ER + \alpha} \right)^\alpha \left( \frac{\lambda ER}{\lambda ER + \alpha} \right)^k, \qquad
-    \forall k \in \N
-    $$
-    entonces $N \rightsquigarrow NBinom\left( \alpha, \frac{\alpha}{\lambda ER + \alpha} \right)$.
-    
-    Similar que antes, si disponemos de una muestra de $N_1, \ldots, N_m$ de variables aleatorias 
-    independientes y también exposiciones al riesgo $ER_1, \ldots, ER_m$ asociadas a cada una de las 
-    variables aleatorias, de tal forma que 
-    $N_i \rightsquigarrow NBinom\left( \alpha, \frac{\alpha}{\lambda ER_i + \alpha} \right)$, entonces 
-    la función de verosimilitud logarítmica toma la forma:
-    $$
-    \begin{split}
-    \ell( \alpha, \lambda )
-    & = \sum\limits_{i=1}^m \log \Gamma( \alpha + N_i ) 
-    - \sum\limits_{i=1}^m \log \Gamma( N_i + 1 ) 
-    - m \log \Gamma( \alpha ) \\
-    & + \sum\limits_{i=1}^m N_i \log\left( \lambda \right) 
-    + \sum\limits_{i=1}^m N_i \log\left( ER_i \right) 
-    - \sum\limits_{i=1}^m N_i \log\left( \lambda ER_i + \alpha \right) 
-    + m \alpha \log\left( \alpha \right) \\
-    & - \alpha \sum\limits_{i=1}^m \log\left( \lambda ER_i + \alpha \right)
-    \end{split}
-    $$
+$$
+\lambda ER = \alpha \frac{1-p}{p} \Rightarrow p = \frac{\alpha}{\lambda ER + \alpha}
+$$
+de donde la ley de probabilidad queda modificada como 
+$$
+P( N = k ) 
+= \frac{\Gamma( \alpha + k )}{\Gamma(k+1) \Gamma(\alpha)} 
+\left( \frac{\alpha}{\lambda ER + \alpha} \right)^\alpha \left( \frac{\lambda ER}{\lambda ER + \alpha} \right)^k, \qquad
+\forall k \in \N
+$$
+entonces $N \rightsquigarrow NBinom\left( \alpha, \frac{\alpha}{\lambda ER + \alpha} \right)$.
+
+Similar que antes, si disponemos de una muestra de $N_1, \ldots, N_m$ de variables aleatorias 
+independientes y también exposiciones al riesgo $ER_1, \ldots, ER_m$ asociadas a cada una de las 
+variables aleatorias, de tal forma que 
+$N_i \rightsquigarrow NBinom\left( \alpha, \frac{\alpha}{\lambda ER_i + \alpha} \right)$, entonces 
+la función de verosimilitud logarítmica toma la forma:
+$$
+\begin{split}
+\ell( \alpha, \lambda )
+& = \sum\limits_{i=1}^m \log \Gamma( \alpha + N_i ) 
+- \sum\limits_{i=1}^m \log \Gamma( N_i + 1 ) 
+- m \log \Gamma( \alpha ) \\
+& + \sum\limits_{i=1}^m N_i \log\left( \lambda \right) 
++ \sum\limits_{i=1}^m N_i \log\left( ER_i \right) 
+- \sum\limits_{i=1}^m N_i \log\left( \lambda ER_i + \alpha \right) 
++ m \alpha \log\left( \alpha \right) \\
+& - \alpha \sum\limits_{i=1}^m \log\left( \lambda ER_i + \alpha \right)
+\end{split}
+$$
 
 3.  Para la distribución binomial, tenemos que si
-    $$
-    \lambda ER = np \Rightarrow p = \frac{\lambda ER}{n}
-    $$
-    de donde la ley de probabilidad queda modificada como
-    $$
-    P( N = k ) = \binom{n}{k} \left( \frac{\lambda ER}{n} \right)^k \left( 1 - \frac{\lambda ER}{n} \right)^{n-k}, 
-    \qquad \forall k \in \{0,\ldots, n\}
-    $$
-    entonces $N \rightsquigarrow Binom\left( n, \frac{\lambda ER}{n} \right)$
-    
-    Mismo razonamiento, si disponemos de una muestra de $N_1, \ldots, N_m$ de variables aleatorias 
-    independientes y también exposiciones al riesgo $ER_1, \ldots, ER_m$ asociadas a cada una de las 
-    variables aleatorias, de tal forma que 
-    $N_i \rightsquigarrow  Binom\left( n, \frac{\lambda ER_i}{n} \right)$, entonces la función de 
-    verosimilitud logarítmica toma la forma:
-    $$
-    \begin{split}
-    \ell( n, \lambda )
-    & = m \log( n! )
-    - \sum\limits_{i=1}^m \log( N_i! ) 
-    - \sum\limits_{i=1}^m \log( (n - N_i)! ) \\
-    & + \sum\limits_{i=1}^m N_i \log \lambda 
-    + \sum\limits_{i=1}^m N_i \log ER_i
-    - n \sum\limits_{i=1}^m N_i \\
-    & + n \sum\limits_{i=1}^m \log\left( 1 - \frac{\lambda ER_i}{n} \right) 
-    - \sum\limits_{i=1}^m N_i \log\left( 1 - \frac{\lambda ER_i}{n} \right) 
-    \end{split}
-    $$
+$$
+\lambda ER = np \Rightarrow p = \frac{\lambda ER}{n}
+$$
+de donde la ley de probabilidad queda modificada como
+$$
+P( N = k ) = \binom{n}{k} \left( \frac{\lambda ER}{n} \right)^k \left( 1 - \frac{\lambda ER}{n} \right)^{n-k}, 
+\qquad \forall k \in \{0,\ldots, n\}
+$$
+entonces $N \rightsquigarrow Binom\left( n, \frac{\lambda ER}{n} \right)$
+
+Mismo razonamiento, si disponemos de una muestra de $N_1, \ldots, N_m$ de variables aleatorias 
+independientes y también exposiciones al riesgo $ER_1, \ldots, ER_m$ asociadas a cada una de las 
+variables aleatorias, de tal forma que 
+$N_i \rightsquigarrow  Binom\left( n, \frac{\lambda ER_i}{n} \right)$, entonces la función de 
+verosimilitud logarítmica toma la forma:
+$$
+\begin{split}
+\ell( n, \lambda )
+& = m \log( n! )
+- \sum\limits_{i=1}^m \log( N_i! ) 
+- \sum\limits_{i=1}^m \log( (n - N_i)! ) \\
+& + \sum\limits_{i=1}^m N_i \log \lambda 
++ \sum\limits_{i=1}^m N_i \log ER_i
+- n \sum\limits_{i=1}^m N_i \\
+& + n \sum\limits_{i=1}^m \log\left( 1 - \frac{\lambda ER_i}{n} \right) 
+- \sum\limits_{i=1}^m N_i \log\left( 1 - \frac{\lambda ER_i}{n} \right) 
+\end{split}
+$$
 
 En los tres casos anteriores, hemos desarrollado una metodología para la estimación de la 
 distribución de frecuencia de los reclamos, tomando en cuenta la exposición al riesgo de cada 
@@ -1680,8 +1682,13 @@ production[ 1:10 ] %>%
     format.args = list( big.mark = ',', decimal.mark = '.', scientific = FALSE ),
     escape = FALSE,
     centering = TRUE,
-    booktabs = TRUE ) %>%
-  kable_classic( full_width = FALSE, html_font = "Cambria", position = "center" ) %>%
+    booktabs = TRUE,
+    longtable = TRUE ) %>%
+  kable_classic( 
+    full_width = FALSE, 
+    html_font = "Cambria", 
+    position = 'center', 
+    latex_options = c( 'hold_position', 'repeat_header', 'scale_down' ) ) %>%
   scroll_box( width = "100%", height = "500px" )
 ```
 
@@ -1700,8 +1707,13 @@ claims[ 1:10 ] %>%
     format.args = list( big.mark = ',', decimal.mark = '.', scientific = FALSE ),
     escape = FALSE,
     centering = TRUE,
-    booktabs = TRUE ) %>%
-  kable_classic( full_width = FALSE, html_font = "Cambria", position = "center" ) %>%
+    booktabs = TRUE, 
+    longtable = TRUE ) %>%
+  kable_classic( 
+    full_width = FALSE, 
+    html_font = "Cambria", 
+    position = 'center', 
+    latex_options = c( 'hold_position', 'repeat_header', 'scale_down' ) ) %>%
   scroll_box( width = "100%", height = "500px" )
 ```
 
@@ -2188,8 +2200,13 @@ prods[ , list( sex, xg, r, ngr, d, M, EN, SDN, EX, SDX, EDX, SDDX, ES, SDS ) ] %
     format.args = list( big.mark = ',', decimal.mark = '.', scientific = FALSE ),
     escape = FALSE,
     centering = TRUE,
-    booktabs = TRUE ) %>%
-  kable_classic( full_width = FALSE, html_font = "Cambria", position = "center" ) %>%
+    booktabs = TRUE,
+    longtable = TRUE ) %>%
+  kable_classic( 
+    full_width = FALSE, 
+    html_font = "Cambria", 
+    position = 'center', 
+    latex_options = c( 'hold_position', 'repeat_header', 'scale_down' ) ) %>%
   scroll_box( width = "100%", height = "500px" )
 ```
 :::

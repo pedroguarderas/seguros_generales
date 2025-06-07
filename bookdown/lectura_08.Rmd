@@ -194,7 +194,7 @@ data( beMTPL97 )
 beMTPL97 <- as.data.table( beMTPL97 )
 
 # Impresión de las primeras filas de la tabla
-beMTPL97[ 1:100 ] %>%
+beMTPL97[ 1:15 ] %>%
   kable(
     label = NA,
     caption = "Pólizas y reclamos de automóviles en Bélgica",
@@ -205,8 +205,13 @@ beMTPL97[ 1:100 ] %>%
     format.args = list( big.mark = ',', decimal.mark = '.', scientific = FALSE ),
     escape = FALSE,
     centering = TRUE,
-    booktabs = TRUE ) %>%
-  kable_classic( full_width = FALSE, html_font = "Cambria", position = "center" ) %>%
+    booktabs = TRUE,
+    longtable = TRUE ) %>%
+  kable_classic( 
+    full_width = FALSE, 
+    html_font = "Cambria", 
+    position = 'center', 
+    latex_options = c( 'hold_position', 'repeat_header', 'scale_down' ) ) %>%
   scroll_box( width = "100%", height = "500px" )
 ```
 
@@ -230,7 +235,11 @@ dat %>%
     escape = FALSE,
     centering = TRUE, 
     booktabs = TRUE ) %>%
-  kable_classic( full_width = FALSE, html_font = "Cambria", position = "center" ) %>%
+  kable_classic( 
+    full_width = FALSE, 
+    html_font = "Cambria", 
+    position = 'center', 
+    latex_options = c( 'hold_position', 'repeat_header', 'scale_down' ) ) %>%
   scroll_box( width = "100%", height = "300px" )
 ```
 
@@ -248,7 +257,11 @@ dat %>%
     escape = FALSE,
     centering = TRUE,
     booktabs = TRUE ) %>%
-  kable_classic( full_width = FALSE, html_font = "Cambria", position = "center" ) %>%
+  kable_classic( 
+    full_width = FALSE, 
+    html_font = "Cambria", 
+    position = 'center', 
+    latex_options = c( 'hold_position', 'repeat_header', 'scale_down' ) ) %>%
   scroll_box( width = "100%", height = "200px" )
 ```
 

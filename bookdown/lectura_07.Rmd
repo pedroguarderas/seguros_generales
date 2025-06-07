@@ -694,8 +694,7 @@ dat %>%
     escape = FALSE,
     centering = TRUE, 
     booktabs = TRUE ) %>%
-  kable_classic( full_width = FALSE, html_font = "Cambria", position = "center" ) %>%
-  scroll_box( width = "100%", height = "250px" )
+  kable_classic( full_width = FALSE, html_font = "Cambria", position = "center" )
 ```
 
 Para el caso cuando se puede caracterizar la severidad total a partir de otra variable explicativa 
@@ -719,8 +718,7 @@ dat %>%
     escape = FALSE,
     centering = TRUE,
     booktabs = TRUE ) %>%
-  kable_classic( full_width = FALSE, html_font = "Cambria", position = "center" ) %>%
-  scroll_box( width = "100%", height = "250px" )
+  kable_classic( full_width = FALSE, html_font = "Cambria", position = "center" )
 ```
 
 La varianza $\V[\E[S \mid Y]]$ es atribuible a la heterogeneidad del portafolio de asegurados, 

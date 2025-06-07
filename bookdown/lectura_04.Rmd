@@ -166,21 +166,21 @@ $$
 
 La función de distribución acumulada, tiene las siguientes propiedades:
 
-  1. Para cualquier $x \in \R$, $0 \leq F( x ) \leq 1$,
-  
-  2. La función $F$ es no decreciente,
-  
-  3. La función $F$ es continua por derecha,
-  
-  4. Se satisfacen los siguientes límites:
-  
+1. Para cualquier $x \in \R$, $0 \leq F( x ) \leq 1$,
+
+2. La función $F$ es no decreciente,
+
+3. La función $F$ es continua por derecha,
+
+4. Se satisfacen los siguientes límites:
+
 $$
 \underset{x \rightarrow -\infty}{\lim} F( x ) = 0\qquad
 \underset{x \rightarrow +\infty}{\lim} F( x ) = 1
 $$
-  5. La función $F$ es a variación acotada @KolmoFunAnalysis. Esto quiere decir que existe un real 
-  $C > 0$, para cualquier partición $\{x_i\}_{i\in\Z}$, tal que:
-  
+5. La función $F$ es a variación acotada @KolmoFunAnalysis. Esto quiere decir que existe un real 
+$C > 0$, para cualquier partición $\{x_i\}_{i\in\Z}$, tal que:
+
 $$
 \sum\limits_{i\in\Z} \left| F( x_{i+1} ) - F( x_i ) \right| < C
 $$
@@ -1179,8 +1179,13 @@ dt %>%
     format.args = list( big.mark = ',', decimal.mark = '.', scientific = FALSE ),
     escape = FALSE,
     centering = TRUE, 
-    booktabs = TRUE ) %>%
-  kable_classic( full_width = FALSE, html_font = "Cambria", position = 'center' ) %>%
+    booktabs = TRUE,
+    longtable = TRUE ) %>%
+  kable_classic( 
+    full_width = FALSE, 
+    html_font = "Cambria", 
+    position = 'center', 
+    latex_options = c( 'hold_position', 'repeat_header' ) ) %>%
   scroll_box( width = "100%", height = "500px" )
 ```
 
@@ -1482,7 +1487,7 @@ xlim <- c( -xmax, xmax )
 plt <- ggplot() +
   geom_histogram( aes( x = e, y = after_stat( density ) ), fill = 'grey50', colour = 'dodgerblue3', bins = nclass.scott( e ) ) + 
   geom_density() +
-    scale_x_continuous( breaks = xbrk,
+  scale_x_continuous( breaks = xbrk,
                       labels = xlbl, 
                       limits = xlim, 
                       expand = c( 0, 0 ) ) +
@@ -1507,11 +1512,11 @@ La **función de actualización** de flujos $v: \R \times \R \longrightarrow [0,
 evaluar en $s, t \in \R, s\leq t, v(s,t)$, diremos que actualizamos los flujos que se 
 producen en el tiempo $t$, valorados desde el tiempo $s$. Además la función de actualización tiene
 las siguientes propiedades:
-  
+
 1. Si $s = t, v(s,t) = 1$,
-  
+
 2. Si $s \leq t, v(s,t) \leq 1$,
-  
+
 3. Si $r \leq s \leq t, v( r, s ) v( s, t ) = v( r, t )$.
 
 La **función de capitalización**, es la función $u: \R \times \R \longrightarrow [0,1]$,
