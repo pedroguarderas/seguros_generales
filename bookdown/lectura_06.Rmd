@@ -495,7 +495,7 @@ utilizando las funciones de aplicación vectorial `sapply` y `lapply`.
 Consideramos el caso de un modelo colectivo para el cuál el conteo de siniestros 
 $N \rightsquigarrow Pois( \lambda )$ y la distribución de cada uno de los reclamos 
 $\{X_i\}_{i\in \N}$, está dada por la misma distribución de probabilidad 
-$X \rightsquigarrow LN( \mu, \sigma )$, siendo además cada uno de los reclamos indepencientes entre
+$X \rightsquigarrow LN( \mu, \sigma )$, siendo además cada uno de los reclamos independientes entre
 si.
 ```{r l6c4}
 # 1. selección de simulaciones
@@ -517,10 +517,10 @@ S <- sapply( X, FUN = function( x ) sum( x, na.rm = TRUE ) )
 ```
 :::
 
-Es de notar que una algoritmo como el descrito tiene una falencia cuando la frecuencia de siniestros
-es poco observada, esto sucede cuando la probabilidad $P( N = 0 )$ es alta y por tal razón para 
-generar suficientes reclamos y así poder tener cálculos con una buena aproximación numérica, 
-con el uso de simulaciones se necesitará muchas simulaciones.
+Es de notar que un algoritmo como el descrito anteriormente tiene una falencia cuando la frecuencia 
+de siniestros es poco observada, esto sucede cuando la probabilidad $P( N = 0 )$ es alta y por tal 
+razón para generar suficientes reclamos y así poder tener cálculos con una buena aproximación 
+numérica, se necesitarán muchas simulaciones.
 
 Es interesante observar que el modelo colectivo puede ser muchas veces calculado de forma similar
 a un modelo individual, para ciertos casos particulares. Por ejemplo, si consideramos el caso 
@@ -536,7 +536,7 @@ aleatorias $X_k$ de cada uno de los reclamos. Así el modelo colectivo se transf
 individual con $n$ constante y valores de reclamos individuales dados por la variable aleatoria 
 $Y_k = B_k X_k$.
 
-Para este caso en particular
+Para este caso en particular:
 $$
 \begin{split}
 \E[ S ] 
@@ -565,8 +565,10 @@ $$
 ::: {.example #l6ex4}
 Hacemos uso del algoritmo de simulación, pero bajo la consideración anterior donde el conteo 
 de siniestros $N \rightsquigarrow Bin( n, p )$, en algunos casos se puede considerar $n$ como el 
-número de pólizas vendidas, esto supone que solo se presenta un reclamo por póliza. Por su parte los
-reclamos consideraremos  $X_i \rightsquigarrow LN( \mu, \sigma )$, para todo $i \in \{1,\ldots,n\}$. 
+número de pólizas vendidas, esto supone que solo se presenta un reclamo por póliza. Por su parte,
+consideraremos los reclamos $X_i \rightsquigarrow LN( \mu, \sigma )$, para todo
+$i \in \{1,\ldots,n\}$. 
+
 Si consideramos generar la simulación como un modelo individual, generamos variables aleatorias
 $B_i \rightsquigarrow Ber(p)$, para todo $i \in \{1,\ldots,n\}$.
 ```{r l6c5}
@@ -591,13 +593,13 @@ $$
 $$
 :::
 
-Es importante observar que si la frecuencia de reclamos es superior a $1$, sea este por póliza, 
+Es importante observar que si la frecuencia de reclamos es superior a $1$, sea esta por póliza, 
 individuo o en general por unidad asegurada, la aproximación anterior no es la correcta si no 
-se realiza un ajuste al valor $n$ que es el número máximo de siniestros. Sino también, se puede 
-considera que las variables de los reclamos es la suma total de reclamos por póliza.
+se realiza un ajuste al valor $n$ que es el número máximo de siniestros. También, se puede 
+considerar que las variables de los reclamos es la suma total de reclamos por póliza.
 
 Por otra parte, es de notar que en el cálculo hay un gasto innecesario de valores simulados de 
-reclamos $X_i$ ya que algunos se multiplicaran por $B_i$, la cual solo toma valores $\{0,1\}$.
+reclamos $X_i$, ya que algunos se multiplicaran por $B_i$, la cual solo toma valores $\{0,1\}$.
 
 <!------------------------------------------------------------------------------------------------->
 ## Modelos mixtos {#modelos_mixtos}
