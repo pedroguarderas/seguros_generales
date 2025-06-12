@@ -1040,13 +1040,14 @@ puede proveer una primera aproximación.
 Consideramos las variables aleatorias $X_1,\ldots,X_n$ i.i.d. con media común finita 
 $\E[X_i] = \mu < +\infty$ y varianza común finita
 $\V[ X_i ] = \sigma^2 < +\infty$, para todo $i \in \{1, \ldots, n \}$. Si consideramos la
-variable aleatoria de la suma total $S_n = \sum\limits_{i=1}^n X_i$, entonces
+variable aleatoria de la suma total $S_n = \sum\limits_{i=1}^n X_i$, entonces para la variable 
+aleatoria estandarizada
 $$
 \frac{S_n - \E[S_n]}{\V[ S_n ]} \overset{d}{\longrightarrow} Z
 $$
-cuando $n \rightarrow +\infty$, donde $Z \rightsquigarrow N( 0, 1 )$. 
-
-Más aún
+se tiene la convergencia en distribución, cuando $n \rightarrow +\infty$, 
+donde $Z \rightsquigarrow N( 0, 1 )$. Más aún, de manera más clara se puede expresar como el 
+siguiente límite.
 $$
 \underset{n \rightarrow +\infty}{\lim} P\left( \frac{S_n 
 - \E[S_n]}{\V[ S_n ]} \leq z \right)
@@ -1121,9 +1122,29 @@ Con $C = 0.7655+8( 1 + e ) > 0$ una constante universal, independiente de $N$, $
 :::
 ::::
 
-El teorema \@ref(thm:tglican) asegura un convergencia, sin embargo no da un estimativo de la 
-rapidez de dicha convergencia conforme aumenta el valor $n$, el siguiente resultado es más claro 
-al respecto y proporciona un criterio de convergencia.
+El teorema del límite central \@ref(thm:tlc) no proporciona un criterio para determinar cuan 
+rápido se realiza la convergencia hacia la distribución normal. El resultado de la desigualdad 
+anterior \@ref{thm:beress} si proporciona un criterio de la convergencia eso sí, bajo la 
+condición adicional de tener $\E\left[\left|X - \E[X]\right|^3\right] < +\infty$. Como podemos
+observar la convergencia es sub-lineal, va en orden de la raíz cuadrada del número de términos
+$n$.
+
+Esto quiere decir que si deseamos un error de aproximación $\varepsilon > 0$, requerimos 
+que
+$$
+\begin{split}
+\frac{C}{\sqrt{n}} \frac{\E\left[\left|X - \E[X]\right|^3\right]}{\sqrt{\V[X]}^3}
+& \leq \varepsilon \\
+\frac{C^2}{\varepsilon^2} \frac{\E\left[\left|X - \E[X]\right|^3\right]^2}{\V[X]^3}
+& \leq n
+\end{split} 
+$$
+lo cual muestra que el número de variables aleatorias $n$ crece en orden cuadrático inverso 
+al error de aproximación deseado $\varepsilon$.
+
+Así mismo, el teorema \@ref(thm:tglican) asegura un convergencia, sin embargo no da un 
+estimativo de la rapidez de dicha convergencia conforme aumenta el valor $n$, el siguiente 
+resultado es más claro al respecto y proporciona un criterio de convergencia.
 
 :::: {.thmbox data-latex=""}
 ::: {.theorem #ddkw name="Desigualdad Dvoretzky–Kiefer–Wolfowitz"}
