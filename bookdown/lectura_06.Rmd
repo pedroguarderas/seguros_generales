@@ -86,7 +86,7 @@ S = \sum\limits_{i=1}^n X_i
 $$
 
 La hipótesis más usual que sostiene a este modelo es la indenpendencia entre cada uno de los
-reclamos $X_i$ y $X_j$ son independientes para cualquier $1 \leq i \neq j \leq n$.
+reclamos $X_i$ y $X_j$ para cualquier $1 \leq i \neq j \leq n$.
 :::
 ::::
 
@@ -100,7 +100,7 @@ $$
 \end{split}
 $$
 
-Así mismo con la varianza de $S$.
+Así mismo, la varianza de $S$:
 $$
 \begin{split}
 \V\left[ S \right]
@@ -113,7 +113,7 @@ $$
 $$
 
 Al tener un número determinado de reclamos $n \in \N$, la distribución de probabilidad del
-total de reclamos $S$ puede ser calculada de una forma maś sencilla.
+total de reclamos $S$ puede ser calculada de la forma más sencilla:
 $$
 \begin{split}
 F_S( x )
@@ -122,7 +122,7 @@ F_S( x )
 \end{split}
 $$
 
-así mismo, si las densidades de probabilidad están bien definidas, entonces
+así mismo, si las densidades de probabilidad están bien definidas, entonces:
 $$
 \begin{split}
 f_S( s )
@@ -133,7 +133,7 @@ $$
 
 Una posible estrategia para estimar $F_S$ o $f_S$ es utilizar la transformada de Fourier 
 $\Fo$, la cual convierte las convoluciones en productos y luego invertir de nuevo la 
-transformada de Fourier.
+transformada de Fourier:
 $$
 \begin{split}
 F_S 
@@ -146,7 +146,7 @@ F_S
 \end{split}
 $$
 
-o de forma equivalente para la densidad $f_S$
+de forma equivalente para la densidad $f_S$
 $$
 \begin{split}
 f_S 
@@ -180,6 +180,8 @@ Se puede simular la severidad total $S$ para el caso donde se asume independenci
 de las severidades $X_1, \ldots, X_n$ y se conoce cada una de sus densidades de probabilidad
 $f_{X_1}, \ldots, f_{X_n}$ o distribuciones de probabilidad $F_{X_1}, \ldots, F_{X_n}$.
 
+Los pasos son los siguientes:
+
 1. Se tiene fijo $n \in \N$,
 
 2. Se fija el número de simulaciones $m \in \N$
@@ -195,7 +197,7 @@ severidad $X_i$ sigue una ley log-normal $LN( \mu_i, \sigma_i )$, de parámetros
 para cada $i \in \{1,\ldots, n\}$. El reclamo total $S = \sum\limits_{i=1}^n X_i$ sigue una ley 
 de probabilidad que estará dada por la convolución de cada una de las leyes de probabilidad de 
 cada reclamo $X_i$, sin embargo estas leyes en este ejemplo son log-normales y no se conoce una 
-forma explícita, analítica para la convolución de log-normales. Por tal razón, debemos aproximar
+forma explícita analítica para la convolución de log-normales. Por tal razón, debemos aproximar
 la distribución de probabilidad de $F_S$ a partir de la distribución empírica.
 ```{r l6c1}
 set.seed(94312)
@@ -216,17 +218,17 @@ X <- lapply( 1:m, FUN = function( i ) sapply( 1:n, FUN = function( j ) rlnorm( 1
 S <- sapply( X, FUN = function( x ) sum( x ) )
 ```
 
-Con ya lo mencionamos en este ejemplo densidad de probabilidad de la severidad $S$ resulta de la
+Como ya lo mencionamos en este ejemplo la densidad de probabilidad de la severidad $S$ resulta de la
 convolución de las $n$ densidades individuales $f_S = f_{X_1} \star \cdots \star f_{X_n}$, la cual
 no presenta una forma analítica conocida. 
 
-De la imposibilidad anterior, como ya mencionamos se puede ver la utilidad de trabajar con la 
-muestra aleatoria de la variable $S$. De esta manera poder estimar la distribución acumulada de 
-probabilidad $F_S$ a partir de la distribución empírica $F_m$ generada con la muestra $\{S_i\}$.
+De la imposibilidad anterior, se puede ver la utilidad de trabajar con la muestra aleatoria de la 
+variable $S$. De esta manera, se puede estimar la distribución acumulada de probabilidad $F_S$ a 
+partir de la distribución empírica $F_m$ generada con la muestra $\{S_i\}$.
 $$
 F_S( s ) \approx F_m( s ) = \frac{1}{m} \sum\limits_{i=1}^m \mathbf {1}_{(-\infty,s]}( S_i )
 $$
-el resultado de concentración \@ref(thm:ddkw) es más nos brinda un criterio de convergencia de 
+el resultado de concentración \@ref(thm:ddkw) nos brinda un criterio de convergencia de 
 $F_m$ a $F_S$
 
 Para construir $F_m$ en R, se puede utilizar la función ya empaquetada `ecdf` (empirical cumulative
@@ -265,7 +267,7 @@ plt <- ggplot() +
 plot( plt )
 ```
 
-Para calcular la esperanza de la severidad total $S$, también se puede utilizar una aproximación 
+Para calcular la esperanza de la severidad total $S$, también se puede usar una aproximación 
 a la integral de Riemann-Stieltjes utilizando la distribución acumulada empírica $F_m$.
 $$
 \E[ S ] = \int\limits_{\R} s dF_S( s )
@@ -280,7 +282,7 @@ s <- seq( min( S ), max( S ), length.out = N )
 EmS <- sum( s[-N] * diff( sapply( s, FUN = Fm ) ) )
 ```
 
-De ello tenemos los siguientes resultados de cálculo para el valor esperado de la severidad total
+De ello, tenemos los siguientes resultados de cálculo para el valor esperado de la severidad total:
 $$
 \begin{split}
 \E[S] = \sum\limits_{i=1}^n e^{ \mu_i + \frac{1}{2} \sigma_i^2 } & = `r formatC( ES, digits = 4, format = 'f' )`, \\
@@ -291,15 +293,15 @@ $$
 :::
 
 Lo bueno de poseer una buena aproximación a la distribución acumulada de una variable aleatoria, es 
-que podemos calcular algunos otros valores de importancia relacionados a la variable aleatoria y
-no tan solo utilizar medidas de tendencia central. Sin embargo, para que esta aproximación sea 
-útil se requiere reducir el error de probabilidad \@ref(thm:ddkw).
+que podemos calcular otros valores de importancia relacionados a la variable aleatoria y no tan solo 
+utilizar medidas de tendencia central. Sin embargo, para que esta aproximación sea útil se requiere 
+reducir el error de probabilidad \@ref(thm:ddkw).
 
 ::: {.example #l6ex2}
 Podemos considerar el caso sencillo donde el valor posible de severidad es determinista, es decir
 para cada póliza $i\in \{1,\ldots,n\}$, el valor de severidad probable es único $M > 0$ si en caso 
-se da un evento $A_i$, esto lo podemos expresar como $X_i = M \mathbf{1}_{A_i}$ es constante. Así, 
-pérdida total está dada por:
+se da un evento $A_i$, esto lo podemos expresar como $X_i = M \mathbf{1}_{A_i}$ donde M es constante.
+Así, la pérdida total está dada por:
 $$ 
 S = \sum\limits_{i=1}^n X_i = \sum\limits_{i=1}^n M \mathbf{1}_{A_i} 
 $$
@@ -324,9 +326,9 @@ $$
 
 :::: {.thmbox data-latex=""}
 ::: {.definition #dmodcol name="Modelo colectivo"}
-El **modelo colectivo** de riesgo considera un número de reclamos descritos por una variable aleatoria 
-discreta $N$. Los reclamos corresponden a un número de pólizas en un periodo específico, el valor 
-de cada reclamo $i \in \{1,\ldots,N\}$ está representado por las variables aleatorias $X_i$. 
+El **modelo colectivo** de riesgo considera un número de reclamos descritos por una variable
+aleatoria discreta $N$. Los reclamos corresponden a un número de pólizas en un periodo específico,
+el valor de cada reclamo $i \in \{1,\ldots,N\}$ está representado por las variables aleatorias $X_i$. 
 Usualmente, se considera que cada uno de los reclamos $X_i$ están idénticamente distribuidos.
 $$
 S = 
@@ -337,8 +339,8 @@ S =
 \end{array}
 \right.
 $$
-o de forma más compacta se puede tan definir $S = \sum\limits_{i=1}^N X_i$, donde se asume que la 
-suma da $0$ si el número de elementos en la suma $N = 0$.
+o de forma más compacta, se puede definir $S = \sum\limits_{i=1}^N X_i$, donde se asume que la 
+suma es igual a $0$ si el número de elementos en la suma $N = 0$.
 :::
 ::::
 
@@ -360,8 +362,8 @@ $$
 \end{split}
 $$
 
-También podemos calcular la varianza de los reclamos totales $S$, para ello necesitamos primeramente
-calcular su segundo momento.
+También podemos calcular la varianza de los reclamos totales $S$, para ello necesitamos calcular su 
+segundo momento:
 $$
 \begin{split}
 \E[S^2]
@@ -380,7 +382,7 @@ $$
 \end{split}
 $$
 
-finalmente la varianza de $S$ tiene la siguiente expresión
+finalmente la varianza de $S$ tiene la siguiente expresión:
 $$
 \begin{split}
 \V\left[S\right]
@@ -414,8 +416,8 @@ de las distribuciones para los modelos individuales $F^{\star n}_{X}$ tomando pa
 probabilidades $p_n = P( N = n )$ de la variable aleatoria discreta $N$ que describe la frecuencia
 de los reclamos.
 
-Al igual que lo realizamos para el modelo individual, podemos estimar $F_S$ o $f_S$ utilizando la 
-transformada de Fourier $\Fo$
+Al igual que para el modelo individual, podemos estimar $F_S$ o $f_S$ utilizando la transformada de 
+Fourier $\Fo$:
 $$
 \begin{split}
 F_S 
@@ -424,11 +426,11 @@ F_S
 \quad \text{sin $\{X_i\}$ son independientes} \\
 & = \Fo^{-1}\left( \sum\limits_{n=0}^{+\infty} \prod\limits_{i=1}^n \Fo\left( F_{X_i} \right) p_n \right) \\ 
 & = \Fo^{-1}\left( \sum\limits_{n=0}^{+\infty} \Fo\left( F_{X} \right)^n p_n \right)
-\quad \text{si $\{X_i\}$ sin son idénticamente distribuidas }
+\quad \text{si $\{X_i\}$ si son idénticamente distribuidas }
 \end{split}
 $$
 
-o de forma equivalente para la densidad $f_S$
+de forma equivalente para la densidad $f_S$:
 $$
 \begin{split}
 f_S 
@@ -437,12 +439,12 @@ f_S
 \quad \text{sin $\{X_i\}$ son independientes} \\
 & = \Fo^{-1}\left( \sum\limits_{n=0}^{+\infty} \prod\limits_{i=1}^n \Fo\left( f_{X_i} \right) p_n \right) \\ 
 & = \Fo^{-1}\left( \sum\limits_{n=0}^{+\infty} \Fo\left( f_{X} \right)^n p_n \right)
-\quad \text{si $\{X_i\}$ sin son idénticamente distribuidas }
+\quad \text{si $\{X_i\}$ si son idénticamente distribuidas }
 \end{split}
 $$
 
 En la práctica es imposible realizar la suma hasta infinito, de donde se puede utilizar una 
-aproximación escogiendo un número máximo $M \in \N$ de términos en la suma. Así, tenemos las 
+aproximación escogiendo un número máximo $M \in \N$ de términos en la suma, obteniendo así las 
 aproximaciones.
 
 Por otra parte, la función característica de la variable aleatoria $S$, está dada para todo 
@@ -471,7 +473,8 @@ $$
 
 <!------------------------------------------------------------------------------------------------->
 ### Algoritmo de simulación
-La variable del reclamo total $S$ puede ser simulada mediante el siguiente método montecarlo.
+La variable del reclamo total $S$ puede ser simulada mediante el siguiente método montecarlo:
+
 Si $N$ sigue una ley discreta $f_N$ y cada valor severidad $X$ son idénticamente distribuidos 
 con ley $f_X$.
 
@@ -486,7 +489,7 @@ $X_{i,1}, \ldots X_{i,N_i}$ con ley $f_X$,
 mediante la siguiente suma $S_i = \sum\limits_{j=1}^{N_i} X_{i,j}$.
 
 En el lenguaje de programación R, este método de simulación puede ser fácilmente implementado, 
-como ya lo hemos realizado, utilizando las funciones de aplicación vectorial `sapply` y `lapply`. 
+utilizando las funciones de aplicación vectorial `sapply` y `lapply`. 
 
 ::: {.example #l6ex3}
 Consideramos el caso de un modelo colectivo para el cuál el conteo de siniestros 
