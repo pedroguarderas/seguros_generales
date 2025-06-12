@@ -1021,7 +1021,7 @@ Consideramos la secuencia de variables aleatorias $\{X_i\}_{i\in \mathbb{N}}$ la
 consideraremos que son i.i.d. y con media común finita $\E[X_i] = \mu < +\infty$. Entonces,
 se satisface el siguiente límite en probabilidad
 $$
-\frac{1}{n} \sum\limits_{i=1}^n X_i \rightarrow \mu
+\frac{1}{n} \sum\limits_{i=1}^n X_i \overset{p}{\rightarrow} \mu
 $$
 esto quiere decir que para cualquier $\varepsilon > 0$ se satisface el siguiente límite
 $$
@@ -1046,12 +1046,12 @@ $$
 \frac{S_n - \E[S_n]}{\V[ S_n ]} \overset{d}{\longrightarrow} Z
 $$
 se tiene la convergencia en distribución, cuando $n \rightarrow +\infty$, 
-donde $Z \rightsquigarrow N( 0, 1 )$. Más aún, de manera más clara se puede expresar como el 
-siguiente límite.
+donde $Z \rightsquigarrow N( 0, 1 )$. Más aún, de manera más clara la convergencia en distribución 
+se puede expresar la convergencia puntual dada por el siguiente límite.
 $$
 \underset{n \rightarrow +\infty}{\lim} P\left( \frac{S_n 
 - \E[S_n]}{\V[ S_n ]} \leq z \right)
-= \Phi( z )
+= \Phi( z ), \qquad \forall z \in \R
 $$
 :::
 ::::
