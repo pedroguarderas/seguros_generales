@@ -1124,7 +1124,7 @@ Con $C = 0.7655+8( 1 + e ) > 0$ una constante universal, independiente de $N$, $
 
 El teorema del límite central \@ref(thm:tlc) no proporciona un criterio para determinar cuan 
 rápido se realiza la convergencia hacia la distribución normal. El resultado de la desigualdad 
-anterior \@ref{thm:beress} si proporciona un criterio de la convergencia eso sí, bajo la 
+anterior \@ref(thm:beress) si proporciona un criterio de la convergencia eso sí, bajo la 
 condición adicional de tener $\E\left[\left|X - \E[X]\right|^3\right] < +\infty$. Como podemos
 observar la convergencia es sub-lineal, va en orden de la raíz cuadrada del número de términos
 $n$.
