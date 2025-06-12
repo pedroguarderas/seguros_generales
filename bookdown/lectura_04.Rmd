@@ -1485,7 +1485,11 @@ xlbl <- formatC( xbrk, digits = 2, format = 'e' )
 xlim <- c( -xmax, xmax )
 
 plt <- ggplot() +
-  geom_histogram( aes( x = e, y = after_stat( density ) ), fill = 'grey50', colour = 'dodgerblue3', bins = nclass.scott( e ) ) + 
+  geom_histogram( 
+    aes( x = e, y = after_stat( density ) ), 
+    fill = 'grey50', 
+    colour = 'dodgerblue3', 
+    bins = nclass.scott( e ) ) + 
   geom_density() +
   scale_x_continuous( breaks = xbrk,
                       labels = xlbl, 
