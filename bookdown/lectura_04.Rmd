@@ -243,7 +243,7 @@ la distribución acumulada de la normal estándar, la cual no admite una forma a
 $$
 \Phi( x ) = \frac{1}{\sqrt{2\pi}} \int\limits_{-\infty}^x \exp\left( -\frac{u^2}{2} \right)\ du
 $$
-```{r l4g1, out.width='80%', fig.align='center', class.source = 'fold-hide'}
+```{r l4g1, warning=FALSE, out.width='80%', fig.align='center', class.source = 'fold-hide'}
 n <- 1e3
 x <- seq( -6, 6, length = n )
 
@@ -1166,7 +1166,7 @@ e <- unlist( lapply( seq( 1, 9, 1 ), FUN = function( n ) seq( 9, 1, -1 ) * 10^{-
 n <- ceiling( -log( delta / 2 ) / ( 2 * e^2 ) )
 ```
 
-```{r l4t1, echo = TRUE, results = 'asis', out.width='100%' }
+```{r l4t1, echo = TRUE, results = 'asis', out.width='100%', class.source = 'fold-hide'}
 dt <- data.table( delta = delta, e, n, d = 8 * n / 1024^3 )
 dt %>%
   kable(
@@ -1212,7 +1212,7 @@ phi <- pnorm( z )
 D <- sapply( FSn, FUN = function( Fn ) max( abs( Fn - phi ) ) )
 ```
 
-```{r l4g2, out.width='80%', fig.align='center', class.source = 'fold-hide'}
+```{r l4g2, warning=FALSE, out.width='80%', fig.align='center', class.source = 'fold-hide'}
 plt <- ggplot() +
   geom_line( aes( x = 1:n, y = D ), colour = 'darkred', linewidth = 0.5 ) + 
   scale_x_continuous( breaks = seq( 0, n, 500 ), limits = c( 1, n ), expand = c( 0, 0 ) ) +
@@ -1223,7 +1223,7 @@ plt <- ggplot() +
 plot( plt )
 ```
 
-```{r l4g3, out.width='80%', fig.align='center', class.source = 'fold-hide'}
+```{r l4g3, warning=FALSE, out.width='80%', fig.align='center', class.source = 'fold-hide'}
 dat <- NULL
 for ( k in 1:n ) {
   dat <- rbindlist( list( dat, data.table( z = z, n = as.factor( k ), FSn = FSn[[ k ]] ) ) )
@@ -1450,7 +1450,7 @@ $$
 
 Como se puede observar se superponen cada una de las distribuciones la discretización $f_k$ y la 
 calculada con inversión de la transformada de Fourier discreta.
-```{r l4g4, out.width='80%', fig.align='center', class.source = 'fold-hide'}
+```{r l4g4, warning=FALSE, out.width='80%', fig.align='center', class.source = 'fold-hide'}
 xbrk <- seq( 0, 40, length = 9 )
 xlbl <- formatC( xbrk, digits = 0, format = 'f' )
 xlim <- c( 0, 40 )
@@ -1476,7 +1476,7 @@ plt <- ggplot() +
 plot( plt )
 ```
 
-```{r l4g5, out.width='80%', fig.align='center', class.source = 'fold-hide'}
+```{r l4g5, warning=FALSE, out.width='80%', fig.align='center', class.source = 'fold-hide'}
 e <- f - IFf
 
 xmax <- max( abs( e ) )
