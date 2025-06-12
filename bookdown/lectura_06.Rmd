@@ -5,8 +5,8 @@
 ## Mutualización del riesgo
 La idea de mantener un seguro está basada en la mutualización de los riesgos. La mutualización 
 como tal nace del mismo mecanismo bajo el cual funciona un seguro, cada asegurado transfiera 
-su riesgo individual a la compañía de seguros por su parte, la suma total de estos riesgos $S$ es 
-el riesgo total que asume el asegurador.
+su riesgo individual a la compañía de seguros, la suma total de estos riesgos $S$ es el riesgo total
+que asume el asegurador.
 
 Los riesgos de cada uno de los $n \in \N$ asegurados, pueden ser representados por variables 
 aleatorias $X_1,\ldots X_n$, las mismas pueden ser independientes o dependientes entre ellas. El 
@@ -16,14 +16,14 @@ S = \sum\limits_{i=1}^n X_i
 $$
 El conocer la distribución del costo total $S$ es una tarea crucial para el asegurador.
 
-El valor esperado de de los reclamos totales, puede ser calculado fácilmente utilizando las
-propiedades de linealidad de la esperanza matemática $\E$
+El valor esperado de los reclamos totales, puede ser calculado fácilmente utilizando las
+propiedades de linealidad de la esperanza matemática $\E$:
 $$
 \E[ S ]
 = \E\left[ \sum\limits_{i=1}^n X_i \right] 
 = \sum\limits_{i=1}^n \E\left[ X_i \right]
 $$
-por su parte, la varianza de la variable aleatoria del costo total $S$, está dada por:
+La varianza de la variable aleatoria del costo total $S$, está dada por:
 $$
 \begin{split}
 \V\left[ S \right]
@@ -36,17 +36,17 @@ $$
 $$
 
 Muchas de las veces el número total de reclamos $n$ es incierto y por tal razón es mejor considerar
-que el número de siniestros vendrá dado por otra variable aleatoria discreta $N$ que solo tomará 
-valores en $\N$
+que el número de siniestros vendrá dado por otra variable aleatoria discreta $N$, que solo tomará 
+valores en $\N$.
 $$
 S = \sum\limits_{i=1}^N X_i
 $$
 
-Esto nos lleva a considerar diferentes modelos de agregación de reclamos o pérdidas como se suele 
-decir en inglés "loss models" @PanjerLoss2012, @LossModFur.
+Esto nos lleva a considerar diferentes modelos de agregación de reclamos o pérdidas, en inglés
+"loss models" @PanjerLoss2012, @LossModFur.
 
 De forma preliminar estudiemos la forma general que podría tener la distribución de $S$, sin realizar
-alguna hipótesis (previa sobre el comportamiento de las variables aleatorias $X_1, \ldots, X_n$ y $N$.
+alguna hipótesis previa sobre el comportamiento de las variables aleatorias $X_1, \ldots, X_n$ y $N$.
 $$
 \begin{split}
 F_S( s ) 
@@ -62,12 +62,11 @@ F_S( s )
 \qquad \text{$F_n$ es la distribución conjunta de $X_1, \ldots, X_n$ dado $N = n$} 
 \end{split}
 $$
-la última expresión es importante de retener, nos dice que para comprender el comportamiento de 
-los reclamos totales $S$, debemos estudiar y estimar la frecuencia de los reclamos $N$, y también 
-debemos comprender y estimar cada uno de los reclamos $X_i$ y también su interacción, siendo al 
-menos estos una infinidad si $N$ puede tomar valores tendiendo al infinito. En términos resumidos, 
-hay que comprender y estimar la frecuencia y severidad de los reclamos que están asociados al riesgo 
-cubierto. 
+La última expresión nos dice que para comprender el comportamiento de los reclamos totales $S$,
+debemos estudiar y estimar la frecuencia de los reclamos $N$, además de comprender y estimar cada
+uno de los reclamos $X_i$ y su interacción, recordando que $N$ puede tomar valores tendiendo al
+infinito. En términos resumidos, hay que comprender y estimar la frecuencia y severidad de los 
+reclamos que están asociados al riesgo cubierto. 
 
 Los términos integrales $\int\limits_{\left\{\sum\limits_{i=1}^n x_i \leq s\right\}} dF_n( x_1, \ldots, x_n )$ 
 asociados a la severidad presentan un verdadero reto estadístico y computacional; hace unos años 
