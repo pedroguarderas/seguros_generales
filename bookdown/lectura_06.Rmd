@@ -789,8 +789,8 @@ deducible es evitar valores de reclamo en determinados rangos que no están acor
 configuraciones y estructuración de productos de seguro. Por ejemplo, se puede colocar un deducible
 para evitar el pago de valores muy pequeños de reclamos, cuya atención incluso puede implicar
 costos operativos o administrativos mayores al valor mismo de los reclamos, ante esta situación 
-se coloca una cota mínima para que de esta forma el asegurado se haga cargo por su cuenta por 
-estos valores menores.
+se coloca una cota mínima para que de esta forma el asegurado se haga cargo por su cuenta de estos 
+valores menores.
 
 Es usual colocar mínimos en las colas de la distribución de reclamos, evitando así valores muy 
 pequeños o valores muy grandes, pero no sería sustentable, ni financieramente o económicamente, el 
@@ -801,14 +801,13 @@ producto difícil de comercializar.
 
 :::: {.thmbox data-latex=""}
 ::: {.definition #ddeducible name="Deducible"}
-De forma algo más formal, un **deducible** es una función $D : \R \longrightarrow \R$ a valores 
-reales, tal que para todo valore real $x \in \R$, se satisface la siguiente desigualdad 
+Formalmente, un **deducible** es una función $D : \R \longrightarrow \R$ a valores 
+reales, tal que para todo valor real $x \in \R$, se satisface la siguiente desigualdad:
 $D( x ) \leq x$.
 :::
 ::::
 
-A continuación presentamos un lista de funciones deducibles, de algunos de los tipos de deducibles
-más comunes que se presenta en el mercado.
+A continuación presentamos un lista de funciones deducibles más comunes que presenta el mercado:
 
 1. Para evitar pérdidas pequeñas se suele configurar la función deducible 
 $$
@@ -855,13 +854,13 @@ plot( plt )
 
 2. Para prevenir los excesos de pérdida (stop loss) se propone el deducible con un tope máximo
 dado por una constante $M > 0$, el cual se aplica a las variables aleatorias de los reclamos
-$X \rightsquigarrow F_X$.
+$X \rightsquigarrow F_X$:
 $$
 D( X ) = \min( X, M )
 $$, 
 
 en este caso, si la variable aleatoria del pago correspondiente al reclamo ya deducido 
-$Z = D( X ) \rightsquigarrow F_Z( z )$, donde 
+$Z = D( X ) \rightsquigarrow F_Z( z )$, donde: 
 $$
 F_Z( z ) = \mathbf{1}_{(-\infty,M)}( z ) F_X( z ) + \mathbf{1}_{[M,+\infty)}( z )
 $$
@@ -900,7 +899,7 @@ plot( plt )
 ```
 
 3. Caso mixto para evitar pérdidas pequeñas y exceso de pérdida, se propone la siguiente composición
-de deducibles que se aplicará sobre las variables aleatorias de los reclamos $X \rightsquigarrow F_X$
+de deducibles que se aplicará sobre las variables aleatorias de los reclamos $X \rightsquigarrow F_X$:
 $$
 D( X ) = \min( \max( X - d, 0 ), M )
 $$
@@ -944,14 +943,14 @@ plt <- ggplot( ) +
 plot( plt )
 ```
 
-4. Otro tipo de deducible acota el número de pagos de reclamos a un número fijo máximo de reclamos
-es decir, se establece un deducible en función para la frecuencia. Usualmente, esto se realiza 
-cuando se considera un modelo donde se dispone de la frecuencia de reclamos por póliza.
+4. Otro tipo de deducible acota el número de pagos de reclamos a un número fijo máximo de reclamos,
+es decir, se establece un deducible en función de la frecuencia. Usualmente, esto se realiza cuando
+se considera un modelo donde se dispone de la frecuencia de reclamos por póliza.
 $$
 D(N) = \min( N, W )
 $$
 con la constante $W \in \N$. Para el reclamo total, si se considera un portafolio con $n$
-pólizas tenemos las siguiente variación del modelo.
+pólizas tenemos las siguiente variación del modelo:
 $$
 S = \sum\limits_{i=1}^n \sum\limits_{j=1}^{D(N_i)} X_{i,j}
 $$
@@ -959,15 +958,15 @@ $$
 5. En otros casos más elaborados se segmenta el riesgo cubierto, al existir variables explicativas
 de la naturaleza del riesgo $Y_1, \ldots, Y_m$, las cuales pueden tomar valores en un conjunto $E$
 solo se toma un subconjunto de valores posibles $A\subset E$, para los cuales es válida la cobertura.
-Así si un reclamo $X$ se explica o caracteriza por las variables anteriores se configura el 
-deducibles 
+Así, si un reclamo $X$ se explica o caracteriza por las variables anteriores, se configura el 
+deducible:
 $$
 D( X ) = \mathbf{1}_{A}\left( Y_1, \ldots, Y_m \right) X
 $$
 
-Un ejemplo del anterior deducible se suele dar en el caso de seguros de salud, donde se cubre 
-ciertos tipos de enfermedades, usualmente se suele evitar las enfermedades de tipo catastrófico 
-que estén ya presentes, en otros productos se evita los gastos odontológicos, etc.
+Un ejemplo del anterior deducible se da en el caso de seguros de salud, donde se cubre ciertos tipos
+de enfermedades, usualmente se evita las enfermedades de tipo catastrófico que estén ya presentes;
+en otros productos se evita los gastos odontológicos, etc.
 
 Los deducibles, pueden ser configurados de forma genérica para todos los asegurados o incluso 
 de forma personalizada por asegurado, según los productos que estos han adquirido. En general, al 
@@ -982,12 +981,9 @@ $$
 S = \sum\limits_{i=1}^n D_i\left( \sum\limits_{n=1}^{N_i} X_{i,j} \right)
 $$
 
-Este caso se suele presentar en los productos que partir de una suma parcial de reclamos individuales,
-el deducible comienza a regir.
-
-Es de notar además que la distribución acumulada de la variable aleatoria correspondiente a los 
-reclamos ya deducidos comienza a presentar singularidades, esto complica el estudio del 
-comportamiento de los reclamos totales.
+Es de notar, que la distribución acumulada de la variable aleatoria, correspondiente a los reclamos
+ya deducidos, comienza a presentar singularidades, esto complica el estudio del comportamiento de 
+los reclamos totales.
 
 <!------------------------------------------------------------------------------------------------->
 ### Algoritmo de simulación
