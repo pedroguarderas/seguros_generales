@@ -10,7 +10,7 @@ que asume el asegurador.
 
 Los riesgos de cada uno de los $n \in \N$ asegurados, pueden ser representados por variables 
 aleatorias $X_1,\ldots X_n$, las mismas pueden ser independientes o dependientes entre ellas. El 
-costo total del portafolio está dado por la suma de todos estos riesgos.
+costo total del portafolio está dado por la suma de todos estos riesgos:
 $$
 S = \sum\limits_{i=1}^n X_i
 $$
@@ -45,8 +45,8 @@ $$
 Esto nos lleva a considerar diferentes modelos de agregación de reclamos o pérdidas, en inglés
 "loss models" @PanjerLoss2012, @LossModFur.
 
-De forma preliminar estudiemos la forma general que podría tener la distribución de $S$, sin realizar
-alguna hipótesis previa sobre el comportamiento de las variables aleatorias $X_1, \ldots, X_n$ y $N$.
+Estudiemos la forma general que podría tener la distribución de $S$, sin realizar hipótesis previa
+sobre el comportamiento de las variables aleatorias $X_1, \ldots, X_n$ y $N$.
 $$
 \begin{split}
 F_S( s ) 
@@ -69,8 +69,8 @@ infinito. En términos resumidos, hay que comprender y estimar la frecuencia y s
 reclamos que están asociados al riesgo cubierto. 
 
 Los términos integrales $\int\limits_{\left\{\sum\limits_{i=1}^n x_i \leq s\right\}} dF_n( x_1, \ldots, x_n )$ 
-asociados a la severidad presentan un verdadero reto estadístico y computacional; hace unos años 
-atrás se desarrolló unos nuevos algoritmos para calcular estos términos @aep_algo, @gaep_algo.
+asociados a la severidad presentan un verdadero reto estadístico y computacional; años atrás se
+desarrollaron algoritmos para calcular estos términos @aep_algo, @gaep_algo.
 
 <!------------------------------------------------------------------------------------------------->
 ## Modelo individual {#modelo_individual}
@@ -78,7 +78,7 @@ atrás se desarrolló unos nuevos algoritmos para calcular estos términos @aep_
 :::: {.thmbox data-latex=""}
 ::: {.definition #dmodind name="Modelo individual"}
 En el **modelo individual** de pérdida consideramos que el número de siniestros que se producirán es
-conocido, por ejemplo puede ser a lo sumo el tamaño de la población asegurada, en tal caso la
+conocido, por ejemplo, puede ser a lo sumo el tamaño de la población asegurada, en tal caso la
 variable aleatoria $N$ pasa a ser una constante, que representaremos por $n$. De esta forma, la
 severidad total puede ser fácilmente representada por: 
 $$
@@ -107,8 +107,8 @@ $$
 & = \V\left[ \sum\limits_{i=1}^n X_i \right] \\
 & = \sum\limits_{i=1}^n \V\left[ X_i \right] 
 + \sum\limits_{i=1}^n \sum\limits_{j=1,j\neq i}^n \mathbb{C}\left[ X_i, X_j \right] \\
-& = \sum\limits_{i=1}^n \V\left[ X_i \right]\quad \text{si $\{X_i\}$ sin son independientes entre si} \\
-& = n \V\left[ X \right]\quad \text{si $\{X_i\}$ sin son idénticamente distribuidas}
+& = \sum\limits_{i=1}^n \V\left[ X_i \right]\quad \text{si $\{X_i\}$ si son independientes entre si} \\
+& = n \V\left[ X \right]\quad \text{si $\{X_i\}$ si son idénticamente distribuidas}
 \end{split}
 $$
 
@@ -117,7 +117,7 @@ total de reclamos $S$ puede ser calculada de la forma más sencilla:
 $$
 \begin{split}
 F_S( x )
-& = F_{X_1} \star \cdots \star F_{X_n} ( s )\quad \text{sin $\{X_i\}$ son independientes} \\
+& = F_{X_1} \star \cdots \star F_{X_n} ( s )\quad \text{si $\{X_i\}$ son independientes} \\
 & = F_{X}^{\star n}( s )\quad \text{si $\{X_i\}$ son idénticamente distribuidas}
 \end{split}
 $$
@@ -126,36 +126,35 @@ así mismo, si las densidades de probabilidad están bien definidas, entonces:
 $$
 \begin{split}
 f_S( s )
-& = f_{X_1} \star \cdots \star f_{X_n} ( s )\quad \text{sin $\{X_i\}$ son independientes} \\
+& = f_{X_1} \star \cdots \star f_{X_n} ( s )\quad \text{si $\{X_i\}$ son independientes} \\
 & = f_{X}^{\star n}( s )\quad \text{si $\{X_i\}$ son idénticamente distribuidas}
 \end{split}
 $$
 
-Una posible estrategia para estimar $F_S$ o $f_S$ es utilizar la transformada de Fourier 
-$\Fo$, la cual convierte las convoluciones en productos y luego invertir de nuevo la 
-transformada de Fourier:
+Una estrategia para estimar $F_S$ o $f_S$ es utilizar la transformada de Fourier $\Fo$, la cual
+convierte las convoluciones en productos y luego invertir de nuevo la transformada de Fourier:
 $$
 \begin{split}
 F_S 
 & = \Fo^{-1}\left( \Fo\left( F_S \right) \right) \\
 & = \Fo^{-1}\left( \Fo\left( F_{X_1} \star \cdots \star F_{X_n} \right) \right)
-\quad \text{sin $\{X_i\}$ son independientes} \\
+\quad \text{si $\{X_i\}$ son independientes} \\
 & = \Fo^{-1}\left( \prod\limits_{i=1}^n \Fo\left( F_{X_i} \right) \right) \\ 
 & = \Fo^{-1}\left( \Fo\left( F_{X} \right)^n \right)
-\quad \text{si $\{X_i\}$ sin son idénticamente distribuidas } 
+\quad \text{si $\{X_i\}$ si son idénticamente distribuidas } 
 \end{split}
 $$
 
-de forma equivalente para la densidad $f_S$
+de forma equivalente para la densidad $f_S$:
 $$
 \begin{split}
 f_S 
 & = \Fo^{-1}\left( \Fo\left( f_S \right) \right) \\
 & = \Fo^{-1}\left( \Fo\left( f_{X_1} \star \cdots \star f_{X_n} \right) \right)
-\quad \text{sin $\{X_i\}$ son independientes} \\
+\quad \text{si $\{X_i\}$ son independientes} \\
 & = \Fo^{-1}\left( \prod\limits_{i=1}^n \Fo\left( f_{X_i} \right) \right) \\ 
 & = \Fo^{-1}\left( \Fo\left( f_{X} \right)^n \right)
-\quad \text{si $\{X_i\}$ sin son idénticamente distribuidas } 
+\quad \text{si $\{X_i\}$ si son idénticamente distribuidas } 
 \end{split}
 $$
 Por otra parte, la función característica de la variable aleatoria $S$, está dada para todo 
@@ -193,7 +192,7 @@ $S_i = \sum\limits_{j=1}^n X_{i,j}$
 
 ::: {.example #l6ex1}
 El siguiente código ejemplifica el algoritmo anterior, donde se asume que cada variable aleatoria de 
-severidad $X_i$ sigue una ley log-normal $LN( \mu_i, \sigma_i )$, de parámetros $\mu_i, \sigma_i$, 
+severidad $X_i$ sigue una ley log-normal $LN( \mu_i, \sigma_i )$ con parámetros $\mu_i, \sigma_i$, 
 para cada $i \in \{1,\ldots, n\}$. El reclamo total $S = \sum\limits_{i=1}^n X_i$ sigue una ley 
 de probabilidad que estará dada por la convolución de cada una de las leyes de probabilidad de 
 cada reclamo $X_i$, sin embargo estas leyes en este ejemplo son log-normales y no se conoce una 
@@ -212,13 +211,16 @@ sigma <- seq( 2, 3, length.out = n )
 m <- 1e3 
 
 # 3. simulación de severidades
-X <- lapply( 1:m, FUN = function( i ) sapply( 1:n, FUN = function( j ) rlnorm( 1, meanlog = mu[ j ], sdlog = sigma[ j ] ) ) )
+X <- lapply( 1:m, 
+             FUN = function( i ) sapply( 1:n, 
+                                         FUN = function( j ) rlnorm( 1, meanlog = mu[ j ], 
+                                                                     sdlog = sigma[ j ] ) ) )
 
 # 4. simulación de severidad total
 S <- sapply( X, FUN = function( x ) sum( x ) )
 ```
 
-Como ya lo mencionamos en este ejemplo la densidad de probabilidad de la severidad $S$ resulta de la
+Como mencionamos, en este ejemplo, la densidad de probabilidad de la severidad $S$ resulta de la
 convolución de las $n$ densidades individuales $f_S = f_{X_1} \star \cdots \star f_{X_n}$, la cual
 no presenta una forma analítica conocida. 
 
@@ -411,8 +413,8 @@ F_S( s )
 $$
 tomando $F^{\star 0}_{X}( s ) = 1$. 
 
-Este último resultado muestra que la distribución de probabilidad de $S$ no es más que una mixtura
-de las distribuciones para los modelos individuales $F^{\star n}_{X}$ tomando para mezclarlas las 
+El último resultado muestra que la distribución de probabilidad de $S$ no es más que una mixtura
+de las distribuciones para los modelos individuales $F^{\star n}_{X}$, tomando para mezclarlas las 
 probabilidades $p_n = P( N = n )$ de la variable aleatoria discreta $N$ que describe la frecuencia
 de los reclamos.
 
@@ -423,7 +425,7 @@ $$
 F_S 
 & = \Fo^{-1}\left( \Fo\left( F_S \right) \right) \\
 & = \Fo^{-1}\left( \Fo\left( \sum\limits_{n=0}^{+\infty} F_{X_1} \star \cdots \star F_{X_n}( s ) p_n \right) \right)
-\quad \text{sin $\{X_i\}$ son independientes} \\
+\quad \text{si $\{X_i\}$ son independientes} \\
 & = \Fo^{-1}\left( \sum\limits_{n=0}^{+\infty} \prod\limits_{i=1}^n \Fo\left( F_{X_i} \right) p_n \right) \\ 
 & = \Fo^{-1}\left( \sum\limits_{n=0}^{+\infty} \Fo\left( F_{X} \right)^n p_n \right)
 \quad \text{si $\{X_i\}$ si son idénticamente distribuidas }
@@ -436,14 +438,14 @@ $$
 f_S 
 & = \Fo^{-1}\left( \Fo\left( f_S \right) \right) \\
 & = \Fo^{-1}\left( \Fo\left( \sum\limits_{n=0}^{+\infty} f_{X_1} \star \cdots \star f_{X_n}( s ) p_n \right) \right)
-\quad \text{sin $\{X_i\}$ son independientes} \\
+\quad \text{si $\{X_i\}$ son independientes} \\
 & = \Fo^{-1}\left( \sum\limits_{n=0}^{+\infty} \prod\limits_{i=1}^n \Fo\left( f_{X_i} \right) p_n \right) \\ 
 & = \Fo^{-1}\left( \sum\limits_{n=0}^{+\infty} \Fo\left( f_{X} \right)^n p_n \right)
 \quad \text{si $\{X_i\}$ si son idénticamente distribuidas }
 \end{split}
 $$
 
-En la práctica es imposible realizar la suma hasta infinito, de donde se puede utilizar una 
+En la práctica es imposible realizar la suma hasta infinito, por esto, se puede utilizar una 
 aproximación escogiendo un número máximo $M \in \N$ de términos en la suma, obteniendo así las 
 aproximaciones.
 
@@ -522,11 +524,11 @@ de siniestros es poco observada, esto sucede cuando la probabilidad $P( N = 0 )$
 razón para generar suficientes reclamos y así poder tener cálculos con una buena aproximación 
 numérica, se necesitarán muchas simulaciones.
 
-Es interesante observar que el modelo colectivo puede ser muchas veces calculado de forma similar
-a un modelo individual, para ciertos casos particulares. Por ejemplo, si consideramos el caso 
-cuando la variable aleatoria del conteo de siniestros $N \rightsquigarrow Bin( n, p )$ sigue una 
-distribución binomial con parámetros $n$ y $p$ y los reclamos individuales $\{ X_i \}$ son i.i.d.
-A partir de esto, el reclamo total $S$ puede ser expresado de dos formas
+Para ciertos casos particulares, el modelo colectivo puede ser muchas veces calculado de forma
+similar a un modelo individual. Por ejemplo, si consideramos el caso cuando la variable aleatoria 
+del conteo de siniestros $N \rightsquigarrow Bin( n, p )$ sigue una distribución binomial con
+parámetros $n$ y $p$ y los reclamos individuales $\{ X_i \}$ son i.i.d. A partir de esto, el reclamo
+total $S$ puede ser expresado de dos formas:
 $$
 S = \sum\limits_{k=0}^{N} X_k
 = \sum\limits_{k=0}^n B_k X_k
@@ -548,7 +550,7 @@ $$
 \end{split}
 $$
 
-así mismo,
+así mismo:
 $$
 \begin{split}
 \V[ S ]
@@ -607,11 +609,11 @@ reclamos $X_i$, ya que algunos se multiplicaran por $B_i$, la cual solo toma val
 :::: {.thmbox data-latex=""}
 ::: {.definition #dmodmix name="Modelo mixto"}
 En algunos casos en particular se considera un modelo de agregación que es una mixtura entre el
-modelo individual y el modelo colectivo. Se parte de considerar un número $n$ de unidades aseguradas
-donde para cada unidad $i \in \{1, \ldots, n\}$, se considera que puede presentar una cantidad 
-de reclamos dados por una variable aleatoria discreta $N_i$, cada uno de las $i$ unidades puede 
-presentar un número de reclamos $X_{i,1}, \ldots, X_{i,N_i}$. De agregar el total de reclamos, 
-se tiene la expresión
+modelo individual y el modelo colectivo. Se parte de considerar un número $n$ de unidades 
+aseguradas, donde para cada unidad $i \in \{1, \ldots, n\}$ se considera que puede presentar una 
+cantidad de reclamos dados por una variable aleatoria discreta $N_i$, cada uno de las $i$ unidades
+pueden presentar un número de reclamos $X_{i,1}, \ldots, X_{i,N_i}$. De agregar el total de reclamos, 
+se tiene la expresión:
 $$
 S 
 = \sum\limits_{i=1}^n \sum\limits_{j=1}^{N_i} X_{i,j}
@@ -620,7 +622,7 @@ $$
 ::::
 
 Si en caso todos los reclamos $X_{i,j}$ son idénticamente distribuidos entre unidades aseguradas 
-y reclamos, entonces el reclamos total anterior puede ser visto como un modelo colectivo de pérdida.
+y reclamos, entonces el reclamo total anterior puede ser visto como un modelo colectivo de pérdida:
 $$
 S 
 = \sum\limits_{j=1}^{N} X_j
@@ -643,18 +645,18 @@ En varias situaciones es difícil determinar la distribución de los reclamos to
 hemos visto no hay una forma explícita sencilla. 
 
 Para tener una primera aproximación a la distribución, se puede utilizar el teorema del límite 
-central \@ref(thm:tlc), para ello se requiere un gran número de elementos en la suma determina 
-los reclamos totales $S$, como ya lo muestra la desigualdad \@ref(thm:beress), 
-la convergencia requiere un número de términos inversamente proporcional al cuadrado del error
-de aproximación. Sin embargo, si en caso el número de reclamos $n$ no es lo suficientemente grande 
-como para obtener un error de aproximación deseado, podemos hacer uso de un resultado más fuerte como 
-la desigualdad de concentración de \@ref(thm:beress), la misma no solo implica el teorema del límite 
-central, sino que además proporciona una acotación y velocidad de convergencia conforme se aumenta 
-$n$. Esta desigualdad puede ser de gran utilidad para tener una acotación de la distribución de los 
-reclamos totales, para cualquier valor de $n$.
+central \@ref(thm:tlc), para ello se requiere un gran número de elementos en la suma de los reclamos 
+totales $S$. Como ya lo muestra la desigualdad \@ref(thm:beress), la convergencia requiere un número
+de términos inversamente proporcional al cuadrado del error de aproximación. Sin embargo, si en caso 
+el número de reclamos $n$ no es lo suficientemente grande como para obtener un error de aproximación
+deseado, podemos hacer uso de un resultado más fuerte como la desigualdad de concentración de
+\@ref(thm:beress), la misma no solo implica el teorema del límite central, sino que además 
+proporciona una acotación y velocidad de convergencia conforme se aumenta $n$. Esta desigualdad
+puede ser de gran utilidad para tener una acotación de la distribución de los reclamos totales, para
+cualquier valor de $n$.
 
 Más claramente, para el caso del modelo individual, donde $n$ es una constante, el teorema
-\@ref(thm:beress) nos proporciona la siguiente desigualdad
+\@ref(thm:beress) nos proporciona la siguiente desigualdad:
 $$
 \begin{split}
 \underset{u\in \R}{\sup}\left( 1 + |u|^3 \right)\left| P\left( \frac{S - \E[S]}{\sqrt{\V[S]}}  \leq u\right) - \Phi( u ) \right| 
@@ -663,7 +665,7 @@ $$
 & \leq \frac{C}{\sqrt{n}} \frac{\E\left[\left|X - \E[X]\right|^3\right]}{\sqrt{\V[X]}^3},\qquad \forall u \in \R \\
 \end{split}
 $$
-Para simplificar la manipulación de las expresiones podemos tomar 
+Para simplificar la manipulación de las expresiones podemos tomar:
 $\tau = \frac{\E\left[\left|X - \E[X]\right|^3\right]}{\sqrt{\V[X]}^3}$
 \begin{gather*}
 -\frac{C}{\sqrt{n}} \tau
@@ -679,8 +681,9 @@ $\tau = \frac{\E\left[\left|X - \E[X]\right|^3\right]}{\sqrt{\V[X]}^3}$
 \leq P\left( S \leq s \right) 
 \leq \min\left( \Phi\left( \frac{s - \E[S]}{\sqrt{\V[S]}} \right) + \frac{C}{\sqrt{n}\left( 1 + \left|\frac{s - \E[S]}{\sqrt{\V[S]}}\right|^3 \right)} \tau, 1 \right)
 \end{gather*}
-cambiando la variable $s = \E[S] + \sqrt{\V[S]} u$. El $\max$ y $\min$ resultan debido a que una
-probabilidad siempre está acotada en el rango de $0$ a $1$.
+cambiando la variable $s = \E[S] + \sqrt{\V[S]} u$.
+El $\max$ y $\min$ resultan debido a que una probabilidad siempre está acotada en el rango de $0$ a
+$1$.
 
 El ejemplo a continuación muestra un claro uso del resultado anterior.
 
@@ -719,9 +722,9 @@ Fmin <- pmax( pnorm( u ) - C * tau / ( sqrt( n ) * r ), 0 ) # cota inferior
 Phi <- sapply( s, FUN = function( s ) pnorm( ( s - ES ) / sqrt( VS ) ) )
 ```
 
-Como se puede ver en el gráfico a continuación la acotación funciona muy bien y al aumentar el 
-número de siniestros $n$ se disminuye el rango de la acotación, proporcionando así una mejor 
-estimación de la distribución de los reclamos totales $S$.
+Como se puede ver en el siguiente gráfico, la acotación funciona muy bien y al aumentar el número de 
+siniestros $n$ se disminuye el rango de la acotación, proporcionando así una mejor estimación de la 
+distribución de los reclamos totales $S$.
 ```{r l6g2, warning=FALSE, out.width='80%', fig.align='center', class.source = 'fold-hide'}
 ylim <- c( 0, 1 )
 ybrk <- seq( ylim[1], ylim[2], 0.1 )
@@ -754,7 +757,7 @@ plt
 :::
 
 Es de notar que las variables aleatorias de los reclamos pueden seguir cualquier otra distribución, 
-el método no depende de la distribución en cuestión sino de que la variable que representa 
+el método no depende de la distribución en cuestión, sino de que la variable que representa 
 los reclamos tenga esperanza finita, varianza finita y la variación de tercer orden 
 $\E\left[\left|X - \E[X]\right|^3 \right] < +\infty$, también sea finita.
 
@@ -770,9 +773,9 @@ $$
 
 Esto es válido siempre y cuando la cota del error de aproximación 
 $\frac{C}{\sqrt{n}\left( 1 + \left|\frac{s - \E[S]}{\sqrt{\V[S]}}\right|^3 \right)} \tau$, sea 
-lo suficientemente pequeño. Además, es de notar que se está trabajando con valores que solo están 
+lo suficientemente pequeña. Además, es de notar que se está trabajando con valores que solo están 
 entre $0$ y $1$, pequeñas variaciones pueden ser muy relevantes al nivel del ajuste de las 
-distribuciones acumuladas .
+distribuciones acumuladas.
 
 Finalmente, debemos tomar en cuenta que las cotas, superior como inferior, no son funciones de 
 de distribución acumuladas en la variable $s$, no necesariamente son siempre crecientes.
@@ -783,7 +786,7 @@ de distribución acumuladas en la variable $s$, no necesariamente son siempre cr
 En muchas ocasiones según las condiciones de los contratos de seguro y el apetito de riesgo del 
 asegurador, se configura funciones deducibles sobre los reclamos. El objetivo de aplicar un 
 deducible es evitar valores de reclamo en determinados rangos que no están acorde a las 
-configuraciones y estructuración de productos de seguro. Por ejemplo: se puede colocar un deducible
+configuraciones y estructuración de productos de seguro. Por ejemplo, se puede colocar un deducible
 para evitar el pago de valores muy pequeños de reclamos, cuya atención incluso puede implicar
 costos operativos o administrativos mayores al valor mismo de los reclamos, ante esta situación 
 se coloca una cota mínima para que de esta forma el asegurado se haga cargo por su cuenta por 
@@ -1235,7 +1238,7 @@ f_S\left( s_k \right)
 f_X\left( s_i \right) f_S\left( s_{k-i} \right) \left( s_{i+1} - s_i \right)
 $$
 
-Al tomar un división uniforme para la malla utilizada para aproximar la integral, por ejemplo 
+Al tomar un división uniforme para la malla utilizada para aproximar la integral, por ejemplo, 
 $s_k = k h$, tenemos que: 
 $$
 f_S\left( s_k \right) 
