@@ -1047,7 +1047,7 @@ DS <- sapply( DX, FUN = function( x ) ifelse( length( x ) == 0, 0, sum( x, na.rm
 El efecto del deducible sobre la distribución del reclamo es evidente, produciendo así una 
 densidad multimodal, como se observa en el gráfico a continuación, en el mismo incluimos dos 
 histogramas, uno correspondiente a los reclamos totales sin aplicar el deducible y el otro 
-el histograma de los reclamos totales aplicados el deducible..
+el histograma de los reclamos totales aplicados el deducible.
 ```{r l6g6, warning=FALSE, out.width='80%', fig.align='center', class.source='fold-hide'}
 smax <- lambda * M
 fmax <- 0.002
@@ -1125,7 +1125,7 @@ PSmax <- sum( ( ( 1 - plnorm( M + d, meanlog = u, sdlog = s ) )^ns ) * dpois( ns
 $$
 P( S\ \text{es máximo} ) = `r formatC( PSmax, digits = 9, format = 'f' )`
 $$
-Además, podemos calcular el valor máximo esperado de $S$.
+Además, podemos calcular el valor máximo esperado de $S$:
 $$
 \begin{split}
 \E\left[ S \middle| S\ \text{es máximo} \right]
