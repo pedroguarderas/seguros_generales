@@ -1992,8 +1992,8 @@ Preparamos la función de verosimilitud en R, en este caso debemos construirla e
 ayuda de alguna función en un paquete, esto se debe a que el deducible $d$ y el monto máximo de 
 cobertura $M$ varían entre pólizas. Esta construcción debe ser realizada para cada grupo de riesgo y
 a su vez debemos maximizar cada una de las verosimilitudes logarítmicas, esto lo podemos realizar
-de forma integrada utilizando un bucle de programación `for` y el método usual de optimización 
-`optim`.
+de forma integrada utilizando un bucle de programación `for` y el método de optimización no 
+lineal `nloptr` del paquete con el mismo nombre.
 ```{r l6c22, warning=FALSE}
 Fd <- plnorm
 fd <- dlnorm
@@ -2145,11 +2145,12 @@ $$
 El valor esperado y varianza de cada uno de estos reclamos totales por grupo de riesgo $g$ y 
 producto $r$, están dados por:
 $$
+\begin{split}
 \E\left[ S_{g,r} \right] 
-= n_{g,r} \E\left[ N_g \right] \E\left[ D( X_g ) \right],
-\qquad
+& = n_{g,r} \E\left[ N_g \right] \E\left[ D( X_g ) \right] \\
 \V\left[ S_{g,r} \right] 
-= n_{g,r} \left( \E\left[ N_g \right] \V\left[ D( X_g ) \right] + \V\left[ N_g \right] \E\left[ D( X_g ) \right]^2 \right),
+& = n_{g,r} \left( \E\left[ N_g \right] \V\left[ D( X_g ) \right] + \V\left[ N_g \right] \E\left[ D( X_g ) \right]^2 \right)
+\end{split}
 $$
 El reclamo total por grupo de riesgo $g$, tan solo resulta de la suma de los reclamos totales por 
 cada producto.
@@ -2158,11 +2159,12 @@ S_g = \sum\limits_{r=1}^{R} S_{g,r}
 $$
 de igual forma su valor esperado y varianza están dados por:
 $$
+\begin{split}
 \E\left[ S_g \right] = \sum\limits_{r=1}^R \E\left[ S_{g,r} \right]
-= \sum\limits_{r=1}^R n_{g,r} \E\left[ N_g \right] \E\left[ D( X_g ) \right],
-\qquad
+& = \sum\limits_{r=1}^R n_{g,r} \E\left[ N_g \right] \E\left[ D( X_g ) \right] \\
 \V\left[ S_{g} \right] = \sum\limits_{r=1}^R \V\left[ S_{g,r} \right]
-= \sum\limits_{r=1}^R n_{g,r} \left( \E\left[ N_g \right] \V\left[ D( X_g ) \right] + \V\left[ N_g \right] \E\left[ D( X_g ) \right]^2 \right),
+& = \sum\limits_{r=1}^R n_{g,r} \left( \E\left[ N_g \right] \V\left[ D( X_g ) \right] + \V\left[ N_g \right] \E\left[ D( X_g ) \right]^2 \right)
+\end{split}
 $$
 
 ```{r l6c24}
