@@ -1171,13 +1171,13 @@ deseables.
 
 :::: {.thmbox data-latex=""}
 ::: {.theorem #mleconsistent}
-Los estimadores por maximización de verosimilitud son consistentes.
+Los estimadores por maximización de verosimilitud, si en caso existen, estos son consistentes.
 :::
 ::::
 
 :::: {.thmbox data-latex=""}
 ::: {.theorem #mleefficient}
-Los estimadores por máximización de verosimilitud, si en caso de existen, estos son eficientes.
+Los estimadores por máximización de verosimilitud, si en caso existen, estos son eficientes.
 :::
 ::::
 

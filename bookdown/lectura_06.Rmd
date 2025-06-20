@@ -211,13 +211,15 @@ sigma <- seq( 2, 3, length.out = n )
 m <- 1e3 
 
 # 3. simulación de severidades
-X <- lapply( 1:m, 
-             FUN = function( i ) sapply( 1:n, 
-                                         FUN = function( j ) rlnorm( 1, meanlog = mu[ j ], 
-                                                                     sdlog = sigma[ j ] ) ) )
+X <- lapply( 
+  X = 1:m, 
+  FUN = function( i ) {
+    return( sapply( 1:n, FUN = function( j ) rlnorm( 1, meanlog = mu[ j ], sdlog = sigma[ j ] ) ) )
+  } 
+)
 
 # 4. simulación de severidad total
-S <- sapply( X, FUN = function( x ) sum( x ) )
+S <- sapply( X, FUN = sum )
 ```
 
 Como mencionamos, en este ejemplo, la densidad de probabilidad de la severidad $S$ resulta de la
