@@ -23,7 +23,7 @@
 <meta name="author" content="Leonardo Vélez y Pedro Guarderas" />
 
 
-<meta name="date" content="2025-06-07" />
+<meta name="date" content="2025-06-20" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -532,24 +532,24 @@ aproximar un cálculo de <span class="math inline">\(VaR_\alpha\)</span>.</p>
 veces esta algoritmo para tener más valores y sacar la media de estos como estimador.</p>
 <p></p>
 <details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb113"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb113-1"><a href="tarificacion.html#cb113-1"></a>u <span class="ot">&lt;-</span> <span class="dv">7</span></span>
-<span id="cb113-2"><a href="tarificacion.html#cb113-2"></a>s <span class="ot">&lt;-</span> <span class="dv">4</span></span>
-<span id="cb113-3"><a href="tarificacion.html#cb113-3"></a>Fd <span class="ot">&lt;-</span> <span class="cf">function</span>( x ) <span class="fu">plnorm</span>( x, <span class="at">meanlog =</span> u, <span class="at">sdlog =</span> s )</span>
-<span id="cb113-4"><a href="tarificacion.html#cb113-4"></a>Fdi <span class="ot">&lt;-</span> <span class="cf">function</span>( x ) <span class="fu">qlnorm</span>( x, <span class="at">meanlog =</span> u, <span class="at">sdlog =</span> s )</span>
-<span id="cb113-5"><a href="tarificacion.html#cb113-5"></a>Rd <span class="ot">&lt;-</span> <span class="cf">function</span>( x ) <span class="fu">rlnorm</span>( <span class="at">n =</span> n, <span class="at">meanlog =</span> u, <span class="at">sdlog =</span> s )</span>
-<span id="cb113-6"><a href="tarificacion.html#cb113-6"></a>alpha <span class="ot">&lt;-</span> <span class="fl">0.98</span></span>
-<span id="cb113-7"><a href="tarificacion.html#cb113-7"></a>delta <span class="ot">&lt;-</span> <span class="fl">1e-2</span></span>
-<span id="cb113-8"><a href="tarificacion.html#cb113-8"></a>hepsilon <span class="ot">&lt;-</span> <span class="fl">0.2e-4</span></span>
-<span id="cb113-9"><a href="tarificacion.html#cb113-9"></a></span>
-<span id="cb113-10"><a href="tarificacion.html#cb113-10"></a>q <span class="ot">&lt;-</span> <span class="fu">Fdi</span>( alpha )</span>
-<span id="cb113-11"><a href="tarificacion.html#cb113-11"></a>epsilon <span class="ot">&lt;-</span> <span class="fu">max</span>( <span class="fu">Fdi</span>( hepsilon <span class="sc">+</span> alpha ) <span class="sc">-</span> q, q <span class="sc">-</span> <span class="fu">Fdi</span>( alpha <span class="sc">-</span> hepsilon ) )</span>
-<span id="cb113-12"><a href="tarificacion.html#cb113-12"></a>C <span class="ot">&lt;-</span> <span class="fl">5.001e-3</span> <span class="co"># seleccionado acorde a cada problema</span></span>
-<span id="cb113-13"><a href="tarificacion.html#cb113-13"></a>n <span class="ot">&lt;-</span> <span class="fu">round</span>( <span class="sc">-</span>( <span class="fu">log</span>( delta ) <span class="sc">-</span> <span class="fu">log</span>( <span class="dv">2</span> ) <span class="sc">-</span> <span class="fu">log</span>( C ) ) <span class="sc">/</span> ( <span class="dv">2</span> <span class="sc">*</span> hepsilon<span class="sc">^</span><span class="dv">2</span> ), <span class="dv">0</span> )</span>
-<span id="cb113-14"><a href="tarificacion.html#cb113-14"></a></span>
-<span id="cb113-15"><a href="tarificacion.html#cb113-15"></a>m <span class="ot">&lt;-</span> <span class="fl">1e3</span></span>
-<span id="cb113-16"><a href="tarificacion.html#cb113-16"></a>qn <span class="ot">&lt;-</span> <span class="fu">sapply</span>( <span class="dv">1</span><span class="sc">:</span>m, <span class="at">FUN =</span> <span class="cf">function</span>( i ) <span class="fu">as.numeric</span>( <span class="fu">quantile</span>( <span class="fu">Rd</span>( n ), <span class="at">probs =</span> alpha ) ) )</span>
-<span id="cb113-17"><a href="tarificacion.html#cb113-17"></a></span>
-<span id="cb113-18"><a href="tarificacion.html#cb113-18"></a>P <span class="ot">&lt;-</span> <span class="fu">mean</span>( <span class="fu">abs</span>( qn <span class="sc">-</span> q ) <span class="sc">&gt;</span> epsilon ) </span></code></pre></div>
+<div class="sourceCode" id="cb97"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb97-1"><a href="tarificacion.html#cb97-1"></a>u <span class="ot">&lt;-</span> <span class="dv">7</span></span>
+<span id="cb97-2"><a href="tarificacion.html#cb97-2"></a>s <span class="ot">&lt;-</span> <span class="dv">4</span></span>
+<span id="cb97-3"><a href="tarificacion.html#cb97-3"></a>Fd <span class="ot">&lt;-</span> <span class="cf">function</span>( x ) <span class="fu">plnorm</span>( x, <span class="at">meanlog =</span> u, <span class="at">sdlog =</span> s )</span>
+<span id="cb97-4"><a href="tarificacion.html#cb97-4"></a>Fdi <span class="ot">&lt;-</span> <span class="cf">function</span>( x ) <span class="fu">qlnorm</span>( x, <span class="at">meanlog =</span> u, <span class="at">sdlog =</span> s )</span>
+<span id="cb97-5"><a href="tarificacion.html#cb97-5"></a>Rd <span class="ot">&lt;-</span> <span class="cf">function</span>( x ) <span class="fu">rlnorm</span>( <span class="at">n =</span> n, <span class="at">meanlog =</span> u, <span class="at">sdlog =</span> s )</span>
+<span id="cb97-6"><a href="tarificacion.html#cb97-6"></a>alpha <span class="ot">&lt;-</span> <span class="fl">0.98</span></span>
+<span id="cb97-7"><a href="tarificacion.html#cb97-7"></a>delta <span class="ot">&lt;-</span> <span class="fl">1e-2</span></span>
+<span id="cb97-8"><a href="tarificacion.html#cb97-8"></a>hepsilon <span class="ot">&lt;-</span> <span class="fl">0.2e-4</span></span>
+<span id="cb97-9"><a href="tarificacion.html#cb97-9"></a></span>
+<span id="cb97-10"><a href="tarificacion.html#cb97-10"></a>q <span class="ot">&lt;-</span> <span class="fu">Fdi</span>( alpha )</span>
+<span id="cb97-11"><a href="tarificacion.html#cb97-11"></a>epsilon <span class="ot">&lt;-</span> <span class="fu">max</span>( <span class="fu">Fdi</span>( hepsilon <span class="sc">+</span> alpha ) <span class="sc">-</span> q, q <span class="sc">-</span> <span class="fu">Fdi</span>( alpha <span class="sc">-</span> hepsilon ) )</span>
+<span id="cb97-12"><a href="tarificacion.html#cb97-12"></a>C <span class="ot">&lt;-</span> <span class="fl">5.001e-3</span> <span class="co"># seleccionado acorde a cada problema</span></span>
+<span id="cb97-13"><a href="tarificacion.html#cb97-13"></a>n <span class="ot">&lt;-</span> <span class="fu">round</span>( <span class="sc">-</span>( <span class="fu">log</span>( delta ) <span class="sc">-</span> <span class="fu">log</span>( <span class="dv">2</span> ) <span class="sc">-</span> <span class="fu">log</span>( C ) ) <span class="sc">/</span> ( <span class="dv">2</span> <span class="sc">*</span> hepsilon<span class="sc">^</span><span class="dv">2</span> ), <span class="dv">0</span> )</span>
+<span id="cb97-14"><a href="tarificacion.html#cb97-14"></a></span>
+<span id="cb97-15"><a href="tarificacion.html#cb97-15"></a>m <span class="ot">&lt;-</span> <span class="fl">1e3</span></span>
+<span id="cb97-16"><a href="tarificacion.html#cb97-16"></a>qn <span class="ot">&lt;-</span> <span class="fu">sapply</span>( <span class="dv">1</span><span class="sc">:</span>m, <span class="at">FUN =</span> <span class="cf">function</span>( i ) <span class="fu">as.numeric</span>( <span class="fu">quantile</span>( <span class="fu">Rd</span>( n ), <span class="at">probs =</span> alpha ) ) )</span>
+<span id="cb97-17"><a href="tarificacion.html#cb97-17"></a></span>
+<span id="cb97-18"><a href="tarificacion.html#cb97-18"></a>P <span class="ot">&lt;-</span> <span class="fu">mean</span>( <span class="fu">abs</span>( qn <span class="sc">-</span> q ) <span class="sc">&gt;</span> epsilon ) </span></code></pre></div>
 </details>
 <p>
 <span class="math display">\[
@@ -644,27 +644,27 @@ se tiene la siguiente igualdad
 idénticamente distribuidos (i.i.d), en este caso con distribución <span class="math inline">\(X_i \rightsquigarrow LN(\mu,\sigma)\)</span></p>
 <p></p>
 <details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb114"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb114-1"><a href="tarificacion.html#cb114-1"></a><span class="fu">set.seed</span>(<span class="dv">94312</span>)</span>
-<span id="cb114-2"><a href="tarificacion.html#cb114-2"></a>u <span class="ot">&lt;-</span> <span class="dv">4</span></span>
-<span id="cb114-3"><a href="tarificacion.html#cb114-3"></a>s <span class="ot">&lt;-</span> <span class="fl">0.5</span></span>
-<span id="cb114-4"><a href="tarificacion.html#cb114-4"></a>n <span class="ot">&lt;-</span> <span class="fl">1e4</span></span>
-<span id="cb114-5"><a href="tarificacion.html#cb114-5"></a>X <span class="ot">&lt;-</span> <span class="fu">rlnorm</span>( n, <span class="at">meanlog =</span> u, <span class="at">sdlog =</span> s )</span>
-<span id="cb114-6"><a href="tarificacion.html#cb114-6"></a>alpha <span class="ot">&lt;-</span> <span class="fu">seq</span>( <span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.01</span> ) </span>
-<span id="cb114-7"><a href="tarificacion.html#cb114-7"></a>VaRX <span class="ot">&lt;-</span> <span class="fu">quantile</span>( X, <span class="at">probs =</span> alpha, <span class="at">names =</span> <span class="cn">FALSE</span> )</span>
-<span id="cb114-8"><a href="tarificacion.html#cb114-8"></a>TVaRX <span class="ot">&lt;-</span> <span class="fu">sapply</span>( </span>
-<span id="cb114-9"><a href="tarificacion.html#cb114-9"></a>  <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>( VaRX ), </span>
-<span id="cb114-10"><a href="tarificacion.html#cb114-10"></a>  <span class="at">FUN =</span> <span class="cf">function</span>( i ) <span class="fu">ifelse</span>( alpha[ i ] <span class="sc">&lt;</span> <span class="dv">1</span>, ( <span class="dv">1</span> <span class="sc">/</span> ( <span class="dv">1</span> <span class="sc">-</span> alpha[ i ] ) ) <span class="sc">*</span> <span class="fu">mean</span>( X <span class="sc">*</span> ( X <span class="sc">&gt;</span> VaRX[ i ] ) ), <span class="fu">max</span>( X ) ) )</span></code></pre></div>
+<div class="sourceCode" id="cb98"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb98-1"><a href="tarificacion.html#cb98-1"></a><span class="fu">set.seed</span>(<span class="dv">94312</span>)</span>
+<span id="cb98-2"><a href="tarificacion.html#cb98-2"></a>u <span class="ot">&lt;-</span> <span class="dv">4</span></span>
+<span id="cb98-3"><a href="tarificacion.html#cb98-3"></a>s <span class="ot">&lt;-</span> <span class="fl">0.5</span></span>
+<span id="cb98-4"><a href="tarificacion.html#cb98-4"></a>n <span class="ot">&lt;-</span> <span class="fl">1e4</span></span>
+<span id="cb98-5"><a href="tarificacion.html#cb98-5"></a>X <span class="ot">&lt;-</span> <span class="fu">rlnorm</span>( n, <span class="at">meanlog =</span> u, <span class="at">sdlog =</span> s )</span>
+<span id="cb98-6"><a href="tarificacion.html#cb98-6"></a>alpha <span class="ot">&lt;-</span> <span class="fu">seq</span>( <span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.01</span> ) </span>
+<span id="cb98-7"><a href="tarificacion.html#cb98-7"></a>VaRX <span class="ot">&lt;-</span> <span class="fu">quantile</span>( X, <span class="at">probs =</span> alpha, <span class="at">names =</span> <span class="cn">FALSE</span> )</span>
+<span id="cb98-8"><a href="tarificacion.html#cb98-8"></a>TVaRX <span class="ot">&lt;-</span> <span class="fu">sapply</span>( </span>
+<span id="cb98-9"><a href="tarificacion.html#cb98-9"></a>  <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>( VaRX ), </span>
+<span id="cb98-10"><a href="tarificacion.html#cb98-10"></a>  <span class="at">FUN =</span> <span class="cf">function</span>( i ) <span class="fu">ifelse</span>( alpha[ i ] <span class="sc">&lt;</span> <span class="dv">1</span>, ( <span class="dv">1</span> <span class="sc">/</span> ( <span class="dv">1</span> <span class="sc">-</span> alpha[ i ] ) ) <span class="sc">*</span> <span class="fu">mean</span>( X <span class="sc">*</span> ( X <span class="sc">&gt;</span> VaRX[ i ] ) ), <span class="fu">max</span>( X ) ) )</span></code></pre></div>
 </details>
 <p></p>
 <p></p>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb115"><pre class="sourceCode r fold-hide"><code class="sourceCode r"><span id="cb115-1"><a href="tarificacion.html#cb115-1" tabindex="-1"></a>plt <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb115-2"><a href="tarificacion.html#cb115-2" tabindex="-1"></a>  <span class="fu">geom_point</span>( <span class="fu">aes</span>( <span class="at">x =</span> alpha, <span class="at">y =</span> VaRX ), <span class="at">colour =</span> <span class="st">&#39;darkred&#39;</span> ) <span class="sc">+</span> </span>
-<span id="cb115-3"><a href="tarificacion.html#cb115-3" tabindex="-1"></a>  <span class="fu">geom_point</span>( <span class="fu">aes</span>( <span class="at">x =</span> alpha, <span class="at">y =</span> TVaRX ), <span class="at">colour =</span> <span class="st">&#39;orange&#39;</span> ) <span class="sc">+</span> </span>
-<span id="cb115-4"><a href="tarificacion.html#cb115-4" tabindex="-1"></a>  <span class="fu">xlab</span>( <span class="fu">TeX</span>( <span class="st">&quot;$</span><span class="sc">\\</span><span class="st">alpha$&quot;</span> ) ) <span class="sc">+</span> </span>
-<span id="cb115-5"><a href="tarificacion.html#cb115-5" tabindex="-1"></a>  <span class="fu">ylab</span>( <span class="fu">TeX</span>( <span class="st">&quot;$VaR,TVaR$&quot;</span> ) ) <span class="sc">+</span> </span>
-<span id="cb115-6"><a href="tarificacion.html#cb115-6" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span>
-<span id="cb115-7"><a href="tarificacion.html#cb115-7" tabindex="-1"></a><span class="fu">plot</span>( plt )</span></code></pre></div>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r fold-hide"><code class="sourceCode r"><span id="cb99-1"><a href="tarificacion.html#cb99-1" tabindex="-1"></a>plt <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb99-2"><a href="tarificacion.html#cb99-2" tabindex="-1"></a>  <span class="fu">geom_point</span>( <span class="fu">aes</span>( <span class="at">x =</span> alpha, <span class="at">y =</span> VaRX ), <span class="at">colour =</span> <span class="st">&#39;darkred&#39;</span> ) <span class="sc">+</span> </span>
+<span id="cb99-3"><a href="tarificacion.html#cb99-3" tabindex="-1"></a>  <span class="fu">geom_point</span>( <span class="fu">aes</span>( <span class="at">x =</span> alpha, <span class="at">y =</span> TVaRX ), <span class="at">colour =</span> <span class="st">&#39;orange&#39;</span> ) <span class="sc">+</span> </span>
+<span id="cb99-4"><a href="tarificacion.html#cb99-4" tabindex="-1"></a>  <span class="fu">xlab</span>( <span class="fu">TeX</span>( <span class="st">&quot;$</span><span class="sc">\\</span><span class="st">alpha$&quot;</span> ) ) <span class="sc">+</span> </span>
+<span id="cb99-5"><a href="tarificacion.html#cb99-5" tabindex="-1"></a>  <span class="fu">ylab</span>( <span class="fu">TeX</span>( <span class="st">&quot;$VaR,TVaR$&quot;</span> ) ) <span class="sc">+</span> </span>
+<span id="cb99-6"><a href="tarificacion.html#cb99-6" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span>
+<span id="cb99-7"><a href="tarificacion.html#cb99-7" tabindex="-1"></a><span class="fu">plot</span>( plt )</span></code></pre></div>
 </details>
 <p><img src="seguros_generales_files/figure-html/l7g1-1.png" width="80%" style="display: block; margin: auto;" /></p>
 <p></p>
@@ -917,61 +917,61 @@ para así aproximar los cálculos de sus momentos y otros estadísticos. Primera
 parámetros.</p>
 <p></p>
 <details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb116"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb116-1"><a href="tarificacion.html#cb116-1"></a><span class="co"># número de unidades aseguradas</span></span>
-<span id="cb116-2"><a href="tarificacion.html#cb116-2"></a>n <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
-<span id="cb116-3"><a href="tarificacion.html#cb116-3"></a></span>
-<span id="cb116-4"><a href="tarificacion.html#cb116-4"></a><span class="co"># parámetros para cada X_i</span></span>
-<span id="cb116-5"><a href="tarificacion.html#cb116-5"></a>a <span class="ot">&lt;-</span> <span class="fu">runif</span>( n, <span class="dv">5</span>, <span class="dv">10</span> )</span>
-<span id="cb116-6"><a href="tarificacion.html#cb116-6"></a></span>
-<span id="cb116-7"><a href="tarificacion.html#cb116-7"></a><span class="co"># parámetro theta, común a todas las X_i</span></span>
-<span id="cb116-8"><a href="tarificacion.html#cb116-8"></a>theta <span class="ot">&lt;-</span> <span class="dv">4</span></span>
-<span id="cb116-9"><a href="tarificacion.html#cb116-9"></a></span>
-<span id="cb116-10"><a href="tarificacion.html#cb116-10"></a><span class="co"># parámetro para S</span></span>
-<span id="cb116-11"><a href="tarificacion.html#cb116-11"></a>A <span class="ot">&lt;-</span> <span class="fu">sum</span>( a )</span></code></pre></div>
+<div class="sourceCode" id="cb100"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb100-1"><a href="tarificacion.html#cb100-1"></a><span class="co"># número de unidades aseguradas</span></span>
+<span id="cb100-2"><a href="tarificacion.html#cb100-2"></a>n <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
+<span id="cb100-3"><a href="tarificacion.html#cb100-3"></a></span>
+<span id="cb100-4"><a href="tarificacion.html#cb100-4"></a><span class="co"># parámetros para cada X_i</span></span>
+<span id="cb100-5"><a href="tarificacion.html#cb100-5"></a>a <span class="ot">&lt;-</span> <span class="fu">runif</span>( n, <span class="dv">5</span>, <span class="dv">10</span> )</span>
+<span id="cb100-6"><a href="tarificacion.html#cb100-6"></a></span>
+<span id="cb100-7"><a href="tarificacion.html#cb100-7"></a><span class="co"># parámetro theta, común a todas las X_i</span></span>
+<span id="cb100-8"><a href="tarificacion.html#cb100-8"></a>theta <span class="ot">&lt;-</span> <span class="dv">4</span></span>
+<span id="cb100-9"><a href="tarificacion.html#cb100-9"></a></span>
+<span id="cb100-10"><a href="tarificacion.html#cb100-10"></a><span class="co"># parámetro para S</span></span>
+<span id="cb100-11"><a href="tarificacion.html#cb100-11"></a>A <span class="ot">&lt;-</span> <span class="fu">sum</span>( a )</span></code></pre></div>
 </details>
 <p></p>
 <p></p>
 <details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb117"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb117-1"><a href="tarificacion.html#cb117-1"></a>EX <span class="ot">&lt;-</span> a <span class="sc">*</span> theta</span>
-<span id="cb117-2"><a href="tarificacion.html#cb117-2"></a>VX <span class="ot">&lt;-</span> a <span class="sc">*</span> theta<span class="sc">^</span><span class="dv">2</span></span>
-<span id="cb117-3"><a href="tarificacion.html#cb117-3"></a>ES <span class="ot">&lt;-</span> <span class="fu">sum</span>( EX )</span>
-<span id="cb117-4"><a href="tarificacion.html#cb117-4"></a>VS <span class="ot">&lt;-</span> <span class="fu">sum</span>( VX )</span>
-<span id="cb117-5"><a href="tarificacion.html#cb117-5"></a>SDS <span class="ot">&lt;-</span> <span class="fu">sqrt</span>( VS )</span></code></pre></div>
+<div class="sourceCode" id="cb101"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb101-1"><a href="tarificacion.html#cb101-1"></a>EX <span class="ot">&lt;-</span> a <span class="sc">*</span> theta</span>
+<span id="cb101-2"><a href="tarificacion.html#cb101-2"></a>VX <span class="ot">&lt;-</span> a <span class="sc">*</span> theta<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb101-3"><a href="tarificacion.html#cb101-3"></a>ES <span class="ot">&lt;-</span> <span class="fu">sum</span>( EX )</span>
+<span id="cb101-4"><a href="tarificacion.html#cb101-4"></a>VS <span class="ot">&lt;-</span> <span class="fu">sum</span>( VX )</span>
+<span id="cb101-5"><a href="tarificacion.html#cb101-5"></a>SDS <span class="ot">&lt;-</span> <span class="fu">sqrt</span>( VS )</span></code></pre></div>
 </details>
 <p></p>
 <p>La variable aleatoria del reclamo total <span class="math inline">\(S\)</span> la podemos simular tomando una muestra i.i.d de tamaño <span class="math inline">\(m\)</span>,
 i.e. <span class="math inline">\(S_1,\ldots,S_m\)</span> de la distribución <span class="math inline">\(Gamma\left( \sum\limits_{i=1}^n \alpha_i, \theta \right)\)</span>.</p>
 <p></p>
 <details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb118"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb118-1"><a href="tarificacion.html#cb118-1"></a>m <span class="ot">&lt;-</span> <span class="fl">1e5</span></span>
-<span id="cb118-2"><a href="tarificacion.html#cb118-2"></a>S <span class="ot">&lt;-</span> <span class="fu">rgamma</span>( m, <span class="at">shape =</span> A, <span class="at">scale =</span> theta )</span></code></pre></div>
+<div class="sourceCode" id="cb102"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb102-1"><a href="tarificacion.html#cb102-1"></a>m <span class="ot">&lt;-</span> <span class="fl">1e5</span></span>
+<span id="cb102-2"><a href="tarificacion.html#cb102-2"></a>S <span class="ot">&lt;-</span> <span class="fu">rgamma</span>( m, <span class="at">shape =</span> A, <span class="at">scale =</span> theta )</span></code></pre></div>
 </details>
 <p></p>
 <p>Prima pura:</p>
 <p></p>
 <details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb119"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb119-1"><a href="tarificacion.html#cb119-1"></a>P <span class="ot">&lt;-</span> ES</span>
-<span id="cb119-2"><a href="tarificacion.html#cb119-2"></a>P <span class="ot">&lt;-</span> <span class="fu">mean</span>( S )</span>
-<span id="cb119-3"><a href="tarificacion.html#cb119-3"></a></span>
-<span id="cb119-4"><a href="tarificacion.html#cb119-4"></a>alpha <span class="ot">&lt;-</span> <span class="fl">0.95</span></span>
-<span id="cb119-5"><a href="tarificacion.html#cb119-5"></a>P_avg <span class="ot">&lt;-</span> ( <span class="dv">1</span> <span class="sc">+</span> alpha ) <span class="sc">*</span> ES</span>
-<span id="cb119-6"><a href="tarificacion.html#cb119-6"></a>P_avg <span class="ot">&lt;-</span> ( <span class="dv">1</span> <span class="sc">+</span> alpha ) <span class="sc">*</span> <span class="fu">mean</span>( S )</span>
-<span id="cb119-7"><a href="tarificacion.html#cb119-7"></a></span>
-<span id="cb119-8"><a href="tarificacion.html#cb119-8"></a>P_var <span class="ot">&lt;-</span> ES <span class="sc">+</span> alpha <span class="sc">*</span> VS</span>
-<span id="cb119-9"><a href="tarificacion.html#cb119-9"></a>P_var <span class="ot">&lt;-</span> <span class="fu">mean</span>( S ) <span class="sc">+</span> alpha <span class="sc">*</span> <span class="fu">var</span>( S )</span>
-<span id="cb119-10"><a href="tarificacion.html#cb119-10"></a></span>
-<span id="cb119-11"><a href="tarificacion.html#cb119-11"></a>P_sde <span class="ot">&lt;-</span> ES <span class="sc">+</span> alpha <span class="sc">*</span> SDS</span>
-<span id="cb119-12"><a href="tarificacion.html#cb119-12"></a>P_sde <span class="ot">&lt;-</span> <span class="fu">mean</span>( S ) <span class="sc">+</span> alpha <span class="sc">*</span> <span class="fu">sd</span>( S )</span>
-<span id="cb119-13"><a href="tarificacion.html#cb119-13"></a></span>
-<span id="cb119-14"><a href="tarificacion.html#cb119-14"></a>VaRS <span class="ot">&lt;-</span> <span class="fu">qgamma</span>( alpha, <span class="at">shape =</span> A, <span class="at">scale =</span> theta )</span>
-<span id="cb119-15"><a href="tarificacion.html#cb119-15"></a>P_VaR <span class="ot">&lt;-</span> VaRS</span>
-<span id="cb119-16"><a href="tarificacion.html#cb119-16"></a>P_VaR <span class="ot">&lt;-</span> <span class="fu">quantile</span>( S, <span class="at">probs =</span> alpha )</span>
-<span id="cb119-17"><a href="tarificacion.html#cb119-17"></a></span>
-<span id="cb119-18"><a href="tarificacion.html#cb119-18"></a>P_TVaR <span class="ot">&lt;-</span> ( <span class="dv">1</span> <span class="sc">/</span> ( <span class="dv">1</span> <span class="sc">-</span> alpha ) ) <span class="sc">*</span> ( A <span class="sc">*</span> theta ) <span class="sc">*</span> ( <span class="dv">1</span> <span class="sc">-</span> <span class="fu">pgamma</span>( VaRS, <span class="at">shape =</span> A <span class="sc">+</span> <span class="dv">1</span>, <span class="at">scale =</span> theta ) )</span>
-<span id="cb119-19"><a href="tarificacion.html#cb119-19"></a>P_TVaR <span class="ot">&lt;-</span> ( <span class="dv">1</span> <span class="sc">/</span> ( <span class="dv">1</span> <span class="sc">-</span> alpha ) ) <span class="sc">*</span> <span class="fu">integrate</span>( <span class="at">f =</span> <span class="cf">function</span>( u ) <span class="fu">qgamma</span>( u, <span class="at">shape =</span> A, <span class="at">scale =</span> theta ), alpha, <span class="dv">1</span> )<span class="sc">$</span>value</span>
-<span id="cb119-20"><a href="tarificacion.html#cb119-20"></a>P_TVaR <span class="ot">&lt;-</span> <span class="fu">mean</span>( <span class="fu">sapply</span>( <span class="fu">runif</span>( m, alpha, <span class="dv">1</span> ), <span class="at">FUN =</span> <span class="cf">function</span>( k ) <span class="fu">qgamma</span>( k, <span class="at">shape =</span> A, <span class="at">scale =</span> theta ) ) )</span>
-<span id="cb119-21"><a href="tarificacion.html#cb119-21"></a>I <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>( S <span class="sc">&gt;</span> VaRS )</span>
-<span id="cb119-22"><a href="tarificacion.html#cb119-22"></a>P_TVaR <span class="ot">&lt;-</span> <span class="fu">mean</span>( S <span class="sc">*</span> I ) <span class="sc">/</span> <span class="fu">mean</span>( I )</span></code></pre></div>
+<div class="sourceCode" id="cb103"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb103-1"><a href="tarificacion.html#cb103-1"></a>P <span class="ot">&lt;-</span> ES</span>
+<span id="cb103-2"><a href="tarificacion.html#cb103-2"></a>P <span class="ot">&lt;-</span> <span class="fu">mean</span>( S )</span>
+<span id="cb103-3"><a href="tarificacion.html#cb103-3"></a></span>
+<span id="cb103-4"><a href="tarificacion.html#cb103-4"></a>alpha <span class="ot">&lt;-</span> <span class="fl">0.95</span></span>
+<span id="cb103-5"><a href="tarificacion.html#cb103-5"></a>P_avg <span class="ot">&lt;-</span> ( <span class="dv">1</span> <span class="sc">+</span> alpha ) <span class="sc">*</span> ES</span>
+<span id="cb103-6"><a href="tarificacion.html#cb103-6"></a>P_avg <span class="ot">&lt;-</span> ( <span class="dv">1</span> <span class="sc">+</span> alpha ) <span class="sc">*</span> <span class="fu">mean</span>( S )</span>
+<span id="cb103-7"><a href="tarificacion.html#cb103-7"></a></span>
+<span id="cb103-8"><a href="tarificacion.html#cb103-8"></a>P_var <span class="ot">&lt;-</span> ES <span class="sc">+</span> alpha <span class="sc">*</span> VS</span>
+<span id="cb103-9"><a href="tarificacion.html#cb103-9"></a>P_var <span class="ot">&lt;-</span> <span class="fu">mean</span>( S ) <span class="sc">+</span> alpha <span class="sc">*</span> <span class="fu">var</span>( S )</span>
+<span id="cb103-10"><a href="tarificacion.html#cb103-10"></a></span>
+<span id="cb103-11"><a href="tarificacion.html#cb103-11"></a>P_sde <span class="ot">&lt;-</span> ES <span class="sc">+</span> alpha <span class="sc">*</span> SDS</span>
+<span id="cb103-12"><a href="tarificacion.html#cb103-12"></a>P_sde <span class="ot">&lt;-</span> <span class="fu">mean</span>( S ) <span class="sc">+</span> alpha <span class="sc">*</span> <span class="fu">sd</span>( S )</span>
+<span id="cb103-13"><a href="tarificacion.html#cb103-13"></a></span>
+<span id="cb103-14"><a href="tarificacion.html#cb103-14"></a>VaRS <span class="ot">&lt;-</span> <span class="fu">qgamma</span>( alpha, <span class="at">shape =</span> A, <span class="at">scale =</span> theta )</span>
+<span id="cb103-15"><a href="tarificacion.html#cb103-15"></a>P_VaR <span class="ot">&lt;-</span> VaRS</span>
+<span id="cb103-16"><a href="tarificacion.html#cb103-16"></a>P_VaR <span class="ot">&lt;-</span> <span class="fu">quantile</span>( S, <span class="at">probs =</span> alpha )</span>
+<span id="cb103-17"><a href="tarificacion.html#cb103-17"></a></span>
+<span id="cb103-18"><a href="tarificacion.html#cb103-18"></a>P_TVaR <span class="ot">&lt;-</span> ( <span class="dv">1</span> <span class="sc">/</span> ( <span class="dv">1</span> <span class="sc">-</span> alpha ) ) <span class="sc">*</span> ( A <span class="sc">*</span> theta ) <span class="sc">*</span> ( <span class="dv">1</span> <span class="sc">-</span> <span class="fu">pgamma</span>( VaRS, <span class="at">shape =</span> A <span class="sc">+</span> <span class="dv">1</span>, <span class="at">scale =</span> theta ) )</span>
+<span id="cb103-19"><a href="tarificacion.html#cb103-19"></a>P_TVaR <span class="ot">&lt;-</span> ( <span class="dv">1</span> <span class="sc">/</span> ( <span class="dv">1</span> <span class="sc">-</span> alpha ) ) <span class="sc">*</span> <span class="fu">integrate</span>( <span class="at">f =</span> <span class="cf">function</span>( u ) <span class="fu">qgamma</span>( u, <span class="at">shape =</span> A, <span class="at">scale =</span> theta ), alpha, <span class="dv">1</span> )<span class="sc">$</span>value</span>
+<span id="cb103-20"><a href="tarificacion.html#cb103-20"></a>P_TVaR <span class="ot">&lt;-</span> <span class="fu">mean</span>( <span class="fu">sapply</span>( <span class="fu">runif</span>( m, alpha, <span class="dv">1</span> ), <span class="at">FUN =</span> <span class="cf">function</span>( k ) <span class="fu">qgamma</span>( k, <span class="at">shape =</span> A, <span class="at">scale =</span> theta ) ) )</span>
+<span id="cb103-21"><a href="tarificacion.html#cb103-21"></a>I <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>( S <span class="sc">&gt;</span> VaRS )</span>
+<span id="cb103-22"><a href="tarificacion.html#cb103-22"></a>P_TVaR <span class="ot">&lt;-</span> <span class="fu">mean</span>( S <span class="sc">*</span> I ) <span class="sc">/</span> <span class="fu">mean</span>( I )</span></code></pre></div>
 </details>
 <p></p>
 </div>
@@ -986,22 +986,22 @@ con riesgos similares.</p>
 <p>Sin segmentación de la población, este el caso más sencillo para la tarificación, el asegurado</p>
 <p></p>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb120"><pre class="sourceCode r fold-hide"><code class="sourceCode r"><span id="cb120-1"><a href="tarificacion.html#cb120-1" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">data.table</span>( <span class="at">nom =</span> <span class="fu">c</span>( <span class="st">&#39;Pago&#39;</span>, <span class="st">&#39;Pago esperado&#39;</span>, <span class="st">&#39;Varianza&#39;</span> ),</span>
-<span id="cb120-2"><a href="tarificacion.html#cb120-2" tabindex="-1"></a>                   <span class="at">cl =</span> <span class="fu">c</span>( <span class="st">&quot;$</span><span class="sc">\\</span><span class="st">E[S]$&quot;</span>, <span class="st">&quot;$</span><span class="sc">\\</span><span class="st">E[S]$&quot;</span>, <span class="st">&quot;$0$&quot;</span> ), </span>
-<span id="cb120-3"><a href="tarificacion.html#cb120-3" tabindex="-1"></a>                   <span class="at">as =</span> <span class="fu">c</span>( <span class="st">&quot;$S - </span><span class="sc">\\</span><span class="st">E[S]$&quot;</span>, <span class="st">&quot;$0$&quot;</span>, <span class="st">&quot;$</span><span class="sc">\\</span><span class="st">V[S]$&quot;</span> ) )</span>
-<span id="cb120-4"><a href="tarificacion.html#cb120-4" tabindex="-1"></a>dat <span class="sc">%&gt;%</span></span>
-<span id="cb120-5"><a href="tarificacion.html#cb120-5" tabindex="-1"></a>  <span class="fu">kable</span>(</span>
-<span id="cb120-6"><a href="tarificacion.html#cb120-6" tabindex="-1"></a>    <span class="at">label =</span> <span class="cn">NA</span>,</span>
-<span id="cb120-7"><a href="tarificacion.html#cb120-7" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">&#39;Transferencia de riesgo sin segmentación&#39;</span>,</span>
-<span id="cb120-8"><a href="tarificacion.html#cb120-8" tabindex="-1"></a>    <span class="at">row.names =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb120-9"><a href="tarificacion.html#cb120-9" tabindex="-1"></a>    <span class="at">col.names =</span> <span class="fu">c</span>( <span class="st">&#39;&#39;</span>, <span class="st">&#39;Asegurado&#39;</span>, <span class="st">&#39;Asegurador&#39;</span> ),</span>
-<span id="cb120-10"><a href="tarificacion.html#cb120-10" tabindex="-1"></a>    <span class="at">align =</span> <span class="st">&#39;lrr&#39;</span>,</span>
-<span id="cb120-11"><a href="tarificacion.html#cb120-11" tabindex="-1"></a>    <span class="at">digits =</span> <span class="fu">c</span>( <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span> ),</span>
-<span id="cb120-12"><a href="tarificacion.html#cb120-12" tabindex="-1"></a>    <span class="at">format.args =</span> <span class="fu">list</span>( <span class="at">big.mark =</span> <span class="st">&#39;,&#39;</span>, <span class="at">decimal.mark =</span> <span class="st">&#39;.&#39;</span>, <span class="at">scientific =</span> <span class="cn">FALSE</span> ),</span>
-<span id="cb120-13"><a href="tarificacion.html#cb120-13" tabindex="-1"></a>    <span class="at">escape =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb120-14"><a href="tarificacion.html#cb120-14" tabindex="-1"></a>    <span class="at">centering =</span> <span class="cn">TRUE</span>, </span>
-<span id="cb120-15"><a href="tarificacion.html#cb120-15" tabindex="-1"></a>    <span class="at">booktabs =</span> <span class="cn">TRUE</span> ) <span class="sc">%&gt;%</span></span>
-<span id="cb120-16"><a href="tarificacion.html#cb120-16" tabindex="-1"></a>  <span class="fu">kable_classic</span>( <span class="at">full_width =</span> <span class="cn">FALSE</span>, <span class="at">html_font =</span> <span class="st">&quot;Cambria&quot;</span>, <span class="at">position =</span> <span class="st">&quot;center&quot;</span> )</span></code></pre></div>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r fold-hide"><code class="sourceCode r"><span id="cb104-1"><a href="tarificacion.html#cb104-1" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">data.table</span>( <span class="at">nom =</span> <span class="fu">c</span>( <span class="st">&#39;Pago&#39;</span>, <span class="st">&#39;Pago esperado&#39;</span>, <span class="st">&#39;Varianza&#39;</span> ),</span>
+<span id="cb104-2"><a href="tarificacion.html#cb104-2" tabindex="-1"></a>                   <span class="at">cl =</span> <span class="fu">c</span>( <span class="st">&quot;$</span><span class="sc">\\</span><span class="st">E[S]$&quot;</span>, <span class="st">&quot;$</span><span class="sc">\\</span><span class="st">E[S]$&quot;</span>, <span class="st">&quot;$0$&quot;</span> ), </span>
+<span id="cb104-3"><a href="tarificacion.html#cb104-3" tabindex="-1"></a>                   <span class="at">as =</span> <span class="fu">c</span>( <span class="st">&quot;$S - </span><span class="sc">\\</span><span class="st">E[S]$&quot;</span>, <span class="st">&quot;$0$&quot;</span>, <span class="st">&quot;$</span><span class="sc">\\</span><span class="st">V[S]$&quot;</span> ) )</span>
+<span id="cb104-4"><a href="tarificacion.html#cb104-4" tabindex="-1"></a>dat <span class="sc">%&gt;%</span></span>
+<span id="cb104-5"><a href="tarificacion.html#cb104-5" tabindex="-1"></a>  <span class="fu">kable</span>(</span>
+<span id="cb104-6"><a href="tarificacion.html#cb104-6" tabindex="-1"></a>    <span class="at">label =</span> <span class="cn">NA</span>,</span>
+<span id="cb104-7"><a href="tarificacion.html#cb104-7" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">&#39;Transferencia de riesgo sin segmentación&#39;</span>,</span>
+<span id="cb104-8"><a href="tarificacion.html#cb104-8" tabindex="-1"></a>    <span class="at">row.names =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb104-9"><a href="tarificacion.html#cb104-9" tabindex="-1"></a>    <span class="at">col.names =</span> <span class="fu">c</span>( <span class="st">&#39;&#39;</span>, <span class="st">&#39;Asegurado&#39;</span>, <span class="st">&#39;Asegurador&#39;</span> ),</span>
+<span id="cb104-10"><a href="tarificacion.html#cb104-10" tabindex="-1"></a>    <span class="at">align =</span> <span class="st">&#39;lrr&#39;</span>,</span>
+<span id="cb104-11"><a href="tarificacion.html#cb104-11" tabindex="-1"></a>    <span class="at">digits =</span> <span class="fu">c</span>( <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span> ),</span>
+<span id="cb104-12"><a href="tarificacion.html#cb104-12" tabindex="-1"></a>    <span class="at">format.args =</span> <span class="fu">list</span>( <span class="at">big.mark =</span> <span class="st">&#39;,&#39;</span>, <span class="at">decimal.mark =</span> <span class="st">&#39;.&#39;</span>, <span class="at">scientific =</span> <span class="cn">FALSE</span> ),</span>
+<span id="cb104-13"><a href="tarificacion.html#cb104-13" tabindex="-1"></a>    <span class="at">escape =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb104-14"><a href="tarificacion.html#cb104-14" tabindex="-1"></a>    <span class="at">centering =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb104-15"><a href="tarificacion.html#cb104-15" tabindex="-1"></a>    <span class="at">booktabs =</span> <span class="cn">TRUE</span> ) <span class="sc">%&gt;%</span></span>
+<span id="cb104-16"><a href="tarificacion.html#cb104-16" tabindex="-1"></a>  <span class="fu">kable_classic</span>( <span class="at">full_width =</span> <span class="cn">FALSE</span>, <span class="at">html_font =</span> <span class="st">&quot;Cambria&quot;</span>, <span class="at">position =</span> <span class="st">&quot;center&quot;</span> )</span></code></pre></div>
 </details>
 <table class=" lightable-classic" style="color: black; font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
@@ -1062,22 +1062,22 @@ explicativa. Esto permite estables primas de forma más adecuada según las dife
 del riesgo cubierto.</p>
 <p></p>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb121"><pre class="sourceCode r fold-hide"><code class="sourceCode r"><span id="cb121-1"><a href="tarificacion.html#cb121-1" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">data.table</span>( <span class="at">nom =</span> <span class="fu">c</span>( <span class="st">&#39;Pago&#39;</span>, <span class="st">&#39;Pago esperado&#39;</span>, <span class="st">&#39;Varianza&#39;</span> ),</span>
-<span id="cb121-2"><a href="tarificacion.html#cb121-2" tabindex="-1"></a>                   <span class="at">cl =</span> <span class="fu">c</span>( <span class="st">&quot;$</span><span class="sc">\\</span><span class="st">E[S </span><span class="sc">\\</span><span class="st">mid Y]$&quot;</span>, <span class="st">&quot;$</span><span class="sc">\\</span><span class="st">E[S]$&quot;</span>, <span class="st">&quot;$</span><span class="sc">\\</span><span class="st">V[</span><span class="sc">\\</span><span class="st">E[S </span><span class="sc">\\</span><span class="st">mid Y]]$&quot;</span> ), </span>
-<span id="cb121-3"><a href="tarificacion.html#cb121-3" tabindex="-1"></a>                   <span class="at">as =</span> <span class="fu">c</span>( <span class="st">&quot;$S - </span><span class="sc">\\</span><span class="st">E[S </span><span class="sc">\\</span><span class="st">mid Y]$&quot;</span>, <span class="st">&quot;$0$&quot;</span>, <span class="st">&quot;$</span><span class="sc">\\</span><span class="st">V[S-</span><span class="sc">\\</span><span class="st">E[S </span><span class="sc">\\</span><span class="st">mid Y]]$&quot;</span> ) )</span>
-<span id="cb121-4"><a href="tarificacion.html#cb121-4" tabindex="-1"></a>dat <span class="sc">%&gt;%</span></span>
-<span id="cb121-5"><a href="tarificacion.html#cb121-5" tabindex="-1"></a>  <span class="fu">kable</span>(</span>
-<span id="cb121-6"><a href="tarificacion.html#cb121-6" tabindex="-1"></a>    <span class="at">label =</span> <span class="cn">NA</span>,</span>
-<span id="cb121-7"><a href="tarificacion.html#cb121-7" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">&#39;Transferencia de riesgo con segmentación&#39;</span>,</span>
-<span id="cb121-8"><a href="tarificacion.html#cb121-8" tabindex="-1"></a>    <span class="at">row.names =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb121-9"><a href="tarificacion.html#cb121-9" tabindex="-1"></a>    <span class="at">col.names =</span> <span class="fu">c</span>( <span class="st">&#39;&#39;</span>, <span class="st">&#39;Asegurado&#39;</span>, <span class="st">&#39;Asegurador&#39;</span> ),</span>
-<span id="cb121-10"><a href="tarificacion.html#cb121-10" tabindex="-1"></a>    <span class="at">align =</span> <span class="st">&#39;lrr&#39;</span>,</span>
-<span id="cb121-11"><a href="tarificacion.html#cb121-11" tabindex="-1"></a>    <span class="at">digits =</span> <span class="fu">c</span>( <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span> ),</span>
-<span id="cb121-12"><a href="tarificacion.html#cb121-12" tabindex="-1"></a>    <span class="at">format.args =</span> <span class="fu">list</span>( <span class="at">big.mark =</span> <span class="st">&#39;,&#39;</span>, <span class="at">decimal.mark =</span> <span class="st">&#39;.&#39;</span>, <span class="at">scientific =</span> <span class="cn">FALSE</span> ),</span>
-<span id="cb121-13"><a href="tarificacion.html#cb121-13" tabindex="-1"></a>    <span class="at">escape =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb121-14"><a href="tarificacion.html#cb121-14" tabindex="-1"></a>    <span class="at">centering =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb121-15"><a href="tarificacion.html#cb121-15" tabindex="-1"></a>    <span class="at">booktabs =</span> <span class="cn">TRUE</span> ) <span class="sc">%&gt;%</span></span>
-<span id="cb121-16"><a href="tarificacion.html#cb121-16" tabindex="-1"></a>  <span class="fu">kable_classic</span>( <span class="at">full_width =</span> <span class="cn">FALSE</span>, <span class="at">html_font =</span> <span class="st">&quot;Cambria&quot;</span>, <span class="at">position =</span> <span class="st">&quot;center&quot;</span> )</span></code></pre></div>
+<div class="sourceCode" id="cb105"><pre class="sourceCode r fold-hide"><code class="sourceCode r"><span id="cb105-1"><a href="tarificacion.html#cb105-1" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">data.table</span>( <span class="at">nom =</span> <span class="fu">c</span>( <span class="st">&#39;Pago&#39;</span>, <span class="st">&#39;Pago esperado&#39;</span>, <span class="st">&#39;Varianza&#39;</span> ),</span>
+<span id="cb105-2"><a href="tarificacion.html#cb105-2" tabindex="-1"></a>                   <span class="at">cl =</span> <span class="fu">c</span>( <span class="st">&quot;$</span><span class="sc">\\</span><span class="st">E[S </span><span class="sc">\\</span><span class="st">mid Y]$&quot;</span>, <span class="st">&quot;$</span><span class="sc">\\</span><span class="st">E[S]$&quot;</span>, <span class="st">&quot;$</span><span class="sc">\\</span><span class="st">V[</span><span class="sc">\\</span><span class="st">E[S </span><span class="sc">\\</span><span class="st">mid Y]]$&quot;</span> ), </span>
+<span id="cb105-3"><a href="tarificacion.html#cb105-3" tabindex="-1"></a>                   <span class="at">as =</span> <span class="fu">c</span>( <span class="st">&quot;$S - </span><span class="sc">\\</span><span class="st">E[S </span><span class="sc">\\</span><span class="st">mid Y]$&quot;</span>, <span class="st">&quot;$0$&quot;</span>, <span class="st">&quot;$</span><span class="sc">\\</span><span class="st">V[S-</span><span class="sc">\\</span><span class="st">E[S </span><span class="sc">\\</span><span class="st">mid Y]]$&quot;</span> ) )</span>
+<span id="cb105-4"><a href="tarificacion.html#cb105-4" tabindex="-1"></a>dat <span class="sc">%&gt;%</span></span>
+<span id="cb105-5"><a href="tarificacion.html#cb105-5" tabindex="-1"></a>  <span class="fu">kable</span>(</span>
+<span id="cb105-6"><a href="tarificacion.html#cb105-6" tabindex="-1"></a>    <span class="at">label =</span> <span class="cn">NA</span>,</span>
+<span id="cb105-7"><a href="tarificacion.html#cb105-7" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">&#39;Transferencia de riesgo con segmentación&#39;</span>,</span>
+<span id="cb105-8"><a href="tarificacion.html#cb105-8" tabindex="-1"></a>    <span class="at">row.names =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb105-9"><a href="tarificacion.html#cb105-9" tabindex="-1"></a>    <span class="at">col.names =</span> <span class="fu">c</span>( <span class="st">&#39;&#39;</span>, <span class="st">&#39;Asegurado&#39;</span>, <span class="st">&#39;Asegurador&#39;</span> ),</span>
+<span id="cb105-10"><a href="tarificacion.html#cb105-10" tabindex="-1"></a>    <span class="at">align =</span> <span class="st">&#39;lrr&#39;</span>,</span>
+<span id="cb105-11"><a href="tarificacion.html#cb105-11" tabindex="-1"></a>    <span class="at">digits =</span> <span class="fu">c</span>( <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span> ),</span>
+<span id="cb105-12"><a href="tarificacion.html#cb105-12" tabindex="-1"></a>    <span class="at">format.args =</span> <span class="fu">list</span>( <span class="at">big.mark =</span> <span class="st">&#39;,&#39;</span>, <span class="at">decimal.mark =</span> <span class="st">&#39;.&#39;</span>, <span class="at">scientific =</span> <span class="cn">FALSE</span> ),</span>
+<span id="cb105-13"><a href="tarificacion.html#cb105-13" tabindex="-1"></a>    <span class="at">escape =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb105-14"><a href="tarificacion.html#cb105-14" tabindex="-1"></a>    <span class="at">centering =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb105-15"><a href="tarificacion.html#cb105-15" tabindex="-1"></a>    <span class="at">booktabs =</span> <span class="cn">TRUE</span> ) <span class="sc">%&gt;%</span></span>
+<span id="cb105-16"><a href="tarificacion.html#cb105-16" tabindex="-1"></a>  <span class="fu">kable_classic</span>( <span class="at">full_width =</span> <span class="cn">FALSE</span>, <span class="at">html_font =</span> <span class="st">&quot;Cambria&quot;</span>, <span class="at">position =</span> <span class="st">&quot;center&quot;</span> )</span></code></pre></div>
 </details>
 <table class=" lightable-classic" style="color: black; font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>

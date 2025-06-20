@@ -23,7 +23,7 @@
 <meta name="author" content="Leonardo Vélez y Pedro Guarderas" />
 
 
-<meta name="date" content="2025-06-07" />
+<meta name="date" content="2025-06-20" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -1283,7 +1283,7 @@ muchos métodos bastante avanzados y complejos en lo que respecta al conocimient
 consideraremos que son i.i.d. y con media común finita <span class="math inline">\(\mathbb{E}[X_i] = \mu &lt; +\infty\)</span>. Entonces,
 se satisface el siguiente límite en probabilidad
 <span class="math display">\[
-\frac{1}{n} \sum\limits_{i=1}^n X_i \rightarrow \mu
+\frac{1}{n} \sum\limits_{i=1}^n X_i \overset{p}{\rightarrow} \mu
 \]</span>
 esto quiere decir que para cualquier <span class="math inline">\(\varepsilon &gt; 0\)</span> se satisface el siguiente límite
 <span class="math display">\[
@@ -1300,16 +1300,18 @@ puede proveer una primera aproximación.</p>
 <p><span id="thm:tlc" class="theorem"><strong>Teorema 4.3  (Teorema del límite central) </strong></span>Consideramos las variables aleatorias <span class="math inline">\(X_1,\ldots,X_n\)</span> i.i.d. con media común finita
 <span class="math inline">\(\mathbb{E}[X_i] = \mu &lt; +\infty\)</span> y varianza común finita
 <span class="math inline">\(\mathbb{V}[ X_i ] = \sigma^2 &lt; +\infty\)</span>, para todo <span class="math inline">\(i \in \{1, \ldots, n \}\)</span>. Si consideramos la
-variable aleatoria de la suma total <span class="math inline">\(S_n = \sum\limits_{i=1}^n X_i\)</span>, entonces
+variable aleatoria de la suma total <span class="math inline">\(S_n = \sum\limits_{i=1}^n X_i\)</span>, entonces para la variable
+aleatoria estandarizada
 <span class="math display">\[
 \frac{S_n - \mathbb{E}[S_n]}{\mathbb{V}[ S_n ]} \overset{d}{\longrightarrow} Z
 \]</span>
-cuando <span class="math inline">\(n \rightarrow +\infty\)</span>, donde <span class="math inline">\(Z \rightsquigarrow N( 0, 1 )\)</span>.</p>
-<p>Más aún
+se tiene la convergencia en distribución, cuando <span class="math inline">\(n \rightarrow +\infty\)</span>,
+donde <span class="math inline">\(Z \rightsquigarrow N( 0, 1 )\)</span>. Más aún, de manera más clara la convergencia en distribución
+se puede expresar la convergencia puntual dada por el siguiente límite.
 <span class="math display">\[
 \underset{n \rightarrow +\infty}{\lim} P\left( \frac{S_n
 - \mathbb{E}[S_n]}{\mathbb{V}[ S_n ]} \leq z \right)
-= \Phi( z )
+= \Phi( z ), \qquad \forall z \in \mathbb{R}
 \]</span></p>
 </div>
 </div>
@@ -1373,9 +1375,27 @@ con respecto a la distribución acumulada <span class="math inline">\(\Phi\)</sp
 Con <span class="math inline">\(C = 0.7655+8( 1 + e ) &gt; 0\)</span> una constante universal, independiente de <span class="math inline">\(N\)</span>, <span class="math inline">\(X\)</span> o <span class="math inline">\(S\)</span>.</p>
 </div>
 </div>
-<p>El teorema <a href="probabilidad_estadistica.html#thm:tglican">4.4</a> asegura un convergencia, sin embargo no da un estimativo de la
-rapidez de dicha convergencia conforme aumenta el valor <span class="math inline">\(n\)</span>, el siguiente resultado es más claro
-al respecto y proporciona un criterio de convergencia.</p>
+<p>El teorema del límite central <a href="probabilidad_estadistica.html#thm:tlc">4.3</a> no proporciona un criterio para determinar cuan
+rápido se realiza la convergencia hacia la distribución normal. El resultado de la desigualdad
+anterior <a href="probabilidad_estadistica.html#thm:beress">4.5</a> si proporciona un criterio de la convergencia eso sí, bajo la
+condición adicional de tener <span class="math inline">\(\mathbb{E}\left[\left|X - \mathbb{E}[X]\right|^3\right] &lt; +\infty\)</span>. Como podemos
+observar la convergencia es sub-lineal, va en orden de la raíz cuadrada del número de términos
+<span class="math inline">\(n\)</span>.</p>
+<p>Esto quiere decir que si deseamos un error de aproximación <span class="math inline">\(\varepsilon &gt; 0\)</span>, requerimos
+que
+<span class="math display">\[
+\begin{split}
+\frac{C}{\sqrt{n}} \frac{\mathbb{E}\left[\left|X - \mathbb{E}[X]\right|^3\right]}{\sqrt{\mathbb{V}[X]}^3}
+&amp; \leq \varepsilon \\
+\frac{C^2}{\varepsilon^2} \frac{\mathbb{E}\left[\left|X - \mathbb{E}[X]\right|^3\right]^2}{\mathbb{V}[X]^3}
+&amp; \leq n
+\end{split}
+\]</span>
+lo cual muestra que el número de variables aleatorias <span class="math inline">\(n\)</span> crece en orden cuadrático inverso
+al error de aproximación deseado <span class="math inline">\(\varepsilon\)</span>.</p>
+<p>Así mismo, el teorema <a href="probabilidad_estadistica.html#thm:tglican">4.4</a> asegura un convergencia, sin embargo no da un
+estimativo de la rapidez de dicha convergencia conforme aumenta el valor <span class="math inline">\(n\)</span>, el siguiente
+resultado es más claro al respecto y proporciona un criterio de convergencia.</p>
 <div class="thmbox">
 <div class="theorem">
 <p><span id="thm:ddkw" class="theorem"><strong>Teorema 4.6  (Desigualdad Dvoretzky–Kiefer–Wolfowitz) </strong></span>Dada una serie de variables aleatorias a valores reales <span class="math inline">\(X_1, \ldots, X_n\)</span>, i.i.d., con
@@ -1416,32 +1436,32 @@ logarítmico en <span class="math inline">\(\delta\)</span> y cuadrático en <sp
 </details>
 <p></p>
 <p></p>
-<details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb19"><pre class="sourceCode numberSource r numberLines lineAnchors"><code class="sourceCode r"><span id="cb19-1"><a href="probabilidad_estadistica.html#cb19-1"></a>dt <span class="ot">&lt;-</span> <span class="fu">data.table</span>( <span class="at">delta =</span> delta, e, n, <span class="at">d =</span> <span class="dv">8</span> <span class="sc">*</span> n <span class="sc">/</span> <span class="dv">1024</span><span class="sc">^</span><span class="dv">3</span> )</span>
-<span id="cb19-2"><a href="probabilidad_estadistica.html#cb19-2"></a>dt <span class="sc">%&gt;%</span></span>
-<span id="cb19-3"><a href="probabilidad_estadistica.html#cb19-3"></a>  <span class="fu">kable</span>(</span>
-<span id="cb19-4"><a href="probabilidad_estadistica.html#cb19-4"></a>    <span class="at">label =</span> <span class="cn">NA</span>,</span>
-<span id="cb19-5"><a href="probabilidad_estadistica.html#cb19-5"></a>    <span class="at">caption =</span> <span class="st">&#39;Error versus número de simulaciones&#39;</span>,</span>
-<span id="cb19-6"><a href="probabilidad_estadistica.html#cb19-6"></a>    <span class="at">row.names =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb19-7"><a href="probabilidad_estadistica.html#cb19-7"></a>    <span class="at">col.names =</span> <span class="fu">c</span>( <span class="st">&quot;$</span><span class="sc">\\</span><span class="st">delta$&quot;</span>, <span class="st">&quot;$</span><span class="sc">\\</span><span class="st">varepsilon$&quot;</span>, <span class="st">&quot;$n$&quot;</span>, <span class="st">&quot;GB&quot;</span> ),</span>
-<span id="cb19-8"><a href="probabilidad_estadistica.html#cb19-8"></a>    <span class="at">align =</span> <span class="st">&#39;llrr&#39;</span>,</span>
-<span id="cb19-9"><a href="probabilidad_estadistica.html#cb19-9"></a>    <span class="at">digits =</span> <span class="fu">c</span>( <span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">0</span>, <span class="dv">10</span> ),</span>
-<span id="cb19-10"><a href="probabilidad_estadistica.html#cb19-10"></a>    <span class="at">format.args =</span> <span class="fu">list</span>( <span class="at">big.mark =</span> <span class="st">&#39;,&#39;</span>, <span class="at">decimal.mark =</span> <span class="st">&#39;.&#39;</span>, <span class="at">scientific =</span> <span class="cn">FALSE</span> ),</span>
-<span id="cb19-11"><a href="probabilidad_estadistica.html#cb19-11"></a>    <span class="at">escape =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb19-12"><a href="probabilidad_estadistica.html#cb19-12"></a>    <span class="at">centering =</span> <span class="cn">TRUE</span>, </span>
-<span id="cb19-13"><a href="probabilidad_estadistica.html#cb19-13"></a>    <span class="at">booktabs =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb19-14"><a href="probabilidad_estadistica.html#cb19-14"></a>    <span class="at">longtable =</span> <span class="cn">TRUE</span> ) <span class="sc">%&gt;%</span></span>
-<span id="cb19-15"><a href="probabilidad_estadistica.html#cb19-15"></a>  <span class="fu">kable_classic</span>( </span>
-<span id="cb19-16"><a href="probabilidad_estadistica.html#cb19-16"></a>    <span class="at">full_width =</span> <span class="cn">FALSE</span>, </span>
-<span id="cb19-17"><a href="probabilidad_estadistica.html#cb19-17"></a>    <span class="at">html_font =</span> <span class="st">&quot;Cambria&quot;</span>, </span>
-<span id="cb19-18"><a href="probabilidad_estadistica.html#cb19-18"></a>    <span class="at">position =</span> <span class="st">&#39;center&#39;</span>, </span>
-<span id="cb19-19"><a href="probabilidad_estadistica.html#cb19-19"></a>    <span class="at">latex_options =</span> <span class="fu">c</span>( <span class="st">&#39;hold_position&#39;</span>, <span class="st">&#39;repeat_header&#39;</span> ) ) <span class="sc">%&gt;%</span></span>
-<span id="cb19-20"><a href="probabilidad_estadistica.html#cb19-20"></a>  <span class="fu">scroll_box</span>( <span class="at">width =</span> <span class="st">&quot;100%&quot;</span>, <span class="at">height =</span> <span class="st">&quot;500px&quot;</span> )</span></code></pre></div>
+<details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r fold-hide"><code class="sourceCode r"><span id="cb19-1"><a href="probabilidad_estadistica.html#cb19-1" tabindex="-1"></a>dt <span class="ot">&lt;-</span> <span class="fu">data.table</span>( <span class="at">delta =</span> delta, e, n, <span class="at">d =</span> <span class="dv">8</span> <span class="sc">*</span> n <span class="sc">/</span> <span class="dv">1024</span><span class="sc">^</span><span class="dv">3</span> )</span>
+<span id="cb19-2"><a href="probabilidad_estadistica.html#cb19-2" tabindex="-1"></a>dt <span class="sc">%&gt;%</span></span>
+<span id="cb19-3"><a href="probabilidad_estadistica.html#cb19-3" tabindex="-1"></a>  <span class="fu">kable</span>(</span>
+<span id="cb19-4"><a href="probabilidad_estadistica.html#cb19-4" tabindex="-1"></a>    <span class="at">label =</span> <span class="cn">NA</span>,</span>
+<span id="cb19-5"><a href="probabilidad_estadistica.html#cb19-5" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">&#39;Error versus número de simulaciones&#39;</span>,</span>
+<span id="cb19-6"><a href="probabilidad_estadistica.html#cb19-6" tabindex="-1"></a>    <span class="at">row.names =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb19-7"><a href="probabilidad_estadistica.html#cb19-7" tabindex="-1"></a>    <span class="at">col.names =</span> <span class="fu">c</span>( <span class="st">&quot;$</span><span class="sc">\\</span><span class="st">delta$&quot;</span>, <span class="st">&quot;$</span><span class="sc">\\</span><span class="st">varepsilon$&quot;</span>, <span class="st">&quot;$n$&quot;</span>, <span class="st">&quot;GB&quot;</span> ),</span>
+<span id="cb19-8"><a href="probabilidad_estadistica.html#cb19-8" tabindex="-1"></a>    <span class="at">align =</span> <span class="st">&#39;llrr&#39;</span>,</span>
+<span id="cb19-9"><a href="probabilidad_estadistica.html#cb19-9" tabindex="-1"></a>    <span class="at">digits =</span> <span class="fu">c</span>( <span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">0</span>, <span class="dv">10</span> ),</span>
+<span id="cb19-10"><a href="probabilidad_estadistica.html#cb19-10" tabindex="-1"></a>    <span class="at">format.args =</span> <span class="fu">list</span>( <span class="at">big.mark =</span> <span class="st">&#39;,&#39;</span>, <span class="at">decimal.mark =</span> <span class="st">&#39;.&#39;</span>, <span class="at">scientific =</span> <span class="cn">FALSE</span> ),</span>
+<span id="cb19-11"><a href="probabilidad_estadistica.html#cb19-11" tabindex="-1"></a>    <span class="at">escape =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb19-12"><a href="probabilidad_estadistica.html#cb19-12" tabindex="-1"></a>    <span class="at">centering =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb19-13"><a href="probabilidad_estadistica.html#cb19-13" tabindex="-1"></a>    <span class="at">booktabs =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb19-14"><a href="probabilidad_estadistica.html#cb19-14" tabindex="-1"></a>    <span class="at">longtable =</span> <span class="cn">TRUE</span> ) <span class="sc">%&gt;%</span></span>
+<span id="cb19-15"><a href="probabilidad_estadistica.html#cb19-15" tabindex="-1"></a>  <span class="fu">kable_classic</span>( </span>
+<span id="cb19-16"><a href="probabilidad_estadistica.html#cb19-16" tabindex="-1"></a>    <span class="at">full_width =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb19-17"><a href="probabilidad_estadistica.html#cb19-17" tabindex="-1"></a>    <span class="at">html_font =</span> <span class="st">&quot;Cambria&quot;</span>, </span>
+<span id="cb19-18"><a href="probabilidad_estadistica.html#cb19-18" tabindex="-1"></a>    <span class="at">position =</span> <span class="st">&#39;center&#39;</span>, </span>
+<span id="cb19-19"><a href="probabilidad_estadistica.html#cb19-19" tabindex="-1"></a>    <span class="at">latex_options =</span> <span class="fu">c</span>( <span class="st">&#39;hold_position&#39;</span>, <span class="st">&#39;repeat_header&#39;</span> ) ) <span class="sc">%&gt;%</span></span>
+<span id="cb19-20"><a href="probabilidad_estadistica.html#cb19-20" tabindex="-1"></a>  <span class="fu">scroll_box</span>( <span class="at">width =</span> <span class="st">&quot;100%&quot;</span>, <span class="at">height =</span> <span class="st">&quot;500px&quot;</span> )</span></code></pre></div>
 </details>
 <div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:500px; overflow-x: scroll; width:100%; ">
 <table class=" lightable-classic" style="color: black; font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
-Error versus número de simulaciones
+<span id="tab:l4t1">Tabla 4.1: </span>Error versus número de simulaciones
 </caption>
 <thead>
 <tr>
@@ -2875,32 +2895,34 @@ calculada con inversión de la transformada de Fourier discreta.</p>
 <span id="cb24-22"><a href="probabilidad_estadistica.html#cb24-22" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span>
 <span id="cb24-23"><a href="probabilidad_estadistica.html#cb24-23" tabindex="-1"></a><span class="fu">plot</span>( plt )</span></code></pre></div>
 </details>
-<pre><code>## Warning: Removed 1 row containing missing values or values outside the scale range (`geom_point()`).</code></pre>
 <p><img src="seguros_generales_files/figure-html/l4g4-1.png" width="80%" style="display: block; margin: auto;" /></p>
 <p></p>
 <p></p>
 <details class=chunk-details><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r fold-hide"><code class="sourceCode r"><span id="cb26-1"><a href="probabilidad_estadistica.html#cb26-1" tabindex="-1"></a>e <span class="ot">&lt;-</span> f <span class="sc">-</span> IFf</span>
-<span id="cb26-2"><a href="probabilidad_estadistica.html#cb26-2" tabindex="-1"></a></span>
-<span id="cb26-3"><a href="probabilidad_estadistica.html#cb26-3" tabindex="-1"></a>xmax <span class="ot">&lt;-</span> <span class="fu">max</span>( <span class="fu">abs</span>( e ) )</span>
-<span id="cb26-4"><a href="probabilidad_estadistica.html#cb26-4" tabindex="-1"></a>xbrk <span class="ot">&lt;-</span> <span class="fu">seq</span>( <span class="sc">-</span>xmax, xmax, <span class="at">length =</span> <span class="dv">9</span> )</span>
-<span id="cb26-5"><a href="probabilidad_estadistica.html#cb26-5" tabindex="-1"></a>xlbl <span class="ot">&lt;-</span> <span class="fu">formatC</span>( xbrk, <span class="at">digits =</span> <span class="dv">2</span>, <span class="at">format =</span> <span class="st">&#39;e&#39;</span> )</span>
-<span id="cb26-6"><a href="probabilidad_estadistica.html#cb26-6" tabindex="-1"></a>xlim <span class="ot">&lt;-</span> <span class="fu">c</span>( <span class="sc">-</span>xmax, xmax )</span>
-<span id="cb26-7"><a href="probabilidad_estadistica.html#cb26-7" tabindex="-1"></a></span>
-<span id="cb26-8"><a href="probabilidad_estadistica.html#cb26-8" tabindex="-1"></a>plt <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb26-9"><a href="probabilidad_estadistica.html#cb26-9" tabindex="-1"></a>  <span class="fu">geom_histogram</span>( <span class="fu">aes</span>( <span class="at">x =</span> e, <span class="at">y =</span> <span class="fu">after_stat</span>( density ) ), <span class="at">fill =</span> <span class="st">&#39;grey50&#39;</span>, <span class="at">colour =</span> <span class="st">&#39;dodgerblue3&#39;</span>, <span class="at">bins =</span> <span class="fu">nclass.scott</span>( e ) ) <span class="sc">+</span> </span>
-<span id="cb26-10"><a href="probabilidad_estadistica.html#cb26-10" tabindex="-1"></a>  <span class="fu">geom_density</span>() <span class="sc">+</span></span>
-<span id="cb26-11"><a href="probabilidad_estadistica.html#cb26-11" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>( <span class="at">breaks =</span> xbrk,</span>
-<span id="cb26-12"><a href="probabilidad_estadistica.html#cb26-12" tabindex="-1"></a>                      <span class="at">labels =</span> xlbl, </span>
-<span id="cb26-13"><a href="probabilidad_estadistica.html#cb26-13" tabindex="-1"></a>                      <span class="at">limits =</span> xlim, </span>
-<span id="cb26-14"><a href="probabilidad_estadistica.html#cb26-14" tabindex="-1"></a>                      <span class="at">expand =</span> <span class="fu">c</span>( <span class="dv">0</span>, <span class="dv">0</span> ) ) <span class="sc">+</span></span>
-<span id="cb26-15"><a href="probabilidad_estadistica.html#cb26-15" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>( <span class="at">labels =</span> <span class="fu">label_scientific</span>( <span class="at">digits =</span> <span class="dv">4</span> ) ) <span class="sc">+</span></span>
-<span id="cb26-16"><a href="probabilidad_estadistica.html#cb26-16" tabindex="-1"></a>  <span class="fu">ylab</span>( <span class="fu">TeX</span>( <span class="st">&quot;distribución del error&quot;</span> ) ) <span class="sc">+</span> </span>
-<span id="cb26-17"><a href="probabilidad_estadistica.html#cb26-17" tabindex="-1"></a>  <span class="fu">xlab</span>( <span class="fu">TeX</span>( <span class="st">&quot;error&quot;</span> ) ) <span class="sc">+</span> </span>
-<span id="cb26-18"><a href="probabilidad_estadistica.html#cb26-18" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span>
-<span id="cb26-19"><a href="probabilidad_estadistica.html#cb26-19" tabindex="-1"></a><span class="fu">plot</span>( plt )</span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r fold-hide"><code class="sourceCode r"><span id="cb25-1"><a href="probabilidad_estadistica.html#cb25-1" tabindex="-1"></a>e <span class="ot">&lt;-</span> f <span class="sc">-</span> IFf</span>
+<span id="cb25-2"><a href="probabilidad_estadistica.html#cb25-2" tabindex="-1"></a></span>
+<span id="cb25-3"><a href="probabilidad_estadistica.html#cb25-3" tabindex="-1"></a>xmax <span class="ot">&lt;-</span> <span class="fu">max</span>( <span class="fu">abs</span>( e ) )</span>
+<span id="cb25-4"><a href="probabilidad_estadistica.html#cb25-4" tabindex="-1"></a>xbrk <span class="ot">&lt;-</span> <span class="fu">seq</span>( <span class="sc">-</span>xmax, xmax, <span class="at">length =</span> <span class="dv">9</span> )</span>
+<span id="cb25-5"><a href="probabilidad_estadistica.html#cb25-5" tabindex="-1"></a>xlbl <span class="ot">&lt;-</span> <span class="fu">formatC</span>( xbrk, <span class="at">digits =</span> <span class="dv">2</span>, <span class="at">format =</span> <span class="st">&#39;e&#39;</span> )</span>
+<span id="cb25-6"><a href="probabilidad_estadistica.html#cb25-6" tabindex="-1"></a>xlim <span class="ot">&lt;-</span> <span class="fu">c</span>( <span class="sc">-</span>xmax, xmax )</span>
+<span id="cb25-7"><a href="probabilidad_estadistica.html#cb25-7" tabindex="-1"></a></span>
+<span id="cb25-8"><a href="probabilidad_estadistica.html#cb25-8" tabindex="-1"></a>plt <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb25-9"><a href="probabilidad_estadistica.html#cb25-9" tabindex="-1"></a>  <span class="fu">geom_histogram</span>( </span>
+<span id="cb25-10"><a href="probabilidad_estadistica.html#cb25-10" tabindex="-1"></a>    <span class="fu">aes</span>( <span class="at">x =</span> e, <span class="at">y =</span> <span class="fu">after_stat</span>( density ) ), </span>
+<span id="cb25-11"><a href="probabilidad_estadistica.html#cb25-11" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">&#39;grey50&#39;</span>, </span>
+<span id="cb25-12"><a href="probabilidad_estadistica.html#cb25-12" tabindex="-1"></a>    <span class="at">colour =</span> <span class="st">&#39;dodgerblue3&#39;</span>, </span>
+<span id="cb25-13"><a href="probabilidad_estadistica.html#cb25-13" tabindex="-1"></a>    <span class="at">bins =</span> <span class="fu">nclass.scott</span>( e ) ) <span class="sc">+</span> </span>
+<span id="cb25-14"><a href="probabilidad_estadistica.html#cb25-14" tabindex="-1"></a>  <span class="fu">geom_density</span>() <span class="sc">+</span></span>
+<span id="cb25-15"><a href="probabilidad_estadistica.html#cb25-15" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>( <span class="at">breaks =</span> xbrk,</span>
+<span id="cb25-16"><a href="probabilidad_estadistica.html#cb25-16" tabindex="-1"></a>                      <span class="at">labels =</span> xlbl, </span>
+<span id="cb25-17"><a href="probabilidad_estadistica.html#cb25-17" tabindex="-1"></a>                      <span class="at">limits =</span> xlim, </span>
+<span id="cb25-18"><a href="probabilidad_estadistica.html#cb25-18" tabindex="-1"></a>                      <span class="at">expand =</span> <span class="fu">c</span>( <span class="dv">0</span>, <span class="dv">0</span> ) ) <span class="sc">+</span></span>
+<span id="cb25-19"><a href="probabilidad_estadistica.html#cb25-19" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>( <span class="at">labels =</span> <span class="fu">label_scientific</span>( <span class="at">digits =</span> <span class="dv">4</span> ) ) <span class="sc">+</span></span>
+<span id="cb25-20"><a href="probabilidad_estadistica.html#cb25-20" tabindex="-1"></a>  <span class="fu">ylab</span>( <span class="fu">TeX</span>( <span class="st">&quot;distribución del error&quot;</span> ) ) <span class="sc">+</span> </span>
+<span id="cb25-21"><a href="probabilidad_estadistica.html#cb25-21" tabindex="-1"></a>  <span class="fu">xlab</span>( <span class="fu">TeX</span>( <span class="st">&quot;error&quot;</span> ) ) <span class="sc">+</span> </span>
+<span id="cb25-22"><a href="probabilidad_estadistica.html#cb25-22" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span>
+<span id="cb25-23"><a href="probabilidad_estadistica.html#cb25-23" tabindex="-1"></a><span class="fu">plot</span>( plt )</span></code></pre></div>
 </details>
-<pre><code>## Warning: Removed 1 row containing missing values or values outside the scale range (`geom_bar()`).</code></pre>
 <p><img src="seguros_generales_files/figure-html/l4g5-1.png" width="80%" style="display: block; margin: auto;" /></p>
 <p></p>
 <!------------------------------------------------------------------------------------------------->
