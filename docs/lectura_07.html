@@ -76,6 +76,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap-257450a62f84a916ff723c9590a8c97c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/quarto-contrib/foldbox/foldbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -134,6 +135,28 @@ window.MathJax = {
 </script>
 <script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+<style>
+.Theorem {
+  --color1: #c0c0c0;
+  --color2: #808080;
+}
+.Definition {
+  --color1: #c0c0c0;
+  --color2: #808080;
+}
+.Corollary {
+  --color1: #c0c0c0;
+  --color2: #808080;
+}
+.Proposition {
+  --color1: #c0c0c0;
+  --color2: #808080;
+}
+.Conjecture {
+  --color1: #c0c0c0;
+  --color2: #808080;
+}
+</style>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -328,8 +351,8 @@ window.Quarto = {
 <!------------------------------------------------------------------------------------------------->
 <section id="medidas_riesgo" class="level2" data-number="8.1">
 <h2 data-number="8.1" class="anchored" data-anchor-id="medidas_riesgo"><span class="header-section-number">8.1</span> Medidas de riesgo</h2>
-<div class="thmbox">
-<div id="dmedriskcohe" class="definition" name="Medida de riesgo coherente">
+<div id="dmedriskcohe" class="Definition" title="Medida de riesgo coherente">
+<details class="Definition fbx-simplebox fbx-default" open=""><summary><strong>Definition 8.1: </strong>Medida de riesgo coherente</summary><div>
 <p>Una <strong>medida de riesgo coeherente</strong> es una función <span class="math inline">\(\rho: \R \longrightarrow \R\)</span>, que satisface la siguientes propiedades:</p>
 <ol type="1">
 <li><p><strong>Normalización</strong>, el riesgo de nada es nada <span class="math display">\[
@@ -348,33 +371,30 @@ window.Quarto = {
 \rho( X + Y ) \leq \rho( X ) + \rho( Y )
 \]</span></p></li>
 </ol>
-</div>
+</div></details>
 </div>
 <p>En lo que continúa citamos algunas de las medidas de riesgo usualmente utilizadas.</p>
-<div class="thmbox">
-<div id="dVaR" class="definition" name="Valor en riesgo">
-<p>Dada una variable aleatoria a valores reales <span class="math inline">\(X\)</span>, el <strong>valor en riesgo</strong> (value at risk) de <span class="math inline">\(X\)</span> al nivel de probabilidad <span class="math inline">\(\alpha \in (0,1)\)</span> está dado por <span class="math display">\[
+<div id="dVaR" class="Definition" title="Valor en riesgo">
+<p></p><details class="Definition fbx-simplebox fbx-default" open=""><summary><strong>Definition 8.2: </strong>Valor en riesgo</summary><div>Dada una variable aleatoria a valores reales <span class="math inline">\(X\)</span>, el <strong>valor en riesgo</strong> (value at risk) de <span class="math inline">\(X\)</span> al nivel de probabilidad <span class="math inline">\(\alpha \in (0,1)\)</span> está dado por <span class="math display">\[
 \VaR_{\alpha}( X ) = \inf\left\{ x \in \R \middle| F_X( x ) &gt; \alpha \right\}
-\]</span></p>
+\]</span><p></p>
+</div></details>
 </div>
-</div>
-<div class="thmbox">
-<div id="varinv" class="proposition">
-<p>Si la función de distribución acumulada <span class="math inline">\(F_X\)</span> es continua, entonces <span class="math inline">\(\VaR_{\alpha}( X ) = F_X^{-1}( \alpha )\)</span>.</p>
-</div>
+<div id="varinv" class="Proposition">
+<p></p><details class="Proposition fbx-simplebox fbx-default" open=""><summary><strong>Proposition 8.3</strong></summary><div>Si la función de distribución acumulada <span class="math inline">\(F_X\)</span> es continua, entonces <span class="math inline">\(\VaR_{\alpha}( X ) = F_X^{-1}( \alpha )\)</span>.<p></p>
+</div></details>
 </div>
 <p>Por otra parte, <span class="math inline">\(\VaR_{\alpha}\)</span> para cualquier <span class="math inline">\(\alpha\)</span> no es una medida de riesgo sub-aditiva.</p>
 <p>El método directo para el calcular el <span class="math inline">\(\VaR_\alpha\)</span> es directamente atacando el problema de encontrar el ínfimo, esto es un problema de optimización que puede tener sus complicaciones, ya que muchas de las veces la distribución acumulada <span class="math inline">\(F\)</span> no es conocida o fácilmente computable. Incluso en el caso cuando la función de distribución <span class="math inline">\(F\)</span> es continua, resta el problema de poder invertir esta función.</p>
 <p>Otra forma es acudir a los métodos de simulación estocástica, partiendo de una muestra <span class="math inline">\(X_1, \ldots, X_n\)</span> y calculando de forma aproximada <span class="math display">\[
 \VaR_{\alpha}( X ) \approx F_n^{-1}( \alpha )
 \]</span> En principio no sabemos si esta aproximación será consistente conforme se aumenta el tamaño de la muestra, sin embargo para ello tenemos la siguiente proposición, la cual nos da una certeza al respecto.</p>
-<div class="thmbox">
-<div id="appoxvar" class="proposition">
-<p>Si consideramos una familia de variables aleatorias <span class="math inline">\(\{X_n\}_{n\in \N}\)</span> i.i.d con distribución común <span class="math inline">\(F\)</span> no necesariamente continua, entonces el percentil empírico de orden <span class="math inline">\(\alpha\)</span>, <span class="math inline">\(\xi_{n,\alpha} = F_n^{-1}( \alpha )\)</span>, que se puede extraer a partir de las <span class="math inline">\(n\)</span> primeras variables en la muestra converge en probabilidad al valor <span class="math inline">\(\xi_{\alpha} = \VaR_{\alpha}( X )\)</span>, correspondiente al valor en riesgo.</p>
-</div>
+<div id="appoxvar" class="Proposition">
+<p></p><details class="Proposition fbx-simplebox fbx-default" open=""><summary><strong>Proposition 8.4</strong></summary><div>Si consideramos una familia de variables aleatorias <span class="math inline">\(\{X_n\}_{n\in \N}\)</span> i.i.d con distribución común <span class="math inline">\(F\)</span> no necesariamente continua, entonces el percentil empírico de orden <span class="math inline">\(\alpha\)</span>, <span class="math inline">\(\xi_{n,\alpha} = F_n^{-1}( \alpha )\)</span>, que se puede extraer a partir de las <span class="math inline">\(n\)</span> primeras variables en la muestra converge en probabilidad al valor <span class="math inline">\(\xi_{\alpha} = \VaR_{\alpha}( X )\)</span>, correspondiente al valor en riesgo.<p></p>
+</div></details>
 </div>
 <div class="proof">
-<p><span class="proof-title"><em>Proof</em>. </span>Utilizando la versión unilateral de la desigualdad @ref(thm:ddkw), podemos establecer las siguientes acotaciones <span class="math display">\[
+<p><span class="proof-title"><em>Proof</em>. </span>Utilizando la versión unilateral de la desigualdad <a href="lectura_04.html#ddkw">5.32</a>, podemos establecer las siguientes acotaciones <span class="math display">\[
 \begin{split}
 P\left( \xi_{n,\alpha}- \xi_{\alpha} &gt; \varepsilon \right)
 &amp; = P\left( \xi_{n,\alpha} &gt;  \xi_{\alpha} + \varepsilon \right) \\
@@ -403,7 +423,7 @@ P\left( \left| \xi_{n,\alpha}- \xi_{\alpha} \right| &gt; \varepsilon \right)
 <!------------------------------------------------------------------------------------------------->
 <p><strong>Algoritmo de simulación</strong></p>
 <p>Con lo anterior se puede crear un algoritmo de simulación estocástico que precisamente contemple el respectivo nivel de convergencia, de ahí que la demostración de la proposición anterior no es inútil, ya que de la misma resulta un criterio para determinar el número de simulaciones que se desea calcular.</p>
-<p>Fijamos un valor <span class="math inline">\(\delta &gt; 0\)</span> el cual acota la probabilidad del evento que mide el error de aproximación, i.e.&nbsp;<span class="math inline">\(P\left( \left| \xi_{n,\alpha} - \xi_{\alpha} \right| &gt; \varepsilon \right) \leq \delta\)</span> y tomando en cuenta la desigualdad en @ref(prp:appoxvar). <span class="math display">\[
+<p>Fijamos un valor <span class="math inline">\(\delta &gt; 0\)</span> el cual acota la probabilidad del evento que mide el error de aproximación, i.e.&nbsp;<span class="math inline">\(P\left( \left| \xi_{n,\alpha} - \xi_{\alpha} \right| &gt; \varepsilon \right) \leq \delta\)</span> y tomando en cuenta la desigualdad en <a href="lectura_07.html#appoxvar">8.4</a>. <span class="math display">\[
 \begin{split}
 2 C e^{-2n \min\left( F( \xi_{\alpha} + \varepsilon ) - \alpha, \alpha - F( \xi_{\alpha} - \varepsilon ) \right)^2 } &amp; \leq \delta \\
 -2n \min\left( F( \xi_{\alpha} + \varepsilon ) - \alpha, \alpha - F( \xi_{\alpha} - \varepsilon ) \right)^2
@@ -452,63 +472,55 @@ n \geq -\frac{\log( \delta )-\log(2)-\log(C)}{2 \widetilde{\varepsilon}^2}
 P\left( \left| \xi_{n,\alpha}- \xi_{\alpha} \right| &gt; \varepsilon \right) =
 0.93100000
 \]</span> Como se observa se tendrá que realizar muchas simulaciones más para llegar a tener en probabilidad un error de aproximación adecuado.</p>
-<div class="thmbox">
-<div id="dTVaR" class="definition" name="Valor en riesgo en la cola">
-<p>Dada una variable aleatoria a valores reales <span class="math inline">\(X\)</span>, el <strong>valor en riesgo en la cola</strong> (tail value at risk) de <span class="math inline">\(X\)</span> al nivel de probabilidad <span class="math inline">\(\alpha \in (0,1)\)</span> está dado por <span class="math display">\[
+<div id="dTVaR" class="Definition" title="Valor en riesgo en la cola">
+<p></p><details class="Definition fbx-simplebox fbx-default" open=""><summary><strong>Definition 8.5: </strong>Valor en riesgo en la cola</summary><div>Dada una variable aleatoria a valores reales <span class="math inline">\(X\)</span>, el <strong>valor en riesgo en la cola</strong> (tail value at risk) de <span class="math inline">\(X\)</span> al nivel de probabilidad <span class="math inline">\(\alpha \in (0,1)\)</span> está dado por <span class="math display">\[
 \TVaR_{\alpha}( X ) = \frac{1}{1-\alpha} \int\limits_{\alpha}^1 \VaR_u( X )\ du
-\]</span></p>
-</div>
+\]</span><p></p>
+</div></details>
 </div>
 <p>Es de notar que si se toma una variable aleatoria uniforme <span class="math inline">\(U \rightsquigarrow U(\alpha,1)\)</span>, tenemos que el valor en riesgo en la cola, puede ser expresado como la esperanza. <span class="math display">\[
 \TVaR_{\alpha}( X ) = \E\left[ \VaR_U( X ) \right]
-\]</span> De ahí que se una forma de calcular el valor en riesgo en la cola es utilizando una simulación estocástica que aproveche el @ref(thm:twln). Así se puede generar una muestra <span class="math inline">\(U_1, \ldots, U_m\)</span> de la distribución uniforme <span class="math inline">\(U(\alpha,1)\)</span> y para cada uno de estos valores se calcula por simulación el <span class="math inline">\(\xi_{n,U_1} \approx \VaR_{U_1}( X ), \ldots, \xi_{n,U_n} \approx  \VaR_{U_n}( X )\)</span>, luego aproximar utilizando la media empírica <span class="math display">\[
+\]</span> De ahí que se una forma de calcular el valor en riesgo en la cola es utilizando una simulación estocástica que aproveche el <a href="lectura_04.html#twln">5.27</a>. Así se puede generar una muestra <span class="math inline">\(U_1, \ldots, U_m\)</span> de la distribución uniforme <span class="math inline">\(U(\alpha,1)\)</span> y para cada uno de estos valores se calcula por simulación el <span class="math inline">\(\xi_{n,U_1} \approx \VaR_{U_1}( X ), \ldots, \xi_{n,U_n} \approx  \VaR_{U_n}( X )\)</span>, luego aproximar utilizando la media empírica <span class="math display">\[
 \TVaR_{\alpha}( X ) \approx \frac{1}{m} \sum\limits_{i=1}^m \xi_{n,U_i}
 \]</span> Pero como ya se mencionó, esta aproximación puede ser realmente costosa en términos computacionales; por tal razón, se requiere utilizar métodos numéricos más eficientes.</p>
-<div class="thmbox">
-<div id="TVaRcohe" class="proposition" name="Coherencia de la medida TVaR">
-<p>La medida de riesgo <span class="math inline">\(\TVaR_{\alpha}\)</span> es una medida de riesgo coherente si la variable aleatoria sobre la cual se mide es una variable aleatoria continua.</p>
+<div id="TVaRcohe" class="Proposition" title="Coherencia de la medida TVaR">
+<p></p><details class="Proposition fbx-simplebox fbx-default" open=""><summary><strong>Proposition 8.6: </strong>Coherencia de la medida TVaR</summary><div>La medida de riesgo <span class="math inline">\(\TVaR_{\alpha}\)</span> es una medida de riesgo coherente si la variable aleatoria sobre la cual se mide es una variable aleatoria continua.<p></p>
+</div></details>
 </div>
-</div>
-<div class="thmbox">
-<div id="dCTE" class="definition" name="Esperanza condicional en la cola">
-<p>Dada una variable aleatoria a valores reales <span class="math inline">\(X\)</span>, la <strong>esperanza condicional en la cola</strong> (conditional tail expectation) de <span class="math inline">\(X\)</span> al nivel de probabilidad <span class="math inline">\(\alpha \in (0,1)\)</span> está dado por <span class="math display">\[
+<div id="dCTE" class="Definition" title="Esperanza condicional en la cola">
+<p></p><details class="Definition fbx-simplebox fbx-default" open=""><summary><strong>Definition 8.7: </strong>Esperanza condicional en la cola</summary><div>Dada una variable aleatoria a valores reales <span class="math inline">\(X\)</span>, la <strong>esperanza condicional en la cola</strong> (conditional tail expectation) de <span class="math inline">\(X\)</span> al nivel de probabilidad <span class="math inline">\(\alpha \in (0,1)\)</span> está dado por <span class="math display">\[
 \CTE_{\alpha}( X ) = \E\left[ X \middle| X &gt; \VaR_{\alpha}( X ) \right]
-\]</span></p>
+\]</span><p></p>
+</div></details>
 </div>
-</div>
-<div class="thmbox">
-<div id="eqtvarcte" class="proposition">
-<p>Si la función de distribución acumulada <span class="math inline">\(F_X\)</span> de la variable aleatoria <span class="math inline">\(X\)</span> es continua, entonces se tiene la siguiente igualdad <span class="math display">\[
+<div id="eqtvarcte" class="Proposition">
+<p></p><details class="Proposition fbx-simplebox fbx-default" open=""><summary><strong>Proposition 8.8</strong></summary><div>Si la función de distribución acumulada <span class="math inline">\(F_X\)</span> de la variable aleatoria <span class="math inline">\(X\)</span> es continua, entonces se tiene la siguiente igualdad <span class="math display">\[
 \CTE_{\alpha}( X ) = \TVaR_{\alpha}( X )
-\]</span></p>
+\]</span><p></p>
+</div></details>
 </div>
-</div>
-<div class="thmbox">
-<div id="dCVaR" class="definition" name="Valor en riesgo condicionado">
-<p>Dada una variable aleatoria a valores reales <span class="math inline">\(X\)</span>, el <strong>valor en riesgo condicionado</strong> (conditional value at risk) de <span class="math inline">\(X\)</span> al nivel de probabilidad <span class="math inline">\(\alpha \in (0,1)\)</span> está dado por <span class="math display">\[
+<div id="dCVaR" class="Definition" title="Valor en riesgo condicionado">
+<p></p><details class="Definition fbx-simplebox fbx-default" open=""><summary><strong>Definition 8.9: </strong>Valor en riesgo condicionado</summary><div>Dada una variable aleatoria a valores reales <span class="math inline">\(X\)</span>, el <strong>valor en riesgo condicionado</strong> (conditional value at risk) de <span class="math inline">\(X\)</span> al nivel de probabilidad <span class="math inline">\(\alpha \in (0,1)\)</span> está dado por <span class="math display">\[
 \CVaR_{\alpha}( X ) = \E\left[ X - \VaR_{\alpha}( X ) \middle| X &gt; \VaR_{\alpha}( X ) \right]
 = \CTE_{\alpha}( X ) - \VaR_{\alpha}( X )
-\]</span></p>
+\]</span><p></p>
+</div></details>
 </div>
-</div>
-<div class="thmbox">
-<div id="dES" class="definition" name="Déficit esperado">
-<p>Dada una variable aleatoria a valores reales <span class="math inline">\(X\)</span>, el <strong>déficit esperado</strong> (expected shortfall) de <span class="math inline">\(X\)</span> al nivel de probabilidad <span class="math inline">\(\alpha \in (0,1)\)</span> está dado por <span class="math display">\[
+<div id="dES" class="Definition" title="Déficit esperado">
+<p></p><details class="Definition fbx-simplebox fbx-default" open=""><summary><strong>Definition 8.10: </strong>Déficit esperado</summary><div>Dada una variable aleatoria a valores reales <span class="math inline">\(X\)</span>, el <strong>déficit esperado</strong> (expected shortfall) de <span class="math inline">\(X\)</span> al nivel de probabilidad <span class="math inline">\(\alpha \in (0,1)\)</span> está dado por <span class="math display">\[
 \ES_{\alpha}( X ) = \E\left[ \max\left( X - \VaR_{\alpha}( X ), 0 \right) \right]
-\]</span></p>
+\]</span><p></p>
+</div></details>
 </div>
-</div>
-<div class="thmbox">
-<div id="dEVaR" class="definition" name="Valor en riesgo entrópico">
-<p>Dada una variable aleatoria a valores reales <span class="math inline">\(X\)</span>, el <strong>valor en riesgo entrópico</strong> (entropic value at risk) de <span class="math inline">\(X\)</span> al nivel de probabilidad <span class="math inline">\(\alpha \in (0,1)\)</span> está dado por <span class="math display">\[
+<div id="dEVaR" class="Definition" title="Valor en riesgo entrópico">
+<p></p><details class="Definition fbx-simplebox fbx-default" open=""><summary><strong>Definition 8.11: </strong>Valor en riesgo entrópico</summary><div>Dada una variable aleatoria a valores reales <span class="math inline">\(X\)</span>, el <strong>valor en riesgo entrópico</strong> (entropic value at risk) de <span class="math inline">\(X\)</span> al nivel de probabilidad <span class="math inline">\(\alpha \in (0,1)\)</span> está dado por <span class="math display">\[
 \EVaR_{\alpha}( X ) = \inf\left\{ \frac{1}{t} \ln\left( \frac{M_X( t )}{1 - \alpha} \right) \middle| t &gt; 0 \right\}
-\]</span></p>
+\]</span><p></p>
+</div></details>
 </div>
-</div>
-<div class="thmbox">
-<div id="EVaRcohe" class="proposition" name="Coherencia de la medida EVaR">
-<p>La medida de riesgo <span class="math inline">\(\EVaR_{\alpha}\)</span> es una medida de riesgo coherente.</p>
-</div>
+<div id="EVaRcohe" class="Proposition" title="Coherencia de la medida EVaR">
+<p></p><details class="Proposition fbx-simplebox fbx-default" open=""><summary><strong>Proposition 8.12: </strong>Coherencia de la medida EVaR</summary><div>La medida de riesgo <span class="math inline">\(\EVaR_{\alpha}\)</span> es una medida de riesgo coherente.<p></p>
+</div></details>
 </div>
 <div id="l7ex2" class="example">
 <p>Podemos considerar el caso particular donde todos los reclamos se suponen independientes e idénticamente distribuidos (i.i.d), en este caso con distribución <span class="math inline">\(X_i \rightsquigarrow LN(\mu,\sigma)\)</span></p>
@@ -570,11 +582,10 @@ P\left( \left| \xi_{n,\alpha}- \xi_{\alpha} \right| &gt; \varepsilon \right) =
 <li><p>Otros activos</p></li>
 </ol>
 <p>En el proceso de tarificación no es pertinente incluir todos los activos de la empresa, ya que muchos de estos no tienen la liquidez necesaria como para ser considerados un tipo de activo viable para la tarificación. Tampoco se toma en cuenta el dinero recibido por la cesión de primas en un ramo en particular, ya que esto constituye un nivel más arriba propio del negocio reasegurador.</p>
-<div class="thmbox">
-<div id="dpruin" class="definition" name="Probabilidad de ruina">
-<p>En términos generales se busca equilibrar el resultado operativo del ramo de negocio <span class="math inline">\(R\)</span> a lo largo de la vida del ramo. El resultado <span class="math inline">\(R\)</span> a su vez está dado por la siguiente relación: <span class="math display">\[
+<div id="dpruin" class="Definition" title="Probabilidad de ruina">
+<p></p><details class="Definition fbx-simplebox fbx-default" open=""><summary><strong>Definition 8.13: </strong>Probabilidad de ruina</summary><div>En términos generales se busca equilibrar el resultado operativo del ramo de negocio <span class="math inline">\(R\)</span> a lo largo de la vida del ramo. El resultado <span class="math inline">\(R\)</span> a su vez está dado por la siguiente relación: <span class="math display">\[
 R = \Pi + I - S - G - K
-\]</span> donde las variables a considerarse en principio son:</p>
+\]</span> donde las variables a considerarse en principio son:<p></p>
 <ol type="1">
 <li><p><span class="math inline">\(\Pi\)</span> Ingreso por primas</p></li>
 <li><p><span class="math inline">\(I\)</span> Ingreso por inversiones</p></li>
@@ -588,9 +599,9 @@ R = \Pi - S - G - K
 <p>Sería ideal que a lo largo de la vida del ramo el resultado mantenga <span class="math inline">\(R &gt; 0\)</span>, pero al tratarse de un negocio que depende de la aleatoriedad de los reclamos, es bastante complicado encontrar un costo de capital <span class="math inline">\(K\)</span> y una prima <span class="math inline">\(\Pi\)</span> que siempre asegure ante todo escenario que se mantenga la positividad. Ante este riesgo continuo se busca minimizar la <strong>probabilidad de ruina</strong>, es decir, acotar la probabilidad del evento <span class="math inline">\(R &lt; 0\)</span> a un nivel de confianza <span class="math inline">\(\alpha &gt; 0\)</span> adecuado <span class="math display">\[
 P( R &lt; 0 ) &lt; \alpha
 \]</span></p>
+</div></details>
 </div>
-</div>
-<p>Muchas de las veces se parte del principio de equilibrio financiero @ref(sec:equifin), donde se busca la igualdad <span class="math inline">\(\E[R] = 0\)</span>, la misma implica la siguiente relación: <span class="math display">\[
+<p>Muchas de las veces se parte del principio de equilibrio financiero <span class="math inline">\(\ref{equifin}\)</span>, donde se busca la igualdad <span class="math inline">\(\E[R] = 0\)</span>, la misma implica la siguiente relación: <span class="math display">\[
 \begin{split}
 0 &amp; = \E[R] \\
 0 &amp; = \E[R\mid R \geq 0]P( R \geq 0 ) + \E[R\mid R &lt; 0]P( R &lt; 0 ) \\
@@ -611,15 +622,14 @@ K = r\left( \rho( S ) - \E[S] \right)
 = \E\left[ \Pi - S - G - r\left( \rho( S ) - \E[S] \right) \right]
 = \Pi - \E[S] - G - r \left( \rho(S) - \E[S] \right)
 \]</span></p>
-<div class="thmbox">
-<div id="dpricing" class="definition" name="Tarificación (Pricing)">
-<p>Lo que se busca es evitar la ruina y por tanto se busca cubrirse ante el evento <span class="math inline">\(R &lt; 0\)</span>, desde una perspectiva probabilista esto se puede realizar seleccionando un nivel de cobertura <span class="math inline">\(\alpha &gt; 0\)</span>, que acote la probabilidad del evento de ruina. <span class="math display">\[
+<div id="dpricing" class="Definition" title="Tarificación (Pricing)">
+<p></p><details class="Definition fbx-simplebox fbx-default" open=""><summary><strong>Definition 8.14: </strong>Tarificación (Pricing)</summary><div>Lo que se busca es evitar la ruina y por tanto se busca cubrirse ante el evento <span class="math inline">\(R &lt; 0\)</span>, desde una perspectiva probabilista esto se puede realizar seleccionando un nivel de cobertura <span class="math inline">\(\alpha &gt; 0\)</span>, que acote la probabilidad del evento de ruina. <span class="math display">\[
 P( R &lt; 0 )
 = P( \Pi - S - G - K &lt; 0 )
 = P\left( \Pi - S - G - r\left( \rho(S) - \E[S] \right) &lt; 0 \right) &lt; \alpha.
-\]</span></p>
+\]</span><p></p>
 <p>De la relación anterior se observa que una vez seleccionado el nivel de cobertura <span class="math inline">\(\alpha\)</span> y la medida de riesgo <span class="math inline">\(\rho\)</span>, las variables correspondientes a la prima <span class="math inline">\(\Pi\)</span> y a los gastos <span class="math inline">\(G\)</span> quedan libres, de ahí resulta un margen que permite seleccionar la prima más óptima para un producto de seguro, así como también optimizar los gastos <span class="math inline">\(G\)</span>. Este proceso de selección es precisamente lo que llamamos en este contexto como <strong>tarificación</strong> (pricing).</p>
-</div>
+</div></details>
 </div>
 <p>Razonando un poco más al respecto, si asumimos que se dispone de la distribución acumulada <span class="math inline">\(F_S\)</span> de <span class="math inline">\(S\)</span>, se puede obtener las siguientes expresiones: <span class="math display">\[
 \begin{split}
@@ -1390,8 +1400,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb10-26"><a href="#cb10-26"></a><span class="co">&lt;!-------------------------------------------------------------------------------------------------&gt;</span></span>
 <span id="cb10-27"><a href="#cb10-27"></a><span class="fu">## Medidas de riesgo {#medidas_riesgo}</span></span>
 <span id="cb10-28"><a href="#cb10-28"></a></span>
-<span id="cb10-29"><a href="#cb10-29"></a>:::: {.thmbox data-latex=""}</span>
-<span id="cb10-30"><a href="#cb10-30"></a>::: {.definition #dmedriskcohe name="Medida de riesgo coherente"}</span>
+<span id="cb10-29"><a href="#cb10-29"></a></span>
+<span id="cb10-30"><a href="#cb10-30"></a>::: {.Definition #dmedriskcohe title="Medida de riesgo coherente"}</span>
 <span id="cb10-31"><a href="#cb10-31"></a>Una **medida de riesgo coeherente** es una función $\rho: \R \longrightarrow \R$, </span>
 <span id="cb10-32"><a href="#cb10-32"></a>que satisface la siguientes propiedades:</span>
 <span id="cb10-33"><a href="#cb10-33"></a></span>
@@ -1420,26 +1430,26 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb10-56"><a href="#cb10-56"></a>\rho( X + Y ) \leq \rho( X ) + \rho( Y )</span>
 <span id="cb10-57"><a href="#cb10-57"></a>$$</span>
 <span id="cb10-58"><a href="#cb10-58"></a>:::</span>
-<span id="cb10-59"><a href="#cb10-59"></a>::::</span>
+<span id="cb10-59"><a href="#cb10-59"></a></span>
 <span id="cb10-60"><a href="#cb10-60"></a></span>
 <span id="cb10-61"><a href="#cb10-61"></a>En lo que continúa citamos algunas de las medidas de riesgo usualmente utilizadas.</span>
 <span id="cb10-62"><a href="#cb10-62"></a></span>
-<span id="cb10-63"><a href="#cb10-63"></a>:::: {.thmbox data-latex=""}</span>
-<span id="cb10-64"><a href="#cb10-64"></a>::: {.definition #dVaR name="Valor en riesgo"}</span>
+<span id="cb10-63"><a href="#cb10-63"></a></span>
+<span id="cb10-64"><a href="#cb10-64"></a>::: {.Definition #dVaR title="Valor en riesgo"}</span>
 <span id="cb10-65"><a href="#cb10-65"></a>Dada una variable aleatoria a valores reales $X$, el **valor en riesgo** (value at risk) de $X$ al </span>
 <span id="cb10-66"><a href="#cb10-66"></a>nivel de probabilidad $\alpha \in (0,1)$ está dado por</span>
 <span id="cb10-67"><a href="#cb10-67"></a>$$</span>
 <span id="cb10-68"><a href="#cb10-68"></a>\VaR_{\alpha}( X ) = \inf\left<span class="sc">\{</span> x \in \R \middle| F_X( x ) &gt; \alpha \right<span class="sc">\}</span></span>
 <span id="cb10-69"><a href="#cb10-69"></a>$$</span>
 <span id="cb10-70"><a href="#cb10-70"></a>:::</span>
-<span id="cb10-71"><a href="#cb10-71"></a>::::</span>
+<span id="cb10-71"><a href="#cb10-71"></a></span>
 <span id="cb10-72"><a href="#cb10-72"></a></span>
-<span id="cb10-73"><a href="#cb10-73"></a>:::: {.thmbox data-latex=""}</span>
-<span id="cb10-74"><a href="#cb10-74"></a>::: {.proposition #varinv}</span>
+<span id="cb10-73"><a href="#cb10-73"></a></span>
+<span id="cb10-74"><a href="#cb10-74"></a>::: {.Proposition #varinv}</span>
 <span id="cb10-75"><a href="#cb10-75"></a>Si la función de distribución acumulada $F_X$ es continua, entonces </span>
 <span id="cb10-76"><a href="#cb10-76"></a>$\VaR_{\alpha}( X ) = F_X^{-1}( \alpha )$.</span>
 <span id="cb10-77"><a href="#cb10-77"></a>:::</span>
-<span id="cb10-78"><a href="#cb10-78"></a>::::</span>
+<span id="cb10-78"><a href="#cb10-78"></a></span>
 <span id="cb10-79"><a href="#cb10-79"></a></span>
 <span id="cb10-80"><a href="#cb10-80"></a>Por otra parte, $\VaR_{\alpha}$ para cualquier $\alpha$ no es una medida de riesgo sub-aditiva.</span>
 <span id="cb10-81"><a href="#cb10-81"></a></span>
@@ -1458,18 +1468,18 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb10-94"><a href="#cb10-94"></a>muestra, sin embargo para ello tenemos la siguiente proposición, la cual nos da una certeza al </span>
 <span id="cb10-95"><a href="#cb10-95"></a>respecto.</span>
 <span id="cb10-96"><a href="#cb10-96"></a></span>
-<span id="cb10-97"><a href="#cb10-97"></a>:::: {.thmbox data-latex=""}</span>
-<span id="cb10-98"><a href="#cb10-98"></a>::: {.proposition #appoxvar}</span>
+<span id="cb10-97"><a href="#cb10-97"></a></span>
+<span id="cb10-98"><a href="#cb10-98"></a>::: {.Proposition #appoxvar}</span>
 <span id="cb10-99"><a href="#cb10-99"></a>Si consideramos una familia de variables aleatorias $<span class="sc">\{</span>X_n<span class="sc">\}</span>_{n\in \N}$ i.i.d con distribución común</span>
 <span id="cb10-100"><a href="#cb10-100"></a>$F$ no necesariamente continua, entonces el percentil empírico de orden $\alpha$, </span>
 <span id="cb10-101"><a href="#cb10-101"></a>$\xi_{n,\alpha} = F_n^{-1}( \alpha )$, que se puede extraer a partir de las $n$ primeras variables </span>
 <span id="cb10-102"><a href="#cb10-102"></a>en la muestra converge en probabilidad al valor $\xi_{\alpha} = \VaR_{\alpha}( X )$, correspondiente</span>
 <span id="cb10-103"><a href="#cb10-103"></a>al valor en riesgo.</span>
 <span id="cb10-104"><a href="#cb10-104"></a>:::</span>
-<span id="cb10-105"><a href="#cb10-105"></a>::::</span>
+<span id="cb10-105"><a href="#cb10-105"></a></span>
 <span id="cb10-106"><a href="#cb10-106"></a></span>
 <span id="cb10-107"><a href="#cb10-107"></a>:::{.proof}</span>
-<span id="cb10-108"><a href="#cb10-108"></a>Utilizando la versión unilateral de la desigualdad \@ref(thm:ddkw), podemos establecer las </span>
+<span id="cb10-108"><a href="#cb10-108"></a>Utilizando la versión unilateral de la desigualdad \ref{ddkw}, podemos establecer las </span>
 <span id="cb10-109"><a href="#cb10-109"></a>siguientes acotaciones</span>
 <span id="cb10-110"><a href="#cb10-110"></a>$$</span>
 <span id="cb10-111"><a href="#cb10-111"></a>\begin{split}</span>
@@ -1513,7 +1523,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb10-149"><a href="#cb10-149"></a></span>
 <span id="cb10-150"><a href="#cb10-150"></a>Fijamos un valor $\delta &gt; 0$ el cual acota la probabilidad del evento que mide el error de </span>
 <span id="cb10-151"><a href="#cb10-151"></a>aproximación, i.e. $P\left( \left| \xi_{n,\alpha} - \xi_{\alpha} \right| &gt; \varepsilon \right) \leq \delta$ </span>
-<span id="cb10-152"><a href="#cb10-152"></a>y tomando en cuenta la desigualdad en \@ref(prp:appoxvar).</span>
+<span id="cb10-152"><a href="#cb10-152"></a>y tomando en cuenta la desigualdad en \ref{appoxvar}.</span>
 <span id="cb10-153"><a href="#cb10-153"></a>$$</span>
 <span id="cb10-154"><a href="#cb10-154"></a>\begin{split}</span>
 <span id="cb10-155"><a href="#cb10-155"></a>2 C e^{-2n \min\left( F( \xi_{\alpha} + \varepsilon ) - \alpha, \alpha - F( \xi_{\alpha} - \varepsilon ) \right)^2 } &amp; \leq \delta <span class="sc">\\</span></span>
@@ -1582,15 +1592,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb10-218"><a href="#cb10-218"></a>Como se observa se tendrá que realizar muchas simulaciones más para llegar a tener en probabilidad</span>
 <span id="cb10-219"><a href="#cb10-219"></a>un error de aproximación adecuado.</span>
 <span id="cb10-220"><a href="#cb10-220"></a></span>
-<span id="cb10-221"><a href="#cb10-221"></a>:::: {.thmbox data-latex=""}</span>
-<span id="cb10-222"><a href="#cb10-222"></a>::: {.definition #dTVaR name="Valor en riesgo en la cola"}</span>
+<span id="cb10-221"><a href="#cb10-221"></a></span>
+<span id="cb10-222"><a href="#cb10-222"></a>::: {.Definition #dTVaR title="Valor en riesgo en la cola"}</span>
 <span id="cb10-223"><a href="#cb10-223"></a>Dada una variable aleatoria a valores reales $X$, el **valor en riesgo en la cola** </span>
 <span id="cb10-224"><a href="#cb10-224"></a>(tail value at risk) de $X$ al nivel de probabilidad $\alpha \in (0,1)$ está dado por</span>
 <span id="cb10-225"><a href="#cb10-225"></a>$$</span>
 <span id="cb10-226"><a href="#cb10-226"></a>\TVaR_{\alpha}( X ) = \frac{1}{1-\alpha} \int\limits_{\alpha}^1 \VaR_u( X )\ du</span>
 <span id="cb10-227"><a href="#cb10-227"></a>$$</span>
 <span id="cb10-228"><a href="#cb10-228"></a>:::</span>
-<span id="cb10-229"><a href="#cb10-229"></a>::::</span>
+<span id="cb10-229"><a href="#cb10-229"></a></span>
 <span id="cb10-230"><a href="#cb10-230"></a></span>
 <span id="cb10-231"><a href="#cb10-231"></a>Es de notar que si se toma una variable aleatoria uniforme $U \rightsquigarrow U(\alpha,1)$, tenemos </span>
 <span id="cb10-232"><a href="#cb10-232"></a>que el valor en riesgo en la cola, puede ser expresado como la esperanza.</span>
@@ -1598,7 +1608,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb10-234"><a href="#cb10-234"></a>\TVaR_{\alpha}( X ) = \E\left<span class="co">[</span><span class="ot"> \VaR_U( X ) \right</span><span class="co">]</span></span>
 <span id="cb10-235"><a href="#cb10-235"></a>$$</span>
 <span id="cb10-236"><a href="#cb10-236"></a>De ahí que se una forma de calcular el valor en riesgo en la cola es utilizando una simulación</span>
-<span id="cb10-237"><a href="#cb10-237"></a>estocástica que aproveche el \@ref(thm:twln). Así se puede generar una muestra $U_1, \ldots, U_m$ de </span>
+<span id="cb10-237"><a href="#cb10-237"></a>estocástica que aproveche el \ref{twln}. Así se puede generar una muestra $U_1, \ldots, U_m$ de </span>
 <span id="cb10-238"><a href="#cb10-238"></a>la distribución uniforme $U(\alpha,1)$ y para cada uno de estos valores se calcula por simulación el </span>
 <span id="cb10-239"><a href="#cb10-239"></a>$\xi_{n,U_1} \approx \VaR_{U_1}( X ), \ldots, \xi_{n,U_n} \approx  \VaR_{U_n}( X )$, luego aproximar</span>
 <span id="cb10-240"><a href="#cb10-240"></a>utilizando la media empírica</span>
@@ -1608,35 +1618,35 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb10-244"><a href="#cb10-244"></a>Pero como ya se mencionó, esta aproximación puede ser realmente costosa en términos </span>
 <span id="cb10-245"><a href="#cb10-245"></a>computacionales; por tal razón, se requiere utilizar métodos numéricos más eficientes.</span>
 <span id="cb10-246"><a href="#cb10-246"></a></span>
-<span id="cb10-247"><a href="#cb10-247"></a>:::: {.thmbox data-latex=""}</span>
-<span id="cb10-248"><a href="#cb10-248"></a>::: {.proposition #TVaRcohe name="Coherencia de la medida TVaR"}</span>
+<span id="cb10-247"><a href="#cb10-247"></a></span>
+<span id="cb10-248"><a href="#cb10-248"></a>::: {.Proposition #TVaRcohe title="Coherencia de la medida TVaR"}</span>
 <span id="cb10-249"><a href="#cb10-249"></a>La medida de riesgo $\TVaR_{\alpha}$ es una medida de riesgo coherente si la variable aleatoria</span>
 <span id="cb10-250"><a href="#cb10-250"></a>sobre la cual se mide es una variable aleatoria continua.</span>
 <span id="cb10-251"><a href="#cb10-251"></a>:::</span>
-<span id="cb10-252"><a href="#cb10-252"></a>::::</span>
+<span id="cb10-252"><a href="#cb10-252"></a></span>
 <span id="cb10-253"><a href="#cb10-253"></a></span>
-<span id="cb10-254"><a href="#cb10-254"></a>:::: {.thmbox data-latex=""}</span>
-<span id="cb10-255"><a href="#cb10-255"></a>::: {.definition #dCTE name="Esperanza condicional en la cola"} </span>
+<span id="cb10-254"><a href="#cb10-254"></a></span>
+<span id="cb10-255"><a href="#cb10-255"></a>::: {.Definition #dCTE title="Esperanza condicional en la cola"} </span>
 <span id="cb10-256"><a href="#cb10-256"></a>Dada una variable aleatoria a valores reales $X$, la **esperanza condicional en la cola** </span>
 <span id="cb10-257"><a href="#cb10-257"></a>(conditional tail expectation) de $X$ al nivel de probabilidad $\alpha \in (0,1)$ está dado por</span>
 <span id="cb10-258"><a href="#cb10-258"></a>$$</span>
 <span id="cb10-259"><a href="#cb10-259"></a>\CTE_{\alpha}( X ) = \E\left<span class="co">[</span><span class="ot"> X \middle| X &gt; \VaR_{\alpha}( X ) \right</span><span class="co">]</span></span>
 <span id="cb10-260"><a href="#cb10-260"></a>$$</span>
 <span id="cb10-261"><a href="#cb10-261"></a>:::</span>
-<span id="cb10-262"><a href="#cb10-262"></a>::::</span>
+<span id="cb10-262"><a href="#cb10-262"></a></span>
 <span id="cb10-263"><a href="#cb10-263"></a></span>
-<span id="cb10-264"><a href="#cb10-264"></a>:::: {.thmbox data-latex=""}</span>
-<span id="cb10-265"><a href="#cb10-265"></a>::: {.proposition #eqtvarcte}</span>
+<span id="cb10-264"><a href="#cb10-264"></a></span>
+<span id="cb10-265"><a href="#cb10-265"></a>::: {.Proposition #eqtvarcte}</span>
 <span id="cb10-266"><a href="#cb10-266"></a>Si la función de distribución acumulada $F_X$ de la variable aleatoria $X$ es continua, entonces</span>
 <span id="cb10-267"><a href="#cb10-267"></a>se tiene la siguiente igualdad</span>
 <span id="cb10-268"><a href="#cb10-268"></a>$$</span>
 <span id="cb10-269"><a href="#cb10-269"></a>\CTE_{\alpha}( X ) = \TVaR_{\alpha}( X )</span>
 <span id="cb10-270"><a href="#cb10-270"></a>$$</span>
 <span id="cb10-271"><a href="#cb10-271"></a>:::</span>
-<span id="cb10-272"><a href="#cb10-272"></a>::::</span>
+<span id="cb10-272"><a href="#cb10-272"></a></span>
 <span id="cb10-273"><a href="#cb10-273"></a></span>
-<span id="cb10-274"><a href="#cb10-274"></a>:::: {.thmbox data-latex=""}</span>
-<span id="cb10-275"><a href="#cb10-275"></a>::: {.definition #dCVaR name="Valor en riesgo condicionado"}</span>
+<span id="cb10-274"><a href="#cb10-274"></a></span>
+<span id="cb10-275"><a href="#cb10-275"></a>::: {.Definition #dCVaR title="Valor en riesgo condicionado"}</span>
 <span id="cb10-276"><a href="#cb10-276"></a>Dada una variable aleatoria a valores reales $X$, el **valor en riesgo condicionado** </span>
 <span id="cb10-277"><a href="#cb10-277"></a>(conditional value at risk) de $X$ al nivel de probabilidad $\alpha \in (0,1)$ está dado por</span>
 <span id="cb10-278"><a href="#cb10-278"></a>$$</span>
@@ -1644,33 +1654,33 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb10-280"><a href="#cb10-280"></a>= \CTE_{\alpha}( X ) - \VaR_{\alpha}( X )</span>
 <span id="cb10-281"><a href="#cb10-281"></a>$$</span>
 <span id="cb10-282"><a href="#cb10-282"></a>:::</span>
-<span id="cb10-283"><a href="#cb10-283"></a>::::</span>
+<span id="cb10-283"><a href="#cb10-283"></a></span>
 <span id="cb10-284"><a href="#cb10-284"></a></span>
-<span id="cb10-285"><a href="#cb10-285"></a>:::: {.thmbox data-latex=""}</span>
-<span id="cb10-286"><a href="#cb10-286"></a>::: {.definition #dES name="Déficit esperado"}</span>
+<span id="cb10-285"><a href="#cb10-285"></a></span>
+<span id="cb10-286"><a href="#cb10-286"></a>::: {.Definition #dES title="Déficit esperado"}</span>
 <span id="cb10-287"><a href="#cb10-287"></a>Dada una variable aleatoria a valores reales $X$, el **déficit esperado** (expected shortfall) de </span>
 <span id="cb10-288"><a href="#cb10-288"></a>$X$ al nivel de probabilidad $\alpha \in (0,1)$ está dado por</span>
 <span id="cb10-289"><a href="#cb10-289"></a>$$</span>
 <span id="cb10-290"><a href="#cb10-290"></a>\ES_{\alpha}( X ) = \E\left<span class="co">[</span><span class="ot"> \max\left( X - \VaR_{\alpha}( X ), 0 \right) \right</span><span class="co">]</span></span>
 <span id="cb10-291"><a href="#cb10-291"></a>$$</span>
 <span id="cb10-292"><a href="#cb10-292"></a>:::</span>
-<span id="cb10-293"><a href="#cb10-293"></a>::::</span>
+<span id="cb10-293"><a href="#cb10-293"></a></span>
 <span id="cb10-294"><a href="#cb10-294"></a></span>
-<span id="cb10-295"><a href="#cb10-295"></a>:::: {.thmbox data-latex=""}</span>
-<span id="cb10-296"><a href="#cb10-296"></a>::: {.definition #dEVaR name="Valor en riesgo entrópico"}</span>
+<span id="cb10-295"><a href="#cb10-295"></a></span>
+<span id="cb10-296"><a href="#cb10-296"></a>::: {.Definition #dEVaR title="Valor en riesgo entrópico"}</span>
 <span id="cb10-297"><a href="#cb10-297"></a>Dada una variable aleatoria a valores reales $X$, el **valor en riesgo entrópico** </span>
 <span id="cb10-298"><a href="#cb10-298"></a>(entropic value at risk) de $X$ al nivel de probabilidad $\alpha \in (0,1)$ está dado por</span>
 <span id="cb10-299"><a href="#cb10-299"></a>$$</span>
 <span id="cb10-300"><a href="#cb10-300"></a>\EVaR_{\alpha}( X ) = \inf\left<span class="sc">\{</span> \frac{1}{t} \ln\left( \frac{M_X( t )}{1 - \alpha} \right) \middle| t &gt; 0 \right<span class="sc">\}</span></span>
 <span id="cb10-301"><a href="#cb10-301"></a>$$</span>
 <span id="cb10-302"><a href="#cb10-302"></a>:::</span>
-<span id="cb10-303"><a href="#cb10-303"></a>::::</span>
+<span id="cb10-303"><a href="#cb10-303"></a></span>
 <span id="cb10-304"><a href="#cb10-304"></a></span>
-<span id="cb10-305"><a href="#cb10-305"></a>:::: {.thmbox data-latex=""}</span>
-<span id="cb10-306"><a href="#cb10-306"></a>::: {.proposition #EVaRcohe name="Coherencia de la medida EVaR"}</span>
+<span id="cb10-305"><a href="#cb10-305"></a></span>
+<span id="cb10-306"><a href="#cb10-306"></a>::: {.Proposition #EVaRcohe title="Coherencia de la medida EVaR"}</span>
 <span id="cb10-307"><a href="#cb10-307"></a>La medida de riesgo $\EVaR_{\alpha}$ es una medida de riesgo coherente.</span>
 <span id="cb10-308"><a href="#cb10-308"></a>:::</span>
-<span id="cb10-309"><a href="#cb10-309"></a>::::</span>
+<span id="cb10-309"><a href="#cb10-309"></a></span>
 <span id="cb10-310"><a href="#cb10-310"></a></span>
 <span id="cb10-311"><a href="#cb10-311"></a>::: {.example #l7ex2}</span>
 <span id="cb10-312"><a href="#cb10-312"></a>Podemos considerar el caso particular donde todos los reclamos se suponen independientes e </span>
@@ -1742,8 +1752,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb10-378"><a href="#cb10-378"></a>en un ramo en particular, ya que esto constituye un nivel más arriba propio del negocio </span>
 <span id="cb10-379"><a href="#cb10-379"></a>reasegurador.</span>
 <span id="cb10-380"><a href="#cb10-380"></a></span>
-<span id="cb10-381"><a href="#cb10-381"></a>:::: {.thmbox data-latex=""}</span>
-<span id="cb10-382"><a href="#cb10-382"></a>::: {.definition #dpruin name="Probabilidad de ruina"}</span>
+<span id="cb10-381"><a href="#cb10-381"></a></span>
+<span id="cb10-382"><a href="#cb10-382"></a>::: {.Definition #dpruin title="Probabilidad de ruina"}</span>
 <span id="cb10-383"><a href="#cb10-383"></a>En términos generales se busca equilibrar el resultado operativo del ramo de negocio $R$ a lo largo </span>
 <span id="cb10-384"><a href="#cb10-384"></a>de la vida del ramo. El resultado $R$ a su vez está dado por la siguiente relación:</span>
 <span id="cb10-385"><a href="#cb10-385"></a>$$</span>
@@ -1777,9 +1787,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb10-413"><a href="#cb10-413"></a>P( R &lt; 0 ) &lt; \alpha</span>
 <span id="cb10-414"><a href="#cb10-414"></a>$$</span>
 <span id="cb10-415"><a href="#cb10-415"></a>:::</span>
-<span id="cb10-416"><a href="#cb10-416"></a>::::</span>
+<span id="cb10-416"><a href="#cb10-416"></a></span>
 <span id="cb10-417"><a href="#cb10-417"></a></span>
-<span id="cb10-418"><a href="#cb10-418"></a>Muchas de las veces se parte del principio de equilibrio financiero \@ref(sec:equifin), donde </span>
+<span id="cb10-418"><a href="#cb10-418"></a>Muchas de las veces se parte del principio de equilibrio financiero \ref{equifin}, donde </span>
 <span id="cb10-419"><a href="#cb10-419"></a>se busca la igualdad $\E<span class="co">[</span><span class="ot">R</span><span class="co">]</span> = 0$, la misma implica la siguiente relación:</span>
 <span id="cb10-420"><a href="#cb10-420"></a>$$</span>
 <span id="cb10-421"><a href="#cb10-421"></a>\begin{split}</span>
@@ -1821,8 +1831,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb10-457"><a href="#cb10-457"></a>= \Pi - \E<span class="co">[</span><span class="ot">S</span><span class="co">]</span> - G - r \left( \rho(S) - \E<span class="co">[</span><span class="ot">S</span><span class="co">]</span> \right)</span>
 <span id="cb10-458"><a href="#cb10-458"></a>$$</span>
 <span id="cb10-459"><a href="#cb10-459"></a></span>
-<span id="cb10-460"><a href="#cb10-460"></a>:::: {.thmbox data-latex=""}</span>
-<span id="cb10-461"><a href="#cb10-461"></a>::: {.definition #dpricing name="Tarificación (Pricing)"}</span>
+<span id="cb10-460"><a href="#cb10-460"></a></span>
+<span id="cb10-461"><a href="#cb10-461"></a>::: {.Definition #dpricing title="Tarificación (Pricing)"}</span>
 <span id="cb10-462"><a href="#cb10-462"></a>Lo que se busca es evitar la ruina y por tanto se busca cubrirse ante el evento $R &lt; 0$, desde una </span>
 <span id="cb10-463"><a href="#cb10-463"></a>perspectiva probabilista esto se puede realizar seleccionando un nivel de cobertura $\alpha &gt; 0$, </span>
 <span id="cb10-464"><a href="#cb10-464"></a>que acote la probabilidad del evento de ruina.</span>
@@ -1838,7 +1848,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb10-474"><a href="#cb10-474"></a>seguro, así como también optimizar los gastos $G$. Este proceso de selección es precisamente lo que </span>
 <span id="cb10-475"><a href="#cb10-475"></a>llamamos en este contexto como **tarificación** (pricing).</span>
 <span id="cb10-476"><a href="#cb10-476"></a>:::</span>
-<span id="cb10-477"><a href="#cb10-477"></a>::::</span>
+<span id="cb10-477"><a href="#cb10-477"></a></span>
 <span id="cb10-478"><a href="#cb10-478"></a></span>
 <span id="cb10-479"><a href="#cb10-479"></a>Razonando un poco más al respecto, si asumimos que se dispone de la distribución acumulada $F_S$</span>
 <span id="cb10-480"><a href="#cb10-480"></a>de $S$, se puede obtener las siguientes expresiones:</span>

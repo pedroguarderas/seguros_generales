@@ -26,6 +26,7 @@
 %   natbib=false, maxnames=10, sorting=nty, maxcitenames=2, hyperref=true]{biblatex}
 
 \usepackage{tcolorbox}
+\usepackage{etoolbox}
 
 % \usepackage{actuarialangle}
 % \usepackage{actuarialsymbol}
@@ -67,6 +68,8 @@
 \newcommand{\Dif}{\operatorname{Dif}}
 \newcommand{\VC}{\operatorname{VC}}
 \renewcommand{\Re}{\operatorname{Re}}
+
+\AtBeginEnvironment{Shaded}{\footnotesize}
 
 \tcbuselibrary{skins,breakable}
 

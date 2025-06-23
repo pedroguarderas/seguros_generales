@@ -2,6 +2,10 @@ p {
 text-align: justify
 }
 
+pre, code, .sourceCode {
+  font-size: 98%;
+}
+
 .blackbox {
   padding: 1em;
   background: black;

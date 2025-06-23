@@ -76,6 +76,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap-257450a62f84a916ff723c9590a8c97c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/quarto-contrib/foldbox/foldbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -134,6 +135,28 @@ window.MathJax = {
 </script>
 <script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+<style>
+.Definition {
+  --color1: #c0c0c0;
+  --color2: #808080;
+}
+.Conjecture {
+  --color1: #c0c0c0;
+  --color2: #808080;
+}
+.Corollary {
+  --color1: #c0c0c0;
+  --color2: #808080;
+}
+.Proposition {
+  --color1: #c0c0c0;
+  --color2: #808080;
+}
+.Theorem {
+  --color1: #c0c0c0;
+  --color2: #808080;
+}
+</style>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -1878,155 +1901,155 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb2-484"><a href="#cb2-484"></a></span>
 <span id="cb2-485"><a href="#cb2-485"></a></span>
 <span id="cb2-486"><a href="#cb2-486"></a><span class="fu">## Seguro o apuesta?</span></span>
-<span id="cb2-489"><a href="#cb2-489"></a><span class="in">```{r}</span></span>
-<span id="cb2-490"><a href="#cb2-490"></a><span class="co">#| echo: true</span></span>
-<span id="cb2-491"><a href="#cb2-491"></a>tbd <span class="ot">&lt;-</span> <span class="fu">data.table</span>(</span>
-<span id="cb2-492"><a href="#cb2-492"></a><span class="fu">matrix</span>( <span class="fu">c</span>(</span>
-<span id="cb2-493"><a href="#cb2-493"></a>    <span class="st">'Respaldo legal estricto'</span>,              <span class="st">'Puede ser ilegal'</span>,</span>
-<span id="cb2-494"><a href="#cb2-494"></a>    <span class="st">'Interés asegurable indispensable'</span>,     <span class="st">'Carece de interés asegurable'</span>,</span>
-<span id="cb2-495"><a href="#cb2-495"></a>    <span class="st">'Máxima buena fe'</span>,                      <span class="st">'No necesariamente de buena fe'</span>,</span>
-<span id="cb2-496"><a href="#cb2-496"></a>    <span class="st">'Nunca es fuente de enriquecimiento'</span>,   <span class="st">'Puede ser fuente de enriquecimiento'</span> </span>
-<span id="cb2-497"><a href="#cb2-497"></a>  ),</span>
-<span id="cb2-498"><a href="#cb2-498"></a>  <span class="at">nrow =</span> <span class="dv">4</span>, <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span> )</span>
-<span id="cb2-499"><a href="#cb2-499"></a>)</span>
-<span id="cb2-500"><a href="#cb2-500"></a>tbd <span class="sc">%&gt;%</span></span>
-<span id="cb2-501"><a href="#cb2-501"></a>  <span class="fu">kable</span>(</span>
-<span id="cb2-502"><a href="#cb2-502"></a>    <span class="at">label =</span> <span class="cn">NA</span>,</span>
-<span id="cb2-503"><a href="#cb2-503"></a>    <span class="at">caption =</span> <span class="st">'Seguros vs Apuestas'</span>,</span>
-<span id="cb2-504"><a href="#cb2-504"></a>    <span class="at">row.names =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb2-505"><a href="#cb2-505"></a>    <span class="at">col.names =</span> <span class="fu">c</span>( <span class="st">'Seguros'</span>, <span class="st">'Apuestas'</span> ),</span>
-<span id="cb2-506"><a href="#cb2-506"></a>    <span class="at">align =</span> <span class="st">'ll'</span>,</span>
-<span id="cb2-507"><a href="#cb2-507"></a>    <span class="at">digits =</span> <span class="fu">c</span>( <span class="dv">0</span>, <span class="dv">0</span> ),</span>
-<span id="cb2-508"><a href="#cb2-508"></a>    <span class="at">format.args =</span> <span class="fu">list</span>( <span class="at">big.mark =</span> <span class="st">','</span>, <span class="at">decimal.mark =</span> <span class="st">'.'</span>, <span class="at">scientific =</span> <span class="cn">FALSE</span> ),</span>
-<span id="cb2-509"><a href="#cb2-509"></a>    <span class="at">escape =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb2-510"><a href="#cb2-510"></a>    <span class="at">centering =</span> <span class="cn">TRUE</span>, </span>
-<span id="cb2-511"><a href="#cb2-511"></a>    <span class="at">booktabs =</span> <span class="cn">TRUE</span> ) <span class="sc">%&gt;%</span></span>
-<span id="cb2-512"><a href="#cb2-512"></a>  <span class="fu">kable_classic</span>( <span class="at">full_width =</span> <span class="cn">FALSE</span>, <span class="at">html_font =</span> <span class="st">"Cambria"</span>, <span class="at">position =</span> <span class="st">"center"</span> )</span>
-<span id="cb2-513"><a href="#cb2-513"></a><span class="in">```</span></span>
-<span id="cb2-514"><a href="#cb2-514"></a></span>
-<span id="cb2-515"><a href="#cb2-515"></a>Estas características permiten distinguir claramente las operaciones de seguro de las apuestas </span>
-<span id="cb2-516"><a href="#cb2-516"></a>o la especulación financiera.</span>
+<span id="cb2-487"><a href="#cb2-487"></a><span class="in">```{r l3t1}</span></span>
+<span id="cb2-488"><a href="#cb2-488"></a><span class="in">#| echo: true</span></span>
+<span id="cb2-489"><a href="#cb2-489"></a><span class="in">tbd &lt;- data.table(</span></span>
+<span id="cb2-490"><a href="#cb2-490"></a><span class="in">matrix( c(</span></span>
+<span id="cb2-491"><a href="#cb2-491"></a><span class="in">    'Respaldo legal estricto',              'Puede ser ilegal',</span></span>
+<span id="cb2-492"><a href="#cb2-492"></a><span class="in">    'Interés asegurable indispensable',     'Carece de interés asegurable',</span></span>
+<span id="cb2-493"><a href="#cb2-493"></a><span class="in">    'Máxima buena fe',                      'No necesariamente de buena fe',</span></span>
+<span id="cb2-494"><a href="#cb2-494"></a><span class="in">    'Nunca es fuente de enriquecimiento',   'Puede ser fuente de enriquecimiento' </span></span>
+<span id="cb2-495"><a href="#cb2-495"></a><span class="in">  ),</span></span>
+<span id="cb2-496"><a href="#cb2-496"></a><span class="in">  nrow = 4, ncol = 2, byrow = TRUE )</span></span>
+<span id="cb2-497"><a href="#cb2-497"></a><span class="in">)</span></span>
+<span id="cb2-498"><a href="#cb2-498"></a><span class="in">tbd %&gt;%</span></span>
+<span id="cb2-499"><a href="#cb2-499"></a><span class="in">  kable(</span></span>
+<span id="cb2-500"><a href="#cb2-500"></a><span class="in">    label = NA,</span></span>
+<span id="cb2-501"><a href="#cb2-501"></a><span class="in">    caption = 'Seguros vs Apuestas',</span></span>
+<span id="cb2-502"><a href="#cb2-502"></a><span class="in">    row.names = FALSE,</span></span>
+<span id="cb2-503"><a href="#cb2-503"></a><span class="in">    col.names = c( 'Seguros', 'Apuestas' ),</span></span>
+<span id="cb2-504"><a href="#cb2-504"></a><span class="in">    align = 'll',</span></span>
+<span id="cb2-505"><a href="#cb2-505"></a><span class="in">    digits = c( 0, 0 ),</span></span>
+<span id="cb2-506"><a href="#cb2-506"></a><span class="in">    format.args = list( big.mark = ',', decimal.mark = '.', scientific = FALSE ),</span></span>
+<span id="cb2-507"><a href="#cb2-507"></a><span class="in">    escape = FALSE,</span></span>
+<span id="cb2-508"><a href="#cb2-508"></a><span class="in">    centering = TRUE, </span></span>
+<span id="cb2-509"><a href="#cb2-509"></a><span class="in">    booktabs = TRUE ) %&gt;%</span></span>
+<span id="cb2-510"><a href="#cb2-510"></a><span class="in">  kable_classic( full_width = FALSE, html_font = "Cambria", position = "center" )</span></span>
+<span id="cb2-511"><a href="#cb2-511"></a><span class="in">```</span></span>
+<span id="cb2-512"><a href="#cb2-512"></a></span>
+<span id="cb2-513"><a href="#cb2-513"></a>Estas características permiten distinguir claramente las operaciones de seguro de las apuestas </span>
+<span id="cb2-514"><a href="#cb2-514"></a>o la especulación financiera.</span>
+<span id="cb2-515"><a href="#cb2-515"></a></span>
+<span id="cb2-516"><a href="#cb2-516"></a><span class="fu">## Fuentes del riesgo en seguros</span></span>
 <span id="cb2-517"><a href="#cb2-517"></a></span>
-<span id="cb2-518"><a href="#cb2-518"></a><span class="fu">## Fuentes del riesgo en seguros</span></span>
-<span id="cb2-519"><a href="#cb2-519"></a></span>
-<span id="cb2-520"><a href="#cb2-520"></a><span class="ss">- </span>Número de reclamos: frecuencia</span>
-<span id="cb2-521"><a href="#cb2-521"></a><span class="ss">- </span>Costo de los reclamos: severidad</span>
-<span id="cb2-522"><a href="#cb2-522"></a><span class="ss">- </span>Período de cobertura</span>
-<span id="cb2-523"><a href="#cb2-523"></a><span class="ss">- </span>Período de pago de primas</span>
-<span id="cb2-524"><a href="#cb2-524"></a><span class="ss">- </span>Período de pago de siniestros</span>
-<span id="cb2-525"><a href="#cb2-525"></a><span class="ss">- </span>Desde la fecha del reclamo hasta el cierre legal.</span>
+<span id="cb2-518"><a href="#cb2-518"></a><span class="ss">- </span>Número de reclamos: frecuencia</span>
+<span id="cb2-519"><a href="#cb2-519"></a><span class="ss">- </span>Costo de los reclamos: severidad</span>
+<span id="cb2-520"><a href="#cb2-520"></a><span class="ss">- </span>Período de cobertura</span>
+<span id="cb2-521"><a href="#cb2-521"></a><span class="ss">- </span>Período de pago de primas</span>
+<span id="cb2-522"><a href="#cb2-522"></a><span class="ss">- </span>Período de pago de siniestros</span>
+<span id="cb2-523"><a href="#cb2-523"></a><span class="ss">- </span>Desde la fecha del reclamo hasta el cierre legal.</span>
+<span id="cb2-524"><a href="#cb2-524"></a></span>
+<span id="cb2-525"><a href="#cb2-525"></a><span class="fu">## Problemas que enfrentan los seguros</span></span>
 <span id="cb2-526"><a href="#cb2-526"></a></span>
-<span id="cb2-527"><a href="#cb2-527"></a><span class="fu">## Problemas que enfrentan los seguros</span></span>
+<span id="cb2-527"><a href="#cb2-527"></a>Identificamos tres problemas principales:</span>
 <span id="cb2-528"><a href="#cb2-528"></a></span>
-<span id="cb2-529"><a href="#cb2-529"></a>Identificamos tres problemas principales:</span>
-<span id="cb2-530"><a href="#cb2-530"></a></span>
-<span id="cb2-531"><a href="#cb2-531"></a><span class="ss">- </span>Asegurabilidad de riesgos</span>
-<span id="cb2-532"><a href="#cb2-532"></a><span class="ss">- </span>Selección adversa (anti-selección)</span>
-<span id="cb2-533"><a href="#cb2-533"></a><span class="ss">- </span>Azar moral</span>
+<span id="cb2-529"><a href="#cb2-529"></a><span class="ss">- </span>Asegurabilidad de riesgos</span>
+<span id="cb2-530"><a href="#cb2-530"></a><span class="ss">- </span>Selección adversa (anti-selección)</span>
+<span id="cb2-531"><a href="#cb2-531"></a><span class="ss">- </span>Azar moral</span>
+<span id="cb2-532"><a href="#cb2-532"></a></span>
+<span id="cb2-533"><a href="#cb2-533"></a><span class="fu">### Asegurabilidad de riesgos</span></span>
 <span id="cb2-534"><a href="#cb2-534"></a></span>
-<span id="cb2-535"><a href="#cb2-535"></a><span class="fu">### Asegurabilidad de riesgos</span></span>
-<span id="cb2-536"><a href="#cb2-536"></a></span>
-<span id="cb2-537"><a href="#cb2-537"></a>Recordemos que el seguro se fundamenta en la compensación o mutualización de riesgos que no siempre</span>
-<span id="cb2-538"><a href="#cb2-538"></a>es posible aplicar, y además, el seguro enfrenta algunas limitaciones técnicas. Por lo tanto existen</span>
-<span id="cb2-539"><a href="#cb2-539"></a>riesgos que no son siempre asegurables y su transferencia dependerá de la capacidad financiera y </span>
-<span id="cb2-540"><a href="#cb2-540"></a>aversión al riesgo de la compañía de seguros.</span>
+<span id="cb2-535"><a href="#cb2-535"></a>Recordemos que el seguro se fundamenta en la compensación o mutualización de riesgos que no siempre</span>
+<span id="cb2-536"><a href="#cb2-536"></a>es posible aplicar, y además, el seguro enfrenta algunas limitaciones técnicas. Por lo tanto existen</span>
+<span id="cb2-537"><a href="#cb2-537"></a>riesgos que no son siempre asegurables y su transferencia dependerá de la capacidad financiera y </span>
+<span id="cb2-538"><a href="#cb2-538"></a>aversión al riesgo de la compañía de seguros.</span>
+<span id="cb2-539"><a href="#cb2-539"></a></span>
+<span id="cb2-540"><a href="#cb2-540"></a><span class="fu">### Riesgos asegurables (deseables) {-}</span></span>
 <span id="cb2-541"><a href="#cb2-541"></a></span>
-<span id="cb2-542"><a href="#cb2-542"></a><span class="fu">### Riesgos asegurables (deseables) {-}</span></span>
-<span id="cb2-543"><a href="#cb2-543"></a></span>
-<span id="cb2-544"><a href="#cb2-544"></a><span class="ss">  - </span>Riesgos comparables y de naturaleza homogénea</span>
-<span id="cb2-545"><a href="#cb2-545"></a><span class="ss">  - </span>Es necesario que se puedan mutualizar </span>
-<span id="cb2-546"><a href="#cb2-546"></a><span class="ss">    - </span>Para que se cumpla la ley de los grandes números</span>
-<span id="cb2-547"><a href="#cb2-547"></a><span class="ss">  - </span>Riesgos medibles </span>
-<span id="cb2-548"><a href="#cb2-548"></a><span class="ss">    - </span>responden a una ley de probabilidad</span>
-<span id="cb2-549"><a href="#cb2-549"></a><span class="ss">    - </span>permitan estimar la pérdida máxima</span>
-<span id="cb2-550"><a href="#cb2-550"></a><span class="ss">  - </span>Riesgos no potestativos: que no dependen de la voluntad del asegurado</span>
-<span id="cb2-551"><a href="#cb2-551"></a><span class="ss">  - </span>Riesgos inciertos</span>
-<span id="cb2-552"><a href="#cb2-552"></a><span class="ss">    - </span>Que no hayan ocurrido o que su ocurrencia sea desconocida.</span>
-<span id="cb2-553"><a href="#cb2-553"></a>    </span>
-<span id="cb2-554"><a href="#cb2-554"></a>    </span>
-<span id="cb2-555"><a href="#cb2-555"></a><span class="fu">### Selección adversa</span></span>
+<span id="cb2-542"><a href="#cb2-542"></a><span class="ss">  - </span>Riesgos comparables y de naturaleza homogénea</span>
+<span id="cb2-543"><a href="#cb2-543"></a><span class="ss">  - </span>Es necesario que se puedan mutualizar </span>
+<span id="cb2-544"><a href="#cb2-544"></a><span class="ss">    - </span>Para que se cumpla la ley de los grandes números</span>
+<span id="cb2-545"><a href="#cb2-545"></a><span class="ss">  - </span>Riesgos medibles </span>
+<span id="cb2-546"><a href="#cb2-546"></a><span class="ss">    - </span>responden a una ley de probabilidad</span>
+<span id="cb2-547"><a href="#cb2-547"></a><span class="ss">    - </span>permitan estimar la pérdida máxima</span>
+<span id="cb2-548"><a href="#cb2-548"></a><span class="ss">  - </span>Riesgos no potestativos: que no dependen de la voluntad del asegurado</span>
+<span id="cb2-549"><a href="#cb2-549"></a><span class="ss">  - </span>Riesgos inciertos</span>
+<span id="cb2-550"><a href="#cb2-550"></a><span class="ss">    - </span>Que no hayan ocurrido o que su ocurrencia sea desconocida.</span>
+<span id="cb2-551"><a href="#cb2-551"></a>    </span>
+<span id="cb2-552"><a href="#cb2-552"></a>    </span>
+<span id="cb2-553"><a href="#cb2-553"></a><span class="fu">### Selección adversa</span></span>
+<span id="cb2-554"><a href="#cb2-554"></a></span>
+<span id="cb2-555"><a href="#cb2-555"></a>Es un fenómeno causado porque la información del asegurador es incompleta y asimétrica:</span>
 <span id="cb2-556"><a href="#cb2-556"></a></span>
-<span id="cb2-557"><a href="#cb2-557"></a>Es un fenómeno causado porque la información del asegurador es incompleta y asimétrica:</span>
+<span id="cb2-557"><a href="#cb2-557"></a><span class="ss">- </span>El asegurado es quien conoce mejor el riesgo.</span>
 <span id="cb2-558"><a href="#cb2-558"></a></span>
-<span id="cb2-559"><a href="#cb2-559"></a><span class="ss">- </span>El asegurado es quien conoce mejor el riesgo.</span>
-<span id="cb2-560"><a href="#cb2-560"></a></span>
-<span id="cb2-561"><a href="#cb2-561"></a>Entonces el seguro atrae con más fuerza a quienes tienen mayor exposición al riesgo y el portafolio </span>
-<span id="cb2-562"><a href="#cb2-562"></a>puede resultar desequilibrado, asegurando demasiados “malos riesgos” que causan el desequilibrio </span>
-<span id="cb2-563"><a href="#cb2-563"></a>financiero</span>
+<span id="cb2-559"><a href="#cb2-559"></a>Entonces el seguro atrae con más fuerza a quienes tienen mayor exposición al riesgo y el portafolio </span>
+<span id="cb2-560"><a href="#cb2-560"></a>puede resultar desequilibrado, asegurando demasiados “malos riesgos” que causan el desequilibrio </span>
+<span id="cb2-561"><a href="#cb2-561"></a>financiero</span>
+<span id="cb2-562"><a href="#cb2-562"></a></span>
+<span id="cb2-563"><a href="#cb2-563"></a><span class="fu">### Medidas contra la selección adversa {-}</span></span>
 <span id="cb2-564"><a href="#cb2-564"></a></span>
-<span id="cb2-565"><a href="#cb2-565"></a><span class="fu">### Medidas contra la selección adversa {-}</span></span>
+<span id="cb2-565"><a href="#cb2-565"></a>Con la finalidad de equilibrar el portafolio el mercado a puesto en práctica algunas medidas:</span>
 <span id="cb2-566"><a href="#cb2-566"></a></span>
-<span id="cb2-567"><a href="#cb2-567"></a>Con la finalidad de equilibrar el portafolio el mercado a puesto en práctica algunas medidas:</span>
-<span id="cb2-568"><a href="#cb2-568"></a></span>
-<span id="cb2-569"><a href="#cb2-569"></a><span class="ss">- </span>Personalización de la prima para asegurados siniestrosos </span>
-<span id="cb2-570"><a href="#cb2-570"></a><span class="ss">  - </span>Ej. bonus malus</span>
-<span id="cb2-571"><a href="#cb2-571"></a><span class="ss">- </span>Proceso de selección de asegurados en base a declaración del riesgo</span>
-<span id="cb2-572"><a href="#cb2-572"></a><span class="ss">- </span>Potestad de la compañía para rechazar un seguro</span>
-<span id="cb2-573"><a href="#cb2-573"></a><span class="ss">- </span>Obligación de asegurar?</span>
-<span id="cb2-574"><a href="#cb2-574"></a><span class="ss">- </span>Período de carencia</span>
-<span id="cb2-575"><a href="#cb2-575"></a><span class="ss">- </span>Límites de cobertura</span>
-<span id="cb2-576"><a href="#cb2-576"></a><span class="ss">- </span>Copago, franquicia, deducible, suma máxima asegurada</span>
-<span id="cb2-577"><a href="#cb2-577"></a></span>
+<span id="cb2-567"><a href="#cb2-567"></a><span class="ss">- </span>Personalización de la prima para asegurados siniestrosos </span>
+<span id="cb2-568"><a href="#cb2-568"></a><span class="ss">  - </span>Ej. bonus malus</span>
+<span id="cb2-569"><a href="#cb2-569"></a><span class="ss">- </span>Proceso de selección de asegurados en base a declaración del riesgo</span>
+<span id="cb2-570"><a href="#cb2-570"></a><span class="ss">- </span>Potestad de la compañía para rechazar un seguro</span>
+<span id="cb2-571"><a href="#cb2-571"></a><span class="ss">- </span>Obligación de asegurar?</span>
+<span id="cb2-572"><a href="#cb2-572"></a><span class="ss">- </span>Período de carencia</span>
+<span id="cb2-573"><a href="#cb2-573"></a><span class="ss">- </span>Límites de cobertura</span>
+<span id="cb2-574"><a href="#cb2-574"></a><span class="ss">- </span>Copago, franquicia, deducible, suma máxima asegurada</span>
+<span id="cb2-575"><a href="#cb2-575"></a></span>
+<span id="cb2-576"><a href="#cb2-576"></a></span>
+<span id="cb2-577"><a href="#cb2-577"></a><span class="fu">### Azar moral</span></span>
 <span id="cb2-578"><a href="#cb2-578"></a></span>
-<span id="cb2-579"><a href="#cb2-579"></a><span class="fu">### Azar moral</span></span>
+<span id="cb2-579"><a href="#cb2-579"></a>Es el riesgo de que el asegurado se desinterese de prevenir la ocurrencia de siniestros:</span>
 <span id="cb2-580"><a href="#cb2-580"></a></span>
-<span id="cb2-581"><a href="#cb2-581"></a>Es el riesgo de que el asegurado se desinterese de prevenir la ocurrencia de siniestros:</span>
+<span id="cb2-581"><a href="#cb2-581"></a><span class="ss">- </span>Ej. Seguro automotriz</span>
 <span id="cb2-582"><a href="#cb2-582"></a></span>
-<span id="cb2-583"><a href="#cb2-583"></a><span class="ss">- </span>Ej. Seguro automotriz</span>
+<span id="cb2-583"><a href="#cb2-583"></a>o se interese en que ocurra el riesgo:</span>
 <span id="cb2-584"><a href="#cb2-584"></a></span>
-<span id="cb2-585"><a href="#cb2-585"></a>o se interese en que ocurra el riesgo:</span>
+<span id="cb2-585"><a href="#cb2-585"></a><span class="ss">- </span>Ej. Por publicidad</span>
 <span id="cb2-586"><a href="#cb2-586"></a></span>
-<span id="cb2-587"><a href="#cb2-587"></a><span class="ss">- </span>Ej. Por publicidad</span>
+<span id="cb2-587"><a href="#cb2-587"></a>o incremente la frecuencia de reclamos</span>
 <span id="cb2-588"><a href="#cb2-588"></a></span>
-<span id="cb2-589"><a href="#cb2-589"></a>o incremente la frecuencia de reclamos</span>
+<span id="cb2-589"><a href="#cb2-589"></a><span class="ss">- </span>Ej. Seguro de salud</span>
 <span id="cb2-590"><a href="#cb2-590"></a></span>
-<span id="cb2-591"><a href="#cb2-591"></a><span class="ss">- </span>Ej. Seguro de salud</span>
-<span id="cb2-592"><a href="#cb2-592"></a></span>
+<span id="cb2-591"><a href="#cb2-591"></a></span>
+<span id="cb2-592"><a href="#cb2-592"></a><span class="fu">### Medidas contra el azar moral {-}</span></span>
 <span id="cb2-593"><a href="#cb2-593"></a></span>
-<span id="cb2-594"><a href="#cb2-594"></a><span class="fu">### Medidas contra el azar moral {-}</span></span>
+<span id="cb2-594"><a href="#cb2-594"></a>Con el objetivo de incentivar la prevención, el mercado ha desarrollado algunas estrategias:</span>
 <span id="cb2-595"><a href="#cb2-595"></a></span>
-<span id="cb2-596"><a href="#cb2-596"></a>Con el objetivo de incentivar la prevención, el mercado ha desarrollado algunas estrategias:</span>
-<span id="cb2-597"><a href="#cb2-597"></a></span>
-<span id="cb2-598"><a href="#cb2-598"></a><span class="ss">- </span>Copago y/o deducible</span>
-<span id="cb2-599"><a href="#cb2-599"></a><span class="ss">- </span>Obligaciones de prevención previstas en el contrato</span>
-<span id="cb2-600"><a href="#cb2-600"></a><span class="ss">- </span>Cobertura máxima</span>
-<span id="cb2-601"><a href="#cb2-601"></a><span class="ss">  - </span>Por siniestro</span>
-<span id="cb2-602"><a href="#cb2-602"></a><span class="ss">  - </span>Por período</span>
-<span id="cb2-603"><a href="#cb2-603"></a><span class="ss">- </span>Bono *no-claims*.</span>
-<span id="cb2-604"><a href="#cb2-604"></a></span>
+<span id="cb2-596"><a href="#cb2-596"></a><span class="ss">- </span>Copago y/o deducible</span>
+<span id="cb2-597"><a href="#cb2-597"></a><span class="ss">- </span>Obligaciones de prevención previstas en el contrato</span>
+<span id="cb2-598"><a href="#cb2-598"></a><span class="ss">- </span>Cobertura máxima</span>
+<span id="cb2-599"><a href="#cb2-599"></a><span class="ss">  - </span>Por siniestro</span>
+<span id="cb2-600"><a href="#cb2-600"></a><span class="ss">  - </span>Por período</span>
+<span id="cb2-601"><a href="#cb2-601"></a><span class="ss">- </span>Bono *no-claims*.</span>
+<span id="cb2-602"><a href="#cb2-602"></a></span>
+<span id="cb2-603"><a href="#cb2-603"></a></span>
+<span id="cb2-604"><a href="#cb2-604"></a><span class="fu">## Primas de seguro: Art. 53 RLGS</span></span>
 <span id="cb2-605"><a href="#cb2-605"></a></span>
-<span id="cb2-606"><a href="#cb2-606"></a><span class="fu">## Primas de seguro: Art. 53 RLGS</span></span>
-<span id="cb2-607"><a href="#cb2-607"></a></span>
-<span id="cb2-608"><a href="#cb2-608"></a><span class="ss">- </span>Prima pura o prima de riesgo: es el costo del riesgo</span>
-<span id="cb2-609"><a href="#cb2-609"></a><span class="ss">- </span>Prima neta: prima pura más un recargo de seguridad</span>
-<span id="cb2-610"><a href="#cb2-610"></a><span class="ss">- </span>Prima de tarifa: prima neta más recargos de operación:</span>
-<span id="cb2-611"><a href="#cb2-611"></a><span class="ss">  - </span>gastos de adquisición, </span>
-<span id="cb2-612"><a href="#cb2-612"></a><span class="ss">  - </span>gastos de administración,</span>
-<span id="cb2-613"><a href="#cb2-613"></a><span class="ss">  - </span>utilidad razonable</span>
-<span id="cb2-614"><a href="#cb2-614"></a><span class="ss">  - </span>otros gastos justificados (legales, inspección, ...)</span>
-<span id="cb2-615"><a href="#cb2-615"></a><span class="ss">- </span>Prima comercial: prima de tarifa más impuestos, contribuciones, etc.</span>
+<span id="cb2-606"><a href="#cb2-606"></a><span class="ss">- </span>Prima pura o prima de riesgo: es el costo del riesgo</span>
+<span id="cb2-607"><a href="#cb2-607"></a><span class="ss">- </span>Prima neta: prima pura más un recargo de seguridad</span>
+<span id="cb2-608"><a href="#cb2-608"></a><span class="ss">- </span>Prima de tarifa: prima neta más recargos de operación:</span>
+<span id="cb2-609"><a href="#cb2-609"></a><span class="ss">  - </span>gastos de adquisición, </span>
+<span id="cb2-610"><a href="#cb2-610"></a><span class="ss">  - </span>gastos de administración,</span>
+<span id="cb2-611"><a href="#cb2-611"></a><span class="ss">  - </span>utilidad razonable</span>
+<span id="cb2-612"><a href="#cb2-612"></a><span class="ss">  - </span>otros gastos justificados (legales, inspección, ...)</span>
+<span id="cb2-613"><a href="#cb2-613"></a><span class="ss">- </span>Prima comercial: prima de tarifa más impuestos, contribuciones, etc.</span>
+<span id="cb2-614"><a href="#cb2-614"></a></span>
+<span id="cb2-615"><a href="#cb2-615"></a><span class="fu">### Relación fundamental {-}</span></span>
 <span id="cb2-616"><a href="#cb2-616"></a></span>
-<span id="cb2-617"><a href="#cb2-617"></a><span class="fu">### Relación fundamental {-}</span></span>
-<span id="cb2-618"><a href="#cb2-618"></a></span>
-<span id="cb2-619"><a href="#cb2-619"></a>$$ P_{tar} = \frac{P}{1-GA-GB-U} $$</span>
-<span id="cb2-620"><a href="#cb2-620"></a>$P$: prima pura</span>
+<span id="cb2-617"><a href="#cb2-617"></a>$$ P_{tar} = \frac{P}{1-GA-GB-U} $$</span>
+<span id="cb2-618"><a href="#cb2-618"></a>$P$: prima pura</span>
+<span id="cb2-619"><a href="#cb2-619"></a></span>
+<span id="cb2-620"><a href="#cb2-620"></a>$P_{tar}$: prima de tarifa</span>
 <span id="cb2-621"><a href="#cb2-621"></a></span>
-<span id="cb2-622"><a href="#cb2-622"></a>$P_{tar}$: prima de tarifa</span>
+<span id="cb2-622"><a href="#cb2-622"></a>$GA$: porcentaje de gastos de administración</span>
 <span id="cb2-623"><a href="#cb2-623"></a></span>
-<span id="cb2-624"><a href="#cb2-624"></a>$GA$: porcentaje de gastos de administración</span>
+<span id="cb2-624"><a href="#cb2-624"></a>$GB$: porcentaje de gastos de adquisición (comisiones de *brokers*)</span>
 <span id="cb2-625"><a href="#cb2-625"></a></span>
-<span id="cb2-626"><a href="#cb2-626"></a>$GB$: porcentaje de gastos de adquisición (comisiones de *brokers*)</span>
+<span id="cb2-626"><a href="#cb2-626"></a>$U$: porcentaje de utilidad esperada por los accionistas </span>
 <span id="cb2-627"><a href="#cb2-627"></a></span>
-<span id="cb2-628"><a href="#cb2-628"></a>$U$: porcentaje de utilidad esperada por los accionistas </span>
+<span id="cb2-628"><a href="#cb2-628"></a>Los porcentajes se calculan sobre la prima de tarifa.</span>
 <span id="cb2-629"><a href="#cb2-629"></a></span>
-<span id="cb2-630"><a href="#cb2-630"></a>Los porcentajes se calculan sobre la prima de tarifa.</span>
-<span id="cb2-631"><a href="#cb2-631"></a></span>
+<span id="cb2-630"><a href="#cb2-630"></a></span>
+<span id="cb2-631"><a href="#cb2-631"></a><span class="fu">## Caso Nessie</span></span>
 <span id="cb2-632"><a href="#cb2-632"></a></span>
-<span id="cb2-633"><a href="#cb2-633"></a><span class="fu">## Caso Nessie</span></span>
+<span id="cb2-633"><a href="#cb2-633"></a><span class="ss">- </span>Estudio de caso.</span>
 <span id="cb2-634"><a href="#cb2-634"></a></span>
-<span id="cb2-635"><a href="#cb2-635"></a><span class="ss">- </span>Estudio de caso.</span>
-<span id="cb2-636"><a href="#cb2-636"></a></span>
-<span id="cb2-637"><a href="#cb2-637"></a><span class="co">&lt;!-- ver web --&gt;</span></span>
+<span id="cb2-635"><a href="#cb2-635"></a><span class="co">&lt;!-- ver web --&gt;</span></span>
 </code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

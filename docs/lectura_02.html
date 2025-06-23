@@ -76,6 +76,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap-257450a62f84a916ff723c9590a8c97c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/quarto-contrib/foldbox/foldbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -132,6 +133,28 @@ window.MathJax = {
   }
 };
 </script>
+<style>
+.Conjecture {
+  --color1: #c0c0c0;
+  --color2: #808080;
+}
+.Definition {
+  --color1: #c0c0c0;
+  --color2: #808080;
+}
+.Theorem {
+  --color1: #c0c0c0;
+  --color2: #808080;
+}
+.Proposition {
+  --color1: #c0c0c0;
+  --color2: #808080;
+}
+.Corollary {
+  --color1: #c0c0c0;
+  --color2: #808080;
+}
+</style>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -1055,52 +1078,52 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb16-87"><a href="#cb16-87"></a>Para definir una variable utilizamos el operador de asignación <span class="in">`&lt;-`</span>, también se puede utilizar <span class="in">`=`</span>.</span>
 <span id="cb16-88"><a href="#cb16-88"></a></span>
 <span id="cb16-89"><a href="#cb16-89"></a>Un **vector** se define con la función de concatenación <span class="in">`c`</span></span>
-<span id="cb16-92"><a href="#cb16-92"></a><span class="in">```{r}</span></span>
-<span id="cb16-93"><a href="#cb16-93"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>( <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span> )</span>
-<span id="cb16-94"><a href="#cb16-94"></a><span class="fu">print</span>( x )</span>
-<span id="cb16-95"><a href="#cb16-95"></a><span class="in">```</span></span>
-<span id="cb16-96"><a href="#cb16-96"></a></span>
-<span id="cb16-97"><a href="#cb16-97"></a>También, se puede guardar los elementos en una **lista**</span>
-<span id="cb16-100"><a href="#cb16-100"></a><span class="in">```{r}</span></span>
-<span id="cb16-101"><a href="#cb16-101"></a>x <span class="ot">&lt;-</span> <span class="fu">list</span>( <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span> )</span>
-<span id="cb16-102"><a href="#cb16-102"></a><span class="fu">print</span>( x )</span>
-<span id="cb16-103"><a href="#cb16-103"></a><span class="in">```</span></span>
-<span id="cb16-104"><a href="#cb16-104"></a></span>
-<span id="cb16-105"><a href="#cb16-105"></a>Los elementos de las listas se pueden guardar con nombres.</span>
-<span id="cb16-108"><a href="#cb16-108"></a><span class="in">```{r}</span></span>
-<span id="cb16-109"><a href="#cb16-109"></a>x <span class="ot">&lt;-</span> <span class="fu">list</span>( <span class="st">'a'</span> <span class="ot">=</span> <span class="dv">1</span>, <span class="st">'b'</span> <span class="ot">=</span> <span class="dv">2</span>, <span class="st">'c'</span> <span class="ot">=</span> <span class="dv">3</span> )</span>
-<span id="cb16-110"><a href="#cb16-110"></a><span class="fu">print</span>( x )</span>
-<span id="cb16-111"><a href="#cb16-111"></a>x[[ <span class="st">'b'</span> ]]</span>
-<span id="cb16-112"><a href="#cb16-112"></a><span class="in">```</span></span>
-<span id="cb16-113"><a href="#cb16-113"></a></span>
-<span id="cb16-114"><a href="#cb16-114"></a>Una **función** se define con la sentencia <span class="in">`function`</span></span>
-<span id="cb16-117"><a href="#cb16-117"></a><span class="in">```{r}</span></span>
-<span id="cb16-118"><a href="#cb16-118"></a>f <span class="ot">&lt;-</span> <span class="cf">function</span>( t ) {</span>
-<span id="cb16-119"><a href="#cb16-119"></a>  <span class="fu">return</span>( t<span class="sc">^</span><span class="dv">2</span> )</span>
-<span id="cb16-120"><a href="#cb16-120"></a>}</span>
-<span id="cb16-121"><a href="#cb16-121"></a><span class="in">```</span></span>
-<span id="cb16-122"><a href="#cb16-122"></a></span>
-<span id="cb16-123"><a href="#cb16-123"></a>Si buscamos aplicar una función sobre un vector, podemos utilizar <span class="in">`sapply`</span></span>
-<span id="cb16-126"><a href="#cb16-126"></a><span class="in">```{r}</span></span>
-<span id="cb16-127"><a href="#cb16-127"></a>y <span class="ot">&lt;-</span> <span class="fu">sapply</span>( x, <span class="at">FUN =</span> f )</span>
-<span id="cb16-128"><a href="#cb16-128"></a><span class="fu">print</span>( y )</span>
-<span id="cb16-129"><a href="#cb16-129"></a><span class="in">```</span></span>
-<span id="cb16-130"><a href="#cb16-130"></a></span>
-<span id="cb16-133"><a href="#cb16-133"></a><span class="in">```{r}</span></span>
-<span id="cb16-134"><a href="#cb16-134"></a>z <span class="ot">&lt;-</span> <span class="fu">lapply</span>( x, <span class="at">FUN =</span> f )</span>
-<span id="cb16-135"><a href="#cb16-135"></a><span class="fu">print</span>( z )</span>
-<span id="cb16-136"><a href="#cb16-136"></a><span class="in">```</span></span>
-<span id="cb16-137"><a href="#cb16-137"></a></span>
-<span id="cb16-138"><a href="#cb16-138"></a>Para muchas tareas que están relacionadas con el manejo de datos, podemos utilizar las </span>
-<span id="cb16-139"><a href="#cb16-139"></a>funcionalidades del paquete de R, <span class="in">`data.table`</span>. Para trabajar con fechas recomendamos utilizar</span>
-<span id="cb16-140"><a href="#cb16-140"></a>el paquete <span class="in">`lubridate`</span>. Para trabajar con distribuciones de probabilidad que se utilizan para </span>
-<span id="cb16-141"><a href="#cb16-141"></a>modelar valores extremos utilizamos <span class="in">`fExtremes`</span>. Para varias funcionalidades asociadas a la </span>
-<span id="cb16-142"><a href="#cb16-142"></a>estimación de modelos de pérdida utilizamos <span class="in">`actuar`</span>.</span>
-<span id="cb16-143"><a href="#cb16-143"></a></span>
-<span id="cb16-146"><a href="#cb16-146"></a><span class="in">```{r}</span></span>
-<span id="cb16-147"><a href="#cb16-147"></a><span class="co">#| echo: false</span></span>
-<span id="cb16-148"><a href="#cb16-148"></a><span class="co"># rm( list = ls()[ ls() != 'def.chunk.hook' ] )</span></span>
-<span id="cb16-149"><a href="#cb16-149"></a><span class="in">```</span></span>
+<span id="cb16-90"><a href="#cb16-90"></a><span class="in">```{r l2c1}</span></span>
+<span id="cb16-91"><a href="#cb16-91"></a><span class="in">x &lt;- c( 1, 2, 3 )</span></span>
+<span id="cb16-92"><a href="#cb16-92"></a><span class="in">print( x )</span></span>
+<span id="cb16-93"><a href="#cb16-93"></a><span class="in">```</span></span>
+<span id="cb16-94"><a href="#cb16-94"></a></span>
+<span id="cb16-95"><a href="#cb16-95"></a>También, se puede guardar los elementos en una **lista**</span>
+<span id="cb16-96"><a href="#cb16-96"></a><span class="in">```{r l2c2}</span></span>
+<span id="cb16-97"><a href="#cb16-97"></a><span class="in">x &lt;- list( 1, 2, 3 )</span></span>
+<span id="cb16-98"><a href="#cb16-98"></a><span class="in">print( x )</span></span>
+<span id="cb16-99"><a href="#cb16-99"></a><span class="in">```</span></span>
+<span id="cb16-100"><a href="#cb16-100"></a></span>
+<span id="cb16-101"><a href="#cb16-101"></a>Los elementos de las listas se pueden guardar con nombres.</span>
+<span id="cb16-102"><a href="#cb16-102"></a><span class="in">```{r l2c3}</span></span>
+<span id="cb16-103"><a href="#cb16-103"></a><span class="in">x &lt;- list( 'a' = 1, 'b' = 2, 'c' = 3 )</span></span>
+<span id="cb16-104"><a href="#cb16-104"></a><span class="in">print( x )</span></span>
+<span id="cb16-105"><a href="#cb16-105"></a><span class="in">x[[ 'b' ]]</span></span>
+<span id="cb16-106"><a href="#cb16-106"></a><span class="in">```</span></span>
+<span id="cb16-107"><a href="#cb16-107"></a></span>
+<span id="cb16-108"><a href="#cb16-108"></a>Una **función** se define con la sentencia <span class="in">`function`</span></span>
+<span id="cb16-109"><a href="#cb16-109"></a><span class="in">```{r l2c4}</span></span>
+<span id="cb16-110"><a href="#cb16-110"></a><span class="in">f &lt;- function( t ) {</span></span>
+<span id="cb16-111"><a href="#cb16-111"></a><span class="in">  return( t^2 )</span></span>
+<span id="cb16-112"><a href="#cb16-112"></a><span class="in">}</span></span>
+<span id="cb16-113"><a href="#cb16-113"></a><span class="in">```</span></span>
+<span id="cb16-114"><a href="#cb16-114"></a></span>
+<span id="cb16-115"><a href="#cb16-115"></a>Si buscamos aplicar una función sobre un vector, podemos utilizar <span class="in">`sapply`</span></span>
+<span id="cb16-116"><a href="#cb16-116"></a><span class="in">```{r l2c5}</span></span>
+<span id="cb16-117"><a href="#cb16-117"></a><span class="in">y &lt;- sapply( x, FUN = f )</span></span>
+<span id="cb16-118"><a href="#cb16-118"></a><span class="in">print( y )</span></span>
+<span id="cb16-119"><a href="#cb16-119"></a><span class="in">```</span></span>
+<span id="cb16-120"><a href="#cb16-120"></a></span>
+<span id="cb16-121"><a href="#cb16-121"></a><span class="in">```{r l2c6}</span></span>
+<span id="cb16-122"><a href="#cb16-122"></a><span class="in">z &lt;- lapply( x, FUN = f )</span></span>
+<span id="cb16-123"><a href="#cb16-123"></a><span class="in">print( z )</span></span>
+<span id="cb16-124"><a href="#cb16-124"></a><span class="in">```</span></span>
+<span id="cb16-125"><a href="#cb16-125"></a></span>
+<span id="cb16-126"><a href="#cb16-126"></a>Para muchas tareas que están relacionadas con el manejo de datos, podemos utilizar las </span>
+<span id="cb16-127"><a href="#cb16-127"></a>funcionalidades del paquete de R, <span class="in">`data.table`</span>. Para trabajar con fechas recomendamos utilizar</span>
+<span id="cb16-128"><a href="#cb16-128"></a>el paquete <span class="in">`lubridate`</span>. Para trabajar con distribuciones de probabilidad que se utilizan para </span>
+<span id="cb16-129"><a href="#cb16-129"></a>modelar valores extremos utilizamos <span class="in">`fExtremes`</span>. Para varias funcionalidades asociadas a la </span>
+<span id="cb16-130"><a href="#cb16-130"></a>estimación de modelos de pérdida utilizamos <span class="in">`actuar`</span>.</span>
+<span id="cb16-131"><a href="#cb16-131"></a></span>
+<span id="cb16-132"><a href="#cb16-132"></a><span class="in">```{r l2end}</span></span>
+<span id="cb16-133"><a href="#cb16-133"></a><span class="in">#| echo: false</span></span>
+<span id="cb16-134"><a href="#cb16-134"></a><span class="in"># rm( list = ls()[ ls() != 'def.chunk.hook' ] )</span></span>
+<span id="cb16-135"><a href="#cb16-135"></a><span class="in">```</span></span>
 </code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
