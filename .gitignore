@@ -10,3 +10,9 @@ book/site_libs/*
 book/lectura_*_files/*
 book/Matemáticas*.tex
 *.fdb_latexmk
+*.aux
+*.bbl
+*.bcf
+*.fls
+*.flg
+*.log
