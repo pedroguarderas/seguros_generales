@@ -155,6 +155,10 @@ window.MathJax = {
 <script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 <style>
+.Theorem {
+  --color1: #c0c0c0;
+  --color2: #808080;
+}
 .Corollary {
   --color1: #c0c0c0;
   --color2: #808080;
@@ -163,15 +167,11 @@ window.MathJax = {
   --color1: #c0c0c0;
   --color2: #808080;
 }
-.Theorem {
+.Conjecture {
   --color1: #c0c0c0;
   --color2: #808080;
 }
 .Proposition {
-  --color1: #c0c0c0;
-  --color2: #808080;
-}
-.Conjecture {
   --color1: #c0c0c0;
   --color2: #808080;
 }
@@ -1667,7 +1667,7 @@ n &amp; \geq \left\lceil -\frac{1}{2\varepsilon^2} \ln\left( \frac{\delta}{2} \r
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="lectura_04_files/figure-html/l4g1-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%"></p>
+<p><img src="lectura_04_files/figure-html/l4g1-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:70.0%"></p>
 </figure>
 </div>
 </div>
@@ -1702,7 +1702,7 @@ n &amp; \geq \left\lceil -\frac{1}{2\varepsilon^2} \ln\left( \frac{\delta}{2} \r
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="lectura_04_files/figure-html/l4g2-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%"></p>
+<p><img src="lectura_04_files/figure-html/l4g2-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:70.0%"></p>
 </figure>
 </div>
 </div>
@@ -1862,7 +1862,7 @@ P( X \geq \rho \E[ X ] ) \geq ( 1 - \rho )^2 \frac{\E[ X ]^2}{\E[ X^2 ]}
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="lectura_04_files/figure-html/l4g3-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%"></p>
+<p><img src="lectura_04_files/figure-html/l4g3-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:70.0%"></p>
 </figure>
 </div>
 </div>
@@ -1897,7 +1897,7 @@ P( X \geq \rho \E[ X ] ) \geq ( 1 - \rho )^2 \frac{\E[ X ]^2}{\E[ X^2 ]}
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="lectura_04_files/figure-html/l4g4-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%"></p>
+<p><img src="lectura_04_files/figure-html/l4g4-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:70.0%"></p>
 </figure>
 </div>
 </div>
@@ -3712,7 +3712,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb10-1252"><a href="#cb10-1252"></a></span>
 <span id="cb10-1253"><a href="#cb10-1253"></a><span class="in">```{r l4g1}</span></span>
 <span id="cb10-1254"><a href="#cb10-1254"></a><span class="in">#| warning: false</span></span>
-<span id="cb10-1255"><a href="#cb10-1255"></a><span class="in">#| out-width: '80%'</span></span>
+<span id="cb10-1255"><a href="#cb10-1255"></a><span class="in">#| out-width: '70%'</span></span>
 <span id="cb10-1256"><a href="#cb10-1256"></a><span class="in">#| fig-align: center</span></span>
 <span id="cb10-1257"><a href="#cb10-1257"></a><span class="in">#| code-fold: true</span></span>
 <span id="cb10-1258"><a href="#cb10-1258"></a><span class="in">plt &lt;- ggplot() +</span></span>
@@ -3727,7 +3727,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb10-1267"><a href="#cb10-1267"></a></span>
 <span id="cb10-1268"><a href="#cb10-1268"></a><span class="in">```{r l4g2}</span></span>
 <span id="cb10-1269"><a href="#cb10-1269"></a><span class="in">#| warning: false</span></span>
-<span id="cb10-1270"><a href="#cb10-1270"></a><span class="in">#| out-width: '80%'</span></span>
+<span id="cb10-1270"><a href="#cb10-1270"></a><span class="in">#| out-width: '70%'</span></span>
 <span id="cb10-1271"><a href="#cb10-1271"></a><span class="in">#| fig-align: center</span></span>
 <span id="cb10-1272"><a href="#cb10-1272"></a><span class="in">#| code-fold: true</span></span>
 <span id="cb10-1273"><a href="#cb10-1273"></a><span class="in">dat &lt;- NULL</span></span>
@@ -3958,7 +3958,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb10-1498"><a href="#cb10-1498"></a>calculada con inversión de la transformada de Fourier discreta.</span>
 <span id="cb10-1499"><a href="#cb10-1499"></a><span class="in">```{r l4g3}</span></span>
 <span id="cb10-1500"><a href="#cb10-1500"></a><span class="in">#| warning: false</span></span>
-<span id="cb10-1501"><a href="#cb10-1501"></a><span class="in">#| out-width: '80%'</span></span>
+<span id="cb10-1501"><a href="#cb10-1501"></a><span class="in">#| out-width: '70%'</span></span>
 <span id="cb10-1502"><a href="#cb10-1502"></a><span class="in">#| fig-align: center</span></span>
 <span id="cb10-1503"><a href="#cb10-1503"></a><span class="in">#| code-fold: true</span></span>
 <span id="cb10-1504"><a href="#cb10-1504"></a><span class="in">xbrk &lt;- seq( 0, 40, length = 9 )</span></span>
@@ -3988,7 +3988,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb10-1528"><a href="#cb10-1528"></a></span>
 <span id="cb10-1529"><a href="#cb10-1529"></a><span class="in">```{r l4g4}</span></span>
 <span id="cb10-1530"><a href="#cb10-1530"></a><span class="in">#| warning: false</span></span>
-<span id="cb10-1531"><a href="#cb10-1531"></a><span class="in">#| out-width: '80%'</span></span>
+<span id="cb10-1531"><a href="#cb10-1531"></a><span class="in">#| out-width: '70%'</span></span>
 <span id="cb10-1532"><a href="#cb10-1532"></a><span class="in">#| fig-align: center</span></span>
 <span id="cb10-1533"><a href="#cb10-1533"></a><span class="in">#| code-fold: true</span></span>
 <span id="cb10-1534"><a href="#cb10-1534"></a><span class="in">e &lt;- f - IFf</span></span>
