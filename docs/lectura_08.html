@@ -453,9 +453,10 @@ f_Y( y \mid \theta )
 <p><span class="math display">\[
 P( N = n ) = \exp(-g( \beta x ) ER( x )) \frac{g( \beta x )^n ER( x )^n}{n!}
 \]</span></p>
-<details open="" class="code-fold">
+<div class="cell">
+<details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r fold-hide number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># la librería CASdatasets fue previamente cargada</span></span>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># la librería CASdatasets fue previamente cargada</span></span>
 <span id="cb1-2"><a href="#cb1-2"></a><span class="fu">data</span>( beMTPL97 )</span>
 <span id="cb1-3"><a href="#cb1-3"></a>beMTPL97 <span class="ot">&lt;-</span> <span class="fu">as.data.table</span>( beMTPL97 )</span>
 <span id="cb1-4"><a href="#cb1-4"></a></span>
@@ -480,8 +481,9 @@ P( N = n ) = \exp(-g( \beta x ) ER( x )) \frac{g( \beta x )^n ER( x )^n}{n!}
 <span id="cb1-23"><a href="#cb1-23"></a>    <span class="at">latex_options =</span> <span class="fu">c</span>( <span class="st">'hold_position'</span>, <span class="st">'repeat_header'</span>, <span class="st">'scale_down'</span> ) ) <span class="sc">%&gt;%</span></span>
 <span id="cb1-24"><a href="#cb1-24"></a>  <span class="fu">scroll_box</span>( <span class="at">width =</span> <span class="st">"100%"</span>, <span class="at">height =</span> <span class="st">"500px"</span> )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
+<div class="cell-output-display">
 <div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:500px; overflow-x: scroll; width:100%; ">
-<table class="lightable-classic caption-top table" data-quarto-postprocess="true">
+<table class="lightable-classic caption-top table table-sm table-striped small" data-quarto-postprocess="true">
 <caption>Pólizas y reclamos de automóviles en Bélgica</caption>
 <thead>
 <tr class="header">
@@ -810,6 +812,8 @@ P( N = n ) = \exp(-g( \beta x ) ER( x )) \frac{g( \beta x )^n ER( x )^n}{n!}
 </table>
 </div>
 
+</div>
+</div>
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Code</summary>
@@ -818,9 +822,10 @@ P( N = n ) = \exp(-g( \beta x ) ER( x )) \frac{g( \beta x )^n ER( x )^n}{n!}
 <span id="cb2-3"><a href="#cb2-3"></a>                <span class="at">data =</span> beMTPL97 )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<details open="" class="code-fold">
+<div class="cell">
+<details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r fold-hide number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">tidy</span>( model_N )</span>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">tidy</span>( model_N )</span>
 <span id="cb3-2"><a href="#cb3-2"></a>dat <span class="sc">%&gt;%</span></span>
 <span id="cb3-3"><a href="#cb3-3"></a>  <span class="fu">kable</span>(</span>
 <span id="cb3-4"><a href="#cb3-4"></a>    <span class="at">label =</span> <span class="cn">NA</span>,</span>
@@ -840,8 +845,9 @@ P( N = n ) = \exp(-g( \beta x ) ER( x )) \frac{g( \beta x )^n ER( x )^n}{n!}
 <span id="cb3-18"><a href="#cb3-18"></a>    <span class="at">latex_options =</span> <span class="fu">c</span>( <span class="st">'hold_position'</span>, <span class="st">'repeat_header'</span>, <span class="st">'scale_down'</span> ) ) <span class="sc">%&gt;%</span></span>
 <span id="cb3-19"><a href="#cb3-19"></a>  <span class="fu">scroll_box</span>( <span class="at">width =</span> <span class="st">"100%"</span>, <span class="at">height =</span> <span class="st">"300px"</span> )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
+<div class="cell-output-display">
 <div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:300px; overflow-x: scroll; width:100%; ">
-<table class="lightable-classic caption-top table" data-quarto-postprocess="true">
+<table class="lightable-classic caption-top table table-sm table-striped small" data-quarto-postprocess="true">
 <caption>Resultados del modelo GLM</caption>
 <thead>
 <tr class="header">
@@ -892,9 +898,12 @@ P( N = n ) = \exp(-g( \beta x ) ER( x )) \frac{g( \beta x )^n ER( x )^n}{n!}
 </table>
 </div>
 
-<details open="" class="code-fold">
+</div>
+</div>
+<div class="cell">
+<details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r fold-hide number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">glance</span>( model_N )</span>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">glance</span>( model_N )</span>
 <span id="cb4-2"><a href="#cb4-2"></a>dat <span class="sc">%&gt;%</span></span>
 <span id="cb4-3"><a href="#cb4-3"></a>  <span class="fu">kable</span>(</span>
 <span id="cb4-4"><a href="#cb4-4"></a>    <span class="at">label =</span> <span class="cn">NA</span>,</span>
@@ -914,8 +923,9 @@ P( N = n ) = \exp(-g( \beta x ) ER( x )) \frac{g( \beta x )^n ER( x )^n}{n!}
 <span id="cb4-18"><a href="#cb4-18"></a>    <span class="at">latex_options =</span> <span class="fu">c</span>( <span class="st">'hold_position'</span>, <span class="st">'repeat_header'</span>, <span class="st">'scale_down'</span> ) ) <span class="sc">%&gt;%</span></span>
 <span id="cb4-19"><a href="#cb4-19"></a>  <span class="fu">scroll_box</span>( <span class="at">width =</span> <span class="st">"100%"</span>, <span class="at">height =</span> <span class="st">"200px"</span> )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
+<div class="cell-output-display">
 <div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:200px; overflow-x: scroll; width:100%; ">
-<table class="lightable-classic caption-top table" data-quarto-postprocess="true">
+<table class="lightable-classic caption-top table table-sm table-striped small" data-quarto-postprocess="true">
 <caption>Resultados del modelo GLM</caption>
 <thead>
 <tr class="header">
@@ -944,6 +954,8 @@ P( N = n ) = \exp(-g( \beta x ) ER( x )) \frac{g( \beta x )^n ER( x )^n}{n!}
 </table>
 </div>
 
+</div>
+</div>
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Code</summary>
@@ -1644,97 +1656,106 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb6-195"><a href="#cb6-195"></a>P( N = n ) = \exp(-g( \beta x ) ER( x )) \frac{g( \beta x )^n ER( x )^n}{n!}</span>
 <span id="cb6-196"><a href="#cb6-196"></a>$$</span>
 <span id="cb6-197"><a href="#cb6-197"></a></span>
-<span id="cb6-198"><a href="#cb6-198"></a><span class="in">```{r l9t1, echo = TRUE, results = 'asis', out.width='100%', class.source = 'fold-hide'}</span></span>
-<span id="cb6-199"><a href="#cb6-199"></a><span class="in"># la librería CASdatasets fue previamente cargada</span></span>
-<span id="cb6-200"><a href="#cb6-200"></a><span class="in">data( beMTPL97 )</span></span>
-<span id="cb6-201"><a href="#cb6-201"></a><span class="in">beMTPL97 &lt;- as.data.table( beMTPL97 )</span></span>
-<span id="cb6-202"><a href="#cb6-202"></a></span>
-<span id="cb6-203"><a href="#cb6-203"></a><span class="in"># Impresión de las primeras filas de la tabla</span></span>
-<span id="cb6-204"><a href="#cb6-204"></a><span class="in">beMTPL97[ 1:15 ] %&gt;%</span></span>
-<span id="cb6-205"><a href="#cb6-205"></a><span class="in">  kable(</span></span>
-<span id="cb6-206"><a href="#cb6-206"></a><span class="in">    label = NA,</span></span>
-<span id="cb6-207"><a href="#cb6-207"></a><span class="in">    caption = "Pólizas y reclamos de automóviles en Bélgica",</span></span>
-<span id="cb6-208"><a href="#cb6-208"></a><span class="in">    row.names = FALSE,</span></span>
-<span id="cb6-209"><a href="#cb6-209"></a><span class="in">    col.names = names( beMTPL97 ),</span></span>
-<span id="cb6-210"><a href="#cb6-210"></a><span class="in">    align = paste0( rep( "r", ncol( beMTPL97 ) ), collapse = "" ),</span></span>
-<span id="cb6-211"><a href="#cb6-211"></a><span class="in">    digits = c( 0, 2, 0, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 4 ),</span></span>
-<span id="cb6-212"><a href="#cb6-212"></a><span class="in">    format.args = list( big.mark = ',', decimal.mark = '.', scientific = FALSE ),</span></span>
-<span id="cb6-213"><a href="#cb6-213"></a><span class="in">    escape = FALSE,</span></span>
-<span id="cb6-214"><a href="#cb6-214"></a><span class="in">    centering = TRUE,</span></span>
-<span id="cb6-215"><a href="#cb6-215"></a><span class="in">    booktabs = TRUE,</span></span>
-<span id="cb6-216"><a href="#cb6-216"></a><span class="in">    longtable = TRUE ) %&gt;%</span></span>
-<span id="cb6-217"><a href="#cb6-217"></a><span class="in">  kable_classic( </span></span>
-<span id="cb6-218"><a href="#cb6-218"></a><span class="in">    full_width = FALSE, </span></span>
-<span id="cb6-219"><a href="#cb6-219"></a><span class="in">    html_font = "Cambria", </span></span>
-<span id="cb6-220"><a href="#cb6-220"></a><span class="in">    position = 'center', </span></span>
-<span id="cb6-221"><a href="#cb6-221"></a><span class="in">    latex_options = c( 'hold_position', 'repeat_header', 'scale_down' ) ) %&gt;%</span></span>
-<span id="cb6-222"><a href="#cb6-222"></a><span class="in">  scroll_box( width = "100%", height = "500px" )</span></span>
-<span id="cb6-223"><a href="#cb6-223"></a><span class="in">```</span></span>
-<span id="cb6-224"><a href="#cb6-224"></a></span>
-<span id="cb6-225"><a href="#cb6-225"></a><span class="in">```{r l9c1}</span></span>
-<span id="cb6-226"><a href="#cb6-226"></a><span class="in">model_N &lt;- glm( formula = nclaims ~ ageph + sex + power + fuel + offset( log( expo ) ) + 0, </span></span>
-<span id="cb6-227"><a href="#cb6-227"></a><span class="in">                family = poisson( link = 'log' ), </span></span>
-<span id="cb6-228"><a href="#cb6-228"></a><span class="in">                data = beMTPL97 )</span></span>
-<span id="cb6-229"><a href="#cb6-229"></a><span class="in">```</span></span>
-<span id="cb6-230"><a href="#cb6-230"></a></span>
-<span id="cb6-231"><a href="#cb6-231"></a><span class="in">```{r l9t2, echo = TRUE, results = 'asis', out.width='100%', class.source = 'fold-hide'}</span></span>
-<span id="cb6-232"><a href="#cb6-232"></a><span class="in">dat &lt;- tidy( model_N )</span></span>
-<span id="cb6-233"><a href="#cb6-233"></a><span class="in">dat %&gt;%</span></span>
-<span id="cb6-234"><a href="#cb6-234"></a><span class="in">  kable(</span></span>
-<span id="cb6-235"><a href="#cb6-235"></a><span class="in">    label = NA,</span></span>
-<span id="cb6-236"><a href="#cb6-236"></a><span class="in">    caption = "Resultados del modelo GLM",</span></span>
-<span id="cb6-237"><a href="#cb6-237"></a><span class="in">    row.names = FALSE,</span></span>
-<span id="cb6-238"><a href="#cb6-238"></a><span class="in">    col.names = names( dat ),</span></span>
-<span id="cb6-239"><a href="#cb6-239"></a><span class="in">    align = 'lrrrr',</span></span>
-<span id="cb6-240"><a href="#cb6-240"></a><span class="in">    digits = c( 0, 6, 6, 6, 6 ),</span></span>
-<span id="cb6-241"><a href="#cb6-241"></a><span class="in">    format.args = list( big.mark = ',', decimal.mark = '.', scientific = FALSE ),</span></span>
-<span id="cb6-242"><a href="#cb6-242"></a><span class="in">    escape = FALSE,</span></span>
-<span id="cb6-243"><a href="#cb6-243"></a><span class="in">    centering = TRUE, </span></span>
-<span id="cb6-244"><a href="#cb6-244"></a><span class="in">    booktabs = TRUE ) %&gt;%</span></span>
-<span id="cb6-245"><a href="#cb6-245"></a><span class="in">  kable_classic( </span></span>
-<span id="cb6-246"><a href="#cb6-246"></a><span class="in">    full_width = FALSE, </span></span>
-<span id="cb6-247"><a href="#cb6-247"></a><span class="in">    html_font = "Cambria", </span></span>
-<span id="cb6-248"><a href="#cb6-248"></a><span class="in">    position = 'center', </span></span>
-<span id="cb6-249"><a href="#cb6-249"></a><span class="in">    latex_options = c( 'hold_position', 'repeat_header', 'scale_down' ) ) %&gt;%</span></span>
-<span id="cb6-250"><a href="#cb6-250"></a><span class="in">  scroll_box( width = "100%", height = "300px" )</span></span>
-<span id="cb6-251"><a href="#cb6-251"></a><span class="in">```</span></span>
-<span id="cb6-252"><a href="#cb6-252"></a></span>
-<span id="cb6-253"><a href="#cb6-253"></a><span class="in">```{r l9t3, echo = TRUE, results = 'asis', out.width='100%', class.source = 'fold-hide'}</span></span>
-<span id="cb6-254"><a href="#cb6-254"></a><span class="in">dat &lt;- glance( model_N )</span></span>
-<span id="cb6-255"><a href="#cb6-255"></a><span class="in">dat %&gt;%</span></span>
-<span id="cb6-256"><a href="#cb6-256"></a><span class="in">  kable(</span></span>
-<span id="cb6-257"><a href="#cb6-257"></a><span class="in">    label = NA,</span></span>
-<span id="cb6-258"><a href="#cb6-258"></a><span class="in">    caption = "Resultados del modelo GLM",</span></span>
-<span id="cb6-259"><a href="#cb6-259"></a><span class="in">    row.names = FALSE,</span></span>
-<span id="cb6-260"><a href="#cb6-260"></a><span class="in">    col.names = names( dat ),</span></span>
-<span id="cb6-261"><a href="#cb6-261"></a><span class="in">    align = paste0( rep( "r", ncol( dat ) ), collapse = "" ),</span></span>
-<span id="cb6-262"><a href="#cb6-262"></a><span class="in">    digits = c( 4, 0, 2, 2, 2, 2, 0, 0 ),</span></span>
-<span id="cb6-263"><a href="#cb6-263"></a><span class="in">    format.args = list( big.mark = ',', decimal.mark = '.', scientific = FALSE ),</span></span>
-<span id="cb6-264"><a href="#cb6-264"></a><span class="in">    escape = FALSE,</span></span>
-<span id="cb6-265"><a href="#cb6-265"></a><span class="in">    centering = TRUE,</span></span>
-<span id="cb6-266"><a href="#cb6-266"></a><span class="in">    booktabs = TRUE ) %&gt;%</span></span>
-<span id="cb6-267"><a href="#cb6-267"></a><span class="in">  kable_classic( </span></span>
-<span id="cb6-268"><a href="#cb6-268"></a><span class="in">    full_width = FALSE, </span></span>
-<span id="cb6-269"><a href="#cb6-269"></a><span class="in">    html_font = "Cambria", </span></span>
-<span id="cb6-270"><a href="#cb6-270"></a><span class="in">    position = 'center', </span></span>
-<span id="cb6-271"><a href="#cb6-271"></a><span class="in">    latex_options = c( 'hold_position', 'repeat_header', 'scale_down' ) ) %&gt;%</span></span>
-<span id="cb6-272"><a href="#cb6-272"></a><span class="in">  scroll_box( width = "100%", height = "200px" )</span></span>
-<span id="cb6-273"><a href="#cb6-273"></a><span class="in">```</span></span>
-<span id="cb6-274"><a href="#cb6-274"></a></span>
-<span id="cb6-275"><a href="#cb6-275"></a><span class="in">```{r l9c2}</span></span>
-<span id="cb6-276"><a href="#cb6-276"></a><span class="in">pob &lt;- expand.grid( ageph = seq( 18, 90, 1 ), </span></span>
-<span id="cb6-277"><a href="#cb6-277"></a><span class="in">                    sex = c( 'male', 'female' ),</span></span>
-<span id="cb6-278"><a href="#cb6-278"></a><span class="in">                    power = seq( 10, 250 ),</span></span>
-<span id="cb6-279"><a href="#cb6-279"></a><span class="in">                    fuel = c( 'gasoline', 'diesel' ),</span></span>
-<span id="cb6-280"><a href="#cb6-280"></a><span class="in">                    expo = 1 )</span></span>
-<span id="cb6-281"><a href="#cb6-281"></a><span class="in">pob &lt;- as.data.table( pob )</span></span>
-<span id="cb6-282"><a href="#cb6-282"></a><span class="in">pob[ , EN := predict( model_N, newdata = pob, type = 'response' ) ]</span></span>
-<span id="cb6-283"><a href="#cb6-283"></a><span class="in">```</span></span>
-<span id="cb6-284"><a href="#cb6-284"></a>:::</span>
-<span id="cb6-285"><a href="#cb6-285"></a></span>
-<span id="cb6-286"><a href="#cb6-286"></a><span class="in">```{r l8end, echo = FALSE}</span></span>
-<span id="cb6-287"><a href="#cb6-287"></a><span class="in">rm( list = ls()[ ls() != 'def.chunk.hook' ] )</span></span>
-<span id="cb6-288"><a href="#cb6-288"></a><span class="in">```</span></span>
+<span id="cb6-198"><a href="#cb6-198"></a><span class="in">```{r l8t1}</span></span>
+<span id="cb6-199"><a href="#cb6-199"></a><span class="in">#| echo: true</span></span>
+<span id="cb6-200"><a href="#cb6-200"></a><span class="in">#| out-width: '100%'</span></span>
+<span id="cb6-201"><a href="#cb6-201"></a><span class="in">#| code-fold: true</span></span>
+<span id="cb6-202"><a href="#cb6-202"></a><span class="in"># la librería CASdatasets fue previamente cargada</span></span>
+<span id="cb6-203"><a href="#cb6-203"></a><span class="in">data( beMTPL97 )</span></span>
+<span id="cb6-204"><a href="#cb6-204"></a><span class="in">beMTPL97 &lt;- as.data.table( beMTPL97 )</span></span>
+<span id="cb6-205"><a href="#cb6-205"></a></span>
+<span id="cb6-206"><a href="#cb6-206"></a><span class="in"># Impresión de las primeras filas de la tabla</span></span>
+<span id="cb6-207"><a href="#cb6-207"></a><span class="in">beMTPL97[ 1:15 ] %&gt;%</span></span>
+<span id="cb6-208"><a href="#cb6-208"></a><span class="in">  kable(</span></span>
+<span id="cb6-209"><a href="#cb6-209"></a><span class="in">    label = NA,</span></span>
+<span id="cb6-210"><a href="#cb6-210"></a><span class="in">    caption = "Pólizas y reclamos de automóviles en Bélgica",</span></span>
+<span id="cb6-211"><a href="#cb6-211"></a><span class="in">    row.names = FALSE,</span></span>
+<span id="cb6-212"><a href="#cb6-212"></a><span class="in">    col.names = names( beMTPL97 ),</span></span>
+<span id="cb6-213"><a href="#cb6-213"></a><span class="in">    align = paste0( rep( "r", ncol( beMTPL97 ) ), collapse = "" ),</span></span>
+<span id="cb6-214"><a href="#cb6-214"></a><span class="in">    digits = c( 0, 2, 0, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 4 ),</span></span>
+<span id="cb6-215"><a href="#cb6-215"></a><span class="in">    format.args = list( big.mark = ',', decimal.mark = '.', scientific = FALSE ),</span></span>
+<span id="cb6-216"><a href="#cb6-216"></a><span class="in">    escape = FALSE,</span></span>
+<span id="cb6-217"><a href="#cb6-217"></a><span class="in">    centering = TRUE,</span></span>
+<span id="cb6-218"><a href="#cb6-218"></a><span class="in">    booktabs = TRUE,</span></span>
+<span id="cb6-219"><a href="#cb6-219"></a><span class="in">    longtable = TRUE ) %&gt;%</span></span>
+<span id="cb6-220"><a href="#cb6-220"></a><span class="in">  kable_classic( </span></span>
+<span id="cb6-221"><a href="#cb6-221"></a><span class="in">    full_width = FALSE, </span></span>
+<span id="cb6-222"><a href="#cb6-222"></a><span class="in">    html_font = "Cambria", </span></span>
+<span id="cb6-223"><a href="#cb6-223"></a><span class="in">    position = 'center', </span></span>
+<span id="cb6-224"><a href="#cb6-224"></a><span class="in">    latex_options = c( 'hold_position', 'repeat_header', 'scale_down' ) ) %&gt;%</span></span>
+<span id="cb6-225"><a href="#cb6-225"></a><span class="in">  scroll_box( width = "100%", height = "500px" )</span></span>
+<span id="cb6-226"><a href="#cb6-226"></a><span class="in">```</span></span>
+<span id="cb6-227"><a href="#cb6-227"></a></span>
+<span id="cb6-228"><a href="#cb6-228"></a><span class="in">```{r l8c1}</span></span>
+<span id="cb6-229"><a href="#cb6-229"></a><span class="in">model_N &lt;- glm( formula = nclaims ~ ageph + sex + power + fuel + offset( log( expo ) ) + 0, </span></span>
+<span id="cb6-230"><a href="#cb6-230"></a><span class="in">                family = poisson( link = 'log' ), </span></span>
+<span id="cb6-231"><a href="#cb6-231"></a><span class="in">                data = beMTPL97 )</span></span>
+<span id="cb6-232"><a href="#cb6-232"></a><span class="in">```</span></span>
+<span id="cb6-233"><a href="#cb6-233"></a></span>
+<span id="cb6-234"><a href="#cb6-234"></a><span class="in">```{r l8t2}</span></span>
+<span id="cb6-235"><a href="#cb6-235"></a><span class="in">#| echo: true</span></span>
+<span id="cb6-236"><a href="#cb6-236"></a><span class="in">#| out-width: '100%'</span></span>
+<span id="cb6-237"><a href="#cb6-237"></a><span class="in">#| code-fold: true</span></span>
+<span id="cb6-238"><a href="#cb6-238"></a><span class="in">dat &lt;- tidy( model_N )</span></span>
+<span id="cb6-239"><a href="#cb6-239"></a><span class="in">dat %&gt;%</span></span>
+<span id="cb6-240"><a href="#cb6-240"></a><span class="in">  kable(</span></span>
+<span id="cb6-241"><a href="#cb6-241"></a><span class="in">    label = NA,</span></span>
+<span id="cb6-242"><a href="#cb6-242"></a><span class="in">    caption = "Resultados del modelo GLM",</span></span>
+<span id="cb6-243"><a href="#cb6-243"></a><span class="in">    row.names = FALSE,</span></span>
+<span id="cb6-244"><a href="#cb6-244"></a><span class="in">    col.names = names( dat ),</span></span>
+<span id="cb6-245"><a href="#cb6-245"></a><span class="in">    align = 'lrrrr',</span></span>
+<span id="cb6-246"><a href="#cb6-246"></a><span class="in">    digits = c( 0, 6, 6, 6, 6 ),</span></span>
+<span id="cb6-247"><a href="#cb6-247"></a><span class="in">    format.args = list( big.mark = ',', decimal.mark = '.', scientific = FALSE ),</span></span>
+<span id="cb6-248"><a href="#cb6-248"></a><span class="in">    escape = FALSE,</span></span>
+<span id="cb6-249"><a href="#cb6-249"></a><span class="in">    centering = TRUE, </span></span>
+<span id="cb6-250"><a href="#cb6-250"></a><span class="in">    booktabs = TRUE ) %&gt;%</span></span>
+<span id="cb6-251"><a href="#cb6-251"></a><span class="in">  kable_classic( </span></span>
+<span id="cb6-252"><a href="#cb6-252"></a><span class="in">    full_width = FALSE, </span></span>
+<span id="cb6-253"><a href="#cb6-253"></a><span class="in">    html_font = "Cambria", </span></span>
+<span id="cb6-254"><a href="#cb6-254"></a><span class="in">    position = 'center', </span></span>
+<span id="cb6-255"><a href="#cb6-255"></a><span class="in">    latex_options = c( 'hold_position', 'repeat_header', 'scale_down' ) ) %&gt;%</span></span>
+<span id="cb6-256"><a href="#cb6-256"></a><span class="in">  scroll_box( width = "100%", height = "300px" )</span></span>
+<span id="cb6-257"><a href="#cb6-257"></a><span class="in">```</span></span>
+<span id="cb6-258"><a href="#cb6-258"></a></span>
+<span id="cb6-259"><a href="#cb6-259"></a><span class="in">```{r l8t3}</span></span>
+<span id="cb6-260"><a href="#cb6-260"></a><span class="in">#| echo: true</span></span>
+<span id="cb6-261"><a href="#cb6-261"></a><span class="in">#| out-width: '100%'</span></span>
+<span id="cb6-262"><a href="#cb6-262"></a><span class="in">#| code-fold: true</span></span>
+<span id="cb6-263"><a href="#cb6-263"></a><span class="in">dat &lt;- glance( model_N )</span></span>
+<span id="cb6-264"><a href="#cb6-264"></a><span class="in">dat %&gt;%</span></span>
+<span id="cb6-265"><a href="#cb6-265"></a><span class="in">  kable(</span></span>
+<span id="cb6-266"><a href="#cb6-266"></a><span class="in">    label = NA,</span></span>
+<span id="cb6-267"><a href="#cb6-267"></a><span class="in">    caption = "Resultados del modelo GLM",</span></span>
+<span id="cb6-268"><a href="#cb6-268"></a><span class="in">    row.names = FALSE,</span></span>
+<span id="cb6-269"><a href="#cb6-269"></a><span class="in">    col.names = names( dat ),</span></span>
+<span id="cb6-270"><a href="#cb6-270"></a><span class="in">    align = paste0( rep( "r", ncol( dat ) ), collapse = "" ),</span></span>
+<span id="cb6-271"><a href="#cb6-271"></a><span class="in">    digits = c( 4, 0, 2, 2, 2, 2, 0, 0 ),</span></span>
+<span id="cb6-272"><a href="#cb6-272"></a><span class="in">    format.args = list( big.mark = ',', decimal.mark = '.', scientific = FALSE ),</span></span>
+<span id="cb6-273"><a href="#cb6-273"></a><span class="in">    escape = FALSE,</span></span>
+<span id="cb6-274"><a href="#cb6-274"></a><span class="in">    centering = TRUE,</span></span>
+<span id="cb6-275"><a href="#cb6-275"></a><span class="in">    booktabs = TRUE ) %&gt;%</span></span>
+<span id="cb6-276"><a href="#cb6-276"></a><span class="in">  kable_classic( </span></span>
+<span id="cb6-277"><a href="#cb6-277"></a><span class="in">    full_width = FALSE, </span></span>
+<span id="cb6-278"><a href="#cb6-278"></a><span class="in">    html_font = "Cambria", </span></span>
+<span id="cb6-279"><a href="#cb6-279"></a><span class="in">    position = 'center', </span></span>
+<span id="cb6-280"><a href="#cb6-280"></a><span class="in">    latex_options = c( 'hold_position', 'repeat_header', 'scale_down' ) ) %&gt;%</span></span>
+<span id="cb6-281"><a href="#cb6-281"></a><span class="in">  scroll_box( width = "100%", height = "200px" )</span></span>
+<span id="cb6-282"><a href="#cb6-282"></a><span class="in">```</span></span>
+<span id="cb6-283"><a href="#cb6-283"></a></span>
+<span id="cb6-284"><a href="#cb6-284"></a><span class="in">```{r l8c2}</span></span>
+<span id="cb6-285"><a href="#cb6-285"></a><span class="in">pob &lt;- expand.grid( ageph = seq( 18, 90, 1 ), </span></span>
+<span id="cb6-286"><a href="#cb6-286"></a><span class="in">                    sex = c( 'male', 'female' ),</span></span>
+<span id="cb6-287"><a href="#cb6-287"></a><span class="in">                    power = seq( 10, 250 ),</span></span>
+<span id="cb6-288"><a href="#cb6-288"></a><span class="in">                    fuel = c( 'gasoline', 'diesel' ),</span></span>
+<span id="cb6-289"><a href="#cb6-289"></a><span class="in">                    expo = 1 )</span></span>
+<span id="cb6-290"><a href="#cb6-290"></a><span class="in">pob &lt;- as.data.table( pob )</span></span>
+<span id="cb6-291"><a href="#cb6-291"></a><span class="in">pob[ , EN := predict( model_N, newdata = pob, type = 'response' ) ]</span></span>
+<span id="cb6-292"><a href="#cb6-292"></a><span class="in">```</span></span>
+<span id="cb6-293"><a href="#cb6-293"></a>:::</span>
+<span id="cb6-294"><a href="#cb6-294"></a></span>
+<span id="cb6-295"><a href="#cb6-295"></a><span class="in">```{r l8end, echo = FALSE}</span></span>
+<span id="cb6-296"><a href="#cb6-296"></a><span class="in">rm( list = ls()[ ls() != 'def.chunk.hook' ] )</span></span>
+<span id="cb6-297"><a href="#cb6-297"></a><span class="in">```</span></span>
 </code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

@@ -40,7 +40,11 @@ p <- dbinom( x = 0:n, size = n, prob = p )
 v <- 1:n * p[ 2:(n + 1) ] / p[ 1:n ]
 ```
 
-```{r l5g1, out.width='80%', fig.align='center', class.source = 'fold-hide'}
+```{r l5g1}
+#| warning: false
+#| out-width: '80%'
+#| fig-align: center
+#| code-fold: true
 plt <- ggplot() +
   geom_point( aes( x = 1:n, y = v ), colour = 'darkred' ) + 
   xlab( TeX( "$k$" ) ) + 
@@ -76,7 +80,11 @@ p <- dpois( x = 0:n, lambda = lambda )
 v <- 1:n * p[ 2:(n + 1) ] / p[ 1:n ]
 ```
 
-```{r l5g2, out.width='80%', fig.align='center', class.source = 'fold-hide'}
+```{r l5g2}
+#| warning: false
+#| out-width: '80%'
+#| fig-align: center
+#| code-fold: true
 plt <- ggplot() +
   geom_point( aes( x = 1:n, y = v ), colour = 'darkred' ) + 
   xlab( TeX( "$k$" ) ) + 
@@ -117,7 +125,11 @@ p <- dnbinom( x = 0:n, size = alpha, prob = p )
 v <- 1:n * p[ 2:(n + 1) ] / p[ 1:n ]
 ```
 
-```{r l5g3, out.width='80%', fig.align='center', class.source = 'fold-hide'}
+```{r l5g3}
+#| warning: false
+#| out-width: '80%'
+#| fig-align: center
+#| code-fold: true
 plt <- ggplot() +
   geom_point( aes( x = 1:n, y = v ), colour = 'darkred' ) + 
   xlab( TeX( "$k$" ) ) + 
@@ -197,7 +209,10 @@ Para una demostración detallada de la proposición anterior se puede consultar 
 en https://nonlifemaths.github.io/.
 
 
-```{r l5t1, echo = TRUE, results = 'asis', out.width='100%', class.source = 'fold-hide'}
+```{r l5t1}
+#| echo: true
+#| out-width: '100%'
+#| code-fold: true
 # la librería CASdatasets fue previamente cargada
 data( beMTPL97 )
 beMTPL97 <- as.data.table( beMTPL97 )
@@ -223,7 +238,11 @@ conteo %>%
   scroll_box( width = "100%", height = "500px" )
 ```
 
-```{r l5g4, out.width='80%', fig.align='center', class.source = 'fold-hide'}
+```{r l5g4}
+#| warning: false
+#| out-width: '80%'
+#| fig-align: center
+#| code-fold: true
 plt <- ggplot() +
   geom_point( data = conteo, aes( x = N, y = jn ), colour = 'purple' ) + 
   xlab( TeX( "$k$" ) ) + 

@@ -194,7 +194,10 @@ $$
 P( N = n ) = \exp(-g( \beta x ) ER( x )) \frac{g( \beta x )^n ER( x )^n}{n!}
 $$
 
-```{r l9t1, echo = TRUE, results = 'asis', out.width='100%', class.source = 'fold-hide'}
+```{r l8t1}
+#| echo: true
+#| out-width: '100%'
+#| code-fold: true
 # la librería CASdatasets fue previamente cargada
 data( beMTPL97 )
 beMTPL97 <- as.data.table( beMTPL97 )
@@ -221,13 +224,16 @@ beMTPL97[ 1:15 ] %>%
   scroll_box( width = "100%", height = "500px" )
 ```
 
-```{r l9c1}
+```{r l8c1}
 model_N <- glm( formula = nclaims ~ ageph + sex + power + fuel + offset( log( expo ) ) + 0, 
                 family = poisson( link = 'log' ), 
                 data = beMTPL97 )
 ```
 
-```{r l9t2, echo = TRUE, results = 'asis', out.width='100%', class.source = 'fold-hide'}
+```{r l8t2}
+#| echo: true
+#| out-width: '100%'
+#| code-fold: true
 dat <- tidy( model_N )
 dat %>%
   kable(
@@ -249,7 +255,10 @@ dat %>%
   scroll_box( width = "100%", height = "300px" )
 ```
 
-```{r l9t3, echo = TRUE, results = 'asis', out.width='100%', class.source = 'fold-hide'}
+```{r l8t3}
+#| echo: true
+#| out-width: '100%'
+#| code-fold: true
 dat <- glance( model_N )
 dat %>%
   kable(
@@ -271,7 +280,7 @@ dat %>%
   scroll_box( width = "100%", height = "200px" )
 ```
 
-```{r l9c2}
+```{r l8c2}
 pob <- expand.grid( ageph = seq( 18, 90, 1 ), 
                     sex = c( 'male', 'female' ),
                     power = seq( 10, 250 ),

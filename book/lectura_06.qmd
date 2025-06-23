@@ -259,9 +259,9 @@ Fms <- sapply( s, FUN = Fm )
 
 ```{r l6g1}
 #| warning: false
-#| out.width: '80%'
-#| fig.align: 'center'
-#| class.source: 'fold-hide'
+#| out-width: '80%'
+#| fig-align: center
+#| code-fold: true
 smax <- 2.0e5
 
 plt <- ggplot() +
@@ -739,9 +739,9 @@ siniestros $n$ se disminuye el rango de la acotación, proporcionando así una m
 distribución de los reclamos totales $S$.
 ```{r l6g2}
 #| warning: false
-#| out.width: '80%'
-#| fig.align: 'center'
-#| class.source: 'fold-hide'
+#| out-width: '80%'
+#| fig-align: center
+#| code-fold: true
 ylim <- c( 0, 1 )
 ybrk <- seq( ylim[1], ylim[2], 0.1 )
 ylbl <- formatC( ybrk, digits = 2, format = 'f' )
@@ -836,9 +836,9 @@ F_Z( z ) = \mathbf{1}_{[0,+\infty)}( z ) F_X( z + d )
 $$
 ```{r l6g3}
 #| warning: false
-#| out.width: '80%'
-#| fig.align: 'center'
-#| class.source: 'fold-hide'
+#| out-width: '80%'
+#| fig-align: center
+#| code-fold: true
 D <- function( x, d ) return( max( x - d, 0 ) )
 d <- 50
 alpha <- 2
@@ -884,7 +884,11 @@ $Z = D( X ) \rightsquigarrow F_Z( z )$, donde:
 $$
 F_Z( z ) = \mathbf{1}_{(-\infty,M)}( z ) F_X( z ) + \mathbf{1}_{[M,+\infty)}( z )
 $$
-```{r l6g4, warning=FALSE, out.width='80%', fig.align='center', class.source = 'fold-hide'}
+```{r l6g4}
+#| warning: false
+#| out-width: '80%'
+#| fig-align: center
+#| code-fold: true
 D <- function( x, M ) return( min( x, M ) )
 M <- 150
 alpha <- 2
@@ -930,9 +934,9 @@ F_Z( z ) = \mathbf{1}_{[0,M)}( z ) F_X( z + d ) + \mathbf{1}_{[M,+\infty)}( z )
 $$
 ```{r l6g5}
 #| warning: false
-#| out.width: '80%'
-#| fig.align: 'center'
-#| class.source: 'fold-hide'
+#| out-width: '80%'
+#| fig-align: center
+#| code-fold: true
 D <- function( x, M ) return( min( max( x - d ), M ) )
 d <- 50
 M <- 150
@@ -1072,7 +1076,11 @@ El efecto del deducible sobre la distribución del reclamo es evidente, producie
 densidad multimodal, como se observa en el gráfico a continuación, en el mismo incluimos dos 
 histogramas, uno correspondiente a los reclamos totales sin aplicar el deducible y el otro 
 el histograma de los reclamos totales aplicados el deducible.
-```{r l6g6, warning=FALSE, out.width='80%', fig.align='center', class.source='fold-hide'}
+```{r l6g6}
+#| warning: false
+#| out-width: '80%'
+#| fig-align: center
+#| code-fold: true
 smax <- lambda * M
 fmax <- 0.002
 
@@ -1189,9 +1197,9 @@ FeDs <- sapply( s, FUN = FeDS )
 
 ```{r l6g7}
 #| warning: false
-#| out.width: '80%'
-#| fig.align: 'center'
-#| class.source: 'fold-hide'
+#| out-width: '80%'
+#| fig-align: center
+#| code-fold: true
 Smax <- ESmax
 
 xbrk <- sort( unique( c( d, M, seq( 0, Smax, length = 7 ) ) ) )
@@ -1316,9 +1324,9 @@ Además, el algoritmo solo es válido cuando el conteo de siniestros pertenece a
 de distribuciones $(a,b,0)$.
 ```{r l6g8}
 #| warning: false
-#| out.width: '80%'
-#| fig.align: 'center'
-#| class.source: 'fold-hide'
+#| out-width: '80%'
+#| fig-align: center
+#| code-fold: true
 fmax <- 0.0007
 
 plt <- ggplot( ) +
@@ -1341,9 +1349,9 @@ plot( plt )
 
 ```{r l6g9}
 #| warning: false
-#| out.width: '80%'
-#| fig.align: 'center'
-#| class.source: 'fold-hide'
+#| out-width: '80%'
+#| fig-align: center
+#| code-fold: true
 e <- cumsum( fS[ -1 ] * ds ) - ecdf( S )( sg[ -1 ] )
 
 eb <- max( abs( e ) )
@@ -1431,9 +1439,9 @@ Fs <- sapply( s, FUN = function( sk ) pgamma( sk, shape = sum( alpha ), scale = 
 
 ```{r l6g10}
 #| warning: false
-#| out.width: '80%'
-#| fig.align: 'center'
-#| class.source: 'fold-hide'
+#| out-width: '80%'
+#| fig-align: center
+#| code-fold: true
 plt <- ggplot() +
   geom_line( aes( x = s, y = fs ), colour = 'darkred', linewidth = 1 ) + 
   geom_point( aes( x = s, y = fS ), colour = 'olivedrab3', size = 0.2 ) + 
@@ -1449,9 +1457,9 @@ algoritmo de estimación de la densidad hay que realizarle algún ajuste o en su
 la precisión numérica.
 ```{r l6g11}
 #| warning: false
-#| out.width: '80%'
-#| fig.align: 'center'
-#| class.source: 'fold-hide'
+#| out-width: '80%'
+#| fig-align: center
+#| code-fold: true
 plt <- ggplot() +
   geom_line( aes( x = s, y = Fs ), colour = 'darkred', linewidth = 1 ) + 
   geom_point( aes( x = s, y = FS ), colour = 'olivedrab3', size = 0.2 ) + 
@@ -1464,9 +1472,9 @@ plot( plt )
 
 ```{r l6g12}
 #| warning: false
-#| out.width: '80%'
-#| fig.align: 'center'
-#| class.source: 'fold-hide'
+#| out-width: '80%'
+#| fig-align: center
+#| code-fold: true
 e <- fS - fs
 eb <- max( abs( e ) )
 
@@ -1529,9 +1537,9 @@ S <- sapply( X, FUN = function( x ) sum( x, na.rm = TRUE ) )
 
 ```{r l6g13}
 #| warning: false
-#| out.width: '80%'
-#| fig.align: 'center'
-#| class.source: 'fold-hide'
+#| out-width: '80%'
+#| fig-align: center
+#| code-fold: true
 fmax <- 0.0007
 smax <- 5e3
 
@@ -1732,9 +1740,8 @@ campos de especial interés como la fecha de nacimiento `bdate`, el inicio de vi
 cobertura `start` y el final de vigencia de la cobertura `end`.
 ```{r l6t1}
 #| echo: true
-#| results: asis
 #| out-width: '100%'
-#| class-source: 'fold-hide'
+#| code-fold: true
 
 production[ 1:10 ] %>%
   kable(
@@ -1762,9 +1769,8 @@ En la misma información se incluye el deducible $d$ y el monto de máximo de co
 utilizó para aplicar la deducción.
 ```{r l6t2}
 #| echo: true
-#| results: asis
 #| out-width: '100%'
-#| class-source: 'fold-hide'
+#| code-fold: true
 claims[ 1:10 ] %>%
   kable(
     label = NA,
@@ -1871,9 +1877,8 @@ Los grupos de riesgo, que designaremos con un índice $g$, los hemos seleccionad
 frecuencia y severidad de los reclamos, estos son los siguientes:
 ```{r l6t3}
 #| echo: true
-#| results: asis
 #| out-width: '100%'
-#| class-source: 'fold-hide'
+#| code-fold: true
 grpcl %>%
   kable(
     label = NA,
@@ -1893,10 +1898,10 @@ grpcl %>%
 El gráfico a continuación muestra el comportamiento del indicador $v_n = n \frac{p_n}{p_{n-1}}$, 
 para cada uno de los grupos $g$ de riesgo.
 ```{r l6g15}
-#| echo: true
-#| results: asis
-#| out-width: '100%'
-#| class-source: 'fold-hide'
+#| warning: false
+#| out-width: '80%'
+#| fig-align: center
+#| code-fold: true
 plt <- ggplot( ) +
   geom_point( data = count, aes( x = N, y = vn ), colour = 'red3', size = 0.5 ) +
   facet_wrap( vars( grp ), ncol = 4 ) +
@@ -1970,9 +1975,8 @@ estimaciones de la frecuencia para cada uno de los grupos. A continuación, pres
 resultados de la estimación para la frecuencia.
 ```{r l6t4}
 #| echo: true
-#| results: asis
 #| out-width: '100%'
-#| class-source: 'fold-hide'
+#| code-fold: true
 estim_frec %>%
   kable(
     label = NA,
@@ -2010,9 +2014,9 @@ Los histogramas a continuación muestran como se distribuyen los reclamos ya cen
 grupos de riesgo.
 ```{r l6g16}
 #| warning: false
-#| out.width: '90%'
-#| fig.align: 'center'
-#| class.source: 'fold-hide'
+#| out-width: '80%'
+#| fig-align: center
+#| code-fold: true
 xlim <- c( 0, 1e3 )
 xbrk <- seq( xlim[1], xlim[2], length = 5 )
 xlbl <- xbrk
@@ -2157,9 +2161,8 @@ Los resultados de la estimación mediante maximización de verosimilitud para la
 reclamos, los presentamos en la tabla a continuación.
 ```{r l6t5}
 #| echo: true
-#| results: 'asis'
-#| out.width: '100%'
-#| class.source: 'fold-hide'
+#| out-width: '100%'
+#| code-fold: true
 estim_sev %>%
   kable(
     label = NA,
@@ -2280,9 +2283,8 @@ prods[ , SDS := sqrt( ngr * ( EN * SDDX^2 + SDN^2 * EDX^2 ) ) ]
 
 ```{r l6t6}
 #| echo: true
-#| results: 'asis'
-#| out.width: '100%'
-#| class.source: 'fold-hide'
+#| out-width: '100%'
+#| code-fold: true
 prods[ , list( sex, xg, r, ngr, d, M, EN, SDN, EX, SDX, EDX, SDDX, ES, SDS ) ] %>%
   kable(
     label = NA,
@@ -2582,7 +2584,11 @@ EeS <- sapply( 1:p, FUN = function( l ) mean( sapply( 1:m, function( i ) S[[ i ]
 
 En el gráfico a continuación presentamos todos los procesos de conteo $N_{i}$ simulados, como es de
 esperarse son funciones de escalera, siempre crecientes, que toman solo valores positivos.
-```{r l6g17, warning=FALSE, out.width='80%', fig.align='center', class.source = 'fold-hide'}
+```{r l6g17}
+#| warning: false
+#| out-width: '80%'
+#| fig-align: center
+#| code-fold: true
 Sord <- order( sapply( 1:m, FUN = function( j ) last( S[[j]] ) ) )
 Ndat <- NULL
 for ( j in 1:m ) {
@@ -2619,8 +2625,8 @@ siempre crecientes, con saltos correspondientes a los reclamos individuales.
 ```{r l6g18}
 #| warning: false
 #| out-width: '80%'
-#| fig-align: 'center'
-#| class-source: 'fold-hide'
+#| fig-align: center
+#| code-fold: true
 Sqmax <- quantile( sapply( S, FUN = function( Si ) last( Si ) ), probs = 0.99 )
 
 plt <- ggplot( ) +
@@ -2657,8 +2663,8 @@ valores mayores del proceso $S$ correspondiente al total de reclamos.
 ```{r l6g19}
 #| warning: false
 #| out-width: '80%'
-#| fig-align: 'center'
-#| class-source: 'fold-hide'
+#| fig-align: center
+#| code-fold: true
 FeSdat <- NULL
 for ( j in 1:p ) {
   FeSdat <- rbindlist( list( FeSdat, data.table( s = s, m = as.factor( j ), Fes = Fes[[ j ]] ) ) )

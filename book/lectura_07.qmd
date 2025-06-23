@@ -322,7 +322,11 @@ TVaRX <- sapply(
   FUN = function( i ) ifelse( alpha[ i ] < 1, ( 1 / ( 1 - alpha[ i ] ) ) * mean( X * ( X > VaRX[ i ] ) ), max( X ) ) )
 ```
 
-```{r l7g1, out.width='80%', fig.align='center', class.source = 'fold-hide'}
+```{r l7g1}
+#| warning: false
+#| out-width: '80%'
+#| fig-align: center
+#| code-fold: true
 plt <- ggplot() +
   geom_point( aes( x = alpha, y = VaRX ), colour = 'darkred' ) + 
   geom_point( aes( x = alpha, y = TVaRX ), colour = 'orange' ) + 
@@ -684,7 +688,10 @@ con riesgos similares.
 
 Sin segmentación de la población, este el caso más sencillo para la tarificación, el asegurado
 
-```{r l7t1, echo = TRUE, results = 'asis', out.width='100%', class.source = 'fold-hide'}
+```{r l7t1}
+#| echo: true
+#| out-width: '100%'
+#| code-fold: true
 dat <- data.table( nom = c( 'Pago', 'Pago esperado', 'Varianza' ),
                    cl = c( "$\\E[S]$", "$\\E[S]$", "$0$" ), 
                    as = c( "$S - \\E[S]$", "$0$", "$\\V[S]$" ) )
@@ -708,7 +715,10 @@ $Y$, condicionando así cada una de las estimaciones según los valores que va t
 explicativa. Esto permite estables primas de forma más adecuada según las diferentes características
 del riesgo cubierto.
 
-```{r l7t2, echo = TRUE, results = 'asis', out.width='100%', class.source = 'fold-hide'}
+```{r l7t2}
+#| echo: true
+#| out-width: '100%'
+#| code-fold: true
 dat <- data.table( nom = c( 'Pago', 'Pago esperado', 'Varianza' ),
                    cl = c( "$\\E[S \\mid Y]$", "$\\E[S]$", "$\\V[\\E[S \\mid Y]]$" ), 
                    as = c( "$S - \\E[S \\mid Y]$", "$0$", "$\\V[S-\\E[S \\mid Y]]$" ) )

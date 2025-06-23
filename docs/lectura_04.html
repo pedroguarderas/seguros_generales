@@ -1106,9 +1106,10 @@ n &amp; \geq \left\lceil -\frac{1}{2\varepsilon^2} \ln\left( \frac{\delta}{2} \r
 <span id="cb2-3"><a href="#cb2-3"></a>n <span class="ot">&lt;-</span> <span class="fu">ceiling</span>( <span class="sc">-</span><span class="fu">log</span>( delta <span class="sc">/</span> <span class="dv">2</span> ) <span class="sc">/</span> ( <span class="dv">2</span> <span class="sc">*</span> e<span class="sc">^</span><span class="dv">2</span> ) )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<details open="" class="code-fold">
+<div class="cell">
+<details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r fold-hide number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>dt <span class="ot">&lt;-</span> <span class="fu">data.table</span>( <span class="at">delta =</span> delta, e, n, <span class="at">d =</span> <span class="dv">8</span> <span class="sc">*</span> n <span class="sc">/</span> <span class="dv">1024</span><span class="sc">^</span><span class="dv">3</span> )</span>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>dt <span class="ot">&lt;-</span> <span class="fu">data.table</span>( <span class="at">delta =</span> delta, e, n, <span class="at">d =</span> <span class="dv">8</span> <span class="sc">*</span> n <span class="sc">/</span> <span class="dv">1024</span><span class="sc">^</span><span class="dv">3</span> )</span>
 <span id="cb3-2"><a href="#cb3-2"></a>dt <span class="sc">%&gt;%</span></span>
 <span id="cb3-3"><a href="#cb3-3"></a>  <span class="fu">kable</span>(</span>
 <span id="cb3-4"><a href="#cb3-4"></a>    <span class="at">label =</span> <span class="cn">NA</span>,</span>
@@ -1129,8 +1130,9 @@ n &amp; \geq \left\lceil -\frac{1}{2\varepsilon^2} \ln\left( \frac{\delta}{2} \r
 <span id="cb3-19"><a href="#cb3-19"></a>    <span class="at">latex_options =</span> <span class="fu">c</span>( <span class="st">'hold_position'</span>, <span class="st">'repeat_header'</span> ) ) <span class="sc">%&gt;%</span></span>
 <span id="cb3-20"><a href="#cb3-20"></a>  <span class="fu">scroll_box</span>( <span class="at">width =</span> <span class="st">"100%"</span>, <span class="at">height =</span> <span class="st">"500px"</span> )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
+<div class="cell-output-display">
 <div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:500px; overflow-x: scroll; width:100%; ">
-<table class="lightable-classic caption-top table" data-quarto-postprocess="true">
+<table class="lightable-classic caption-top table table-sm table-striped small" data-quarto-postprocess="true">
 <caption>Error versus número de simulaciones</caption>
 <thead>
 <tr class="header">
@@ -1631,6 +1633,8 @@ n &amp; \geq \left\lceil -\frac{1}{2\varepsilon^2} \ln\left( \frac{\delta}{2} \r
 </table>
 </div>
 
+</div>
+</div>
 <div id="l4ex2" class="example">
 <p>En este caso en particular estudiaremos la velocidad de convergencia del método resultante del teorema del límite central @ref(thm:tlc). Generaremos una simulación aleatoria de la suma agregada <span class="math inline">\(S_n\)</span> y mostrar</p>
 <div class="cell">
@@ -1655,9 +1659,9 @@ n &amp; \geq \left\lceil -\frac{1}{2\varepsilon^2} \ln\left( \frac{\delta}{2} \r
 </details>
 </div>
 <div class="cell" data-layout-align="center">
-<details open="" class="code-fold">
+<details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r fold-hide number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>plt <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>plt <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
 <span id="cb5-2"><a href="#cb5-2"></a>  <span class="fu">geom_line</span>( <span class="fu">aes</span>( <span class="at">x =</span> <span class="dv">1</span><span class="sc">:</span>n, <span class="at">y =</span> D ), <span class="at">colour =</span> <span class="st">'darkred'</span>, <span class="at">linewidth =</span> <span class="fl">0.5</span> ) <span class="sc">+</span> </span>
 <span id="cb5-3"><a href="#cb5-3"></a>  <span class="fu">scale_x_continuous</span>( <span class="at">breaks =</span> <span class="fu">seq</span>( <span class="dv">0</span>, n, <span class="dv">500</span> ), <span class="at">limits =</span> <span class="fu">c</span>( <span class="dv">1</span>, n ), <span class="at">expand =</span> <span class="fu">c</span>( <span class="dv">0</span>, <span class="dv">0</span> ) ) <span class="sc">+</span></span>
 <span id="cb5-4"><a href="#cb5-4"></a>  <span class="fu">scale_y_continuous</span>( <span class="at">breaks =</span> <span class="fu">seq</span>( <span class="dv">0</span>, <span class="fl">0.5</span>, <span class="at">length =</span> <span class="dv">11</span> ), <span class="at">limits =</span> <span class="fu">c</span>( <span class="dv">0</span>, <span class="fl">0.5</span> ), <span class="at">expand =</span> <span class="fu">c</span>( <span class="dv">0</span>, <span class="dv">0</span> ) ) <span class="sc">+</span></span>
@@ -1669,15 +1673,15 @@ n &amp; \geq \left\lceil -\frac{1}{2\varepsilon^2} \ln\left( \frac{\delta}{2} \r
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="lectura_04_files/figure-html/l4g2-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%"></p>
+<p><img src="lectura_04_files/figure-html/l4g1-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%"></p>
 </figure>
 </div>
 </div>
 </div>
 <div class="cell" data-layout-align="center">
-<details open="" class="code-fold">
+<details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r fold-hide number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>dat <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>dat <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
 <span id="cb6-2"><a href="#cb6-2"></a><span class="cf">for</span> ( k <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n ) {</span>
 <span id="cb6-3"><a href="#cb6-3"></a>  dat <span class="ot">&lt;-</span> <span class="fu">rbindlist</span>( <span class="fu">list</span>( dat, <span class="fu">data.table</span>( <span class="at">z =</span> z, <span class="at">n =</span> <span class="fu">as.factor</span>( k ), <span class="at">FSn =</span> FSn[[ k ]] ) ) )</span>
 <span id="cb6-4"><a href="#cb6-4"></a>}</span>
@@ -1704,7 +1708,7 @@ n &amp; \geq \left\lceil -\frac{1}{2\varepsilon^2} \ln\left( \frac{\delta}{2} \r
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="lectura_04_files/figure-html/l4g3-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%"></p>
+<p><img src="lectura_04_files/figure-html/l4g2-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%"></p>
 </figure>
 </div>
 </div>
@@ -1840,9 +1844,9 @@ P( X \geq \rho \E[ X ] ) \geq ( 1 - \rho )^2 \frac{\E[ X ]^2}{\E[ X^2 ]}
 \]</span></p>
 <p>Como se puede observar se superponen cada una de las distribuciones la discretización <span class="math inline">\(f_k\)</span> y la calculada con inversión de la transformada de Fourier discreta.</p>
 <div class="cell" data-layout-align="center">
-<details open="" class="code-fold">
+<details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r fold-hide number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>xbrk <span class="ot">&lt;-</span> <span class="fu">seq</span>( <span class="dv">0</span>, <span class="dv">40</span>, <span class="at">length =</span> <span class="dv">9</span> )</span>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>xbrk <span class="ot">&lt;-</span> <span class="fu">seq</span>( <span class="dv">0</span>, <span class="dv">40</span>, <span class="at">length =</span> <span class="dv">9</span> )</span>
 <span id="cb8-2"><a href="#cb8-2"></a>xlbl <span class="ot">&lt;-</span> <span class="fu">formatC</span>( xbrk, <span class="at">digits =</span> <span class="dv">0</span>, <span class="at">format =</span> <span class="st">'f'</span> )</span>
 <span id="cb8-3"><a href="#cb8-3"></a>xlim <span class="ot">&lt;-</span> <span class="fu">c</span>( <span class="dv">0</span>, <span class="dv">40</span> )</span>
 <span id="cb8-4"><a href="#cb8-4"></a></span>
@@ -1869,15 +1873,15 @@ P( X \geq \rho \E[ X ] ) \geq ( 1 - \rho )^2 \frac{\E[ X ]^2}{\E[ X^2 ]}
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="lectura_04_files/figure-html/l4g4-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%"></p>
+<p><img src="lectura_04_files/figure-html/l4g3-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%"></p>
 </figure>
 </div>
 </div>
 </div>
 <div class="cell" data-layout-align="center">
-<details open="" class="code-fold">
+<details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r fold-hide number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>e <span class="ot">&lt;-</span> f <span class="sc">-</span> IFf</span>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>e <span class="ot">&lt;-</span> f <span class="sc">-</span> IFf</span>
 <span id="cb9-2"><a href="#cb9-2"></a></span>
 <span id="cb9-3"><a href="#cb9-3"></a>xmax <span class="ot">&lt;-</span> <span class="fu">max</span>( <span class="fu">abs</span>( e ) )</span>
 <span id="cb9-4"><a href="#cb9-4"></a>xbrk <span class="ot">&lt;-</span> <span class="fu">seq</span>( <span class="sc">-</span>xmax, xmax, <span class="at">length =</span> <span class="dv">9</span> )</span>
@@ -1904,7 +1908,7 @@ P( X \geq \rho \E[ X ] ) \geq ( 1 - \rho )^2 \frac{\E[ X ]^2}{\E[ X^2 ]}
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="lectura_04_files/figure-html/l4g5-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%"></p>
+<p><img src="lectura_04_files/figure-html/l4g4-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%"></p>
 </figure>
 </div>
 </div>
@@ -3671,9 +3675,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb10-1203"><a href="#cb10-1203"></a></span>
 <span id="cb10-1204"><a href="#cb10-1204"></a><span class="in">```{r l4t1}</span></span>
 <span id="cb10-1205"><a href="#cb10-1205"></a><span class="in">#| echo: true</span></span>
-<span id="cb10-1206"><a href="#cb10-1206"></a><span class="in">#| results: asis</span></span>
-<span id="cb10-1207"><a href="#cb10-1207"></a><span class="in">#| out.width: '100%'</span></span>
-<span id="cb10-1208"><a href="#cb10-1208"></a><span class="in">#| class.source: 'fold-hide'</span></span>
+<span id="cb10-1206"><a href="#cb10-1206"></a><span class="in">#| out-width: '100%'</span></span>
+<span id="cb10-1207"><a href="#cb10-1207"></a><span class="in">#| code-fold: true</span></span>
+<span id="cb10-1208"><a href="#cb10-1208"></a></span>
 <span id="cb10-1209"><a href="#cb10-1209"></a><span class="in">dt &lt;- data.table( delta = delta, e, n, d = 8 * n / 1024^3 )</span></span>
 <span id="cb10-1210"><a href="#cb10-1210"></a><span class="in">dt %&gt;%</span></span>
 <span id="cb10-1211"><a href="#cb10-1211"></a><span class="in">  kable(</span></span>
@@ -3719,11 +3723,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb10-1251"><a href="#cb10-1251"></a><span class="in">D &lt;- sapply( FSn, FUN = function( Fn ) max( abs( Fn - phi ) ) )</span></span>
 <span id="cb10-1252"><a href="#cb10-1252"></a><span class="in">```</span></span>
 <span id="cb10-1253"><a href="#cb10-1253"></a></span>
-<span id="cb10-1254"><a href="#cb10-1254"></a><span class="in">```{r l4g2}</span></span>
+<span id="cb10-1254"><a href="#cb10-1254"></a><span class="in">```{r l4g1}</span></span>
 <span id="cb10-1255"><a href="#cb10-1255"></a><span class="in">#| warning: false</span></span>
-<span id="cb10-1256"><a href="#cb10-1256"></a><span class="in">#| out.width: '80%'</span></span>
-<span id="cb10-1257"><a href="#cb10-1257"></a><span class="in">#| fig.align: 'center'</span></span>
-<span id="cb10-1258"><a href="#cb10-1258"></a><span class="in">#| class.source: 'fold-hide'</span></span>
+<span id="cb10-1256"><a href="#cb10-1256"></a><span class="in">#| out-width: '80%'</span></span>
+<span id="cb10-1257"><a href="#cb10-1257"></a><span class="in">#| fig-align: center</span></span>
+<span id="cb10-1258"><a href="#cb10-1258"></a><span class="in">#| code-fold: true</span></span>
 <span id="cb10-1259"><a href="#cb10-1259"></a><span class="in">plt &lt;- ggplot() +</span></span>
 <span id="cb10-1260"><a href="#cb10-1260"></a><span class="in">  geom_line( aes( x = 1:n, y = D ), colour = 'darkred', linewidth = 0.5 ) + </span></span>
 <span id="cb10-1261"><a href="#cb10-1261"></a><span class="in">  scale_x_continuous( breaks = seq( 0, n, 500 ), limits = c( 1, n ), expand = c( 0, 0 ) ) +</span></span>
@@ -3734,11 +3738,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb10-1266"><a href="#cb10-1266"></a><span class="in">plot( plt )</span></span>
 <span id="cb10-1267"><a href="#cb10-1267"></a><span class="in">```</span></span>
 <span id="cb10-1268"><a href="#cb10-1268"></a></span>
-<span id="cb10-1269"><a href="#cb10-1269"></a><span class="in">```{r l4g3}</span></span>
+<span id="cb10-1269"><a href="#cb10-1269"></a><span class="in">```{r l4g2}</span></span>
 <span id="cb10-1270"><a href="#cb10-1270"></a><span class="in">#| warning: false</span></span>
-<span id="cb10-1271"><a href="#cb10-1271"></a><span class="in">#| out.width: '80%'</span></span>
-<span id="cb10-1272"><a href="#cb10-1272"></a><span class="in">#| fig.align: 'center'</span></span>
-<span id="cb10-1273"><a href="#cb10-1273"></a><span class="in">#| class.source: 'fold-hide'</span></span>
+<span id="cb10-1271"><a href="#cb10-1271"></a><span class="in">#| out-width: '80%'</span></span>
+<span id="cb10-1272"><a href="#cb10-1272"></a><span class="in">#| fig-align: center</span></span>
+<span id="cb10-1273"><a href="#cb10-1273"></a><span class="in">#| code-fold: true</span></span>
 <span id="cb10-1274"><a href="#cb10-1274"></a><span class="in">dat &lt;- NULL</span></span>
 <span id="cb10-1275"><a href="#cb10-1275"></a><span class="in">for ( k in 1:n ) {</span></span>
 <span id="cb10-1276"><a href="#cb10-1276"></a><span class="in">  dat &lt;- rbindlist( list( dat, data.table( z = z, n = as.factor( k ), FSn = FSn[[ k ]] ) ) )</span></span>
@@ -3965,164 +3969,172 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb10-1497"><a href="#cb10-1497"></a></span>
 <span id="cb10-1498"><a href="#cb10-1498"></a>Como se puede observar se superponen cada una de las distribuciones la discretización $f_k$ y la </span>
 <span id="cb10-1499"><a href="#cb10-1499"></a>calculada con inversión de la transformada de Fourier discreta.</span>
-<span id="cb10-1500"><a href="#cb10-1500"></a><span class="in">```{r l4g4, warning=FALSE, out.width='80%', fig.align='center', class.source = 'fold-hide'}</span></span>
-<span id="cb10-1501"><a href="#cb10-1501"></a><span class="in">xbrk &lt;- seq( 0, 40, length = 9 )</span></span>
-<span id="cb10-1502"><a href="#cb10-1502"></a><span class="in">xlbl &lt;- formatC( xbrk, digits = 0, format = 'f' )</span></span>
-<span id="cb10-1503"><a href="#cb10-1503"></a><span class="in">xlim &lt;- c( 0, 40 )</span></span>
-<span id="cb10-1504"><a href="#cb10-1504"></a></span>
-<span id="cb10-1505"><a href="#cb10-1505"></a><span class="in">ybrk &lt;- seq( 0, 0.125, length = 10 )</span></span>
-<span id="cb10-1506"><a href="#cb10-1506"></a><span class="in">ylbl &lt;- formatC( ybrk, digits = 3, format = 'f' )</span></span>
-<span id="cb10-1507"><a href="#cb10-1507"></a><span class="in">ylim &lt;- c( 0, 0.125 )</span></span>
+<span id="cb10-1500"><a href="#cb10-1500"></a><span class="in">```{r l4g3}</span></span>
+<span id="cb10-1501"><a href="#cb10-1501"></a><span class="in">#| warning: false</span></span>
+<span id="cb10-1502"><a href="#cb10-1502"></a><span class="in">#| out-width: '80%'</span></span>
+<span id="cb10-1503"><a href="#cb10-1503"></a><span class="in">#| fig-align: center</span></span>
+<span id="cb10-1504"><a href="#cb10-1504"></a><span class="in">#| code-fold: true</span></span>
+<span id="cb10-1505"><a href="#cb10-1505"></a><span class="in">xbrk &lt;- seq( 0, 40, length = 9 )</span></span>
+<span id="cb10-1506"><a href="#cb10-1506"></a><span class="in">xlbl &lt;- formatC( xbrk, digits = 0, format = 'f' )</span></span>
+<span id="cb10-1507"><a href="#cb10-1507"></a><span class="in">xlim &lt;- c( 0, 40 )</span></span>
 <span id="cb10-1508"><a href="#cb10-1508"></a></span>
-<span id="cb10-1509"><a href="#cb10-1509"></a><span class="in">plt &lt;- ggplot() +</span></span>
-<span id="cb10-1510"><a href="#cb10-1510"></a><span class="in">  geom_line( aes( x = x, y = f ), colour = 'darkred', linewidth = 1 ) + </span></span>
-<span id="cb10-1511"><a href="#cb10-1511"></a><span class="in">  geom_point( aes( x = x, y = IFf ), colour = 'olivedrab3', size = 0.25 ) + </span></span>
-<span id="cb10-1512"><a href="#cb10-1512"></a><span class="in">  scale_x_continuous( breaks = xbrk,</span></span>
-<span id="cb10-1513"><a href="#cb10-1513"></a><span class="in">                      labels = xlbl, </span></span>
-<span id="cb10-1514"><a href="#cb10-1514"></a><span class="in">                      limits = xlim, </span></span>
-<span id="cb10-1515"><a href="#cb10-1515"></a><span class="in">                      expand = c( 0, 0 ) ) +</span></span>
-<span id="cb10-1516"><a href="#cb10-1516"></a><span class="in">  scale_y_continuous( breaks = ybrk, </span></span>
-<span id="cb10-1517"><a href="#cb10-1517"></a><span class="in">                      labels = ylbl, </span></span>
-<span id="cb10-1518"><a href="#cb10-1518"></a><span class="in">                      limits = ylim, </span></span>
+<span id="cb10-1509"><a href="#cb10-1509"></a><span class="in">ybrk &lt;- seq( 0, 0.125, length = 10 )</span></span>
+<span id="cb10-1510"><a href="#cb10-1510"></a><span class="in">ylbl &lt;- formatC( ybrk, digits = 3, format = 'f' )</span></span>
+<span id="cb10-1511"><a href="#cb10-1511"></a><span class="in">ylim &lt;- c( 0, 0.125 )</span></span>
+<span id="cb10-1512"><a href="#cb10-1512"></a></span>
+<span id="cb10-1513"><a href="#cb10-1513"></a><span class="in">plt &lt;- ggplot() +</span></span>
+<span id="cb10-1514"><a href="#cb10-1514"></a><span class="in">  geom_line( aes( x = x, y = f ), colour = 'darkred', linewidth = 1 ) + </span></span>
+<span id="cb10-1515"><a href="#cb10-1515"></a><span class="in">  geom_point( aes( x = x, y = IFf ), colour = 'olivedrab3', size = 0.25 ) + </span></span>
+<span id="cb10-1516"><a href="#cb10-1516"></a><span class="in">  scale_x_continuous( breaks = xbrk,</span></span>
+<span id="cb10-1517"><a href="#cb10-1517"></a><span class="in">                      labels = xlbl, </span></span>
+<span id="cb10-1518"><a href="#cb10-1518"></a><span class="in">                      limits = xlim, </span></span>
 <span id="cb10-1519"><a href="#cb10-1519"></a><span class="in">                      expand = c( 0, 0 ) ) +</span></span>
-<span id="cb10-1520"><a href="#cb10-1520"></a><span class="in">  xlab( TeX( "$x$" ) ) + </span></span>
-<span id="cb10-1521"><a href="#cb10-1521"></a><span class="in">  ylab( TeX( "$f(x)$" ) ) + </span></span>
-<span id="cb10-1522"><a href="#cb10-1522"></a><span class="in">  theme_bw()</span></span>
-<span id="cb10-1523"><a href="#cb10-1523"></a><span class="in">plot( plt )</span></span>
-<span id="cb10-1524"><a href="#cb10-1524"></a><span class="in">```</span></span>
-<span id="cb10-1525"><a href="#cb10-1525"></a></span>
-<span id="cb10-1526"><a href="#cb10-1526"></a><span class="in">```{r l4g5, warning=FALSE, out.width='80%', fig.align='center', class.source = 'fold-hide'}</span></span>
-<span id="cb10-1527"><a href="#cb10-1527"></a><span class="in">e &lt;- f - IFf</span></span>
-<span id="cb10-1528"><a href="#cb10-1528"></a></span>
-<span id="cb10-1529"><a href="#cb10-1529"></a><span class="in">xmax &lt;- max( abs( e ) )</span></span>
-<span id="cb10-1530"><a href="#cb10-1530"></a><span class="in">xbrk &lt;- seq( -xmax, xmax, length = 9 )</span></span>
-<span id="cb10-1531"><a href="#cb10-1531"></a><span class="in">xlbl &lt;- formatC( xbrk, digits = 2, format = 'e' )</span></span>
-<span id="cb10-1532"><a href="#cb10-1532"></a><span class="in">xlim &lt;- c( -xmax, xmax )</span></span>
-<span id="cb10-1533"><a href="#cb10-1533"></a></span>
-<span id="cb10-1534"><a href="#cb10-1534"></a><span class="in">plt &lt;- ggplot() +</span></span>
-<span id="cb10-1535"><a href="#cb10-1535"></a><span class="in">  geom_histogram( </span></span>
-<span id="cb10-1536"><a href="#cb10-1536"></a><span class="in">    aes( x = e, y = after_stat( density ) ), </span></span>
-<span id="cb10-1537"><a href="#cb10-1537"></a><span class="in">    fill = 'grey50', </span></span>
-<span id="cb10-1538"><a href="#cb10-1538"></a><span class="in">    colour = 'dodgerblue3', </span></span>
-<span id="cb10-1539"><a href="#cb10-1539"></a><span class="in">    bins = nclass.scott( e ) ) + </span></span>
-<span id="cb10-1540"><a href="#cb10-1540"></a><span class="in">  geom_density() +</span></span>
-<span id="cb10-1541"><a href="#cb10-1541"></a><span class="in">  scale_x_continuous( breaks = xbrk,</span></span>
-<span id="cb10-1542"><a href="#cb10-1542"></a><span class="in">                      labels = xlbl, </span></span>
-<span id="cb10-1543"><a href="#cb10-1543"></a><span class="in">                      limits = xlim, </span></span>
-<span id="cb10-1544"><a href="#cb10-1544"></a><span class="in">                      expand = c( 0, 0 ) ) +</span></span>
-<span id="cb10-1545"><a href="#cb10-1545"></a><span class="in">  scale_y_continuous( labels = label_scientific( digits = 4 ) ) +</span></span>
-<span id="cb10-1546"><a href="#cb10-1546"></a><span class="in">  ylab( TeX( "distribución del error" ) ) + </span></span>
-<span id="cb10-1547"><a href="#cb10-1547"></a><span class="in">  xlab( TeX( "error" ) ) + </span></span>
-<span id="cb10-1548"><a href="#cb10-1548"></a><span class="in">  theme_bw()</span></span>
-<span id="cb10-1549"><a href="#cb10-1549"></a><span class="in">plot( plt )</span></span>
-<span id="cb10-1550"><a href="#cb10-1550"></a><span class="in">```</span></span>
-<span id="cb10-1551"><a href="#cb10-1551"></a></span>
-<span id="cb10-1552"><a href="#cb10-1552"></a><span class="co">&lt;!-------------------------------------------------------------------------------------------------&gt;</span></span>
-<span id="cb10-1553"><a href="#cb10-1553"></a><span class="fu">## Consideraciones financieras</span></span>
-<span id="cb10-1554"><a href="#cb10-1554"></a>Antes de desarrollar el contenido propio del curso, debemos tener en cuenta algunas consideraciones</span>
-<span id="cb10-1555"><a href="#cb10-1555"></a>financieras como las siguientes:</span>
-<span id="cb10-1556"><a href="#cb10-1556"></a></span>
-<span id="cb10-1557"><a href="#cb10-1557"></a><span class="co">&lt;!-------------------------------------------------------------------------------------------------&gt;</span></span>
-<span id="cb10-1558"><a href="#cb10-1558"></a><span class="fu">### Función de actualización o descuento</span></span>
+<span id="cb10-1520"><a href="#cb10-1520"></a><span class="in">  scale_y_continuous( breaks = ybrk, </span></span>
+<span id="cb10-1521"><a href="#cb10-1521"></a><span class="in">                      labels = ylbl, </span></span>
+<span id="cb10-1522"><a href="#cb10-1522"></a><span class="in">                      limits = ylim, </span></span>
+<span id="cb10-1523"><a href="#cb10-1523"></a><span class="in">                      expand = c( 0, 0 ) ) +</span></span>
+<span id="cb10-1524"><a href="#cb10-1524"></a><span class="in">  xlab( TeX( "$x$" ) ) + </span></span>
+<span id="cb10-1525"><a href="#cb10-1525"></a><span class="in">  ylab( TeX( "$f(x)$" ) ) + </span></span>
+<span id="cb10-1526"><a href="#cb10-1526"></a><span class="in">  theme_bw()</span></span>
+<span id="cb10-1527"><a href="#cb10-1527"></a><span class="in">plot( plt )</span></span>
+<span id="cb10-1528"><a href="#cb10-1528"></a><span class="in">```</span></span>
+<span id="cb10-1529"><a href="#cb10-1529"></a></span>
+<span id="cb10-1530"><a href="#cb10-1530"></a><span class="in">```{r l4g4}</span></span>
+<span id="cb10-1531"><a href="#cb10-1531"></a><span class="in">#| warning: false</span></span>
+<span id="cb10-1532"><a href="#cb10-1532"></a><span class="in">#| out-width: '80%'</span></span>
+<span id="cb10-1533"><a href="#cb10-1533"></a><span class="in">#| fig-align: center</span></span>
+<span id="cb10-1534"><a href="#cb10-1534"></a><span class="in">#| code-fold: true</span></span>
+<span id="cb10-1535"><a href="#cb10-1535"></a><span class="in">e &lt;- f - IFf</span></span>
+<span id="cb10-1536"><a href="#cb10-1536"></a></span>
+<span id="cb10-1537"><a href="#cb10-1537"></a><span class="in">xmax &lt;- max( abs( e ) )</span></span>
+<span id="cb10-1538"><a href="#cb10-1538"></a><span class="in">xbrk &lt;- seq( -xmax, xmax, length = 9 )</span></span>
+<span id="cb10-1539"><a href="#cb10-1539"></a><span class="in">xlbl &lt;- formatC( xbrk, digits = 2, format = 'e' )</span></span>
+<span id="cb10-1540"><a href="#cb10-1540"></a><span class="in">xlim &lt;- c( -xmax, xmax )</span></span>
+<span id="cb10-1541"><a href="#cb10-1541"></a></span>
+<span id="cb10-1542"><a href="#cb10-1542"></a><span class="in">plt &lt;- ggplot() +</span></span>
+<span id="cb10-1543"><a href="#cb10-1543"></a><span class="in">  geom_histogram( </span></span>
+<span id="cb10-1544"><a href="#cb10-1544"></a><span class="in">    aes( x = e, y = after_stat( density ) ), </span></span>
+<span id="cb10-1545"><a href="#cb10-1545"></a><span class="in">    fill = 'grey50', </span></span>
+<span id="cb10-1546"><a href="#cb10-1546"></a><span class="in">    colour = 'dodgerblue3', </span></span>
+<span id="cb10-1547"><a href="#cb10-1547"></a><span class="in">    bins = nclass.scott( e ) ) + </span></span>
+<span id="cb10-1548"><a href="#cb10-1548"></a><span class="in">  geom_density() +</span></span>
+<span id="cb10-1549"><a href="#cb10-1549"></a><span class="in">  scale_x_continuous( breaks = xbrk,</span></span>
+<span id="cb10-1550"><a href="#cb10-1550"></a><span class="in">                      labels = xlbl, </span></span>
+<span id="cb10-1551"><a href="#cb10-1551"></a><span class="in">                      limits = xlim, </span></span>
+<span id="cb10-1552"><a href="#cb10-1552"></a><span class="in">                      expand = c( 0, 0 ) ) +</span></span>
+<span id="cb10-1553"><a href="#cb10-1553"></a><span class="in">  scale_y_continuous( labels = label_scientific( digits = 4 ) ) +</span></span>
+<span id="cb10-1554"><a href="#cb10-1554"></a><span class="in">  ylab( TeX( "distribución del error" ) ) + </span></span>
+<span id="cb10-1555"><a href="#cb10-1555"></a><span class="in">  xlab( TeX( "error" ) ) + </span></span>
+<span id="cb10-1556"><a href="#cb10-1556"></a><span class="in">  theme_bw()</span></span>
+<span id="cb10-1557"><a href="#cb10-1557"></a><span class="in">plot( plt )</span></span>
+<span id="cb10-1558"><a href="#cb10-1558"></a><span class="in">```</span></span>
 <span id="cb10-1559"><a href="#cb10-1559"></a></span>
-<span id="cb10-1560"><a href="#cb10-1560"></a>:::: {.thmbox data-latex=""}</span>
-<span id="cb10-1561"><a href="#cb10-1561"></a>::: {.definition #deffact name="Funciones de atualización y capitalización"}</span>
-<span id="cb10-1562"><a href="#cb10-1562"></a>La **función de actualización** de flujos $v: \R \times \R \longrightarrow <span class="co">[</span><span class="ot">0,1</span><span class="co">]</span>$, al</span>
-<span id="cb10-1563"><a href="#cb10-1563"></a>evaluar en $s, t \in \R, s\leq t, v(s,t)$, diremos que actualizamos los flujos que se </span>
-<span id="cb10-1564"><a href="#cb10-1564"></a>producen en el tiempo $t$, valorados desde el tiempo $s$. Además la función de actualización tiene</span>
-<span id="cb10-1565"><a href="#cb10-1565"></a>las siguientes propiedades:</span>
-<span id="cb10-1566"><a href="#cb10-1566"></a></span>
-<span id="cb10-1567"><a href="#cb10-1567"></a><span class="ss">1. </span>Si $s = t, v(s,t) = 1$,</span>
-<span id="cb10-1568"><a href="#cb10-1568"></a></span>
-<span id="cb10-1569"><a href="#cb10-1569"></a><span class="ss">2. </span>Si $s \leq t, v(s,t) \leq 1$,</span>
-<span id="cb10-1570"><a href="#cb10-1570"></a></span>
-<span id="cb10-1571"><a href="#cb10-1571"></a><span class="ss">3. </span>Si $r \leq s \leq t, v( r, s ) v( s, t ) = v( r, t )$.</span>
-<span id="cb10-1572"><a href="#cb10-1572"></a></span>
-<span id="cb10-1573"><a href="#cb10-1573"></a>La **función de capitalización**, es la función $u: \R \times \R \longrightarrow <span class="co">[</span><span class="ot">0,1</span><span class="co">]</span>$,</span>
-<span id="cb10-1574"><a href="#cb10-1574"></a>tal que $u( s, t ) v( s, t ) = 1$.</span>
-<span id="cb10-1575"><a href="#cb10-1575"></a>:::</span>
-<span id="cb10-1576"><a href="#cb10-1576"></a>::::</span>
-<span id="cb10-1577"><a href="#cb10-1577"></a></span>
-<span id="cb10-1578"><a href="#cb10-1578"></a>El caso más particular y sencillo se presenta cuando la función de actualización es generada</span>
-<span id="cb10-1579"><a href="#cb10-1579"></a>por una tasa constante $i \in \R$ en el tiempo, es decir, la función de actualización toma </span>
-<span id="cb10-1580"><a href="#cb10-1580"></a>la forma </span>
-<span id="cb10-1581"><a href="#cb10-1581"></a>$$</span>
-<span id="cb10-1582"><a href="#cb10-1582"></a>v(s,t) = ( 1 + i )^{-(t-s)}</span>
-<span id="cb10-1583"><a href="#cb10-1583"></a>$$</span>
-<span id="cb10-1584"><a href="#cb10-1584"></a></span>
-<span id="cb10-1585"><a href="#cb10-1585"></a><span class="co">&lt;!-------------------------------------------------------------------------------------------------&gt;</span></span>
-<span id="cb10-1586"><a href="#cb10-1586"></a><span class="fu">### Flujos financieros</span></span>
-<span id="cb10-1587"><a href="#cb10-1587"></a>Un flujo financiero discreto $c$ es una serie de valores reales $c(t_1), c(t_2), \cdots, c(t_n)$ </span>
-<span id="cb10-1588"><a href="#cb10-1588"></a>que se producen en un número discreto de tiempos $t_0 &lt; t_1 &lt; \cdots &lt; t_n$. </span>
-<span id="cb10-1589"><a href="#cb10-1589"></a></span>
-<span id="cb10-1590"><a href="#cb10-1590"></a>El **valor presente** de estos flujos, en un tiempo $t \leq t_0$, se lo puede calcular utilizando </span>
-<span id="cb10-1591"><a href="#cb10-1591"></a>precisamente la función de actualización $v$</span>
-<span id="cb10-1592"><a href="#cb10-1592"></a>$$</span>
-<span id="cb10-1593"><a href="#cb10-1593"></a>VP_t( c ) = \sum\limits_{k = 1}^n v( t, t_k )  c( t_k )</span>
-<span id="cb10-1594"><a href="#cb10-1594"></a>$$</span>
-<span id="cb10-1595"><a href="#cb10-1595"></a>cuando $t=0$, se suele solo expresar $VP( c ) = VP_0( c )$.</span>
-<span id="cb10-1596"><a href="#cb10-1596"></a></span>
-<span id="cb10-1597"><a href="#cb10-1597"></a><span class="co">&lt;!-------------------------------------------------------------------------------------------------&gt;</span></span>
-<span id="cb10-1598"><a href="#cb10-1598"></a><span class="fu">### Flujos financieros probables</span></span>
-<span id="cb10-1599"><a href="#cb10-1599"></a>Un flujo financiero discreto $c$ es una serie de valores reales $c(t_1), c(t_2), \cdots, c(t_n)$ </span>
-<span id="cb10-1600"><a href="#cb10-1600"></a>que se producen en un número discreto de tiempos $t_0 &lt; t_1 &lt; \cdots &lt; t_n$. </span>
-<span id="cb10-1601"><a href="#cb10-1601"></a></span>
-<span id="cb10-1602"><a href="#cb10-1602"></a>El **valor actuarial presente** de estos flujos, en un tiempo $t \leq t_0$, se lo puede calcular </span>
-<span id="cb10-1603"><a href="#cb10-1603"></a>utilizando precisamente la función de actualización $v$</span>
-<span id="cb10-1604"><a href="#cb10-1604"></a>$$</span>
-<span id="cb10-1605"><a href="#cb10-1605"></a>VAP_t( c ) = \E\left<span class="co">[</span><span class="ot"> \sum\limits_{k = 1}^n v( t, t_k )  c( t_k ) \right</span><span class="co">]</span></span>
-<span id="cb10-1606"><a href="#cb10-1606"></a>= \sum\limits_{k = 1}^n v( t, t_k ) \E\left<span class="co">[</span><span class="ot"> c( t_k ) \right</span><span class="co">]</span></span>
-<span id="cb10-1607"><a href="#cb10-1607"></a>$$</span>
-<span id="cb10-1608"><a href="#cb10-1608"></a>cuando $t=0$, se suele solo expresar $VAP( c ) = VAP_0( c )$.</span>
+<span id="cb10-1560"><a href="#cb10-1560"></a><span class="co">&lt;!-------------------------------------------------------------------------------------------------&gt;</span></span>
+<span id="cb10-1561"><a href="#cb10-1561"></a><span class="fu">## Consideraciones financieras</span></span>
+<span id="cb10-1562"><a href="#cb10-1562"></a>Antes de desarrollar el contenido propio del curso, debemos tener en cuenta algunas consideraciones</span>
+<span id="cb10-1563"><a href="#cb10-1563"></a>financieras como las siguientes:</span>
+<span id="cb10-1564"><a href="#cb10-1564"></a></span>
+<span id="cb10-1565"><a href="#cb10-1565"></a><span class="co">&lt;!-------------------------------------------------------------------------------------------------&gt;</span></span>
+<span id="cb10-1566"><a href="#cb10-1566"></a><span class="fu">### Función de actualización o descuento</span></span>
+<span id="cb10-1567"><a href="#cb10-1567"></a></span>
+<span id="cb10-1568"><a href="#cb10-1568"></a>:::: {.thmbox data-latex=""}</span>
+<span id="cb10-1569"><a href="#cb10-1569"></a>::: {.definition #deffact name="Funciones de atualización y capitalización"}</span>
+<span id="cb10-1570"><a href="#cb10-1570"></a>La **función de actualización** de flujos $v: \R \times \R \longrightarrow <span class="co">[</span><span class="ot">0,1</span><span class="co">]</span>$, al</span>
+<span id="cb10-1571"><a href="#cb10-1571"></a>evaluar en $s, t \in \R, s\leq t, v(s,t)$, diremos que actualizamos los flujos que se </span>
+<span id="cb10-1572"><a href="#cb10-1572"></a>producen en el tiempo $t$, valorados desde el tiempo $s$. Además la función de actualización tiene</span>
+<span id="cb10-1573"><a href="#cb10-1573"></a>las siguientes propiedades:</span>
+<span id="cb10-1574"><a href="#cb10-1574"></a></span>
+<span id="cb10-1575"><a href="#cb10-1575"></a><span class="ss">1. </span>Si $s = t, v(s,t) = 1$,</span>
+<span id="cb10-1576"><a href="#cb10-1576"></a></span>
+<span id="cb10-1577"><a href="#cb10-1577"></a><span class="ss">2. </span>Si $s \leq t, v(s,t) \leq 1$,</span>
+<span id="cb10-1578"><a href="#cb10-1578"></a></span>
+<span id="cb10-1579"><a href="#cb10-1579"></a><span class="ss">3. </span>Si $r \leq s \leq t, v( r, s ) v( s, t ) = v( r, t )$.</span>
+<span id="cb10-1580"><a href="#cb10-1580"></a></span>
+<span id="cb10-1581"><a href="#cb10-1581"></a>La **función de capitalización**, es la función $u: \R \times \R \longrightarrow <span class="co">[</span><span class="ot">0,1</span><span class="co">]</span>$,</span>
+<span id="cb10-1582"><a href="#cb10-1582"></a>tal que $u( s, t ) v( s, t ) = 1$.</span>
+<span id="cb10-1583"><a href="#cb10-1583"></a>:::</span>
+<span id="cb10-1584"><a href="#cb10-1584"></a>::::</span>
+<span id="cb10-1585"><a href="#cb10-1585"></a></span>
+<span id="cb10-1586"><a href="#cb10-1586"></a>El caso más particular y sencillo se presenta cuando la función de actualización es generada</span>
+<span id="cb10-1587"><a href="#cb10-1587"></a>por una tasa constante $i \in \R$ en el tiempo, es decir, la función de actualización toma </span>
+<span id="cb10-1588"><a href="#cb10-1588"></a>la forma </span>
+<span id="cb10-1589"><a href="#cb10-1589"></a>$$</span>
+<span id="cb10-1590"><a href="#cb10-1590"></a>v(s,t) = ( 1 + i )^{-(t-s)}</span>
+<span id="cb10-1591"><a href="#cb10-1591"></a>$$</span>
+<span id="cb10-1592"><a href="#cb10-1592"></a></span>
+<span id="cb10-1593"><a href="#cb10-1593"></a><span class="co">&lt;!-------------------------------------------------------------------------------------------------&gt;</span></span>
+<span id="cb10-1594"><a href="#cb10-1594"></a><span class="fu">### Flujos financieros</span></span>
+<span id="cb10-1595"><a href="#cb10-1595"></a>Un flujo financiero discreto $c$ es una serie de valores reales $c(t_1), c(t_2), \cdots, c(t_n)$ </span>
+<span id="cb10-1596"><a href="#cb10-1596"></a>que se producen en un número discreto de tiempos $t_0 &lt; t_1 &lt; \cdots &lt; t_n$. </span>
+<span id="cb10-1597"><a href="#cb10-1597"></a></span>
+<span id="cb10-1598"><a href="#cb10-1598"></a>El **valor presente** de estos flujos, en un tiempo $t \leq t_0$, se lo puede calcular utilizando </span>
+<span id="cb10-1599"><a href="#cb10-1599"></a>precisamente la función de actualización $v$</span>
+<span id="cb10-1600"><a href="#cb10-1600"></a>$$</span>
+<span id="cb10-1601"><a href="#cb10-1601"></a>VP_t( c ) = \sum\limits_{k = 1}^n v( t, t_k )  c( t_k )</span>
+<span id="cb10-1602"><a href="#cb10-1602"></a>$$</span>
+<span id="cb10-1603"><a href="#cb10-1603"></a>cuando $t=0$, se suele solo expresar $VP( c ) = VP_0( c )$.</span>
+<span id="cb10-1604"><a href="#cb10-1604"></a></span>
+<span id="cb10-1605"><a href="#cb10-1605"></a><span class="co">&lt;!-------------------------------------------------------------------------------------------------&gt;</span></span>
+<span id="cb10-1606"><a href="#cb10-1606"></a><span class="fu">### Flujos financieros probables</span></span>
+<span id="cb10-1607"><a href="#cb10-1607"></a>Un flujo financiero discreto $c$ es una serie de valores reales $c(t_1), c(t_2), \cdots, c(t_n)$ </span>
+<span id="cb10-1608"><a href="#cb10-1608"></a>que se producen en un número discreto de tiempos $t_0 &lt; t_1 &lt; \cdots &lt; t_n$. </span>
 <span id="cb10-1609"><a href="#cb10-1609"></a></span>
-<span id="cb10-1610"><a href="#cb10-1610"></a>Si cada $c(t_k)$ es una variable aleatoria discreta</span>
-<span id="cb10-1611"><a href="#cb10-1611"></a>$$</span>
-<span id="cb10-1612"><a href="#cb10-1612"></a>VAP_t( c ) = \sum\limits_{k = 1}^n v( t, t_k ) \E\left<span class="co">[</span><span class="ot"> c( t_k ) \right</span><span class="co">]</span></span>
-<span id="cb10-1613"><a href="#cb10-1613"></a>= \sum\limits_{k = 1}^n \sum\limits_{i=1}^{\infty} v( t, t_k ) c_i( t_k ) p_i( t_k )</span>
-<span id="cb10-1614"><a href="#cb10-1614"></a>$$</span>
-<span id="cb10-1615"><a href="#cb10-1615"></a></span>
-<span id="cb10-1616"><a href="#cb10-1616"></a><span class="co">&lt;!-------------------------------------------------------------------------------------------------&gt;</span></span>
-<span id="cb10-1617"><a href="#cb10-1617"></a><span class="fu">### Equilibrio financiero {#sec:equifin}</span></span>
-<span id="cb10-1618"><a href="#cb10-1618"></a>Se dice que un flujo financiero $c(t_1), c(t_2), \cdots, c(t_n)$ como el anterior, está en </span>
-<span id="cb10-1619"><a href="#cb10-1619"></a>**equilibrio financiero** si:</span>
-<span id="cb10-1620"><a href="#cb10-1620"></a>$$</span>
-<span id="cb10-1621"><a href="#cb10-1621"></a>VP_0( c ) = \sum\limits_{k=0}^{n} v( 0, t_k ) c( t_k ) =  0</span>
+<span id="cb10-1610"><a href="#cb10-1610"></a>El **valor actuarial presente** de estos flujos, en un tiempo $t \leq t_0$, se lo puede calcular </span>
+<span id="cb10-1611"><a href="#cb10-1611"></a>utilizando precisamente la función de actualización $v$</span>
+<span id="cb10-1612"><a href="#cb10-1612"></a>$$</span>
+<span id="cb10-1613"><a href="#cb10-1613"></a>VAP_t( c ) = \E\left<span class="co">[</span><span class="ot"> \sum\limits_{k = 1}^n v( t, t_k )  c( t_k ) \right</span><span class="co">]</span></span>
+<span id="cb10-1614"><a href="#cb10-1614"></a>= \sum\limits_{k = 1}^n v( t, t_k ) \E\left<span class="co">[</span><span class="ot"> c( t_k ) \right</span><span class="co">]</span></span>
+<span id="cb10-1615"><a href="#cb10-1615"></a>$$</span>
+<span id="cb10-1616"><a href="#cb10-1616"></a>cuando $t=0$, se suele solo expresar $VAP( c ) = VAP_0( c )$.</span>
+<span id="cb10-1617"><a href="#cb10-1617"></a></span>
+<span id="cb10-1618"><a href="#cb10-1618"></a>Si cada $c(t_k)$ es una variable aleatoria discreta</span>
+<span id="cb10-1619"><a href="#cb10-1619"></a>$$</span>
+<span id="cb10-1620"><a href="#cb10-1620"></a>VAP_t( c ) = \sum\limits_{k = 1}^n v( t, t_k ) \E\left<span class="co">[</span><span class="ot"> c( t_k ) \right</span><span class="co">]</span></span>
+<span id="cb10-1621"><a href="#cb10-1621"></a>= \sum\limits_{k = 1}^n \sum\limits_{i=1}^{\infty} v( t, t_k ) c_i( t_k ) p_i( t_k )</span>
 <span id="cb10-1622"><a href="#cb10-1622"></a>$$</span>
 <span id="cb10-1623"><a href="#cb10-1623"></a></span>
-<span id="cb10-1624"><a href="#cb10-1624"></a>El equilibrio financiero se mantiene en el tiempo, basta observar que para cualquier instante </span>
-<span id="cb10-1625"><a href="#cb10-1625"></a>$t \geq 0$</span>
-<span id="cb10-1626"><a href="#cb10-1626"></a>$$</span>
-<span id="cb10-1627"><a href="#cb10-1627"></a>\begin{split}</span>
-<span id="cb10-1628"><a href="#cb10-1628"></a>0 &amp; = u( 0, t ) VP_0( c ) <span class="sc">\\</span></span>
-<span id="cb10-1629"><a href="#cb10-1629"></a>&amp; = u( 0, t ) \sum\limits_{k=0}^{n} v( 0, t_k ) c( t_k ) <span class="sc">\\</span></span>
-<span id="cb10-1630"><a href="#cb10-1630"></a>&amp; = \sum\limits_{t_k \leq t} u( 0, t ) v( 0, t_k ) c( t_k ) </span>
-<span id="cb10-1631"><a href="#cb10-1631"></a><span class="ss">+ </span>\sum\limits_{t_k &gt; t} u( 0, t ) v( 0, t_k ) c( t_k ) <span class="sc">\\</span></span>
-<span id="cb10-1632"><a href="#cb10-1632"></a>&amp; = \sum\limits_{t_k \leq t} u( 0, t_k ) u( t_k, t ) v( 0, t_k ) c( t_k ) </span>
-<span id="cb10-1633"><a href="#cb10-1633"></a><span class="ss">+ </span>\sum\limits_{t_k &gt; t} u( 0, t ) v( 0, t ) v( t, t_k ) c( t_k ) <span class="sc">\\</span></span>
-<span id="cb10-1634"><a href="#cb10-1634"></a>&amp; = \sum\limits_{t_k \leq t} u( t_k, t ) c( t_k ) </span>
-<span id="cb10-1635"><a href="#cb10-1635"></a><span class="ss">+ </span>\sum\limits_{t_k &gt; t} v( t, t_k ) c( t_k ) <span class="sc">\\</span></span>
-<span id="cb10-1636"><a href="#cb10-1636"></a>\end{split}</span>
-<span id="cb10-1637"><a href="#cb10-1637"></a>$$</span>
-<span id="cb10-1638"><a href="#cb10-1638"></a></span>
-<span id="cb10-1639"><a href="#cb10-1639"></a>Esto implica que el valor actualizado a cualquier instante $t$ de un flujo financiero $c$ que </span>
-<span id="cb10-1640"><a href="#cb10-1640"></a>está en equilibrio en un inicio, se mantiene también en equilibrio; siempre y cuando se preserve</span>
-<span id="cb10-1641"><a href="#cb10-1641"></a>los flujos y tasas de actualización. A pesar de ser un resultado evidente, en la izquierda tenemos </span>
-<span id="cb10-1642"><a href="#cb10-1642"></a>los  flujos capitalizados hasta el tiempo $t$ y en la derecha tenemos los flujos actualizados al </span>
-<span id="cb10-1643"><a href="#cb10-1643"></a>tiempo $t$. La expresión de la izquierda se conoce como la parte **retrospectiva** y la expresión de </span>
-<span id="cb10-1644"><a href="#cb10-1644"></a>la derecha como la parte **prospectiva**.</span>
-<span id="cb10-1645"><a href="#cb10-1645"></a></span>
-<span id="cb10-1646"><a href="#cb10-1646"></a>En condiciones de equilibrio financiero la parte retrospectiva es igual a menos la parte </span>
-<span id="cb10-1647"><a href="#cb10-1647"></a>prospectiva.</span>
-<span id="cb10-1648"><a href="#cb10-1648"></a>$$</span>
-<span id="cb10-1649"><a href="#cb10-1649"></a>\sum\limits_{t_k \leq t} u( t_k, t ) c( t_k ) = </span>
-<span id="cb10-1650"><a href="#cb10-1650"></a>-\sum\limits_{t_k &gt; t} v( t, t_k ) c( t_k )</span>
-<span id="cb10-1651"><a href="#cb10-1651"></a>$$</span>
-<span id="cb10-1652"><a href="#cb10-1652"></a>algunas veces se considera la parte prospectiva con el signo menos.</span>
+<span id="cb10-1624"><a href="#cb10-1624"></a><span class="co">&lt;!-------------------------------------------------------------------------------------------------&gt;</span></span>
+<span id="cb10-1625"><a href="#cb10-1625"></a><span class="fu">### Equilibrio financiero {#sec:equifin}</span></span>
+<span id="cb10-1626"><a href="#cb10-1626"></a>Se dice que un flujo financiero $c(t_1), c(t_2), \cdots, c(t_n)$ como el anterior, está en </span>
+<span id="cb10-1627"><a href="#cb10-1627"></a>**equilibrio financiero** si:</span>
+<span id="cb10-1628"><a href="#cb10-1628"></a>$$</span>
+<span id="cb10-1629"><a href="#cb10-1629"></a>VP_0( c ) = \sum\limits_{k=0}^{n} v( 0, t_k ) c( t_k ) =  0</span>
+<span id="cb10-1630"><a href="#cb10-1630"></a>$$</span>
+<span id="cb10-1631"><a href="#cb10-1631"></a></span>
+<span id="cb10-1632"><a href="#cb10-1632"></a>El equilibrio financiero se mantiene en el tiempo, basta observar que para cualquier instante </span>
+<span id="cb10-1633"><a href="#cb10-1633"></a>$t \geq 0$</span>
+<span id="cb10-1634"><a href="#cb10-1634"></a>$$</span>
+<span id="cb10-1635"><a href="#cb10-1635"></a>\begin{split}</span>
+<span id="cb10-1636"><a href="#cb10-1636"></a>0 &amp; = u( 0, t ) VP_0( c ) <span class="sc">\\</span></span>
+<span id="cb10-1637"><a href="#cb10-1637"></a>&amp; = u( 0, t ) \sum\limits_{k=0}^{n} v( 0, t_k ) c( t_k ) <span class="sc">\\</span></span>
+<span id="cb10-1638"><a href="#cb10-1638"></a>&amp; = \sum\limits_{t_k \leq t} u( 0, t ) v( 0, t_k ) c( t_k ) </span>
+<span id="cb10-1639"><a href="#cb10-1639"></a><span class="ss">+ </span>\sum\limits_{t_k &gt; t} u( 0, t ) v( 0, t_k ) c( t_k ) <span class="sc">\\</span></span>
+<span id="cb10-1640"><a href="#cb10-1640"></a>&amp; = \sum\limits_{t_k \leq t} u( 0, t_k ) u( t_k, t ) v( 0, t_k ) c( t_k ) </span>
+<span id="cb10-1641"><a href="#cb10-1641"></a><span class="ss">+ </span>\sum\limits_{t_k &gt; t} u( 0, t ) v( 0, t ) v( t, t_k ) c( t_k ) <span class="sc">\\</span></span>
+<span id="cb10-1642"><a href="#cb10-1642"></a>&amp; = \sum\limits_{t_k \leq t} u( t_k, t ) c( t_k ) </span>
+<span id="cb10-1643"><a href="#cb10-1643"></a><span class="ss">+ </span>\sum\limits_{t_k &gt; t} v( t, t_k ) c( t_k ) <span class="sc">\\</span></span>
+<span id="cb10-1644"><a href="#cb10-1644"></a>\end{split}</span>
+<span id="cb10-1645"><a href="#cb10-1645"></a>$$</span>
+<span id="cb10-1646"><a href="#cb10-1646"></a></span>
+<span id="cb10-1647"><a href="#cb10-1647"></a>Esto implica que el valor actualizado a cualquier instante $t$ de un flujo financiero $c$ que </span>
+<span id="cb10-1648"><a href="#cb10-1648"></a>está en equilibrio en un inicio, se mantiene también en equilibrio; siempre y cuando se preserve</span>
+<span id="cb10-1649"><a href="#cb10-1649"></a>los flujos y tasas de actualización. A pesar de ser un resultado evidente, en la izquierda tenemos </span>
+<span id="cb10-1650"><a href="#cb10-1650"></a>los  flujos capitalizados hasta el tiempo $t$ y en la derecha tenemos los flujos actualizados al </span>
+<span id="cb10-1651"><a href="#cb10-1651"></a>tiempo $t$. La expresión de la izquierda se conoce como la parte **retrospectiva** y la expresión de </span>
+<span id="cb10-1652"><a href="#cb10-1652"></a>la derecha como la parte **prospectiva**.</span>
 <span id="cb10-1653"><a href="#cb10-1653"></a></span>
-<span id="cb10-1654"><a href="#cb10-1654"></a><span class="in">```{r l4end}</span></span>
-<span id="cb10-1655"><a href="#cb10-1655"></a><span class="in">#| echo: false</span></span>
-<span id="cb10-1656"><a href="#cb10-1656"></a><span class="in">rm( list = ls()[ ls() != 'def.chunk.hook' ] )</span></span>
-<span id="cb10-1657"><a href="#cb10-1657"></a><span class="in">```</span></span>
+<span id="cb10-1654"><a href="#cb10-1654"></a>En condiciones de equilibrio financiero la parte retrospectiva es igual a menos la parte </span>
+<span id="cb10-1655"><a href="#cb10-1655"></a>prospectiva.</span>
+<span id="cb10-1656"><a href="#cb10-1656"></a>$$</span>
+<span id="cb10-1657"><a href="#cb10-1657"></a>\sum\limits_{t_k \leq t} u( t_k, t ) c( t_k ) = </span>
+<span id="cb10-1658"><a href="#cb10-1658"></a>-\sum\limits_{t_k &gt; t} v( t, t_k ) c( t_k )</span>
+<span id="cb10-1659"><a href="#cb10-1659"></a>$$</span>
+<span id="cb10-1660"><a href="#cb10-1660"></a>algunas veces se considera la parte prospectiva con el signo menos.</span>
+<span id="cb10-1661"><a href="#cb10-1661"></a></span>
+<span id="cb10-1662"><a href="#cb10-1662"></a><span class="in">```{r l4end}</span></span>
+<span id="cb10-1663"><a href="#cb10-1663"></a><span class="in">#| echo: false</span></span>
+<span id="cb10-1664"><a href="#cb10-1664"></a><span class="in">rm( list = ls()[ ls() != 'def.chunk.hook' ] )</span></span>
+<span id="cb10-1665"><a href="#cb10-1665"></a><span class="in">```</span></span>
 </code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
