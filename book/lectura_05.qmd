@@ -41,7 +41,7 @@ v <- 1:n * p[ 2:(n + 1) ] / p[ 1:n ]
 
 ```{r l5g1}
 #| warning: false
-#| out-width: '80%'
+#| out-width: '70%'
 #| fig-align: center
 #| code-fold: true
 plt <- ggplot() +
@@ -81,7 +81,7 @@ v <- 1:n * p[ 2:(n + 1) ] / p[ 1:n ]
 
 ```{r l5g2}
 #| warning: false
-#| out-width: '80%'
+#| out-width: '70%'
 #| fig-align: center
 #| code-fold: true
 plt <- ggplot() +
@@ -126,7 +126,7 @@ v <- 1:n * p[ 2:(n + 1) ] / p[ 1:n ]
 
 ```{r l5g3}
 #| warning: false
-#| out-width: '80%'
+#| out-width: '70%'
 #| fig-align: center
 #| code-fold: true
 plt <- ggplot() +
@@ -239,7 +239,7 @@ conteo %>%
 
 ```{r l5g4}
 #| warning: false
-#| out-width: '80%'
+#| out-width: '70%'
 #| fig-align: center
 #| code-fold: true
 plt <- ggplot() +

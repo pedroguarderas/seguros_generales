@@ -1248,7 +1248,7 @@ D <- sapply( FSn, FUN = function( Fn ) max( abs( Fn - phi ) ) )
 
 ```{r l4g1}
 #| warning: false
-#| out-width: '80%'
+#| out-width: '70%'
 #| fig-align: center
 #| code-fold: true
 plt <- ggplot() +
@@ -1263,7 +1263,7 @@ plot( plt )
 
 ```{r l4g2}
 #| warning: false
-#| out-width: '80%'
+#| out-width: '70%'
 #| fig-align: center
 #| code-fold: true
 dat <- NULL
@@ -1494,7 +1494,7 @@ Como se puede observar se superponen cada una de las distribuciones la discretiz
 calculada con inversión de la transformada de Fourier discreta.
 ```{r l4g3}
 #| warning: false
-#| out-width: '80%'
+#| out-width: '70%'
 #| fig-align: center
 #| code-fold: true
 xbrk <- seq( 0, 40, length = 9 )
@@ -1524,7 +1524,7 @@ plot( plt )
 
 ```{r l4g4}
 #| warning: false
-#| out-width: '80%'
+#| out-width: '70%'
 #| fig-align: center
 #| code-fold: true
 e <- f - IFf

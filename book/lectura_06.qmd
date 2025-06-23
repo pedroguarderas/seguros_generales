@@ -259,7 +259,7 @@ Fms <- sapply( s, FUN = Fm )
 
 ```{r l6g1}
 #| warning: false
-#| out-width: '80%'
+#| out-width: '70%'
 #| fig-align: center
 #| code-fold: true
 smax <- 2.0e5
@@ -739,7 +739,7 @@ siniestros $n$ se disminuye el rango de la acotación, proporcionando así una m
 distribución de los reclamos totales $S$.
 ```{r l6g2}
 #| warning: false
-#| out-width: '80%'
+#| out-width: '70%'
 #| fig-align: center
 #| code-fold: true
 ylim <- c( 0, 1 )
@@ -836,7 +836,7 @@ F_Z( z ) = \mathbf{1}_{[0,+\infty)}( z ) F_X( z + d )
 $$
 ```{r l6g3}
 #| warning: false
-#| out-width: '80%'
+#| out-width: '70%'
 #| fig-align: center
 #| code-fold: true
 D <- function( x, d ) return( max( x - d, 0 ) )
@@ -886,7 +886,7 @@ F_Z( z ) = \mathbf{1}_{(-\infty,M)}( z ) F_X( z ) + \mathbf{1}_{[M,+\infty)}( z 
 $$
 ```{r l6g4}
 #| warning: false
-#| out-width: '80%'
+#| out-width: '70%'
 #| fig-align: center
 #| code-fold: true
 D <- function( x, M ) return( min( x, M ) )
@@ -934,7 +934,7 @@ F_Z( z ) = \mathbf{1}_{[0,M)}( z ) F_X( z + d ) + \mathbf{1}_{[M,+\infty)}( z )
 $$
 ```{r l6g5}
 #| warning: false
-#| out-width: '80%'
+#| out-width: '70%'
 #| fig-align: center
 #| code-fold: true
 D <- function( x, M ) return( min( max( x - d ), M ) )
@@ -1078,7 +1078,7 @@ histogramas, uno correspondiente a los reclamos totales sin aplicar el deducible
 el histograma de los reclamos totales aplicados el deducible.
 ```{r l6g6}
 #| warning: false
-#| out-width: '80%'
+#| out-width: '70%'
 #| fig-align: center
 #| code-fold: true
 smax <- lambda * M
@@ -1197,7 +1197,7 @@ FeDs <- sapply( s, FUN = FeDS )
 
 ```{r l6g7}
 #| warning: false
-#| out-width: '80%'
+#| out-width: '70%'
 #| fig-align: center
 #| code-fold: true
 Smax <- ESmax
@@ -1324,7 +1324,7 @@ Además, el algoritmo solo es válido cuando el conteo de siniestros pertenece a
 de distribuciones $(a,b,0)$.
 ```{r l6g8}
 #| warning: false
-#| out-width: '80%'
+#| out-width: '70%'
 #| fig-align: center
 #| code-fold: true
 fmax <- 0.0007
@@ -1349,7 +1349,7 @@ plot( plt )
 
 ```{r l6g9}
 #| warning: false
-#| out-width: '80%'
+#| out-width: '70%'
 #| fig-align: center
 #| code-fold: true
 e <- cumsum( fS[ -1 ] * ds ) - ecdf( S )( sg[ -1 ] )
@@ -1439,7 +1439,7 @@ Fs <- sapply( s, FUN = function( sk ) pgamma( sk, shape = sum( alpha ), scale = 
 
 ```{r l6g10}
 #| warning: false
-#| out-width: '80%'
+#| out-width: '70%'
 #| fig-align: center
 #| code-fold: true
 plt <- ggplot() +
@@ -1457,7 +1457,7 @@ algoritmo de estimación de la densidad hay que realizarle algún ajuste o en su
 la precisión numérica.
 ```{r l6g11}
 #| warning: false
-#| out-width: '80%'
+#| out-width: '70%'
 #| fig-align: center
 #| code-fold: true
 plt <- ggplot() +
@@ -1472,7 +1472,7 @@ plot( plt )
 
 ```{r l6g12}
 #| warning: false
-#| out-width: '80%'
+#| out-width: '70%'
 #| fig-align: center
 #| code-fold: true
 e <- fS - fs
@@ -1537,7 +1537,7 @@ S <- sapply( X, FUN = function( x ) sum( x, na.rm = TRUE ) )
 
 ```{r l6g13}
 #| warning: false
-#| out-width: '80%'
+#| out-width: '70%'
 #| fig-align: center
 #| code-fold: true
 fmax <- 0.0007
@@ -1563,7 +1563,7 @@ plot( plt )
 
 ```{r l6g14}
 #| warning: false
-#| out.width: '80%'
+#| out.width: '70%'
 #| fig.align: 'center'
 #| class.source: 'fold-hide'
 e <- cumsum( fS[ -1 ] * diff( sg ) ) - ecdf( S )( sg[-1] )
@@ -1899,7 +1899,7 @@ El gráfico a continuación muestra el comportamiento del indicador $v_n = n \fr
 para cada uno de los grupos $g$ de riesgo.
 ```{r l6g15}
 #| warning: false
-#| out-width: '80%'
+#| out-width: '70%'
 #| fig-align: center
 #| code-fold: true
 plt <- ggplot( ) +
@@ -2015,7 +2015,7 @@ Los histogramas a continuación muestran como se distribuyen los reclamos ya cen
 grupos de riesgo.
 ```{r l6g16}
 #| warning: false
-#| out-width: '80%'
+#| out-width: '70%'
 #| fig-align: center
 #| code-fold: true
 xlim <- c( 0, 1e3 )
@@ -2587,7 +2587,7 @@ En el gráfico a continuación presentamos todos los procesos de conteo $N_{i}$ 
 esperarse son funciones de escalera, siempre crecientes, que toman solo valores positivos.
 ```{r l6g17}
 #| warning: false
-#| out-width: '80%'
+#| out-width: '70%'
 #| fig-align: center
 #| code-fold: true
 Sord <- order( sapply( 1:m, FUN = function( j ) last( S[[j]] ) ) )
@@ -2625,7 +2625,7 @@ reclamos, conforme avanza el tiempo. De igual manera los procesos $S_i$ son func
 siempre crecientes, con saltos correspondientes a los reclamos individuales.
 ```{r l6g18}
 #| warning: false
-#| out-width: '80%'
+#| out-width: '70%'
 #| fig-align: center
 #| code-fold: true
 Sqmax <- quantile( sapply( S, FUN = function( Si ) last( Si ) ), probs = 0.99 )
@@ -2663,7 +2663,7 @@ $F_{m,l}$. Se puede observar que conforme avanza el tiempo, aumenta la probabili
 valores mayores del proceso $S$ correspondiente al total de reclamos.
 ```{r l6g19}
 #| warning: false
-#| out-width: '80%'
+#| out-width: '70%'
 #| fig-align: center
 #| code-fold: true
 FeSdat <- NULL

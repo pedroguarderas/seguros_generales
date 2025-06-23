@@ -324,7 +324,7 @@ TVaRX <- sapply(
 
 ```{r l7g1}
 #| warning: false
-#| out-width: '80%'
+#| out-width: '70%'
 #| fig-align: center
 #| code-fold: true
 plt <- ggplot() +
