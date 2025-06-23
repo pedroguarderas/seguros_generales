@@ -1,0 +1,131 @@
+<!------------------------------------------------------------------------------------------------->
+# Preliminares
+
+<!------------------------------------------------------------------------------------------------->
+## Notación matemática
+
+1. $\N$ el conjunto de los números naturales $\N = \{0,1,2,\ldots,\}$
+
+2. $\N^*$ el conjunto de los números naturales positivos $\N^* = \N \setminus \{0\} = \{1,2,3,\ldots,\}$
+
+3. $\Z$ el conjunto de los números enteros, $\Z = \{\ldots,-2,-1,0,1,2, \ldots \}$
+
+4. $\R$ el conjunto de los números reales
+
+5. $\R_+$ el conjunto de los números reales no negativos $\R_+ = \{ x \in \R \mid x \geq 0 \}$
+
+6. $\C$ el conjunto de los números complejos, $\C = \R \oplus i \R$
+
+7. $\overline{\R} = \R \cup \{ +\infty \} \cup \{ -\infty \}$ el conjunto de los 
+reales extendido incluyendo los infinitos
+
+8. $x \approx y$ indica que el valor $y$ es aproximado al valor $x$
+
+9. $f: X \longrightarrow Y$ la función que toma valores en $X$ y entrega valores en $Y$
+
+10. $\sum\limits_{k=0}^n x_k$ es la suma de los elementos $x_0,\ldots,x_n$ de una lista
+
+11. $[ a, b ] = \left\{ x \in \R \mid x \geq a \land x \leq b \right\}$ intervalo cerrado para
+cualquier $a,b \in \overline{\R}$
+
+12. $(a,b) = \left\{ x \in \R \mid x > a \land x < b \right\}$ intervalo abierto para 
+cualquier $a,b \in \overline{\R}$
+
+13. $\{x_n\}_{n\in\N} = \left\{ x_n \in X \mid n \in \N \right\}$ secuencia en 
+el conjunto $X$, no es más que una función de $\N$ con valores en $X$
+
+14. $\underset{x \rightarrow y}{\lim} f(x) = a$ límite de la función $f(x)$ cuando $x$ tiende a $y$.
+
+15. $\inf A$ es la mayor de las cotas inferiores de $A$.
+
+16. $\sup A$ es la menor de las cotas superiores de $A$.
+
+17. $\Dif f$ conjunto de puntos donde la función $f$ es diferenciable.
+
+
+<!------------------------------------------------------------------------------------------------->
+## Consideraciones de programación en R
+
+### Opciones usuales
+
+```{r}
+#| warning: false
+options( scipen = 9999 )
+options( stringsAsFactors = FALSE )
+```
+
+<!------------------------------------------------------------------------------------------------->
+### Paquetes usuales
+
+```{r}
+#| warning: false
+library( actuar )
+library( data.table )
+library( fExtremes )
+library( fitdistrplus )
+library( ggplot2 )
+library( googledrive )
+library( kableExtra )
+library( knitr )
+library( latex2exp )
+library( lubridate )
+library( openxlsx )
+library( readxl )
+library( rmarkdown )
+library( shiny )
+library( wesanderson )
+library( dplyr )
+```
+
+<!------------------------------------------------------------------------------------------------->
+### Estructuras básicas
+
+Para definir una variable utilizamos el operador de asignación `<-`, también se puede utilizar `=`.
+
+Un **vector** se define con la función de concatenación `c`
+```{r}
+x <- c( 1, 2, 3 )
+print( x )
+```
+
+También, se puede guardar los elementos en una **lista**
+```{r}
+x <- list( 1, 2, 3 )
+print( x )
+```
+
+Los elementos de las listas se pueden guardar con nombres.
+```{r}
+x <- list( 'a' = 1, 'b' = 2, 'c' = 3 )
+print( x )
+x[[ 'b' ]]
+```
+
+Una **función** se define con la sentencia `function`
+```{r}
+f <- function( t ) {
+  return( t^2 )
+}
+```
+
+Si buscamos aplicar una función sobre un vector, podemos utilizar `sapply`
+```{r}
+y <- sapply( x, FUN = f )
+print( y )
+```
+
+```{r}
+z <- lapply( x, FUN = f )
+print( z )
+```
+
+Para muchas tareas que están relacionadas con el manejo de datos, podemos utilizar las 
+funcionalidades del paquete de R, `data.table`. Para trabajar con fechas recomendamos utilizar
+el paquete `lubridate`. Para trabajar con distribuciones de probabilidad que se utilizan para 
+modelar valores extremos utilizamos `fExtremes`. Para varias funcionalidades asociadas a la 
+estimación de modelos de pérdida utilizamos `actuar`.
+
+```{r}
+#| echo: false
+# rm( list = ls()[ ls() != 'def.chunk.hook' ] )
+```

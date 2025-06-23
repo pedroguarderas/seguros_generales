@@ -1,0 +1,87 @@
+%---------------------------------------------------------------------------------------------------
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+
+\usepackage[spanish]{babel}
+\usepackage{csquotes}
+\usepackage[top=2cm, bottom=2cm, left=3cm, right=2cm, includeheadfoot,bindingoffset=0cm]{geometry}
+  
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+\usepackage{newpxtext,newpxmath}
+\usepackage{mathrsfs}
+
+\usepackage[colorlinks = true, linkcolor = linkcol, urlcolor = urlcol, citecolor = citecol,
+  linktoc = page]{hyperref}
+\usepackage{memhfixc}
+\usepackage{float}
+
+% \usepackage[bibencoding=utf8, style=numeric-verb, citestyle=numeric, labelnumber=true,
+%   backend=biber, natbib=false, maxnames=10, sorting=nty, maxcitenames=2, hyperref=true]{biblatex}
+
+% \usepackage[bibencoding=utf8, style=numeric-verb, citestyle=numeric, labelnumber=true, 
+%   natbib=false, maxnames=10, sorting=nty, maxcitenames=2, hyperref=true]{biblatex}
+
+\usepackage{tcolorbox}
+
+% \usepackage{actuarialangle}
+% \usepackage{actuarialsymbol}
+
+% \usepackage{color}
+% \usepackage{colortbl}
+
+% Colours ------------------------------------------------------------------------------------------
+\definecolor{divtext}{rgb}{0.0,0.0,0.0}
+\definecolor{bemphcolor}{rgb}{0.0,0.0,0.0}
+\definecolor{nodecol}{rgb}{0.5,0.8,0.95}
+\definecolor{titcol}{RGB}{ 0, 0, 0 }
+\definecolor{citecol}{RGB}{ 246, 32, 24 }
+\definecolor{linkcol}{RGB}{ 246, 32, 24 }
+\definecolor{urlcol}{RGB}{ 0, 0, 0 }
+% \definecolor{covercol}{RGB}{ 0, 32, 96 }
+% \definecolor{covercol}{RGB}{ 123, 16, 12 }
+\definecolor{covercol}{RGB}{ 255, 215, 0 }
+\definecolor{thmboxcol}{rgb}{ 0.938, 0.99, 0.935 }
+
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Fo}{\mathscr{F}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\V}{\mathbb{V}}
+\newcommand{\D}{\partial}
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\arginf}{\operatorname{arginf}}
+\newcommand{\argsup}{\operatorname{argsup}}
+\newcommand{\DFT}{\operatorname{DFT}}
+\newcommand{\VaR}{\operatorname{VaR}}
+\newcommand{\CVaR}{\operatorname{CVaR}}
+\newcommand{\TVaR}{\operatorname{TVaR}}
+\newcommand{\EVaR}{\operatorname{EVaR}}
+\newcommand{\CTE}{\operatorname{CTE}}
+\newcommand{\ES}{\operatorname{ES}}
+\newcommand{\Dif}{\operatorname{Dif}}
+\newcommand{\VC}{\operatorname{VC}}
+\renewcommand{\Re}{\operatorname{Re}}
+
+\tcbuselibrary{skins,breakable}
+
+\newenvironment{ideabox}
+{\begin{tcolorbox}[enhanced,breakable,width=\textwidth,colback=thmboxcol,colframe=thmboxcol]}
+{\end{tcolorbox}}
+
+\newenvironment{thmbox}
+{\begin{tcolorbox}[enhanced,breakable,width=\textwidth,colback=thmboxcol,colframe=thmboxcol]}
+{\end{tcolorbox}}
+
+\renewcommand{\baselinestretch}{1.5}
+% \linespread{1.5\baselineskip}
+\setlength{\parindent}{0.0mm}
+
+\allowdisplaybreaks
+\sloppy
+
