@@ -16,3 +16,10 @@ book/Matemáticas*.tex
 *.fls
 *.flg
 *.log
+*.toc
+book/_extensions/*
+book/._htmlbook*
+book/._pdfbook*
+book/lectura_*.html
+book/list-of-mathstuff.qmd
+book/*.pdf
