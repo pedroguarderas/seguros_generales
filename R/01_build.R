@@ -33,7 +33,7 @@ suppressPackageStartupMessages( library( lubridate ) )
 suppressPackageStartupMessages( library( nloptr ) )
 suppressPackageStartupMessages( library( openxlsx ) )
 # suppressPackageStartupMessages( library( pscl ) )
-# suppressPackageStartupMessages( library( quarto ) )
+suppressPackageStartupMessages( library( quarto ) )
 # suppressPackageStartupMessages( library( rainbow ) )
 # suppressPackageStartupMessages( library( ranger ) )
 suppressPackageStartupMessages( library( RColorBrewer ) )
@@ -84,17 +84,15 @@ for ( dr in dirs ) {
 rm( dr, dirs )
 
 # Copiando bibliografía ----------------------------------------------------------------------------
-file.copy( '~/Development/bibliography/Bibtex/bibliografia_libros.bib', 'bookdown/bib/biblibros.bib', overwrite = TRUE )
-file.copy( '~/Development/bibliography/Bibtex/bibliografia_paquetes.bib', 'bookdown/bib/bibpaquetes.bib', overwrite = TRUE )
-file.copy( '~/Development/bibliography/Bibtex/bibliografia_articulos.bib', 'bookdown/bib/bibarticulos.bib', overwrite = TRUE )
+file.copy( '~/Development/bibliography/Bibtex/bibliografia_libros.bib', 'book/bib/biblibros.bib', overwrite = TRUE )
+file.copy( '~/Development/bibliography/Bibtex/bibliografia_paquetes.bib', 'book/bib/bibpaquetes.bib', overwrite = TRUE )
+file.copy( '~/Development/bibliography/Bibtex/bibliografia_articulos.bib', 'book/bib/bibarticulos.bib', overwrite = TRUE )
 
 # Genera libro ------------------------------------------------------------------------------------- 
 wd <- paste0( getActiveProject(), '/' )
 setwd( paste0( wd, 'book' ) )
 
 quarto_render( 
-  output_format = 'html',
-  execute_dir = 'docs',
   cache = TRUE,
   cache_refresh = TRUE,
   quiet = FALSE )
