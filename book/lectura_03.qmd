@@ -482,7 +482,7 @@ del siniestro.
 
 
 ## Seguro o apuesta?
-```{r}
+```{r l3t1}
 #| echo: true
 tbd <- data.table(
 matrix( c(

@@ -81,8 +81,8 @@ desarrollaron algoritmos para calcular estos términos @aep_algo, @gaep_algo.
 <!------------------------------------------------------------------------------------------------->
 ## Modelo individual {#modelo_individual}
 
-:::: {.thmbox data-latex=""}
-::: {.definition #dmodind name="Modelo individual"}
+
+::: {.Definition #dmodind title="Modelo individual"}
 En el **modelo individual** de pérdida consideramos que el número de siniestros que se producirán es
 conocido, por ejemplo, puede ser a lo sumo el tamaño de la población asegurada, en tal caso la
 variable aleatoria $N$ pasa a ser una constante, que representaremos por $n$. De esta forma, la
@@ -94,7 +94,7 @@ $$
 La hipótesis más usual que sostiene a este modelo es la indenpendencia entre cada uno de los
 reclamos $X_i$ y $X_j$ para cualquier $1 \leq i \neq j \leq n$.
 :::
-::::
+
 
 El valor esperado de la severidad total $S$ es:
 $$
@@ -238,7 +238,7 @@ partir de la distribución empírica $F_m$ generada con la muestra $\{S_i\}$.
 $$
 F_S( s ) \approx F_m( s ) = \frac{1}{m} \sum\limits_{i=1}^m \mathbf {1}_{(-\infty,s]}( S_i )
 $$
-el resultado de concentración \@ref(thm:ddkw) nos brinda un criterio de convergencia de 
+el resultado de concentración \ref{ddkw} nos brinda un criterio de convergencia de 
 $F_m$ a $F_S$
 
 Para construir $F_m$ en R, se puede utilizar la función ya empaquetada `ecdf` (empirical cumulative
@@ -309,7 +309,7 @@ $$
 Lo bueno de poseer una buena aproximación a la distribución acumulada de una variable aleatoria, es 
 que podemos calcular otros valores de importancia relacionados a la variable aleatoria y no tan solo 
 utilizar medidas de tendencia central. Sin embargo, para que esta aproximación sea útil se requiere 
-reducir el error de probabilidad \@ref(thm:ddkw).
+reducir el error de probabilidad \ref{ddkw}.
 
 ::: {.example #l6ex2}
 Podemos considerar el caso sencillo donde el valor posible de severidad es determinista, es decir
@@ -326,7 +326,7 @@ $$
 = \sum\limits_{i=1}^n \E\left[ M \mathbf{1}_{A_i} \right]
 = M \sum\limits_{i=1}^n P( A_i )
 $$
-la última igualdad resulta de las propiedades de la función indicatriz \@ref(def:indicatriz).
+la última igualdad resulta de las propiedades de la función indicatriz \ref{indicatriz}.
 
 Si en caso todos los $P(A_i) = p$ tienen la misma probabilidad, el valor total esperado de reclamos
 toma la siguiente forma:
@@ -338,8 +338,8 @@ $$
 <!------------------------------------------------------------------------------------------------->
 ## Modelo colectivo {#modelo_colectivo}
 
-:::: {.thmbox data-latex=""}
-::: {.definition #dmodcol name="Modelo colectivo"}
+
+::: {.Definition #dmodcol title="Modelo colectivo"}
 El **modelo colectivo** de riesgo considera un número de reclamos descritos por una variable
 aleatoria discreta $N$. Los reclamos corresponden a un número de pólizas en un periodo específico,
 el valor de cada reclamo $i \in \{1,\ldots,N\}$ está representado por las variables aleatorias $X_i$. 
@@ -356,7 +356,7 @@ $$
 o de forma más compacta, se puede definir $S = \sum\limits_{i=1}^N X_i$, donde se asume que la 
 suma es igual a $0$ si el número de elementos en la suma $N = 0$.
 :::
-::::
+
 
 El valor esperado del total de reclamos $S$, está dado por:
 $$
@@ -618,8 +618,8 @@ reclamos $X_i$, ya que algunos se multiplicaran por $B_i$, la cual solo toma val
 <!------------------------------------------------------------------------------------------------->
 ## Modelos mixtos {#modelos_mixtos}
 
-:::: {.thmbox data-latex=""}
-::: {.definition #dmodmix name="Modelo mixto"}
+
+::: {.Definition #dmodmix title="Modelo mixto"}
 En algunos casos en particular se considera un modelo de agregación que es una mixtura entre el
 modelo individual y el modelo colectivo. Se parte de considerar un número $n$ de unidades 
 aseguradas, donde para cada unidad $i \in \{1, \ldots, n\}$ se considera que puede presentar una 
@@ -631,7 +631,7 @@ S
 = \sum\limits_{i=1}^n \sum\limits_{j=1}^{N_i} X_{i,j}
 $$
 :::
-::::
+
 
 Si en caso todos los reclamos $X_{i,j}$ son idénticamente distribuidos entre unidades aseguradas 
 y reclamos, entonces el reclamo total anterior puede ser visto como un modelo colectivo de pérdida:
@@ -657,18 +657,18 @@ En varias situaciones es difícil determinar la distribución de los reclamos to
 hemos visto no hay una forma explícita sencilla. 
 
 Para tener una primera aproximación a la distribución, se puede utilizar el teorema del límite 
-central \@ref(thm:tlc), para ello se requiere un gran número de elementos en la suma de los reclamos 
-totales $S$. Como ya lo muestra la desigualdad \@ref(thm:beress), la convergencia requiere un número
+central \ref{tlc}, para ello se requiere un gran número de elementos en la suma de los reclamos 
+totales $S$. Como ya lo muestra la desigualdad \ref{beress}, la convergencia requiere un número
 de términos inversamente proporcional al cuadrado del error de aproximación. Sin embargo, si en caso 
 el número de reclamos $n$ no es lo suficientemente grande como para obtener un error de aproximación
 deseado, podemos hacer uso de un resultado más fuerte como la desigualdad de concentración de
-\@ref(thm:beress), la misma no solo implica el teorema del límite central, sino que además 
+\ref{beress}, la misma no solo implica el teorema del límite central, sino que además 
 proporciona una acotación y velocidad de convergencia conforme se aumenta $n$. Esta desigualdad
 puede ser de gran utilidad para tener una acotación de la distribución de los reclamos totales, para
 cualquier valor de $n$.
 
 Más claramente, para el caso del modelo individual, donde $n$ es una constante, el teorema
-\@ref(thm:beress) nos proporciona la siguiente desigualdad:
+\ref{beress} nos proporciona la siguiente desigualdad:
 $$
 \begin{split}
 \underset{u\in \R}{\sup}\left( 1 + |u|^3 \right)\left| P\left( \frac{S - \E[S]}{\sqrt{\V[S]}}  \leq u\right) - \Phi( u ) \right| 
@@ -780,12 +780,12 @@ $\E\left[\left|X - \E[X]\right|^3 \right] < +\infty$, también sea finita.
 En la práctica se suele tomar lo que se conoce como una aproximación por el teorema de límite 
 central.
 
-:::: {.thmbox data-latex=""}
+
 $$
 P( S \leq s )
 \approx \Phi\left( \frac{s - \E[S]}{\sqrt{\V[S]}} \right)
 $$
-::::
+
 
 Esto es válido siempre y cuando la cota del error de aproximación 
 $\frac{C}{\sqrt{n}\left( 1 + \left|\frac{s - \E[S]}{\sqrt{\V[S]}}\right|^3 \right)} \tau$, sea 
@@ -815,13 +815,13 @@ la perspectiva de un asegurado, ¿De qué serviría adquirir una póliza que no 
 siniestros más usuales?, esta no sería una póliza apetecible en el mercado y por otra parte un 
 producto difícil de comercializar.
 
-:::: {.thmbox data-latex=""}
-::: {.definition #ddeducible name="Deducible"}
+
+::: {.Definition #ddeducible title="Deducible"}
 Formalmente, un **deducible** es una función $D : \R \longrightarrow \R$ a valores 
 reales, tal que para todo valor real $x \in \R$, se satisface la siguiente desigualdad:
 $D( x ) \leq x$.
 :::
-::::
+
 
 A continuación presentamos un lista de funciones deducibles más comunes que presenta el mercado:
 
@@ -1592,8 +1592,8 @@ entonces la frecuencia del número de reclamos $N$ será bianual. Si por el cont
 utilizar esta frecuencia para estimar el número de reclamos para pólizas con cobertura anual 
 entonces, es necesario realizar un ajuste acorde.
 
-:::: {.thmbox data-latex=""}
-::: {.definition #der name="Exposición al riesgo"}
+
+::: {.Definition #der title="Exposición al riesgo"}
 Dando algo más de sentido matemático a este razonamiento, a cada póliza podemos asociar su 
 respectiva **exposición al riesgo**, que no es más que el ancho de intervalo dado por la fecha 
 inicial de la póliza, menos la fecha final de la póliza. Usualmente la unidad que su utiliza para 
@@ -1605,7 +1605,7 @@ $$
 ER_i = d( s_i, e_i )
 $$
 :::
-::::
+
 
 Por ejemplo, una buena distancia puede ser
 $$
@@ -1975,6 +1975,7 @@ estimaciones de la frecuencia para cada uno de los grupos. A continuación, pres
 resultados de la estimación para la frecuencia.
 ```{r l6t4}
 #| echo: true
+#| results: asis
 #| out-width: '100%'
 #| code-fold: true
 estim_frec %>%
@@ -1998,7 +1999,7 @@ valores de los reclamos ya vienen censurados, a causa de la aplicación de la fu
 como consecuencia tenemos pérdida de información que no podemos recuperar, por tal razón es de 
 esperar que la función de distribución acumulada de los reclamos deducidos $D(X)$ tenga 
 singularidades. Si buscamos utilizar el método de máxima verosimilitud para la estimación de la 
-mejor distribución, debemos hacer uso de la expresión completa que presentamos en \@ref(eq:loglik). 
+mejor distribución, debemos hacer uso de la expresión completa que presentamos en \ref{eq:loglik}. 
 ```{r l6c21}
 sev_claims <- claims[ , list( policy, id, idc, type, sex, bdate, cdate, deductible, amount, claim ) ]
 sev_claims[ , x := round( interval( bdate, cdate ) / dyears( 1 ), 0 ) ]

@@ -83,38 +83,38 @@ library( dplyr )
 Para definir una variable utilizamos el operador de asignación `<-`, también se puede utilizar `=`.
 
 Un **vector** se define con la función de concatenación `c`
-```{r}
+```{r l2c1}
 x <- c( 1, 2, 3 )
 print( x )
 ```
 
 También, se puede guardar los elementos en una **lista**
-```{r}
+```{r l2c2}
 x <- list( 1, 2, 3 )
 print( x )
 ```
 
 Los elementos de las listas se pueden guardar con nombres.
-```{r}
+```{r l2c3}
 x <- list( 'a' = 1, 'b' = 2, 'c' = 3 )
 print( x )
 x[[ 'b' ]]
 ```
 
 Una **función** se define con la sentencia `function`
-```{r}
+```{r l2c4}
 f <- function( t ) {
   return( t^2 )
 }
 ```
 
 Si buscamos aplicar una función sobre un vector, podemos utilizar `sapply`
-```{r}
+```{r l2c5}
 y <- sapply( x, FUN = f )
 print( y )
 ```
 
-```{r}
+```{r l2c6}
 z <- lapply( x, FUN = f )
 print( z )
 ```
@@ -125,7 +125,7 @@ el paquete `lubridate`. Para trabajar con distribuciones de probabilidad que se 
 modelar valores extremos utilizamos `fExtremes`. Para varias funcionalidades asociadas a la 
 estimación de modelos de pérdida utilizamos `actuar`.
 
-```{r}
+```{r l2end}
 #| echo: false
 # rm( list = ls()[ ls() != 'def.chunk.hook' ] )
 ```

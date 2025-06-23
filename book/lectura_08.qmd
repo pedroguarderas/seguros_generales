@@ -11,8 +11,7 @@ source("_common.R")
 <!------------------------------------------------------------------------------------------------->
 ## Familia exponencial
 
-:::: {.thmbox data-latex=""}
-::: {.definition #dfamexp name="Familia exponencial"}
+::: {.Definition #dfamexp title="Familia exponencial"}
 De forma amplia, un modelo lineal generalizado aprovecha algunas propiedades de la distribución de 
 probabilidad $f_X$ de la variable (vector) aleatoria $X : \Omega \longrightarrow \R^n$ en 
 estudio. Se parte de asumir que $X$ tiene una distribución dentro de la **familia exponencial**, es 
@@ -32,7 +31,6 @@ $$
 f_X( x \mid \theta ) = h( x ) \exp\left( \eta( \theta ) \cdot T( x ) - A( \theta ) \right)
 $$
 :::
-::::
 
 Al tener varias observaciones independientes de la misma variable aleatoria $X_1, \ldots, X_N$,
 su distribución conjunta se puede expresar como:
@@ -123,8 +121,8 @@ $$
 
 <!------------------------------------------------------------------------------------------------->
 ## Modelo lineal generalizado (GLM)
-:::: {.thmbox data-latex=""}
-::: {.definition #dglm name="Modelo lineal generalizado (GLM)"}
+
+::: {.Definition #dglm title="Modelo lineal generalizado (GLM)"}
 Precisamente, un **modelo lineal generalizado** (**GLM** por Generalized Linear Model) busca explotar 
 las propiedades de las variables aleatorias que poseen una densidad de probabilidad dada por alguna 
 de la funciones de la familia exponencial. Para más detalles se puede consultar @mathstat1.
@@ -147,7 +145,7 @@ f_Y( y \mid \theta )
 = h( y ) \exp\left( \eta( g( \beta x ) ) \cdot T( y ) - A( g( \beta x ) ) \right)
 $$
 :::
-::::
+
 
 En la aplicación, el ajuste de un modelo GLM a $N \in \N$ observaciones $y_1, \ldots, y_N$
 de la variable aleatoria $Y$ y sus respectivas variables explicativas $x_1, \ldots, x_N$. Se asume
@@ -182,7 +180,7 @@ $$
 \eta( g( \beta x_i ), \theta_2 ) \cdot T( y_i ) - A( g( \beta x_i ), \theta_2 ) \right)
 $$ 
 
-::: {.example #l8ex1 name="Regresión de Poisson"}
+::: {.example #l8ex1}
 En este caso presentamos el modelo bastante utilizado conocido como regresión de Poisson. En donde 
 suponemos que $N \rightsquigarrow Pois( \lambda( x ) ER( x ) ) = Pois( g( \beta x ) ER( x ) )$
 donde $\lambda$ es el parámetro a estimar en función de las variables explicativas $x$.

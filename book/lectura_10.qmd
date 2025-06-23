@@ -7,8 +7,8 @@
 source("_common.R")
 ```
 
-:::: {.thmbox data-latex=""}
-::: {.definition #dmaxstab  name="Distribución con cola pesada"}
+
+::: {.Definition #dmaxstab  title="Distribución con cola pesada"}
 Una variable aleatoria a valores reales $X$ se dice que tiene su distribución $F$  es de 
 **cola pesada hacia la derecha** si el siguiente límite no es finito.
 $$
@@ -34,8 +34,8 @@ $$
 $$
  
 <!------------------------------------------------------------------------------------------------->
-:::: {.thmbox data-latex=""}
-::: {.theorem #tvalext1  name="Fisher-Tippett-Gnedenko"}
+
+::: {.Theorem #tvalext1  title="Fisher-Tippett-Gnedenko"}
 Si consideramos una secuencia de variables aleatorias $\{X_i\}_{i\in \N}$ las mismas
 son i.i.d, con distribución acumulada $F$. Entonces, si existen dos sucesiones de valores reales 
 $\{a_n\}_{n \in \N}$ y $\{b_n\}_{n \in \N}$, con $a_n > 0$ para cualquier 
@@ -69,8 +69,8 @@ $x < \mu + \frac{\sigma}{|\xi|}$ y $\frac{1}{\xi} < 0$,
 ::::
 
 <!------------------------------------------------------------------------------------------------->
-:::: {.thmbox data-latex=""}
-::: {.theorem #tvalext2 name="Pickands-Balkema-De Haan"}
+
+::: {.Theorem #tvalext2 title="Pickands-Balkema-De Haan"}
 Sea $F_u$ la distribución de exceso asociada a la variable aleatoria $X$ y con umbral de 
 condicionamiento $u > 0$. Entonces, para cualquier $\varepsilon \in \R$ tenemos que 
 $F \in MDA( H )$ para alguna distribución $H = GEV( \mu, \sigma, \varepsilon )$ si y solamente
@@ -85,7 +85,7 @@ $\mu$, $\sigma$ y $u$.
 :::
 ::::
 
-El teorema anterior \@ref(thm:tvalext2) en cierta forma sugiere que si en el límite la distribución de 
+El teorema anterior \ref{tvalext2} en cierta forma sugiere que si en el límite la distribución de 
 exceso a partir de un valor de condicionamiento $u$ cada vez se comporta más como una distribución 
 de generalizada de Pareto. Entonces, la distribución de los máximos que se observen de una muestra
 de la variable aleatoria $X$ tienen un comportamiento que puede ser descrito por una distribución 
@@ -96,7 +96,7 @@ nivel $u$ de los valores observados de reclamos $X_1, \ldots, X_n$, es decir tom
 todos los valores $\{ X_i \mid X_i \geq u \}$, a estos valores realizarles un test de ajuste
 a una distribución de Pareto generalizada $GPD( \nu, \beta, \varepsilon )$, si el test es aceptable
 y no se rechaza la hipótesis nula, entonces tenemos el resultado de aproximación anterior 
-\@ref(thm:tvalext2). Luego se puede simular los reclamos de forma condicional.
+\ref{tvalext2}. Luego se puede simular los reclamos de forma condicional.
 
 Es importante observar antes de continuar que para estudiar los valores extremos de reclamos estos
 no deben haber pasado por alguna deducción, después de aplicar alguna función deducible $D$, sino 
@@ -107,7 +107,7 @@ los cuales es imposible estimar de forma adecuada alguna distribución de valore
 ## Estimación con valores extremos
 
 Para generar un modelo utilizando valores extremos se puede tomar la siguiente aproximación 
-haciendo uso \@ref(thm:tvalext2)
+haciendo uso \ref{tvalext2}
 
 1. Seleccionar un valor de corte $u > 0$.
 

@@ -32,6 +32,9 @@ book:
 bibliography: [ "bib/biblibros.bib", "bib/bibpaquetes.bib", "bib/bibarticulos.bib" ]
 csl: "springer-basic-brackets-no-et-al-alphabetical.csl"
 
+filters:
+  - custom-numbered-blocks
+  
 format: 
   html: 
     theme: default
@@ -65,7 +68,7 @@ format:
     cite-method: biblatex
     biblatexoptions: [ bibencoding=utf8, style=numeric-verb, citestyle=numeric, labelnumber=true,
     backend=biber, natbib=false, maxnames=10, sorting=nty, maxcitenames=2, hyperref=true ]
-    fontsize: 10pt
+    fontsize: 11pt
     keep-tex: true
     toc: true
     toc-depth: 3
@@ -77,3 +80,22 @@ execute:
   cache: true
 
 freeze: auto
+
+custom-numbered-blocks:
+  groups:
+    thmlike:
+      boxstyle: foldbox.simple
+      collapse: false
+      listin: [mathstuff]
+    todos: default  
+  classes:
+    Theorem:
+      group: thmlike
+    Proposition:
+      group: thmlike
+    Corollary:
+      group: thmlike
+    Conjecture:
+      group: thmlike
+    Definition:
+      group: thmlike

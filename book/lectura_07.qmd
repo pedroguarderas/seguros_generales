@@ -24,8 +24,8 @@ desarrollamos a continuación y se lo conoce como medidas de riesgo.
 <!------------------------------------------------------------------------------------------------->
 ## Medidas de riesgo {#medidas_riesgo}
 
-:::: {.thmbox data-latex=""}
-::: {.definition #dmedriskcohe name="Medida de riesgo coherente"}
+
+::: {.Definition #dmedriskcohe title="Medida de riesgo coherente"}
 Una **medida de riesgo coeherente** es una función $\rho: \R \longrightarrow \R$, 
 que satisface la siguientes propiedades:
 
@@ -54,26 +54,26 @@ $$
 \rho( X + Y ) \leq \rho( X ) + \rho( Y )
 $$
 :::
-::::
+
 
 En lo que continúa citamos algunas de las medidas de riesgo usualmente utilizadas.
 
-:::: {.thmbox data-latex=""}
-::: {.definition #dVaR name="Valor en riesgo"}
+
+::: {.Definition #dVaR title="Valor en riesgo"}
 Dada una variable aleatoria a valores reales $X$, el **valor en riesgo** (value at risk) de $X$ al 
 nivel de probabilidad $\alpha \in (0,1)$ está dado por
 $$
 \VaR_{\alpha}( X ) = \inf\left\{ x \in \R \middle| F_X( x ) > \alpha \right\}
 $$
 :::
-::::
 
-:::: {.thmbox data-latex=""}
-::: {.proposition #varinv}
+
+
+::: {.Proposition #varinv}
 Si la función de distribución acumulada $F_X$ es continua, entonces 
 $\VaR_{\alpha}( X ) = F_X^{-1}( \alpha )$.
 :::
-::::
+
 
 Por otra parte, $\VaR_{\alpha}$ para cualquier $\alpha$ no es una medida de riesgo sub-aditiva.
 
@@ -92,18 +92,18 @@ En principio no sabemos si esta aproximación será consistente conforme se aume
 muestra, sin embargo para ello tenemos la siguiente proposición, la cual nos da una certeza al 
 respecto.
 
-:::: {.thmbox data-latex=""}
-::: {.proposition #appoxvar}
+
+::: {.Proposition #appoxvar}
 Si consideramos una familia de variables aleatorias $\{X_n\}_{n\in \N}$ i.i.d con distribución común
 $F$ no necesariamente continua, entonces el percentil empírico de orden $\alpha$, 
 $\xi_{n,\alpha} = F_n^{-1}( \alpha )$, que se puede extraer a partir de las $n$ primeras variables 
 en la muestra converge en probabilidad al valor $\xi_{\alpha} = \VaR_{\alpha}( X )$, correspondiente
 al valor en riesgo.
 :::
-::::
+
 
 :::{.proof}
-Utilizando la versión unilateral de la desigualdad \@ref(thm:ddkw), podemos establecer las 
+Utilizando la versión unilateral de la desigualdad \ref{ddkw}, podemos establecer las 
 siguientes acotaciones
 $$
 \begin{split}
@@ -147,7 +147,7 @@ desea calcular.
 
 Fijamos un valor $\delta > 0$ el cual acota la probabilidad del evento que mide el error de 
 aproximación, i.e. $P\left( \left| \xi_{n,\alpha} - \xi_{\alpha} \right| > \varepsilon \right) \leq \delta$ 
-y tomando en cuenta la desigualdad en \@ref(prp:appoxvar).
+y tomando en cuenta la desigualdad en \ref{appoxvar}.
 $$
 \begin{split}
 2 C e^{-2n \min\left( F( \xi_{\alpha} + \varepsilon ) - \alpha, \alpha - F( \xi_{\alpha} - \varepsilon ) \right)^2 } & \leq \delta \\
@@ -216,15 +216,15 @@ $$
 Como se observa se tendrá que realizar muchas simulaciones más para llegar a tener en probabilidad
 un error de aproximación adecuado.
 
-:::: {.thmbox data-latex=""}
-::: {.definition #dTVaR name="Valor en riesgo en la cola"}
+
+::: {.Definition #dTVaR title="Valor en riesgo en la cola"}
 Dada una variable aleatoria a valores reales $X$, el **valor en riesgo en la cola** 
 (tail value at risk) de $X$ al nivel de probabilidad $\alpha \in (0,1)$ está dado por
 $$
 \TVaR_{\alpha}( X ) = \frac{1}{1-\alpha} \int\limits_{\alpha}^1 \VaR_u( X )\ du
 $$
 :::
-::::
+
 
 Es de notar que si se toma una variable aleatoria uniforme $U \rightsquigarrow U(\alpha,1)$, tenemos 
 que el valor en riesgo en la cola, puede ser expresado como la esperanza.
@@ -232,7 +232,7 @@ $$
 \TVaR_{\alpha}( X ) = \E\left[ \VaR_U( X ) \right]
 $$
 De ahí que se una forma de calcular el valor en riesgo en la cola es utilizando una simulación
-estocástica que aproveche el \@ref(thm:twln). Así se puede generar una muestra $U_1, \ldots, U_m$ de 
+estocástica que aproveche el \ref{twln}. Así se puede generar una muestra $U_1, \ldots, U_m$ de 
 la distribución uniforme $U(\alpha,1)$ y para cada uno de estos valores se calcula por simulación el 
 $\xi_{n,U_1} \approx \VaR_{U_1}( X ), \ldots, \xi_{n,U_n} \approx  \VaR_{U_n}( X )$, luego aproximar
 utilizando la media empírica
@@ -242,35 +242,35 @@ $$
 Pero como ya se mencionó, esta aproximación puede ser realmente costosa en términos 
 computacionales; por tal razón, se requiere utilizar métodos numéricos más eficientes.
 
-:::: {.thmbox data-latex=""}
-::: {.proposition #TVaRcohe name="Coherencia de la medida TVaR"}
+
+::: {.Proposition #TVaRcohe title="Coherencia de la medida TVaR"}
 La medida de riesgo $\TVaR_{\alpha}$ es una medida de riesgo coherente si la variable aleatoria
 sobre la cual se mide es una variable aleatoria continua.
 :::
-::::
 
-:::: {.thmbox data-latex=""}
-::: {.definition #dCTE name="Esperanza condicional en la cola"} 
+
+
+::: {.Definition #dCTE title="Esperanza condicional en la cola"} 
 Dada una variable aleatoria a valores reales $X$, la **esperanza condicional en la cola** 
 (conditional tail expectation) de $X$ al nivel de probabilidad $\alpha \in (0,1)$ está dado por
 $$
 \CTE_{\alpha}( X ) = \E\left[ X \middle| X > \VaR_{\alpha}( X ) \right]
 $$
 :::
-::::
 
-:::: {.thmbox data-latex=""}
-::: {.proposition #eqtvarcte}
+
+
+::: {.Proposition #eqtvarcte}
 Si la función de distribución acumulada $F_X$ de la variable aleatoria $X$ es continua, entonces
 se tiene la siguiente igualdad
 $$
 \CTE_{\alpha}( X ) = \TVaR_{\alpha}( X )
 $$
 :::
-::::
 
-:::: {.thmbox data-latex=""}
-::: {.definition #dCVaR name="Valor en riesgo condicionado"}
+
+
+::: {.Definition #dCVaR title="Valor en riesgo condicionado"}
 Dada una variable aleatoria a valores reales $X$, el **valor en riesgo condicionado** 
 (conditional value at risk) de $X$ al nivel de probabilidad $\alpha \in (0,1)$ está dado por
 $$
@@ -278,33 +278,33 @@ $$
 = \CTE_{\alpha}( X ) - \VaR_{\alpha}( X )
 $$
 :::
-::::
 
-:::: {.thmbox data-latex=""}
-::: {.definition #dES name="Déficit esperado"}
+
+
+::: {.Definition #dES title="Déficit esperado"}
 Dada una variable aleatoria a valores reales $X$, el **déficit esperado** (expected shortfall) de 
 $X$ al nivel de probabilidad $\alpha \in (0,1)$ está dado por
 $$
 \ES_{\alpha}( X ) = \E\left[ \max\left( X - \VaR_{\alpha}( X ), 0 \right) \right]
 $$
 :::
-::::
 
-:::: {.thmbox data-latex=""}
-::: {.definition #dEVaR name="Valor en riesgo entrópico"}
+
+
+::: {.Definition #dEVaR title="Valor en riesgo entrópico"}
 Dada una variable aleatoria a valores reales $X$, el **valor en riesgo entrópico** 
 (entropic value at risk) de $X$ al nivel de probabilidad $\alpha \in (0,1)$ está dado por
 $$
 \EVaR_{\alpha}( X ) = \inf\left\{ \frac{1}{t} \ln\left( \frac{M_X( t )}{1 - \alpha} \right) \middle| t > 0 \right\}
 $$
 :::
-::::
 
-:::: {.thmbox data-latex=""}
-::: {.proposition #EVaRcohe name="Coherencia de la medida EVaR"}
+
+
+::: {.Proposition #EVaRcohe title="Coherencia de la medida EVaR"}
 La medida de riesgo $\EVaR_{\alpha}$ es una medida de riesgo coherente.
 :::
-::::
+
 
 ::: {.example #l7ex2}
 Podemos considerar el caso particular donde todos los reclamos se suponen independientes e 
@@ -376,8 +376,8 @@ viable para la tarificación. Tampoco se toma en cuenta el dinero recibido por l
 en un ramo en particular, ya que esto constituye un nivel más arriba propio del negocio 
 reasegurador.
 
-:::: {.thmbox data-latex=""}
-::: {.definition #dpruin name="Probabilidad de ruina"}
+
+::: {.Definition #dpruin title="Probabilidad de ruina"}
 En términos generales se busca equilibrar el resultado operativo del ramo de negocio $R$ a lo largo 
 de la vida del ramo. El resultado $R$ a su vez está dado por la siguiente relación:
 $$
@@ -411,9 +411,9 @@ $$
 P( R < 0 ) < \alpha
 $$
 :::
-::::
 
-Muchas de las veces se parte del principio de equilibrio financiero \@ref(sec:equifin), donde 
+
+Muchas de las veces se parte del principio de equilibrio financiero \ref{equifin}, donde 
 se busca la igualdad $\E[R] = 0$, la misma implica la siguiente relación:
 $$
 \begin{split}
@@ -455,8 +455,8 @@ $$
 = \Pi - \E[S] - G - r \left( \rho(S) - \E[S] \right)
 $$
 
-:::: {.thmbox data-latex=""}
-::: {.definition #dpricing name="Tarificación (Pricing)"}
+
+::: {.Definition #dpricing title="Tarificación (Pricing)"}
 Lo que se busca es evitar la ruina y por tanto se busca cubrirse ante el evento $R < 0$, desde una 
 perspectiva probabilista esto se puede realizar seleccionando un nivel de cobertura $\alpha > 0$, 
 que acote la probabilidad del evento de ruina.
@@ -472,7 +472,7 @@ libres, de ahí resulta un margen que permite seleccionar la prima más óptima 
 seguro, así como también optimizar los gastos $G$. Este proceso de selección es precisamente lo que 
 llamamos en este contexto como **tarificación** (pricing).
 :::
-::::
+
 
 Razonando un poco más al respecto, si asumimos que se dispone de la distribución acumulada $F_S$
 de $S$, se puede obtener las siguientes expresiones:
