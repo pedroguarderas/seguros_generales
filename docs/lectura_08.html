@@ -1,0 +1,1745 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.42">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Leonardo Vélez y Pedro Guarderas">
+
+<title>9&nbsp; Modelos lineales generalizados (GLM) – Matemáticas Actuariales para Seguros Generales</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./lectura_09.html" rel="next">
+<link href="./lectura_07.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-257450a62f84a916ff723c9590a8c97c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script>
+window.MathJax = {
+  tex: {
+    macros: {
+      R: "\\mathbb{R}",
+      C: "\\mathbb{C}",
+      N: "\\mathbb{N}",
+      Z: "\\mathbb{Z}",
+      Fo: "\\mathscr{F}",
+      E: "\\mathbb{E}",
+      V: "\\mathbb{V}",
+      D: "\\partial",
+      F: "\\mathcal{F}",
+      arginf: "\\operatorname{arginf}",
+      argsup: "\\operatorname{argsup}",
+      DFT: "\\operatorname{DFT}",
+      VaR: "\\operatorname{VaR}",
+      CVaR: "\\operatorname{CVaR}",
+      TVaR: "\\operatorname{TVaR}",
+      EVaR: "\\operatorname{EVaR}",
+      CTE: "\\operatorname{CTE}",
+      ES: "\\operatorname{ES}",
+      Re: "\\operatorname{Re}",
+      Dif: "\\operatorname{Dif}",
+      VC: "\\operatorname{VC}"
+    }
+  }
+};
+</script>
+<script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./lectura_08.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Modelos lineales generalizados (GLM)</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Matemáticas Actuariales para Seguros Generales</a> 
+        <div class="sidebar-tools-main tools-wide">
+    <a href="https://github.com/pedroguarderas/seguros_generales" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <a href="./Matemáticas-Actuariales-para-Seguros-Generales.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">index.html</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lectura_01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Materia</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lectura_02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Preliminares</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lectura_03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Introducción a las operaciones de seguros</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lectura_04.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Probabilidad y Estadística</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lectura_05.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Distribuciones</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lectura_06.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Modelos de pérdida agregada</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lectura_07.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Tarificación</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lectura_08.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Modelos lineales generalizados (GLM)</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lectura_09.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Reservas técnicas</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lectura_10.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Estimación de valores extremos</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lectura_11.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Bibliografía</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#familia-exponencial" id="toc-familia-exponencial" class="nav-link active" data-scroll-target="#familia-exponencial"><span class="header-section-number">9.1</span> Familia exponencial</a></li>
+  <li><a href="#modelo-lineal-generalizado-glm" id="toc-modelo-lineal-generalizado-glm" class="nav-link" data-scroll-target="#modelo-lineal-generalizado-glm"><span class="header-section-number">9.2</span> Modelo lineal generalizado (GLM)</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/pedroguarderas/seguros_generales/edit/main/lectura_08.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/pedroguarderas/seguros_generales/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title"><span id="modelos_glm" class="quarto-section-identifier"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Modelos lineales generalizados (GLM)</span></span></h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<!------------------------------------------------------------------------------------------------->
+<!------------------------------------------------------------------------------------------------->
+<section id="familia-exponencial" class="level2" data-number="9.1">
+<h2 data-number="9.1" class="anchored" data-anchor-id="familia-exponencial"><span class="header-section-number">9.1</span> Familia exponencial</h2>
+<div class="thmbox">
+<div id="dfamexp" class="definition" name="Familia exponencial">
+<p>De forma amplia, un modelo lineal generalizado aprovecha algunas propiedades de la distribución de probabilidad <span class="math inline">\(f_X\)</span> de la variable (vector) aleatoria <span class="math inline">\(X : \Omega \longrightarrow \R^n\)</span> en estudio. Se parte de asumir que <span class="math inline">\(X\)</span> tiene una distribución dentro de la <strong>familia exponencial</strong>, es decir, existen:</p>
+<ol type="1">
+<li><p>Un conjunto admisible de parámetros <span class="math inline">\(\Theta \subset \R^m\)</span>, así cada parámetro <span class="math inline">\(\theta = ( \theta_1, \ldots, \theta_m )^T \in \Theta\)</span>,</p></li>
+<li><p>Una función <span class="math inline">\(T: \R^n \longrightarrow \R^p\)</span></p></li>
+<li><p>Una función <span class="math inline">\(A: \R^m \longrightarrow \R\)</span></p></li>
+<li><p>Una función <span class="math inline">\(\eta: \R^m \longrightarrow \R^p\)</span></p></li>
+</ol>
+<p>de tal forma que <span class="math inline">\(X \rightsquigarrow f_X\)</span>, siendo: <span class="math display">\[
+f_X( x \mid \theta ) = h( x ) \exp\left( \eta( \theta ) \cdot T( x ) - A( \theta ) \right)
+\]</span></p>
+</div>
+</div>
+<p>Al tener varias observaciones independientes de la misma variable aleatoria <span class="math inline">\(X_1, \ldots, X_N\)</span>, su distribución conjunta se puede expresar como: <span class="math display">\[
+f_{X_1,\ldots,X_N}( x_1, \ldots, x_N \mid \theta )
+= \prod\limits_{i=1}^N f_{X_i}( x_i \mid \theta )
+\]</span></p>
+<p>La función de verosimilitud logarítmica, “log-likelihood”, toma una forma específica, la cual puede ser trabajada con comodidad para la maximización de verosimilitud. <span class="math display">\[
+\begin{split}
+\ell( \theta )
+&amp; = \log f_{X_1,\ldots,X_N}( x_1, \ldots, x_N \mid \theta ) \\
+&amp; = \sum\limits_{i=1}^N \log f_{X_i}( x_i \mid \theta ) \\
+&amp; = \sum\limits_{i=1}^N \left( \log h( x_i ) + \eta( \theta ) \cdot T( x_i ) - A( \theta )  \right)
+\end{split}
+\]</span> lo que podemos observar es que existe una casi linealidad respecto de la variable <span class="math inline">\(\theta\)</span>. Esta propiedad permite obtener un problema de maximización de verosimilitud que puede ser atacado con varios paquetes de optimización numérica de una forma eficiente.</p>
+<p><span class="math display">\[
+\underset{\theta \in \Theta}{\sup} \ell( \theta )
+= \underset{\theta \in \Theta}{\sup}  
+\sum\limits_{i=1}^N \left( \eta( \theta ) \cdot T( x_i ) - A( \theta )  \right)
+\]</span></p>
+<p>Usualmente, este problema se suele atacar mediante la anulación del gradiente de la función objetivo, esto lo realiza la mayor parte de paquetes de software. El sistema a resolver es el siguiente sistema, usualmente no lineal, de dimensión <span class="math inline">\(m\)</span>:</p>
+<p><span class="math display">\[
+\frac{\D \ell}{\D \theta_i}( \theta )
+= \sum\limits_{i=1}^N \left( \frac{\D \eta}{\D \theta_i}( \theta ) \cdot T( x_i ) -
+\frac{\D A}{\D \theta_i}( \theta ) \right)
+= 0,\qquad \forall i \in \{1,\ldots, m\}
+\]</span></p>
+<p>En la familia exponential tenemos las siguientes distribuciones: <em>normal, exponencial, log-normal, gamma, chi-cuadrado, beta, Dirichlet, Bernoulli, Poisson, binomial, geométrica, binomial negativa, von Mises-Fisher, Pareto con valor mínimo conocido, Gaussiana inversa, gamma inversa, multinomial con número <span class="math inline">\(n\)</span> conocido, Wishart, categórica</em>.</p>
+<p>Por la condición de normalización de la densidad de probabilidad <span class="math inline">\(f_X\)</span>, se satisface la igualdad: <span class="math display">\[
+\begin{split}
+1 &amp; = \int\limits f_X( x \mid \theta )\ dx \\
+1 &amp; = \int\limits h( x ) \exp\left( \eta( \theta ) \cdot T( x ) - A( \theta ) \right)\ dx \\
+1 &amp; = \int\limits h( x ) \exp\left( \eta( \theta ) \cdot T( x ) \right) \exp\left( - A( \theta ) \right)\ dx \\
+1 &amp; = \exp\left( - A( \theta ) \right) \int\limits h( x ) \exp\left( \eta( \theta ) \cdot T( x ) \right)\ dx \\
+\exp\left( A( \theta ) \right) &amp; = \int\limits h( x ) \exp\left( \eta( \theta ) \cdot T( x ) \right)\ dx \\
+A( \theta ) &amp; = \log\left( \int\limits h( x ) \exp\left( \eta( \theta ) \cdot T( x ) \right)\ dx \right)
+\end{split}
+\]</span> de donde se determina precisamente la forma que tiene la función <span class="math inline">\(A\)</span> y su el papel como factor de normalización para la distribución de la variable aleatoria <span class="math inline">\(X\)</span>.</p>
+<p>Así mismo, podemos establecer una cierta relación para la espera de los valores observados de <span class="math inline">\(T(X)\)</span> en función de <span class="math inline">\(A\)</span> <span class="math display">\[
+\begin{split}
+0 &amp; = \frac{\D}{\D \theta_i} 1 \\
+0 &amp; = \frac{\D}{\D \theta_i} \int\limits f_X( x \mid \theta )\ dx \\
+0 &amp; = \int\limits h( x ) \frac{\D}{\D \theta_i} \exp\left( \eta( \theta ) \cdot T( x ) - A( \theta ) \right)\ dx \\
+0 &amp; = \int\limits h( x ) \exp\left( \eta( \theta ) \cdot T( x ) - A( \theta ) \right)
+\left( \frac{\D \eta}{\D \theta_i}( \theta )  \cdot T( x ) -  \frac{\D A}{\D \theta_i}( \theta ) \right)\ dx \\
+0 &amp; = \int\limits h( x ) \exp\left( \eta( \theta ) \cdot T( x ) - A( \theta ) \right)
+\frac{\D \eta}{\D \theta_i}( \theta )  \cdot T( x )\ dx \\
+&amp; - \frac{\D A}{\D \theta_i} ( \theta )
+\int\limits h( x ) \exp\left( \eta( \theta ) \cdot T( x ) - A( \theta ) \right)\ dx \\
+0 &amp; = \int \limits \frac{\D \eta}{\D \theta_i}( \theta )  \cdot T( x ) f_X( x \mid \theta )\ dx
+- \frac{\D A}{\D \theta_i}( \theta ) \int \limits f_X( x \mid \theta )\ dx
+\end{split}
+\]</span> estamos en la capacidad de concluir que: <span class="math display">\[
+\E\left[ \frac{\D \eta}{\D \theta_i}( \theta )  \cdot T( X ) \right]
+= \frac{\D A}{\D \theta_i}( \theta )
+\]</span></p>
+<p>Cuando se da el caso que <span class="math inline">\(\eta\)</span> y <span class="math inline">\(T\)</span> son las funciones identidad, la relación anterior se reduce a la siguiente igualdad: <span class="math display">\[
+\E\left[ X_i \right]
+= \frac{\D A}{\D \theta_i}( \theta )
+\]</span></p>
+<!------------------------------------------------------------------------------------------------->
+</section>
+<section id="modelo-lineal-generalizado-glm" class="level2" data-number="9.2">
+<h2 data-number="9.2" class="anchored" data-anchor-id="modelo-lineal-generalizado-glm"><span class="header-section-number">9.2</span> Modelo lineal generalizado (GLM)</h2>
+<div class="thmbox">
+<div id="dglm" class="definition" name="Modelo lineal generalizado (GLM)">
+<p>Precisamente, un <strong>modelo lineal generalizado</strong> (<strong>GLM</strong> por Generalized Linear Model) busca explotar las propiedades de las variables aleatorias que poseen una densidad de probabilidad dada por alguna de la funciones de la familia exponencial. Para más detalles se puede consultar <span class="citation" data-cites="mathstat1">[<a href="#ref-mathstat1" role="doc-biblioref">1</a>]</span>.</p>
+<p>La idea general es poder describir el comportamiento de una variable aleatoria <span class="math inline">\(Y\)</span> que se presume puede ser descrita por alguna función de la familia exponencial, a partir de otras variables aleatorias <span class="math inline">\(X : \Omega \longrightarrow \R^n\)</span> mediante una <strong>función de vínculo</strong> <span class="math inline">\(g: \R^q \longrightarrow \R^m\)</span> entre <span class="math inline">\(\theta\)</span> y <span class="math inline">\(X\)</span>, a través del paso por una composición con una función lineal <span class="math inline">\(\beta : \R^n \longrightarrow \R^q\)</span>, de tal forma que: <span class="math display">\[
+\theta = g( \beta( X ) ) = g( \beta X )
+\]</span></p>
+<p>Así, un GLM prescribe una distribución de probabilidad para <span class="math inline">\(Y\)</span> que tendrá la siguiente forma y será dependiente de los parámetros <span class="math inline">\(\beta\)</span> y las variables explicativas <span class="math inline">\(X\)</span> <span class="math display">\[
+f_Y( y \mid \theta )
+= f_Y( y \mid g( \beta x ) )
+= h( y ) \exp\left( \eta( g( \beta x ) ) \cdot T( y ) - A( g( \beta x ) ) \right)
+\]</span></p>
+</div>
+</div>
+<p>En la aplicación, el ajuste de un modelo GLM a <span class="math inline">\(N \in \N\)</span> observaciones <span class="math inline">\(y_1, \ldots, y_N\)</span> de la variable aleatoria <span class="math inline">\(Y\)</span> y sus respectivas variables explicativas <span class="math inline">\(x_1, \ldots, x_N\)</span>. Se asume independencias entre las observaciones y se busca maximizar la verosimilitud de los valores observados, pero en función del nuevo parámetro <span class="math inline">\(\beta\)</span>, de ahí la parte lineal del modelo. <span class="math display">\[
+\ell( \beta )
+= \sum\limits_{i=1}^N \left( \log h( y_i ) +
+\eta( g( \beta x_i ) ) \cdot T( y_i ) - A( g( \beta x_i ) \right)
+\]</span></p>
+<p>De ello resulta el problema de maximización de verosimilitud que se busca resolver para ajustar un modelo GLM. <span class="math display">\[
+\underset{\beta \in \R^{q \times n}}{\sup} \ell( \beta )
+= \underset{\beta \in \R^{q \times n}}{\sup} \sum\limits_{i=1}^N \left( \log h( y_i ) +
+\eta( g( \beta x_i ) ) \cdot T( y_i ) - A( g( \beta x_i ) \right)
+\]</span> es de notar que el término <span class="math inline">\(\sum\limits_{i=1}^N \log h( y_i )\)</span> no depende de <span class="math inline">\(\beta\)</span> y por tal razón puede ser omitido al momento de maximizar la verosimilitud.</p>
+<p>En varias ocasiones no todos los parámetros <span class="math inline">\(\theta\)</span> de la densidad de probabilidad son considerados, sino tan solo una parte de los mismos, los otros parámetros se consideran como un valor constante ya dado o también como un parámetro a determinar. Así, se divide <span class="math inline">\(\theta = ( \theta_1, \theta_2 ), \theta_1 \in \R^{m_1}, \theta_2 \in \R^{m_2}, m = m_1 + m_2\)</span>, donde solo se establece una función de vínculo para la primera parte <span class="math inline">\(\theta_1 = g( \beta X )\)</span>. Esta consideración en muchos casos ayuda a simplificar la formulación del modelo y el costo computacional de estimación. En este contexto la función de verosimilitud tomaría la forma: <span class="math display">\[
+\ell( \beta, \theta_2 )
+= \sum\limits_{i=1}^N \left( \log h( y_i ) +
+\eta( g( \beta x_i ), \theta_2 ) \cdot T( y_i ) - A( g( \beta x_i ), \theta_2 ) \right)
+\]</span></p>
+<div id="l8ex1" class="example" name="Regresión de Poisson">
+<p>En este caso presentamos el modelo bastante utilizado conocido como regresión de Poisson. En donde suponemos que <span class="math inline">\(N \rightsquigarrow Pois( \lambda( x ) ER( x ) ) = Pois( g( \beta x ) ER( x ) )\)</span> donde <span class="math inline">\(\lambda\)</span> es el parámetro a estimar en función de las variables explicativas <span class="math inline">\(x\)</span>. <span class="math display">\[
+\E[ N ] = \lambda( x ) ER( x ) = g( \beta x ) ER( x )
+\]</span></p>
+<p><span class="math display">\[
+P( N = n ) = \exp(-g( \beta x ) ER( x )) \frac{g( \beta x )^n ER( x )^n}{n!}
+\]</span></p>
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r fold-hide number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># la librería CASdatasets fue previamente cargada</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="fu">data</span>( beMTPL97 )</span>
+<span id="cb1-3"><a href="#cb1-3"></a>beMTPL97 <span class="ot">&lt;-</span> <span class="fu">as.data.table</span>( beMTPL97 )</span>
+<span id="cb1-4"><a href="#cb1-4"></a></span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="co"># Impresión de las primeras filas de la tabla</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a>beMTPL97[ <span class="dv">1</span><span class="sc">:</span><span class="dv">15</span> ] <span class="sc">%&gt;%</span></span>
+<span id="cb1-7"><a href="#cb1-7"></a>  <span class="fu">kable</span>(</span>
+<span id="cb1-8"><a href="#cb1-8"></a>    <span class="at">label =</span> <span class="cn">NA</span>,</span>
+<span id="cb1-9"><a href="#cb1-9"></a>    <span class="at">caption =</span> <span class="st">"Pólizas y reclamos de automóviles en Bélgica"</span>,</span>
+<span id="cb1-10"><a href="#cb1-10"></a>    <span class="at">row.names =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb1-11"><a href="#cb1-11"></a>    <span class="at">col.names =</span> <span class="fu">names</span>( beMTPL97 ),</span>
+<span id="cb1-12"><a href="#cb1-12"></a>    <span class="at">align =</span> <span class="fu">paste0</span>( <span class="fu">rep</span>( <span class="st">"r"</span>, <span class="fu">ncol</span>( beMTPL97 ) ), <span class="at">collapse =</span> <span class="st">""</span> ),</span>
+<span id="cb1-13"><a href="#cb1-13"></a>    <span class="at">digits =</span> <span class="fu">c</span>( <span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">4</span>, <span class="dv">4</span> ),</span>
+<span id="cb1-14"><a href="#cb1-14"></a>    <span class="at">format.args =</span> <span class="fu">list</span>( <span class="at">big.mark =</span> <span class="st">','</span>, <span class="at">decimal.mark =</span> <span class="st">'.'</span>, <span class="at">scientific =</span> <span class="cn">FALSE</span> ),</span>
+<span id="cb1-15"><a href="#cb1-15"></a>    <span class="at">escape =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb1-16"><a href="#cb1-16"></a>    <span class="at">centering =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb1-17"><a href="#cb1-17"></a>    <span class="at">booktabs =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb1-18"><a href="#cb1-18"></a>    <span class="at">longtable =</span> <span class="cn">TRUE</span> ) <span class="sc">%&gt;%</span></span>
+<span id="cb1-19"><a href="#cb1-19"></a>  <span class="fu">kable_classic</span>( </span>
+<span id="cb1-20"><a href="#cb1-20"></a>    <span class="at">full_width =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb1-21"><a href="#cb1-21"></a>    <span class="at">html_font =</span> <span class="st">"Cambria"</span>, </span>
+<span id="cb1-22"><a href="#cb1-22"></a>    <span class="at">position =</span> <span class="st">'center'</span>, </span>
+<span id="cb1-23"><a href="#cb1-23"></a>    <span class="at">latex_options =</span> <span class="fu">c</span>( <span class="st">'hold_position'</span>, <span class="st">'repeat_header'</span>, <span class="st">'scale_down'</span> ) ) <span class="sc">%&gt;%</span></span>
+<span id="cb1-24"><a href="#cb1-24"></a>  <span class="fu">scroll_box</span>( <span class="at">width =</span> <span class="st">"100%"</span>, <span class="at">height =</span> <span class="st">"500px"</span> )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:500px; overflow-x: scroll; width:100%; ">
+<table class="lightable-classic caption-top table" data-quarto-postprocess="true">
+<caption>Pólizas y reclamos de automóviles en Bélgica</caption>
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th" style="text-align: right; position: sticky; top: 0; background-color: #FFFFFF;">id</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; position: sticky; top: 0; background-color: #FFFFFF;">expo</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; position: sticky; top: 0; background-color: #FFFFFF;">claim</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; position: sticky; top: 0; background-color: #FFFFFF;">nclaims</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; position: sticky; top: 0; background-color: #FFFFFF;">amount</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; position: sticky; top: 0; background-color: #FFFFFF;">average</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; position: sticky; top: 0; background-color: #FFFFFF;">coverage</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; position: sticky; top: 0; background-color: #FFFFFF;">ageph</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; position: sticky; top: 0; background-color: #FFFFFF;">sex</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; position: sticky; top: 0; background-color: #FFFFFF;">bm</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; position: sticky; top: 0; background-color: #FFFFFF;">power</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; position: sticky; top: 0; background-color: #FFFFFF;">agec</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; position: sticky; top: 0; background-color: #FFFFFF;">fuel</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; position: sticky; top: 0; background-color: #FFFFFF;">use</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; position: sticky; top: 0; background-color: #FFFFFF;">fleet</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; position: sticky; top: 0; background-color: #FFFFFF;">postcode</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; position: sticky; top: 0; background-color: #FFFFFF;">long</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; position: sticky; top: 0; background-color: #FFFFFF;">lat</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1,618.00</td>
+<td style="text-align: right;">1,618.00</td>
+<td style="text-align: right;">TPL</td>
+<td style="text-align: right;">50</td>
+<td style="text-align: right;">male</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">77</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">gasoline</td>
+<td style="text-align: right;">private</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1,000</td>
+<td style="text-align: right;">4.3552</td>
+<td style="text-align: right;">50.8454</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: right;">TPL+</td>
+<td style="text-align: right;">64</td>
+<td style="text-align: right;">female</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">66</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">gasoline</td>
+<td style="text-align: right;">private</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1,000</td>
+<td style="text-align: right;">4.3552</td>
+<td style="text-align: right;">50.8454</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: right;">TPL</td>
+<td style="text-align: right;">60</td>
+<td style="text-align: right;">male</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">70</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">diesel</td>
+<td style="text-align: right;">private</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1,000</td>
+<td style="text-align: right;">4.3552</td>
+<td style="text-align: right;">50.8454</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: right;">TPL</td>
+<td style="text-align: right;">77</td>
+<td style="text-align: right;">male</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">57</td>
+<td style="text-align: right;">15</td>
+<td style="text-align: right;">gasoline</td>
+<td style="text-align: right;">private</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1,000</td>
+<td style="text-align: right;">4.3552</td>
+<td style="text-align: right;">50.8454</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">0.05</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">155.97</td>
+<td style="text-align: right;">155.97</td>
+<td style="text-align: right;">TPL</td>
+<td style="text-align: right;">28</td>
+<td style="text-align: right;">female</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">70</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">gasoline</td>
+<td style="text-align: right;">private</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1,000</td>
+<td style="text-align: right;">4.3552</td>
+<td style="text-align: right;">50.8454</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: right;">TPL</td>
+<td style="text-align: right;">26</td>
+<td style="text-align: right;">male</td>
+<td style="text-align: right;">11</td>
+<td style="text-align: right;">70</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">gasoline</td>
+<td style="text-align: right;">private</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1,000</td>
+<td style="text-align: right;">4.3552</td>
+<td style="text-align: right;">50.8454</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">155.97</td>
+<td style="text-align: right;">155.97</td>
+<td style="text-align: right;">TPL++</td>
+<td style="text-align: right;">26</td>
+<td style="text-align: right;">male</td>
+<td style="text-align: right;">11</td>
+<td style="text-align: right;">55</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">gasoline</td>
+<td style="text-align: right;">private</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1,000</td>
+<td style="text-align: right;">4.3552</td>
+<td style="text-align: right;">50.8454</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">0.40</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: right;">TPL</td>
+<td style="text-align: right;">58</td>
+<td style="text-align: right;">female</td>
+<td style="text-align: right;">11</td>
+<td style="text-align: right;">47</td>
+<td style="text-align: right;">14</td>
+<td style="text-align: right;">gasoline</td>
+<td style="text-align: right;">private</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1,000</td>
+<td style="text-align: right;">4.3552</td>
+<td style="text-align: right;">50.8454</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: right;">TPL++</td>
+<td style="text-align: right;">59</td>
+<td style="text-align: right;">male</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">98</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">gasoline</td>
+<td style="text-align: right;">private</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1,000</td>
+<td style="text-align: right;">4.3552</td>
+<td style="text-align: right;">50.8454</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: right;">TPL+</td>
+<td style="text-align: right;">34</td>
+<td style="text-align: right;">male</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">74</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">gasoline</td>
+<td style="text-align: right;">private</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1,000</td>
+<td style="text-align: right;">4.3552</td>
+<td style="text-align: right;">50.8454</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">11</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">544.87</td>
+<td style="text-align: right;">544.87</td>
+<td style="text-align: right;">TPL++</td>
+<td style="text-align: right;">39</td>
+<td style="text-align: right;">male</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">85</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">diesel</td>
+<td style="text-align: right;">private</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1,000</td>
+<td style="text-align: right;">4.3552</td>
+<td style="text-align: right;">50.8454</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">0.98</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: right;">TPL</td>
+<td style="text-align: right;">55</td>
+<td style="text-align: right;">male</td>
+<td style="text-align: right;">11</td>
+<td style="text-align: right;">87</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">diesel</td>
+<td style="text-align: right;">private</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1,000</td>
+<td style="text-align: right;">4.3552</td>
+<td style="text-align: right;">50.8454</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">13</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: right;">TPL+</td>
+<td style="text-align: right;">77</td>
+<td style="text-align: right;">male</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">104</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">gasoline</td>
+<td style="text-align: right;">private</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1,000</td>
+<td style="text-align: right;">4.3552</td>
+<td style="text-align: right;">50.8454</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">14</td>
+<td style="text-align: right;">0.97</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: right;">TPL</td>
+<td style="text-align: right;">49</td>
+<td style="text-align: right;">male</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">71</td>
+<td style="text-align: right;">19</td>
+<td style="text-align: right;">gasoline</td>
+<td style="text-align: right;">private</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1,000</td>
+<td style="text-align: right;">4.3552</td>
+<td style="text-align: right;">50.8454</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">15</td>
+<td style="text-align: right;">0.58</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">NaN</td>
+<td style="text-align: right;">TPL</td>
+<td style="text-align: right;">63</td>
+<td style="text-align: right;">male</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">104</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">gasoline</td>
+<td style="text-align: right;">private</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1,000</td>
+<td style="text-align: right;">4.3552</td>
+<td style="text-align: right;">50.8454</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>model_N <span class="ot">&lt;-</span> <span class="fu">glm</span>( <span class="at">formula =</span> nclaims <span class="sc">~</span> ageph <span class="sc">+</span> sex <span class="sc">+</span> power <span class="sc">+</span> fuel <span class="sc">+</span> <span class="fu">offset</span>( <span class="fu">log</span>( expo ) ) <span class="sc">+</span> <span class="dv">0</span>, </span>
+<span id="cb2-2"><a href="#cb2-2"></a>                <span class="at">family =</span> <span class="fu">poisson</span>( <span class="at">link =</span> <span class="st">'log'</span> ), </span>
+<span id="cb2-3"><a href="#cb2-3"></a>                <span class="at">data =</span> beMTPL97 )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r fold-hide number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">tidy</span>( model_N )</span>
+<span id="cb3-2"><a href="#cb3-2"></a>dat <span class="sc">%&gt;%</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a>  <span class="fu">kable</span>(</span>
+<span id="cb3-4"><a href="#cb3-4"></a>    <span class="at">label =</span> <span class="cn">NA</span>,</span>
+<span id="cb3-5"><a href="#cb3-5"></a>    <span class="at">caption =</span> <span class="st">"Resultados del modelo GLM"</span>,</span>
+<span id="cb3-6"><a href="#cb3-6"></a>    <span class="at">row.names =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb3-7"><a href="#cb3-7"></a>    <span class="at">col.names =</span> <span class="fu">names</span>( dat ),</span>
+<span id="cb3-8"><a href="#cb3-8"></a>    <span class="at">align =</span> <span class="st">'lrrrr'</span>,</span>
+<span id="cb3-9"><a href="#cb3-9"></a>    <span class="at">digits =</span> <span class="fu">c</span>( <span class="dv">0</span>, <span class="dv">6</span>, <span class="dv">6</span>, <span class="dv">6</span>, <span class="dv">6</span> ),</span>
+<span id="cb3-10"><a href="#cb3-10"></a>    <span class="at">format.args =</span> <span class="fu">list</span>( <span class="at">big.mark =</span> <span class="st">','</span>, <span class="at">decimal.mark =</span> <span class="st">'.'</span>, <span class="at">scientific =</span> <span class="cn">FALSE</span> ),</span>
+<span id="cb3-11"><a href="#cb3-11"></a>    <span class="at">escape =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb3-12"><a href="#cb3-12"></a>    <span class="at">centering =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb3-13"><a href="#cb3-13"></a>    <span class="at">booktabs =</span> <span class="cn">TRUE</span> ) <span class="sc">%&gt;%</span></span>
+<span id="cb3-14"><a href="#cb3-14"></a>  <span class="fu">kable_classic</span>( </span>
+<span id="cb3-15"><a href="#cb3-15"></a>    <span class="at">full_width =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb3-16"><a href="#cb3-16"></a>    <span class="at">html_font =</span> <span class="st">"Cambria"</span>, </span>
+<span id="cb3-17"><a href="#cb3-17"></a>    <span class="at">position =</span> <span class="st">'center'</span>, </span>
+<span id="cb3-18"><a href="#cb3-18"></a>    <span class="at">latex_options =</span> <span class="fu">c</span>( <span class="st">'hold_position'</span>, <span class="st">'repeat_header'</span>, <span class="st">'scale_down'</span> ) ) <span class="sc">%&gt;%</span></span>
+<span id="cb3-19"><a href="#cb3-19"></a>  <span class="fu">scroll_box</span>( <span class="at">width =</span> <span class="st">"100%"</span>, <span class="at">height =</span> <span class="st">"300px"</span> )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:300px; overflow-x: scroll; width:100%; ">
+<table class="lightable-classic caption-top table" data-quarto-postprocess="true">
+<caption>Resultados del modelo GLM</caption>
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th" style="text-align: left; position: sticky; top: 0; background-color: #FFFFFF;">term</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; position: sticky; top: 0; background-color: #FFFFFF;">estimate</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; position: sticky; top: 0; background-color: #FFFFFF;">std.error</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; position: sticky; top: 0; background-color: #FFFFFF;">statistic</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; position: sticky; top: 0; background-color: #FFFFFF;">p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">ageph</td>
+<td style="text-align: right;">-0.015627</td>
+<td style="text-align: right;">0.000508</td>
+<td style="text-align: right;">-30.790409</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">sexfemale</td>
+<td style="text-align: right;">-1.409836</td>
+<td style="text-align: right;">0.032166</td>
+<td style="text-align: right;">-43.830099</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">sexmale</td>
+<td style="text-align: right;">-1.458010</td>
+<td style="text-align: right;">0.034274</td>
+<td style="text-align: right;">-42.539517</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">power</td>
+<td style="text-align: right;">0.002499</td>
+<td style="text-align: right;">0.000372</td>
+<td style="text-align: right;">6.714624</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">fueldiesel</td>
+<td style="text-align: right;">0.140048</td>
+<td style="text-align: right;">0.015098</td>
+<td style="text-align: right;">9.275900</td>
+<td style="text-align: right;">0</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r fold-hide number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">glance</span>( model_N )</span>
+<span id="cb4-2"><a href="#cb4-2"></a>dat <span class="sc">%&gt;%</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a>  <span class="fu">kable</span>(</span>
+<span id="cb4-4"><a href="#cb4-4"></a>    <span class="at">label =</span> <span class="cn">NA</span>,</span>
+<span id="cb4-5"><a href="#cb4-5"></a>    <span class="at">caption =</span> <span class="st">"Resultados del modelo GLM"</span>,</span>
+<span id="cb4-6"><a href="#cb4-6"></a>    <span class="at">row.names =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb4-7"><a href="#cb4-7"></a>    <span class="at">col.names =</span> <span class="fu">names</span>( dat ),</span>
+<span id="cb4-8"><a href="#cb4-8"></a>    <span class="at">align =</span> <span class="fu">paste0</span>( <span class="fu">rep</span>( <span class="st">"r"</span>, <span class="fu">ncol</span>( dat ) ), <span class="at">collapse =</span> <span class="st">""</span> ),</span>
+<span id="cb4-9"><a href="#cb4-9"></a>    <span class="at">digits =</span> <span class="fu">c</span>( <span class="dv">4</span>, <span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">0</span> ),</span>
+<span id="cb4-10"><a href="#cb4-10"></a>    <span class="at">format.args =</span> <span class="fu">list</span>( <span class="at">big.mark =</span> <span class="st">','</span>, <span class="at">decimal.mark =</span> <span class="st">'.'</span>, <span class="at">scientific =</span> <span class="cn">FALSE</span> ),</span>
+<span id="cb4-11"><a href="#cb4-11"></a>    <span class="at">escape =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb4-12"><a href="#cb4-12"></a>    <span class="at">centering =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb4-13"><a href="#cb4-13"></a>    <span class="at">booktabs =</span> <span class="cn">TRUE</span> ) <span class="sc">%&gt;%</span></span>
+<span id="cb4-14"><a href="#cb4-14"></a>  <span class="fu">kable_classic</span>( </span>
+<span id="cb4-15"><a href="#cb4-15"></a>    <span class="at">full_width =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb4-16"><a href="#cb4-16"></a>    <span class="at">html_font =</span> <span class="st">"Cambria"</span>, </span>
+<span id="cb4-17"><a href="#cb4-17"></a>    <span class="at">position =</span> <span class="st">'center'</span>, </span>
+<span id="cb4-18"><a href="#cb4-18"></a>    <span class="at">latex_options =</span> <span class="fu">c</span>( <span class="st">'hold_position'</span>, <span class="st">'repeat_header'</span>, <span class="st">'scale_down'</span> ) ) <span class="sc">%&gt;%</span></span>
+<span id="cb4-19"><a href="#cb4-19"></a>  <span class="fu">scroll_box</span>( <span class="at">width =</span> <span class="st">"100%"</span>, <span class="at">height =</span> <span class="st">"200px"</span> )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:200px; overflow-x: scroll; width:100%; ">
+<table class="lightable-classic caption-top table" data-quarto-postprocess="true">
+<caption>Resultados del modelo GLM</caption>
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th" style="text-align: right; position: sticky; top: 0; background-color: #FFFFFF;">null.deviance</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; position: sticky; top: 0; background-color: #FFFFFF;">df.null</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; position: sticky; top: 0; background-color: #FFFFFF;">logLik</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; position: sticky; top: 0; background-color: #FFFFFF;">AIC</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; position: sticky; top: 0; background-color: #FFFFFF;">BIC</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; position: sticky; top: 0; background-color: #FFFFFF;">deviance</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; position: sticky; top: 0; background-color: #FFFFFF;">df.residual</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; position: sticky; top: 0; background-color: #FFFFFF;">nobs</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">260,163.9</td>
+<td style="text-align: right;">163,212</td>
+<td style="text-align: right;">-63,171.99</td>
+<td style="text-align: right;">126,354</td>
+<td style="text-align: right;">126,404</td>
+<td style="text-align: right;">88,651.89</td>
+<td style="text-align: right;">163,207</td>
+<td style="text-align: right;">163,212</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>pob <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>( <span class="at">ageph =</span> <span class="fu">seq</span>( <span class="dv">18</span>, <span class="dv">90</span>, <span class="dv">1</span> ), </span>
+<span id="cb5-2"><a href="#cb5-2"></a>                    <span class="at">sex =</span> <span class="fu">c</span>( <span class="st">'male'</span>, <span class="st">'female'</span> ),</span>
+<span id="cb5-3"><a href="#cb5-3"></a>                    <span class="at">power =</span> <span class="fu">seq</span>( <span class="dv">10</span>, <span class="dv">250</span> ),</span>
+<span id="cb5-4"><a href="#cb5-4"></a>                    <span class="at">fuel =</span> <span class="fu">c</span>( <span class="st">'gasoline'</span>, <span class="st">'diesel'</span> ),</span>
+<span id="cb5-5"><a href="#cb5-5"></a>                    <span class="at">expo =</span> <span class="dv">1</span> )</span>
+<span id="cb5-6"><a href="#cb5-6"></a>pob <span class="ot">&lt;-</span> <span class="fu">as.data.table</span>( pob )</span>
+<span id="cb5-7"><a href="#cb5-7"></a>pob[ , EN <span class="sc">:</span><span class="er">=</span> <span class="fu">predict</span>( model_N, <span class="at">newdata =</span> pob, <span class="at">type =</span> <span class="st">'response'</span> ) ]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</div>
+
+
+<!-- -->
+
+<div id="refs" class="references csl-bib-body" role="list">
+<div id="ref-mathstat1" class="csl-entry" role="listitem">
+<div class="csl-left-margin">1. </div><div class="csl-right-inline">Bickel PJ, Doksum KA (2015) Mathematical statistics: Basic ideas and selected topics. CRC Press</div>
+</div>
+</div>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./lectura_07.html" class="pagination-link" aria-label="Tarificación">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Tarificación</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./lectura_09.html" class="pagination-link" aria-label="Reservas técnicas">
+        <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Reservas técnicas</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb6" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb6-1"><a href="#cb6-1"></a><span class="co">&lt;!-------------------------------------------------------------------------------------------------&gt;</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="fu"># Modelos lineales generalizados (GLM) {#modelos_glm}</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a></span>
+<span id="cb6-6"><a href="#cb6-6"></a><span class="in">```{r}</span></span>
+<span id="cb6-7"><a href="#cb6-7"></a><span class="co">#| echo: false</span></span>
+<span id="cb6-8"><a href="#cb6-8"></a><span class="co">#| warning: false</span></span>
+<span id="cb6-9"><a href="#cb6-9"></a><span class="fu">source</span>(<span class="st">"_common.R"</span>)</span>
+<span id="cb6-10"><a href="#cb6-10"></a><span class="in">```</span></span>
+<span id="cb6-11"><a href="#cb6-11"></a></span>
+<span id="cb6-12"><a href="#cb6-12"></a><span class="co">&lt;!-------------------------------------------------------------------------------------------------&gt;</span></span>
+<span id="cb6-13"><a href="#cb6-13"></a><span class="fu">## Familia exponencial</span></span>
+<span id="cb6-14"><a href="#cb6-14"></a></span>
+<span id="cb6-15"><a href="#cb6-15"></a>:::: {.thmbox data-latex=""}</span>
+<span id="cb6-16"><a href="#cb6-16"></a>::: {.definition #dfamexp name="Familia exponencial"}</span>
+<span id="cb6-17"><a href="#cb6-17"></a>De forma amplia, un modelo lineal generalizado aprovecha algunas propiedades de la distribución de </span>
+<span id="cb6-18"><a href="#cb6-18"></a>probabilidad $f_X$ de la variable (vector) aleatoria $X : \Omega \longrightarrow \R^n$ en </span>
+<span id="cb6-19"><a href="#cb6-19"></a>estudio. Se parte de asumir que $X$ tiene una distribución dentro de la **familia exponencial**, es </span>
+<span id="cb6-20"><a href="#cb6-20"></a>decir, existen:</span>
+<span id="cb6-21"><a href="#cb6-21"></a></span>
+<span id="cb6-22"><a href="#cb6-22"></a><span class="ss">1. </span>Un conjunto admisible de parámetros $\Theta \subset \R^m$, así cada parámetro </span>
+<span id="cb6-23"><a href="#cb6-23"></a>$\theta = ( \theta_1, \ldots, \theta_m )^T \in \Theta$,</span>
+<span id="cb6-24"><a href="#cb6-24"></a></span>
+<span id="cb6-25"><a href="#cb6-25"></a><span class="ss">2. </span>Una función $T: \R^n \longrightarrow \R^p$</span>
+<span id="cb6-26"><a href="#cb6-26"></a></span>
+<span id="cb6-27"><a href="#cb6-27"></a><span class="ss">3. </span>Una función $A: \R^m \longrightarrow \R$</span>
+<span id="cb6-28"><a href="#cb6-28"></a></span>
+<span id="cb6-29"><a href="#cb6-29"></a><span class="ss">4. </span>Una función $\eta: \R^m \longrightarrow \R^p$</span>
+<span id="cb6-30"><a href="#cb6-30"></a></span>
+<span id="cb6-31"><a href="#cb6-31"></a>de tal forma que $X \rightsquigarrow f_X$, siendo:</span>
+<span id="cb6-32"><a href="#cb6-32"></a>$$</span>
+<span id="cb6-33"><a href="#cb6-33"></a>f_X( x \mid \theta ) = h( x ) \exp\left( \eta( \theta ) \cdot T( x ) - A( \theta ) \right)</span>
+<span id="cb6-34"><a href="#cb6-34"></a>$$</span>
+<span id="cb6-35"><a href="#cb6-35"></a>:::</span>
+<span id="cb6-36"><a href="#cb6-36"></a>::::</span>
+<span id="cb6-37"><a href="#cb6-37"></a></span>
+<span id="cb6-38"><a href="#cb6-38"></a>Al tener varias observaciones independientes de la misma variable aleatoria $X_1, \ldots, X_N$,</span>
+<span id="cb6-39"><a href="#cb6-39"></a>su distribución conjunta se puede expresar como:</span>
+<span id="cb6-40"><a href="#cb6-40"></a>$$</span>
+<span id="cb6-41"><a href="#cb6-41"></a>f_{X_1,\ldots,X_N}( x_1, \ldots, x_N \mid \theta )</span>
+<span id="cb6-42"><a href="#cb6-42"></a>= \prod\limits_{i=1}^N f_{X_i}( x_i \mid \theta )</span>
+<span id="cb6-43"><a href="#cb6-43"></a>$$</span>
+<span id="cb6-44"><a href="#cb6-44"></a></span>
+<span id="cb6-45"><a href="#cb6-45"></a>La función de verosimilitud logarítmica, "log-likelihood", toma una forma específica, la cual puede</span>
+<span id="cb6-46"><a href="#cb6-46"></a>ser trabajada con comodidad para la maximización de verosimilitud.</span>
+<span id="cb6-47"><a href="#cb6-47"></a>$$</span>
+<span id="cb6-48"><a href="#cb6-48"></a>\begin{split}</span>
+<span id="cb6-49"><a href="#cb6-49"></a>\ell( \theta )</span>
+<span id="cb6-50"><a href="#cb6-50"></a>&amp; = \log f_{X_1,\ldots,X_N}( x_1, \ldots, x_N \mid \theta ) <span class="sc">\\</span></span>
+<span id="cb6-51"><a href="#cb6-51"></a>&amp; = \sum\limits_{i=1}^N \log f_{X_i}( x_i \mid \theta ) <span class="sc">\\</span></span>
+<span id="cb6-52"><a href="#cb6-52"></a>&amp; = \sum\limits_{i=1}^N \left( \log h( x_i ) + \eta( \theta ) \cdot T( x_i ) - A( \theta )  \right)</span>
+<span id="cb6-53"><a href="#cb6-53"></a>\end{split}</span>
+<span id="cb6-54"><a href="#cb6-54"></a>$$</span>
+<span id="cb6-55"><a href="#cb6-55"></a>lo que podemos observar es que existe una casi linealidad respecto de la variable $\theta$. Esta </span>
+<span id="cb6-56"><a href="#cb6-56"></a>propiedad permite obtener un problema de maximización de verosimilitud que puede ser atacado con </span>
+<span id="cb6-57"><a href="#cb6-57"></a>varios paquetes de optimización numérica de una forma eficiente.</span>
+<span id="cb6-58"><a href="#cb6-58"></a></span>
+<span id="cb6-59"><a href="#cb6-59"></a>$$</span>
+<span id="cb6-60"><a href="#cb6-60"></a>\underset{\theta \in \Theta}{\sup} \ell( \theta )</span>
+<span id="cb6-61"><a href="#cb6-61"></a>= \underset{\theta \in \Theta}{\sup}  </span>
+<span id="cb6-62"><a href="#cb6-62"></a>\sum\limits_{i=1}^N \left( \eta( \theta ) \cdot T( x_i ) - A( \theta )  \right)</span>
+<span id="cb6-63"><a href="#cb6-63"></a>$$</span>
+<span id="cb6-64"><a href="#cb6-64"></a></span>
+<span id="cb6-65"><a href="#cb6-65"></a>Usualmente, este problema se suele atacar mediante la anulación del gradiente de la función </span>
+<span id="cb6-66"><a href="#cb6-66"></a>objetivo, esto lo realiza la mayor parte de paquetes de software. El sistema a resolver es el </span>
+<span id="cb6-67"><a href="#cb6-67"></a>siguiente sistema, usualmente no lineal, de dimensión $m$:</span>
+<span id="cb6-68"><a href="#cb6-68"></a></span>
+<span id="cb6-69"><a href="#cb6-69"></a>$$</span>
+<span id="cb6-70"><a href="#cb6-70"></a>\frac{\D \ell}{\D \theta_i}( \theta ) </span>
+<span id="cb6-71"><a href="#cb6-71"></a>= \sum\limits_{i=1}^N \left( \frac{\D \eta}{\D \theta_i}( \theta ) \cdot T( x_i ) - </span>
+<span id="cb6-72"><a href="#cb6-72"></a>\frac{\D A}{\D \theta_i}( \theta ) \right) </span>
+<span id="cb6-73"><a href="#cb6-73"></a>= 0,\qquad \forall i \in <span class="sc">\{</span>1,\ldots, m<span class="sc">\}</span></span>
+<span id="cb6-74"><a href="#cb6-74"></a>$$</span>
+<span id="cb6-75"><a href="#cb6-75"></a></span>
+<span id="cb6-76"><a href="#cb6-76"></a>En la familia exponential tenemos las siguientes distribuciones: *normal, exponencial, log-normal,</span>
+<span id="cb6-77"><a href="#cb6-77"></a>gamma, chi-cuadrado, beta, Dirichlet, Bernoulli, Poisson, binomial, geométrica, binomial negativa,</span>
+<span id="cb6-78"><a href="#cb6-78"></a>von Mises-Fisher, Pareto con valor mínimo conocido, Gaussiana inversa, gamma inversa, multinomial</span>
+<span id="cb6-79"><a href="#cb6-79"></a>con número $n$ conocido, Wishart, categórica*.</span>
+<span id="cb6-80"><a href="#cb6-80"></a></span>
+<span id="cb6-81"><a href="#cb6-81"></a>Por la condición de normalización de la densidad de probabilidad $f_X$, se satisface la igualdad:</span>
+<span id="cb6-82"><a href="#cb6-82"></a>$$</span>
+<span id="cb6-83"><a href="#cb6-83"></a>\begin{split}</span>
+<span id="cb6-84"><a href="#cb6-84"></a>1 &amp; = \int\limits f_X( x \mid \theta )\ dx <span class="sc">\\</span></span>
+<span id="cb6-85"><a href="#cb6-85"></a>1 &amp; = \int\limits h( x ) \exp\left( \eta( \theta ) \cdot T( x ) - A( \theta ) \right)\ dx <span class="sc">\\</span></span>
+<span id="cb6-86"><a href="#cb6-86"></a>1 &amp; = \int\limits h( x ) \exp\left( \eta( \theta ) \cdot T( x ) \right) \exp\left( - A( \theta ) \right)\ dx <span class="sc">\\</span></span>
+<span id="cb6-87"><a href="#cb6-87"></a>1 &amp; = \exp\left( - A( \theta ) \right) \int\limits h( x ) \exp\left( \eta( \theta ) \cdot T( x ) \right)\ dx <span class="sc">\\</span></span>
+<span id="cb6-88"><a href="#cb6-88"></a>\exp\left( A( \theta ) \right) &amp; = \int\limits h( x ) \exp\left( \eta( \theta ) \cdot T( x ) \right)\ dx <span class="sc">\\</span></span>
+<span id="cb6-89"><a href="#cb6-89"></a>A( \theta ) &amp; = \log\left( \int\limits h( x ) \exp\left( \eta( \theta ) \cdot T( x ) \right)\ dx \right)</span>
+<span id="cb6-90"><a href="#cb6-90"></a>\end{split}</span>
+<span id="cb6-91"><a href="#cb6-91"></a>$$</span>
+<span id="cb6-92"><a href="#cb6-92"></a>de donde se determina precisamente la forma que tiene la función $A$ y su el papel como factor </span>
+<span id="cb6-93"><a href="#cb6-93"></a>de normalización para la distribución de la variable aleatoria $X$.</span>
+<span id="cb6-94"><a href="#cb6-94"></a></span>
+<span id="cb6-95"><a href="#cb6-95"></a>Así mismo, podemos establecer una cierta relación para la espera de los valores observados </span>
+<span id="cb6-96"><a href="#cb6-96"></a>de $T(X)$ en función de $A$</span>
+<span id="cb6-97"><a href="#cb6-97"></a>$$</span>
+<span id="cb6-98"><a href="#cb6-98"></a>\begin{split}</span>
+<span id="cb6-99"><a href="#cb6-99"></a>0 &amp; = \frac{\D}{\D \theta_i} 1 <span class="sc">\\</span></span>
+<span id="cb6-100"><a href="#cb6-100"></a>0 &amp; = \frac{\D}{\D \theta_i} \int\limits f_X( x \mid \theta )\ dx <span class="sc">\\</span></span>
+<span id="cb6-101"><a href="#cb6-101"></a>0 &amp; = \int\limits h( x ) \frac{\D}{\D \theta_i} \exp\left( \eta( \theta ) \cdot T( x ) - A( \theta ) \right)\ dx <span class="sc">\\</span></span>
+<span id="cb6-102"><a href="#cb6-102"></a>0 &amp; = \int\limits h( x ) \exp\left( \eta( \theta ) \cdot T( x ) - A( \theta ) \right) </span>
+<span id="cb6-103"><a href="#cb6-103"></a>\left( \frac{\D \eta}{\D \theta_i}( \theta )  \cdot T( x ) -  \frac{\D A}{\D \theta_i}( \theta ) \right)\ dx <span class="sc">\\</span> </span>
+<span id="cb6-104"><a href="#cb6-104"></a>0 &amp; = \int\limits h( x ) \exp\left( \eta( \theta ) \cdot T( x ) - A( \theta ) \right) </span>
+<span id="cb6-105"><a href="#cb6-105"></a>\frac{\D \eta}{\D \theta_i}( \theta )  \cdot T( x )\ dx <span class="sc">\\</span></span>
+<span id="cb6-106"><a href="#cb6-106"></a>&amp; - \frac{\D A}{\D \theta_i} ( \theta )</span>
+<span id="cb6-107"><a href="#cb6-107"></a>\int\limits h( x ) \exp\left( \eta( \theta ) \cdot T( x ) - A( \theta ) \right)\ dx <span class="sc">\\</span></span>
+<span id="cb6-108"><a href="#cb6-108"></a>0 &amp; = \int \limits \frac{\D \eta}{\D \theta_i}( \theta )  \cdot T( x ) f_X( x \mid \theta )\ dx</span>
+<span id="cb6-109"><a href="#cb6-109"></a><span class="ss">- </span>\frac{\D A}{\D \theta_i}( \theta ) \int \limits f_X( x \mid \theta )\ dx</span>
+<span id="cb6-110"><a href="#cb6-110"></a>\end{split}</span>
+<span id="cb6-111"><a href="#cb6-111"></a>$$</span>
+<span id="cb6-112"><a href="#cb6-112"></a>estamos en la capacidad de concluir que:</span>
+<span id="cb6-113"><a href="#cb6-113"></a>$$</span>
+<span id="cb6-114"><a href="#cb6-114"></a>\E\left<span class="co">[</span><span class="ot"> \frac{\D \eta}{\D \theta_i}( \theta )  \cdot T( X ) \right</span><span class="co">]</span></span>
+<span id="cb6-115"><a href="#cb6-115"></a>= \frac{\D A}{\D \theta_i}( \theta )</span>
+<span id="cb6-116"><a href="#cb6-116"></a>$$</span>
+<span id="cb6-117"><a href="#cb6-117"></a></span>
+<span id="cb6-118"><a href="#cb6-118"></a>Cuando se da el caso que $\eta$ y $T$ son las funciones identidad, la relación anterior se reduce </span>
+<span id="cb6-119"><a href="#cb6-119"></a>a la siguiente igualdad:</span>
+<span id="cb6-120"><a href="#cb6-120"></a>$$</span>
+<span id="cb6-121"><a href="#cb6-121"></a>\E\left<span class="co">[</span><span class="ot"> X_i \right</span><span class="co">]</span></span>
+<span id="cb6-122"><a href="#cb6-122"></a>= \frac{\D A}{\D \theta_i}( \theta )</span>
+<span id="cb6-123"><a href="#cb6-123"></a>$$</span>
+<span id="cb6-124"><a href="#cb6-124"></a></span>
+<span id="cb6-125"><a href="#cb6-125"></a><span class="co">&lt;!-------------------------------------------------------------------------------------------------&gt;</span></span>
+<span id="cb6-126"><a href="#cb6-126"></a><span class="fu">## Modelo lineal generalizado (GLM)</span></span>
+<span id="cb6-127"><a href="#cb6-127"></a>:::: {.thmbox data-latex=""}</span>
+<span id="cb6-128"><a href="#cb6-128"></a>::: {.definition #dglm name="Modelo lineal generalizado (GLM)"}</span>
+<span id="cb6-129"><a href="#cb6-129"></a>Precisamente, un **modelo lineal generalizado** (**GLM** por Generalized Linear Model) busca explotar </span>
+<span id="cb6-130"><a href="#cb6-130"></a>las propiedades de las variables aleatorias que poseen una densidad de probabilidad dada por alguna </span>
+<span id="cb6-131"><a href="#cb6-131"></a>de la funciones de la familia exponencial. Para más detalles se puede consultar @mathstat1.</span>
+<span id="cb6-132"><a href="#cb6-132"></a></span>
+<span id="cb6-133"><a href="#cb6-133"></a>La idea general es poder describir el comportamiento de una variable aleatoria $Y$ que se presume</span>
+<span id="cb6-134"><a href="#cb6-134"></a>puede ser descrita por alguna función de la familia exponencial, a partir de otras variables </span>
+<span id="cb6-135"><a href="#cb6-135"></a>aleatorias $X : \Omega \longrightarrow \R^n$ mediante una **función de vínculo** </span>
+<span id="cb6-136"><a href="#cb6-136"></a>$g: \R^q \longrightarrow \R^m$ entre $\theta$ y $X$, a través del paso por una </span>
+<span id="cb6-137"><a href="#cb6-137"></a>composición con una función lineal $\beta : \R^n \longrightarrow \R^q$, de tal </span>
+<span id="cb6-138"><a href="#cb6-138"></a>forma que:</span>
+<span id="cb6-139"><a href="#cb6-139"></a>$$</span>
+<span id="cb6-140"><a href="#cb6-140"></a>\theta = g( \beta( X ) ) = g( \beta X )</span>
+<span id="cb6-141"><a href="#cb6-141"></a>$$</span>
+<span id="cb6-142"><a href="#cb6-142"></a></span>
+<span id="cb6-143"><a href="#cb6-143"></a>Así, un GLM prescribe una distribución de probabilidad para $Y$ que tendrá la siguiente forma y </span>
+<span id="cb6-144"><a href="#cb6-144"></a>será dependiente de los parámetros $\beta$ y las variables explicativas $X$</span>
+<span id="cb6-145"><a href="#cb6-145"></a>$$</span>
+<span id="cb6-146"><a href="#cb6-146"></a>f_Y( y \mid \theta ) </span>
+<span id="cb6-147"><a href="#cb6-147"></a>= f_Y( y \mid g( \beta x ) )</span>
+<span id="cb6-148"><a href="#cb6-148"></a>= h( y ) \exp\left( \eta( g( \beta x ) ) \cdot T( y ) - A( g( \beta x ) ) \right)</span>
+<span id="cb6-149"><a href="#cb6-149"></a>$$</span>
+<span id="cb6-150"><a href="#cb6-150"></a>:::</span>
+<span id="cb6-151"><a href="#cb6-151"></a>::::</span>
+<span id="cb6-152"><a href="#cb6-152"></a></span>
+<span id="cb6-153"><a href="#cb6-153"></a>En la aplicación, el ajuste de un modelo GLM a $N \in \N$ observaciones $y_1, \ldots, y_N$</span>
+<span id="cb6-154"><a href="#cb6-154"></a>de la variable aleatoria $Y$ y sus respectivas variables explicativas $x_1, \ldots, x_N$. Se asume</span>
+<span id="cb6-155"><a href="#cb6-155"></a>independencias entre las observaciones y se busca maximizar la verosimilitud de los valores </span>
+<span id="cb6-156"><a href="#cb6-156"></a>observados, pero en función del nuevo parámetro $\beta$, de ahí la parte lineal del modelo.</span>
+<span id="cb6-157"><a href="#cb6-157"></a>$$</span>
+<span id="cb6-158"><a href="#cb6-158"></a>\ell( \beta )</span>
+<span id="cb6-159"><a href="#cb6-159"></a>= \sum\limits_{i=1}^N \left( \log h( y_i ) +</span>
+<span id="cb6-160"><a href="#cb6-160"></a>\eta( g( \beta x_i ) ) \cdot T( y_i ) - A( g( \beta x_i ) \right)</span>
+<span id="cb6-161"><a href="#cb6-161"></a>$$ </span>
+<span id="cb6-162"><a href="#cb6-162"></a></span>
+<span id="cb6-163"><a href="#cb6-163"></a>De ello resulta el problema de maximización de verosimilitud que se busca resolver para ajustar un </span>
+<span id="cb6-164"><a href="#cb6-164"></a>modelo GLM.</span>
+<span id="cb6-165"><a href="#cb6-165"></a>$$</span>
+<span id="cb6-166"><a href="#cb6-166"></a>\underset{\beta \in \R^{q \times n}}{\sup} \ell( \beta ) </span>
+<span id="cb6-167"><a href="#cb6-167"></a>= \underset{\beta \in \R^{q \times n}}{\sup} \sum\limits_{i=1}^N \left( \log h( y_i ) +</span>
+<span id="cb6-168"><a href="#cb6-168"></a>\eta( g( \beta x_i ) ) \cdot T( y_i ) - A( g( \beta x_i ) \right)</span>
+<span id="cb6-169"><a href="#cb6-169"></a>$$</span>
+<span id="cb6-170"><a href="#cb6-170"></a>es de notar que el término $\sum\limits_{i=1}^N \log h( y_i )$ no depende de $\beta$ y por tal </span>
+<span id="cb6-171"><a href="#cb6-171"></a>razón puede ser omitido al momento de maximizar la verosimilitud.</span>
+<span id="cb6-172"><a href="#cb6-172"></a></span>
+<span id="cb6-173"><a href="#cb6-173"></a>En varias ocasiones no todos los parámetros $\theta$ de la densidad de probabilidad son </span>
+<span id="cb6-174"><a href="#cb6-174"></a>considerados, sino tan solo una parte de los mismos, los otros parámetros se consideran como un</span>
+<span id="cb6-175"><a href="#cb6-175"></a>valor constante ya dado o también como un parámetro a determinar. Así, se divide </span>
+<span id="cb6-176"><a href="#cb6-176"></a>$\theta = ( \theta_1, \theta_2 ), \theta_1 \in \R^{m_1}, \theta_2 \in \R^{m_2}, m = m_1 + m_2$, </span>
+<span id="cb6-177"><a href="#cb6-177"></a>donde solo se establece una función de vínculo para la primera parte $\theta_1 = g( \beta X )$. </span>
+<span id="cb6-178"><a href="#cb6-178"></a>Esta consideración en muchos casos ayuda a simplificar la formulación del modelo y el costo </span>
+<span id="cb6-179"><a href="#cb6-179"></a>computacional de estimación. En este contexto la función de verosimilitud tomaría la forma:</span>
+<span id="cb6-180"><a href="#cb6-180"></a>$$</span>
+<span id="cb6-181"><a href="#cb6-181"></a>\ell( \beta, \theta_2 )</span>
+<span id="cb6-182"><a href="#cb6-182"></a>= \sum\limits_{i=1}^N \left( \log h( y_i ) +</span>
+<span id="cb6-183"><a href="#cb6-183"></a>\eta( g( \beta x_i ), \theta_2 ) \cdot T( y_i ) - A( g( \beta x_i ), \theta_2 ) \right)</span>
+<span id="cb6-184"><a href="#cb6-184"></a>$$ </span>
+<span id="cb6-185"><a href="#cb6-185"></a></span>
+<span id="cb6-186"><a href="#cb6-186"></a>::: {.example #l8ex1 name="Regresión de Poisson"}</span>
+<span id="cb6-187"><a href="#cb6-187"></a>En este caso presentamos el modelo bastante utilizado conocido como regresión de Poisson. En donde </span>
+<span id="cb6-188"><a href="#cb6-188"></a>suponemos que $N \rightsquigarrow Pois( \lambda( x ) ER( x ) ) = Pois( g( \beta x ) ER( x ) )$</span>
+<span id="cb6-189"><a href="#cb6-189"></a>donde $\lambda$ es el parámetro a estimar en función de las variables explicativas $x$.</span>
+<span id="cb6-190"><a href="#cb6-190"></a>$$</span>
+<span id="cb6-191"><a href="#cb6-191"></a>\E<span class="co">[</span><span class="ot"> N </span><span class="co">]</span> = \lambda( x ) ER( x ) = g( \beta x ) ER( x )</span>
+<span id="cb6-192"><a href="#cb6-192"></a>$$</span>
+<span id="cb6-193"><a href="#cb6-193"></a></span>
+<span id="cb6-194"><a href="#cb6-194"></a>$$</span>
+<span id="cb6-195"><a href="#cb6-195"></a>P( N = n ) = \exp(-g( \beta x ) ER( x )) \frac{g( \beta x )^n ER( x )^n}{n!}</span>
+<span id="cb6-196"><a href="#cb6-196"></a>$$</span>
+<span id="cb6-197"><a href="#cb6-197"></a></span>
+<span id="cb6-198"><a href="#cb6-198"></a><span class="in">```{r l9t1, echo = TRUE, results = 'asis', out.width='100%', class.source = 'fold-hide'}</span></span>
+<span id="cb6-199"><a href="#cb6-199"></a><span class="in"># la librería CASdatasets fue previamente cargada</span></span>
+<span id="cb6-200"><a href="#cb6-200"></a><span class="in">data( beMTPL97 )</span></span>
+<span id="cb6-201"><a href="#cb6-201"></a><span class="in">beMTPL97 &lt;- as.data.table( beMTPL97 )</span></span>
+<span id="cb6-202"><a href="#cb6-202"></a></span>
+<span id="cb6-203"><a href="#cb6-203"></a><span class="in"># Impresión de las primeras filas de la tabla</span></span>
+<span id="cb6-204"><a href="#cb6-204"></a><span class="in">beMTPL97[ 1:15 ] %&gt;%</span></span>
+<span id="cb6-205"><a href="#cb6-205"></a><span class="in">  kable(</span></span>
+<span id="cb6-206"><a href="#cb6-206"></a><span class="in">    label = NA,</span></span>
+<span id="cb6-207"><a href="#cb6-207"></a><span class="in">    caption = "Pólizas y reclamos de automóviles en Bélgica",</span></span>
+<span id="cb6-208"><a href="#cb6-208"></a><span class="in">    row.names = FALSE,</span></span>
+<span id="cb6-209"><a href="#cb6-209"></a><span class="in">    col.names = names( beMTPL97 ),</span></span>
+<span id="cb6-210"><a href="#cb6-210"></a><span class="in">    align = paste0( rep( "r", ncol( beMTPL97 ) ), collapse = "" ),</span></span>
+<span id="cb6-211"><a href="#cb6-211"></a><span class="in">    digits = c( 0, 2, 0, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 4 ),</span></span>
+<span id="cb6-212"><a href="#cb6-212"></a><span class="in">    format.args = list( big.mark = ',', decimal.mark = '.', scientific = FALSE ),</span></span>
+<span id="cb6-213"><a href="#cb6-213"></a><span class="in">    escape = FALSE,</span></span>
+<span id="cb6-214"><a href="#cb6-214"></a><span class="in">    centering = TRUE,</span></span>
+<span id="cb6-215"><a href="#cb6-215"></a><span class="in">    booktabs = TRUE,</span></span>
+<span id="cb6-216"><a href="#cb6-216"></a><span class="in">    longtable = TRUE ) %&gt;%</span></span>
+<span id="cb6-217"><a href="#cb6-217"></a><span class="in">  kable_classic( </span></span>
+<span id="cb6-218"><a href="#cb6-218"></a><span class="in">    full_width = FALSE, </span></span>
+<span id="cb6-219"><a href="#cb6-219"></a><span class="in">    html_font = "Cambria", </span></span>
+<span id="cb6-220"><a href="#cb6-220"></a><span class="in">    position = 'center', </span></span>
+<span id="cb6-221"><a href="#cb6-221"></a><span class="in">    latex_options = c( 'hold_position', 'repeat_header', 'scale_down' ) ) %&gt;%</span></span>
+<span id="cb6-222"><a href="#cb6-222"></a><span class="in">  scroll_box( width = "100%", height = "500px" )</span></span>
+<span id="cb6-223"><a href="#cb6-223"></a><span class="in">```</span></span>
+<span id="cb6-224"><a href="#cb6-224"></a></span>
+<span id="cb6-225"><a href="#cb6-225"></a><span class="in">```{r l9c1}</span></span>
+<span id="cb6-226"><a href="#cb6-226"></a><span class="in">model_N &lt;- glm( formula = nclaims ~ ageph + sex + power + fuel + offset( log( expo ) ) + 0, </span></span>
+<span id="cb6-227"><a href="#cb6-227"></a><span class="in">                family = poisson( link = 'log' ), </span></span>
+<span id="cb6-228"><a href="#cb6-228"></a><span class="in">                data = beMTPL97 )</span></span>
+<span id="cb6-229"><a href="#cb6-229"></a><span class="in">```</span></span>
+<span id="cb6-230"><a href="#cb6-230"></a></span>
+<span id="cb6-231"><a href="#cb6-231"></a><span class="in">```{r l9t2, echo = TRUE, results = 'asis', out.width='100%', class.source = 'fold-hide'}</span></span>
+<span id="cb6-232"><a href="#cb6-232"></a><span class="in">dat &lt;- tidy( model_N )</span></span>
+<span id="cb6-233"><a href="#cb6-233"></a><span class="in">dat %&gt;%</span></span>
+<span id="cb6-234"><a href="#cb6-234"></a><span class="in">  kable(</span></span>
+<span id="cb6-235"><a href="#cb6-235"></a><span class="in">    label = NA,</span></span>
+<span id="cb6-236"><a href="#cb6-236"></a><span class="in">    caption = "Resultados del modelo GLM",</span></span>
+<span id="cb6-237"><a href="#cb6-237"></a><span class="in">    row.names = FALSE,</span></span>
+<span id="cb6-238"><a href="#cb6-238"></a><span class="in">    col.names = names( dat ),</span></span>
+<span id="cb6-239"><a href="#cb6-239"></a><span class="in">    align = 'lrrrr',</span></span>
+<span id="cb6-240"><a href="#cb6-240"></a><span class="in">    digits = c( 0, 6, 6, 6, 6 ),</span></span>
+<span id="cb6-241"><a href="#cb6-241"></a><span class="in">    format.args = list( big.mark = ',', decimal.mark = '.', scientific = FALSE ),</span></span>
+<span id="cb6-242"><a href="#cb6-242"></a><span class="in">    escape = FALSE,</span></span>
+<span id="cb6-243"><a href="#cb6-243"></a><span class="in">    centering = TRUE, </span></span>
+<span id="cb6-244"><a href="#cb6-244"></a><span class="in">    booktabs = TRUE ) %&gt;%</span></span>
+<span id="cb6-245"><a href="#cb6-245"></a><span class="in">  kable_classic( </span></span>
+<span id="cb6-246"><a href="#cb6-246"></a><span class="in">    full_width = FALSE, </span></span>
+<span id="cb6-247"><a href="#cb6-247"></a><span class="in">    html_font = "Cambria", </span></span>
+<span id="cb6-248"><a href="#cb6-248"></a><span class="in">    position = 'center', </span></span>
+<span id="cb6-249"><a href="#cb6-249"></a><span class="in">    latex_options = c( 'hold_position', 'repeat_header', 'scale_down' ) ) %&gt;%</span></span>
+<span id="cb6-250"><a href="#cb6-250"></a><span class="in">  scroll_box( width = "100%", height = "300px" )</span></span>
+<span id="cb6-251"><a href="#cb6-251"></a><span class="in">```</span></span>
+<span id="cb6-252"><a href="#cb6-252"></a></span>
+<span id="cb6-253"><a href="#cb6-253"></a><span class="in">```{r l9t3, echo = TRUE, results = 'asis', out.width='100%', class.source = 'fold-hide'}</span></span>
+<span id="cb6-254"><a href="#cb6-254"></a><span class="in">dat &lt;- glance( model_N )</span></span>
+<span id="cb6-255"><a href="#cb6-255"></a><span class="in">dat %&gt;%</span></span>
+<span id="cb6-256"><a href="#cb6-256"></a><span class="in">  kable(</span></span>
+<span id="cb6-257"><a href="#cb6-257"></a><span class="in">    label = NA,</span></span>
+<span id="cb6-258"><a href="#cb6-258"></a><span class="in">    caption = "Resultados del modelo GLM",</span></span>
+<span id="cb6-259"><a href="#cb6-259"></a><span class="in">    row.names = FALSE,</span></span>
+<span id="cb6-260"><a href="#cb6-260"></a><span class="in">    col.names = names( dat ),</span></span>
+<span id="cb6-261"><a href="#cb6-261"></a><span class="in">    align = paste0( rep( "r", ncol( dat ) ), collapse = "" ),</span></span>
+<span id="cb6-262"><a href="#cb6-262"></a><span class="in">    digits = c( 4, 0, 2, 2, 2, 2, 0, 0 ),</span></span>
+<span id="cb6-263"><a href="#cb6-263"></a><span class="in">    format.args = list( big.mark = ',', decimal.mark = '.', scientific = FALSE ),</span></span>
+<span id="cb6-264"><a href="#cb6-264"></a><span class="in">    escape = FALSE,</span></span>
+<span id="cb6-265"><a href="#cb6-265"></a><span class="in">    centering = TRUE,</span></span>
+<span id="cb6-266"><a href="#cb6-266"></a><span class="in">    booktabs = TRUE ) %&gt;%</span></span>
+<span id="cb6-267"><a href="#cb6-267"></a><span class="in">  kable_classic( </span></span>
+<span id="cb6-268"><a href="#cb6-268"></a><span class="in">    full_width = FALSE, </span></span>
+<span id="cb6-269"><a href="#cb6-269"></a><span class="in">    html_font = "Cambria", </span></span>
+<span id="cb6-270"><a href="#cb6-270"></a><span class="in">    position = 'center', </span></span>
+<span id="cb6-271"><a href="#cb6-271"></a><span class="in">    latex_options = c( 'hold_position', 'repeat_header', 'scale_down' ) ) %&gt;%</span></span>
+<span id="cb6-272"><a href="#cb6-272"></a><span class="in">  scroll_box( width = "100%", height = "200px" )</span></span>
+<span id="cb6-273"><a href="#cb6-273"></a><span class="in">```</span></span>
+<span id="cb6-274"><a href="#cb6-274"></a></span>
+<span id="cb6-275"><a href="#cb6-275"></a><span class="in">```{r l9c2}</span></span>
+<span id="cb6-276"><a href="#cb6-276"></a><span class="in">pob &lt;- expand.grid( ageph = seq( 18, 90, 1 ), </span></span>
+<span id="cb6-277"><a href="#cb6-277"></a><span class="in">                    sex = c( 'male', 'female' ),</span></span>
+<span id="cb6-278"><a href="#cb6-278"></a><span class="in">                    power = seq( 10, 250 ),</span></span>
+<span id="cb6-279"><a href="#cb6-279"></a><span class="in">                    fuel = c( 'gasoline', 'diesel' ),</span></span>
+<span id="cb6-280"><a href="#cb6-280"></a><span class="in">                    expo = 1 )</span></span>
+<span id="cb6-281"><a href="#cb6-281"></a><span class="in">pob &lt;- as.data.table( pob )</span></span>
+<span id="cb6-282"><a href="#cb6-282"></a><span class="in">pob[ , EN := predict( model_N, newdata = pob, type = 'response' ) ]</span></span>
+<span id="cb6-283"><a href="#cb6-283"></a><span class="in">```</span></span>
+<span id="cb6-284"><a href="#cb6-284"></a>:::</span>
+<span id="cb6-285"><a href="#cb6-285"></a></span>
+<span id="cb6-286"><a href="#cb6-286"></a><span class="in">```{r l8end, echo = FALSE}</span></span>
+<span id="cb6-287"><a href="#cb6-287"></a><span class="in">rm( list = ls()[ ls() != 'def.chunk.hook' ] )</span></span>
+<span id="cb6-288"><a href="#cb6-288"></a><span class="in">```</span></span>
+</code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+
+
+
+
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/pedroguarderas/seguros_generales/edit/main/lectura_08.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/pedroguarderas/seguros_generales/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>
