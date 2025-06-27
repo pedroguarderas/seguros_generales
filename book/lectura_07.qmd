@@ -24,9 +24,13 @@ desarrollamos a continuación y se lo conoce como medidas de riesgo.
 <!------------------------------------------------------------------------------------------------->
 ## Medidas de riesgo {#medidas_riesgo}
 
+Para medir el riesgo suelen ser de utilidad para determinar el capital regulatorio que debería 
+mantener alguien que está dispuesto a correr un riesgo. 
 
-::: {.Definition #dmedriskcohe title="Medida de riesgo coherente"}
-Una **medida de riesgo coeherente** es una función $\rho: \R \longrightarrow \R$, 
+Así un medida de riesgo es una función que se espera tenga algunas propiedades como.
+
+::: {.Definition #dmedriskprop title="Medida de riesgo propiedad"}
+Una **medida de riesgo** es una función $\rho: \R \longrightarrow \R$, 
 que satisface la siguientes propiedades:
 
 1. **Normalización**, el riesgo de nada es nada
@@ -34,30 +38,91 @@ $$
 \rho( 0 ) = 0
 $$
 
-1. **Homogenidad positiva**, el riesgo crece con la escala, así para cualquier $a > 0$
+2. **Homogeneidad positiva**, el riesgo crece con la escala, así para cualquier $a > 0$
 $$
 \rho( a X ) = a \rho( X )
 $$
 
-2. **Invarianza ante las traslaciones**, para cualquier $a > 0$
+3. **Invarianza ante las traslaciones**, para cualquier $a > 0$
 $$
 \rho( \alpha X + a ) = \rho( \alpha X ) + a
 $$
 
-3. **Monotonicidad**, Si $X \leq Y$
+4. **Monotonicidad**, Si $X \leq Y$
 $$
 \rho( X ) \leq \rho( Y )
 $$
 
-4. **Sub-aditividad**, el diversificar el riesgo es menor a la suma de los riesgos independientes
+5. **Sub-aditividad**, el diversificar el riesgo es menor a la suma de los riesgos independientes
 $$
 \rho( X + Y ) \leq \rho( X ) + \rho( Y )
 $$
+6. **Convexidad**, igual está relacionado con la diversificación, así para cualquier 
+$\lambda \in (0,1)$
+$$
+\rho( \lambda X + ( 1 - \lambda ) Y ) \leq \lambda \rho( X ) + ( 1 - \lambda ) \rho( Y )
+$$
+
+Una medida de riesgo se dice **coherente** si satisface la condición de normalización, homogeneidad
+positiva, monotonía y sub-aditivadad. 
+
+Por otra parte las nociones de sub-aditividad y homogenidad positiva son equivalentes a la noción
+de convexidad.
 :::
 
+A las propiedades anteriores se suma una propiedad adicional que se conoce como **objetividad**
+
+::: {.Definition #drskobj title="Objetividad"}
+Una medida de riesgo se dice que es **objetiva** si y solo si la misma depende de la distribución
+acumulada $F_X$ de la variable aleatoria $X$ sobre la que se calcula y no de la variable en si 
+mismo.
+$$
+\rho( X ) = \rho( F_X )
+$$
+:::
+
+Sin embargo, es de notar que la coherencia de una medida de riesgo puede estar en contraposición con
+la propiedad de objetividad.
+
+La siguiente proposición es de ayuda para establecer un requerimiento necesario y suficiente para 
+tener una medida coherente dado que esta es positivamente homogénea.
+
+::: {.Proposition}
+Una medida de riesgo que tiene homogeneidad positiva es coherente si y solamente si esta es convexa.
+:::
+
+Existe el siguiente resultado de potencia inusual, caracteriza las medidas de riesgo convexas y
+tiene un efecto también sobre la caracterización de medidas de riesgo coherentes. El mismo está 
+por fuera del alcance de estas notas sin embargo, vale la pena citarlo, ya que su conclusión 
+provee de un resultado que es de utilidad para construir medidas de riesgo coherentes bajo un 
+princípio de optimalidad.
+
+::: {.Theorem}
+Una medida de riesgo $\rho$ es convexa si y solamente si esta puede ser representada como el 
+infimo de esperanzas sobre medidas que son absolutamente continuas a la medida de probabilidad
+inicial $P$. Más precisamente
+$$
+\rho( X ) = -\underset{Q \in AC( P )}{\inf} \left( \E_Q\left[ X \right] + \alpha( Q ) \right)
+$$
+donde, $\alpha : AC( P ) \longrightarrow \R$ es un mapeo tal que 
+$\underset{Q \in AC( P )}{\inf} \alpha( Q ) = 0$ y $AC(P)$ es el conjunto de medidas absolutamente
+continuas respecto a $P$.
+:::
+
+Como consecuencia del teorema anterior tenemos el siguiente corolario.
+
+::: {.Corollary}
+Una medida de riesgo $\rho$ es coherente si y solamente si esta puede ser representada de la 
+siguiente forma:
+$$
+\rho( X ) = -\underset{Q \in AC( P )}{\inf} E_Q\left[ X \right]
+$$
+:::
 
 En lo que continúa citamos algunas de las medidas de riesgo usualmente utilizadas.
 
+<!------------------------------------------------------------------------------------------------->
+## Valor en riesgo $\VaR_{\alpha}$
 
 ::: {.Definition #dVaR title="Valor en riesgo"}
 Dada una variable aleatoria a valores reales $X$, el **valor en riesgo** (value at risk) de $X$ al 
@@ -67,15 +132,24 @@ $$
 $$
 :::
 
-
-
 ::: {.Proposition #varinv}
 Si la función de distribución acumulada $F_X$ es continua, entonces 
 $\VaR_{\alpha}( X ) = F_X^{-1}( \alpha )$.
 :::
 
+La medida de riesgo $\VaR_{\alpha}$ tiene las siguientes propiedades que se satisfacen para cualquier
+nivel $\alpha$ de seguridad.
 
-Por otra parte, $\VaR_{\alpha}$ para cualquier $\alpha$ no es una medida de riesgo sub-aditiva.
+1. Es una medida de riesgo normalizada
+
+2. Es una medida de riesgo con homogeneidad positiva
+
+3. Es una medida de riesgo invariante ante las traslaciones
+
+4. Es una medida de riesgo monótona
+
+5. Es una medida de riesgo que no es necesariamente sub-aditiva y en consecuencia no es una medida
+de riesgo que privilegia la diversificación.
 
 El método directo para el calcular el $\VaR_\alpha$ es directamente atacando el problema de 
 encontrar el ínfimo, esto es un problema de optimización que puede tener sus complicaciones, ya
@@ -92,7 +166,6 @@ En principio no sabemos si esta aproximación será consistente conforme se aume
 muestra, sin embargo para ello tenemos la siguiente proposición, la cual nos da una certeza al 
 respecto.
 
-
 ::: {.Proposition #appoxvar}
 Si consideramos una familia de variables aleatorias $\{X_n\}_{n\in \N}$ i.i.d con distribución común
 $F$ no necesariamente continua, entonces el percentil empírico de orden $\alpha$, 
@@ -100,7 +173,6 @@ $\xi_{n,\alpha} = F_n^{-1}( \alpha )$, que se puede extraer a partir de las $n$ 
 en la muestra converge en probabilidad al valor $\xi_{\alpha} = \VaR_{\alpha}( X )$, correspondiente
 al valor en riesgo.
 :::
-
 
 :::{.proof}
 Utilizando la versión unilateral de la desigualdad \ref{ddkw}, podemos establecer las 
@@ -138,7 +210,7 @@ distribución empírica se aproxima en probabilidad al percentil $\xi_{\alpha} =
 :::
 
 <!------------------------------------------------------------------------------------------------->
-**Algoritmo de simulación**
+### Algoritmo de simulación
 
 Con lo anterior se puede crear un algoritmo de simulación estocástico que precisamente contemple
 el respectivo nivel de convergencia, de ahí que la demostración de la proposición anterior no es 
@@ -217,6 +289,9 @@ Como se observa se tendrá que realizar muchas simulaciones más para llegar a t
 un error de aproximación adecuado.
 
 
+<!------------------------------------------------------------------------------------------------->
+## Valor en riesgo en la cola $\TVaR_{\alpha}$
+
 ::: {.Definition #dTVaR title="Valor en riesgo en la cola"}
 Dada una variable aleatoria a valores reales $X$, el **valor en riesgo en la cola** 
 (tail value at risk) de $X$ al nivel de probabilidad $\alpha \in (0,1)$ está dado por
@@ -225,6 +300,23 @@ $$
 $$
 :::
 
+La medida de riesgo $\TVaR_{\alpha}$ tiene las siguientes propiedades que se satisfacen para cualquier
+nivel $\alpha$ de seguridad.
+
+1. Es una medida de riesgo normalizada
+
+2. Es una medida de riesgo con homogeneidad positiva
+
+3. Es una medida de riesgo invariante ante las traslaciones
+
+4. Es una medida de riesgo monótona
+
+5. Es una medida de riesgo sub-aditiva
+
+En conclusión $\TVaR_{\alpha}$ es una medida de riesgo coherente.
+
+<!------------------------------------------------------------------------------------------------->
+### Algoritmo de simulación
 
 Es de notar que si se toma una variable aleatoria uniforme $U \rightsquigarrow U(\alpha,1)$, tenemos 
 que el valor en riesgo en la cola, puede ser expresado como la esperanza.
@@ -243,12 +335,8 @@ Pero como ya se mencionó, esta aproximación puede ser realmente costosa en té
 computacionales; por tal razón, se requiere utilizar métodos numéricos más eficientes.
 
 
-::: {.Proposition #TVaRcohe title="Coherencia de la medida TVaR"}
-La medida de riesgo $\TVaR_{\alpha}$ es una medida de riesgo coherente si la variable aleatoria
-sobre la cual se mide es una variable aleatoria continua.
-:::
-
-
+<!------------------------------------------------------------------------------------------------->
+## Esperanza condicional en la cola $\CTE_{\alpha}$
 
 ::: {.Definition #dCTE title="Esperanza condicional en la cola"} 
 Dada una variable aleatoria a valores reales $X$, la **esperanza condicional en la cola** 
@@ -258,8 +346,6 @@ $$
 $$
 :::
 
-
-
 ::: {.Proposition #eqtvarcte}
 Si la función de distribución acumulada $F_X$ de la variable aleatoria $X$ es continua, entonces
 se tiene la siguiente igualdad
@@ -268,7 +354,13 @@ $$
 $$
 :::
 
+::: {.Proposition #CTEcohe title="Coherencia de la medida de esperanza condicional en la cola"}
+La medida de riesgo $\CTE_{\alpha}$ es una medida de riesgo coherente si la variable aleatoria
+sobre la cual se mide es una variable aleatoria continua.
+:::
 
+<!------------------------------------------------------------------------------------------------->
+## Valor en riesgo condicionado $\CVaR_{\alpha}$
 
 ::: {.Definition #dCVaR title="Valor en riesgo condicionado"}
 Dada una variable aleatoria a valores reales $X$, el **valor en riesgo condicionado** 
@@ -280,6 +372,8 @@ $$
 :::
 
 
+<!------------------------------------------------------------------------------------------------->
+## Déficit esperado
 
 ::: {.Definition #dES title="Déficit esperado"}
 Dada una variable aleatoria a valores reales $X$, el **déficit esperado** (expected shortfall) de 
@@ -290,6 +384,8 @@ $$
 :::
 
 
+<!------------------------------------------------------------------------------------------------->
+## Valor en riesgo entrópico $\EVaR_{\alpha}$
 
 ::: {.Definition #dEVaR title="Valor en riesgo entrópico"}
 Dada una variable aleatoria a valores reales $X$, el **valor en riesgo entrópico** 
@@ -298,8 +394,6 @@ $$
 \EVaR_{\alpha}( X ) = \inf\left\{ \frac{1}{t} \ln\left( \frac{M_X( t )}{1 - \alpha} \right) \middle| t > 0 \right\}
 $$
 :::
-
-
 
 ::: {.Proposition #EVaRcohe title="Coherencia de la medida EVaR"}
 La medida de riesgo $\EVaR_{\alpha}$ es una medida de riesgo coherente.
@@ -335,6 +429,94 @@ plt <- ggplot() +
   theme_bw()
 plot( plt )
 ```
+:::
+
+<!------------------------------------------------------------------------------------------------->
+## Medidas de riesgo de Wang
+
+Hay otra forma de construir medidas de riesgo, estas son las medidas de riesgo de Wang, las mismas
+dependen de lo que conocemos como **función de distorsión** $g : [0,1] \longrightarrow [0,1]$,
+tal que $g(0) = 0$ y $g(1) = 1$.
+
+::: {.Definition #drskwang title="Medida de riesgod de Wang"}
+La **medida de riesgo de Wang** asociada a la función de distorsión $g$ y representada por $\rho_g$
+está dada por la siguiente expresión:
+$$
+\rho_g( X ) = \int\limits_{0}^{+\infty} g\left( S_X( u ) \right)\, du
+$$
+:::
+
+Por lo regular se enfoca a utilizar medidas de distorsión $g$ superlineales es decir, $g(x) \geq x$,
+para así construir medidas de riesgo de Wang de tal forma que $\rho_g( X ) \geq \E[ X ]$.
+
+Si tomamos $H( \alpha ) = \VaR_{1-\alpha}( X )$, entonces sabemos que 
+$d\left( g( \alpha ) H( \alpha ) \right) = g( \alpha ) dH( \alpha ) + H( \alpha ) dg( \alpha )$ y 
+además se tiene que:
+$$
+\int\limits_0^1 d\left( g( \alpha ) H( \alpha ) \right) = g( 1 ) H( 1 ) - g( 0 ) H( 0 ) = 0
+$$
+
+también se tiene que que $H$ no es más que la inversa de $S_X$, i.e $S_X( H( \alpha ) ) = \alpha$, 
+en pocas si realizamos el cambio de variable $u = H( \alpha )$, en la integral que define la medida 
+de riesgo de Wang. Primeramente tomando un valor finito $x \in \R$ trabajamos la integral definida, 
+así tenemos:
+$$
+\begin{split}
+\int\limits_0^{x} g( S_X( u ) )\, du
+& = \int\limits_0^{x} g( S_X( H( \alpha ) ) )\, dH( \alpha ),  \qquad \text{integral de Riemann-Stieltjes} \\
+& = \int\limits_{H^{-1}(0)}^{H^{-1}(x)} g( \alpha )\, dH( \alpha ) \\
+& = \int\limits_{S_X(0)}^{S_X(x)} g( \alpha )\, dH( \alpha ) \\
+& = \int\limits_{1}^{S_X(x)} g( \alpha )\, dH( \alpha ) \\
+& = -\int\limits_{1}^{S_X(x)} H( \alpha )\, dg( \alpha ),  \qquad \text{por la igualdad que hemos citado}  \\
+& = \int\limits_{S_X(x)}^1 H( \alpha )\, dg( \alpha ) \\
+& = \int\limits_{S_X(x)}^1 \VaR_{1 - \alpha}( X )\, dg( \alpha )
+\end{split}
+$$
+
+tomando límite $x \rightarrow +\infty$, se tiene
+$$
+\begin{split}
+\rho_g( X ) 
+& = \underset{x \rightarrow +\infty}{\lim} \int\limits_0^x g( S_X( u ) )\, du \\
+& = \underset{x \rightarrow +\infty}{\lim} \int\limits_{S_X(x)}^1 \VaR_{1 - \alpha}( X )\, dg( \alpha ) \\
+& = \int\limits_0^1 \VaR_{1 - \alpha}( X )\, dg( \alpha )
+\end{split}
+$$
+
+Esto quiere decir que una medida de riesgo de Wang, no es más que una suma ponderada por $g$ de los 
+valores $\VaR$.
+
+Como casos particulares de interés tenemos:
+
+1. Si $g = \mathbf{1}_{(1-\alpha,+\infty)}$, entonces $\rho_g( X ) = \VaR_{\alpha}( X )$
+
+2. Si $g = \min\left( \frac{x}{1-\alpha}, 1 \right)$, entonces $\rho_g( X ) = \TVaR_{\alpha}( X )$
+
+Además, para las medidas de riesgo de Wang se tiene las siguientes propiedades:
+
+1. Es una medida de riesgo con homogeneidad positiva
+
+3. Es una medida de riesgo invariante ante las traslaciones
+
+4. Es una medida de riesgo monótona
+
+Si la función de distorsión $g$ que define la medida de riesgo de Wang es una función cóncava y 
+si para una variable aleatoria $X$, la función compuesta $g \circ S_X$ es continua por derecha, 
+entonces $1 - g \circ S_X$ es efectivamente la distribución de probabilidad de alguna variable 
+aleatoria $Y$, quiere decir que:
+$$
+P( Y \leq y ) = 1 - g( F_X( y ) ),\quad \forall y \geq 0
+$$
+y por tanto
+$$
+\rho_g( X ) = \E[ Y ]
+$$
+
+En general lo que le falta a una medida de riesgo de Wang para ser coherente es que sea sub-aditiva, 
+esto puede ser determinado con las propiedades de la función de distorsión.
+
+::: {.Proposition}
+La medida de riesgo de Wang es coherente si la función de distorsión es cóncava
 :::
 
 <!------------------------------------------------------------------------------------------------->
@@ -413,7 +595,7 @@ $$
 :::
 
 
-Muchas de las veces se parte del principio de equilibrio financiero \ref{equifin}, donde 
+Muchas de las veces se parte del principio de equilibrio financiero @sec-equifin, donde 
 se busca la igualdad $\E[R] = 0$, la misma implica la siguiente relación:
 $$
 \begin{split}
@@ -487,20 +669,21 @@ F_S\left( \Pi - G - K \right) & \in \left( 1 - \alpha, +\infty \right), \qquad
 \text{la desigualdad anterior es equivalente a la inclusión}\\
 \Pi - G - K & \in F_S^{-1}\left( \left( 1 - \alpha, +\infty \right) \right),\qquad
 \text{por propiedades de la inversión de funciones}\\
-\Pi & \geq G + K + F_S^{-1}\left( 1 - \alpha \right), \qquad 
+\Pi & \geq G + K + \VaR_{1 - \alpha}(S), \qquad 
 \text{como $F_S$ es creciente, mínimo se debe satisfacer la desigualdad}
 \end{split}
 $$
+
 En especial cuando $K = r\left( \rho(S) - \E[S] \right)$, la última desigualdad toma la forma
 $$
-\Pi \geq G + r\left( \rho(S) - \E[S] \right) + F_S^{-1}\left( 1 - \alpha \right)
+\Pi \geq G + r\left( \rho(S) - \E[S] \right) + \VaR_{1 - \alpha}(S)
 $$
 
 Así, en el caso anterior si se utiliza como medida de riesgo al mismo nivel de confianza $1 - \alpha$, 
-esto es $\rho( S ) = \VaR_{1-\alpha}( S ) = F_S^{-1}( 1 - \alpha )$, la última igualdad se cumple si $S$
+esto es $\rho( S ) = \VaR_{1-\alpha}( S )$, la última igualdad se cumple si $S$
 es una variable aleatoria continua.
 $$
-\Pi \geq G + (1 + r) F_S^{-1}\left( 1 - \alpha \right) - r \E[S] 
+\Pi \geq G + (1 + r) \VaR_{1 - \alpha}(S)- r \E[S] 
 $$
 
 Si en caso los gastos $G$ son proporcionales a la prima $G = \gamma \Pi$, para una constante 
@@ -509,14 +692,18 @@ sino esto estaría en una situación insostenible donde los gastos son mayores a
 riesgo. Las desigualdades anteriores toman la forma:
 $$
 \begin{split}
-\Pi & \geq \frac{r}{1 - \gamma} K + \frac{1}{1 - \gamma} F_S^{-1}\left( 1 - \alpha \right) \\
-\Pi & \geq \frac{r}{1 - \gamma} \left( \rho(S) - \E[S] \right) + \frac{1}{1 - \gamma} F_S^{-1}\left( 1 - \alpha \right) \\
-\Pi & \geq \frac{1 + r}{1 - \gamma} F_S^{-1}\left( 1 - \alpha \right) -  \frac{r}{1 - \gamma} \E[S]
+\Pi & \geq \frac{r}{1 - \gamma} K + \frac{1}{1 - \gamma} \VaR_{1 - \alpha}(S) \\
+\Pi & \geq \frac{r}{1 - \gamma} \left( \rho(S) - \E[S] \right) + \frac{1}{1 - \gamma} \VaR_{1 - \alpha}(S) \\
+\Pi & \geq \frac{1 + r}{1 - \gamma} \VaR_{1 - \alpha}(S) -  \frac{r}{1 - \gamma} \E[S]
 \end{split}
 $$
 
-De lo anterior se observa, que un buen inicio para estimar la prima de riesgo es ciertamente 
-usar la medida $\VaR_{1-\alpha}$ al nivel adecuado de confianza $\alpha$.
+De lo anterior se observa que un buen inicio para estimar la prima de riesgo es ciertamente 
+usar la medida de riesgo dada por $\VaR_{1-\alpha}$ con el nivel adecuado de confianza $\alpha$. 
+Por otra parte, esta versión más moderna de tarificación contempla parte de la utilidad debe 
+estar reflejada en la experticia que tenga el asegurador  comprender y administrar el riesgo, 
+esto se lo incluye en el término $\frac{r}{1 - \gamma} \E[S]$.
+
 
 <!------------------------------------------------------------------------------------------------->
 ## Prima {#prima}
@@ -553,8 +740,14 @@ $$
 Esto se traduce a que ningún asegurado estará interesado en adquirir una póliza para cubrir un 
 riesgo por encima del valor total asegurado.
 
-Es así que hay algunos principios para la estimación de primas, aquí citamos algunos de los más 
-conocidos:
+
+<!------------------------------------------------------------------------------------------------->
+## Métodos clásicos para calular la prima {#sec-clasprima}
+
+Para la estimación de primas existe algunos métodos que podemos llamar clásicos, que en un principio
+no consideraban la cobertura ante el riesgo y el uso de una medida de riesgo. Son métodos bien 
+establecidos, comunes en la práctica y pueden ser ajustados para contemplar una cobertura ante 
+el riesgo, aquí citamos algunos de los más conocidos:
 
 1. Prima neta, o prima pura de riesgo
 $$
@@ -587,15 +780,20 @@ $$
 $$
 
 6. Prima de percentiles para un valor de confianza $\alpha \in [0,1]$ o prima de valor en riesgo 
-$VaR_\alpha$
+$\VaR_\alpha$
 $$
-  \Pi = \rho( S ) = \VaR_\alpha( S ) =  F_S^{-1}( \alpha )
+\begin{split}
+\Pi 
+& = \rho( S ) \\
+& = \VaR_\alpha( S ) \\
+& =  F_S^{-1}( \alpha ), \quad \text{cuando $F_S$ es continua}
+\end{split}
 $$
 
 7. Prima de valor en riesgo en la cola (Tail Value at Risk) $TVaR_\alpha$. Es el promedio uniforme
 de todos los valores en riesgo $VaR_u$, con $u \geq \alpha$.
 $$
-  \Pi = \rho( S ) = \TVaR_\alpha( S ) = \frac{1}{1-\alpha} \int\limits_{\alpha}^1 \VaR_u( S )\ du
+  \Pi = \rho( S ) = \TVaR_\alpha( S )
 $$
 
 ::: {.example #l7ex1}
@@ -690,11 +888,11 @@ Sin segmentación de la población, este el caso más sencillo para la tarificac
 
 ```{r l7t1}
 #| echo: true
-#| out-width: '100%'
+#| out-width: '60%'
 #| code-fold: true
 dat <- data.table( nom = c( 'Pago', 'Pago esperado', 'Varianza' ),
-                   cl = c( "$\\E[S]$", "$\\E[S]$", "$0$" ), 
-                   as = c( "$S - \\E[S]$", "$0$", "$\\V[S]$" ) )
+                   cl = c( "\\( \\E[S] \\)", "\\(\\E[S]\\)", "\\(0\\)" ), 
+                   as = c( "\\(S - \\E[S]\\)", "\\(0\\)", "\\(\\V[S]\\)" ) )
 dat %>%
   kable(
     label = NA,
@@ -717,11 +915,11 @@ del riesgo cubierto.
 
 ```{r l7t2}
 #| echo: true
-#| out-width: '100%'
+#| out-width: '60%'
 #| code-fold: true
 dat <- data.table( nom = c( 'Pago', 'Pago esperado', 'Varianza' ),
-                   cl = c( "$\\E[S \\mid Y]$", "$\\E[S]$", "$\\V[\\E[S \\mid Y]]$" ), 
-                   as = c( "$S - \\E[S \\mid Y]$", "$0$", "$\\V[S-\\E[S \\mid Y]]$" ) )
+                   cl = c( "\\(\\E[S \\mid Y]\\)", "\\(\\E[S]\\)", "\\(\\V[\\E[S \\mid Y]]\\)" ), 
+                   as = c( "\\(S - \\E[S \\mid Y]\\)", "\\(0\\)", "\\(\\V[S-\\E[S \\mid Y]]\\)" ) )
 dat %>%
   kable(
     label = NA,

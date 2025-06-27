@@ -1617,7 +1617,7 @@ VAP_t( c ) = \sum\limits_{k = 1}^n v( t, t_k ) \E\left[ c( t_k ) \right]
 $$
 
 <!------------------------------------------------------------------------------------------------->
-### Equilibrio financiero {#sec:equifin}
+### Equilibrio financiero {#sec-equifin}
 Se dice que un flujo financiero $c(t_1), c(t_2), \cdots, c(t_n)$ como el anterior, está en 
 **equilibrio financiero** si:
 $$
