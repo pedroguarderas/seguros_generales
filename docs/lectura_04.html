@@ -155,6 +155,14 @@ window.MathJax = {
 <script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 <style>
+.Proposition {
+  --color1: #c0c0c0;
+  --color2: #808080;
+}
+.Definition {
+  --color1: #c0c0c0;
+  --color2: #808080;
+}
 .Theorem {
   --color1: #c0c0c0;
   --color2: #808080;
@@ -163,15 +171,7 @@ window.MathJax = {
   --color1: #c0c0c0;
   --color2: #808080;
 }
-.Definition {
-  --color1: #c0c0c0;
-  --color2: #808080;
-}
 .Conjecture {
-  --color1: #c0c0c0;
-  --color2: #808080;
-}
-.Proposition {
   --color1: #c0c0c0;
   --color2: #808080;
 }
@@ -348,7 +348,7 @@ window.Quarto = {
   <li><a href="#función-de-actualización-o-descuento" id="toc-función-de-actualización-o-descuento" class="nav-link" data-scroll-target="#función-de-actualización-o-descuento"><span class="header-section-number">5.6.1</span> Función de actualización o descuento</a></li>
   <li><a href="#flujos-financieros" id="toc-flujos-financieros" class="nav-link" data-scroll-target="#flujos-financieros"><span class="header-section-number">5.6.2</span> Flujos financieros</a></li>
   <li><a href="#flujos-financieros-probables" id="toc-flujos-financieros-probables" class="nav-link" data-scroll-target="#flujos-financieros-probables"><span class="header-section-number">5.6.3</span> Flujos financieros probables</a></li>
-  <li><a href="#sec:equifin" id="toc-sec:equifin" class="nav-link" data-scroll-target="#sec\:equifin"><span class="header-section-number">5.6.4</span> Equilibrio financiero</a></li>
+  <li><a href="#sec-equifin" id="toc-sec-equifin" class="nav-link" data-scroll-target="#sec-equifin"><span class="header-section-number">5.6.4</span> Equilibrio financiero</a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/pedroguarderas/seguros_generales/edit/main/lectura_04.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/pedroguarderas/seguros_generales/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
@@ -1947,8 +1947,8 @@ VAP_t( c ) = \sum\limits_{k = 1}^n v( t, t_k ) \E\left[ c( t_k ) \right]
 \]</span></p>
 <!------------------------------------------------------------------------------------------------->
 </section>
-<section id="sec:equifin" class="level3" data-number="5.6.4">
-<h3 data-number="5.6.4" class="anchored" data-anchor-id="sec:equifin"><span class="header-section-number">5.6.4</span> Equilibrio financiero</h3>
+<section id="sec-equifin" class="level3" data-number="5.6.4">
+<h3 data-number="5.6.4" class="anchored" data-anchor-id="sec-equifin"><span class="header-section-number">5.6.4</span> Equilibrio financiero</h3>
 <p>Se dice que un flujo financiero <span class="math inline">\(c(t_1), c(t_2), \cdots, c(t_n)\)</span> como el anterior, está en <strong>equilibrio financiero</strong> si: <span class="math display">\[
 VP_0( c ) = \sum\limits_{k=0}^{n} v( 0, t_k ) c( t_k ) =  0
 \]</span></p>
@@ -4081,7 +4081,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb10-1621"><a href="#cb10-1621"></a>$$</span>
 <span id="cb10-1622"><a href="#cb10-1622"></a></span>
 <span id="cb10-1623"><a href="#cb10-1623"></a><span class="co">&lt;!-------------------------------------------------------------------------------------------------&gt;</span></span>
-<span id="cb10-1624"><a href="#cb10-1624"></a><span class="fu">### Equilibrio financiero {#sec:equifin}</span></span>
+<span id="cb10-1624"><a href="#cb10-1624"></a><span class="fu">### Equilibrio financiero {#sec-equifin}</span></span>
 <span id="cb10-1625"><a href="#cb10-1625"></a>Se dice que un flujo financiero $c(t_1), c(t_2), \cdots, c(t_n)$ como el anterior, está en </span>
 <span id="cb10-1626"><a href="#cb10-1626"></a>**equilibrio financiero** si:</span>
 <span id="cb10-1627"><a href="#cb10-1627"></a>$$</span>
