@@ -579,7 +579,8 @@ donde las variables a considerarse en principio son:
 los inversores para mantener el nivel de solvencia del ramo.
 
 En varias ocasiones el ciclo del negocio puede ser corto plazo y no permite considerar un ingreso 
-por inversiones $I = 0$.
+por inversiones $I = 0$. Esto sobre todo en el contexto donde no se haya acumulado mucha experiencia
+en el ramo, un escenario algo más desfavorable.
 $$
 R = \Pi - S - G - K
 $$
@@ -692,9 +693,9 @@ sino esto estaría en una situación insostenible donde los gastos son mayores a
 riesgo. Las desigualdades anteriores toman la forma:
 $$
 \begin{split}
-\Pi & \geq \frac{r}{1 - \gamma} K + \frac{1}{1 - \gamma} \VaR_{1 - \alpha}(S) \\
-\Pi & \geq \frac{r}{1 - \gamma} \left( \rho(S) - \E[S] \right) + \frac{1}{1 - \gamma} \VaR_{1 - \alpha}(S) \\
-\Pi & \geq \frac{1 + r}{1 - \gamma} \VaR_{1 - \alpha}(S) -  \frac{r}{1 - \gamma} \E[S]
+\Pi & \geq \frac{1}{1 - \gamma} \left( K + \VaR_{1 - \alpha}(S) \right) \\
+\Pi & \geq \frac{1}{1 - \gamma} \left( r \rho(S) - r \E[S] + \VaR_{1 - \alpha}(S) \right)\\
+\Pi & \geq \frac{1}{1 - \gamma} \left( ( 1 + r ) \VaR_{1 - \alpha}(S) -  r \E[S] \right)
 \end{split}
 $$
 
@@ -704,6 +705,33 @@ Por otra parte, esta versión más moderna de tarificación contempla parte de l
 estar reflejada en la experticia que tenga el asegurador  comprender y administrar el riesgo, 
 esto se lo incluye en el término $\frac{r}{1 - \gamma} \E[S]$.
 
+Sin mucha complicación para el caso cuando hay inversiones $I$, el razonamiento llega a ser muy 
+similar y la prima de riesgo debería satisfacer una cota como la siguiente:
+$$
+\begin{split}
+\Pi & \geq \frac{1}{1 - \gamma} \left( K - I + \VaR_{1 - \alpha}(S) \right) \\
+\Pi & \geq \frac{1}{1 - \gamma} \left( r \rho(S) - r \E[S] - I + \VaR_{1 - \alpha}(S) \right)\\
+\Pi & \geq \frac{1}{1 - \gamma} \left( ( 1 + r ) \VaR_{1 - \alpha}(S) - I -  r \E[S] \right)
+\end{split}
+$$
+
+si incluso las inversiones son proporcionales a la prima $I = \iota \Pi$ se llega a las siguientes
+desigualdades.
+$$
+\begin{split}
+\Pi & \geq \frac{1}{1 + \iota - \gamma} \left( K + \VaR_{1 - \alpha}(S) \right) \\
+\Pi & \geq \frac{1}{1 + \iota - \gamma} \left( r \rho(S) - r \E[S] + \VaR_{1 - \alpha}(S) \right)\\
+\Pi & \geq \frac{1}{1 + \iota - \gamma} \left( ( 1 + r ) \VaR_{1 - \alpha}(S) -  r \E[S] \right)
+\end{split}
+$$
+Pero, en general el retorno de las inversiones no es certero, dependiendo de los instrumentos 
+financieros que se utilice, siendo en sí $I$ también otra variable y el criterio de cobertura
+$P\left( \Pi + I - S - G - K < 0 \right) < \alpha$ debe tomar en cuenta que tanto $S$ como $I$
+son variables aleatorias, eso da una naturaleza estocástica a los dos grupos de desigualdades 
+anteriores y deben ser tomadas con mucho cuidado. La interpretación, antes que su uso, es lo 
+relevante e importante a tener en cuenta, con lo anterior se muestra que las inversiones pueden 
+contribuir a la generación de una prima de riesgo más competitiva, pero su inclusión exige un modelo 
+de riesgo más complejo y de seguro una administración de riesgos conjunta más demandante.
 
 <!------------------------------------------------------------------------------------------------->
 ## Prima {#prima}
