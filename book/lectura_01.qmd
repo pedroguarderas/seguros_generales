@@ -1,0 +1,106 @@
+<!------------------------------------------------------------------------------------------------->
+# Materia {#materia}
+
+Las presentes notas de curso han sido creadas para la materia **Matemática Actuarial de los 
+Seguros Generales** la cual es dictada en la Maestría de Ciencias Actuariales que realizan de forma 
+conjunta la "Escuela Politécnica Nacional" (EPN) y la "Pontificia Universidad Católica del Ecuador" 
+(PUCE). 
+
+Hemos creado estas notas con la motivación de brindar una referencia de la materia y facilitar el 
+aprendizaje a los estudiantes, tratando de conjugar la parte teórica del curso con ejemplos prácticos 
+implementados utilizando el lenguaje R.
+
+Este trabajo se ha realizado en colaboración entre Leonardo Vélez y Pedro Guarderas. La motivación
+y objetivo para haber creado las presentes notas es llegar a generar un buen material de aprendizaje 
+y referencia. 
+
+Sin embargo, será un placer para nosotros que las lean, critiquen y en especial nos hagan llegar
+sus observaciones y posibles mejoras.
+
+<!------------------------------------------------------------------------------------------------->
+## Personal docente {-}
+
+El profesor a cargo de la materia es el actuario **Leonardo Vélez Aguirre**.
+
+Como docente de apoyo, especialmente en la parte informática, también colaborará el 
+matemático **Pedro Guarderas**.
+
+<!------------------------------------------------------------------------------------------------->
+## Resultados de aprendizaje {-}
+
+- Contrastar los criterios de valoración actuarial en los seguros generales, así como elaborar y 
+aplicar las bases técnicas.
+
+- Aprender a obtener la distribución y momentos correspondientes de la siniestralidad total pagada
+por el asegurador y por el reasegurador en presencia de franquicias y reaseguro.
+
+- Utilizar textos informativos y de divulgación científica para el desarrollo de trabajos académicos 
+y el desempeño profesional actuarial.
+
+- Aplicar adecuadamente las fases y procedimientos de la investigación científica a fin de encauzarla 
+de manera eficiente y tendiente a la excelencia.
+
+- Desarrollar la capacidad de trabajar en equipo y el sentido de responsabilidad en el cumplimiento 
+de sus responsabilidades.
+
+- Desarrollar un espíritu crítico y creativo, y respetuoso de su docente y compañeros.
+
+<!------------------------------------------------------------------------------------------------->
+## Contenidos propuestos {-}
+
+1. **Distribuciones compuestas**
+
+2. Series de tiempo
+
+3. **El Proceso de Riesgo: Distribución clase (a,b) y algoritmo de Panjer, Distribución de 
+siniestralidad agregada**
+
+4. Modelos Lineales Generalizados (GLMs): para datos binarios y recuentos
+
+5. **Proceso de Tarificación**
+
+6. **Tarificación a priori: cálculo de la prima pura**
+
+7. Tarificación a posteriori: sistemas Bonus-Malus
+
+8. **Teoría de la Ruina**
+
+<!------------------------------------------------------------------------------------------------->
+## Referencias bibliográficas {-}
+
+### Principales libros guía {-}
+
+@PanjerLoss2012, 
+@LossModFur, 
+@modevquant, 
+@MathAssuNV1, 
+@MathAssuNV2, 
+https://nonlifemaths.github.io/. 
+
+<!------------------------------------------------------------------------------------------------->
+### Otras referencias de soporte {-}
+
+De utilidad para quien desee profundizar con más detalle en algunos conceptos
+
+@funmathstat, 
+@prinsrisk, 
+@QRisk:2015, 
+@KNight, 
+@mathstat1, 
+@mathstat2. 
+
+GIL FANA: Elementos de Matemáticas para las Ciencias del Seguro. Fundación Mapfre Estudios. 1991
+
+<!------------------------------------------------------------------------------------------------->
+## Requerimientos informáticos {-}
+
+1. Lenguaje R
+
+2. Editor de código: RStudio, VScode, ...
+
+3. Paquete R *actuar* @actuar.
+
+```{r}
+#| echo: false
+# rm( list = ls()[ ls() != 'def.chunk.hook' ] )
+```

@@ -1,7 +1,7 @@
 # Carga de librerías necesarias --------------------------------------------------------------------
 # suppressPackageStartupMessages( library( AER ) )
 suppressPackageStartupMessages( library( actuar ) )
-suppressPackageStartupMessages( library( bookdown ) )
+# suppressPackageStartupMessages( library( bookdown ) )
 # suppressPackageStartupMessages( library( boot ) )
 # suppressPackageStartupMessages( library( conflicted ) )
 suppressPackageStartupMessages( library( broom ) )
@@ -33,7 +33,7 @@ suppressPackageStartupMessages( library( lubridate ) )
 suppressPackageStartupMessages( library( nloptr ) )
 suppressPackageStartupMessages( library( openxlsx ) )
 # suppressPackageStartupMessages( library( pscl ) )
-# suppressPackageStartupMessages( library( quarto ) )
+suppressPackageStartupMessages( library( quarto ) )
 # suppressPackageStartupMessages( library( rainbow ) )
 # suppressPackageStartupMessages( library( ranger ) )
 suppressPackageStartupMessages( library( RColorBrewer ) )
@@ -84,45 +84,18 @@ for ( dr in dirs ) {
 rm( dr, dirs )
 
 # Copiando bibliografía ----------------------------------------------------------------------------
-file.copy( '~/Development/bibliography/Bibtex/bibliografia_libros.bib', 'bookdown/bib/bibliografia_libros.bib', overwrite = TRUE )
-file.copy( '~/Development/bibliography/Bibtex/bibliografia_paquetes.bib', 'bookdown/bib/bibliografia_paquetes.bib', overwrite = TRUE )
-file.copy( '~/Development/bibliography/Bibtex/bibliografia_articulos.bib', 'bookdown/bib/ibliografia_articulos.bib', overwrite = TRUE )
-
-# Descarga datos e información ---------------------------------------------------------------------
-# Descarga información si en caso está presente en la fuente de origen en Google Drive
-# fl <- 'RData/IESS_life_tables_2020.RData'
-# if ( !file.exists( fl ) ) {
-#   
-#   file_src <- as_id( 'https://drive.google.com/file/d/17E273IkxW_C4Y9Q7JqtqiDIiHnsEIXO3/view?usp=drive_link' )
-#   drive_deauth()
-#   drive_user()
-#   drive_download( file = file_src, path = fl, type = 'RData', overwrite = TRUE )
-#   
-# }
-# 
-# fl <- 'RData/INEC_cens_pob_aggregated.RData'
-# if ( !file.exists( fl ) ) {
-#   
-#   file_src <- as_id( 'https://drive.google.com/file/d/1VBDoz8n9MszL1BDIqbLKrlS7HRTlNuGo/view?usp=drive_link' )
-#   drive_deauth()
-#   drive_user()
-#   drive_download( file = file_src, path = fl, type = 'RData', overwrite = TRUE )
-#   
-# }
+file.copy( '~/Development/bibliography/Bibtex/bibliografia_libros.bib', 'book/bib/biblibros.bib', overwrite = TRUE )
+file.copy( '~/Development/bibliography/Bibtex/bibliografia_paquetes.bib', 'book/bib/bibpaquetes.bib', overwrite = TRUE )
+file.copy( '~/Development/bibliography/Bibtex/bibliografia_articulos.bib', 'book/bib/bibarticulos.bib', overwrite = TRUE )
 
 # Genera libro ------------------------------------------------------------------------------------- 
-setwd( wd )
-setwd( 'bookdown' )
-outdir <- paste0( wd, 'docs' )
-render_book( input = "lectura_01.Rmd", output_format = "bookdown::gitbook", output_dir = outdir,
-             encoding = "UTF-8", config_file = "_bookdown.yml" )
-
-# render_book( input = "lectura_01.Rmd", output_format = "bookdown::pdf_book", output_dir = outdir,
-#              encoding = "UTF-8", config_file = "_bookdown.yml" )
-
-# render_book( input = "lectura_01.Rmd", output_format = "all", output_dir = outdir,
-#              encoding = "UTF-8", config_file = "_bookdown.yml" )
-
 wd <- paste0( getActiveProject(), '/' )
+setwd( paste0( wd, 'book' ) )
+
+quarto_render( 
+  cache = TRUE,
+  cache_refresh = TRUE,
+  quiet = FALSE )
+
 setwd( wd )
 gc()

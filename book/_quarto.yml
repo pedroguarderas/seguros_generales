@@ -1,0 +1,101 @@
+project:
+  type: book
+  output-dir: ../docs
+
+book:
+  title: "Matemáticas Actuariales para Seguros Generales"
+  author: "Leonardo Vélez y Pedro Guarderas"
+  reader-mode: true
+  # page-footer:
+  #   left: |
+  #     Matemáticas Actuariales para Seguros Generales escrito por Leonardo Vélez y Pedro Guarderas
+  #   right: |
+  #     Este libro ha sido creado con <a href="https://quarto.org/">Quarto</a>.
+  repo-url: "https://github.com/pedroguarderas/seguros_generales"
+  repo-branch: main
+  repo-actions: [edit, issue]
+  chapters: [ 
+    "index.qmd",
+    "lectura_01.qmd",
+    "lectura_02.qmd",
+    "lectura_03.qmd",
+    "lectura_04.qmd",
+    "lectura_05.qmd",
+    "lectura_06.qmd",
+    "lectura_07.qmd",
+    "lectura_08.qmd",
+    "lectura_09.qmd",
+    "lectura_10.qmd",
+    "lectura_11.qmd" ]
+  downloads: [ pdf ]
+  
+bibliography: [ "bib/biblibros.bib", "bib/bibpaquetes.bib", "bib/bibarticulos.bib" ]
+csl: "springer-basic-brackets-no-et-al-alphabetical.csl"
+
+filters:
+  - custom-numbered-blocks
+  
+format: 
+  html: 
+    theme: default
+    css: style.css
+    fontsize: 12pt
+    mainfont: Cambria
+    toc: true
+    toc-depth: 3
+    toc-location: right
+    number-sections: true 
+    linestretch: 1.5
+    fig-cap-location: top
+    tbl-cap-location: top
+    html-math-method: mathjax
+    include-in-header: macros.html
+    grid: 
+      sidebar-width: 300px
+      body-width: 1250px
+      margin-width: 300px
+    author-meta: "Leonardo Vélez y Pedro Guarderas"
+    df-print: kable
+    code-link: false
+    code-overflow: wrap
+    code-tools: true
+    code-line-numbers: true
+    code-copy: true
+    code-fold: show
+  pdf:
+    include-in-header: preamble.tex
+    pdf-engine: latexmk
+    cite-method: biblatex
+    biblatexoptions: [ bibencoding=utf8, style=numeric-verb, citestyle=numeric, labelnumber=true,
+    backend=biber, natbib=false, maxnames=10, sorting=nty, maxcitenames=2, hyperref=true ]
+    fontsize: 11pt
+    keep-tex: true
+    toc: true
+    toc-depth: 3
+    code-line-numbers: true
+
+format-links: [ ipynb, pdf ]
+
+execute: 
+  cache: true
+
+freeze: auto
+
+custom-numbered-blocks:
+  groups:
+    thmlike:
+      boxstyle: foldbox.simple
+      collapse: false
+      listin: [mathstuff]
+    todos: default  
+  classes:
+    Theorem:
+      group: thmlike
+    Proposition:
+      group: thmlike
+    Corollary:
+      group: thmlike
+    Conjecture:
+      group: thmlike
+    Definition:
+      group: thmlike

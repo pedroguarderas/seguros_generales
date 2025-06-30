@@ -1,0 +1,164 @@
+<!------------------------------------------------------------------------------------------------->
+# Estimación de valores extremos {#estimacion_valores_extremos}
+
+```{r}
+#| echo: false
+#| warning: false
+source("_common.R")
+```
+
+
+::: {.Definition #dmaxstab  title="Distribución con cola pesada"}
+Una variable aleatoria a valores reales $X$ se dice que tiene su distribución $F$  es de 
+**cola pesada hacia la derecha** si el siguiente límite no es finito.
+$$
+\underset{x \rightarrow +\infty}{\lim} \exp( t x ) P( X > x ) 
+= \underset{x \rightarrow +\infty}{\lim} \exp( t x ) ( 1 - F( x ) ) 
+= + \infty, \qquad \forall t > 0
+$$
+
+de forma muy similar diremos que la distribución tiene **cola pesada hacia la izquierda** si 
+$$
+\underset{x \rightarrow -\infty}{\lim} \exp( -t x ) P( X \leq x ) 
+= \underset{x \rightarrow -\infty}{\lim} \exp( -t x ) F( x )
+= + \infty, \qquad \forall t > 0
+$$
+:::
+::::
+
+Como consecuencia de la definición anterior, las variables aleatoria a valores reales que tiene
+cola pesada no poseen función generadora de momentos ya que la integral a continuación diverge 
+para cualquier valor $t > 0$
+$$
+\int\limits_{\R} \exp( t x ) dF( x ) = + \infty
+$$
+ 
+<!------------------------------------------------------------------------------------------------->
+
+::: {.Theorem #tvalext1  title="Fisher-Tippett-Gnedenko"}
+Si consideramos una secuencia de variables aleatorias $\{X_i\}_{i\in \N}$ las mismas
+son i.i.d, con distribución acumulada $F$. Entonces, si existen dos sucesiones de valores reales 
+$\{a_n\}_{n \in \N}$ y $\{b_n\}_{n \in \N}$, con $a_n > 0$ para cualquier 
+$n \in \N$ y una distribución acumulada no degenerada $G$, de tal forma que para la 
+variable aleatoria del máximo $M_n = \max\{ X_1, \ldots, X_n \}$ se satisfaga el siguiente límite
+$$
+\underset{n \rightarrow +\infty}{\lim} P\left( \frac{M_n - b_n}{a_n} < x\right)
+= \underset{n \rightarrow +\infty}{\lim} ( F\left( a_n x + b_n \right) )^n 
+= G( x ),
+\forall x \in \R
+$$
+decimos por tanto que la distribución $F$ pertenece al **máximo dominio de atracción** de $G$ y lo
+representamos por $F \in MDA( G )$.
+
+Además, las distribuciones $G$ vienen caracterizadas por ser alguna de las distribuciones 
+de valores extremos generalizadas $GEV( \mu, \sigma, \xi )$. Las cuales engloban tres tipos 
+relevantes:
+
+1. **Tipo I**, una distribución de Gumbel 
+$G(x) = \exp\left( -\exp\left( -\frac{x-\mu}{\sigma} \right) \right)$, para 
+$x \in \R, \xi = 0$
+
+2. **Tipo II**, una distribución de Fréchet 
+$G( x ) = \exp\left( -\left(1 + \xi\frac{x-\mu}{\sigma}\right)^{-\frac{1}{\xi}} \right)$, para 
+$x > \mu - \frac{\sigma}{\xi}$ y $\frac{1}{\xi} > 0$,
+
+3. **Tipo III**, una distribución de Weibull inversa 
+$G( x ) = \exp\left( -\left(1 - |\xi|\frac{x-\mu}{\sigma}\right)^{\frac{1}{\xi}} \right)$, para 
+$x < \mu + \frac{\sigma}{|\xi|}$ y $\frac{1}{\xi} < 0$,
+:::
+::::
+
+<!------------------------------------------------------------------------------------------------->
+
+::: {.Theorem #tvalext2 title="Pickands-Balkema-De Haan"}
+Sea $F_u$ la distribución de exceso asociada a la variable aleatoria $X$ y con umbral de 
+condicionamiento $u > 0$. Entonces, para cualquier $\varepsilon \in \R$ tenemos que 
+$F \in MDA( H )$ para alguna distribución $H = GEV( \mu, \sigma, \varepsilon )$ si y solamente
+si existe una distribución $G = GPD( \nu, \beta, \varepsilon )$, de tal forma que el siguiente 
+límite se satisface por la distribución de exceso $F_u$.
+$$
+\underset{u \longrightarrow x_F}{\lim} \underset{0 < x < x_F - u}{\sup} 
+\left| F_u( x ) - G( x ) \right| = 0
+$$
+donde $x_F = \sup\{ x\in \R \mid F(x) < 1 \}$ y $\nu, \beta$ dependen de los parámetros 
+$\mu$, $\sigma$ y $u$.
+:::
+::::
+
+El teorema anterior \ref{tvalext2} en cierta forma sugiere que si en el límite la distribución de 
+exceso a partir de un valor de condicionamiento $u$ cada vez se comporta más como una distribución 
+de generalizada de Pareto. Entonces, la distribución de los máximos que se observen de una muestra
+de la variable aleatoria $X$ tienen un comportamiento que puede ser descrito por una distribución 
+de valores extremos generalizada.
+
+Un forma de estimar si hay la posibilidad de presentar valores extremos es tomando un corte a un 
+nivel $u$ de los valores observados de reclamos $X_1, \ldots, X_n$, es decir tomar de la muestra 
+todos los valores $\{ X_i \mid X_i \geq u \}$, a estos valores realizarles un test de ajuste
+a una distribución de Pareto generalizada $GPD( \nu, \beta, \varepsilon )$, si el test es aceptable
+y no se rechaza la hipótesis nula, entonces tenemos el resultado de aproximación anterior 
+\ref{tvalext2}. Luego se puede simular los reclamos de forma condicional.
+
+Es importante observar antes de continuar que para estudiar los valores extremos de reclamos estos
+no deben haber pasado por alguna deducción, después de aplicar alguna función deducible $D$, sino 
+posiblemente estaremos en el caso inútil de tener valores truncados, con una cola limitada, para 
+los cuales es imposible estimar de forma adecuada alguna distribución de valores extremos.
+
+<!------------------------------------------------------------------------------------------------->
+## Estimación con valores extremos
+
+Para generar un modelo utilizando valores extremos se puede tomar la siguiente aproximación 
+haciendo uso \ref{tvalext2}
+
+1. Seleccionar un valor de corte $u > 0$.
+
+2. A partir de la muestra de valores de reclamos observados, tomar aquellos valores observados 
+tales que $X_i \geq u$.
+
+3. Al conjunto $\{ X_i \mid X_i \geq u \}$ aplicarle un test de ajuste a una distribución de Pareto
+generalizada $GPD( u, \beta, \varepsilon )$, donde $u$ está fijo como parámetro.
+
+4. Si el test es satisfactorio, buscar un nuevo $u$, realizar nuevamente los pasos 2 y 3. Comparar
+el resultado de ajuste con el anterior y decidir cuál $u$ mantener según algún criterio de 
+selección estadística. Usualmente un criterio de información o la significancia de los valores $p$
+
+   Si llegamos a obtener un resultado satisfactorio para algún $u > 0$, podemos concluir con cierto
+nivel de certeza, que los valores extremos de los reclamos si pueden ser descritos con una 
+distribución de valores extremos generalizada $GEV( \mu, \sigma, \varepsilon )$ o de forma 
+equivalente que los reclamos en la cola $X \geq u$ pueden ser descritos con una distribución de 
+Pareto generalizada $GPD( u, \beta, \varepsilon )$.
+
+5. Se ajusta una distribución de severidad $F$ a todos los reclamos en la muestra $X$. La 
+distribución que se ajusta, debe estar precisamente dentro de la familia de funciones que están el 
+dominio máximo de atracción de la familia de distribuciones de valores extremos generalizadas, 
+i.e. $F \in MDA( GEV( \mu, \sigma, \varepsilon ) )$.
+
+6. Si la prueba anterior fue satisfactoria para algún $u > 0$. Se determina a que percentil 
+$p_u$ pertenece, esto se lo puede realizar a partir de la muestra mismo $F_n( X \leq u ) = p_u$ o 
+con la distribución ajustada para los reclamos $F( X \leq u ) = p_u$.
+
+<!------------------------------------------------------------------------------------------------->
+## Simulación con valores extremos
+Si en caso se desea simular los reclamos, se toma con probabilidad $p_u$ un muestra con la 
+distribución truncada $X \rightsquigarrow F_{(u)}( x ) = F( x \mid X \leq u ) = \frac{F(\min(u,x))}{F(u)}$ y con 
+probabilidad $1 - p_u$ una muestra con la distribución de Pareto generalizada estimada 
+$X \rightsquigarrow G = GPD( u, \beta, \varepsilon )$.
+
+Así, en particular al esperanza de $X$ tiene al forma
+$$
+\E[ X ]
+= \E[ X \mid X \leq u ] P( X \leq u ) + \E[ X \mid X > u ] P( X > u ) 
+= p_u \E_{F_{(u)}}[ X ] + \left( 1 - p_u \right) \E_{G}[ X ]
+$$
+
+Si la muestra inicial es lo suficientemente representable y por tanto tiene un buen tamaño, el 
+valor $p_u$ puede ser realmente cercano a $1$, por tal razón si se decide realizar una simulación de 
+valores extremos de tamaño $m$, se tiene que tomar en cuenta que en promedio $m ( 1 - p_u )$ de esos 
+valores serán valores extremos, si $m$ no es lo suficientemente grande puede que los valores 
+extremos simulados sean cero en cantidad y habrá sido inútil el haber realizado una estimación más 
+compleja con  valores extremos, ya que no se la está utilizando en las simulaciones. En tales 
+circunstancias es mucho mejor utilizar algún algoritmo determinista que supere este problema.
+
+```{r l10end, echo = FALSE}
+rm( list = ls()[ ls() != 'def.chunk.hook' ] )
+```
+
