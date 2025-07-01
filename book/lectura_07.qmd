@@ -63,8 +63,8 @@ $$
 \rho( \lambda X + ( 1 - \lambda ) Y ) \leq \lambda \rho( X ) + ( 1 - \lambda ) \rho( Y )
 $$
 
-Una medida de riesgo se dice **coherente** si satisface la condición de normalización, homogeneidad
-positiva, monotonía y sub-aditivadad. 
+Una medida de riesgo se dice **coherente** si satisface la condición de homogeneidad positiva, 
+monotonía, invarianza ante las traslaciones y sub-aditivadad. 
 
 Por otra parte las nociones de sub-aditividad y homogenidad positiva son equivalentes a la noción
 de convexidad.
