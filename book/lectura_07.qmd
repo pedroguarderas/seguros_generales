@@ -488,9 +488,9 @@ valores $\VaR$.
 
 Como casos particulares de interés tenemos:
 
-1. Si $g = \mathbf{1}_{(1-\alpha,+\infty)}$, entonces $\rho_g( X ) = \VaR_{\alpha}( X )$
+1. Si $g( x ) = \mathbf{1}_{(\alpha,+\infty)}$, entonces $\rho_g( X ) = \VaR_{1-\alpha}( X )$
 
-2. Si $g = \min\left( \frac{x}{1-\alpha}, 1 \right)$, entonces $\rho_g( X ) = \TVaR_{\alpha}( X )$
+2. Si $g( x ) = \min\left( \frac{x}{\alpha}, 1 \right)$, entonces $\rho_g( X ) = \TVaR_{1-\alpha}( X )$
 
 Además, para las medidas de riesgo de Wang se tiene las siguientes propiedades:
 
@@ -731,7 +731,8 @@ son variables aleatorias, eso da una naturaleza estocástica a los dos grupos de
 anteriores y deben ser tomadas con mucho cuidado. La interpretación, antes que su uso, es lo 
 relevante e importante a tener en cuenta, con lo anterior se muestra que las inversiones pueden 
 contribuir a la generación de una prima de riesgo más competitiva, pero su inclusión exige un modelo 
-de riesgo más complejo y de seguro una administración de riesgos conjunta más demandante.
+de riesgo más complejo, una administración entre activos y pasivos más activa y de seguro una 
+gestión de riesgos conjunta más demandante.
 
 <!------------------------------------------------------------------------------------------------->
 ## Prima {#prima}
@@ -760,8 +761,8 @@ $$
 Esta propiedad implica que al configurar un producto de seguro con mejor cobertura, se espera 
 una prima de mayor costo.
 
-3. Si el riesgo a cubrir está limitado, es decir $P( S \leq M ) = 1$, para un valor $M > 0$, 
-entonces jamás la prima será superior a $M$
+3. Si el riesgo a cubrir está limitado es decir, para la variable del valor total de reclamo $S$
+tenemos que $P( S \leq M ) = 1$, para un valor $M > 0$, entonces jamás la prima será superior a $M$
 $$
 \rho( S ) \leq M
 $$

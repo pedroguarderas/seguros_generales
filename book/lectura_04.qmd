@@ -216,6 +216,35 @@ S( x ) = 1 - F( x ) = 1 - P( X \leq x ) = P( X > x )
 $$
 :::
 
+Existe una relación interesante entre la función de supervivencia y la esperanza de la variable 
+aleatoria $X$. Cuando se da el caso que la variable aleatoria $X$ solo toma valores non-negativos
+$X \geq 0$. Por una parte tenemos la siguiente igualdad para cualquier $y \geq 0$
+$$
+S_X( y ) y =\int\limits_0^y d( x S_X( x ) ) 
+= \int\limits_0^y x\ dS_X( x ) + \int\limits_0^y S_X( x )\ dx
+$$
+
+En el límite $\underset{y \rightarrow +\infty}{\lim} S_X( y ) y = 0$ y por otra parte
+$$
+\int\limits_0^y x\ dS_X( x )
+= - \int\limits_0^y x\ dF_X( x )
+$$
+y por tanto uniendo estos dos resultados
+$$
+\int\limits_0^y x\ dF_X( x ) = \int\limits_0^y dS_X( x ) - S_X( y ) y
+$$
+
+si tomamos límites cuando $y \rightarrow +\infty$
+$$
+\E[ X ] 
+= \int\limits_0^{+\infty} x\ dF_X( x )
+= \underset{y \rightarrow +\infty}{\lim} \int\limits_0^y x\ dF_X( x )
+= \underset{y \rightarrow +\infty}{\lim} \left( \int\limits_0^y dS_X( x ) - S_X( y )y \right)
+= \int\limits_0^{+\infty} dS_X( x )
+$$
+
+Es decir hay otra forma de calcular la esperanza matemática de una variable aleatoria $X$ 
+non-negativa, utilizando su función de supervivencia $S_X$.
 
 Hay un caso bastante conocido, el mismo es el más presentado en el curso introductorio de teoría
 de probabilidades, precisamente se hace uso del teorema fundamental del cálculo para poder 
@@ -229,7 +258,6 @@ a valores reales $X$, es una función $f: \R \longrightarrow \R$, tal que
 $$
 P( a \leq X \leq b ) = F( b ) - F( a ) = \int\limits_a^b f( x )\ dx
 $$
-
 Así se satisface la siguiente igualdad
 $$
 F( x )
