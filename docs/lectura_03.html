@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.6.42">
+<meta name="generator" content="quarto-1.7.32">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -22,8 +22,9 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: middle;
 }
 /* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -34,7 +35,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -67,15 +68,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <meta name="quarto:offset" content="./">
 <link href="./lectura_04.html" rel="next">
 <link href="./lectura_02.html" rel="prev">
-<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-257450a62f84a916ff723c9590a8c97c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-00064947a2eea59a243d424dd27b9f68.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <link href="site_libs/quarto-contrib/foldbox/foldbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
@@ -136,11 +138,7 @@ window.MathJax = {
 <script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 <style>
-.Corollary {
-  --color1: #c0c0c0;
-  --color2: #808080;
-}
-.Theorem {
+.Proposition {
   --color1: #c0c0c0;
   --color2: #808080;
 }
@@ -148,11 +146,15 @@ window.MathJax = {
   --color1: #c0c0c0;
   --color2: #808080;
 }
+.Theorem {
+  --color1: #c0c0c0;
+  --color2: #808080;
+}
 .Conjecture {
   --color1: #c0c0c0;
   --color2: #808080;
 }
-.Proposition {
+.Corollary {
   --color1: #c0c0c0;
   --color2: #808080;
 }
@@ -191,7 +193,7 @@ window.Quarto = {
 <link rel="stylesheet" href="style.css">
 </head>
 
-<body class="nav-sidebar floating">
+<body class="nav-sidebar floating quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -690,6 +692,16 @@ window.Quarto = {
 </section>
 <section id="visita-web-de-la-scvs-y-jprf" class="level2" data-number="4.12">
 <h2 data-number="4.12" class="anchored" data-anchor-id="visita-web-de-la-scvs-y-jprf"><span class="header-section-number">4.12</span> Visita web de la SCVS y JPRF</h2>
+<ul>
+<li>https://www.supercias.gob.ec/portalscvs/index.htm
+<ul>
+<li>Publicaciones y Resoluciones –&gt; Seguros –&gt; Normativa y resoluciones –&gt; Normativa –&gt; Codificación</li>
+</ul></li>
+<li>https://jprf.gob.ec/
+<ul>
+<li>Resoluciones –&gt; Codificación</li>
+</ul></li>
+</ul>
 </section>
 <section id="principios-básicos-del-seguro" class="level2" data-number="4.13">
 <h2 data-number="4.13" class="anchored" data-anchor-id="principios-básicos-del-seguro"><span class="header-section-number">4.13</span> Principios básicos del seguro</h2>
@@ -797,8 +809,6 @@ window.Quarto = {
 </tr>
 </tbody>
 </table>
-
-
 </div>
 </div>
 <p>Estas características permiten distinguir claramente las operaciones de seguro de las apuestas o la especulación financiera.</p>
@@ -938,287 +948,293 @@ window.Quarto = {
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
-window.document.addEventListener("DOMContentLoaded", function (event) {
-  const toggleBodyColorMode = (bsSheetEl) => {
-    const mode = bsSheetEl.getAttribute("data-mode");
-    const bodyEl = window.document.querySelector("body");
-    if (mode === "dark") {
-      bodyEl.classList.add("quarto-dark");
-      bodyEl.classList.remove("quarto-light");
-    } else {
-      bodyEl.classList.add("quarto-light");
-      bodyEl.classList.remove("quarto-dark");
-    }
-  }
-  const toggleBodyColorPrimary = () => {
-    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
-    if (bsSheetEl) {
-      toggleBodyColorMode(bsSheetEl);
-    }
-  }
-  toggleBodyColorPrimary();  
-  const icon = "";
-  const anchorJS = new window.AnchorJS();
-  anchorJS.options = {
-    placement: 'right',
-    icon: icon
-  };
-  anchorJS.add('.anchored');
-  const isCodeAnnotation = (el) => {
-    for (const clz of el.classList) {
-      if (clz.startsWith('code-annotation-')) {                     
-        return true;
-      }
-    }
-    return false;
-  }
-  const onCopySuccess = function(e) {
-    // button target
-    const button = e.trigger;
-    // don't keep focus
-    button.blur();
-    // flash "checked"
-    button.classList.add('code-copy-button-checked');
-    var currentTitle = button.getAttribute("title");
-    button.setAttribute("title", "Copied!");
-    let tooltip;
-    if (window.bootstrap) {
-      button.setAttribute("data-bs-toggle", "tooltip");
-      button.setAttribute("data-bs-placement", "left");
-      button.setAttribute("data-bs-title", "Copied!");
-      tooltip = new bootstrap.Tooltip(button, 
-        { trigger: "manual", 
-          customClass: "code-copy-button-tooltip",
-          offset: [0, -8]});
-      tooltip.show();    
-    }
-    setTimeout(function() {
-      if (tooltip) {
-        tooltip.hide();
-        button.removeAttribute("data-bs-title");
-        button.removeAttribute("data-bs-toggle");
-        button.removeAttribute("data-bs-placement");
-      }
-      button.setAttribute("title", currentTitle);
-      button.classList.remove('code-copy-button-checked');
-    }, 1000);
-    // clear code selection
-    e.clearSelection();
-  }
-  const getTextToCopy = function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-  }
-  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-    text: getTextToCopy
-  });
-  clipboard.on('success', onCopySuccess);
-  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-      text: getTextToCopy,
-      container: window.document.getElementById('quarto-embedded-source-code-modal')
-    });
-    clipboardModal.on('success', onCopySuccess);
-  }
-  const viewSource = window.document.getElementById('quarto-view-source') ||
-                     window.document.getElementById('quarto-code-tools-source');
-  if (viewSource) {
-    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
-    viewSource.addEventListener("click", function(e) {
-      if (sourceUrl) {
-        // rstudio viewer pane
-        if (/\bcapabilities=\b/.test(window.location)) {
-          window.open(sourceUrl);
-        } else {
-          window.location.href = sourceUrl;
-        }
-      } else {
-        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
-        modal.show();
-      }
-      return false;
-    });
-  }
-  function toggleCodeHandler(show) {
-    return function(e) {
-      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
-      for (let i=0; i<detailsSrc.length; i++) {
-        const details = detailsSrc[i].parentElement;
-        if (show) {
-          details.open = true;
-        } else {
-          details.removeAttribute("open");
-        }
-      }
-      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
-      const fromCls = show ? "hidden" : "unhidden";
-      const toCls = show ? "unhidden" : "hidden";
-      for (let i=0; i<cellCodeDivs.length; i++) {
-        const codeDiv = cellCodeDivs[i];
-        if (codeDiv.classList.contains(fromCls)) {
-          codeDiv.classList.remove(fromCls);
-          codeDiv.classList.add(toCls);
-        } 
-      }
-      return false;
-    }
-  }
-  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
-  if (hideAllCode) {
-    hideAllCode.addEventListener("click", toggleCodeHandler(false));
-  }
-  const showAllCode = window.document.getElementById("quarto-show-all-code");
-  if (showAllCode) {
-    showAllCode.addEventListener("click", toggleCodeHandler(true));
-  }
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-    var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp('/' + window.location.host + '/');
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
-    }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-        // undo the damage that might have been done by quarto-nav.js in the case of
-        // links that we want to consider external
-        if (link.dataset.originalHref !== undefined) {
-          link.href = link.dataset.originalHref;
-        }
-      }
-    }
-  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
-    const config = {
-      allowHTML: true,
-      maxWidth: 500,
-      delay: 100,
-      arrow: false,
-      appendTo: function(el) {
-          return el.parentElement;
-      },
-      interactive: true,
-      interactiveBorder: 10,
-      theme: 'quarto',
-      placement: 'bottom-start',
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
     };
-    if (contentFn) {
-      config.content = contentFn;
-    }
-    if (onTriggerFn) {
-      config.onTrigger = onTriggerFn;
-    }
-    if (onUntriggerFn) {
-      config.onUntrigger = onUntriggerFn;
-    }
-    window.tippy(el, config); 
-  }
-  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-  for (var i=0; i<noterefs.length; i++) {
-    const ref = noterefs[i];
-    tippyHover(ref, function() {
-      // use id or data attribute instead here
-      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-      try { href = new URL(href).hash; } catch {}
-      const id = href.replace(/^#\/?/, "");
-      const note = window.document.getElementById(id);
-      if (note) {
-        return note.innerHTML;
-      } else {
-        return "";
-      }
-    });
-  }
-  const xrefs = window.document.querySelectorAll('a.quarto-xref');
-  const processXRef = (id, note) => {
-    // Strip column container classes
-    const stripColumnClz = (el) => {
-      el.classList.remove("page-full", "page-columns");
-      if (el.children) {
-        for (const child of el.children) {
-          stripColumnClz(child);
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
         }
       }
+      return false;
     }
-    stripColumnClz(note)
-    if (id === null || id.startsWith('sec-')) {
-      // Special case sections, only their first couple elements
-      const container = document.createElement("div");
-      if (note.children && note.children.length > 2) {
-        container.appendChild(note.children[0].cloneNode(true));
-        for (let i = 1; i < note.children.length; i++) {
-          const child = note.children[i];
-          if (child.tagName === "P" && child.innerText === "") {
-            continue;
-          } else {
-            container.appendChild(child.cloneNode(true));
-            break;
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
           }
         }
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(container);
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+    const viewSource = window.document.getElementById('quarto-view-source') ||
+                       window.document.getElementById('quarto-code-tools-source');
+    if (viewSource) {
+      const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+      viewSource.addEventListener("click", function(e) {
+        if (sourceUrl) {
+          // rstudio viewer pane
+          if (/\bcapabilities=\b/.test(window.location)) {
+            window.open(sourceUrl);
+          } else {
+            window.location.href = sourceUrl;
+          }
+        } else {
+          const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+          modal.show();
         }
-        return container.innerHTML
+        return false;
+      });
+    }
+    function toggleCodeHandler(show) {
+      return function(e) {
+        const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+        for (let i=0; i<detailsSrc.length; i++) {
+          const details = detailsSrc[i].parentElement;
+          if (show) {
+            details.open = true;
+          } else {
+            details.removeAttribute("open");
+          }
+        }
+        const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+        const fromCls = show ? "hidden" : "unhidden";
+        const toCls = show ? "unhidden" : "hidden";
+        for (let i=0; i<cellCodeDivs.length; i++) {
+          const codeDiv = cellCodeDivs[i];
+          if (codeDiv.classList.contains(fromCls)) {
+            codeDiv.classList.remove(fromCls);
+            codeDiv.classList.add(toCls);
+          } 
+        }
+        return false;
+      }
+    }
+    const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+    if (hideAllCode) {
+      hideAllCode.addEventListener("click", toggleCodeHandler(false));
+    }
+    const showAllCode = window.document.getElementById("quarto-show-all-code");
+    if (showAllCode) {
+      showAllCode.addEventListener("click", toggleCodeHandler(true));
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
       } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
         if (window.Quarto?.typesetMath) {
           window.Quarto.typesetMath(note);
         }
-        return note.innerHTML;
-      }
-    } else {
-      // Remove any anchor links if they are present
-      const anchorLink = note.querySelector('a.anchorjs-link');
-      if (anchorLink) {
-        anchorLink.remove();
-      }
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(note);
-      }
-      if (note.classList.contains("callout")) {
-        return note.outerHTML;
-      } else {
-        return note.innerHTML;
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
       }
     }
-  }
-  for (var i=0; i<xrefs.length; i++) {
-    const xref = xrefs[i];
-    tippyHover(xref, undefined, function(instance) {
-      instance.disable();
-      let url = xref.getAttribute('href');
-      let hash = undefined; 
-      if (url.startsWith('#')) {
-        hash = url;
-      } else {
-        try { hash = new URL(url).hash; } catch {}
-      }
-      if (hash) {
-        const id = hash.replace(/^#\/?/, "");
-        const note = window.document.getElementById(id);
-        if (note !== null) {
-          try {
-            const html = processXRef(id, note.cloneNode(true));
-            instance.setContent(html);
-          } finally {
-            instance.enable();
-            instance.show();
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
           }
         } else {
-          // See if we can fetch this
-          fetch(url.split('#')[0])
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
           .then(res => res.text())
           .then(html => {
             const parser = new DOMParser();
             const htmlDoc = parser.parseFromString(html, "text/html");
-            const note = htmlDoc.getElementById(id);
+            const note = htmlDoc.querySelector('main.content');
             if (note !== null) {
-              const html = processXRef(id, note);
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
               instance.setContent(html);
             } 
           }).finally(() => {
@@ -1226,185 +1242,161 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             instance.show();
           });
         }
-      } else {
-        // See if we can fetch a full url (with no hash to target)
-        // This is a special case and we should probably do some content thinning / targeting
-        fetch(url)
-        .then(res => res.text())
-        .then(html => {
-          const parser = new DOMParser();
-          const htmlDoc = parser.parseFromString(html, "text/html");
-          const note = htmlDoc.querySelector('main.content');
-          if (note !== null) {
-            // This should only happen for chapter cross references
-            // (since there is no id in the URL)
-            // remove the first header
-            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
-              note.children[0].remove();
-            }
-            const html = processXRef(null, note);
-            instance.setContent(html);
-          } 
-        }).finally(() => {
-          instance.enable();
-          instance.show();
-        });
-      }
-    }, function(instance) {
-    });
-  }
-      let selectedAnnoteEl;
-      const selectorForAnnotation = ( cell, annotation) => {
-        let cellAttr = 'data-code-cell="' + cell + '"';
-        let lineAttr = 'data-code-annotation="' +  annotation + '"';
-        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
-        return selector;
-      }
-      const selectCodeLines = (annoteEl) => {
-        const doc = window.document;
-        const targetCell = annoteEl.getAttribute("data-target-cell");
-        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
-        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
-        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
-        const lineIds = lines.map((line) => {
-          return targetCell + "-" + line;
-        })
-        let top = null;
-        let height = null;
-        let parent = null;
-        if (lineIds.length > 0) {
-            //compute the position of the single el (top and bottom and make a div)
-            const el = window.document.getElementById(lineIds[0]);
-            top = el.offsetTop;
-            height = el.offsetHeight;
-            parent = el.parentElement.parentElement;
-          if (lineIds.length > 1) {
-            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-            height = bottom - top;
-          }
-          if (top !== null && height !== null && parent !== null) {
-            // cook up a div (if necessary) and position it 
-            let div = window.document.getElementById("code-annotation-line-highlight");
-            if (div === null) {
-              div = window.document.createElement("div");
-              div.setAttribute("id", "code-annotation-line-highlight");
-              div.style.position = 'absolute';
-              parent.appendChild(div);
-            }
-            div.style.top = top - 2 + "px";
-            div.style.height = height + 4 + "px";
-            div.style.left = 0;
-            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-            if (gutterDiv === null) {
-              gutterDiv = window.document.createElement("div");
-              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-              gutterDiv.style.position = 'absolute';
-              const codeCell = window.document.getElementById(targetCell);
-              const gutter = codeCell.querySelector('.code-annotation-gutter');
-              gutter.appendChild(gutterDiv);
-            }
-            gutterDiv.style.top = top - 2 + "px";
-            gutterDiv.style.height = height + 4 + "px";
-          }
-          selectedAnnoteEl = annoteEl;
-        }
-      };
-      const unselectCodeLines = () => {
-        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
-        elementsIds.forEach((elId) => {
-          const div = window.document.getElementById(elId);
-          if (div) {
-            div.remove();
-          }
-        });
-        selectedAnnoteEl = undefined;
-      };
-        // Handle positioning of the toggle
-    window.addEventListener(
-      "resize",
-      throttle(() => {
-        elRect = undefined;
-        if (selectedAnnoteEl) {
-          selectCodeLines(selectedAnnoteEl);
-        }
-      }, 10)
-    );
-    function throttle(fn, ms) {
-    let throttle = false;
-    let timer;
-      return (...args) => {
-        if(!throttle) { // first call gets through
-            fn.apply(this, args);
-            throttle = true;
-        } else { // all the others get throttled
-            if(timer) clearTimeout(timer); // cancel #2
-            timer = setTimeout(() => {
-              fn.apply(this, args);
-              timer = throttle = false;
-            }, ms);
-        }
-      };
-    }
-      // Attach click handler to the DT
-      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
-      for (const annoteDlNode of annoteDls) {
-        annoteDlNode.addEventListener('click', (event) => {
-          const clickedEl = event.target;
-          if (clickedEl !== selectedAnnoteEl) {
-            unselectCodeLines();
-            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
-            if (activeEl) {
-              activeEl.classList.remove('code-annotation-active');
-            }
-            selectCodeLines(clickedEl);
-            clickedEl.classList.add('code-annotation-active');
-          } else {
-            // Unselect the line
-            unselectCodeLines();
-            clickedEl.classList.remove('code-annotation-active');
-          }
-        });
-      }
-  const findCites = (el) => {
-    const parentEl = el.parentElement;
-    if (parentEl) {
-      const cites = parentEl.dataset.cites;
-      if (cites) {
-        return {
-          el,
-          cites: cites.split(' ')
-        };
-      } else {
-        return findCites(el.parentElement)
-      }
-    } else {
-      return undefined;
-    }
-  };
-  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-  for (var i=0; i<bibliorefs.length; i++) {
-    const ref = bibliorefs[i];
-    const citeInfo = findCites(ref);
-    if (citeInfo) {
-      tippyHover(citeInfo.el, function() {
-        var popup = window.document.createElement('div');
-        citeInfo.cites.forEach(function(cite) {
-          var citeDiv = window.document.createElement('div');
-          citeDiv.classList.add('hanging-indent');
-          citeDiv.classList.add('csl-entry');
-          var biblioDiv = window.document.getElementById('ref-' + cite);
-          if (biblioDiv) {
-            citeDiv.innerHTML = biblioDiv.innerHTML;
-          }
-          popup.appendChild(citeDiv);
-        });
-        return popup.innerHTML;
+      }, function(instance) {
       });
     }
-  }
-});
-</script>
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./lectura_02.html" class="pagination-link" aria-label="Preliminares">
@@ -1827,229 +1819,234 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb2-410"><a href="#cb2-410"></a></span>
 <span id="cb2-411"><a href="#cb2-411"></a><span class="fu">## Visita web de la SCVS y JPRF</span></span>
 <span id="cb2-412"><a href="#cb2-412"></a></span>
-<span id="cb2-413"><a href="#cb2-413"></a></span>
-<span id="cb2-414"><a href="#cb2-414"></a><span class="fu">## Principios básicos del seguro</span></span>
+<span id="cb2-413"><a href="#cb2-413"></a><span class="ss">- </span>https://www.supercias.gob.ec/portalscvs/index.htm</span>
+<span id="cb2-414"><a href="#cb2-414"></a><span class="ss">  - </span>Publicaciones y Resoluciones --&gt; Seguros --&gt; Normativa y resoluciones --&gt; Normativa --&gt; Codificación</span>
 <span id="cb2-415"><a href="#cb2-415"></a></span>
-<span id="cb2-416"><a href="#cb2-416"></a><span class="ss">1. </span>Buena fe</span>
-<span id="cb2-417"><a href="#cb2-417"></a><span class="ss">2. </span>Interés asegurable</span>
-<span id="cb2-418"><a href="#cb2-418"></a><span class="ss">3. </span>Indemnización</span>
-<span id="cb2-419"><a href="#cb2-419"></a><span class="ss">4. </span>Subrogación</span>
+<span id="cb2-416"><a href="#cb2-416"></a><span class="ss">- </span>https://jprf.gob.ec/</span>
+<span id="cb2-417"><a href="#cb2-417"></a><span class="ss">  - </span>Resoluciones --&gt; Codificación</span>
+<span id="cb2-418"><a href="#cb2-418"></a></span>
+<span id="cb2-419"><a href="#cb2-419"></a><span class="fu">## Principios básicos del seguro</span></span>
 <span id="cb2-420"><a href="#cb2-420"></a></span>
-<span id="cb2-421"><a href="#cb2-421"></a></span>
-<span id="cb2-422"><a href="#cb2-422"></a><span class="fu">### Principio de buena fe {-}</span></span>
-<span id="cb2-423"><a href="#cb2-423"></a></span>
-<span id="cb2-424"><a href="#cb2-424"></a>Tanto el asegurador como el asegurado deben actuar con máxima honestidad,</span>
-<span id="cb2-425"><a href="#cb2-425"></a>moral y buena fe.</span>
+<span id="cb2-421"><a href="#cb2-421"></a><span class="ss">1. </span>Buena fe</span>
+<span id="cb2-422"><a href="#cb2-422"></a><span class="ss">2. </span>Interés asegurable</span>
+<span id="cb2-423"><a href="#cb2-423"></a><span class="ss">3. </span>Indemnización</span>
+<span id="cb2-424"><a href="#cb2-424"></a><span class="ss">4. </span>Subrogación</span>
+<span id="cb2-425"><a href="#cb2-425"></a></span>
 <span id="cb2-426"><a href="#cb2-426"></a></span>
-<span id="cb2-427"><a href="#cb2-427"></a>El asegurado debe declarar todas las características del riesgo que se asegura.</span>
+<span id="cb2-427"><a href="#cb2-427"></a><span class="fu">### Principio de buena fe {-}</span></span>
 <span id="cb2-428"><a href="#cb2-428"></a></span>
-<span id="cb2-429"><a href="#cb2-429"></a>El asegurador debe explicar con claridad y detalle las condiciones de la cobertura que ofrece.</span>
-<span id="cb2-430"><a href="#cb2-430"></a></span>
+<span id="cb2-429"><a href="#cb2-429"></a>Tanto el asegurador como el asegurado deben actuar con máxima honestidad,</span>
+<span id="cb2-430"><a href="#cb2-430"></a>moral y buena fe.</span>
 <span id="cb2-431"><a href="#cb2-431"></a></span>
-<span id="cb2-432"><a href="#cb2-432"></a><span class="fu">### Principio del interés asegurable {-}</span></span>
+<span id="cb2-432"><a href="#cb2-432"></a>El asegurado debe declarar todas las características del riesgo que se asegura.</span>
 <span id="cb2-433"><a href="#cb2-433"></a></span>
-<span id="cb2-434"><a href="#cb2-434"></a>El asegurado debe sufrir una pérdida económica si el riesgo asegurado se realiza.</span>
+<span id="cb2-434"><a href="#cb2-434"></a>El asegurador debe explicar con claridad y detalle las condiciones de la cobertura que ofrece.</span>
 <span id="cb2-435"><a href="#cb2-435"></a></span>
-<span id="cb2-436"><a href="#cb2-436"></a>No se puede asegurar legalmente nada que no tenga interés asegurable.</span>
-<span id="cb2-437"><a href="#cb2-437"></a></span>
-<span id="cb2-438"><a href="#cb2-438"></a>El interés debe ser lícito.</span>
-<span id="cb2-439"><a href="#cb2-439"></a></span>
-<span id="cb2-440"><a href="#cb2-440"></a><span class="ss">- </span>En seguros de personas, toda persona tiene interés asegurable:</span>
-<span id="cb2-441"><a href="#cb2-441"></a><span class="ss">- </span>En su propia vida;</span>
-<span id="cb2-442"><a href="#cb2-442"></a><span class="ss">- </span>En la de las personas a quienes pueda reclamar alimentos, y</span>
-<span id="cb2-443"><a href="#cb2-443"></a><span class="ss">- </span>En la de aquellas cuya muerte pueda aparejarle un perjuicio económico.</span>
-<span id="cb2-444"><a href="#cb2-444"></a><span class="ss">- </span>En los amparos accesorios de gastos que tengan carácter de daño patrimonial, como gastos </span>
-<span id="cb2-445"><a href="#cb2-445"></a>médicos, clínicos, quirúrgicos o farmacéuticos</span>
-<span id="cb2-446"><a href="#cb2-446"></a><span class="ss">- </span>Son susceptibles de indemnización y se regulan por las normas relativas a los seguros de daños.</span>
-<span id="cb2-447"><a href="#cb2-447"></a></span>
-<span id="cb2-448"><a href="#cb2-448"></a><span class="ss">- </span>En seguros de daños puede ser objeto de contrato de seguro todo interés económico en que una</span>
-<span id="cb2-449"><a href="#cb2-449"></a>persona tenga en que no se produzca un siniestro.</span>
-<span id="cb2-450"><a href="#cb2-450"></a></span>
-<span id="cb2-451"><a href="#cb2-451"></a>-- Ref. Decreto 1147</span>
+<span id="cb2-436"><a href="#cb2-436"></a></span>
+<span id="cb2-437"><a href="#cb2-437"></a><span class="fu">### Principio del interés asegurable {-}</span></span>
+<span id="cb2-438"><a href="#cb2-438"></a></span>
+<span id="cb2-439"><a href="#cb2-439"></a>El asegurado debe sufrir una pérdida económica si el riesgo asegurado se realiza.</span>
+<span id="cb2-440"><a href="#cb2-440"></a></span>
+<span id="cb2-441"><a href="#cb2-441"></a>No se puede asegurar legalmente nada que no tenga interés asegurable.</span>
+<span id="cb2-442"><a href="#cb2-442"></a></span>
+<span id="cb2-443"><a href="#cb2-443"></a>El interés debe ser lícito.</span>
+<span id="cb2-444"><a href="#cb2-444"></a></span>
+<span id="cb2-445"><a href="#cb2-445"></a><span class="ss">- </span>En seguros de personas, toda persona tiene interés asegurable:</span>
+<span id="cb2-446"><a href="#cb2-446"></a><span class="ss">- </span>En su propia vida;</span>
+<span id="cb2-447"><a href="#cb2-447"></a><span class="ss">- </span>En la de las personas a quienes pueda reclamar alimentos, y</span>
+<span id="cb2-448"><a href="#cb2-448"></a><span class="ss">- </span>En la de aquellas cuya muerte pueda aparejarle un perjuicio económico.</span>
+<span id="cb2-449"><a href="#cb2-449"></a><span class="ss">- </span>En los amparos accesorios de gastos que tengan carácter de daño patrimonial, como gastos </span>
+<span id="cb2-450"><a href="#cb2-450"></a>médicos, clínicos, quirúrgicos o farmacéuticos</span>
+<span id="cb2-451"><a href="#cb2-451"></a><span class="ss">- </span>Son susceptibles de indemnización y se regulan por las normas relativas a los seguros de daños.</span>
 <span id="cb2-452"><a href="#cb2-452"></a></span>
-<span id="cb2-453"><a href="#cb2-453"></a><span class="fu">### Principio de indemnización {-}</span></span>
-<span id="cb2-454"><a href="#cb2-454"></a></span>
-<span id="cb2-455"><a href="#cb2-455"></a>La indemnización no puede exceder el valor real del interés asegurado ni el monto efectivo del </span>
-<span id="cb2-456"><a href="#cb2-456"></a>prejuicio patrimonial ni el límite de la suma asegurada.</span>
+<span id="cb2-453"><a href="#cb2-453"></a><span class="ss">- </span>En seguros de daños puede ser objeto de contrato de seguro todo interés económico en que una</span>
+<span id="cb2-454"><a href="#cb2-454"></a>persona tenga en que no se produzca un siniestro.</span>
+<span id="cb2-455"><a href="#cb2-455"></a></span>
+<span id="cb2-456"><a href="#cb2-456"></a>-- Ref. Decreto 1147</span>
 <span id="cb2-457"><a href="#cb2-457"></a></span>
-<span id="cb2-458"><a href="#cb2-458"></a>El seguro no puede constituir fuente de enriquecimiento del asegurado.</span>
+<span id="cb2-458"><a href="#cb2-458"></a><span class="fu">### Principio de indemnización {-}</span></span>
 <span id="cb2-459"><a href="#cb2-459"></a></span>
-<span id="cb2-460"><a href="#cb2-460"></a>A opción del asegurador la indemnización es pagadera en dinero mediante la reposición, reparación o</span>
-<span id="cb2-461"><a href="#cb2-461"></a>reconstrucción de la cosa asegurada.</span>
+<span id="cb2-460"><a href="#cb2-460"></a>La indemnización no puede exceder el valor real del interés asegurado ni el monto efectivo del </span>
+<span id="cb2-461"><a href="#cb2-461"></a>prejuicio patrimonial ni el límite de la suma asegurada.</span>
 <span id="cb2-462"><a href="#cb2-462"></a></span>
-<span id="cb2-463"><a href="#cb2-463"></a></span>
-<span id="cb2-464"><a href="#cb2-464"></a>En los seguros de personas el valor del interés asegurable no tiene otro límite que el que </span>
-<span id="cb2-465"><a href="#cb2-465"></a>libremente le asignen las partes contratantes.</span>
-<span id="cb2-466"><a href="#cb2-466"></a></span>
-<span id="cb2-467"><a href="#cb2-467"></a>-- Ref. Decreto 1147</span>
+<span id="cb2-463"><a href="#cb2-463"></a>El seguro no puede constituir fuente de enriquecimiento del asegurado.</span>
+<span id="cb2-464"><a href="#cb2-464"></a></span>
+<span id="cb2-465"><a href="#cb2-465"></a>A opción del asegurador la indemnización es pagadera en dinero mediante la reposición, reparación o</span>
+<span id="cb2-466"><a href="#cb2-466"></a>reconstrucción de la cosa asegurada.</span>
+<span id="cb2-467"><a href="#cb2-467"></a></span>
 <span id="cb2-468"><a href="#cb2-468"></a></span>
-<span id="cb2-469"><a href="#cb2-469"></a><span class="fu">### Principio de subrogación {-}</span></span>
-<span id="cb2-470"><a href="#cb2-470"></a></span>
-<span id="cb2-471"><a href="#cb2-471"></a><span class="ss">- </span>El asegurador sustituye al asegurado en el ejercicio de las acciones o derechos que tendría este, </span>
-<span id="cb2-472"><a href="#cb2-472"></a>a fin de recuperar la indemnización.</span>
-<span id="cb2-473"><a href="#cb2-473"></a>-- Diccionario MAPFRE de seguros</span>
-<span id="cb2-474"><a href="#cb2-474"></a></span>
-<span id="cb2-475"><a href="#cb2-475"></a><span class="ss">- </span>El asegurador que haya pagado una indemnización de seguro se subroga, por Ministerio de la Ley, </span>
-<span id="cb2-476"><a href="#cb2-476"></a>hasta el monto de dicha indemnización, en los derechos del asegurado contra terceros responsables</span>
-<span id="cb2-477"><a href="#cb2-477"></a>del siniestro.</span>
-<span id="cb2-478"><a href="#cb2-478"></a></span>
-<span id="cb2-479"><a href="#cb2-479"></a>-- Ref. Decreto 1147</span>
-<span id="cb2-480"><a href="#cb2-480"></a></span>
-<span id="cb2-481"><a href="#cb2-481"></a><span class="ss">- </span>Consecuencia</span>
-<span id="cb2-482"><a href="#cb2-482"></a>  -Bienes recuperables pasan a ser propiedad de la compañía </span>
-<span id="cb2-483"><a href="#cb2-483"></a>  -Ej. carros robados y recuperados.</span>
-<span id="cb2-484"><a href="#cb2-484"></a></span>
+<span id="cb2-469"><a href="#cb2-469"></a>En los seguros de personas el valor del interés asegurable no tiene otro límite que el que </span>
+<span id="cb2-470"><a href="#cb2-470"></a>libremente le asignen las partes contratantes.</span>
+<span id="cb2-471"><a href="#cb2-471"></a></span>
+<span id="cb2-472"><a href="#cb2-472"></a>-- Ref. Decreto 1147</span>
+<span id="cb2-473"><a href="#cb2-473"></a></span>
+<span id="cb2-474"><a href="#cb2-474"></a><span class="fu">### Principio de subrogación {-}</span></span>
+<span id="cb2-475"><a href="#cb2-475"></a></span>
+<span id="cb2-476"><a href="#cb2-476"></a><span class="ss">- </span>El asegurador sustituye al asegurado en el ejercicio de las acciones o derechos que tendría este, </span>
+<span id="cb2-477"><a href="#cb2-477"></a>a fin de recuperar la indemnización.</span>
+<span id="cb2-478"><a href="#cb2-478"></a>-- Diccionario MAPFRE de seguros</span>
+<span id="cb2-479"><a href="#cb2-479"></a></span>
+<span id="cb2-480"><a href="#cb2-480"></a><span class="ss">- </span>El asegurador que haya pagado una indemnización de seguro se subroga, por Ministerio de la Ley, </span>
+<span id="cb2-481"><a href="#cb2-481"></a>hasta el monto de dicha indemnización, en los derechos del asegurado contra terceros responsables</span>
+<span id="cb2-482"><a href="#cb2-482"></a>del siniestro.</span>
+<span id="cb2-483"><a href="#cb2-483"></a></span>
+<span id="cb2-484"><a href="#cb2-484"></a>-- Ref. Decreto 1147</span>
 <span id="cb2-485"><a href="#cb2-485"></a></span>
-<span id="cb2-486"><a href="#cb2-486"></a><span class="fu">## Seguro o apuesta?</span></span>
-<span id="cb2-487"><a href="#cb2-487"></a><span class="in">```{r l3t1}</span></span>
-<span id="cb2-488"><a href="#cb2-488"></a><span class="in">#| echo: true</span></span>
-<span id="cb2-489"><a href="#cb2-489"></a><span class="in">tbd &lt;- data.table(</span></span>
-<span id="cb2-490"><a href="#cb2-490"></a><span class="in">matrix( c(</span></span>
-<span id="cb2-491"><a href="#cb2-491"></a><span class="in">    'Respaldo legal estricto',              'Puede ser ilegal',</span></span>
-<span id="cb2-492"><a href="#cb2-492"></a><span class="in">    'Interés asegurable indispensable',     'Carece de interés asegurable',</span></span>
-<span id="cb2-493"><a href="#cb2-493"></a><span class="in">    'Máxima buena fe',                      'No necesariamente de buena fe',</span></span>
-<span id="cb2-494"><a href="#cb2-494"></a><span class="in">    'Nunca es fuente de enriquecimiento',   'Puede ser fuente de enriquecimiento' </span></span>
-<span id="cb2-495"><a href="#cb2-495"></a><span class="in">  ),</span></span>
-<span id="cb2-496"><a href="#cb2-496"></a><span class="in">  nrow = 4, ncol = 2, byrow = TRUE )</span></span>
-<span id="cb2-497"><a href="#cb2-497"></a><span class="in">)</span></span>
-<span id="cb2-498"><a href="#cb2-498"></a><span class="in">tbd %&gt;%</span></span>
-<span id="cb2-499"><a href="#cb2-499"></a><span class="in">  kable(</span></span>
-<span id="cb2-500"><a href="#cb2-500"></a><span class="in">    label = NA,</span></span>
-<span id="cb2-501"><a href="#cb2-501"></a><span class="in">    caption = 'Seguros vs Apuestas',</span></span>
-<span id="cb2-502"><a href="#cb2-502"></a><span class="in">    row.names = FALSE,</span></span>
-<span id="cb2-503"><a href="#cb2-503"></a><span class="in">    col.names = c( 'Seguros', 'Apuestas' ),</span></span>
-<span id="cb2-504"><a href="#cb2-504"></a><span class="in">    align = 'll',</span></span>
-<span id="cb2-505"><a href="#cb2-505"></a><span class="in">    digits = c( 0, 0 ),</span></span>
-<span id="cb2-506"><a href="#cb2-506"></a><span class="in">    format.args = list( big.mark = ',', decimal.mark = '.', scientific = FALSE ),</span></span>
-<span id="cb2-507"><a href="#cb2-507"></a><span class="in">    escape = FALSE,</span></span>
-<span id="cb2-508"><a href="#cb2-508"></a><span class="in">    centering = TRUE, </span></span>
-<span id="cb2-509"><a href="#cb2-509"></a><span class="in">    booktabs = TRUE ) %&gt;%</span></span>
-<span id="cb2-510"><a href="#cb2-510"></a><span class="in">  kable_classic( full_width = FALSE, html_font = "Cambria", position = "center" )</span></span>
-<span id="cb2-511"><a href="#cb2-511"></a><span class="in">```</span></span>
-<span id="cb2-512"><a href="#cb2-512"></a></span>
-<span id="cb2-513"><a href="#cb2-513"></a>Estas características permiten distinguir claramente las operaciones de seguro de las apuestas </span>
-<span id="cb2-514"><a href="#cb2-514"></a>o la especulación financiera.</span>
-<span id="cb2-515"><a href="#cb2-515"></a></span>
-<span id="cb2-516"><a href="#cb2-516"></a><span class="fu">## Fuentes del riesgo en seguros</span></span>
+<span id="cb2-486"><a href="#cb2-486"></a><span class="ss">- </span>Consecuencia</span>
+<span id="cb2-487"><a href="#cb2-487"></a>  -Bienes recuperables pasan a ser propiedad de la compañía </span>
+<span id="cb2-488"><a href="#cb2-488"></a>  -Ej. carros robados y recuperados.</span>
+<span id="cb2-489"><a href="#cb2-489"></a></span>
+<span id="cb2-490"><a href="#cb2-490"></a></span>
+<span id="cb2-491"><a href="#cb2-491"></a><span class="fu">## Seguro o apuesta?</span></span>
+<span id="cb2-492"><a href="#cb2-492"></a><span class="in">```{r l3t1}</span></span>
+<span id="cb2-493"><a href="#cb2-493"></a><span class="co">#| echo: true</span></span>
+<span id="cb2-494"><a href="#cb2-494"></a>tbd <span class="ot">&lt;-</span> <span class="fu">data.table</span>(</span>
+<span id="cb2-495"><a href="#cb2-495"></a><span class="fu">matrix</span>( <span class="fu">c</span>(</span>
+<span id="cb2-496"><a href="#cb2-496"></a>    <span class="st">'Respaldo legal estricto'</span>,              <span class="st">'Puede ser ilegal'</span>,</span>
+<span id="cb2-497"><a href="#cb2-497"></a>    <span class="st">'Interés asegurable indispensable'</span>,     <span class="st">'Carece de interés asegurable'</span>,</span>
+<span id="cb2-498"><a href="#cb2-498"></a>    <span class="st">'Máxima buena fe'</span>,                      <span class="st">'No necesariamente de buena fe'</span>,</span>
+<span id="cb2-499"><a href="#cb2-499"></a>    <span class="st">'Nunca es fuente de enriquecimiento'</span>,   <span class="st">'Puede ser fuente de enriquecimiento'</span> </span>
+<span id="cb2-500"><a href="#cb2-500"></a>  ),</span>
+<span id="cb2-501"><a href="#cb2-501"></a>  <span class="at">nrow =</span> <span class="dv">4</span>, <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span> )</span>
+<span id="cb2-502"><a href="#cb2-502"></a>)</span>
+<span id="cb2-503"><a href="#cb2-503"></a>tbd <span class="sc">%&gt;%</span></span>
+<span id="cb2-504"><a href="#cb2-504"></a>  <span class="fu">kable</span>(</span>
+<span id="cb2-505"><a href="#cb2-505"></a>    <span class="at">label =</span> <span class="cn">NA</span>,</span>
+<span id="cb2-506"><a href="#cb2-506"></a>    <span class="at">caption =</span> <span class="st">'Seguros vs Apuestas'</span>,</span>
+<span id="cb2-507"><a href="#cb2-507"></a>    <span class="at">row.names =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb2-508"><a href="#cb2-508"></a>    <span class="at">col.names =</span> <span class="fu">c</span>( <span class="st">'Seguros'</span>, <span class="st">'Apuestas'</span> ),</span>
+<span id="cb2-509"><a href="#cb2-509"></a>    <span class="at">align =</span> <span class="st">'ll'</span>,</span>
+<span id="cb2-510"><a href="#cb2-510"></a>    <span class="at">digits =</span> <span class="fu">c</span>( <span class="dv">0</span>, <span class="dv">0</span> ),</span>
+<span id="cb2-511"><a href="#cb2-511"></a>    <span class="at">format.args =</span> <span class="fu">list</span>( <span class="at">big.mark =</span> <span class="st">','</span>, <span class="at">decimal.mark =</span> <span class="st">'.'</span>, <span class="at">scientific =</span> <span class="cn">FALSE</span> ),</span>
+<span id="cb2-512"><a href="#cb2-512"></a>    <span class="at">escape =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb2-513"><a href="#cb2-513"></a>    <span class="at">centering =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb2-514"><a href="#cb2-514"></a>    <span class="at">booktabs =</span> <span class="cn">TRUE</span> ) <span class="sc">%&gt;%</span></span>
+<span id="cb2-515"><a href="#cb2-515"></a>  <span class="fu">kable_classic</span>( <span class="at">full_width =</span> <span class="cn">FALSE</span>, <span class="at">html_font =</span> <span class="st">"Cambria"</span>, <span class="at">position =</span> <span class="st">"center"</span> )</span>
+<span id="cb2-516"><a href="#cb2-516"></a><span class="in">```</span></span>
 <span id="cb2-517"><a href="#cb2-517"></a></span>
-<span id="cb2-518"><a href="#cb2-518"></a><span class="ss">- </span>Número de reclamos: frecuencia</span>
-<span id="cb2-519"><a href="#cb2-519"></a><span class="ss">- </span>Costo de los reclamos: severidad</span>
-<span id="cb2-520"><a href="#cb2-520"></a><span class="ss">- </span>Período de cobertura</span>
-<span id="cb2-521"><a href="#cb2-521"></a><span class="ss">- </span>Período de pago de primas</span>
-<span id="cb2-522"><a href="#cb2-522"></a><span class="ss">- </span>Período de pago de siniestros</span>
-<span id="cb2-523"><a href="#cb2-523"></a><span class="ss">- </span>Desde la fecha del reclamo hasta el cierre legal.</span>
-<span id="cb2-524"><a href="#cb2-524"></a></span>
-<span id="cb2-525"><a href="#cb2-525"></a><span class="fu">## Problemas que enfrentan los seguros</span></span>
-<span id="cb2-526"><a href="#cb2-526"></a></span>
-<span id="cb2-527"><a href="#cb2-527"></a>Identificamos tres problemas principales:</span>
-<span id="cb2-528"><a href="#cb2-528"></a></span>
-<span id="cb2-529"><a href="#cb2-529"></a><span class="ss">- </span>Asegurabilidad de riesgos</span>
-<span id="cb2-530"><a href="#cb2-530"></a><span class="ss">- </span>Selección adversa (anti-selección)</span>
-<span id="cb2-531"><a href="#cb2-531"></a><span class="ss">- </span>Azar moral</span>
-<span id="cb2-532"><a href="#cb2-532"></a></span>
-<span id="cb2-533"><a href="#cb2-533"></a><span class="fu">### Asegurabilidad de riesgos</span></span>
-<span id="cb2-534"><a href="#cb2-534"></a></span>
-<span id="cb2-535"><a href="#cb2-535"></a>Recordemos que el seguro se fundamenta en la compensación o mutualización de riesgos que no siempre</span>
-<span id="cb2-536"><a href="#cb2-536"></a>es posible aplicar, y además, el seguro enfrenta algunas limitaciones técnicas. Por lo tanto existen</span>
-<span id="cb2-537"><a href="#cb2-537"></a>riesgos que no son siempre asegurables y su transferencia dependerá de la capacidad financiera y </span>
-<span id="cb2-538"><a href="#cb2-538"></a>aversión al riesgo de la compañía de seguros.</span>
+<span id="cb2-518"><a href="#cb2-518"></a>Estas características permiten distinguir claramente las operaciones de seguro de las apuestas </span>
+<span id="cb2-519"><a href="#cb2-519"></a>o la especulación financiera.</span>
+<span id="cb2-520"><a href="#cb2-520"></a></span>
+<span id="cb2-521"><a href="#cb2-521"></a><span class="fu">## Fuentes del riesgo en seguros</span></span>
+<span id="cb2-522"><a href="#cb2-522"></a></span>
+<span id="cb2-523"><a href="#cb2-523"></a><span class="ss">- </span>Número de reclamos: frecuencia</span>
+<span id="cb2-524"><a href="#cb2-524"></a><span class="ss">- </span>Costo de los reclamos: severidad</span>
+<span id="cb2-525"><a href="#cb2-525"></a><span class="ss">- </span>Período de cobertura</span>
+<span id="cb2-526"><a href="#cb2-526"></a><span class="ss">- </span>Período de pago de primas</span>
+<span id="cb2-527"><a href="#cb2-527"></a><span class="ss">- </span>Período de pago de siniestros</span>
+<span id="cb2-528"><a href="#cb2-528"></a><span class="ss">- </span>Desde la fecha del reclamo hasta el cierre legal.</span>
+<span id="cb2-529"><a href="#cb2-529"></a></span>
+<span id="cb2-530"><a href="#cb2-530"></a><span class="fu">## Problemas que enfrentan los seguros</span></span>
+<span id="cb2-531"><a href="#cb2-531"></a></span>
+<span id="cb2-532"><a href="#cb2-532"></a>Identificamos tres problemas principales:</span>
+<span id="cb2-533"><a href="#cb2-533"></a></span>
+<span id="cb2-534"><a href="#cb2-534"></a><span class="ss">- </span>Asegurabilidad de riesgos</span>
+<span id="cb2-535"><a href="#cb2-535"></a><span class="ss">- </span>Selección adversa (anti-selección)</span>
+<span id="cb2-536"><a href="#cb2-536"></a><span class="ss">- </span>Azar moral</span>
+<span id="cb2-537"><a href="#cb2-537"></a></span>
+<span id="cb2-538"><a href="#cb2-538"></a><span class="fu">### Asegurabilidad de riesgos</span></span>
 <span id="cb2-539"><a href="#cb2-539"></a></span>
-<span id="cb2-540"><a href="#cb2-540"></a><span class="fu">### Riesgos asegurables (deseables) {-}</span></span>
-<span id="cb2-541"><a href="#cb2-541"></a></span>
-<span id="cb2-542"><a href="#cb2-542"></a><span class="ss">  - </span>Riesgos comparables y de naturaleza homogénea</span>
-<span id="cb2-543"><a href="#cb2-543"></a><span class="ss">  - </span>Es necesario que se puedan mutualizar </span>
-<span id="cb2-544"><a href="#cb2-544"></a><span class="ss">    - </span>Para que se cumpla la ley de los grandes números</span>
-<span id="cb2-545"><a href="#cb2-545"></a><span class="ss">  - </span>Riesgos medibles </span>
-<span id="cb2-546"><a href="#cb2-546"></a><span class="ss">    - </span>responden a una ley de probabilidad</span>
-<span id="cb2-547"><a href="#cb2-547"></a><span class="ss">    - </span>permitan estimar la pérdida máxima</span>
-<span id="cb2-548"><a href="#cb2-548"></a><span class="ss">  - </span>Riesgos no potestativos: que no dependen de la voluntad del asegurado</span>
-<span id="cb2-549"><a href="#cb2-549"></a><span class="ss">  - </span>Riesgos inciertos</span>
-<span id="cb2-550"><a href="#cb2-550"></a><span class="ss">    - </span>Que no hayan ocurrido o que su ocurrencia sea desconocida.</span>
-<span id="cb2-551"><a href="#cb2-551"></a>    </span>
-<span id="cb2-552"><a href="#cb2-552"></a>    </span>
-<span id="cb2-553"><a href="#cb2-553"></a><span class="fu">### Selección adversa</span></span>
-<span id="cb2-554"><a href="#cb2-554"></a></span>
-<span id="cb2-555"><a href="#cb2-555"></a>Es un fenómeno causado porque la información del asegurador es incompleta y asimétrica:</span>
-<span id="cb2-556"><a href="#cb2-556"></a></span>
-<span id="cb2-557"><a href="#cb2-557"></a><span class="ss">- </span>El asegurado es quien conoce mejor el riesgo.</span>
-<span id="cb2-558"><a href="#cb2-558"></a></span>
-<span id="cb2-559"><a href="#cb2-559"></a>Entonces el seguro atrae con más fuerza a quienes tienen mayor exposición al riesgo y el portafolio </span>
-<span id="cb2-560"><a href="#cb2-560"></a>puede resultar desequilibrado, asegurando demasiados “malos riesgos” que causan el desequilibrio </span>
-<span id="cb2-561"><a href="#cb2-561"></a>financiero</span>
-<span id="cb2-562"><a href="#cb2-562"></a></span>
-<span id="cb2-563"><a href="#cb2-563"></a><span class="fu">### Medidas contra la selección adversa {-}</span></span>
-<span id="cb2-564"><a href="#cb2-564"></a></span>
-<span id="cb2-565"><a href="#cb2-565"></a>Con la finalidad de equilibrar el portafolio el mercado a puesto en práctica algunas medidas:</span>
-<span id="cb2-566"><a href="#cb2-566"></a></span>
-<span id="cb2-567"><a href="#cb2-567"></a><span class="ss">- </span>Personalización de la prima para asegurados siniestrosos </span>
-<span id="cb2-568"><a href="#cb2-568"></a><span class="ss">  - </span>Ej. bonus malus</span>
-<span id="cb2-569"><a href="#cb2-569"></a><span class="ss">- </span>Proceso de selección de asegurados en base a declaración del riesgo</span>
-<span id="cb2-570"><a href="#cb2-570"></a><span class="ss">- </span>Potestad de la compañía para rechazar un seguro</span>
-<span id="cb2-571"><a href="#cb2-571"></a><span class="ss">- </span>Obligación de asegurar?</span>
-<span id="cb2-572"><a href="#cb2-572"></a><span class="ss">- </span>Período de carencia</span>
-<span id="cb2-573"><a href="#cb2-573"></a><span class="ss">- </span>Límites de cobertura</span>
-<span id="cb2-574"><a href="#cb2-574"></a><span class="ss">- </span>Copago, franquicia, deducible, suma máxima asegurada</span>
-<span id="cb2-575"><a href="#cb2-575"></a></span>
-<span id="cb2-576"><a href="#cb2-576"></a></span>
-<span id="cb2-577"><a href="#cb2-577"></a><span class="fu">### Azar moral</span></span>
-<span id="cb2-578"><a href="#cb2-578"></a></span>
-<span id="cb2-579"><a href="#cb2-579"></a>Es el riesgo de que el asegurado se desinterese de prevenir la ocurrencia de siniestros:</span>
+<span id="cb2-540"><a href="#cb2-540"></a>Recordemos que el seguro se fundamenta en la compensación o mutualización de riesgos que no siempre</span>
+<span id="cb2-541"><a href="#cb2-541"></a>es posible aplicar, y además, el seguro enfrenta algunas limitaciones técnicas. Por lo tanto existen</span>
+<span id="cb2-542"><a href="#cb2-542"></a>riesgos que no son siempre asegurables y su transferencia dependerá de la capacidad financiera y </span>
+<span id="cb2-543"><a href="#cb2-543"></a>aversión al riesgo de la compañía de seguros.</span>
+<span id="cb2-544"><a href="#cb2-544"></a></span>
+<span id="cb2-545"><a href="#cb2-545"></a><span class="fu">### Riesgos asegurables (deseables) {-}</span></span>
+<span id="cb2-546"><a href="#cb2-546"></a></span>
+<span id="cb2-547"><a href="#cb2-547"></a><span class="ss">  - </span>Riesgos comparables y de naturaleza homogénea</span>
+<span id="cb2-548"><a href="#cb2-548"></a><span class="ss">  - </span>Es necesario que se puedan mutualizar </span>
+<span id="cb2-549"><a href="#cb2-549"></a><span class="ss">    - </span>Para que se cumpla la ley de los grandes números</span>
+<span id="cb2-550"><a href="#cb2-550"></a><span class="ss">  - </span>Riesgos medibles </span>
+<span id="cb2-551"><a href="#cb2-551"></a><span class="ss">    - </span>responden a una ley de probabilidad</span>
+<span id="cb2-552"><a href="#cb2-552"></a><span class="ss">    - </span>permitan estimar la pérdida máxima</span>
+<span id="cb2-553"><a href="#cb2-553"></a><span class="ss">  - </span>Riesgos no potestativos: que no dependen de la voluntad del asegurado</span>
+<span id="cb2-554"><a href="#cb2-554"></a><span class="ss">  - </span>Riesgos inciertos</span>
+<span id="cb2-555"><a href="#cb2-555"></a><span class="ss">    - </span>Que no hayan ocurrido o que su ocurrencia sea desconocida.</span>
+<span id="cb2-556"><a href="#cb2-556"></a>    </span>
+<span id="cb2-557"><a href="#cb2-557"></a>    </span>
+<span id="cb2-558"><a href="#cb2-558"></a><span class="fu">### Selección adversa</span></span>
+<span id="cb2-559"><a href="#cb2-559"></a></span>
+<span id="cb2-560"><a href="#cb2-560"></a>Es un fenómeno causado porque la información del asegurador es incompleta y asimétrica:</span>
+<span id="cb2-561"><a href="#cb2-561"></a></span>
+<span id="cb2-562"><a href="#cb2-562"></a><span class="ss">- </span>El asegurado es quien conoce mejor el riesgo.</span>
+<span id="cb2-563"><a href="#cb2-563"></a></span>
+<span id="cb2-564"><a href="#cb2-564"></a>Entonces el seguro atrae con más fuerza a quienes tienen mayor exposición al riesgo y el portafolio </span>
+<span id="cb2-565"><a href="#cb2-565"></a>puede resultar desequilibrado, asegurando demasiados “malos riesgos” que causan el desequilibrio </span>
+<span id="cb2-566"><a href="#cb2-566"></a>financiero</span>
+<span id="cb2-567"><a href="#cb2-567"></a></span>
+<span id="cb2-568"><a href="#cb2-568"></a><span class="fu">### Medidas contra la selección adversa {-}</span></span>
+<span id="cb2-569"><a href="#cb2-569"></a></span>
+<span id="cb2-570"><a href="#cb2-570"></a>Con la finalidad de equilibrar el portafolio el mercado a puesto en práctica algunas medidas:</span>
+<span id="cb2-571"><a href="#cb2-571"></a></span>
+<span id="cb2-572"><a href="#cb2-572"></a><span class="ss">- </span>Personalización de la prima para asegurados siniestrosos </span>
+<span id="cb2-573"><a href="#cb2-573"></a><span class="ss">  - </span>Ej. bonus malus</span>
+<span id="cb2-574"><a href="#cb2-574"></a><span class="ss">- </span>Proceso de selección de asegurados en base a declaración del riesgo</span>
+<span id="cb2-575"><a href="#cb2-575"></a><span class="ss">- </span>Potestad de la compañía para rechazar un seguro</span>
+<span id="cb2-576"><a href="#cb2-576"></a><span class="ss">- </span>Obligación de asegurar?</span>
+<span id="cb2-577"><a href="#cb2-577"></a><span class="ss">- </span>Período de carencia</span>
+<span id="cb2-578"><a href="#cb2-578"></a><span class="ss">- </span>Límites de cobertura</span>
+<span id="cb2-579"><a href="#cb2-579"></a><span class="ss">- </span>Copago, franquicia, deducible, suma máxima asegurada</span>
 <span id="cb2-580"><a href="#cb2-580"></a></span>
-<span id="cb2-581"><a href="#cb2-581"></a><span class="ss">- </span>Ej. Seguro automotriz</span>
-<span id="cb2-582"><a href="#cb2-582"></a></span>
-<span id="cb2-583"><a href="#cb2-583"></a>o se interese en que ocurra el riesgo:</span>
-<span id="cb2-584"><a href="#cb2-584"></a></span>
-<span id="cb2-585"><a href="#cb2-585"></a><span class="ss">- </span>Ej. Por publicidad</span>
-<span id="cb2-586"><a href="#cb2-586"></a></span>
-<span id="cb2-587"><a href="#cb2-587"></a>o incremente la frecuencia de reclamos</span>
-<span id="cb2-588"><a href="#cb2-588"></a></span>
-<span id="cb2-589"><a href="#cb2-589"></a><span class="ss">- </span>Ej. Seguro de salud</span>
-<span id="cb2-590"><a href="#cb2-590"></a></span>
+<span id="cb2-581"><a href="#cb2-581"></a></span>
+<span id="cb2-582"><a href="#cb2-582"></a><span class="fu">### Azar moral</span></span>
+<span id="cb2-583"><a href="#cb2-583"></a></span>
+<span id="cb2-584"><a href="#cb2-584"></a>Es el riesgo de que el asegurado se desinterese de prevenir la ocurrencia de siniestros:</span>
+<span id="cb2-585"><a href="#cb2-585"></a></span>
+<span id="cb2-586"><a href="#cb2-586"></a><span class="ss">- </span>Ej. Seguro automotriz</span>
+<span id="cb2-587"><a href="#cb2-587"></a></span>
+<span id="cb2-588"><a href="#cb2-588"></a>o se interese en que ocurra el riesgo:</span>
+<span id="cb2-589"><a href="#cb2-589"></a></span>
+<span id="cb2-590"><a href="#cb2-590"></a><span class="ss">- </span>Ej. Por publicidad</span>
 <span id="cb2-591"><a href="#cb2-591"></a></span>
-<span id="cb2-592"><a href="#cb2-592"></a><span class="fu">### Medidas contra el azar moral {-}</span></span>
+<span id="cb2-592"><a href="#cb2-592"></a>o incremente la frecuencia de reclamos</span>
 <span id="cb2-593"><a href="#cb2-593"></a></span>
-<span id="cb2-594"><a href="#cb2-594"></a>Con el objetivo de incentivar la prevención, el mercado ha desarrollado algunas estrategias:</span>
+<span id="cb2-594"><a href="#cb2-594"></a><span class="ss">- </span>Ej. Seguro de salud</span>
 <span id="cb2-595"><a href="#cb2-595"></a></span>
-<span id="cb2-596"><a href="#cb2-596"></a><span class="ss">- </span>Copago y/o deducible</span>
-<span id="cb2-597"><a href="#cb2-597"></a><span class="ss">- </span>Obligaciones de prevención previstas en el contrato</span>
-<span id="cb2-598"><a href="#cb2-598"></a><span class="ss">- </span>Cobertura máxima</span>
-<span id="cb2-599"><a href="#cb2-599"></a><span class="ss">  - </span>Por siniestro</span>
-<span id="cb2-600"><a href="#cb2-600"></a><span class="ss">  - </span>Por período</span>
-<span id="cb2-601"><a href="#cb2-601"></a><span class="ss">- </span>Bono *no-claims*.</span>
-<span id="cb2-602"><a href="#cb2-602"></a></span>
-<span id="cb2-603"><a href="#cb2-603"></a></span>
-<span id="cb2-604"><a href="#cb2-604"></a><span class="fu">## Primas de seguro: Art. 53 RLGS</span></span>
-<span id="cb2-605"><a href="#cb2-605"></a></span>
-<span id="cb2-606"><a href="#cb2-606"></a><span class="ss">- </span>Prima pura o prima de riesgo: es el costo del riesgo</span>
-<span id="cb2-607"><a href="#cb2-607"></a><span class="ss">- </span>Prima neta: prima pura más un recargo de seguridad</span>
-<span id="cb2-608"><a href="#cb2-608"></a><span class="ss">- </span>Prima de tarifa: prima neta más recargos de operación:</span>
-<span id="cb2-609"><a href="#cb2-609"></a><span class="ss">  - </span>gastos de adquisición, </span>
-<span id="cb2-610"><a href="#cb2-610"></a><span class="ss">  - </span>gastos de administración,</span>
-<span id="cb2-611"><a href="#cb2-611"></a><span class="ss">  - </span>utilidad razonable</span>
-<span id="cb2-612"><a href="#cb2-612"></a><span class="ss">  - </span>otros gastos justificados (legales, inspección, ...)</span>
-<span id="cb2-613"><a href="#cb2-613"></a><span class="ss">- </span>Prima comercial: prima de tarifa más impuestos, contribuciones, etc.</span>
-<span id="cb2-614"><a href="#cb2-614"></a></span>
-<span id="cb2-615"><a href="#cb2-615"></a><span class="fu">### Relación fundamental {-}</span></span>
-<span id="cb2-616"><a href="#cb2-616"></a></span>
-<span id="cb2-617"><a href="#cb2-617"></a>$$ P_{tar} = \frac{P}{1-GA-GB-U} $$</span>
-<span id="cb2-618"><a href="#cb2-618"></a>$P$: prima pura</span>
+<span id="cb2-596"><a href="#cb2-596"></a></span>
+<span id="cb2-597"><a href="#cb2-597"></a><span class="fu">### Medidas contra el azar moral {-}</span></span>
+<span id="cb2-598"><a href="#cb2-598"></a></span>
+<span id="cb2-599"><a href="#cb2-599"></a>Con el objetivo de incentivar la prevención, el mercado ha desarrollado algunas estrategias:</span>
+<span id="cb2-600"><a href="#cb2-600"></a></span>
+<span id="cb2-601"><a href="#cb2-601"></a><span class="ss">- </span>Copago y/o deducible</span>
+<span id="cb2-602"><a href="#cb2-602"></a><span class="ss">- </span>Obligaciones de prevención previstas en el contrato</span>
+<span id="cb2-603"><a href="#cb2-603"></a><span class="ss">- </span>Cobertura máxima</span>
+<span id="cb2-604"><a href="#cb2-604"></a><span class="ss">  - </span>Por siniestro</span>
+<span id="cb2-605"><a href="#cb2-605"></a><span class="ss">  - </span>Por período</span>
+<span id="cb2-606"><a href="#cb2-606"></a><span class="ss">- </span>Bono *no-claims*.</span>
+<span id="cb2-607"><a href="#cb2-607"></a></span>
+<span id="cb2-608"><a href="#cb2-608"></a></span>
+<span id="cb2-609"><a href="#cb2-609"></a><span class="fu">## Primas de seguro: Art. 53 RLGS</span></span>
+<span id="cb2-610"><a href="#cb2-610"></a></span>
+<span id="cb2-611"><a href="#cb2-611"></a><span class="ss">- </span>Prima pura o prima de riesgo: es el costo del riesgo</span>
+<span id="cb2-612"><a href="#cb2-612"></a><span class="ss">- </span>Prima neta: prima pura más un recargo de seguridad</span>
+<span id="cb2-613"><a href="#cb2-613"></a><span class="ss">- </span>Prima de tarifa: prima neta más recargos de operación:</span>
+<span id="cb2-614"><a href="#cb2-614"></a><span class="ss">  - </span>gastos de adquisición, </span>
+<span id="cb2-615"><a href="#cb2-615"></a><span class="ss">  - </span>gastos de administración,</span>
+<span id="cb2-616"><a href="#cb2-616"></a><span class="ss">  - </span>utilidad razonable</span>
+<span id="cb2-617"><a href="#cb2-617"></a><span class="ss">  - </span>otros gastos justificados (legales, inspección, ...)</span>
+<span id="cb2-618"><a href="#cb2-618"></a><span class="ss">- </span>Prima comercial: prima de tarifa más impuestos, contribuciones, etc.</span>
 <span id="cb2-619"><a href="#cb2-619"></a></span>
-<span id="cb2-620"><a href="#cb2-620"></a>$P_{tar}$: prima de tarifa</span>
+<span id="cb2-620"><a href="#cb2-620"></a><span class="fu">### Relación fundamental {-}</span></span>
 <span id="cb2-621"><a href="#cb2-621"></a></span>
-<span id="cb2-622"><a href="#cb2-622"></a>$GA$: porcentaje de gastos de administración</span>
-<span id="cb2-623"><a href="#cb2-623"></a></span>
-<span id="cb2-624"><a href="#cb2-624"></a>$GB$: porcentaje de gastos de adquisición (comisiones de *brokers*)</span>
-<span id="cb2-625"><a href="#cb2-625"></a></span>
-<span id="cb2-626"><a href="#cb2-626"></a>$U$: porcentaje de utilidad esperada por los accionistas </span>
-<span id="cb2-627"><a href="#cb2-627"></a></span>
-<span id="cb2-628"><a href="#cb2-628"></a>Los porcentajes se calculan sobre la prima de tarifa.</span>
-<span id="cb2-629"><a href="#cb2-629"></a></span>
+<span id="cb2-622"><a href="#cb2-622"></a>$$ P_{tar} = \frac{P}{1-GA-GB-U} $$</span>
+<span id="cb2-623"><a href="#cb2-623"></a>$P$: prima pura</span>
+<span id="cb2-624"><a href="#cb2-624"></a></span>
+<span id="cb2-625"><a href="#cb2-625"></a>$P_{tar}$: prima de tarifa</span>
+<span id="cb2-626"><a href="#cb2-626"></a></span>
+<span id="cb2-627"><a href="#cb2-627"></a>$GA$: porcentaje de gastos de administración</span>
+<span id="cb2-628"><a href="#cb2-628"></a></span>
+<span id="cb2-629"><a href="#cb2-629"></a>$GB$: porcentaje de gastos de adquisición (comisiones de *brokers*)</span>
 <span id="cb2-630"><a href="#cb2-630"></a></span>
-<span id="cb2-631"><a href="#cb2-631"></a><span class="fu">## Caso Nessie</span></span>
+<span id="cb2-631"><a href="#cb2-631"></a>$U$: porcentaje de utilidad esperada por los accionistas </span>
 <span id="cb2-632"><a href="#cb2-632"></a></span>
-<span id="cb2-633"><a href="#cb2-633"></a><span class="ss">- </span>Estudio de caso.</span>
+<span id="cb2-633"><a href="#cb2-633"></a>Los porcentajes se calculan sobre la prima de tarifa.</span>
 <span id="cb2-634"><a href="#cb2-634"></a></span>
-<span id="cb2-635"><a href="#cb2-635"></a><span class="co">&lt;!-- ver web --&gt;</span></span>
+<span id="cb2-635"><a href="#cb2-635"></a></span>
+<span id="cb2-636"><a href="#cb2-636"></a><span class="fu">## Caso Nessie</span></span>
+<span id="cb2-637"><a href="#cb2-637"></a></span>
+<span id="cb2-638"><a href="#cb2-638"></a><span class="ss">- </span>Estudio de caso.</span>
+<span id="cb2-639"><a href="#cb2-639"></a></span>
+<span id="cb2-640"><a href="#cb2-640"></a><span class="co">&lt;!-- ver web --&gt;</span></span>
 </code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
